@@ -1,0 +1,7 @@
+*~
+__pycache__
+build/
+*.sw[p,o]
+cscope.*
+*.o
+
