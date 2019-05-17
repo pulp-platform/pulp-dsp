@@ -1,6 +1,4 @@
-Copyright (c) 2018 ETH Zurich, Xiaying Wang
-
-## PULP DSP: Digital Signal Processing on Parallel Low Power Platform
+## PULP DSP: Digital Signal Processing on Parallel Ultra Low Power Platform
 
 # Introduction
 
@@ -43,5 +41,6 @@ Questions to be solved (ask Germain):
 
 ## License and Attribution
 Please refer to the LICENSE file for the licensing of our code. 
-We rely on the interfaces, specifications, and some code of the FANN project. 
+We got inspiration from CMSIS-DSP from ARM and partially adapted its structure.
+
 
