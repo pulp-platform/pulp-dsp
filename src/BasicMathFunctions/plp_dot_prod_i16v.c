@@ -33,29 +33,6 @@
   @ingroup groupMath
  */
 
-/**
-  @defgroup BasicDotProd Vector Dot Product
-  Computes the scalar dot product of two vectors.
-  The vectors are multiplied element-by-element and then summed.
-  <pre>
-      sum = pSrcA[0]*pSrcB[0] + pSrcA[1]*pSrcB[1] + ... + pSrcA[blockSize-1]*pSrcB[blockSize-1]
-  </pre>
-  There are separate functions for floating-point, int8, int16, and int32 data types. For lower precision integers (int8, int16), functions exploiting SIMD instructions are provided.
-
-  The naming of the functions follows the following pattern (for example plp_dot_prod_i32s):
-  <pre>
-      pulp _ function name _ data type precision method, with
-
-      data type = {f, i} respectively for floats or integers
-
-      precision = {32, 16, 8} bits
-
-      method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
-
-  </pre>
-
-
- */
 
 /**
   @addtogroup BasicDotProd
@@ -63,17 +40,20 @@
  */
 
 /**
-  @brief Scalar dot product of 32-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  pSrcB      points to the second input vector
+  @brief Vectorized dot product of 16-bit integer vectors.
+  @param[in]  pSrcA      points to the first input vector [16 bit]
+  @param[in]  pSrcB      points to the second input vector [16 bit]
   @param[in]  blockSize  number of samples in each vector
-  @param[out] result     output result returned here
+  @param[out] result     output result returned here [32 bit]
   @return        none
+
+  @par Exploiting SIMD instructions
+       The 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed on 32 bit vectors.
  */
 
-void plp_dot_prod_i32s(
-                         const int32_t * pSrcA,
-                         const int32_t * pSrcB,
+void plp_dot_prod_i16v(
+                         const int16_t * pSrcA,
+                         const int16_t * pSrcB,
                          uint32_t blockSize,
                          int32_t * pRes) {
         uint32_t blkCnt;                               /* Loop counter */
@@ -83,13 +63,26 @@ void plp_dot_prod_i32s(
 
 #if defined(PLP_MATH_LOOPUNROLL)
 
-        for (blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+        for (blkCnt=0; blkCnt<(blockSize>>2); blkCnt++){
+
+          v2s a0 = *((v2s*)((void*)(pSrcA+4*blkCnt)));
+          v2s b0 = *((v2s*)((void*)(pSrcB+4*blkCnt)));
+          v2s a1 = *((v2s*)((void*)(pSrcA+4*blkCnt+2)));
+          v2s b1 = *((v2s*)((void*)(pSrcB+4*blkCnt+2)));
+          sum = __SUMDOTP2(a0, b0, sum);
+          sum = __SUMDOTP2(a1, b1, sum);
+
+
+
+          //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+          //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
         }
 
-        for (blkCnt=0; blkCnt<(blockSize%2U); blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+        for (blkCnt=0; blkCnt<(blockSize%4U); blkCnt++){
+          int16_t a = *((int16_t*)(pSrcA+4*(blockSize/4)+blkCnt));
+          int16_t b = *((int16_t*)(pSrcB+4*(blockSize/4)+blkCnt));
+          sum += a*b;
+          //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
         }
 
 #else // PLP_MATH_LOOPUNROLL

@@ -38,3 +38,4 @@ Currently the library is being tested on Mr.Wolf, in the folder mrWolf several s
 
 - `test_lib`: after testing the functions in the previous folder, the tested function will be added into ../Source and consequently added to the static library in ../Lib. This folder is used for testing the function included in the static library (.a) to double check the correctness and the performance.
 
+Both `test_fct` and `test_lib` contain three subdirectories to test on fabric controller with ibex extensions, on cluster single core and on cluster multicore with riscy extensions.

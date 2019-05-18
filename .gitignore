@@ -5,3 +5,7 @@ build/
 cscope.*
 *.o
 
+test_data/*
+
+doc/html/
+doc/latex/

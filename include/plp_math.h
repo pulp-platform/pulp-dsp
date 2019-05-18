@@ -1,4 +1,4 @@
-/* ===========================================================================
+/** ==========================================================================
  * @file     plp_math.h
  * @brief    Public header file for PULP DSP Library
  * @version  V0
@@ -47,17 +47,45 @@
    * 32-bit integer and 32-bit floating-point values.
    */
 
+/**
+ * @defgroup groupMath Basic Math Functions
+ * The naming of the functions follows the following pattern (for example plp_dot_prod_i32s):
+ <pre>
+ pulp _ function name _ data type precision method, with
+
+ data type = {f, i} respectively for floats or integers
+
+ precision = {32, 16, 8} bits
+
+ method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+
+ </pre>
+
+ */
+
+/**
+ * @defgroup groupFilters Filtering Functions
+ */
+
+/**
+ * @defgroup groupMatrix Matrix Functions
+ *
+ * This set of functions provides basic matrix math operations.
+ * 
+ */
+
+
 #ifndef __PLP_MATH_H__
 #define __PLP_MATH_H__
 
 #include "rt/rt_api.h"
 #include "math.h"
 
-#define PLP_MATH_IBEX // previously called zero-riscy
-//#define PLP_MATH_RISCY
+//#define PLP_MATH_IBEX // previously called zero-riscy
+#define PLP_MATH_RISCY
 #define PLP_MATH_LOOPUNROLL
 
-/* --------------------------------------------------------
+/** -------------------------------------------------------
 * @brief Scalar dot product of 32-bit integer vectors.
 * @param[in]  pSrcA      points to the first input vector
 * @param[in]  pSrcB      points to the second input vector
@@ -68,7 +96,22 @@ void plp_dot_prod_i32s(
                       const int32_t * pSrcA,
                       const int32_t * pSrcB,
                       uint32_t blockSize,
-                      int32_t * result);
+                      int32_t * result
+                       );
+
+/** -------------------------------------------------------
+ * @brief Vectorized dot product of 16-bit integer vectors.
+ * @param[in]  pSrcA      points to the first input vector [16 bit]
+ * @param[in]  pSrcB      points to the second input vector [16 bit]
+ * @param[in]  blockSize  number of samples in each vector
+ * @param[out] result     output result returned here [32 bit]
+ */
+void plp_dot_prod_i16v(
+                       const int16_t * pSrcA,
+                       const int16_t * pSrcB,
+                       uint32_t blockSize,
+                       int32_t * result
+                       );
 
 
 #endif // __PLP_MATH_H__

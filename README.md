@@ -22,15 +22,18 @@ This repository contains:
 
 [Note: in the same header file it's possible to define macros (e.g. IBEX or RISCY or LOOPUNROLL, check the header file for exact list of these macros) to compile the functions for different extensions.]
 
-- `Lib` folder contains the created static library/libraries. The approach is to create a static library for each custom RISC-V extensions developed for PULP platforms (e.g. IBEX or RISCY, etc.). A shell script is currently used to help creating the library.
+- `Lib` folder contains the created static library/libraries. The approach is to create a static library for each custom RISC-V extensions developed for PULP platforms (e.g. IBEX or RISCY, etc.). A shell script is currently used to help creating the library (see comment below).
 
-- `Source` folder contains the source codes.
+- `Source` folder contains the source codes. This folder contains a subfolder called `create_obj_files`, the usage of which is explained below in the comment.
 
 - `Test` folder contains the test functions used during the development of the library. For more details please read the README file in the folder.
 
 # Notes
 
-Comment: for creating the library a work-around is applied. For running functions on PULP the Makefile is used and it always requires a main function, therefore in the Source folder for each function (or subset of functions) a main file is written which calls this/these function(s). Afterwards the object file(s) is found in the build folder created and saved into `Obj` folder (which is ignored in the .gitignore). These object files are consenquetly used to create the library.
+Comment: for creating the library a work-around is applied. For running functions on PULP the Makefile is used and it always requires a main function, therefore in the Source folder for each function (or subset of functions) a main file is written which calls this/these function(s). The subfolder called `create_obj_files` is used as a storage for these main functions, it collect the functions and Makefiles in subdirectories for creating object files with ibex on fc, riscy single core, and riscy multicore, on Mr. Wolf. (Note: riscy single core and multi core uses the same isa extensions, but creating the obj files separately is less confusing while writing the codes.)
+
+Afterwards the object file(s) is found in the build folder created and saved into `Obj` folder (which is ignored in the .gitignore). These object files are consenquetly used to create the library.
+
 
 [
 Questions to be solved (ask Germain):
