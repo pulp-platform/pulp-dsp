@@ -1,4 +1,4 @@
-FCT=plp_dot_prod_i32s.c
+FCT=plp_dot_prod_q32s.c plp_dot_prod_i32s.c
 
 PULP_APP = test
 

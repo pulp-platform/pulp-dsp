@@ -34,30 +34,6 @@
  */
 
 /**
-  @defgroup BasicDotProd Vector Dot Product
-  Computes the scalar dot product of two vectors.
-  The vectors are multiplied element-by-element and then summed.
-  <pre>
-      sum = pSrcA[0]*pSrcB[0] + pSrcA[1]*pSrcB[1] + ... + pSrcA[blockSize-1]*pSrcB[blockSize-1]
-  </pre>
-  There are separate functions for floating-point, int8, int16, and int32 data types. For lower precision integers (int8, int16), functions exploiting SIMD instructions are provided.
-
-  The naming of the functions follows the following pattern (for example plp_dot_prod_i32s):
-  <pre>
-      pulp _ function name _ data type precision method, with
-
-      data type = {f, i, q} respectively for floats, integers, fixed points
-
-      precision = {32, 16, 8} bits
-
-      method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
-
-  </pre>
-
-
- */
-
-/**
   @addtogroup BasicDotProd
   @{
  */
@@ -71,10 +47,11 @@
   @return        none
  */
 
-void plp_dot_prod_i32s(
+void plp_dot_prod_q32s(
                          const int32_t * pSrcA,
                          const int32_t * pSrcB,
                          uint32_t blockSize,
+                         uint32_t deciPoint,
                          int32_t * pRes) {
         uint32_t blkCnt;                               /* Loop counter */
         int32_t sum = 0;                          /* Temporary return variable */
@@ -84,18 +61,18 @@ void plp_dot_prod_i32s(
 #if defined(PLP_MATH_LOOPUNROLL)
 
         for (blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+          sum = __MAC(sum, (*pSrcA++), (*pSrcB++)) >> deciPoint;
+          sum = __MAC(sum, (*pSrcA++), (*pSrcB++)) >> deciPoint;
         }
 
         for (blkCnt=0; blkCnt<(blockSize%2U); blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+          sum = __MAC(sum, (*pSrcA++), (*pSrcB++)) >> deciPoint;
         }
 
 #else // PLP_MATH_LOOPUNROLL
 
         for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+          sum = __MAC(sum, (*pSrcA++), (*pSrcB++)) >> deciPoint;
         }
 
 #endif // PLP_MATH_LOOPUNROLL
@@ -107,18 +84,18 @@ void plp_dot_prod_i32s(
 #if defined (PLP_MATH_LOOPUNROLL)
 
         for (blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++);
-          sum += (*pSrcA++) * (*pSrcB++);
+          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
         }
 
         for (blkCnt=0; blkCnt<(blockSize%2U); blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++);
+          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
         }
 
 #else // PLP_MATH_LOOPUNROLL
 
         for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++);
+          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
         }
 
 #endif // PLP_MATH_LOOPUNROLL

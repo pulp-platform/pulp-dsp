@@ -3,6 +3,8 @@
 #include "fct.h"
 #include "../../test_data/vec_data.h"
 
+#define DECIMAL_POINT 3
+
 
 // This benchmark is a single shot so we can read the value directly out of the
 // HW counter using the function rt_perf_read
@@ -20,7 +22,7 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  plp_dot_prod_i32s(v_a, v_b, LENGTH, &result);
+  plp_dot_prod_q32s(v_a, v_b, LENGTH, &result, DECIMAL_POINT);
 
   rt_perf_stop(perf);
 

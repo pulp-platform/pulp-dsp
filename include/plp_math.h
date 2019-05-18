@@ -53,7 +53,7 @@
  <pre>
  pulp _ function name _ data type precision method, with
 
- data type = {f, i} respectively for floats or integers
+ data type = {f, i, q} respectively for floats, integers, fixed points
 
  precision = {32, 16, 8} bits
 
@@ -97,6 +97,22 @@ void plp_dot_prod_i32s(
                       const int32_t * pSrcB,
                       uint32_t blockSize,
                       int32_t * result
+                       );
+
+/** -------------------------------------------------------
+ * @brief Scalar dot product of 32-bit integer vectors.
+ * @param[in]  pSrcA      points to the first input vector
+ * @param[in]  pSrcB      points to the second input vector
+ * @param[in]  blockSize  number of samples in each vector
+ * @param[in]  deciPoint  decimal point for fixed point shifting
+ * @param[out] result     output result returned here
+ */
+void plp_dot_prod_q32s(
+                       const int32_t * pSrcA,
+                       const int32_t * pSrcB,
+                       uint32_t blockSize,
+                       uint32_t deciPoint,
+                       int32_t * result
                        );
 
 /** -------------------------------------------------------
