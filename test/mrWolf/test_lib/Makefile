@@ -1,9 +1,9 @@
 LOCAL_TEST=0
 FCT_TEST=plp_dot_prod_i32s.c
 
-LIB=/home/xiaywang/pulp/PULP-DSP/Lib/libplp_math_ibex.a
+LIB=/home/xiaywang/pulp/PULP-DSP/lib/libplp_math_ibex.a
 
-IDIR=/home/xiaywang/pulp/PULP-DSP/Include
+IDIR=/home/xiaywang/pulp/PULP-DSP/include
 
 PULP_APP = test
 

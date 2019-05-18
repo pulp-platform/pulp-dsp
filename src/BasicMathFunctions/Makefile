@@ -1,8 +1,8 @@
 PULP_APP = test
 
-IDIR=/home/xiaywang/pulp/PULP-DSP/Include
+IDIR=/home/xiaywang/pulp/PULP-DSP/include
 
-BUILD_DIR=/home/xiaywang/pulp/PULP-DSP/Obj/build
+BUILD_DIR=/home/xiaywang/pulp/PULP-DSP/obj/build
 
 PULP_APP_FC_SRCS = test.c plp_dot_prod_i32s.c
 PULP_CFLAGS += -I$(IDIR) -O3 -g -c $(BUILD_DIR)
