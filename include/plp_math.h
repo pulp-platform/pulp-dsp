@@ -81,8 +81,8 @@
 #include "rt/rt_api.h"
 #include "math.h"
 
-//#define PLP_MATH_IBEX // previously called zero-riscy
-#define PLP_MATH_RISCY
+#define PLP_MATH_IBEX // previously called zero-riscy
+//#define PLP_MATH_RISCY
 #define PLP_MATH_LOOPUNROLL
 
 /** -------------------------------------------------------

@@ -61,18 +61,22 @@ void plp_dot_prod_q32s(
 #if defined(PLP_MATH_LOOPUNROLL)
 
         for (blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++)) >> deciPoint;
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++)) >> deciPoint;
+          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+          sum = sum >> deciPoint;
+          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+          sum = sum >> deciPoint;
         }
 
         for (blkCnt=0; blkCnt<(blockSize%2U); blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++)) >> deciPoint;
+          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+          sum = sum >> deciPoint;
         }
 
 #else // PLP_MATH_LOOPUNROLL
 
         for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++)) >> deciPoint;
+          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+          sum = sum >> deciPoint;
         }
 
 #endif // PLP_MATH_LOOPUNROLL
