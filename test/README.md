@@ -32,10 +32,10 @@ Inputs to the function are:
 
 Currently the library is being tested on Mr.Wolf, in the folder mrWolf several subfolders are present:
 
-- `test_data`: contains the data needed for testing the functions. For now it contains vec_data.h for dot product function (i.e. two vector or desired length and the expected result from the dot product).
+- `test_data`: contains the data needed for testing the functions. For now it contains vec_data.h for dot product function (i.e. two vector or desired length and the expected result from the dot product). Ignored in gitignore.
 
-- `test_fct`: is used during the very first implementations and development of the functions for the library.
+- `test_fct`: is used during the very first implementations and development of the functions for the library. Local functions (i.e. fct.c) are used.
 
-- `test_lib`: after testing the functions in the previous folder, the tested function will be added into ../Source and consequently added to the static library in ../Lib. This folder is used for testing the function included in the static library (.a) to double check the correctness and the performance.
+- `test_lib`: after testing the functions in the previous folder, the tested function will be added into ../Source and consequently added to the static library in ../Lib. This folder is used for testing the function included in the static library (.a) to double check the correctness and the performance. Note: in the Makefile include the folder containing `plp_math.h` and the static library.
 
 Both `test_fct` and `test_lib` contain three subdirectories to test on fabric controller with ibex extensions, on cluster single core and on cluster multicore with riscy extensions.

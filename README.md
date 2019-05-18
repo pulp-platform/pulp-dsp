@@ -30,7 +30,7 @@ This repository contains:
 
 # Notes
 
-Comment: for creating the library a work-around is applied. For running functions on PULP the Makefile is used and it always requires a main function, therefore in the Source folder for each function (or subset of functions) a main file is written which calls this/these function(s). The subfolder called `create_obj_files` is used as a storage for these main functions, it collect the functions and Makefiles in subdirectories for creating object files with ibex on fc, riscy single core, and riscy multicore, on Mr. Wolf. (Note: riscy single core and multi core uses the same isa extensions, but creating the obj files separately is less confusing while writing the codes.)
+Comment: for creating the library a work-around is applied. For running functions on PULP the Makefile is used and it always requires a main function, therefore in the Source folder for each function (or subset of functions) a main file is written which calls this/these function(s). The subfolder called `create_obj_files` is used as a storage for these main functions, it collects the functions and Makefiles (Note: in the Makefiles include the folder containing `plp_math.h`) in subdirectories for creating object files with ibex on fc, riscy single core, and riscy multicore, on Mr. Wolf. (Note: riscy single core and multi core uses the same isa extensions, but creating the obj files separately is less confusing while writing the codes.)
 
 Afterwards the object file(s) is found in the build folder created and saved into `Obj` folder (which is ignored in the .gitignore). These object files are consenquetly used to create the library.
 
