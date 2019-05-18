@@ -8,9 +8,9 @@ The approach is to create a static library for each custom RISC-V extensions dev
 
 Currently it's being developed and tested on Mr.Wolf (fabric controller with IBEX (previous zero-riscy) and cluster with 8 RISCY cores).
 
-# List of ISA extensions
+# List of ISA extensions on PULP
 
-[Here](https://docs.google.com/spreadsheets/d/13hU5qtpxtcejE1NCyHPy07BwGrqVjrbf9GrBuDpx4Xc/edit?usp=sharing) is a list of PULP chips with respective instructions sets: [needs verification and update]
+[Here](https://docs.google.com/spreadsheets/d/13hU5qtpxtcejE1NCyHPy07BwGrqVjrbf9GrBuDpx4Xc/edit?usp=sharing) is a list of PULP chips with respective instructions set extensions: [needs verification and update]
 
 https://docs.google.com/spreadsheets/d/13hU5qtpxtcejE1NCyHPy07BwGrqVjrbf9GrBuDpx4Xc/edit?usp=sharing
 
@@ -38,6 +38,7 @@ Questions to be solved (ask Germain):
 - how to give all the .c files in a directory which doesn't contain the Makefile?
 - is it possible to create the objective files without a main? (dig into all the makefiles in the pulp-sdk...) In case it's not possible, write a script to automize the copy and paste of the object files.
 - function declared with const variables, is this okay?
+- a better way to compile for different isa extensions (currently using macros in math header file)
 ]
 
 
