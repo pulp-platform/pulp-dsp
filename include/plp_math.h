@@ -49,15 +49,17 @@
 
 /**
  * @defgroup groupMath Basic Math Functions
- * The naming of the functions follows the following pattern (for example plp_dot_prod_i32s):
+ * The naming of the functions follows the following pattern (for example plp_dot_prod_i32s_rv32im):
  <pre>
- pulp _ function name _ data type precision method, with
+ <pulp> _ <function name> _ <data type><precision><method>_<isa extension>, with
 
  data type = {f, i, q} respectively for floats, integers, fixed points
 
  precision = {32, 16, 8} bits
 
  method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+
+ isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
  </pre>
 
@@ -86,7 +88,7 @@
 #define PLP_MATH_LOOPUNROLL
 
 /** -------------------------------------------------------
-* @brief Scalar dot product of 32-bit integer vectors.
+* @brief Glue code for scalar dot product of 32-bit integer vectors.
 * @param[in]  pSrcA      points to the first input vector
 * @param[in]  pSrcB      points to the second input vector
 * @param[in]  blockSize  number of samples in each vector
@@ -100,27 +102,93 @@ void plp_dot_prod_i32s(
                        );
 
 /** -------------------------------------------------------
- * @brief Scalar dot product of 32-bit integer vectors.
+ * @brief Scalar dot product of 32-bit integer vectors kernel for RV32IM extension.
  * @param[in]  pSrcA      points to the first input vector
  * @param[in]  pSrcB      points to the second input vector
  * @param[in]  blockSize  number of samples in each vector
- * @param[in]  deciPoint  decimal point for fixed point shifting
  * @param[out] result     output result returned here
  */
+void plp_dot_prod_i32s_rv32im(
+                       const int32_t * pSrcA,
+                       const int32_t * pSrcB,
+                       uint32_t blockSize,
+                       int32_t * result
+                       );
+
+/** -------------------------------------------------------
+ * @brief Scalar dot product of 32-bit integer vectors kernel for XPULPV2 extension.
+ * @param[in]  pSrcA      points to the first input vector
+ * @param[in]  pSrcB      points to the second input vector
+ * @param[in]  blockSize  number of samples in each vector
+ * @param[out] result     output result returned here
+ */
+void plp_dot_prod_i32s_xpulpv2(
+                              const int32_t * pSrcA,
+                              const int32_t * pSrcB,
+                              uint32_t blockSize,
+                              int32_t * result
+                              );
+
+/**
+   @brief Glue code for scalar dot product of 32-bit fixed point vectors.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  blockSize  number of samples in each vector
+   @param[in]  deciPoint  decimal point for right shift
+   @param[out] result     output result returned here
+   @return        none
+*/
+
 void plp_dot_prod_q32s(
                        const int32_t * pSrcA,
                        const int32_t * pSrcB,
                        uint32_t blockSize,
                        uint32_t deciPoint,
-                       int32_t * result
-                       );
+                       int32_t * pRes);
+
+/**
+   @brief Scalar dot product of 32-bit fixed point vectors kernel for RV32IM extension.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  blockSize  number of samples in each vector
+   @param[in]  deciPoint  decimal point for right shift
+   @param[out] result     output result returned here
+   @return        none
+*/
+
+void plp_dot_prod_q32s_rv32im(
+                              const int32_t * pSrcA,
+                              const int32_t * pSrcB,
+                              uint32_t blockSize,
+                              uint32_t deciPoint,
+                              int32_t * pRes);
+
+/**
+   @brief Scalar dot product of 32-bit fixed point vectors kernel for XPULPV2 extension.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  blockSize  number of samples in each vector
+   @param[in]  deciPoint  decimal point for right shift
+   @param[out] result     output result returned here
+   @return        none
+*/
+
+void plp_dot_prod_q32s_xpulpv2(
+                               const int32_t * pSrcA,
+                               const int32_t * pSrcB,
+                               uint32_t blockSize,
+                               uint32_t deciPoint,
+                               int32_t * pRes);
 
 /** -------------------------------------------------------
- * @brief Vectorized dot product of 16-bit integer vectors.
+ * @brief Glue code for dot product of 16-bit integer vectors.
  * @param[in]  pSrcA      points to the first input vector [16 bit]
  * @param[in]  pSrcB      points to the second input vector [16 bit]
  * @param[in]  blockSize  number of samples in each vector
  * @param[out] result     output result returned here [32 bit]
+ *
+ * @par Exploiting SIMD instructions
+ When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
  */
 void plp_dot_prod_i16v(
                        const int16_t * pSrcA,
@@ -128,6 +196,97 @@ void plp_dot_prod_i16v(
                        uint32_t blockSize,
                        int32_t * result
                        );
+
+/**
+   @brief Vectorized dot product of 16-bit integer vectors kernel for RV32IM extension.
+  @param[in]  pSrcA      points to the first input vector [16 bit]
+  @param[in]  pSrcB      points to the second input vector [16 bit]
+  @param[in]  blockSize  number of samples in each vector
+  @param[out] result     output result returned here [32 bit]
+  @return        none
+
+  @par Exploiting SIMD instructions
+       The 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors.
+ */
+
+void plp_dot_prod_i16v_rv32im(
+                         const int16_t * pSrcA,
+                         const int16_t * pSrcB,
+                         uint32_t blockSize,
+                         int32_t * pRes);
+
+/**
+  @brief Vectorized dot product of 16-bit integer vectors kernel for XPULPV2 extension.
+  @param[in]  pSrcA      points to the first input vector [16 bit]
+  @param[in]  pSrcB      points to the second input vector [16 bit]
+  @param[in]  blockSize  number of samples in each vector
+  @param[out] result     output result returned here [32 bit]
+  @return        none
+
+  @par Exploiting SIMD instructions
+       The 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors.
+ */
+
+void plp_dot_prod_i16v_xpulpv2(
+                         const int16_t * pSrcA,
+                         const int16_t * pSrcB,
+                         uint32_t blockSize,
+                         int32_t * pRes);
+
+/**
+   @brief Glue code for dot product of 8-bit integer vectors.
+   @param[in]  pSrcA      points to the first input vector [8 bit]
+   @param[in]  pSrcB      points to the second input vector [8 bit]
+   @param[in]  blockSize  number of samples in each vector
+   @param[out] result     output result returned here [32 bit]
+   @return        none
+
+   @par Exploiting SIMD instructions
+   When the ISA supports, the 8 bit values are packed four by four into 32 bit vectors and then the four dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_dot_prod_i8v(
+                      const int8_t * pSrcA,
+                      const int8_t * pSrcB,
+                      uint32_t blockSize,
+                      int32_t * pRes);
+
+/**
+   @brief Vectorized dot product of 8-bit integer vectors kernel for RV32IM extension.
+   @param[in]  pSrcA      points to the first input vector [8] bit]
+   @param[in]  pSrcB      points to the second input vector [8 bit]
+   @param[in]  blockSize  number of samples in each vector
+   @param[out] result     output result returned here [32 bit]
+   @return        none
+
+   @par Exploiting SIMD instructions
+   The 8 bit values are packed four by four into 32 bit vectors and then the four dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_dot_prod_i8v_rv32im(
+                             const int8_t * pSrcA,
+                             const int8_t * pSrcB,
+                             uint32_t blockSize,
+                             int32_t * pRes);
+
+/**
+   @brief Vectorized dot product of 8-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]  pSrcA      points to the first input vector [8 bit]
+   @param[in]  pSrcB      points to the second input vector [8 bit]
+   @param[in]  blockSize  number of samples in each vector
+   @param[out] result     output result returned here [32 bit]
+   @return        none
+
+   @par Exploiting SIMD instructions
+   The 8 bit values are packed four by four into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_dot_prod_i8v_xpulpv2(
+                              const int8_t * pSrcA,
+                              const int8_t * pSrcB,
+                              uint32_t blockSize,
+                              int32_t * pRes);
+
 
 
 #endif // __PLP_MATH_H__

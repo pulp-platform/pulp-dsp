@@ -10,7 +10,7 @@ static void do_bench_0(rt_perf_t *perf, int events)
 {
   int32_t result=0;
 
-  printf("dot product i32\n");
+  printf("dot product i32s fc\n");
 
   // Activate specified events
   rt_perf_conf(perf, events);
@@ -20,7 +20,8 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  plp_dot_prod_i32s(v_a, v_b, LENGTH, &result);
+  //plp_dot_prod_i32s(v_a, v_b, LENGTH, &result);
+  plp_dot_prod_i32s_xpulpv2(v_a, v_b, LENGTH, &result);
 
   rt_perf_stop(perf);
 

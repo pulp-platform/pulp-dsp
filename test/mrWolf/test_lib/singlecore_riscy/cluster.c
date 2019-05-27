@@ -4,8 +4,8 @@
 #include "../../test_data/vec_data.h"
 
 static int cores_events;
-RT_CL_DATA static int16_t * v_a_l1;// __attribute__ ((aligned(32)));
-RT_CL_DATA static int16_t * v_b_l1;// __attribute__ ((aligned(32)));
+RT_CL_DATA static int32_t * v_a_l1;// __attribute__ ((aligned(32)));
+RT_CL_DATA static int32_t * v_b_l1;// __attribute__ ((aligned(32)));
 
 // This benchmark is a single shot so we can read the value directly out of the
 // HW counter using the function rt_perf_read
@@ -13,7 +13,7 @@ static void do_bench_0(rt_perf_t *perf, int events)
 {
   int32_t result=0;
 
-  printf("dot product i32\n");
+  printf("dot product i32s cl\n");
 
   // Activate specified events
   rt_perf_conf(perf, events);
@@ -23,7 +23,7 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  plp_dot_prod_i16v(v_a_l1, v_b_l1, LENGTH, &result);
+  plp_dot_prod_i32s_xpulpv2(v_a_l1, v_b_l1, LENGTH, &result);
 
   rt_perf_stop(perf);
 
