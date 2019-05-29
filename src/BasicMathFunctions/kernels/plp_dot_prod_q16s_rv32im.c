@@ -1,9 +1,9 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_dot_prod_i8v_xpulpv2.c
- * Description:  8-bit integer vectorized dot product for XPULPV2
+ * Title:        plp_dot_prod_q16s_rv32im.c
+ * Description:  16-bit fixed point scalar dot product kernel for RV32IM
  *
- * $Date:        25. May 2019
+ * $Date:        28. May 2019
  * $Revision:    V0
  *
  * Target Processor: PULP cores
@@ -33,59 +33,48 @@
   @ingroup BasicDotProd
  */
 
-
 /**
   @addtogroup BasicDotProdKernels
   @{
  */
 
 /**
-  @brief Vectorized dot product of 8-bit integer vectors kernel for XPULPV2 extension.
-  @param[in]  pSrcA      points to the first input vector [8 bit]
-  @param[in]  pSrcB      points to the second input vector [8 bit]
+  @brief Scalar dot product of 16-bit fixed point vectors kernel for RV32IM extension.
+  @param[in]  pSrcA      points to the first input vector [16 bit]
+  @param[in]  pSrcB      points to the second input vector [16 bit]
   @param[in]  blockSize  number of samples in each vector
+  @param[in]  deciPoint  decimal point for right shift
   @param[out] result     output result returned here [32 bit]
   @return        none
 
   @par Exploiting SIMD instructions
-  The 8 bit values are packed four by four into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
  */
 
-void plp_dot_prod_i8v_xpulpv2(
-                              const int8_t * __restrict__ pSrcA,
-                              const int8_t * __restrict__ pSrcB,
+void plp_dot_prod_q16s_rv32im(
+                              const int16_t * __restrict__ pSrcA,
+                              const int16_t * __restrict__ pSrcB,
                               uint32_t blockSize,
+                              uint32_t deciPoint,
                               int32_t * __restrict__ pRes){
         uint32_t blkCnt;                               /* Loop counter */
         int32_t sum = 0;                          /* Temporary return variable */
 
-#if defined(PLP_MATH_LOOPUNROLL)
+#if defined (PLP_MATH_LOOPUNROLL)
 
-
-        for (blkCnt=0; blkCnt<(blockSize>>3); blkCnt++){
-
-          v4s a0 = *((v4s*)((void*)(pSrcA+8*blkCnt)));
-          v4s b0 = *((v4s*)((void*)(pSrcB+8*blkCnt)));
-          v4s a1 = *((v4s*)((void*)(pSrcA+8*blkCnt+4)));
-          v4s b1 = *((v4s*)((void*)(pSrcB+8*blkCnt+4)));
-          sum = __SUMDOTP4(a0, b0, sum);
-          sum = __SUMDOTP4(a1, b1, sum);
-
-          //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-          //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+        for (blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
+          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
         }
 
-        for (blkCnt=0; blkCnt<(blockSize%8U); blkCnt++){
-          int8_t a = *((int8_t*)(pSrcA+8*(blockSize/8)+blkCnt));
-          int8_t b = *((int8_t*)(pSrcB+8*(blockSize/8)+blkCnt));
-          sum += a*b;
-          //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+        for (blkCnt=0; blkCnt<(blockSize%2U); blkCnt++){
+          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
         }
 
 #else // PLP_MATH_LOOPUNROLL
 
         for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
         }
 
 #endif // PLP_MATH_LOOPUNROLL
@@ -93,9 +82,3 @@ void plp_dot_prod_i8v_xpulpv2(
         * pRes = sum;
 
 }
-
-/**
-  @} end of BasicDotProdKernels group
- */
-
-

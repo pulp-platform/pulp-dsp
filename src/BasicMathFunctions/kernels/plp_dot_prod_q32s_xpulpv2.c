@@ -50,11 +50,11 @@
  */
 
 void plp_dot_prod_q32s_xpulpv2(
-                         const int32_t * pSrcA,
-                         const int32_t * pSrcB,
-                         uint32_t blockSize,
-                         uint32_t deciPoint,
-                         int32_t * pRes) {
+                               const int32_t * __restrict__ pSrcA,
+                               const int32_t * __restrict__ pSrcB,
+                               uint32_t blockSize,
+                               uint32_t deciPoint,
+                               int32_t * __restrict__ pRes){
         uint32_t blkCnt;                               /* Loop counter */
         int32_t sum = 0;                          /* Temporary return variable */
 

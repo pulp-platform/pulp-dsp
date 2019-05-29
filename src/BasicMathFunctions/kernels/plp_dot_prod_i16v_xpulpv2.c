@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_dot_prod_i16v_xpulpv2.c
- * Description:  16-bit integer vectorized dot product for xpulpv2
+ * Description:  16-bit integer vectorized dot product for XPULPV2
  *
  * $Date:        16. May 2019
  * $Revision:    V0
@@ -52,10 +52,10 @@
  */
 
 void plp_dot_prod_i16v_xpulpv2(
-                         const int16_t * pSrcA,
-                         const int16_t * pSrcB,
-                         uint32_t blockSize,
-                         int32_t * pRes) {
+                               const int16_t * __restrict__ pSrcA,
+                               const int16_t * __restrict__ pSrcB,
+                               uint32_t blockSize,
+                               int32_t * __restrict__ pRes){
         uint32_t blkCnt;                               /* Loop counter */
         int32_t sum = 0;                          /* Temporary return variable */
 

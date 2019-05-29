@@ -13,7 +13,7 @@ static void do_bench_0(rt_perf_t *perf, int events)
 {
   int32_t result=0;
 
-  printf("dot product i32s cl\n");
+  //printf("dot product i32s cl\n");
 
   // Activate specified events
   rt_perf_conf(perf, events);
@@ -23,7 +23,7 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  plp_dot_prod_i32s_xpulpv2(v_a_l1, v_b_l1, LENGTH, &result);
+  plp_dot_prod_q32(v_a_l1, v_b_l1, LENGTH, 1, &result);
 
   rt_perf_stop(perf);
 
@@ -47,7 +47,10 @@ void cluster_entry(void *arg){
 
   rt_perf_t perf;
   rt_perf_init(&perf);
-  do_bench_0(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR));
+  
+  for (int i=0; i < 10; i++){
+    do_bench_0(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR));
+  }
   printf("Total cycles: %d\n", rt_perf_read(RT_PERF_CYCLES));
   printf("Instructions: %d\n", rt_perf_read(RT_PERF_INSTR));
 

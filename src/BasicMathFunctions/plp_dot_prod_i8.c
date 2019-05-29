@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_dot_prod_i16v.c
- * Description:  16-bit integer dot product glue code
+ * Title:        plp_dot_prod_i8.c
+ * Description:  8-bit integer dot product glue code
  *
  * $Date:        25. May 2019
  * $Revision:    V0
@@ -40,28 +40,28 @@
  */
 
 /**
-  @brief Glue code for dot product of 16-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector [16 bit]
-  @param[in]  pSrcB      points to the second input vector [16 bit]
+  @brief Glue code for dot product of 8-bit integer vectors.
+  @param[in]  pSrcA      points to the first input vector [8 bit]
+  @param[in]  pSrcB      points to the second input vector [8 bit]
   @param[in]  blockSize  number of samples in each vector
   @param[out] result     output result returned here [32 bit]
   @return        none
 
   @par Exploiting SIMD instructions
-       When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
+       When the ISA supports, the 8 bit values are packed four by four into 32 bit vectors and then the four dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
  */
 
-void plp_dot_prod_i16v(
-                         const int16_t * pSrcA,
-                         const int16_t * pSrcB,
-                         uint32_t blockSize,
-                         int32_t * pRes) {
+void plp_dot_prod_i8(
+                      const int8_t * __restrict__ pSrcA,
+                      const int8_t * __restrict__ pSrcB,
+                      uint32_t blockSize,
+                      int32_t * __restrict__ pRes){
   
   if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_dot_prod_i16v_rv32im(pSrcA, pSrcB, blockSize, pRes);
+    plp_dot_prod_i8s_rv32im(pSrcA, pSrcB, blockSize, pRes);
   }
   else{
-    plp_dot_prod_i16v_xpulpv2(pSrcA, pSrcB, blockSize, pRes);
+    plp_dot_prod_i8v_xpulpv2(pSrcA, pSrcB, blockSize, pRes);
   }
 }
 

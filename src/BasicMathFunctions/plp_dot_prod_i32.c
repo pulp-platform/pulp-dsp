@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_dot_prod_int32_scalar.c
- * Description:  32-bit integer scalar dot product
+ * Title:        plp_dot_prod_i32.c
+ * Description:  32-bit integer dot product glue code
  *
  * $Date:        16. May 2019
  * $Revision:    V0
@@ -65,7 +65,7 @@
  */
 
 /**
-  @brief Glue code for scalar dot product of 32-bit integer vectors.
+  @brief Glue code for dot product of 32-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
   @param[in]  pSrcB      points to the second input vector
   @param[in]  blockSize  number of samples in each vector
@@ -73,11 +73,11 @@
   @return        none
  */
 
-void plp_dot_prod_i32s(
-                         const int32_t * pSrcA,
-                         const int32_t * pSrcB,
+void plp_dot_prod_i32(
+                         const int32_t * __restrict__ pSrcA,
+                         const int32_t * __restrict__ pSrcB,
                          uint32_t blockSize,
-                         int32_t * pRes) {
+                         int32_t * __restrict__ pRes){
   
   if (rt_cluster_id() == ARCHI_FC_CID){
     plp_dot_prod_i32s_rv32im(pSrcA, pSrcB, blockSize, pRes);

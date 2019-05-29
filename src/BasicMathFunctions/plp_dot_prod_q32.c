@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_dot_prod_i32s_xpulpv2.c
- * Description:  32-bit integer scalar dot product for XPULPV2
+ * Title:        plp_dot_prod_q32.c
+ * Description:  32-bit fixed point dot product
  *
  * $Date:        16. May 2019
  * $Revision:    V0
@@ -30,52 +30,43 @@
 
 
 /**
-  @ingroup BasicDotProd
+  @ingroup groupMath
  */
 
-
 /**
-  @addtogroup BasicDotProdKernels
+  @addtogroup BasicDotProd
   @{
  */
 
 /**
-  @brief Scalar dot product of 32-bit integer vectors kernel for XPULPV2 extension.
+  @brief Glue code for dot product of 32-bit fixed point vectors.
   @param[in]  pSrcA      points to the first input vector
   @param[in]  pSrcB      points to the second input vector
   @param[in]  blockSize  number of samples in each vector
+  @param[in]  deciPoint  decimal point for right shift
   @param[out] result     output result returned here
   @return        none
  */
 
-void plp_dot_prod_i32s_xpulpv2(
-                               const int32_t * __restrict__ pSrcA,
-                               const int32_t * __restrict__ pSrcB,
-                               uint32_t blockSize,
-                               int32_t * __restrict__ pRes) {
-        uint32_t blkCnt;                               /* Loop counter */
-        int32_t sum = 0;                          /* Temporary return variable */
+void plp_dot_prod_q32(
+                       const int32_t * __restrict__ pSrcA,
+                       const int32_t * __restrict__ pSrcB,
+                       uint32_t blockSize,
+                       uint32_t deciPoint,
+                       int32_t * __restrict__ pRes){
 
-#if defined(PLP_MATH_LOOPUNROLL)
 
-        for (blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-        }
-
-        for (blkCnt=0; blkCnt<(blockSize%2U); blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-        }
-
-#else // PLP_MATH_LOOPUNROLL
-
-        for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-        }
-
-#endif // PLP_MATH_LOOPUNROLL
-
-        * pRes = sum;
+  if (rt_cluster_id() == ARCHI_FC_CID){
+    plp_dot_prod_q32s_rv32im(pSrcA, pSrcB, blockSize, deciPoint, pRes);
+  }
+  else{
+    plp_dot_prod_q32s_xpulpv2(pSrcA, pSrcB, blockSize, deciPoint, pRes);
+  }
 
 }
+
+/**
+  @} end of BasicDotProd group
+ */
+
 

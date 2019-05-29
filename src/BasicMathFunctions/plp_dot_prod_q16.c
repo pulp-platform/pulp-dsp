@@ -1,9 +1,9 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_dot_prod_i16v_rv32im.c
- * Description:  16-bit integer vectorized dot product for rv32im
+ * Title:        plp_dot_prod_q16.c
+ * Description:  16-bit fixed point scalar dot product
  *
- * $Date:        16. May 2019
+ * $Date:        28. May 2019
  * $Revision:    V0
  *
  * Target Processor: PULP cores
@@ -30,56 +30,41 @@
 
 
 /**
-  @ingroup BasicDotProd
+  @ingroup groupMath
  */
 
-
 /**
-  @addtogroup BasicDotProdKernels
+  @addtogroup BasicDotProd
   @{
  */
 
 /**
-  @brief Vectorized dot product of 16-bit integer vectors kernel for RV32IM extension.
+  @brief Glue code for dot product of 16-bit fixed point vectors.
   @param[in]  pSrcA      points to the first input vector [16 bit]
   @param[in]  pSrcB      points to the second input vector [16 bit]
   @param[in]  blockSize  number of samples in each vector
+  @param[in]  deciPoint  decimal point for right shift
   @param[out] result     output result returned here [32 bit]
   @return        none
 
   @par Exploiting SIMD instructions
-  The 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
+  When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
  */
 
-void plp_dot_prod_i16v_rv32im(
-                         const int16_t * pSrcA,
-                         const int16_t * pSrcB,
-                         uint32_t blockSize,
-                         int32_t * pRes) {
-        uint32_t blkCnt;                               /* Loop counter */
-        int32_t sum = 0;                          /* Temporary return variable */
+void plp_dot_prod_q16(
+                       const int16_t * __restrict__ pSrcA,
+                       const int16_t * __restrict__ pSrcB,
+                       uint32_t blockSize,
+                       uint32_t deciPoint,
+                       int32_t * __restrict__ pRes){
 
 
-#if defined (PLP_MATH_LOOPUNROLL)
-
-        for (blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++);
-          sum += (*pSrcA++) * (*pSrcB++);
-        }
-
-        for (blkCnt=0; blkCnt<(blockSize%2U); blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++);
-        }
-
-#else // PLP_MATH_LOOPUNROLL
-
-        for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++);
-        }
-
-#endif // PLP_MATH_LOOPUNROLL
-
-        * pRes = sum;
+  if (rt_cluster_id() == ARCHI_FC_CID){
+    plp_dot_prod_q16s_rv32im(pSrcA, pSrcB, blockSize, deciPoint, pRes);
+  }
+  else{
+    plp_dot_prod_q16v_xpulpv2(pSrcA, pSrcB, blockSize, deciPoint, pRes);
+  }
 
 }
 
