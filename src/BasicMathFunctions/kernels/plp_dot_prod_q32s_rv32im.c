@@ -59,12 +59,14 @@ void plp_dot_prod_q32s_rv32im(
 
 #if defined (PLP_MATH_LOOPUNROLL)
 
-        for (blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
+        for (blkCnt=0; blkCnt<(blockSize>>2); blkCnt++){
+          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
           sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
           sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
         }
 
-        for (blkCnt=0; blkCnt<(blockSize%2U); blkCnt++){
+        for (blkCnt=0; blkCnt<(blockSize%4U); blkCnt++){
           sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
         }
 
@@ -79,3 +81,7 @@ void plp_dot_prod_q32s_rv32im(
         * pRes = sum;
 
 }
+
+/**
+   @} end of BasicDotProdKernels group
+*/

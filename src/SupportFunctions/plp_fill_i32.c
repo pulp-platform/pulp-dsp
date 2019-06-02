@@ -1,13 +1,13 @@
-/* =====================================================================
+/* ----------------------------------------------------------------------
  * Project:      PULP DSP Library
- * Title:        plp_dot_prod_i32.c
- * Description:  32-bit integer dot product glue code
+ * Title:        plp_fill_i32.c
+ * Description:  Glue code for filling a constant value into a 32-bit integer vector
  *
- * $Date:        16. May 2019
+ * $Date:        02. June 2019
  * $Revision:    V0
  *
  * Target Processor: PULP cores
- * ===================================================================== */
+ * -------------------------------------------------------------------- */
 /*
  * Copyright (C) 2019 ETH Zurich. All rights reserved.
  *
@@ -30,19 +30,15 @@
 
 #include "plp_math.h"
 
-
 /**
-  @ingroup groupMath
+  @ingroup groupSupport
  */
 
 /**
-  @defgroup BasicDotProd Vector Dot Product
-  This module contains the glue code for Vector Dot Product. The kernel codes (kernels) are in the Moducle Vector Dot Product Kernels.
-
-  The Vector Dot Product computes the dot product of two vectors.
-  The vectors are multiplied element-by-element and then summed.
+  @defgroup Fill Vector Fill
+  Fills the destination vector with a constant value.
   <pre>
-      sum = pSrcA[0]*pSrcB[0] + pSrcA[1]*pSrcB[1] + ... + pSrcA[blockSize-1]*pSrcB[blockSize-1]
+      pDst[n] = value;   0 <= n < blockSize.
   </pre>
   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
 
@@ -58,42 +54,37 @@
 
   isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
-  </pre>
-
-
  */
 
 /**
-  @addtogroup BasicDotProd
+  @addtogroup Fill
   @{
  */
 
 /**
-  @brief Glue code for dot product of 32-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  blockSize  number of samples in each vector
-  @param[out] result     output result returned here
+  @brief         Glue code for filling a constant value into a 32-bit integer vector.
+  @param[in]     value      input value to be filled
+  @param[out]    pDst       points to output vector
+  @param[in]     blockSize  number of samples in each vector
   @return        none
  */
 
-void plp_dot_prod_i32(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t blockSize,
-                         int32_t * __restrict__ pRes){
-  
+void plp_fill_i32(
+                  int32_t value,
+                  int32_t * __restrict__ pDst,
+                  uint32_t blockSize){
+
+  uint32_t blkCnt;                               /* Loop counter */
+
   if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_dot_prod_i32s_rv32im(pSrcA, pSrcB, blockSize, pRes);
+    plp_fill_i32s_rv32im(value, pDst, blockSize);
   }
   else{
-    plp_dot_prod_i32s_xpulpv2(pSrcA, pSrcB, blockSize, pRes);
+    plp_fill_i32s_xpulpv2(value, pDst, blockSize);
   }
 
 }
 
 /**
-  @} end of BasicDotProd group
+  @} end of Fill group
  */
-
-

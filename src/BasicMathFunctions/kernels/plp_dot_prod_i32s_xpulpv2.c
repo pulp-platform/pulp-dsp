@@ -53,29 +53,36 @@ void plp_dot_prod_i32s_xpulpv2(
                                const int32_t * __restrict__ pSrcB,
                                uint32_t blockSize,
                                int32_t * __restrict__ pRes) {
-        uint32_t blkCnt;                               /* Loop counter */
-        int32_t sum = 0;                          /* Temporary return variable */
+  uint32_t blkCnt, tmpBS;                      /* Loop counter, temporal BlockSize */
+  int32_t sum1 = 0, sum2=0;                          /* Temporary return variable */
 
 #if defined(PLP_MATH_LOOPUNROLL)
 
-        for (blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+        tmpBS = (blockSize>>1);
+
+        for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
+          sum1 = __MAC(sum1, (*pSrcA++), (*pSrcB++));
+          sum2 = __MAC(sum2, (*pSrcA++), (*pSrcB++));
         }
 
-        for (blkCnt=0; blkCnt<(blockSize%2U); blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+        tmpBS = (blockSize%2U);
+
+        for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
+          sum1 = __MAC(sum1, (*pSrcA++), (*pSrcB++));
         }
 
 #else // PLP_MATH_LOOPUNROLL
 
         for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+          sum1 = __MAC(sum1, (*pSrcA++), (*pSrcB++));
         }
 
 #endif // PLP_MATH_LOOPUNROLL
 
-        * pRes = sum;
+        * pRes = sum1 + sum2;
 
 }
 
+/**
+   @} end of BasicDotProdKernels group
+*/

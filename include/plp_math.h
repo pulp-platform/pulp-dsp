@@ -49,9 +49,9 @@
 
 /**
  * @defgroup groupMath Basic Math Functions
- * The naming of the functions follows the following pattern (for example plp_dot_prod_i32s_rv32im):
+ * The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s_rv32im):
  <pre>
- <pulp> _ <function name> _ <data type><precision><method>_<isa extension>, with
+ <pulp> _ <function name> _ <data type> <precision> <method> _ <isa extension>, with
 
  data type = {f, i, q} respectively for floats, integers, fixed points
 
@@ -76,6 +76,18 @@
  * 
  */
 
+/**
+ * @defgroup groupTransforms Transform Functions
+ */
+
+/**
+ * @defgroup groupStats Statistics Functions
+ */
+
+/**
+ * @defgroup groupSupport Support Functions
+ */
+
 
 #ifndef __PLP_MATH_H__
 #define __PLP_MATH_H__
@@ -86,6 +98,8 @@
 #define PLP_MATH_IBEX // previously called zero-riscy
 //#define PLP_MATH_RISCY
 #define PLP_MATH_LOOPUNROLL
+
+
 
 /** -------------------------------------------------------
 * @brief Glue code for dot product of 32-bit integer vectors.
@@ -100,6 +114,8 @@ void plp_dot_prod_i32(
                        uint32_t blockSize,
                        int32_t * __restrict__ pRes);
 
+
+
 /** -------------------------------------------------------
  * @brief Scalar dot product of 32-bit integer vectors kernel for RV32IM extension.
  * @param[in]  pSrcA      points to the first input vector
@@ -113,6 +129,8 @@ void plp_dot_prod_i32s_rv32im(
                               uint32_t blockSize,
                               int32_t * __restrict__ pRes);
 
+
+
 /** -------------------------------------------------------
  * @brief Scalar dot product of 32-bit integer vectors kernel for XPULPV2 extension.
  * @param[in]  pSrcA      points to the first input vector
@@ -125,6 +143,8 @@ void plp_dot_prod_i32s_xpulpv2(
                                const int32_t * __restrict__ pSrcB,
                                uint32_t blockSize,
                                int32_t * __restrict__ pRes);
+
+
 
 /** -------------------------------------------------------
    @brief Glue code for dot product of 32-bit fixed point vectors.
@@ -143,6 +163,8 @@ void plp_dot_prod_q32(
                        uint32_t deciPoint,
                        int32_t * __restrict__ pRes);
 
+
+
 /** -------------------------------------------------------
    @brief Scalar dot product of 32-bit fixed point vectors kernel for RV32IM extension.
    @param[in]  pSrcA      points to the first input vector
@@ -159,6 +181,8 @@ void plp_dot_prod_q32s_rv32im(
                               uint32_t blockSize,
                               uint32_t deciPoint,
                               int32_t * __restrict__ pRes);
+
+
 
 /** -------------------------------------------------------
    @brief Scalar dot product of 32-bit fixed point vectors kernel for XPULPV2 extension.
@@ -177,6 +201,8 @@ void plp_dot_prod_q32s_xpulpv2(
                                uint32_t deciPoint,
                                int32_t * __restrict__ pRes);
 
+
+
 /** -------------------------------------------------------
  * @brief Glue code for dot product of 16-bit integer vectors.
  * @param[in]  pSrcA      points to the first input vector [16 bit]
@@ -192,6 +218,8 @@ void plp_dot_prod_i16(
                        const int16_t * pSrcB,
                        uint32_t blockSize,
                        int32_t * __restrict__ pRes);
+
+
 
 /** -------------------------------------------------------
    @brief Vectorized dot product of 16-bit integer vectors kernel for RV32IM extension.
@@ -211,6 +239,8 @@ void plp_dot_prod_i16s_rv32im(
                          uint32_t blockSize,
                          int32_t * __restrict__ pRes);
 
+
+
 /** -------------------------------------------------------
   @brief Vectorized dot product of 16-bit integer vectors kernel for XPULPV2 extension.
   @param[in]  pSrcA      points to the first input vector [16 bit]
@@ -228,6 +258,8 @@ void plp_dot_prod_i16v_xpulpv2(
                          const int16_t * __restrict__ pSrcB,
                          uint32_t blockSize,
                          int32_t * __restrict__ pRes);
+
+
 
 /** -------------------------------------------------------
    @brief Glue code for dot product of 16-bit fixed point vectors.
@@ -249,6 +281,8 @@ void plp_dot_prod_q16(
                        uint32_t deciPoint,
                        int32_t * __restrict__ pRes);
 
+
+
 /** -------------------------------------------------------
    @brief Scalar dot product of 16-bit fixed point vectors kernel for RV32IM extension.
    @param[in]  pSrcA      points to the first input vector [16 bit]
@@ -268,6 +302,8 @@ void plp_dot_prod_q16s_rv32im(
                               uint32_t blockSize,
                               uint32_t deciPoint,
                               int32_t * __restrict__ pRes);
+
+
 
 /** -------------------------------------------------------
     @brief Vectorized dot product of 16-bit fixed point vectors kernel for XPULPV2 extension.
@@ -289,6 +325,8 @@ void plp_dot_prod_q16v_xpulpv2(
                                uint32_t deciPoint,
                                int32_t * __restrict__ pRes);
 
+
+
 /** -------------------------------------------------------
    @brief Glue code for dot product of 8-bit integer vectors.
    @param[in]  pSrcA      points to the first input vector [8 bit]
@@ -306,6 +344,8 @@ void plp_dot_prod_i8(
                       const int8_t * __restrict__ pSrcB,
                       uint32_t blockSize,
                       int32_t * __restrict__ pRes);
+
+
 
 /** -------------------------------------------------------
    @brief Vectorized dot product of 8-bit integer vectors kernel for RV32IM extension.
@@ -325,6 +365,8 @@ void plp_dot_prod_i8s_rv32im(
                              uint32_t blockSize,
                              int32_t * __restrict__ pRes);
 
+
+
 /** -------------------------------------------------------
    @brief Vectorized dot product of 8-bit integer vectors kernel for XPULPV2 extension.
    @param[in]  pSrcA      points to the first input vector [8 bit]
@@ -342,6 +384,8 @@ void plp_dot_prod_i8v_xpulpv2(
                               const int8_t * __restrict__ pSrcB,
                               uint32_t blockSize,
                               int32_t * __restrict__ pRes);
+
+
 
 /** -------------------------------------------------------
    @brief Glue code for dot product of 8-bit fixed point vectors.
@@ -363,6 +407,8 @@ void plp_dot_prod_q8(
                       uint32_t deciPoint,
                       int32_t * __restrict__ pRes);
 
+
+
 /** -------------------------------------------------------
    @brief Scalar dot product of 8-bit fixed point vectors kernel for RV32IM extension.
    @param[in]  pSrcA      points to the first input vector [8 bit]
@@ -382,6 +428,8 @@ void plp_dot_prod_q8s_rv32im(
                              uint32_t blockSize,
                              uint32_t deciPoint,
                              int32_t * __restrict__ pRes);
+
+
 
 /** -------------------------------------------------------
    @brief Scalar dot product of 8-bit fixed point vectors kernel for XPULPV2 extension.
@@ -404,6 +452,49 @@ void plp_dot_prod_q8v_xpulpv2(
                               int32_t * __restrict__ pRes);
 
 
+
+/** -------------------------------------------------------
+   @brief         Glue code for filling a constant value into a 32-bit integer vector.
+   @param[in]     value      input value to be filled
+   @param[out]    pDst       points to output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_fill_i32(
+                  int32_t value,
+                  int32_t * __restrict__ pDst,
+                  uint32_t blockSize);
+
+
+
+/** -------------------------------------------------------
+   @brief         Fills a constant value into a 32-bit integer vector for RV32IM extension.
+   @param[in]     value      input value to be filled
+   @param[out]    pDst       points to output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_fill_i32s_rv32im(
+                          int32_t value,
+                          int32_t * __restrict__ pDst,
+                          uint32_t blockSize);
+
+
+
+/** -------------------------------------------------------
+   @brief         Fills a constant value into a 32-bit integer vector for XPULPV2 extension.
+   @param[in]     value      input value to be filled
+   @param[out]    pDst       points to output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_fill_i32s_xpulpv2(
+                           int32_t value,
+                           int32_t * __restrict__ pDst,
+                           uint32_t blockSize);
 
 
 

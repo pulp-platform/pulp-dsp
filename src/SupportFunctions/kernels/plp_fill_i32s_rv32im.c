@@ -1,13 +1,13 @@
-/* =====================================================================
+/* ----------------------------------------------------------------------
  * Project:      PULP DSP Library
- * Title:        plp_dot_prod_i32.c
- * Description:  32-bit integer dot product glue code
+ * Title:        plp_fill_i32s_rv32im.c
+ * Description:  Fills a constant value into a 32-bit integer vector for RV32IM
  *
- * $Date:        16. May 2019
+ * $Date:        02. June 2019
  * $Revision:    V0
  *
  * Target Processor: PULP cores
- * ===================================================================== */
+ * -------------------------------------------------------------------- */
 /*
  * Copyright (C) 2019 ETH Zurich. All rights reserved.
  *
@@ -30,19 +30,15 @@
 
 #include "plp_math.h"
 
-
 /**
-  @ingroup groupMath
+  @ingroup Fill
  */
 
 /**
-  @defgroup BasicDotProd Vector Dot Product
-  This module contains the glue code for Vector Dot Product. The kernel codes (kernels) are in the Moducle Vector Dot Product Kernels.
-
-  The Vector Dot Product computes the dot product of two vectors.
-  The vectors are multiplied element-by-element and then summed.
+  @defgroup FillKernels Vector Fill Kernels
+  Fills the destination vector with a constant value.
   <pre>
-      sum = pSrcA[0]*pSrcB[0] + pSrcA[1]*pSrcB[1] + ... + pSrcA[blockSize-1]*pSrcB[blockSize-1]
+      pDst[n] = value;   0 <= n < blockSize.
   </pre>
   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
 
@@ -58,42 +54,59 @@
 
   isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
-  </pre>
-
-
  */
 
 /**
-  @addtogroup BasicDotProd
+  @addtogroup FillKernels
   @{
  */
 
 /**
-  @brief Glue code for dot product of 32-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  blockSize  number of samples in each vector
-  @param[out] result     output result returned here
+  @brief         Fills a constant value into a 32-bit integer vector for RV32IM extension.
+  @param[in]     value      input value to be filled
+  @param[out]    pDst       points to output vector
+  @param[in]     blockSize  number of samples in each vector
   @return        none
  */
 
-void plp_dot_prod_i32(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t blockSize,
-                         int32_t * __restrict__ pRes){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_dot_prod_i32s_rv32im(pSrcA, pSrcB, blockSize, pRes);
+void plp_fill_i32s_rv32im(
+                  int32_t value,
+                  int32_t * __restrict__ pDst,
+                  uint32_t blockSize){
+
+  uint32_t blkCnt, tmpBS;                               /* Loop counter */
+  //  int32_t value1 = value;
+  //  int32_t value2 = value;
+  //  int32_t value3 = value;
+
+#if defined (PLP_MATH_LOOPUNROLL)
+
+  tmpBS = (blockSize>>2);
+
+  for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
+    *pDst++ = value;
+    *pDst++ = value;
+    *pDst++ = value;
+    *pDst++ = value;
   }
-  else{
-    plp_dot_prod_i32s_xpulpv2(pSrcA, pSrcB, blockSize, pRes);
+
+  tmpBS = (blockSize%4U);
+
+  for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
+    *pDst++ = value;
   }
+
+#else
+
+  for (blkCnt=0; blkCnt<blockSize; blkCnt++){
+    *pDst++ = value;
+  }
+
+#endif // PLP_MATH_LOOPUNROLL
+
 
 }
 
 /**
-  @} end of BasicDotProd group
+  @} end of FillKernels group
  */
-
-

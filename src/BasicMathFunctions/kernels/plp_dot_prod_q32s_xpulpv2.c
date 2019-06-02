@@ -55,12 +55,14 @@ void plp_dot_prod_q32s_xpulpv2(
                                uint32_t blockSize,
                                uint32_t deciPoint,
                                int32_t * __restrict__ pRes){
-        uint32_t blkCnt;                               /* Loop counter */
+  uint32_t blkCnt, tmpBS;                   /* Loop counter, temporal BlockSize */
         int32_t sum = 0;                          /* Temporary return variable */
 
 #if defined(PLP_MATH_LOOPUNROLL)
 
-        for (blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
+        tmpBS = (blockSize>>1);
+
+        for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
           sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
           sum = sum >> deciPoint;
           sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
@@ -84,4 +86,8 @@ void plp_dot_prod_q32s_xpulpv2(
         * pRes = sum;
 
 }
+
+/**
+   @} end of BasicDotProdKernels group
+*/
 

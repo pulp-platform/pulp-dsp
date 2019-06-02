@@ -58,13 +58,16 @@ void plp_dot_prod_q16v_xpulpv2(
                                uint32_t blockSize,
                                uint32_t deciPoint,
                                int32_t * __restrict__ pRes){
-        uint32_t blkCnt;                               /* Loop counter */
-        int32_t sum = 0;                          /* Temporary return variable */
+
+  uint32_t blkCnt, tmpBS;                   /* Loop counter, temporal BlockSize */
+  int32_t sum = 0;
+  //  int32_t sum1 = 0, sum2 = 0;                          /* Temporary return variable */
 
 #if defined(PLP_MATH_LOOPUNROLL)
 
+        tmpBS = (blockSize>>2);
 
-        for (blkCnt=0; blkCnt<(blockSize>>2); blkCnt++){
+        for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
 
           v2s a0 = *((v2s*)((void*)(pSrcA+4*blkCnt)));
           v2s b0 = *((v2s*)((void*)(pSrcB+4*blkCnt)));
@@ -79,7 +82,9 @@ void plp_dot_prod_q16v_xpulpv2(
           //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
         }
 
-        for (blkCnt=0; blkCnt<(blockSize%4U); blkCnt++){
+        tmpBS = (blockSize%4U);
+        
+        for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
           int16_t a = *((int16_t*)(pSrcA+4*(blockSize/4)+blkCnt));
           int16_t b = *((int16_t*)(pSrcB+4*(blockSize/4)+blkCnt));
           sum += a*b;
@@ -96,7 +101,11 @@ void plp_dot_prod_q16v_xpulpv2(
 
 #endif // PLP_MATH_LOOPUNROLL
 
-        * pRes = sum;
+        * pRes = sum; //sum1 + sum2;
 
 }
+
+/**
+   @} end of BasicDotProdKernels group
+*/
 

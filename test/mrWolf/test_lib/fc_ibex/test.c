@@ -20,8 +20,8 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  //plp_dot_prod_i32s(v_a, v_b, LENGTH, &result);
-  plp_dot_prod_q32(v_a, v_b, LENGTH, 1, &result);
+  plp_dot_prod_i32(v_a, v_b, LENGTH, &result);
+  //plp_dot_prod_q32(v_a, v_b, LENGTH, 1, &result);
 
   rt_perf_stop(perf);
 
