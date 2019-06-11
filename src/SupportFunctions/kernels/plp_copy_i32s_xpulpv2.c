@@ -1,7 +1,7 @@
 /* ----------------------------------------------------------------------
  * Project:      PULP DSP Library
- * Title:        plp_fill_i32s_xpulpv2.c
- * Description:  Fills a constant value into a 32-bit integer vector for XPULPV2
+ * Title:        plp_copy_i32s_xpulpv2.c
+ * Description:  Copies the elements of a 32-bit integer vector for XPULPV2
  *
  * $Date:        02. June 2019
  * $Revision:    V0
@@ -31,55 +31,59 @@
 #include "plp_math.h"
 
 /**
-  @ingroup Fill
+  @ingroup Copy
  */
 
 /**
-  @addtogroup FillKernels
+  @addtogroup CopyKernels
   @{
  */
 
 /**
-  @brief         Fills a constant value into a 32-bit integer vector for XPULPV2 extension.
-  @param[in]     value      input value to be filled
+  @brief         Copies the elements of a 32-bit integer vector for XPULPV2 extension.
+  @param[in]     pSrc       points to input vector
   @param[out]    pDst       points to output vector
   @param[in]     blockSize  number of samples in each vector
   @return        none
- */
+*/
 
-void plp_fill_i32s_xpulpv2(
-                  int32_t value,
-                  int32_t * __restrict__ pDst,
-                  uint32_t blockSize){
+void plp_copy_i32s_xpulpv2(
+                           int32_t * __restrict__ pSrc,
+                           int32_t * __restrict__ pDst,
+                           uint32_t blockSize){
 
   uint32_t blkCnt, tmpBS;                     /* Loop counter, temporal BlockSize */
-  int32_t value1 = value; // comment: it performs the same with or without temporary values.
+
 
 #if defined (PLP_MATH_LOOPUNROLL)
 
   tmpBS = (blockSize>>1);
 
   for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-    *pDst++ = value;
-    *pDst++ = value1;
+
+    /* Copy and store result in destination buffer */
+    *pDst++ = *pSrc++;
+    *pDst++ = *pSrc++;
+
   }
 
   tmpBS = (blockSize%2U);
 
   for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-    *pDst++ = value;
+    *pDst++ = *pSrc++;
   }
 
 #else
 
   for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-    *pDst++ = value;
+    *pDst++ = *pSrc++;
   }
 
 #endif // PLP_MATH_LOOPUNROLL
 
+
 }
 
 /**
-  @} end of FillKernels group
+  @} end of CopyKernels group
  */

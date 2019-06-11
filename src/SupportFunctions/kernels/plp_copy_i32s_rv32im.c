@@ -1,7 +1,7 @@
 /* ----------------------------------------------------------------------
  * Project:      PULP DSP Library
- * Title:        plp_fill_i32s_rv32im.c
- * Description:  Fills a constant value into a 32-bit integer vector for RV32IM
+ * Title:        plp_copy_i32s_rv32im.c
+ * Description:  Copies the elements of a 32-bit integer vector for RV32IM
  *
  * $Date:        02. June 2019
  * $Revision:    V0
@@ -31,14 +31,14 @@
 #include "plp_math.h"
 
 /**
-  @ingroup Fill
+  @ingroup Copy
  */
 
 /**
-  @defgroup FillKernels Vector Fill Kernels
-  Fills the destination vector with a constant value.
+  @defgroup CopyKernels Vector Copy Kernels
+  Copies sample by sample from source vector to destination vector.
   <pre>
-      pDst[n] = value;   0 <= n < blockSize.
+  pDst[n] = pSrc[n];   0 <= n < blockSize.
   </pre>
   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
 
@@ -57,49 +57,48 @@
  */
 
 /**
-  @addtogroup FillKernels
+  @addtogroup CopyKernels
   @{
  */
 
 /**
-  @brief         Fills a constant value into a 32-bit integer vector for RV32IM extension.
-  @param[in]     value      input value to be filled
+  @brief         Copies the elements of a 32-bit integer vector for RV32IM extension.
+  @param[in]     pSrc       points to input vector
   @param[out]    pDst       points to output vector
   @param[in]     blockSize  number of samples in each vector
   @return        none
- */
+*/
 
-void plp_fill_i32s_rv32im(
-                  int32_t value,
-                  int32_t * __restrict__ pDst,
-                  uint32_t blockSize){
+void plp_copy_i32s_rv32im(
+                          int32_t * __restrict__ pSrc,
+                          int32_t * __restrict__ pDst,
+                          uint32_t blockSize){
 
-  uint32_t blkCnt, tmpBS;                               /* Loop counter */
-    int32_t value1 = value;
-    int32_t value2 = value;
-    int32_t value3 = value; // comment: it performs the same with or without temporary values.
+  uint32_t blkCnt, tmpBS;             /* Loop counter and temporal blockSize */
 
 #if defined (PLP_MATH_LOOPUNROLL)
 
   tmpBS = (blockSize>>2);
 
   for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-    *pDst++ = value;
-    *pDst++ = value1;
-    *pDst++ = value2;
-    *pDst++ = value3;
+
+    /* Copy and store result in destination buffer */
+    *pDst++ = *pSrc++;
+    *pDst++ = *pSrc++;
+    *pDst++ = *pSrc++;
+    *pDst++ = *pSrc++;
   }
 
   tmpBS = (blockSize%4U);
 
   for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-    *pDst++ = value;
+    *pDst++ = *pSrc++;
   }
 
 #else
 
   for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-    *pDst++ = value;
+    *pDst++ = *pSrc++;
   }
 
 #endif // PLP_MATH_LOOPUNROLL
@@ -108,5 +107,5 @@ void plp_fill_i32s_rv32im(
 }
 
 /**
-  @} end of FillKernels group
+  @} end of CopyKernels group
  */
