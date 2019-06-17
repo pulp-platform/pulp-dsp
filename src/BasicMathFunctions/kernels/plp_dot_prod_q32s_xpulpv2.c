@@ -56,34 +56,49 @@ void plp_dot_prod_q32s_xpulpv2(
                                uint32_t deciPoint,
                                int32_t * __restrict__ pRes){
   uint32_t blkCnt, tmpBS;                   /* Loop counter, temporal BlockSize */
-        int32_t sum = 0;                          /* Temporary return variable */
+        int32_t sum = 0; //, sum1 =0;                          /* Temporary return variable */
+//int32_t prod=0;
+  //int32_t deci = deciPoint;
 
 #if defined(PLP_MATH_LOOPUNROLL)
 
         tmpBS = (blockSize>>1);
 
         for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
+
+//	prod = (*pSrcA++) * (*pSrcB++);
+//	sum = __ADDNORMU_REG(sum, prod, deciPoint);
+
+//	prod = (*pSrcA++) * (*pSrcB++);
+//	sum = __ADDNORMU_REG(sum, prod, deciPoint);
+	
+
+	sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+	sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+
+//	sum = __MACSN(sum, (*pSrcA++), (*pSrcB++), 0);
+//	sum1 = __MACSN(sum1, (*pSrcA++), (*pSrcB++), 0);
+/*
           sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
           sum = sum >> deciPoint;
           sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
           sum = sum >> deciPoint;
+*/
         }
 
         for (blkCnt=0; blkCnt<(blockSize%2U); blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-          sum = sum >> deciPoint;
+          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
         }
 
 #else // PLP_MATH_LOOPUNROLL
 
         for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-          sum = sum >> deciPoint;
+          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
         }
 
 #endif // PLP_MATH_LOOPUNROLL
 
-        * pRes = sum;
+        * pRes = sum; // + sum1;
 
 }
 

@@ -1,5 +1,9 @@
 FC_SRCS = \
-	src/SupportFunctions/plp_fill_i32.c src/SupportFunctions/kernels/plp_fill_i32s_rv32im.c \
+	src/StatisticsFunctions/plp_mean_i32.c src/StatisticsFunctions/kernels/plp_mean_i32s_rv32im.c \
+	src/BasicMathFunctions/plp_dot_prod_q32_parallel.c \
+	src/BasicMathFunctions/plp_dot_prod_i32_parallel.c \
+	src/SupportFunctions/plp_copy_i32.c src/SupportFunctions/kernels/plp_copy_i32s_rv32im.c \
+        src/SupportFunctions/plp_fill_i32.c src/SupportFunctions/kernels/plp_fill_i32s_rv32im.c \
 	src/BasicMathFunctions/plp_dot_prod_q8.c src/BasicMathFunctions/kernels/plp_dot_prod_q8s_rv32im.c \
         src/BasicMathFunctions/plp_dot_prod_q16.c src/BasicMathFunctions/kernels/plp_dot_prod_q16s_rv32im.c \
         src/BasicMathFunctions/plp_dot_prod_q32.c src/BasicMathFunctions/kernels/plp_dot_prod_q32s_rv32im.c \
@@ -8,7 +12,11 @@ FC_SRCS = \
 	src/BasicMathFunctions/plp_dot_prod_i32.c src/BasicMathFunctions/kernels/plp_dot_prod_i32s_rv32im.c
 
 CL_SRCS = \
-	src/SupportFunctions/kernels/plp_fill_i32s_xpulpv2.c \
+	src/StatisticsFunctions/kernels/plp_mean_i32s_xpulpv2.c \
+	src/BasicMathFunctions/kernels/plp_dot_prod_q32p_xpulpv2.c \
+	src/BasicMathFunctions/kernels/plp_dot_prod_i32p_xpulpv2.c \
+	src/SupportFunctions/kernels/plp_copy_i32s_xpulpv2.c \
+        src/SupportFunctions/kernels/plp_fill_i32s_xpulpv2.c \
 	src/BasicMathFunctions/kernels/plp_dot_prod_q8v_xpulpv2.c \
         src/BasicMathFunctions/kernels/plp_dot_prod_q16v_xpulpv2.c \
         src/BasicMathFunctions/kernels/plp_dot_prod_q32s_xpulpv2.c \

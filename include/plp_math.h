@@ -100,6 +100,102 @@
 #define PLP_MATH_LOOPUNROLL
 
 
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel dot product.
+ */
+typedef struct
+     {
+       int32_t * pSrcA;     // pointer to the first vector
+       int32_t * pSrcB;     // pointer to the second vector
+       uint32_t blkSizePE;     // number of samples in each vector
+       uint32_t nPE;        // number of processing units
+       int32_t * resBuffer;      // pointer to result vector
+     } plp_dot_prod_instance_i32;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for fixed point parallel dot product.
+ */
+typedef struct
+{
+  int32_t * pSrcA;     // pointer to the first vector
+  int32_t * pSrcB;     // pointer to the second vector
+  uint32_t blkSizePE;     // number of samples in each vector
+  uint32_t deciPoint;    // decimal point for right shift
+  uint32_t nPE;        // number of processing units
+  int32_t * resBuffer;      // pointer to result vector
+} plp_dot_prod_instance_q32;
+
+
+
+
+/** -------------------------------------------------------
+   @brief Glue code for parallel dot product of 32-bit integer vectors.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  blockSize  number of samples in each vector
+   @param[in]  nPE        number of parallel processing units
+   @param[out] result     output result returned here
+   @return        none
+*/
+
+void plp_dot_prod_i32_parallel(
+                               const int32_t * __restrict__ pSrcA,
+                               const int32_t * __restrict__ pSrcB,
+                               uint32_t blockSize,
+                               uint32_t nPE,
+                               int32_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief Glue code for parallel dot product of 32-bit fixed point vectors.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  blockSize  number of samples in each vector
+   @param[in]  deciPoint  decimal point for right shift
+   @param[in]  nPE        number of parallel processing units
+   @param[out] result     output result returned here
+   @return        none
+*/
+
+void plp_dot_prod_q32_parallel(
+                               const int32_t * __restrict__ pSrcA,
+                               const int32_t * __restrict__ pSrcB,
+                               uint32_t blockSize,
+                               uint32_t deciPoint,
+                               uint32_t nPE,
+                               int32_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief Scalar dot product with interleaved access of 32-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  blockSize  number of samples in each vector
+   @param[out] result     output result returned here
+   @return        none
+*/
+
+void plp_dot_prod_i32p_xpulpv2(void * S);
+
+
+
+/** -------------------------------------------------------
+   @brief Scalar dot product with interleaved access of 32-bit fixed point vectors kernel for XPULPV2 extension.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  blockSize  number of samples in each vector
+   @param[in]  deciPoint  decimal point for right shift
+   @param[out] result     output result returned here
+   @return        none
+*/
+
+void plp_dot_prod_q32p_xpulpv2(void * S);
+
+
 
 /** -------------------------------------------------------
 * @brief Glue code for dot product of 32-bit integer vectors.
@@ -495,6 +591,96 @@ void plp_fill_i32s_xpulpv2(
                            int32_t value,
                            int32_t * __restrict__ pDst,
                            uint32_t blockSize);
+
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for copying the elements of a 32-bit integer vector
+   @param[in]     pSrc       points to input vector
+   @param[out]    pDst       points to output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_copy_i32(
+                  int32_t * __restrict__ pSrc,
+                  int32_t * __restrict__ pDst,
+                  uint32_t blockSize);
+
+
+
+/** -------------------------------------------------------
+   @brief         Copies the elements of a 32-bit integer vector for RV32IM extension.
+   @param[in]     pSrc       points to input vector
+   @param[out]    pDst       points to output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_copy_i32s_rv32im(
+                          int32_t * __restrict__ pSrc,
+                          int32_t * __restrict__ pDst,
+                          uint32_t blockSize);
+
+
+
+/** -------------------------------------------------------
+   @brief         Copies the elements of a 32-bit integer vector for XPULPV2 extension.
+   @param[in]     pSrc       points to input vector
+   @param[out]    pDst       points to output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_copy_i32s_xpulpv2(
+                           int32_t * __restrict__ pSrc,
+                           int32_t * __restrict__ pDst,
+                           uint32_t blockSize);
+
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for mean value of a 32-bit integer vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    mean value returned here
+   @return        none
+*/
+
+void plp_mean_i32(
+                  const int32_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  int32_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Mean value of a 32-bit integer vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    mean value returned here
+   @return        none
+*/
+
+void plp_mean_i32s_rv32im(
+                          const int32_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          int32_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Mean value of a 32-bit integer vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    mean value returned here
+   @return        none
+*/
+
+void plp_mean_i32s_xpulpv2(
+                           const int32_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           int32_t * __restrict__ pRes);
 
 
 
