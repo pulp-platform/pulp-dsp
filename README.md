@@ -4,9 +4,9 @@
 
 This repository contains the work in progress of an optimized DSP library for PULP platforms.
 
-The approach is to create a static library for each custom RISC-V extensions developed for PULP platforms (e.g. IBEX or RISCY, etc.).
+It contains the kernel functions for different ISA extensions of RISC-V being developed for PULP platforms (RV32IM, XPULPV2, etc.).
 
-Currently it's being developed and tested on Mr.Wolf (fabric controller with IBEX (previous zero-riscy) and cluster with 8 RISCY cores).
+Currently it's being developed and tested on Mr.Wolf (fabric controller (FC) with IBEX (previous zero-riscy), i.e. RV32IM, and cluster with 8 RISCY cores, i.e. RV32IM with XPULPV2 extentions.).
 
 # List of ISA extensions on PULP
 
@@ -18,31 +18,17 @@ https://docs.google.com/spreadsheets/d/13hU5qtpxtcejE1NCyHPy07BwGrqVjrbf9GrBuDpx
 
 This repository contains:
 
-- `Include` folder with necessary header files. Especially the main header file for the library to be included in the codes which want to use this library.
+- `src` folder contains the source codes. In the folder you can find subfolders with different kinds of functions (e.g. BasicMathFunctions, StatisticsFunctions, etc.). In each subfolder you find the glue codes and a folder called `kernel` which contains the kernels for different ISA extensions. The glue codes are used for namely "gluing" the kernels, for example for checking the ISA extension of the calling platform (in the case of Mr. Wolf, it checks if it's FC or CLUSTER calling the function, in case of FC the kernel function for RV32IM is called, otherwise the kernel function for XPULPV2 extension is called.
+ 
+- `include` folder with necessary header files. Especially the main header file for the library to be included in the codes which want to use this library.
 
-[Note: in the same header file it's possible to define macros (e.g. IBEX or RISCY or LOOPUNROLL, check the header file for exact list of these macros) to compile the functions for different extensions.]
+[Note: in the same header file it's possible to define macros (e.g. LOOPUNROLL if you want to take into consideration the option of unrolling or not unrolling the loops).]
 
-- `Lib` folder contains the created static library/libraries. The approach is to create a static library for each custom RISC-V extensions developed for PULP platforms (e.g. IBEX or RISCY, etc.). A shell script is currently used to help creating the library (see comment below).
+- `Makefile` for compiling the library. Add your glue codes and kernel functions to be compiled. Then do `make clean all install` and the library will be compiled and installed in your pulp-sdk. To use the library add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project (for example when you test the functions in the `test` folder).
 
-- `Source` folder contains the source codes. This folder contains a subfolder called `create_obj_files`, the usage of which is explained below in the comment.
+- `lib` folder contains the build/ folder when building the library and the static library can be found in lib/build/wolfe/.
 
-- `Test` folder contains the test functions used during the development of the library. For more details please read the README file in the folder.
-
-# Notes
-
-Comment: for creating the library a work-around is applied. For running functions on PULP the Makefile is used and it always requires a main function, therefore in the Source folder for each function (or subset of functions) a main file is written which calls this/these function(s). The subfolder called `create_obj_files` is used as a storage for these main functions, it collects the functions and Makefiles (Note: in the Makefiles include the folder containing `plp_math.h`) in subdirectories for creating object files with ibex on fc, riscy single core, and riscy multicore, on Mr. Wolf. (Note: riscy single core and multi core uses the same isa extensions, but creating the obj files separately is less confusing while writing the codes.)
-
-Afterwards the object file(s) is found in the build folder created and saved into `Obj` folder (which is ignored in the .gitignore). These object files are consenquetly used to create the library.
-
-
-[
-Questions to be solved (ask Germain):
-
-- how to give all the .c files in a directory which doesn't contain the Makefile?
-- is it possible to create the objective files without a main? (dig into all the makefiles in the pulp-sdk...) In case it's not possible, write a script to automize the copy and paste of the object files.
-- function declared with const variables, is this okay?
-- a better way to compile for different isa extensions (currently using macros in math header file)
-]
+- `test` folder contains the testing setup used during the development of the library. For more details please read the README file in the folder.
 
 
 ## License and Attribution
