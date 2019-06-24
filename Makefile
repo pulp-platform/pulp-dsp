@@ -25,12 +25,12 @@ CL_SRCS = \
 	src/BasicMathFunctions/kernels/plp_dot_prod_i32s_xpulpv2.c
 	
 
-PULP_LIBS = plpdsp
+PULP_LIBS = plpdsp # the name of the library, after installing it into the pulp-sdk, add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project to use this library.
 PULP_LIB_FC_SRCS_plpdsp = $(FC_SRCS)
 PULP_LIB_CL_SRCS_plpdsp = $(CL_SRCS)
 
 IDIR=$(CURDIR)/include
-BUILD_DIR=$(CURDIR)/lib/build
+BUILD_DIR=$(CURDIR)/lib/build # the build folder is saved here.
 
 PULP_CFLAGS += -I$(IDIR) -O3 -g
 
