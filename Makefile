@@ -30,7 +30,8 @@ PULP_LIB_FC_SRCS_plpdsp = $(FC_SRCS)
 PULP_LIB_CL_SRCS_plpdsp = $(CL_SRCS)
 
 IDIR=$(CURDIR)/include
-BUILD_DIR=$(CURDIR)/lib/build # the build folder is saved here.
+BUILD_DIR=$(CURDIR)/lib/build
+# the build folder is saved here.
 
 PULP_CFLAGS += -I$(IDIR) -O3 -g
 
