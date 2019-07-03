@@ -43,14 +43,19 @@ def write_scalar(f, name, value, var_type):
 
 ################################################################################
 # generates resutl C a MxO matrix from A: MxN and B: NxO
-def gen_stimuli(name, var_type, n_bits, min_value, max_value, M, N, O): 
-    f = open(name + '_L1.h', 'w')
-    g = open(name + '_L2.h', 'w')
-
+def gen_stimuli(name, var_type, n_bits, min_value, max_value, M, N, O, fma):
+    f = open(name + '_L1.h', 'w+')
+    g = open(name + '_L2.h', 'w+')
 
     m_a = np.random.randint(min_value, max_value, M*N)
     m_b = np.random.randint(min_value, max_value, N*O)
-    m_c = np.zeros(M*O, dtype=int)
+    if fma == 1:
+        m_c = np.random.randint(min_value, max_value, M*O)
+        write_arr(f, 'm_c_initial',   m_c,   var_type, M*O, "M_LENGTH*O_LENGTH", 1)
+        write_arr(f, 'm_c_initial',   m_c,   var_type, M*O, "M_LENGTH*O_LENGTH", 2)
+    else:
+        m_c = np.zeros(M*O, dtype=int)
+
     for i in range(0,M):
         for j in range(0,N):
             for k in range(0,O):
@@ -112,6 +117,13 @@ if __name__=='__main__':
 
     # gen_stimuli(file_name, data_type, n_bits, min_value, max_value,v_len)
 
-    gen_stimuli('data32', "int32_t", 32, -2**7, 2**7-1,8,8,8)
-    gen_stimuli('data16', "int16_t", 16, -2**6, 2**6-1,8,8,8)
-    gen_stimuli('data8',  "int8_t", 8, -2**3, 2**3-1,8,8,8)
+    m_size = 16
+    n_size = 16
+    o_size = 16
+
+    gen_stimuli('mul_data32', "int32_t", 32, -2**7, 2**7-1  ,m_size, n_size, o_size,0)
+    gen_stimuli('mul_data16', "int16_t", 16, -2**6, 2**6-1  ,m_size, n_size, o_size,0)
+    gen_stimuli('mul_data8' ,  "int8_t", 8, -2**3, 2**3-1   ,m_size, n_size, o_size,0)
+    gen_stimuli('fma_data32', "int32_t", 32, -2**7, 2**7-1  ,m_size, n_size, o_size,1)
+    gen_stimuli('fma_data16', "int16_t", 16, -2**6, 2**6-1  ,m_size, n_size, o_size,1)
+    gen_stimuli('fma_data8' ,  "int8_t", 8, -2**3, 2**3-1   ,m_size, n_size, o_size,1)
