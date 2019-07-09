@@ -40,7 +40,7 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  // plp_mat_mult_i32s_xpulpv2(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
+  //plp_mat_mult_i32s_xpulpv2(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
   plp_mat_mult_i16v_xpulpv2(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
   
   rt_perf_stop(perf);

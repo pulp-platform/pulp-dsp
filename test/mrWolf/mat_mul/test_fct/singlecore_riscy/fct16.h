@@ -11,6 +11,6 @@ void plp_mat_mult_i16v_xpulpv2(
                               uint32_t M,
                               uint32_t N,
                               uint32_t O,
-                              int16_t * __restrict__ pDstC);
+                              int32_t * __restrict__ pDstC);
 
 #endif

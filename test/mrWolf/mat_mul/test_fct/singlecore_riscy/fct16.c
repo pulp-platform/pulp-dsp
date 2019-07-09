@@ -17,7 +17,7 @@ void plp_mat_mult_i16v_xpulpv2(
                               uint32_t M,
                               uint32_t N,
                               uint32_t O,
-                              int16_t * __restrict__ pDstC) {
+                              int32_t * __restrict__ pDstC) {
         
         uint32_t i; // loop counter for M
         uint32_t j; // loop counter for N
@@ -48,11 +48,14 @@ void plp_mat_mult_i16v_xpulpv2(
               v2s bVec0 = {BVal00, BVal10};
               // v2s bVec1 = {BVal01, BVal11};
 
-              sum00 += __DOTP2(aVec0, bVec0);
+              //sum00 += __DOTP2(aVec0, bVec0);
+sum00 = __SUMDOTP2(aVec0, bVec0, sum00);
               // sum01 += __DOTP2(aVec0, bVec1);
-              sum10 += __DOTP2(aVec1, bVec0);
+              //sum10 += __DOTP2(aVec1, bVec0);
+sum10 = __SUMDOTP2(aVec1, bVec0, sum10);
               // sum11 += __DOTP2(aVec1, bVec1);
-              sum20 += __DOTP2(aVec2, bVec0);
+              //sum20 += __DOTP2(aVec2, bVec0);
+sum20 = __SUMDOTP2(aVec2, bVec0, sum20);
               // sum21 += __DOTP2(aVec2, bVec1);
 
             }
@@ -202,7 +205,7 @@ void plp_mat_mult_i16v_xpulpv2(
           uint32_t jReset = j==N ? N-STEP_SIZE : j;
           uint32_t kReset = k==O ? O-STEP_SIZE : k;
 
-          for(i = 0; i < iReset)
+          for(i = 0; i < iReset; i++){
           for(; i < M; i++){
             for(; k < O; k++){
               int16_t sum = 0;
@@ -213,7 +216,7 @@ void plp_mat_mult_i16v_xpulpv2(
             }
           }
         }
-
+}
 }
 
 #elif defined(BETTER_BLOCK)

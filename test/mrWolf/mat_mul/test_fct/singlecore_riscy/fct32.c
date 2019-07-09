@@ -3,8 +3,8 @@
 
 
 // #define BLOCK_VERSION
-// #define BETTER_BLOCK
-#define ASM
+#define BETTER_BLOCK
+// #define ASM
 // #define ADVANCED_ASM
 
 #ifdef BLOCK_VERSION
