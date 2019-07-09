@@ -117,9 +117,9 @@ if __name__=='__main__':
 
     # gen_stimuli(file_name, data_type, n_bits, min_value, max_value,v_len)
 
-    m_size = 16
-    n_size = 16
-    o_size = 16
+    m_size = 32
+    n_size = 32
+    o_size = 32
 
     gen_stimuli('mul_data32', "int32_t", 32, -2**7, 2**7-1  ,m_size, n_size, o_size,0)
     gen_stimuli('mul_data16', "int16_t", 16, -2**6, 2**6-1  ,m_size, n_size, o_size,0)
