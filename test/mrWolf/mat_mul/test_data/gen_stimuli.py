@@ -50,16 +50,15 @@ def gen_stimuli(name, var_type, n_bits, min_value, max_value, M, N, O, fma):
     m_a = np.random.randint(min_value, max_value, M*N)
     m_b = np.random.randint(min_value, max_value, N*O)
     if fma == 1:
-        m_c = np.random.randint(min_value, max_value, M*O)
-        write_arr(f, 'm_c_initial',   m_c,   var_type, M*O, "M_LENGTH*O_LENGTH", 1)
-        write_arr(f, 'm_c_initial',   m_c,   var_type, M*O, "M_LENGTH*O_LENGTH", 2)
+        m_c_initial = np.random.randint(min_value, max_value, M*O)
+        m_c = np.array(m_c_initial, copy=True)
     else:
         m_c = np.zeros(M*O, dtype=int)
 
     for i in range(0,M):
         for j in range(0,N):
             for k in range(0,O):
-                m_c[i*M+k] = (m_c[i*M+k] + m_a[i*M+j]*m_b[j*N+k]) % (2**n_bits) # make sure it does correctly overflow as it should with the data types chosen.
+                m_c[i*M+k] = (m_c[i*M+k] + m_a[i*M+j]*m_b[j*N+k]) % (2**32) # make sure it does correctly overflow as it should with the data types chosen.
 
 
     f.write('#ifndef __MAT_MUL_L1_H_' + str(n_bits) + '__\n#define __MAT_MUL_L1_H_' + str(n_bits) + '__\n\n')
@@ -79,11 +78,15 @@ def gen_stimuli(name, var_type, n_bits, min_value, max_value, M, N, O, fma):
 
     write_arr(f, 'm_a',   m_a,   var_type, M*N, "M_LENGTH*N_LENGTH", 1)
     write_arr(f, 'm_b',   m_b,   var_type, N*O, "N_LENGTH*O_LENGTH", 1)
-    write_arr(f, 'm_c',   m_c,   var_type, M*O, "M_LENGTH*O_LENGTH", 1)
+    write_arr(f, 'm_c',   m_c,   "int32_t", M*O, "M_LENGTH*O_LENGTH", 1)
+    if fma == 1:
+    	write_arr(f, 'm_c_initial',   m_c_initial,   var_type, M*O, "M_LENGTH*O_LENGTH", 1)
 
     write_arr(g, 'm_a',   m_a,   var_type, M*N, "M_LENGTH*N_LENGTH", 2)
     write_arr(g, 'm_b',   m_b,   var_type, N*O, "N_LENGTH*O_LENGTH", 2)
-    write_arr(g, 'm_c',   m_c,   var_type, M*O, "M_LENGTH*O_LENGTH", 2)
+    write_arr(g, 'm_c',   m_c,   "int32_t", M*O, "M_LENGTH*O_LENGTH", 2)
+    if fma == 1:
+    	write_arr(g, 'm_c_initial',   m_c_initial,   var_type, M*O, "M_LENGTH*O_LENGTH", 2)
     
 #    f.write('%s dot_product(%s * v, %s * u, unsigned int n);\n' % (var_type, var_type, var_type))
 
