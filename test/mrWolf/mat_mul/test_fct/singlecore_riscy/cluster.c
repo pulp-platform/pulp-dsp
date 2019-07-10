@@ -14,8 +14,8 @@
   #define DATA_TYPE int16_t
 #else
   #include "fct32.h"
-  #include "../../test_data/mul_data32_L1.h"
   #define DATA_TYPE int32_t
+  #include "../../test_data/mul_data32_L1.h"
 #endif
 
 static int cores_events;
@@ -24,7 +24,7 @@ static int cores_events;
 // HW counter using the function rt_perf_read
 static void do_bench_0(rt_perf_t *perf, int events)
 {
-  DATA_TYPE* result = (DATA_TYPE*)rt_alloc(RT_ALLOC_CL_DATA, sizeof(DATA_TYPE)*O_LENGTH*M_LENGTH);
+  int32_t* result = (int32_t*)rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*O_LENGTH*M_LENGTH);
 
   if(result == NULL){
     printf("no data allocation\n");
@@ -101,11 +101,9 @@ void cluster_entry(void *arg){
   unsigned int cycles = rt_perf_read(RT_PERF_CYCLES);
   unsigned int instr = rt_perf_read(RT_PERF_INSTR);
   unsigned int ld_stall = rt_perf_read(RT_PERF_LD_STALL);
-  // unsigned int misc = rt_perf_read(RT_PERF_TCDM_CONT);
   printf("Total cycles: %d\n", cycles);
   printf("Instructions: %d\n", instr);
   printf("Load stalls %d\n", ld_stall);
-  // printf("misc %d\n", misc);
   printf("Operations %d\n", ops);
   printf("Ops per Instructions: %d.%d \n", ops/instr, (ops*100)/instr);
   printf("Ops per Cycle: %d.%d \n", ops/cycles, (ops*100)/cycles);

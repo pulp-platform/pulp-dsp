@@ -2,10 +2,9 @@
 #ifndef __FCT_H__
 #define __FCT_H__
 
-#include "rt/rt_api.h"
 #include <stdint.h>
 
-void plp_mat_mult_i16v_xpulpv2(
+void plp_mat_fma_i16s_rv32im(
                               const int16_t * __restrict__ pSrcA,
                               const int16_t * __restrict__ pSrcB,
                               uint32_t M,
