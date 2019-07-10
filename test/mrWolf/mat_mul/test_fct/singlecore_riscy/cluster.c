@@ -1,10 +1,22 @@
 #include "rt/rt_api.h"
 #include "stdio.h"
-#include "fct16.h"
-#include "../../test_data/mul_data16_L1.h"
 
-#define DATA_TYPE int16_t
+// #define TEST_8
+#define TEST_16
 
+#ifdef TEST_8
+  #include "fct8.h"
+  #include "../../test_data/mul_data8_L1.h"
+  #define DATA_TYPE int8_t
+#elif defined(TEST_16)
+  #include "fct16.h"
+  #include "../../test_data/mul_data16_L1.h"
+  #define DATA_TYPE int16_t
+#else
+  #include "fct32.h"
+  #include "../../test_data/mul_data32_L1.h"
+  #define DATA_TYPE int32_t
+#endif
 
 static int cores_events;
 
@@ -19,6 +31,14 @@ static void do_bench_0(rt_perf_t *perf, int events)
     return;
   }
 
+  #ifdef TEST_8
+    printf("running test for 8 bit\n");
+  #elif defined(TEST_16)
+    printf("running test for 16 bit\n");
+  #else
+    printf("running test for 32 bit\n");
+  #endif
+
   // for(int i = 0; i < O_LENGTH*M_LENGTH; i++){
   //   result[i] = 0;
   // }
@@ -30,7 +50,7 @@ static void do_bench_0(rt_perf_t *perf, int events)
   //   printf("result %i\n", result[i]);
   // }
 
-  printf("mat mult i32s cl\n");
+  // printf("mat mult i32s cl\n");
 
   // Activate specified events
   rt_perf_conf(perf, events);
@@ -40,9 +60,14 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  // plp_mat_mult_i32s_xpulpv2(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
-  plp_mat_mult_i16v_xpulpv2(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
-  
+  #ifdef TEST_8
+    plp_mat_mult_i8v_xpulpv2(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
+  #elif defined(TEST_16)
+    plp_mat_mult_i16v_xpulpv2(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
+  #else
+    plp_mat_mult_i32s_xpulpv2(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
+  #endif
+
   rt_perf_stop(perf);
 
   int errors = 0;
