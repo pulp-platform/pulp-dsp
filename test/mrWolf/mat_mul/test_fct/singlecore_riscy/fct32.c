@@ -7,6 +7,7 @@
 // #define ASM
 // #define ADVANCED_ASM
 
+
 #ifdef BLOCK_VERSION
 
 #define STEP_SIZE 2 // do not change, only for readability
@@ -185,9 +186,6 @@ void plp_mat_mult_i32s_xpulpv2(
           uint32_t iEnd = i;
           uint32_t jEnd = j;
           uint32_t kEnd = k;
-          uint32_t iReset = i==M ? M-2 : i;
-          uint32_t jReset = j==N ? N-1 : j;
-          uint32_t kReset = k==O ? O-2 : k;
 
           if(i == 0 || k == 0 || j == 0){
             for(; i < M; i++){
