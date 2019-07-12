@@ -1,9 +1,9 @@
 #include "rt/rt_api.h"
 #include "stdio.h"
 
-#define P_TEST_16
+// #define P_TEST_16
 // #define P_TEST_32
-// #define TEST_8
+#define TEST_8
 // #define TEST_16
 
 #if defined(P_TEST_16)
@@ -138,10 +138,12 @@ void cluster_entry(void *arg){
   unsigned int cycles = rt_perf_read(RT_PERF_CYCLES);
   unsigned int instr = rt_perf_read(RT_PERF_INSTR);
   unsigned int ld_stall = rt_perf_read(RT_PERF_LD_STALL);
-  unsigned int misc = rt_perf_read(RT_PERF_TCDM_CONT);
+  unsigned int cont = rt_perf_read(RT_PERF_TCDM_CONT);
+  // unsigned int misc = rt_perf_read(RT_PERF_DELAY_NOP);
   printf("Total cycles: %d\n", cycles);
   printf("Instructions: %d\n", instr);
   printf("Load stalls %d\n", ld_stall);
+  printf("Contention %d\n", cont);
   printf("Misc %d\n", misc);
   printf("Operations %d\n", ops);
 
