@@ -3,24 +3,28 @@
 
 
 // #define BLOCK_VERSION
-// #define BLOCK_VERSION_SHUFFLE
+#define BLOCK_VERSION_SHUFFLE
 
 #if defined(BLOCK_VERSION)
 
-void plp_mat_mult_i16vp_xpulpv2(
-                              const int16_t * __restrict__ pSrcA,
-                              const int16_t * __restrict__ pSrcB,
-                              uint32_t M,
-                              uint32_t N,
-                              uint32_t O,
-                              int32_t * __restrict__ pDstC) {
-        
+void plp_mat_mult_i16vp_xpulpv2(void* args) {
+        mat_mult_p_args* arguments = (mat_mult_p_args*) args;
+        const int16_t * __restrict__ pSrcA = arguments->pSrcA;
+        const int16_t * __restrict__ pSrcB = arguments->pSrcB;
+        uint32_t M = arguments->M;
+        uint32_t N = arguments->N;
+        uint32_t O = arguments->O;
+        uint32_t nPE = arguments->nPE;
+        int32_t * __restrict__ pDstC = arguments->pDstC;
+
         uint32_t i; // loop counter for M
         uint32_t j; // loop counter for N
         uint32_t k; // loop counter for O
+
+        int core_id = rt_core_id();
         
-        for(i=0; i < M/2; i++){
-          for(k=0; k < O/2; k++){
+        for(k=core_id; k < O/2; k+=nPE){
+          for(i=0; i < M/2; i++){
 
             int32_t sum00 = 0;
             int32_t sum01 = 0;
@@ -62,12 +66,12 @@ void plp_mat_mult_i16vp_xpulpv2(
         j = j*2;
         k = k*2;
         //check if every index is nicely finished
-        if(i == M && j == N && k == O){
-          return;
+        if(i == M && j == N && k >= O){
+          
         } else {
           uint32_t iEnd = i;
           uint32_t jEnd = j;
-          uint32_t kEnd = k;
+          uint32_t kEnd = k >= O ? O:k; // take the lower of both
 
           if(i == 0 || k == 0 || j == 0){
             for(; i < M; i++){
@@ -122,20 +126,24 @@ void plp_mat_mult_i16vp_xpulpv2(
 
 #elif defined(BLOCK_VERSION_SHUFFLE)
 
-void plp_mat_mult_i16vp_xpulpv2(
-                              const int16_t * __restrict__ pSrcA,
-                              const int16_t * __restrict__ pSrcB,
-                              uint32_t M,
-                              uint32_t N,
-                              uint32_t O,
-                              int32_t * __restrict__ pDstC) {
-        
+void plp_mat_mult_i16vp_xpulpv2(void* args) {
+        mat_mult_p_args* arguments = (mat_mult_p_args*) args;
+        const int16_t * __restrict__ pSrcA = arguments->pSrcA;
+        const int16_t * __restrict__ pSrcB = arguments->pSrcB;
+        uint32_t M = arguments->M;
+        uint32_t N = arguments->N;
+        uint32_t O = arguments->O;
+        uint32_t nPE = arguments->nPE;
+        int32_t * __restrict__ pDstC = arguments->pDstC;
+
         uint32_t i; // loop counter for M
         uint32_t j; // loop counter for N
         uint32_t k; // loop counter for O
         
-        for(i=0; i < M/4; i++){
-          for(k=0; k < O/2; k++){
+        int core_id = rt_core_id();
+
+        for(k=core_id; k < O/2; k+=nPE){
+          for(i=0; i < M/4; i++){
 
             int32_t sum00 = 0;
             int32_t sum01 = 0;
@@ -154,14 +162,6 @@ void plp_mat_mult_i16vp_xpulpv2(
               v2s aVec1 = *((v2s*)&(pSrcA[(i*4+1)*N + (j*2  )]));
               v2s aVec2 = *((v2s*)&(pSrcA[(i*4+2)*N + (j*2  )]));
               v2s aVec3 = *((v2s*)&(pSrcA[(i*4+3)*N + (j*2  )]));
-
-              // int16_t BVal00 = pSrcB[(j*2  )*O+(k*2 )];
-              // int16_t BVal01 = pSrcB[(j*2  )*O+(k*2+1)];
-              // int16_t BVal10 = pSrcB[(j*2+1)*O+(k*2 )];
-              // int16_t BVal11 = pSrcB[(j*2+1)*O+(k*2+1)];
-
-              // v2s bVec0 = {BVal00, BVal10};
-              // v2s bVec1 = {BVal01, BVal11};
 
               v2s bTemp0 = *((v2s*)&(pSrcB[(j*2  )*O + (k*2  )]));
               v2s bTemp1 = *((v2s*)&(pSrcB[(j*2+1)*O + (k*2  )]));
@@ -197,12 +197,12 @@ void plp_mat_mult_i16vp_xpulpv2(
         j = j*2;
         k = k*2;
         //check if every index is nicely finished
-        if(i == M && j == N && k == O){
+        if(i == M && j == N && k >= O){
           return;
         } else {
           uint32_t iEnd = i;
           uint32_t jEnd = j;
-          uint32_t kEnd = k;
+          uint32_t kEnd = k >= O ? O:k; // take the lower of both
 
           if(i == 0 || k == 0 || j == 0){
             for(; i < M; i++){

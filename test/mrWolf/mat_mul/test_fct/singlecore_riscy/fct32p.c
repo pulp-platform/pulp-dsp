@@ -124,7 +124,6 @@ void plp_mat_mult_i32p_xpulpv2( void* args) {
         uint32_t k; // loop counter for O
 
         int core_id = rt_core_id();
-        int step = (O-1+nPE)/nPE;
 
         // printf("core id: %i, start: %i, end: %i\n", core_id, START, END);
 
@@ -163,12 +162,12 @@ void plp_mat_mult_i32p_xpulpv2( void* args) {
         k = k*2;
 
         //check if every index is nicely finished
-        if(i == M && j == N && k >= O){ //TODO
+        if(i == M && j == N && k >= O){
           
         } else {
           uint32_t iEnd = i;
           uint32_t jEnd = j;
-          uint32_t kEnd = k >= O ? O:k;
+          uint32_t kEnd = k >= O ? O:k; // take the lower of both
 
           // clean up for j
           if(jEnd != N){
