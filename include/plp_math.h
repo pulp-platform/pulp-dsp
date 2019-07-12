@@ -112,6 +112,14 @@ typedef struct
        int32_t * resBuffer;      // pointer to result vector
      } plp_dot_prod_instance_i32;
 
+typedef struct {
+       int32_t * pSrcA;     // pointer to the first vector
+       uint32_t srcALen;
+       int32_t * pSrcB;     // pointer to the second vector
+       uint32_t srcBLen;     // number of samples in each vector
+       uint8_t nPE;        // number of processing units
+       int32_t * pRes;      // pointer to result vector
+     } plp_conv_instance_i32;
 
 
 /** -------------------------------------------------------
@@ -546,9 +554,6 @@ void plp_dot_prod_q8v_xpulpv2(
                               uint32_t blockSize,
                               uint32_t deciPoint,
                               int32_t * __restrict__ pRes);
-
-
-
 /** -------------------------------------------------------
    @brief         Glue code for filling a constant value into a 32-bit integer vector.
    @param[in]     value      input value to be filled
@@ -682,6 +687,166 @@ void plp_mean_i32s_xpulpv2(
                            uint32_t blockSize,
                            int32_t * __restrict__ pRes);
 
+/**
+  @brief Glue code for convolution of 32-bit integer vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  SrcALen   Length of the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  SrcBLen   Length of the second input vector
+  @param[out] result     output result returned here
+  @return        none
+ */
 
+void plp_conv_i32(
+                       const int32_t * pSrcA,
+		       const uint32_t srcALen,
+                       const int32_t * pSrcB,
+		       const uint32_t srcBLen,
+                       int32_t * pRes);
+
+/**
+   @brief Convolution of 32-bit integer vectors kernel for RV32IM extension.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  srcALen   Length of the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  srcBLen   Length of the second input vector
+   @param[out] result     output result returned here
+   @return        none */
+
+void plp_conv_i32s_rv32im(const int32_t * pSrcA,
+			      const uint32_t srcALen,
+			      const int32_t * pSrcB,
+			      const uint32_t srcBLen,
+			      int32_t * pRes);
+
+/**
+   @brief Convolution of 32-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  srcALen   Length of the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  srcBLen   Length of the second input vector
+   @param[out] result     output result returned here
+   @return        none */
+
+void plp_conv_i32s_xpulpv2(const int32_t * __restrict__ pSrcA,
+			      const uint32_t srcALen,
+			      const int32_t * __restrict__ pSrcB,
+			      const uint32_t srcBLen,
+			      int32_t * __restrict__ pRes);
+
+
+/**
+  @brief Glue code for convolution of 16-bit integer vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  SrcALen   Length of the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  SrcBLen   Length of the second input vector
+  @param[out] result     output result returned here
+  @return        none
+ */
+
+void plp_conv_i16(const int16_t *  pSrcA,
+		  const uint32_t srcALen,
+		  const int16_t *  pSrcB,
+		  const uint32_t srcBLen,
+		  int32_t *  pRes);
+
+/**
+   @brief Convolution of 16-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  srcALen   Length of the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  srcBLen   Length of the second input vector
+   @param[out] result     output result returned here
+   @return        none */
+
+void plp_conv_i16s_xpulpv2(const int16_t *  pSrcA,
+			   const uint32_t srcALen,
+			   const int16_t *  pSrcB,
+			   const uint32_t srcBLen,
+			   int32_t *  pRes);
+/**
+   @brief Convolution of 16-bit integer vectors kernel for RV32IM extension.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  srcALen   Length of the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  srcBLen   Length of the second input vector
+   @param[out] result     output result returned here
+   @return        none */
+
+void plp_conv_i16s_rv32im(const int16_t *  pSrcA,
+			  const uint32_t srcALen,
+			  const int16_t *  pSrcB,
+			  const uint32_t srcBLen,
+			  int32_t *  pRes);
+
+
+
+/**
+  @brief Glue code for convolution of 8-bit integer vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  SrcALen   Length of the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  SrcBLen   Length of the second input vector
+  @param[out] result     output result returned here
+  @return        none
+ */
+
+void plp_conv_i8(const int8_t *  pSrcA,
+		  const uint32_t srcALen,
+		  const int8_t *  pSrcB,
+		  const uint32_t srcBLen,
+		  int32_t *  pRes);
+
+/**
+   @brief Convolution of 8-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  srcALen   Length of the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  srcBLen   Length of the second input vector
+   @param[out] result     output result returned here
+   @return        none */
+
+void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
+			   const uint32_t srcALen,
+			   const int8_t *  pSrcB,
+			   const uint32_t srcBLen,
+			   int32_t *  pRes);
+
+/**
+   @brief Convolution of 8-bit integer vectors kernel for RV32IM extension.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  srcALen   Length of the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  srcBLen   Length of the second input vector
+   @param[out] result     output result returned here
+   @return        none */
+
+void plp_conv_i8s_rv32im(const int8_t *  pSrcA,
+			  const uint32_t srcALen,
+			  const int8_t *  pSrcB,
+			  const uint32_t srcBLen,
+			  int32_t *  pRes);
+
+/**
+  @brief Glue code for parallel convolution of 32-bit fixed point vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  SrcALen   Length of the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  SrcBLen   Length of the second input vector
+  @param[in]  nPe       Number of cores to compute on
+  @param[out] result     output result returned here
+  @return        none
+ */
+
+void plp_conv_i32_parallel(
+                       const int32_t *  pSrcA,
+		       const uint32_t srcALen,
+                       const int32_t *  pSrcB,
+		       const uint32_t srcBLen,
+		       const uint8_t nPE,
+                       int32_t *  pRes);
+
+void plp_conv_i32p_xpulpv2(void* task_args);
 
 #endif // __PLP_MATH_H__
