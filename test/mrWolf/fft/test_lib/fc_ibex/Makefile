@@ -1,11 +1,10 @@
 
 #LIB=/home/xiaywang/pulp/PULP-DSP/lib/libmyplpdsp.a
 
-IDIR=/home/fischeti/PULP-DSP/include
+IDIR=/home/xiaywang/pulp/PULP-DSP/include
 
 PULP_APP = test
 
-PULP_APP_CL_SRCS = cluster.c
 PULP_APP_FC_SRCS = test.c
 
 PULP_LDFLAGS += -lplpdsp

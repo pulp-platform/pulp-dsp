@@ -1,7 +1,7 @@
 
 #LIB=/home/xiaywang/pulp/PULP-DSP/lib/libmyplpdsp.a
 
-IDIR=/home/fischeti/PULP-DSP/include
+IDIR=/home/xiaywang/pulp/PULP-DSP/include
 
 PULP_APP = test
 
