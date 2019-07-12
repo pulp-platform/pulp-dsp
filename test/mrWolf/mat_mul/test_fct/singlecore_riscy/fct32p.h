@@ -2,6 +2,7 @@
 #ifndef __FCT_H__
 #define __FCT_H__
 
+#include "rt/rt_api.h"
 #include <stdint.h>
 
 typedef struct{
