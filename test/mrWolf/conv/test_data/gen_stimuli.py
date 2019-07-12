@@ -67,11 +67,11 @@ def gen_stimuli(name, var_type, n_bits, min_value, max_value, A, B):
 
     write_arr(f, 'v_a',   v_a,   var_type, A, "LENGTHA", 1)
     write_arr(f, 'v_b',   v_b,   var_type, B, "LENGTHB", 1)
-    write_arr(f, 'r',   r,   var_type, A+B-1, "LENGTHB+LENGTHA-1", 1)
+    write_arr(f, 'r',   r,   "int32_t", A+B-1, "LENGTHB+LENGTHA-1", 1)
 
     write_arr(g, 'v_a',   v_a,   var_type, A, "LENGTHA", 2)
     write_arr(g, 'v_b',   v_b,   var_type, B, "LENGTHB", 2)
-    write_arr(g, 'r',   r,   var_type, A+B-1, "LENGTHB+LENGTHA-1", 2)
+    write_arr(g, 'r',   r,   "int32_t", A+B-1, "LENGTHB+LENGTHA-1", 2)
     
 #    f.write('%s dot_product(%s * v, %s * u, unsigned int n);\n' % (var_type, var_type, var_type))
 
@@ -105,8 +105,8 @@ if __name__=='__main__':
 
     # gen_stimuli(file_name, data_type, n_bits, min_value, max_value,v_len)
 
-    m_size = 16
-    n_size = 16
+    m_size = 128
+    n_size = 128
 
     gen_stimuli('conv_data32', "int32_t", 32, -2**7, 2**7-1  ,m_size, n_size)
     gen_stimuli('conv_data16', "int16_t", 16, -2**6, 2**6-1  ,m_size, n_size)
