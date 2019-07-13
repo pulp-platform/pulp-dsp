@@ -798,8 +798,6 @@ void plp_conv_i16s_rv32im(const int16_t *  pSrcA,
 			  const uint32_t srcBLen,
 			  int32_t *  pRes);
 
-
-
 /**
   @brief Glue code for convolution of 8-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
@@ -847,7 +845,7 @@ void plp_conv_i8s_rv32im(const int8_t *  pSrcA,
 			  int32_t *  pRes);
 
 /**
-  @brief Glue code for parallel convolution of 32-bit fixed point vectors.
+  @brief Glue code for parallel convolution of 32-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
   @param[in]  SrcALen   Length of the first input vector
   @param[in]  pSrcB      points to the second input vector
@@ -865,7 +863,24 @@ void plp_conv_i32_parallel(
 		       const uint8_t nPE,
                        int32_t *  pRes);
 
+/**
+  @brief Setup code for parallel convolution of 32-bit integer vectors.
+  @param[in]  task_args      pointer to plp_conv_instance_i32 struct initialized by plp_conv_i32_parallel
+  @return        none
+ */
+
 void plp_conv_i32p_xpulpv2(void* task_args);
+
+/**
+  @brief Glue code for parallel convolution of 16-bit integer vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  SrcALen   Length of the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  SrcBLen   Length of the second input vector
+  @param[in]  nPe       Number of cores to compute on
+  @param[out] result     output result returned here
+  @return        none
+ */
 
 void plp_conv_i16_parallel(
                        const int16_t *  pSrcA,
@@ -874,8 +889,24 @@ void plp_conv_i16_parallel(
 		       const uint32_t srcBLen,
 		       const uint8_t nPE,
                        int32_t *  pRes);
+/**
+  @brief Setup code for parallel convolution of 16-bit integer vectors.
+  @param[in]  task_args      pointer to plp_conv_instance_i16 struct initialized by plp_conv_i16_parallel
+  @return        none
+ */
 
 void plp_conv_i16p_xpulpv2(void* task_args);
+
+/**
+  @brief Glue code for parallel convolution of 8-bit integer vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  SrcALen   Length of the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  SrcBLen   Length of the second input vector
+  @param[in]  nPe       Number of cores to compute on
+  @param[out] result     output result returned here
+  @return        none
+ */
 
 void plp_conv_i8_parallel(
                        const int8_t *  pSrcA,
@@ -884,7 +915,11 @@ void plp_conv_i8_parallel(
 		       const uint32_t srcBLen,
 		       const uint8_t nPE,
                        int32_t *  pRes);
-
+/**
+  @brief Setup code for parallel convolution of 8-bit integer vectors.
+  @param[in]  task_args      pointer to plp_conv_instance_i8 struct initialized by plp_conv_i8_parallel
+  @return        none
+ */
 void plp_conv_i8p_xpulpv2(void* task_args);
 
 #endif // __PLP_MATH_H__

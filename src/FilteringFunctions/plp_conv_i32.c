@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_dot_prod_i32.c
- * Description:  32-bit integer dot product glue code
+ * Description:  32-bit integer convolution glue code
  *
  * $Date:        01. July 2019
  * $Revision:    V0
@@ -41,7 +41,7 @@
  */
 
 /**
-  @brief Glue code for convolution of 32-bit fixed point vectors.
+  @brief Glue code for convolution of 32-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
   @param[in]  SrcALen   Length of the first input vector
   @param[in]  pSrcB      points to the second input vector

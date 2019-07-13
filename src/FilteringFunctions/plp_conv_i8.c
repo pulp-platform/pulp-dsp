@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_dot_prod_i8.c
- * Description:  8-bit integer dot product glue code
+ * Description:  8-bit integer convolution glue code
  *
  * $Date:        01. July 2019
  * $Revision:    V0

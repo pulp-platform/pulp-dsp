@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_dot_prod_i32.c
- * Description:  32-bit integer dot product glue code
+ * Title:        plp_conv_i16_parallel.c
+ * Description:  16-bit parallel integer convolution glue code
  *
  * $Date:        01. July 2019
  * $Revision:    V0
@@ -43,7 +43,7 @@ RT_CL_DATA int32_t* resultsBuffer;
 */
 
 /**
-   @brief Glue code for parallel convolution of 16-bit fixed point vectors.
+   @brief Glue code for parallel convolution of 16-bit integer vectors.
    @param[in]  pSrcA      points to the first input vector
    @param[in]  SrcALen   Length of the first input vector
    @param[in]  pSrcB      points to the second input vector

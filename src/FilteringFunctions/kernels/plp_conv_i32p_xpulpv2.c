@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_conv_i32_xpulpv2.c
- * Description:  32-bit fixed point scalar dot product kernel for RV32IM
+ * Title:        plp_conv_i32p_xpulpv2.c
+ * Description:  32-bit parallel integer convolution for XPULPV2
  *
  * $Date:        01. July 2019
  * $Revision:    V0
@@ -39,7 +39,7 @@
 */
 
 /**
-   @brief Convolution of 32-bit integer vectors kernel for XPULPV2 extension.
+   @brief Parallel convolution of 32-bit integer vectors kernel for XPULPV2 extension.
    @param[in]  pSrcA      points to the first input vector
    @param[in]  srcALen   Length of the first input vector
    @param[in]  pSrcB      points to the second input vector
