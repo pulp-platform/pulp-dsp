@@ -219,17 +219,17 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
 	    {
 	      /* Read y[srcBLen - 1] sample */
 	      _x1 = *((v4s*)px); // {x[0],x[1],x[2],x[3]}
-	      px+=4U;
-	      _x2 = *((v4s*)(px-1)); // {x[3],x[4],x[5],x[6]}
-	      py-=4U;
-	      _y1 = *((v4s*)(py+1)); // {y[srcBLen - 4],y[srcBLen - 3],y[srcBLen - 2],y[srcBLen - 1]} 
+	      _x4 = *((v4s*)(px+3)); // {x[3],x[4],x[5],x[6]}
+	      _y1 = *((v4s*)(py-3)); // {y[srcBLen - 4],y[srcBLen - 3],y[srcBLen - 2],y[srcBLen - 1]} 
 
-	      _x3 = __builtin_shuffle(_x1,_x2,(v4s){1,2,3,5}); // {x[1],x[2],x[3],x[4]}
-	      _x4 = __builtin_shuffle(_x1,_x2,(v4s){2,3,5,6}); // {x[2],x[3],x[4],x[5]}
+	      px+=4U;
+	      py-=4U;
+	      
+	      _x2 = __builtin_shuffle(_x1,_x4,(v4s){1,2,3,5}); // {x[1],x[2],x[3],x[4]}
+	      _x3 = __builtin_shuffle(_x1,_x4,(v4s){2,3,5,6}); // {x[2],x[3],x[4],x[5]}
 	      
 	      _y1 = __builtin_shuffle(_y1,_y1,(v4s){3,2,1,0}); // {y[srcBLen - 1],y[srcBLen - 2],y[srcBLen - 3],y[srcBLen - 4]} 
 
-	      
 	      acc0 = __SUMDOTP4(_x1,_y1,acc0);
 	      acc1 = __SUMDOTP4(_x2,_y1,acc1);
 	      acc2 = __SUMDOTP4(_x3,_y1,acc2);
@@ -253,7 +253,7 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
 	      /* px++; */
 	      /* px++; */
 	      /* px++; */
-	      px+=4;
+	      px++;
 
 	      /* px+=2; */
 	      /* Perform the multiply-accumulate */
