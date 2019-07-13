@@ -105,8 +105,8 @@ if __name__=='__main__':
 
     # gen_stimuli(file_name, data_type, n_bits, min_value, max_value,v_len)
 
-    m_size = 128
-    n_size = 128
+    m_size = 32
+    n_size = 16
 
     gen_stimuli('conv_data32', "int32_t", 32, -2**7, 2**7-1  ,m_size, n_size)
     gen_stimuli('conv_data16', "int16_t", 16, -2**6, 2**6-1  ,m_size, n_size)

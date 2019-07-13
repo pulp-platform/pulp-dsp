@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_conv_i32_xpulpv2.c
- * Description:  32-bit fixed point scalar dot product kernel for RV32IM
+ * Title:        plp_conv_i8_xpulpv2.c
+ * Description:  8-bit fixed point scalar dot product kernel for RV32IM
  *
  * $Date:        01. July 2019
  * $Revision:    V0
@@ -39,7 +39,7 @@
 */
 
 /**
-   @brief Convolution of 32-bit integer vectors kernel for XPULPV2 extension.
+   @brief Convolution of 8-bit integer vectors kernel for XPULPV2 extension.
    @param[in]  pSrcA      points to the first input vector
    @param[in]  srcALen   Length of the first input vector
    @param[in]  pSrcB      points to the second input vector
@@ -51,46 +51,46 @@
 // Pre-condition: pRes has enough allocated memory, i.e. srcALen + srcBLen-1u
 // Pre-condition: srcALen >= 2 and srcBLen >= 2, otherwise use vector dot product
 
-void plp_conv_i32p_xpulpv2(void* task_args){
+void plp_conv_i8p_xpulpv2(void* task_args){
 
-  plp_conv_instance_i32* S = (plp_conv_instance_i32*)task_args;
+  plp_conv_instance_i8* S = (plp_conv_instance_i8*)task_args;
   
-  int32_t resultoffset = ((S->srcALen+S->nPE-1)/S->nPE) + S->srcBLen - 1;
-  int32_t srcAoffset = ((S->srcALen+S->nPE-1)/S->nPE);
+  uint32_t resultoffset = ((S->srcALen+S->nPE-1)/S->nPE) + S->srcBLen - 1;
+  uint32_t srcAoffset = ((S->srcALen+S->nPE-1)/S->nPE);
 
-  int32_t *  pSrcA;
+  int8_t *  pSrcA;
   uint32_t srcALen;
-  int32_t *  pSrcB;
+  int8_t *  pSrcB;
   uint32_t srcBLen;
   uint8_t nPE;
   int32_t *  pRes;
 
-  int32_t* pIn1;
-  int32_t* pIn2;
+  int8_t* pIn1;
+  int8_t* pIn2;
   uint32_t pIn1Len;
   uint32_t pIn2Len;
   
   if(rt_core_id() == (S->nPE - 1)){
 
-    pSrcA = (int32_t*)((S->pSrcA + srcAoffset * (S->nPE-1)));
+    pSrcA = (int8_t*)((S->pSrcA + srcAoffset * (S->nPE-1)));
     srcALen = S->srcALen - (srcAoffset * (S->nPE-1));
-    pSrcB = (int32_t*)(S->pSrcB);
+    pSrcB = (int8_t*)(S->pSrcB);
     srcBLen = S->srcBLen;
     nPE = S->nPE;
     pRes = (int32_t*)(S->pRes + resultoffset*(S->nPE-1));
 
-    printf("ID %i: 0x%x %i 0x%x %i 0x%x\n",rt_core_id(), pSrcA, srcALen, pSrcB, srcBLen, pRes);
+    //printf("ID %i: 0x%x %i 0x%x %i 0x%x\n",rt_core_id(), pSrcA, srcALen, pSrcB, srcBLen, pRes);
     
   } else {
   
     srcALen = srcAoffset;
-    pSrcA = (int32_t*)(S->pSrcA + (rt_core_id()*srcAoffset));
-    pSrcB = (int32_t*)S->pSrcB;
+    pSrcA = (int8_t*)(S->pSrcA + (rt_core_id()*srcAoffset));
+    pSrcB = (int8_t*)S->pSrcB;
     srcBLen = S->srcBLen;
     nPE = S->nPE;
     pRes = (int32_t*)(S->pRes + resultoffset*(rt_core_id()));
 
-    printf("ID %i: 0x%x %i 0x%x %i 0x%x\n",rt_core_id(), pSrcA, srcALen, pSrcB, srcBLen, pRes);
+    //printf("ID %i: 0x%x %i 0x%x %i 0x%x\n",rt_core_id(), pSrcA, srcALen, pSrcB, srcBLen, pRes);
 
   }
 
@@ -106,7 +106,7 @@ void plp_conv_i32p_xpulpv2(void* task_args){
     pIn2Len = srcALen;
   }
   
-  plp_conv_i32s_xpulpv2(pIn1, pIn1Len, pIn2, pIn2Len, pRes);
+  plp_conv_i8s_xpulpv2(pIn1, pIn1Len, pIn2, pIn2Len, pRes);
   rt_team_barrier();
   
 }

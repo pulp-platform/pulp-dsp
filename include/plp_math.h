@@ -121,6 +121,24 @@ typedef struct {
        int32_t * pRes;      // pointer to result vector
      } plp_conv_instance_i32;
 
+typedef struct {
+       int16_t * pSrcA;     // pointer to the first vector
+       uint32_t srcALen;
+       int16_t * pSrcB;     // pointer to the second vector
+       uint32_t srcBLen;     // number of samples in each vector
+       uint8_t nPE;        // number of processing units
+       int32_t * pRes;      // pointer to result vector
+     } plp_conv_instance_i16;
+
+typedef struct {
+       int8_t * pSrcA;     // pointer to the first vector
+       uint32_t srcALen;
+       int8_t * pSrcB;     // pointer to the second vector
+       uint32_t srcBLen;     // number of samples in each vector
+       uint8_t nPE;        // number of processing units
+       int32_t * pRes;      // pointer to result vector
+     } plp_conv_instance_i8;
+
 
 /** -------------------------------------------------------
  * @brief Instance structure for fixed point parallel dot product.
@@ -848,5 +866,25 @@ void plp_conv_i32_parallel(
                        int32_t *  pRes);
 
 void plp_conv_i32p_xpulpv2(void* task_args);
+
+void plp_conv_i16_parallel(
+                       const int16_t *  pSrcA,
+		       const uint32_t srcALen,
+                       const int16_t *  pSrcB,
+		       const uint32_t srcBLen,
+		       const uint8_t nPE,
+                       int32_t *  pRes);
+
+void plp_conv_i16p_xpulpv2(void* task_args);
+
+void plp_conv_i8_parallel(
+                       const int8_t *  pSrcA,
+		       const uint32_t srcALen,
+                       const int8_t *  pSrcB,
+		       const uint32_t srcBLen,
+		       const uint8_t nPE,
+                       int32_t *  pRes);
+
+void plp_conv_i8p_xpulpv2(void* task_args);
 
 #endif // __PLP_MATH_H__
