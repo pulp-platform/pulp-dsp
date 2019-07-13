@@ -66,8 +66,8 @@ void plp_conv_i16_parallel(
     return;
   }  else {
 
-    int16_t* pIn1;
-    int16_t* pIn2;
+    const int16_t* pIn1;
+    const int16_t* pIn2;
 
     uint32_t pIn1Len;
     uint32_t pIn2Len;
@@ -115,7 +115,7 @@ void plp_conv_i16_parallel(
 	pRes[i] = 0;
       }
 
-      for(uint32_t i=1;i<nPE-1;i++){
+      for(int32_t i=1;i<nPE-1;i++){
 	for(uint32_t j=0;j<resultsoffset;j++){
 	   pRes[i*srcAoffset+j] += resultsBuffer[j+i*resultsoffset];
 	}

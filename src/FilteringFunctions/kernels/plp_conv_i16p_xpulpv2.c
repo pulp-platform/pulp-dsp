@@ -62,7 +62,6 @@ void plp_conv_i16p_xpulpv2(void* task_args){
   uint32_t srcALen;
   int16_t *  pSrcB;
   uint32_t srcBLen;
-  uint8_t nPE;
   int32_t *  pRes;
 
   int16_t* pIn1;
@@ -76,7 +75,6 @@ void plp_conv_i16p_xpulpv2(void* task_args){
     srcALen = S->srcALen - (srcAoffset * (S->nPE-1));
     pSrcB = (int16_t*)(S->pSrcB);
     srcBLen = S->srcBLen;
-    nPE = S->nPE;
     pRes = (int32_t*)(S->pRes + resultoffset*(S->nPE-1));
 
     //printf("ID %i: 0x%x %i 0x%x %i 0x%x\n",rt_core_id(), pSrcA, srcALen, pSrcB, srcBLen, pRes);
@@ -87,7 +85,6 @@ void plp_conv_i16p_xpulpv2(void* task_args){
     pSrcA = (int16_t*)(S->pSrcA + (rt_core_id()*srcAoffset));
     pSrcB = (int16_t*)S->pSrcB;
     srcBLen = S->srcBLen;
-    nPE = S->nPE;
     pRes = (int32_t*)(S->pRes + resultoffset*(rt_core_id()));
 
     //printf("ID %i: 0x%x %i 0x%x %i 0x%x\n",rt_core_id(), pSrcA, srcALen, pSrcB, srcBLen, pRes);

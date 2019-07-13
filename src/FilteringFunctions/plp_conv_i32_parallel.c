@@ -66,8 +66,8 @@ void plp_conv_i32_parallel(
     return;
   }  else {
 
-    int32_t* pIn1;
-    int32_t* pIn2;
+    const int32_t* pIn1;
+    const int32_t* pIn2;
 
     uint32_t pIn1Len;
     uint32_t pIn2Len;
@@ -90,7 +90,7 @@ void plp_conv_i32_parallel(
     
     if(nPE > 1){
       resultsBuffer = (int32_t*)rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*resultsLen);
-      printf("Address of resultsBuffer: 0x%x, End: 0x%x\n", resultsBuffer, resultsBuffer + sizeof(int32_t)*resultsLen);
+      //printf("Address of resultsBuffer: 0x%x, End: 0x%x\n", resultsBuffer, resultsBuffer + sizeof(int32_t)*resultsLen);
     } else {
       resultsBuffer = pRes;
     }
@@ -108,20 +108,20 @@ void plp_conv_i32_parallel(
 
     if(nPE > 1){
 
-      for(int i=0;i<resultsoffset;i++){
+      for(uint32_t i=0;i<resultsoffset;i++){
 	pRes[i] = resultsBuffer[i];
       }
       
-      for(int i = resultsoffset; i<srcALen+srcBLen-1;i++){
+      for(uint32_t i = resultsoffset; i<srcALen+srcBLen-1;i++){
 	pRes[i] = 0;
       }
 
-      for(int i=1;i<nPE-1;i++){
-	for(int j=0;j<resultsoffset;j++){
+      for(int32_t i=1;i<nPE-1;i++){
+	for(uint32_t j=0;j<resultsoffset;j++){
 	   pRes[i*srcAoffset+j] += resultsBuffer[j+i*resultsoffset];
 	}
       }
-      for(int j=0;j<resultsLen-resultsoffset*(nPE-1);j++){
+      for(uint32_t j=0;j<resultsLen-resultsoffset*(nPE-1);j++){
       	pRes[(nPE-1)*srcAoffset+j] += resultsBuffer[(nPE-1)*resultsoffset + j];
       }
       

@@ -113,27 +113,27 @@ typedef struct
      } plp_dot_prod_instance_i32;
 
 typedef struct {
-       int32_t * pSrcA;     // pointer to the first vector
+       const int32_t * pSrcA;     // pointer to the first vector
        uint32_t srcALen;
-       int32_t * pSrcB;     // pointer to the second vector
+       const int32_t * pSrcB;     // pointer to the second vector
        uint32_t srcBLen;     // number of samples in each vector
        uint8_t nPE;        // number of processing units
        int32_t * pRes;      // pointer to result vector
      } plp_conv_instance_i32;
 
 typedef struct {
-       int16_t * pSrcA;     // pointer to the first vector
+       const int16_t * pSrcA;     // pointer to the first vector
        uint32_t srcALen;
-       int16_t * pSrcB;     // pointer to the second vector
+       const int16_t * pSrcB;     // pointer to the second vector
        uint32_t srcBLen;     // number of samples in each vector
        uint8_t nPE;        // number of processing units
        int32_t * pRes;      // pointer to result vector
      } plp_conv_instance_i16;
 
 typedef struct {
-       int8_t * pSrcA;     // pointer to the first vector
+       const int8_t * pSrcA;     // pointer to the first vector
        uint32_t srcALen;
-       int8_t * pSrcB;     // pointer to the second vector
+       const int8_t * pSrcB;     // pointer to the second vector
        uint32_t srcBLen;     // number of samples in each vector
        uint8_t nPE;        // number of processing units
        int32_t * pRes;      // pointer to result vector
