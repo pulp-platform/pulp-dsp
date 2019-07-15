@@ -1,5 +1,4 @@
 #include "MFCC.h"
-#include "rt/rt_api.h"
 
 #ifdef STACK_SIZE
 #undef STACK_SIZE
@@ -8,7 +7,6 @@
 #define MOUNT           1
 #define UNMOUNT         0
 #define CID             0
-
 
 #include "FFT_Lib.h"
 #include "MFCC_FB40.def"
@@ -44,10 +42,6 @@ struct complex_f {
 
 //#define LOG_NORM  ((int) floor(log((float)N_FFT)*(float)(1<<QN)+0.5))
 #define LOG_NORM    (0x400) 
-
-#define __CPLXMULS(x, y)			((v2s) {(signed short) ((((long long) (x)[0]*(long long) (y)[0]) - ((long long) (x)[1]*(long long) (y)[1]))>>15),  \
-							(signed short) ((((long long) (x)[0]*(long long) (y)[1]) + ((long long) (x)[1]*(long long) (y)[0]))>>15)})
-#define __CPLXMULSDIV2(x, y)			(__CPLXMULS(x, y)>>(v2s){1,1})
 
 int MFCC_Logfp(unsigned int a)
 {
@@ -186,9 +180,9 @@ void Radix2FFT_DIF_argsff(short int *__restrict__ Data, struct complex_f *DataVf
 
                 DataV[iA] = (DataV[iA] + DataV[iB]) >> (v2s) {FFT2_SCALEDOWN, FFT2_SCALEDOWN};
 #ifdef EXT
-                DataV[iB] = __CPLXMULSDIV2(Tmp, W);
+                DataV[iB] = __CPLX_MULS_DIV2(Tmp, W);
 #else
-                DataV[iB] = __CPLXMULS(Tmp, W) >> (v2s) {FFT2_SCALEDOWN, FFT2_SCALEDOWN};
+                DataV[iB] = __CPLX_MULS(Tmp, W) >> (v2s) {FFT2_SCALEDOWN, FFT2_SCALEDOWN};
 #endif
 
 #ifdef FLOAT
@@ -261,9 +255,9 @@ void Radix2FFT_DIF_args(short int *__restrict__ Data,short int *__restrict__ Twi
 
                 DataV[iA] = (DataV[iA] + DataV[iB]) >> (v2s) {FFT2_SCALEDOWN, FFT2_SCALEDOWN};
 #ifdef EXT
-                DataV[iB] = __CPLXMULSDIV2(Tmp, W);
+                DataV[iB] = __CPLX_MULS_DIV2(Tmp, W);
 #else
-                DataV[iB] = __CPLXMULS(Tmp, W) >> (v2s) {FFT2_SCALEDOWN, FFT2_SCALEDOWN};
+                DataV[iB] = __CPLX_MULS(Tmp, W) >> (v2s) {FFT2_SCALEDOWN, FFT2_SCALEDOWN};
 #endif
                 iA = iA + 2 * iM;
             }
@@ -309,8 +303,8 @@ void Radix2FFT_DIF(FFT_Arg_T *Arg)
                 v2s Tmp;
                 iB = iA + iM;
                 Tmp = DataV[iA] - DataV[iB];
-                DataV[iA] = (v2s) (DataV[iA] + DataV[iB]) >> (v2s) {FFT2_SCALEDOWN, FFT2_SCALEDOWN};
-                DataV[iB] = __CPLXMULSDIV2(Tmp, W);
+                DataV[iA] = (DataV[iA] + DataV[iB]) >> (v2s) {FFT2_SCALEDOWN, FFT2_SCALEDOWN};
+                DataV[iB] = __CPLX_MULS_DIV2(Tmp, W);
                 iA = iA + 2 * iM;
             }
             iQ += iL;
@@ -345,6 +339,44 @@ void MFCC_PreEmphasis(short int * __restrict__ Frame, short int * __restrict__ O
             Out[i] = Frame[i]<<Gain;
         }
 
+    }
+    //return S;
+}
+
+void MFCC_PreEmphasis_parallel(void * S)
+{
+    int16_t * Frame = (int16_t)((MFCC_PreEmphasis_instance *)S)->Frame;
+    int16_t * Out = (int16_t)((MFCC_PreEmphasis_instance *)S)->Out;
+    int16_t * FrameSize = (int16_t)((MFCC_PreEmphasis_instance *)S)->FrameSize;
+    int16_t * last_sample = (int16_t)((MFCC_PreEmphasis_instance *)S)->last_sample;
+    int8_t * shift = (int16_t)((MFCC_PreEmphasis_instance *)S)->shift;
+    uint8_t * nPE = (uint16_t)((MFCC_PreEmphasis_instance *)S)->nPE;
+    
+    
+    Frame += FrameSize/nPE*rt_core_id();
+    Out += FrameSize/nPE*rt_core_id();
+    if(rt_core_id() != 0) last_sample = *(Frame - 1);
+    
+    static int Active = 1;
+    static int Gain = 2;
+    unsigned int i;
+    
+    // Y[n]=X[n]−0.95⋅X[n−1]
+    for(i = 0; i < FrameSize/nPE; i++) {
+        if (Active) {
+            Out[i] = (Frame[i]<<shift) - __MULSRN(FP2FIX(0.97, Q15), last_sample, 15);
+            last_sample = (Frame[i]<<shift);
+        }
+    }
+    
+    for (i=0; i<(unsigned int)FrameSize; i++) {
+        if (Active) {
+            Out[i] = (Frame[i]<<shift) - __MULSRN(FP2FIX(0.97, Q15), S, 15);
+            S = (Frame[i]<<shift);
+        } else {
+            Out[i] = Frame[i]<<Gain;
+        }
+        
     }
     //return S;
 }
@@ -488,7 +520,7 @@ void MFCC_ComputeDCT(v2s *in_dct, v2s *twiddct, v2s *twiddles, short int *SwapLU
     SwapSamples_args(in_dct,SwapLUT,2*NDCT);
 
     for (i=0;i<NDCT;i++) {
-        v2s out_dct_loc = (v2s)__CPLXMULS(in_dct[i],twiddct[i]);
+        v2s out_dct_loc = __CPLX_MULS(in_dct[i],twiddct[i]);
         in_dct[i] = out_dct_loc;
     }
 }

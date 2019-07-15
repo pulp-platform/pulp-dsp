@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-#include "rt/rt_api.h"
-//#include <cmsis.h>
+#include <cmsis.h>
 
 /* Input frequency */
 #define IN_FREQ         16000 // 625us
