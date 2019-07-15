@@ -34,7 +34,9 @@ CL_SRCS = \
 	src/FilteringFunctions/kernels/plp_conv_i8s_xpulpv2.c \
 	src/FilteringFunctions/kernels/plp_conv_i32p_xpulpv2.c \
 	src/FilteringFunctions/kernels/plp_conv_i16p_xpulpv2.c \
-	src/FilteringFunctions/kernels/plp_conv_i8p_xpulpv2.c
+	src/FilteringFunctions/kernels/plp_conv_i8p_xpulpv2.c \
+	src/FilteringFunctions/kernels/plp_conv_parallel_OLA.c \
+	src/FilteringFunctions/kernels/plp_conv_parallel_OLA_kernel.c
 
 PULP_LIBS = plpdsp # the name of the library, after installing it into the pulp-sdk, add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project to use this library.
 PULP_LIB_FC_SRCS_plpdsp = $(FC_SRCS)

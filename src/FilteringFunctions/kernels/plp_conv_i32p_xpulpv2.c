@@ -102,6 +102,10 @@ void plp_conv_i32p_xpulpv2(void* task_args){
     pIn2 = pSrcA;
     pIn2Len = srcALen;
   }
+
+  /* for(int i=0;i<resultoffset;i++){ */
+  /*   pRes[i] = 0; */
+  /* } */
   
   plp_conv_i32s_xpulpv2(pIn1, pIn1Len, pIn2, pIn2Len, pRes);
   //rt_team_barrier();

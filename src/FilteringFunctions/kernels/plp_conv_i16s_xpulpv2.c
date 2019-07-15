@@ -222,6 +222,7 @@ void plp_conv_i16s_xpulpv2(const int16_t *  pSrcA,
 	      _y2 = *((v2s*)(py-3)); // { y[srcBLen - 4] , y[srcBLen - 3] }
 	      
 	      _y1 = __builtin_shuffle(_y1,_y1,(v2s){1,0}); // { y[srcBLen - 1] , y[srcBLen - 2]  }
+
 	      _x4 = *((v2s*)(px+3)); // { x[3] , x[4] }
 
 	      _x2 = __builtin_shuffle(_x1,_x3,(v2s){1,2}); // { x[1] , x[2] }
@@ -233,7 +234,7 @@ void plp_conv_i16s_xpulpv2(const int16_t *  pSrcA,
 	      /* acc1 +=  x[1] * y[srcBLen - 1] +  x[2] * y[srcBLen - 2] */
 	      acc1 = __SUMDOTP2(_x2,_y1,acc1);
 	      
-	      _x2 = *((v2s*)(px+5));
+	      _x2 = *((v2s*)(px+5)); // {x[5] , x[6]}
 	      
 	      /* acc2 +=  x[2] * y[srcBLen - 1] +  x[3] * y[srcBLen - 2]*/
 	      acc2 = __SUMDOTP2(_x3,_y1,acc2);
@@ -241,7 +242,7 @@ void plp_conv_i16s_xpulpv2(const int16_t *  pSrcA,
 	      acc3 = __SUMDOTP2(_x4,_y1,acc3);
 
 	      /* Re-use _x1 and _x4: */
-	      _x1 = __builtin_shuffle(_x4,_x2,(v2s){1,2});
+	      _x1 = __builtin_shuffle(_x4,_x2,(v2s){1,2}); // {x[4] , x[5]}
 	      /* Perform the multiply-accumulate */
 	      /* acc0 +=  x[2] * y[srcBLen - 3] + x[3] * y[srcBLen - 4]  */
 	      acc0 = __SUMDOTP2(_x3,_y2, acc0);
@@ -462,11 +463,10 @@ void plp_conv_i16s_xpulpv2(const int16_t *  pSrcA,
 	  
 	  _y1 = *((v2s*)(py-1));
 	  py-=2;
+	  _y2 = *((v2s*)(py-1));
 	  
 	  _x1 = *((v2s*)px);
 	  px+=2;
-	  
-	  _y2 = *((v2s*)(py-1));
 	  _x2 = *((v2s*)px);
 	  
 	  _y1 = __builtin_shuffle(_y1,_y1,(v2s){1,0});

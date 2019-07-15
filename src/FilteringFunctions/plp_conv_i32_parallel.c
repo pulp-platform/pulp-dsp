@@ -53,6 +53,8 @@ RT_CL_DATA int32_t* resultsBuffer;
    @return        none
 */
 
+//#define PLP_CONV_SEQUENTIALADDING 1
+
 void plp_conv_i32_parallel(
 			   const int32_t *  pSrcA,
 			   const uint32_t srcALen,
@@ -89,7 +91,10 @@ void plp_conv_i32_parallel(
     uint32_t resultsLen = resultsoffset*(nPE-1) + (pIn1Len - (srcAoffset * (nPE-1))) + pIn2Len - 1;
     
     if(nPE > 1){
-      resultsBuffer = (int32_t*)rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*resultsLen);
+      resultsBuffer = (int32_t*)rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*resultsoffset*nPE);
+      for(int i=resultsLen;i<resultsoffset*nPE;i++){
+	resultsBuffer[i] = 0;
+      }
       //printf("Address of resultsBuffer: 0x%x, End: 0x%x\n", resultsBuffer, resultsBuffer + sizeof(int32_t)*resultsLen);
     } else {
       resultsBuffer = pRes;
@@ -103,7 +108,6 @@ void plp_conv_i32_parallel(
       .nPE = nPE
     };
 
-    
     rt_team_fork(nPE, plp_conv_i32p_xpulpv2, (void*)&S);
 
     if(nPE > 1){
@@ -113,36 +117,32 @@ void plp_conv_i32_parallel(
       }
       
       for(uint32_t i = resultsoffset; i<srcALen+srcBLen-1;i++){
-	pRes[i] = 0;
+      	pRes[i] = 0;
       }
 
+      /* Sequential overlap-adding */
+
+#if defined(PLP_CONV_SEQUENTIALADDING)
+
       for(int32_t i=1;i<nPE-1;i++){
-	for(uint32_t j=0;j<resultsoffset;j++){
-	   pRes[i*srcAoffset+j] += resultsBuffer[j+i*resultsoffset];
-	}
+      	for(uint32_t j=0;j<resultsoffset;j++){
+	  pRes[i*srcAoffset+j] += resultsBuffer[j+i*resultsoffset];
+      	}
       }
+      
       for(uint32_t j=0;j<resultsLen-resultsoffset*(nPE-1);j++){
       	pRes[(nPE-1)*srcAoffset+j] += resultsBuffer[(nPE-1)*resultsoffset + j];
       }
       
-      /* for(int i=0;i<resultsoffset;i++){ */
-      /* 	pRes[i] = resultsBuffer[i]; */
-      /* } */
-      /* for(int i=1;i<nPE-1;i++){ */
-      /* 	for(int j=0;j<pIn2Len-1;j++){ */
-      /* 	  pRes[i*srcAoffset+j] += resultsBuffer[j+i*resultsoffset]; */
-      /* 	} */
-      /* 	for(int j=pIn2Len-1;j<resultsoffset;j++){ */
-      /* 	  pRes[i*srcAoffset+j] = resultsBuffer[j+i*resultsoffset]; */
-      /* 	} */
-      /* } */
-      /* for(int j=0;j<(pIn1Len - (srcAoffset * (nPE-1)));j++){ */
-      /* 	pRes[(nPE-1)*srcAoffset+j] += resultsBuffer[j+(nPE-1)*resultsoffset]; */
-      /* } */
-      /* for(int j=0;j<pIn2Len;j++){ */
-      /* 	pRes[srcALen+srcBLen-1-j-1] = resultsBuffer[resultsLen-1-j]; */
-      /* } */
+#else
       
+      /* Parallel overlap-adding */
+      plp_conv_parallel_OLA(nPE, pIn1Len, pIn2Len, resultsBuffer);
+      for(uint32_t i = 0; i<srcALen + srcBLen - 1; i++){
+	pRes[i] = resultsBuffer[i];
+      }
+            
+#endif 
     }
     return;
   }
