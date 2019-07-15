@@ -343,6 +343,44 @@ void MFCC_PreEmphasis(short int * __restrict__ Frame, short int * __restrict__ O
     //return S;
 }
 
+void MFCC_PreEmphasis_parallel(void * S)
+{
+    int16_t * Frame = (int16_t)((MFCC_PreEmphasis_instance *)S)->Frame;
+    int16_t * Out = (int16_t)((MFCC_PreEmphasis_instance *)S)->Out;
+    int16_t * FrameSize = (int16_t)((MFCC_PreEmphasis_instance *)S)->FrameSize;
+    int16_t * last_sample = (int16_t)((MFCC_PreEmphasis_instance *)S)->last_sample;
+    int8_t * shift = (int16_t)((MFCC_PreEmphasis_instance *)S)->shift;
+    uint8_t * nPE = (uint16_t)((MFCC_PreEmphasis_instance *)S)->nPE;
+    
+    
+    Frame += FrameSize/nPE*rt_core_id();
+    Out += FrameSize/nPE*rt_core_id();
+    if(rt_core_id() != 0) last_sample = *(Frame - 1);
+    
+    static int Active = 1;
+    static int Gain = 2;
+    unsigned int i;
+    
+    // Y[n]=X[n]−0.95⋅X[n−1]
+    for(i = 0; i < FrameSize/nPE; i++) {
+        if (Active) {
+            Out[i] = (Frame[i]<<shift) - __MULSRN(FP2FIX(0.97, Q15), last_sample, 15);
+            last_sample = (Frame[i]<<shift);
+        }
+    }
+    
+    for (i=0; i<(unsigned int)FrameSize; i++) {
+        if (Active) {
+            Out[i] = (Frame[i]<<shift) - __MULSRN(FP2FIX(0.97, Q15), S, 15);
+            S = (Frame[i]<<shift);
+        } else {
+            Out[i] = Frame[i]<<Gain;
+        }
+        
+    }
+    //return S;
+}
+
 void MFCC_WindowedFrame(short int *__restrict__ Frame, v2s *__restrict__ OutFrame,
                    short int *__restrict__ Window, int FrameSize, int FFT_Dim)
 {
