@@ -3,17 +3,6 @@
 
 #define Abs(a) (((a)<0)?(-a):(a))
 
-typedef struct
-{
-    short int * Frame;      // pointer to the input Frame
-    short int * Out;        // pointer to the output Frame
-    int FrameSize;          // Size of input Frame
-    short int last_sample;  // last sample of previous frame
-    short int shift;        // left shift input such that it is at least Q13.
-    unsigned short nPE;     // number of working tasks
-} MFCC_PreEmphasis_instance;
-
-
 
 void MFCC_Processing(short int *InSignal, v2s * W_Frame, short int *Frame, short int *FEAT_LIST)
 {
@@ -37,7 +26,7 @@ void MFCC_Processing(short int *InSignal, v2s * W_Frame, short int *Frame, short
         }
 #endif
 
-        lastsmp = (i==0)?0 : InSignal[i-1];
+        
         maxin=0;
         for (j=0;j<FRAME;j++) if (Abs(InSignal[i+j])>maxin) maxin=Abs(InSignal[i+j]);
 
@@ -45,11 +34,16 @@ void MFCC_Processing(short int *InSignal, v2s * W_Frame, short int *Frame, short
 
         if (shift<=13) shift = (15-shift-2); else shift=0;
 
+	lastsmp = (i==0)?0 : InSignal[i-1]<<shift;
+
 #ifdef PRINTINT
         printf("shift %d max %x\n",shift,maxin);
 #endif
 
         MFCC_PreEmphasis(InSignal+i , Frame, FRAME,lastsmp,shift);
+
+	//for(int i = 0; i < FRAME; i++)
+	//  printf("%hi ", Frame[i]);
 
 #ifdef PRINTDEB
         DumpShortInt("Premphasis Output", Frame, FRAME, FrameCount, Q15+shift);
@@ -245,34 +239,49 @@ void MFCC_Processing_parallel(short int *InSignal, v2s * W_Frame, short int *Fra
         }
 #endif
         
-        lastsmp = (i==0)?0 : InSignal[i-1];
+
         maxin=0;
         for (j=0;j<FRAME;j++) if (Abs(InSignal[i+j])>maxin) maxin=Abs(InSignal[i+j]);
         
         shift = __FL1(maxin);
         
         if (shift<=13) shift = (15-shift-2); else shift=0;
+
+	lastsmp = (i==0)?0 : InSignal[i-1]<<shift;
         
 #ifdef PRINTINT
         printf("shift %d max %x\n",shift,maxin);
 #endif
-        MFCC_PreEmphasis_instance S;
+        MFCC_PreEmphasis_instance S_PreEmphasis;
         
-        S.Frame = InSignal+i;
-        S.Out = Frame;
-        S.FrameSize = FRAME;
-        S.last_sample = lastsmp;
-        S.shift = shift;
-        S.nPE = nPE;
+        S_PreEmphasis.Frame = InSignal+i;
+        S_PreEmphasis.Out = Frame;
+        S_PreEmphasis.FrameSize = FRAME;
+        S_PreEmphasis.last_sample = lastsmp;
+        S_PreEmphasis.shift = shift;
+        S_PreEmphasis.nPE = nPE;
         
-        rt_team_fork(nPE, MFCC_PreEmphasis_parallel, (void *)&S);
+        rt_team_fork(nPE, MFCC_PreEmphasis_parallel, (void *)&S_PreEmphasis);
+
+	//for(int i = 0; i < FRAME; i++)
+	//printf("%hi ", Frame[i]);
         // MFCC_PreEmphasis(InSignal+i , Frame, FRAME,lastsmp,shift);
         
 #ifdef PRINTDEB
         DumpShortInt("Premphasis Output", Frame, FRAME, FrameCount, Q15+shift);
 #endif
-        
-        MFCC_WindowedFrame(Frame, W_Frame, HammingLUT, FRAME, N_FFT);
+        MFCC_WindowedFrame_instance S_WindowedFrame;
+
+	S_WindowedFrame.Frame = Frame;
+	S_WindowedFrame.OutFrame = W_Frame;
+	S_WindowedFrame.Window = HammingLUT;
+	S_WindowedFrame.FrameSize = FRAME;
+	S_WindowedFrame.FFT_Dim = N_FFT;
+	S_WindowedFrame.nPE = nPE;
+	rt_team_fork(nPE, MFCC_WindowedFrame_parallel, (void *)&S_WindowedFrame);
+        //MFCC_WindowedFrame(Frame, W_Frame, HammingLUT, FRAME, N_FFT);
+	//for(int i = 0; i < N_FFT; i++)
+	//  printf("%hi ", Frame[i]);
         
 #ifdef PRINTDEB
         DumpComplex("Windowed", W_Frame, N_FFT, FrameCount, 15+shift);

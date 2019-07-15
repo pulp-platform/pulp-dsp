@@ -29,16 +29,14 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  MFCC_Processing(Data_In_L1, W_Frame, Frame, FEAT_LIST);
+  //MFCC_Processing(Data_In_L1, W_Frame, Frame, FEAT_LIST);
+  MFCC_Processing_parallel(Data_In_L1, W_Frame, Frame, FEAT_LIST,8);
 
+  
   rt_perf_stop(perf);
 
 
-  printf("finished\n");
-  printf("W_Frame:\n");
-  for(int i = 0; i < N_FFT + 4; i++)
-     printf("%i ", W_Frame[i]);
-  printf("\n");
+  printf("\nfinished\n");
 }
 
 void cluster_entry(void *arg){

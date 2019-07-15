@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
-#include <cmsis.h>
+//#include <cmsis.h>
+#include "rt/rt_api.h"
 
 /* Input frequency */
 #define IN_FREQ         16000 // 625us
@@ -60,6 +61,24 @@ typedef struct mfcc_config_ {
     short int *InSignal;
 } mfcc_config_t;
 
+typedef struct MFCC_PreEmphasis_instance {
+  int16_t * Frame;
+  int16_t * Out;
+  int16_t   FrameSize;
+  int16_t   last_sample;
+  int16_t   shift;
+  uint8_t   nPE;
+} MFCC_PreEmphasis_instance;
+
+typedef struct MFCC_WindowedFrame_instance {
+  int16_t * Frame;
+  v2s     * OutFrame;
+  int16_t * Window;
+  int16_t   FrameSize;
+  int16_t   FFT_Dim;
+  uint8_t   nPE;
+} MFCC_WindowedFrame_instance;
+
 int  MFCC_Logfp(unsigned int a);
 void MFCC_ComputeLog( unsigned int *MFCC);
 void SwapSamples_args(v2s *__restrict__ Data,
@@ -67,9 +86,10 @@ void SwapSamples_args(v2s *__restrict__ Data,
                       int Ni);
 void Radix2FFT_DIF_args(short int *__restrict__ Data,short int *__restrict__ Twiddles, int N_FFT2);
 void MFCC_PreEmphasis(short int * __restrict__ Frame, short int * __restrict__ Out, int FrameSize, short int S, short int  shift);
-void MFCC_PreEmphasis_parallel(short int * __restrict__ Frame, short int * __restrict__ Out, int FrameSize, short int S, short int  shift, unsigned short nPE);
+void MFCC_PreEmphasis_parallel(void * S);
 void MFCC_WindowedFrame(short int *__restrict__ Frame, v2s *__restrict__ OutFrame,
                    short int *__restrict__ Window, int FrameSize, int FFT_Dim);
+void MFCC_WindowedFrame_parallel(void * S);
 void MFCC_EstimatePower(v2s *__restrict__ FrameIn,  int N, int N_fft, int SHIFT_RIGHT);
 void MFCC_EstimatePowerInt(v2s *__restrict__ FrameIn,  int N, int N_fft);
 void MFCC_Compute(short int *__restrict__ FramePower,  int *__restrict__ MFCC);

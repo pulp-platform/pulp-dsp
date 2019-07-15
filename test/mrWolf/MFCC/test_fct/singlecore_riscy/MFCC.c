@@ -351,28 +351,26 @@ void MFCC_PreEmphasis(short int * __restrict__ Frame, short int * __restrict__ O
 
 void MFCC_PreEmphasis_parallel(void * S)
 {
-    int16_t * Frame = (int16_t)((MFCC_PreEmphasis_instance *)S)->Frame;
-    int16_t * Out = (int16_t)((MFCC_PreEmphasis_instance *)S)->Out;
-    int16_t * FrameSize = (int16_t)((MFCC_PreEmphasis_instance *)S)->FrameSize;
-    int16_t * last_sample = (int16_t)((MFCC_PreEmphasis_instance *)S)->last_sample;
-    int8_t * shift = (int16_t)((MFCC_PreEmphasis_instance *)S)->shift;
-    uint8_t * nPE = (uint16_t)((MFCC_PreEmphasis_instance *)S)->nPE;
-    
+    int16_t * Frame = (int16_t *)((MFCC_PreEmphasis_instance *)S)->Frame;
+    int16_t * Out = (int16_t *)((MFCC_PreEmphasis_instance *)S)->Out;
+    int16_t FrameSize = (int16_t)((MFCC_PreEmphasis_instance *)S)->FrameSize;
+    int16_t last_sample = (int16_t)((MFCC_PreEmphasis_instance *)S)->last_sample;
+    int16_t shift = (int16_t)((MFCC_PreEmphasis_instance *)S)->shift;
+    uint8_t nPE = (uint8_t)((MFCC_PreEmphasis_instance *)S)->nPE;
     
     Frame += FrameSize/nPE*rt_core_id();
     Out += FrameSize/nPE*rt_core_id();
-    if(rt_core_id() != 0) last_sample = *(Frame - 1);
+    if(rt_core_id() != 0) last_sample = *(Frame - 1) << shift;
     
     static int Active = 1;
     static int Gain = 2;
-    unsigned int i;
     
     // Y[n]=X[n]−0.95⋅X[n−1]
-    for(i = 0; i < FrameSize/nPE; i++) {
+    for(int i = 0; i < FrameSize/nPE; i++) {
         if (Active) {
             Out[i] = (Frame[i]<<shift) - __MULSRN(FP2FIX(0.97, Q15), last_sample, 15);
             last_sample = (Frame[i]<<shift);
-        }
+       }
     }
     
 }
@@ -388,6 +386,30 @@ void MFCC_WindowedFrame(short int *__restrict__ Frame, v2s *__restrict__ OutFram
         OutFrame[i] = (v2s) {__MULSRN(Frame[i], Window[i], 15), 0};
     }
     for (i=FrameSize; i<(unsigned int)FFT_Dim;i++) OutFrame[i] = (v2s) {0, 0};
+}
+
+void MFCC_WindowedFrame_parallel(void * S)
+{
+  int16_t * Frame = (int16_t *)((MFCC_WindowedFrame_instance *)S)->Frame;
+  v2s * OutFrame = (v2s *)((MFCC_WindowedFrame_instance *)S)->OutFrame;
+  int16_t * Window = (int16_t *)((MFCC_WindowedFrame_instance *)S)->Window;
+  int16_t FrameSize = (int16_t)((MFCC_WindowedFrame_instance *)S)->FrameSize;
+  int16_t FFT_Dim = (int16_t)((MFCC_WindowedFrame_instance *)S)->FFT_Dim;
+  uint8_t nPE = (uint8_t)((MFCC_WindowedFrame_instance *)S)->nPE;
+
+  Frame += FrameSize/nPE*rt_core_id();
+  OutFrame += FrameSize/nPE*rt_core_id();
+  Window += FrameSize/nPE*rt_core_id();
+
+    for (int i = 0; i < FrameSize/nPE; i++) {
+        /* Frame and Window are Q15, we want OutFrame with precision FFT2_SAMPLE_DYN */
+        //  printf("win %d %f\n",i,Window[i]/(float) (1<<15));
+        OutFrame[i] = (v2s) {__MULSRN(Frame[i], Window[i], 15), 0};
+    }
+
+    if(rt_core_id() == 0) {
+      for (int i = FrameSize; i<(unsigned int)FFT_Dim;i++) OutFrame[i] = (v2s) {0, 0};
+    }
 }
 
 #define    INVSQRT2    __FP2FIX(0.707106781, FFT2_SAMPLE_DYN)
