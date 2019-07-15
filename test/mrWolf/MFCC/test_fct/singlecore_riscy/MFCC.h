@@ -67,6 +67,7 @@ void SwapSamples_args(v2s *__restrict__ Data,
                       int Ni);
 void Radix2FFT_DIF_args(short int *__restrict__ Data,short int *__restrict__ Twiddles, int N_FFT2);
 void MFCC_PreEmphasis(short int * __restrict__ Frame, short int * __restrict__ Out, int FrameSize, short int S, short int  shift);
+void MFCC_PreEmphasis_parallel(short int * __restrict__ Frame, short int * __restrict__ Out, int FrameSize, short int S, short int  shift, unsigned short nPE);
 void MFCC_WindowedFrame(short int *__restrict__ Frame, v2s *__restrict__ OutFrame,
                    short int *__restrict__ Window, int FrameSize, int FFT_Dim);
 void MFCC_EstimatePower(v2s *__restrict__ FrameIn,  int N, int N_fft, int SHIFT_RIGHT);
