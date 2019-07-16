@@ -1,12 +1,17 @@
 #include "rt/rt_api.h"
 #include "stdio.h"
 
+#define P_TEST_8
 // #define P_TEST_16
 // #define P_TEST_32
-#define TEST_8
+// #define TEST_8
 // #define TEST_16
 
-#if defined(P_TEST_16)
+#if defined(P_TEST_8)
+  #include "fct8p.h"
+  #include "../../test_data/mul_data8_L1.h"
+  #define DATA_TYPE int8_t
+#elif defined(P_TEST_16)
   #include "fct16p.h"
   #include "../../test_data/mul_data16_L1.h"
   #define DATA_TYPE int16_t
@@ -41,10 +46,12 @@ static void do_bench_0(rt_perf_t *perf, int events)
     return;
   }
 
-  #if defined (P_TEST_16)
-    printf("running parallel on %i cores, test for 16 bit\n", rt_nb_pe());
+  #if defined (P_TEST_8)
+    printf("running parallel test for 8 bit\n");
+  #elif defined (P_TEST_16)
+    printf("running parallel test for 16 bit\n");
   #elif defined (P_TEST_32)
-    printf("running parallel on %i cores, test for 32 bit\n", rt_nb_pe());
+    printf("running parallel test for 32 bit\n");
   #elif defined TEST_8
     printf("running test for 8 bit\n");
   #elif defined(TEST_16)
@@ -52,19 +59,6 @@ static void do_bench_0(rt_perf_t *perf, int events)
   #else
     printf("running test for 32 bit\n");
   #endif
-
-  // for(int i = 0; i < O_LENGTH*M_LENGTH; i++){
-  //   result[i] = 0;
-  // }
-
-  // for(int i = 0; i < 64; i++){
-  //   printf("m_a %i\n", m_a[i]);
-  //   printf("m_b %i\n", m_b[i]);
-  //   printf("m_c %i\n", m_c[i]);
-  //   printf("result %i\n", result[i]);
-  // }
-
-  // printf("mat mult i32s cl\n");
 
   // Activate specified events
   rt_perf_conf(perf, events);
@@ -75,6 +69,17 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_start(perf);
 
   #if defined (P_TEST_16)
+    mat_mult_p_args args = {
+      .pSrcA = m_a,
+      .pSrcB = m_b,
+      .M = M_LENGTH,
+      .N = N_LENGTH,
+      .O = O_LENGTH,
+      .nPE =  rt_nb_pe(),
+      .pDstC = result
+    };
+    rt_team_fork(args.nPE, plp_mat_mult_i8vp_xpulpv2, (void *)&args);
+  #elif defined (P_TEST_16)
     mat_mult_p_args args = {
       .pSrcA = m_a,
       .pSrcB = m_b,
@@ -95,7 +100,7 @@ static void do_bench_0(rt_perf_t *perf, int events)
       .nPE =  rt_nb_pe(),
       .pDstC = result
     };
-    rt_team_fork(args.nPE, plp_mat_mult_i32vp_xpulpv2, (void *)&args);
+    rt_team_fork(args.nPE, plp_mat_mult_i32p_xpulpv2, (void *)&args);
   #elif defined (TEST_8)
     plp_mat_mult_i8v_xpulpv2(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
   #elif defined(TEST_16)
@@ -144,7 +149,7 @@ void cluster_entry(void *arg){
   printf("Instructions: %d\n", instr);
   printf("Load stalls %d\n", ld_stall);
   printf("Contention %d\n", cont);
-  printf("Misc %d\n", misc);
+  // printf("Misc %d\n", misc);
   printf("Operations %d\n", ops);
 
   return;

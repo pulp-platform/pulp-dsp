@@ -12,4 +12,22 @@ PULP_LDFLAGS += -lplpdsp
 #PULP_LDFLAGS += $(LIB)
 PULP_CFLAGS += -I$(IDIR) -O3 -g
 
+ifdef TEST_8
+PULP_CFLAGS += -DTEST_8
+endif
+ifdef TEST_16
+PULP_CFLAGS += -DTEST_16
+endif
+ifdef P_TEST_8
+PULP_CFLAGS += -DP_TEST_8
+endif
+ifdef P_TEST_16
+PULP_CFLAGS += -DP_TEST_16
+endif
+ifdef P_TEST_32
+PULP_CFLAGS += -DP_TEST_32
+endif
+
+
+
 include $(PULP_SDK_HOME)/install/rules/pulp_rt.mk

@@ -5,9 +5,9 @@
 #include "rt/rt_api.h"
 #include <stdint.h>
 
-void plp_mat_mult_i16v_xpulpv2(
-                              const int16_t * __restrict__ pSrcA,
-                              const int16_t * __restrict__ pSrcB,
+void plp_mat_mult_i8v_xpulpv2(
+                              const int8_t * __restrict__ pSrcA,
+                              const int8_t * __restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
                               uint32_t O,
