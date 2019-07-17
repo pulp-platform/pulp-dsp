@@ -213,7 +213,7 @@ void plp_mat_mult_i16v_xpulpv2(
                 for(k = 0; k < kEnd; k++){
                   int32_t sum = 0;
                   for(j = jEnd; j < N; j++){
-                    sum += sum + pSrcA[i*N + j]*pSrcB[j*O + k];
+                    sum = sum + pSrcA[i*N + j]*pSrcB[j*O + k];
                   }
                   pDstC[i*O+k] += sum;
                 }
@@ -257,9 +257,9 @@ void plp_mat_mult_i16v_xpulpv2(
                               uint32_t O,
                               int32_t * __restrict__ pDstC) {
         
-        uint32_t i; // loop counter for M
-        uint32_t j; // loop counter for N
-        uint32_t k; // loop counter for O
+        uint32_t i=0; // loop counter for M
+        uint32_t j=0; // loop counter for N
+        uint32_t k=0; // loop counter for O
         
         for(i=0; i < M/4; i++){
           for(k=0; k < O/2; k++){
@@ -325,58 +325,46 @@ void plp_mat_mult_i16v_xpulpv2(
         k = k*2;
         //check if every index is nicely finished
         if(i == M && j == N && k == O){
-          return;
+          
         } else {
           uint32_t iEnd = i;
           uint32_t jEnd = j;
           uint32_t kEnd = k;
 
-          if(i == 0 || k == 0 || j == 0){
-            for(; i < M; i++){
-              for(; k < O; k++){
+          // clean up for j
+          if(jEnd != N){
+            for(i = 0; i < iEnd; i++){
+              for(k = 0; k < kEnd; k++){
                 int32_t sum = 0;
-                for(; j<N; j++){
-                  sum = sum + pSrcA[i*N + j]*pSrcB[j*O + k];
+                for(j = jEnd; j < N; j++){
+                  sum += sum + pSrcA[i*N + j]*pSrcB[j*O + k];
                 }
-                pDstC[i*O + k] = sum;
+                pDstC[i*O+k] += sum;
               }
             }
-          } else {
-            // clean up for j
-            if(jEnd != N){
-              for(i = 0; i < iEnd; i++){
-                for(k = 0; k < kEnd; k++){
-                  int32_t sum = 0;
-                  for(j = jEnd; j < N; j++){
-                    sum += sum + pSrcA[i*N + j]*pSrcB[j*O + k];
-                  }
-                  pDstC[i*O+k] += sum;
-                }
-              }
-            }
+          }
 
-            // clean up for k
-            if(kEnd != O){
-              for(i = 0; i < iEnd; i++){
-                for(k = kEnd; k < O; k++){
-                  int32_t sum = 0;
-                  for(j=0; j<N; j++){
-                    sum = sum + pSrcA[i*N + j]*pSrcB[j*O + k];
-                  }
-                  pDstC[i*O + k] = sum;
-                }
-              }
-            }
-            
-            // clean up for i
-            for(i = iEnd; i < M; i++){
-              for(k = 0; k < O; k++){
+          // clean up for k
+          if(kEnd != O){
+            for(i = 0; i < iEnd; i++){
+              for(k = kEnd; k < O; k++){
                 int32_t sum = 0;
-                for(j = 0; j < N; j++){
+                for(j=0; j<N; j++){
                   sum = sum + pSrcA[i*N + j]*pSrcB[j*O + k];
                 }
                 pDstC[i*O + k] = sum;
               }
+            }
+          }
+
+          // clean up for i
+          for(i = iEnd; i < M; i++){
+            for(k = 0; k < O; k++){
+              int32_t sum = 0;
+              for(j = 0; j < N; j++){
+                sum = sum + pSrcA[i*N + j]*pSrcB[j*O + k];
+              }
+              pDstC[i*O + k] = sum;
             }
           }
         }

@@ -15,9 +15,9 @@ void plp_mat_mult_i32s_rv32im(
                               uint32_t O,
                               int32_t * __restrict__ pDstC) {
         
-        uint32_t i; // loop counter
-        uint32_t j; // loop counter
-        uint32_t k; // loop counter
+        uint32_t i = 0; // loop counter
+        uint32_t j = 0; // loop counter
+        uint32_t k = 0; // loop counter
 
         for(i=0; i < M; i++){
           for(k=0; k < O; k++){
@@ -44,9 +44,9 @@ void plp_mat_mult_i32s_rv32im(
                               uint32_t O,
                               int32_t * __restrict__ pDstC) {
         
-        uint32_t i; // loop counter
-        uint32_t j; // loop counter
-        uint32_t k; // loop counter
+        uint32_t i= 0; // loop counter
+        uint32_t j= 0; // loop counter
+        uint32_t k= 0; // loop counter
         
         for(i=0; i < M/iStep; i++){
           for(k=0; k < O/jStep; k++){
@@ -91,7 +91,7 @@ void plp_mat_mult_i32s_rv32im(
         // clean up code
         //check if every index is nicely finished
         if(i == M && j == N && k == O){
-          return;
+          
         } else {
           uint32_t iEnd = i;
           uint32_t jEnd = j;
@@ -101,7 +101,7 @@ void plp_mat_mult_i32s_rv32im(
           if(jEnd != N){
             for(i = 0; i < iEnd; i++){
               for(k = 0; k < kEnd; k++){
-                int32_t sum = pDstC[i*O+k];
+                int32_t sum = 0;
                 for(j = jEnd; j < N; j++){
                   sum += sum + pSrcA[i*N + j]*pSrcB[j*O + k];
                 }

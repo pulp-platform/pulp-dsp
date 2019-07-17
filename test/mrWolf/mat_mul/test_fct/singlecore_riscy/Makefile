@@ -5,7 +5,7 @@ IDIR=/home/xiaywang/pulp/PULP-DSP/include
 
 PULP_APP = test
 
-PULP_APP_CL_SRCS = cluster.c fct32.c fct32p.c fct16.c fct16p.c fct8.c
+PULP_APP_CL_SRCS = cluster.c fct32.c fct32p.c fct16.c fct16p.c fct8.c fct8p.c
 PULP_APP_FC_SRCS = test.c
 
 PULP_LDFLAGS += -lplpdsp

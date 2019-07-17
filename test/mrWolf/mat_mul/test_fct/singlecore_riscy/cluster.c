@@ -1,7 +1,7 @@
 #include "rt/rt_api.h"
 #include "stdio.h"
 
-#define P_TEST_8
+// #define P_TEST_8
 // #define P_TEST_16
 // #define P_TEST_32
 // #define TEST_8
@@ -68,7 +68,7 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  #if defined (P_TEST_16)
+  #if defined (P_TEST_8)
     mat_mult_p_args args = {
       .pSrcA = m_a,
       .pSrcB = m_b,
@@ -113,10 +113,12 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_stop(perf);
 
   int errors = 0;
-  for(int i = 0; i < M_LENGTH*O_LENGTH; i++){
-    if(result[i] != m_c[i]){
-      printf("error at index: %i result is %i, expected result is %i\n", i, result[i], m_c[i]);
-      errors++;
+  for(int i = 0; i < M_LENGTH; i++){
+    for(int k = 0; k < O_LENGTH; k++){
+      if(result[i*O_LENGTH+k] != m_c[i*O_LENGTH+k]){
+        printf("error at %i, %i result is %i, expected result is %i\n", i,k, result[i*O_LENGTH+k], m_c[i*O_LENGTH+k]);
+        errors++;
+      }  
     }
   }
 

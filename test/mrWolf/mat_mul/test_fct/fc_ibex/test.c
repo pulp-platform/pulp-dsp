@@ -4,11 +4,11 @@
 // #define FMA_TEST_8
 // #define FMA_TEST_16
 // #define FMA_TEST_32
-#define MUL_TEST_8
+// #define MUL_TEST_8
 // #define MUL_TEST_16
 
 #if defined(FMA_TEST_8)
-  #include "fma_fct16.h"
+  #include "fma_fct8.h"
   #include "../../test_data/fma_data8_L2.h"
 #elif defined(FMA_TEST_16)
   #include "fma_fct16.h"
@@ -17,7 +17,7 @@
   #include "fma_fct32.h"
   #include "../../test_data/fma_data32_L2.h"
 #elif defined(MUL_TEST_8)
-  #include "mul_fct16.h"
+  #include "mul_fct8.h"
   #include "../../test_data/mul_data8_L2.h"
 #elif defined(MUL_TEST_16)
   #include "mul_fct16.h"
@@ -33,6 +33,14 @@ static void do_bench_0(rt_perf_t *perf, int events)
 {
   
   int32_t* result = (int32_t*) rt_alloc(RT_ALLOC_FC_DATA, sizeof(uint32_t)*M_LENGTH*O_LENGTH);
+
+  #if defined MUL_TEST_8
+    printf("running test for 8 bit\n");
+  #elif defined(MUL_TEST_16)
+    printf("running test for 16 bit\n");
+  #else
+    printf("running test for 32 bit\n");
+  #endif
 
   // Activate specified events
   rt_perf_conf(perf, events);
@@ -99,19 +107,21 @@ int main(){
   // same time (the silicon as only 1 HW counter), but the total number of cyles
   // is reported by a timer, we can activate it at the same time.
   // for (int i=0; i<10; i++){
-    do_bench_0(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR) | (1<<RT_PERF_LD_STALL));
+    do_bench_0(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR) | (1<<RT_PERF_LD_STALL) | (1<<RT_PERF_TCDM_CONT));
   // }
 
-  unsigned int ops = M_LENGTH*O_LENGTH*(N_LENGTH*2);
+  unsigned int ops = M_LENGTH*O_LENGTH*N_LENGTH*2;
   unsigned int cycles = rt_perf_read(RT_PERF_CYCLES);
   unsigned int instr = rt_perf_read(RT_PERF_INSTR);
   unsigned int ld_stall = rt_perf_read(RT_PERF_LD_STALL);
+  unsigned int cont = rt_perf_read(RT_PERF_TCDM_CONT);
+  // unsigned int misc = rt_perf_read(RT_PERF_DELAY_NOP);
   printf("Total cycles: %d\n", cycles);
   printf("Instructions: %d\n", instr);
   printf("Load stalls %d\n", ld_stall);
+  printf("Contention %d\n", cont);
+  // printf("Misc %d\n", misc);
   printf("Operations %d\n", ops);
-  printf("Ops per Instructions: %d.%d \n", ops/instr, (ops*100)/instr);
-  printf("Ops per Cycle: %d.%d \n", ops/cycles, (ops*100)/cycles);
 
 
   return 0;

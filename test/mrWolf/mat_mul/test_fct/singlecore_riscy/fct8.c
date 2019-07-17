@@ -5,10 +5,10 @@
 #define BLOCK_VERSION_BIG
 // #define BLOCK_VERSION
 
-RT_CL_DATA v4s mask0 = {0,1,4,5};
-RT_CL_DATA v4s mask1 = {2,3,6,7};
-RT_CL_DATA v4s mask2 = {0,2,4,6};
-RT_CL_DATA v4s mask3 = {1,3,5,7};
+RT_CL_DATA static v4s mask0 = {0,1,4,5};
+RT_CL_DATA static v4s mask1 = {2,3,6,7};
+RT_CL_DATA static v4s mask2 = {0,2,4,6};
+RT_CL_DATA static v4s mask3 = {1,3,5,7};
 
 #if defined(BLOCK_VERSION_BIG_4)
 
@@ -20,14 +20,9 @@ void plp_mat_mult_i8v_xpulpv2(
                               uint32_t O,
                               int32_t * __restrict__ pDstC) {
         
-        uint32_t i; // loop counter for M
-        uint32_t j; // loop counter for N
-        uint32_t k; // loop counter for O
-        
-        RT_LOCAL_DATA v4s mask0 = {0,1,4,5};
-        RT_LOCAL_DATA v4s mask1 = {2,3,6,7};
-        RT_LOCAL_DATA v4s mask2 = {0,2,4,6};
-        RT_LOCAL_DATA v4s mask3 = {1,3,5,7};
+        uint32_t i=0; // loop counter for M
+        uint32_t j=0; // loop counter for N
+        uint32_t k=0; // loop counter for O
 
         for(i=0; i < M/3; i++){
           for(k=0; k < O/4; k++){
@@ -173,9 +168,9 @@ void plp_mat_mult_i8v_xpulpv2(
                               uint32_t O,
                               int32_t * __restrict__ pDstC) {
         
-        uint32_t i; // loop counter for M
-        uint32_t j; // loop counter for N
-        uint32_t k; // loop counter for O
+        uint32_t i=0; // loop counter for M
+        uint32_t j=0; // loop counter for N
+        uint32_t k=0; // loop counter for O
         
         for(i=0; i < M/2; i++){
           for(k=0; k < O/4; k++){
@@ -206,10 +201,10 @@ void plp_mat_mult_i8v_xpulpv2(
               v4s temp6 = __builtin_shuffle(temp0,temp1,mask1); // 2,3,6,7
               v4s temp7 = __builtin_shuffle(temp2,temp3,mask1); // 3,7,11,15
 
-              v4s bVec0 = __builtin_shuffle(temp4,temp5,mask2);
-              v4s bVec1 = __builtin_shuffle(temp4,temp5,mask3);
-              v4s bVec2 = __builtin_shuffle(temp6,temp7,mask2);
-              v4s bVec3 = __builtin_shuffle(temp6,temp7,mask3);
+              v4s bVec0 = __builtin_shuffle(temp4,temp5,mask2); // 0,4,8,12
+              v4s bVec1 = __builtin_shuffle(temp4,temp5,mask3); // 1,5,9,13
+              v4s bVec2 = __builtin_shuffle(temp6,temp7,mask2); // 2,6,10,14
+              v4s bVec3 = __builtin_shuffle(temp6,temp7,mask3); // 3,7,11,15
 
               sum00 = __SUMDOTP4(aVec0,bVec0,sum00);
               sum01 = __SUMDOTP4(aVec0,bVec1,sum01);
@@ -240,58 +235,46 @@ void plp_mat_mult_i8v_xpulpv2(
         k = k*4;
         //check if every index is nicely finished
         if(i == M && j == N && k == O){
-          return;
+          
         } else {
           uint32_t iEnd = i;
           uint32_t jEnd = j;
           uint32_t kEnd = k;
 
-          if(i == 0 || k == 0 || j == 0){
-            for(; i < M; i++){
-              for(; k < O; k++){
+          // clean up for j
+          if(jEnd != N){
+            for(i = 0; i < iEnd; i++){
+              for(k = 0; k < kEnd; k++){
                 int32_t sum = 0;
-                for(; j<N; j++){
+                for(j = jEnd; j < N; j++){
                   sum = sum + pSrcA[i*N + j]*pSrcB[j*O + k];
                 }
-                pDstC[i*O + k] = sum;
+                pDstC[i*O+k] += sum;
               }
             }
-          } else {
-            // clean up for j
-            if(jEnd != N){
-              for(i = 0; i < iEnd; i++){
-                for(k = 0; k < kEnd; k++){
-                  int32_t sum = 0;
-                  for(j = jEnd; j < N; j++){
-                    sum += sum + pSrcA[i*N + j]*pSrcB[j*O + k];
-                  }
-                  pDstC[i*O+k] += sum;
-                }
-              }
-            }
+          }
 
-            // clean up for k
-            if(kEnd != O){
-              for(i = 0; i < iEnd; i++){
-                for(k = kEnd; k < O; k++){
-                  int32_t sum = 0;
-                  for(j=0; j<N; j++){
-                    sum = sum + pSrcA[i*N + j]*pSrcB[j*O + k];
-                  }
-                  pDstC[i*O + k] = sum;
-                }
-              }
-            }
-            
-            // clean up for i
-            for(i = iEnd; i < M; i++){
-              for(k = 0; k < O; k++){
+          // clean up for k
+          if(kEnd != O){
+            for(i = 0; i < iEnd; i++){
+              for(k = kEnd; k < O; k++){
                 int32_t sum = 0;
-                for(j = 0; j < N; j++){
+                for(j=0; j<N; j++){
                   sum = sum + pSrcA[i*N + j]*pSrcB[j*O + k];
                 }
                 pDstC[i*O + k] = sum;
               }
+            }
+          }
+
+          // clean up for i
+          for(i = iEnd; i < M; i++){
+            for(k = 0; k < O; k++){
+              int32_t sum = 0;
+              for(j = 0; j < N; j++){
+                sum = sum + pSrcA[i*N + j]*pSrcB[j*O + k];
+              }
+              pDstC[i*O + k] = sum;
             }
           }
         }

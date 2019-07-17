@@ -5,7 +5,7 @@
         k = k*kSTEP;
         //check if every index is nicely finished
         if(i == M && j == N && k == O){
-          return;
+          
         } else {
           uint32_t iEnd = i;
           uint32_t jEnd = j;
@@ -15,9 +15,9 @@
           if(jEnd != N){
             for(i = 0; i < iEnd; i++){
               for(k = 0; k < kEnd; k++){
-                int32_t sum = pDstC[i*O+k];
+                int32_t sum = 0;
                 for(j = jEnd; j < N; j++){
-                  sum += sum + pSrcA[i*N + j]*pSrcB[j*O + k];
+                  sum = sum + pSrcA[i*N + j]*pSrcB[j*O + k];
                 }
                 pDstC[i*O+k] += sum;
               }
