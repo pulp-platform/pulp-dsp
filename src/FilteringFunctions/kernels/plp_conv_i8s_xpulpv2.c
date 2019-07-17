@@ -29,6 +29,10 @@
 #include "plp_math.h"
 
 
+#define shufflemask1 (v4s){3,2,1,0}
+#define shufflemask2 (v4s){1,2,3,5}
+#define shufflemask3 (v4s){2,3,5,6}
+
 /**
    @ingroup BasicConvolution
 */
@@ -120,9 +124,7 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
 	  _y1 = *((v4s*)(py-3));
 	  _x1 = *((v4s*)(px));
 	  
-	  _y1 = __builtin_shuffle(_y1,_y1,(v4s){3,2,1,0});
-
-	  //printf("count: %i _y1: %i %i %i %i\n",count,_y1[0],_y1[1],_y1[2],_y1[3]);
+	  _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
 	  
 	  px += 4U;
 	  py -= 4U;
@@ -208,11 +210,6 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
 	  /* Apply loop unrolling and compute 4 MACs simultaneously. */
 	  k = srcBLen >> 2U;
 	  
-	  /* read x[0], x[1], x[2] samples */
-	  /* x0 = *px++; */
-	  /* x1 = *px++; */
-	  /* x2 = *px++; */
-
 	  /* First part of the processing with loop unrolling.  Compute 4 MACs at a time.
 	  ** a second loop below computes MACs for the remaining 1 to 3 samples. */
 	  do
@@ -225,10 +222,10 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
 	      px+=4U;
 	      py-=4U;
 	      
-	      _x2 = __builtin_shuffle(_x1,_x4,(v4s){1,2,3,5}); // {x[1],x[2],x[3],x[4]}
-	      _x3 = __builtin_shuffle(_x1,_x4,(v4s){2,3,5,6}); // {x[2],x[3],x[4],x[5]}
+	      _x2 = __builtin_shuffle(_x1,_x4, shufflemask2); // {x[1],x[2],x[3],x[4]}
+	      _x3 = __builtin_shuffle(_x1,_x4, shufflemask3); // {x[2],x[3],x[4],x[5]}
 	      
-	      _y1 = __builtin_shuffle(_y1,_y1,(v4s){3,2,1,0}); // {y[srcBLen - 1],y[srcBLen - 2],y[srcBLen - 3],y[srcBLen - 4]} 
+	      _y1 = __builtin_shuffle(_y1,_y1,shufflemask1); // {y[srcBLen - 1],y[srcBLen - 2],y[srcBLen - 3],y[srcBLen - 4]} 
 
 	      acc0 = __SUMDOTP4(_x1,_y1,acc0);
 	      acc1 = __SUMDOTP4(_x2,_y1,acc1);
@@ -249,33 +246,19 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
 	      
 	      _x1 = *((v4s*)(px)); // {x[0],x[1],x[2],x[3]}
 	      
-	      /* px++; */
-	      /* px++; */
-	      /* px++; */
-	      /* px++; */
 	      px++;
 
 	      /* px+=2; */
 	      /* Perform the multiply-accumulate */
+	      
 	      /* acc0 +=  x[4] * y[srcBLen - 5] */
 	      acc0 = __MAC(acc0, _x1[0], c0);
-	      /* acc0 += _x1[0] * c0; */
 	      /* acc1 +=  x[5] * y[srcBLen - 5] */
-	      /* acc1 += _x1[1] * c0; */
 	      acc1 = __MAC(acc1, _x1[1], c0);
 	      /* acc2 +=  x[6] * y[srcBLen - 5] */
-	      /* acc2 += _x1[2] * c0; */
 	      acc2 = __MAC(acc2, _x1[2], c0);
 	      /* acc3 +=  x[7] * y[srcBLen - 5] */
-	      /* acc3 += _x1[3] * c0; */
 	      acc3 = __MAC(acc3, _x1[3], c0);
-
-	      /* Reuse the present samples for the next MAC */
-	      /* x0 = x1; */
-	      /* x1 = x2; */
-	      /* x2 = x3; */
-
-	      //px+=4;
 
 	      /* Decrement the loop counter */
 	      k--;
@@ -323,12 +306,9 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
 	      _x1 = *((v4s*)(px));
 	      
 	      px += 4U;
-	      
-	      _y1 = __builtin_shuffle(_y1,_y1,(v4s){3,2,1,0});
-
 	      py -= 4U;
 	      
-	      //printf("count: %i _y1: %i %i %i %i\n",count,_y1[0],_y1[1],_y1[2],_y1[3]);
+	      _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
   
 	      sum = __SUMDOTP4(_x1,_y1,sum);
 	      k--;
@@ -446,7 +426,7 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
 	  px += 4U;
 	  py -= 4U;
 	  
-	  _y1 = __builtin_shuffle(_y1,_y1,(v4s){3,2,1,0});
+	  _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
   
 	  sum = __SUMDOTP4(_x1,_y1,sum);
 	  k--;
