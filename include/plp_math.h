@@ -71,9 +71,19 @@
 
 /**
  * @defgroup groupMatrix Matrix Functions
- *
- * This set of functions provides basic matrix math operations.
- * 
+ * The naming scheme of the functions follows the following pattern (for example plp_mat_mult_i32s_rv32im):
+ <pre>
+ <pulp> _ <function name> _ <data type> <precision> <method> _ <isa extension>, with
+
+ data type = {f, i, q} respectively for floats, integers, fixed points
+
+ precision = {32, 16, 8} bits
+
+ method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+
+ isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
+
+ </pre>
  */
 
 /**
@@ -127,6 +137,53 @@ typedef struct
   int32_t * resBuffer;      // pointer to result vector
 } plp_dot_prod_instance_q32;
 
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel matrix multiplication.
+ */
+typedef struct
+{
+  const int8_t * __restrict__ pSrcA;
+  const int8_t * __restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t nPE;
+  int32_t * __restrict__ pDstC;
+}plp_mat_mult_instance_i8;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel matrix multiplication.
+ */
+typedef struct
+{
+  const int16_t * __restrict__ pSrcA;
+  const int16_t * __restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t nPE;
+  int32_t * __restrict__ pDstC;
+}plp_mat_mult_instance_i16;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel matrix multiplication.
+ */
+typedef struct
+{
+  const int32_t * __restrict__ pSrcA;
+  const int32_t * __restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t nPE;
+  int32_t * __restrict__ pDstC;
+}plp_mat_mult_instance_i32;
 
 
 
@@ -682,6 +739,8 @@ void plp_mean_i32s_xpulpv2(
                            uint32_t blockSize,
                            int32_t * __restrict__ pRes);
 
+
+
 /** -------------------------------------------------------
    @brief         Glue code for matrix matrix multiplication of a 32-bit integer matrices.
    @param[in]     pSrcA      points to first the input matrix
@@ -701,6 +760,8 @@ void plp_mat_mult_i32(
                          uint32_t O,
                          int32_t * __restrict__ pDstC);
 
+
+
 /** -------------------------------------------------------
    @brief         Matrix matrix multiplication of a 32-bit integer matrices for RV32IM extension.
    @param[in]     pSrcA      points to first the input matrix
@@ -719,6 +780,8 @@ void plp_mat_mult_i32s_rv32im(
                          uint32_t N,
                          uint32_t O,
                          int32_t * __restrict__ pDstC);
+
+
 
 /** -------------------------------------------------------
    @brief         Matrix matrix multiplication of a 32-bit integer matrices for XPULPV2 extension.
@@ -740,6 +803,7 @@ void plp_mat_mult_i32s_xpulpv2(
                          int32_t * __restrict__ pDstC);
 
 
+
 /** -------------------------------------------------------
    @brief         Glue code for matrix matrix multiplication of a 16-bit integer matrices.
    @param[in]     pSrcA      points to first the input matrix
@@ -759,6 +823,8 @@ void plp_mat_mult_i16(
                          uint32_t O,
                          int32_t * __restrict__ pDstC);
 
+
+
 /** -------------------------------------------------------
    @brief         Matrix matrix multiplication of a 16-bit integer matrices for RV32IM extension.
    @param[in]     pSrcA      points to first the input matrix
@@ -777,6 +843,8 @@ void plp_mat_mult_i16s_rv32im(
                          uint32_t N,
                          uint32_t O,
                          int32_t * __restrict__ pDstC);
+
+
 
 /** -------------------------------------------------------
    @brief         Matrix matrix multiplication of a 16-bit integer matrices for XPULPV2 extension.
@@ -801,6 +869,7 @@ void plp_mat_mult_i16v_xpulpv2(
                          int32_t * __restrict__ pDstC);
 
 
+
 /** -------------------------------------------------------
    @brief         Glue code for matrix matrix multiplication of a 8-bit integer matrices.
    @param[in]     pSrcA      points to first the input matrix
@@ -819,6 +888,8 @@ void plp_mat_mult_i8(
                          uint32_t N,
                          uint32_t O,
                          int32_t * __restrict__ pDstC);
+
+
 
 /** -------------------------------------------------------
    @brief         Matrix matrix multiplication of a 8-bit integer matrices for RV32IM extension.
@@ -839,6 +910,8 @@ void plp_mat_mult_i8s_rv32im(
                          uint32_t O,
                          int32_t * __restrict__ pDstC);
 
+
+
 /** -------------------------------------------------------
    @brief         Matrix matrix multiplication of a 8-bit integer matrices for XPULPV2 extension.
    @param[in]     pSrcA      points to first the input matrix
@@ -850,7 +923,7 @@ void plp_mat_mult_i8s_rv32im(
    @return        none
 
    @par Exploiting SIMD instructions
-   The 8 bit values are packed foir each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+   The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
 */
 
 void plp_mat_mult_i8v_xpulpv2(
@@ -860,5 +933,130 @@ void plp_mat_mult_i8v_xpulpv2(
                          uint32_t N,
                          uint32_t O,
                          int32_t * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel matrix matrix multiplication of a 32-bit integer matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_i32_parallel(
+                         const int32_t * __restrict__ pSrcA,
+                         const int32_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         uint32_t nPE,
+                         int32_t * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+   @brief         Parallel matrix matrix multiplication of a 32-bit integer matrices for RV32IM extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_i32p_xpulpv2(
+                         void* args);
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel matrix matrix multiplication of a 16-bit integer matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_i16_parallel(
+                         const int16_t * __restrict__ pSrcA,
+                         const int16_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         uint32_t nPE,
+                         int32_t * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+   @brief         Parallel matrix matrix multiplication of a 16-bit integer matrices for RV32IM extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Exploiting SIMD instructions
+   The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_i16vp_xpulpv2(
+                         void* args);
+
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel matrix matrix multiplication of a 8-bit integer matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_i8_parallel(
+                         const int8_t * __restrict__ pSrcA,
+                         const int8_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         uint32_t nPE,
+                         int32_t * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+   @brief         Parallel matrix matrix multiplication of a 8-bit integer matrices for RV32IM extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Exploiting SIMD instructions
+   The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_i8vp_xpulpv2(
+                         void* args);
 
 #endif // __PLP_MATH_H__

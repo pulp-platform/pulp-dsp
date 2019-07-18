@@ -2,10 +2,10 @@
 #include "stdio.h"
 #include "plp_math.h"
 
-// #define P_TEST_8
+#define P_TEST_8
 // #define P_TEST_16
 // #define P_TEST_32
-#define TEST_8
+// #define TEST_8
 // #define TEST_16
 
 #if defined(P_TEST_8)
@@ -64,38 +64,11 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_start(perf);
 
   #if defined (P_TEST_8)
-    mat_mult_p_args args = {
-      .pSrcA = m_a,
-      .pSrcB = m_b,
-      .M = M_LENGTH,
-      .N = N_LENGTH,
-      .O = O_LENGTH,
-      .nPE =  rt_nb_pe(),
-      .pDstC = result
-    };
-    rt_team_fork(args.nPE, plp_mat_mult_i8_paralell, (void *)&args);
+    plp_mat_mult_i8_parallel(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, rt_nb_pe(), result);
   #elif defined (P_TEST_16)
-    mat_mult_p_args args = {
-      .pSrcA = m_a,
-      .pSrcB = m_b,
-      .M = M_LENGTH,
-      .N = N_LENGTH,
-      .O = O_LENGTH,
-      .nPE =  rt_nb_pe(),
-      .pDstC = result
-    };
-    rt_team_fork(args.nPE, plp_mat_mult_i16_paralell, (void *)&args);
+    plp_mat_mult_i16_parallel(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, rt_nb_pe(), result);
   #elif defined (P_TEST_32)
-    mat_mult_p_args args = {
-      .pSrcA = m_a,
-      .pSrcB = m_b,
-      .M = M_LENGTH,
-      .N = N_LENGTH,
-      .O = O_LENGTH,
-      .nPE =  rt_nb_pe(),
-      .pDstC = result
-    };
-    rt_team_fork(args.nPE, plp_mat_mult_i32_paralell, (void *)&args);
+    plp_mat_mult_i32_parallel(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, rt_nb_pe(), result);
   #elif defined (TEST_8)
     plp_mat_mult_i8(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
   #elif defined(TEST_16)
@@ -133,7 +106,7 @@ void cluster_entry(void *arg){
   rt_perf_init(&perf);
   
   for (int i=0; i < 1; i++){
-    do_bench_0(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR) | (1<<RT_PERF_LD_STALL) | (1<<RT_PERF_TCDM_CONT));
+    do_bench_0(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR) | (1<<RT_PERF_LD_STALL) | (1<<RT_PERF_TCDM_CONT) | (1<<RT_PERF_LD_EXT_CYC));
   }
 
   unsigned int ops = M_LENGTH*O_LENGTH*N_LENGTH*2;
@@ -146,7 +119,7 @@ void cluster_entry(void *arg){
   printf("Instructions: %d\n", instr);
   printf("Load stalls %d\n", ld_stall);
   printf("Contention %d\n", cont);
-  // printf("Misc %d\n", misc);
+  printf("Misc %d\n", misc);
   printf("Operations %d\n", ops);
 
   return;

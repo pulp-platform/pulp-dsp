@@ -2,10 +2,18 @@
 #include "stdio.h"
 #include "plp_math.h"
 
-#define MUL_TEST_8
+#define P_MUL_TEST_8
+// #define P_MUL_TEST_16
+//#define P_MUL_TEST_32
+//#define MUL_TEST_8
 // #define MUL_TEST_16
-
-#if defined(MUL_TEST_8)
+#if defined(P_MUL_TEST_8)
+  #include "../../test_data/mul_data8_L2.h"
+#elif defined(P_MUL_TEST_16)
+  #include "../../test_data/mul_data16_L2.h"
+#elif defined(P_MUL_TEST_32)
+  #include "../../test_data/mul_data32_L2.h"
+#elif defined(MUL_TEST_8)
   #include "../../test_data/mul_data8_L2.h"
 #elif defined(MUL_TEST_16)
   #include "../../test_data/mul_data16_L2.h"
@@ -24,6 +32,12 @@ static void do_bench_0(rt_perf_t *perf, int events)
     printf("running test for 8 bit\n");
   #elif defined(MUL_TEST_16)
     printf("running test for 16 bit\n");
+  #elif defined(P_MUL_TEST_8)
+    printf("running parallel test for 8 bit\n");
+  #elif defined(P_MUL_TEST_16)
+    printf("running parallel test for 16 bit\n");
+  #elif defined(P_MUL_TEST_32)
+    printf("running parallel test for 32 bit\n");
   #else
     printf("running test for 32 bit\n");
   #endif
@@ -36,7 +50,13 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  #if defined(MUL_TEST_8)
+  #if defined(P_MUL_TEST_8)
+    plp_mat_mult_i8_parallel(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, 8, result);
+  #elif defined(P_MUL_TEST_16)
+    plp_mat_mult_i16_parallel(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, 8, result);
+  #elif defined(P_MUL_TEST_32)
+    plp_mat_mult_i32_parallel(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, 8, result);
+  #elif defined(MUL_TEST_8)
     plp_mat_mult_i8(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
   #elif defined(MUL_TEST_16)
     plp_mat_mult_i16(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
