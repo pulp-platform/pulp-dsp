@@ -1,7 +1,8 @@
 #include "rt/rt_api.h"
 #include "stdio.h"
 #include "fct.h"
-#include "../../test_data/vec_data.h"
+#include "fft_data_i32_512.h"
+#include "SwapTable.h"
 
 #define DECIMAL_POINT 3
 
@@ -12,7 +13,7 @@ static void do_bench_0(rt_perf_t *perf, int events)
 {
   int32_t result=0;
 
-  printf("dot product i32\n");
+  printf("cfft i32\n");
 
   // Activate specified events
   rt_perf_conf(perf, events);
@@ -22,12 +23,25 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  plp_dot_prod_q32s(v_a, v_b, LENGTH, &result, DECIMAL_POINT);
+  plp_cfft_i32(x, twiddleCoef_i32_512, 512);
+
+  SwapSamples_i32(x, SwapTable_512, 512);
 
   rt_perf_stop(perf);
 
-  printf("result is %d, expected result is %d\n", result, exp_result);
 
+  printf("expected result:\n");
+  
+  for(int i = 0; i < 1024; i++)
+    printf("%i, ", exp_result[i]);
+  printf("\n\n");
+  
+  printf("result:\n");
+  
+  for(int i = 0; i < 1024; i++)
+    printf("%i, ", x[i]);
+  printf("\n\n");
+    
 }
 
 

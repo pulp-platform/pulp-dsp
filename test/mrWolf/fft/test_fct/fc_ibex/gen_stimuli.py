@@ -45,10 +45,7 @@ def gen_stimuli(name, var_type, n_bits, min_value, max_value, length):
     #x = np.concatenate((10*np.ones(256), np.zeros(256)))
     x_complex = np.zeros(length*2, dtype='int'+str(n_bits))
     x_complex[0:length*2-1:2] = x
-    X = np.fft.fft(x, norm=None)
-
-    #print(n_bits, length, np.max(x_complex), np.min(x_complex))
-    #print(n_bits, length, np.max(X), np.min(X))
+    X = np.fft.fft(x)
 
     X_real = X.real.astype('int'+str(n_bits))
     X_imag = X.imag.astype('int'+str(n_bits))
@@ -99,9 +96,9 @@ if __name__=='__main__':
     #max_value = int(sys.argv[5])
     #v_len = int(sys.argv[6])
 
-    gen_stimuli('fft_data_i16_128.h', 'int16_t', 16, -2**8, 2**8-1, 128)
-    gen_stimuli('fft_data_i16_256.h', 'int16_t', 16, -2**8, 2**8-1, 256)
-    gen_stimuli('fft_data_i16_512.h', 'int16_t', 16, -2**8, 2**8-1, 512)
-    gen_stimuli('fft_data_i32_128.h', 'int32_t', 32, -2**16, 2**16-1, 128)
-    gen_stimuli('fft_data_i32_256.h', 'int32_t', 32, -2**16, 2**16-1, 256)
-    gen_stimuli('fft_data_i32_512.h', 'int32_t', 32, -2**16, 2**16-1, 512)
+    gen_stimuli('fft_data_i16_128.h', 'int16_t', 16, -2**7 , 2**7-1 , 128)
+    gen_stimuli('fft_data_i16_256.h', 'int16_t', 16, -2**7 , 2**7-1 , 256)
+    gen_stimuli('fft_data_i16_512.h', 'int16_t', 16, -2**7 , 2**7-1 , 512)
+    gen_stimuli('fft_data_i32_128.h', 'int32_t', 32, -2**15, 2**15-1, 128)
+    gen_stimuli('fft_data_i32_256.h', 'int32_t', 32, -2**15, 2**15-1, 256)
+    gen_stimuli('fft_data_i32_512.h', 'int32_t', 32, -2**15, 2**15-1, 512)
