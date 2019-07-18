@@ -58,7 +58,7 @@ def gen_stimuli(name, var_type, n_bits, min_value, max_value, M, N, O, fma):
     for i in range(0,M):
         for j in range(0,N):
             for k in range(0,O):
-                m_c[i*M+k] = (m_c[i*M+k] + m_a[i*M+j]*m_b[j*N+k]) % (2**32) # make sure it does correctly overflow as it should with the data types chosen.
+                m_c[i*O+k] = (m_c[i*O+k] + m_a[i*N+j]*m_b[j*O+k]) % (2**32) # make sure it does correctly overflow as it should with the data types chosen.
 
 
     f.write('#ifndef __MAT_MUL_L1_H_' + str(n_bits) + '__\n#define __MAT_MUL_L1_H_' + str(n_bits) + '__\n\n')
@@ -116,17 +116,26 @@ if __name__=='__main__':
     # max_value = int(sys.argv[5])
     # v_len = int(sys.argv[6])
 
-#    print("file_name {}, data_type {}, n_bits {}, v_len {}\n".format(file_name, data_type, n_bits, type(v_len)))
+    import os
+    folder = os.path.dirname(os.path.realpath(__file__))
 
-    # gen_stimuli(file_name, data_type, n_bits, min_value, max_value,v_len)
+    if(len(sys.argv) > 3):
+        # print(sys.argv[1])
+        # print(sys.argv[2])
+        # print(sys.argv[3])
+        m_size = int(sys.argv[1])
+        n_size = int(sys.argv[2])
+        o_size = int(sys.argv[3])
+    else:
+        m_size = 32
+        n_size = 32
+        o_size = 32
 
-    m_size = 32
-    n_size = 32
-    o_size = 32
+    # print(m_size, n_size, o_size)
 
-    gen_stimuli('mul_data32', "int32_t", 32, -2**7, 2**7-1  ,m_size, n_size, o_size,0)
-    gen_stimuli('mul_data16', "int16_t", 16, -2**6, 2**6-1  ,m_size, n_size, o_size,0)
-    gen_stimuli('mul_data8' ,  "int8_t", 8, -2**3, 2**3-1   ,m_size, n_size, o_size,0)
-    gen_stimuli('fma_data32', "int32_t", 32, -2**7, 2**7-1  ,m_size, n_size, o_size,1)
-    gen_stimuli('fma_data16', "int16_t", 16, -2**6, 2**6-1  ,m_size, n_size, o_size,1)
-    gen_stimuli('fma_data8' ,  "int8_t", 8, -2**3, 2**3-1   ,m_size, n_size, o_size,1)
+    gen_stimuli(folder+'/mul_data32', "int32_t", 32, -2**7, 2**7-1  ,m_size, n_size, o_size,0)
+    gen_stimuli(folder+'/mul_data16', "int16_t", 16, -2**6, 2**6-1  ,m_size, n_size, o_size,0)
+    gen_stimuli(folder+'/mul_data8' ,  "int8_t", 8, -2**3, 2**3-1   ,m_size, n_size, o_size,0)
+    gen_stimuli(folder+'/fma_data32', "int32_t", 32, -2**7, 2**7-1  ,m_size, n_size, o_size,1)
+    gen_stimuli(folder+'/fma_data16', "int16_t", 16, -2**6, 2**6-1  ,m_size, n_size, o_size,1)
+    gen_stimuli(folder+'/fma_data8' ,  "int8_t", 8, -2**3, 2**3-1   ,m_size, n_size, o_size,1)
