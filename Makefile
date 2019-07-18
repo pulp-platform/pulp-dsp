@@ -3,26 +3,32 @@ FC_SRCS = \
 	src/BasicMathFunctions/plp_dot_prod_q32_parallel.c \
 	src/BasicMathFunctions/plp_dot_prod_i32_parallel.c \
 	src/SupportFunctions/plp_copy_i32.c src/SupportFunctions/kernels/plp_copy_i32s_rv32im.c \
-        src/SupportFunctions/plp_fill_i32.c src/SupportFunctions/kernels/plp_fill_i32s_rv32im.c \
+    src/SupportFunctions/plp_fill_i32.c src/SupportFunctions/kernels/plp_fill_i32s_rv32im.c \
 	src/BasicMathFunctions/plp_dot_prod_q8.c src/BasicMathFunctions/kernels/plp_dot_prod_q8s_rv32im.c \
-        src/BasicMathFunctions/plp_dot_prod_q16.c src/BasicMathFunctions/kernels/plp_dot_prod_q16s_rv32im.c \
-        src/BasicMathFunctions/plp_dot_prod_q32.c src/BasicMathFunctions/kernels/plp_dot_prod_q32s_rv32im.c \
+    src/BasicMathFunctions/plp_dot_prod_q16.c src/BasicMathFunctions/kernels/plp_dot_prod_q16s_rv32im.c \
+    src/BasicMathFunctions/plp_dot_prod_q32.c src/BasicMathFunctions/kernels/plp_dot_prod_q32s_rv32im.c \
 	src/BasicMathFunctions/plp_dot_prod_i8.c src/BasicMathFunctions/kernels/plp_dot_prod_i8s_rv32im.c \
 	src/BasicMathFunctions/plp_dot_prod_i16.c src/BasicMathFunctions/kernels/plp_dot_prod_i16s_rv32im.c \
-	src/BasicMathFunctions/plp_dot_prod_i32.c src/BasicMathFunctions/kernels/plp_dot_prod_i32s_rv32im.c
+	src/BasicMathFunctions/plp_dot_prod_i32.c src/BasicMathFunctions/kernels/plp_dot_prod_i32s_rv32im.c \
+	src/MatrixFunctions/plp_mat_mult_i32.c src/MatrixFunctions/kernels/plp_mat_mult_i32s_rv32im.c \
+	src/MatrixFunctions/plp_mat_mult_i16.c src/MatrixFunctions/kernels/plp_mat_mult_i16s_rv32im.c \
+	src/MatrixFunctions/plp_mat_mult_i8.c src/MatrixFunctions/kernels/plp_mat_mult_i8s_rv32im.c
 
 CL_SRCS = \
 	src/StatisticsFunctions/kernels/plp_mean_i32s_xpulpv2.c \
 	src/BasicMathFunctions/kernels/plp_dot_prod_q32p_xpulpv2.c \
 	src/BasicMathFunctions/kernels/plp_dot_prod_i32p_xpulpv2.c \
 	src/SupportFunctions/kernels/plp_copy_i32s_xpulpv2.c \
-        src/SupportFunctions/kernels/plp_fill_i32s_xpulpv2.c \
+    src/SupportFunctions/kernels/plp_fill_i32s_xpulpv2.c \
 	src/BasicMathFunctions/kernels/plp_dot_prod_q8v_xpulpv2.c \
-        src/BasicMathFunctions/kernels/plp_dot_prod_q16v_xpulpv2.c \
-        src/BasicMathFunctions/kernels/plp_dot_prod_q32s_xpulpv2.c \
+    src/BasicMathFunctions/kernels/plp_dot_prod_q16v_xpulpv2.c \
+    src/BasicMathFunctions/kernels/plp_dot_prod_q32s_xpulpv2.c \
 	src/BasicMathFunctions/kernels/plp_dot_prod_i8v_xpulpv2.c \
 	src/BasicMathFunctions/kernels/plp_dot_prod_i16v_xpulpv2.c \
-	src/BasicMathFunctions/kernels/plp_dot_prod_i32s_xpulpv2.c
+	src/BasicMathFunctions/kernels/plp_dot_prod_i32s_xpulpv2.c \
+	src/MatrixFunctions/kernels/plp_mat_mult_i32s_xpulpv2.c \
+	src/MatrixFunctions/kernels/plp_mat_mult_i16v_xpulpv2.c \
+	src/MatrixFunctions/kernels/plp_mat_mult_i8v_xpulpv2.c
 	
 
 PULP_LIBS = plpdsp # the name of the library, after installing it into the pulp-sdk, add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project to use this library.

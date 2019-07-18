@@ -682,6 +682,183 @@ void plp_mean_i32s_xpulpv2(
                            uint32_t blockSize,
                            int32_t * __restrict__ pRes);
 
+/** -------------------------------------------------------
+   @brief         Glue code for matrix matrix multiplication of a 32-bit integer matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
 
+void plp_mat_mult_i32(
+                         const int32_t * __restrict__ pSrcA,
+                         const int32_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         int32_t * __restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Matrix matrix multiplication of a 32-bit integer matrices for RV32IM extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_i32s_rv32im(
+                         const int32_t * __restrict__ pSrcA,
+                         const int32_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         int32_t * __restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Matrix matrix multiplication of a 32-bit integer matrices for XPULPV2 extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_i32s_xpulpv2(
+                         const int32_t * __restrict__ pSrcA,
+                         const int32_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         int32_t * __restrict__ pDstC);
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for matrix matrix multiplication of a 16-bit integer matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_i16(
+                         const int16_t * __restrict__ pSrcA,
+                         const int16_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         int32_t * __restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Matrix matrix multiplication of a 16-bit integer matrices for RV32IM extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_i16s_rv32im(
+                         const int16_t * __restrict__ pSrcA,
+                         const int16_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         int32_t * __restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Matrix matrix multiplication of a 16-bit integer matrices for XPULPV2 extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Exploiting SIMD instructions
+   The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_i16v_xpulpv2(
+                         const int16_t * __restrict__ pSrcA,
+                         const int16_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         int32_t * __restrict__ pDstC);
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for matrix matrix multiplication of a 8-bit integer matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_i8(
+                         const int8_t * __restrict__ pSrcA,
+                         const int8_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         int32_t * __restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Matrix matrix multiplication of a 8-bit integer matrices for RV32IM extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_i8s_rv32im(
+                         const int8_t * __restrict__ pSrcA,
+                         const int8_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         int32_t * __restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Matrix matrix multiplication of a 8-bit integer matrices for XPULPV2 extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Exploiting SIMD instructions
+   The 8 bit values are packed foir each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_i8v_xpulpv2(
+                         const int8_t * __restrict__ pSrcA,
+                         const int8_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         int32_t * __restrict__ pDstC);
 
 #endif // __PLP_MATH_H__
