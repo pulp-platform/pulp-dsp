@@ -1,10 +1,18 @@
 #include "rt/rt_api.h"
 #include "stdio.h"
 #include "fct.h"
+#include "plp_cfft_i16s_rv32im.c"
+#include "plp_cfft_i16v_xpulpv2.c"
+//#include "plp_cfft_i16v_xpulpv2cplx.c"
+#include "plp_cfft_i16vp_xpulpv2.c"
+//#include "plp_cfft_i16vp_xpulpv2cplx.c"
+#include "plp_cfft_i32s_rv32im.c"
+#include "plp_cfft_i32s_xpulpv2.c"
+#include "plp_cfft_i32p_xpulpv2.c"
 #include "SwapTable.h"
 
-#define N_BITS 32
-#define LENGTH 256
+#define N_BITS 16
+#define LENGTH 512
 #define PARALLEL 8
 
 #define PRINT_RESULT
@@ -54,7 +62,7 @@ static int cores_events;
 RT_CL_DATA static DATA_TYPE * X_l1;
 RT_CL_DATA static DATA_TYPE * exp_result_l1;
 RT_CL_DATA static DATA_TYPE * twiddleCoef_l1;
-RT_CL_DATA static int16_t * SwapTable_l1;
+RT_CL_DATA static uint16_t * SwapTable_l1;
 
 
 // This benchmark is a single shot so we can read the value directly out of the
@@ -76,29 +84,24 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_start(perf);
 
 #if N_BITS == 16 && PARALLEL == 1
-  plp_cfft_i16(X_l1, twiddleCoef_l1, LENGTH);
-  SwapSamples_i16(X_l1, SwapTable_l1, LENGTH);
+  //plp_cfft_i16s_rv32im(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
+  plp_cfft_i16v_xpulpv2(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
+  //plp_cfft_i16v_xpulpv2cplx(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
 #elif N_BITS == 32 && PARALLEL == 1
-  plp_cfft_i32(X_l1, twiddleCoef_l1, LENGTH);
-
-  printf("preswapped result:\n");
-  
-  for(int i = 0; i < 2 * LENGTH; i++)
-    printf("%i, ", X_l1[i]);
-  printf("\n\n");
-  
-  SwapSamples_i32(X_l1, SwapTable_l1, LENGTH);
+  //plp_cfft_i32s_rv32im(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
+  plp_cfft_i32s_xpulpv2(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
 #elif N_BITS == 16 && PARALLEL > 1
   
   plp_cfft_instance_i16 S;
 
   S.Data = X_l1;
   S.Twiddles = twiddleCoef_l1;
+  S.SwapTable = SwapTable_l1;
   S.N_FFT = LENGTH;
   S.nPE = PARALLEL;
 
-  rt_team_fork(PARALLEL, plp_cfft_i16_parallel, (void *)&S);
-  SwapSamples_i16(X_l1, SwapTable_l1, LENGTH);
+  rt_team_fork(PARALLEL, plp_cfft_i16vp_xpulpv2, (void *)&S);
+  //rt_team_fork(PARALLEL, plp_cfft_i16vp_xpulpv2cplx, (void *)&S);
 
 #elif N_BITS == 32 && PARALLEL > 1
   
@@ -106,34 +109,22 @@ static void do_bench_0(rt_perf_t *perf, int events)
 
   S.Data = X_l1;
   S.Twiddles = twiddleCoef_l1;
+  S.SwapTable = SwapTable_l1;
   S.N_FFT = LENGTH;
   S.nPE = PARALLEL;
 
-  rt_team_fork(PARALLEL, plp_cfft_i32_parallel, (void *)&S);
+  rt_team_fork(PARALLEL, plp_cfft_i32p_xpulpv2, (void *)&S);
 
-  printf("preswapped result:\n");
-  
-  for(int i = 0; i < 2 * LENGTH; i++)
-    printf("%i, ", X_l1[i]);
-  printf("\n\n");
-  
-  SwapSamples_i32(X_l1, SwapTable_l1, LENGTH);
 #endif
   rt_perf_stop(perf);
 
 
 #ifdef PRINT_RESULT
-  /* printf("stimuli:\n"); */
-
-  /* for(int i = 0; i < 2 * LENGTH; i++) */
-  /*   printf("%i, ", x[i]); */
-  /* printf("\n\n"); */
-
-  /* printf("expected result:\n"); */
+  printf("expected result:\n");
   
-  /* for(int i = 0; i < 2 * LENGTH; i++) */
-  /*   printf("%i, ", exp_result_l1[i]); */
-  /* printf("\n\n"); */
+  for(int i = 0; i < 2 * LENGTH; i++)
+    printf("%i, ", exp_result_l1[i]);
+  printf("\n\n");
   
   printf("result:\n");
   

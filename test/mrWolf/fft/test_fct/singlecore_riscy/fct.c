@@ -25,7 +25,7 @@ void plp_cfft_i16(int16_t *__restrict__ Data, int16_t *__restrict__ Twiddles, in
 		//v2s TmpiA = DataV[iA];
 		//v2s TmpiB = DataV[iB];
 
-                DataV[iA] = (DataV[iA] + DataV[iB]) /*>> (v2s) {1, 1}*/;
+                DataV[iA] = (DataV[iA] + DataV[iB]) >> (v2s) {1, 1};
 		//if((((int16_t *)&TmpiA)[0] < 0 && ((int16_t *)&TmpiB)[0] < 0 && ((int16_t *)&DataV[iA])[0] > 0) || (((int16_t *)&TmpiA)[0] > 0 && ((int16_t *)&TmpiB)[0] > 0 && ((int16_t *)&DataV[iA])[0] < 0)) {
 		//printf("iA_r %hi, iA_i %hi, iB_r %hi, iB_i %hi, ", ((int16_t *)&TmpiA)[0], ((int16_t *)&TmpiA)[1], ((int16_t *)&TmpiB)[0], ((int16_t *)&TmpiB)[1]);
 		//printf("iA_r + iB_r %hi, iA_i + iB_i %hi\n", ((int16_t *)&DataV[iA])[0], ((int16_t *)&DataV[iA])[1]);
@@ -34,7 +34,7 @@ void plp_cfft_i16(int16_t *__restrict__ Data, int16_t *__restrict__ Twiddles, in
 		//printf("iA_r %hi, iA_i %hi, iB_r %hi, iB_i %hi, ", ((int16_t *)&TmpiA)[0], ((int16_t *)&TmpiA)[1], ((int16_t *)&TmpiB)[0], ((int16_t *)&TmpiB)[1]);
 		//printf("iA_r - iB_r %hi, iA_i - iB_i %hi\n", ((int16_t *)&Tmp)[0], ((int16_t *)&Tmp)[1]);
 		//}
-                DataV[iB] = (v2s) {((int16_t) ((((int32_t) (Tmp)[0]*(int32_t) (W)[0]) - ((int32_t) (Tmp)[1]*(int32_t) (W)[1]))>>15)), ((int16_t) ((((int32_t) (Tmp)[0]*(int32_t) (W)[1]) + ((int) (Tmp)[1]*(int32_t) (W)[0]))>>15))} /*>> (v2s) {1, 1}*/; 
+                DataV[iB] = (v2s) {((int16_t) ((((int32_t) (Tmp)[0]*(int32_t) (W)[0]) - ((int32_t) (Tmp)[1]*(int32_t) (W)[1]))>>15)), ((int16_t) ((((int32_t) (Tmp)[0]*(int32_t) (W)[1]) + ((int) (Tmp)[1]*(int32_t) (W)[0]))>>15))} >> (v2s) {1, 1}; 
                 iA = iA + 2 * iM;
             }
             iQ += iL;
@@ -81,8 +81,8 @@ void plp_cfft_i16_parallel(void * S)
                 v2s Tmp;
                 iB = iA + iM; 
                 Tmp = DataV[iA] - DataV[iB]; 
-                DataV[iA] = (DataV[iA] + DataV[iB]); 
-                DataV[iB] = (v2s) {((int16_t) ((((int32_t) (Tmp)[0]*(int32_t) (W)[0]) - ((int32_t) (Tmp)[1]*(int32_t) (W)[1]))>>15)), ((int16_t) ((((int32_t) (Tmp)[0]*(int32_t) (W)[1]) + ((int) (Tmp)[1]*(int32_t) (W)[0]))>>15))}; 
+                DataV[iA] = (DataV[iA] + DataV[iB]) >> (v2s) {1, 1}; 
+                DataV[iB] = (v2s) {((int16_t) ((((int32_t) (Tmp)[0]*(int32_t) (W)[0]) - ((int32_t) (Tmp)[1]*(int32_t) (W)[1]))>>16)), ((int16_t) ((((int32_t) (Tmp)[0]*(int32_t) (W)[1]) + ((int) (Tmp)[1]*(int32_t) (W)[0]))>>16))}; 
                 iA = iA + 2 * iM;
             }
             iQ += iL * nPE;
@@ -101,8 +101,8 @@ void plp_cfft_i16_parallel(void * S)
 	    v2s Tmp, W = CoeffV[iQ];
 	    iB = iA + iM;
 	    Tmp = DataV[iA] - DataV[iB]; 
-            DataV[iA] = (DataV[iA] + DataV[iB]); 
-            DataV[iB] = (v2s) {((int16_t) ((((int32_t) (Tmp)[0]*(int32_t) (W)[0]) - ((int32_t) (Tmp)[1]*(int32_t) (W)[1]))>>15)), ((int16_t) ((((int32_t) (Tmp)[0]*(int32_t) (W)[1]) + ((int) (Tmp)[1]*(int32_t) (W)[0]))>>15))};
+            DataV[iA] = (DataV[iA] + DataV[iB])  >> (v2s) {1, 1}; 
+            DataV[iB] = (v2s) {((int16_t) ((((int32_t) (Tmp)[0]*(int32_t) (W)[0]) - ((int32_t) (Tmp)[1]*(int32_t) (W)[1]))>>16)), ((int16_t) ((((int32_t) (Tmp)[0]*(int32_t) (W)[1]) + ((int) (Tmp)[1]*(int32_t) (W)[0]))>>16))};
 	    iA += 1;
 	    iQ += iL;
 	  }
@@ -308,10 +308,29 @@ void SwapSamples_i16(int16_t *__restrict__ Data,
   
   for (int32_t i = 0; i < N_FFT; i++) {
     v2s S = DataV[i];
-    int16_t SwapIndex = SwapTable[i];
+    uint16_t SwapIndex = SwapTable[i];
     //printf("%d swapindex %d S %d %d\n",i,SwapIndex,S[0],S[1]);
     if (i < SwapIndex) {
       DataV[i] = DataV[SwapIndex]; DataV[SwapIndex] = S;
+      }
+  }
+}
+
+/* Reorder from natural indexes to digitally-reversed one. Uses a pre computed LUT */
+void SwapSamples_i16_parallel(int16_t *__restrict__ Data,
+                              uint16_t *__restrict__ SwapTable ,
+                              uint32_t N_FFT,
+			      uint32_t nPE)
+{
+
+  v2s * DataV = (v2s *) Data;
+  
+  for (uint32_t i = rt_core_id(); i < N_FFT; i+=nPE) {
+    v2s S = DataV[i];
+    uint16_t SwapIndex = SwapTable[i];
+    if (i < SwapIndex) {
+      DataV[i] = DataV[SwapIndex];
+      DataV[SwapIndex] = S;
       }
   }
 }
@@ -322,8 +341,26 @@ void SwapSamples_i32(int32_t *__restrict__ Data,
 {
   
   for (int32_t i = 0; i < N_FFT; i++) {
-    int16_t SwapIndex = SwapTable[i];
+    uint16_t SwapIndex = SwapTable[i];
     //printf("%d swapindex %d S %d %d\n",i,SwapIndex,S[0],S[1]);
+    if (i < SwapIndex) {
+      int32_t Tmp[2] = {Data[2*i], Data[2*i+1]};
+      Data[2*i] = Data[2*SwapIndex];
+      Data[2*i+1] = Data[2*SwapIndex+1];
+      Data[2*SwapIndex] = Tmp[0];
+      Data[2*SwapIndex+1] = Tmp[1];
+      }
+  }
+}
+
+void SwapSamples_i32_parallel(int32_t *__restrict__ Data,
+                              uint16_t *__restrict__ SwapTable ,
+                              uint32_t N_FFT,
+			      uint32_t nPE)
+{
+  
+  for (uint32_t i = rt_core_id(); i < N_FFT; i+=nPE) {
+    uint16_t SwapIndex = SwapTable[i];
     if (i < SwapIndex) {
       int32_t Tmp[2] = {Data[2*i], Data[2*i+1]};
       Data[2*i] = Data[2*SwapIndex];

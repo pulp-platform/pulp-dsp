@@ -1,7 +1,7 @@
 #include "rt/rt_api.h"
 #include "stdio.h"
 #include "fct.h"
-#include "fft_data_i32_512.h"
+#include "fft_data_i16_512.h"
 #include "SwapTable.h"
 
 #define DECIMAL_POINT 3
@@ -13,7 +13,7 @@ static void do_bench_0(rt_perf_t *perf, int events)
 {
   int32_t result=0;
 
-  printf("cfft i32\n");
+  printf("cfft i16\n");
 
   // Activate specified events
   rt_perf_conf(perf, events);
@@ -23,9 +23,9 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  plp_cfft_i32(x, twiddleCoef_i32_512, 512);
+  plp_cfft_i16(x, twiddleCoef_i16_512, 512);
 
-  SwapSamples_i32(x, SwapTable_512, 512);
+  SwapSamples_i16(x, SwapTable_512, 512);
 
   rt_perf_stop(perf);
 
