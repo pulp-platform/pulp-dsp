@@ -1,0 +1,449 @@
+[dumpfile] "/home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/all.vcd"
+@800200
+-overview
+-soc
+@2022
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{fc} sys.board.chip.soc.fc.state[7:0]
+@20c02024
+[color] 4
+^2 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/sys.board.chip.soc.udma.txt
+#{udma} (0)sys.board.chip.soc.udma.spim0_rx.state[7:0] (1)sys.board.chip.soc.udma.spim0_rx.state[7:0] (2)sys.board.chip.soc.udma.spim0_rx.state[7:0] (3)sys.board.chip.soc.udma.spim0_rx.state[7:0] (4)sys.board.chip.soc.udma.spim0_rx.state[7:0] (5)sys.board.chip.soc.udma.spim0_rx.state[7:0] (6)sys.board.chip.soc.udma.spim0_rx.state[7:0] (7)sys.board.chip.soc.udma.spim0_rx.state[7:0] (0)sys.board.chip.soc.udma.spim0_tx.state[7:0] (1)sys.board.chip.soc.udma.spim0_tx.state[7:0] (2)sys.board.chip.soc.udma.spim0_tx.state[7:0] (3)sys.board.chip.soc.udma.spim0_tx.state[7:0] (4)sys.board.chip.soc.udma.spim0_tx.state[7:0] (5)sys.board.chip.soc.udma.spim0_tx.state[7:0] (6)sys.board.chip.soc.udma.spim0_tx.state[7:0] (7)sys.board.chip.soc.udma.spim0_tx.state[7:0] (0)sys.board.chip.soc.udma.spim1_rx.state[7:0] (1)sys.board.chip.soc.udma.spim1_rx.state[7:0] (2)sys.board.chip.soc.udma.spim1_rx.state[7:0] (3)sys.board.chip.soc.udma.spim1_rx.state[7:0] (4)sys.board.chip.soc.udma.spim1_rx.state[7:0] (5)sys.board.chip.soc.udma.spim1_rx.state[7:0] (6)sys.board.chip.soc.udma.spim1_rx.state[7:0] (7)sys.board.chip.soc.udma.spim1_rx.state[7:0] (0)sys.board.chip.soc.udma.spim1_tx.state[7:0] (1)sys.board.chip.soc.udma.spim1_tx.state[7:0] (2)sys.board.chip.soc.udma.spim1_tx.state[7:0] (3)sys.board.chip.soc.udma.spim1_tx.state[7:0] (4)sys.board.chip.soc.udma.spim1_tx.state[7:0] (5)sys.board.chip.soc.udma.spim1_tx.state[7:0] (6)sys.board.chip.soc.udma.spim1_tx.state[7:0] (7)sys.board.chip.soc.udma.spim1_tx.state[7:0] (0)sys.board.chip.soc.udma.hyper0_rx.state[7:0] (1)sys.board.chip.soc.udma.hyper0_rx.state[7:0] (2)sys.board.chip.soc.udma.hyper0_rx.state[7:0] (3)sys.board.chip.soc.udma.hyper0_rx.state[7:0] (4)sys.board.chip.soc.udma.hyper0_rx.state[7:0] (5)sys.board.chip.soc.udma.hyper0_rx.state[7:0] (6)sys.board.chip.soc.udma.hyper0_rx.state[7:0] (7)sys.board.chip.soc.udma.hyper0_rx.state[7:0] (0)sys.board.chip.soc.udma.hyper0_tx.state[7:0] (1)sys.board.chip.soc.udma.hyper0_tx.state[7:0] (2)sys.board.chip.soc.udma.hyper0_tx.state[7:0] (3)sys.board.chip.soc.udma.hyper0_tx.state[7:0] (4)sys.board.chip.soc.udma.hyper0_tx.state[7:0] (5)sys.board.chip.soc.udma.hyper0_tx.state[7:0] (6)sys.board.chip.soc.udma.hyper0_tx.state[7:0] (7)sys.board.chip.soc.udma.hyper0_tx.state[7:0] (0)sys.board.chip.soc.udma.i2c0_rx.state[7:0] (1)sys.board.chip.soc.udma.i2c0_rx.state[7:0] (2)sys.board.chip.soc.udma.i2c0_rx.state[7:0] (3)sys.board.chip.soc.udma.i2c0_rx.state[7:0] (4)sys.board.chip.soc.udma.i2c0_rx.state[7:0] (5)sys.board.chip.soc.udma.i2c0_rx.state[7:0] (6)sys.board.chip.soc.udma.i2c0_rx.state[7:0] (7)sys.board.chip.soc.udma.i2c0_rx.state[7:0] (0)sys.board.chip.soc.udma.i2c0_tx.state[7:0] (1)sys.board.chip.soc.udma.i2c0_tx.state[7:0] (2)sys.board.chip.soc.udma.i2c0_tx.state[7:0] (3)sys.board.chip.soc.udma.i2c0_tx.state[7:0] (4)sys.board.chip.soc.udma.i2c0_tx.state[7:0] (5)sys.board.chip.soc.udma.i2c0_tx.state[7:0] (6)sys.board.chip.soc.udma.i2c0_tx.state[7:0] (7)sys.board.chip.soc.udma.i2c0_tx.state[7:0] (0)sys.board.chip.soc.udma.i2c1_rx.state[7:0] (1)sys.board.chip.soc.udma.i2c1_rx.state[7:0] (2)sys.board.chip.soc.udma.i2c1_rx.state[7:0] (3)sys.board.chip.soc.udma.i2c1_rx.state[7:0] (4)sys.board.chip.soc.udma.i2c1_rx.state[7:0] (5)sys.board.chip.soc.udma.i2c1_rx.state[7:0] (6)sys.board.chip.soc.udma.i2c1_rx.state[7:0] (7)sys.board.chip.soc.udma.i2c1_rx.state[7:0] (0)sys.board.chip.soc.udma.i2c1_tx.state[7:0] (1)sys.board.chip.soc.udma.i2c1_tx.state[7:0] (2)sys.board.chip.soc.udma.i2c1_tx.state[7:0] (3)sys.board.chip.soc.udma.i2c1_tx.state[7:0] (4)sys.board.chip.soc.udma.i2c1_tx.state[7:0] (5)sys.board.chip.soc.udma.i2c1_tx.state[7:0] (6)sys.board.chip.soc.udma.i2c1_tx.state[7:0] (7)sys.board.chip.soc.udma.i2c1_tx.state[7:0] (0)sys.board.chip.soc.udma.i2s0_rx.state[7:0] (1)sys.board.chip.soc.udma.i2s0_rx.state[7:0] (2)sys.board.chip.soc.udma.i2s0_rx.state[7:0] (3)sys.board.chip.soc.udma.i2s0_rx.state[7:0] (4)sys.board.chip.soc.udma.i2s0_rx.state[7:0] (5)sys.board.chip.soc.udma.i2s0_rx.state[7:0] (6)sys.board.chip.soc.udma.i2s0_rx.state[7:0] (7)sys.board.chip.soc.udma.i2s0_rx.state[7:0] (0)sys.board.chip.soc.udma.uart0_rx.state[7:0] (1)sys.board.chip.soc.udma.uart0_rx.state[7:0] (2)sys.board.chip.soc.udma.uart0_rx.state[7:0] (3)sys.board.chip.soc.udma.uart0_rx.state[7:0] (4)sys.board.chip.soc.udma.uart0_rx.state[7:0] (5)sys.board.chip.soc.udma.uart0_rx.state[7:0] (6)sys.board.chip.soc.udma.uart0_rx.state[7:0] (7)sys.board.chip.soc.udma.uart0_rx.state[7:0] (0)sys.board.chip.soc.udma.uart0_tx.state[7:0] (1)sys.board.chip.soc.udma.uart0_tx.state[7:0] (2)sys.board.chip.soc.udma.uart0_tx.state[7:0] (3)sys.board.chip.soc.udma.uart0_tx.state[7:0] (4)sys.board.chip.soc.udma.uart0_tx.state[7:0] (5)sys.board.chip.soc.udma.uart0_tx.state[7:0] (6)sys.board.chip.soc.udma.uart0_tx.state[7:0] (7)sys.board.chip.soc.udma.uart0_tx.state[7:0] (0)sys.board.chip.soc.udma.cpi0_rx.state[7:0] (1)sys.board.chip.soc.udma.cpi0_rx.state[7:0] (2)sys.board.chip.soc.udma.cpi0_rx.state[7:0] (3)sys.board.chip.soc.udma.cpi0_rx.state[7:0] (4)sys.board.chip.soc.udma.cpi0_rx.state[7:0] (5)sys.board.chip.soc.udma.cpi0_rx.state[7:0] (6)sys.board.chip.soc.udma.cpi0_rx.state[7:0] (7)sys.board.chip.soc.udma.cpi0_rx.state[7:0]
+@2022
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{spim0_rx} sys.board.chip.soc.udma.spim0_rx.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{spim0_tx} sys.board.chip.soc.udma.spim0_tx.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{spim1_rx} sys.board.chip.soc.udma.spim1_rx.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{spim1_tx} sys.board.chip.soc.udma.spim1_tx.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{hyper0_rx} sys.board.chip.soc.udma.hyper0_rx.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{hyper0_tx} sys.board.chip.soc.udma.hyper0_tx.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{ic20_rx} sys.board.chip.soc.udma.i2c0_rx.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{ic20_tx} sys.board.chip.soc.udma.i2c0_tx.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{ic21_rx} sys.board.chip.soc.udma.i2c1_rx.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{i2c1_tx} sys.board.chip.soc.udma.i2c1_tx.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{i2s0_rx} sys.board.chip.soc.udma.i2s0_rx.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{uart0_rx} sys.board.chip.soc.udma.uart0_rx.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{uart0_tx} sys.board.chip.soc.udma.uart0_tx.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{cpi0_rx} sys.board.chip.soc.udma.cpi0_rx.state[7:0]
+@1001200
+-group_end
+@22
++{period} sys.board.chip.soc_clock.period
++{cycles} sys.board.chip.soc_clock.cycles
+@1000200
+-soc
+@800200
+-cluster
+@2022
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{pe_0} sys.board.chip.cluster.pe0.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{pe_1} sys.board.chip.cluster.pe1.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{pe_2} sys.board.chip.cluster.pe2.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{pe_3} sys.board.chip.cluster.pe3.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{pe_4} sys.board.chip.cluster.pe4.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{pe_5} sys.board.chip.cluster.pe5.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{pe_6} sys.board.chip.cluster.pe6.state[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{pe_7} sys.board.chip.cluster.pe7.state[7:0]
+@20c02024
+[color] 4
+^3 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/sys.board.chip.cluster.dma.txt
+#{dma} (0)sys.board.chip.cluster.dma.channel_0[7:0] (1)sys.board.chip.cluster.dma.channel_0[7:0] (2)sys.board.chip.cluster.dma.channel_0[7:0] (3)sys.board.chip.cluster.dma.channel_0[7:0] (4)sys.board.chip.cluster.dma.channel_0[7:0] (5)sys.board.chip.cluster.dma.channel_0[7:0] (6)sys.board.chip.cluster.dma.channel_0[7:0] (7)sys.board.chip.cluster.dma.channel_0[7:0] (0)sys.board.chip.cluster.dma.channel_1[7:0] (1)sys.board.chip.cluster.dma.channel_1[7:0] (2)sys.board.chip.cluster.dma.channel_1[7:0] (3)sys.board.chip.cluster.dma.channel_1[7:0] (4)sys.board.chip.cluster.dma.channel_1[7:0] (5)sys.board.chip.cluster.dma.channel_1[7:0] (6)sys.board.chip.cluster.dma.channel_1[7:0] (7)sys.board.chip.cluster.dma.channel_1[7:0] (0)sys.board.chip.cluster.dma.channel_2[7:0] (1)sys.board.chip.cluster.dma.channel_2[7:0] (2)sys.board.chip.cluster.dma.channel_2[7:0] (3)sys.board.chip.cluster.dma.channel_2[7:0] (4)sys.board.chip.cluster.dma.channel_2[7:0] (5)sys.board.chip.cluster.dma.channel_2[7:0] (6)sys.board.chip.cluster.dma.channel_2[7:0] (7)sys.board.chip.cluster.dma.channel_2[7:0] (0)sys.board.chip.cluster.dma.channel_3[7:0] (1)sys.board.chip.cluster.dma.channel_3[7:0] (2)sys.board.chip.cluster.dma.channel_3[7:0] (3)sys.board.chip.cluster.dma.channel_3[7:0] (4)sys.board.chip.cluster.dma.channel_3[7:0] (5)sys.board.chip.cluster.dma.channel_3[7:0] (6)sys.board.chip.cluster.dma.channel_3[7:0] (7)sys.board.chip.cluster.dma.channel_3[7:0] (0)sys.board.chip.cluster.dma.channel_4[7:0] (1)sys.board.chip.cluster.dma.channel_4[7:0] (2)sys.board.chip.cluster.dma.channel_4[7:0] (3)sys.board.chip.cluster.dma.channel_4[7:0] (4)sys.board.chip.cluster.dma.channel_4[7:0] (5)sys.board.chip.cluster.dma.channel_4[7:0] (6)sys.board.chip.cluster.dma.channel_4[7:0] (7)sys.board.chip.cluster.dma.channel_4[7:0] (0)sys.board.chip.cluster.dma.channel_5[7:0] (1)sys.board.chip.cluster.dma.channel_5[7:0] (2)sys.board.chip.cluster.dma.channel_5[7:0] (3)sys.board.chip.cluster.dma.channel_5[7:0] (4)sys.board.chip.cluster.dma.channel_5[7:0] (5)sys.board.chip.cluster.dma.channel_5[7:0] (6)sys.board.chip.cluster.dma.channel_5[7:0] (7)sys.board.chip.cluster.dma.channel_5[7:0] (0)sys.board.chip.cluster.dma.channel_6[7:0] (1)sys.board.chip.cluster.dma.channel_6[7:0] (2)sys.board.chip.cluster.dma.channel_6[7:0] (3)sys.board.chip.cluster.dma.channel_6[7:0] (4)sys.board.chip.cluster.dma.channel_6[7:0] (5)sys.board.chip.cluster.dma.channel_6[7:0] (6)sys.board.chip.cluster.dma.channel_6[7:0] (7)sys.board.chip.cluster.dma.channel_6[7:0] (0)sys.board.chip.cluster.dma.channel_7[7:0] (1)sys.board.chip.cluster.dma.channel_7[7:0] (2)sys.board.chip.cluster.dma.channel_7[7:0] (3)sys.board.chip.cluster.dma.channel_7[7:0] (4)sys.board.chip.cluster.dma.channel_7[7:0] (5)sys.board.chip.cluster.dma.channel_7[7:0] (6)sys.board.chip.cluster.dma.channel_7[7:0] (7)sys.board.chip.cluster.dma.channel_7[7:0] (0)sys.board.chip.cluster.dma.channel_8[7:0] (1)sys.board.chip.cluster.dma.channel_8[7:0] (2)sys.board.chip.cluster.dma.channel_8[7:0] (3)sys.board.chip.cluster.dma.channel_8[7:0] (4)sys.board.chip.cluster.dma.channel_8[7:0] (5)sys.board.chip.cluster.dma.channel_8[7:0] (6)sys.board.chip.cluster.dma.channel_8[7:0] (7)sys.board.chip.cluster.dma.channel_8[7:0] (0)sys.board.chip.cluster.dma.channel_9[7:0] (1)sys.board.chip.cluster.dma.channel_9[7:0] (2)sys.board.chip.cluster.dma.channel_9[7:0] (3)sys.board.chip.cluster.dma.channel_9[7:0] (4)sys.board.chip.cluster.dma.channel_9[7:0] (5)sys.board.chip.cluster.dma.channel_9[7:0] (6)sys.board.chip.cluster.dma.channel_9[7:0] (7)sys.board.chip.cluster.dma.channel_9[7:0] (0)sys.board.chip.cluster.dma.channel_10[7:0] (1)sys.board.chip.cluster.dma.channel_10[7:0] (2)sys.board.chip.cluster.dma.channel_10[7:0] (3)sys.board.chip.cluster.dma.channel_10[7:0] (4)sys.board.chip.cluster.dma.channel_10[7:0] (5)sys.board.chip.cluster.dma.channel_10[7:0] (6)sys.board.chip.cluster.dma.channel_10[7:0] (7)sys.board.chip.cluster.dma.channel_10[7:0] (0)sys.board.chip.cluster.dma.channel_11[7:0] (1)sys.board.chip.cluster.dma.channel_11[7:0] (2)sys.board.chip.cluster.dma.channel_11[7:0] (3)sys.board.chip.cluster.dma.channel_11[7:0] (4)sys.board.chip.cluster.dma.channel_11[7:0] (5)sys.board.chip.cluster.dma.channel_11[7:0] (6)sys.board.chip.cluster.dma.channel_11[7:0] (7)sys.board.chip.cluster.dma.channel_11[7:0] (0)sys.board.chip.cluster.dma.channel_12[7:0] (1)sys.board.chip.cluster.dma.channel_12[7:0] (2)sys.board.chip.cluster.dma.channel_12[7:0] (3)sys.board.chip.cluster.dma.channel_12[7:0] (4)sys.board.chip.cluster.dma.channel_12[7:0] (5)sys.board.chip.cluster.dma.channel_12[7:0] (6)sys.board.chip.cluster.dma.channel_12[7:0] (7)sys.board.chip.cluster.dma.channel_12[7:0] (0)sys.board.chip.cluster.dma.channel_13[7:0] (1)sys.board.chip.cluster.dma.channel_13[7:0] (2)sys.board.chip.cluster.dma.channel_13[7:0] (3)sys.board.chip.cluster.dma.channel_13[7:0] (4)sys.board.chip.cluster.dma.channel_13[7:0] (5)sys.board.chip.cluster.dma.channel_13[7:0] (6)sys.board.chip.cluster.dma.channel_13[7:0] (7)sys.board.chip.cluster.dma.channel_13[7:0] (0)sys.board.chip.cluster.dma.channel_14[7:0] (1)sys.board.chip.cluster.dma.channel_14[7:0] (2)sys.board.chip.cluster.dma.channel_14[7:0] (3)sys.board.chip.cluster.dma.channel_14[7:0] (4)sys.board.chip.cluster.dma.channel_14[7:0] (5)sys.board.chip.cluster.dma.channel_14[7:0] (6)sys.board.chip.cluster.dma.channel_14[7:0] (7)sys.board.chip.cluster.dma.channel_14[7:0] (0)sys.board.chip.cluster.dma.channel_15[7:0] (1)sys.board.chip.cluster.dma.channel_15[7:0] (2)sys.board.chip.cluster.dma.channel_15[7:0] (3)sys.board.chip.cluster.dma.channel_15[7:0] (4)sys.board.chip.cluster.dma.channel_15[7:0] (5)sys.board.chip.cluster.dma.channel_15[7:0] (6)sys.board.chip.cluster.dma.channel_15[7:0] (7)sys.board.chip.cluster.dma.channel_15[7:0]
+@2022
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{channel_0} sys.board.chip.cluster.dma.channel_0[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{channel_1} sys.board.chip.cluster.dma.channel_1[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{channel_2} sys.board.chip.cluster.dma.channel_2[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{channel_3} sys.board.chip.cluster.dma.channel_3[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{channel_4} sys.board.chip.cluster.dma.channel_4[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{channel_5} sys.board.chip.cluster.dma.channel_5[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{channel_6} sys.board.chip.cluster.dma.channel_6[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{channel_7} sys.board.chip.cluster.dma.channel_7[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{channel_8} sys.board.chip.cluster.dma.channel_8[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{channel_9} sys.board.chip.cluster.dma.channel_9[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{channel_10} sys.board.chip.cluster.dma.channel_10[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{channel_11} sys.board.chip.cluster.dma.channel_11[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{channel_12} sys.board.chip.cluster.dma.channel_12[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{channel_13} sys.board.chip.cluster.dma.channel_13[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{channel_14} sys.board.chip.cluster.dma.channel_14[7:0]
+^1 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/core_state.txt
++{channel_15} sys.board.chip.cluster.dma.channel_15[7:0]
+@1001200
+-group_end
+@22
++{period} sys.board.chip.cluster_clock.period
++{cycles} sys.board.chip.cluster_clock.cycles
+@c00200
+-runtime
+@2024
+^4 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/rt_state.txt
++{overview.cluster.runtime.pe0} user.runtime.cluster_0.pe0[31:0]
+^4 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/rt_state.txt
++{overview.cluster.runtime.pe1} user.runtime.cluster_0.pe1[31:0]
+^4 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/rt_state.txt
++{overview.cluster.runtime.pe2} user.runtime.cluster_0.pe2[31:0]
+^4 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/rt_state.txt
++{overview.cluster.runtime.pe3} user.runtime.cluster_0.pe3[31:0]
+^4 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/rt_state.txt
++{overview.cluster.runtime.pe4} user.runtime.cluster_0.pe4[31:0]
+^4 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/rt_state.txt
++{overview.cluster.runtime.pe5} user.runtime.cluster_0.pe5[31:0]
+^4 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/rt_state.txt
++{overview.cluster.runtime.pe6} user.runtime.cluster_0.pe6[31:0]
+^4 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/rt_state.txt
++{overview.cluster.runtime.pe7} user.runtime.cluster_0.pe7[31:0]
+@1401200
+-runtime
+@c00200
+-stats
+@88022
++{pe0_ipc} sys.board.chip.cluster.pe0.ipc_stat
++{pe1_ipc} sys.board.chip.cluster.pe1.ipc_stat
++{pe2_ipc} sys.board.chip.cluster.pe2.ipc_stat
++{pe3_ipc} sys.board.chip.cluster.pe3.ipc_stat
++{pe4_ipc} sys.board.chip.cluster.pe4.ipc_stat
++{pe5_ipc} sys.board.chip.cluster.pe5.ipc_stat
++{pe6_ipc} sys.board.chip.cluster.pe6.ipc_stat
++{pe7_ipc} sys.board.chip.cluster.pe7.ipc_stat
+@1401200
+-stats
+@1000200
+-cluster
+-overview
+@c00200
+-chip
+-fc
+@22
++{pc} sys.board.chip.soc.fc.pc[31:0]
++{asm} sys.board.chip.soc.fc.asm
++{func} sys.board.chip.soc.fc.func
++{inline_func} sys.board.chip.soc.fc.inline_func
++{file} sys.board.chip.soc.fc.file
+@24
++{line} sys.board.chip.soc.fc.line[31:0]
+@c00200
+-events
+@22
++{cycles} sys.board.chip.soc.fc.pcer_cycles
++{instr} sys.board.chip.soc.fc.pcer_instr
++{ld_stall} sys.board.chip.soc.fc.pcer_ld_stall
++{jmp_stall} sys.board.chip.soc.fc.pcer_jmp_stall
++{imiss} sys.board.chip.soc.fc.pcer_imiss
++{ld} sys.board.chip.soc.fc.pcer_ld
++{st} sys.board.chip.soc.fc.pcer_st
++{jump} sys.board.chip.soc.fc.pcer_jump
++{branch} sys.board.chip.soc.fc.pcer_branch
++{taken_branch} sys.board.chip.soc.fc.pcer_taken_branch
++{rvc} sys.board.chip.soc.fc.pcer_rvc
++{ld_ext} sys.board.chip.soc.fc.pcer_ld_ext
++{st_ext} sys.board.chip.soc.fc.pcer_st_ext
++{ld_ext_cycles} sys.board.chip.soc.fc.pcer_ld_ext_cycles
++{st_ext_cycles} sys.board.chip.soc.fc.pcer_st_ext_cycles
++{tcdm_cont} sys.board.chip.soc.fc.pcer_tcdm_cont
++{misaligned} sys.board.chip.soc.fc.misaligned
+@1401200
+-events
+-fc
+@c00200
+-cluster
+@c8020
+sys.board.chip.cluster.power_trace
+@c00200
+-pe_0
+@22
++{pc} sys.board.chip.cluster.pe0.pc[31:0]
++{asm} sys.board.chip.cluster.pe0.asm
++{func} sys.board.chip.cluster.pe0.func
++{inline_func} sys.board.chip.cluster.pe0.inline_func
++{file} sys.board.chip.cluster.pe0.file
+@24
++{line} sys.board.chip.cluster.pe0.line[31:0]
+@c00200
+-events
+@22
++{cycles} sys.board.chip.cluster.pe0.pcer_cycles
++{instr} sys.board.chip.cluster.pe0.pcer_instr
++{ld_stall} sys.board.chip.cluster.pe0.pcer_ld_stall
++{jmp_stall} sys.board.chip.cluster.pe0.pcer_jmp_stall
++{imiss} sys.board.chip.cluster.pe0.pcer_imiss
++{ld} sys.board.chip.cluster.pe0.pcer_ld
++{st} sys.board.chip.cluster.pe0.pcer_st
++{jump} sys.board.chip.cluster.pe0.pcer_jump
++{branch} sys.board.chip.cluster.pe0.pcer_branch
++{taken_branch} sys.board.chip.cluster.pe0.pcer_taken_branch
++{rvc} sys.board.chip.cluster.pe0.pcer_rvc
++{ld_ext} sys.board.chip.cluster.pe0.pcer_ld_ext
++{st_ext} sys.board.chip.cluster.pe0.pcer_st_ext
++{ld_ext_cycles} sys.board.chip.cluster.pe0.pcer_ld_ext_cycles
++{st_ext_cycles} sys.board.chip.cluster.pe0.pcer_st_ext_cycles
++{tcdm_cont} sys.board.chip.cluster.pe0.pcer_tcdm_cont
++{misaligned} sys.board.chip.cluster.pe0.misaligned
+@1401200
+-events
+-pe_0
+@c00200
+-pe_1
+@22
++{pc} sys.board.chip.cluster.pe1.pc[31:0]
++{asm} sys.board.chip.cluster.pe1.asm
++{func} sys.board.chip.cluster.pe1.func
++{inline_func} sys.board.chip.cluster.pe1.inline_func
++{file} sys.board.chip.cluster.pe1.file
+@24
++{line} sys.board.chip.cluster.pe1.line[31:0]
+@c00200
+-events
+@22
++{cycles} sys.board.chip.cluster.pe1.pcer_cycles
++{instr} sys.board.chip.cluster.pe1.pcer_instr
++{ld_stall} sys.board.chip.cluster.pe1.pcer_ld_stall
++{jmp_stall} sys.board.chip.cluster.pe1.pcer_jmp_stall
++{imiss} sys.board.chip.cluster.pe1.pcer_imiss
++{ld} sys.board.chip.cluster.pe1.pcer_ld
++{st} sys.board.chip.cluster.pe1.pcer_st
++{jump} sys.board.chip.cluster.pe1.pcer_jump
++{branch} sys.board.chip.cluster.pe1.pcer_branch
++{taken_branch} sys.board.chip.cluster.pe1.pcer_taken_branch
++{rvc} sys.board.chip.cluster.pe1.pcer_rvc
++{ld_ext} sys.board.chip.cluster.pe1.pcer_ld_ext
++{st_ext} sys.board.chip.cluster.pe1.pcer_st_ext
++{ld_ext_cycles} sys.board.chip.cluster.pe1.pcer_ld_ext_cycles
++{st_ext_cycles} sys.board.chip.cluster.pe1.pcer_st_ext_cycles
++{tcdm_cont} sys.board.chip.cluster.pe1.pcer_tcdm_cont
++{misaligned} sys.board.chip.cluster.pe1.misaligned
+@1401200
+-events
+-pe_1
+@c00200
+-pe_2
+@22
++{pc} sys.board.chip.cluster.pe2.pc[31:0]
++{asm} sys.board.chip.cluster.pe2.asm
++{func} sys.board.chip.cluster.pe2.func
++{inline_func} sys.board.chip.cluster.pe2.inline_func
++{file} sys.board.chip.cluster.pe2.file
+@24
++{line} sys.board.chip.cluster.pe2.line[31:0]
+@c00200
+-events
+@22
++{cycles} sys.board.chip.cluster.pe2.pcer_cycles
++{instr} sys.board.chip.cluster.pe2.pcer_instr
++{ld_stall} sys.board.chip.cluster.pe2.pcer_ld_stall
++{jmp_stall} sys.board.chip.cluster.pe2.pcer_jmp_stall
++{imiss} sys.board.chip.cluster.pe2.pcer_imiss
++{ld} sys.board.chip.cluster.pe2.pcer_ld
++{st} sys.board.chip.cluster.pe2.pcer_st
++{jump} sys.board.chip.cluster.pe2.pcer_jump
++{branch} sys.board.chip.cluster.pe2.pcer_branch
++{taken_branch} sys.board.chip.cluster.pe2.pcer_taken_branch
++{rvc} sys.board.chip.cluster.pe2.pcer_rvc
++{ld_ext} sys.board.chip.cluster.pe2.pcer_ld_ext
++{st_ext} sys.board.chip.cluster.pe2.pcer_st_ext
++{ld_ext_cycles} sys.board.chip.cluster.pe2.pcer_ld_ext_cycles
++{st_ext_cycles} sys.board.chip.cluster.pe2.pcer_st_ext_cycles
++{tcdm_cont} sys.board.chip.cluster.pe2.pcer_tcdm_cont
++{misaligned} sys.board.chip.cluster.pe2.misaligned
+@1401200
+-events
+-pe_2
+@c00200
+-pe_3
+@22
++{pc} sys.board.chip.cluster.pe3.pc[31:0]
++{asm} sys.board.chip.cluster.pe3.asm
++{func} sys.board.chip.cluster.pe3.func
++{inline_func} sys.board.chip.cluster.pe3.inline_func
++{file} sys.board.chip.cluster.pe3.file
+@24
++{line} sys.board.chip.cluster.pe3.line[31:0]
+@c00200
+-events
+@22
++{cycles} sys.board.chip.cluster.pe3.pcer_cycles
++{instr} sys.board.chip.cluster.pe3.pcer_instr
++{ld_stall} sys.board.chip.cluster.pe3.pcer_ld_stall
++{jmp_stall} sys.board.chip.cluster.pe3.pcer_jmp_stall
++{imiss} sys.board.chip.cluster.pe3.pcer_imiss
++{ld} sys.board.chip.cluster.pe3.pcer_ld
++{st} sys.board.chip.cluster.pe3.pcer_st
++{jump} sys.board.chip.cluster.pe3.pcer_jump
++{branch} sys.board.chip.cluster.pe3.pcer_branch
++{taken_branch} sys.board.chip.cluster.pe3.pcer_taken_branch
++{rvc} sys.board.chip.cluster.pe3.pcer_rvc
++{ld_ext} sys.board.chip.cluster.pe3.pcer_ld_ext
++{st_ext} sys.board.chip.cluster.pe3.pcer_st_ext
++{ld_ext_cycles} sys.board.chip.cluster.pe3.pcer_ld_ext_cycles
++{st_ext_cycles} sys.board.chip.cluster.pe3.pcer_st_ext_cycles
++{tcdm_cont} sys.board.chip.cluster.pe3.pcer_tcdm_cont
++{misaligned} sys.board.chip.cluster.pe3.misaligned
+@1401200
+-events
+-pe_3
+@c00200
+-pe_4
+@22
++{pc} sys.board.chip.cluster.pe4.pc[31:0]
++{asm} sys.board.chip.cluster.pe4.asm
++{func} sys.board.chip.cluster.pe4.func
++{inline_func} sys.board.chip.cluster.pe4.inline_func
++{file} sys.board.chip.cluster.pe4.file
+@24
++{line} sys.board.chip.cluster.pe4.line[31:0]
+@c00200
+-events
+@22
++{cycles} sys.board.chip.cluster.pe4.pcer_cycles
++{instr} sys.board.chip.cluster.pe4.pcer_instr
++{ld_stall} sys.board.chip.cluster.pe4.pcer_ld_stall
++{jmp_stall} sys.board.chip.cluster.pe4.pcer_jmp_stall
++{imiss} sys.board.chip.cluster.pe4.pcer_imiss
++{ld} sys.board.chip.cluster.pe4.pcer_ld
++{st} sys.board.chip.cluster.pe4.pcer_st
++{jump} sys.board.chip.cluster.pe4.pcer_jump
++{branch} sys.board.chip.cluster.pe4.pcer_branch
++{taken_branch} sys.board.chip.cluster.pe4.pcer_taken_branch
++{rvc} sys.board.chip.cluster.pe4.pcer_rvc
++{ld_ext} sys.board.chip.cluster.pe4.pcer_ld_ext
++{st_ext} sys.board.chip.cluster.pe4.pcer_st_ext
++{ld_ext_cycles} sys.board.chip.cluster.pe4.pcer_ld_ext_cycles
++{st_ext_cycles} sys.board.chip.cluster.pe4.pcer_st_ext_cycles
++{tcdm_cont} sys.board.chip.cluster.pe4.pcer_tcdm_cont
++{misaligned} sys.board.chip.cluster.pe4.misaligned
+@1401200
+-events
+-pe_4
+@c00200
+-pe_5
+@22
++{pc} sys.board.chip.cluster.pe5.pc[31:0]
++{asm} sys.board.chip.cluster.pe5.asm
++{func} sys.board.chip.cluster.pe5.func
++{inline_func} sys.board.chip.cluster.pe5.inline_func
++{file} sys.board.chip.cluster.pe5.file
+@24
++{line} sys.board.chip.cluster.pe5.line[31:0]
+@c00200
+-events
+@22
++{cycles} sys.board.chip.cluster.pe5.pcer_cycles
++{instr} sys.board.chip.cluster.pe5.pcer_instr
++{ld_stall} sys.board.chip.cluster.pe5.pcer_ld_stall
++{jmp_stall} sys.board.chip.cluster.pe5.pcer_jmp_stall
++{imiss} sys.board.chip.cluster.pe5.pcer_imiss
++{ld} sys.board.chip.cluster.pe5.pcer_ld
++{st} sys.board.chip.cluster.pe5.pcer_st
++{jump} sys.board.chip.cluster.pe5.pcer_jump
++{branch} sys.board.chip.cluster.pe5.pcer_branch
++{taken_branch} sys.board.chip.cluster.pe5.pcer_taken_branch
++{rvc} sys.board.chip.cluster.pe5.pcer_rvc
++{ld_ext} sys.board.chip.cluster.pe5.pcer_ld_ext
++{st_ext} sys.board.chip.cluster.pe5.pcer_st_ext
++{ld_ext_cycles} sys.board.chip.cluster.pe5.pcer_ld_ext_cycles
++{st_ext_cycles} sys.board.chip.cluster.pe5.pcer_st_ext_cycles
++{tcdm_cont} sys.board.chip.cluster.pe5.pcer_tcdm_cont
++{misaligned} sys.board.chip.cluster.pe5.misaligned
+@1401200
+-events
+-pe_5
+@c00200
+-pe_6
+@22
++{pc} sys.board.chip.cluster.pe6.pc[31:0]
++{asm} sys.board.chip.cluster.pe6.asm
++{func} sys.board.chip.cluster.pe6.func
++{inline_func} sys.board.chip.cluster.pe6.inline_func
++{file} sys.board.chip.cluster.pe6.file
+@24
++{line} sys.board.chip.cluster.pe6.line[31:0]
+@c00200
+-events
+@22
++{cycles} sys.board.chip.cluster.pe6.pcer_cycles
++{instr} sys.board.chip.cluster.pe6.pcer_instr
++{ld_stall} sys.board.chip.cluster.pe6.pcer_ld_stall
++{jmp_stall} sys.board.chip.cluster.pe6.pcer_jmp_stall
++{imiss} sys.board.chip.cluster.pe6.pcer_imiss
++{ld} sys.board.chip.cluster.pe6.pcer_ld
++{st} sys.board.chip.cluster.pe6.pcer_st
++{jump} sys.board.chip.cluster.pe6.pcer_jump
++{branch} sys.board.chip.cluster.pe6.pcer_branch
++{taken_branch} sys.board.chip.cluster.pe6.pcer_taken_branch
++{rvc} sys.board.chip.cluster.pe6.pcer_rvc
++{ld_ext} sys.board.chip.cluster.pe6.pcer_ld_ext
++{st_ext} sys.board.chip.cluster.pe6.pcer_st_ext
++{ld_ext_cycles} sys.board.chip.cluster.pe6.pcer_ld_ext_cycles
++{st_ext_cycles} sys.board.chip.cluster.pe6.pcer_st_ext_cycles
++{tcdm_cont} sys.board.chip.cluster.pe6.pcer_tcdm_cont
++{misaligned} sys.board.chip.cluster.pe6.misaligned
+@1401200
+-events
+-pe_6
+@c00200
+-pe_7
+@22
++{pc} sys.board.chip.cluster.pe7.pc[31:0]
++{asm} sys.board.chip.cluster.pe7.asm
++{func} sys.board.chip.cluster.pe7.func
++{inline_func} sys.board.chip.cluster.pe7.inline_func
++{file} sys.board.chip.cluster.pe7.file
+@24
++{line} sys.board.chip.cluster.pe7.line[31:0]
+@c00200
+-events
+@22
++{cycles} sys.board.chip.cluster.pe7.pcer_cycles
++{instr} sys.board.chip.cluster.pe7.pcer_instr
++{ld_stall} sys.board.chip.cluster.pe7.pcer_ld_stall
++{jmp_stall} sys.board.chip.cluster.pe7.pcer_jmp_stall
++{imiss} sys.board.chip.cluster.pe7.pcer_imiss
++{ld} sys.board.chip.cluster.pe7.pcer_ld
++{st} sys.board.chip.cluster.pe7.pcer_st
++{jump} sys.board.chip.cluster.pe7.pcer_jump
++{branch} sys.board.chip.cluster.pe7.pcer_branch
++{taken_branch} sys.board.chip.cluster.pe7.pcer_taken_branch
++{rvc} sys.board.chip.cluster.pe7.pcer_rvc
++{ld_ext} sys.board.chip.cluster.pe7.pcer_ld_ext
++{st_ext} sys.board.chip.cluster.pe7.pcer_st_ext
++{ld_ext_cycles} sys.board.chip.cluster.pe7.pcer_ld_ext_cycles
++{st_ext_cycles} sys.board.chip.cluster.pe7.pcer_st_ext_cycles
++{tcdm_cont} sys.board.chip.cluster.pe7.pcer_tcdm_cont
++{misaligned} sys.board.chip.cluster.pe7.misaligned
+@1401200
+-events
+-pe_7
+-cluster
+-chip

@@ -1,0 +1,216 @@
+i32s
+Total cycles: 1285281
+Instructions: 1281682
+Load stalls: 1536
+i16s
+Total cycles: 1093273
+Instructions: 894588
+Load stalls: 1537
+i8s
+Total cycles: 604198
+Instructions: 486658
+Load stalls: 1536
+i32p 1 Cores
+Total cycles: 1285404
+Instructions: 1281778
+Load stalls: 1538
+i16p 1 Cores
+Total cycles: 1093380
+Instructions: 894674
+Load stalls: 1538
+i8p 1 Cores
+Total cycles: 604321
+Instructions: 486751
+Load stalls: 1537
+i32p 2 Cores
+Total cycles: 912668
+Instructions: 896041
+Load stalls: 2565
+i16p 2 Cores
+Total cycles: 721004
+Instructions: 571375
+Load stalls: 2564
+i8p 2 Cores
+Total cycles: 408086	
+Instructions: 309754
+Load stalls: 2563
+i32p 3 Cores
+Total cycles: 532544
+Instructions: 514212
+Load stalls: 3074
+i16p 3 Cores
+Total cycles: 452762
+Instructions: 355404
+Load stalls: 3073
+i8p 3 Cores
+Total cycles: 269139
+Instructions: 206363
+Load stalls: 3072
+i32p 4 Cores
+Total cycles: 375949
+Instructions: 356418
+Load stalls: 2561
+i16p 4 Cores
+Total cycles: 329989
+Instructions: 259268
+Load stalls: 2563
+i8p 4 Cores
+Total cycles: 206334
+Instructions: 157397
+Load stalls: 2562
+i32p 5 Cores
+Total cycles: 301983
+Instructions: 279411
+Load stalls: 3588
+i16p 5 Cores
+Total cycles: 272351
+Instructions: 211908
+Load stalls: 3587
+i8p 5 Cores
+Total cycles: 176932
+Instructions: 134675
+Load stalls: 3586
+i32p 6 Cores
+Total cycles: 251488
+Instructions: 228706
+Load stalls: 3246
+i16p 6 Cores
+Total cycles: 232197
+Instructions: 179865
+Load stalls: 3247
+i8p 6 Cores
+Total cycles: 155810
+Instructions: 118168
+Load stalls: 3246
+i32p 7 Cores
+Total cycles: 219064
+Instructions: 195772
+Load stalls: 3006
+i16p 7 Cores
+Total cycles: 204989
+Instructions: 157575
+Load stalls: 3007
+i8p 7 Cores
+Total cycles: 140632
+Instructions: 106132
+Load stalls: 3006
+i32p 8 Cores
+Total cycles: 192473
+Instructions: 170600
+Load stalls: 2815
+i16p 8 Cores
+Total cycles: 182384
+Instructions: 138058
+Load stalls: 2817
+i8p 8 Cores
+Total cycles: 128222
+Instructions: 94555
+Load stalls: 2816
+i32s
+Total cycles: 1285281
+Instructions: 1281682
+Load stalls: 1536
+i16s
+Total cycles: 1093273
+Instructions: 894588
+Load stalls: 1537
+i8s
+Total cycles: 604198
+Instructions: 486658
+Load stalls: 1536
+i32p 1 Cores
+Total cycles: 1285404
+Instructions: 1281778
+Load stalls: 1538
+i16p 1 Cores
+Total cycles: 1093380
+Instructions: 894674
+Load stalls: 1538
+i8p 1 Cores
+Total cycles: 604321
+Instructions: 486751
+Load stalls: 1537
+i32p 2 Cores
+Total cycles: 912668
+Instructions: 896041
+Load stalls: 2565
+i16p 2 Cores
+Total cycles: 721004
+Instructions: 571375
+Load stalls: 2564
+i8p 2 Cores
+Total cycles: 408086
+Instructions: 309754
+Load stalls: 2563
+i32p 3 Cores
+Total cycles: 532544
+Instructions: 514212
+Load stalls: 3074
+i16p 3 Cores
+Total cycles: 452762
+Instructions: 355404
+Load stalls: 3073
+i8p 3 Cores
+Total cycles: 269139
+Instructions: 206363
+Load stalls: 3072
+i32p 4 Cores
+Total cycles: 375949
+Instructions: 356418
+Load stalls: 2561
+i16p 4 Cores
+Total cycles: 329989
+Instructions: 259268
+Load stalls: 2563
+i8p 4 Cores
+Total cycles: 206334
+Instructions: 157397
+Load stalls: 2562
+i32p 5 Cores
+Total cycles: 301983
+Instructions: 279411
+Load stalls: 3588
+i16p 5 Cores
+Total cycles: 272351
+Instructions: 211908
+Load stalls: 3587
+i8p 5 Cores
+Total cycles: 176932
+Instructions: 134675
+Load stalls: 3586
+i32p 6 Cores
+Total cycles: 251488
+Instructions: 228706
+Load stalls: 3246
+i16p 6 Cores
+Total cycles: 232197
+Instructions: 179865
+Load stalls: 3247
+i8p 6 Cores
+Total cycles: 155810
+Instructions: 118168
+Load stalls: 3246
+i32p 7 Cores
+Total cycles: 219064
+Instructions: 195772
+Load stalls: 3006
+i16p 7 Cores
+Total cycles: 204989
+Instructions: 157575
+Load stalls: 3007
+i8p 7 Cores
+Total cycles: 140632
+Instructions: 106132
+Load stalls: 3006
+i32p 8 Cores
+Total cycles: 192473
+Instructions: 170600
+Load stalls: 2815
+i16p 8 Cores
+Total cycles: 182384
+Instructions: 138058
+Load stalls: 2817
+i8p 8 Cores
+Total cycles: 128222
+Instructions: 94555
+Load stalls: 2816

@@ -1,0 +1,7 @@
+sed -i "s/#define i32s 0/#define i32s 1/"
+
+
+
+sed -i "s/#define NUMCORES [0-9]/#define NUMCORES 1/"
+
+
