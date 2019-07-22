@@ -78,6 +78,19 @@
 
 /**
  * @defgroup groupTransforms Transform Functions
+* The naming scheme of the functions follows the following pattern (for example plp_cfft_i32s_rv32im):
+ <pre>
+ <pulp> _ <function name> _ <data type> <precision> <method> _ <isa extension>, with
+
+ data type = {f, i, q} respectively for floats, integers, fixed points
+
+ precision = {32, 16, 8} bits
+
+ method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+
+ isa extension = rv32im, xpulpv2, cplx etc. of which rv32im is the most general one.
+
+ </pre>
  */
 
 /**
@@ -128,6 +141,30 @@ typedef struct
 } plp_dot_prod_instance_q32;
 
 
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel complex fourier transform.
+ */
+typedef struct
+{
+  int16_t * Data;  // points to the complex data buffer
+  int16_t * Twiddles; // points to the Twiddles-factor LUT
+  uint16_t * SwapTable; // points to the SwapTable LUT
+  uint32_t N_FFT; // Size of input data
+  uint32_t nPE;  // number of processing units
+} plp_cfft_instance_i16;
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel complex fourier transform.
+ */
+typedef struct
+{
+  int32_t * Data;  // points to the complex data buffer
+  int32_t * Twiddles; // points to the Twiddles-factor LUT
+  uint16_t * SwapTable; // points to the SwapTable LUT
+  uint32_t   N_FFT; // Size of input data
+  uint32_t  nPE; // number of processing units
+} plp_cfft_instance_i32;
 
 
 /** -------------------------------------------------------
@@ -683,5 +720,209 @@ void plp_mean_i32s_xpulpv2(
                            int32_t * __restrict__ pRes);
 
 
+/** -------------------------------------------------------
+  @brief Glue code for Complex Fourier Transform of 16-bit integer vectors
+  @param[in,out]  Data   points to the complex data buffer of size <code>2*N_FFT</code> [16 bit]. Processing occurs in-place
+  @param[in]  N_FFT      Size of input data
+  @return        none
+ */
+
+void plp_cfft_i16(int16_t * __restrict__ Data,
+		  uint32_t N_FFT);
+
+/** -------------------------------------------------------
+  @brief Complex Fourier Transform of 16-bit integer vectors kernel for RV32IM extension
+  @param[in,out]  Data   points to the complex data buffer of size <code>2*N_FFT</code> [16 bit]. Processing occurs in-place
+  @param[in]  Twiddles   points to the Twiddles-factor LUT [16 bit]
+  @param[in]  SwapTable  points to the SwapTable LUT [16 bit]
+  @param[in]  N_FFT      Size of input data
+  @return        none
+ */
+
+
+void plp_cfft_i16s_rv32im(
+			  int16_t *__restrict__ Data,
+			  int16_t *__restrict__ Twiddles,
+			  uint16_t * __restrict__ SwapTable,
+			  uint32_t N_FFT);
+
+/** -------------------------------------------------------
+  @brief Complex Fourier Transform of vectorized 16-bit integers for XPULPV2 extension.
+  @param[in,out]  Data   points to the complex data buffer of size <code>2*N_FFT</code> [16 bit]. Processing occurs in-place
+  @param[in]  Twiddles   points to the Twiddles-factor LUT [16 bit]
+  @param[in]  SwapTable  points to the SwapTable LUT [16 bit]
+  @param[in]  N_FFT      Size of input data
+  @return        none
+ */
+
+void plp_cfft_i16v_xpulpv2(int16_t *__restrict__ Data,
+			   int16_t *__restrict__ Twiddles,
+			   uint16_t * __restrict__ SwapTable,
+			   uint32_t N_FFT);
+
+
+/** -------------------------------------------------------
+  @brief Complex Fourier Transform of vectorized 16-bit integers for XPULPV2, CPLX extension.
+  @param[in,out]  Data   points to the complex data buffer of size <code>2*N_FFT</code> [16 bit]. Processing occurs in-place
+  @param[in]  Twiddles   points to the Twiddles-factor LUT [16 bit]
+  @param[in]  SwapTable  points to the SwapTable LUT [16 bit]
+  @param[in]  N_FFT      Size of input data
+  @return        none
+ */
+
+void plp_cfft_i16v_xpulpv2cplx(int16_t *__restrict__ Data,
+			       int16_t *__restrict__ Twiddles,
+			       uint16_t * SwapTable,
+			       uint32_t N_FFT);
+
+
+/** -------------------------------------------------------
+  @brief Glue code for parallel Complex Fourier Transform of 16-bit integer vectors
+  @param[in,out]  Data   points to the complex data buffer of size <code>2*N_FFT</code> [16 bit]. Processing occurs in-place
+  @param[in]  N_FFT      Size of input data
+  @param[in]  nPE        number of parallel processing units
+  @return        none
+ */
+
+void plp_cfft_i16_parallel(int16_t * __restrict__ Data,
+			   uint32_t N_FFT,
+			   uint32_t nPE);
+
+/** -------------------------------------------------------
+  @brief Parallel Complex Fourier Transform of vectorized 16-bit integers for XPULPV2 extension.
+  @param[in]  Data  points to an instance of the CFFT structure
+  @return        none
+
+ */
+
+void plp_cfft_i16vp_xpulpv2(void * S);
+
+/** -------------------------------------------------------
+  @brief Parallel Complex Fourier Transform of vectorized 16-bit integers for XPULPV2, CPLX extension.
+  @param[in]  Data  points to an instance of the CFFT structure
+  @return        none
+
+ */
+
+void plp_cfft_i16vp_xpulpv2cplx(void * S);
+
+/** -------------------------------------------------------
+  @brief Glue code for Complex Fourier Transform of 32-bit integer vectors
+  @param[in,out]  Data   points to the complex data buffer of size <code>2*N_FFT</code> [32 bit]. Processing occurs in-place
+  @param[in]  N_FFT      Size of input data
+  @return        none
+ */
+
+void plp_cfft_i32(int32_t * __restrict__ Data,
+		  uint32_t N_FFT);
+
+/** -------------------------------------------------------
+  @brief Complex Fourier Transform of 32-bit integer vectors kernel for RV32IM extension
+  @param[in,out]  Data   points to the complex data buffer of size <code>2*N_FFT</code> [32 bit]. Processing occurs in-place
+  @param[in]  Twiddles   points to the Twiddles-factor LUT [32 bit]
+  @param[in]  SwapTable  points to the SwapTable LUT [32 bit]
+  @param[in]  N_FFT      Size of input data
+  @return        none
+ */
+
+void plp_cfft_i32s_rv32im(int32_t *__restrict__ Data,
+			  int32_t *__restrict__ Twiddles,
+			  uint16_t * SwapTable,
+			  uint32_t N_FFT);
+
+/** -------------------------------------------------------
+  @brief Complex Fourier Transform of 32-bit integer vectors kernel for XPULPV2 extension
+  @param[in,out]  Data   points to the complex data buffer of size <code>2*N_FFT</code> [32 bit]. Processing occurs in-place
+  @param[in]  Twiddles   points to the Twiddles-factor LUT [32 bit]
+  @param[in]  SwapTable  points to the SwapTable LUT [32 bit]
+  @param[in]  N_FFT      Size of input data
+  @return        none
+ */
+
+void plp_cfft_i32s_xpulpv2(int32_t *__restrict__ Data,
+			   int32_t *__restrict__ Twiddles,
+			   uint16_t * SwapTable,
+			   uint32_t N_FFT);
+
+
+/** -------------------------------------------------------
+  @brief Glue code for parallel Complex Fourier Transform of 32-bit integer vectors
+  @param[in,out]  Data   points to the complex data buffer of size <code>2*N_FFT</code> [32 bit]. Processing occurs in-place
+  @param[in]  N_FFT      Size of input data
+  @param[in]  nPE        number of parallel processing units
+  @return        none
+ */
+
+void plp_cfft_i32_parallel(int32_t * __restrict__ Data,
+			   uint32_t N_FFT,
+			   uint32_t nPE);
+  
+/** -------------------------------------------------------
+  @brief Parallel Complex Fourier Transform of 32-bit integers for XPULPV2 extension.
+  @param[in]  Data  points to an instance of the CFFT structure
+  @return        none
+ */
+
+void plp_cfft_i32p_xpulpv2(void * S);
+
+/**
+  @brief  Look-up Table for bit reversal process
+*/
+uint16_t SwapTable_128[128];
+
+/**
+  @brief  Look-up Table for bit reversal process
+*/
+uint16_t SwapTable_256[256];
+
+/**
+  @brief  Look-up Table for bit reversal process
+*/
+uint16_t SwapTable_512[512];
+
+/**
+  @brief  Look-up Table for bit reversal process
+*/
+uint16_t SwapTable_1024[256];
+
+/**
+  @brief  Look-up Table for Twiddle factors
+*/
+int16_t twiddleCoef_i16_128[128];
+
+/**
+  @brief  Look-up Table for Twiddle factors
+*/
+int16_t twiddleCoef_i16_256[256];
+
+/**
+  @brief  Look-up Table for Twiddle factors
+*/
+int16_t twiddleCoef_i16_512[512];
+
+/**
+  @brief  Look-up Table for Twiddle factors
+*/
+int16_t twiddleCoef_i16_1024[1024];
+
+/**
+  @brief  Look-up Table for Twiddle factors
+*/
+int32_t twiddleCoef_i32_128[128];
+
+/**
+  @brief  Look-up Table for Twiddle factors
+*/
+int32_t twiddleCoef_i32_256[256];
+
+/**
+  @brief  Look-up Table for Twiddle factors
+*/
+int32_t twiddleCoef_i32_512[512];
+
+/**
+  @brief  Look-up Table for Twiddle factors
+*/
+int32_t twiddleCoef_i32_1024[1024];
 
 #endif // __PLP_MATH_H__

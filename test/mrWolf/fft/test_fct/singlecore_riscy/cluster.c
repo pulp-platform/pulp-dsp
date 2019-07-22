@@ -10,10 +10,11 @@
 #include "plp_cfft_i32s_xpulpv2.c"
 #include "plp_cfft_i32p_xpulpv2.c"
 #include "SwapTable.h"
+#include "TwiddleFactors.h"
 
-#define N_BITS 16
+#define N_BITS 32
 #define LENGTH 512
-#define PARALLEL 8
+#define PARALLEL 1
 
 #define PRINT_RESULT
 
@@ -21,26 +22,26 @@
 #if N_BITS == 16
    #if LENGTH == 128
       #include "fft_data_i16_128.h"
-      #define TWIDLE_COEFF twiddleCoef_i16_128
+      #define TWIDDLE_COEFF twiddleCoef_i16_128
    #elif LENGTH == 256
       #include "fft_data_i16_256.h"
-      #define TWIDLE_COEFF twiddleCoef_i16_256
+      #define TWIDDLE_COEFF twiddleCoef_i16_256
    #elif LENGTH == 512
       #include "fft_data_i16_512.h"
-      #define TWIDLE_COEFF twiddleCoef_i16_512
+      #define TWIDDLE_COEFF twiddleCoef_i16_512
    #endif
 #endif
 
 #if N_BITS == 32
    #if LENGTH == 128
       #include "fft_data_i32_128.h"
-      #define TWIDLE_COEFF twiddleCoef_i32_128
+      #define TWIDDLE_COEFF twiddleCoef_i32_128
    #elif LENGTH == 256
       #include "fft_data_i32_256.h"
-      #define TWIDLE_COEFF twiddleCoef_i32_256
+      #define TWIDDLE_COEFF twiddleCoef_i32_256
    #elif LENGTH == 512
       #include "fft_data_i32_512.h"
-      #define TWIDLE_COEFF twiddleCoef_i32_512
+      #define TWIDDLE_COEFF twiddleCoef_i32_512
    #endif
 #endif
 
@@ -88,8 +89,8 @@ static void do_bench_0(rt_perf_t *perf, int events)
   plp_cfft_i16v_xpulpv2(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
   //plp_cfft_i16v_xpulpv2cplx(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
 #elif N_BITS == 32 && PARALLEL == 1
-  //plp_cfft_i32s_rv32im(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
-  plp_cfft_i32s_xpulpv2(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
+  plp_cfft_i32s_rv32im(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
+  //plp_cfft_i32s_xpulpv2(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
 #elif N_BITS == 16 && PARALLEL > 1
   
   plp_cfft_instance_i16 S;
@@ -141,7 +142,7 @@ void cluster_entry(void *arg){
 
   X_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(x));
   exp_result_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(exp_result));
-  twiddleCoef_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(TWIDLE_COEFF));
+  twiddleCoef_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(TWIDDLE_COEFF));
   SwapTable_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(SWAP_TABLE));
   
   // Transfer to L1 memory
@@ -150,7 +151,7 @@ void cluster_entry(void *arg){
   rt_dma_wait(&copy);
   rt_dma_memcpy(exp_result, exp_result_l1, sizeof(exp_result), RT_DMA_DIR_EXT2LOC, 0, &copy);
   rt_dma_wait(&copy);
-  rt_dma_memcpy(TWIDLE_COEFF, twiddleCoef_l1, sizeof(TWIDLE_COEFF), RT_DMA_DIR_EXT2LOC, 0, &copy);
+  rt_dma_memcpy(TWIDDLE_COEFF, twiddleCoef_l1, sizeof(TWIDDLE_COEFF), RT_DMA_DIR_EXT2LOC, 0, &copy);
   rt_dma_wait(&copy);
   rt_dma_memcpy(SWAP_TABLE, SwapTable_l1, sizeof(SWAP_TABLE), RT_DMA_DIR_EXT2LOC, 0, &copy);
   rt_dma_wait(&copy);

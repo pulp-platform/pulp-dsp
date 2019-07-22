@@ -13,6 +13,7 @@
     '''
 
 import sys
+import os
 import random
 import numpy as np
 
@@ -38,26 +39,42 @@ def write_scalar(f, name, value, var_type):
 
 ################################################################################
 
+def gen_twiddles(f, var_type, n_bits, length):
+    
+    twiddleCoef = np.empty(2*length//2)
+    twiddleCoef_real = np.cos(np.arange(length//2) * 2*np.pi/length)*(2**(n_bits - 1) - 1)
+    twiddleCoef_imag = -np.sin(np.arange(length//2) * 2*np.pi/length)*(2**(n_bits - 1) - 1)
+    twiddleCoef[0:2*length//2-1:2] = twiddleCoef_real
+    twiddleCoef[1:2*length//2:2] = twiddleCoef_imag
+    twiddleCoef_q = np.empty(2*length//2, dtype='int'+str(n_bits))
+    twiddleCoef_q = twiddleCoef.astype('int'+str(n_bits))
+
+    #print(n_bits, length, np.min(twiddleCoef_q), np.max(twiddleCoef_q), 2**(n_bits-1))
+        
+    write_arr(f, 'twiddleCoef_i' + str(n_bits) + '_' + str(length), twiddleCoef_q, var_type, 2*length//2) 
+        
+
+
+
 if __name__=='__main__':
 
-    f = open('SwapTable.h', 'w')
+    file_name = 'TwiddleFactors.h'
+    if os.path.exists(file_name):
+        os.remove(file_name)
 
-    f.write('#ifndef __FFT_SWAPTABLE_H_' + '__\n#define __FFT_SWAPTABLE_H_'  + '__\n\n')
+    f = open(file_name, 'a+')
+    f.write('#ifndef __FFT_TWIDDLES_H__\n#define __FFT_TWIDDLES_H__\n\n')
 
-    lengths = np.array([128, 256, 512, 1024])
+    gen_twiddles(f, 'int16_t', 16, 128)
+    gen_twiddles(f, 'int16_t', 16, 256)
+    gen_twiddles(f, 'int16_t', 16, 512)
+    gen_twiddles(f, 'int16_t', 16, 1024)
 
-    for i in lengths:
-        rangi = range(i)
-        swaptable = np.zeros(i)
+    gen_twiddles(f, 'int32_t', 32, 128)
+    gen_twiddles(f, 'int32_t', 32, 256)
+    gen_twiddles(f, 'int32_t', 32, 512)
+    gen_twiddles(f, 'int32_t', 32, 1024)
 
-        for j in rangi:
-            for k in range(int(np.log2(i))):
-                swaptable[j] += ((j // (i // 2**(k+1))) % 2) * (2**k)
+    f.write('\n#endif\n')
 
-        write_arr(f, 'SwapTable_' + str(i), swaptable, 'uint16_t', i)
-   
-
-    
-f.write('\n#endif\n')
-    
-f.close()
+    f.close()
