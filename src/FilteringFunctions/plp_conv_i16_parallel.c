@@ -132,7 +132,7 @@ void plp_conv_i16_parallel(
       /* Parallel overlap-adding */
       plp_conv_parallel_OLA(nPE, pIn1Len, pIn2Len, resultsBuffer);
       for(uint32_t i = 0; i<srcALen + srcBLen - 1; i++){
-	pRes[i] = resultsBuffer[i];
+      	pRes[i] = resultsBuffer[i];
       }
             
 #endif 

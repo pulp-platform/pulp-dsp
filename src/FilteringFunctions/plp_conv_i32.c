@@ -61,8 +61,7 @@ void plp_conv_i32(
     } else {
       plp_conv_i32s_rv32im(pSrcB, srcBLen, pSrcA, srcALen, pRes);
     }
-  }
-  else{
+  } else {
     if(srcALen >= srcBLen){
       plp_conv_i32s_xpulpv2(pSrcA, srcALen, pSrcB, srcBLen, pRes);
     } else {

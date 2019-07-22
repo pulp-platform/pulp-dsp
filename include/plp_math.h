@@ -146,6 +146,7 @@ typedef struct{
   uint32_t numVectors;
   uint32_t blockOffset;
   int32_t* pRes;
+  uint8_t coresPerVector;
 } plp_conv_tree_add_instance;
 
 

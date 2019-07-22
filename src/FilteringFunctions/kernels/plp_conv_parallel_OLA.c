@@ -23,19 +23,21 @@ void plp_conv_parallel_OLA(uint32_t nPE, uint32_t srcALen, uint32_t srcBLen, int
     .addLengthsecond = (srcALen - (srcAoffset * (nPE-1))) + srcBLen - 1,
     .numVectors = nPE,
     .pRes = resultsBuffer,
-    .blockOffset = resultsoffset
+    .blockOffset = resultsoffset,
+    .coresPerVector = 2*((nPE)/((S.numVectors>>1)<<1))
   };
       
   while(remainingcycles > 1U){
 	
-    rt_team_fork(S.numVectors>>1, plp_conv_parallel_OLA_kernel, (void*)&S);
+    rt_team_fork((S.coresPerVector*(S.numVectors>>1)), plp_conv_parallel_OLA_kernel, (void*)&S);
 
     S.numVectors = S.numVectors - participants;
     S.blockOffset *=2;
     S.addLengthfirst = S.addLengthfirst + S.addOffset;
     S.addOffset*=2;
-    remainingcycles = (remainingcycles+1)>>1 ;
+    remainingcycles = (remainingcycles+1)>>1;
     participants = S.numVectors>>1;
+    S.coresPerVector = ((2*nPE)/((S.numVectors>>1)<<1));
   }
 
 

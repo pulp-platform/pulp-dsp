@@ -65,7 +65,7 @@ void plp_conv_i8_parallel(
     printf("parallel processing supported only for cluster side\n");
     return;
   }  else {
-
+    
     const int8_t* pIn1;
     const int8_t* pIn2;
 
