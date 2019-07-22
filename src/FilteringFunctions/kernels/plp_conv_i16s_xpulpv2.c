@@ -154,6 +154,7 @@ void plp_conv_i16s_xpulpv2(const int16_t *  pSrcA,
 	  /* sum += *px++ * *py--; */
 	  sum = __MAC(sum, *px++, *py--);
 	  /* Decrement loop counter */
+	  k--;
 	}
 
       /* Store the result in the accumulator in the destination buffer. */

@@ -154,7 +154,7 @@
  /home/moritz/pulp-sdk/pkg/sdk/dev/install/include/pmsis_cluster/dma/cl_dma.h \
  /home/moritz/pulp-sdk/pkg/sdk/dev/install/include/rt/implem/cluster.h \
  /home/moritz/pulp-sdk/pkg/sdk/dev/install/include/rt/implem/udma.h \
- ../../../../../include/plp_math.h ../../test_data/conv_data8_L1.h
+ ../../../../../include/plp_math.h ../../test_data/conv_data16_L1.h
 
 /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/cl_config.h:
 
@@ -466,4 +466,4 @@
 
 ../../../../../include/plp_math.h:
 
-../../test_data/conv_data8_L1.h:
+../../test_data/conv_data16_L1.h:

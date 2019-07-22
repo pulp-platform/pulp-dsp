@@ -11,9 +11,9 @@ static uint32_t nummismatches = 0;
 #define i32s 0
 #define i32p 0
 #define i16s 0
-#define i16p 0
+#define i16p 1
 #define i8s 0
-#define i8p 1
+#define i8p 0
 
 #if(i16s || i16p)
 #include "../../test_data/conv_data16_L1.h"
@@ -40,12 +40,6 @@ static void do_bench_0(rt_perf_t *perf, int events)
   // only around the printf
   rt_perf_reset(perf);
   rt_perf_start(perf);
-
-  //plp_dot_prod_q32_parallel(v_a_l1, v_b_l1, LENGTH, 2, 8, &result);
-  //plp_dot_prod_i32_parallel(v_a_l1, v_b_l1, LENGTH, 8, &result);
-  //plp_dot_prod_i32(v_a_l1, v_b_l1, LENGTH, &result);
-  //plp_dot_prod_q32(v_a_l1, v_b_l1, LENGTH, 1, &result);
-
   
 #if(i32s)
   plp_conv_i32(v_a,LENGTHA,v_b,LENGTHB,v_r);
