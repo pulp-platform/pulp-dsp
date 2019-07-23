@@ -178,6 +178,6 @@ void plp_conv_parallel_OLA_kernel(void* task_args){
 #endif // if defined(PLP_MATH_LOOPUNROLL)
 
   }
-  
+  rt_team_barrier();
   return;
 }

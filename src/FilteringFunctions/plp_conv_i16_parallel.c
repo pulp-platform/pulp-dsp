@@ -104,19 +104,19 @@ void plp_conv_i16_parallel(
     };
 
     rt_team_fork(nPE, plp_conv_i16p_xpulpv2, (void*)&S);
-
     if(nPE > 1){
-
-      for(uint32_t i=0;i<resultsoffset;i++){
-	pRes[i] = resultsBuffer[i];
-      }
-      
-      for(uint32_t i = resultsoffset; i<srcALen+srcBLen-1;i++){
-	pRes[i] = 0;
-      }
 
 #if defined(PLP_CONV_SEQUENTIALADDING)
 
+      for(uint32_t i=0;i<resultsoffset;i++){
+      	pRes[i] = resultsBuffer[i];
+      }
+      
+      for(uint32_t i = resultsoffset; i<srcALen+srcBLen-1;i++){
+      	pRes[i] = 0;
+      }
+
+      
       for(int32_t i=1;i<nPE-1;i++){
       	for(uint32_t j=0;j<resultsoffset;j++){
 	  pRes[i*srcAoffset+j] += resultsBuffer[j+i*resultsoffset];
@@ -128,14 +128,40 @@ void plp_conv_i16_parallel(
       }
       
 #else
-      
+
       /* Parallel overlap-adding */
       plp_conv_parallel_OLA(nPE, pIn1Len, pIn2Len, resultsBuffer);
-      for(uint32_t i = 0; i<srcALen + srcBLen - 1; i++){
-      	pRes[i] = resultsBuffer[i];
+
+#if defined(PLP_MATH_LOOPUNROLL)
+
+      uint32_t k = (srcALen + srcBLen - 1) >> 1U;
+      int32_t temp1, temp2;
+      
+      while(k){
+	temp1 = *resultsBuffer++;
+	temp2 = *resultsBuffer++;
+
+	*pRes++ = temp1;
+	*pRes++ = temp2;
+	
+	k--;
       }
+
+      k = (srcALen + srcBLen - 1) % 0x2U;
+
+      if(k){
+	*pRes++ = *resultsBuffer++;
+      }
+      
+#else
+      for(uint32_t i = 0; i<srcALen + srcBLen - 1; i++){
+	pRes[i] = resultsBuffer[i];
+      }
+#endif
+      free(resultsBuffer);
             
 #endif 
+      
     }
     
     return;

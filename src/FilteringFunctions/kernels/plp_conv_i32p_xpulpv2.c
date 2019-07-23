@@ -54,8 +54,6 @@
 void plp_conv_i32p_xpulpv2(void* task_args){
 
   plp_conv_instance_i32* S = (plp_conv_instance_i32*)task_args;
-
-
   
   int32_t resultoffset = ((S->srcALen+S->nPE-1)/S->nPE) + S->srcBLen - 1;
   int32_t srcAoffset = ((S->srcALen+S->nPE-1)/S->nPE);
@@ -104,12 +102,7 @@ void plp_conv_i32p_xpulpv2(void* task_args){
     pIn2 = pSrcA;
     pIn2Len = srcALen;
   }
-
-  /* for(int i=0;i<resultoffset;i++){ */
-  /*   pRes[i] = 0; */
-  /* } */
   
   plp_conv_i32s_xpulpv2(pIn1, pIn1Len, pIn2, pIn2Len, pRes);
-  //rt_team_barrier();
-  
+  rt_team_barrier();
 }

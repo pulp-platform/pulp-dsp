@@ -104,6 +104,4 @@ void plp_conv_i8p_xpulpv2(void* task_args){
   }
   
   plp_conv_i8s_xpulpv2(pIn1, pIn1Len, pIn2, pIn2Len, pRes);
-  rt_team_barrier();
-  
 }

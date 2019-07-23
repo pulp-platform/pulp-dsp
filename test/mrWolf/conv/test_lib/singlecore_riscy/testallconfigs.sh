@@ -1,5 +1,8 @@
 #!/bin/bash
 
+m=512
+n=1024
+
 runSequential(){
     clearConfig
 
@@ -104,15 +107,52 @@ clearConfig(){
     sed -i "s/#define i8p 1/#define i8p 0/" cluster.c
 }
 
+runAll(){
+    $(clearConfig)
+    $(runSequential)
+    $(clearConfig)
+    $(runParallel)
+}
+
+saveResults(){
+    $(less benchmark.txt > benchmark_"$m"_"$n".txt)
+    echo -e "" > benchmark.txt
+    echo -e "" > results.txt
+}
+
+setConfigHeaders(){
+    $(ls ../../test_data | grep ".h" | xargs -I '{}' rm ../../test_data/'{}')
+    $(sed -i "s/m_size = [0-9]*/m_size = $m/" ../../test_data/gen_stimuli.py)
+    $(sed -i "s/n_size = [0-9]*/n_size = $n/" ../../test_data/gen_stimuli.py)
+    $(python ../../test_data/gen_stimuli.py)
+    $(ls | grep "conv_data" | xargs -I '{}' mv '{}' ../../test_data/'{}')
+}
+
 export clearConfig
 export runParallel
 export runSequential
+export runAll
+export saveResults
+export setConfigHeaders
 
-echo "" > benchmark.txt
-echo "" > results.txt
+echo -e "" > benchmark.txt
+echo -e "" > results.txt
 
-$(clearConfig)
-$(runSequential)
-$(clearConfig)
-$(runParallel)
-
+m=512
+n=1024
+echo "Running $m and $n"
+$(setConfigHeaders)
+$(runAll)
+$(saveResults)
+m=511
+n=1023
+echo "Running $m and $n"
+$(setConfigHeaders)
+$(runAll)
+$(saveResults)
+m=512
+n=512
+echo "Running $m and $n"
+$(setConfigHeaders)
+$(runAll)
+$(saveResults)
