@@ -109,59 +109,53 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
       /* Accumulator is made zero for every iteration */
       sum = 0;
 
+      temp1=*px;
+      temp2=*py;
+
 #if defined (PLP_MATH_LOOPUNROLL)
       /* Loop unrolling: Compute 4 outputs at a time */
-      k = count >> 2U;
+      k = count >> 1U;
       while (k > 0U)
 	{
-
-	  temp1=*px++;
-	  temp2=*py--;
-	  temp3=*px++;
-	  temp4=*py--;
+	  temp3=*(px+1);
+	  temp4=*(py-1);
 	  
-	  /* x[0] * y[srcBLen - 1] */
-	  //sum = __MAC(sum, *px++, *py--);
-	  sum += temp1*temp2;
-
-	  temp1=*px++;
-	  temp2=*py--;
-
-	  /* x[1] * y[srcBLen - 2] */
-	  //sum = __MAC(sum, *px++, *py--);
-	  sum += temp3*temp4;
-
-	  temp3=*px++;
-	  temp4=*py--;
-	  
-	  /* x[2] * y[srcBLen - 3] */
-	  //sum = __MAC(sum, *px++, *py--);
 	  sum += temp1*temp2;
 	  
 	  /* x[3] * y[srcBLen - 4] */
 	  //sum = __MAC(sum, *px++, *py--);
 	  sum += temp3*temp4;
 
+	  temp1=*(px+2);
+	  temp2=*(py-2);
+
+	  px+=2;
+	  py-=2;
+	  
 	  /* Decrement loop counter */
 	  k--;
 	}
 
       /* Loop unrolling: Compute remaining outputs */
-      k = count % 0x4U;
+      k = count % 0x2U;
+
+      if(k){
+	sum += temp1*temp2;
+      }
+
 #else
       /* Initialize k with number of samples */
       k = count;
 
+      while (k > 0U){
+	/* Perform the multiply-accumulate */
+	sum += *px++ * *py--;
+
+	/* Decrement loop counter */
+	k--;
+      }	    
+      
 #endif /* #if defined (PLP_MATH_LOOPUNROLL) */
-
-      while (k > 0U)
-	{
-	  /* Perform the multiply-accumulate */
-	  sum += *px++ * *py--;
-
-	  /* Decrement loop counter */
-	  k--;
-	}
 
       /* Store the result in the accumulator in the destination buffer. */
       *pOut++ = sum;
@@ -355,31 +349,43 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
       while (blkCnt > 0U)
 	{
 	  /* Accumulator is made zero for every iteration */
-	  sum = 0.0f;
-
+	  sum = 0;
+	  
+	  temp1 = *px;
+	  temp2 = *py;
+	  
 #if  defined (PLP_MATH_LOOPUNROLL)
 	  /* Loop unrolling: Compute 4 outputs at a time */
-	  k = srcBLen >> 2U;
+	  k = srcBLen >> 1U;
 	  while (k > 0U)
 	    {
-	      /* Perform the multiply-accumulate */
-	      sum += *px++ * *py--;
-	      sum += *px++ * *py--;
-	      sum += *px++ * *py--;
-	      sum += *px++ * *py--;
+	      temp3 = *(px+1);
+	      temp4 = *(py-1);
 
+	      sum = __MAC(sum, temp1, temp2);
+	      sum = __MAC(sum, temp3, temp4);
+
+	      temp1 = *(px+2);
+	      temp2 = *(py-2);
+
+	      px+=2;
+	      py-=2;
+	      
 	      /* Decrement loop counter */
 	      k--;
 	    }
 
 	  /* Loop unrolling: Compute remaining outputs */
-	  k = srcBLen % 0x4U;
+	  k = srcBLen % 0x2U;
 
+	  if(k){
+	    sum += temp1*temp2;
+	  }
+
+	  
 #else
 	  /* Initialize blkCnt with number of samples */
 	  k = srcBLen;
-
-#endif /* #if defined (PLP_MATH_LOOPUNROLL) */
 
 	  while (k > 0U)
 	    {
@@ -389,6 +395,9 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 	      /* Decrement the loop counter */
 	      k--;
 	    }
+
+	  
+#endif /* #if defined (PLP_MATH_LOOPUNROLL) */
 
 	  /* Store the result in the accumulator in the destination buffer. */
 	  *pOut++ = sum;
@@ -413,7 +422,7 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
       while (blkCnt > 0U)
 	{
 	  /* Accumulator is made zero for every iteration */
-	  sum = 0.0f;
+	  sum = 0;
 
 	  /* srcBLen number of MACS should be performed */
 	  k = srcBLen;
@@ -471,48 +480,57 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
   while (blockSize3 > 0U)
     {
       /* Accumulator is made zero for every iteration */
-      sum = 0.0f;
+      sum = 0;
 
 #if defined (PLP_MATH_LOOPUNROLL)
       /* Loop unrolling: Compute 4 outputs at a time */
-      k = blockSize3 >> 2U;
+      k = blockSize3 >> 1U;
+      
+      temp1 = *px;
+      temp2 = *py;	  
+      
       while (k > 0U)
 	{
-	  /* Perform the multiply-accumulate */
-	  /* sum += x[srcALen - srcBLen + 1] * y[srcBLen - 1] */
-	  sum += *px++ * *py--;
+	  temp3 = *(px+1);
+	  temp4 = *(py-1);
+	  
+	  sum = __MAC(sum, temp1, temp2);
+	  sum = __MAC(sum, temp3, temp4);
+	  
+	  temp1 = *(px+2);
+	  temp2 = *(py-2);
 
-	  /* sum += x[srcALen - srcBLen + 2] * y[srcBLen - 2] */
-	  sum += *px++ * *py--;
-
-	  /* sum += x[srcALen - srcBLen + 3] * y[srcBLen - 3] */
-	  sum += *px++ * *py--;
-
-	  /* sum += x[srcALen - srcBLen + 4] * y[srcBLen - 4] */
-	  sum += *px++ * *py--;
-
+	  px+=2;
+	  py-=2;
+	  
 	  /* Decrement loop counter */
 	  k--;
 	}
 
       /* Loop unrolling: Compute remaining outputs */
-      k = blockSize3 % 0x4U;
+      k = blockSize3 % 0x2U;
+      
+      if(k){
+	sum += temp1*temp2;
+      }
+
 #else
 
       /* Initialize blkCnt with number of samples */
       k = blockSize3;
 
-#endif /* defined (PLP_MATH_LOOPUNROLL)*/
-
+      
       while (k > 0U)
 	{
 	  /* Perform the multiply-accumulate */
 	  /* sum +=  x[srcALen-1] * y[srcBLen-1] */
 	  sum += *px++ * *py--;
-
+	  
 	  /* Decrement loop counter */
 	  k--;
 	}
+      
+#endif /* defined (PLP_MATH_LOOPUNROLL)*/
 
       /* Store the result in the accumulator in the destination buffer. */
       *pOut++ = sum;
