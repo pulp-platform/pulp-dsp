@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_cfft_i16v_xpulpv2.c
- * Description:  16-bit integer vectorized complex fast fourier transform for XPULPV2
+ * Title:        plp_cfft_i8v_xpulpv2.c
+ * Description:  8-bit integer vectorized complex fast fourier transform for XPULPV2
  *
  * $Date:        18. July 2019
  * $Revision:    V0
@@ -26,7 +26,7 @@
  * limitations under the License.
  */
 
-#include "plp_math.h"
+//#include "plp_math.h"
 
 
 /**
@@ -40,40 +40,42 @@
  */
 
 /**
-  @brief Complex Fourier Transform of vectorized 16-bit integers for XPULPV2 extension.
-  @param[in,out]  Data   points to the complex data buffer of size <code>2*N_FFT</code> [16 bit]. Processing occurs in-place
-  @param[in]  Twiddles   points to the Twiddles-factor LUT [16 bit]
-  @param[in]  SwapTable  points to the SwapTable LUT [16 bit]
+  @brief Complex Fourier Transform of vectorized 8-bit integers for XPULPV2 extension.
+  @param[in,out]  Data   points to the complex data buffer of size <code>2*N_FFT</code> [8 bit]. Processing occurs in-place
+  @param[in]  Twiddles   points to the Twiddles-factor LUT [8 bit]
+  @param[in]  SwapTable  points to the SwapTable LUT [8 bit]
   @param[in]  N_FFT      Size of input data
   @return        none
 
  */
 
 
-void plp_cfft_i16v_xpulpv2(int16_t *__restrict__ Data, int16_t *__restrict__ Twiddles, uint16_t * __restrict__ SwapTable, uint32_t N_FFT)
+void plp_cfft_i8v_xpulpv2(int8_t *__restrict__ Data, int8_t *__restrict__ Twiddles, uint16_t * __restrict__ SwapTable, uint32_t N_FFT)
 {
     uint32_t iLog2N  = __FL1(N_FFT);
     uint32_t iCnt1, iCnt2, iCnt3,
     iQ,    iL,    iM,
     iA,    iB;
-    v2s *CoeffV = (v2s *) Twiddles;
-    v2s *DataV  = (v2s *) Data;
+    v4s *CoeffV = (v4s *) Twiddles;
+    v4s *DataV  = (v4s *) Data;
     iL = 1;
-    iM = N_FFT / 2; 
+    iM = N_FFT >> 2; 
     
     for (iCnt1 = 0; iCnt1 < (iLog2N-1); iCnt1++) {
         iQ = 0;
-        
         for (iCnt2 = 0; iCnt2 < iM; iCnt2++) {
-            v2s W = CoeffV[iQ];
+	  v4s W = (v4s){*((int16_t *)&CoeffV[iQ]), *((int16_t *)&CoeffV[iQ] + iL)};
             iA = iCnt2; 
             for (iCnt3 = 0; iCnt3 < iL; iCnt3++) {
-                v2s Tmp;
+                v4s Tmp;
                 iB = iA + iM; 
                 Tmp = DataV[iA] - DataV[iB];
-                DataV[iA] = (DataV[iA] + DataV[iB]) >> (v2s) {1, 1};
-		DataV[iB] = (v2s) {((int16_t) ((((int32_t) (Tmp)[0]*(int32_t) (W)[0]) - ((int32_t) (Tmp)[1]*(int32_t) (W)[1]))>>16)), ((int16_t) ((((int32_t) (Tmp)[0]*(int32_t) (W)[1]) + ((int) (Tmp)[1]*(int32_t) (W)[0]))>>16))};
-                iA = iA + 2 * iM;
+                DataV[iA] = (DataV[iA] + DataV[iB]) >> (v4s) {1, 1, 1, 1};
+		DataV[iB] = (v4s) {((int8_t) ((((int16_t) (Tmp)[0]*(int16_t) (W)[0]) - ((int16_t) (Tmp)[1]*(int16_t) (W)[1]))>>8)),
+				   ((int8_t) ((((int16_t) (Tmp)[0]*(int16_t) (W)[1]) + ((int16_t) (Tmp)[1]*(int16_t) (W)[0]))>>8)),
+				   ((int8_t) ((((int16_t) (Tmp)[2]*(int16_t) (W)[2]) - ((int16_t) (Tmp)[3]*(int16_t) (W)[3]))>>8)),
+				   ((int8_t) ((((int16_t) (Tmp)[2]*(int16_t) (W)[3]) + ((int16_t) (Tmp)[3]*(int16_t) (W)[2]))>>8))};
+                iA = iA + (iM << 1);
             }
             iQ += iL;
         }
@@ -81,23 +83,27 @@ void plp_cfft_i16v_xpulpv2(int16_t *__restrict__ Data, int16_t *__restrict__ Twi
         iM >>= 1;
     }
     iA = 0;
+    
     /* Last Layer: W = (1, 0) */
     for (iCnt3 = 0; iCnt3 < (N_FFT>>1); iCnt3++) {
-        v2s Tmp;
-        iB = iA + 1;
-        Tmp = DataV[iA] - DataV[iB];
-        DataV[iA] = (DataV[iA] + DataV[iB]);
-        DataV[iB] = Tmp;
-        iA = iA + 2;
+      int8_t[2] Tmp;
+      iB = iA + 2;
+      Tmp[0] = *((int8_t *)&DataV[iA]) - *((int8_t *)&DataV[iA] + 2);
+      Tmp[1] = *((int8_t *)&DataV[iA] + 1) - *((int8_t *)&DataV[iA] + 3);
+      DataV[iA] = (DataV[iA] + DataV[iB]);
+      DataV[iB] = Tmp;
+      iA = iA + 2;
     }
 
+
     for (uint16_t i = 0; i < N_FFT; i++) {
-      v2s S = DataV[i];
-      uint16_t SwapIndex = SwapTable[i];
+      v4s S = DataV[i];
+      int16_t SwapIndex = SwapTable[i];
       if (i < SwapIndex) {
 	DataV[i] = DataV[SwapIndex]; DataV[SwapIndex] = S;
       }
     }
+    
 }
 
 

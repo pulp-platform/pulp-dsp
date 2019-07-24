@@ -1,6 +1,8 @@
 #include "rt/rt_api.h"
 #include "stdio.h"
 #include "fct.h"
+//#include "plp_cfft_i8v_xpulpv2.c"
+//#include "plp_cfft_i8s_rv32im.c"
 #include "plp_cfft_i16s_rv32im.c"
 #include "plp_cfft_i16v_xpulpv2.c"
 //#include "plp_cfft_i16v_xpulpv2cplx.c"
@@ -12,48 +14,64 @@
 #include "SwapTable.h"
 #include "TwiddleFactors.h"
 
-#define N_BITS 32
-#define LENGTH 512
-#define PARALLEL 1
+#define N_BITS 16
+#define LENGTH 256
+#define PARALLEL 8
 
 #define PRINT_RESULT
 
+#define PLP_FFT_TABLES_I16_256
+
+#if N_BITS == 8
+   #if LENGTH == 128
+      #include "fft_data_i8_128.h"
+//#define TWIDDLE_COEFF twiddleCoef_i8_128
+   #elif LENGTH == 256
+      #include "fft_data_i8_256.h"
+//#define TWIDDLE_COEFF twiddleCoef_i8_256
+   #elif LENGTH == 512
+      #include "fft_data_i8_512.h"
+//#define TWIDDLE_COEFF twiddleCoef_i8_512
+   #endif
+#endif
 
 #if N_BITS == 16
    #if LENGTH == 128
       #include "fft_data_i16_128.h"
-      #define TWIDDLE_COEFF twiddleCoef_i16_128
+//#define TWIDDLE_COEFF twiddleCoef_i16_128
    #elif LENGTH == 256
       #include "fft_data_i16_256.h"
-      #define TWIDDLE_COEFF twiddleCoef_i16_256
+//#define TWIDDLE_COEFF twiddleCoef_i16_256
    #elif LENGTH == 512
       #include "fft_data_i16_512.h"
-      #define TWIDDLE_COEFF twiddleCoef_i16_512
+//#define TWIDDLE_COEFF twiddleCoef_i16_512
    #endif
 #endif
 
 #if N_BITS == 32
    #if LENGTH == 128
       #include "fft_data_i32_128.h"
-      #define TWIDDLE_COEFF twiddleCoef_i32_128
+//#define TWIDDLE_COEFF twiddleCoef_i32_128
    #elif LENGTH == 256
       #include "fft_data_i32_256.h"
-      #define TWIDDLE_COEFF twiddleCoef_i32_256
+//#define TWIDDLE_COEFF twiddleCoef_i32_256
    #elif LENGTH == 512
       #include "fft_data_i32_512.h"
-      #define TWIDDLE_COEFF twiddleCoef_i32_512
+//#define TWIDDLE_COEFF twiddleCoef_i32_512
    #endif
 #endif
 
 #if LENGTH == 128
-   #define SWAP_TABLE SwapTable_128
+//#define SWAP_TABLE SwapTable_128
 #elif LENGTH == 256
-   #define SWAP_TABLE SwapTable_256
+//#define SWAP_TABLE SwapTable_256
 #elif LENGTH == 512
-   #define SWAP_TABLE SwapTable_512
+//#define SWAP_TABLE SwapTable_512
 #endif
 
-#if N_BITS == 16
+#if N_BITS == 8
+   #define DATA_TYPE int8_t
+#elif N_BITS == 16
    #define DATA_TYPE int16_t
 #elif N_BITS == 32
    #define DATA_TYPE int32_t
@@ -62,8 +80,8 @@
 static int cores_events;
 RT_CL_DATA static DATA_TYPE * X_l1;
 RT_CL_DATA static DATA_TYPE * exp_result_l1;
-RT_CL_DATA static DATA_TYPE * twiddleCoef_l1;
-RT_CL_DATA static uint16_t * SwapTable_l1;
+RT_CL_DATA static DATA_TYPE Twiddles_LUT[256];
+RT_CL_DATA static uint16_t Swap_LUT[256];
 
 
 // This benchmark is a single shot so we can read the value directly out of the
@@ -84,20 +102,36 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-#if N_BITS == 16 && PARALLEL == 1
+#if N_BITS == 8 && PARALLEL == 1
+  //plp_cfft_i8s_rv32im(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
+  //plp_cfft_i8v_xpulpv2(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
+  //plp_cfft_i8v_xpulpv2cplx(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
+#elif N_BITS == 16 && PARALLEL == 1
   //plp_cfft_i16s_rv32im(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
-  plp_cfft_i16v_xpulpv2(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
+  plp_cfft_i16v_xpulpv2(X_l1, Twiddles_LUT, Swap_LUT, LENGTH);
   //plp_cfft_i16v_xpulpv2cplx(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
 #elif N_BITS == 32 && PARALLEL == 1
-  plp_cfft_i32s_rv32im(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
-  //plp_cfft_i32s_xpulpv2(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
+  //plp_cfft_i32s_rv32im(X_l1, twiddleCoef_l1, SwapTable_l1, LENGTH);
+  plp_cfft_i32s_xpulpv2(X_l1, Twiddles_LUT, Swap_LUT, LENGTH);
+#elif N_BITS == 8 && PARALLEL > 1
+  
+  plp_cfft_instance_i8 S;
+
+  S.Data = X_l1;
+  S.Twiddles = Twiddles_LUT;
+  S.SwapTable = Swap_LUT;
+  S.N_FFT = LENGTH;
+  S.nPE = PARALLEL;
+
+  rt_team_fork(PARALLEL, plp_cfft_i8vp_xpulpv2, (void *)&S);
+  //rt_team_fork(PARALLEL, plp_cfft_i8vp_xpulpv2cplx, (void *)&S);
 #elif N_BITS == 16 && PARALLEL > 1
   
   plp_cfft_instance_i16 S;
 
   S.Data = X_l1;
-  S.Twiddles = twiddleCoef_l1;
-  S.SwapTable = SwapTable_l1;
+  S.Twiddles = Twiddles_LUT;
+  S.SwapTable = Swap_LUT;
   S.N_FFT = LENGTH;
   S.nPE = PARALLEL;
 
@@ -109,8 +143,8 @@ static void do_bench_0(rt_perf_t *perf, int events)
   plp_cfft_instance_i32 S;
 
   S.Data = X_l1;
-  S.Twiddles = twiddleCoef_l1;
-  S.SwapTable = SwapTable_l1;
+  S.Twiddles = Twiddles_LUT;
+  S.SwapTable = Swap_LUT;
   S.N_FFT = LENGTH;
   S.nPE = PARALLEL;
 
@@ -142,8 +176,8 @@ void cluster_entry(void *arg){
 
   X_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(x));
   exp_result_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(exp_result));
-  twiddleCoef_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(TWIDDLE_COEFF));
-  SwapTable_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(SWAP_TABLE));
+  //twiddleCoef_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(TWIDDLE_COEFF));
+  //SwapTable_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(SWAP_TABLE));
   
   // Transfer to L1 memory
   rt_dma_copy_t copy;
@@ -151,10 +185,10 @@ void cluster_entry(void *arg){
   rt_dma_wait(&copy);
   rt_dma_memcpy(exp_result, exp_result_l1, sizeof(exp_result), RT_DMA_DIR_EXT2LOC, 0, &copy);
   rt_dma_wait(&copy);
-  rt_dma_memcpy(TWIDDLE_COEFF, twiddleCoef_l1, sizeof(TWIDDLE_COEFF), RT_DMA_DIR_EXT2LOC, 0, &copy);
-  rt_dma_wait(&copy);
-  rt_dma_memcpy(SWAP_TABLE, SwapTable_l1, sizeof(SWAP_TABLE), RT_DMA_DIR_EXT2LOC, 0, &copy);
-  rt_dma_wait(&copy);
+  /* rt_dma_memcpy(TWIDDLE_COEFF, twiddleCoef_l1, sizeof(TWIDDLE_COEFF), RT_DMA_DIR_EXT2LOC, 0, &copy); */
+  /* rt_dma_wait(&copy); */
+  /* rt_dma_memcpy(SWAP_TABLE, SwapTable_l1, sizeof(SWAP_TABLE), RT_DMA_DIR_EXT2LOC, 0, &copy); */
+  /* rt_dma_wait(&copy); */
 
   rt_perf_t perf;
   rt_perf_init(&perf);

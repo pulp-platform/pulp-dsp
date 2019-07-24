@@ -23,13 +23,17 @@ def write_header_scalar(f, name, var_type, value):
     f.write('%s %s = %s;\n\n' % (var_type, name, value)) #RT_CL_DATA
 
 def write_arr(f, name, arr, var_type, length):
-    
-    f.write('RT_L2_DATA %s %s[%s] = {\n' % (var_type, name, length)) # RT_L2_DATA #RT_CL_DATA
+
+    f.write('#if defined(PLP_FFT_TABLES_I%s_%s) || defined(PLP_FFT_TABLES_I%s_%s)\n' % (16, length, 32, length))
+    f.write('RT_CL_DATA %s %s[%s] = {\n' % (var_type, name, length)) # RT_L2_DATA #RT_CL_DATA
     for i in range(0, length):
         v = arr[i]
         f.write('%d, ' % (v))
     f.write('\n')
-    f.write('};\n\n')
+    f.write('};\n')
+    
+    f.write('#endif\n\n')
+        
     return
 
 def write_scalar(f, name, value, var_type):
@@ -40,9 +44,11 @@ def write_scalar(f, name, value, var_type):
 
 if __name__=='__main__':
 
-    f = open('SwapTable.h', 'w')
-
-    f.write('#ifndef __FFT_SWAPTABLE_H_' + '__\n#define __FFT_SWAPTABLE_H_'  + '__\n\n')
+    f = open('SwapTable.c', 'w')
+    
+    f.write('#ifndef __FFT_SWAPTABLE_H__\n#define __FFT_SWAPTABLE_H__\n\n')
+    f.write('#include \"rt/rt_api.h\"\n\n')
+    f.write('#define PLP_FFT_TABLES_I16_256\n\n')
 
     lengths = np.array([128, 256, 512, 1024])
 
@@ -54,7 +60,7 @@ if __name__=='__main__':
             for k in range(int(np.log2(i))):
                 swaptable[j] += ((j // (i // 2**(k+1))) % 2) * (2**k)
 
-        write_arr(f, 'SwapTable_' + str(i), swaptable, 'uint16_t', i)
+        write_arr(f, 'Swap_LUT', swaptable, 'uint16_t', i)
    
 
     

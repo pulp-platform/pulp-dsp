@@ -865,64 +865,91 @@ void plp_cfft_i32_parallel(int32_t * __restrict__ Data,
 
 void plp_cfft_i32p_xpulpv2(void * S);
 
-/**
-  @brief  Look-up Table for bit reversal process
-*/
-uint16_t SwapTable_128[128];
 
-/**
-  @brief  Look-up Table for bit reversal process
-*/
-uint16_t SwapTable_256[256];
+/* #if defined(PLP_FFT_TABLES_I16_128) || defined(PLP_FFT_TABLES_I32_128) */
+/* /\** */
+/*   @brief  Look-up Table for bit reversal process */
+/* *\/ */
+/* uint16_t Swap_LUT[128]; */
+/* #endif */
 
-/**
-  @brief  Look-up Table for bit reversal process
-*/
-uint16_t SwapTable_512[512];
+/* #if defined(PLP_FFT_TABLES_I16_256) || defined(PLP_FFT_TABLES_I32_256) */
+/* /\** */
+/*   @brief  Look-up Table for bit reversal process */
+/* *\/ */
+/* uint16_t Swap_LUT[256]; */
+/* #endif */
 
-/**
-  @brief  Look-up Table for bit reversal process
-*/
-uint16_t SwapTable_1024[256];
+/* #if defined(PLP_FFT_TABLES_I16_512) || defined(PLP_FFT_TABLES_I32_512) */
+/* /\** */
+/*   @brief  Look-up Table for bit reversal process */
+/* *\/ */
+/* uint16_t Swap_LUT[512]; */
+/* #endif */
 
-/**
-  @brief  Look-up Table for Twiddle factors
-*/
-int16_t twiddleCoef_i16_128[128];
+/* #if defined(PLP_FFT_TABLES_I16_1024) || defined(PLP_FFT_TABLES_I32_1024) */
+/* /\** */
+/*   @brief  Look-up Table for bit reversal process */
+/* *\/ */
+/* uint16_t Swap_LUT[1024]; */
+/* #endif */
 
-/**
-  @brief  Look-up Table for Twiddle factors
-*/
-int16_t twiddleCoef_i16_256[256];
+/* #if defined(PLP_FFT_TABLES_I16_128) */
+/* /\** */
+/*   @brief  Look-up Table for Twiddle factors */
+/* *\/ */
+/* int16_t Twiddles_LUT[128]; */
+/* #endif */
 
-/**
-  @brief  Look-up Table for Twiddle factors
-*/
-int16_t twiddleCoef_i16_512[512];
+/* #if defined(PLP_FFT_TABLES_I16_256) */
+/* /\** */
+/*   @brief  Look-up Table for Twiddle factors */
+/* *\/ */
+/* int16_t Twiddles_LUT[256]; */
+/* #endif */
 
-/**
-  @brief  Look-up Table for Twiddle factors
-*/
-int16_t twiddleCoef_i16_1024[1024];
+/* #if defined(PLP_FFT_TABLES_I16_512) */
+/* /\** */
+/*   @brief  Look-up Table for Twiddle factors */
+/* *\/ */
+/* int16_t Twiddles_LUT[512]; */
+/* #endif */
 
-/**
-  @brief  Look-up Table for Twiddle factors
-*/
-int32_t twiddleCoef_i32_128[128];
+/* #if defined(PLP_FFT_TABLES_I16_1024) */
+/* /\** */
+/*   @brief  Look-up Table for Twiddle factors */
+/* *\/ */
+/* int16_t Twiddles_LUT[1024]; */
+/* #endif */
 
-/**
-  @brief  Look-up Table for Twiddle factors
-*/
-int32_t twiddleCoef_i32_256[256];
+/* #if defined(PLP_FFT_TABLES_I32_128) */
+/* /\** */
+/*   @brief  Look-up Table for Twiddle factors */
+/* *\/ */
+/* int32_t Twiddles_LUT[128]; */
+/* #endif */
 
-/**
-  @brief  Look-up Table for Twiddle factors
-*/
-int32_t twiddleCoef_i32_512[512];
+/* #if defined(PLP_FFT_TABLES_I32_256) */
+/* /\** */
+/*   @brief  Look-up Table for Twiddle factors */
+/* *\/ */
+/* int32_t Twiddles_LUT[256]; */
+/* #endif */
 
-/**
-  @brief  Look-up Table for Twiddle factors
-*/
-int32_t twiddleCoef_i32_1024[1024];
+/* #if defined(PLP_FFT_TABLES_I32_512) */
+/* /\** */
+/*   @brief  Look-up Table for Twiddle factors */
+/* *\/ */
+/* int32_t Twiddles_LUT[512]; */
+/* #endif */
+
+/* #if defined(PLP_FFT_TABLES_I32_1024) */
+/* /\** */
+/*   @brief  Look-up Table for Twiddle factors */
+/* *\/ */
+/* int32_t Twiddles_LUT[1024]; */
+/* #endif */
+
+
 
 #endif // __PLP_MATH_H__

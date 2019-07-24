@@ -23,14 +23,18 @@ def write_header(f, name, var_type, height, width):
 def write_header_scalar(f, name, var_type, value):
     f.write('%s %s = %s;\n\n' % (var_type, name, value)) #RT_CL_DATA
 
-def write_arr(f, name, arr, var_type, length):
-    
-    f.write('RT_L2_DATA %s %s[%s] = {\n' % (var_type, name, length)) # RT_L2_DATA #RT_CL_DATA
+def write_arr(f, name, arr, n_bits, var_type, length):
+
+    f.write('#if defined(PLP_FFT_TABLES_I%s_%s)\n' % (n_bits, length))
+    f.write('RT_CL_DATA %s %s[%s] = {\n' % (var_type, name, length)) # RT_L2_DATA #RT_CL_DATA
     for i in range(0, length):
         v = arr[i]
         f.write('%d, ' % (v))
     f.write('\n')
-    f.write('};\n\n')
+    f.write('};\n')
+
+    f.write('#endif\n\n')
+
     return
 
 def write_scalar(f, name, value, var_type):
@@ -51,20 +55,27 @@ def gen_twiddles(f, var_type, n_bits, length):
 
     #print(n_bits, length, np.min(twiddleCoef_q), np.max(twiddleCoef_q), 2**(n_bits-1))
         
-    write_arr(f, 'twiddleCoef_i' + str(n_bits) + '_' + str(length), twiddleCoef_q, var_type, 2*length//2) 
+    write_arr(f, 'Twiddles_LUT', twiddleCoef_q, n_bits, var_type, 2*length//2) 
         
 
 
 
 if __name__=='__main__':
 
-    file_name = 'TwiddleFactors.h'
+    file_name = 'TwiddleFactors.c'
     if os.path.exists(file_name):
         os.remove(file_name)
 
     f = open(file_name, 'a+')
     f.write('#ifndef __FFT_TWIDDLES_H__\n#define __FFT_TWIDDLES_H__\n\n')
+    f.write('#include \"rt/rt_api.h\"\n\n')
+    f.write('#define PLP_FFT_TABLES_I16_256\n\n')
 
+    gen_twiddles(f, 'int8_t', 8, 128)
+    gen_twiddles(f, 'int8_t', 8, 256)
+    gen_twiddles(f, 'int8_t', 8, 512)
+    gen_twiddles(f, 'int8_t', 8, 1024)
+    
     gen_twiddles(f, 'int16_t', 16, 128)
     gen_twiddles(f, 'int16_t', 16, 256)
     gen_twiddles(f, 'int16_t', 16, 512)

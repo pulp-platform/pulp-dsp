@@ -92,6 +92,10 @@ if __name__=='__main__':
     #max_value = int(sys.argv[5])
     #v_len = int(sys.argv[6])
 
+    gen_stimuli('fft_data_i8_128.h', 'int8_t', 8, -2**4, 2**4-1, 128)
+    gen_stimuli('fft_data_i8_256.h', 'int8_t', 8, -2**4, 2**4-1, 256)
+    gen_stimuli('fft_data_i8_512.h', 'int8_t', 8, -2**4, 2**4-1, 512)
+    gen_stimuli('fft_data_i8_1024.h', 'int8_t', 8, -2**4, 2**4-1, 1024)
     gen_stimuli('fft_data_i16_128.h', 'int16_t', 16, -2**14, 2**14-1, 128)
     gen_stimuli('fft_data_i16_256.h', 'int16_t', 16, -2**14, 2**14-1, 256)
     gen_stimuli('fft_data_i16_512.h', 'int16_t', 16, -2**14, 2**14-1, 512)
