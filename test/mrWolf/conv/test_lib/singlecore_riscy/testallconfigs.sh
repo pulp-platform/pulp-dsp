@@ -6,48 +6,74 @@ n=1024
 runSequential(){
     clearConfig
 
+    touch buf.txt
+    
     sed -i "s/#define i32s 0/#define i32s 1/" cluster.c
     
-    echo "i32s" >> results.txt
-    make clean all run | tail -5 >> results.txt
-    i+=$(less results.txt | tail -5 | head -1 | tail -1 | grep -o "[0-9]*")
-    i+=$(echo -e "\t")
-    i+=$(less results.txt | tail -5 | head -2 | tail -1 | grep -o "[0-9]*")
-    i+=$(echo -e "\t")
-    i+=$(less results.txt | tail -5 | head -3 | tail -1 | grep -o "[0-9]*")
-    i+=$(echo -e "\t")
+    echo "i32s" > buf.txt
+    make clean all run | grep "Total cycles\|Instructions\|Load stalls\|TCDM Contentions\|External loads" >> buf.txt
+
+    less buf.txt >> results.txt
     
+    i+=$(less buf.txt | grep "Total cycles" | grep -o "[0-9]*" )
+    i+=$(printf "\t")
+    i+=$(less buf.txt  | grep "Instructions" | grep -o "[0-9]*")
+    i+=$(printf "\t")
+    i+=$(less buf.txt  | grep "Load stalls" | grep -o "[0-9]*")
+    i+=$(printf "\t")
+    i+=$(less buf.txt  | grep "TCDM Contentions" | grep -o "[0-9]*")
+    i+=$(printf "\t")
+    i+=$(less buf.txt  | grep "External loads" | grep -o "[0-9]*")
+    i+=$(printf "\n")
+
     sed -i "s/#define i16s 0/#define i16s 1/" cluster.c
     sed -i "s/#define i32s 1/#define i32s 0/" cluster.c
     
-    echo "i16s" >> results.txt
-    make clean all run | tail -5 >> results.txt
+    echo "i16s" > buf.txt
+    make clean all run | grep "Total cycles\|Instructions\|Load stalls\|TCDM Contentions\|External loads" >> buf.txt
 
-    i+=$(less results.txt | tail -5 | head -1 | tail -1  | grep -o "[0-9]*")
-    i+=$(echo -e "\t")
-    i+=$(less results.txt | tail -5 | head -2 | tail -1  | grep -o "[0-9]*")
-    i+=$(echo -e "\t")
-    i+=$(less results.txt | tail -5 | head -3 | tail -1  | grep -o "[0-9]*")
-    i+=$(echo -e "\t")
-
+    less buf.txt >> results.txt
+    
+    i+=$(less buf.txt | grep "Total cycles" | grep -o "[0-9]*")
+    i+=$(printf "\t")
+    i+=$(less buf.txt  | grep "Instructions" | grep -o "[0-9]*")
+    i+=$(printf "\t")
+    i+=$(less buf.txt  | grep "Load stalls" | grep -o "[0-9]*")
+    i+=$(printf "\t")
+    i+=$(less buf.txt  | grep "TCDM Contentions" | grep -o "[0-9]*")
+    i+=$(printf "\t")
+    i+=$(less buf.txt  | grep "External loads" | grep -o "[0-9]*")
+    i+=$(printf "\n")
+    
     sed -i "s/#define i8s 0/#define i8s 1/" cluster.c
     sed -i "s/#define i16s 1/#define i16s 0/" cluster.c
 
-    echo "i8s" >> results.txt
-    make clean all run | tail -5 >> results.txt
+    echo "i8s"  > buf.txt
+    make clean all run | grep "Total cycles\|Instructions\|Load stalls\|TCDM Contentions\|External loads" >> buf.txt
 
-    i+=$(less results.txt | tail -5 | head -1 | tail -1 | grep -o "[0-9]*")
-    i+=$(echo -e "\t")
-    i+=$(less results.txt | tail -5 | head -2 | tail -1 | grep -o "[0-9]*")
-    i+=$(echo -e "\t")
-    i+=$(less results.txt | tail -5 | head -3 | tail -1 | grep -o "[0-9]*")
+    less buf.txt >> results.txt
+    
+    i+=$(less buf.txt | grep "Total cycles" | grep -o "[0-9]*")
+    i+=$(printf "\t")
+    i+=$(less buf.txt  | grep "Instructions" | grep -o "[0-9]*")
+    i+=$(printf "\t")
+    i+=$(less buf.txt  | grep "Load stalls" | grep -o "[0-9]*")
+    i+=$(printf "\t")
+    i+=$(less buf.txt  | grep "TCDM Contentions" | grep -o "[0-9]*")
+    i+=$(printf "\t")
+    i+=$(less buf.txt  | grep "External loads" | grep -o "[0-9]*")
+    i+=$(printf "\n")
 
+    rm buf.txt
+    
     echo "$i" >> benchmark.txt
     export i
 }
 
 runParallel(){
 
+    touch buf.txt
+    
     for i in {1..8}
     do
 	sed -i "s/#define NUMCORES [0-9]/#define NUMCORES $i/" cluster.c
@@ -55,46 +81,70 @@ runParallel(){
 	clearConfig
 	sed -i "s/#define i32p 0/#define i32p 1/" cluster.c
 	
-	echo "i32p $i Cores" >> results.txt
-	make clean all run | tail -5 >> results.txt
+	echo "i32p $i Cores" > buf.txt
+	make clean all run | grep "Total cycles\|Instructions\|Load stalls\|TCDM Contentions\|External loads" >> buf.txt
 
-	q=$(less results.txt | tail -5 | head -1 | tail -1 | grep -o "[0-9]*")
-	q+=$(echo -e "\t")
-	q+=$(less results.txt | tail -5 | head -2 | tail -1 | grep -o "[0-9]*")
-	q+=$(echo -e "\t")
-	q+=$(less results.txt | tail -5 | head -3 | tail -1 | grep -o "[0-9]*")
-	q+=$(echo -e "\t")
+	less buf.txt >> results.txt
+
+	q=$(printf "")
+	
+	q+=$(less buf.txt | grep "Total cycles" | grep -o "[0-9]*")
+	q+=$(printf "\t")
+	q+=$(less buf.txt  | grep "Instructions" | grep -o "[0-9]*")
+	q+=$(printf "\t")
+	q+=$(less buf.txt  | grep "Load stalls" | grep -o "[0-9]*")
+	q+=$(printf "\t")
+	q+=$(less buf.txt  | grep "TCDM Contentions" | grep -o "[0-9]*")
+	q+=$(printf "\t")
+	q+=$(less buf.txt  | grep "External loads" | grep -o "[0-9]*")
+	q+=$(printf "\n")
 	
 	clearConfig
 	sed -i "s/#define i16p 0/#define i16p 1/" cluster.c
 
-	echo "i16p $i Cores" >> results.txt
-	make clean all run | tail -5 >> results.txt
+	echo "i16p $i Cores" > buf.txt
+	make clean all run | grep "Total cycles\|Instructions\|Load stalls\|TCDM Contentions\|External loads" >> buf.txt
+
+	less buf.txt >> results.txt
 	
-	q+=$(less results.txt | tail -5 | head -1 | tail -1 | grep -o "[0-9]*")
-	q+=$(echo -e "\t")
-	q+=$(less results.txt | tail -5 | head -2 | tail -1 | grep -o "[0-9]*")
-	q+=$(echo -e "\t")
-	q+=$(less results.txt | tail -5 | head -3 | tail -1 | grep -o "[0-9]*")
-	q+=$(echo -e "\t")
+	q+=$(less buf.txt | grep "Total cycles" | grep -o "[0-9]*")
+	q+=$(printf "\t")
+	q+=$(less buf.txt  | grep "Instructions" | grep -o "[0-9]*")
+	q+=$(printf "\t")
+	q+=$(less buf.txt  | grep "Load stalls" | grep -o "[0-9]*")
+	q+=$(printf "\t")
+	q+=$(less buf.txt  | grep "TCDM Contentions" | grep -o "[0-9]*")
+	q+=$(printf "\t")
+	q+=$(less buf.txt  | grep "External loads" | grep -o "[0-9]*")
+	q+=$(printf "\n")
 	
+
 	clearConfig
 	sed -i "s/#define i8p 0/#define i8p 1/" cluster.c
 
-	echo "i8p $i Cores" >> results.txt
-	make clean all run | tail -5 >> results.txt
+	echo "i8p $i Cores" > buf.txt
+	make clean all run | grep "Total cycles\|Instructions\|Load stalls\|TCDM Contentions\|External loads" >> buf.txt
 
-	q+=$(less results.txt | tail -5 | head -1 | tail -1 | grep -o "[0-9]*")
-	q+=$(echo -e "\t")
-	q+=$(less results.txt | tail -5 | head -2 | tail -1 | grep -o "[0-9]*")
-	q+=$(echo -e "\t")
-	q+=$(less results.txt | tail -5 | head -3 | tail -1 | grep -o "[0-9]*")
-
+	less buf.txt >> results.txt
+	
+	q+=$(less buf.txt | grep "Total cycles" | grep -o "[0-9]*")
+	q+=$(printf "\t")
+	q+=$(less buf.txt  | grep "Instructions" | grep -o "[0-9]*")
+	q+=$(printf "\t")
+	q+=$(less buf.txt  | grep "Load stalls" | grep -o "[0-9]*")
+	q+=$(printf "\t")
+	q+=$(less buf.txt  | grep "TCDM Contentions" | grep -o "[0-9]*")
+	q+=$(printf "\t")
+	q+=$(less buf.txt  | grep "External loads" | grep -o "[0-9]*")
+	q+=$(printf "\n")
+	
 	echo "$q" >> benchmark.txt
 	
     done
     export q
 
+    rm buf.txt
+    
     
 }
 
@@ -116,8 +166,8 @@ runAll(){
 
 saveResults(){
     $(less benchmark.txt > benchmark_"$m"_"$n".txt)
-    echo -e "" > benchmark.txt
-    echo -e "" > results.txt
+    printf "" > benchmark.txt
+    printf "" > results.txt
 }
 
 setConfigHeaders(){
@@ -135,17 +185,47 @@ export runAll
 export saveResults
 export setConfigHeaders
 
-echo -e "" > benchmark.txt
-echo -e "" > results.txt
+printf "" > benchmark.txt
+printf "" > results.txt
 
 m=512
-n=1024
+n=64
 echo "Running $m and $n"
 $(setConfigHeaders)
 $(runAll)
 $(saveResults)
-m=511
-n=1023
+m=512
+n=128
+echo "Running $m and $n"
+$(setConfigHeaders)
+$(runAll)
+$(saveResults)
+m=512
+n=192
+echo "Running $m and $n"
+$(setConfigHeaders)
+$(runAll)
+$(saveResults)
+m=512
+n=256
+echo "Running $m and $n"
+$(setConfigHeaders)
+$(runAll)
+$(saveResults)
+m=512
+n=320
+echo "Running $m and $n"
+$(setConfigHeaders)
+$(runAll)
+$(saveResults)
+m=512
+n=384
+echo "Running $m and $n"
+$(setConfigHeaders)
+$(runAll)
+$(saveResults)
+m=512
+n=448
 echo "Running $m and $n"
 $(setConfigHeaders)
 $(runAll)

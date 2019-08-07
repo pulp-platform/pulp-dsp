@@ -1,6 +1,6 @@
 #include "rt/rt_api.h"
 
-unsigned int __rt_platform = 3;
+unsigned int __rt_platform = 4;
 
 rt_dev_t __rt_devices[] = {
   {"jtag_proxy", -1, 0, (void *)NULL, {{}}},

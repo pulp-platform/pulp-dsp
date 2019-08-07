@@ -1,109 +1,24 @@
-
 i32s
-Total cycles: 1289550
-Instructions: 1285689
-Load stalls: 1539
+Total cycles: 16859
+Instructions: 14769
 i16s
-Total cycles: 979531
-Instructions: 910634
-Load stalls: 1540
+Total cycles: 12559
+Instructions: 10492
 i8s
-Total cycles: 554200
-Instructions: 485167
-Load stalls: 1539
+Total cycles: 9402
+Instructions: 7564
 i32p 1 Cores
-Total cycles: 1289673
-Instructions: 1285785
-Load stalls: 1541
+Total cycles: 16049
+Instructions: 14811
 i16p 1 Cores
-Total cycles: 979638
-Instructions: 910720
-Load stalls: 1541
+Total cycles: 13996
+Instructions: 10592
 i8p 1 Cores
-Total cycles: 554323
-Instructions: 485260
-Load stalls: 1540
+Total cycles: 10260
+Instructions: 7654
 i32p 2 Cores
-Total cycles: 913758
-Instructions: 897731
-Load stalls: 2565
+Total cycles: 10261
+Instructions: 7228
 i16p 2 Cores
-Total cycles: 653670
-Instructions: 572462
-Load stalls: 2565
-i8p 2 Cores
-Total cycles: 375283
-Instructions: 310328
-Load stalls: 2564
-i32p 3 Cores
-Total cycles: 536231
-Instructions: 516864
-Load stalls: 3084
-i16p 3 Cores
-Total cycles: 409273
-Instructions: 361103
-Load stalls: 3083
-i8p 3 Cores
-Total cycles: 271151
-Instructions: 207597
-Load stalls: 3082
-i32p 4 Cores
-Total cycles: 376409
-Instructions: 357282
-Load stalls: 2564
-i16p 4 Cores
-Total cycles: 298857
-Instructions: 263943
-Load stalls: 2565
-i8p 4 Cores
-Total cycles: 193788
-Instructions: 157715
-Load stalls: 2564
-i32p 5 Cores
-Total cycles: 300900
-Instructions: 278686
-Load stalls: 3585
-i16p 5 Cores
-Total cycles: 267457
-Instructions: 215693
-Load stalls: 3587
-i8p 5 Cores
-Total cycles: 177004
-Instructions: 134692
-Load stalls: 3586
-i32p 6 Cores
-Total cycles: 252145
-Instructions: 229304
-Load stalls: 3253
-i16p 6 Cores
-Total cycles: 228635
-Instructions: 183840
-Load stalls: 3253
-i8p 6 Cores
-Total cycles: 156000
-Instructions: 118401
-Load stalls: 3252
-i32p 7 Cores
-Total cycles: 219449
-Instructions: 196292
-Load stalls: 3013
-i16p 7 Cores
-Total cycles: 201307
-Instructions: 161208
-Load stalls: 3013
-i8p 7 Cores
-Total cycles: 140978
-Instructions: 106341
-Load stalls: 3012
-i32p 8 Cores
-Total cycles: 192348
-Instructions: 171052
-Load stalls: 2819
-i16p 8 Cores
-Total cycles: 166585
-Instructions: 141457
-Load stalls: 2820
-i8p 8 Cores
-Total cycles: 122010
-Instructions: 94749
-Load stalls: 2819
+Total cycles: 9566
+Instructions: 5875

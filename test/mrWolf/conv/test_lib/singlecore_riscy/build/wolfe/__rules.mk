@@ -82,7 +82,7 @@ test_OBJS += $(test_CL_OBJS) $(test_CL_ASM_OBJS) $(test_CL_OMP_OBJS)
 PULP_LIB_NAME_test ?= test
 
 
-PULP_FC_EXTRA_SRCS_test = /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/rt_conf.c /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/rt_pad_conf.c
+PULP_FC_EXTRA_SRCS_test = /home/scheremo/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/rt_conf.c /home/scheremo/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/rt_pad_conf.c
 PULP_FC_EXTRA_ASM_SRCS_test = 
 PULP_FC_EXTRA_OMP_SRCS_test = 
 

@@ -6,14 +6,14 @@ static int cores_events;
 static uint32_t nummismatches = 0;
 
 #define NUMBEROFTIMES 1
-#define NUMCORES 8
+#define NUMCORES 2
 
 #define i32s 0
 #define i32p 0
 #define i16s 0
-#define i16p 1
+#define i16p 0
 #define i8s 0
-#define i8p 0
+#define i8p 1
 
 #if(i16s || i16p)
 #include "../../test_data/conv_data16_L1.h"
@@ -94,9 +94,9 @@ void cluster_entry(void *arg){
   printf("Number of mismatches in results: %ld\n", nummismatches);
   printf("Total cycles: %d\n", rt_perf_read(RT_PERF_CYCLES));
   printf("Instructions: %d\n", rt_perf_read(RT_PERF_INSTR));
-  printf("Load stalls: %d\n", rt_perf_read(RT_PERF_LD_STALL));
-  printf("TCDM Contentions: %d\n", rt_perf_read(RT_PERF_TCDM_CONT));
-  printf("External loads: %d\n", rt_perf_read(RT_PERF_LD_EXT));
+  //printf("Load stalls: %d\n", rt_perf_read(RT_PERF_LD_STALL));
+  //printf("TCDM Contentions: %d\n", rt_perf_read(RT_PERF_TCDM_CONT));
+  //printf("External loads: %d\n", rt_perf_read(RT_PERF_LD_EXT));
   return;
 }
 

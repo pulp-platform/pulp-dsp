@@ -11,8 +11,8 @@ export PULP_SDK_INSTALL=$(TARGET_INSTALL_DIR)
 export PULP_SDK_WS_INSTALL=$(INSTALL_DIR)
 endif
 
--include /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/__flags.mk
+-include /home/scheremo/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/__flags.mk
 
 ifndef INCLUDE_NO_RULES
--include /home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/__rules.mk
+-include /home/scheremo/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/__rules.mk
 endif

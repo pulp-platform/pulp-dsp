@@ -27,7 +27,7 @@
       ]
     }
   },
-  "platform": "gvsoc",
+  "platform": "board",
   "pulp_compiler": "gcc",
   "pulp_rt_version": "bench",
   "pulp_omp_version": {

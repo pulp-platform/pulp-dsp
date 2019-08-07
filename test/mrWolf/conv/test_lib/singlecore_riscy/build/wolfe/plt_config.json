@@ -2920,7 +2920,7 @@
             "map_base": "0x1A000000",
             "map_size": "0x00002000",
             "vp_class": "memory/memory",
-            "stim_file": "/home/moritz/pulp-sdk/pkg/sdk/dev/install/ws/python/pulp/chips/wolfe/rom.bin",
+            "stim_file": "/home/scheremo/pulp-sdk/pkg/sdk/dev/install/ws/python/pulp/chips/wolfe/rom.bin",
             "vp_ports": [
               "input"
             ]
@@ -10864,11 +10864,11 @@
           "aes_key": 0,
           "aes_iv": 0
         },
-        "stim_file": "/home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/stimuli/flash.bin"
+        "stim_file": "/home/scheremo/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/stimuli/flash.bin"
       },
       "spiflash_clock": {
-        "vp_class": "vp/clock_domain",
         "frequency": 50000000,
+        "vp_class": "vp/clock_domain",
         "vp_ports": [
           "out"
         ]
@@ -10903,12 +10903,12 @@
             "aes_key": 0,
             "aes_iv": 0
           },
-          "preload_file": "/home/moritz/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/stimuli/flash.bin"
+          "preload_file": "/home/scheremo/PULP-DSP/test/mrWolf/conv/test_lib/singlecore_riscy/build/wolfe/stimuli/flash.bin"
         }
       },
       "hyper_clock": {
-        "vp_class": "vp/clock_domain",
         "frequency": 50000000,
+        "vp_class": "vp/clock_domain",
         "vp_ports": [
           "out"
         ]
