@@ -73,10 +73,10 @@ static void do_bench_0(rt_perf_t *perf, int events)
 }
 void cluster_entry(void *arg){
 
-  printf("(%d, %d) Hello! Cluster entered\n", rt_cluster_id(), rt_core_id());
+  /* printf("(%d, %d) Hello! Cluster entered\n", rt_cluster_id(), rt_core_id()); */
 
   v_r = rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*(LENGTHA+LENGTHB-1));
-  
+
   // Transfer to L1 memory
   /* rt_dma_copy_t copy; */
   /* rt_dma_memcpy(v_a, v_a_l1, sizeof(v_a), RT_DMA_DIR_EXT2LOC, 0, &copy); */
@@ -88,13 +88,15 @@ void cluster_entry(void *arg){
   rt_perf_init(&perf);
   
   for (int i=0; i < NUMBEROFTIMES; i++){
-    do_bench_0(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR) | (1<<RT_PERF_LD_STALL));
+    do_bench_0(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR) | (1<<RT_PERF_LD_STALL) | (1<<RT_PERF_TCDM_CONT) | (1<<RT_PERF_LD_EXT));
   }
 
   printf("Number of mismatches in results: %ld\n", nummismatches);
   printf("Total cycles: %d\n", rt_perf_read(RT_PERF_CYCLES));
   printf("Instructions: %d\n", rt_perf_read(RT_PERF_INSTR));
   printf("Load stalls: %d\n", rt_perf_read(RT_PERF_LD_STALL));
+  printf("TCDM Contentions: %d\n", rt_perf_read(RT_PERF_TCDM_CONT));
+  printf("External loads: %d\n", rt_perf_read(RT_PERF_LD_EXT));
   return;
 }
 
