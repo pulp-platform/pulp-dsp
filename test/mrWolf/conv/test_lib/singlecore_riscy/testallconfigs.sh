@@ -24,6 +24,7 @@ runSequential(){
     i+=$(less buf.txt  | grep "TCDM Contentions" | grep -o "[0-9]*")
     i+=$(printf "\t")
     i+=$(less buf.txt  | grep "External loads" | grep -o "[0-9]*")
+    i+=$(printf "\t")
     i+=$(printf "\n")
 
     sed -i "s/#define i16s 0/#define i16s 1/" cluster.c
@@ -43,6 +44,7 @@ runSequential(){
     i+=$(less buf.txt  | grep "TCDM Contentions" | grep -o "[0-9]*")
     i+=$(printf "\t")
     i+=$(less buf.txt  | grep "External loads" | grep -o "[0-9]*")
+    i+=$(printf "\t")
     i+=$(printf "\n")
     
     sed -i "s/#define i8s 0/#define i8s 1/" cluster.c
@@ -62,6 +64,7 @@ runSequential(){
     i+=$(less buf.txt  | grep "TCDM Contentions" | grep -o "[0-9]*")
     i+=$(printf "\t")
     i+=$(less buf.txt  | grep "External loads" | grep -o "[0-9]*")
+    i+=$(printf "\t")
     i+=$(printf "\n")
 
     rm buf.txt
@@ -97,6 +100,7 @@ runParallel(){
 	q+=$(less buf.txt  | grep "TCDM Contentions" | grep -o "[0-9]*")
 	q+=$(printf "\t")
 	q+=$(less buf.txt  | grep "External loads" | grep -o "[0-9]*")
+	i+=$(printf "\t")
 	q+=$(printf "\n")
 	
 	clearConfig
@@ -116,6 +120,7 @@ runParallel(){
 	q+=$(less buf.txt  | grep "TCDM Contentions" | grep -o "[0-9]*")
 	q+=$(printf "\t")
 	q+=$(less buf.txt  | grep "External loads" | grep -o "[0-9]*")
+	i+=$(printf "\t")
 	q+=$(printf "\n")
 	
 
@@ -136,6 +141,7 @@ runParallel(){
 	q+=$(less buf.txt  | grep "TCDM Contentions" | grep -o "[0-9]*")
 	q+=$(printf "\t")
 	q+=$(less buf.txt  | grep "External loads" | grep -o "[0-9]*")
+	i+=$(printf "\t")
 	q+=$(printf "\n")
 	
 	echo "$q" >> benchmark.txt
