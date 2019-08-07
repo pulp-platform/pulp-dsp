@@ -100,7 +100,7 @@ runParallel(){
 	q+=$(less buf.txt  | grep "TCDM Contentions" | grep -o "[0-9]*")
 	q+=$(printf "\t")
 	q+=$(less buf.txt  | grep "External loads" | grep -o "[0-9]*")
-	i+=$(printf "\t")
+	q+=$(printf "\t")
 	q+=$(printf "\n")
 	
 	clearConfig
@@ -120,7 +120,7 @@ runParallel(){
 	q+=$(less buf.txt  | grep "TCDM Contentions" | grep -o "[0-9]*")
 	q+=$(printf "\t")
 	q+=$(less buf.txt  | grep "External loads" | grep -o "[0-9]*")
-	i+=$(printf "\t")
+	q+=$(printf "\t")
 	q+=$(printf "\n")
 	
 
@@ -141,7 +141,7 @@ runParallel(){
 	q+=$(less buf.txt  | grep "TCDM Contentions" | grep -o "[0-9]*")
 	q+=$(printf "\t")
 	q+=$(less buf.txt  | grep "External loads" | grep -o "[0-9]*")
-	i+=$(printf "\t")
+	q+=$(printf "\t")
 	q+=$(printf "\n")
 	
 	echo "$q" >> benchmark.txt
