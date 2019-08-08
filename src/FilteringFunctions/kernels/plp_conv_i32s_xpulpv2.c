@@ -120,12 +120,9 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 	  temp3=*(px+1);
 	  temp4=*(py-1);
 	  
-	  sum += temp1*temp2;
+	  sum = __MAC(sum, temp1, temp2);
+	  sum = __MAC(sum, temp3, temp4);
 	  
-	  /* x[3] * y[srcBLen - 4] */
-	  //sum = __MAC(sum, *px++, *py--);
-	  sum += temp3*temp4;
-
 	  temp1=*(px+2);
 	  temp2=*(py-2);
 
@@ -140,7 +137,7 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
       k = count % 0x2U;
 
       if(k){
-	sum += temp1*temp2;
+	sum = __MAC(sum, temp1, temp2);
       }
 
 #else
@@ -149,7 +146,7 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 
       while (k > 0U){
 	/* Perform the multiply-accumulate */
-	sum += *px++ * *py--;
+	sum = __MAC(sum, *px++, *py--);
 
 	/* Decrement loop counter */
 	k--;
@@ -326,7 +323,7 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 
 	  /* Increment the pointer pIn1 index, count by 4 */
 	  count += 4U;
-
+	  
 	  /* Update the inputA and inputB pointers for next MAC calculation */
 	  px = pIn1 + count;
 	  py = pSrc2;
@@ -379,7 +376,7 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 	  k = srcBLen % 0x2U;
 
 	  if(k){
-	    sum += temp1*temp2;
+	    sum = __MAC(sum, temp1, temp2);
 	  }
 
 	  
@@ -390,7 +387,7 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 	  while (k > 0U)
 	    {
 	      /* Perform the multiply-accumulate */
-	      sum += *px++ * *py--;
+	      sum = __MAC(sum, *px++, *py--);
 
 	      /* Decrement the loop counter */
 	      k--;
@@ -430,8 +427,7 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 	  while (k > 0U)
 	    {
 	      /* Perform the multiply-accumulate */
-	      sum += *px++ * *py--;
-
+	      sum = __MAC(sum, *px++, *py--);
 	      /* Decrement the loop counter */
 	      k--;
 	    }
@@ -511,7 +507,7 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
       k = blockSize3 % 0x2U;
       
       if(k){
-	sum += temp1*temp2;
+	sum = __MAC(sum, temp1, temp2);
       }
 
 #else
@@ -524,8 +520,7 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 	{
 	  /* Perform the multiply-accumulate */
 	  /* sum +=  x[srcALen-1] * y[srcBLen-1] */
-	  sum += *px++ * *py--;
-	  
+	  sum = __MAC(sum, *px++, *py--);
 	  /* Decrement loop counter */
 	  k--;
 	}

@@ -73,15 +73,15 @@ void plp_conv_i16_parallel(
     uint32_t pIn2Len;
     
     if(srcALen >= srcBLen ){
-      pIn1 = pSrcA;
-      pIn2 = pSrcB;
-      pIn1Len = srcALen;
-      pIn2Len = srcBLen;
-    } else {
-      pIn1 = pSrcB;
       pIn2 = pSrcA;
-      pIn1Len = srcBLen;
+      pIn1 = pSrcB;
       pIn2Len = srcALen;
+      pIn1Len = srcBLen;
+    } else {
+      pIn2 = pSrcB;
+      pIn1 = pSrcA;
+      pIn2Len = srcBLen;
+      pIn1Len = srcALen;
     }
 
     uint32_t srcAoffset = ((pIn1Len+nPE-1)/nPE);

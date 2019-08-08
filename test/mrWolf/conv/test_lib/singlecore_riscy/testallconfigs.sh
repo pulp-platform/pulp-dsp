@@ -195,6 +195,12 @@ printf "" > benchmark.txt
 printf "" > results.txt
 
 m=512
+n=32
+echo "Running $m and $n"
+$(setConfigHeaders)
+$(runAll)
+$(saveResults)
+m=512
 n=64
 echo "Running $m and $n"
 $(setConfigHeaders)
