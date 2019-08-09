@@ -66,7 +66,12 @@ void plp_conv_i32_parallel(
   if (rt_cluster_id() == ARCHI_FC_CID){
     printf("parallel processing supported only for cluster side\n");
     return;
-  }  else {
+  } else {
+
+    if(nPE == 1){
+      plp_conv_i32(pSrcA, srcALen, pSrcB, srcBLen, pRes);
+      return;
+    }
 
     const int32_t* pIn1;
     const int32_t* pIn2;
@@ -92,7 +97,7 @@ void plp_conv_i32_parallel(
     
     if(nPE > 1){
       resultsBuffer = (int32_t*)rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*resultsoffset*nPE);
-      for(int i=resultsLen;i<resultsoffset*nPE;i++){
+      for(uint32_t i=resultsLen;i<resultsoffset*nPE;i++){
 	resultsBuffer[i] = 0;
       }
       //printf("Address of resultsBuffer: 0x%x, End: 0x%x\n", resultsBuffer, resultsBuffer + sizeof(int32_t)*resultsLen);
@@ -166,7 +171,7 @@ void plp_conv_i32_parallel(
 	pRes[i] = resultsBuffer[i];
       }
 #endif
-      free(resultsBuffer);
+      rt_free(RT_ALLOC_CL_DATA, &resultsBuffer[0], sizeof(int32_t)*resultsoffset*nPE);
             
 #endif 
       

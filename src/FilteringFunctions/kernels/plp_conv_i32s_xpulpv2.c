@@ -55,12 +55,11 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 			  const uint32_t srcALen,
 			  const int32_t *  pSrcB,
 			  const uint32_t srcBLen,
-			  int32_t *  pRes){
+			  int32_t * __restrict__ pRes){
 
 
   const int32_t *pIn1 = pSrcA;                               /* InputA pointer */
   const int32_t *pIn2 = pSrcB;                               /* InputB pointer */
-  int32_t *pOut = pRes;                        /* Output pointer */
   const int32_t *px;                                 /* Intermediate inputA pointer */
   const int32_t *py;                                 /* Intermediate inputB pointer */
   const int32_t *pSrc1, *pSrc2;                      /* Intermediate pointers */
@@ -155,7 +154,7 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 #endif /* #if defined (PLP_MATH_LOOPUNROLL) */
 
       /* Store the result in the accumulator in the destination buffer. */
-      *pOut++ = sum;
+      *pRes++ = sum;
 
       /* Update the inputA and inputB pointers for next MAC calculation */
       py = pIn2 + count;
@@ -316,10 +315,10 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 	    }
 
 	  /* Store the result in the accumulator in the destination buffer. */
-	  *pOut++ = acc0;
-	  *pOut++ = acc1;
-	  *pOut++ = acc2;
-	  *pOut++ = acc3;
+	  *pRes++ = acc0;
+	  *pRes++ = acc1;
+	  *pRes++ = acc2;
+	  *pRes++ = acc3;
 
 	  /* Increment the pointer pIn1 index, count by 4 */
 	  count += 4U;
@@ -397,7 +396,7 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 #endif /* #if defined (PLP_MATH_LOOPUNROLL) */
 
 	  /* Store the result in the accumulator in the destination buffer. */
-	  *pOut++ = sum;
+	  *pRes++ = sum;
 
 	  /* Increment the MAC count */
 	  count++;
@@ -433,7 +432,7 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 	    }
 
 	  /* Store the result in the accumulator in the destination buffer. */
-	  *pOut++ = sum;
+	  *pRes++ = sum;
 
 	  /* Increment the MAC count */
 	  count++;
@@ -528,7 +527,7 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 #endif /* defined (PLP_MATH_LOOPUNROLL)*/
 
       /* Store the result in the accumulator in the destination buffer. */
-      *pOut++ = sum;
+      *pRes++ = sum;
 
       /* Update the inputA and inputB pointers for next MAC calculation */
       px = ++pSrc1;

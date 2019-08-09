@@ -87,8 +87,6 @@ void plp_conv_i8p_xpulpv2(void* task_args){
     srcBLen = S->srcBLen;
     pRes = (int32_t*)(S->pRes + resultoffset*(rt_core_id()));
 
-    //printf("ID %i: 0x%x %i 0x%x %i 0x%x\n",rt_core_id(), pSrcA, srcALen, pSrcB, srcBLen, pRes);
-
   }
 
   if(srcALen >= srcBLen){
@@ -104,4 +102,5 @@ void plp_conv_i8p_xpulpv2(void* task_args){
   }
   
   plp_conv_i8s_xpulpv2(pIn1, pIn1Len, pIn2, pIn2Len, pRes);
+  rt_team_barrier();
 }

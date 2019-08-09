@@ -29,47 +29,175 @@
  */
 
 #include "plp_math.h"
+#define OLARATIO32 8 // Eight is optimal in terms of overhead minimization
 
-
-/**
-  @ingroup groupMath
- */
+static RT_CL_DATA int32_t* _pRes1_32;
 
 /**
-  @addtogroup BasicConvolution
-  @{
- */
+   @ingroup groupMath
+*/
 
 /**
-  @brief Glue code for convolution of 32-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  SrcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  SrcBLen   Length of the second input vector
-  @param[out] result     output result returned here
-  @return        none
- */
+   @addtogroup BasicConvolution
+   @{
+*/
+
+/**
+   @brief Glue code for convolution of 32-bit integer vectors.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  SrcALen   Length of the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  SrcBLen   Length of the second input vector
+   @param[out] result     output result returned here
+   @return        none
+*/
 void plp_conv_i32(
-                       const int32_t *  pSrcA,
-		       const uint32_t srcALen,
-                       const int32_t *  pSrcB,
-		       const uint32_t srcBLen,
-                       int32_t *  pRes){
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    if(srcALen >= srcBLen){
-      plp_conv_i32s_rv32im(pSrcA, srcALen, pSrcB, srcBLen, pRes);
-    } else {
-      plp_conv_i32s_rv32im(pSrcB, srcBLen, pSrcA, srcALen, pRes);
-    }
+		  const int32_t *  pSrcA,
+		  const uint32_t srcALen,
+		  const int32_t *  pSrcB,
+		  const uint32_t srcBLen,
+		  int32_t * __restrict__ pRes){
+
+  uint32_t in1Len, in2Len;
+  const int32_t* pIn1;
+  const int32_t* pIn2;
+
+  if(srcALen >= srcBLen){
+    in1Len = srcALen;
+    in2Len = srcBLen;
+    pIn1 = pSrcA;
+    pIn2 = pSrcB;
   } else {
-    if(srcALen >= srcBLen){
-      plp_conv_i32s_xpulpv2(pSrcA, srcALen, pSrcB, srcBLen, pRes);
-    } else {
-      plp_conv_i32s_xpulpv2(pSrcB, srcBLen, pSrcA, srcALen, pRes);
+    in2Len = srcALen;
+    in1Len = srcBLen;
+    pIn2 = pSrcA;
+    pIn1 = pSrcB;
+  }
+  
+  uint32_t nPE = (OLARATIO32/(in1Len/in2Len));
+
+  uint32_t src2Offset = ((in2Len+nPE-1)/nPE);
+  uint32_t resultsoffset = src2Offset + in1Len - 1;
+  uint32_t lastresultLen = (in2Len - (src2Offset * (nPE-1))) + in1Len - 1;
+
+  uint32_t temp1,temp2,k;
+
+  int32_t* pOut = pRes;
+  int32_t* _pRes = _pRes1_32;
+  
+  _pRes1_32 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*(resultsoffset)); 
+
+  for(uint32_t i=0;i<srcALen+srcBLen-1;i++){
+    pRes[i] = 0;
+  }
+  
+  if (rt_cluster_id() == ARCHI_FC_CID){
+    
+    for(uint32_t i=0;i<nPE-1;i++){
+      plp_conv_i32s_rv32im(pIn1, in1Len, pIn2+i*src2Offset, src2Offset, _pRes1_32);
+
+      pOut = pRes + i*src2Offset;
+      _pRes = _pRes1_32;
+      
+      k = resultsoffset >> 1;
+      while(k){
+
+	temp1 = *_pRes++;
+	temp2 = *_pRes++;
+	
+	*pOut++ += temp1;
+	*pOut++ += temp2;
+
+	k--;
+      }
+
+      k = resultsoffset % 2U;
+
+      if(k){
+	*pOut++ += *_pRes++;
+      }
+      
     }
-  }  
+      
+    plp_conv_i32s_rv32im(pIn1, in1Len, pIn2+(nPE-1)*src2Offset, in2Len - (src2Offset * (nPE-1)), _pRes1_32);
+
+    pOut = pRes + (nPE-1)*src2Offset;
+    _pRes = _pRes1_32;
+    
+    k = lastresultLen >> 1;
+
+    while(k){
+
+      temp1 = *_pRes++;
+      temp2 = *_pRes++;
+	
+      *pOut++ += temp1;
+      *pOut++ += temp2;
+
+      k--;
+    }
+
+    k = lastresultLen % 2U;
+
+    if(k){
+      *pOut++ += *_pRes++;
+    }
+
+  } else {
+
+    for(uint32_t i=0;i<nPE-1;i++){
+      plp_conv_i32s_xpulpv2(pIn1, in1Len, pIn2+i*src2Offset, src2Offset, _pRes1_32);
+
+      pOut = pRes + i*src2Offset;
+      _pRes = _pRes1_32;
+      
+      k = resultsoffset >> 1;
+      while(k){
+
+	temp1 = *_pRes++;
+	temp2 = *_pRes++;
+	
+	*pOut++ += temp1;
+	*pOut++ += temp2;
+
+	k--;
+      }
+
+      k = resultsoffset % 2U;
+
+      if(k){
+	*pOut++ += *_pRes++;
+      }
+    }    
+    
+    plp_conv_i32s_xpulpv2(pIn1, in1Len, pIn2+(nPE-1)*src2Offset, in2Len - (src2Offset * (nPE-1)), _pRes1_32);
+
+    pOut = pRes + (nPE-1)*src2Offset;
+    _pRes = _pRes1_32;
+    
+    k = lastresultLen >> 1;
+
+    while(k){
+
+      temp1 = *_pRes++;
+      temp2 = *_pRes++;
+	
+      *pOut++ += temp1;
+      *pOut++ += temp2;
+
+      k--;
+    }
+
+    k = lastresultLen % 2U;
+
+    if(k){
+      *pOut++ += *_pRes++;
+    }
+
+  }
+  rt_free(RT_ALLOC_CL_DATA, _pRes1_32, sizeof(int32_t)*(resultsoffset));
 }
 
 /**
-  @} end of BasicConvolution group
- */
+   @} end of BasicConvolution group
+*/
