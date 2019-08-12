@@ -29,6 +29,8 @@
  */
 
 #include "plp_math.h"
+#include "kernels/SwapTable.h"
+#include "kernels/TwiddleFactors.h"
 
 
 /**
@@ -42,8 +44,9 @@
  */
 
 
+#ifndef Abs
 #define Abs(a) (((a)<0)?(-a):(a))
-
+#endif
 /**
   @brief Glue code for parallel Complex Fourier Transform of 32-bit integer vectors
   @param[in,out]  Data   points to the complex data buffer of size <code>2*N_FFT</code> [32 bit]. Processing occurs in-place
@@ -60,28 +63,23 @@ void plp_cfft_i32_parallel(int32_t * __restrict__ Data,
   uint32_t argmax, shift, maxlog2N = 0;
   int32_t max = 0;
   uint32_t N = N_FFT;
-  uint16_t * SwapTable;
-  int32_t * twiddleCoef;
+  RT_CL_DATA static uint16_t * Swap_LUT_l1;
+  RT_CL_DATA static int32_t * Twiddles_LUT_l1;
+  
+  /* L1 Memory allocation for look-up tables */
+  Swap_LUT_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(Swap_LUT));
+  Twiddles_LUT_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(Twiddles_LUT));
+  
+  if(Swap_LUT_l1 == NULL || Twiddles_LUT_l1 == NULL)
+    printf("memory allocation for look-up tables failed");
+  
+  /* Transfer to L1 memory */
+  rt_dma_copy_t copy;
+  rt_dma_memcpy((unsigned int)Swap_LUT, (unsigned int)Swap_LUT_l1, sizeof(Swap_LUT), RT_DMA_DIR_EXT2LOC, 0, &copy);
+  rt_dma_wait(&copy);
+  rt_dma_memcpy((unsigned int)Twiddles_LUT, (unsigned int)Twiddles_LUT_l1, sizeof(Twiddles_LUT), RT_DMA_DIR_EXT2LOC, 0, &copy);
+  rt_dma_wait(&copy);
 
-  /* Declare length and precision specific LUTs */
-  switch(N_FFT) {
-  case 128:
-    SwapTable = SwapTable_128;
-    twiddleCoef = twiddleCoef_i32_128;
-    break;
-  case 256:
-    SwapTable = SwapTable_256;
-    twiddleCoef = twiddleCoef_i32_256;
-    break;
-  case 512:
-    SwapTable = SwapTable_512;
-    twiddleCoef = twiddleCoef_i32_512;
-    break;
-  case 1024:
-    SwapTable = SwapTable_1024;
-    twiddleCoef = twiddleCoef_i32_1024;
-    break;
-  }
 
   /* find maximum absolute value of input data */
   for(uint32_t i = 0; i < 2 * N_FFT; i++) {
@@ -104,7 +102,6 @@ void plp_cfft_i32_parallel(int32_t * __restrict__ Data,
       Data[i] >>= shift;
     }
   }
-
   
   if (rt_cluster_id() == ARCHI_FC_CID){
     printf("parallel processing supported only for cluster side\n");
@@ -112,13 +109,13 @@ void plp_cfft_i32_parallel(int32_t * __restrict__ Data,
   }
   else{
 
-    plp_cfft_instance_i32 S;
-
-    S.Data = Data;
-    S.Twiddles = twiddleCoef;
-    S.SwapTable = SwapTable;
-    S.N_FFT = N_FFT;
-    S.nPE = nPE;
+    plp_cfft_instance_i32 S = {
+      .Data = Data,
+      .Twiddles = Twiddles_LUT_l1,
+      .SwapTable = Swap_LUT_l1,
+      .N_FFT = N_FFT,
+      .nPE = nPE,
+    };
     
     rt_team_fork(nPE, plp_cfft_i32p_xpulpv2, (void *)&S);
     

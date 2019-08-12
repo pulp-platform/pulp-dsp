@@ -98,8 +98,13 @@ if __name__=='__main__':
     gen_stimuli('fft_data_i16_256.h', 'int16_t', 16, -2**14, 2**14-1, 256)
     gen_stimuli('fft_data_i16_512.h', 'int16_t', 16, -2**14, 2**14-1, 512)
     gen_stimuli('fft_data_i16_1024.h', 'int16_t', 16, -2**14, 2**14-1, 1024)
+    gen_stimuli('fft_data_i16_2048.h', 'int16_t', 16, -2**14, 2**14-1, 2048)
+    gen_stimuli('fft_data_i16_4096.h', 'int16_t', 16, -2**14, 2**14-1, 4096)
+    
     gen_stimuli('fft_data_i32_128.h', 'int32_t', 32, -2**16, 2**16-1, 128)
     gen_stimuli('fft_data_i32_256.h', 'int32_t', 32, -2**16, 2**16-1, 256)
     gen_stimuli('fft_data_i32_512.h', 'int32_t', 32, -2**16, 2**16-1, 512)
     gen_stimuli('fft_data_i32_1024.h', 'int32_t', 32, -2**16, 2**16-1, 1024)
+    gen_stimuli('fft_data_i32_2048.h', 'int32_t', 32, -2**16, 2**16-1, 2048)
+    gen_stimuli('fft_data_i32_4096.h', 'int32_t', 32, -2**16, 2**16-1, 4096)
 

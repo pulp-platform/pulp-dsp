@@ -59,11 +59,10 @@ void plp_cfft_i16v_xpulpv2(int16_t *__restrict__ Data, int16_t *__restrict__ Twi
     v2s *CoeffV = (v2s *) Twiddles;
     v2s *DataV  = (v2s *) Data;
     iL = 1;
-    iM = N_FFT / 2; 
+    iM = N_FFT / 2;
     
     for (iCnt1 = 0; iCnt1 < (iLog2N-1); iCnt1++) {
         iQ = 0;
-        
         for (iCnt2 = 0; iCnt2 < iM; iCnt2++) {
             v2s W = CoeffV[iQ];
             iA = iCnt2; 
@@ -81,6 +80,8 @@ void plp_cfft_i16v_xpulpv2(int16_t *__restrict__ Data, int16_t *__restrict__ Twi
         iM >>= 1;
     }
     iA = 0;
+
+
     /* Last Layer: W = (1, 0) */
     for (iCnt3 = 0; iCnt3 < (N_FFT>>1); iCnt3++) {
         v2s Tmp;

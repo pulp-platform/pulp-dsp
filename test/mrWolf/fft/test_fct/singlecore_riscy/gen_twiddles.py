@@ -26,7 +26,7 @@ def write_header_scalar(f, name, var_type, value):
 def write_arr(f, name, arr, n_bits, var_type, length):
 
     f.write('#if defined(PLP_FFT_TABLES_I%s_%s)\n' % (n_bits, length))
-    f.write('RT_CL_DATA %s %s[%s] = {\n' % (var_type, name, length)) # RT_L2_DATA #RT_CL_DATA
+    f.write('RT_L2_DATA %s %s[%s] = {\n' % (var_type, name, length)) # RT_L2_DATA #RT_CL_DATA
     for i in range(0, length):
         v = arr[i]
         f.write('%d, ' % (v))
@@ -37,13 +37,21 @@ def write_arr(f, name, arr, n_bits, var_type, length):
 
     return
 
+def write_arr_decl(f, name, n_bits, var_type, length):
+
+    f.write('#if defined(PLP_FFT_TABLES_I%s_%s)\n' % (n_bits, length))
+    f.write('extern %s %s[%s];\n' % (var_type, name, length)) # RT_L2_DATA #RT_CL_DATA
+    f.write('#endif\n\n')
+
+    return
+
 def write_scalar(f, name, value, var_type):
     f.write('%s %s = %d;\n\n' % (var_type, name, value)) # RT_L2_DATA # RT_CL_DATA
     return
 
 ################################################################################
 
-def gen_twiddles(f, var_type, n_bits, length):
+def gen_twiddles(cfile, hfile, var_type, n_bits, length):
     
     twiddleCoef = np.empty(2*length//2)
     twiddleCoef_real = np.cos(np.arange(length//2) * 2*np.pi/length)*(2**(n_bits - 1) - 1)
@@ -55,37 +63,35 @@ def gen_twiddles(f, var_type, n_bits, length):
 
     #print(n_bits, length, np.min(twiddleCoef_q), np.max(twiddleCoef_q), 2**(n_bits-1))
         
-    write_arr(f, 'Twiddles_LUT', twiddleCoef_q, n_bits, var_type, 2*length//2) 
-        
-
+    write_arr(cfile, 'Twiddles_LUT', twiddleCoef_q, n_bits, var_type, 2*length//2)
+    write_arr_decl(hfile, 'Twiddles_LUT', n_bits, var_type, 2*length//2)
 
 
 if __name__=='__main__':
 
-    file_name = 'TwiddleFactors.c'
-    if os.path.exists(file_name):
-        os.remove(file_name)
-
-    f = open(file_name, 'a+')
-    f.write('#ifndef __FFT_TWIDDLES_H__\n#define __FFT_TWIDDLES_H__\n\n')
-    f.write('#include \"rt/rt_api.h\"\n\n')
-    f.write('#define PLP_FFT_TABLES_I16_256\n\n')
-
-    gen_twiddles(f, 'int8_t', 8, 128)
-    gen_twiddles(f, 'int8_t', 8, 256)
-    gen_twiddles(f, 'int8_t', 8, 512)
-    gen_twiddles(f, 'int8_t', 8, 1024)
+    n_bits = [16, 32]
+    lengths = [128, 256, 512, 1024, 2048, 4096];
     
-    gen_twiddles(f, 'int16_t', 16, 128)
-    gen_twiddles(f, 'int16_t', 16, 256)
-    gen_twiddles(f, 'int16_t', 16, 512)
-    gen_twiddles(f, 'int16_t', 16, 1024)
+    cfile_name = 'TwiddleFactors.c'
+    if os.path.exists(cfile_name):
+        os.remove(cfile_name)
 
-    gen_twiddles(f, 'int32_t', 32, 128)
-    gen_twiddles(f, 'int32_t', 32, 256)
-    gen_twiddles(f, 'int32_t', 32, 512)
-    gen_twiddles(f, 'int32_t', 32, 1024)
+    hfile_name = 'TwiddleFactors.h'
+    if os.path.exists(hfile_name):
+        os.remove(hfile_name)
 
-    f.write('\n#endif\n')
+    cfile = open(cfile_name, 'a+')
+    hfile = open(hfile_name, 'a+')
+    hfile.write('#ifndef __FFT_TWIDDLES_H__\n#define __FFT_TWIDDLES_H__\n\n')
+    cfile.write('#include \"rt/rt_api.h\"\n#include \"TwiddleFactors.h\"\n#include \"../config.h\"\n\n')
+    hfile.write('#include \"rt/rt_api.h\"\n#include \"../config.h\"\n\n')
 
-    f.close()
+    for n in n_bits:
+        for l in lengths:
+            gen_twiddles(cfile, hfile, 'int' + str(n) + '_t', n, l)
+
+
+    hfile.write('\n#endif // __FFT_TWIDDLES_H__\n')
+
+    hfile.close()
+    cfile.close()

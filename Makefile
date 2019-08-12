@@ -10,13 +10,10 @@ FC_SRCS = \
 	src/BasicMathFunctions/plp_dot_prod_i16.c src/BasicMathFunctions/kernels/plp_dot_prod_i16s_rv32im.c \
 	src/BasicMathFunctions/plp_dot_prod_i32.c src/BasicMathFunctions/kernels/plp_dot_prod_i32s_rv32im.c \
 	src/TransformFunctions/plp_cfft_i16.c \
+	src/TransformFunctions/plp_cfft_i16_parallel.c \
 	src/TransformFunctions/kernels/plp_cfft_i16s_rv32im.c \
-	src/TransformFunctions/kernels/SwapTable.c \
-	src/TransformFunctions/kernels/TwiddleFactors.c \
-#src/TransformFunctions/plp_cfft_i16_parallel.c \
 	src/TransformFunctions/plp_cfft_i32.c \
 	src/TransformFunctions/plp_cfft_i32_parallel.c \
-	src/TransformFunctions/kernels/plp_cfft_i16s_rv32im.c \
 	src/TransformFunctions/kernels/plp_cfft_i32s_rv32im.c \
 	src/TransformFunctions/kernels/SwapTable.c \
 	src/TransformFunctions/kernels/TwiddleFactors.c \

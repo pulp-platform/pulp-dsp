@@ -20,5 +20,13 @@ extern uint16_t Swap_LUT[512];
 extern uint16_t Swap_LUT[1024];
 #endif
 
+#if defined(PLP_FFT_TABLES_I16_2048) || defined(PLP_FFT_TABLES_I32_2048)
+extern uint16_t Swap_LUT[2048];
+#endif
+
+#if defined(PLP_FFT_TABLES_I16_4096) || defined(PLP_FFT_TABLES_I32_4096)
+extern uint16_t Swap_LUT[4096];
+#endif
+
 
 #endif

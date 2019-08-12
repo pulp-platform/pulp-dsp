@@ -1,17 +1,5 @@
 #!/usr/bin/env python
 
-'''
-    gen_stimuli.py is used to generate header files containing data used for testing.
-    Currently it supports generation of two vectors for dot product. It randomly generates the two vectors and saves them into a header file together with the respected expected (right) result from dot product.
-    The inputs to the gen_stimuli.py are:
-    - name of the header file containing generated data
-    - variable type: int32_t, int16_t, int8_t
-    - precision of the elements of the vectors in bit: 32, 16, 8
-    - minimum extreme of the range of the values in the vectors
-    - maximum extreme of the range of the values in the vectors
-    - length of the vectors
-    '''
-
 import sys
 import random
 import numpy as np
@@ -25,7 +13,7 @@ def write_header_scalar(f, name, var_type, value):
 def write_arr(f, name, arr, var_type, length):
 
     f.write('#if defined(PLP_FFT_TABLES_I%s_%s) || defined(PLP_FFT_TABLES_I%s_%s)\n' % (16, length, 32, length))
-    f.write('RT_CL_DATA %s %s[%s] = {\n' % (var_type, name, length)) # RT_L2_DATA #RT_CL_DATA
+    f.write('RT_L2_DATA %s %s[%s] = {\n' % (var_type, name, length)) # RT_L2_DATA #RT_CL_DATA
     for i in range(0, length):
         v = arr[i]
         f.write('%d, ' % (v))
@@ -44,13 +32,14 @@ def write_scalar(f, name, value, var_type):
 
 if __name__=='__main__':
 
-    f = open('SwapTable.c', 'w')
-    
-    f.write('#ifndef __FFT_SWAPTABLE_H__\n#define __FFT_SWAPTABLE_H__\n\n')
-    f.write('#include \"rt/rt_api.h\"\n\n')
-    f.write('#define PLP_FFT_TABLES_I16_256\n\n')
+    cfile = open('SwapTable.c', 'w')
+    hfile = open('SwapTable.h', 'w')
 
-    lengths = np.array([128, 256, 512, 1024])
+    cfile.write('#include \"rt/rt_api.h\"\n#include \"SwapTable.h\"\n#include \"../config.h\"\n\n')
+    hfile.write('#ifndef __FFT_SWAPTABLE_H__\n#define __FFT_SWAPTABLE_H__\n\n')
+    hfile.write('#include \"rt/rt_api.h\"\n#include \"../config.h\"\n\n')
+    
+    lengths = np.array([128, 256, 512, 1024, 2048, 4096])
 
     for i in lengths:
         rangi = range(i)
@@ -60,10 +49,13 @@ if __name__=='__main__':
             for k in range(int(np.log2(i))):
                 swaptable[j] += ((j // (i // 2**(k+1))) % 2) * (2**k)
 
-        write_arr(f, 'Swap_LUT', swaptable, 'uint16_t', i)
+        write_arr(cfile, 'Swap_LUT', swaptable, 'uint16_t', i)
+        hfile.write('#if defined(PLP_FFT_TABLES_I%s_%s) || defined(PLP_FFT_TABLES_I%s_%s)\n' % (16, i, 32, i))
+        hfile.write('extern uint16_t Swap_LUT[%s];\n#endif\n\n' % (i))
    
 
     
-f.write('\n#endif\n')
+hfile.write('\n#endif\n')
     
-f.close()
+hfile.close()
+cfile.close()
