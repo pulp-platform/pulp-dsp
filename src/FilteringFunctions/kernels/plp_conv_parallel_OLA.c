@@ -40,5 +40,4 @@ void plp_conv_parallel_OLA(uint32_t nPE, uint32_t srcALen, uint32_t srcBLen, int
     S.coresPerVector = ((2*nPE)/((S.numVectors>>1)<<1));
   }
 
-
 }

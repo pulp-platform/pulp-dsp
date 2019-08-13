@@ -29,9 +29,9 @@
  */
 
 #include "plp_math.h"
-#define OLARATIO32 8 // Eight is optimal in terms of overhead minimization
+#define OLARATIO32 10 // Eight is optimal in terms of overhead minimization
 
-static RT_CL_DATA int32_t* _pRes1_32;
+static int32_t* _pRes1_32;
 
 /**
    @ingroup groupMath
@@ -82,16 +82,17 @@ void plp_conv_i32(
 
   uint32_t temp1,temp2,k;
 
-  int32_t* pOut = pRes;
-  int32_t* _pRes = _pRes1_32;
-  
-  _pRes1_32 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*(resultsoffset)); 
-
   for(uint32_t i=0;i<srcALen+srcBLen-1;i++){
     pRes[i] = 0;
   }
   
   if (rt_cluster_id() == ARCHI_FC_CID){
+
+    _pRes1_32 = rt_alloc(RT_ALLOC_FC_DATA, sizeof(int32_t)*(resultsoffset)); 
+  
+    int32_t* pOut = pRes;
+    int32_t* _pRes = _pRes1_32;
+  
     
     for(uint32_t i=0;i<nPE-1;i++){
       plp_conv_i32s_rv32im(pIn1, in1Len, pIn2+i*src2Offset, src2Offset, _pRes1_32);
@@ -145,6 +146,12 @@ void plp_conv_i32(
 
   } else {
 
+    _pRes1_32 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*(resultsoffset)); 
+  
+    int32_t* pOut = pRes;
+    int32_t* _pRes = _pRes1_32;
+    
+    
     for(uint32_t i=0;i<nPE-1;i++){
       plp_conv_i32s_xpulpv2(pIn1, in1Len, pIn2+i*src2Offset, src2Offset, _pRes1_32);
 

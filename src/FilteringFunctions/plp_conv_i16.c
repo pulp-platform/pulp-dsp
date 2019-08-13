@@ -31,7 +31,7 @@
 #include "plp_math.h"
 
 #define OLARATIO16 8
-static RT_CL_DATA int32_t* _pRes1_16;
+static int32_t* _pRes1_16;
 
 
 /**
@@ -83,16 +83,17 @@ void plp_conv_i16(
 
   uint32_t temp1,temp2,k;
 
-  int32_t* pOut = pRes;
-  int32_t* _pRes = _pRes1_16;
-  
-  _pRes1_16 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*(resultsoffset)); 
-
   for(uint32_t i=0;i<srcALen+srcBLen-1;i++){
     pRes[i] = 0;
   }
   
   if (rt_cluster_id() == ARCHI_FC_CID){
+
+    
+    _pRes1_16 = rt_alloc(RT_ALLOC_FC_DATA, sizeof(int32_t)*(resultsoffset)); 
+    
+    int32_t* pOut = pRes;
+    int32_t* _pRes = _pRes1_16;
     
     for(uint32_t i=0;i<nPE-1;i++){
       plp_conv_i16s_rv32im(pIn1, in1Len, pIn2+i*src2Offset, src2Offset, _pRes1_16);
@@ -146,6 +147,11 @@ void plp_conv_i16(
 
   } else {
 
+    _pRes1_16 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*(resultsoffset)); 
+    
+    int32_t* pOut = pRes;
+    int32_t* _pRes = _pRes1_16;
+    
     for(uint32_t i=0;i<nPE-1;i++){
       plp_conv_i16s_xpulpv2(pIn1, in1Len, pIn2+i*src2Offset, src2Offset, _pRes1_16);
 

@@ -226,7 +226,6 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 	      /* Read x[3] sample */
 	      x3 = *(px);
 
-	      /* Perform the multiply-accumulate */
 	      /* acc0 +=  x[0] * y[srcBLen - 1] */
 	      acc0 += x0 * c0;
 	      /* acc1 +=  x[1] * y[srcBLen - 1] */
@@ -241,7 +240,6 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 	      /* Read x[4] sample */
 	      x0 = *(px + 1U);
 
-	      /* Perform the multiply-accumulate */
 	      /* acc0 +=  x[1] * y[srcBLen - 2] */
 	      acc0 += x1 * c0;
 	      /* acc1 +=  x[2] * y[srcBLen - 2] */
@@ -256,7 +254,6 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 	      /* Read x[5] sample */
 	      x1 = *(px + 2U);
 
-	      /* Perform the multiply-accumulate */
 	      /* acc0 +=  x[2] * y[srcBLen - 3] */
 	      acc0 += x2 * c0;
 	      /* acc1 +=  x[3] * y[srcBLen - 2] */
@@ -272,7 +269,6 @@ void plp_conv_i32s_xpulpv2(const int32_t *  pSrcA,
 	      x2 = *(px + 3U);
 	      px += 4U;
 
-	      /* Perform the multiply-accumulate */
 	      /* acc0 +=  x[3] * y[srcBLen - 4] */
 	      acc0 += x3 * c0;
 	      /* acc1 +=  x[4] * y[srcBLen - 4] */

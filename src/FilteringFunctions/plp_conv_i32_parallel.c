@@ -94,9 +94,11 @@ void plp_conv_i32_parallel(
     uint32_t srcAoffset = ((pIn1Len+nPE-1)/nPE);
     uint32_t resultsoffset = srcAoffset + pIn2Len - 1;
     uint32_t resultsLen = resultsoffset*(nPE-1) + (pIn1Len - (srcAoffset * (nPE-1))) + pIn2Len - 1;
+    int32_t* resBuf;
     
     if(nPE > 1){
       resultsBuffer = (int32_t*)rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*resultsoffset*nPE);
+      resBuf = resultsBuffer;
       for(uint32_t i=resultsLen;i<resultsoffset*nPE;i++){
 	resultsBuffer[i] = 0;
       }
@@ -104,6 +106,7 @@ void plp_conv_i32_parallel(
     } else {
       resultsBuffer = pRes;
     }
+
     plp_conv_instance_i32 S = {
       .srcALen = pIn1Len,
       .srcBLen = pIn2Len,
@@ -171,7 +174,7 @@ void plp_conv_i32_parallel(
 	pRes[i] = resultsBuffer[i];
       }
 #endif
-      rt_free(RT_ALLOC_CL_DATA, &resultsBuffer[0], sizeof(int32_t)*resultsoffset*nPE);
+      rt_free(RT_ALLOC_CL_DATA, resBuf, sizeof(int32_t)*resultsoffset*nPE);
             
 #endif 
       

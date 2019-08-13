@@ -76,6 +76,8 @@ void plp_conv_i8_parallel(
 
     uint32_t pIn1Len;
     uint32_t pIn2Len;
+
+    int32_t* resBuf;
     
     if(srcALen >= srcBLen ){
       pIn2 = pSrcA;
@@ -95,6 +97,7 @@ void plp_conv_i8_parallel(
     
     if(nPE > 1){
       resultsBuffer = (int32_t*)rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*resultsLen);
+      resBuf = resultsBuffer;
       // printf("Address of resultsBuffer: 0x%x, End: 0x%x\n", resultsBuffer, resultsBuffer + sizeof(int32_t)*resultsLen);
     } else {
       resultsBuffer = pRes;
@@ -163,8 +166,7 @@ void plp_conv_i8_parallel(
 	pRes[i] = resultsBuffer[i];
       }
 #endif
-      free(resultsBuffer);
-            
+      rt_free(RT_ALLOC_CL_DATA, resBuf, sizeof(int32_t)*resultsoffset*nPE);
 #endif 
       
     }
