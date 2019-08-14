@@ -88,7 +88,7 @@ void plp_conv_i16_parallel(
     uint32_t resultsoffset = srcAoffset + pIn2Len - 1;
     uint32_t resultsLen = resultsoffset*(nPE-1) + (pIn1Len - (srcAoffset * (nPE-1))) + pIn2Len - 1;
 
-    int32_t resBuf;
+    int32_t* resBuf;
     
     if(nPE > 1){
       resultsBuffer = (int32_t*)rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*resultsLen);

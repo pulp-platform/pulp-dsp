@@ -76,7 +76,7 @@ void plp_conv_i8(
   }
   
   uint32_t nPE = (OLARATIO8/(in1Len/in2Len));
-
+  nPE = nPE > 0 ? nPE : 1;
   uint32_t src2Offset = ((in2Len+nPE-1)/nPE);
   uint32_t resultsoffset = src2Offset + in1Len - 1;
   uint32_t lastresultLen = (in2Len - (src2Offset * (nPE-1))) + in1Len - 1;
