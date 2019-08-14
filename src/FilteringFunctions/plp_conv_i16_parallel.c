@@ -65,11 +65,6 @@ void plp_conv_i16_parallel(
     printf("parallel processing supported only for cluster side\n");
     return;
   }  else {
-    
-    if(nPE == 1){
-      plp_conv_i16(pSrcA, srcALen, pSrcB, srcBLen, pRes);
-      return;
-    }
 
     const int16_t* pIn1;
     const int16_t* pIn2;
