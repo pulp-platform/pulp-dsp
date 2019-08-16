@@ -119,14 +119,13 @@ void plp_cfft_i16vp_xpulpv2(void * S)
 
   rt_team_barrier();
   
-    
-  for (uint32_t i = rt_core_id(); i < N_FFT; i+=nPE) {
-    v2s S = DataV[i];
-    uint16_t SwapIndex = SwapTable[i];
-    if (i < SwapIndex) {
-      DataV[i] = DataV[SwapIndex];
-      DataV[SwapIndex] = S;
-    }
+
+  uint16_t SwapTable_length = SwapTable[0];
+  SwapTable++;
+  for (uint16_t i = rt_core_id()*2; i < SwapTable_length; i+=2*nPE) {
+    v2s S = DataV[SwapTable[i]];
+    DataV[SwapTable[i]] = DataV[SwapTable[i+1]];
+    DataV[SwapTable[i+1]] = S;
   }
 
 }

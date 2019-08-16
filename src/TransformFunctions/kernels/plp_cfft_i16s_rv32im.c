@@ -98,16 +98,15 @@ void plp_cfft_i16s_rv32im(int16_t *__restrict__ Data, int16_t *__restrict__ Twid
         iA = iA + 4;
     }
   
-    for (uint16_t i = 0; i < N_FFT; i++) {
-      uint16_t SwapIndex = SwapTable[i];
-      if (i < SwapIndex) {
-	int16_t Tmp[2] = {Data[2*i], Data[2*i+1]};
-	Data[2*i] = Data[2*SwapIndex];
-	Data[2*i+1] = Data[2*SwapIndex+1];
-	Data[2*SwapIndex] = Tmp[0];
-	Data[2*SwapIndex+1] = Tmp[1];
-      }
-  }
+    uint16_t SwapTable_length = SwapTable[0];
+    SwapTable++;
+    for (uint16_t i = 0; i < SwapTable_length; i+=2) {
+      int16_t Tmp[2] = {DataV[2*SwapTable[i]], DataV[2*SwapTable[i]+1]};
+      DataV[2*SwapTable[i]] = DataV[2*SwapTable[i+1]];
+      DataV[2*SwapTable[i]+1] = DataV[2*SwapTable[i+1]+1];
+      DataV[2*SwapTable[i+1]] = Tmp[0];
+      DataV[2*SwapTable[i+1]+1] = Tmp[1];
+    }
 }
 
 

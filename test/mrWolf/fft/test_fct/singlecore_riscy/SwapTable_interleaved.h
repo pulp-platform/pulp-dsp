@@ -1,5 +1,5 @@
-#ifndef __FFT_SWAPTABLE_H__
-#define __FFT_SWAPTABLE_H__
+#ifndef __FFT_SWAPTABLE_INTERLEAVED_H__
+#define __FFT_SWAPTABLE_INTERLEAVED_H__
 
 #include "rt/rt_api.h"
 #include "../config.h"
