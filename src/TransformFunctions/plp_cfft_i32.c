@@ -115,4 +115,9 @@ void plp_cfft_i32(int32_t * __restrict__ Data,
   else{
     plp_cfft_i32s_xpulpv2(Data, (int32_t *)Twiddles_LUT_l1, Swap_LUT_l1, N_FFT);
   }
+
+  if (rt_cluster_id() != ARCHI_FC_CID) {
+    rt_free(RT_ALLOC_CL_DATA, Swap_LUT_l1, sizeof(Swap_LUT));
+    rt_free(RT_ALLOC_CL_DATA, Twiddles_LUT_l1, sizeof(Twiddles_LUT));
+  }
 }

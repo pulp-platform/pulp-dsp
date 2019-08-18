@@ -1,7 +1,7 @@
 #include "rt/rt_api.h"
 #include "stdio.h"
 #include "plp_math.h"
-#include "../singlecore_riscy/fft_data_i32_512.h"
+#include "../singlecore_riscy/fft_data_i16_512.h"
 
 
 // This benchmark is a single shot so we can read the value directly out of the
@@ -18,21 +18,21 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  plp_cfft_i32(x, 512);
+  plp_cfft_i16(x, 512);
 
   rt_perf_stop(perf);
   
-  printf("finished\n");
+  /* printf("finished\n"); */
   
-  printf("result\n");
-  for(int i = 0; i < 2 * 512; i++)
-    printf("%i, ", x[i]);
-  printf("\n\n");
+  /* printf("result\n"); */
+  /* for(int i = 0; i < 2 * 512; i++) */
+  /*   printf("%i, ", x[i]); */
+  /* printf("\n\n"); */
   
-  printf("expected result\n");
-  for(int i = 0; i < 2 * 512; i++)
-    printf("%i, ", exp_result[i]);
-  printf("\n\n");
+  /* printf("expected result\n"); */
+  /* for(int i = 0; i < 2 * 512; i++) */
+  /*   printf("%i, ", exp_result[i]); */
+  /* printf("\n\n"); */
 }
 
 

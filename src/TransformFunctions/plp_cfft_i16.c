@@ -57,8 +57,7 @@
 void plp_cfft_i16(int16_t * __restrict__ Data,
 		  uint32_t N_FFT)
 {
-
-
+  
   uint32_t argmax, shift, maxlog2N = 0;
   int32_t max = 0;
   uint32_t N = N_FFT;
@@ -107,6 +106,7 @@ void plp_cfft_i16(int16_t * __restrict__ Data,
     }
   }
 
+
 #endif //PLP_FFT_SHIFT_INPUT
     
   if (rt_cluster_id() == ARCHI_FC_CID){
@@ -119,5 +119,10 @@ void plp_cfft_i16(int16_t * __restrict__ Data,
     plp_cfft_i16v_xpulpv2(Data, (int16_t *)Twiddles_LUT_l1, Swap_LUT_l1, N_FFT);
 #endif
     
+  }
+  
+  if (rt_cluster_id() != ARCHI_FC_CID) {
+    rt_free(RT_ALLOC_CL_DATA, Swap_LUT_l1, sizeof(Swap_LUT));
+    rt_free(RT_ALLOC_CL_DATA, Twiddles_LUT_l1, sizeof(Twiddles_LUT));
   }
 }

@@ -121,6 +121,8 @@ void plp_cfft_i32_parallel(int32_t * __restrict__ Data,
     };
     
     rt_team_fork(nPE, plp_cfft_i32p_xpulpv2, (void *)&S);
-    
+
+    rt_free(RT_ALLOC_CL_DATA, Swap_LUT_l1, sizeof(Swap_LUT));
+    rt_free(RT_ALLOC_CL_DATA, Twiddles_LUT_l1, sizeof(Twiddles_LUT));
   }
 }

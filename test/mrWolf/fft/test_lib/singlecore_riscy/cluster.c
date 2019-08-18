@@ -1,16 +1,16 @@
 #include "rt/rt_api.h"
 #include "stdio.h"
 #include "plp_math.h"
-#include "fft_data_i32_512.h"
+#include "fft_data_i16_512.h"
 
 //static int cores_events;
-RT_CL_DATA static int32_t * x_l1;// __attribute__ ((aligned(32)));
+RT_CL_DATA static int16_t * x_l1;// __attribute__ ((aligned(32)));
 
 // This benchmark is a single shot so we can read the value directly out of the
 // HW counter using the function rt_perf_read
 static void do_bench_0(rt_perf_t *perf, int events)
 {
-  printf("fft i32 512\n");
+  printf("fft i16 512\n");
 
   // Activate specified events
   rt_perf_conf(perf, events);
@@ -20,21 +20,21 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  plp_cfft_i32_parallel(x_l1, 512, 8);
+  plp_cfft_i16_parallel(x_l1, 512, 8);
 
   rt_perf_stop(perf);
 
-  printf("finished\n");
+  /* printf("finished\n"); */
   
-  printf("result\n");
-  for(int i = 0; i < 2 * 512; i++)
-    printf("%i, ", x_l1[i]);
-  printf("\n\n");
+  /* printf("result\n"); */
+  /* for(int i = 0; i < 2 * 512; i++) */
+  /*   printf("%i, ", x_l1[i]); */
+  /* printf("\n\n"); */
 
-  printf("expected result\n");
-  for(int i = 0; i < 2 * 512; i++)
-    printf("%i, ", exp_result[i]);
-  printf("\n\n");
+  /* printf("expected result\n"); */
+  /* for(int i = 0; i < 2 * 512; i++) */
+  /*   printf("%i, ", exp_result[i]); */
+  /* printf("\n\n"); */
 }
 
 void cluster_entry(void *arg){
