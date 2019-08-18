@@ -1,5 +1,5 @@
 #include "rt/rt_api.h"
-#include "SwapTable.h"
+#include "SwapTable_interleaved.h"
 #include "../config.h"
 
 #if defined(PLP_FFT_TABLES_I16_128) || defined(PLP_FFT_TABLES_I32_128)

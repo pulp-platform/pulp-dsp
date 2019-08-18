@@ -1,17 +1,15 @@
 #include "rt/rt_api.h"
 #include "stdio.h"
 #include "plp_math.h"
-#include "../../test_data/vec_data.h"
+#include "../singlecore_riscy/fft_data_i16_512.h"
 
 
 // This benchmark is a single shot so we can read the value directly out of the
 // HW counter using the function rt_perf_read
 static void do_bench_0(rt_perf_t *perf, int events)
 {
-  int32_t result=0;
-
-  //printf("dot product i32s fc\n");
-
+  printf("fft i32 512\n");
+  
   // Activate specified events
   rt_perf_conf(perf, events);
 
@@ -20,13 +18,21 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  //plp_dot_prod_i32(v_a, v_b, LENGTH, &result);
-  plp_dot_prod_q32(v_a, v_b, LENGTH, 1, &result);
+  plp_cfft_i16(x, 512);
 
   rt_perf_stop(perf);
-
-  printf("result is %d, expected result is %d\n", result, exp_result);
-
+  
+  /* printf("finished\n"); */
+  
+  /* printf("result\n"); */
+  /* for(int i = 0; i < 2 * 512; i++) */
+  /*   printf("%i, ", x[i]); */
+  /* printf("\n\n"); */
+  
+  /* printf("expected result\n"); */
+  /* for(int i = 0; i < 2 * 512; i++) */
+  /*   printf("%i, ", exp_result[i]); */
+  /* printf("\n\n"); */
 }
 
 
@@ -44,11 +50,17 @@ int main(){
   // To be compatible with all platforms, we can count only 1 event at the
   // same time (the silicon as only 1 HW counter), but the total number of cyles
   // is reported by a timer, we can activate it at the same time.
-  for (int i=0; i<10; i++){
-    do_bench_0(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR));
+  for (int i=0; i<1; i++){
+    do_bench_0(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR) | (1<<RT_PERF_LD_STALL) | (1<<RT_PERF_JR_STALL) | (1<<RT_PERF_ACTIVE_CYCLES) | (1<<RT_PERF_LD_EXT_CYC) | (1<<RT_PERF_ST_EXT_CYC) | (1<<RT_PERF_TCDM_CONT));
   }
-  printf("Total cycles: %d\n", rt_perf_read(RT_PERF_CYCLES));
+   printf("Total cycles: %d\n", rt_perf_read(RT_PERF_CYCLES));
+  printf("Active cycles: %d\n", rt_perf_read(RT_PERF_ACTIVE_CYCLES));
   printf("Instructions: %d\n", rt_perf_read(RT_PERF_INSTR));
+  printf("Load Stalls: %d\n", rt_perf_read(RT_PERF_LD_STALL));
+  printf("Jump Stalls: %d\n", rt_perf_read(RT_PERF_JR_STALL));
+  printf("Extern Load cycles: %d\n", rt_perf_read(RT_PERF_LD_EXT_CYC));
+  printf("Extern Store cycles: %d\n", rt_perf_read(RT_PERF_ST_EXT_CYC));
+  printf("TCDM contention cycles: %d\n", rt_perf_read(RT_PERF_TCDM_CONT));
 
 
   return 0;

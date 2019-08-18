@@ -80,7 +80,8 @@ void plp_cfft_i32_parallel(int32_t * __restrict__ Data,
   rt_dma_memcpy((unsigned int)Twiddles_LUT, (unsigned int)Twiddles_LUT_l1, sizeof(Twiddles_LUT), RT_DMA_DIR_EXT2LOC, 0, &copy);
   rt_dma_wait(&copy);
 
-
+#ifdef PLP_FFT_SHIFT_INPUT
+  
   /* find maximum absolute value of input data */
   for(uint32_t i = 0; i < 2 * N_FFT; i++) {
     if(Abs(Data[i]) > max)
@@ -102,6 +103,8 @@ void plp_cfft_i32_parallel(int32_t * __restrict__ Data,
       Data[i] >>= shift;
     }
   }
+
+#endif //PLP_FFT_SHIFT_INPUT
   
   if (rt_cluster_id() == ARCHI_FC_CID){
     printf("parallel processing supported only for cluster side\n");
@@ -118,6 +121,8 @@ void plp_cfft_i32_parallel(int32_t * __restrict__ Data,
     };
     
     rt_team_fork(nPE, plp_cfft_i32p_xpulpv2, (void *)&S);
-    
+
+    rt_free(RT_ALLOC_CL_DATA, Swap_LUT_l1, sizeof(Swap_LUT));
+    rt_free(RT_ALLOC_CL_DATA, Twiddles_LUT_l1, sizeof(Twiddles_LUT));
   }
 }

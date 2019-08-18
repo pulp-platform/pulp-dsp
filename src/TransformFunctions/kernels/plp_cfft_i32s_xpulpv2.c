@@ -59,7 +59,7 @@ void plp_cfft_i32s_xpulpv2(int32_t *__restrict__ Data, int32_t *__restrict__ Twi
     int32_t *CoeffV = Twiddles;
     int32_t *DataV  = Data;
     iL = 1;
-    iM = N_FFT / 2; 
+    iM = N_FFT / 2;
    
     for (iCnt1 = 0; iCnt1 < (iLog2N-1); iCnt1++) {
         iQ = 0;
@@ -98,15 +98,14 @@ void plp_cfft_i32s_xpulpv2(int32_t *__restrict__ Data, int32_t *__restrict__ Twi
     }
 
     
-    for (uint32_t i = 0; i < N_FFT; i++) {
-      uint16_t SwapIndex = SwapTable[i];
-      if (i < SwapIndex) {
-	int32_t Tmp[2] = {DataV[2*i], DataV[2*i+1]};
-	DataV[2*i] = DataV[2*SwapIndex];
-	DataV[2*i+1] = DataV[2*SwapIndex+1];
-	DataV[2*SwapIndex] = Tmp[0];
-	DataV[2*SwapIndex+1] = Tmp[1];
-      }
+    uint16_t SwapTable_length = SwapTable[0];
+    SwapTable++;
+    for (uint16_t i = 0; i < SwapTable_length; i+=2) {
+      int32_t Tmp[2] = {DataV[2*SwapTable[i]], DataV[2*SwapTable[i]+1]};
+      DataV[2*SwapTable[i]] = DataV[2*SwapTable[i+1]];
+      DataV[2*SwapTable[i]+1] = DataV[2*SwapTable[i+1]+1];
+      DataV[2*SwapTable[i+1]] = Tmp[0];
+      DataV[2*SwapTable[i+1]+1] = Tmp[1];
     }
 }
 

@@ -62,20 +62,22 @@ void plp_cfft_i32(int32_t * __restrict__ Data,
   uint32_t N = N_FFT;
   RT_CL_DATA static uint16_t * Swap_LUT_l1;
   RT_CL_DATA static int32_t * Twiddles_LUT_l1;
-  
-  /* L1 Memory allocation for Look-up tables */
-  Swap_LUT_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(Swap_LUT));
-  Twiddles_LUT_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(Twiddles_LUT));
-  
-  if(Swap_LUT_l1 == NULL || Twiddles_LUT_l1 == NULL)
-    printf("memory allocation for look-up tables failed\n");
-  
-  /* Transfer to L1 memory */
-  rt_dma_copy_t copy;
-  rt_dma_memcpy((unsigned int)Swap_LUT, (unsigned int)Swap_LUT_l1, sizeof(Swap_LUT), RT_DMA_DIR_EXT2LOC, 0, &copy);
-  rt_dma_wait(&copy);
-  rt_dma_memcpy((unsigned int)Twiddles_LUT, (unsigned int)Twiddles_LUT_l1, sizeof(Twiddles_LUT), RT_DMA_DIR_EXT2LOC, 0, &copy);
-  rt_dma_wait(&copy);
+
+  if (rt_cluster_id() != ARCHI_FC_CID) {
+    /* L1 Memory allocation for Look-up tables */
+    Swap_LUT_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(Swap_LUT));
+    Twiddles_LUT_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(Twiddles_LUT));
+    
+    if(Swap_LUT_l1 == NULL || Twiddles_LUT_l1 == NULL)
+      printf("memory allocation for look-up tables failed\n");
+    
+    /* Transfer to L1 memory */
+    rt_dma_copy_t copy;
+    rt_dma_memcpy((unsigned int)Swap_LUT, (unsigned int)Swap_LUT_l1, sizeof(Swap_LUT), RT_DMA_DIR_EXT2LOC, 0, &copy);
+    rt_dma_wait(&copy);
+    rt_dma_memcpy((unsigned int)Twiddles_LUT, (unsigned int)Twiddles_LUT_l1, sizeof(Twiddles_LUT), RT_DMA_DIR_EXT2LOC, 0, &copy);
+    rt_dma_wait(&copy);
+  }
 
 
 
@@ -108,8 +110,14 @@ void plp_cfft_i32(int32_t * __restrict__ Data,
   
   if (rt_cluster_id() == ARCHI_FC_CID){
     plp_cfft_i32s_rv32im(Data, (int32_t *)Twiddles_LUT, Swap_LUT, N_FFT);
+    printf("enters rv32im\n");
   }
   else{
     plp_cfft_i32s_xpulpv2(Data, (int32_t *)Twiddles_LUT_l1, Swap_LUT_l1, N_FFT);
+  }
+
+  if (rt_cluster_id() != ARCHI_FC_CID) {
+    rt_free(RT_ALLOC_CL_DATA, Swap_LUT_l1, sizeof(Swap_LUT));
+    rt_free(RT_ALLOC_CL_DATA, Twiddles_LUT_l1, sizeof(Twiddles_LUT));
   }
 }

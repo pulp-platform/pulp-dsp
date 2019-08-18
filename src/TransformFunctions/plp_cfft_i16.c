@@ -57,27 +57,30 @@
 void plp_cfft_i16(int16_t * __restrict__ Data,
 		  uint32_t N_FFT)
 {
-
+  
   uint32_t argmax, shift, maxlog2N = 0;
   int32_t max = 0;
   uint32_t N = N_FFT;
+
   RT_CL_DATA static uint16_t * Swap_LUT_l1;
   RT_CL_DATA static int16_t * Twiddles_LUT_l1;
-
-
-  /* L1 Memory allocation for look-up tables */
-  Swap_LUT_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(Swap_LUT));
-  Twiddles_LUT_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(Twiddles_LUT));
   
-  if(Swap_LUT_l1 == NULL || Twiddles_LUT_l1 == NULL)
-    printf("memory allocation for look-up tables failed");
+  if (rt_cluster_id() != ARCHI_FC_CID) {
+    /* L1 Memory allocation for look-up tables */
+    Swap_LUT_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(Swap_LUT));
+    Twiddles_LUT_l1 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(Twiddles_LUT));
+    
+    if(Swap_LUT_l1 == NULL || Twiddles_LUT_l1 == NULL)
+      printf("memory allocation for look-up tables failed");
+    
+    /* Transfer to L1 memory */
+    rt_dma_copy_t copy;
+    rt_dma_memcpy((unsigned int)Swap_LUT, (unsigned int)Swap_LUT_l1, sizeof(Swap_LUT), RT_DMA_DIR_EXT2LOC, 0, &copy);
+    rt_dma_wait(&copy);
+    rt_dma_memcpy((unsigned int)Twiddles_LUT, (unsigned int)Twiddles_LUT_l1, sizeof(Twiddles_LUT), RT_DMA_DIR_EXT2LOC, 0, &copy);
+    rt_dma_wait(&copy);
+  }
   
-  /* Transfer to L1 memory */
-  rt_dma_copy_t copy;
-  rt_dma_memcpy((unsigned int)Swap_LUT, (unsigned int)Swap_LUT_l1, sizeof(Swap_LUT), RT_DMA_DIR_EXT2LOC, 0, &copy);
-  rt_dma_wait(&copy);
-  rt_dma_memcpy((unsigned int)Twiddles_LUT, (unsigned int)Twiddles_LUT_l1, sizeof(Twiddles_LUT), RT_DMA_DIR_EXT2LOC, 0, &copy);
-  rt_dma_wait(&copy);
 
 #ifdef PLP_FFT_SHIFT_INPUT
   
@@ -103,7 +106,8 @@ void plp_cfft_i16(int16_t * __restrict__ Data,
     }
   }
 
-#endif
+
+#endif //PLP_FFT_SHIFT_INPUT
     
   if (rt_cluster_id() == ARCHI_FC_CID){
     plp_cfft_i16s_rv32im(Data, (int16_t *)Twiddles_LUT, Swap_LUT, N_FFT);
@@ -115,5 +119,10 @@ void plp_cfft_i16(int16_t * __restrict__ Data,
     plp_cfft_i16v_xpulpv2(Data, (int16_t *)Twiddles_LUT_l1, Swap_LUT_l1, N_FFT);
 #endif
     
+  }
+  
+  if (rt_cluster_id() != ARCHI_FC_CID) {
+    rt_free(RT_ALLOC_CL_DATA, Swap_LUT_l1, sizeof(Swap_LUT));
+    rt_free(RT_ALLOC_CL_DATA, Twiddles_LUT_l1, sizeof(Twiddles_LUT));
   }
 }

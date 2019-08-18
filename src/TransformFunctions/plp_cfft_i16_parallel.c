@@ -128,6 +128,7 @@ void plp_cfft_i16_parallel(int16_t * __restrict__ Data,
 #else
     rt_team_fork(nPE, plp_cfft_i16vp_xpulpv2, (void *)&S);
 #endif
-    
+    rt_free(RT_ALLOC_CL_DATA, Swap_LUT_l1, sizeof(Swap_LUT));
+    rt_free(RT_ALLOC_CL_DATA, Twiddles_LUT_l1, sizeof(Twiddles_LUT));
   }
 }
