@@ -3,7 +3,7 @@
  * Title:        plp_cfft_i32.c
  * Description:  32-bit integer complex fourier transform glue code
  *
- * $Date:        25. May 2019
+ * $Date:        19. Aug. 2019
  * $Revision:    V0
  *
  * Target Processor: PULP cores
@@ -33,7 +33,7 @@
 #include "kernels/TwiddleFactors.h"
 
 /**
-  @ingroup groupMath
+  @ingroup groupTransforms
  */
 
 
@@ -43,9 +43,7 @@
  */
 
 
-#ifndef Abs
-#define Abs(a) (((a)<0)?(-a):(a))
-#endif
+
 /**
   @brief Glue code for Complex Fourier Transform of 32-bit integer vectors
   @param[in,out]  Data   points to the complex data buffer of size <code>2*N_FFT</code> [32 bit]. Processing occurs in-place
@@ -83,6 +81,10 @@ void plp_cfft_i32(int32_t * __restrict__ Data,
 
 
 #ifdef PLP_FFT_SHIFT_INPUT
+
+  #ifndef Abs
+  #define Abs(a) (((a)<0)?(-a):(a))
+  #endif
   
   /* find maximum absolute value of input data */
   for(uint32_t i = 0; i < 2 * N_FFT; i++) {
@@ -121,3 +123,7 @@ void plp_cfft_i32(int32_t * __restrict__ Data,
     rt_free(RT_ALLOC_CL_DATA, Twiddles_LUT_l1, sizeof(Twiddles_LUT));
   }
 }
+
+/**
+   @} end of FourierTransform group
+*/

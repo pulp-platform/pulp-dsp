@@ -3,7 +3,7 @@
  * Title:        plp_cfft_i16s_rv32im.c
  * Description:  16-bit integer scalar complex fourier transform for RV32IM
  *
- * $Date:        18. July 2019
+ * $Date:        19. Aug. 2019
  * $Revision:    V0
  *
  * Target Processor: PULP cores
@@ -30,7 +30,7 @@
 
 
 /**
-  @ingroup FastFourierTransform
+  @ingroup FourierTransform
  */
 
 

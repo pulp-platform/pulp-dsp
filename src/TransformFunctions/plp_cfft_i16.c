@@ -3,7 +3,7 @@
  * Title:        plp_cfft_i16.c
  * Description:  16-bit integer complex fourier transform glue code
  *
- * $Date:        25. May 2019
+ * $Date:        19. Aug. 2019
  * $Revision:    V0
  *
  * Target Processor: PULP cores
@@ -34,7 +34,38 @@
 
 
 /**
-  @ingroup groupMath
+  @ingroup groupTransforms
+ */
+
+/**
+  @defgroup FourierTransform Complex Fast Fourier Transform
+  This module contains the glue code for Complex Fast Fourier Transform. The kernel codes (kernels) are in the Module Fast Fourier kernels.
+
+  The Complex Fast Fourier Transform performs a Fourier Transform on a complex input data buffer of size <code>2*N_FFT</code>
+<pre>
+      data = {real[0], imag[0], real[1], imag[1], ... , real[N], imag[N]}
+  </pre>
+  The transformation occurs in-place and is stored back to the data buffer.
+  The functions uses Look-up-Tables for the Twiddle Factors and for the Bitreversal in the end. These Tables are compiled during compilation of the library. The length and the precision of the CFFT have to be configured beforehand in the <code>config.h</code> file. Furthermore if input shifting is used, it has to be defined.
+
+  There are separate functions int16, and int32 data types. For 16-bit precision, functions exploiting SIMD instructions as well as complex extensions are provided.
+
+
+  The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
+  <pre>
+  <pulp> _ <function name> _ <data type> <precision> <method> _ <isa extension>, with
+
+  data type = {f, i, q} respectively for floats, integers, fixed points
+
+  precision = {32, 16, 8} bits
+
+  method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+
+  isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
+
+  </pre>
+
+
  */
 
 
@@ -43,9 +74,6 @@
   @{
  */
 
-#ifndef Abs
-#define Abs(a) (((a)<0)?(-a):(a))
-#endif
 
 /**
   @brief Glue code for Complex Fourier Transform of 16-bit integer vectors
@@ -83,6 +111,10 @@ void plp_cfft_i16(int16_t * __restrict__ Data,
   
 
 #ifdef PLP_FFT_SHIFT_INPUT
+
+  #ifndef Abs
+  #define Abs(a) (((a)<0)?(-a):(a))
+  #endif
   
   /* find maximum absolute value of input data */
   for(uint32_t i = 0; i < 2 * N_FFT; i++) {
@@ -126,3 +158,8 @@ void plp_cfft_i16(int16_t * __restrict__ Data,
     rt_free(RT_ALLOC_CL_DATA, Twiddles_LUT_l1, sizeof(Twiddles_LUT));
   }
 }
+
+/**
+   @} end of FourierTransform group
+*/
+

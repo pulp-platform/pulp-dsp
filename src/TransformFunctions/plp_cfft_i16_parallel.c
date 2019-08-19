@@ -3,7 +3,7 @@
  * Title:        plp_cfft_i16_parallel.c
  * Description:  16-bit integer parallel complex fourier transform glue code
  *
- * $Date:        25. May 2019
+ * $Date:        19. Aug. 2019
  * $Revision:    V0
  *
  * Target Processor: PULP cores
@@ -34,7 +34,7 @@
 
 
 /**
-  @ingroup groupMath
+  @ingroup groupTransforms
  */
 
 
@@ -43,10 +43,6 @@
   @{
  */
 
-
-#ifndef Abs
-#define Abs(a) (((a)<0)?(-a):(a))
-#endif
 
 /**
   @brief Glue code for parallel Complex Fourier Transform of 16-bit integer vectors
@@ -84,6 +80,10 @@ void plp_cfft_i16_parallel(int16_t * __restrict__ Data,
 
 
 #ifdef PLP_FFT_SHIFT_INPUT
+  
+  #ifndef Abs
+  #define Abs(a) (((a)<0)?(-a):(a))
+  #endif
   
   /* find maximum absolute value of input data */
   for(uint32_t i = 0; i < 2 * N_FFT; i++) {
@@ -132,3 +132,8 @@ void plp_cfft_i16_parallel(int16_t * __restrict__ Data,
     rt_free(RT_ALLOC_CL_DATA, Twiddles_LUT_l1, sizeof(Twiddles_LUT));
   }
 }
+
+/**
+   @} end of FourierTransform group
+*/
+

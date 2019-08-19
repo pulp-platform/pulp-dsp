@@ -30,7 +30,7 @@
 
 
 /**
-   @ingroup FastFourierTransform
+   @ingroup FourierTransform
 */
 
 
@@ -49,9 +49,9 @@
 
 */
 
-#if !defined(ARCHI_CORE_HAS_CPLX)
-#define __CPLXMULSDIV2(x, y) (v2s) {((int16_t) ((((int32_t) (x)[0]*(int32_t) (y)[0]) - ((int32_t) (x)[1]*(int32_t) (y)[1]))>>16)), ((int16_t) ((((int32_t) (x)[0]*(int32_t) (y)[1]) + ((int) (x)[1]*(int32_t) (y)[0]))>>16))}
-#endif
+/* #if !defined(ARCHI_CORE_HAS_CPLX) */
+/* #define __CPLXMULSDIV2(x, y) (v2s) {((int16_t) ((((int32_t) (x)[0]*(int32_t) (y)[0]) - ((int32_t) (x)[1]*(int32_t) (y)[1]))>>16)), ((int16_t) ((((int32_t) (x)[0]*(int32_t) (y)[1]) + ((int) (x)[1]*(int32_t) (y)[0]))>>16))} */
+/* #endif */
 
 void plp_cfft_i16v_xpulpv2cplx(int16_t *__restrict__ Data, int16_t *__restrict__ Twiddles, uint16_t * SwapTable, uint32_t N_FFT)
 {

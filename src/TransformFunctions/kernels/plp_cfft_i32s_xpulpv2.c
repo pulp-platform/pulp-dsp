@@ -30,7 +30,7 @@
 
 
 /**
-  @ingroup FastFourierTransform
+  @ingroup FourierTransform
  */
 
 
