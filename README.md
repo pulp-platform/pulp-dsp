@@ -30,7 +30,7 @@ This repository contains:
 
 - `test` folder contains the testing setup used during the development of the library. For more details please read the README file in the folder.
 
-- `doc` folder contains the configurations for building documentation for the library. Go to the folder and type `doxygen doc_config`, it creates the documentation and you can browse it by opening `html/index/html` using a browser. To add documentations use `@defgroup`, `@ingroup`, `addtogroup`, etc. Please refer to `plp_math.h` and the source codes in `src/BasicMathFunctions/` as examples.
+- `doc` folder contains the configurations for building documentation for the library. Go to the folder and type `doxygen doc_config`, it creates the documentation and you can browse it by opening `html/index/html` using a browser. To add documentations use @defgroup, @ingroup, @addtogroup, etc. Please refer to plp_math.h and the source codes in src/BasicMathFunctions/ as examples.
 
 
 ## License and Attribution
