@@ -35,7 +35,7 @@ static int32_t* _pRes1_16;
 
 
 /**
-   @ingroup groupMath
+   @ingroup groupFilters
 */
 
 /**

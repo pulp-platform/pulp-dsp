@@ -34,7 +34,7 @@
 RT_CL_DATA int32_t* resultsBuffer;
 
 /**
-   @ingroup groupMath
+   @ingroup groupFilters
 */
 
 /**
