@@ -48,6 +48,8 @@ BUILD_DIR=$(CURDIR)/lib/build
 
 PULP_CFLAGS += -I$(IDIR) -O3 -g
 
+INSTALL_FILES += $(shell find include -name *.h)
+
 include $(PULP_SDK_HOME)/install/rules/pulp.mk
 
 

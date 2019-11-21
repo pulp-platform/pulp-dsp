@@ -24,7 +24,7 @@ This repository contains:
 
 [Note: in the same header file it's possible to define macros (e.g. LOOPUNROLL if you want to take into consideration the option of unrolling or not unrolling the loops).]
 
-- `Makefile` for compiling the library. Add your glue codes and kernel functions to be compiled. Then do `make clean all install` and the library will be compiled and installed in your pulp-sdk. To use the library add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project (for example when you test the functions in the `test` folder).
+- `Makefile` for compiling the library. Add your glue codes and kernel functions to be compiled. Then do `make clean header all install` and the library will be compiled and installed in your pulp-sdk. To use the library add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project (for example when you test the functions in the `test` folder). If you add or modify the source codes and want to rebuild the library, do `make header build install`.
 
 - `lib` folder contains the build/ folder when building the library and the static library can be found in lib/build/wolfe/.
 
