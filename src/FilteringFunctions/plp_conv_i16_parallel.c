@@ -49,7 +49,7 @@ RT_CL_DATA int32_t* resultsBuffer;
    @param[in]  pSrcB      points to the second input vector
    @param[in]  SrcBLen   Length of the second input vector
    @param[in]  nPe       Number of cores to compute on
-   @param[out] result     output result returned here
+   @param[out] pRes     output result returned here
    @return        none
 */
 

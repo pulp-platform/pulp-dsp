@@ -22,7 +22,7 @@
  * limitations under the License.
  */
 
-/**
+/** 
    \mainpage PULP DSP Software Library
    *
    * Introduction
@@ -47,7 +47,7 @@
    * 32-bit integer and 32-bit floating-point values.
    */
 
-/**
+/** 
  * @defgroup groupMath Basic Math Functions
  * The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s_rv32im):
  <pre>
@@ -65,26 +65,26 @@
 
  */
 
-/**
+/** 
  * @defgroup groupFilters Filtering Functions
  */
 
-/**
+/** 
  * @defgroup groupMatrix Matrix Functions
  *
  * This set of functions provides basic matrix math operations.
  * 
  */
 
-/**
+/** 
  * @defgroup groupTransforms Transform Functions
  */
 
-/**
+/** 
  * @defgroup groupStats Statistics Functions
  */
 
-/**
+/** 
  * @defgroup groupSupport Support Functions
  */
 
@@ -112,6 +112,9 @@ typedef struct
   int32_t * resBuffer;      // pointer to result vector
 } plp_dot_prod_instance_i32;
 
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel dot product.
+ */
 typedef struct {
   const int32_t * pSrcA;     // pointer to the first vector
   uint32_t srcALen;
@@ -121,6 +124,9 @@ typedef struct {
   int32_t * pRes;      // pointer to result vector
 } plp_conv_instance_i32;
 
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel dot product.
+ */
 typedef struct {
   const int16_t * pSrcA;     // pointer to the first vector
   uint32_t srcALen;
@@ -130,6 +136,9 @@ typedef struct {
   int32_t * pRes;      // pointer to result vector
 } plp_conv_instance_i16;
 
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel dot product.
+ */
 typedef struct {
   const int8_t * pSrcA;     // pointer to the first vector
   uint32_t srcALen;
@@ -139,6 +148,9 @@ typedef struct {
   int32_t * pRes;      // pointer to result vector
 } plp_conv_instance_i8;
 
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel dot product.
+ */
 typedef struct{
   uint32_t addOffset;
   uint32_t addLengthfirst;
@@ -172,7 +184,7 @@ typedef struct
    @param[in]  pSrcB      points to the second input vector
    @param[in]  blockSize  number of samples in each vector
    @param[in]  nPE        number of parallel processing units
-   @param[out] result     output result returned here
+   @param[out] pRes     output result returned here
    @return        none
 */
 
@@ -192,7 +204,7 @@ void plp_dot_prod_i32_parallel(
    @param[in]  blockSize  number of samples in each vector
    @param[in]  deciPoint  decimal point for right shift
    @param[in]  nPE        number of parallel processing units
-   @param[out] result     output result returned here
+   @param[out] pRes     output result returned here
    @return        none
 */
 
@@ -211,7 +223,7 @@ void plp_dot_prod_q32_parallel(
    @param[in]  pSrcA      points to the first input vector
    @param[in]  pSrcB      points to the second input vector
    @param[in]  blockSize  number of samples in each vector
-   @param[out] result     output result returned here
+   @param[out] pRes     output result returned here
    @return        none
 */
 
@@ -225,7 +237,7 @@ void plp_dot_prod_i32p_xpulpv2(void * S);
    @param[in]  pSrcB      points to the second input vector
    @param[in]  blockSize  number of samples in each vector
    @param[in]  deciPoint  decimal point for right shift
-   @param[out] result     output result returned here
+   @param[out] pRes     output result returned here
    @return        none
 */
 
@@ -238,7 +250,7 @@ void plp_dot_prod_q32p_xpulpv2(void * S);
 * @param[in]  pSrcA      points to the first input vector
 * @param[in]  pSrcB      points to the second input vector
 * @param[in]  blockSize  number of samples in each vector
-* @param[out] result     output result returned here
+* @param[out] pRes     output result returned here
 */
 void plp_dot_prod_i32(
                        const int32_t * __restrict__ pSrcA,
@@ -253,7 +265,7 @@ void plp_dot_prod_i32(
  * @param[in]  pSrcA      points to the first input vector
  * @param[in]  pSrcB      points to the second input vector
  * @param[in]  blockSize  number of samples in each vector
- * @param[out] result     output result returned here
+ * @param[out] pRes     output result returned here
  */
 void plp_dot_prod_i32s_rv32im(
                               const int32_t * __restrict__ pSrcA,
@@ -268,7 +280,7 @@ void plp_dot_prod_i32s_rv32im(
  * @param[in]  pSrcA      points to the first input vector
  * @param[in]  pSrcB      points to the second input vector
  * @param[in]  blockSize  number of samples in each vector
- * @param[out] result     output result returned here
+ * @param[out] pRes     output result returned here
  */
 void plp_dot_prod_i32s_xpulpv2(
                                const int32_t * __restrict__ pSrcA,
@@ -284,7 +296,7 @@ void plp_dot_prod_i32s_xpulpv2(
    @param[in]  pSrcB      points to the second input vector
    @param[in]  blockSize  number of samples in each vector
    @param[in]  deciPoint  decimal point for right shift
-   @param[out] result     output result returned here
+   @param[out] pRes     output result returned here
    @return        none
 */
 
@@ -303,7 +315,7 @@ void plp_dot_prod_q32(
    @param[in]  pSrcB      points to the second input vector
    @param[in]  blockSize  number of samples in each vector
    @param[in]  deciPoint  decimal point for right shift
-   @param[out] result     output result returned here
+   @param[out] pRes     output result returned here
    @return        none
 */
 
@@ -322,7 +334,7 @@ void plp_dot_prod_q32s_rv32im(
    @param[in]  pSrcB      points to the second input vector
    @param[in]  blockSize  number of samples in each vector
    @param[in]  deciPoint  decimal point for right shift
-   @param[out] result     output result returned here
+   @param[out] pRes     output result returned here
    @return        none
 */
 
@@ -340,7 +352,7 @@ void plp_dot_prod_q32s_xpulpv2(
  * @param[in]  pSrcA      points to the first input vector [16 bit]
  * @param[in]  pSrcB      points to the second input vector [16 bit]
  * @param[in]  blockSize  number of samples in each vector
- * @param[out] result     output result returned here [32 bit]
+ * @param[out] pRes     output result returned here [32 bit]
  *
  * @par Exploiting SIMD instructions
  When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
@@ -358,7 +370,7 @@ void plp_dot_prod_i16(
   @param[in]  pSrcA      points to the first input vector [16 bit]
   @param[in]  pSrcB      points to the second input vector [16 bit]
   @param[in]  blockSize  number of samples in each vector
-  @param[out] result     output result returned here [32 bit]
+  @param[out] pRes     output result returned here [32 bit]
   @return        none
 
   @par Exploiting SIMD instructions
@@ -378,7 +390,7 @@ void plp_dot_prod_i16s_rv32im(
   @param[in]  pSrcA      points to the first input vector [16 bit]
   @param[in]  pSrcB      points to the second input vector [16 bit]
   @param[in]  blockSize  number of samples in each vector
-  @param[out] result     output result returned here [32 bit]
+  @param[out] pRes     output result returned here [32 bit]
   @return        none
 
   @par Exploiting SIMD instructions
@@ -399,7 +411,7 @@ void plp_dot_prod_i16v_xpulpv2(
    @param[in]  pSrcB      points to the second input vector [16 bit]
    @param[in]  blockSize  number of samples in each vector
    @param[in]  deciPoint  decimal point for right shift
-   @param[out] result     output result returned here [32 bit]
+   @param[out] pRes     output result returned here [32 bit]
    @return        none
 
    @par Exploiting SIMD instructions
@@ -421,7 +433,7 @@ void plp_dot_prod_q16(
    @param[in]  pSrcB      points to the second input vector [16 bit]
    @param[in]  blockSize  number of samples in each vector
    @param[in]  deciPoint  decimal point for right shift
-   @param[out] result     output result returned here [32 bit]
+   @param[out] pRes     output result returned here [32 bit]
    @return        none
 
    @par Exploiting SIMD instructions
@@ -443,7 +455,7 @@ void plp_dot_prod_q16s_rv32im(
     @param[in]  pSrcB      points to the second input vector [16 bit]
     @param[in]  blockSize  number of samples in each vector
     @param[in]  deciPoint  decimal point for right shift
-    @param[out] result     output result returned here [32 bit]
+    @param[out] pRes     output result returned here [32 bit]
     @return        none
 
     @par Exploiting SIMD instructions
@@ -464,7 +476,7 @@ void plp_dot_prod_q16v_xpulpv2(
    @param[in]  pSrcA      points to the first input vector [8 bit]
    @param[in]  pSrcB      points to the second input vector [8 bit]
    @param[in]  blockSize  number of samples in each vector
-   @param[out] result     output result returned here [32 bit]
+   @param[out] pRes     output result returned here [32 bit]
    @return        none
 
    @par Exploiting SIMD instructions
@@ -484,7 +496,7 @@ void plp_dot_prod_i8(
    @param[in]  pSrcA      points to the first input vector [8] bit]
    @param[in]  pSrcB      points to the second input vector [8 bit]
    @param[in]  blockSize  number of samples in each vector
-   @param[out] result     output result returned here [32 bit]
+   @param[out] pRes     output result returned here [32 bit]
    @return        none
 
    @par Exploiting SIMD instructions
@@ -504,7 +516,7 @@ void plp_dot_prod_i8s_rv32im(
    @param[in]  pSrcA      points to the first input vector [8 bit]
    @param[in]  pSrcB      points to the second input vector [8 bit]
    @param[in]  blockSize  number of samples in each vector
-   @param[out] result     output result returned here [32 bit]
+   @param[out] pRes     output result returned here [32 bit]
    @return        none
 
    @par Exploiting SIMD instructions
@@ -525,7 +537,7 @@ void plp_dot_prod_i8v_xpulpv2(
    @param[in]  pSrcB      points to the second input vector [8 bit]
    @param[in]  blockSize  number of samples in each vector
    @param[in]  deciPoint  decimal point for right shift
-   @param[out] result     output result returned here [32 bit]
+   @param[out] pRes     output result returned here [32 bit]
    @return        none
 
    @par Exploiting SIMD instructions
@@ -547,7 +559,7 @@ void plp_dot_prod_q8(
    @param[in]  pSrcB      points to the second input vector [8 bit]
    @param[in]  blockSize  number of samples in each vector
    @param[in]  deciPoint  decimal point for right shift
-   @param[out] result     output result returned here [32 bit]
+   @param[out] pRes     output result returned here [32 bit]
    @return        none
 
    @par Exploiting SIMD instructions
@@ -569,7 +581,7 @@ void plp_dot_prod_q8s_rv32im(
    @param[in]  pSrcB      points to the second input vector [8 bit]
    @param[in]  blockSize  number of samples in each vector
    @param[in]  deciPoint  decimal point for right shift
-   @param[out] result     output result returned here [32 bit]
+   @param[out] pRes     output result returned here [32 bit]
    @return        none
 
    @par Exploiting SIMD instructions
@@ -706,7 +718,7 @@ void plp_mean_i32s_rv32im(
    @brief         Mean value of a 32-bit integer vector for XPULPV2 extension.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    mean value returned here
+   @param[out]    pRes    mean value returned here
    @return        none
 */
 
@@ -715,13 +727,13 @@ void plp_mean_i32s_xpulpv2(
                            uint32_t blockSize,
                            int32_t * __restrict__ pRes);
 
-/**
+/** -------------------------------------------------------
   @brief Glue code for convolution of 32-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
-  @param[in]  SrcALen   Length of the first input vector
+  @param[in]  srcALen   Length of the first input vector
   @param[in]  pSrcB      points to the second input vector
-  @param[in]  SrcBLen   Length of the second input vector
-  @param[out] result     output result returned here
+  @param[in]  srcBLen   Length of the second input vector
+  @param[out] pRes     output result returned here
   @return        none
  */
 
@@ -732,14 +744,15 @@ void plp_conv_i32(
 		       const uint32_t srcBLen,
                        int32_t * pRes);
 
-/**
+/** -------------------------------------------------------
    @brief Convolution of 32-bit integer vectors kernel for RV32IM extension.
    @param[in]  pSrcA      points to the first input vector
    @param[in]  srcALen   Length of the first input vector
    @param[in]  pSrcB      points to the second input vector
    @param[in]  srcBLen   Length of the second input vector
-   @param[out] result     output result returned here
-   @return        none */
+   @param[out] pRes     output result returned here
+   @return        none
+*/
 
 void plp_conv_i32s_rv32im(const int32_t * pSrcA,
 			      const uint32_t srcALen,
@@ -747,13 +760,13 @@ void plp_conv_i32s_rv32im(const int32_t * pSrcA,
 			      const uint32_t srcBLen,
 			      int32_t * pRes);
 
-/**
+/** -------------------------------------------------------
    @brief Convolution of 32-bit integer vectors kernel for XPULPV2 extension.
    @param[in]  pSrcA      points to the first input vector
    @param[in]  srcALen   Length of the first input vector
    @param[in]  pSrcB      points to the second input vector
    @param[in]  srcBLen   Length of the second input vector
-   @param[out] result     output result returned here
+   @param[out] pRes     output result returned here
    @return        none */
 
 void plp_conv_i32s_xpulpv2(const int32_t * __restrict__ pSrcA,
@@ -763,13 +776,13 @@ void plp_conv_i32s_xpulpv2(const int32_t * __restrict__ pSrcA,
 			      int32_t * __restrict__ pRes);
 
 
-/**
+/** -------------------------------------------------------
   @brief Glue code for convolution of 16-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
-  @param[in]  SrcALen   Length of the first input vector
+  @param[in]  srcALen   Length of the first input vector
   @param[in]  pSrcB      points to the second input vector
-  @param[in]  SrcBLen   Length of the second input vector
-  @param[out] result     output result returned here
+  @param[in]  srcBLen   Length of the second input vector
+  @param[out] pRes     output result returned here
   @return        none
  */
 
@@ -779,28 +792,31 @@ void plp_conv_i16(const int16_t *  pSrcA,
 		  const uint32_t srcBLen,
 		  int32_t *  pRes);
 
-/**
+/** -------------------------------------------------------
    @brief Convolution of 16-bit integer vectors kernel for XPULPV2 extension.
    @param[in]  pSrcA      points to the first input vector
    @param[in]  srcALen   Length of the first input vector
    @param[in]  pSrcB      points to the second input vector
    @param[in]  srcBLen   Length of the second input vector
-   @param[out] result     output result returned here
-   @return        none */
+   @param[out] pRes     output result returned here
+   @return        none
+*/
 
 void plp_conv_i16s_xpulpv2(const int16_t *  pSrcA,
 			   const uint32_t srcALen,
 			   const int16_t *  pSrcB,
 			   const uint32_t srcBLen,
 			   int32_t *  pRes);
-/**
+
+/** -------------------------------------------------------
    @brief Convolution of 16-bit integer vectors kernel for RV32IM extension.
    @param[in]  pSrcA      points to the first input vector
    @param[in]  srcALen   Length of the first input vector
    @param[in]  pSrcB      points to the second input vector
    @param[in]  srcBLen   Length of the second input vector
-   @param[out] result     output result returned here
-   @return        none */
+   @param[out] pRes     output result returned here
+   @return        none
+*/
 
 void plp_conv_i16s_rv32im(const int16_t *  pSrcA,
 			  const uint32_t srcALen,
@@ -808,13 +824,13 @@ void plp_conv_i16s_rv32im(const int16_t *  pSrcA,
 			  const uint32_t srcBLen,
 			  int32_t *  pRes);
 
-/**
+/** -------------------------------------------------------
   @brief Glue code for convolution of 8-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
   @param[in]  SrcALen   Length of the first input vector
   @param[in]  pSrcB      points to the second input vector
   @param[in]  SrcBLen   Length of the second input vector
-  @param[out] result     output result returned here
+  @param[out] pRes     output result returned here
   @return        none
  */
 
@@ -824,14 +840,15 @@ void plp_conv_i8(const int8_t *  pSrcA,
 		  const uint32_t srcBLen,
 		  int32_t *  pRes);
 
-/**
+/** -------------------------------------------------------
    @brief Convolution of 8-bit integer vectors kernel for XPULPV2 extension.
    @param[in]  pSrcA      points to the first input vector
    @param[in]  srcALen   Length of the first input vector
    @param[in]  pSrcB      points to the second input vector
    @param[in]  srcBLen   Length of the second input vector
-   @param[out] result     output result returned here
-   @return        none */
+   @param[out] pRes     output result returned here
+   @return        none
+*/
 
 void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
 			   const uint32_t srcALen,
@@ -839,14 +856,15 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
 			   const uint32_t srcBLen,
 			   int32_t *  pRes);
 
-/**
+/** -------------------------------------------------------
    @brief Convolution of 8-bit integer vectors kernel for RV32IM extension.
    @param[in]  pSrcA      points to the first input vector
    @param[in]  srcALen   Length of the first input vector
    @param[in]  pSrcB      points to the second input vector
    @param[in]  srcBLen   Length of the second input vector
-   @param[out] result     output result returned here
-   @return        none */
+   @param[out] pRes     output result returned here
+   @return        none
+*/
 
 void plp_conv_i8s_rv32im(const int8_t *  pSrcA,
 			  const uint32_t srcALen,
@@ -854,14 +872,14 @@ void plp_conv_i8s_rv32im(const int8_t *  pSrcA,
 			  const uint32_t srcBLen,
 			  int32_t *  pRes);
 
-/**
+/** -------------------------------------------------------
   @brief Glue code for parallel convolution of 32-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
   @param[in]  SrcALen   Length of the first input vector
   @param[in]  pSrcB      points to the second input vector
   @param[in]  SrcBLen   Length of the second input vector
   @param[in]  nPe       Number of cores to compute on
-  @param[out] result     output result returned here
+  @param[out] pRes     output result returned here
   @return        none
  */
 
@@ -873,7 +891,7 @@ void plp_conv_i32_parallel(
 		       const uint8_t nPE,
                        int32_t *  pRes);
 
-/**
+/** -------------------------------------------------------
   @brief Setup code for parallel convolution of 32-bit integer vectors.
   @param[in]  task_args      pointer to plp_conv_instance_i32 struct initialized by plp_conv_i32_parallel
   @return        none
@@ -881,14 +899,14 @@ void plp_conv_i32_parallel(
 
 void plp_conv_i32p_xpulpv2(void* task_args);
 
-/**
+/** -------------------------------------------------------
   @brief Glue code for parallel convolution of 16-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
   @param[in]  SrcALen   Length of the first input vector
   @param[in]  pSrcB      points to the second input vector
   @param[in]  SrcBLen   Length of the second input vector
   @param[in]  nPe       Number of cores to compute on
-  @param[out] result     output result returned here
+  @param[out] pRes     output result returned here
   @return        none
  */
 
@@ -899,7 +917,7 @@ void plp_conv_i16_parallel(
 		       const uint32_t srcBLen,
 		       const uint8_t nPE,
                        int32_t *  pRes);
-/**
+/** -------------------------------------------------------
   @brief Setup code for parallel convolution of 16-bit integer vectors.
   @param[in]  task_args      pointer to plp_conv_instance_i16 struct initialized by plp_conv_i16_parallel
   @return        none
@@ -907,14 +925,14 @@ void plp_conv_i16_parallel(
 
 void plp_conv_i16p_xpulpv2(void* task_args);
 
-/**
+/** -------------------------------------------------------
   @brief Glue code for parallel convolution of 8-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
   @param[in]  SrcALen   Length of the first input vector
   @param[in]  pSrcB      points to the second input vector
   @param[in]  SrcBLen   Length of the second input vector
   @param[in]  nPe       Number of cores to compute on
-  @param[out] result     output result returned here
+  @param[out] pRes     output result returned here
   @return        none
  */
 
@@ -925,14 +943,15 @@ void plp_conv_i8_parallel(
 		       const uint32_t srcBLen,
 		       const uint8_t nPE,
                        int32_t *  pRes);
-/**
+/** -------------------------------------------------------
   @brief Setup code for parallel convolution of 8-bit integer vectors.
   @param[in]  task_args      pointer to plp_conv_instance_i8 struct initialized by plp_conv_i8_parallel
   @return        none
  */
+
 void plp_conv_i8p_xpulpv2(void* task_args);
 
-/**
+/** -------------------------------------------------------
    @brief Helper function for parallelized overlap-adding of partial convolution results
    @param[in] nPE Number of processing cores
    @param[in] srcALen Length of the first original input vector
@@ -943,7 +962,7 @@ void plp_conv_i8p_xpulpv2(void* task_args);
 
 void plp_conv_parallel_OLA(uint32_t nPE, uint32_t srcALen, uint32_t srcBLen, int32_t* resultsBuffer);
 
-/**
+/** -------------------------------------------------------
    @brief Helper function for parallelized overlap-adding of partial convolution results
    @param[in] task_args  Holds the plp_conv_tree_add_instance that describes the vector parameters
    @return none

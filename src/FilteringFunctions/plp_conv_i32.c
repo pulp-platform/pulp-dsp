@@ -38,6 +38,13 @@ static int32_t* _pRes1_32;
 */
 
 /**
+  @defgroup BasicConvolution Basic Convolution
+  This module contains the glue code for Basic Convolution. The kernel codes (kernels) are in the Moducle Basic Convolution Kernels.
+
+
+ */
+
+/**
    @addtogroup BasicConvolution
    @{
 */
@@ -45,10 +52,10 @@ static int32_t* _pRes1_32;
 /**
    @brief Glue code for convolution of 32-bit integer vectors.
    @param[in]  pSrcA      points to the first input vector
-   @param[in]  SrcALen   Length of the first input vector
+   @param[in]  srcALen   Length of the first input vector
    @param[in]  pSrcB      points to the second input vector
-   @param[in]  SrcBLen   Length of the second input vector
-   @param[out] result     output result returned here
+   @param[in]  srcBLen   Length of the second input vector
+   @param[out] pRes     output result returned here
    @return        none
 */
 void plp_conv_i32(

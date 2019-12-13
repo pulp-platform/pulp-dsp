@@ -49,7 +49,7 @@ static int32_t* _pRes1_8;
   @param[in]  SrcALen   Length of the first input vector
   @param[in]  pSrcB      points to the second input vector
   @param[in]  SrcBLen   Length of the second input vector
-  @param[out] result     output result returned here
+  @param[out] pRes     output result returned here
   @return        none
  */
 void plp_conv_i8(

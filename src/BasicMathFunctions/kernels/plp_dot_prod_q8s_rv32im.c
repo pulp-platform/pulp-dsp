@@ -44,7 +44,7 @@
   @param[in]  pSrcB      points to the second input vector [8 bit]
   @param[in]  blockSize  number of samples in each vector
   @param[in]  deciPoint  decimal point for right shift
-  @param[out] result     output result returned here [32 bit]
+  @param[out] pRes     output result returned here [32 bit]
   @return        none
 
   @par Exploiting SIMD instructions

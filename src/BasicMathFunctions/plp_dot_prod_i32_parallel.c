@@ -47,7 +47,7 @@
   @param[in]  pSrcB      points to the second input vector
   @param[in]  blockSize  number of samples in each vector
   @param[in]  nPE        number of parallel processing units
-  @param[out] result     output result returned here
+  @param[out] pRes     output result returned here
   @return        none
  */
 

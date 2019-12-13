@@ -44,7 +44,7 @@
    @param[in]  srcALen   Length of the first input vector
    @param[in]  pSrcB      points to the second input vector
    @param[in]  srcBLen   Length of the second input vector
-   @param[out] result     output result returned here
+   @param[out] pRes     output result returned here
    @return        none */
 
 // Pre-condition: psrcALen >= psrcBLen, established by calling function plp_conv_i32
@@ -106,3 +106,8 @@ void plp_conv_i32p_xpulpv2(void* task_args){
   plp_conv_i32s_xpulpv2(pIn1, pIn1Len, pIn2, pIn2Len, pRes);
   rt_team_barrier();
 }
+
+
+/**
+   @} end of BasicConvolutionKernels
+*/

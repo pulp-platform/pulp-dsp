@@ -2,6 +2,15 @@
 #include "rt/rt_api.h"
 
 /**
+   @ingroup BasicConvolution
+*/
+
+/**
+   @addtogroup BasicConvolutionKernels
+   @{
+*/
+
+/**
    @brief Helper function for parallelized overlap-adding of partial convolution results
    @param[in] task_args  Holds the plp_conv_tree_add_instance that describes the vector parameters
    @return none
@@ -181,3 +190,7 @@ void plp_conv_parallel_OLA_kernel(void* task_args){
   rt_team_barrier();
   return;
 }
+
+/**
+   @} end of BasicConvolutionKernels
+*/
