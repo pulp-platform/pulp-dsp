@@ -44,7 +44,7 @@
 
   The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
   <pre>
-  <pulp> _ <function name> _ <data type> <precision> <method> _ <isa extension>, with
+  \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
 
   data type = {f, i, q} respectively for floats, integers, fixed points
 
@@ -53,6 +53,8 @@
   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
   isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
+
+  </pre>
 
  */
 

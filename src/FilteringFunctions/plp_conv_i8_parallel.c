@@ -45,10 +45,10 @@ RT_CL_DATA int32_t* resultsBuffer;
 /**
    @brief Glue code for parallel convolution of 8-bit integer vectors.
    @param[in]  pSrcA      points to the first input vector
-   @param[in]  SrcALen   Length of the first input vector
+   @param[in]  srcALen   Length of the first input vector
    @param[in]  pSrcB      points to the second input vector
-   @param[in]  SrcBLen   Length of the second input vector
-   @param[in]  nPe       Number of cores to compute on
+   @param[in]  srcBLen   Length of the second input vector
+   @param[in]  nPE       Number of cores to compute on
    @param[out] pRes     output result returned here
    @return        none
 */

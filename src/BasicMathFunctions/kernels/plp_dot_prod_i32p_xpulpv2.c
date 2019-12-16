@@ -41,10 +41,7 @@
 
 /**
   @brief Scalar dot product with interleaved access of 32-bit integer vectors kernel for XPULPV2 extension.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  blockSize  number of samples in each vector
-  @param[out] pRes     output result returned here
+  @param[in]  S     points to the instance structure for integer parallel dot product
   @return        none
  */
 

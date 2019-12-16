@@ -12,7 +12,10 @@
 
 /**
    @brief Helper function for parallelized overlap-adding of partial convolution results
-   @param[in] task_args  Holds the plp_conv_tree_add_instance that describes the vector parameters
+   @param[in] nPE Number of processing cores
+   @param[in] srcALen Length of the first original input vector
+   @param[in] srcBLen Length of the second original input vector
+   @param[in] resultsBuffer resultsBuffer array from plp_conv_i[XX]_parallel
    @return none
 */
 

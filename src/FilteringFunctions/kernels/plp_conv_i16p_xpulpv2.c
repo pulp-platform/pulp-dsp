@@ -40,12 +40,9 @@
 
 /**
    @brief Parallel convolution of 16-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  srcALen   Length of the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none */
+   @param[in]  task_args     pointer to plp_conv_instance_i16 struct initialized by plp_conv_i16_parallel
+   @return        none
+*/
 
 // Pre-condition: psrcALen >= psrcBLen, established by calling function plp_conv_i32
 // Pre-condition: pRes has enough allocated memory, i.e. srcALen + srcBLen-1u

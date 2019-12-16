@@ -43,7 +43,7 @@
    @brief         Mean value of a 32-bit integer vector for XPULPV2 extension.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    mean value returned here
+   @param[out]    pRes    mean value returned here
    @return        none
 */
 

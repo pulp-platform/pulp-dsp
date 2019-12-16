@@ -51,7 +51,7 @@
  * @defgroup groupMath Basic Math Functions
  * The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s_rv32im):
  <pre>
- <pulp> _ <function name> _ <data type> <precision> <method> _ <isa extension>, with
+ \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
 
  data type = {f, i, q} respectively for floats, integers, fixed points
 
@@ -101,7 +101,13 @@
 
 
 /** -------------------------------------------------------
- * @brief Instance structure for integer parallel dot product.
+    @struct plp_dot_prod_instance_i32
+    @brief Instance structure for integer parallel dot product.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] resBuffer  pointer to the result buffer
  */
 typedef struct
 {
@@ -113,57 +119,12 @@ typedef struct
 } plp_dot_prod_instance_i32;
 
 /** -------------------------------------------------------
- * @brief Instance structure for integer parallel dot product.
- */
-typedef struct {
-  const int32_t * pSrcA;     // pointer to the first vector
-  uint32_t srcALen;
-  const int32_t * pSrcB;     // pointer to the second vector
-  uint32_t srcBLen;     // number of samples in each vector
-  uint8_t nPE;        // number of processing units
-  int32_t * pRes;      // pointer to result vector
-} plp_conv_instance_i32;
-
-/** -------------------------------------------------------
- * @brief Instance structure for integer parallel dot product.
- */
-typedef struct {
-  const int16_t * pSrcA;     // pointer to the first vector
-  uint32_t srcALen;
-  const int16_t * pSrcB;     // pointer to the second vector
-  uint32_t srcBLen;     // number of samples in each vector
-  uint8_t nPE;        // number of processing units
-  int32_t * pRes;      // pointer to result vector
-} plp_conv_instance_i16;
-
-/** -------------------------------------------------------
- * @brief Instance structure for integer parallel dot product.
- */
-typedef struct {
-  const int8_t * pSrcA;     // pointer to the first vector
-  uint32_t srcALen;
-  const int8_t * pSrcB;     // pointer to the second vector
-  uint32_t srcBLen;     // number of samples in each vector
-  uint8_t nPE;        // number of processing units
-  int32_t * pRes;      // pointer to result vector
-} plp_conv_instance_i8;
-
-/** -------------------------------------------------------
- * @brief Instance structure for integer parallel dot product.
- */
-typedef struct{
-  uint32_t addOffset;
-  uint32_t addLengthfirst;
-  uint32_t addLengthsecond;
-  uint32_t numVectors;
-  uint32_t blockOffset;
-  int32_t* pRes;
-  uint8_t coresPerVector;
-} plp_conv_tree_add_instance;
-
-
-/** -------------------------------------------------------
- * @brief Instance structure for fixed point parallel dot product.
+    @brief Instance structure for fixed point parallel dot product.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] resBuffer  pointer to the result buffer
  */
 typedef struct
 {
@@ -175,6 +136,79 @@ typedef struct
   int32_t * resBuffer;      // pointer to result vector
 } plp_dot_prod_instance_q32;
 
+/** -------------------------------------------------------
+    @brief Instance structure for basic integer convolution.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  srcALen    length of the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  srcBLen    length of the second input vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] pRes       output result returned here
+ */
+typedef struct {
+  const int32_t * pSrcA;     // pointer to the first vector
+  uint32_t srcALen;
+  const int32_t * pSrcB;     // pointer to the second vector
+  uint32_t srcBLen;     // number of samples in each vector
+  uint8_t nPE;        // number of processing units
+  int32_t * pRes;      // pointer to result vector
+} plp_conv_instance_i32;
+
+/** -------------------------------------------------------
+    @brief Instance structure for basic integer convolution.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  srcALen    length of the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  srcBLen    length of the second input vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] pRes       output result returned here
+ */
+typedef struct {
+  const int16_t * pSrcA;     // pointer to the first vector
+  uint32_t srcALen;
+  const int16_t * pSrcB;     // pointer to the second vector
+  uint32_t srcBLen;     // number of samples in each vector
+  uint8_t nPE;        // number of processing units
+  int32_t * pRes;      // pointer to result vector
+} plp_conv_instance_i16;
+
+/** -------------------------------------------------------
+    @brief Instance structure for basic integer convolution.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  srcALen    length of the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  srcBLen    length of the second input vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] pRes       output result returned here
+ */
+typedef struct {
+  const int8_t * pSrcA;     // pointer to the first vector
+  uint32_t srcALen;
+  const int8_t * pSrcB;     // pointer to the second vector
+  uint32_t srcBLen;     // number of samples in each vector
+  uint8_t nPE;        // number of processing units
+  int32_t * pRes;      // pointer to result vector
+} plp_conv_instance_i8;
+
+/** -------------------------------------------------------
+    @brief Instance structure for basic integer convolution.
+    @param[in]  addOffset  
+    @param[in]  addLengthfirst
+    @param[in]  addLengthsecond
+    @param[in]  numVectors
+    @param[in]  blockOffset
+    @param[out] pRes       output result returned here
+    @param[in]  coresPerVector
+ */
+typedef struct{
+  uint32_t addOffset;
+  uint32_t addLengthfirst;
+  uint32_t addLengthsecond;
+  uint32_t numVectors;
+  uint32_t blockOffset;
+  int32_t* pRes;
+  uint8_t coresPerVector;
+} plp_conv_tree_add_instance;
 
 
 
@@ -827,9 +861,9 @@ void plp_conv_i16s_rv32im(const int16_t *  pSrcA,
 /** -------------------------------------------------------
   @brief Glue code for convolution of 8-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
-  @param[in]  SrcALen   Length of the first input vector
+  @param[in]  srcALen   Length of the first input vector
   @param[in]  pSrcB      points to the second input vector
-  @param[in]  SrcBLen   Length of the second input vector
+  @param[in]  srcBLen   Length of the second input vector
   @param[out] pRes     output result returned here
   @return        none
  */
@@ -875,10 +909,10 @@ void plp_conv_i8s_rv32im(const int8_t *  pSrcA,
 /** -------------------------------------------------------
   @brief Glue code for parallel convolution of 32-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
-  @param[in]  SrcALen   Length of the first input vector
+  @param[in]  srcALen   Length of the first input vector
   @param[in]  pSrcB      points to the second input vector
-  @param[in]  SrcBLen   Length of the second input vector
-  @param[in]  nPe       Number of cores to compute on
+  @param[in]  srcBLen   Length of the second input vector
+  @param[in]  nPE       Number of cores to compute on
   @param[out] pRes     output result returned here
   @return        none
  */
@@ -902,10 +936,10 @@ void plp_conv_i32p_xpulpv2(void* task_args);
 /** -------------------------------------------------------
   @brief Glue code for parallel convolution of 16-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
-  @param[in]  SrcALen   Length of the first input vector
+  @param[in]  srcALen   Length of the first input vector
   @param[in]  pSrcB      points to the second input vector
-  @param[in]  SrcBLen   Length of the second input vector
-  @param[in]  nPe       Number of cores to compute on
+  @param[in]  srcBLen   Length of the second input vector
+  @param[in]  nPE       Number of cores to compute on
   @param[out] pRes     output result returned here
   @return        none
  */
@@ -928,10 +962,10 @@ void plp_conv_i16p_xpulpv2(void* task_args);
 /** -------------------------------------------------------
   @brief Glue code for parallel convolution of 8-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
-  @param[in]  SrcALen   Length of the first input vector
+  @param[in]  srcALen   Length of the first input vector
   @param[in]  pSrcB      points to the second input vector
-  @param[in]  SrcBLen   Length of the second input vector
-  @param[in]  nPe       Number of cores to compute on
+  @param[in]  srcBLen   Length of the second input vector
+  @param[in]  nPE       Number of cores to compute on
   @param[out] pRes     output result returned here
   @return        none
  */

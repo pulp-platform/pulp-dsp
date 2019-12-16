@@ -46,7 +46,7 @@
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
    <pre>
-   <pulp> _ <function name> _ <data type> <precision> <method> _ <isa extension>, with
+   \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
 
    data type = {f, i, q} respectively for floats, integers, fixed points
 
@@ -70,7 +70,7 @@
    @brief         Glue code for mean value of a 32-bit integer vector.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    mean value returned here
+   @param[out]    pRes    mean value returned here
    @return        none
  */
 

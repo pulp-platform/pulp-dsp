@@ -46,9 +46,9 @@ static int32_t* _pRes1_8;
 /**
   @brief Glue code for convolution of 8-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
-  @param[in]  SrcALen   Length of the first input vector
+  @param[in]  srcALen   Length of the first input vector
   @param[in]  pSrcB      points to the second input vector
-  @param[in]  SrcBLen   Length of the second input vector
+  @param[in]  srcBLen   Length of the second input vector
   @param[out] pRes     output result returned here
   @return        none
  */
