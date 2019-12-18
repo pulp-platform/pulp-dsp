@@ -1,8 +1,8 @@
+#!/usr/bin/env python
+
 # Copyright (C) 2019 ETH Zurich, University of Bologna.
 # Released under Apache v2.
 # Author: Xiaying Wang, ETH Zurich
-
-#!/usr/bin/env python
 
 '''
 gen_stimuli.py is used to generate header files containing data used for testing. 
