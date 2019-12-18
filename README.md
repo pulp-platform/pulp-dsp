@@ -12,8 +12,6 @@ Currently it's being developed and tested on Mr.Wolf (fabric controller (FC) wit
 
 [Here](https://docs.google.com/spreadsheets/d/13hU5qtpxtcejE1NCyHPy07BwGrqVjrbf9GrBuDpx4Xc/edit?usp=sharing) is a list of PULP chips with respective instructions set extensions: [needs verification and update]
 
-https://docs.google.com/spreadsheets/d/13hU5qtpxtcejE1NCyHPy07BwGrqVjrbf9GrBuDpx4Xc/edit?usp=sharing
-
 # Structure of the repository
 
 This repository contains:
