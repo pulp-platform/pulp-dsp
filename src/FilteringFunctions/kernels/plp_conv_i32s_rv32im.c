@@ -9,7 +9,9 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 Moritz Scherer, IIS, ETH Zurich. All rights reserved.
+ * Copyright (C) 2019 ETH Zurich and University of Bologna. All rights reserved.
+ *
+ * Author: Moritz Scherer, ETH Zurich
  *
  * SPDX-License-Identifier: Apache-2.0
  *

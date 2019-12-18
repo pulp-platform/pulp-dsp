@@ -9,7 +9,9 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 Xiaying Wang, IIS, ETH Zurich. All rights reserved.
+ * Copyright (C) 2019 ETH Zurich and University of Bologna. All rights reserved.
+ *
+ * Author: Xiaying Wang, ETH Zurich
  *
  * SPDX-License-Identifier: Apache-2.0
  *

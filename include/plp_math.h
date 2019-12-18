@@ -5,7 +5,7 @@
  * @date     16. May 2019
  * =========================================================================== */
 /*
- * Copyright (C) 2019 Xiaying Wang, IIS, ETH Zurich. All rights reserved.
+ * Copyright (C) 2019 ETH Zurich and University of Bologna. All rights reserved.
  *
  * SPDX-License-Identifier: Apache-2.0
  *
