@@ -45,6 +45,9 @@
    *
    * The library has separate functions for operating on 8-bit integers, 16-bit integers,
    * 32-bit integer and 32-bit floating-point values.
+   *
+   * The library is released under Apache v2.0 license.
+   *
    */
 
 /** 

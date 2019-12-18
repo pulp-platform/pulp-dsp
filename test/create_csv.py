@@ -1,3 +1,7 @@
+# Copyright (C) 2019 ETH Zurich, University of Bologna.
+# Released under Apache v2.
+# Author: Xiaying Wang, ETH Zurich
+
 import sys
 import csv
 

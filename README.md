@@ -39,8 +39,8 @@ Once you are done with the pulp-sdk setup, you can clone this repository, enter 
 After installing the library, you can call all the functions of the library you want to use. Don't forget to include the header file `plp_math.h` in your codes :)
 
 ## License and Attribution
-Please refer to the LICENSE file for the licensing of our code.
+All source code is released under Apache v2.0 license unless noted otherwise, please refer to the LICENSE file for details.
 
-We got inspiration from CMSIS-DSP from ARM and partially adapted its structure.
+We are inspired by CMSIS-DSP and partially adapted its structure.
 
 
