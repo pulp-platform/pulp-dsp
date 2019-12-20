@@ -213,11 +213,18 @@ typedef struct{
 } plp_conv_tree_add_instance;
 
 /** -------------------------------------------------------
-    @brief Instance structure for floating-point FFT.
+    @struct plp_rfft_instance_f32
+    @brief Instance structure for floating-point FFT
     @param[in]  length data length of the FFT
     @param[in]  bitReverseFlag  flag that enables (bitReverseFlagR=1) or disables (bitReverseFlagR=0) bit reversal of output
-    @param[in]  pTwiddleFactors pointer to the twiddle factors
-    @param[in]  pBitReverseLUT  pointer to the lookup table used for the bit resersal of output
+    @param[in]  pTwiddleFactors pointer to the twiddle factors.
+                These values must be computed using this formula:
+                \f$W_N^k =   e^{-j \frac{\pi}{N} k}\f$,
+                where \f$N\f$ is the data length and \f$k\f$ is the index.
+                The user must provide \f$\frac{N}{2}\f$ values (\f$k = 0 .. \frac{N}{2}-1\f$).
+    @param[in]  pBitReverseLUT  pointer to the lookup table used for the bit reversal of output.
+                This table must include \f$N\f$ elements in the range \f$0 .. N-1\f$,
+                where each location \f$k\f$ contains the value \f$bitreverse(k)\f$.
  */
 typedef struct{
   uint32_t          FFTLength;
@@ -225,6 +232,13 @@ typedef struct{
   const float32_t * pTwiddleFactors;
   const uint16_t  * pBitReverseLUT;
 } plp_rfft_instance_f32;
+
+typedef struct{
+  plp_rfft_instance_f32 * S;
+  const float32_t * pSrc;
+  const uint32_t nPE;
+  float32_t * pDst;
+} plp_rfft_parallel_arg_f32;
 
 typedef struct{
   float32_t re;
@@ -1037,16 +1051,38 @@ void plp_rfft_f32(
 
 
 /**
+   @brief Floating-point FFT on real input data (parallel version).
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrcA   points to the input buffer (real data)
+   @param[in]   nPE     number of parallel processing units
+   @param[out]  pDst    points to the output buffer (complex data)
+   @return      none
+*/
+void plp_rfft_f32_parallel(
+        const plp_rfft_instance_f32 *S,
+        const float32_t * __restrict__ pSrc,
+        const uint32_t nPE,
+        float32_t * __restrict__ pDst);
+
+/**
    @brief  Floating-point FFT on real input data for XPULPV2 extension.
    @param[in]   S       points to an instance of the floating-point FFT structure
    @param[in]   pSrcA   points to the input buffer (real data)
    @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-
 void plp_rfft_f32_xpulpv2(
         const plp_rfft_instance_f32 *S,
         const float32_t * __restrict__ pSrc,
         float32_t * __restrict__ pDst);
+
+/**
+   @brief  Floating-point FFT on real input data for XPULPV2 extension (parallel version).
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrcA   points to the input buffer (real data)
+   @param[out]  pDst    points to the output buffer (complex data)
+   @return      none
+*/
+void plp_rfft_f32_xpulpv2_parallel(plp_rfft_parallel_arg_f32 *arg);
 
 #endif // __PLP_MATH_H__

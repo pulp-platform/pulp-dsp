@@ -1,7 +1,7 @@
 /* ----------------------------------------------------------------------
  * Project:      PULP DSP Library
- * Title:        plp_rfft_f32.c
- * Description:  Floating-point FFT on real input data
+ * Title:        plp_rfft_f32_parallel.c
+ * Description:  Floating-point FFT on real input data (parallel version)
  *
  * $Date:        16. December 2019
  * $Revision:    V0
@@ -48,24 +48,27 @@
  */
 
  /**
-    @brief Floating-point FFT on real input data.
+    @brief Floating-point FFT on real input data (parallel version).
     @param[in]   S       points to an instance of the floating-point FFT structure
     @param[in]   pSrcA   points to the input buffer (real data)
+    @param[in]   nPE     number of parallel processing units
     @param[out]  pDst    points to the output buffer (complex data)
     @return      none
  */
- void plp_rfft_f32(
+ void plp_rfft_f32_parallel(
          const plp_rfft_instance_f32 *S,
  		     const float32_t * __restrict__ pSrc,
+         const uint32_t nPE,
  	 	     float32_t * __restrict__ pDst){
 
-   if (rt_cluster_id() == ARCHI_FC_CID){
-     printf("F extension is supported only for cluster side\n");
-     return;
-   }
-   
-   plp_rfft_f32_xpulpv2(S, pSrc, pDst);
+  if (rt_cluster_id() == ARCHI_FC_CID){
+    printf("Parallel processing supported only for cluster side\n");
+    return;
+  }
 
+  plp_rfft_parallel_arg_f32 arg = (plp_rfft_parallel_arg_f32) {S, pSrc, nPE, pDst};
+
+  rt_team_fork(nPE, plp_rfft_f32_xpulpv2_parallel, (void *)&arg);
 
  }
 

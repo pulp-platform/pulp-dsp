@@ -16,7 +16,8 @@ FC_SRCS = \
 	src/FilteringFunctions/plp_conv_i32_parallel.c \
 	src/FilteringFunctions/plp_conv_i16_parallel.c \
 	src/FilteringFunctions/plp_conv_i8_parallel.c \
-	src/TransformFunctions/plp_rfft_f32.c
+	src/TransformFunctions/plp_rfft_f32.c \
+	 src/TransformFunctions/plp_rfft_f32_parallel.c
 
 CL_SRCS = \
 	src/StatisticsFunctions/kernels/plp_mean_i32s_xpulpv2.c \
