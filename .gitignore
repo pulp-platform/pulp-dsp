@@ -5,7 +5,8 @@ build/
 cscope.*
 *.o
 
-test_data/
+test_data
+!test_data/gen_stimuli.py
 
 doc/html/
 doc/latex/
