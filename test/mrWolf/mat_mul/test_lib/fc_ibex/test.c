@@ -2,10 +2,10 @@
 #include "stdio.h"
 #include "plp_math.h"
 
-#define P_MUL_TEST_8
+// #define P_MUL_TEST_8
 // #define P_MUL_TEST_16
-//#define P_MUL_TEST_32
-//#define MUL_TEST_8
+// #define P_MUL_TEST_32
+// #define MUL_TEST_8
 // #define MUL_TEST_16
 #if defined(P_MUL_TEST_8)
   #include "../../test_data/mul_data8_L2.h"
