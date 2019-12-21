@@ -1,19 +1,20 @@
 #include "rt/rt_api.h"
 #include "stdio.h"
 
-// #define MUL_TEST_8
-// #define MUL_TEST_16
+// #define FMA_TEST_8
+// #define FMA_TEST_16
 
-#if defined(MUL_TEST_8)
-  #include "mul_fct8.h"
-  #include "../../test_data/mul_data8_L2.h"
-#elif defined(MUL_TEST_16)
-  #include "mul_fct16.h"
-  #include "../../test_data/mul_data16_L2.h"
-#else // meaning MUL_TEST_32
-  #include "mul_fct32.h"
-  #include "../../test_data/mul_data32_L2.h"
+#if defined(FMA_TEST_8)
+  #include "fma_fct8.h"
+  #include "../../test_data/fma_data8_L2.h"
+#elif defined(FMA_TEST_16)
+  #include "fma_fct16.h"
+  #include "../../test_data/fma_data16_L2.h"
+#else
+  #include "fma_fct32.h"
+  #include "../../test_data/fma_data32_L2.h"
 #endif
+
 
 // This benchmark is a single shot so we can read the value directly out of the
 // HW counter using the function rt_perf_read
@@ -22,9 +23,9 @@ static void do_bench_0(rt_perf_t *perf, int events)
   
   int32_t* result = (int32_t*) rt_alloc(RT_ALLOC_FC_DATA, sizeof(uint32_t)*M_LENGTH*O_LENGTH);
 
-  #if defined MUL_TEST_8
+  #if defined FMA_TEST_8
     printf("running test for 8 bit\n");
-  #elif defined(MUL_TEST_16)
+  #elif defined(FMA_TEST_16)
     printf("running test for 16 bit\n");
   #else
     printf("running test for 32 bit\n");
@@ -38,12 +39,21 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  #if defined(MUL_TEST_8)
-    plp_mat_mult_i8s_rv32im(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
-  #elif defined(MUL_TEST_16)
-    plp_mat_mult_i16s_rv32im(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
-  #else // meaning MUL_TEST_32
-    plp_mat_mult_i32s_rv32im(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
+  #if defined(FMA_TEST_8)
+    for(int i = 0; i < M_LENGTH*O_LENGTH; i++){
+      result[i] = (int32_t)m_c_initial[i];
+    }
+    plp_mat_fma_i8s_rv32im(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
+  #elif defined(FMA_TEST_16)
+    for(int i = 0; i < M_LENGTH*O_LENGTH; i++){
+      result[i] = (int32_t)m_c_initial[i];
+    }
+    plp_mat_fma_i16s_rv32im(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
+  #else
+    for(int i = 0; i < M_LENGTH*O_LENGTH; i++){
+      result[i] = (int32_t)m_c_initial[i];
+    }
+    plp_mat_fma_i32s_rv32im(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
   #endif
 
   rt_perf_stop(perf);
