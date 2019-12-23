@@ -32,39 +32,11 @@
 
 
 /**
-  @ingroup groupMath
+  @ingroup groupMatrix
  */
 
 /**
-  @defgroup BasicMatMult Matrix Transposed Matrix Multiplication
-  This module contains the glue code for Matrix Transposed Matrix Multiplication. The kernel codes (kernels) are in the Moducle Matrix Transposed Matrix Multiplication Kernels.
-
-  The Matrix Transposed Matrix Multiplication computes the product of two matrices with dimensions MxN and NxO, the second matrix is transposed in memory.
-  The both matrices are accessed row wise, all values form the first are multiplied with the values of the second and then sum of the result gives the value for the result matrix.
-  <pre>
-      pDst[i,k] = pSrcA[i*M]*pSrcB[k*N] + pSrcA[i*M+1]*pSrcB[k*N +1] + ... + pSrcA[i*M+N-1]*pSrcB[k*N+N-1]
-  </pre>
-  There are functions for integer 32- 16- and 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
-
-  The naming scheme of the functions follows the following pattern (for example plp_mat_mult_i32s):
-  <pre>
-  <pulp> _ <function name> _ <data type> <precision> <method> _ <isa extension>, with
-
-  data type = {f, i, q} respectively for floats, integers, fixed points
-
-  precision = {32, 16, 8} bits
-
-  method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
-
-  isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
-
-  </pre>
-
-
- */
-
-/**
-  @addtogroup BasicMatMult
+  @addtogroup BasicMatMultTrans
   @{
  */
 
@@ -75,6 +47,7 @@
   @param[in]  M         height of the first input matrix
   @param[in]  N         width of the first input matrix and hight of the second
   @param[in]  O         width of the second input matrix
+  @param[in]  nPE       Number of cores to use
   @param[out] pDstC     points to the output matrix
   @return        none
  */
@@ -108,7 +81,7 @@ void plp_mat_mult_trans_i8_parallel(
 }
 
 /**
-  @} end of BasicMatMult group
+  @} end of BasicMatMultTrans group
  */
 
 

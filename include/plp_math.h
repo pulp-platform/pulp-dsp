@@ -76,7 +76,7 @@
  * @defgroup groupMatrix Matrix Functions
  * The naming scheme of the functions follows the following pattern (for example plp_mat_mult_i32s_rv32im):
  <pre>
- <pulp> _ <function name> _ <data type> <precision> <method> _ <isa extension>, with
+ \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
 
  data type = {f, i, q} respectively for floats, integers, fixed points
 
@@ -1084,6 +1084,7 @@ void plp_mat_mult_i32(
 
 
 
+
 /** -------------------------------------------------------
    @brief         Matrix matrix multiplication of a 32-bit integer matrices for RV32IM extension.
    @param[in]     pSrcA      points to first the input matrix
@@ -1282,14 +1283,8 @@ void plp_mat_mult_i32_parallel(
 
 
 /** -------------------------------------------------------
-   @brief         Parallel matrix matrix multiplication of a 32-bit integer matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
+   @brief         Parallel matrix matrix multiplication of a 32-bit integer matrices for XPULPV2 extension.
+   @param[in]  args      pointer to plp_mat_mult_instance_i32 struct initialized by plp_mat_mult_i32_parallel
    @return        none
 */
 
@@ -1321,18 +1316,12 @@ void plp_mat_mult_i16_parallel(
 
 
 /** -------------------------------------------------------
-   @brief         Parallel matrix matrix multiplication of a 16-bit integer matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+    @brief Parallel matrix multiplication of 16-bit integer matrices kernel for XPULPV2 extension.
+    @param[in]  args      pointer to plp_mat_mult_instance_i16 struct initialized by plp_mat_mult_i16_parallel
+    @return        none
 
-   @par Exploiting SIMD instructions
-   The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+    @par Exploiting SIMD instructions
+    The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
 */
 
 void plp_mat_mult_i16vp_xpulpv2(
@@ -1364,14 +1353,8 @@ void plp_mat_mult_i8_parallel(
 
 
 /** -------------------------------------------------------
-   @brief         Parallel matrix matrix multiplication of a 8-bit integer matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
+   @brief Parallel matrix multiplication of 8-bit integer matrices kernel for XPULPV2 extension.
+   @param[in]  args      pointer to plp_mat_mult_instance_i8 struct initialized by plp_mat_mult_i8_parallel
    @return        none
 
    @par Exploiting SIMD instructions
@@ -1601,13 +1584,7 @@ void plp_mat_mult_trans_i32_parallel(
 
 /** -------------------------------------------------------
    @brief         Parallel matrix transposed matrix multiplication of a 32-bit integer matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
+   @param[in]  args      pointer to plp_mat_mult_instance_i32 struct initialized by plp_mat_mult_i32_parallel
    @return        none
 */
 
@@ -1639,14 +1616,8 @@ void plp_mat_mult_trans_i16_parallel(
 
 
 /** -------------------------------------------------------
-   @brief         Parallel matrix transposed matrix multiplication of a 16-bit integer matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
+   @brief         Parallel matrix transposed matrix multiplication of a 16-bit integer matrices for XPULPV2 extension.
+   @param[in]  args      pointer to plp_mat_mult_instance_i16 struct initialized by plp_mat_mult_i16_parallel
    @return        none
 
    @par Exploiting SIMD instructions
@@ -1682,14 +1653,8 @@ void plp_mat_mult_trans_i8_parallel(
 
 
 /** -------------------------------------------------------
-   @brief         Parallel matrix transposed matrix multiplication of a 8-bit integer matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
+   @brief         Parallel matrix transposed matrix multiplication of a 8-bit integer matrices for XPULPV2 extension.
+   @param[in]  args      pointer to plp_mat_mult_instance_i8 struct initialized by plp_mat_mult_i8_parallel
    @return        none
 
    @par Exploiting SIMD instructions

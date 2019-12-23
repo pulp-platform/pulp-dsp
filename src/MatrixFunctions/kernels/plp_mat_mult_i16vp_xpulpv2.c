@@ -42,15 +42,13 @@
  */
 
 /**
-  @brief Parallel matrix multiplication of 16-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  pSrcA     points to the first input matrix
-  @param[in]  pSrcB     points to the second input matrix
-  @param[in]  M         height of the first input matrix
-  @param[in]  N         width of the first input matrix and hight of the second
-  @param[in]  O         width of the second input matrix
-  @param[out] pDstC     points to the output matrix
-  @return        none
- */
+   @brief Parallel matrix multiplication of 16-bit integer matrices kernel for XPULPV2 extension.
+   @param[in]  args      pointer to plp_mat_mult_instance_i16 struct initialized by plp_mat_mult_i16_parallel
+   @return        none
+
+   @par Exploiting SIMD instructions
+   The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
 
 // define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 

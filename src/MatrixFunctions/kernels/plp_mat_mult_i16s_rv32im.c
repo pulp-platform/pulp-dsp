@@ -36,7 +36,7 @@
  */
 
 /**
-  @defgroup BasicMatMulktKernels Matrix Multiplication Kernels
+  @defgroup BasicMatMultKernels Matrix Multiplication Kernels
   Computes the product of two matrices.
 
   The Matrix Matrix Multiplication computes the product of two matrices with dimensions MxN and NxO.
@@ -48,7 +48,7 @@
 
   The naming of the functions follows the following pattern (for example plp_dot_prod_i32s_rv32im):
   <pre>
-      <pulp> _ <function name> _ <data type><precision><method>_<isa extension>, with
+      \<pulp\> _ \<function name\> _ \<data type\>\<precision\>\<method\>_\<isa extension\>, with
 
       data type = {f, i, q} respectively for floats, integers, fixed points
 

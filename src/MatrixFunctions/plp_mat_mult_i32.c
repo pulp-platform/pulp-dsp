@@ -32,7 +32,7 @@
 
 
 /**
-  @ingroup groupMath
+   @ingroup groupMatrix
  */
 
 /**
@@ -48,7 +48,7 @@
 
   The naming scheme of the functions follows the following pattern (for example plp_mat_mult_i32s):
   <pre>
-  <pulp> _ <function name> _ <data type> <precision> <method> _ <isa extension>, with
+  \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
 
   data type = {f, i, q} respectively for floats, integers, fixed points
 

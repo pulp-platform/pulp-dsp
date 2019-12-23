@@ -42,13 +42,8 @@
  */
 
 /**
-  @brief Parallel mtrix multiplication of 32-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  pSrcA     points to the first input matrix
-  @param[in]  pSrcB     points to the second input matrix
-  @param[in]  M         height of the first input matrix
-  @param[in]  N         width of the first input matrix and hight of the second
-  @param[in]  O         width of the second input matrix
-  @param[out] pDstC     points to the output matrix
+  @brief Parallel matrix multiplication of 32-bit integer matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_mult_instance_i32 struct initialized by plp_mat_mult_i32_parallel
   @return        none
  */
 

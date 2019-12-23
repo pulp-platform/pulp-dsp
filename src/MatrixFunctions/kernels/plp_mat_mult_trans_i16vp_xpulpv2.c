@@ -36,7 +36,7 @@
  */
 
 /**
-  @defgroup BasicMatMulktKernels Matrix Multiplication Kernels
+  @defgroup BasicMatMultTransKernels Matrix Multiplication Kernels
   Computes the product of two matrices, the second of which is transposed.
 
   The Matrix Matrix Multiplication computes the product of two matrices with dimensions MxN and NxO, the second one is stored transposed in memory.
@@ -48,7 +48,7 @@
 
   The naming of the functions follows the following pattern (for example plp_dot_prod_i32s_rv32im):
   <pre>
-      <pulp> _ <function name> _ <data type><precision><method>_<isa extension>, with
+      \<pulp\> _ \<function name\> _ \<data type\>\<precision\>\<method\>_\<isa extension\>, with
 
       data type = {f, i, q} respectively for floats, integers, fixed points
 
@@ -65,20 +65,18 @@
 
 
 /**
-  @addtogroup BasicMatMultKernels
+  @addtogroup BasicMatMultTransKernels
   @{
  */
 
 /**
-  @brief Parallel matrix multiplication of 16-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  pSrcA     points to the first input matrix
-  @param[in]  pSrcB     points to the second input matrix
-  @param[in]  M         height of the first input matrix
-  @param[in]  N         width of the first input matrix and hight of the second
-  @param[in]  O         width of the second input matrix
-  @param[out] pDstC     points to the output matrix
-  @return        none
- */
+   @brief         Parallel matrix transposed matrix multiplication of a 16-bit integer matrices for XPULPV2 extension.
+   @param[in]  args      pointer to plp_mat_mult_instance_i16 struct initialized by plp_mat_mult_i16_parallel
+   @return        none
+
+   @par Exploiting SIMD instructions
+   The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
 
 // define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 
@@ -224,5 +222,5 @@ void plp_mat_mult_trans_i16vp_xpulpv2(void* args) {
 
 // undefine BASIC_VERSION
 /**
-   @} end of BasicMatMultKernels group
+   @} end of BasicMatMultTransKernels group
 */
