@@ -58,7 +58,7 @@ static inline void process_butterfly_last_radix2 (Complex_type_f32 * input,  Com
 /**
    @brief  Floating-point FFT on real input data for XPULPV2 extension.
    @param[in]   S       points to an instance of the floating-point FFT structure
-   @param[in]   pSrcA   points to the input buffer (real data)
+   @param[in]   pSrc    points to the input buffer (real data)
    @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
@@ -173,9 +173,7 @@ void plp_rfft_f32_xpulpv2(
 
 /**
    @brief  Floating-point FFT on real input data for XPULPV2 extension.
-   @param[in]   S      points to an instance of the floating-point FFT structure
-   @param[in]   pSrcA  points to the input buffer (real data)
-   @param[out]  pDst   points to the output buffer (complex data)
+   @param[in]   arg      points to an instance of the floating-point FFT structure
    @return      none
 */
 void plp_rfft_f32_xpulpv2_parallel(plp_rfft_parallel_arg_f32 *arg){

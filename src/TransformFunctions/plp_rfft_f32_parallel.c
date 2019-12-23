@@ -50,7 +50,7 @@
  /**
     @brief Floating-point FFT on real input data (parallel version).
     @param[in]   S       points to an instance of the floating-point FFT structure
-    @param[in]   pSrcA   points to the input buffer (real data)
+    @param[in]   pSrc    points to the input buffer (real data)
     @param[in]   nPE     number of parallel processing units
     @param[out]  pDst    points to the output buffer (complex data)
     @return      none
