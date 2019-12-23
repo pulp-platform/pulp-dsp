@@ -1,0 +1,13 @@
+-- 2 CORES
+Total cycles: 118640
+Instructions: 115016
+
+
+-- 4 CORES
+Total cycles: 61890
+Instructions: 59324
+
+
+-- 8 CORES
+Total cycles: 32683
+Instructions: 30250

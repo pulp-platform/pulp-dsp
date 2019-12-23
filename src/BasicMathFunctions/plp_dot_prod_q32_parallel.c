@@ -59,7 +59,7 @@ void plp_dot_prod_q32_parallel(
                          uint32_t deciPoint,
                          uint32_t nPE,
                          int32_t * __restrict__ pRes){
-  
+
   if (rt_cluster_id() == ARCHI_FC_CID){
     printf("parallel processing supported only for cluster side\n");
     return;
@@ -117,5 +117,3 @@ void plp_dot_prod_q32_parallel(
 /**
   @} end of BasicDotProd group
  */
-
-

@@ -22,7 +22,7 @@
  * limitations under the License.
  */
 
-/** 
+/**
    \mainpage PULP DSP Software Library
    *
    * Introduction
@@ -50,7 +50,7 @@
    *
    */
 
-/** 
+/**
  * @defgroup groupMath Basic Math Functions
  * The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s_rv32im):
  <pre>
@@ -68,11 +68,11 @@
 
  */
 
-/** 
+/**
  * @defgroup groupFilters Filtering Functions
  */
 
-/** 
+/**
  * @defgroup groupMatrix Matrix Functions
  * The naming scheme of the functions follows the following pattern (for example plp_mat_mult_i32s_rv32im):
  <pre>
@@ -87,17 +87,22 @@
  isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
  </pre>
+
+ *
+ * This set of functions provides basic matrix math operations.
+ *
+
  */
 
-/** 
+/**
  * @defgroup groupTransforms Transform Functions
  */
 
-/** 
+/**
  * @defgroup groupStats Statistics Functions
  */
 
-/** 
+/**
  * @defgroup groupSupport Support Functions
  */
 
@@ -107,6 +112,8 @@
 
 #include "rt/rt_api.h"
 #include "math.h"
+
+typedef float float32_t;
 
 #define PLP_MATH_IBEX // previously called zero-riscy
 //#define PLP_MATH_RISCY
@@ -205,7 +212,7 @@ typedef struct {
 
 /** -------------------------------------------------------
     @brief Instance structure for basic integer convolution.
-    @param[in]  addOffset  
+    @param[in]  addOffset
     @param[in]  addLengthfirst
     @param[in]  addLengthsecond
     @param[in]  numVectors
@@ -223,6 +230,38 @@ typedef struct{
   uint8_t coresPerVector;
 } plp_conv_tree_add_instance;
 
+/** -------------------------------------------------------
+    @struct plp_rfft_instance_f32
+    @brief Instance structure for floating-point FFT
+    @param[in]  length data length of the FFT
+    @param[in]  bitReverseFlag  flag that enables (bitReverseFlagR=1) or disables (bitReverseFlagR=0) bit reversal of output
+    @param[in]  pTwiddleFactors pointer to the twiddle factors.
+                These values must be computed using this formula:
+                \f$W_N^k =   e^{-j \frac{\pi}{N} k}\f$,
+                where \f$N\f$ is the data length and \f$k\f$ is the index.
+                The user must provide \f$\frac{N}{2}\f$ values (\f$k = 0 .. \frac{N}{2}-1\f$).
+    @param[in]  pBitReverseLUT  pointer to the lookup table used for the bit reversal of output.
+                This table must include \f$N\f$ elements in the range \f$0 .. N-1\f$,
+                where each location \f$k\f$ contains the value \f$bitreverse(k)\f$.
+ */
+typedef struct{
+  uint32_t          FFTLength;
+  uint8_t 	        bitReverseFlag;
+  const float32_t * pTwiddleFactors;
+  const uint16_t  * pBitReverseLUT;
+} plp_rfft_instance_f32;
+
+typedef struct{
+  plp_rfft_instance_f32 * S;
+  const float32_t * pSrc;
+  const uint32_t nPE;
+  float32_t * pDst;
+} plp_rfft_parallel_arg_f32;
+
+typedef struct{
+  float32_t re;
+  float32_t im;
+} Complex_type_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix multiplication.
@@ -1063,6 +1102,7 @@ void plp_conv_parallel_OLA(uint32_t nPE, uint32_t srcALen, uint32_t srcBLen, int
 */
 void plp_conv_parallel_OLA_kernel(void* task_args);
 
+
 /** -------------------------------------------------------
    @brief         Glue code for matrix matrix multiplication of a 32-bit integer matrices.
    @param[in]     pSrcA      points to first the input matrix
@@ -1663,5 +1703,54 @@ void plp_mat_mult_trans_i8_parallel(
 
 void plp_mat_mult_trans_i8vp_xpulpv2(
                          void* args);
+
+/**
+   @brief Floating-point FFT on real input data.
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrcA   points to the input buffer (real data)
+   @param[out]  pDst    points to the output buffer (complex data)
+   @return      none
+*/
+void plp_rfft_f32(
+        const plp_rfft_instance_f32 *S,
+        const float32_t * __restrict__ pSrc,
+        float32_t * __restrict__ pDst);
+
+
+/**
+   @brief Floating-point FFT on real input data (parallel version).
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrcA   points to the input buffer (real data)
+   @param[in]   nPE     number of parallel processing units
+   @param[out]  pDst    points to the output buffer (complex data)
+   @return      none
+*/
+void plp_rfft_f32_parallel(
+        const plp_rfft_instance_f32 *S,
+        const float32_t * __restrict__ pSrc,
+        const uint32_t nPE,
+        float32_t * __restrict__ pDst);
+
+/**
+   @brief  Floating-point FFT on real input data for XPULPV2 extension.
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrcA   points to the input buffer (real data)
+   @param[out]  pDst    points to the output buffer (complex data)
+   @return      none
+*/
+void plp_rfft_f32_xpulpv2(
+        const plp_rfft_instance_f32 *S,
+        const float32_t * __restrict__ pSrc,
+        float32_t * __restrict__ pDst);
+
+/**
+   @brief  Floating-point FFT on real input data for XPULPV2 extension (parallel version).
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrcA   points to the input buffer (real data)
+   @param[out]  pDst    points to the output buffer (complex data)
+   @return      none
+*/
+void plp_rfft_f32_xpulpv2_parallel(plp_rfft_parallel_arg_f32 *arg);
+
 
 #endif // __PLP_MATH_H__
