@@ -1,17 +1,17 @@
 #include "rt/rt_api.h"
 #include "stdio.h"
 #include "plp_math.h"
-#include "../../test_data/vec_data.h"
+#include "../../test_data/vec_data_i_1000.h"
 
 static int cores_events;
-RT_CL_DATA static int32_t * v_a_l1;// __attribute__ ((aligned(32)));
-RT_CL_DATA static int32_t * v_b_l1;// __attribute__ ((aligned(32)));
+RT_CL_DATA static v_type * v_a_l1;// __attribute__ ((aligned(32)));
+RT_CL_DATA static v_type * v_b_l1;// __attribute__ ((aligned(32)));
 
 // This benchmark is a single shot so we can read the value directly out of the
 // HW counter using the function rt_perf_read
 static void do_bench_0(rt_perf_t *perf, int events)
 {
-  int32_t result=0;
+  v_type result=0;
 
   //printf("dot product i32s cl\n");
 
@@ -25,8 +25,13 @@ static void do_bench_0(rt_perf_t *perf, int events)
 
   //plp_dot_prod_q32_parallel(v_a_l1, v_b_l1, LENGTH, 2, 8, &result);
   //plp_dot_prod_i32_parallel(v_a_l1, v_b_l1, LENGTH, 8, &result);
-  plp_dot_prod_i32(v_a_l1, v_b_l1, LENGTH, &result);
+  //plp_dot_prod_f32(v_a_l1, v_b_l1, LENGTH, &result);
+  //plp_dot_prod_f32_parallel(v_a_l1, v_b_l1, LENGTH, 8, &result);
   //plp_dot_prod_q32(v_a_l1, v_b_l1, LENGTH, 1, &result);
+  //plp_dot_prod_f32s_xpulpv2(v_a_l1, v_b_l1, LENGTH, &result);
+  //plp_dot_prod_q32s_xpulpv2(v_a_l1, v_b_l1, LENGTH, 2, &result);
+  plp_dot_prod_i32s_xpulpv2(v_a_l1, v_b_l1, LENGTH, &result);
+  
 
   rt_perf_stop(perf);
 

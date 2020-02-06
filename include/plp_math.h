@@ -157,6 +157,24 @@ typedef struct
 } plp_dot_prod_instance_q32;
 
 /** -------------------------------------------------------
+    @struct plp_dot_prod_instance_f32
+    @brief Instance structure for float parallel dot product.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] resBuffer  pointer to the result buffer
+*/
+typedef struct
+{
+  float32_t * pSrcA;     // pointer to the first vector
+  float32_t * pSrcB;     // pointer to the second vector
+  uint32_t blkSizePE;     // number of samples in each vector
+  uint32_t nPE;        // number of processing units
+  float32_t * resBuffer;      // pointer to result vector
+} plp_dot_prod_instance_f32;
+
+/** -------------------------------------------------------
     @brief Instance structure for basic integer convolution.
     @param[in]  pSrcA      points to the first input vector
     @param[in]  srcALen    length of the first input vector
@@ -350,6 +368,23 @@ void plp_dot_prod_q32_parallel(
                                int32_t * __restrict__ pRes);
 
 
+/** -------------------------------------------------------
+    @brief Glue code for parallel dot product of 32-bit float vectors.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blockSize  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] pRes     output result returned here
+    @return        none
+*/
+
+void plp_dot_prod_f32_parallel(
+                               const float32_t * __restrict__ pSrcA,
+                               const float32_t * __restrict__ pSrcB,
+                               uint32_t blockSize,
+                               uint32_t nPE,
+                               float32_t * __restrict__ pRes);
+
 
 /** -------------------------------------------------------
    @brief Scalar dot product with interleaved access of 32-bit integer vectors kernel for XPULPV2 extension.
@@ -375,6 +410,16 @@ void plp_dot_prod_i32p_xpulpv2(void * S);
 */
 
 void plp_dot_prod_q32p_xpulpv2(void * S);
+
+
+
+/** -------------------------------------------------------
+   @brief Scalar dot product with interleaved access of 32-bit float vectors kernel for XPULPV2 extension.
+   @param[in]  S     points to the instance structure for float parallel dot product
+   @return        none
+*/
+
+void plp_dot_prod_f32p_xpulpv2(void * S);
 
 
 
@@ -420,7 +465,6 @@ void plp_dot_prod_i32s_xpulpv2(
                                const int32_t * __restrict__ pSrcB,
                                uint32_t blockSize,
                                int32_t * __restrict__ pRes);
-
 
 
 /** -------------------------------------------------------
@@ -478,6 +522,37 @@ void plp_dot_prod_q32s_xpulpv2(
                                uint32_t deciPoint,
                                int32_t * __restrict__ pRes);
 
+
+/** -------------------------------------------------------
+   @brief Glue code for dot product of 32-bit float vectors.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  blockSize  number of samples in each vector
+   @param[out] pRes     output result returned here
+   @return        none
+*/
+
+void plp_dot_prod_f32(
+                      const float32_t * __restrict__ pSrcA,
+                      const float32_t * __restrict__ pSrcB,
+                      uint32_t blockSize,
+                      float32_t * __restrict__ pRes);
+
+
+/** -------------------------------------------------------
+    @brief Glue code for dot product of 32-bit float vectors.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blockSize  number of samples in each vector
+    @param[out] pRes     output result returned here
+    @return        none
+*/
+
+void plp_dot_prod_f32s_xpulpv2(
+                                        const float32_t * __restrict__ pSrcA,
+                                        const float32_t * __restrict__ pSrcB,
+                                        uint32_t blockSize,
+                                        float32_t * __restrict__ pRes);
 
 
 /** -------------------------------------------------------
@@ -813,6 +888,34 @@ void plp_copy_i32s_rv32im(
 void plp_copy_i32s_xpulpv2(
                            int32_t * __restrict__ pSrc,
                            int32_t * __restrict__ pDst,
+                           uint32_t blockSize);
+
+
+/** -------------------------------------------------------
+    @brief         Glue code for copying the elements of a 32-bit float vector
+    @param[in]     pSrc       points to input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_copy_f32(
+                  float32_t * __restrict__ pSrc,
+                  float32_t * __restrict__ pDst,
+                  uint32_t blockSize);
+
+
+/** -------------------------------------------------------
+   @brief         Copies the elements of a 32-bit integer vector for XPULPV2 extension.
+   @param[in]     pSrc       points to input vector
+   @param[out]    pDst       points to output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_copy_f32s_xpulpv2(
+                           float32_t * __restrict__ pSrc,
+                           float32_t * __restrict__ pDst,
                            uint32_t blockSize);
 
 

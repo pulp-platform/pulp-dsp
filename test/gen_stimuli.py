@@ -54,11 +54,11 @@ def gen_stimuli(name, var_type, n_bits, min_value, max_value, length):
     f.write('typedef %s v_type;\n' % var_type)
 #    f.write('unsigned int v_length = %s;\n' % str(length))
 
-    write_header_scalar(f, 'result',   "int32_t", 0)
+    write_header_scalar(f, 'result',   var_type, 0)
 
     write_arr(f, 'v_a',   v_a,   var_type, length)
     write_arr(f, 'v_b',   v_b,   var_type, length)
-    write_scalar(f, 'exp_result', exp_result, "int32_t")
+    write_scalar(f, 'exp_result', exp_result, var_type)
     
 #    f.write('%s dot_product(%s * v, %s * u, unsigned int n);\n' % (var_type, var_type, var_type))
 

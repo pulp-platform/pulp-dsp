@@ -63,20 +63,20 @@ void plp_mean_i32s_xpulpv2(
         tmpBS = (blockSize>>1);
 
         for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-          sum1 += *pSrc;
-          sum2 += *pSrc;
+          sum1 += *pSrc++;
+          sum2 += *pSrc++;
         }
 
         tmpBS = (blockSize%2U);
 
         for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-          sum1 += *pSrc;
+          sum1 += *pSrc++;
         }
 
 #else // PLP_MATH_LOOPUNROLL
 
         for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum1 += *pSrc;
+          sum1 += *pSrc++;
         }
 
 #endif // PLP_MATH_LOOPUNROLL

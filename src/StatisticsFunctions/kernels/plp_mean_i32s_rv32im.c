@@ -85,21 +85,21 @@ void plp_mean_i32s_rv32im(
 #if defined(PLP_MATH_LOOPUNROLL)
 
   for (blkCnt=0; blkCnt<(blockSize>>2); blkCnt++){
-          sum += *pSrc;
-          sum += *pSrc;
-          sum += *pSrc;
-          sum += *pSrc;
+          sum += *pSrc++;
+          sum += *pSrc++;
+          sum += *pSrc++;
+          sum += *pSrc++;
         }
 
 
         for (blkCnt=0; blkCnt<(blockSize%4U); blkCnt++){
-          sum += *pSrc;
+          sum += *pSrc++;
         }
 
 #else // PLP_MATH_LOOPUNROLL
 
         for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum += *pSrc;
+          sum += *pSrc++;
         }
 
 #endif // PLP_MATH_LOOPUNROLL
