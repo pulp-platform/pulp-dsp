@@ -19,7 +19,8 @@ else
 	PULP_CFLAGS += -D FSIG="printf(\"Hello Print\n\")"
 endif
 
-# gen: 
-# 	./gen_stimuli.py $(GENFLAGS)
-
 include $(PULP_SDK_HOME)/install/rules/pulp_rt.mk
+
+gen: 
+	./gen_stimuli.py $(GARGS)
+		
