@@ -24,8 +24,8 @@ static void do_bench_0(rt_perf_t *perf, int events)
 
   rt_perf_stop(perf);
 
-  // bool passed = true;
-  // printf("Test passed: %d\n", passed);
+  int passed = 1;
+  printf("Test passed: %d\n", passed);
 
 }
 
