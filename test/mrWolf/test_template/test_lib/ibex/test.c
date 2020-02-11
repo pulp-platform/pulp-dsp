@@ -1,6 +1,7 @@
 #include "rt/rt_api.h"
 #include "stdio.h"
 #include "plp_math.h"
+#include "data.h"
 
 // This benchmark is a single shot so we can read the value directly out of the
 // HW counter using the function rt_perf_read
@@ -9,22 +10,26 @@ static void do_bench_0(rt_perf_t *perf, int events)
   // Activate specified events
   rt_perf_conf(perf, events);
 
+  // Set up buffers needed for computation
+  int32_t comp_result=0;
+
   // Reset HW counters now and start and stop counters so that we benchmark
   // only around the printf
 
   rt_perf_reset(perf);
-
-  #ifdef PERF
-    printf("Perf Hello\n");
-  #endif
-
   rt_perf_start(perf);
 
   FSIG;
 
+  plp_dot_prod_i32(v_a, v_b,12, &comp_result);
+
   rt_perf_stop(perf);
 
+  printf("comp_result: %d\n", comp_result);
   int passed = 1;
+  if(comp_result != result){
+    passed = 0;
+  }
   printf("Test passed: %d\n", passed);
 
 }
