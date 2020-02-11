@@ -32,11 +32,7 @@ def write_scalar(f, name, var_type, value):
 	f.write('%s %s = %s;\n\n' % (var_type, name, value))
 
 def write_result(f, var_type, result):
-	print(result)
-	if result[0] == 1:
-		write_scalar(f, 'result', var_type, result[1][0])
-	else: 
-		write_arr(f, 'result', var_type, result[0], result[1])
+	write_arr(f, 'result', var_type, result[0], result[1])
 
 if __name__ == '__main__':
 	

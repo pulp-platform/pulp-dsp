@@ -16,7 +16,7 @@ endif
 ifdef FSIG
 	PULP_CFLAGS += $(FSIG)
 else
-	PULP_CFLAGS += -D FSIG="printf(\"Hello Print\n\")"
+	PULP_CFLAGS += -D FSIG="printf(\"No function defined\n\")"
 endif
 
 include $(PULP_SDK_HOME)/install/rules/pulp_rt.mk
