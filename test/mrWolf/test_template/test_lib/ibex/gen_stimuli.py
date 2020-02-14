@@ -100,9 +100,16 @@ if __name__ == '__main__':
 					data = [rand.randint(min_val,max_val) for i in range(arg[2])]
 					write_arr(f, arg[0], arg[1], arg[2], data)
 
-			# elif arg[1] == 'float':
-			# 	max_val = MAX_FLOAT
-			# 	min_val = MIN_FLOAT
+			elif arg[1] == 'float':
+				max_val = (2**31)-1
+				min_val = -(2**31)
+				if arg[2] == 1:
+					data = rand.uniform(min_val,max_val)
+					write_scalar(f, arg[0], arg[1], data)
+				else:
+					data = [rand.uniform(min_val,max_val) for i in range(arg[2])]
+					write_arr(f, arg[0], arg[1], arg[2], data)
+
 			# also need to handle fixed point at this
 
 
@@ -142,7 +149,14 @@ if __name__ == '__main__':
 		arg_data.append(data)
 
 	# handle result arguments in seperate loop, as we need to have all data form above ready
-	# start check define:
+	# start check define: write a check for every argument that is marked as result
+	f.write('#define CHECK {\\\n')
+	for arg in arglist:
+		if arg[3] == 2:
+			ref_name = 'reference_'+ arg[0]
+			write_check(f, arg[0], ref_name, arg[2])
+	f.write('}\n\n')
+	# compute results for all arguments maked as results
 	for arg in arglist:
 		result_index = 0
 		if arg[3] == 2:
@@ -150,10 +164,4 @@ if __name__ == '__main__':
 			write_arr(f, ref_name, arg[1], arg[2], compute_result(result_index, arg_data))
 			result_index = result_index + 1
 
-	f.write('#define CHECK {\\\n')
-	for arg in arglist:
-		if arg[3] == 2:
-			ref_name = 'reference_'+ arg[0]
-			write_check(f, arg[0], ref_name, arg[2])
-	f.write('}')
 	f.close()
