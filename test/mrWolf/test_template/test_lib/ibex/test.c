@@ -11,7 +11,7 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_conf(perf, events);
 
   // Set up buffers needed for computation
-  int32_t comp_result[1]={0};
+  int32_t comp_result[1];
 
   // Reset HW counters now and start and stop counters so that we benchmark
   // only around the printf
@@ -23,9 +23,10 @@ static void do_bench_0(rt_perf_t *perf, int events)
 
   rt_perf_stop(perf);
 
-  printf("comp_result: %d\n", comp_result);
+  printf("comp_result: %u\n", comp_result[0]);
+  
   int passed = 1;
-  if(comp_result[0] != result[0]){
+  if(comp_result[0] != reference_comp_result[0]){
     passed = 0;
   }
   printf("Test passed: %d\n", passed);
