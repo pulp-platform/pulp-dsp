@@ -141,11 +141,6 @@ if __name__ == '__main__':
 
 			write_arr(f, arg[0], arg[1], arg[2], [rand.randint(min_val,max_val) for i in range(arg[2])])
 
-			# elif arg[1] == 'float':
-			# 	max_val = MAX_FLOAT
-			# 	min_val = MIN_FLOAT
-			# also need to handle fixed point at this
-
 		arg_data.append(data)
 
 	# handle result arguments in seperate loop, as we need to have all data form above ready
