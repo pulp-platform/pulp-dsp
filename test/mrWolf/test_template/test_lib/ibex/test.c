@@ -26,9 +26,9 @@ static void do_bench_0(rt_perf_t *perf, int events)
   printf("comp_result: %u\n", comp_result[0]);
   
   int passed = 1;
-  if(comp_result[0] != reference_comp_result[0]){
-    passed = 0;
-  }
+
+  CHECK
+
   printf("Test passed: %d\n", passed);
 
 }

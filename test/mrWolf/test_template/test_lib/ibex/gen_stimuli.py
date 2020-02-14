@@ -32,6 +32,9 @@ def write_arr(f, name, var_type, size, arr):
 def write_scalar(f, name, var_type, value):
 	f.write('%s %s = %s;\n\n' % (var_type, name, value))
 
+def write_check(f, name, reference, size):
+	f.write('if(passed == 1){for(int i = 0; i < %s; i++){if(%s[i] != %s[i]){passed = 0;}}}\\\n' % (size, name, reference))
+
 if __name__ == '__main__':
 
 	import argparse
@@ -139,12 +142,18 @@ if __name__ == '__main__':
 		arg_data.append(data)
 
 	# handle result arguments in seperate loop, as we need to have all data form above ready
-	
+	# start check define:
 	for arg in arglist:
 		result_index = 0
 		if arg[3] == 2:
-			res_name = 'reference_'+ arg[0]
-			write_arr(f, res_name, arg[1], arg[2], compute_result(result_index, arg_data))
+			ref_name = 'reference_'+ arg[0]
+			write_arr(f, ref_name, arg[1], arg[2], compute_result(result_index, arg_data))
 			result_index = result_index + 1
 
+	f.write('#define CHECK {\\\n')
+	for arg in arglist:
+		if arg[3] == 2:
+			ref_name = 'reference_'+ arg[0]
+			write_check(f, arg[0], ref_name, arg[2])
+	f.write('}')
 	f.close()
