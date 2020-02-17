@@ -81,8 +81,8 @@ if __name__ == '__main__':
 					write_arr(f, arg[0], arg[1], arg[2], data)
 
 			elif arg[1] == 'int16_t':
-				max_val = (2**16)-1
-				min_val = -(2**16)
+				max_val = (2**15)-1
+				min_val = -(2**15)
 				if arg[2] == 1:
 					data = rand.randint(min_val,max_val)
 					write_scalar(f, arg[0], arg[1], data)
@@ -91,8 +91,8 @@ if __name__ == '__main__':
 					write_arr(f, arg[0], arg[1], arg[2], data)
 
 			elif arg[1] == 'int8_t':
-				max_val = (2**8)-1
-				min_val = -(2**8)
+				max_val = (2**7)-1
+				min_val = -(2**7)
 				if arg[2] == 1:
 					data = rand.randint(min_val,max_val)
 					write_scalar(f, arg[0], arg[1], data)
