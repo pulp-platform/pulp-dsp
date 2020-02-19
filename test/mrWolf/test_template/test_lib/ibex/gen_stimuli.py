@@ -49,8 +49,15 @@ if __name__ == '__main__':
 	# 3 : arg_type
 	# 4 : value
 	parser.add_argument('--arg', nargs=5, action='append')
+	parser.add_argument('--folder')
 
 	args = parser.parse_args()
+
+	# change to build folder
+	import os
+	os.chdir(args.folder)
+
+	# get nicer name for argument list
 	arglist = args.arg
 
 	for arg in arglist:
