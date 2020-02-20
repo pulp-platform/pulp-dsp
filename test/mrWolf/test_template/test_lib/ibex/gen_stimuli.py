@@ -8,14 +8,24 @@ import numpy as np
  # where x is the index of the input, 
  # meaning it's position in the function signature
  # i is a possible index into any array
+ # res_type contains the string type of the result
+ # fix point will give -1 if it is not fix point arithmetic or the index where the point should be
 
-def compute_result(res_number, inputs):
+def compute_result(res_number, inputs, res_type, fix_point):
 	lenght = inputs[2]
-	result = np.zeros(lenght, dtype=int)
-	for i in range(0,lenght):
-		result[0] = (result[0] + inputs[0][i]*inputs[1][i]) % (2**32) 
-		# need to convert to signed reperesentation if possible
-	return(result)
+	if res_type == 'int32_t':
+		result = np.zeros(lenght, dtype=int)
+		for i in range(0,lenght):
+			result[0] = (result[0] + inputs[0][i]*inputs[1][i]) % (2**32) 
+			# need to convert to signed reperesentation if possible
+		return result
+	elif res_type == 'float':
+		result = np.zeros(lenght, dtype=float)
+		for i in range(0,lenght):
+			result[0] = result[0] + inputs[0][i]*inputs[1][i]
+		return result
+	else:
+		raise TypeError('result %s has neither i32 or float type' % res_number)
 
  
 ###############################################################
@@ -50,6 +60,7 @@ if __name__ == '__main__':
 	# 4 : value
 	parser.add_argument('--arg', nargs=5, action='append')
 	parser.add_argument('--folder')
+	parser.add_argument('--point')
 
 	args = parser.parse_args()
 
@@ -163,7 +174,7 @@ if __name__ == '__main__':
 		result_index = 0
 		if arg[3] == 2:
 			ref_name = 'reference_'+ arg[0]
-			write_arr(f, ref_name, arg[1], arg[2], compute_result(result_index, arg_data))
+			write_arr(f, ref_name, arg[1], arg[2], compute_result(result_index, arg_data, arg[1], args.point))
 			result_index = result_index + 1
 
 	f.close()

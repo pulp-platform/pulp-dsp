@@ -20,8 +20,8 @@ static void do_bench_0(rt_perf_t *perf, int events)
 
   rt_perf_stop(perf);
 
-  // printf("comp_result: %u\n", comp_result[0]);
-  // printf("comp_result: %d\n", comp_result[0]);
+  printf("comp_result: %u\n", comp_result[0]);
+  printf("comp_result: %d\n", comp_result[0]);
   
   int passed = 1;
 
