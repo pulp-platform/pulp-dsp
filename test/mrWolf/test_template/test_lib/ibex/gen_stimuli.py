@@ -14,11 +14,22 @@ import numpy as np
 def compute_result(res_number, inputs, res_type, fix_point):
 	lenght = inputs[2]
 	if res_type == 'int32_t':
-		result = np.zeros(lenght, dtype=int)
-		for i in range(0,lenght):
-			result[0] = (result[0] + inputs[0][i]*inputs[1][i]) % (2**32) 
-			# need to convert to signed reperesentation if possible
-		return result
+		# compute results for i32, i16 and i8
+		if fix_point == -1:
+			result = np.zeros(lenght, dtype=int)
+			for i in range(0,lenght):
+				result[0] = (result[0] + inputs[0][i]*inputs[1][i]) % (2**32) 
+				# need to convert to signed reperesentation if possible
+			return result
+		# compite results for q32, q16 and q8
+		# the example is wront currently
+		else:
+			result = np.zeros(lenght, dtype=int)
+			for i in range(0,lenght):
+				result[0] = (result[0] + inputs[0][i]*inputs[1][i]) % (2**32) 
+				# need to convert to signed reperesentation if possible
+			return result
+	# compute result for float computation
 	elif res_type == 'float':
 		result = np.zeros(lenght, dtype=float)
 		for i in range(0,lenght):
