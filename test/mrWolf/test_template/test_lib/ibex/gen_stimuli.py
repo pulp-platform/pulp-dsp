@@ -2,6 +2,31 @@
 
 import numpy as np
 
+def make_int_32(x):
+	if x >= 2**31:
+		return x - 2**32
+	else:
+		return x
+
+def q_sat(x):
+	if x > 2**31 -1:
+		return 2**31-1
+	elif x < -2**31:
+		return -2**31
+	else:
+		return x
+
+def q_add(a, b, p):
+	return q_sat(a+b)
+
+def q_sub(a, b, p):
+	return q_sat(a-b)
+
+def q_mul(a, b, p):
+	rounding = 1<<(p-1)
+	return q_sat((a*b+rounding) >> p)
+
+
 ###############################################################
  # Define how to compute the result here
  # The data in argument arrays can be accessed by inputs[x][i]
@@ -18,16 +43,19 @@ def compute_result(res_number, inputs, res_type, fix_point):
 		if fix_point == -1:
 			result = np.zeros(lenght, dtype=int)
 			for i in range(0,lenght):
-				result[0] = (result[0] + inputs[0][i]*inputs[1][i]) % (2**32) 
-				# need to convert to signed reperesentation if possible
+				result[0] = make_int_32(result[0] + inputs[0][i]*inputs[1][i])
 			return result
 		# compite results for q32, q16 and q8
 		# the example is wront currently
 		else:
 			result = np.zeros(lenght, dtype=int)
-			for i in range(0,lenght):
-				result[0] = (result[0] + inputs[0][i]*inputs[1][i]) % (2**32) 
-				# need to convert to signed reperesentation if possible
+			if fix_point != 0:
+				for i in range(0,lenght):
+					result[0] = q_add(result[0], q_mul(inputs[0][i], inputs[1][i],fix_point),fix_point)
+			else:
+				for i in range(0,lenght):
+					result[0] = (result[0] + inputs[0][i]*inputs[1][i]) % (2**32)
+
 			return result
 	# compute result for float computation
 	elif res_type == 'float':
@@ -185,7 +213,7 @@ if __name__ == '__main__':
 		result_index = 0
 		if arg[3] == 2:
 			ref_name = 'reference_'+ arg[0]
-			write_arr(f, ref_name, arg[1], arg[2], compute_result(result_index, arg_data, arg[1], args.point))
+			write_arr(f, ref_name, arg[1], arg[2], compute_result(result_index, arg_data, arg[1], int(args.point)))
 			result_index = result_index + 1
 
 	f.close()
