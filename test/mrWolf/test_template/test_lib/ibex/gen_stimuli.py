@@ -2,12 +2,6 @@
 
 import numpy as np
 
-def make_int_32(x):
-	if x >= 2**31:
-		return x - 2**32
-	else:
-		return x
-
 def q_sat(x):
 	if x > 2**31 -1:
 		return 2**31-1
@@ -41,27 +35,27 @@ def compute_result(res_number, inputs, res_type, fix_point):
 	if res_type == 'int32_t':
 		# compute results for i32, i16 and i8
 		if fix_point == -1:
-			result = np.zeros(lenght, dtype=int)
+			result = np.zeros(lenght, dtype=np.int32)
 			for i in range(0,lenght):
-				result[0] = make_int_32(result[0] + inputs[0][i]*inputs[1][i])
+				result[0] = (result[0] + inputs[0][i]*inputs[1][i])
 			return result
 		# compite results for q32, q16 and q8
 		# the example is wront currently
 		else:
-			result = np.zeros(lenght, dtype=int)
+			result = np.zeros(lenght, dtype=np.int32)
 			if fix_point != 0:
 				for i in range(0,lenght):
 					result[0] = q_add(result[0], q_mul(inputs[0][i], inputs[1][i],fix_point),fix_point)
 			else:
 				for i in range(0,lenght):
-					result[0] = (result[0] + inputs[0][i]*inputs[1][i]) % (2**32)
+					result[0] = (result[0] + inputs[0][i]*inputs[1][i])
 
 			return result
 	# compute result for float computation
 	elif res_type == 'float':
-		result = np.zeros(lenght, dtype=float)
+		result = np.zeros(lenght, dtype=np.float32)
 		for i in range(0,lenght):
-			result[0] = result[0] + inputs[0][i]*inputs[1][i]
+			result[0] = (result[0] + inputs[0][i]*inputs[1][i])
 		return result
 	else:
 		raise TypeError('result %s has neither i32 or float type' % res_number)
@@ -79,7 +73,7 @@ def write_arr(f, name, var_type, size, arr):
 	return
 
 def write_scalar(f, name, var_type, value):
-	f.write('%s %s = %s;\n\n' % (var_type, name, value))
+	f.write('L2_DATA %s %s = %s;\n\n' % (var_type, name, value))
 
 def write_check(f, name, reference, size):
 	f.write('if(passed == 1){for(int i = 0; i < %s; i++){if(%s[i] != %s[i]){passed = 0;}}}\\\n' % (size, name, reference))
@@ -87,7 +81,6 @@ def write_check(f, name, reference, size):
 if __name__ == '__main__':
 
 	import argparse
-	import random as rand
 
 	parser = argparse.ArgumentParser()
 
@@ -131,40 +124,40 @@ if __name__ == '__main__':
 				max_val = (2**31)-1
 				min_val = -(2**31)
 				if arg[2] == 1:
-					data = rand.randint(min_val,max_val)
+					data = np.random.randint(min_val,high=max_val, dtype=np.int32)
 					write_scalar(f, arg[0], arg[1], data)
 				else:
-					data = [rand.randint(min_val,max_val) for i in range(arg[2])]
+					data = data = np.random.randint(min_val,high=max_val, size=arg[2])
 					write_arr(f, arg[0], arg[1], arg[2], data)
 
 			elif arg[1] == 'int16_t':
 				max_val = (2**15)-1
 				min_val = -(2**15)
 				if arg[2] == 1:
-					data = rand.randint(min_val,max_val)
+					data = np.random.randint(min_val,high=max_val)
 					write_scalar(f, arg[0], arg[1], data)
 				else:
-					data = [rand.randint(min_val,max_val) for i in range(arg[2])]
+					data = data = np.random.randint(min_val,high=max_val, size=arg[2])
 					write_arr(f, arg[0], arg[1], arg[2], data)
 
 			elif arg[1] == 'int8_t':
 				max_val = (2**7)-1
 				min_val = -(2**7)
 				if arg[2] == 1:
-					data = rand.randint(min_val,max_val)
+					data = np.random.randint(min_val,high=max_val)
 					write_scalar(f, arg[0], arg[1], data)
 				else:
-					data = [rand.randint(min_val,max_val) for i in range(arg[2])]
+					data = data = np.random.randint(min_val,high=max_val, size=arg[2])
 					write_arr(f, arg[0], arg[1], arg[2], data)
 
 			elif arg[1] == 'float':
 				max_val = (2**31)-1
 				min_val = -(2**31)
 				if arg[2] == 1:
-					data = rand.uniform(min_val,max_val)
+					data = np.random.randint(min_val,high=max_val)
 					write_scalar(f, arg[0], arg[1], data)
 				else:
-					data = [rand.uniform(min_val,max_val) for i in range(arg[2])]
+					data = data = np.random.randint(min_val,high=max_val, size=arg[2])
 					write_arr(f, arg[0], arg[1], arg[2], data)
 
 			# also need to handle fixed point at this
@@ -196,7 +189,7 @@ if __name__ == '__main__':
 				max_val = (2**31)-1
 				min_val = -(2**31)
 
-			write_arr(f, arg[0], arg[1], arg[2], [rand.randint(min_val,max_val) for i in range(arg[2])])
+			write_arr(f, arg[0], arg[1], arg[2], np.random.randint(min_val,high=max_val, dtype=np.int32, size=arg[2]))
 
 		arg_data.append(data)
 

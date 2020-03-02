@@ -154,10 +154,10 @@ if __name__ == '__main__':
 				max_val = (2**31)-1
 				min_val = -(2**31)
 				if arg[2] == 1:
-					data = np.random.randint(min_val,high=max_val, dtype=np.float32)
+					data = np.random.randint(min_val,high=max_val)
 					write_scalar(f, arg[0], arg[1], data)
 				else:
-					data = data = np.random.randint(min_val,high=max_val, dtype=np.float32, size=arg[2])
+					data = data = np.random.randint(min_val,high=max_val, size=arg[2])
 					write_arr(f, arg[0], arg[1], arg[2], data)
 
 			# also need to handle fixed point at this
