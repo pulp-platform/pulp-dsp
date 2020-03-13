@@ -8,6 +8,8 @@ cscope.*
 test_data
 !test_data/gen_stimuli.py
 
+junit-reports
+
 doc/html/
 doc/latex/
 
