@@ -73,7 +73,7 @@ class Argument(object):
 	def get_arg_string(self, var_type, env):
 		ctype = self.get_type(var_type)
 		var_type, var_value = self.interpret_value(env)
-		return '--arg %s %s 1 %d %d' % (self.name, ctype, var_type, var_value)
+		return '--arg %s %s 0 %d %d' % (self.name, ctype, var_type, var_value)
 
 
 class ArrayArgument(Argument):
@@ -254,7 +254,7 @@ def generate_test(device_name, function_name, arguments, variables, implemented,
 
 
 def write_arr(f, name, var_type, size, arr, use_l1):
-	assert size == len(arr)
+	assert size == len(arr), "array should have size %d, but has %d" % (size, len(arr))
 	target_loc = 'RT_L1_DATA' if use_l1 else 'RT_L2_DATA'
 	f.write('%s %s %s[%s] = {\n' % (target_loc, var_type, name, size))
 	for i in range(0, size - 1):
@@ -330,7 +330,7 @@ def generate_stimuli_header(compute_result):
 			if arg.ctype == 'int32_t':
 				max_val = (2**31) - 1
 				min_val = -(2**31)
-				if arg.length == 1:
+				if arg.length == 0:
 					data = np.random.randint(min_val, high=max_val, dtype=np.int32)
 					write_scalar(f, arg.name, arg.ctype, data, use_l1)
 				else:
@@ -340,7 +340,7 @@ def generate_stimuli_header(compute_result):
 			elif arg.ctype == 'int16_t':
 				max_val = (2**15) - 1
 				min_val = -(2**15)
-				if arg.length == 1:
+				if arg.length == 0:
 					data = np.random.randint(min_val, high=max_val, dtype=np.int16)
 					write_scalar(f, arg.name, arg.ctype, data, use_l1)
 				else:
@@ -350,7 +350,7 @@ def generate_stimuli_header(compute_result):
 			elif arg.ctype == 'int8_t':
 				max_val = (2**7) - 1
 				min_val = -(2**7)
-				if arg.length == 1:
+				if arg.length == 0:
 					data = np.random.randint(min_val, high=max_val, dtype=np.int8)
 					write_scalar(f, arg.name, arg.ctype, data, use_l1)
 				else:
@@ -360,7 +360,7 @@ def generate_stimuli_header(compute_result):
 			elif arg.ctype == 'float':
 				max_val = (2**31) - 1
 				min_val = -(2**31)
-				if arg.length == 1:
+				if arg.length == 0:
 					data = np.random.randint(min_val, high=max_val, dtype=np.int32)
 					write_scalar(f, arg.name, arg.ctype, data, use_l1)
 				else:
@@ -370,7 +370,7 @@ def generate_stimuli_header(compute_result):
 			# also need to handle fixed point at this
 
 		elif arg.arg_type == TYPE_CONSTANT:
-			if arg.length == 1:
+			if arg.length == 0:
 				data = arg.value
 				write_scalar(f, arg.name, arg.ctype, data, use_l1)
 			else:
