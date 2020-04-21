@@ -220,7 +220,7 @@ def check_output(config, output):
     passed = False
     for item in output.split('\n'):
         if 'Test passed:' in item:
-            print(item)
+            # print(item)
             if item.find('1') != -1:
                 passed = True
         elif 'Total cycles:' in item:
@@ -228,7 +228,7 @@ def check_output(config, output):
         elif 'Instructions:' in item:
             print(item)
         elif 'comp_result:' in item:
-            print(item) # can be used for debug purposes
+            # print(item) # can be used for debug purposes
             pass
 
     return (passed, None)
