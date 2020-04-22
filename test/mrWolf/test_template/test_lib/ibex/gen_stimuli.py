@@ -21,22 +21,19 @@ def compute_result(result_parameter, inputs, fix_point):
     if result_parameter.ctype == 'int32_t':
         a = inputs['srcA'].value.astype(np.int32)
         b = inputs['srcB'].value.astype(np.int32)
-        if fix_point is None:
-            result = np.dot(a, b)
-            return np.array([result])
+        result = np.zeros(1, dtype=np.int32)
+        if fix_point is None or fix_point == 0:
+            result[0] = np.dot(a, b)
         else:
-            result = np.zeros(1, dtype=np.int32)
             if fix_point != 0:
                 for xa, xb in zip(a, b):
                     result[0] = q_add(result[0], q_mul(xa, xb, fix_point), fix_point)
-            else:
-                for xa, xb in zip(a, b):
-                    result[0] = result[0] + xa * xb
-            return result
     elif result_parameter.ctype == 'float':
         raise RuntimeError("Float not implemented")
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
+
+    return result
 
 
 ######################
@@ -62,8 +59,7 @@ def q_sub(a, b, p):
 
 
 def q_mul(a, b, p):
-    rounding = 1 << (p - 1)
-    return q_sat((a * b + rounding) >> p)
+    return q_sat((a * b) >> p)
 
 
 ###########################
