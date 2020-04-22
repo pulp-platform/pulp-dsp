@@ -74,9 +74,9 @@ void plp_dot_prod_q32s_xpulpv2(
 //	prod = (*pSrcA++) * (*pSrcB++);
 //	sum = __ADDNORMU_REG(sum, prod, deciPoint);
 	
-
-	sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
-	sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+            int32_t x0 = (*pSrcA++) * (*pSrcB++);
+            int32_t x1 = (*pSrcA++) * (*pSrcB++);
+            sum += __ADDROUNDNORM_REG(x0, x1, deciPoint);
 
 //	sum = __MACSN(sum, (*pSrcA++), (*pSrcB++), 0);
 //	sum1 = __MACSN(sum1, (*pSrcA++), (*pSrcB++), 0);
@@ -89,13 +89,13 @@ void plp_dot_prod_q32s_xpulpv2(
         }
 
         for (blkCnt=0; blkCnt<(blockSize%2U); blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+            sum += __ADDROUNDNORM_REG((*pSrcA++) * (*pSrcB++), 0, deciPoint);
         }
 
 #else // PLP_MATH_LOOPUNROLL
 
         for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+            sum += __ADDROUNDNORM_REG((*pSrcA++) * (*pSrcB++), 0, deciPoint);
         }
 
 #endif // PLP_MATH_LOOPUNROLL

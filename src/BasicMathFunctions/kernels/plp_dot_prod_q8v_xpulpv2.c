@@ -74,10 +74,13 @@ void plp_dot_prod_q8v_xpulpv2(
           v4s b0 = *((v4s*)((void*)(pSrcB+8*blkCnt)));
           v4s a1 = *((v4s*)((void*)(pSrcA+8*blkCnt+4)));
           v4s b1 = *((v4s*)((void*)(pSrcB+8*blkCnt+4)));
-          sum = __SUMDOTP4(a0, b0, sum);
-          sum = sum >> deciPoint;
-          sum = __SUMDOTP4(a1, b1, sum);
-          sum = sum >> deciPoint;
+          //sum = __SUMDOTP4(a0, b0, sum);
+          //sum = sum >> deciPoint;
+          //sum = __SUMDOTP4(a1, b1, sum);
+          //sum = sum >> deciPoint;
+		  int32_t x0 = __DOTP4(a0, b0);
+		  int32_t x1 = __DOTP4(a1, b1);
+		  sum += __ADDROUNDNORM_REG(x0, x1, deciPoint);
 
           //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
           //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
@@ -88,16 +91,18 @@ void plp_dot_prod_q8v_xpulpv2(
         for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
           int8_t a = *((int8_t*)(pSrcA+8*(blockSize/8)+blkCnt));
           int8_t b = *((int8_t*)(pSrcB+8*(blockSize/8)+blkCnt));
-          sum += a*b;
-          sum = sum >> deciPoint;
+          // sum += a*b;
+          // sum = sum >> deciPoint;
+		  sum += __ROUNDNORM_REG(a * b, deciPoint);
           //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
         }
 
 #else // PLP_MATH_LOOPUNROLL
 
         for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-          sum = sum >> deciPoint;
+		  //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+		  //sum = sum >> deciPoint;
+		  sum += __ROUNDNORM_REG((*pSrcA++) * (*pSrcB++), deciPoint);
         }
 
 #endif // PLP_MATH_LOOPUNROLL
