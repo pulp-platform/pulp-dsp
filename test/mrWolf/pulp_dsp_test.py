@@ -84,7 +84,7 @@ class Argument(object):
         assert self.ctype not in ['var_type', 'ret_type']
         if self.ctype == "float":
             raise NotImplementedError("Floating point is not yet implemented")
-        n_bits = 16 if self.ctype == 'int16_t' else 8 if self.ctype == 'int8_t' else 32
+        n_bits = 16 if self.ctype == 'int16_t' else 8 if self.ctype == 'int8_t' else 16
         return (-(2 ** (n_bits - 1)), (2 ** (n_bits - 1)) - 1)
 
     def get_dtype(self):

@@ -1,31 +1,30 @@
 #include "rt/rt_api.h"
 #include "stdio.h"
 #include "plp_math.h"
-#include "../../test_data/vec_data.h"
-
+#include "data.h"
 
 // This benchmark is a single shot so we can read the value directly out of the
 // HW counter using the function rt_perf_read
 static void do_bench_0(rt_perf_t *perf, int events)
 {
-  int32_t result=0;
-
-  //printf("dot product i32s fc\n");
-
   // Activate specified events
   rt_perf_conf(perf, events);
 
   // Reset HW counters now and start and stop counters so that we benchmark
   // only around the printf
+
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
-  //plp_dot_prod_i32(v_a, v_b, LENGTH, &result);
-  plp_dot_prod_q32(v_a, v_b, LENGTH, 1, &result);
+  FSIG;
 
   rt_perf_stop(perf);
+  
+  int passed = 1;
 
-  printf("result is %d, expected result is %d\n", result, exp_result);
+  CHECK
+
+  printf("Test passed: %d\n", passed);
 
 }
 
@@ -44,9 +43,8 @@ int main(){
   // To be compatible with all platforms, we can count only 1 event at the
   // same time (the silicon as only 1 HW counter), but the total number of cyles
   // is reported by a timer, we can activate it at the same time.
-  for (int i=0; i<10; i++){
-    do_bench_0(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR));
-  }
+  do_bench_0(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR));
+
   printf("Total cycles: %d\n", rt_perf_read(RT_PERF_CYCLES));
   printf("Instructions: %d\n", rt_perf_read(RT_PERF_INSTR));
 
