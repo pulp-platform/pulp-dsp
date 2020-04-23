@@ -218,20 +218,24 @@ class FixPointArgument(Argument):
 def check_output(config, output):
     # print(output)
     passed = False
+    results = {}
     for item in output.split('\n'):
         if 'Test passed:' in item:
             # print(item)
             if item.find('1') != -1:
                 passed = True
         elif 'Total cycles:' in item:
-            print(item)
+            results['cycles'] = int(item.split(": ")[1])
+            # print(item)
         elif 'Instructions:' in item:
-            print(item)
+            results['instructions'] = int(item.split(": ")[1])
+            # print(item)
         elif 'comp_result:' in item:
             # print(item) # can be used for debug purposes
             pass
-
-    return (passed, None)
+    result_format = ", ".join(["%s=%s" % (k, v) for k, v in results.items()])
+    print(result_format)
+    return (passed, result_format)
 
 
 class Test(object):
