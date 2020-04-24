@@ -4,6 +4,7 @@ from plptest import Test as PulpTest
 from plptest import Shell, Check
 from itertools import product, chain
 from functools import partial
+from collections import OrderedDict
 import argparse
 import numpy as np
 import json
@@ -364,7 +365,7 @@ class Sweep:
 
     def __next__(self):
         sweep_vars = iter(next(self.prod_iter))
-        env = {}
+        env = OrderedDict()
         for var in self.variables:
             if isinstance(var, SweepVariable):
                 env[var.name] = next(sweep_vars)
