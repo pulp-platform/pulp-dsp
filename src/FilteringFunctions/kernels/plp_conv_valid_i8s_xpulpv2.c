@@ -73,7 +73,6 @@ void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
 
     const int8_t* p_b_tmp;          // Intermediate pointers
     int32_t sum;                    // Accumulators
-    uint32_t block_size;            // Loop counters
     uint32_t j, k, count, blk_cnt;  // Loop counters
 
     // for loop unroll
@@ -86,9 +85,6 @@ void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
 
     v4s _x1, _x2, _x3, _x4;         // local registers
     v4s _y1, _y2;                   // local registers
-
-    // compute block size (total output size
-    block_size = srcALen - srcBLen + 1U;
 
     // Working pointer of inputA
     p_a_iter = pSrcA;
@@ -103,7 +99,7 @@ void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
     if (srcBLen >= 4U) {
 
         // compute 4 outputs at the same time
-        blk_cnt = block_size >> 2U;
+        blk_cnt = res_len >> 2U;
         while (blk_cnt > 0U) {
 
             // Set all accumulators to zero
@@ -189,10 +185,10 @@ void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
             blk_cnt--;
         }
 
-        /* If the block_size is not a multiple of 4, compute any remaining output samples here.
+        /* If the res_len is not a multiple of 4, compute any remaining output samples here.
          * No loop unrolling is used.
          */
-        blk_cnt = block_size % 0x4U;
+        blk_cnt = res_len % 0x4U;
 
         while (blk_cnt > 0U) {
 
@@ -243,10 +239,10 @@ void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
     } else { // case: srcBLen < 4
 
         /* If the srcBLen is smaller than 4
-         * the block_size loop cannot be unrolled by 4
+         * the res_len loop cannot be unrolled by 4
          * TODO yes, it can!
          */
-        blk_cnt = block_size;
+        blk_cnt = res_len;
 
         while (blk_cnt > 0U) {
             /* Accumulator is made zero for every iteration */
