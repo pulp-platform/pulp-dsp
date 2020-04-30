@@ -1095,6 +1095,23 @@ void plp_conv_valid_i8(const int8_t *  pSrcA,
 
 
 /** -------------------------------------------------------
+  @brief Glue code for convolution (valid with data replication) of 8-bit integer vectors.
+  @param[in]  pSrcA      points to the first input vector (in L2)
+  @param[in]  srcALen   Length of the first input vector
+  @param[in]  pSrcB      points to the second input vector (in L2)
+  @param[in]  srcBLen   Length of the second input vector
+  @param[out] pRes     output result returned here (preferably in L1)
+  @return        none
+ */
+
+void plp_conv_valid_rep_i8(const int8_t *  pSrcA,
+		  const uint32_t srcALen,
+		  const int8_t *  pSrcB,
+		  const uint32_t srcBLen,
+		  int32_t *  pRes);
+
+
+/** -------------------------------------------------------
    @brief Convolution of 8-bit integer vectors kernel for XPULPV2 extension.
    @param[in]  pSrcA      points to the first input vector
    @param[in]  srcALen   Length of the first input vector
@@ -1112,7 +1129,7 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
 
 
 /** -------------------------------------------------------
-   @brief Convolution of 8-bit integer vectors kernel for XPULPV2 extension.
+   @brief Convolution (valid) of 8-bit integer vectors kernel for XPULPV2 extension.
    @param[in]  pSrcA      points to the first input vector
    @param[in]  srcALen   Length of the first input vector
    @param[in]  pSrcB      points to the second input vector
@@ -1126,6 +1143,26 @@ void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
 			   const int8_t *  pSrcB,
 			   const uint32_t srcBLen,
 			   int32_t *  pRes);
+
+
+/** -------------------------------------------------------
+   @brief Convolution (valid with data replication) of 8-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]  pSrcA      points to the first input vector of the replicated data
+   @param[in]  srcALen   Number of elements in (unreplicated) vector a
+   @param[in]  srcAMem   Number of elements between each replication
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  srcBLen   Length of the second input vector
+   @param[out] pRes     output result returned here
+   @return        none
+*/
+
+void plp_conv_valid_rep_i8s_xpulpv2(const int8_t *  pSrcA,
+			   const uint32_t srcALen,
+			   const uint32_t srcAMem,
+			   const int8_t *  pSrcB,
+			   const uint32_t srcBLen,
+			   int32_t *  pRes);
+
 
 /** -------------------------------------------------------
    @brief Convolution of 8-bit integer vectors kernel for RV32IM extension.
