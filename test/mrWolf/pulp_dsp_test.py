@@ -46,26 +46,30 @@ class DynamicVariable(Variable):
 
 class Argument(object):
     """docstring for argument"""
-    def __init__(self, name, ctype, value):
+    def __init__(self, name, ctype, value, use_l1=None):
         """
         name: name of the argument (in the function declaration)
         ctype: C type of the argument (or 'var_type', 'ret_type')
         value: Number for initialization, or SweepVariable, or None for random value
+        use_l1: if True, use L1 memory. If None, use default value configured in generate_test
         """
         super(Argument, self).__init__()
         self.name = name
         self.ctype = ctype
         self.value = value
+        self.use_l1 = use_l1
         if isinstance(self.value, SweepVariable):
             self.value = self.value.name
 
-    def to_dict(self, env, var_type):
-        d = self.apply(env, var_type).__dict__
+    def to_dict(self, env, var_type, use_l1):
+        d = self.apply(env, var_type, use_l1).__dict__
         return {'class': type(self).__name__, 'dict': d}
 
-    def apply(self, env, var_type):
+    def apply(self, env, var_type, use_l1):
         """ Applies environment and var_type to the argument """
-        return Argument(self.name, self.get_type(var_type), self.interpret_value(env))
+        if self.use_l1 is not None:
+            use_l1 = self.use_l1
+        return Argument(self.name, self.get_type(var_type), self.interpret_value(env), use_l1)
 
     def get_type(self, var_type):
         if self.ctype == 'var_type':
@@ -105,28 +109,32 @@ class Argument(object):
             self.value = np.random.randint(low=min_value, high=max_value + 1, dtype=self.get_dtype())
         return self.value
 
-    def generate_stimuli(self, header, use_l1):
+    def generate_stimuli(self, header):
         """ Writes stimuli value to header file """
         self.generate_value()
-        header.write_scalar(self.name, self.ctype, self.value, use_l1)
+        header.write_scalar(self.name, self.ctype, self.value, self.use_l1)
 
 
 class ArrayArgument(Argument):
     """Array Argument"""
-    def __init__(self, name, ctype, length, value):
+    def __init__(self, name, ctype, length, value, use_l1=None):
         """
         name: name of the argument
         ctype: type of the argument (or 'var_type', 'ret_type')
         length: Length of the array, or SweepVariable, or tuple for random value between (min, max)
         value: tuple for random value between (min, max), or list with values, or single number for all.
+        use_l1: if True, use L1 memory. If None, use default value configured in generate_test
         """
-        super(ArrayArgument, self).__init__(name, ctype, value)
+        super(ArrayArgument, self).__init__(name, ctype, value, use_l1)
         self.length = length
         if isinstance(self.length, SweepVariable):
             self.length = self.length.name
 
-    def apply(self, env, var_type):
-        return ArrayArgument(self.name, self.get_type(var_type), self.interpret_length(env), self.interpret_value(env))
+    def apply(self, env, var_type, use_l1):
+        if self.use_l1 is not None:
+            use_l1 = self.use_l1
+        return ArrayArgument(self.name, self.get_type(var_type), self.interpret_length(env),
+                             self.interpret_value(env), use_l1)
 
     def interpret_length(self, env):
         if isinstance(self.length, tuple):
@@ -154,25 +162,29 @@ class ArrayArgument(Argument):
             raise RuntimeError("Unknown Type!")
         return self.value
 
-    def generate_stimuli(self, header, use_l1):
+    def generate_stimuli(self, header):
         """ Writes stimuli value to header file """
         self.generate_value()
-        header.write_array(self.name, self.ctype, self.value, use_l1)
+        header.write_array(self.name, self.ctype, self.value, self.use_l1)
 
 
 class OutputArgument(ArrayArgument):
     """Output Array Argument"""
-    def __init__(self, name, ctype, length):
+    def __init__(self, name, ctype, length, use_l1=None):
         """
         name: name of the argument
         ctype: type of the argument (or 'var_type', 'ret_type')
         length: Length of the array, or SweepVariable, or None for random value
+        use_l1: if True, use L1 memory. If None, use default value configured in generate_test
         """
-        super(OutputArgument, self).__init__(name, ctype, length, 0)
+        super(OutputArgument, self).__init__(name, ctype, length, 0, use_l1)
         self.reference_name = self.name + "_reference"
 
-    def apply(self, env, var_type):
-        return OutputArgument(self.name, self.get_type(var_type), self.interpret_length(env))
+    def apply(self, env, var_type, use_l1):
+        if self.use_l1 is not None:
+            use_l1 = self.use_l1
+        return OutputArgument(self.name, self.get_type(var_type), self.interpret_length(env),
+                              use_l1)
 
     def generate_value(self):
         """ Generates the value of argument, stores it in self.value and returns it. """
@@ -181,36 +193,38 @@ class OutputArgument(ArrayArgument):
         self.value = np.zeros(self.length).astype(self.get_dtype())
         return self.value
 
-    def generate_reference(self, gen_function, header, use_l1):
+    def generate_reference(self, gen_function, header):
         """ Generates and writes reference value to header file """
         reference = gen_function(self)
-        header.write_array(self.reference_name, self.ctype, reference, use_l1)
+        header.write_array(self.reference_name, self.ctype, reference, False)
 
 
 class ReturnValue(Argument):
     """ result value """
-    def __init__(self, ctype):
+    def __init__(self, ctype, use_l1=None):
         """
         ctype: type of the argument (or 'var_type', 'ret_type')
+        use_l1: if True, use L1 memory. If None, use default value configured in generate_test
         """
-        super(ReturnValue, self).__init__("return_value", ctype, 0)
+        super(ReturnValue, self).__init__("return_value", ctype, 0, use_l1)
         self.reference_name = self.name + "_reference"
 
-    def generate_reference(self, gen_function, header, use_l1):
+    def generate_reference(self, gen_function, header):
         """ Generates and writes reference value to header file """
         reference = gen_function(self)
-        header.write_scalar(self.reference_name, self.ctype, reference, use_l1)
+        header.write_scalar(self.reference_name, self.ctype, reference, False)
 
 
 class FixPointArgument(Argument):
     """fixpoint argument"""
-    def __init__(self, name, ctype, value):
+    def __init__(self, name, ctype, value, use_l1=None):
         """
         name: name of the argument (in the function declaration)
         ctype: C type of the argument (or 'var_type', 'ret_type')
         value: Number for initialization, or SweepVariable, or None for random value
+        use_l1: if True, use L1 memory. If None, use default value configured in generate_test
         """
-        super(FixPointArgument, self).__init__(name, ctype, value)
+        super(FixPointArgument, self).__init__(name, ctype, value, use_l1)
 
     def apply(self, env, var_type):
         return FixPointArgument(self.name, self.get_type(var_type), self.interpret_value(env))
@@ -276,7 +290,7 @@ class Test(object):
             self.arguments = arguments
             fix_point_args = [arg for arg in arguments if isinstance(arg, FixPointArgument)]
             assert len(fix_point_args) == 1
-            self.fix_point = fix_point_args[0].apply(self.env, self.var_type).value
+            self.fix_point = fix_point_args[0].apply(self.env, self.var_type, self.use_l1).value
             assert isinstance(self.fix_point, int)
 
         return self
@@ -290,7 +304,8 @@ class Test(object):
     def to_json(self):
         d = self.__dict__
         # overwrite arguments
-        d['arguments'] = [arg.to_dict(self.env, self.var_type) for arg in self.arguments]
+        d['arguments'] = [arg.to_dict(self.env, self.var_type, self.use_l1)
+                          for arg in self.arguments]
         json_str = json.dumps(d)
         return json_str.replace('\"', '\\\"')
 
@@ -342,7 +357,7 @@ class Test(object):
              for arg in self.arguments if isinstance(arg, OutputArgument)])
 
     def generate_stimuli(self, header):
-        any([arg.generate_stimuli(header, self.use_l1) for arg in self.arguments])
+        any([arg.generate_stimuli(header) for arg in self.arguments])
 
     def generate_reference(self, header, gen_function):
         # build input dictionary
@@ -350,7 +365,7 @@ class Test(object):
                   for arg in self.arguments
                   if not isinstance(arg, (ReturnValue, OutputArgument))}
         gen_function_prep = partial(gen_function, inputs=inputs, fix_point=self.fix_point)
-        any([arg.generate_reference(gen_function_prep, header, self.use_l1)
+        any([arg.generate_reference(gen_function_prep, header)
              for arg in self.arguments if isinstance(arg, (OutputArgument, ReturnValue))])
 
 
