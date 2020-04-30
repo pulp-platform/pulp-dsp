@@ -226,29 +226,32 @@ class FixPointArgument(Argument):
         """
         super(FixPointArgument, self).__init__(name, ctype, value, use_l1)
 
-    def apply(self, env, var_type):
-        return FixPointArgument(self.name, self.get_type(var_type), self.interpret_value(env))
+    def apply(self, env, var_type, use_l1):
+        if self.use_l1 is not None:
+            use_l1 = self.use_l1
+        return FixPointArgument(self.name, self.get_type(var_type), self.interpret_value(env),
+                                use_l1)
 
 
 def check_output(config, output):
     # print(output)
     passed = False
-    results = {}
+    performance = {}
+    mistakes = []
     for item in output.split('\n'):
         if 'Test passed:' in item:
-            # print(item)
             if item.find('1') != -1:
                 passed = True
         elif 'Total cycles:' in item:
-            results['cycles'] = int(item.split(": ")[1])
-            # print(item)
+            performance['cycles'] = int(item.split(": ")[1])
         elif 'Instructions:' in item:
-            results['instructions'] = int(item.split(": ")[1])
-            # print(item)
-        elif 'comp_result:' in item:
-            # print(item) # can be used for debug purposes
-            pass
-    result_format = ", ".join(["%s=%s" % (k, v) for k, v in results.items()])
+            performance['instructions'] = int(item.split(": ")[1])
+        elif '<Mismatch>' in item:
+            mistakes.append("Mismatch: %s" % item[11:])
+    result_format = ", ".join(["%s=%s" % (k, v) for k, v in performance.items()])
+    if mistakes:
+        result_format += "\n"
+        result_format += "\n".join(mistakes)
     print(result_format)
     return (passed, result_format)
 
@@ -263,14 +266,17 @@ class Test(object):
         self.env = {}
         self.use_l1 = False
         self.fix_point = None
+        self.extended_output = True
         self.version = ''
 
-    def build(self, test_idx, function_name, version, arguments, env, use_l1):
+    def build(self, test_idx, function_name, version, arguments, env, use_l1,
+              extended_output=True):
         self.test_idx = test_idx
         self.function_name = "%s_%s" % (function_name, version)
         self.version = version
         self.env = env
         self.use_l1 = use_l1
+        self.extended_output = extended_output
 
         # prepare var_type
         if version == 'i32' or version == 'q32':
@@ -349,11 +355,11 @@ class Test(object):
 
     def generate_check(self, header):
         # generate return check
-        any([header.write_return_check(arg.name, arg.reference_name)
+        any([header.write_return_check(arg.name, arg.reference_name, self.extended_output)
              for arg in self.arguments if isinstance(arg, ReturnValue)])
 
         # generate result check
-        any([header.write_check(arg.name, arg.reference_name, arg.length)
+        any([header.write_check(arg.name, arg.reference_name, arg.length, self.extended_output)
              for arg in self.arguments if isinstance(arg, OutputArgument)])
 
     def generate_stimuli(self, header):
@@ -429,14 +435,30 @@ class HeaderWriter(object):
         test.generate_check(self)
         self.fp.write('}\n\n')
 
-    def write_check(self, result_name, reference_name, size):
+    def write_check(self, result_name, reference_name, size, print_errors=False):
         self.fp.write('%sfor (int i = 0; i < %s; i++) {\\\n' % (self.tab, size))
-        self.fp.write('%sif (%s[i] != %s[i]) passed = 0;\\\n' % (self.tab * 2, result_name,
-                                                                 reference_name))
+        if print_errors:
+            self.fp.write('%sif (%s[i] != %s[i]) {\\\n' % (self.tab * 2, result_name,
+                                                           reference_name))
+            self.fp.write('%spassed=0;\\\n' % (self.tab * 3))
+            self.fp.write('%sprintf("<Mismatch> %s[%%d]: acq=%%d, exp=%%d\\n", i, %s[i], %s[i]);\\\n'
+                          % (self.tab * 3, result_name, result_name, reference_name))
+            self.fp.write('%s}\\\n' % (self.tab * 2))
+        else:
+            self.fp.write('%sif (%s[i] != %s[i]) passed = 0;\\\n' % (self.tab * 2, result_name,
+                                                                     reference_name))
         self.fp.write('%s}\\\n' % self.tab)
 
-    def write_return_check(self, result_name, reference_name):
-        self.fp.write('%sif (%s != %s) passed = 0;\\\n' % (self.tab, result_name, reference_name))
+    def write_return_check(self, result_name, reference_name, print_errors=False):
+        if print_errors:
+            self.fp.write('%sif (%s != %s) {\\\n' % (self.tab, result_name, reference_name))
+            self.fp.write('%spassed = 0;\\\n' % self.tab * 2)
+            self.fp.write('%sprintf("<Mismatch> return: acq=%%d, exp=%%d", %s, %s);\\\n'
+                          % (self.tab * 2, result_name, reference_name))
+            self.fp.write('%s}\\\n' % self.tab)
+        else:
+            self.fp.write('%sif (%s != %s) passed = 0;\\\n'
+                          % (self.tab, result_name, reference_name))
 
     def generate_fsig(self, test):
         self.fp.write('#define FSIG {\\\n')
@@ -444,8 +466,9 @@ class HeaderWriter(object):
         self.fp.write('}\n\n')
 
 
-def generate_test(device_name, function_name, arguments, variables, implemented, use_l1=False):
-    tests = [[Test().build(i, function_name, v, arguments, e, use_l1).to_plptest()
+def generate_test(device_name, function_name, arguments, variables, implemented, use_l1=False,
+                  extended_output=True):
+    tests = [[Test().build(i, function_name, v, arguments, e, use_l1, extended_output).to_plptest()
               for i, e in enumerate(Sweep(variables))]
              for v in implemented if implemented[v]]
 
