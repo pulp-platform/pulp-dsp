@@ -270,13 +270,13 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
 		acc2 = __SUMDOTP4(_x3,_y1,acc2);
 		acc3 = __SUMDOTP4(_x4,_y1,acc3);
 
-		/* Store the result in the accumulator in the destination buffer. */
-		*pOut++ = acc0;
-		*pOut++ = acc1;
-		*pOut++ = acc2;
-		*pOut++ = acc3;
-
 	  }
+
+	  /* Store the result in the accumulator in the destination buffer. */
+	  *pOut++ = acc0;
+	  *pOut++ = acc1;
+	  *pOut++ = acc2;
+	  *pOut++ = acc3;
 
 	  /* Increment the pointer pIn1 index, count by 4 */
 	  count += 4U;
