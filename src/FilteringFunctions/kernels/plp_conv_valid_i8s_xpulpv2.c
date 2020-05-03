@@ -73,18 +73,17 @@ void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
 
     const int8_t* p_b_tmp;          // Intermediate pointers
     int32_t sum;                    // Accumulators
-    uint32_t j, k, count, blk_cnt;  // Loop counters
+    uint32_t k, count, blk_cnt;     // Loop counters
 
     // for loop unroll
     int32_t acc0, acc1, acc2, acc3; // Accumulators
 
-    int32_t temp1, temp2;
     v4s xmask[] = {(v4s){0,0,0,0}, (v4s){0xff,0,0,0}, (v4s){0xff,0xff,0,0}, (v4s){0xff,0xff,0xff,0}};
     v4s ymask[] = {(v4s){0,0,0,0}, (v4s){0,0,0,0xff}, (v4s){0,0,0xff,0xff}, (v4s){0,0xff,0xff,0xff}};
     v4s mask;
 
     v4s _x1, _x2, _x3, _x4;         // local registers
-    v4s _y1, _y2;                   // local registers
+    v4s _y1;                        // local registers
 
     // Working pointer of inputA
     p_a_iter = pSrcA;

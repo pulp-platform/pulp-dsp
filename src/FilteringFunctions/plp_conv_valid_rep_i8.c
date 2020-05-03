@@ -102,7 +102,7 @@ void plp_conv_valid_rep_i8(const int8_t *  pSrcA,
 
         for (int i = 0; i < 4; i++) {
             rt_dma_memcpy((unsigned int)(pIn1 + i),
-                          (unsigned int)(p_1_loc + sizeof(int8_t) * i * len_align),
+                          (unsigned int)(p_1_loc + i * len_align),
                           sizeof(int8_t) * (in1Len - i),
                           RT_DMA_DIR_EXT2LOC, merge, &copy);
             merge = 1;
