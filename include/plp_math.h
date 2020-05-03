@@ -981,6 +981,23 @@ void plp_conv_i32(
                        int32_t * pRes);
 
 /** -------------------------------------------------------
+  @brief Glue code for convolution (valid) of 32-bit integer vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  srcALen   Length of the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  srcBLen   Length of the second input vector
+  @param[out] pRes     output result returned here
+  @return        none
+ */
+
+void plp_conv_valid_i32(
+                       const int32_t * pSrcA,
+		       const uint32_t srcALen,
+                       const int32_t * pSrcB,
+		       const uint32_t srcBLen,
+                       int32_t * pRes);
+
+/** -------------------------------------------------------
    @brief Convolution of 32-bit integer vectors kernel for RV32IM extension.
    @param[in]  pSrcA      points to the first input vector
    @param[in]  srcALen   Length of the first input vector
@@ -1011,6 +1028,21 @@ void plp_conv_i32s_xpulpv2(const int32_t * __restrict__ pSrcA,
 			      const uint32_t srcBLen,
 			      int32_t * __restrict__ pRes);
 
+/** -------------------------------------------------------
+   @brief Convolution (valid) of 32-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  srcALen   Length of the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  srcBLen   Length of the second input vector
+   @param[out] pRes     output result returned here
+   @return        none */
+
+void plp_conv_valid_i32s_xpulpv2(const int32_t * __restrict__ pSrcA,
+			      const uint32_t srcALen,
+			      const int32_t * __restrict__ pSrcB,
+			      const uint32_t srcBLen,
+			      int32_t * __restrict__ pRes);
+
 
 /** -------------------------------------------------------
   @brief Glue code for convolution of 16-bit integer vectors.
@@ -1023,6 +1055,40 @@ void plp_conv_i32s_xpulpv2(const int32_t * __restrict__ pSrcA,
  */
 
 void plp_conv_i16(const int16_t *  pSrcA,
+		  const uint32_t srcALen,
+		  const int16_t *  pSrcB,
+		  const uint32_t srcBLen,
+		  int32_t *  pRes);
+
+
+/** -------------------------------------------------------
+  @brief Glue code for convolution (valid) of 16-bit integer vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  srcALen   Length of the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  srcBLen   Length of the second input vector
+  @param[out] pRes     output result returned here
+  @return        none
+ */
+
+void plp_conv_valid_i16(const int16_t *  pSrcA,
+		  const uint32_t srcALen,
+		  const int16_t *  pSrcB,
+		  const uint32_t srcBLen,
+		  int32_t *  pRes);
+
+
+/** -------------------------------------------------------
+  @brief Glue code for convolution (valid with replication) of 16-bit integer vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  srcALen   Length of the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  srcBLen   Length of the second input vector
+  @param[out] pRes     output result returned here
+  @return        none
+ */
+
+void plp_conv_valid_rep_i16(const int16_t *  pSrcA,
 		  const uint32_t srcALen,
 		  const int16_t *  pSrcB,
 		  const uint32_t srcBLen,
@@ -1041,6 +1107,41 @@ void plp_conv_i16(const int16_t *  pSrcA,
 void plp_conv_i16s_xpulpv2(const int16_t *  pSrcA,
 			   const uint32_t srcALen,
 			   const int16_t *  pSrcB,
+			   const uint32_t srcBLen,
+			   int32_t *  pRes);
+
+/** -------------------------------------------------------
+   @brief Convolution (valid) of 16-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  srcALen   Length of the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  srcBLen   Length of the second input vector
+   @param[out] pRes     output result returned here
+   @return        none
+*/
+
+void plp_conv_valid_i16s_xpulpv2(const int16_t *  pSrcA,
+			   const uint32_t srcALen,
+			   const int16_t *  pSrcB,
+			   const uint32_t srcBLen,
+			   int32_t *  pRes);
+
+
+/** -------------------------------------------------------
+   @brief Convolution (valid with data replication) of 16-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]  pSrcA      points to the first input vector of the replicated data
+   @param[in]  srcALen   Number of elements in (unreplicated) vector a
+   @param[in]  srcAMem   Number of elements between each replication
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  srcBLen   Length of the second input vector
+   @param[out] pRes     output result returned here
+   @return        none
+*/
+
+void plp_conv_valid_rep_i16s_xpulpv2(const int16_t *  pSrcA,
+			   const uint32_t srcALen,
+			   const uint32_t srcAMem,
+			   const int16_t*  pSrcB,
 			   const uint32_t srcBLen,
 			   int32_t *  pRes);
 
