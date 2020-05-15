@@ -16,6 +16,11 @@ FC_SRCS = \
 	src/FilteringFunctions/plp_conv_i32.c src/FilteringFunctions/kernels/plp_conv_i32s_rv32im.c \
 	src/FilteringFunctions/plp_conv_i16.c src/FilteringFunctions/kernels/plp_conv_i16s_rv32im.c \
 	src/FilteringFunctions/plp_conv_i8.c src/FilteringFunctions/kernels/plp_conv_i8s_rv32im.c \
+    src/FilteringFunctions/plp_conv_valid_i32.c \
+    src/FilteringFunctions/plp_conv_valid_i16.c \
+    src/FilteringFunctions/plp_conv_valid_i8.c \
+    src/FilteringFunctions/plp_conv_valid_rep_i16.c \
+    src/FilteringFunctions/plp_conv_valid_rep_i8.c \
 	src/FilteringFunctions/plp_conv_i32_parallel.c \
 	src/FilteringFunctions/plp_conv_i16_parallel.c \
 	src/FilteringFunctions/plp_conv_i8_parallel.c \
@@ -56,6 +61,11 @@ CL_SRCS = \
 	src/FilteringFunctions/kernels/plp_conv_i32p_xpulpv2.c \
 	src/FilteringFunctions/kernels/plp_conv_i16p_xpulpv2.c \
 	src/FilteringFunctions/kernels/plp_conv_i8p_xpulpv2.c \
+	src/FilteringFunctions/kernels/plp_conv_valid_i32s_xpulpv2.c \
+	src/FilteringFunctions/kernels/plp_conv_valid_i16s_xpulpv2.c \
+	src/FilteringFunctions/kernels/plp_conv_valid_i8s_xpulpv2.c \
+	src/FilteringFunctions/kernels/plp_conv_valid_rep_i16s_xpulpv2.c \
+	src/FilteringFunctions/kernels/plp_conv_valid_rep_i8s_xpulpv2.c \
 	src/FilteringFunctions/kernels/plp_conv_parallel_OLA.c \
 	src/FilteringFunctions/kernels/plp_conv_parallel_OLA_kernel.c\
 	src/FilteringFunctions/kernels/plp_conv_parallel_OLA_kernel.c \

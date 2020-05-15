@@ -61,7 +61,7 @@ void plp_dot_prod_q16v_xpulpv2(
                                uint32_t deciPoint,
                                int32_t * __restrict__ pRes){
 
-  uint32_t blkCnt, tmpBS;                   /* Loop counter, temporal BlockSize */
+  uint32_t blkCnt, tmpBS, remBS;                   /* Loop counter, temporal BlockSize */
   int32_t sum = 0;
   //  int32_t sum1 = 0, sum2 = 0;                          /* Temporary return variable */
 
@@ -75,30 +75,34 @@ void plp_dot_prod_q16v_xpulpv2(
           v2s b0 = *((v2s*)((void*)(pSrcB+4*blkCnt)));
           v2s a1 = *((v2s*)((void*)(pSrcA+4*blkCnt+2)));
           v2s b1 = *((v2s*)((void*)(pSrcB+4*blkCnt+2)));
-          sum = __SUMDOTP2(a0, b0, sum);
-          sum = sum >> deciPoint;
-          sum = __SUMDOTP2(a1, b1, sum);
-          sum = sum >> deciPoint;
+          //sum = __SUMDOTP2(a0, b0, sum);
+          //sum = sum >> deciPoint;
+          //sum = __SUMDOTP2(a1, b1, sum);
+          //sum = sum >> deciPoint;
+          int32_t x0 = __DOTP2(a0, b0);
+          int32_t x1 = __DOTP2(a1, b1);
+          sum += __ADDROUNDNORM_REG(x0, x1, deciPoint);
 
           //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
           //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
         }
 
-        tmpBS = (blockSize%4U);
-        
-        for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-          int16_t a = *((int16_t*)(pSrcA+4*(blockSize/4)+blkCnt));
-          int16_t b = *((int16_t*)(pSrcB+4*(blockSize/4)+blkCnt));
-          sum += a*b;
-          sum = sum >> deciPoint;
+        remBS = (blockSize%4U);
+
+        for (blkCnt=0; blkCnt<remBS; blkCnt++){
+          int16_t a = *(pSrcA+4*tmpBS+blkCnt);
+          int16_t b = *(pSrcB+4*tmpBS+blkCnt);
+          //sum += a*b;
+          //sum = sum >> deciPoint;
+          sum += __ROUNDNORM_REG(a * b, deciPoint);
           //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
         }
 
 #else // PLP_MATH_LOOPUNROLL
 
         for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-          sum = sum >> deciPoint;
+          //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+          sum += __ROUNDNORM_REG((*pSrcA++) * (*pSrcB++), deciPoint);
         }
 
 #endif // PLP_MATH_LOOPUNROLL

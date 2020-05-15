@@ -7,12 +7,12 @@
 // HW counter using the function rt_perf_read
 static void do_bench_0(rt_perf_t *perf, int events)
 {
-
   // Activate specified events
   rt_perf_conf(perf, events);
 
   // Reset HW counters now and start and stop counters so that we benchmark
-  // not around the printf
+  // only around the printf
+
   rt_perf_reset(perf);
   rt_perf_start(perf);
 
@@ -20,29 +20,38 @@ static void do_bench_0(rt_perf_t *perf, int events)
 
   rt_perf_stop(perf);
 
+  //printf("comp_result: %d\n", comp_result[0]);
+  
   int passed = 1;
 
   CHECK
 
   printf("Test passed: %d\n", passed);
-  printf("Result: %d\n", res[0]);
-  printf("Result Reference: %d\n", res_reference[0]);
 
 }
 
-void cluster_entry(void *arg){
 
-  printf("(%d, %d) Hello! Cluster entered\n", rt_cluster_id(), rt_core_id());
 
+int main(){
+
+  // This tructure will hold the configuration and also the results in the
+  // cumulative mode
   rt_perf_t perf;
+
+  // It must be initiliazed at least once, this will set all values in the
+  // structure to zero.
   rt_perf_init(&perf);
-  
+
+  // To be compatible with all platforms, we can count only 1 event at the
+  // same time (the silicon as only 1 HW counter), but the total number of cyles
+  // is reported by a timer, we can activate it at the same time.
   do_bench_0(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR));
 
   printf("Total cycles: %d\n", rt_perf_read(RT_PERF_CYCLES));
   printf("Instructions: %d\n", rt_perf_read(RT_PERF_INSTR));
 
-  return;
-}
 
+  return 0;
+
+}
 

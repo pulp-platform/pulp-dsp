@@ -248,26 +248,30 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
 	  ** No loop unrolling is used. */
 
 	  k = srcBLen % 0x4U;
-	  
-	  _x1 = *((v4s*)px); // {x[0],x[1],x[2],x[3]}
-	  _x4 = *((v4s*)(px+3)); // {x[3],x[4],x[5],x[6]}
-	  _y1 = *((v4s*)(py-3)); // {y[srcBLen - 4],y[srcBLen - 3],y[srcBLen - 2],y[srcBLen - 1]} 
 
-	  mask = ymask[k];
-	  
-	  _x2 = __builtin_shuffle(_x1,_x4, shufflemask2); // {x[1],x[2],x[3],x[4]}
-	  _x3 = __builtin_shuffle(_x1,_x4, shufflemask3); // {x[2],x[3],x[4],x[5]}
-	        
-	  _y1 = __AND4(_y1,mask);	  
-	  _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
+	  if (k > 0) {
 
-	  /* Perform the multiply-accumulate */
+		_x1 = *((v4s*)px); // {x[0],x[1],x[2],x[3]}
+		_x4 = *((v4s*)(px+3)); // {x[3],x[4],x[5],x[6]}
+		_y1 = *((v4s*)(py-3)); // {y[srcBLen - 4],y[srcBLen - 3],y[srcBLen - 2],y[srcBLen - 1]} 
 
-	  acc0 = __SUMDOTP4(_x1,_y1,acc0);
-	  acc1 = __SUMDOTP4(_x2,_y1,acc1);
-	  acc2 = __SUMDOTP4(_x3,_y1,acc2);
-	  acc3 = __SUMDOTP4(_x4,_y1,acc3);
-	  
+		mask = ymask[k];
+
+		_x2 = __builtin_shuffle(_x1,_x4, shufflemask2); // {x[1],x[2],x[3],x[4]}
+		_x3 = __builtin_shuffle(_x1,_x4, shufflemask3); // {x[2],x[3],x[4],x[5]}
+
+		_y1 = __AND4(_y1,mask);	  
+		_y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
+
+		/* Perform the multiply-accumulate */
+
+		acc0 = __SUMDOTP4(_x1,_y1,acc0);
+		acc1 = __SUMDOTP4(_x2,_y1,acc1);
+		acc2 = __SUMDOTP4(_x3,_y1,acc2);
+		acc3 = __SUMDOTP4(_x4,_y1,acc3);
+
+	  }
+
 	  /* Store the result in the accumulator in the destination buffer. */
 	  *pOut++ = acc0;
 	  *pOut++ = acc1;

@@ -20,13 +20,13 @@ static void do_bench_0(rt_perf_t *perf, int events)
 
   rt_perf_stop(perf);
 
+  //printf("comp_result: %d\n", comp_result[0]);
+  
   int passed = 1;
 
   CHECK
 
   printf("Test passed: %d\n", passed);
-  printf("Result: %d\n", res[0]);
-  printf("Result Reference: %d\n", res_reference[0]);
 
 }
 
