@@ -1,6 +1,6 @@
 import os
 import random
-from plptest import Test as PulpTest
+from plptest import Test as PulpTest, Testset
 from plptest import Shell, Check
 from itertools import product, chain
 from functools import partial
@@ -468,11 +468,12 @@ class HeaderWriter(object):
 
 def generate_test(device_name, function_name, arguments, variables, implemented, use_l1=False,
                   extended_output=True):
-    tests = [[Test().build(i, function_name, v, arguments, e, use_l1, extended_output).to_plptest()
-              for i, e in enumerate(Sweep(variables))]
-             for v in implemented if implemented[v]]
-
-    return {'tests': list(chain(*tests))}
+    testsets = [Testset(
+        name=v,
+        tests=[Test().build(i, function_name, v, arguments, e, use_l1, extended_output).to_plptest()
+               for i, e in enumerate(Sweep(variables))]
+    ) for v in implemented if implemented[v]]
+    return {'testsets': testsets}
 
 
 def generate_stimuli_header(compute_result):
