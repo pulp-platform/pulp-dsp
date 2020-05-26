@@ -19,9 +19,9 @@ New tests can be generated using the test_template located at `test/mrWolf/test_
 1. Copy and rename the folder `test/mrWolf/test_template` to `test/mrWolf/[NAME]`.
 2. Edit `test/mrWolf/testset.cfg` and add the new test using `add_test_folder`.
 3. For both `ibex` and `riscy` subfolders, configure the `testset.cfg` script (is treated as regular python script):
-   a. Edit the `device_name` (either `'ibex'` or `'riscy'` and the `function_name`. The `function_name` is the name of the function, without the version (i.e., datatype like i8, q32)
-   b. Create the `variables` list. Add one or more `SweepVariable`s, and tests will be created for each combination. This is usually used to generate multiple tests with different dimensionality of the input vectors. However, this is not always enough. As an example, if the output vector has a different length than all input vectors (as it is the case for convolution or matrix multiplication), then you can use `DynamicVariables`, which require a function `f(env: dict) -> val` as an argument. The environment `env` is a dictionary, mapping other variables (`SweeiVariable`s) to their value. See the testcase `test/mrWolf/conv/test_lib/ibex/testset.cfg` as an example.
-   c. Create the `arguments` list. The order must be the same as defined in the function declaration. However, the names are used internally, and don't need to match. You can use the following argument types: 
+   1. Edit the `device_name` (either `'ibex'` or `'riscy'` and the `function_name`. The `function_name` is the name of the function, without the version (i.e., datatype like i8, q32)
+   2. Create the `variables` list. Add one or more `SweepVariable`s, and tests will be created for each combination. This is usually used to generate multiple tests with different dimensionality of the input vectors. However, this is not always enough. As an example, if the output vector has a different length than all input vectors (as it is the case for convolution or matrix multiplication), then you can use `DynamicVariables`, which require a function `f(env: dict) -> val` as an argument. The environment `env` is a dictionary, mapping other variables (`SweeiVariable`s) to their value. See the testcase `test/mrWolf/conv/test_lib/ibex/testset.cfg` as an example.
+   3. Create the `arguments` list. The order must be the same as defined in the function declaration. However, the names are used internally, and don't need to match. You can use the following argument types:
       - `Argument`: basic argument, representing a single value like an integer or a float. The Constructor takes:
 	    - `name`: the name used internally, can be chosen arbitrarily (as long as it is unique).
 		- `c_type`: either a valid type of `C`, including `stdint.h` or the string `var_type`, in which case the type will be chosen based on the `version`, e.g., `i32` will cause the `var_type` to be replaced with `int32_t`.
@@ -38,9 +38,9 @@ New tests can be generated using the test_template located at `test/mrWolf/test_
 	  - `ReturnValue`: return value of the function. Obviously, there can only ever exist one `ReturnValue` in the `arguments` list. The constructor needs the following arguments:
 		- `c_type`: either a valid type of `C`, including `stdint.h` or the string `var_type`, in which case the type will be chosen based on the `version`, e.g., `i32` will cause the `var_type` to be replaced with `int32_t`.
 		- `use_l1`: Boolean or None. if None, use the default configuration (as specified `generate_test`, see below).
-   d. Edit the `implemented` dictionary. This `dict` maps the version name (like `i32` and `q8`) to a boolean, Only versions which map to `True` will be tested. The `c_type` `var_type` is dependent on this version.
-   e. Create the function `n_macs`. This function `n_macs(env: dict) -> int` takes the environment `env` as an argument, which is defined identical as for `DynamicVariables`, see above. It should return the number of macs in an ideal setting (used for benchmarking only).
-   f. Call `generate_test` and store the returned struct as `TestConfig`. This function takes the following arguments:
+   4. Edit the `implemented` dictionary. This `dict` maps the version name (like `i32` and `q8`) to a boolean, Only versions which map to `True` will be tested. The `c_type` `var_type` is dependent on this version.
+   5. Create the function `n_macs`. This function `n_macs(env: dict) -> int` takes the environment `env` as an argument, which is defined identical as for `DynamicVariables`, see above. It should return the number of macs in an ideal setting (used for benchmarking only).
+   6. Call `generate_test` and store the returned struct as `TestConfig`. This function takes the following arguments:
       - `device_name: str`: name of the device (either `'ibex'` or `'riscy'`).
 	  - `function_name: str`: name of the function without the version
 	  - `arguments: list`: see above
