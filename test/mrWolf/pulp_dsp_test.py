@@ -254,7 +254,8 @@ def check_output(config, output, test_obj):
         result_format += "\n"
         result_format += "\n".join(mistakes)
     # generate / update benchmark file
-    bench_output(performance['cycles'], performance['instructions'], test_obj)
+    if passed:
+        bench_output(performance['cycles'], performance['instructions'], test_obj)
     return (passed, result_format)
 
 
