@@ -1,4 +1,5 @@
 import os
+import time
 import random
 from plptest import Test as PulpTest, Testset
 from plptest import Shell, Check
@@ -233,7 +234,7 @@ class FixPointArgument(Argument):
                                 use_l1)
 
 
-def check_output(config, output):
+def check_output(config, output, test_obj):
     # print(output)
     passed = False
     performance = {}
@@ -252,8 +253,36 @@ def check_output(config, output):
     if mistakes:
         result_format += "\n"
         result_format += "\n".join(mistakes)
-    print(result_format)
+    # generate / update benchmark file
+    bench_output(performance['cycles'], performance['instructions'], test_obj)
     return (passed, result_format)
+
+
+BENCHMARK_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                              "bench_{}.csv".format(time.strftime("%Y-%m-%d_%H:%M:%S")))
+
+
+def bench_output(cycles, instructions, test_obj):
+    # generate file and first header line if it does not yet exist
+    if not os.path.isfile(BENCHMARK_FILE):
+        # create file and write header
+        with open(BENCHMARK_FILE, "w") as f:
+            f.write("name,device,dimension,cycles,instructions,ipc,macs,mpc\n")
+
+    # extract relevant fields
+    dimension = "; ".join(["%s=%s" % (k, str(v)) for k, v in test_obj.env.items()])
+    insn_per_cycles = instructions / cycles
+    macs_per_cycle = test_obj.n_macs / cycles
+    # write the new line
+    with open(BENCHMARK_FILE, "a") as f:
+        f.write("{},{},{},{},{},{},{},{}\n".format(test_obj.function_name,
+                                                   test_obj.device_name,
+                                                   dimension,
+                                                   cycles,
+                                                   instructions,
+                                                   insn_per_cycles,
+                                                   test_obj.n_macs,
+                                                   macs_per_cycle))
 
 
 class Test(object):
@@ -269,14 +298,16 @@ class Test(object):
         self.extended_output = True
         self.version = ''
 
-    def build(self, test_idx, function_name, version, arguments, env, use_l1,
-              extended_output=True):
+    def build(self, test_idx, function_name, version, arguments, env, device_name, use_l1,
+              extended_output=True, n_macs=None):
         self.test_idx = test_idx
         self.function_name = "%s_%s" % (function_name, version)
         self.version = version
         self.env = env
+        self.device_name = device_name
         self.use_l1 = use_l1
         self.extended_output = extended_output
+        self.n_macs = n_macs(env) if env is not None else 0
 
         # prepare var_type
         if version == 'i32' or version == 'q32':
@@ -341,7 +372,7 @@ class Test(object):
                                   Shell('gen', 'make gen %s' % (flags)),
                                   Shell('build', 'make all %s' % (flags)),
                                   Shell('run', 'make run %s' % (flags)),
-                                  Check('check', check_output)],
+                                  Check('check', check_output, test_obj=self)],
                         timeout=1000000)
 
     def function_signature(self):
@@ -466,11 +497,19 @@ class HeaderWriter(object):
         self.fp.write('}\n\n')
 
 
-def generate_test(device_name, function_name, arguments, variables, implemented, use_l1=False,
-                  extended_output=True):
+def generate_test(device_name, function_name, arguments, variables, implemented,
+                  use_l1=False, extended_output=True, n_macs=None):
     testsets = [Testset(
         name=v,
-        tests=[Test().build(i, function_name, v, arguments, e, use_l1, extended_output).to_plptest()
+        tests=[Test().build(test_idx=i,
+                            function_name=function_name,
+                            version=v,
+                            arguments=arguments,
+                            env=e,
+                            device_name=device_name,
+                            use_l1=use_l1,
+                            extended_output=extended_output,
+                            n_macs=n_macs).to_plptest()
                for i, e in enumerate(Sweep(variables))]
     ) for v in implemented if implemented[v]]
     return {'testsets': testsets}
