@@ -3,7 +3,7 @@ import time
 import random
 from plptest import Test as PulpTest, Testset
 from plptest import Shell, Check
-from itertools import product, chain
+from itertools import product
 from functools import partial
 from collections import OrderedDict
 import argparse
@@ -237,16 +237,26 @@ class FixPointArgument(Argument):
 def check_output(config, output, test_obj):
     # print(output)
     passed = False
-    performance = {}
+    performance = {'cycles': 0,
+                   'instructions': 0,
+                   'load_stalls': 0,
+                   'icache_miss': 0,
+                   'tcdm_cont': 0}
     mistakes = []
     for item in output.split('\n'):
-        if 'Test passed:' in item:
+        if 'passed:' in item:
             if item.find('1') != -1:
                 passed = True
-        elif 'Total cycles:' in item:
+        elif 'cycles:' in item:
             performance['cycles'] = int(item.split(": ")[1])
-        elif 'Instructions:' in item:
+        elif 'instructions:' in item:
             performance['instructions'] = int(item.split(": ")[1])
+        elif 'load_stalls:' in item:
+            performance['load_stalls'] = int(item.split(": ")[1])
+        elif 'icache_miss:' in item:
+            performance['icache_miss'] = int(item.split(": ")[1])
+        elif 'tcdm_cont:' in item:
+            performance['tcdm_cont'] = int(item.split(": ")[1])
         elif '<Mismatch>' in item:
             mistakes.append("Mismatch: %s" % item[11:])
     result_format = ", ".join(["%s=%s" % (k, v) for k, v in performance.items()])
@@ -255,7 +265,7 @@ def check_output(config, output, test_obj):
         result_format += "\n".join(mistakes)
     # generate / update benchmark file
     if passed:
-        bench_output(performance['cycles'], performance['instructions'], test_obj)
+        bench_output(performance, test_obj)
     return (passed, result_format)
 
 
@@ -263,27 +273,31 @@ BENCHMARK_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                               "bench_{}.csv".format(time.strftime("%Y-%m-%d_%H:%M:%S")))
 
 
-def bench_output(cycles, instructions, test_obj):
+def bench_output(performance, test_obj):
     # generate file and first header line if it does not yet exist
     if not os.path.isfile(BENCHMARK_FILE):
         # create file and write header
         with open(BENCHMARK_FILE, "w") as f:
-            f.write("name,device,dimension,cycles,instructions,ipc,macs,mpc\n")
+            f.write("name,device,dimension,cycles,instructions,ipc,imiss,ld_stall,tcdm_cont,macs,mpc\n")
 
     # extract relevant fields
     dimension = "; ".join(["%s=%s" % (k, str(v)) for k, v in test_obj.env.items()])
-    insn_per_cycles = instructions / cycles
-    macs_per_cycle = test_obj.n_macs / cycles
+    insn_per_cycles = performance['instructions'] / performance['cycles']
+    macs_per_cycle = test_obj.n_macs / performance['cycles']
     # write the new line
     with open(BENCHMARK_FILE, "a") as f:
-        f.write("{},{},{},{},{},{},{},{}\n".format(test_obj.function_name,
-                                                   test_obj.device_name,
-                                                   dimension,
-                                                   cycles,
-                                                   instructions,
-                                                   insn_per_cycles,
-                                                   test_obj.n_macs,
-                                                   macs_per_cycle))
+        f.write(",".join([test_obj.function_name,
+                          test_obj.device_name,
+                          dimension,
+                          str(performance['cycles']),
+                          str(performance['instructions']),
+                          str(insn_per_cycles),
+                          str(performance['icache_miss']),
+                          str(performance['load_stalls']),
+                          str(performance['tcdm_cont']),
+                          str(test_obj.n_macs),
+                          str(macs_per_cycle)]))
+        f.write("\n")
 
 
 class Test(object):
@@ -449,6 +463,7 @@ class HeaderWriter(object):
         test.generate_reference(self, gen_function)
         self.generate_check(test)
         self.generate_fsig(test)
+        self.generate_bench()
 
     def write_array(self, name, var_type, arr, use_l1):
         target_loc = 'RT_L1_DATA' if use_l1 else 'RT_L2_DATA'
@@ -496,6 +511,25 @@ class HeaderWriter(object):
         self.fp.write('#define FSIG {\\\n')
         self.fp.write('%s%s;\\\n' % (self.tab, test.function_signature()))
         self.fp.write('}\n\n')
+
+    def generate_bench(self):
+        self.fp.write("""#define BENCH {{\\
+{tab}rt_perf_t perf;\\
+{tab}rt_perf_init(&perf);\\
+{tab}int passed = do_bench(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR), 1);\\
+{tab}printf(\"passed: %d\\n\", passed);\\
+{tab}printf(\"cycles: %d\\n\", rt_perf_read(RT_PERF_CYCLES));\\
+{tab}printf(\"instructions: %d\\n\", rt_perf_read(RT_PERF_INSTR));\\
+{tab}if (passed) {{\\
+{tab}{tab}do_bench(&perf, 1<<RT_PERF_LD_STALL, 0);\\
+{tab}{tab}printf(\"load_stalls: %d\\n\", rt_perf_read(RT_PERF_LD_STALL));\\
+{tab}{tab}do_bench(&perf, 1<<RT_PERF_IMISS, 0);\\
+{tab}{tab}printf(\"icache_miss: %d\\n\", rt_perf_read(RT_PERF_IMISS));\\
+{tab}{tab}do_bench(&perf, 1<<RT_PERF_TCDM_CONT, 0);\\
+{tab}{tab}printf(\"tcdm_cont: %d\\n\", rt_perf_read(RT_PERF_TCDM_CONT));\\
+{tab}}}\\
+}}\\""".format(tab=self.tab))
+        self.fp.write('\n\n')
 
 
 def generate_test(device_name, function_name, arguments, variables, implemented,
