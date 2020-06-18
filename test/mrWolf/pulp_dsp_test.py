@@ -14,34 +14,35 @@ import textwrap
 
 class Variable(object):
     """Variable"""
-    def __init__(self, name):
+    def __init__(self, name, visible=True):
         """
         name: name for the variable
         """
         super(Variable, self).__init__()
         self.name = name
+        self.visible = visible
 
 
 class SweepVariable(Variable):
     """sweep variable"""
-    def __init__(self, name, values):
+    def __init__(self, name, values, visible=True):
         """
         name: name for the sweep variable
         values: iterable over all possible values for this variable
         """
-        super(SweepVariable, self).__init__(name)
+        super(SweepVariable, self).__init__(name, visible)
         self.values = values
 
 
 class DynamicVariable(Variable):
     """Dynamic Variable, value determined based on others"""
-    def __init__(self, name, fun):
+    def __init__(self, name, fun, visible=True):
         """
         name: name of the variable
         fun: function, returning a value for a dictionary of all other previously defined variables.
         example: DynamicVairable('resLen', lambda env: env['lenA'] + env['lenB'] + 1)
         """
-        super(DynamicVariable, self).__init__(name)
+        super(DynamicVariable, self).__init__(name, visible)
         self.fun = fun
 
 
@@ -283,7 +284,7 @@ def bench_output(performance, test_obj):
             f.write("name,device,dimension,cycles,instructions,ipc,imiss,ld_stall,tcdm_cont,macs,mpc\n")
 
     # extract relevant fields
-    dimension = "; ".join(["%s=%s" % (k, str(v)) for k, v in test_obj.env.items()])
+    dimension = "; ".join(["%s=%s" % (k, str(test_obj.env[k])) for k in test_obj.visible_env])
     insn_per_cycles = performance['instructions'] / performance['cycles']
     macs_per_cycle = test_obj.n_macs / performance['cycles']
     # write the new line
@@ -310,17 +311,19 @@ class Test(object):
         self.var_type = []
         self.arguments = []
         self.env = {}
+        self.visible_env = []
         self.use_l1 = False
         self.fix_point = None
         self.extended_output = True
         self.version = ''
 
-    def build(self, test_idx, function_name, version, arguments, env, device_name, use_l1,
-              extended_output=True, n_macs=None):
+    def build(self, test_idx, function_name, version, arguments, env, visible_env, device_name,
+              use_l1, extended_output=True, n_macs=None):
         self.test_idx = test_idx
         self.function_name = "%s_%s" % (function_name, version)
         self.version = version
         self.env = env
+        self.visible_env = visible_env
         self.device_name = device_name
         self.use_l1 = use_l1
         self.extended_output = extended_output
@@ -381,7 +384,8 @@ class Test(object):
 
     def to_plptest(self):
         test_name = "%s(%s)" % (self.function_name,
-                                ", ".join(["%s=%s" % (k, str(v)) for k, v in self.env.items()]))
+                                ", ".join(["%s=%s" % (k, str(self.env[k]))
+                                           for k in self.visible_env]))
         build_dir = "test_%s_t%d" % (self.version, self.test_idx)
         flags = "GARGS=\'--json %s\' BUILD_DIR_EXT=%s" % (self.to_json(), build_dir)
         return PulpTest(name=test_name,
@@ -537,6 +541,7 @@ class HeaderWriter(object):
 
 def generate_test(device_name, function_name, arguments, variables, implemented,
                   use_l1=False, extended_output=True, n_macs=None):
+    visible_env = [v.name for v in variables if v.visible]
     testsets = [Testset(
         name=v,
         tests=[Test().build(test_idx=i,
@@ -544,6 +549,7 @@ def generate_test(device_name, function_name, arguments, variables, implemented,
                             version=v,
                             arguments=arguments,
                             env=e,
+                            visible_env=visible_env,
                             device_name=device_name,
                             use_l1=use_l1,
                             extended_output=extended_output,
