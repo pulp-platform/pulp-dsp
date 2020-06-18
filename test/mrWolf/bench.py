@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+
 import os
 import re
 import argparse
@@ -84,8 +86,8 @@ def read_bench(bench_file):
     """ Reads a bench file and returns a sorted list of runs """
     with open(bench_file, "r") as f:
         # check the first line
-        lines = iter(f)
-        header = lines.next().strip().split(",")
+        lines = iter(f.readlines())
+        header = next(lines).strip().split(",")
         assert(header == HEADER)
         runs = [run_from_csv_line(line) for line in lines]
     # sort the runs
