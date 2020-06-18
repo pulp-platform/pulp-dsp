@@ -3,7 +3,7 @@ import time
 import random
 from plptest import Test as PulpTest, Testset
 from plptest import Shell, Check
-from itertools import product, chain
+from itertools import product
 from functools import partial
 from collections import OrderedDict
 import argparse
@@ -14,34 +14,35 @@ import textwrap
 
 class Variable(object):
     """Variable"""
-    def __init__(self, name):
+    def __init__(self, name, visible=True):
         """
         name: name for the variable
         """
         super(Variable, self).__init__()
         self.name = name
+        self.visible = visible
 
 
 class SweepVariable(Variable):
     """sweep variable"""
-    def __init__(self, name, values):
+    def __init__(self, name, values, visible=True):
         """
         name: name for the sweep variable
         values: iterable over all possible values for this variable
         """
-        super(SweepVariable, self).__init__(name)
+        super(SweepVariable, self).__init__(name, visible)
         self.values = values
 
 
 class DynamicVariable(Variable):
     """Dynamic Variable, value determined based on others"""
-    def __init__(self, name, fun):
+    def __init__(self, name, fun, visible=True):
         """
         name: name of the variable
         fun: function, returning a value for a dictionary of all other previously defined variables.
         example: DynamicVairable('resLen', lambda env: env['lenA'] + env['lenB'] + 1)
         """
-        super(DynamicVariable, self).__init__(name)
+        super(DynamicVariable, self).__init__(name, visible)
         self.fun = fun
 
 
@@ -107,7 +108,8 @@ class Argument(object):
         assert not isinstance(self.value, str)
         if self.value is None:
             min_value, max_value = self.get_range()
-            self.value = np.random.randint(low=min_value, high=max_value + 1, dtype=self.get_dtype())
+            self.value = np.random.randint(low=min_value, high=max_value + 1)
+            self.value = self.value.astype(self.get_dtype())
         return self.value
 
     def generate_stimuli(self, header):
@@ -154,7 +156,8 @@ class ArrayArgument(Argument):
         dtype = self.get_dtype()
         if self.value is None:
             min_value, max_value = self.get_range()
-            self.value = np.random.randint(low=min_value, high=max_value + 1, size=self.length, dtype=dtype)
+            self.value = np.random.randint(low=min_value, high=max_value + 1, size=self.length)
+            self.value = self.value.astype(dtype)
         elif isinstance(self.value, (int, float)):
             self.value = (np.ones(self.length) * self.value).astype(dtype)
         elif isinstance(self.value, np.ndarray):
@@ -237,16 +240,26 @@ class FixPointArgument(Argument):
 def check_output(config, output, test_obj):
     # print(output)
     passed = False
-    performance = {}
+    performance = {'cycles': 0,
+                   'instructions': 0,
+                   'load_stalls': 0,
+                   'icache_miss': 0,
+                   'tcdm_cont': 0}
     mistakes = []
     for item in output.split('\n'):
-        if 'Test passed:' in item:
+        if 'passed:' in item:
             if item.find('1') != -1:
                 passed = True
-        elif 'Total cycles:' in item:
+        elif 'cycles:' in item:
             performance['cycles'] = int(item.split(": ")[1])
-        elif 'Instructions:' in item:
+        elif 'instructions:' in item:
             performance['instructions'] = int(item.split(": ")[1])
+        elif 'load_stalls:' in item:
+            performance['load_stalls'] = int(item.split(": ")[1])
+        elif 'icache_miss:' in item:
+            performance['icache_miss'] = int(item.split(": ")[1])
+        elif 'tcdm_cont:' in item:
+            performance['tcdm_cont'] = int(item.split(": ")[1])
         elif '<Mismatch>' in item:
             mistakes.append("Mismatch: %s" % item[11:])
     result_format = ", ".join(["%s=%s" % (k, v) for k, v in performance.items()])
@@ -255,7 +268,7 @@ def check_output(config, output, test_obj):
         result_format += "\n".join(mistakes)
     # generate / update benchmark file
     if passed:
-        bench_output(performance['cycles'], performance['instructions'], test_obj)
+        bench_output(performance, test_obj)
     return (passed, result_format)
 
 
@@ -263,27 +276,31 @@ BENCHMARK_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                               "bench_{}.csv".format(time.strftime("%Y-%m-%d_%H:%M:%S")))
 
 
-def bench_output(cycles, instructions, test_obj):
+def bench_output(performance, test_obj):
     # generate file and first header line if it does not yet exist
     if not os.path.isfile(BENCHMARK_FILE):
         # create file and write header
         with open(BENCHMARK_FILE, "w") as f:
-            f.write("name,device,dimension,cycles,instructions,ipc,macs,mpc\n")
+            f.write("name,device,dimension,cycles,instructions,ipc,imiss,ld_stall,tcdm_cont,macs,mpc\n")
 
     # extract relevant fields
-    dimension = "; ".join(["%s=%s" % (k, str(v)) for k, v in test_obj.env.items()])
-    insn_per_cycles = instructions / cycles
-    macs_per_cycle = test_obj.n_macs / cycles
+    dimension = "; ".join(["%s=%s" % (k, str(test_obj.env[k])) for k in test_obj.visible_env])
+    insn_per_cycles = performance['instructions'] / performance['cycles']
+    macs_per_cycle = test_obj.n_macs / performance['cycles']
     # write the new line
     with open(BENCHMARK_FILE, "a") as f:
-        f.write("{},{},{},{},{},{},{},{}\n".format(test_obj.function_name,
-                                                   test_obj.device_name,
-                                                   dimension,
-                                                   cycles,
-                                                   instructions,
-                                                   insn_per_cycles,
-                                                   test_obj.n_macs,
-                                                   macs_per_cycle))
+        f.write(",".join([test_obj.function_name,
+                          test_obj.device_name,
+                          dimension,
+                          str(performance['cycles']),
+                          str(performance['instructions']),
+                          str(insn_per_cycles),
+                          str(performance['icache_miss']),
+                          str(performance['load_stalls']),
+                          str(performance['tcdm_cont']),
+                          str(test_obj.n_macs),
+                          str(macs_per_cycle)]))
+        f.write("\n")
 
 
 class Test(object):
@@ -294,17 +311,19 @@ class Test(object):
         self.var_type = []
         self.arguments = []
         self.env = {}
+        self.visible_env = []
         self.use_l1 = False
         self.fix_point = None
         self.extended_output = True
         self.version = ''
 
-    def build(self, test_idx, function_name, version, arguments, env, device_name, use_l1,
-              extended_output=True, n_macs=None):
+    def build(self, test_idx, function_name, version, arguments, env, visible_env, device_name,
+              use_l1, extended_output=True, n_macs=None):
         self.test_idx = test_idx
         self.function_name = "%s_%s" % (function_name, version)
         self.version = version
         self.env = env
+        self.visible_env = visible_env
         self.device_name = device_name
         self.use_l1 = use_l1
         self.extended_output = extended_output
@@ -365,14 +384,21 @@ class Test(object):
 
     def to_plptest(self):
         test_name = "%s(%s)" % (self.function_name,
-                                ", ".join(["%s=%s" % (k, str(v)) for k, v in self.env.items()]))
+                                ", ".join(["%s=%s" % (k, str(self.env[k]))
+                                           for k in self.visible_env]))
         build_dir = "test_%s_t%d" % (self.version, self.test_idx)
         flags = "GARGS=\'--json %s\' BUILD_DIR_EXT=%s" % (self.to_json(), build_dir)
+        # set the platform for compatibility with various different Pulp-SDK versions
+        platform_str = "platform=gvsoc" # default platform
+        if "TEST_PLATFORM" in os.environ:
+            platform_str = "platform=%s" % (os.environ["TEST_PLATFORM"])
+        elif "PULP_CURRENT_CONFIG_ARGS" in os.environ:
+            platform_str = os.environ["PULP_CURRENT_CONFIG_ARGS"]
         return PulpTest(name=test_name,
                         commands=[Shell('clean', 'make clean %s' % (flags)),
                                   Shell('gen', 'make gen %s' % (flags)),
                                   Shell('build', 'make all %s' % (flags)),
-                                  Shell('run', 'make run %s' % (flags)),
+                                  Shell('run', 'make run %s %s' % (platform_str, flags)),
                                   Check('check', check_output, test_obj=self)],
                         timeout=1000000)
 
@@ -402,7 +428,8 @@ class Test(object):
         inputs = {arg.name: arg
                   for arg in self.arguments
                   if not isinstance(arg, (ReturnValue, OutputArgument))}
-        gen_function_prep = partial(gen_function, inputs=inputs, fix_point=self.fix_point)
+        gen_function_prep = partial(gen_function, inputs=inputs, env=self.env,
+                                    fix_point=self.fix_point)
         any([arg.generate_reference(gen_function_prep, header)
              for arg in self.arguments if isinstance(arg, (OutputArgument, ReturnValue))])
 
@@ -449,6 +476,7 @@ class HeaderWriter(object):
         test.generate_reference(self, gen_function)
         self.generate_check(test)
         self.generate_fsig(test)
+        self.generate_bench()
 
     def write_array(self, name, var_type, arr, use_l1):
         target_loc = 'RT_L1_DATA' if use_l1 else 'RT_L2_DATA'
@@ -497,9 +525,29 @@ class HeaderWriter(object):
         self.fp.write('%s%s;\\\n' % (self.tab, test.function_signature()))
         self.fp.write('}\n\n')
 
+    def generate_bench(self):
+        self.fp.write("""#define BENCH {{\\
+{tab}rt_perf_t perf;\\
+{tab}rt_perf_init(&perf);\\
+{tab}int passed = do_bench(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR), 1);\\
+{tab}printf(\"passed: %d\\n\", passed);\\
+{tab}printf(\"cycles: %d\\n\", rt_perf_read(RT_PERF_CYCLES));\\
+{tab}printf(\"instructions: %d\\n\", rt_perf_read(RT_PERF_INSTR));\\
+{tab}if (passed) {{\\
+{tab}{tab}do_bench(&perf, 1<<RT_PERF_LD_STALL, 0);\\
+{tab}{tab}printf(\"load_stalls: %d\\n\", rt_perf_read(RT_PERF_LD_STALL));\\
+{tab}{tab}do_bench(&perf, 1<<RT_PERF_IMISS, 0);\\
+{tab}{tab}printf(\"icache_miss: %d\\n\", rt_perf_read(RT_PERF_IMISS));\\
+{tab}{tab}do_bench(&perf, 1<<RT_PERF_TCDM_CONT, 0);\\
+{tab}{tab}printf(\"tcdm_cont: %d\\n\", rt_perf_read(RT_PERF_TCDM_CONT));\\
+{tab}}}\\
+}}\\""".format(tab=self.tab))
+        self.fp.write('\n\n')
+
 
 def generate_test(device_name, function_name, arguments, variables, implemented,
                   use_l1=False, extended_output=True, n_macs=None):
+    visible_env = [v.name for v in variables if v.visible]
     testsets = [Testset(
         name=v,
         tests=[Test().build(test_idx=i,
@@ -507,6 +555,7 @@ def generate_test(device_name, function_name, arguments, variables, implemented,
                             version=v,
                             arguments=arguments,
                             env=e,
+                            visible_env=visible_env,
                             device_name=device_name,
                             use_l1=use_l1,
                             extended_output=extended_output,

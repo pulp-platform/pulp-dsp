@@ -20,16 +20,19 @@ def compute_result(result_parameter, inputs, env, fix_point):
     fix_point: None (if no fixpoint is used) or decimal point
     """
     if result_parameter.ctype == 'int32_t':
-        if fix_point is None:
-            a = inputs['srcA'].value.astype(np.int32)
-            b = inputs['srcB'].value.astype(np.int32)
-            return np.convolve(a, b, mode='full')
+        a = inputs['srcA'].value.astype(np.int32).reshape((env['len_m'], env['len_n']))
+        b = inputs['srcB'].value.astype(np.int32).reshape((env['len_n'], env['len_o']))
+        if fix_point is None or fix_point == 0:
+            result = (a @ b).astype(np.int32)
+            result = result.reshape((env['len_res'], ))
         else:
-            raise RuntimeError("Fixpoint not implemented")
+            raise RuntimeError("Fix-Point not implemented")
     elif result_parameter.ctype == 'float':
         raise RuntimeError("Float not implemented")
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
+
+    return result
 
 
 ######################
@@ -55,8 +58,7 @@ def q_sub(a, b, p):
 
 
 def q_mul(a, b, p):
-    rounding = 1 << (p - 1)
-    return q_sat((a * b + rounding) >> p)
+    return q_sat((a * b) >> p)
 
 
 ###########################
