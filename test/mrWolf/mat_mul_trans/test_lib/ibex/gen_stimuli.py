@@ -21,9 +21,9 @@ def compute_result(result_parameter, inputs, env, fix_point):
     """
     if result_parameter.ctype == 'int32_t':
         a = inputs['srcA'].value.astype(np.int32).reshape((env['len_m'], env['len_n']))
-        b = inputs['srcB'].value.astype(np.int32).reshape((env['len_n'], env['len_o']))
+        b = inputs['srcB'].value.astype(np.int32).reshape((env['len_o'], env['len_n']))
         if fix_point is None or fix_point == 0:
-            result = np.matmul(a, b).astype(np.int32).reshape((env['len_res'], ))
+            result = np.matmul(a, b.T).astype(np.int32).reshape((env['len_res'], ))
         else:
             raise RuntimeError("Fix-Point not implemented")
     elif result_parameter.ctype == 'float':

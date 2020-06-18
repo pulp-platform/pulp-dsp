@@ -15,15 +15,15 @@ def compute_result(result_parameter, inputs, env, fix_point):
     Arguments
     ---------
     result_parameter: Either OutputArgument or ReturnValue (see pulp_dsp_test.py)
-    inputs: Dict mapping name to the Argument, with arg.value, arg.dtype (and arg.length)
+    inputs: Dict mapping name to the Argument, with arg.value, arg.ctype (and arg.length)
     env: Dict mapping the variable (SweepVariable or DynamicVariable) names to their value.
     fix_point: None (if no fixpoint is used) or decimal point
     """
     if result_parameter.ctype == 'int32_t':
         a = inputs['srcA'].value.astype(np.int32).reshape((env['len_m'], env['len_n']))
-        b = inputs['srcB'].value.astype(np.int32).reshape((env['len_n'], env['len_o']))
+        b = inputs['srcB'].value.astype(np.int32).reshape((env['len_o'], env['len_n']))
         if fix_point is None or fix_point == 0:
-            result = np.matmul(a, b).astype(np.int32).reshape((env['len_res'], ))
+            result = np.matmul(a, b.T).astype(np.int32).reshape((env['len_res'], ))
         else:
             raise RuntimeError("Fix-Point not implemented")
     elif result_parameter.ctype == 'float':
@@ -57,7 +57,12 @@ def q_sub(a, b, p):
 
 
 def q_mul(a, b, p):
-    return q_sat((a * b) >> p)
+    return q_sat(q_roundnorm(a * b, p) >> p)
+
+
+def q_roundnorm(a, p):
+    rounding = 1 << (p - 1)
+    return q_sat((a + rounding) >> p)
 
 
 ###########################
