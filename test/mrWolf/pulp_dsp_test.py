@@ -418,7 +418,8 @@ class Test(object):
         inputs = {arg.name: arg
                   for arg in self.arguments
                   if not isinstance(arg, (ReturnValue, OutputArgument))}
-        gen_function_prep = partial(gen_function, inputs=inputs, fix_point=self.fix_point)
+        gen_function_prep = partial(gen_function, inputs=inputs, env=self.env,
+                                    fix_point=self.fix_point)
         any([arg.generate_reference(gen_function_prep, header)
              for arg in self.arguments if isinstance(arg, (OutputArgument, ReturnValue))])
 

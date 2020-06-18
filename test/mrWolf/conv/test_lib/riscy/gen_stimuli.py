@@ -8,7 +8,7 @@ import numpy as np
 ##################
 
 
-def compute_result(result_parameter, inputs, fix_point):
+def compute_result(result_parameter, inputs, env, fix_point):
     """
     Funciton to generate the expected result of the testcase.
 
@@ -16,6 +16,7 @@ def compute_result(result_parameter, inputs, fix_point):
     ---------
     result_parameter: Either OutputArgument or ReturnValue (see pulp_dsp_test.py)
     inputs: Dict mapping name to the Argument, with arg.value, arg.dtype (and arg.length)
+    env: Dict mapping the variable (SweepVariable or DynamicVariable) names to their value.
     fix_point: None (if no fixpoint is used) or decimal point
     """
     if result_parameter.ctype == 'int32_t':
