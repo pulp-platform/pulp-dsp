@@ -107,7 +107,8 @@ class Argument(object):
         assert not isinstance(self.value, str)
         if self.value is None:
             min_value, max_value = self.get_range()
-            self.value = np.random.randint(low=min_value, high=max_value + 1, dtype=self.get_dtype())
+            self.value = np.random.randint(low=min_value, high=max_value + 1)
+            self.value = self.value.astype(self.get_dtype())
         return self.value
 
     def generate_stimuli(self, header):
@@ -154,7 +155,8 @@ class ArrayArgument(Argument):
         dtype = self.get_dtype()
         if self.value is None:
             min_value, max_value = self.get_range()
-            self.value = np.random.randint(low=min_value, high=max_value + 1, size=self.length, dtype=dtype)
+            self.value = np.random.randint(low=min_value, high=max_value + 1, size=self.length)
+            self.value = self.value.astype(dtype)
         elif isinstance(self.value, (int, float)):
             self.value = (np.ones(self.length) * self.value).astype(dtype)
         elif isinstance(self.value, np.ndarray):
