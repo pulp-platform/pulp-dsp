@@ -42,7 +42,7 @@
  */
 
 /**
-  @brief Scalar dot product with interleaved access of 32-bit float vectors kernel for XPULPV2 extension.
+  @brief Parallel dot product with interleaved access of 32-bit float vectors kernel for XPULPV2 extension.
   @param[in]  S     points to the instance structure for float parallel dot product
   @return        none
  */

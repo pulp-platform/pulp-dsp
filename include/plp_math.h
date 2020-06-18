@@ -387,12 +387,9 @@ void plp_dot_prod_f32_parallel(
 
 
 /** -------------------------------------------------------
-   @brief Scalar dot product with interleaved access of 32-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  blockSize  number of samples in each vector
-   @param[out] pRes     output result returned here
-   @return        none
+    @brief Parallel dot product with interleaved access of 32-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]  S     points to the instance structure for integer parallel dot product
+    @return        none
 */
 
 void plp_dot_prod_i32p_xpulpv2(void * S);
@@ -400,13 +397,9 @@ void plp_dot_prod_i32p_xpulpv2(void * S);
 
 
 /** -------------------------------------------------------
-   @brief Scalar dot product with interleaved access of 32-bit fixed point vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  blockSize  number of samples in each vector
-   @param[in]  deciPoint  decimal point for right shift
-   @param[out] pRes     output result returned here
-   @return        none
+    @brief Parallel dot product with interleaved access of 32-bit fixed point vectors kernel for XPULPV2 extension.
+    @param[in]  S     points to the instance structure for fixed point parallel dot product
+    @return        none
 */
 
 void plp_dot_prod_q32p_xpulpv2(void * S);
@@ -414,7 +407,7 @@ void plp_dot_prod_q32p_xpulpv2(void * S);
 
 
 /** -------------------------------------------------------
-   @brief Scalar dot product with interleaved access of 32-bit float vectors kernel for XPULPV2 extension.
+   @brief Parallel dot product with interleaved access of 32-bit float vectors kernel for XPULPV2 extension.
    @param[in]  S     points to the instance structure for float parallel dot product
    @return        none
 */
