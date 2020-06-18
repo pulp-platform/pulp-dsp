@@ -59,22 +59,21 @@ New tests can be generated using the test_template located at `test/mrWolf/test_
 
 ### Testing Pulp-DSP
 
-To execute the tests, you need to change directory into either `test/mrWolf`, or any of it's subdirectories. Then, make sure that the correct configuration is loaded:
-
-```
-# for simulation in GVSOC:
-source ~/pulp/pulp-sdk/configs/platform-gvsoc.sh
-# for running it on an actual board:
-source ~/pulp/pulp-sdk/configs/platform-board.sh
-```
-
-Then, start plptest with:
+To execute the tests, you need to change directory into either `test/mrWolf`, or any of it's subdirectories. Then, start plptest with:
 
 ```
 plptest --threads 1
 ```
 
 Running all tests will take a while. As soon as all tests are finished, plptest will show you a summary of all executed tests and if they passed or failed.
+
+### Target platform & Pulp-SDK Compatibility
+
+In recent versions of Pulp-SDK, the platform configuration changed. In earlier versions, the platform could be chosen by sourcing `pulp-sdk/configs/platform-<PLATFORM>.sh`. However, this was removed in recent versions, and replaced by adding the `platform=<PLATFORM>` flag to `make run` (this flag is already available in earlier versions). In order to guarantee compatibility with different Pulp-SDK versions, the test framework chooses the platform in the following way:
+
+- If the environment variable `TEST_PLATFORM` is set, then the tests are run with `make run platform=$TEST_PLATFORM`. Simply run `TEST_PLATFORM=board plptest --threads 1` to execute the tests on an actual board.
+- The old platform configuration script `pulp-sdk/configs/platform-<PLATFORM>.sh` sets the environment variable `PULP_CURRENT_CONFIG_ARGS=platform=<PLATFORM>`. If this variable is set (and `TEST_PLATFORM` is not), then the tests are executed with `make run $PULP_CURRENT_CONFIG_ARGS`. This will ensure that the configuration is applied.
+- If neither of the two environment variables `TEST_PLATFORM` or `PULP_CURRENT_CONFIG_ARGS` are set, then the tests are run with `make run platform=gvsoc`.
 
 ### Benchmarking
 

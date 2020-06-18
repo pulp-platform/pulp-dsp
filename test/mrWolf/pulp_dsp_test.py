@@ -388,11 +388,17 @@ class Test(object):
                                            for k in self.visible_env]))
         build_dir = "test_%s_t%d" % (self.version, self.test_idx)
         flags = "GARGS=\'--json %s\' BUILD_DIR_EXT=%s" % (self.to_json(), build_dir)
+        # set the platform for compatibility with various different Pulp-SDK versions
+        platform_str = "platform=gvsoc" # default platform
+        if "TEST_PLATFORM" in os.environ:
+            platform_str = "platform=%s" % (os.environ["TEST_PLATFORM"])
+        elif "PULP_CURRENT_CONFIG_ARGS" in os.environ:
+            platform_str = os.environ["PULP_CURRENT_CONFIG_ARGS"]
         return PulpTest(name=test_name,
                         commands=[Shell('clean', 'make clean %s' % (flags)),
                                   Shell('gen', 'make gen %s' % (flags)),
                                   Shell('build', 'make all %s' % (flags)),
-                                  Shell('run', 'make run %s' % (flags)),
+                                  Shell('run', 'make run %s %s' % (platform_str, flags)),
                                   Check('check', check_output, test_obj=self)],
                         timeout=1000000)
 
