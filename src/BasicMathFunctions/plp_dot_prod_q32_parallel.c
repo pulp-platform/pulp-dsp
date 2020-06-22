@@ -68,20 +68,13 @@ void plp_dot_prod_q32_parallel(
 
     uint32_t i;
     int32_t resBuffer[rt_nb_pe()];
-    // initialize results buffer
-    /* not necessary
-    for (i=0; i<rt_nb_pe(); i++){
-      resBuffer[i]=0;
-      //printf("i %d, buffer %d, rt_nb_pe %d, rt_core_id %d\n", i, resBuffer[i], rt_nb_pe(), rt_core_id());
-    }
-    */
 
     plp_dot_prod_instance_q32 S;
 
     // Initialize the plp_dot_prod_instance
     S.pSrcA = pSrcA;
     S.pSrcB = pSrcB;
-    S.blkSizePE = blockSize/nPE;
+    S.blkSizePE = blockSize;
     S.deciPoint = deciPoint;
     S.nPE = nPE;
     S.resBuffer = resBuffer;
@@ -93,22 +86,8 @@ void plp_dot_prod_q32_parallel(
     for (i=0; i<nPE; i++){ // not necessary rt_nb_pe()
       sum += resBuffer[i];
     }
-#if defined(PLP_MATH_LOOPUNROLL)
-    //uint32_t blkCnt = blockSize/nPE/2 * 2 * nPE;
-    //printf("blkCnt %d\n", blkCnt);
-    for (i= (blockSize/nPE/2) * 2* nPE; i<blockSize; i++){
-      //printf("i %d, blockSize/nPE %d, (blockSize/nPE) * nPE %d\n", i, (blockSize/nPE), (blockSize/nPE) * nPE);
-      sum += pSrcA[i]*pSrcB[i];
-    }
-#else // PLP_MATH_LOOPUNROLL
-    for (i= (blockSize/nPE) * nPE; i<blockSize; i++){
-      sum += pSrcA[i]*pSrcB[i];
-    }
-#endif
-
 
     *pRes = sum;
-
 
   }
 

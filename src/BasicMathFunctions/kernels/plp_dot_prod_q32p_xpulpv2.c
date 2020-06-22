@@ -49,49 +49,59 @@
 
 void plp_dot_prod_q32p_xpulpv2(void * S) {
 
-  int32_t * pSrcA = (int32_t*)(((plp_dot_prod_instance_q32 *)S)->pSrcA) + rt_core_id();
-  int32_t * pSrcB = (int32_t*)(((plp_dot_prod_instance_q32 *)S)->pSrcB) + rt_core_id();
-  uint32_t blkSizePE = ((plp_dot_prod_instance_q32 *)S)->blkSizePE;
-  uint32_t deciPoint = ((plp_dot_prod_instance_q32 *)S)->deciPoint;
-  uint32_t nPE = ((plp_dot_prod_instance_q32 *)S)->nPE;
-  int32_t * resBufferPE = &(((plp_dot_prod_instance_q32 *)S)->resBuffer[rt_core_id()]);
+    int core_id = rt_core_id();
 
+    plp_dot_prod_instance_q32* args = (plp_dot_prod_instance_q32*)S;
 
-  uint32_t blkCnt, tmpBS;                      /* Loop counter, temporal BlockSize */
-  int32_t sum1 = 0, sum2=0;                          /* Temporary return variable */
+    int32_t * pSrcA = (int32_t*)(args->pSrcA);
+    int32_t * pSrcB = (int32_t*)(args->pSrcB);
+    uint32_t blkSizePE = args->blkSizePE;
+    uint32_t deciPoint = args->deciPoint;
+    uint32_t nPE = args->nPE;
+    int32_t * resBufferPE = &(args->resBuffer[core_id]);
+
+    // *NOTICE* here, we can do something better for performance, by splitting it more evenly.
+    // If (blkSizePe / nPE) is odd, then each core will process (blkSizePe / nPE) - 1 elements.
+    // This is due to verification reasons: FOr the non-parallel case, we always sum up two
+    // temporary values, and then execute __ROUNDNORM_REG. To mimik this behavior, every core
+    // (except the last one) will process an even number of elements. This way, the last core will
+    // have to do more work, but the result of this function will identical to the result of the
+    // singlecore implementation.
+    // set the default block size
+    uint32_t blkSize = (blkSizePE / nPE) & 0xFFFFFFFE; // the and makes sure the block size is even
+
+    // set pSrcA and pSrcB to the correct location
+    pSrcA += core_id * blkSize;
+    pSrcB += core_id * blkSize;
+
+    // set the block size for the last core
+    if (core_id == nPE - 1) {
+        blkSize = blkSizePE - (nPE - 1) * blkSize;
+    }
+
+    int32_t i, sum = 0;
 
 #if defined(PLP_MATH_LOOPUNROLL)
 
-        tmpBS = (blkSizePE>>1);
-        uint32_t tmpIdx = 2*nPE;
+    for (i = 0; i<blkSize - 1; i += 2){
+        int32_t x0 = pSrcA[i] * pSrcB[i];
+        int32_t x1 = pSrcA[i + 1] * pSrcB[i + 1];
+        sum += __ADDROUNDNORM_REG(x0, x1, deciPoint);
+    }
 
-        for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-          //printf("blkCnt %d, tmpIdx*blkCnt %d, blkSizePE %d\n", blkCnt, tmpIdx*blkCnt, blkSizePE);
-          sum1 = __MAC(sum1, pSrcA[tmpIdx*blkCnt], pSrcB[tmpIdx*blkCnt]);
-          sum1 = sum1 >> deciPoint;
-          sum2 = __MAC(sum2, pSrcA[tmpIdx*blkCnt + nPE], pSrcB[tmpIdx*blkCnt + nPE]);
-          sum2 = sum2 >> deciPoint;
-        }
-        /*
-        tmpBS = (blkSizePE%2U);
-
-        for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-          printf("here?\n");
-          sum1 = __MAC(sum1, (*pSrcA++), (*pSrcB++));
-        }
-        */
+    if (i != blkSize) {
+        sum += __ROUNDNORM_REG(pSrcA[i] * pSrcB[i], deciPoint);
+    }
 
 #else // PLP_MATH_LOOPUNROLL
 
-        for (blkCnt=0; blkCnt<blockSize; blkCnt=blkCnt+nPE){
-          sum1 = __MAC(sum1, pSrcA[blkCnt], pSrcB[blkCnt]);
-        }
+    for (i = 0; i < blkSize; i++) {
+        sum += __ROUNDNORM_REG(pSrcA[i] * pSrcB[i], deciPoint);
+    }
 
 #endif // PLP_MATH_LOOPUNROLL
 
-        * resBufferPE = sum1 + sum2;
-
-        //printf("resBufferPE %d, core id %d\n", *resBufferPE, rt_core_id());
+    * resBufferPE = sum;
 
 }
 
