@@ -94,9 +94,9 @@ void plp_mat_mult_trans_i32p_xpulpv2( void* args) {
         uint32_t k; // loop counter for O
 
         int core_id = rt_core_id();
-        int step = (O-1+nPE)/nPE;
+        int step = (M-1+nPE)/nPE;
         uint32_t START = step*core_id;
-        uint32_t END = (core_id != rt_nb_pe()-1) ? START+step : M;
+        uint32_t END = (core_id != nPE-1) ? START+step : M;
 
         for(i=START; i < END; i++){
           for(k=0; k < M; k++){
@@ -122,18 +122,15 @@ void plp_mat_mult_trans_i32p_xpulpv2( void* args) {
         uint32_t O = arguments->O;
         uint32_t nPE = arguments->nPE;
         int32_t * __restrict__ pDstC = arguments->pDstC;
-        
+
         uint32_t i; // loop counter for M
         uint32_t j; // loop counter for N
         uint32_t k; // loop counter for O
 
         int core_id = rt_core_id();
-        int step = (O-1+nPE)/nPE;
-        uint32_t START = step*core_id;
-        uint32_t END = (core_id != rt_nb_pe()-1) ? START+step : M;
 
         if(N & 0x1){
-          for(i=START; i < END; i++){
+          for(i=core_id; i < M; i += nPE){
             for(k=0; k < O; k++){
               int32_t sum1 = 0;
               int32_t sum2 = 0;
@@ -145,7 +142,7 @@ void plp_mat_mult_trans_i32p_xpulpv2( void* args) {
             }
           }
         } else {
-          for(i=START; i < END; i++){
+          for(i=core_id; i < M; i += nPE){
             for(k=0; k < O; k++){
               int32_t sum1 = 0;
               int32_t sum2 = 0;
