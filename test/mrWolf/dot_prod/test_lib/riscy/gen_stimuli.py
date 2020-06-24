@@ -33,11 +33,11 @@ def compute_result(result_parameter, inputs, env, fix_point):
                 tmp_val = 0
                 for i in range(groups):
                     j = g * groups + i
-                    tmp_val = q_add(tmp_val, a[j] * b[j], fix_point)
-                result[0] = q_add(result[0], q_roundnorm(tmp_val, fix_point), fix_point)
+                    tmp_val = q_add(tmp_val, a[j] * b[j])
+                result[0] = q_add(result[0], q_roundnorm(tmp_val, fix_point))
             # do the remaining elements one by one
             for i in range((len(a) // groups) * groups, len(a)):
-                result[0] = q_add(result[0], q_roundnorm(a[i] * b[i], fix_point), fix_point)
+                result[0] = q_add(result[0], q_roundnorm(a[i] * b[i], fix_point))
     elif result_parameter.ctype == 'float':
         # for float implementation, it is important to always use float32 for intermediate operations!
         a = inputs['srcA'].value.astype(np.float32)
@@ -66,16 +66,16 @@ def q_sat(x):
         return x
 
 
-def q_add(a, b, p):
+def q_add(a, b):
     return q_sat(a + b)
 
 
-def q_sub(a, b, p):
+def q_sub(a, b):
     return q_sat(a - b)
 
 
 def q_mul(a, b, p):
-    return q_sat(q_roundnorm(a * b, p) >> p)
+    return q_roundnorm(a * b, p)
 
 
 def q_roundnorm(a, p):
