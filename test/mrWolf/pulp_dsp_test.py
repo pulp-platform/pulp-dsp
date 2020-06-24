@@ -64,11 +64,11 @@ class Argument(object):
         if isinstance(self.value, SweepVariable):
             self.value = self.value.name
 
-    def to_dict(self, env, var_type, use_l1):
-        d = self.apply(env, var_type, use_l1).__dict__
+    def to_dict(self, env, var_type, version, use_l1):
+        d = self.apply(env, var_type, version, use_l1).__dict__
         return {'class': type(self).__name__, 'dict': d}
 
-    def apply(self, env, var_type, use_l1):
+    def apply(self, env, var_type, version, use_l1):
         """ Applies environment and var_type to the argument """
         if self.use_l1 is not None:
             use_l1 = self.use_l1
@@ -139,7 +139,7 @@ class ArrayArgument(Argument):
         if isinstance(self.length, SweepVariable):
             self.length = self.length.name
 
-    def apply(self, env, var_type, use_l1):
+    def apply(self, env, var_type, version, use_l1):
         if self.use_l1 is not None:
             use_l1 = self.use_l1
         return ArrayArgument(self.name, self.get_type(var_type), self.interpret_length(env),
@@ -199,11 +199,11 @@ class OutputArgument(ArrayArgument):
         self.reference_name = self.name + "_reference"
         self.tolerance = tolerance
 
-    def apply(self, env, var_type, use_l1):
+    def apply(self, env, var_type, version, use_l1):
         if self.use_l1 is not None:
             use_l1 = self.use_l1
         ctype = self.get_type(var_type)
-        tolerance = self.tolerance(ctype) if callable(self.tolerance) else self.tolerance
+        tolerance = self.tolerance(version) if callable(self.tolerance) else self.tolerance
         return OutputArgument(self.name, ctype, self.interpret_length(env), use_l1, tolerance)
 
     def generate_value(self):
@@ -231,11 +231,11 @@ class ReturnValue(Argument):
         self.reference_name = self.name + "_reference"
         self.tolerance = tolerance
 
-    def apply(self, env, var_type, use_l1):
+    def apply(self, env, var_type, version, use_l1):
         if self.use_l1 is not None:
             use_l1 = self.use_l1
         ctype = self.get_type(var_type)
-        tolerance = self.tolerance(ctype) if callable(self.tolerance) else self.tolerance
+        tolerance = self.tolerance(version) if callable(self.tolerance) else self.tolerance
         return OutputArgument(ctype, use_l1, tolerance)
 
     def generate_reference(self, gen_function, header):
@@ -254,7 +254,7 @@ class FixPointArgument(Argument):
         """
         super(FixPointArgument, self).__init__(name, "uint32_t", value, use_l1)
 
-    def apply(self, env, var_type, use_l1):
+    def apply(self, env, var_type, version, use_l1):
         if self.use_l1 is not None:
             use_l1 = self.use_l1
         return FixPointArgument(self.name, self.interpret_value(env), use_l1)
@@ -270,7 +270,7 @@ class ParallelArgument(Argument):
         """
         super(ParallelArgument, self).__init__(name, "uint32_t", value, use_l1)
 
-    def apply(self, env, var_type, use_l1):
+    def apply(self, env, var_type, version, use_l1):
         if self.use_l1 is not None:
             use_l1 = self.use_l1
         return ParallelArgument(self.name, self.interpret_value(env), use_l1)
@@ -393,7 +393,7 @@ class Test(object):
         if version.startswith('q'):
             fix_point_args = [arg for arg in arguments if isinstance(arg, FixPointArgument)]
             assert len(fix_point_args) == 1
-            self.fix_point = fix_point_args[0].apply(self.env, self.var_type, self.use_l1).value
+            self.fix_point = fix_point_args[0].apply(self.env, self.var_type, self.version, self.use_l1).value
             assert isinstance(self.fix_point, int)
         else:
             self.fix_point = None
@@ -413,7 +413,7 @@ class Test(object):
     def to_json(self):
         d = self.__dict__
         # overwrite arguments
-        d['arguments'] = [arg.to_dict(self.env, self.var_type, self.use_l1)
+        d['arguments'] = [arg.to_dict(self.env, self.var_type, self.version, self.use_l1)
                           for arg in self.arguments]
         json_str = json.dumps(d)
         return json_str.replace('\"', '\\\"')
