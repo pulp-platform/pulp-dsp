@@ -28,7 +28,7 @@ def compute_result(result_parameter, inputs, env, fix_point):
         else:
             if fix_point != 0:
                 for xa, xb in zip(a, b):
-                    result[0] = q_add(result[0], q_mul(xa, xb, fix_point), fix_point)
+                    result[0] = q_add(result[0], (xa * xb) >> fix_point)
     elif result_parameter.ctype == 'float':
         raise RuntimeError("Float not implemented")
     else:
