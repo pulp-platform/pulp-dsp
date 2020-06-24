@@ -10,6 +10,7 @@ import argparse
 import numpy as np
 import json
 import textwrap
+import struct
 
 
 class Variable(object):
@@ -522,14 +523,30 @@ class HeaderWriter(object):
     def write_array(self, name, var_type, arr, use_l1):
         target_loc = 'RT_L1_DATA' if use_l1 else 'RT_L2_DATA'
         nl = '\n' + self.tab
-        self.fp.write('%s %s %s[%s] = {\n' % (target_loc, var_type, name, len(arr)))
-        self.fp.write(self.tab)
-        self.fp.write(nl.join(textwrap.wrap(', '.join([str(x) for x in arr]), width=self.width)))
-        self.fp.write('\n};\n\n')
+        if var_type == "float":
+            self.fp.write('%s uint32_t %s__int[%s] = {\n' % (target_loc, name, len(arr)))
+            self.fp.write(self.tab)
+            self.fp.write(nl.join(textwrap.wrap(', '.join([fmt_float(x) for x in arr]),
+                                                width=self.width)))
+            self.fp.write('\n};\n')
+            self.fp.write('%s %s* %s = (%s*)((void*)%s__int);' % (target_loc, var_type, name,
+                                                                  var_type, name))
+            self.fp.write('\n\n')
+        else:
+            self.fp.write('%s %s %s[%s] = {\n' % (target_loc, var_type, name, len(arr)))
+            self.fp.write(self.tab)
+            self.fp.write(nl.join(textwrap.wrap(', '.join([str(x) for x in arr]),
+                                                width=self.width)))
+            self.fp.write('\n};\n\n')
 
     def write_scalar(self, name, var_type, value, use_l1):
         target_loc = 'L1_DATA' if use_l1 else 'L2_DATA'
-        self.fp.write('%s %s %s = %s;\n\n' % (target_loc, var_type, name, value))
+        if var_type == "float":
+            self.fp.write('%s uint32_t %s__int = %s;\n' % (target_loc, name, fmt_float(value)))
+            self.fp.write('%s %s %s = *((%s*)((void*)&%s__int));\n\n' % (target_loc, var_type, name,
+                                                                         var_type, name))
+        else:
+            self.fp.write('%s %s %s = %s;\n\n' % (target_loc, var_type, name, value))
 
     def generate_check(self, test):
         self.fp.write('#define CHECK {\\\n')
@@ -537,7 +554,7 @@ class HeaderWriter(object):
         self.fp.write('}\n\n')
 
     def write_check(self, arg, print_errors=False):
-        display_format = "%f" if arg.ctype == "float" else "%d"
+        display_format = "%.10f" if arg.ctype == "float" else "%d"
         self.fp.write('%sfor (int i = 0; i < %s; i++) {\\\n' % (self.tab, arg.length))
         if print_errors:
             self.fp.write('%sif (%s[i] != %s[i]) {\\\n' % (self.tab * 2, arg.name,
@@ -586,6 +603,13 @@ class HeaderWriter(object):
 {tab}}}\\
 }}\\""".format(tab=self.tab))
         self.fp.write('\n\n')
+
+
+def fmt_float(val):
+    assert(val.dtype == np.float32)
+    packed = struct.pack('!f', val)
+    int_val = sum([b << ((3 - i) * 8) for i, b in enumerate(packed)])
+    return hex(int_val)
 
 
 def generate_test(device_name, function_name, arguments, variables, implemented,
