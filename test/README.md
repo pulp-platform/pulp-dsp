@@ -35,9 +35,15 @@ New tests can be generated using the test_template located at `test/mrWolf/test_
 		- `use_l1`: Boolean or None. if None, use the default configuration (as specified `generate_test`, see below).
 	  - `FixPointArgument`: argument which is only used for the fix-point implementation. This field must specify the position of the binary point. The constructor has identical arguments as `Argument`, but it uses `ctype=uint32_t` by default.
 	  - `ParallelArgument`: argument which is only used for the parallel implementation. This field must specify the number of processing units (cores). The constructor has identical arguments as `Argument`, but it uses `ctype=uint32_t` by default.
-	  - `OutputArgument`: array argument which represents the output array. Its constructor has the same arguments as `ArrayArgument`, hosever, without the parameter `value`.
+	  - `OutputArgument`: array argument which represents the output array. Its constructor has the same arguments as `ArrayArgument`, however, without the parameter `value`, and with a `tolerance`:
+	    - `name`: the name used internally, can be chosen arbitrarily (as long as it is unique).
+		- `c_type`: either a valid type of `C`, including `stdint.h` or the string `var_type`, in which case the type will be chosen based on the `version`, e.g., `i32` will cause the `var_type` to be replaced with `int32_t`. This type refers to the data type that is referenced.
+		- `length`: either a specific size, the name of a `Variable` or a `tuple`: `(min, max)`, in which case a random value in this range will be chosen.
+	    - `tolerance`: Either a value (default 0) or a function, which maps the version string to the relative tolerance. The tolerance check is only enabled if the parameter for a given version is nonzero.
+		- `use_l1`: Boolean or None. if None, use the default configuration (as specified `generate_test`, see below).
 	  - `ReturnValue`: return value of the function. Obviously, there can only ever exist one `ReturnValue` in the `arguments` list. The constructor needs the following arguments:
 		- `c_type`: either a valid type of `C`, including `stdint.h` or the string `var_type`, in which case the type will be chosen based on the `version`, e.g., `i32` will cause the `var_type` to be replaced with `int32_t`.
+	    - `tolerance`: Either a value (default 0) or a function, which maps the version string to the relative tolerance. The tolerance check is only enabled if the parameter for a given version is nonzero.
 		- `use_l1`: Boolean or None. if None, use the default configuration (as specified `generate_test`, see below).
    4. Edit the `implemented` dictionary. This `dict` maps the version name (like `i32` and `q8`) to a boolean, Only versions which map to `True` will be tested. The `c_type` `var_type` is dependent on this version.
    5. Create the function `n_macs`. This function `n_macs(env: dict) -> int` takes the environment `env` as an argument, which is defined identical as for `DynamicVariables`, see above. It should return the number of macs in an ideal setting (used for benchmarking only).
