@@ -90,7 +90,7 @@ class Argument(object):
     def get_range(self):
         assert self.ctype not in ['var_type', 'ret_type']
         if self.ctype == "float":
-            raise NotImplementedError("Floating point is not yet implemented")
+            return -1, 1
         n_bits = 16 if self.ctype == 'int16_t' else 8 if self.ctype == 'int8_t' else 16
         return (-(2 ** (n_bits - 1)), (2 ** (n_bits - 1)) - 1)
 
@@ -101,6 +101,8 @@ class Argument(object):
             return np.int16
         if self.ctype == "int32_t":
             return np.int32
+        if self.ctype == "float":
+            return np.float32
         raise RuntimeError("Unknown type: %s" % self.ctype)
 
     def generate_value(self):
@@ -108,7 +110,10 @@ class Argument(object):
         assert not isinstance(self.value, str)
         if self.value is None:
             min_value, max_value = self.get_range()
-            self.value = np.random.randint(low=min_value, high=max_value + 1)
+            if self.ctype == "float":
+                self.value = np.random.uniform(low=min_value, high=max_value)
+            else:
+                self.value = np.random.randint(low=min_value, high=max_value + 1)
             self.value = self.value.astype(self.get_dtype())
         return self.value
 
@@ -154,9 +159,16 @@ class ArrayArgument(Argument):
         assert not isinstance(self.value, str)
         assert isinstance(self.length, int)
         dtype = self.get_dtype()
-        if self.value is None:
-            min_value, max_value = self.get_range()
-            self.value = np.random.randint(low=min_value, high=max_value + 1, size=self.length)
+        if self.value is None or (self.value.isinstance(self.value, tuple)
+                                  and self.value.len() == 2):
+            if isinstance(self.value, tuple):
+                min_value, max_value = self.value
+            else:
+                min_value, max_value = self.get_range()
+            if self.ctype == "float":
+                self.value = np.random.uniform(low=min_value, high=max_value, size=self.length)
+            else:
+                self.value = np.random.randint(low=min_value, high=max_value + 1, size=self.length)
             self.value = self.value.astype(dtype)
         elif isinstance(self.value, (int, float)):
             self.value = (np.ones(self.length) * self.value).astype(dtype)
@@ -446,7 +458,7 @@ class Test(object):
              for arg in self.arguments if isinstance(arg, ReturnValue)])
 
         # generate result check
-        any([header.write_check(arg.name, arg.reference_name, arg.length, self.extended_output)
+        any([header.write_check(arg, self.extended_output)
              for arg in self.arguments if isinstance(arg, OutputArgument)])
 
     def generate_stimuli(self, header):
@@ -524,18 +536,20 @@ class HeaderWriter(object):
         test.generate_check(self)
         self.fp.write('}\n\n')
 
-    def write_check(self, result_name, reference_name, size, print_errors=False):
-        self.fp.write('%sfor (int i = 0; i < %s; i++) {\\\n' % (self.tab, size))
+    def write_check(self, arg, print_errors=False):
+        display_format = "%f" if arg.ctype == "float" else "%d"
+        self.fp.write('%sfor (int i = 0; i < %s; i++) {\\\n' % (self.tab, arg.length))
         if print_errors:
-            self.fp.write('%sif (%s[i] != %s[i]) {\\\n' % (self.tab * 2, result_name,
-                                                           reference_name))
+            self.fp.write('%sif (%s[i] != %s[i]) {\\\n' % (self.tab * 2, arg.name,
+                                                           arg.reference_name))
             self.fp.write('%spassed=0;\\\n' % (self.tab * 3))
-            self.fp.write('%sprintf("<Mismatch> %s[%%d]: acq=%%d, exp=%%d\\n", i, %s[i], %s[i]);\\\n'
-                          % (self.tab * 3, result_name, result_name, reference_name))
+            self.fp.write('%sprintf("<Mismatch> %s[%%d]: acq=%s, exp=%s\\n", i, %s[i], %s[i]);\\\n'
+                          % (self.tab * 3, arg.name, display_format, display_format, arg.name,
+                             arg.reference_name))
             self.fp.write('%s}\\\n' % (self.tab * 2))
         else:
-            self.fp.write('%sif (%s[i] != %s[i]) passed = 0;\\\n' % (self.tab * 2, result_name,
-                                                                     reference_name))
+            self.fp.write('%sif (%s[i] != %s[i]) passed = 0;\\\n' % (self.tab * 2, arg.name,
+                                                                     arg.reference_name))
         self.fp.write('%s}\\\n' % self.tab)
 
     def write_return_check(self, result_name, reference_name, print_errors=False):

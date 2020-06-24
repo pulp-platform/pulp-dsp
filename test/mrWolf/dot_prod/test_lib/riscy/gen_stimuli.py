@@ -39,7 +39,11 @@ def compute_result(result_parameter, inputs, env, fix_point):
             for i in range((len(a) // groups) * groups, len(a)):
                 result[0] = q_add(result[0], q_roundnorm(a[i] * b[i], fix_point), fix_point)
     elif result_parameter.ctype == 'float':
-        raise RuntimeError("Float not implemented")
+        # for float implementation, it is important to always use float32 for intermediate operations!
+        a = inputs['srcA'].value
+        b = inputs['srcB'].value
+        result = np.zeros(1, dtype=np.float32)
+        result[0] = np.array([x_a * x_b for x_a, x_b in zip(a, b)], dtype=np.float32).sum()
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
 
