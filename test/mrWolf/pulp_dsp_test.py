@@ -187,21 +187,24 @@ class ArrayArgument(Argument):
 
 class OutputArgument(ArrayArgument):
     """Output Array Argument"""
-    def __init__(self, name, ctype, length, use_l1=None):
+    def __init__(self, name, ctype, length, use_l1=None, tolerance=0):
         """
         name: name of the argument
         ctype: type of the argument (or 'var_type', 'ret_type')
         length: Length of the array, or SweepVariable, or None for random value
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
+        tolerance: constant or function, which maps the output variable type to a tolerance.
         """
         super(OutputArgument, self).__init__(name, ctype, length, 0, use_l1)
         self.reference_name = self.name + "_reference"
+        self.tolerance = tolerance
 
     def apply(self, env, var_type, use_l1):
         if self.use_l1 is not None:
             use_l1 = self.use_l1
-        return OutputArgument(self.name, self.get_type(var_type), self.interpret_length(env),
-                              use_l1)
+        ctype = self.get_type(var_type)
+        tolerance = self.tolerance(ctype) if callable(self.tolerance) else self.tolerance
+        return OutputArgument(self.name, ctype, self.interpret_length(env), use_l1, tolerance)
 
     def generate_value(self):
         """ Generates the value of argument, stores it in self.value and returns it. """
@@ -218,13 +221,22 @@ class OutputArgument(ArrayArgument):
 
 class ReturnValue(Argument):
     """ result value """
-    def __init__(self, ctype, use_l1=None):
+    def __init__(self, ctype, use_l1=None, tolerance=0):
         """
         ctype: type of the argument (or 'var_type', 'ret_type')
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
+        tolerance: constant or function, which maps the output variable type to a relative tolerance
         """
         super(ReturnValue, self).__init__("return_value", ctype, 0, use_l1)
         self.reference_name = self.name + "_reference"
+        self.tolerance = tolerance
+
+    def apply(self, env, var_type, use_l1):
+        if self.use_l1 is not None:
+            use_l1 = self.use_l1
+        ctype = self.get_type(var_type)
+        tolerance = self.tolerance(ctype) if callable(self.tolerance) else self.tolerance
+        return OutputArgument(ctype, use_l1, tolerance)
 
     def generate_reference(self, gen_function, header):
         """ Generates and writes reference value to header file """
@@ -519,6 +531,7 @@ class HeaderWriter(object):
         self.generate_check(test)
         self.generate_fsig(test)
         self.generate_bench()
+        self.generate_abs()
 
     def write_array(self, name, var_type, arr, use_l1):
         target_loc = 'RT_L1_DATA' if use_l1 else 'RT_L2_DATA'
@@ -555,10 +568,15 @@ class HeaderWriter(object):
 
     def write_check(self, arg, print_errors=False):
         display_format = "%.10f" if arg.ctype == "float" else "%d"
+        check_str = "%s[i] != %s[i]" % (arg.name, arg.reference_name)
+        if arg.tolerance != 0:
+            check_str =  "({acq}[i] < (({ty})((float){exp}[i] - ABS({tol:E} * (float){exp}[i])))) || "
+            check_str += "({acq}[i] > (({ty})((float){exp}[i] + ABS({tol:E} * (float){exp}[i]))))"
+            check_str = check_str.format(acq=arg.name, exp=arg.reference_name,
+                                         tol=arg.tolerance, ty=arg.ctype)
         self.fp.write('%sfor (int i = 0; i < %s; i++) {\\\n' % (self.tab, arg.length))
         if print_errors:
-            self.fp.write('%sif (%s[i] != %s[i]) {\\\n' % (self.tab * 2, arg.name,
-                                                           arg.reference_name))
+            self.fp.write('%sif (%s) {\\\n' % (self.tab * 2, check_str))
             self.fp.write('%spassed=0;\\\n' % (self.tab * 3))
             self.fp.write('%sprintf("<Mismatch> %s[%%d]: acq=%s, exp=%s\\n", i, %s[i], %s[i]);\\\n'
                           % (self.tab * 3, arg.name, display_format, display_format, arg.name,
@@ -603,6 +621,9 @@ class HeaderWriter(object):
 {tab}}}\\
 }}\\""".format(tab=self.tab))
         self.fp.write('\n\n')
+
+    def generate_abs(self):
+        self.fp.write("#define ABS(x) (x > 0.0 ? x : -x)\n\n")
 
 
 def fmt_float(val):

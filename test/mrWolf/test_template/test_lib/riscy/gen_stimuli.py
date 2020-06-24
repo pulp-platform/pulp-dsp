@@ -40,10 +40,12 @@ def compute_result(result_parameter, inputs, env, fix_point):
                 result[0] += q_roundnorm(a[i] * b[i], fix_point)
     elif result_parameter.ctype == 'float':
         # for float implementation, it is important to always use float32 for intermediate operations!
-        a = inputs['srcA'].value
-        b = inputs['srcB'].value
-        result = np.zeros(1, dtype=np.float32)
-        result[0] = np.array([x_a * x_b for x_a, x_b in zip(a, b)], dtype=np.float32).sum()
+        a = inputs['srcA'].value.astype(np.float32)
+        b = inputs['srcB'].value.astype(np.float32)
+        res = np.float32(0)
+        for x_a, x_b in zip(a, b):
+            res += x_a * x_b
+        result = np.array([res], dtype=np.float32)
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
 
