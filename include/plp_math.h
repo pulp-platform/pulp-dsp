@@ -167,11 +167,11 @@ typedef struct
 */
 typedef struct
 {
-  float32_t * pSrcA;     // pointer to the first vector
-  float32_t * pSrcB;     // pointer to the second vector
-  uint32_t blkSizePE;     // number of samples in each vector
-  uint32_t nPE;        // number of processing units
-  float32_t * resBuffer;      // pointer to result vector
+  const float32_t * pSrcA; // pointer to the first vector
+  const float32_t * pSrcB; // pointer to the second vector
+  uint32_t blkSizePE;      // number of samples in each vector
+  uint32_t nPE;            // number of processing units
+  float32_t * resBuffer;   // pointer to result vector
 } plp_dot_prod_instance_f32;
 
 /** -------------------------------------------------------
@@ -326,6 +326,22 @@ typedef struct
   uint32_t nPE;
   int32_t * __restrict__ pDstC;
 }plp_mat_mult_instance_i32;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for floating-point parallel matrix multiplication.
+ */
+typedef struct
+{
+  const float * __restrict__ pSrcA;
+  const float * __restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t nPE;
+  float * __restrict__ pDstC;
+}plp_mat_mult_instance_f32;
 
 
 
@@ -1667,6 +1683,80 @@ void plp_mat_mult_i8_parallel(
                          int32_t * __restrict__ pDstC);
 
 
+/** -------------------------------------------------------
+   @brief         Glue code for matrix matrix multiplication of a 32-bit floating-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+
+void plp_mat_mult_f32(
+                         const float * __restrict__ pSrcA,
+                         const float * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         float * __restrict__ pDstC);
+
+
+/** -------------------------------------------------------
+   @brief         Matrix matrix multiplication of a 32-bit floating-point matrices for XPULPV2 extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_f32s_xpulpv2(
+                         const float * __restrict__ pSrcA,
+                         const float * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         float * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel matrix matrix multiplication of a 32-bit floating-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_f32_parallel(
+                         const float * __restrict__ pSrcA,
+                         const float * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         uint32_t nPE,
+                         float * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+    @brief Parallel matrix multiplication of 32-bit floating-point matrices kernel for XPULPV2 extension.
+    @param[in]  args      pointer to plp_mat_mult_instance_f32 struct initialized by plp_mat_mult_f32_parallel
+    @return     none
+*/
+
+void plp_mat_mult_f32p_xpulpv2(
+                         void* args);
+
 
 /** -------------------------------------------------------
    @brief Parallel matrix multiplication of 8-bit integer matrices kernel for XPULPV2 extension.
@@ -1679,6 +1769,8 @@ void plp_mat_mult_i8_parallel(
 
 void plp_mat_mult_i8vp_xpulpv2(
                          void* args);
+
+
 
 /** -------------------------------------------------------
    @brief         Glue code for matrix transposed matrix multiplication of a 32-bit integer matrices.

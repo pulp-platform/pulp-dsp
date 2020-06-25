@@ -27,7 +27,14 @@ def compute_result(result_parameter, inputs, env, fix_point):
         else:
             raise RuntimeError("Fix-Point not implemented")
     elif result_parameter.ctype == 'float':
-        raise RuntimeError("Float not implemented")
+        a = inputs['srcA'].value.astype(np.float32).reshape((env['len_m'], env['len_n']))
+        b = inputs['srcB'].value.astype(np.float32).reshape((env['len_n'], env['len_o']))
+        result = np.zeros((env['len_m'], env['len_o']), dtype=np.float32)
+        for m in range(env['len_m']):
+            for o in range(env['len_o']):
+                for n in range(env['len_n']):
+                    result[m, o] = np.float32(result[m, o] + np.float32(a[m, n] * b[n, o]))
+        result = result.reshape((env['len_res'], ))
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
 

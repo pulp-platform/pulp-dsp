@@ -31,6 +31,8 @@ FC_SRCS = \
 	src/MatrixFunctions/plp_mat_mult_i32_parallel.c \
 	src/MatrixFunctions/plp_mat_mult_i16_parallel.c \
 	src/MatrixFunctions/plp_mat_mult_i8_parallel.c \
+	src/MatrixFunctions/plp_mat_mult_f32.c \
+	src/MatrixFunctions/plp_mat_mult_f32_parallel.c \
 	src/MatrixFunctions/plp_mat_mult_trans_i32.c src/MatrixFunctions/kernels/plp_mat_mult_trans_i32s_rv32im.c \
 	src/MatrixFunctions/plp_mat_mult_trans_i16.c src/MatrixFunctions/kernels/plp_mat_mult_trans_i16s_rv32im.c \
 	src/MatrixFunctions/plp_mat_mult_trans_i8.c src/MatrixFunctions/kernels/plp_mat_mult_trans_i8s_rv32im.c \
@@ -75,6 +77,8 @@ CL_SRCS = \
 	src/MatrixFunctions/kernels/plp_mat_mult_i32p_xpulpv2.c \
 	src/MatrixFunctions/kernels/plp_mat_mult_i16vp_xpulpv2.c \
 	src/MatrixFunctions/kernels/plp_mat_mult_i8vp_xpulpv2.c	\
+	src/MatrixFunctions/kernels/plp_mat_mult_f32s_xpulpv2.c \
+	src/MatrixFunctions/kernels/plp_mat_mult_f32p_xpulpv2.c \
 	src/MatrixFunctions/kernels/plp_mat_mult_trans_i32s_xpulpv2.c \
 	src/MatrixFunctions/kernels/plp_mat_mult_trans_i16v_xpulpv2.c \
 	src/MatrixFunctions/kernels/plp_mat_mult_trans_i8v_xpulpv2.c \
