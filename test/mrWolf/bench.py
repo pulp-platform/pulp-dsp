@@ -115,20 +115,20 @@ def match_two_runs(runs_a, runs_b):
     new_b = []
 
     try:
-        a_run = iter_a.next()
-        b_run = iter_b.next()
+        a_run = next(iter_a)
+        b_run = next(iter_b)
         while True:
             a_key = run_sort_key(a_run)
             b_key = run_sort_key(b_run)
             if a_key == b_key:
                 new_a.append(a_run)
                 new_b.append(b_run)
-                a_run = iter_a.next()
-                b_run = iter_b.next()
+                a_run = next(iter_a)
+                b_run = next(iter_b)
             elif a_key < b_key:
-                a_run = iter_a.next()
+                a_run = next(iter_a)
             else:
-                b_run = iter_b.next()
+                b_run = next(iter_b)
     except StopIteration:
         pass
 
