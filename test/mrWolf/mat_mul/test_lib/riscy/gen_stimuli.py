@@ -23,8 +23,7 @@ def compute_result(result_parameter, inputs, env, fix_point):
         a = inputs['srcA'].value.astype(np.int32).reshape((env['len_m'], env['len_n']))
         b = inputs['srcB'].value.astype(np.int32).reshape((env['len_n'], env['len_o']))
         if fix_point is None or fix_point == 0:
-            result = (a @ b).astype(np.int32)
-            result = result.reshape((env['len_res'], ))
+            result = np.matmul(a, b).astype(np.int32).reshape((env['len_res'], ))
         else:
             raise RuntimeError("Fix-Point not implemented")
     elif result_parameter.ctype == 'float':
@@ -42,23 +41,23 @@ def compute_result(result_parameter, inputs, env, fix_point):
 
 def q_sat(x):
     if x > 2**31 - 1:
-        return 2**31 - 1
+        return x - 2**32
     elif x < -2**31:
-        return -2**31
+        return x + 2**32
     else:
         return x
 
 
-def q_add(a, b, p):
+def q_add(a, b):
     return q_sat(a + b)
 
 
-def q_sub(a, b, p):
+def q_sub(a, b):
     return q_sat(a - b)
 
 
 def q_mul(a, b, p):
-    return q_sat(q_roundnorm(a * b, p) >> p)
+    return q_roundnorm(a * b, p)
 
 
 def q_roundnorm(a, p):

@@ -10,6 +10,7 @@ import argparse
 import numpy as np
 import json
 import textwrap
+import struct
 
 
 class Variable(object):
@@ -63,11 +64,11 @@ class Argument(object):
         if isinstance(self.value, SweepVariable):
             self.value = self.value.name
 
-    def to_dict(self, env, var_type, use_l1):
-        d = self.apply(env, var_type, use_l1).__dict__
+    def to_dict(self, env, var_type, version, use_l1):
+        d = self.apply(env, var_type, version, use_l1).__dict__
         return {'class': type(self).__name__, 'dict': d}
 
-    def apply(self, env, var_type, use_l1):
+    def apply(self, env, var_type, version, use_l1):
         """ Applies environment and var_type to the argument """
         if self.use_l1 is not None:
             use_l1 = self.use_l1
@@ -90,7 +91,7 @@ class Argument(object):
     def get_range(self):
         assert self.ctype not in ['var_type', 'ret_type']
         if self.ctype == "float":
-            raise NotImplementedError("Floating point is not yet implemented")
+            return -1, 1
         n_bits = 16 if self.ctype == 'int16_t' else 8 if self.ctype == 'int8_t' else 16
         return (-(2 ** (n_bits - 1)), (2 ** (n_bits - 1)) - 1)
 
@@ -101,6 +102,8 @@ class Argument(object):
             return np.int16
         if self.ctype == "int32_t":
             return np.int32
+        if self.ctype == "float":
+            return np.float32
         raise RuntimeError("Unknown type: %s" % self.ctype)
 
     def generate_value(self):
@@ -108,7 +111,10 @@ class Argument(object):
         assert not isinstance(self.value, str)
         if self.value is None:
             min_value, max_value = self.get_range()
-            self.value = np.random.randint(low=min_value, high=max_value + 1)
+            if self.ctype == "float":
+                self.value = np.random.uniform(low=min_value, high=max_value)
+            else:
+                self.value = np.random.randint(low=min_value, high=max_value + 1)
             self.value = self.value.astype(self.get_dtype())
         return self.value
 
@@ -133,7 +139,7 @@ class ArrayArgument(Argument):
         if isinstance(self.length, SweepVariable):
             self.length = self.length.name
 
-    def apply(self, env, var_type, use_l1):
+    def apply(self, env, var_type, version, use_l1):
         if self.use_l1 is not None:
             use_l1 = self.use_l1
         return ArrayArgument(self.name, self.get_type(var_type), self.interpret_length(env),
@@ -154,9 +160,16 @@ class ArrayArgument(Argument):
         assert not isinstance(self.value, str)
         assert isinstance(self.length, int)
         dtype = self.get_dtype()
-        if self.value is None:
-            min_value, max_value = self.get_range()
-            self.value = np.random.randint(low=min_value, high=max_value + 1, size=self.length)
+        if self.value is None or (self.value.isinstance(self.value, tuple)
+                                  and self.value.len() == 2):
+            if isinstance(self.value, tuple):
+                min_value, max_value = self.value
+            else:
+                min_value, max_value = self.get_range()
+            if self.ctype == "float":
+                self.value = np.random.uniform(low=min_value, high=max_value, size=self.length)
+            else:
+                self.value = np.random.randint(low=min_value, high=max_value + 1, size=self.length)
             self.value = self.value.astype(dtype)
         elif isinstance(self.value, (int, float)):
             self.value = (np.ones(self.length) * self.value).astype(dtype)
@@ -174,21 +187,24 @@ class ArrayArgument(Argument):
 
 class OutputArgument(ArrayArgument):
     """Output Array Argument"""
-    def __init__(self, name, ctype, length, use_l1=None):
+    def __init__(self, name, ctype, length, use_l1=None, tolerance=0):
         """
         name: name of the argument
         ctype: type of the argument (or 'var_type', 'ret_type')
         length: Length of the array, or SweepVariable, or None for random value
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
+        tolerance: constant or function, which maps the output variable type to a tolerance.
         """
         super(OutputArgument, self).__init__(name, ctype, length, 0, use_l1)
         self.reference_name = self.name + "_reference"
+        self.tolerance = tolerance
 
-    def apply(self, env, var_type, use_l1):
+    def apply(self, env, var_type, version, use_l1):
         if self.use_l1 is not None:
             use_l1 = self.use_l1
-        return OutputArgument(self.name, self.get_type(var_type), self.interpret_length(env),
-                              use_l1)
+        ctype = self.get_type(var_type)
+        tolerance = self.tolerance(version) if callable(self.tolerance) else self.tolerance
+        return OutputArgument(self.name, ctype, self.interpret_length(env), use_l1, tolerance)
 
     def generate_value(self):
         """ Generates the value of argument, stores it in self.value and returns it. """
@@ -205,13 +221,22 @@ class OutputArgument(ArrayArgument):
 
 class ReturnValue(Argument):
     """ result value """
-    def __init__(self, ctype, use_l1=None):
+    def __init__(self, ctype, use_l1=None, tolerance=0):
         """
         ctype: type of the argument (or 'var_type', 'ret_type')
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
+        tolerance: constant or function, which maps the output variable type to a relative tolerance
         """
         super(ReturnValue, self).__init__("return_value", ctype, 0, use_l1)
         self.reference_name = self.name + "_reference"
+        self.tolerance = tolerance
+
+    def apply(self, env, var_type, version, use_l1):
+        if self.use_l1 is not None:
+            use_l1 = self.use_l1
+        ctype = self.get_type(var_type)
+        tolerance = self.tolerance(version) if callable(self.tolerance) else self.tolerance
+        return OutputArgument(ctype, use_l1, tolerance)
 
     def generate_reference(self, gen_function, header):
         """ Generates and writes reference value to header file """
@@ -220,21 +245,35 @@ class ReturnValue(Argument):
 
 
 class FixPointArgument(Argument):
-    """fixpoint argument"""
-    def __init__(self, name, ctype, value, use_l1=None):
+    """fixpoint argument for setting the decimal point, ctype is always set to uint32_t"""
+    def __init__(self, name, value, use_l1=None):
         """
         name: name of the argument (in the function declaration)
-        ctype: C type of the argument (or 'var_type', 'ret_type')
         value: Number for initialization, or SweepVariable, or None for random value
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
         """
-        super(FixPointArgument, self).__init__(name, ctype, value, use_l1)
+        super(FixPointArgument, self).__init__(name, "uint32_t", value, use_l1)
 
-    def apply(self, env, var_type, use_l1):
+    def apply(self, env, var_type, version, use_l1):
         if self.use_l1 is not None:
             use_l1 = self.use_l1
-        return FixPointArgument(self.name, self.get_type(var_type), self.interpret_value(env),
-                                use_l1)
+        return FixPointArgument(self.name, self.interpret_value(env), use_l1)
+
+
+class ParallelArgument(Argument):
+    """Argument for choosing the number of cores argument. ctype is always set to uint32_t"""
+    def __init__(self, name, value, use_l1=None):
+        """
+        name: name of the argument
+        value: Number for initialization, or SweepVariable, or None for random value
+        use_l1: if True, use L1 memory. If None, use default value configured in generate_test
+        """
+        super(ParallelArgument, self).__init__(name, "uint32_t", value, use_l1)
+
+    def apply(self, env, var_type, version, use_l1):
+        if self.use_l1 is not None:
+            use_l1 = self.use_l1
+        return ParallelArgument(self.name, self.interpret_value(env), use_l1)
 
 
 def check_output(config, output, test_obj):
@@ -330,25 +369,38 @@ class Test(object):
         self.n_macs = n_macs(env) if env is not None else 0
 
         # prepare var_type
-        if version == 'i32' or version == 'q32':
+        if version.startswith('i32') or version.startswith('q32'):
             self.var_type = ['int32_t', 'int32_t']
-        elif version == 'i16' or version == 'q16':
+        elif version.startswith('i16') or version.startswith('q16'):
             self.var_type = ['int16_t', 'int32_t']
-        elif version == 'i8' or version == 'q8':
+        elif version.startswith('i8') or version.startswith('q8'):
             self.var_type = ['int8_t', 'int32_t']
         else:
             self.var_type = ['float', 'float']
 
-        # prepare fix-point stuff and arguments
-        if 'q' not in version:
+        # arguments based on if fix-point and parallel is used
+        if not version.startswith('q') and not version.endswith('parallel'):
+            self.arguments = [arg for arg in arguments
+                              if not isinstance(arg, (FixPointArgument, ParallelArgument))]
+        if not version.startswith('q') and version.endswith('parallel'):
             self.arguments = [arg for arg in arguments if not isinstance(arg, FixPointArgument)]
-            self.fix_point = None
-        else:
+        if version.startswith('q') and not version.endswith('parallel'):
+            self.arguments = [arg for arg in arguments if not isinstance(arg, ParallelArgument)]
+        if version.startswith('q') and version.endswith('parallel'):
             self.arguments = arguments
+
+        # prepare fixpoint stuff
+        if version.startswith('q'):
             fix_point_args = [arg for arg in arguments if isinstance(arg, FixPointArgument)]
             assert len(fix_point_args) == 1
-            self.fix_point = fix_point_args[0].apply(self.env, self.var_type, self.use_l1).value
+            self.fix_point = fix_point_args[0].apply(self.env, self.var_type, self.version, self.use_l1).value
             assert isinstance(self.fix_point, int)
+        else:
+            self.fix_point = None
+
+        # check parallel argument
+        if version.endswith('parallel'):
+            assert len([arg for arg in arguments if isinstance(arg, ParallelArgument)]) == 1
 
         return self
 
@@ -361,7 +413,7 @@ class Test(object):
     def to_json(self):
         d = self.__dict__
         # overwrite arguments
-        d['arguments'] = [arg.to_dict(self.env, self.var_type, self.use_l1)
+        d['arguments'] = [arg.to_dict(self.env, self.var_type, self.version, self.use_l1)
                           for arg in self.arguments]
         json_str = json.dumps(d)
         return json_str.replace('\"', '\\\"')
@@ -375,6 +427,8 @@ class Test(object):
             arg = OutputArgument("tmp", "tmp", 1)
         elif d['class'] == FixPointArgument.__name__:
             arg = FixPointArgument("tmp", "tmp", 0)
+        elif d['class'] == ParallelArgument.__name__:
+            arg = ParallelArgument("tmp", "tmp", 0)
         elif d['class'] == ReturnValue.__name__:
             arg = ReturnValue("tmp")
         else:
@@ -417,7 +471,7 @@ class Test(object):
              for arg in self.arguments if isinstance(arg, ReturnValue)])
 
         # generate result check
-        any([header.write_check(arg.name, arg.reference_name, arg.length, self.extended_output)
+        any([header.write_check(arg, self.extended_output)
              for arg in self.arguments if isinstance(arg, OutputArgument)])
 
     def generate_stimuli(self, header):
@@ -477,36 +531,60 @@ class HeaderWriter(object):
         self.generate_check(test)
         self.generate_fsig(test)
         self.generate_bench()
+        self.generate_abs()
 
     def write_array(self, name, var_type, arr, use_l1):
         target_loc = 'RT_L1_DATA' if use_l1 else 'RT_L2_DATA'
         nl = '\n' + self.tab
-        self.fp.write('%s %s %s[%s] = {\n' % (target_loc, var_type, name, len(arr)))
-        self.fp.write(self.tab)
-        self.fp.write(nl.join(textwrap.wrap(', '.join([str(x) for x in arr]), width=self.width)))
-        self.fp.write('\n};\n\n')
+        if var_type == "float":
+            self.fp.write('%s uint32_t %s__int[%s] = {\n' % (target_loc, name, len(arr)))
+            self.fp.write(self.tab)
+            self.fp.write(nl.join(textwrap.wrap(', '.join([fmt_float(x) for x in arr]),
+                                                width=self.width)))
+            self.fp.write('\n};\n')
+            self.fp.write('%s %s* %s = (%s*)((void*)%s__int);' % (target_loc, var_type, name,
+                                                                  var_type, name))
+            self.fp.write('\n\n')
+        else:
+            self.fp.write('%s %s %s[%s] = {\n' % (target_loc, var_type, name, len(arr)))
+            self.fp.write(self.tab)
+            self.fp.write(nl.join(textwrap.wrap(', '.join([str(x) for x in arr]),
+                                                width=self.width)))
+            self.fp.write('\n};\n\n')
 
     def write_scalar(self, name, var_type, value, use_l1):
         target_loc = 'L1_DATA' if use_l1 else 'L2_DATA'
-        self.fp.write('%s %s %s = %s;\n\n' % (target_loc, var_type, name, value))
+        if var_type == "float":
+            self.fp.write('%s uint32_t %s__int = %s;\n' % (target_loc, name, fmt_float(value)))
+            self.fp.write('%s %s %s = *((%s*)((void*)&%s__int));\n\n' % (target_loc, var_type, name,
+                                                                         var_type, name))
+        else:
+            self.fp.write('%s %s %s = %s;\n\n' % (target_loc, var_type, name, value))
 
     def generate_check(self, test):
         self.fp.write('#define CHECK {\\\n')
         test.generate_check(self)
         self.fp.write('}\n\n')
 
-    def write_check(self, result_name, reference_name, size, print_errors=False):
-        self.fp.write('%sfor (int i = 0; i < %s; i++) {\\\n' % (self.tab, size))
+    def write_check(self, arg, print_errors=False):
+        display_format = "%.10f" if arg.ctype == "float" else "%d"
+        check_str = "%s[i] != %s[i]" % (arg.name, arg.reference_name)
+        if arg.tolerance != 0:
+            check_str =  "({acq}[i] < (({ty})((float){exp}[i] - ABS({tol:E} * (float){exp}[i])))) || "
+            check_str += "({acq}[i] > (({ty})((float){exp}[i] + ABS({tol:E} * (float){exp}[i]))))"
+            check_str = check_str.format(acq=arg.name, exp=arg.reference_name,
+                                         tol=arg.tolerance, ty=arg.ctype)
+        self.fp.write('%sfor (int i = 0; i < %s; i++) {\\\n' % (self.tab, arg.length))
         if print_errors:
-            self.fp.write('%sif (%s[i] != %s[i]) {\\\n' % (self.tab * 2, result_name,
-                                                           reference_name))
+            self.fp.write('%sif (%s) {\\\n' % (self.tab * 2, check_str))
             self.fp.write('%spassed=0;\\\n' % (self.tab * 3))
-            self.fp.write('%sprintf("<Mismatch> %s[%%d]: acq=%%d, exp=%%d\\n", i, %s[i], %s[i]);\\\n'
-                          % (self.tab * 3, result_name, result_name, reference_name))
+            self.fp.write('%sprintf("<Mismatch> %s[%%d]: acq=%s, exp=%s\\n", i, %s[i], %s[i]);\\\n'
+                          % (self.tab * 3, arg.name, display_format, display_format, arg.name,
+                             arg.reference_name))
             self.fp.write('%s}\\\n' % (self.tab * 2))
         else:
-            self.fp.write('%sif (%s[i] != %s[i]) passed = 0;\\\n' % (self.tab * 2, result_name,
-                                                                     reference_name))
+            self.fp.write('%sif (%s[i] != %s[i]) passed = 0;\\\n' % (self.tab * 2, arg.name,
+                                                                     arg.reference_name))
         self.fp.write('%s}\\\n' % self.tab)
 
     def write_return_check(self, result_name, reference_name, print_errors=False):
@@ -543,6 +621,16 @@ class HeaderWriter(object):
 {tab}}}\\
 }}\\""".format(tab=self.tab))
         self.fp.write('\n\n')
+
+    def generate_abs(self):
+        self.fp.write("#define ABS(x) (x > 0.0 ? x : -x)\n\n")
+
+
+def fmt_float(val):
+    assert(val.dtype == np.float32)
+    packed = struct.pack('!f', val)
+    int_val = sum([b << ((3 - i) * 8) for i, b in enumerate(packed)])
+    return hex(int_val)
 
 
 def generate_test(device_name, function_name, arguments, variables, implemented,

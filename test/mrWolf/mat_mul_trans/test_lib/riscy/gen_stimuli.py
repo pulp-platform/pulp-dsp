@@ -15,20 +15,17 @@ def compute_result(result_parameter, inputs, env, fix_point):
     Arguments
     ---------
     result_parameter: Either OutputArgument or ReturnValue (see pulp_dsp_test.py)
-    inputs: Dict mapping name to the Argument, with arg.value, arg.dtype (and arg.length)
+    inputs: Dict mapping name to the Argument, with arg.value, arg.ctype (and arg.length)
     env: Dict mapping the variable (SweepVariable or DynamicVariable) names to their value.
     fix_point: None (if no fixpoint is used) or decimal point
     """
     if result_parameter.ctype == 'int32_t':
-        a = inputs['srcA'].value.astype(np.int32)
-        b = inputs['srcB'].value.astype(np.int32)
-        result = np.zeros(1, dtype=np.int32)
+        a = inputs['srcA'].value.astype(np.int32).reshape((env['len_m'], env['len_n']))
+        b = inputs['srcB'].value.astype(np.int32).reshape((env['len_o'], env['len_n']))
         if fix_point is None or fix_point == 0:
-            result[0] = np.dot(a, b)
+            result = np.matmul(a, b.T).astype(np.int32).reshape((env['len_res'], ))
         else:
-            if fix_point != 0:
-                for xa, xb in zip(a, b):
-                    result[0] = q_add(result[0], (xa * xb) >> fix_point)
+            raise RuntimeError("Fix-Point not implemented")
     elif result_parameter.ctype == 'float':
         raise RuntimeError("Float not implemented")
     else:
