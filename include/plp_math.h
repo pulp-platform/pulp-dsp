@@ -346,6 +346,57 @@ typedef struct
 
 
 /** -------------------------------------------------------
+ * @brief Instance structure for 8-bit fix-point parallel matrix multiplication.
+ */
+typedef struct
+{
+  const int8_t * __restrict__ pSrcA;
+  const int8_t * __restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t shift;
+  uint32_t nPE;
+  int8_t * __restrict__ pDstC;
+}plp_mat_mult_instance_q8;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for 16-bit fix-point parallel matrix multiplication.
+ */
+typedef struct
+{
+  const int16_t * __restrict__ pSrcA;
+  const int16_t * __restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t shift;
+  uint32_t nPE;
+  int16_t * __restrict__ pDstC;
+}plp_mat_mult_instance_q16;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for 32-bit fix-point parallel matrix multiplication.
+ */
+typedef struct
+{
+  const int32_t * __restrict__ pSrcA;
+  const int32_t * __restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t shift;
+  uint32_t nPE;
+  int32_t * __restrict__ pDstC;
+}plp_mat_mult_instance_q32;
+
+
+
+/** -------------------------------------------------------
    @brief Glue code for parallel dot product of 32-bit integer vectors.
    @param[in]  pSrcA      points to the first input vector
    @param[in]  pSrcB      points to the second input vector
@@ -1769,6 +1820,414 @@ void plp_mat_mult_f32p_xpulpv2(
 
 void plp_mat_mult_i8vp_xpulpv2(
                          void* args);
+
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for matrix matrix multiplication of a 32-bit fix-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+ */
+
+void plp_mat_mult_q32(
+                         const int32_t * __restrict__ pSrcA,
+                         const int32_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         uint32_t shift,
+                         int32_t * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel matrix matrix multiplication of a 32-bit fix-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+ */
+
+void plp_mat_mult_q32_parallel(
+                         const int32_t * __restrict__ pSrcA,
+                         const int32_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         uint32_t shift,
+                         uint32_t nPE,
+                         int32_t * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+   @brief         Matrix matrix multiplication of a 32-bit fix-point matrices for RV32IM extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+*/
+
+void plp_mat_mult_q32s_rv32im(
+                         const int32_t * __restrict__ pSrcA,
+                         const int32_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         uint32_t shift,
+                         int32_t * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+   @brief         Matrix matrix multiplication of a 32-bit fix-point matrices for XPULPV2 extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+*/
+
+void plp_mat_mult_q32s_xpulpv2(
+                         const int32_t * __restrict__ pSrcA,
+                         const int32_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         uint32_t shift,
+                         int32_t * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+    @brief Parallel matrix multiplication of 32-bit fix-point matrices kernel for XPULPV2 extension.
+    @param[in]  args      pointer to plp_mat_mult_instance_q32 struct initialized by plp_mat_mult_q32_parallel
+    @return     none
+*/
+
+void plp_mat_mult_q32p_xpulpv2(void* args);
+
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for matrix matrix multiplication of a 16-bit fix-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 16-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+ */
+
+void plp_mat_mult_q16(
+                         const int16_t * __restrict__ pSrcA,
+                         const int16_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         uint32_t shift,
+                         int16_t * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel matrix matrix multiplication of a 16-bit fix-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 16-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+ */
+
+void plp_mat_mult_q16_parallel(
+                         const int16_t * __restrict__ pSrcA,
+                         const int16_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         uint32_t shift,
+                         uint32_t nPE,
+                         int16_t * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+   @brief         Matrix matrix multiplication of a 16-bit fix-point matrices for RV32IM extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 16-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+*/
+
+void plp_mat_mult_q16s_rv32im(
+                         const int16_t * __restrict__ pSrcA,
+                         const int16_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         uint32_t shift,
+                         int16_t * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+   @brief         Matrix matrix multiplication of a 16-bit fix-point matrices for XPULPV2 extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 16-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+*/
+
+void plp_mat_mult_q16v_xpulpv2(
+                         const int16_t * __restrict__ pSrcA,
+                         const int16_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         uint32_t shift,
+                         int16_t * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+    @brief Parallel matrix multiplication of 16-bit fix-point matrices kernel for XPULPV2 extension.
+    @param[in]  args      pointer to plp_mat_mult_instance_q16 struct initialized by plp_mat_mult_q16_parallel
+    @return     none
+*/
+
+void plp_mat_mult_q16vp_xpulpv2(void* args);
+
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for matrix matrix multiplication of a 8-bit fix-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 8-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+ */
+
+void plp_mat_mult_q8(
+                         const int8_t * __restrict__ pSrcA,
+                         const int8_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         uint32_t shift,
+                         int8_t * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel matrix matrix multiplication of a 8-bit fix-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 8-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+ */
+
+void plp_mat_mult_q8_parallel(
+                         const int8_t * __restrict__ pSrcA,
+                         const int8_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         uint32_t shift,
+                         uint32_t nPE,
+                         int8_t * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+   @brief         Matrix matrix multiplication of a 8-bit fix-point matrices for RV32IM extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 8-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+*/
+
+void plp_mat_mult_q8s_rv32im(
+                         const int8_t * __restrict__ pSrcA,
+                         const int8_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         uint32_t shift,
+                         int8_t * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+   @brief         Matrix matrix multiplication of a 8-bit fix-point matrices for XPULPV2 extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 8-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+*/
+
+void plp_mat_mult_q8v_xpulpv2(
+                         const int8_t * __restrict__ pSrcA,
+                         const int8_t * __restrict__ pSrcB,
+                         uint32_t M,
+                         uint32_t N,
+                         uint32_t O,
+                         uint32_t shift,
+                         int8_t * __restrict__ pDstC);
+
+
+
+/** -------------------------------------------------------
+    @brief Parallel matrix multiplication of 8-bit fix-point matrices kernel for XPULPV2 extension.
+    @param[in]  args      pointer to plp_mat_mult_instance_q8 struct initialized by plp_mat_mult_q8_parallel
+    @return     none
+*/
+
+void plp_mat_mult_q8vp_xpulpv2(void* args);
 
 
 
