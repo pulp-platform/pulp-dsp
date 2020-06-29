@@ -36,7 +36,7 @@
  */
 
 /**
-  @addtogroup BasicMatMultTrans
+  @addtogroup MatMultTrans
   @{
  */
 
@@ -69,7 +69,7 @@ void plp_mat_mult_trans_i8(
 }
 
 /**
-  @} end of BasicMatMultTrans group
+  @} end of MatMultTrans group
  */
 
 

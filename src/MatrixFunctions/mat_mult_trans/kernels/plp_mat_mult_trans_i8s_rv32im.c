@@ -32,39 +32,11 @@
 
 
 /**
-  @ingroup BasicMatMultTrans
+  @ingroup MatMultTrans
  */
 
 /**
-  @defgroup BasicMatMultTransKernels Matrix Multiplication Kernels
-  Computes the product of two matrices, the second of which is transposed.
-
-  The Matrix Matrix Multiplication computes the product of two matrices with dimensions MxN and NxO, the second one is stored transposed in memory.
-  The first matrix is accessed row wise, the second column wise, all values form the first are multiplied with the values of the second and then sum of the result gives the value for the result matrix.
-  <pre>
-      pDst[i,k] = pSrcA[i*M]*pSrcB[k*N] + pSrcA[i*M+1]*pSrcB[k*N+1] + ... + pSrcA[i*M+N-1]*pSrcB[k*N+N-1]
-  </pre>
-  There are separate functions int8, int16, and int32 data types. For lower precision integers (int8, int16), functions exploiting SIMD instructions are provided.
-
-  The naming of the functions follows the following pattern (for example plp_dot_prod_i32s_rv32im):
-  <pre>
-      \<pulp\> _ \<function name\> _ \<data type\>\<precision\>\<method\>_\<isa extension\>, with
-
-      data type = {f, i, q} respectively for floats, integers, fixed points
-
-      precision = {32, 16, 8} bits
-
-      method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
-
-      isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
-
-  </pre>
-
-
- */
-
-/**
-  @addtogroup BasicMatMultTransKernels
+  @addtogroup MatMultTransKernels
   @{
  */
 

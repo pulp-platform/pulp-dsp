@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_mat_mult_i8p_xpulpv2.c
- * Description:  parallel 8-bit integer matrix multiplication for XPULPV2
+ * Title:        plp_mat_mult_i8v_xpulpv2.c
+ * Description:  8-bit integer matrix multiplication for XPULPV2
  *
  * $Date:        22. December 2019
  * $Revision:    V0
@@ -32,77 +32,42 @@
 
 
 /**
-  @ingroup BasicMatMultTrans
+  @ingroup MatMultTrans
  */
 
 /**
-  @defgroup BasicMatMultTransKernels Matrix Multiplication Kernels
-  Computes the product of two matrices, the second of which is transposed.
-
-  The Matrix Matrix Multiplication computes the product of two matrices with dimensions MxN and NxO, the second one is stored transposed in memory.
-  The first matrix is accessed row wise, the second column wise, all values form the first are multiplied with the values of the second and then sum of the result gives the value for the result matrix.
-  <pre>
-      pDst[i,k] = pSrcA[i*M]*pSrcB[k*N] + pSrcA[i*M+1]*pSrcB[k*N+1] + ... + pSrcA[i*M+N-1]*pSrcB[k*N+N-1]
-  </pre>
-  There are separate functions int8, int16, and int32 data types. For lower precision integers (int8, int16), functions exploiting SIMD instructions are provided.
-
-  The naming of the functions follows the following pattern (for example plp_dot_prod_i32s_rv32im):
-  <pre>
-      \<pulp\> _ \<function name\> _ \<data type\>\<precision\>\<method\>_\<isa extension\>, with
-
-      data type = {f, i, q} respectively for floats, integers, fixed points
-
-      precision = {32, 16, 8} bits
-
-      method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
-
-      isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
-
-  </pre>
-
-
- */
-
-
-/**
-  @addtogroup BasicMatMultTransKernels
+  @addtogroup MatMultTransKernels
   @{
  */
 
 /**
-   @brief         Parallel matrix transposed matrix multiplication of a 8-bit integer matrices for XPULPV2 extension.
-   @param[in]  args      pointer to plp_mat_mult_instance_i8 struct initialized by plp_mat_mult_i8_parallel
-   @return        none
-
-   @par Exploiting SIMD instructions
-   The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
-*/
+  @brief Matrix multiplication of 8-bit integer matrices kernel for XPULPV2 extension.
+  @param[in]  pSrcA     points to the first input matrix
+  @param[in]  pSrcB     points to the second input matrix
+  @param[in]  M         height of the first input matrix
+  @param[in]  N         width of the first input matrix and hight of the second
+  @param[in]  O         width of the second input matrix
+  @param[out] pDstC     points to the output matrix
+  @return        none
+ */
 
 // define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 
 #ifdef BASIC_VERSION
 
-void plp_mat_mult_trans_i8vp_xpulpv2(void* args) {
+void plp_mat_mult_trans_i8v_xpulpv2(
+                              const int8_t * __restrict__ pSrcA,
+                              const int8_t * __restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t O,
+                              int32_t * __restrict__ pDstC) {
         
-        plp_mat_mult_instance_i8* arguments = (plp_mat_mult_instance_i8*) args;
-        const int8_t * __restrict__ pSrcA = arguments->pSrcA;
-        const int8_t * __restrict__ pSrcB = arguments->pSrcB;
-        uint32_t M = arguments->M;
-        uint32_t N = arguments->N;
-        uint32_t O = arguments->O;
-        uint32_t nPE = arguments->nPE;
-        int32_t * __restrict__ pDstC = arguments->pDstC;
+        uint32_t i; // loop counter
+        uint32_t j; // loop counter
+        uint32_t k; // loop counter
 
-        uint32_t i=0; // loop counter for M
-        uint32_t j=0; // loop counter for N
-        uint32_t k=0; // loop counter for O
-        
-        uint32_t core_id = rt_core_id();
-        int step = (O-1+nPE)/nPE;
-        uint32_t START = step*core_id;
-        uint32_t END = (core_id != rt_nb_pe()-1) ? START+step : M;
-
-        for(i=START; i < END; i++){
+        for(i=0; i < M; i++){
           for(k=0; k < O; k++){
             int32_t sum = 0;
             for(j=0; j<N; j++){
@@ -111,36 +76,26 @@ void plp_mat_mult_trans_i8vp_xpulpv2(void* args) {
             pDstC[i*O +k] = sum;
           }
         }
-
-        rt_team_barrier();
 }
 
-#else
+#else 
 
-void plp_mat_mult_trans_i8vp_xpulpv2(void* args) {
+void plp_mat_mult_trans_i8v_xpulpv2(
+                              const int8_t * __restrict__ pSrcA,
+                              const int8_t * __restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t O,
+                              int32_t * __restrict__ pDstC) {
         
-        plp_mat_mult_instance_i8* arguments = (plp_mat_mult_instance_i8*) args;
-        const int8_t * __restrict__ pSrcA = arguments->pSrcA;
-        const int8_t * __restrict__ pSrcB = arguments->pSrcB;
-        uint32_t M = arguments->M;
-        uint32_t N = arguments->N;
-        uint32_t O = arguments->O;
-        uint32_t nPE = arguments->nPE;
-        int32_t * __restrict__ pDstC = arguments->pDstC;
-
-        uint32_t i=0; // loop counter for M
-        uint32_t j=0; // loop counter for N
-        uint32_t k=0; // loop counter for O
-        
-        uint32_t core_id = rt_core_id();
-        int step = (O-1+nPE)/nPE;
-        uint32_t START = step*core_id;
-        uint32_t END = (core_id != rt_nb_pe()-1) ? START+step : M;
+        uint32_t i; // loop counter
+        uint32_t j; // loop counter
+        uint32_t k; // loop counter
 
         uint32_t mod = N & 0x7;
 
         if(mod == 7){  
-          for(i=START; i < END; i++){
+          for(i=0; i < M; i++){
             for(k=0; k < O; k++){
               int32_t sum1 = 0;
               int32_t sum2 = 0;
@@ -163,7 +118,7 @@ void plp_mat_mult_trans_i8vp_xpulpv2(void* args) {
             }
           }
         } else if(mod == 6){  
-          for(i=START; i < END; i++){
+          for(i=0; i < M; i++){
             for(k=0; k < O; k++){
               int32_t sum1 = 0;
               int32_t sum2 = 0;
@@ -185,7 +140,7 @@ void plp_mat_mult_trans_i8vp_xpulpv2(void* args) {
             }
           }
         } else if(mod == 5){  
-          for(i=START; i < END; i++){
+          for(i=0; i < M; i++){
             for(k=0; k < O; k++){
               int32_t sum1 = 0;
               int32_t sum2 = 0;
@@ -206,7 +161,7 @@ void plp_mat_mult_trans_i8vp_xpulpv2(void* args) {
             }
           }
         } else if(mod == 4){  
-          for(i=START; i < END; i++){
+          for(i=0; i < M; i++){
             for(k=0; k < O; k++){
               int32_t sum1 = 0;
               int32_t sum2 = 0;
@@ -226,7 +181,7 @@ void plp_mat_mult_trans_i8vp_xpulpv2(void* args) {
             }
           }
         } else if(mod == 3){  
-          for(i=START; i < END; i++){
+          for(i=0; i < M; i++){
             for(k=0; k < O; k++){
               int32_t sum1 = 0;
               int32_t sum2 = 0;
@@ -246,7 +201,7 @@ void plp_mat_mult_trans_i8vp_xpulpv2(void* args) {
             }
           }
         } else if(mod == 2){  
-          for(i=START; i < END; i++){
+          for(i=0; i < M; i++){
             for(k=0; k < O; k++){
               int32_t sum1 = 0;
               int32_t sum2 = 0;
@@ -265,7 +220,7 @@ void plp_mat_mult_trans_i8vp_xpulpv2(void* args) {
             }
           }
         } else if(mod == 1){  
-          for(i=START; i < END; i++){
+          for(i=0; i < M; i++){
             for(k=0; k < O; k++){
               int32_t sum1 = 0;
               int32_t sum2 = 0;
@@ -283,7 +238,7 @@ void plp_mat_mult_trans_i8vp_xpulpv2(void* args) {
             }
           }
         } else {  
-          for(i=START; i < END; i++){
+          for(i=0; i < M; i++){
             for(k=0; k < O; k++){
               int32_t sum1 = 0;
               int32_t sum2 = 0;
@@ -300,13 +255,11 @@ void plp_mat_mult_trans_i8vp_xpulpv2(void* args) {
             }
           }
         }
-
-      rt_team_barrier();
 }
 
 #endif
 
 // undefine BASIC_VERSION
 /**
-   @} end of BasicMatMultTransKernels group
+   @} end of MatMultTransKernels group
 */

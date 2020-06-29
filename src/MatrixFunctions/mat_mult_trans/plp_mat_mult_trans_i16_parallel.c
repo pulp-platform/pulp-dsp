@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_mat_mult_i8_parallel.c
- * Description:  parallel 8-bit integer matrix multiplication glue code
+ * Title:        plp_mat_mult_i16_parallel.c
+ * Description:  parallel 16-bit integer matrix multiplication glue code
  *
  * $Date:        22. December 2019
  * $Revision:    V0
@@ -36,12 +36,12 @@
  */
 
 /**
-  @addtogroup BasicMatMultTrans
+  @addtogroup MatMultTrans
   @{
  */
 
 /**
-  @brief Glue code for parallel matrix mutliplication of 8-bit integer matrices.
+  @brief Glue code for parallel matrix mutliplication of 16-bit integer matrices.
   @param[in]  pSrcA     points to the first input matrix
   @param[in]  pSrcB     points to the second input matrix
   @param[in]  M         height of the first input matrix
@@ -52,9 +52,9 @@
   @return        none
  */
 
-void plp_mat_mult_trans_i8_parallel(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
+void plp_mat_mult_trans_i16_parallel(
+                         const int16_t * __restrict__ pSrcA,
+                         const int16_t * __restrict__ pSrcB,
                          uint32_t M,
                          uint32_t N,
                          uint32_t O,
@@ -66,7 +66,7 @@ void plp_mat_mult_trans_i8_parallel(
     return;
   }
   else{
-    plp_mat_mult_instance_i8 args = {
+    plp_mat_mult_instance_i16 args = {
       .pSrcA = pSrcA,
       .pSrcB = pSrcB,
       .M = M,
@@ -75,13 +75,13 @@ void plp_mat_mult_trans_i8_parallel(
       .nPE = nPE,
       .pDstC = pDstC
     };
-    rt_team_fork(nPE,plp_mat_mult_trans_i8vp_xpulpv2, (void*) &args);
+    rt_team_fork(nPE,plp_mat_mult_trans_i16vp_xpulpv2, (void*) &args);
   }
 
 }
 
 /**
-  @} end of BasicMatMultTrans group
+  @} end of MatMultTrans group
  */
 
 

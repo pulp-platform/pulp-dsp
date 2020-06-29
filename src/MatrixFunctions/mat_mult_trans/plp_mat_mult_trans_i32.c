@@ -36,7 +36,7 @@
  */
 
 /**
-  @defgroup BasicMatMultTrans Matrix Transposed Matrix Multiplication
+  @defgroup MatMultTrans Matrix Transposed Matrix Multiplication
   This module contains the glue code for Matrix Transposed Matrix Multiplication. The kernel codes (kernels) are in the Moducle Matrix Transposed Matrix Multiplication Kernels.
 
   The Matrix Transposed Matrix Multiplication computes the product of two matrices with dimensions MxN and NxO, the second matrix is transposed in memory.
@@ -64,7 +64,7 @@
  */
 
 /**
-  @addtogroup BasicMatMultTrans
+  @addtogroup MatMultTrans
   @{
  */
 
@@ -97,7 +97,7 @@ void plp_mat_mult_trans_i32(
 }
 
 /**
-  @} end of BasicMatMultTrans group
+  @} end of MatMultTrans group
  */
 
 
