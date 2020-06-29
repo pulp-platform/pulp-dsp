@@ -47,7 +47,17 @@ New tests can be generated using the test_template located at `test/mrWolf/test_
 		- `use_l1`: Boolean or None. if None, use the default configuration (as specified `generate_test`, see below).
    4. Edit the `implemented` dictionary. This `dict` maps the version name (like `i32` and `q8`) to a boolean, Only versions which map to `True` will be tested. The `c_type` `var_type` is dependent on this version.
    5. Create the function `n_macs`. This function `n_macs(env: dict) -> int` takes the environment `env` as an argument, which is defined identical as for `DynamicVariables`, see above. It should return the number of macs in an ideal setting (used for benchmarking only).
-   6. Call `generate_test` and store the returned struct as `TestConfig`. This function takes the following arguments:
+   6. (Optional) Create a dictionary `arg_ret_type`, which maps the version name (without any extension like `_parallel`) to a tuple of two strings, where the first string is the c type for the input arguments (`var_type` used for argument description), and the second one is the c type for the return type (`ret_type` used for argument description). Any version which is not present in this dictionary will take the follwing default values:
+      | version | `var_type` | `ret_type` |
+      | ------- | ---------- | ---------- |
+      | `i8`    | `int8_t`   | `int32_t`  |
+      | `i16`   | `int16_t`  | `int32_t`  |
+      | `i32`   | `int32_t`  | `int32_t`  |
+      | `q8`    | `int8_t`   | `int32_t`  |
+      | `q16`   | `int16_t`  | `int32_t`  |
+      | `q32`   | `int32_t`  | `int32_t`  |
+      | `f32`   | `float`    | `float`    |
+   7. Call `generate_test` and store the returned struct as `TestConfig`. This function takes the following arguments:
       - `device_name: str`: name of the device (either `'ibex'` or `'riscy'`).
 	  - `function_name: str`: name of the function without the version
 	  - `arguments: list`: see above

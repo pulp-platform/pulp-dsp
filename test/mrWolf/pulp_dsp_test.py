@@ -303,6 +303,7 @@ def check_output(config, output, test_obj):
             mistakes.append("Mismatch: %s" % item[11:])
     result_format = ", ".join(["%s=%s" % (k, v) for k, v in performance.items()])
     if mistakes:
+        print("\n".join(mistakes))
         result_format += "\n"
         result_format += "\n".join(mistakes)
     # generate / update benchmark file
@@ -356,8 +357,8 @@ class Test(object):
         self.extended_output = True
         self.version = ''
 
-    def build(self, test_idx, function_name, version, arguments, env, visible_env, device_name,
-              use_l1, extended_output=True, n_macs=None):
+    def build(self, test_idx, function_name, version, arg_ret_type, arguments, env, visible_env,
+              device_name, use_l1, extended_output=True, n_macs=None):
         self.test_idx = test_idx
         self.function_name = "%s_%s" % (function_name, version)
         self.version = version
@@ -369,7 +370,10 @@ class Test(object):
         self.n_macs = n_macs(env) if env is not None else 0
 
         # prepare var_type
-        if version.startswith('i32') or version.startswith('q32'):
+        version_type = version.split('_')[0]
+        if arg_ret_type is not None and version_type in arg_ret_type:
+            self.var_type = arg_ret_type[version_type]
+        elif version.startswith('i32') or version.startswith('q32'):
             self.var_type = ['int32_t', 'int32_t']
         elif version.startswith('i16') or version.startswith('q16'):
             self.var_type = ['int16_t', 'int32_t']
@@ -634,13 +638,14 @@ def fmt_float(val):
 
 
 def generate_test(device_name, function_name, arguments, variables, implemented,
-                  use_l1=False, extended_output=True, n_macs=None):
+                  use_l1=False, extended_output=True, n_macs=None, arg_ret_type=None):
     visible_env = [v.name for v in variables if v.visible]
     testsets = [Testset(
         name=v,
         tests=[Test().build(test_idx=i,
                             function_name=function_name,
                             version=v,
+                            arg_ret_type=arg_ret_type,
                             arguments=arguments,
                             env=e,
                             visible_env=visible_env,
