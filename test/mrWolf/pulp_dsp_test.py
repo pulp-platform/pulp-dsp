@@ -572,15 +572,31 @@ class HeaderWriter(object):
 
     def write_check(self, arg, print_errors=False):
         display_format = "%.10f" if arg.ctype == "float" else "%d"
-        check_str = "%s[i] != %s[i]" % (arg.name, arg.reference_name)
+        check_str = "%sif (%s[i] != %s[i]) {\\\n" % (self.tab * 2, arg.name, arg.reference_name)
+        # Generate the check string
+        # For the fix-point and integer check string with tolerance, we need to take the wrapping
+        # into account. Therefore, we check for all three different cases.
         if arg.tolerance != 0:
-            check_str =  "({acq}[i] < (({ty})((float){exp}[i] - ABS({tol:E} * (float){exp}[i])))) || "
-            check_str += "({acq}[i] > (({ty})((float){exp}[i] + ABS({tol:E} * (float){exp}[i]))))"
-            check_str = check_str.format(acq=arg.name, exp=arg.reference_name,
-                                         tol=arg.tolerance, ty=arg.ctype)
+            if arg.ctype == "float":
+                check_str = """{sp}{sp}float __tol = ABS({tol:E} * (float){exp}[i]);\\
+{sp}{sp}if (!({acq}[i] >= ({ty})({exp}[i] - __tol) &&\\
+{sp}{sp}      {acq}[i] <= ({ty})({exp}[i] + __tol))) {{\\
+""".format(sp=self.tab, acq=arg.name, exp=arg.reference_name, tol=arg.tolerance, ty=arg.ctype)
+            else:
+                check_str = """{sp}{sp}float __tol = ABS({tol:E} * (float){exp}[i]);\\
+{sp}{sp}{ty} __tol_t = ({ty})__tol;\\
+{sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
+{sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t || {acq}[i] >= {exp}[i] - __tol_t)) ||\\
+{sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
+{sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t || {acq}[i] <= {exp}[i] + __tol_t)) ||\\
+{sp}{sp}      ({exp}[i] >= {type_min} + __tol_t && {exp}[i] <= {type_max} - __tol_t &&\\
+{sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t && {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
+""".format(sp=self.tab, acq=arg.name, exp=arg.reference_name, tol=arg.tolerance, ty=arg.ctype,
+           type_min = -(1<<7) if arg.ctype == "int8_t" else -(1<<15) if arg.ctype == "int16_t" else -(1<<31),
+           type_max = (1<<7)-1 if arg.ctype == "int8_t" else (1<<15)-1 if arg.ctype == "int16_t" else (1<<31)-1)
         self.fp.write('%sfor (int i = 0; i < %s; i++) {\\\n' % (self.tab, arg.length))
         if print_errors:
-            self.fp.write('%sif (%s) {\\\n' % (self.tab * 2, check_str))
+            self.fp.write(check_str)
             self.fp.write('%spassed=0;\\\n' % (self.tab * 3))
             self.fp.write('%sprintf("<Mismatch> %s[%%d]: acq=%s, exp=%s\\n", i, %s[i], %s[i]);\\\n'
                           % (self.tab * 3, arg.name, display_format, display_format, arg.name,
