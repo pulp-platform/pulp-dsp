@@ -16,49 +16,58 @@ Before you use the test framework, make sure that the most recent version of [pl
 
 New tests can be generated using the test_template located at `test/mrWolf/test_template`. The following steps are required:
 
-1. Copy and rename the folder `test/mrWolf/test_template` to `test/mrWolf/[NAME]`.
+1. Copy and rename the folder `test/mrWolf/test_template` to `test/mrWolf/[NAME]`. The two necessary files in this folder are: `testset.cfg` and `gen_stimuli.py`.
 2. Edit `test/mrWolf/testset.cfg` and add the new test using `add_test_folder`.
-3. For both `ibex` and `riscy` subfolders, configure the `testset.cfg` script (is treated as regular python script):
-   1. Edit the `device_name` (either `'ibex'` or `'riscy'` and the `function_name`. The `function_name` is the name of the function, without the version (i.e., datatype like i8, q32, and the suffix `_parallel` for the parallel implementation)
-   2. Create the `variables` list. Add one or more `SweepVariable`s, and tests will be created for each combination. This is usually used to generate multiple tests with different dimensionality of the input vectors. However, this is not always enough. As an example, if the output vector has a different length than all input vectors (as it is the case for convolution or matrix multiplication), then you can use `DynamicVariables`, which require a function `f(env: dict) -> val` as an argument. The environment `env` is a dictionary, mapping other variables (`SweeiVariable`s) to their value. See the testcase `test/mrWolf/conv/test_lib/ibex/testset.cfg` as an example.
-   3. Create the `arguments` list. The order must be the same as defined in the function declaration. However, the names are used internally, and don't need to match. You can use the following argument types:
+3. Edit the `testset.cfg` configuration file (which is treated as a regular python sctipt):
+   1. Create the `variables` list. Add one or more `SweepVariable`s, and tests will be created for each combination. This is usually used to generate multiple tests with different dimensionality of the input vectors. However, this is not always enough. As an example, if the output vector has a different length than all input vectors (as it is the case for convolution or matrix multiplication), then you can use `DynamicVariables`, which require a function `f(env: dict) -> val` as an argument. The environment `env` is a dictionary, mapping other variables (`SweeiVariable`s) to their value. See the testcase `test/mrWolf/conv/test_lib/ibex/testset.cfg` as an example.
+   2. Create the `arguments` list. The order must be the same as defined in the function declaration. However, the names are used internally, and don't need to match. For all arguments, the parameter `use_l1` is only considered for riscy testcases, and is ignored when the ibex core is used. You can use the following argument types:
       - `Argument`: basic argument, representing a single value like an integer or a float. The Constructor takes:
-	    - `name`: the name used internally, can be chosen arbitrarily (as long as it is unique).
-		- `c_type`: either a valid type of `C`, including `stdint.h` or the string `var_type`, in which case the type will be chosen based on the `version`, e.g., `i32` will cause the `var_type` to be replaced with `int32_t`.
-		- `value`: either use a specific value, the name of a `Variable` (as defined in the `variables` list) or `None` (the framework will then choose a random value).
-		- `use_l1`: Boolean or None. if None, use the default configuration (as specified `generate_test`, see below).
-	  - `ArrayArgument`: array argument, which is passed to the funciton as a pointer. 
-	    - `name`: the name used internally, can be chosen arbitrarily (as long as it is unique).
-		- `c_type`: either a valid type of `C`, including `stdint.h` or the string `var_type`, in which case the type will be chosen based on the `version`, e.g., `i32` will cause the `var_type` to be replaced with `int32_t`. This type refers to the data type that is referenced. 
-		- `length`: either a specific size, the name of a `Variable` or a `tuple`: `(min, max)`, in which case a random value in this range will be chosen.
-		- `value`: either a list of values (must then have the same length as the `length` argument), a single value (in which case all elements will be initialized with this value), a `tuple`: `(min, max)` where a random value will be chosen in the specified range, or `None`, in which case the entire range available in `c_type` will be used.
-		- `use_l1`: Boolean or None. if None, use the default configuration (as specified `generate_test`, see below).
-	  - `FixPointArgument`: argument which is only used for the fix-point implementation. This field must specify the position of the binary point. The constructor has identical arguments as `Argument`, but it uses `ctype=uint32_t` by default.
-	  - `ParallelArgument`: argument which is only used for the parallel implementation. This field must specify the number of processing units (cores). The constructor has identical arguments as `Argument`, but it uses `ctype=uint32_t` by default.
-	  - `OutputArgument`: array argument which represents the output array. Its constructor has the same arguments as `ArrayArgument`, however, without the parameter `value`, and with a `tolerance`:
-	    - `name`: the name used internally, can be chosen arbitrarily (as long as it is unique).
-		- `c_type`: either a valid type of `C`, including `stdint.h` or the string `var_type`, in which case the type will be chosen based on the `version`, e.g., `i32` will cause the `var_type` to be replaced with `int32_t`. This type refers to the data type that is referenced.
-		- `length`: either a specific size, the name of a `Variable` or a `tuple`: `(min, max)`, in which case a random value in this range will be chosen.
-	    - `tolerance`: Either a value (default 0) or a function, which maps the version string to the relative tolerance. The tolerance check is only enabled if the parameter for a given version is nonzero.
-		- `use_l1`: Boolean or None. if None, use the default configuration (as specified `generate_test`, see below).
-	  - `ReturnValue`: return value of the function. Obviously, there can only ever exist one `ReturnValue` in the `arguments` list. The constructor needs the following arguments:
-		- `c_type`: either a valid type of `C`, including `stdint.h` or the string `var_type`, in which case the type will be chosen based on the `version`, e.g., `i32` will cause the `var_type` to be replaced with `int32_t`.
-	    - `tolerance`: Either a value (default 0) or a function, which maps the version string to the relative tolerance. The tolerance check is only enabled if the parameter for a given version is nonzero.
-		- `use_l1`: Boolean or None. if None, use the default configuration (as specified `generate_test`, see below).
-   4. Edit the `implemented` dictionary. This `dict` maps the version name (like `i32` and `q8`) to a boolean, Only versions which map to `True` will be tested. The `c_type` `var_type` is dependent on this version.
-   5. Create the function `n_macs`. This function `n_macs(env: dict) -> int` takes the environment `env` as an argument, which is defined identical as for `DynamicVariables`, see above. It should return the number of macs in an ideal setting (used for benchmarking only).
+        - `name`: the name used internally, can be chosen arbitrarily (as long as it is unique).
+        - `c_type`: either a valid type of `C`, including `stdint.h` or the string `var_type`, in which case the type will be chosen based on the `version`, e.g., `i32` will cause the `var_type` to be replaced with `int32_t`.
+        - `value`: either use a specific value, the name of a `Variable` (as defined in the `variables` list) or `None` (the framework will then choose a random value).
+        - `use_l1`: Boolean or None. if None, use the default configuration (as specified `generate_test`, see below).
+      - `ArrayArgument`: array argument, which is passed to the funciton as a pointer. 
+        - `name`: the name used internally, can be chosen arbitrarily (as long as it is unique).
+        - `c_type`: either a valid type of `C`, including `stdint.h` or the string `var_type`, in which case the type will be chosen based on the `version`, e.g., `i32` will cause the `var_type` to be replaced with `int32_t`. This type refers to the data type that is referenced. 
+        - `length`: either a specific size, the name of a `Variable` or a `tuple`: `(min, max)`, in which case a random value in this range will be chosen.
+        - `value`: either a list of values (must then have the same length as the `length` argument), a single value (in which case all elements will be initialized with this value), a `tuple`: `(min, max)` where a random value will be chosen in the specified range, or `None`, in which case the entire range available in `c_type` will be used.
+        - `use_l1`: Boolean or None. if None, use the default configuration (as specified `generate_test`, see below).
+      - `FixPointArgument`: argument which is only used for the fix-point implementation. This field must specify the position of the binary point. The constructor has identical arguments as `Argument`, but it uses `ctype=uint32_t` by default.
+      - `ParallelArgument`: argument which is only used for the parallel implementation. This field must specify the number of processing units (cores). The constructor has identical arguments as `Argument`, but it uses `ctype=uint32_t` by default.
+      - `OutputArgument`: array argument which represents the output array. Its constructor has the same arguments as `ArrayArgument`, however, without the parameter `value`, and with a `tolerance`:
+        - `name`: the name used internally, can be chosen arbitrarily (as long as it is unique).
+        - `c_type`: either a valid type of `C`, including `stdint.h` or the string `var_type`, in which case the type will be chosen based on the `version`, e.g., `i32` will cause the `var_type` to be replaced with `int32_t`. This type refers to the data type that is referenced.
+        - `length`: either a specific size, the name of a `Variable` or a `tuple`: `(min, max)`, in which case a random value in this range will be chosen.
+        - `tolerance`: Either a value (default 0) or a function, which maps the version string to the relative tolerance. The tolerance check is only enabled if the parameter for a given version is nonzero.
+        - `use_l1`: Boolean or None. if None, use the default configuration (as specified `generate_test`, see below).
+      - `ReturnValue`: return value of the function. Obviously, there can only ever exist one `ReturnValue` in the `arguments` list. The constructor needs the following arguments:
+        - `c_type`: either a valid type of `C`, including `stdint.h` or the string `var_type`, in which case the type will be chosen based on the `version`, e.g., `i32` will cause the `var_type` to be replaced with `int32_t`.
+        - `tolerance`: Either a value (default 0) or a function, which maps the version string to the relative tolerance. The tolerance check is only enabled if the parameter for a given version is nonzero.
+        - `use_l1`: Boolean or None. if None, use the default configuration (as specified `generate_test`, see below).
+   3. Edit the `implemented` dictionary. This `dict` maps the device name (either `'ibex'` or `'riscy'`) to the version-`dict`, which maps the version name (like `i32` and `q8`) to a boolean, Only versions which map to `True` will be tested. The `c_type` `var_type` and `ret_type` is dependent on this version. Additionally, the suffix `_parallel` can be used to enable tests for the parallel implementation.
+   4. Create the function `n_ops`. This function `n_ops(env: dict) -> int` takes the environment `env` as an argument, which is defined identical as for `DynamicVariables`, see above. It should return the number of operations in an ideal setting (used for benchmarking only).
+   5. (Optional) Create a dictionary `arg_ret_type`, which maps the version name (without any extension like `_parallel`) to a tuple of two strings, where the first string is the c type for the input arguments (`var_type` used for argument description), and the second one is the c type for the return type (`ret_type` used for argument description). Any version which is not present in this dictionary will take the follwing default values:
+      | version | `var_type` | `ret_type` |
+      | ------- | ---------- | ---------- |
+      | `i8`    | `int8_t`   | `int32_t`  |
+      | `i16`   | `int16_t`  | `int32_t`  |
+      | `i32`   | `int32_t`  | `int32_t`  |
+      | `q8`    | `int8_t`   | `int32_t`  |
+      | `q16`   | `int16_t`  | `int32_t`  |
+      | `q32`   | `int32_t`  | `int32_t`  |
+      | `f32`   | `float`    | `float`    |
    6. Call `generate_test` and store the returned struct as `TestConfig`. This function takes the following arguments:
-      - `device_name: str`: name of the device (either `'ibex'` or `'riscy'`).
-	  - `function_name: str`: name of the function without the version
-	  - `arguments: list`: see above
-	  - `variables: list`: see above
-	  - `implemented: dict`: see above
-	  - `use_l1: bool`: default value for `use_l1` for all arguments. This can be overwritten for individual arguments.
-	  - `extended_output: bool`: if `True`, all errors will be printed to stdout, can be used for debugging.
-	  - `n_macs`: function (see above). If not given, the benchmark will assume that it has 0 macs.
-3. For both `ibex` and `riscy` subfolders, edit the `gen_stimuli.py` script. At the bottom of this file, the `pulp_dsp_test.py` framework is included, which handles all parameters and sets up the environment. The only thing, which must be edited, is the function `compute_result`, which represents the Golden Model. This function takes three parameters:
+      - `function_name: str`: name of the function without the version
+      - `arguments: list`: see above
+      - `variables: list`: see above
+      - `implemented: dict`: see above
+      - `use_l1: bool`: default value for `use_l1` for all arguments. This can be overwritten for individual arguments.
+      - `extended_output: bool`: if `True`, all errors will be printed to stdout, can be used for debugging.
+      - `n_macs`: function (see above). If not given, the benchmark will assume that it has 0 macs.
+3. Edit the `gen_stimuli.py` script, and write the function `compute_result`, which represents the Golden Model. This function takes four parameters:
    - `result_parameter`: This is either `OutputArgument` or `ReturnValue`, which tells the function what expected output to generate. This argument has all ambiguity removed, and is instantiated based on the current sweep, which means that `c_type` and `length` are set to a specific type and length. The function `compute_result` will be called multiple times, for each `OutputArgument` or `ReturnValue` that was specified in the `arguments` list.
    - `inputs` This is a dictionary, which maps the name of all arguments to one of the `Argument` object. As for the `result_parameter`, the argument is instantiated properly, and the `c_type`, the `length` and the `value` have specific values, and can be used to generate the result. All `OutputArguments` and the `ReturnValue` are missing in this dictionary.
+   - `env`: Environment dictionary, which maps the variable names (defined in the `testset.cfg`) to their value of the current test.
    - `fix_point`: Either `False` (for no use of fix-point) or the position of the binary point.
    The function must return a list (or numpy array) with the expected result (or a single value in case of `ReturnValue`).
 

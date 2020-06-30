@@ -27,19 +27,26 @@ FC_SRCS = \
 	src/FilteringFunctions/plp_conv_i32_parallel.c \
 	src/FilteringFunctions/plp_conv_i16_parallel.c \
 	src/FilteringFunctions/plp_conv_i8_parallel.c \
-	src/FilteringFunctions/plp_conv_i8_parallel.c \
-	src/MatrixFunctions/plp_mat_mult_i32.c src/MatrixFunctions/kernels/plp_mat_mult_i32s_rv32im.c \
-	src/MatrixFunctions/plp_mat_mult_i16.c src/MatrixFunctions/kernels/plp_mat_mult_i16s_rv32im.c \
-	src/MatrixFunctions/plp_mat_mult_i8.c src/MatrixFunctions/kernels/plp_mat_mult_i8s_rv32im.c \
-	src/MatrixFunctions/plp_mat_mult_i32_parallel.c \
-	src/MatrixFunctions/plp_mat_mult_i16_parallel.c \
-	src/MatrixFunctions/plp_mat_mult_i8_parallel.c \
-	src/MatrixFunctions/plp_mat_mult_trans_i32.c src/MatrixFunctions/kernels/plp_mat_mult_trans_i32s_rv32im.c \
-	src/MatrixFunctions/plp_mat_mult_trans_i16.c src/MatrixFunctions/kernels/plp_mat_mult_trans_i16s_rv32im.c \
-	src/MatrixFunctions/plp_mat_mult_trans_i8.c src/MatrixFunctions/kernels/plp_mat_mult_trans_i8s_rv32im.c \
-	src/MatrixFunctions/plp_mat_mult_trans_i32_parallel.c \
-	src/MatrixFunctions/plp_mat_mult_trans_i16_parallel.c \
-	src/MatrixFunctions/plp_mat_mult_trans_i8_parallel.c \
+	src/MatrixFunctions/mat_mult/plp_mat_mult_i32.c src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i32s_rv32im.c \
+	src/MatrixFunctions/mat_mult/plp_mat_mult_i16.c src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i16s_rv32im.c \
+	src/MatrixFunctions/mat_mult/plp_mat_mult_i8.c src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8s_rv32im.c \
+	src/MatrixFunctions/mat_mult/plp_mat_mult_q32.c src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q32s_rv32im.c \
+	src/MatrixFunctions/mat_mult/plp_mat_mult_q16.c src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q16s_rv32im.c \
+	src/MatrixFunctions/mat_mult/plp_mat_mult_q8.c src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q8s_rv32im.c \
+	src/MatrixFunctions/mat_mult/plp_mat_mult_i32_parallel.c \
+	src/MatrixFunctions/mat_mult/plp_mat_mult_i16_parallel.c \
+	src/MatrixFunctions/mat_mult/plp_mat_mult_i8_parallel.c \
+	src/MatrixFunctions/mat_mult/plp_mat_mult_q32_parallel.c \
+	src/MatrixFunctions/mat_mult/plp_mat_mult_q16_parallel.c \
+	src/MatrixFunctions/mat_mult/plp_mat_mult_q8_parallel.c \
+	src/MatrixFunctions/mat_mult/plp_mat_mult_f32.c \
+	src/MatrixFunctions/mat_mult/plp_mat_mult_f32_parallel.c \
+	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_i32.c src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i32s_rv32im.c \
+	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_i16.c src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i16s_rv32im.c \
+	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_i8.c src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i8s_rv32im.c \
+	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_i32_parallel.c \
+	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_i16_parallel.c \
+	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_i8_parallel.c \
 	src/TransformFunctions/plp_rfft_f32.c \
 	src/TransformFunctions/plp_rfft_f32_parallel.c
 
@@ -75,18 +82,26 @@ CL_SRCS = \
 	src/FilteringFunctions/kernels/plp_conv_parallel_OLA.c \
 	src/FilteringFunctions/kernels/plp_conv_parallel_OLA_kernel.c\
 	src/FilteringFunctions/kernels/plp_conv_parallel_OLA_kernel.c \
-	src/MatrixFunctions/kernels/plp_mat_mult_i32s_xpulpv2.c \
-	src/MatrixFunctions/kernels/plp_mat_mult_i16v_xpulpv2.c \
-	src/MatrixFunctions/kernels/plp_mat_mult_i8v_xpulpv2.c \
-	src/MatrixFunctions/kernels/plp_mat_mult_i32p_xpulpv2.c \
-	src/MatrixFunctions/kernels/plp_mat_mult_i16vp_xpulpv2.c \
-	src/MatrixFunctions/kernels/plp_mat_mult_i8vp_xpulpv2.c	\
-	src/MatrixFunctions/kernels/plp_mat_mult_trans_i32s_xpulpv2.c \
-	src/MatrixFunctions/kernels/plp_mat_mult_trans_i16v_xpulpv2.c \
-	src/MatrixFunctions/kernels/plp_mat_mult_trans_i8v_xpulpv2.c \
-	src/MatrixFunctions/kernels/plp_mat_mult_trans_i32p_xpulpv2.c \
-	src/MatrixFunctions/kernels/plp_mat_mult_trans_i16vp_xpulpv2.c \
-	src/MatrixFunctions/kernels/plp_mat_mult_trans_i8vp_xpulpv2.c	\
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i32s_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i16v_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8v_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q32s_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q16v_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q8v_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i32p_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i16vp_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8vp_xpulpv2.c	\
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q32p_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q16vp_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q8vp_xpulpv2.c	\
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_f32s_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_f32p_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i32s_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i16v_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i8v_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i32p_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i16vp_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i8vp_xpulpv2.c	\
 	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c
 
 
