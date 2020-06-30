@@ -1026,6 +1026,96 @@ void plp_mean_i32s_xpulpv2(
 
 
 /** -------------------------------------------------------
+   @brief         Glue code for mean value of a 16-bit integer vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    mean value returned here
+   @return        none
+*/
+
+void plp_mean_i16(
+                  const int16_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  int16_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Mean value of a 16-bit integer vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    mean value returned here
+   @return        none
+*/
+
+void plp_mean_i16s_rv32im(
+                          const int16_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          int16_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Mean value of a 16-bit integer vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    mean value returned here
+   @return        none
+*/
+
+void plp_mean_i16s_xpulpv2(
+                           const int16_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           int16_t * __restrict__ pRes);
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for mean value of a 8-bit integer vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    mean value returned here
+   @return        none
+*/
+
+void plp_mean_i8(
+                  const int8_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  int8_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Mean value of a 8-bit integer vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    mean value returned here
+   @return        none
+*/
+
+void plp_mean_i8s_rv32im(
+                          const int8_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          int8_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Mean value of a 8-bit integer vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    mean value returned here
+   @return        none
+*/
+
+void plp_mean_i8s_xpulpv2(
+                           const int8_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           int8_t * __restrict__ pRes);
+
+
+/** -------------------------------------------------------
    @brief         Glue code for max value of a 32-bit integer vector.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector

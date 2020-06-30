@@ -1,5 +1,7 @@
 FC_SRCS = \
 	src/StatisticsFunctions/plp_mean_i32.c src/StatisticsFunctions/kernels/plp_mean_i32s_rv32im.c \
+	src/StatisticsFunctions/plp_mean_i16.c src/StatisticsFunctions/kernels/plp_mean_i16s_rv32im.c \
+	src/StatisticsFunctions/plp_mean_i8.c src/StatisticsFunctions/kernels/plp_mean_i8s_rv32im.c \
 	src/StatisticsFunctions/plp_max_i32.c src/StatisticsFunctions/kernels/plp_max_i32s_rv32im.c \
 	src/StatisticsFunctions/plp_max_i16.c src/StatisticsFunctions/kernels/plp_max_i16s_rv32im.c \
 	src/StatisticsFunctions/plp_max_i8.c src/StatisticsFunctions/kernels/plp_max_i8s_rv32im.c \
@@ -52,6 +54,8 @@ FC_SRCS = \
 
 CL_SRCS = \
 	src/StatisticsFunctions/kernels/plp_mean_i32s_xpulpv2.c \
+	src/StatisticsFunctions/kernels/plp_mean_i16s_xpulpv2.c \
+	src/StatisticsFunctions/kernels/plp_mean_i8s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_max_i32s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_max_i16s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_max_i8s_xpulpv2.c \
