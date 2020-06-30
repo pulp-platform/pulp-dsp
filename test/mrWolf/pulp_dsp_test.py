@@ -10,6 +10,7 @@ import argparse
 import numpy as np
 import json
 import textwrap
+from textwrap import dedent
 import struct
 
 
@@ -579,37 +580,64 @@ class HeaderWriter(object):
         if arg.tolerance != 0:
             if arg.ctype == "float":
                 # In case of float: add a tiny absolute offset of 0.0001
-                check_str = """{sp}{sp}float __tol = ABS({tol:E} * (float){exp}[i] + 0.0001);\\
-{sp}{sp}if (!({acq}[i] >= ({ty})({exp}[i] - __tol) &&\\
-{sp}{sp}      {acq}[i] <= ({ty})({exp}[i] + __tol))) {{\\
-""".format(sp=self.tab, acq=arg.name, exp=arg.reference_name, tol=arg.tolerance, ty=arg.ctype)
+                check_str = dedent(
+                    """\
+                    {sp}{sp}float __tol = ABS({tol:E} * (float){exp}[i] + 0.0001);\\
+                    {sp}{sp}if (!({acq}[i] >= ({ty})({exp}[i] - __tol) &&\\
+                    {sp}{sp}      {acq}[i] <= ({ty})({exp}[i] + __tol))) {{\\
+                    """
+                ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
+                         tol=arg.tolerance, ty=arg.ctype)
             elif target == "ibex":
                 # in this case, we cannot use floating point! But make sure that the fraction is at
                 # least 1.
-                check_str = """{sp}{sp}{ty} __tol_t = ABS({exp}[i] / {tol_fraction}) + 1;\\
-{sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
-{sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t || {acq}[i] >= {exp}[i] - __tol_t)) ||\\
-{sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
-{sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t || {acq}[i] <= {exp}[i] + __tol_t)) ||\\
-{sp}{sp}      ({exp}[i] >= {type_min} + __tol_t && {exp}[i] <= {type_max} - __tol_t &&\\
-{sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t && {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
-""".format(sp=self.tab, acq=arg.name, exp=arg.reference_name, ty=arg.ctype,
-           tol_fraction=int(1 / arg.tolerance),
-           type_min=-(1<<7) if arg.ctype == "int8_t" else -(1<<15) if arg.ctype == "int16_t" else -(1<<31),
-           type_max=(1<<7)-1 if arg.ctype == "int8_t" else (1<<15)-1 if arg.ctype == "int16_t" else (1<<31)-1)
+                check_str = dedent(
+                    """\
+                    {sp}{sp}{ty} __tol_t = ABS({exp}[i] / {tol_fraction}) + 1;\\
+                    {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
+                    {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
+                    {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
+                    {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
+                    {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
+                    {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
+                    {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
+                    {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
+                    {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
+                    {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
+                    """
+                ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
+                         ty=arg.ctype, tol_fraction=int(1 / arg.tolerance),
+                         type_min=-(1 << 7) if arg.ctype == "int8_t"
+                                  else -(1 << 15) if arg.ctype == "int16_t"
+                                  else -(1 << 31),
+                         type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
+                                  else (1 << 15) - 1 if arg.ctype == "int16_t"
+                                  else (1 << 31) - 1)
             else:
                 # Here, we can use float. But for the int-version, we want to round up.
-                check_str = """{sp}{sp}float __tol = ABS({tol:E} * (float){exp}[i]);\\
-{sp}{sp}{ty} __tol_t = ({ty})(__tol + 0.999);\\
-{sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
-{sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t || {acq}[i] >= {exp}[i] - __tol_t)) ||\\
-{sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
-{sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t || {acq}[i] <= {exp}[i] + __tol_t)) ||\\
-{sp}{sp}      ({exp}[i] >= {type_min} + __tol_t && {exp}[i] <= {type_max} - __tol_t &&\\
-{sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t && {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
-""".format(sp=self.tab, acq=arg.name, exp=arg.reference_name, tol=arg.tolerance, ty=arg.ctype,
-           type_min=-(1<<7) if arg.ctype == "int8_t" else -(1<<15) if arg.ctype == "int16_t" else -(1<<31),
-           type_max=(1<<7)-1 if arg.ctype == "int8_t" else (1<<15)-1 if arg.ctype == "int16_t" else (1<<31)-1)
+                check_str = dedent(
+                    """\
+                    {sp}{sp}float __tol = ABS({tol:E} * (float){exp}[i]);\\
+                    {sp}{sp}{ty} __tol_t = ({ty})(__tol + 0.999);\\
+                    {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
+                    {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
+                    {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
+                    {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
+                    {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
+                    {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
+                    {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
+                    {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
+                    {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
+                    {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
+                    """
+                ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
+                         tol=arg.tolerance, ty=arg.ctype,
+                         type_min=-(1 << 7) if arg.ctype == "int8_t"
+                                  else -(1 << 15) if arg.ctype == "int16_t"
+                                  else -(1 << 31),
+                         type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
+                                  else (1 << 15) - 1 if arg.ctype == "int16_t"
+                                  else (1 << 31) - 1)
         self.fp.write('%sfor (int i = 0; i < %s; i++) {\\\n' % (self.tab, arg.length))
         if print_errors:
             self.fp.write(check_str)
@@ -640,22 +668,27 @@ class HeaderWriter(object):
         self.fp.write('}\n\n')
 
     def generate_bench(self):
-        self.fp.write("""#define BENCH {{\\
-{tab}rt_perf_t perf;\\
-{tab}rt_perf_init(&perf);\\
-{tab}int passed = do_bench(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR), 1);\\
-{tab}printf(\"passed: %d\\n\", passed);\\
-{tab}printf(\"cycles: %d\\n\", rt_perf_read(RT_PERF_CYCLES));\\
-{tab}printf(\"instructions: %d\\n\", rt_perf_read(RT_PERF_INSTR));\\
-{tab}if (passed) {{\\
-{tab}{tab}do_bench(&perf, 1<<RT_PERF_LD_STALL, 0);\\
-{tab}{tab}printf(\"load_stalls: %d\\n\", rt_perf_read(RT_PERF_LD_STALL));\\
-{tab}{tab}do_bench(&perf, 1<<RT_PERF_IMISS, 0);\\
-{tab}{tab}printf(\"icache_miss: %d\\n\", rt_perf_read(RT_PERF_IMISS));\\
-{tab}{tab}do_bench(&perf, 1<<RT_PERF_TCDM_CONT, 0);\\
-{tab}{tab}printf(\"tcdm_cont: %d\\n\", rt_perf_read(RT_PERF_TCDM_CONT));\\
-{tab}}}\\
-}}\\""".format(tab=self.tab))
+        self.fp.write(
+            dedent(
+                """\
+                #define BENCH {{\\
+                {tab}rt_perf_t perf;\\
+                {tab}rt_perf_init(&perf);\\
+                {tab}int passed = do_bench(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR), 1);\\
+                {tab}printf(\"passed: %d\\n\", passed);\\
+                {tab}printf(\"cycles: %d\\n\", rt_perf_read(RT_PERF_CYCLES));\\
+                {tab}printf(\"instructions: %d\\n\", rt_perf_read(RT_PERF_INSTR));\\
+                {tab}if (passed) {{\\
+                {tab}{tab}do_bench(&perf, 1<<RT_PERF_LD_STALL, 0);\\
+                {tab}{tab}printf(\"load_stalls: %d\\n\", rt_perf_read(RT_PERF_LD_STALL));\\
+                {tab}{tab}do_bench(&perf, 1<<RT_PERF_IMISS, 0);\\
+                {tab}{tab}printf(\"icache_miss: %d\\n\", rt_perf_read(RT_PERF_IMISS));\\
+                {tab}{tab}do_bench(&perf, 1<<RT_PERF_TCDM_CONT, 0);\\
+                {tab}{tab}printf(\"tcdm_cont: %d\\n\", rt_perf_read(RT_PERF_TCDM_CONT));\\
+                {tab}}}\\
+                }}\\""".format(tab=self.tab)
+            )
+        )
         self.fp.write('\n\n')
 
     def generate_abs(self):
