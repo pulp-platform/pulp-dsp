@@ -49,6 +49,22 @@ class DynamicVariable(Variable):
         self.fun = fun
 
 
+class ExternalPointedArgument(object):
+    """External Argument pointed to"""
+    def __init__(self, name):
+        """
+        name: name of the argument to be input
+        """
+        super(ExternalPointedArgument, self).__init__()
+        self.name = name
+
+    def to_dict(self, env, var_type, version, use_l1):
+        return {'class': type(self).__name__, 'dict': self.__dict__}
+
+    def generate_stimuli(self, header):
+        return
+
+
 class Argument(object):
     """docstring for argument"""
     def __init__(self, name, ctype, value, use_l1=None):
@@ -438,6 +454,8 @@ class Test(object):
             arg = ParallelArgument("tmp", "tmp", 0)
         elif d['class'] == ReturnValue.__name__:
             arg = ReturnValue("tmp")
+        elif d['class'] == ExternalPointedArgument.__name__:
+            arg = ExternalPointedArgument("tmp");
         else:
             raise RuntimeError("Unknown class name")
         arg.__dict__ = d['dict']
@@ -472,7 +490,7 @@ class Test(object):
                         timeout=1000000)
 
     def function_signature(self):
-        arguments_str = ', '.join([arg.name for arg in self.arguments])
+        arguments_str = ', '.join([arg.name if not isinstance(arg, ExternalPointedArgument) else "&" + arg.name for arg in self.arguments])
         return_value_str = ""
         return_value_list = [arg for arg in self.arguments if isinstance(arg, ReturnValue)]
         assert len(return_value_list) <= 1
@@ -818,6 +836,8 @@ def setup_ibex():
         #include "stdio.h"
         #include "plp_math.h"
         #include "data.h"
+        #include "plp_const_structs.h"
+
         static int do_bench(rt_perf_t *perf, int events, int do_check)
         {
             rt_perf_conf(perf, events);
