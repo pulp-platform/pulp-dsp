@@ -1260,6 +1260,151 @@ void plp_max_i8s_xpulpv2(
   @return        none
  */
 
+/** -------------------------------------------------------
+   @brief         Glue code for min value of a 32-bit integer vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    min value returned here
+   @return        none
+*/
+
+void plp_min_i32(
+                  const int32_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  int32_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Min value of a 32-bit integer vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    min value returned here
+   @return        none
+*/
+
+void plp_min_i32s_rv32im(
+                          const int32_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          int32_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Min value of a 32-bit integer vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    min value returned here
+   @return        none
+*/
+
+void plp_min_i32s_xpulpv2(
+                           const int32_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           int32_t * __restrict__ pRes);
+
+/** -------------------------------------------------------
+   @brief         Glue code for min value of a 16-bit integer vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    min value returned here
+   @return        none
+*/
+
+void plp_min_i16(
+                  const int16_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  int16_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Min value of a 16-bit integer vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    min value returned here
+   @return        none
+*/
+
+void plp_min_i16s_rv32im(
+                          const int16_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          int16_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Min value of a 16-bit integer vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    min value returned here
+   @return        none
+*/
+
+void plp_min_i16s_xpulpv2(
+                           const int16_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           int16_t * __restrict__ pRes);
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for min value of a 8-bit integer vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    min value returned here
+   @return        none
+*/
+
+void plp_min_i8(
+                  const int8_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  int8_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Min value of a 8-bit integer vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    min value returned here
+   @return        none
+*/
+
+void plp_min_i8s_rv32im(
+                          const int8_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          int8_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Min value of a 8-bit integer vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    min value returned here
+   @return        none
+*/
+
+void plp_min_i8s_xpulpv2(
+                           const int8_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           int8_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+  @brief Glue code for convolution of 32-bit integer vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  srcALen   Length of the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  srcBLen   Length of the second input vector
+  @param[out] pRes     output result returned here
+  @return        none
+ */
+
 
 void plp_conv_i32(
                        const int32_t * pSrcA,
