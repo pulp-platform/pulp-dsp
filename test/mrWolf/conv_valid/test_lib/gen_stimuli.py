@@ -20,21 +20,16 @@ def compute_result(result_parameter, inputs, env, fix_point):
     fix_point: None (if no fixpoint is used) or decimal point
     """
     if result_parameter.ctype == 'int32_t':
-        a = inputs['srcA'].value.astype(np.int32)
-        b = inputs['srcB'].value.astype(np.int32)
-        result = np.zeros(1, dtype=np.int32)
-        if fix_point is None or fix_point == 0:
-            result[0] = np.dot(a, b)
+        if fix_point is None:
+            a = inputs['srcA'].value.astype(np.int32)
+            b = inputs['srcB'].value.astype(np.int32)
+            return np.convolve(a, b, mode='valid')
         else:
-            if fix_point != 0:
-                for xa, xb in zip(a, b):
-                    result[0] = q_add(result[0], (xa * xb) >> fix_point)
+            raise RuntimeError("Fixpoint not implemented")
     elif result_parameter.ctype == 'float':
         raise RuntimeError("Float not implemented")
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
-
-    return result
 
 
 ######################
@@ -66,15 +61,3 @@ def q_mul(a, b, p):
 def q_roundnorm(a, p):
     rounding = 1 << (p - 1)
     return q_sat((a + rounding) >> p)
-
-
-###########################
-# generate_stimuli_header #
-###########################
-
-
-if __name__ == "__main__":
-    import sys, os
-    sys.path.append(os.path.abspath(os.path.join(os.path.realpath(__file__), "../../../..")))
-    from pulp_dsp_test import generate_stimuli_header
-    generate_stimuli_header(compute_result)

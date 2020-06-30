@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import random
 from plptest import Test as PulpTest, Testset
@@ -322,12 +323,12 @@ def bench_output(performance, test_obj):
     if not os.path.isfile(BENCHMARK_FILE):
         # create file and write header
         with open(BENCHMARK_FILE, "w") as f:
-            f.write("name,device,dimension,cycles,instructions,ipc,imiss,ld_stall,tcdm_cont,macs,mpc\n")
+            f.write("name,device,dimension,cycles,instructions,ipc,imiss,ld_stall,tcdm_cont,ops,mpc\n")
 
     # extract relevant fields
     dimension = "; ".join(["%s=%s" % (k, str(test_obj.env[k])) for k in test_obj.visible_env])
     insn_per_cycles = performance['instructions'] / performance['cycles']
-    macs_per_cycle = test_obj.n_macs / performance['cycles']
+    ops_per_cycle = test_obj.n_ops / performance['cycles']
     # write the new line
     with open(BENCHMARK_FILE, "a") as f:
         f.write(",".join([test_obj.function_name,
@@ -339,8 +340,8 @@ def bench_output(performance, test_obj):
                           str(performance['icache_miss']),
                           str(performance['load_stalls']),
                           str(performance['tcdm_cont']),
-                          str(test_obj.n_macs),
-                          str(macs_per_cycle)]))
+                          str(test_obj.n_ops),
+                          str(ops_per_cycle)]))
         f.write("\n")
 
 
@@ -357,9 +358,10 @@ class Test(object):
         self.fix_point = None
         self.extended_output = True
         self.version = ''
+        self.device_name = ''
 
     def build(self, test_idx, function_name, version, arg_ret_type, arguments, env, visible_env,
-              device_name, use_l1, extended_output=True, n_macs=None):
+              device_name, use_l1, extended_output=True, n_ops=None):
         self.test_idx = test_idx
         self.function_name = "%s_%s" % (function_name, version)
         self.version = version
@@ -368,7 +370,7 @@ class Test(object):
         self.device_name = device_name
         self.use_l1 = use_l1
         self.extended_output = extended_output
-        self.n_macs = n_macs(env) if env is not None else 0
+        self.n_ops = n_ops(env) if env is not None else 0
 
         # prepare var_type
         version_type = version.split('_')[0]
@@ -446,19 +448,27 @@ class Test(object):
                                 ", ".join(["%s=%s" % (k, str(self.env[k]))
                                            for k in self.visible_env]))
         build_dir = "test_%s_t%d" % (self.version, self.test_idx)
-        flags = "GARGS=\'--json %s\' BUILD_DIR_EXT=%s" % (self.to_json(), build_dir)
+        json_str = self.to_json()
+        flags = "GARGS=\'\' BUILD_DIR_EXT=%s" % (build_dir)
+        setup_flags = "--device %s" % self.device_name
+        gen_flags = "--json %s" % (json_str)
         # set the platform for compatibility with various different Pulp-SDK versions
         platform_str = "platform=gvsoc" # default platform
         if "TEST_PLATFORM" in os.environ:
             platform_str = "platform=%s" % (os.environ["TEST_PLATFORM"])
         elif "PULP_CURRENT_CONFIG_ARGS" in os.environ:
             platform_str = os.environ["PULP_CURRENT_CONFIG_ARGS"]
+        file_name = os.path.abspath(__file__)
         return PulpTest(name=test_name,
-                        commands=[Shell('clean', 'make clean %s' % (flags)),
-                                  Shell('gen', 'make gen %s' % (flags)),
-                                  Shell('build', 'make all %s' % (flags)),
-                                  Shell('run', 'make run %s %s' % (platform_str, flags)),
-                                  Check('check', check_output, test_obj=self)],
+                        commands=[
+                            Shell('setup_dir', 'python3 %s --setup %s' % (file_name, setup_flags)),
+                            Shell('clean', 'make clean %s' % (flags)),
+                            Shell('gen', 'python3 %s --gen %s' % (file_name, gen_flags)),
+                            Shell('build', 'make all %s' % (flags)),
+                            Shell('run', 'make run %s %s' % (platform_str, flags)),
+                            Shell('clean_dir', 'python3 %s --clean %s' % (file_name, setup_flags)),
+                            Check('check', check_output, test_obj=self)
+                        ],
                         timeout=1000000)
 
     def function_signature(self):
@@ -515,11 +525,12 @@ class Sweep:
 
 class HeaderWriter(object):
     """ writes .h header files """
-    def __init__(self, filename='data.h', indent=4, max_line_len=100):
+    def __init__(self, filename='data.h', indent=4, max_line_len=100, allow_l1=True):
         self.filename = filename
         self.tab = ' ' * indent
         self.width = max_line_len
         self.fp = None
+        self.allow_l1 = allow_l1
 
     def __enter__(self):
         self.fp = open(self.filename, 'w')
@@ -539,7 +550,7 @@ class HeaderWriter(object):
         self.generate_abs()
 
     def write_array(self, name, var_type, arr, use_l1):
-        target_loc = 'RT_L1_DATA' if use_l1 else 'RT_L2_DATA'
+        target_loc = 'RT_L1_DATA' if use_l1 and self.allow_l1 else 'RT_L2_DATA'
         nl = '\n' + self.tab
         if var_type == "float":
             self.fp.write('%s uint32_t %s__int[%s] = {\n' % (target_loc, name, len(arr)))
@@ -558,7 +569,7 @@ class HeaderWriter(object):
             self.fp.write('\n};\n\n')
 
     def write_scalar(self, name, var_type, value, use_l1):
-        target_loc = 'L1_DATA' if use_l1 else 'L2_DATA'
+        target_loc = 'L1_DATA' if use_l1 and self.allow_l1 else 'L2_DATA'
         if var_type == "float":
             self.fp.write('%s uint32_t %s__int = %s;\n' % (target_loc, name, fmt_float(value)))
             self.fp.write('%s %s %s = *((%s*)((void*)&%s__int));\n\n' % (target_loc, var_type, name,
@@ -678,14 +689,12 @@ class HeaderWriter(object):
                 {tab}printf(\"passed: %d\\n\", passed);\\
                 {tab}printf(\"cycles: %d\\n\", rt_perf_read(RT_PERF_CYCLES));\\
                 {tab}printf(\"instructions: %d\\n\", rt_perf_read(RT_PERF_INSTR));\\
-                {tab}if (passed) {{\\
-                {tab}{tab}do_bench(&perf, 1<<RT_PERF_LD_STALL, 0);\\
-                {tab}{tab}printf(\"load_stalls: %d\\n\", rt_perf_read(RT_PERF_LD_STALL));\\
-                {tab}{tab}do_bench(&perf, 1<<RT_PERF_IMISS, 0);\\
-                {tab}{tab}printf(\"icache_miss: %d\\n\", rt_perf_read(RT_PERF_IMISS));\\
-                {tab}{tab}do_bench(&perf, 1<<RT_PERF_TCDM_CONT, 0);\\
-                {tab}{tab}printf(\"tcdm_cont: %d\\n\", rt_perf_read(RT_PERF_TCDM_CONT));\\
-                {tab}}}\\
+                {tab}do_bench(&perf, 1<<RT_PERF_LD_STALL, 0);\\
+                {tab}printf(\"load_stalls: %d\\n\", rt_perf_read(RT_PERF_LD_STALL));\\
+                {tab}do_bench(&perf, 1<<RT_PERF_IMISS, 0);\\
+                {tab}printf(\"icache_miss: %d\\n\", rt_perf_read(RT_PERF_IMISS));\\
+                {tab}do_bench(&perf, 1<<RT_PERF_TCDM_CONT, 0);\\
+                {tab}printf(\"tcdm_cont: %d\\n\", rt_perf_read(RT_PERF_TCDM_CONT));\\
                 }}\\""".format(tab=self.tab)
             )
         )
@@ -702,46 +711,227 @@ def fmt_float(val):
     return hex(int_val)
 
 
-def generate_test(device_name, function_name, arguments, variables, implemented,
-                  use_l1=False, extended_output=True, n_macs=None, arg_ret_type=None):
+def generate_test(function_name, arguments, variables, implemented, use_l1=False,
+                  extended_output=True, n_ops=None, arg_ret_type=None):
     visible_env = [v.name for v in variables if v.visible]
-    testsets = [Testset(
-        name=v,
-        tests=[Test().build(test_idx=i,
-                            function_name=function_name,
-                            version=v,
-                            arg_ret_type=arg_ret_type,
-                            arguments=arguments,
-                            env=e,
-                            visible_env=visible_env,
-                            device_name=device_name,
-                            use_l1=use_l1,
-                            extended_output=extended_output,
-                            n_macs=n_macs).to_plptest()
-               for i, e in enumerate(Sweep(variables))]
-    ) for v in implemented if implemented[v]]
+    testsets = [
+        Testset(
+            name=device_name,
+            testsets=[
+                Testset(
+                    name=v,
+                    tests=[Test().build(test_idx=i,
+                                        function_name=function_name,
+                                        version=v,
+                                        arg_ret_type=arg_ret_type,
+                                        arguments=arguments,
+                                        env=e,
+                                        visible_env=visible_env,
+                                        device_name=device_name,
+                                        use_l1=use_l1,
+                                        extended_output=extended_output,
+                                        n_ops=n_ops).to_plptest()
+                           for i, e in enumerate(Sweep(variables))]
+                )
+                for v in impl if impl[v]
+            ]
+        )
+        for device_name, impl in implemented.items()
+    ]
+
     return {'testsets': testsets}
 
 
-def generate_stimuli_header(compute_result):
+def main():
     """
-    Parses the command line parameters, and generates the stimuli header file based on the
-    compute_result function passed as argument
+    Does either a setup or a clean of the test project
     """
     parser = argparse.ArgumentParser()
-
-    parser.add_argument('--json', nargs='+')
+    parser.add_argument('--setup', action="store_true")
+    parser.add_argument('--clean', action="store_true")
+    parser.add_argument('--gen', action="store_true")
+    parser.add_argument('--device')
     parser.add_argument('--folder')
-
+    parser.add_argument('--json', nargs='*')
     args = parser.parse_args()
 
-    # change to build folder
-    os.chdir(args.folder)
+    if args.clean:
+        clean()
+    elif args.setup:
+        setup(args.device)
+    elif args.gen:
+        # get the test directory
+        test_dir = os.environ['PLPTEST_PATH']
+        # add the location of gen_stimuli.py to the path
+        sys.path.append(test_dir)
+        # import gen_stimuli
+        from gen_stimuli import compute_result
 
-    # parse json
-    json_str = ' '.join(args.json)
-    test = Test().from_json(json_str)
+        # parse json
+        json_str = ' '.join(args.json)
+        test = Test().from_json(json_str)
 
-    # write header file
-    with HeaderWriter() as writer:
-        writer.write_test(test, compute_result)
+        # write header file
+        with HeaderWriter(allow_l1=test.device_name == 'riscy') as writer:
+            writer.write_test(test, compute_result)
+
+
+def setup(device):
+    """
+    Setup the test environment
+    """
+    # first, make sure that all the files are removed
+    clean()
+
+    # check for the target device
+    if device == "ibex":
+        setup_ibex()
+    elif device == "riscy":
+        setup_riscy()
+    else:
+        raise RuntimeError("Invalid device: %s" % device)
+
+
+def setup_ibex():
+    """
+    Setup test environment for ibex test
+    """
+    # write makefile
+    _write_file("Makefile", dedent(
+        """\
+        PULP_APP = test
+        PULP_APP_FC_SRCS = test.c
+        PULP_LDFLAGS += -lplpdsp
+        PULP_CFLAGS += -I$(CONFIG_BUILD_DIR) -O3 -g
+        ifdef TFLAGS
+            PULP_CFLAGS += $(TFLAGS)
+        endif
+        include $(PULP_SDK_HOME)/install/rules/pulp_rt.mk
+        PULP_CFLAGS += -D DATA=$(CONFIG_BUILD_DIR)$(BUILD_DIR_EXT)
+        """
+    ))
+
+    # write test.c
+    _write_file("test.c", dedent(
+        """\
+        #include "rt/rt_api.h"
+        #include "stdio.h"
+        #include "plp_math.h"
+        #include "data.h"
+        static int do_bench(rt_perf_t *perf, int events, int do_check)
+        {
+            rt_perf_conf(perf, events);
+            rt_perf_reset(perf);
+            rt_perf_start(perf);
+            FSIG
+            rt_perf_stop(perf);
+            int passed = 1;
+            if (do_check) {
+                CHECK
+            }
+            return passed;
+        }
+        int main(){
+            BENCH
+            return 0;
+        }
+        """
+    ))
+
+
+def setup_riscy():
+    """
+    Setup test environment for riscy test
+    """
+    _write_file("Makefile", dedent(
+        """\
+        PULP_APP = test
+        PULP_APP_FC_SRCS = test.c cluster.c
+        PULP_LDFLAGS += -lplpdsp
+        PULP_CFLAGS += -I$(CONFIG_BUILD_DIR) -O3 -g
+        ifdef TFLAGS
+            PULP_CFLAGS += $(TFLAGS)
+        endif
+        include $(PULP_SDK_HOME)/install/rules/pulp_rt.mk
+        PULP_CFLAGS += -D DATA=$(CONFIG_BUILD_DIR)$(BUILD_DIR_EXT)
+        """
+    ))
+
+    _write_file("test.c", dedent(
+        """\
+        #include "rt/rt_api.h"
+        #include "stdio.h"
+        #include "cluster.h"
+        int main(){
+            rt_cluster_mount(1, 0, 0, NULL);
+            rt_cluster_call(NULL, 0, cluster_entry, NULL, NULL, 0, 0, 0, NULL);
+            rt_cluster_mount(0, 0, 0, NULL);
+            return 0;
+        }
+        """
+    ))
+
+    _write_file("cluster.c", dedent(
+        """\
+        #include "rt/rt_api.h"
+        #include "stdio.h"
+        #include "plp_math.h"
+        #include "data.h"
+        static int do_bench(rt_perf_t *perf, int events, int do_check)
+        {
+            rt_perf_conf(perf, events);
+            rt_perf_reset(perf);
+            rt_perf_start(perf);
+            FSIG
+            rt_perf_stop(perf);
+            int passed = 1;
+            if (do_check) {
+                CHECK
+            }
+            return passed;
+        }
+        void cluster_entry(void *arg){
+            BENCH
+            return;
+        }
+        """
+    ))
+
+    _write_file("cluster.h", dedent(
+        """\
+        #ifndef __INC_CLUSTER_H__
+        #define __INC_CLUSTER_H__
+        void cluster_entry(void *arg);
+        #endif
+        """
+    ))
+
+
+def _write_file(filename, content):
+    with open(filename, "w") as f:
+        f.write(content)
+
+
+def clean():
+    """
+    Clean the test environment
+    """
+    if os.path.isfile("Makefile"):
+        print("removing Makefile")
+        os.remove("Makefile")
+    if os.path.isfile("cluster.c"):
+        print("removing cluster.c")
+        os.remove("cluster.c")
+    if os.path.isfile("cluster.h"):
+        print("removing cluster.h")
+        os.remove("cluster.h")
+    if os.path.isfile("test.c"):
+        print("removing test.c")
+        os.remove("test.c")
+    if os.path.isfile("data.h"):
+        print("removing data.h")
+        os.remove("data.h")
+
+
+if __name__ == "__main__":
+    main()

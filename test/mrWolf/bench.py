@@ -78,7 +78,7 @@ def get_most_recent_bench_filename():
 
 
 HEADER = ["name", "device", "dimension", "cycles", "instructions", "ipc", "imiss", "ld_stall",
-          "tcdm_cont", "macs", "mpc"]
+          "tcdm_cont", "ops", "mpc"]
 Run = namedtuple("Run", HEADER)
 
 
@@ -136,9 +136,9 @@ def match_two_runs(runs_a, runs_b):
 
 
 TABLE_HEADER = ["function", "device", "dimension", "cycles", "insn", "i/c", "imiss", "ld_stall",
-                "tcdm_cont", "macs", "macs/c"]
+                "tcdm_cont", "ops", "ops/c"]
 TABLE_HEADER_COMP = ["function", "device", "dimension", "cycles", "", "insn", "", "i/c", "",
-                     "imiss", "", "ld_stall", "", "tcdm_cont", "", "macs", "", "macs/c", ""]
+                     "imiss", "", "ld_stall", "", "tcdm_cont", "", "ops", "", "ops/c", ""]
 
 
 def print_runs(runs):
@@ -210,7 +210,7 @@ def run_from_csv_line(line):
                imiss=int(parts[6].strip()),
                ld_stall=int(parts[7].strip()),
                tcdm_cont=int(parts[8].strip()),
-               macs=int(parts[9].strip()),
+               ops=int(parts[9].strip()),
                mpc=float(parts[10].strip()))
 
 
@@ -225,7 +225,7 @@ def format_run_to_str_list(run):
             str(run.imiss),
             str(run.ld_stall),
             str(run.tcdm_cont),
-            str(run.macs),
+            str(run.ops),
             format_float(run.mpc)]
 
 
@@ -246,8 +246,8 @@ def format_comparison_to_str_list(new_run, old_run):
             format_diff_int(new_run.ld_stall, old_run.ld_stall),
             str(new_run.tcdm_cont),
             format_diff_int(new_run.tcdm_cont, old_run.tcdm_cont),
-            str(new_run.macs),
-            format_diff_int(new_run.macs, old_run.macs),
+            str(new_run.ops),
+            format_diff_int(new_run.ops, old_run.ops),
             format_float(new_run.mpc),
             format_diff_float(new_run.mpc, old_run.mpc)]
 

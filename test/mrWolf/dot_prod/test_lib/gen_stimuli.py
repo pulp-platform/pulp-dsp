@@ -81,15 +81,3 @@ def q_mul(a, b, p):
 def q_roundnorm(a, p):
     rounding = 1 << (p - 1)
     return q_sat((a + rounding) >> p)
-
-
-###########################
-# generate_stimuli_header #
-###########################
-
-
-if __name__ == "__main__":
-    import sys, os
-    sys.path.append(os.path.abspath(os.path.join(os.path.realpath(__file__), "../../../..")))
-    from pulp_dsp_test import generate_stimuli_header
-    generate_stimuli_header(compute_result)

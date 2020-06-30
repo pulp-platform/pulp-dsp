@@ -15,7 +15,7 @@ def compute_result(result_parameter, inputs, env, fix_point):
     Arguments
     ---------
     result_parameter: Either OutputArgument or ReturnValue (see pulp_dsp_test.py)
-    inputs: Dict mapping name to the Argument, with arg.value, arg.dtype (and arg.length)
+    inputs: Dict mapping name to the Argument, with arg.value, arg.ctype (and arg.length)
     env: Dict mapping the variable (SweepVariable or DynamicVariable) names to their value.
     fix_point: None (if no fixpoint is used) or decimal point
     """
@@ -39,7 +39,14 @@ def compute_result(result_parameter, inputs, env, fix_point):
         b = inputs['srcB'].value.astype(np.int32).reshape((env['len_n'], env['len_o']))
         result = np.matmul(a, b).astype(np.int32).reshape((env['len_res'], ))
     elif result_parameter.ctype == 'float':
-        raise RuntimeError("Float not implemented")
+        a = inputs['srcA'].value.astype(np.float32).reshape((env['len_m'], env['len_n']))
+        b = inputs['srcB'].value.astype(np.float32).reshape((env['len_n'], env['len_o']))
+        result = np.zeros((env['len_m'], env['len_o']), dtype=np.float32)
+        for m in range(env['len_m']):
+            for o in range(env['len_o']):
+                for n in range(env['len_n']):
+                    result[m, o] = np.float32(result[m, o] + np.float32(a[m, n] * b[n, o]))
+        result = result.reshape((env['len_res'], ))
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
 
@@ -75,15 +82,3 @@ def q_mul(a, b, p):
 def q_roundnorm(a, p):
     rounding = 1 << (p - 1)
     return q_sat((a + rounding) >> p)
-
-
-###########################
-# generate_stimuli_header #
-###########################
-
-
-if __name__ == "__main__":
-    import sys, os
-    sys.path.append(os.path.abspath(os.path.join(os.path.realpath(__file__), "../../../..")))
-    from pulp_dsp_test import generate_stimuli_header
-    generate_stimuli_header(compute_result)
