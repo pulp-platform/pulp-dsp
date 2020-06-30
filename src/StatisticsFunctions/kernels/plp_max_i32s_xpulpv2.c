@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_max_i32s_rv32im.c
- * Description:  Max value of a 32-bit integer vector for RV32IM
+ * Title:        plp_max_i32s_xpulpv2.c
+ * Description:  Max value of a 32-bit integer vector for XPULPV2
  *
  * $Date:        29.06.2020        
  *
