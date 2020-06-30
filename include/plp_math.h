@@ -928,6 +928,7 @@ void plp_mean_i32(
 
 
 
+
 /** -------------------------------------------------------
    @brief         Mean value of a 32-bit integer vector for RV32IM extension.
    @param[in]     pSrc       points to the input vector
@@ -956,6 +957,142 @@ void plp_mean_i32s_xpulpv2(
                            uint32_t blockSize,
                            int32_t * __restrict__ pRes);
 
+
+/** -------------------------------------------------------
+   @brief         Glue code for max value of a 32-bit integer vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    max value returned here
+   @return        none
+*/
+
+void plp_max_i32(
+                  const int32_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  int32_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Max value of a 32-bit integer vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    max value returned here
+   @return        none
+*/
+
+void plp_max_i32s_rv32im(
+                          const int32_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          int32_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Max value of a 32-bit integer vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    max value returned here
+   @return        none
+*/
+
+void plp_max_i32s_xpulpv2(
+                           const int32_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           int32_t * __restrict__ pRes);
+
+/** -------------------------------------------------------
+   @brief         Glue code for max value of a 16-bit integer vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    max value returned here
+   @return        none
+*/
+
+void plp_max_i16(
+                  const int16_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  int16_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Max value of a 16-bit integer vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    max value returned here
+   @return        none
+*/
+
+void plp_max_i16s_rv32im(
+                          const int16_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          int16_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Max value of a 16-bit integer vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    max value returned here
+   @return        none
+*/
+
+void plp_max_i16s_xpulpv2(
+                           const int16_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           int16_t * __restrict__ pRes);
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for max value of a 8-bit integer vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    max value returned here
+   @return        none
+*/
+
+void plp_max_i8(
+                  const int8_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  int8_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Max value of a 8-bit integer vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    max value returned here
+   @return        none
+*/
+
+void plp_max_i8s_rv32im(
+                          const int8_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          int8_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Max value of a 8-bit integer vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    max value returned here
+   @return        none
+*/
+
+void plp_max_i8s_xpulpv2(
+                           const int8_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           int8_t * __restrict__ pRes);
+
+
+
 /** -------------------------------------------------------
   @brief Glue code for convolution of 32-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
@@ -965,6 +1102,7 @@ void plp_mean_i32s_xpulpv2(
   @param[out] pRes     output result returned here
   @return        none
  */
+
 
 void plp_conv_i32(
                        const int32_t * pSrcA,
