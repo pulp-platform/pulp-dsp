@@ -47,6 +47,7 @@ FC_SRCS = \
 	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_i32_parallel.c \
 	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_i16_parallel.c \
 	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_i8_parallel.c \
+	src/TransformFunctions/plp_cfft_q16.c src/TransformFunctions/kernels/plp_cfft_q16s_rv32im.c \
 	src/TransformFunctions/plp_rfft_f32.c \
 	src/TransformFunctions/plp_rfft_f32_parallel.c \
 	src/CommonTables/plp_common_tables.c \
