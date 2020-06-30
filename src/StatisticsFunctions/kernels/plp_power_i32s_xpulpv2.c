@@ -76,7 +76,7 @@ void plp_power_i32s_xpulpv2(
 
   uint32_t blkCnt = 0;
   int32_t x1, x2;
-  int32_t sum;
+  int32_t sum = 0;
   
 #if defined(PLP_MATH_LOOPUNROLL)
   

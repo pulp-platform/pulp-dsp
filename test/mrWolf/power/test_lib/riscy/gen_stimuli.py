@@ -23,7 +23,7 @@ def compute_result(result_parameter, inputs, env, fix_point):
         p = inputs['pSrc'].value.astype(np.int32)
         result = np.zeros(1, dtype=np.int32)
         if fix_point is None or fix_point == 0:
-            result[0] = np.dot(p, p)
+            result[0] = q_sat(np.dot(p, p))
         else:
             if fix_point != 0:
                 for xa, xb in zip(p, p):
@@ -32,7 +32,7 @@ def compute_result(result_parameter, inputs, env, fix_point):
         p = inputs['pSrc'].value.astype(np.int16)
         result = np.zeros(1, dtype=np.int16)
         if fix_point is None or fix_point == 0:
-            result[0] = np.dot(p, p)
+            result[0] = q_sat(np.dot(p, p))
         else:
             if fix_point != 0:
                 for xa, xb in zip(p, p):
@@ -41,7 +41,7 @@ def compute_result(result_parameter, inputs, env, fix_point):
         p = inputs['pSrc'].value.astype(np.int8)
         result = np.zeros(1, dtype=np.int8)
         if fix_point is None or fix_point == 0:
-            result[0] = np.dot(p, p)
+            result[0] = q_sat(np.dot(p, p))
         else:
             if fix_point != 0:
                 for xa, xb in zip(p, p):

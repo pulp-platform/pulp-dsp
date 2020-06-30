@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_power_i16s_rv32im.c
- * Description:  Calculates the sum of squares on RV32IM cores
+ * Title:        plp_power_q32.c
+ * Description:  Calculates the sum of squares of an input vector
  *
  * $Date:        30.06.2020        
  *
@@ -27,17 +27,15 @@
  * limitations under the License.
  */
 
-
 #include "plp_math.h"
 
-
 /**
-   @ingroup power
+   @ingroup groupStats
 */
 
 /**
-   @defgroup powerKernels Power Kernels
-   Calculates the sum of squares of the input vector.
+   @defgroup power Power
+   Calculates the sum of squares of the input vector. 
    There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
@@ -57,49 +55,35 @@
 */
 
 /**
-   @addtogroup powerKernels
+   @addtogroup power
    @{
 */
 
+
 /**
-   @brief         Sum of squares of a 16-bit integer vector for RV32IM extension.
+   @brief         Glue code for sum of squares of a 8-bit fixed point vector.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
    @param[out]    pRes    sum of squares returned here
    @return        none
-*/
+ */
 
-void plp_power_i16s_rv32im(
-                         const int16_t * __restrict__ pSrc,
+
+void plp_power_q32(
+                         const int32_t * __restrict__ pSrc,
                          uint32_t blockSize,
+                         uint32_t deciPoint,
                          int32_t * __restrict__ pRes){
-
-  uint32_t blkCnt = 0;
-  int16_t x1, x2;
-  int32_t sum = 0;
   
-#if defined(PLP_MATH_LOOPUNROLL)
-  
-  for(blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
-    x1 = *pSrc++;
-    x2 = *pSrc++;
-    sum += x1*x1;
-    sum += x2*x2;
+  if (rt_cluster_id() == ARCHI_FC_CID){
+    plp_power_q32s_rv32im(pSrc, blockSize, deciPoint, pRes);
+  }
+  else{
+    plp_power_q32s_xpulpv2(pSrc, blockSize, deciPoint, pRes);
   }
 
-  if(blockSize%2 == 1){
-    x1 = *pSrc++;
-    sum += x1*x1;
-  }
-  
-#else
-
-  for(blkCnt=0;blkCnt<blockSize;blkCnt++){
-    x1 = *pSrc++;
-    sum += x1*x1;
-  }
-
-#endif
-
-  *pRes = sum;
 }
+
+/**
+  @} end of power group
+ */

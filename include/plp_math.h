@@ -1251,16 +1251,6 @@ void plp_max_i8s_xpulpv2(
 
 
 /** -------------------------------------------------------
-  @brief Glue code for convolution of 32-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  srcBLen   Length of the second input vector
-  @param[out] pRes     output result returned here
-  @return        none
- */
-
-/** -------------------------------------------------------
    @brief         Glue code for min value of a 32-bit integer vector.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
@@ -1393,6 +1383,282 @@ void plp_min_i8s_xpulpv2(
                            uint32_t blockSize,
                            int8_t * __restrict__ pRes);
 
+
+/** -------------------------------------------------------
+   @brief         Glue code for Sum of squares of a 32-bit integer vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Sum of squares returned here
+   @return        none
+*/
+
+void plp_power_i32(
+                  const int32_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  int32_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Sum of squares of a 32-bit integer vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Sum of squares returned here
+   @return        none
+*/
+
+void plp_power_i32s_rv32im(
+                          const int32_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          int32_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Sum of squares of a 32-bit integer vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    Sum of squares returned here
+   @return        none
+*/
+
+void plp_power_i32s_xpulpv2(
+                           const int32_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           int32_t * __restrict__ pRes);
+
+/** -------------------------------------------------------
+   @brief         Glue code for Sum of squares of a 16-bit integer vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Sum of squares returned here
+   @return        none
+*/
+
+void plp_power_i16(
+                  const int16_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  int32_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Sum of squares of a 16-bit integer vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Sum of squares returned here
+   @return        none
+*/
+
+void plp_power_i16s_rv32im(
+                          const int16_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          int32_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Sum of squares of a 16-bit integer vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    Sum of squares returned here
+   @return        none
+*/
+
+void plp_power_i16s_xpulpv2(
+                           const int16_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           int32_t * __restrict__ pRes);
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for Sum of squares of a 8-bit integer vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Sum of squares returned here
+   @return        none
+*/
+
+void plp_power_i8(
+                  const int8_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  int32_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Sum of squares of a 8-bit integer vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Sum of squares returned here
+   @return        none
+*/
+
+void plp_power_i8s_rv32im(
+                          const int8_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          int32_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Sum of squares of a 8-bit integer vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    Sum of squares value returned here
+   @return        none
+*/
+
+void plp_power_i8s_xpulpv2(
+                           const int8_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           int32_t * __restrict__ pRes);
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for Sum of squares of a 32-bit fixed point vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Sum of squares returned here
+   @return        none
+*/
+
+void plp_power_q32(
+                  const int32_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  uint32_t deciPoint,
+                  int32_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Sum of squares of a 32-bit fixed point vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Sum of squares value returned here
+   @return        none
+*/
+
+void plp_power_q32s_rv32im(
+                          const int32_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          uint32_t deciPoint,
+                          int32_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Sum of squares of a 32-bit fixed point vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    Sum of squares returned here
+   @return        none
+*/
+
+void plp_power_q32s_xpulpv2(
+                           const int32_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           uint32_t deciPoint,
+                           int32_t * __restrict__ pRes);
+
+/** -------------------------------------------------------
+   @brief         Glue code for Sum of squares of a 16-bit fixed point vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Sum of squares returned here
+   @return        none
+*/
+
+void plp_power_q16(
+                  const int16_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  uint32_t deciPoint,
+                  int32_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Sum of squares of a 16-bit fixed point vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Sum of squares returned here
+   @return        none
+*/
+
+void plp_power_q16s_rv32im(
+                          const int16_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          uint32_t deciPoint,
+                          int32_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Sum of squares of a 16-bit fixed point vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    Sum of squares returned here
+   @return        none
+*/
+
+void plp_power_q16s_xpulpv2(
+                           const int16_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           uint32_t deciPoint,
+                           int32_t * __restrict__ pRes);
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for Sum of squares of a 8-bit fixed point vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Sum of squares returned here
+   @return        none
+*/
+
+void plp_power_q8(
+                  const int8_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  uint32_t deciPoint,
+                  int32_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Sum of squares of a 8-bit fixed point vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Sum of squares returned here
+   @return        none
+*/
+
+void plp_power_q8s_rv32im(
+                          const int8_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          uint32_t deciPoint,
+                          int32_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Sum of squares of a 8-bit fixed point vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    Sum of squares value returned here
+   @return        none
+*/
+
+void plp_power_q8s_xpulpv2(
+                           const int8_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           uint32_t deciPoint,
+                           int32_t * __restrict__ pRes);
 
 
 /** -------------------------------------------------------

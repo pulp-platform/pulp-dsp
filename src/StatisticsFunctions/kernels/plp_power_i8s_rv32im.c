@@ -76,7 +76,7 @@ void plp_power_i8s_rv32im(
 
   uint32_t blkCnt = 0;
   int8_t x1, x2;
-  int32_t sum;
+  int32_t sum = 0;
   
 #if defined(PLP_MATH_LOOPUNROLL)
   

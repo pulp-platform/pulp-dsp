@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_power_i16s_rv32im.c
- * Description:  Calculates the sum of squares on RV32IM cores
+ * Title:        plp_power_q16s_xpulpv2.c
+ * Description:  Calculates the sum of squares on XPULPV2 cores
  *
  * $Date:        30.06.2020        
  *
@@ -62,16 +62,17 @@
 */
 
 /**
-   @brief         Sum of squares of a 16-bit integer vector for RV32IM extension.
+   @brief         Sum of squares of a 16-bit fixed point vector for XPULPV2 extension.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
    @param[out]    pRes    sum of squares returned here
    @return        none
 */
 
-void plp_power_i16s_rv32im(
+void plp_power_q16s_xpulpv2(
                          const int16_t * __restrict__ pSrc,
                          uint32_t blockSize,
+                         uint32_t deciPoint,
                          int32_t * __restrict__ pRes){
 
   uint32_t blkCnt = 0;
@@ -83,20 +84,20 @@ void plp_power_i16s_rv32im(
   for(blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
     x1 = *pSrc++;
     x2 = *pSrc++;
-    sum += x1*x1;
-    sum += x2*x2;
+    sum += ((x1*x1) >> deciPoint);
+    sum += ((x2*x2) >> deciPoint);
   }
 
   if(blockSize%2 == 1){
     x1 = *pSrc++;
-    sum += x1*x1;
+    sum += ((x1*x1) >> deciPoint);
   }
   
 #else
 
   for(blkCnt=0;blkCnt<blockSize;blkCnt++){
     x1 = *pSrc++;
-    sum += x1*x1;
+    sum += ((x1*x1) >> deciPoint);
   }
 
 #endif
