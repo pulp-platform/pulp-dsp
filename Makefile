@@ -95,7 +95,15 @@ FC_SRCS = \
 	src/MatrixFunctions/mat_add/plp_mat_add_i32_parallel.c \
 	src/MatrixFunctions/mat_add/plp_mat_add_i16_parallel.c \
 	src/MatrixFunctions/mat_add/plp_mat_add_i8_parallel.c \
-	src/MatrixFunctions/mat_add/plp_mat_add_f32_parallel.c
+	src/MatrixFunctions/mat_add/plp_mat_add_f32_parallel.c \
+	src/MatrixFunctions/mat_sub/plp_mat_sub_i32.c src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i32s_rv32im.c \
+	src/MatrixFunctions/mat_sub/plp_mat_sub_i16.c src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i16s_rv32im.c \
+	src/MatrixFunctions/mat_sub/plp_mat_sub_i8.c src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i8s_rv32im.c \
+	src/MatrixFunctions/mat_sub/plp_mat_sub_f32.c \
+	src/MatrixFunctions/mat_sub/plp_mat_sub_i32_parallel.c \
+	src/MatrixFunctions/mat_sub/plp_mat_sub_i16_parallel.c \
+	src/MatrixFunctions/mat_sub/plp_mat_sub_i8_parallel.c \
+	src/MatrixFunctions/mat_sub/plp_mat_sub_f32_parallel.c
 
 CL_SRCS = \
 	src/StatisticsFunctions/kernels/plp_entropy_f32s_xpulpv2.c \
@@ -196,7 +204,15 @@ CL_SRCS = \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i8v_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i8vp_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_f32s_xpulpv2.c \
-	src/MatrixFunctions/mat_add/kernels/plp_mat_add_f32p_xpulpv2.c
+	src/MatrixFunctions/mat_add/kernels/plp_mat_add_f32p_xpulpv2.c \
+	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i32s_xpulpv2.c \
+	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i32p_xpulpv2.c \
+	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i16v_xpulpv2.c \
+	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i16vp_xpulpv2.c \
+	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i8v_xpulpv2.c \
+	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i8vp_xpulpv2.c \
+	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_f32s_xpulpv2.c \
+	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_f32p_xpulpv2.c
 
 
 PULP_LIBS = plpdsp # the name of the library, after installing it into the pulp-sdk, add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project to use this library.
