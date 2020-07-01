@@ -50,7 +50,10 @@ def compute_result(result_parameter, inputs, env, fix_point):
                     result[0] = q_add(result[0], (xa * xb) >> fix_point)
                     
     elif result_parameter.ctype == 'float':
-        raise RuntimeError("Float not implemented")
+        p = inputs['pSrc'].value.astype(np.float32)
+        result = np.zeros(1, dtype=np.float32)
+        result[0] = q_sat(np.dot(p, p))
+        
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
 

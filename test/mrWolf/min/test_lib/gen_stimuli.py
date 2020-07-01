@@ -32,7 +32,9 @@ def compute_result(result_parameter, inputs, env, fix_point):
         result = np.zeros(1, dtype=np.int8)
         result[0] = np.amin(p)
     elif result_parameter.ctype == 'float':
-        raise RuntimeError("Float not implemented")
+        p = inputs['pSrc'].value.astype(np.float32)
+        result = np.zeros(1, dtype=np.float32)
+        result[0] = np.amin(p)
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
 
