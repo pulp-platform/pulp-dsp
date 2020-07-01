@@ -22,20 +22,26 @@ def compute_result(result_parameter, inputs, env, fix_point):
     if result_parameter.ctype == 'int32_t':
         p = inputs['pSrc'].value.astype(np.int32)
         result = np.zeros(1, dtype=np.int32)
-        result[0] = np.mean(p)
+        result[0] = int(np.mean(p))
+        
     elif result_parameter.ctype == 'int16_t':
         p = inputs['pSrc'].value.astype(np.int16)
         result = np.zeros(1, dtype=np.int16)
-        result[0] = np.mean(p)
+        result[0] = int(np.mean(p))
     elif result_parameter.ctype == 'int8_t':
         p = inputs['pSrc'].value.astype(np.int8)
         result = np.zeros(1, dtype=np.int8)
-        result[0] = np.mean(p)
+        result[0] = int(np.mean(p))
     elif result_parameter.ctype == 'float':
         raise RuntimeError("Float not implemented")
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
 
+
+    print("---------------------------------")
+    print(p)
+    print("---------------------------------")
+    
     return result
 
 

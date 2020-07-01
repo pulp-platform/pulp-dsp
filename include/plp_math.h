@@ -994,8 +994,6 @@ void plp_mean_i32(
                   int32_t * __restrict__ pRes);
 
 
-
-
 /** -------------------------------------------------------
    @brief         Mean value of a 32-bit integer vector for RV32IM extension.
    @param[in]     pSrc       points to the input vector
@@ -1037,8 +1035,6 @@ void plp_mean_i16(
                   const int16_t * __restrict__ pSrc,
                   uint32_t blockSize,
                   int16_t * __restrict__ pRes);
-
-
 
 
 /** -------------------------------------------------------
@@ -1613,6 +1609,7 @@ void plp_power_q16s_xpulpv2(
                            int32_t * __restrict__ pRes);
 
 
+
 /** -------------------------------------------------------
    @brief         Glue code for Sum of squares of a 8-bit fixed point vector.
    @param[in]     pSrc       points to the input vector
@@ -1661,6 +1658,86 @@ void plp_power_q8s_xpulpv2(
                            int32_t * __restrict__ pRes);
 
 
+
+/** -------------------------------------------------------
+   @brief         Glue code for square root of a 32-bit fixed point number.
+   @param[in]     in  32-Bit input integer
+   @param[out]    out    Square root of the input
+   @return        none
+*/
+
+void plp_sqrt_q32(
+                           const int32_t in,
+                           const uint32_t decBits,
+                           int32_t * __restrict__ out);
+
+
+/** -------------------------------------------------------
+   @brief         Square root of a 32-bit fixed point number for XPULPV2 extension.
+   @param[in]     in  32-Bit input integer
+   @param[out]    out    Square root of the input
+   @return        none
+*/
+
+void plp_sqrt_q32s_rv32im(
+                           const int32_t in,
+                           const uint32_t decBits,
+                           int32_t * __restrict__ out);
+
+
+/** -------------------------------------------------------
+   @brief         Square root of a 32-bit fixed point number for XPULPV2 extension.
+   @param[in]     in  32-Bit input integer
+   @param[out]    out    Square root of the input
+   @return        none
+*/
+
+void plp_sqrt_q32s_xpulpv2(
+                           const int32_t in,
+                           const uint32_t decBits,
+                           int32_t * __restrict__ out);
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for square root of a 16-bit fixed point number.
+   @param[in]     in  16-Bit input integer
+   @param[out]    out    Square root of the input
+   @return        none
+*/
+
+void plp_sqrt_q16(
+                           const int16_t in,
+                           const uint32_t decBits,
+                           int16_t * __restrict__ out);
+
+
+/** -------------------------------------------------------
+   @brief         Square root of a 16-bit fixed point number for XPULPV2 extension.
+   @param[in]     in  16-Bit input integer
+   @param[out]    out    Square root of the input
+   @return        none
+*/
+
+void plp_sqrt_q16s_rv32im(
+                           const int16_t in,
+                           const uint32_t decBits,
+                           int16_t * __restrict__ out);
+
+
+/** -------------------------------------------------------
+   @brief         Square root of a 16-bit fixed point number for XPULPV2 extension.
+   @param[in]     in  16-Bit input integer
+   @param[out]    out    Square root of the input
+   @return        none
+*/
+
+void plp_sqrt_q16s_xpulpv2(
+                           const int16_t in,
+                           const uint32_t decBits,
+                           int16_t * __restrict__ out);
+
+
+
 /** -------------------------------------------------------
   @brief Glue code for convolution of 32-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
@@ -1670,7 +1747,6 @@ void plp_power_q8s_xpulpv2(
   @param[out] pRes     output result returned here
   @return        none
  */
-
 
 void plp_conv_i32(
                        const int32_t * pSrcA,

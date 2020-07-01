@@ -1,17 +1,16 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_mean_i16s_xpulpv2.c
- * Description:  Mean value of a 16-bit integer vector for XPULPV2
+ * Description:  Kernel for calculation the mean of 16-Bit input vectors on XPULPV2
  *
- * $Date:        11. Jun 2019
- * $Revision:    V0
+ * $Date:        01.07.2020        
  *
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and University of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna. All rights reserved.
  *
- * Author: Xiaying Wang, ETH Zurich
+ * Author: Moritz Scherer, ETH Zurich
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -27,6 +26,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 
 #include "plp_math.h"
 
@@ -55,33 +55,32 @@ void plp_mean_i16s_xpulpv2(
                   int16_t * __restrict__ pRes){
 
 
-  uint32_t blkCnt, tmpBS;                      /* Loop counter, temporal BlockSize */
-  int32_t sum1 = 0, sum2=0;                          /* Temporary return variable */
+  uint32_t blkCnt;                      /* Loop counter, temporal BlockSize */
+  int32_t sum = 0;                             /* Temporary return variable */
 
+  int16_t x1,x2;
+  
 #if defined(PLP_MATH_LOOPUNROLL)
 
-        tmpBS = (blockSize>>1);
-
-        for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-          sum1 += *pSrc++;
-          sum2 += *pSrc++;
-        }
-
-        tmpBS = (blockSize%2U);
-
-        for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-          sum1 += *pSrc++;
-        }
-
+  for(blkCnt=0;blkCnt<(blockSize>>1);blkCnt++){
+    x1 = *pSrc++;
+    x2 = *pSrc++;
+    sum += x1;
+    sum += x2;
+  }
+  if(blockSize%2 == 1){
+    sum += (*pSrc++);
+  }
+  
 #else // PLP_MATH_LOOPUNROLL
 
-        for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum1 += *pSrc++;
-        }
+  for (blkCnt=0; blkCnt<blockSize; blkCnt++){
+    sum += *pSrc++;
+  }
 
 #endif // PLP_MATH_LOOPUNROLL
 
-        * pRes = ((sum1 + sum2) / blockSize);
+  *pRes = ( (sum) / (int32_t)blockSize);
 
 }
 

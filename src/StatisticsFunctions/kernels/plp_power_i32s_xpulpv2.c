@@ -32,7 +32,7 @@
 
 
 /**
-   @ingroup power
+   @ingroup groupStat
 */
 
 /**
