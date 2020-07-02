@@ -33,17 +33,22 @@ def compute_result(result_parameter, inputs, env, fix_point):
 
     a = inputs['p1'].value.astype(my_type)
     result = np.zeros(len(a), dtype=my_type)
-    complex_a = np.zeros(len(a)/2)
-    complex_result = np.zeros(len(a)/2)
+    complex_a = np.zeros(int(len(a)/2), dtype=np.csingle)
+    complex_result = np.zeros(len(a)>>1, dtype=np.csingle)
     if fix_point is None or fix_point == 0:
         raise RuntimeError("no fixpoint not implemented")
     else:
-        for i in range(len(a)/2):
-            complex_a[i] = a[2*i]>>inputs['deciPoint'] + (a[2*i + 1]>>inputs['deciPoint'])*j
+        for i in range(len(a)>>1):
+            complex_a[i] = a[2*i].astype(np.csingle)/(2**(inputs['deciPoint'].value)) + (a[2*i + 1].astype(np.csingle)/(2**(inputs['deciPoint'].value)))*1j
         complex_result = np.fft.fft(complex_a)
-        for i in range(len(a)/2):
-            result[2*i] = (np.real(complex_result[i])<<inputs['deciPoint']).astype(my_type)
-            result[2*i+1] = (np.imag(complex_result[i])<<inputs['deciPoint']).astype(my_type)
+        print(a)
+        print(complex_a)
+        print(complex_result)
+
+        for i in range(int(len(a)/2)):
+            result[2*i] = (np.real(complex_result[i])*(2**8)).astype(my_type)
+            result[2*i+1] = (np.imag(complex_result[i])*(2**8)).astype(my_type)
+        print(result)
 
     return result
 

@@ -205,7 +205,7 @@ class ArrayArgument(Argument):
 
 class OutputArgument(ArrayArgument):
     """Output Array Argument"""
-    def __init__(self, name, ctype, length, use_l1=None, tolerance=0):
+    def __init__(self, name, ctype, length, use_l1=None, tolerance=0, value=None):
         """
         name: name of the argument
         ctype: type of the argument (or 'var_type', 'ret_type')
@@ -216,6 +216,7 @@ class OutputArgument(ArrayArgument):
         super(OutputArgument, self).__init__(name, ctype, length, 0, use_l1)
         self.reference_name = self.name + "_reference"
         self.tolerance = tolerance
+        self.value = value
 
     def apply(self, env, var_type, version, use_l1):
         if self.use_l1 is not None:
@@ -224,12 +225,31 @@ class OutputArgument(ArrayArgument):
         tolerance = self.tolerance(version) if callable(self.tolerance) else self.tolerance
         return OutputArgument(self.name, ctype, self.interpret_length(env), use_l1, tolerance)
 
-    def generate_value(self):
-        """ Generates the value of argument, stores it in self.value and returns it. """
-        assert not isinstance(self.value, str)
-        assert isinstance(self.length, int)
-        self.value = np.zeros(self.length).astype(self.get_dtype())
-        return self.value
+    # def generate_value(self):
+    #     """ Generates the value of argument, stores it in self.value and returns it. """
+    #     assert not isinstance(self.value, str)
+    #     assert isinstance(self.length, int)
+    #     if self.input_value == 0:
+    #         self.value = np.zeros(self.length).astype(self.get_dtype())
+    #     elif self.input_value is None or (self.input_value.isinstance(self.input_value, tuple)
+    #                               and self.input_value.len() == 2):
+    #         if isinstance(self.input_value, tuple):
+    #             min_value, max_value = self.input_value
+    #         else:
+    #             min_value, max_value = self.get_range()
+    #         if self.ctype == "float":
+    #             self.value = np.random.uniform(low=min_value, high=max_value, size=self.length)
+    #         else:
+    #             self.value = np.random.randint(low=min_value, high=max_value + 1, size=self.length)
+    #         self.value = self.value.astype(dtype)
+    #     elif isinstance(self.input_value, (int, float)):
+    #         self.value = (np.ones(self.length) * self.input_value).astype(dtype)
+    #     elif isinstance(self.input_value, np.ndarray):
+    #         self.value = self.input_value
+    #         assert len(self.value) == self.length
+    #     else:
+    #         raise RuntimeError("Unknown Type!")
+    #     return self.value
 
     def generate_reference(self, gen_function, header):
         """ Generates and writes reference value to header file """
@@ -514,7 +534,7 @@ class Test(object):
         # build input dictionary
         inputs = {arg.name: arg
                   for arg in self.arguments
-                  if not isinstance(arg, (ReturnValue, OutputArgument))}
+                  if not isinstance(arg, (ReturnValue))}
         gen_function_prep = partial(gen_function, inputs=inputs, env=self.env,
                                     fix_point=self.fix_point)
         any([arg.generate_reference(gen_function_prep, header)

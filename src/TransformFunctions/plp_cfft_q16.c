@@ -60,9 +60,6 @@ void plp_cfft_q16(
 		return;
 	}
 
-	uint32_t L = S->fftLen;
-
-
 	if (rt_cluster_id() == ARCHI_FC_CID){
 		plp_cfft_q16s_rv32im(S, p1, ifftFlag, bitReverseFlag, deciPoint);
 	} 
