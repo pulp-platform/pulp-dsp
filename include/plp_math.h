@@ -2078,9 +2078,9 @@ void plp_var_q8s_xpulpv2(
 */
 
 void plp_sqrt_q32(
-                           const int32_t in,
-                           const uint32_t decBits,
-                           int32_t * __restrict__ out);
+                           const int32_t* __restrict__ pSrc,
+                           const uint32_t deciPoint,
+                           int32_t * __restrict__ pRes);
 
 
 /** -------------------------------------------------------
@@ -2091,9 +2091,9 @@ void plp_sqrt_q32(
 */
 
 void plp_sqrt_q32s_rv32im(
-                           const int32_t in,
-                           const uint32_t decBits,
-                           int32_t * __restrict__ out);
+                           const int32_t* __restrict__ pSrc,
+                           const uint32_t deciPoint,
+                           int32_t * __restrict__ pRes);
 
 
 /** -------------------------------------------------------
@@ -2104,9 +2104,9 @@ void plp_sqrt_q32s_rv32im(
 */
 
 void plp_sqrt_q32s_xpulpv2(
-                           const int32_t in,
-                           const uint32_t decBits,
-                           int32_t * __restrict__ out);
+                           const int32_t* __restrict__ pSrc,
+                           const uint32_t deciPoint,
+                           int32_t * __restrict__ pRes);
 
 
 /** -------------------------------------------------------
@@ -2117,9 +2117,9 @@ void plp_sqrt_q32s_xpulpv2(
 */
 
 void plp_sqrt_q16(
-                           const int16_t in,
-                           const uint32_t decBits,
-                           int16_t * __restrict__ out);
+                           const int16_t* __restrict__ pSrc,
+                           const uint32_t deciPoint,
+                           int16_t * __restrict__ pRes);
 
 
 /** -------------------------------------------------------
@@ -2130,10 +2130,9 @@ void plp_sqrt_q16(
 */
 
 void plp_sqrt_q16s_rv32im(
-                           const int16_t in,
-                           const uint32_t decBits,
-                           int16_t * __restrict__ out);
-
+                           const int16_t* __restrict__ pSrc,
+                           const uint32_t deciPoint,
+                           int16_t * __restrict__ pRes);
 
 /** -------------------------------------------------------
    @brief         Square root of a 16-bit fixed point number for XPULPV2 extension.
@@ -2143,10 +2142,9 @@ void plp_sqrt_q16s_rv32im(
 */
 
 void plp_sqrt_q16s_xpulpv2(
-                           const int16_t in,
-                           const uint32_t decBits,
-                           int16_t * __restrict__ out);
-
+                           const int16_t* __restrict__ pSrc,
+                           const uint32_t deciPoint,
+                           int16_t * __restrict__ pRes);
 
 
 /** -------------------------------------------------------
