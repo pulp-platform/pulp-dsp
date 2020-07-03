@@ -72,6 +72,14 @@ FC_SRCS = \
 	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_i32_parallel.c \
 	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_i16_parallel.c \
 	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_i8_parallel.c \
+	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_q32.c src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q32s_rv32im.c \
+	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_q16.c src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q16s_rv32im.c \
+	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_q8.c src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q8s_rv32im.c \
+	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_q32_parallel.c \
+	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_q16_parallel.c \
+	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_q8_parallel.c \
+	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_f32.c \
+	src/MatrixFunctions/mat_mult_trans/plp_mat_mult_trans_f32_parallel.c \
 	src/TransformFunctions/plp_rfft_f32.c \
 	src/TransformFunctions/plp_rfft_f32_parallel.c
 
@@ -152,6 +160,14 @@ src/BasicMathFunctions/kernels/plp_dot_prod_f32s_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i32p_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i16vp_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i8vp_xpulpv2.c	\
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q32s_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q16v_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q8v_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q32p_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q16vp_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q8vp_xpulpv2.c	\
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_f32s_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_f32p_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c
 
 

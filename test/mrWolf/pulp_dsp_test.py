@@ -7,12 +7,15 @@ from plptest import Shell, Check
 from itertools import product
 from functools import partial
 from collections import OrderedDict
+from copy import deepcopy
 import argparse
 import numpy as np
 import json
 import textwrap
 from textwrap import dedent
 import struct
+
+GENERATE_STIMULI = "gen_stimuli"
 
 
 class Variable(object):
@@ -51,11 +54,21 @@ class DynamicVariable(Variable):
 
 class Argument(object):
     """docstring for argument"""
-    def __init__(self, name, ctype, value, use_l1=None):
+    def __init__(self, name, ctype, value=None, use_l1=None):
         """
         name: name of the argument (in the function declaration)
-        ctype: C type of the argument (or 'var_type', 'ret_type')
-        value: Number for initialization, or SweepVariable, or None for random value
+        ctype: String, one of the following:
+               - C type of the argument (like 'int32_t')
+               - 'var_type' or 'ret_type', which is determined based on the current version.
+        value: One of the following:
+               - Number for constant initialization
+               - The name of a SweepVariable or DynamicVariable, to take their value
+               - None for a random value
+               - tuple(min, max) for a random value in the given range
+               - "gen_stimuli" (GENERATE_STIMULI): the function generate_stimuli in gen_stimuli.py
+                 will be called for generating the values. This function must take the argument
+                 itself, and the environment (dict(string, number)) as arguments, and return the
+                 desired value
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
         """
         super(Argument, self).__init__()
@@ -67,30 +80,29 @@ class Argument(object):
             self.value = self.value.name
 
     def to_dict(self, env, var_type, version, use_l1):
-        d = self.apply(env, var_type, version, use_l1).__dict__
-        return {'class': type(self).__name__, 'dict': d}
+        """ returns the serialized object """
+        obj = deepcopy(self)
+        obj.apply(env, var_type, version, use_l1)
+        return {'class': type(self).__name__, 'dict': obj.__dict__}
 
     def apply(self, env, var_type, version, use_l1):
-        """ Applies environment and var_type to the argument """
-        if self.use_l1 is not None:
-            use_l1 = self.use_l1
-        return Argument(self.name, self.get_type(var_type), self.interpret_value(env), use_l1)
-
-    def get_type(self, var_type):
+        """
+        Prepare the variable for the specific test case. The following is done:
+        - Apply the environment (current iteration of the sweep variables)
+        - Apply the version (var_type or ret_type)
+        - Apply use_l1 flag
+        """
+        # set the use_l1 flag
+        if self.use_l1 is None:
+            self.use_l1 = use_l1
+        # apply the ctype
         if self.ctype == 'var_type':
-            return var_type[0]
+            self.ctype = var_type[0]
         if self.ctype == 'ret_type':
-            return var_type[1]
-        return self.ctype
-
-    def interpret_value(self, env):
-        if self.value is None or isinstance(self.value, int):
-            return self.value
-        elif isinstance(self.value, str):
-            return env[self.value]
-        raise TypeError("self.value has an unknown type: %s" % str(self.value))
+            self.ctype = var_type[1]
 
     def get_range(self):
+        """ return the range for random values based on the ctype """
         assert self.ctype not in ['var_type', 'ret_type']
         if self.ctype == "float":
             return -1, 1
@@ -98,6 +110,7 @@ class Argument(object):
         return (-(2 ** (n_bits - 1)), (2 ** (n_bits - 1)) - 1)
 
     def get_dtype(self):
+        """ translation from self.ctype as string to a np dtype """
         if self.ctype == "int8_t":
             return np.int8
         if self.ctype == "int16_t":
@@ -108,32 +121,50 @@ class Argument(object):
             return np.float32
         raise RuntimeError("Unknown type: %s" % self.ctype)
 
-    def generate_value(self):
-        """ Generates the value of argument, stores it in self.value and returns it. """
-        assert not isinstance(self.value, str)
-        if self.value is None:
-            min_value, max_value = self.get_range()
+    def generate_value(self, env, gen_stimuli):
+        """ Interpret the type of self.value and generate the stimuli """
+        if self.value == GENERATE_STIMULI:
+            self.value = gen_stimuli(self, env)
+        elif isinstance(self.value, str):
+            self.value = env[self.value]
+        elif self.value is None or (isinstance(self.value, tuple) and len(self.value) == 2):
+            if isinstance(self.value, tuple):
+                min_value, max_value = self.value
+            else:
+                min_value, max_value = self.get_range()
             if self.ctype == "float":
                 self.value = np.random.uniform(low=min_value, high=max_value)
             else:
                 self.value = np.random.randint(low=min_value, high=max_value + 1)
             self.value = self.value.astype(self.get_dtype())
-        return self.value
+        assert isinstance(self.value, (float, int))
 
     def generate_stimuli(self, header):
         """ Writes stimuli value to header file """
-        self.generate_value()
         header.write_scalar(self.name, self.ctype, self.value, self.use_l1)
 
 
 class ArrayArgument(Argument):
     """Array Argument"""
-    def __init__(self, name, ctype, length, value, use_l1=None):
+    def __init__(self, name, ctype, length, value=None, use_l1=None):
         """
         name: name of the argument
-        ctype: type of the argument (or 'var_type', 'ret_type')
-        length: Length of the array, or SweepVariable, or tuple for random value between (min, max)
-        value: tuple for random value between (min, max), or list with values, or single number for all.
+        ctype: String, one of the following:
+               - C type of the argument (like 'int32_t')
+               - 'var_type' or 'ret_type', which is determined based on the current version.
+        length: One of the following:
+                - Integer for a constant length
+                - The name of a SweepVariable or DynamicVariable, to take their value
+                - tuple(min, max) for random value in the given range
+        value: One of the following:
+               - Number for constant initialization, all elements will have the same value
+               - None for a random value
+               - tuple(min, max) for a random value in the given range
+               - np.ndarray for a constant initialization
+               - "gen_stimuli" (GENERATE_STIMULI): the function generate_stimuli in gen_stimuli.py
+                 will be called for generating the values. This function must take the argument
+                 itself, and the environment (dict(string, number)) as arguments, and return the
+                 numpy array.
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
         """
         super(ArrayArgument, self).__init__(name, ctype, value, use_l1)
@@ -142,28 +173,38 @@ class ArrayArgument(Argument):
             self.length = self.length.name
 
     def apply(self, env, var_type, version, use_l1):
-        if self.use_l1 is not None:
-            use_l1 = self.use_l1
-        return ArrayArgument(self.name, self.get_type(var_type), self.interpret_length(env),
-                             self.interpret_value(env), use_l1)
+        """
+        Prepare the variable for the specific test case. The following is done:
+        - Apply the environment (current iteration of the sweep variables)
+        - Apply the version (var_type or ret_type)
+        - Apply use_l1 flag
+        - Interpret the length of the variable
+        """
+        # interpret the length
+        self.interpret_length(env)
+        # do the same thing as a regular Argument
+        super(ArrayArgument, self).apply(env, var_type, version, use_l1)
 
     def interpret_length(self, env):
+        """ interpret the length of the variable based on the environment """
         if isinstance(self.length, tuple):
             assert len(self.length) == 2
-            return random.randint(*self.length)
+            self.length = random.randint(*self.length)
         if isinstance(self.length, str):
-            return env[self.length]
+            self.length = env[self.length]
         if isinstance(self.length, int):
-            return self.length
-        raise TypeError("self.length has unknown type: %s" % str(self.length))
+            self.length = self.length
+        assert isinstance(self.length, int)
 
-    def generate_value(self):
+    def generate_value(self, env, gen_stimuli):
         """ Generates the value of argument, stores it in self.value and returns it. """
-        assert not isinstance(self.value, str)
         assert isinstance(self.length, int)
         dtype = self.get_dtype()
-        if self.value is None or (self.value.isinstance(self.value, tuple)
-                                  and self.value.len() == 2):
+        if self.value == GENERATE_STIMULI:
+            self.value = gen_stimuli(self, env)
+        elif isinstance(self.value, str):
+            self.value = env[self.value]
+        elif self.value is None or (isinstance(self.value, tuple) and len(self.value) == 2):
             if isinstance(self.value, tuple):
                 min_value, max_value = self.value
             else:
@@ -176,14 +217,12 @@ class ArrayArgument(Argument):
         elif isinstance(self.value, (int, float)):
             self.value = (np.ones(self.length) * self.value).astype(dtype)
         elif isinstance(self.value, np.ndarray):
-            assert len(self.value) == self.length
-        else:
-            raise RuntimeError("Unknown Type!")
-        return self.value
+            pass # nothing to do
+        assert isinstance(self.value, np.ndarray)
+        assert len(self.value) == self.length
 
     def generate_stimuli(self, header):
         """ Writes stimuli value to header file """
-        self.generate_value()
         header.write_array(self.name, self.ctype, self.value, self.use_l1)
 
 
@@ -202,18 +241,17 @@ class OutputArgument(ArrayArgument):
         self.tolerance = tolerance
 
     def apply(self, env, var_type, version, use_l1):
-        if self.use_l1 is not None:
-            use_l1 = self.use_l1
-        ctype = self.get_type(var_type)
-        tolerance = self.tolerance(version) if callable(self.tolerance) else self.tolerance
-        return OutputArgument(self.name, ctype, self.interpret_length(env), use_l1, tolerance)
-
-    def generate_value(self):
-        """ Generates the value of argument, stores it in self.value and returns it. """
-        assert not isinstance(self.value, str)
-        assert isinstance(self.length, int)
-        self.value = np.zeros(self.length).astype(self.get_dtype())
-        return self.value
+        """
+        Prepare the variable for the specific test case. The following is done:
+        - Apply the environment (current iteration of the sweep variables)
+        - Apply the version (var_type or ret_type)
+        - Apply use_l1 flag
+        - Interpret the length of the variable
+        - Apply the tolerance
+        """
+        if callable(self.tolerance):
+            self.tolerance = self.tolerance(version)
+        super(OutputArgument, self).apply(env, var_type, version, use_l1)
 
     def generate_reference(self, gen_function, header):
         """ Generates and writes reference value to header file """
@@ -234,11 +272,16 @@ class ReturnValue(Argument):
         self.tolerance = tolerance
 
     def apply(self, env, var_type, version, use_l1):
-        if self.use_l1 is not None:
-            use_l1 = self.use_l1
-        ctype = self.get_type(var_type)
-        tolerance = self.tolerance(version) if callable(self.tolerance) else self.tolerance
-        return OutputArgument(ctype, use_l1, tolerance)
+        """
+        Prepare the variable for the specific test case. The following is done:
+        - Apply the environment (current iteration of the sweep variables)
+        - Apply the version (var_type or ret_type)
+        - Apply use_l1 flag
+        - Apply the tolerance
+        """
+        if callable(self.tolerance):
+            self.tolerance = self.tolerance(version)
+        super(ReturnValue, self).apply(env, var_type, version, use_l1)
 
     def generate_reference(self, gen_function, header):
         """ Generates and writes reference value to header file """
@@ -256,11 +299,6 @@ class FixPointArgument(Argument):
         """
         super(FixPointArgument, self).__init__(name, "uint32_t", value, use_l1)
 
-    def apply(self, env, var_type, version, use_l1):
-        if self.use_l1 is not None:
-            use_l1 = self.use_l1
-        return FixPointArgument(self.name, self.interpret_value(env), use_l1)
-
 
 class ParallelArgument(Argument):
     """Argument for choosing the number of cores argument. ctype is always set to uint32_t"""
@@ -271,11 +309,6 @@ class ParallelArgument(Argument):
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
         """
         super(ParallelArgument, self).__init__(name, "uint32_t", value, use_l1)
-
-    def apply(self, env, var_type, version, use_l1):
-        if self.use_l1 is not None:
-            use_l1 = self.use_l1
-        return ParallelArgument(self.name, self.interpret_value(env), use_l1)
 
 
 def check_output(config, output, test_obj):
@@ -400,7 +433,9 @@ class Test(object):
         if version.startswith('q'):
             fix_point_args = [arg for arg in arguments if isinstance(arg, FixPointArgument)]
             assert len(fix_point_args) == 1
-            self.fix_point = fix_point_args[0].apply(self.env, self.var_type, self.version, self.use_l1).value
+            fix_point_copy = deepcopy(fix_point_args[0])
+            fix_point_copy.apply(self.env, self.var_type, self.version, self.use_l1)
+            self.fix_point = fix_point_copy.value
             assert isinstance(self.fix_point, int)
         else:
             self.fix_point = None
@@ -489,8 +524,9 @@ class Test(object):
         any([header.write_check(arg, self.device_name, self.extended_output)
              for arg in self.arguments if isinstance(arg, OutputArgument)])
 
-    def generate_stimuli(self, header):
-        any([arg.generate_stimuli(header) for arg in self.arguments])
+    def generate_stimuli(self, header, gen_stimuli):
+        [arg.generate_value(self.env, gen_stimuli) for arg in self.arguments]
+        [arg.generate_stimuli(header) for arg in self.arguments]
 
     def generate_reference(self, header, gen_function):
         # build input dictionary
@@ -507,7 +543,9 @@ class Sweep:
     """ Iterator over all variables and returns the environment"""
     def __init__(self, variables):
         self.variables = variables
-        self.prod_iter = product(*[v.values for v in self.variables if isinstance(v, SweepVariable)])
+        self.prod_iter = product(*[v.values
+                                   for v in self.variables
+                                   if isinstance(v, SweepVariable)])
 
     def __iter__(self):
         return self
@@ -540,9 +578,9 @@ class HeaderWriter(object):
         self.fp.close()
         self.fp = None
 
-    def write_test(self, test, gen_function):
+    def write_test(self, test, gen_function, gen_stimuli):
         assert self.fp is not None
-        test.generate_stimuli(self)
+        test.generate_stimuli(self, gen_stimuli)
         test.generate_reference(self, gen_function)
         self.generate_check(test)
         self.generate_fsig(test)
@@ -766,6 +804,10 @@ def main():
         sys.path.append(test_dir)
         # import gen_stimuli
         from gen_stimuli import compute_result
+        try:
+            from gen_stimuli import generate_stimuli
+        except ImportError:
+            generate_stimuli = None
 
         # parse json
         json_str = ' '.join(args.json)
@@ -773,7 +815,7 @@ def main():
 
         # write header file
         with HeaderWriter(allow_l1=test.device_name == 'riscy') as writer:
-            writer.write_test(test, compute_result)
+            writer.write_test(test, compute_result, generate_stimuli)
 
 
 def setup(device):
