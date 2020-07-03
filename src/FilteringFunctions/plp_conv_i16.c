@@ -53,11 +53,11 @@ static int32_t* _pRes1_16;
    @return        none
 */
 void plp_conv_i16(
-		  const int16_t *  pSrcA,
-		  const uint32_t srcALen,
-		  const int16_t *  pSrcB,
-		  const uint32_t srcBLen,
-		  int32_t *  pRes){
+                  const int16_t *  pSrcA,
+                  const uint32_t srcALen,
+                  const int16_t *  pSrcB,
+                  const uint32_t srcBLen,
+                  int32_t *  pRes){
 
   uint32_t in1Len, in2Len;
   const int16_t* pIn1;
@@ -104,19 +104,19 @@ void plp_conv_i16(
       k = resultsoffset >> 1;
       while(k){
 
-	temp1 = *_pRes++;
-	temp2 = *_pRes++;
+        temp1 = *_pRes++;
+        temp2 = *_pRes++;
 	
-	*pOut++ += temp1;
-	*pOut++ += temp2;
+        *pOut++ += temp1;
+        *pOut++ += temp2;
 
-	k--;
+        k--;
       }
 
       k = resultsoffset % 2U;
 
       if(k){
-	*pOut++ += *_pRes++;
+        *pOut++ += *_pRes++;
       }
       
     }
@@ -161,19 +161,19 @@ void plp_conv_i16(
       k = resultsoffset >> 1;
       while(k){
 
-	temp1 = *_pRes++;
-	temp2 = *_pRes++;
+        temp1 = *_pRes++;
+        temp2 = *_pRes++;
 	
-	*pOut++ += temp1;
-	*pOut++ += temp2;
+        *pOut++ += temp1;
+        *pOut++ += temp2;
 
-	k--;
+        k--;
       }
 
       k = resultsoffset % 2U;
 
       if(k){
-	*pOut++ += *_pRes++;
+        *pOut++ += *_pRes++;
       }
     }    
     

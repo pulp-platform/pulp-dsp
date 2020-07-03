@@ -58,10 +58,10 @@
 // Pre-condition: srcALen >= 2 and srcBLen >= 2, otherwise use vector dot product
 
 void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
-			  const uint32_t srcALen,
-			  const int8_t *  pSrcB,
-			  const uint32_t srcBLen,
-			  int32_t *  pRes){
+                          const uint32_t srcALen,
+                          const int8_t *  pSrcB,
+                          const uint32_t srcBLen,
+                          int32_t *  pRes){
 
 
   const int8_t *pIn1 = pSrcA;                               /* InputA pointer */
@@ -130,18 +130,18 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
       /* Loop unrolling: Compute 4 outputs at a time */
       k = count >> 2U;
       while (k > 0U){
-	  sum = __SUMDOTP4(_x1,_y1,sum);	  		  
+        sum = __SUMDOTP4(_x1,_y1,sum);	  		  
 
-	  _y1 = *((v4s*)(py-7));
-	  _x1 = *((v4s*)(px+4));
+        _y1 = *((v4s*)(py-7));
+        _x1 = *((v4s*)(px+4));
 
-	  px += 4U;
-	  py -= 4U;	  
+        px += 4U;
+        py -= 4U;	  
 
-	  _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
-	  k--;
+        _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
+        k--;
 
-	}
+      }
 
       /* Loop unrolling: Compute remaining outputs */
       k = count % 0x4U;
@@ -155,8 +155,8 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
       k = count;
 
       while(k){
-	sum = __MAC(sum, *px++, *py--);
-	k--;
+        sum = __MAC(sum, *px++, *py--);
+        k--;
       }
 
 #endif /* #if defined (PLP_MATH_LOOPUNROLL) */
@@ -210,84 +210,84 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
       /* Loop unrolling: Compute 4 outputs at a time */
       blkCnt = blockSize2 >> 2U;
       while (blkCnt > 0U)
-	{
-	  /* Set all accumulators to zero */
-	  acc0 = 0;
-	  acc1 = 0;
-	  acc2 = 0;
-	  acc3 = 0;
+        {
+          /* Set all accumulators to zero */
+          acc0 = 0;
+          acc1 = 0;
+          acc2 = 0;
+          acc3 = 0;
 
-	  /* Apply loop unrolling and compute 4 MACs simultaneously. */
-	  k = srcBLen >> 2U;
+          /* Apply loop unrolling and compute 4 MACs simultaneously. */
+          k = srcBLen >> 2U;
 	  
-	  /* First part of the processing with loop unrolling.  Compute 4 MACs at a time.
-	  ** a second loop below computes MACs for the remaining 1 to 3 samples. */
-	  do
-	    {
-	      /* Read y[srcBLen - 1] sample */
-	      _x1 = *((v4s*)px); // {x[0],x[1],x[2],x[3]}
-	      _x4 = *((v4s*)(px+3)); // {x[3],x[4],x[5],x[6]}
-	      _y1 = *((v4s*)(py-3)); // {y[srcBLen - 4],y[srcBLen - 3],y[srcBLen - 2],y[srcBLen - 1]} 
+          /* First part of the processing with loop unrolling.  Compute 4 MACs at a time.
+          ** a second loop below computes MACs for the remaining 1 to 3 samples. */
+          do
+            {
+              /* Read y[srcBLen - 1] sample */
+              _x1 = *((v4s*)px); // {x[0],x[1],x[2],x[3]}
+              _x4 = *((v4s*)(px+3)); // {x[3],x[4],x[5],x[6]}
+              _y1 = *((v4s*)(py-3)); // {y[srcBLen - 4],y[srcBLen - 3],y[srcBLen - 2],y[srcBLen - 1]} 
 
-	      px+=4U;
-	      py-=4U;
+              px+=4U;
+              py-=4U;
 	      
-	      _x2 = __builtin_shuffle(_x1,_x4, shufflemask2); // {x[1],x[2],x[3],x[4]}
-	      _x3 = __builtin_shuffle(_x1,_x4, shufflemask3); // {x[2],x[3],x[4],x[5]}
+              _x2 = __builtin_shuffle(_x1,_x4, shufflemask2); // {x[1],x[2],x[3],x[4]}
+              _x3 = __builtin_shuffle(_x1,_x4, shufflemask3); // {x[2],x[3],x[4],x[5]}
 	      
-	      _y1 = __builtin_shuffle(_y1,_y1,shufflemask1); // {y[srcBLen - 1],y[srcBLen - 2],y[srcBLen - 3],y[srcBLen - 4]} 
+              _y1 = __builtin_shuffle(_y1,_y1,shufflemask1); // {y[srcBLen - 1],y[srcBLen - 2],y[srcBLen - 3],y[srcBLen - 4]} 
 
-	      acc0 = __SUMDOTP4(_x1,_y1,acc0);
-	      acc1 = __SUMDOTP4(_x2,_y1,acc1);
-	      acc2 = __SUMDOTP4(_x3,_y1,acc2);
-	      acc3 = __SUMDOTP4(_x4,_y1,acc3);
+              acc0 = __SUMDOTP4(_x1,_y1,acc0);
+              acc1 = __SUMDOTP4(_x2,_y1,acc1);
+              acc2 = __SUMDOTP4(_x3,_y1,acc2);
+              acc3 = __SUMDOTP4(_x4,_y1,acc3);
 	      
-	    } while (--k);
+            } while (--k);
 
-	  /* If the srcBLen is not a multiple of 4, compute any remaining MACs here.
-	  ** No loop unrolling is used. */
+          /* If the srcBLen is not a multiple of 4, compute any remaining MACs here.
+          ** No loop unrolling is used. */
 
-	  k = srcBLen % 0x4U;
+          k = srcBLen % 0x4U;
 
-	  if (k > 0) {
+          if (k > 0) {
 
-		_x1 = *((v4s*)px); // {x[0],x[1],x[2],x[3]}
-		_x4 = *((v4s*)(px+3)); // {x[3],x[4],x[5],x[6]}
-		_y1 = *((v4s*)(py-3)); // {y[srcBLen - 4],y[srcBLen - 3],y[srcBLen - 2],y[srcBLen - 1]} 
+            _x1 = *((v4s*)px); // {x[0],x[1],x[2],x[3]}
+            _x4 = *((v4s*)(px+3)); // {x[3],x[4],x[5],x[6]}
+            _y1 = *((v4s*)(py-3)); // {y[srcBLen - 4],y[srcBLen - 3],y[srcBLen - 2],y[srcBLen - 1]} 
 
-		mask = ymask[k];
+            mask = ymask[k];
 
-		_x2 = __builtin_shuffle(_x1,_x4, shufflemask2); // {x[1],x[2],x[3],x[4]}
-		_x3 = __builtin_shuffle(_x1,_x4, shufflemask3); // {x[2],x[3],x[4],x[5]}
+            _x2 = __builtin_shuffle(_x1,_x4, shufflemask2); // {x[1],x[2],x[3],x[4]}
+            _x3 = __builtin_shuffle(_x1,_x4, shufflemask3); // {x[2],x[3],x[4],x[5]}
 
-		_y1 = __AND4(_y1,mask);	  
-		_y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
+            _y1 = __AND4(_y1,mask);	  
+            _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
 
-		/* Perform the multiply-accumulate */
+            /* Perform the multiply-accumulate */
 
-		acc0 = __SUMDOTP4(_x1,_y1,acc0);
-		acc1 = __SUMDOTP4(_x2,_y1,acc1);
-		acc2 = __SUMDOTP4(_x3,_y1,acc2);
-		acc3 = __SUMDOTP4(_x4,_y1,acc3);
+            acc0 = __SUMDOTP4(_x1,_y1,acc0);
+            acc1 = __SUMDOTP4(_x2,_y1,acc1);
+            acc2 = __SUMDOTP4(_x3,_y1,acc2);
+            acc3 = __SUMDOTP4(_x4,_y1,acc3);
 
-	  }
+          }
 
-	  /* Store the result in the accumulator in the destination buffer. */
-	  *pOut++ = acc0;
-	  *pOut++ = acc1;
-	  *pOut++ = acc2;
-	  *pOut++ = acc3;
+          /* Store the result in the accumulator in the destination buffer. */
+          *pOut++ = acc0;
+          *pOut++ = acc1;
+          *pOut++ = acc2;
+          *pOut++ = acc3;
 
-	  /* Increment the pointer pIn1 index, count by 4 */
-	  count += 4U;
+          /* Increment the pointer pIn1 index, count by 4 */
+          count += 4U;
 
-	  /* Update the inputA and inputB pointers for next MAC calculation */
-	  px = pIn1 + count;
-	  py = pSrc2;
+          /* Update the inputA and inputB pointers for next MAC calculation */
+          px = pIn1 + count;
+          py = pSrc2;
 
-	  /* Decrement the loop counter */
-	  blkCnt--;
-	}
+          /* Decrement the loop counter */
+          blkCnt--;
+        }
 
       /* If the blockSize2 is not a multiple of 4, compute any remaining output samples here.
       ** No loop unrolling is used. */
@@ -301,57 +301,57 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
 #endif /* #if defined (PLP_MATH_LOOPUNROLL)*/
 
       while (blkCnt > 0U)
-	{
-	  /* Accumulator is made zero for every iteration */
+        {
+          /* Accumulator is made zero for every iteration */
 
-	  _y1 = *((v4s*)(py-3));
-	  _x1 = *((v4s*)(px));
-	  sum = 0;
-	  _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
+          _y1 = *((v4s*)(py-3));
+          _x1 = *((v4s*)(px));
+          sum = 0;
+          _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
 
 #if  defined (PLP_MATH_LOOPUNROLL)
-	  /* Loop unrolling: Compute 8 outputs at a time */
-	  k = srcBLen >> 2U;
-	  while (k > 0U)
-	    { 
-	      sum = __SUMDOTP4(_x1,_y1,sum);
+          /* Loop unrolling: Compute 8 outputs at a time */
+          k = srcBLen >> 2U;
+          while (k > 0U)
+            { 
+              sum = __SUMDOTP4(_x1,_y1,sum);
 	      
-	      _y1 = *((v4s*)(py-7));
-	      _x1 = *((v4s*)(px+4));
+              _y1 = *((v4s*)(py-7));
+              _x1 = *((v4s*)(px+4));
 
-	      px += 4U;
-	      py -= 4U;
+              px += 4U;
+              py -= 4U;
 	      
-	      _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
-	      k--;
-	    }
+              _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
+              k--;
+            }
 
-	  /* Loop unrolling: Compute remaining outputs */
-	  k = srcBLen % 0x4U;
+          /* Loop unrolling: Compute remaining outputs */
+          k = srcBLen % 0x4U;
 	  
-	  mask = xmask[k];
-	  _x1 = __AND4(_x1,mask);
-	  sum = __SUMDOTP4(_x1,_y1,sum);
+          mask = xmask[k];
+          _x1 = __AND4(_x1,mask);
+          sum = __SUMDOTP4(_x1,_y1,sum);
 	  
 #else
-	  /* Initialize blkCnt with number of samples */
-	  k = srcBLen;
+          /* Initialize blkCnt with number of samples */
+          k = srcBLen;
 
 #endif /* #if defined (PLP_MATH_LOOPUNROLL) */
 	  
-	  /* Store the result in the accumulator in the destination buffer. */
-	  *pOut++ = sum;
+          /* Store the result in the accumulator in the destination buffer. */
+          *pOut++ = sum;
 
-	  /* Increment the MAC count */
-	  count++;
+          /* Increment the MAC count */
+          count++;
 
-	  /* Update the inputA and inputB pointers for next MAC calculation */
-	  px = pIn1 + count;
-	  py = pSrc2;
+          /* Update the inputA and inputB pointers for next MAC calculation */
+          px = pIn1 + count;
+          py = pSrc2;
 
-	  /* Decrement the loop counter */
-	  blkCnt--;
-	}
+          /* Decrement the loop counter */
+          blkCnt--;
+        }
     }
   else
     {
@@ -360,35 +360,35 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
       blkCnt = blockSize2;
 
       while (blkCnt > 0U)
-	{
-	  /* Accumulator is made zero for every iteration */
-	  sum = 0;
+        {
+          /* Accumulator is made zero for every iteration */
+          sum = 0;
 
-	  /* srcBLen number of MACS should be performed */
-	  k = srcBLen;
-	  mask = xmask[k];
+          /* srcBLen number of MACS should be performed */
+          k = srcBLen;
+          mask = xmask[k];
 
-	  _y1 = *((v4s*)(py-3));
-	  _x1 = *((v4s*)(px));
+          _y1 = *((v4s*)(py-3));
+          _x1 = *((v4s*)(px));
 
-	  _x1 = __AND4(_x1,mask);
-	  _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
+          _x1 = __AND4(_x1,mask);
+          _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
 	  
-	  sum = __SUMDOTP4(_x1,_y1,sum);
+          sum = __SUMDOTP4(_x1,_y1,sum);
       
-	  /* Store the result in the accumulator in the destination buffer. */
-	  *pOut++ = sum;
+          /* Store the result in the accumulator in the destination buffer. */
+          *pOut++ = sum;
 
-	  /* Increment the MAC count */
-	  count++;
+          /* Increment the MAC count */
+          count++;
 
-	  /* Update the inputA and inputB pointers for next MAC calculation */
-	  px = pIn1 + count;
-	  py = pSrc2;
+          /* Update the inputA and inputB pointers for next MAC calculation */
+          px = pIn1 + count;
+          py = pSrc2;
 
-	  /* Decrement the loop counter */
-	  blkCnt--;
-	}
+          /* Decrement the loop counter */
+          blkCnt--;
+        }
     }
 
 
@@ -432,19 +432,19 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
       k = blockSize3 >> 2U;
       
       while (k > 0U)
-	{	  	    
-	  sum = __SUMDOTP4(_x1,_y1,sum);
+        {	  	    
+          sum = __SUMDOTP4(_x1,_y1,sum);
 
-	  _y1 = *((v4s*)(py-7));
-	  _x1 = *((v4s*)(px+4));
+          _y1 = *((v4s*)(py-7));
+          _x1 = *((v4s*)(px+4));
 
-	  px += 4U;
-	  py -= 4U;
+          px += 4U;
+          py -= 4U;
 
-	  _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
+          _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
 
-	  k--;
-	}
+          k--;
+        }
 
       /* Loop unrolling: Compute remaining outputs */
       k = blockSize3 % 0x4U;
@@ -459,8 +459,8 @@ void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
       k = blockSize3;
 
       while(k){
-	sum = __MAC(sum,*px++,*py--);
-	k--;
+        sum = __MAC(sum,*px++,*py--);
+        k--;
       }
       
 #endif /* defined (PLP_MATH_LOOPUNROLL)*/

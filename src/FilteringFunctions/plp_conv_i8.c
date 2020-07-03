@@ -35,29 +35,29 @@ static int32_t* _pRes1_8;
 
 
 /**
-  @ingroup groupFilters
- */
+   @ingroup groupFilters
+*/
 
 /**
-  @addtogroup BasicConvolution
-  @{
- */
+   @addtogroup BasicConvolution
+   @{
+*/
 
 /**
-  @brief Glue code for convolution of 8-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  srcBLen   Length of the second input vector
-  @param[out] pRes     output result returned here
-  @return        none
- */
+   @brief Glue code for convolution of 8-bit integer vectors.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  srcALen   Length of the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  srcBLen   Length of the second input vector
+   @param[out] pRes     output result returned here
+   @return        none
+*/
 void plp_conv_i8(
-                       const int8_t *  pSrcA,
-		       const uint32_t srcALen,
-                       const int8_t *  pSrcB,
-		       const uint32_t srcBLen,
-                       int32_t *  pRes){
+                 const int8_t *  pSrcA,
+                 const uint32_t srcALen,
+                 const int8_t *  pSrcB,
+                 const uint32_t srcBLen,
+                 int32_t *  pRes){
   
   uint32_t in1Len, in2Len;
   const int8_t* pIn1;
@@ -103,26 +103,26 @@ void plp_conv_i8(
       k = resultsoffset >> 1;
       while(k){
 
-	temp1 = *_pRes++;
-	temp2 = *_pRes++;
+        temp1 = *_pRes++;
+        temp2 = *_pRes++;
 	
-	*pOut++ += temp1;
-	*pOut++ += temp2;
+        *pOut++ += temp1;
+        *pOut++ += temp2;
 
-	k--;
+        k--;
       }
 
       k = resultsoffset % 2U;
 
       if(k){
-	*pOut++ += *_pRes++;
+        *pOut++ += *_pRes++;
       }
       
     }
       
     plp_conv_i8s_rv32im(pIn1, in1Len, pIn2+(nPE-1)*src2Offset, in2Len - (src2Offset * (nPE-1)), _pRes1_8);
 
-        pOut = pRes + (nPE-1)*src2Offset;
+    pOut = pRes + (nPE-1)*src2Offset;
     _pRes = _pRes1_8;
     
     k = lastresultLen >> 1;
@@ -160,19 +160,19 @@ void plp_conv_i8(
       k = resultsoffset >> 1;
       while(k){
 
-	temp1 = *_pRes++;
-	temp2 = *_pRes++;
+        temp1 = *_pRes++;
+        temp2 = *_pRes++;
 	
-	*pOut++ += temp1;
-	*pOut++ += temp2;
+        *pOut++ += temp1;
+        *pOut++ += temp2;
 
-	k--;
+        k--;
       }
 
       k = resultsoffset % 2U;
 
       if(k){
-	*pOut++ += *_pRes++;
+        *pOut++ += *_pRes++;
       }
     }    
     
@@ -206,5 +206,5 @@ void plp_conv_i8(
 
 
 /**
-  @} end of BasicConvolution group
- */
+   @} end of BasicConvolution group
+*/
