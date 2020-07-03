@@ -8,7 +8,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna. 
  *
  * Author: Moritz Scherer, ETH Zurich
  *
@@ -74,7 +74,7 @@ void plp_sqrt_q32s_rv32im(
                            const uint32_t deciPoint,
                            int32_t * __restrict__ pRes){
 
-  register int32_t root, remHi, remLo, testDiv, count;
+    register int32_t root, remHi, remLo, testDiv, count;
 
   root = 0;
   remHi = 0;
@@ -82,7 +82,6 @@ void plp_sqrt_q32s_rv32im(
   count = 15 + ((32-deciPoint) >> 1);
   
 #if defined(PLP_MATH_LOOPUNROLL)
-
   do {
     remHi = (remHi << 2) | (remLo >> 30);
     remLo <<= 2;
@@ -94,6 +93,7 @@ void plp_sqrt_q32s_rv32im(
     }
   } while(count-- != 0);
 
+  *pRes = root;
     
 #else
 
@@ -108,8 +108,9 @@ void plp_sqrt_q32s_rv32im(
     }
   } while(count-- != 0);
 
+  *pRes = root;
+
 #endif
 
-  *pRes = root;
  
 }
