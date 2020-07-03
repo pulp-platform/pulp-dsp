@@ -64,7 +64,7 @@ void plp_cfft_q16(
 		plp_cfft_q16s_rv32im(S, p1, ifftFlag, bitReverseFlag, deciPoint);
 	} 
 	else {
-		// plp_cfft_q16v_xpulpv2(S, p1, ifftFlag, bitReverseFlag, deciPoint);
+		plp_cfft_q16v_xpulpv2(S, p1, ifftFlag, bitReverseFlag, deciPoint);
 	}
 
 }

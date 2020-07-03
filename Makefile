@@ -106,6 +106,8 @@ CL_SRCS = \
 	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i32p_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i16vp_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i8vp_xpulpv2.c	\
+	src/TransformFunctions/kernels/plp_bitreversal_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_cfft_q16v_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c
 
 

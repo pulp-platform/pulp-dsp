@@ -2693,6 +2693,20 @@ void plp_bitreversal_16s_rv32im(
 
 
 /**
+  @brief         In-place 16 bit reversal function for XPULPV2
+  @param[in,out] pSrc        points to in-place buffer of unknown 16-bit data type
+  @param[in]     bitRevLen   bit reversal table length
+  @param[in]     pBitRevTab  points to bit reversal table
+  @return        none
+*/
+
+void plp_bitreversal_16v_xpulpv2(
+        uint16_t *pSrc,
+  const uint16_t bitRevLen,
+  const uint16_t *pBitRevTab);
+
+
+/**
  * @brief         Glue code for quantized 16 bit complex fast fourier transform
  * @param[in]     S               points to an instance of the 16bit quantized CFFT structure
  * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.

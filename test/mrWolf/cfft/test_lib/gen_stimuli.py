@@ -41,14 +41,9 @@ def compute_result(result_parameter, inputs, env, fix_point):
         for i in range(len(a)>>1):
             complex_a[i] = a[2*i].astype(np.csingle)/(2**(inputs['deciPoint'].value)) + (a[2*i + 1].astype(np.csingle)/(2**(inputs['deciPoint'].value)))*1j
         complex_result = np.fft.fft(complex_a)
-        print(a)
-        print(complex_a)
-        print(complex_result)
-
         for i in range(int(len(a)/2)):
             result[2*i] = (np.real(complex_result[i])*(2**8)).astype(my_type)
             result[2*i+1] = (np.imag(complex_result[i])*(2**8)).astype(my_type)
-        print(result)
 
     return result
 

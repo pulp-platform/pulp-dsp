@@ -51,14 +51,16 @@ class DynamicVariable(Variable):
 
 class ExternalPointedArgument(object):
     """External Argument pointed to"""
-    def __init__(self, name):
+    def __init__(self, name, suffix=None):
         """
         name: name of the argument to be input
         """
         super(ExternalPointedArgument, self).__init__()
-        self.name = name
+        self.base_name = name
+        self.suffix = suffix
 
     def to_dict(self, env, var_type, version, use_l1):
+        self.name = self.base_name + str(env[self.suffix])
         return {'class': type(self).__name__, 'dict': self.__dict__}
 
     def generate_stimuli(self, header):
@@ -917,6 +919,8 @@ def setup_riscy():
         #include "stdio.h"
         #include "plp_math.h"
         #include "data.h"
+        #include "plp_const_structs.h"
+
         static int do_bench(rt_perf_t *perf, int events, int do_check)
         {
             rt_perf_conf(perf, events);
