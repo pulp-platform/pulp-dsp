@@ -41,6 +41,12 @@ FC_SRCS = \
 	src/BasicMathFunctions/plp_dot_prod_i8.c src/BasicMathFunctions/kernels/plp_dot_prod_i8s_rv32im.c \
 	src/BasicMathFunctions/plp_dot_prod_i16.c src/BasicMathFunctions/kernels/plp_dot_prod_i16s_rv32im.c \
 	src/BasicMathFunctions/plp_dot_prod_i32.c src/BasicMathFunctions/kernels/plp_dot_prod_i32s_rv32im.c \
+	src/FilteringFunctions/plp_correlate_i32.c src/FilteringFunctions/kernels/plp_correlate_i32s_rv32im.c \
+	src/FilteringFunctions/plp_correlate_i16.c src/FilteringFunctions/kernels/plp_correlate_i16s_rv32im.c \
+	src/FilteringFunctions/plp_correlate_i8.c src/FilteringFunctions/kernels/plp_correlate_i8s_rv32im.c \
+	src/FilteringFunctions/plp_correlate_q8.c src/FilteringFunctions/kernels/plp_correlate_q8s_rv32im.c \
+  src/FilteringFunctions/plp_correlate_q16.c src/FilteringFunctions/kernels/plp_correlate_q16s_rv32im.c \
+  src/FilteringFunctions/plp_correlate_q32.c src/FilteringFunctions/kernels/plp_correlate_q32s_rv32im.c \
 	src/FilteringFunctions/plp_conv_i32.c src/FilteringFunctions/kernels/plp_conv_i32s_rv32im.c \
 	src/FilteringFunctions/plp_conv_i16.c src/FilteringFunctions/kernels/plp_conv_i16s_rv32im.c \
 	src/FilteringFunctions/plp_conv_i8.c src/FilteringFunctions/kernels/plp_conv_i8s_rv32im.c \
@@ -118,6 +124,12 @@ src/BasicMathFunctions/kernels/plp_dot_prod_f32s_xpulpv2.c \
 	src/BasicMathFunctions/kernels/plp_dot_prod_i8v_xpulpv2.c \
 	src/BasicMathFunctions/kernels/plp_dot_prod_i16v_xpulpv2.c \
 	src/BasicMathFunctions/kernels/plp_dot_prod_i32s_xpulpv2.c \
+	src/FilteringFunctions/kernels/plp_correlate_i32s_xpulpv2.c \
+	src/FilteringFunctions/kernels/plp_correlate_i16s_xpulpv2.c \
+	src/FilteringFunctions/kernels/plp_correlate_i8s_xpulpv2.c \
+	src/FilteringFunctions/kernels/plp_correlate_q32s_xpulpv2.c \
+	src/FilteringFunctions/kernels/plp_correlate_q16s_xpulpv2.c \
+	src/FilteringFunctions/kernels/plp_correlate_q8s_xpulpv2.c \
 	src/FilteringFunctions/kernels/plp_conv_i32s_xpulpv2.c \
 	src/FilteringFunctions/kernels/plp_conv_i16s_xpulpv2.c \
 	src/FilteringFunctions/kernels/plp_conv_i8s_xpulpv2.c \
