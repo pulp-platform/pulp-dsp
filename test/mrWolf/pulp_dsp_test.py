@@ -227,32 +227,6 @@ class OutputArgument(ArrayArgument):
         tolerance = self.tolerance(version) if callable(self.tolerance) else self.tolerance
         return OutputArgument(self.name, ctype, self.interpret_length(env), use_l1, tolerance)
 
-    # def generate_value(self):
-    #     """ Generates the value of argument, stores it in self.value and returns it. """
-    #     assert not isinstance(self.value, str)
-    #     assert isinstance(self.length, int)
-    #     if self.input_value == 0:
-    #         self.value = np.zeros(self.length).astype(self.get_dtype())
-    #     elif self.input_value is None or (self.input_value.isinstance(self.input_value, tuple)
-    #                               and self.input_value.len() == 2):
-    #         if isinstance(self.input_value, tuple):
-    #             min_value, max_value = self.input_value
-    #         else:
-    #             min_value, max_value = self.get_range()
-    #         if self.ctype == "float":
-    #             self.value = np.random.uniform(low=min_value, high=max_value, size=self.length)
-    #         else:
-    #             self.value = np.random.randint(low=min_value, high=max_value + 1, size=self.length)
-    #         self.value = self.value.astype(dtype)
-    #     elif isinstance(self.input_value, (int, float)):
-    #         self.value = (np.ones(self.length) * self.input_value).astype(dtype)
-    #     elif isinstance(self.input_value, np.ndarray):
-    #         self.value = self.input_value
-    #         assert len(self.value) == self.length
-    #     else:
-    #         raise RuntimeError("Unknown Type!")
-    #     return self.value
-
     def generate_reference(self, gen_function, header):
         """ Generates and writes reference value to header file """
         reference = gen_function(self)
@@ -639,7 +613,7 @@ class HeaderWriter(object):
                     """
                 ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
                          tol=arg.tolerance, ty=arg.ctype)
-            elif target == "ibex":
+            elif target == "ibex" and arg.tolerance < 1:
                 # in this case, we cannot use floating point! But make sure that the fraction is at
                 # least 1.
                 check_str = dedent(
@@ -664,7 +638,7 @@ class HeaderWriter(object):
                          type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
                                   else (1 << 15) - 1 if arg.ctype == "int16_t"
                                   else (1 << 31) - 1)
-            else:
+            elif target == "riscy" and arg.tolerance < 1:
                 # Here, we can use float. But for the int-version, we want to round up.
                 check_str = dedent(
                     """\
@@ -689,6 +663,57 @@ class HeaderWriter(object):
                          type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
                                   else (1 << 15) - 1 if arg.ctype == "int16_t"
                                   else (1 << 31) - 1)
+            elif target == "ibex" and arg.tolerance >= 1:
+                # use absolute tolerances in this case
+                check_str = dedent(
+                    """\
+                    {sp}{sp}{ty} __tol_t = ABS({tol_fraction});\\
+                    {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
+                    {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
+                    {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
+                    {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
+                    {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
+                    {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
+                    {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
+                    {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
+                    {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
+                    {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
+                    """
+                ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
+                         ty=arg.ctype, tol_fraction=int(arg.tolerance),
+                         type_min=-(1 << 7) if arg.ctype == "int8_t"
+                                  else -(1 << 15) if arg.ctype == "int16_t"
+                                  else -(1 << 31),
+                         type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
+                                  else (1 << 15) - 1 if arg.ctype == "int16_t"
+                                  else (1 << 31) - 1)
+            elif target == "riscy" and arg.tolerance >= 1:
+                # use absolute tolerances in this case
+                check_str = dedent(
+                    """\
+                    {sp}{sp}float __tol = ABS({tol:E});\\
+                    {sp}{sp}{ty} __tol_t = ({ty})(__tol + 0.999);\\
+                    {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
+                    {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
+                    {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
+                    {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
+                    {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
+                    {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
+                    {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
+                    {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
+                    {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
+                    {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
+                    """
+                ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
+                         tol=arg.tolerance, ty=arg.ctype,
+                         type_min=-(1 << 7) if arg.ctype == "int8_t"
+                                  else -(1 << 15) if arg.ctype == "int16_t"
+                                  else -(1 << 31),
+                         type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
+                                  else (1 << 15) - 1 if arg.ctype == "int16_t"
+                                  else (1 << 31) - 1)
+
+
         self.fp.write('%sfor (int i = 0; i < %s; i++) {\\\n' % (self.tab, arg.length))
         if print_errors:
             self.fp.write(check_str)
