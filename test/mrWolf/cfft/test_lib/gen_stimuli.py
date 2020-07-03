@@ -19,6 +19,19 @@ def compute_result(result_parameter, inputs, env, fix_point):
     env: Dict mapping the variable (SweepVariable or DynamicVariable) names to their value.
     fix_point: None (if no fixpoint is used) or decimal point
     """
+
+    # len=16:    Q1.15 -> Q5.11
+    # len=32:    Q1.15 -> Q6.10
+    # len=64:    Q1.15 -> Q7.9
+    # len=128:   Q1.15 -> Q8.8
+    # len=256:   Q1.15 -> Q9.7
+    # len=512:   Q1.15 -> Q10.6
+    # len=1024:  Q1.15 -> Q11.5
+    # len=2048:  Q1.15 -> Q12.4
+    # len=4096:  Q1.15 -> Q13.3
+    bit_shift_dict = {16:11, 32:10, 64: 9, 128: 8, 256: 7, 512: 6, 1024: 5, 2048: 4, 4096: 3}
+
+
     ctype = inputs['p1'].ctype;
     if ctype == 'int32_t':
         my_type = np.int32
@@ -42,8 +55,8 @@ def compute_result(result_parameter, inputs, env, fix_point):
             complex_a[i] = a[2*i].astype(np.csingle)/(2**(inputs['deciPoint'].value)) + (a[2*i + 1].astype(np.csingle)/(2**(inputs['deciPoint'].value)))*1j
         complex_result = np.fft.fft(complex_a)
         for i in range(int(len(a)/2)):
-            result[2*i] = (np.real(complex_result[i])*(2**8)).astype(my_type)
-            result[2*i+1] = (np.imag(complex_result[i])*(2**8)).astype(my_type)
+            result[2*i] = (np.real(complex_result[i])*(2**(bit_shift_dict[int(len(a)/2)]))).astype(my_type)
+            result[2*i+1] = (np.imag(complex_result[i])*(2**(bit_shift_dict[int(len(a)/2)]))).astype(my_type)
 
     return result
 

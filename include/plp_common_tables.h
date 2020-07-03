@@ -27,35 +27,35 @@
 
 #include "plp_math.h"
 
-// extern const int16_t twiddleCoef_16_q16[24];
-// extern const int16_t twiddleCoef_32_q16[48];
-// extern const int16_t twiddleCoef_64_q16[96];
+extern const int16_t twiddleCoef_16_q16[24];
+extern const int16_t twiddleCoef_32_q16[48];
+extern const int16_t twiddleCoef_64_q16[96];
 extern const int16_t twiddleCoef_128_q16[192];
-// extern const int16_t twiddleCoef_256_q16[384];
-// extern const int16_t twiddleCoef_512_q16[768];
-// extern const int16_t twiddleCoef_1024_q16[1536];
-// extern const int16_t twiddleCoef_2048_q16[3072];
-// extern const int16_t twiddleCoef_4096_q16[6144];
+extern const int16_t twiddleCoef_256_q16[384];
+extern const int16_t twiddleCoef_512_q16[768];
+extern const int16_t twiddleCoef_1024_q16[1536];
+extern const int16_t twiddleCoef_2048_q16[3072];
+extern const int16_t twiddleCoef_4096_q16[6144];
 
-// #define PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH ((uint16_t)12)
-// #define PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH ((uint16_t)24)
-// #define PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH ((uint16_t)56)
+#define PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH ((uint16_t)12)
+#define PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH ((uint16_t)24)
+#define PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH ((uint16_t)56)
 #define PLPBITREVINDEXTABLE_FIXED_128_TABLE_LENGTH ((uint16_t)112)
-// #define PLPBITREVINDEXTABLE_FIXED_256_TABLE_LENGTH ((uint16_t)240)
-// #define PLPBITREVINDEXTABLE_FIXED_512_TABLE_LENGTH ((uint16_t)480)
-// #define PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH ((uint16_t)992)
-// #define PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH ((uint16_t)1984)
-// #define PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH ((uint16_t)4032)
+#define PLPBITREVINDEXTABLE_FIXED_256_TABLE_LENGTH ((uint16_t)240)
+#define PLPBITREVINDEXTABLE_FIXED_512_TABLE_LENGTH ((uint16_t)480)
+#define PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH ((uint16_t)992)
+#define PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH ((uint16_t)1984)
+#define PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH ((uint16_t)4032)
 
-// extern const uint16_t plpBitRevIndexTable_fixed_16[PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH];
-// extern const uint16_t plpBitRevIndexTable_fixed_32[PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH];
-// extern const uint16_t plpBitRevIndexTable_fixed_64[PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH];
+extern const uint16_t plpBitRevIndexTable_fixed_16[PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH];
+extern const uint16_t plpBitRevIndexTable_fixed_32[PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH];
+extern const uint16_t plpBitRevIndexTable_fixed_64[PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH];
 extern const uint16_t plpBitRevIndexTable_fixed_128[PLPBITREVINDEXTABLE_FIXED_128_TABLE_LENGTH];
-// extern const uint16_t plpBitRevIndexTable_fixed_256[PLPBITREVINDEXTABLE_FIXED_256_TABLE_LENGTH];
-// extern const uint16_t plpBitRevIndexTable_fixed_512[PLPBITREVINDEXTABLE_FIXED_512_TABLE_LENGTH];
-// extern const uint16_t plpBitRevIndexTable_fixed_1024[PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH];
-// extern const uint16_t plpBitRevIndexTable_fixed_2048[PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH];
-// extern const uint16_t plpBitRevIndexTable_fixed_4096[PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH];
+extern const uint16_t plpBitRevIndexTable_fixed_256[PLPBITREVINDEXTABLE_FIXED_256_TABLE_LENGTH];
+extern const uint16_t plpBitRevIndexTable_fixed_512[PLPBITREVINDEXTABLE_FIXED_512_TABLE_LENGTH];
+extern const uint16_t plpBitRevIndexTable_fixed_1024[PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH];
+extern const uint16_t plpBitRevIndexTable_fixed_2048[PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH];
+extern const uint16_t plpBitRevIndexTable_fixed_4096[PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH];
 
 extern const Complex_type_f32 twiddleCoef_rfft_2048[1024];
 

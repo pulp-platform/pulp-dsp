@@ -2708,6 +2708,18 @@ void plp_bitreversal_16v_xpulpv2(
 
 /**
  * @brief         Glue code for quantized 16 bit complex fast fourier transform
+ * 
+ * Fixed point units input -> output dependent on length:
+ * len=16:    Q1.15 -> Q5.11
+ * len=32:    Q1.15 -> Q6.10
+ * len=64:    Q1.15 -> Q7.9
+ * len=128:   Q1.15 -> Q8.8
+ * len=256:   Q1.15 -> Q9.7
+ * len=512:   Q1.15 -> Q10.6
+ * len=1024:  Q1.15 -> Q11.5
+ * len=2048:  Q1.15 -> Q12.4
+ * len=4096:  Q1.15 -> Q13.3
+ * 
  * @param[in]     S               points to an instance of the 16bit quantized CFFT structure
  * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
  * @param[in]     ifftFlag        flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1) transform.
