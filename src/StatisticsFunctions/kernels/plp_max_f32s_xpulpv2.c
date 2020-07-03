@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_max_i16s_xpulpv2.c
- * Description:  Max value of a 16-bit integer vector for XPULPV2
+ * Title:        plp_max_f32s_xpulpv2.c
+ * Description:  Max value of a 32-bit integer vector for XPULPV2
  *
  * $Date:        29.06.2020        
  *
@@ -29,6 +29,7 @@
 
 
 #include "plp_math.h"
+#include <float.h>
 
 
 /**
@@ -38,7 +39,7 @@
 /**
    @defgroup maxKernels Max Kernels
    Calculates the max of the input vector. Max is defined as the greatest of the elements in the vector.
-   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
+   There are separate functions for floating point, integer, and fixed point 32- 32- 8-bit data types. For lower precision integers (32- and 8-bit), functions exploiting SIMD instructions are provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
    <pre>
@@ -46,7 +47,7 @@
 
    data type = {f, i, q} respectively for floats, integers, fixed points
 
-   precision = {32, 16, 8} bits
+   precision = {32, 32, 8} bits
 
    method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
@@ -62,21 +63,21 @@
  */
 
 /**
-   @brief         Max value of a 16-bit integer vector for XPULPV2 extension.
+   @brief         Max value of a 32-bit float vector for XPULPV2 extension.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
    @param[out]    pRes    max value returned here
    @return        none
 */
 
-void plp_max_i16s_xpulpv2(
-                  const int16_t * __restrict__ pSrc,
+void plp_max_f32s_xpulpv2(
+                  const float * __restrict__ pSrc,
                   uint32_t blockSize,
-                  int16_t * __restrict__ pRes){
+                  float * __restrict__ pRes){
 
   uint32_t blkCnt = 0;
-  int16_t x1, x2;
-  int16_t max = 0xA000;
+  float x1, x2;
+  float max = pSrc[0];
   
 #if defined(PLP_MATH_LOOPUNROLL)
 
@@ -93,7 +94,7 @@ void plp_max_i16s_xpulpv2(
       max = x2;
     }  
   }
-    
+
   if(blockSize%2 == 1){
     x1 = *pSrc++;
     if(x1 > max) {
@@ -101,7 +102,7 @@ void plp_max_i16s_xpulpv2(
     }
   }
   
-  #else
+#else
 
   for(blkCnt=0;blkCnt<blockSize;blkCnt++){
     x1 = *pSrc++;
@@ -110,7 +111,7 @@ void plp_max_i16s_xpulpv2(
     }
   }
 
-  #endif
+#endif
 
   *pRes = max;
 }

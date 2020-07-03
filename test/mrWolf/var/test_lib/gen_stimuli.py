@@ -19,22 +19,42 @@ def compute_result(result_parameter, inputs, env, fix_point):
     env: Dict mapping the variable (SweepVariable or DynamicVariable) names to their value.
     fix_point: None (if no fixpoint is used) or decimal point
     """
+    bS = inputs['blockSize'].value
     if result_parameter.ctype == 'int32_t':
         p = inputs['pSrc'].value.astype(np.int32)
         result = np.zeros(1, dtype=np.int32)
-        result[0] = np.amax(p)
+        if fix_point is None or fix_point == 0:
+            result[0] = q_sat(np.var(p))
+        else:
+            if fix_point != 0:
+                for xa, xb in zip(p, p):
+                    result[0] = q_add(result[0], (xa * xb) >> fix_point)/bS
+                result[0] = q_add(result[0],-np.mean(p))
     elif result_parameter.ctype == 'int16_t':
         p = inputs['pSrc'].value.astype(np.int16)
         result = np.zeros(1, dtype=np.int16)
-        result[0] = np.amax(p)
+        if fix_point is None or fix_point == 0:
+            result[0] = q_sat(np.var(p))
+        else:
+            if fix_point != 0:
+                for xa, xb in zip(p, p):
+                    result[0] = q_add(result[0], (xa * xb) >> fix_point)/bS
+                result[0] = q_add(result[0],-np.mean(p))
     elif result_parameter.ctype == 'int8_t':
         p = inputs['pSrc'].value.astype(np.int8)
         result = np.zeros(1, dtype=np.int8)
-        result[0] = np.amax(p)
+        if fix_point is None or fix_point == 0:
+            result[0] = q_sat(np.var(p))
+        else:
+            if fix_point != 0:
+                for xa, xb in zip(p, p):
+                    result[0] = q_add(result[0], (xa * xb) >> fix_point)/bS
+                result[0] = q_add(result[0],-np.mean(p))
     elif result_parameter.ctype == 'float':
         p = inputs['pSrc'].value.astype(np.float32)
         result = np.zeros(1, dtype=np.float32)
-        result[0] = np.amax(p)
+        result[0] = np.var(p)
+        
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
 

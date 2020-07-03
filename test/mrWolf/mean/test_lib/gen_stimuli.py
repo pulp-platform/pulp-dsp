@@ -22,22 +22,28 @@ def compute_result(result_parameter, inputs, env, fix_point):
     if result_parameter.ctype == 'int32_t':
         p = inputs['pSrc'].value.astype(np.int32)
         result = np.zeros(1, dtype=np.int32)
-        result[0] = np.amax(p)
+        result[0] = int(np.mean(p))
+        
     elif result_parameter.ctype == 'int16_t':
         p = inputs['pSrc'].value.astype(np.int16)
         result = np.zeros(1, dtype=np.int16)
-        result[0] = np.amax(p)
+        result[0] = int(np.mean(p))
     elif result_parameter.ctype == 'int8_t':
         p = inputs['pSrc'].value.astype(np.int8)
         result = np.zeros(1, dtype=np.int8)
-        result[0] = np.amax(p)
+        result[0] = int(np.mean(p))
     elif result_parameter.ctype == 'float':
         p = inputs['pSrc'].value.astype(np.float32)
         result = np.zeros(1, dtype=np.float32)
-        result[0] = np.amax(p)
+        result[0] = np.mean(p)
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
 
+
+    print("---------------------------------")
+    print(p)
+    print("---------------------------------")
+    
     return result
 
 
@@ -70,3 +76,15 @@ def q_mul(a, b, p):
 def q_roundnorm(a, p):
     rounding = 1 << (p - 1)
     return q_sat((a + rounding) >> p)
+
+
+###########################
+# generate_stimuli_header #
+###########################
+
+
+if __name__ == "__main__":
+    import sys, os
+    sys.path.append(os.path.abspath(os.path.join(os.path.realpath(__file__), "../../../..")))
+    from pulp_dsp_test import generate_stimuli_header
+    generate_stimuli_header(compute_result)

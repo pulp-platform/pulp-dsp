@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_max_i16s_xpulpv2.c
- * Description:  Max value of a 16-bit integer vector for XPULPV2
+ * Title:        plp_var_q8.c
+ * Description:  Varimum value of a 8-bit integer vector glue code
  *
  * $Date:        29.06.2020        
  *
@@ -27,20 +27,18 @@
  * limitations under the License.
  */
 
-
 #include "plp_math.h"
 
+/**
+   @ingroup groupStats
+*/
 
 /**
-  @ingroup max
- */
+   @defgroup var Var
+   Calculates the varimum of the input vector. Var is defined as the the greatest value in the vector.
+   There are separate functions for floating point, integer, and fixed point 32- 8- 8-bit data types. For lower precision integers (8- and 8-bit), functions exploiting SIMD instructions are provided.
 
-/**
-   @defgroup maxKernels Max Kernels
-   Calculates the max of the input vector. Max is defined as the greatest of the elements in the vector.
-   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
-
-   The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
+   The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i8s):
    <pre>
    \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
 
@@ -54,63 +52,38 @@
 
    </pre>
 
- */
-
-/**
-  @addtogroup maxKernels
-  @{
- */
-
-/**
-   @brief         Max value of a 16-bit integer vector for XPULPV2 extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    max value returned here
-   @return        none
 */
 
-void plp_max_i16s_xpulpv2(
-                  const int16_t * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  int16_t * __restrict__ pRes){
+/**
+   @addtogroup var
+   @{
+*/
 
-  uint32_t blkCnt = 0;
-  int16_t x1, x2;
-  int16_t max = 0xA000;
+
+/**
+   @brief         Glue code for var value of a 8-bit integer vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    var value returned here
+   @return        none
+ */
+
+
+void plp_var_q8(
+                         const int8_t * __restrict__ pSrc,
+                         uint32_t blockSize,
+                         uint32_t deciPoint,
+                         int32_t * __restrict__ pRes){
   
-#if defined(PLP_MATH_LOOPUNROLL)
-
-  for(blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
-    x1 = *pSrc++;
-    x2 = *pSrc++;
-    if(x1 > max) {
-      if(x2 > x1){
-        max = x2;
-      } else {
-        max = x1;
-      }
-    } else if(x2 > max) {
-      max = x2;
-    }  
+  if (rt_cluster_id() == ARCHI_FC_CID){
+    plp_var_q8s_rv32im(pSrc, blockSize, deciPoint, pRes);
   }
-    
-  if(blockSize%2 == 1){
-    x1 = *pSrc++;
-    if(x1 > max) {
-      max = x1;
-    }
-  }
-  
-  #else
-
-  for(blkCnt=0;blkCnt<blockSize;blkCnt++){
-    x1 = *pSrc++;
-    if(x1 > max){
-      max = x1; 
-    }
+  else{
+    plp_var_q8s_xpulpv2(pSrc, blockSize, deciPoint, pRes);
   }
 
-  #endif
-
-  *pRes = max;
 }
+
+/**
+  @} end of mean group
+ */

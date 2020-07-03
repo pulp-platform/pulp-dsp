@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_mean_i32s_rv32im.c
- * Description:  Kernel for calculation the mean of 32-Bit input vectors on RV32IM
+ * Title:        plp_mean_i16s_rv32im.c
+ * Description:  Kernel for calculation the mean of 16-Bit input vectors on RV32IM
  *
  * $Date:        01.07.2020        
  *
@@ -42,23 +42,23 @@
  */
 
 /**
-   @brief         Mean value of a 32-bit integer vector for RV32IM extension.
+   @brief         Mean value of a 16-bit integer vector for RV32IM extension.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
    @param[out]    pRes    mean value returned here
    @return        none
 */
 
-void plp_mean_i32s_rv32im(
-                  const int32_t * __restrict__ pSrc,
+void plp_mean_i16s_rv32im(
+                  const int16_t * __restrict__ pSrc,
                   uint32_t blockSize,
-                  int32_t * __restrict__ pRes){
+                  int16_t * __restrict__ pRes){
 
 
-  uint32_t blkCnt;                      /* Loop counter, temporal BlockSize */
-  int32_t sum = 0;                             /* Temporary return variable */
+  uint32_t blkCnt, tmpBS;                      /* Loop counter, temporal BlockSize */
+  int32_t sum = 0; /* Temporary return variable */
 
-  int32_t x1,x2;
+  int16_t x1,x2;
   
 #if defined(PLP_MATH_LOOPUNROLL)
 

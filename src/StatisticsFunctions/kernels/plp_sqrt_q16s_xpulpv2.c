@@ -1,9 +1,9 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_max_i16s_xpulpv2.c
- * Description:  Max value of a 16-bit integer vector for XPULPV2
+ * Title:        plp_sqrt_q16s_xpulpv2.c
+ * Description:  
  *
- * $Date:        29.06.2020        
+ * $Date:        02.07.2020        
  *
  * Target Processor: PULP cores
  * ===================================================================== */
@@ -32,12 +32,12 @@
 
 
 /**
-  @ingroup max
- */
+   @ingroup sqrt
+*/
 
 /**
-   @defgroup maxKernels Max Kernels
-   Calculates the max of the input vector. Max is defined as the greatest of the elements in the vector.
+   @defgroup sqrtKernels Sqrt Kernels
+   Calculates the square root of the input number.
    There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
@@ -54,63 +54,63 @@
 
    </pre>
 
- */
+*/
 
 /**
-  @addtogroup maxKernels
-  @{
- */
+   @addtogroup sqrtKernels
+   @{
+*/
 
 /**
-   @brief         Max value of a 16-bit integer vector for XPULPV2 extension.
+   @brief         Square root of a 16-bit fixed point number for XPULPV2 extension.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    max value returned here
+   @param[out]    pRes    sum of squares returned here
    @return        none
 */
 
-void plp_max_i16s_xpulpv2(
-                  const int16_t * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  int16_t * __restrict__ pRes){
+void plp_sqrt_q16s_xpulpv2(
+                           const int16_t * __restrict__ pSrc,
+                           const uint32_t deciPoint,
+                           int16_t * __restrict__ pRes){
 
-  uint32_t blkCnt = 0;
-  int16_t x1, x2;
-  int16_t max = 0xA000;
+  register int16_t root, remHi, remLo, testDiv, count;
+
+  root = 0;
+  remHi = 0;
+  remLo = *pSrc;
+  count = 7 + ((16-deciPoint) >> 1);
   
 #if defined(PLP_MATH_LOOPUNROLL)
+  do {
+    remHi = (remHi << 2) | (remLo >> 14);
+    remLo <<= 2;
+    root <<= 1;
+    testDiv = (root << 1) + 1;
+    if (remHi >= testDiv) {
+      remHi -= testDiv;
+      root += 1;
+    }
+  } while(count-- != 0);
 
-  for(blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
-    x1 = *pSrc++;
-    x2 = *pSrc++;
-    if(x1 > max) {
-      if(x2 > x1){
-        max = x2;
-      } else {
-        max = x1;
-      }
-    } else if(x2 > max) {
-      max = x2;
-    }  
-  }
+  *pRes = root;
     
-  if(blockSize%2 == 1){
-    x1 = *pSrc++;
-    if(x1 > max) {
-      max = x1;
+#else
+
+  do {
+    remHi = (remHi << 2) | (remLo >> 14);
+    remLo <<= 2;
+    root <<= 1;
+    testDiv = (root << 1) + 1;
+    if (remHi >= testDiv) {
+      remHi -= testDiv;
+      root += 1;
     }
-  }
-  
-  #else
+  } while(count-- != 0);
 
-  for(blkCnt=0;blkCnt<blockSize;blkCnt++){
-    x1 = *pSrc++;
-    if(x1 > max){
-      max = x1; 
-    }
-  }
+  *pRes = root;
 
-  #endif
+#endif
 
-  *pRes = max;
+ 
 }

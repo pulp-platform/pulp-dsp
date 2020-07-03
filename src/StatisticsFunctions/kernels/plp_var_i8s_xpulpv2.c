@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_max_i16s_xpulpv2.c
- * Description:  Max value of a 16-bit integer vector for XPULPV2
+ * Title:        plp_var_i8s_xpulpv2.c
+ * Description:  Var value of a 8-bit integer vector for XPULPV2
  *
  * $Date:        29.06.2020        
  *
@@ -32,13 +32,13 @@
 
 
 /**
-  @ingroup max
+  @ingroup var
  */
 
 /**
-   @defgroup maxKernels Max Kernels
-   Calculates the max of the input vector. Max is defined as the greatest of the elements in the vector.
-   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
+   @defgroup varKernels Var Kernels
+   Calculates the var of the input vector. Var is defined as the greatest of the elements in the vector.
+   There are separate functions for floating point, integer, and fixed point 32- 8- 8-bit data types. For lower precision integers (8- and 8-bit), functions exploiting SIMD instructions are provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
    <pre>
@@ -46,7 +46,7 @@
 
    data type = {f, i, q} respectively for floats, integers, fixed points
 
-   precision = {32, 16, 8} bits
+   precision = {32, 8, 8} bits
 
    method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
@@ -57,60 +57,33 @@
  */
 
 /**
-  @addtogroup maxKernels
+  @addtogroup varKernels
   @{
  */
 
 /**
-   @brief         Max value of a 16-bit integer vector for XPULPV2 extension.
+   @brief         Var value of a 8-bit integer vector for XPULPV2 extension.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    max value returned here
+   @param[out]    pRes    var value returned here
    @return        none
 */
 
-void plp_max_i16s_xpulpv2(
-                  const int16_t * __restrict__ pSrc,
+void plp_var_i8s_xpulpv2(
+                  const int8_t * __restrict__ pSrc,
                   uint32_t blockSize,
-                  int16_t * __restrict__ pRes){
-
-  uint32_t blkCnt = 0;
-  int16_t x1, x2;
-  int16_t max = 0xA000;
+                  int32_t * __restrict__ pRes){
   
-#if defined(PLP_MATH_LOOPUNROLL)
+  int32_t square_of_mean;
+  int32_t square_of_values;
 
-  for(blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
-    x1 = *pSrc++;
-    x2 = *pSrc++;
-    if(x1 > max) {
-      if(x2 > x1){
-        max = x2;
-      } else {
-        max = x1;
-      }
-    } else if(x2 > max) {
-      max = x2;
-    }  
-  }
-    
-  if(blockSize%2 == 1){
-    x1 = *pSrc++;
-    if(x1 > max) {
-      max = x1;
-    }
-  }
+  int8_t mean;
+
+  plp_mean_i8(pSrc, blockSize, &mean);
+  square_of_mean = mean * mean;
+
+  plp_power_i8(pSrc, blockSize, &square_of_values);
   
-  #else
+  *pRes = (square_of_values/blockSize - square_of_mean);
 
-  for(blkCnt=0;blkCnt<blockSize;blkCnt++){
-    x1 = *pSrc++;
-    if(x1 > max){
-      max = x1; 
-    }
-  }
-
-  #endif
-
-  *pRes = max;
 }
