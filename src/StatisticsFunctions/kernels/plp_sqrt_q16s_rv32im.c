@@ -8,7 +8,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna. 
  *
  * Author: Moritz Scherer, ETH Zurich
  *
@@ -73,43 +73,38 @@ void plp_sqrt_q16s_rv32im(
                            const int16_t * __restrict__ pSrc,
                            const uint32_t deciPoint,
                            int16_t * __restrict__ pRes){
+  int16_t x,n;
 
-  register int16_t root, remHi, remLo, testDiv, count;
+  n = *pSrc;
+  x = 1 << (15-deciPoint);
 
-  root = 0;
-  remHi = 0;
-  remLo = *pSrc;
-  count = 7 + ((16-deciPoint) >> 1);
+  const int16_t three = 3 << (16-deciPoint);
+  int16_t x_square, nx_square, final;
   
 #if defined(PLP_MATH_LOOPUNROLL)
-  do {
-    remHi = (remHi << 2) | (remLo >> 14);
-    remLo <<= 2;
-    root <<= 1;
-    testDiv = (root << 1) + 1;
-    if (remHi >= testDiv) {
-      remHi -= testDiv;
-      root += 1;
-    }
-  } while(count-- != 0);
 
-  *pRes = root;
+  for (int i=0; i<2; i++){
+
+    x_square = (x*x)>>deciPoint;
+    nx_square  = (n*x_square)>>deciPoint;
+    final = (x*(three-nx_square))>>deciPoint;
     
+    x = final;
+  }
+
+  *pRes = x*n >> deciPoint;
 #else
 
-  do {
-    remHi = (remHi << 2) | (remLo >> 14);
-    remLo <<= 2;
-    root <<= 1;
-    testDiv = (root << 1) + 1;
-    if (remHi >= testDiv) {
-      remHi -= testDiv;
-      root += 1;
-    }
-  } while(count-- != 0);
+  for (int i=0; i<2; i++){
 
-  *pRes = root;
+    x_square = (x*x)>>deciPoint;
+    nx_square  = (n*x_square)>>deciPoint;
+    final = (x*(three-nx_square))>>deciPoint;
+    
+    x = final;
+  }
 
+  *pRes = x*n >> deciPoint;  
 #endif
 
  

@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and University of Bologna. All rights reserved.
+ * Copyright (C) 2019 ETH Zurich and University of Bologna. 
  *
  * Author: Moritz Scherer, ETH Zurich
  *
@@ -57,10 +57,10 @@
 // Pre-condition: srcALen >= 2 and srcBLen >= 2, otherwise use vector dot product
 
 void plp_conv_i16s_xpulpv2(const int16_t *  pSrcA,
-			   const uint32_t srcALen,
-			   const int16_t *  pSrcB,
-			   const uint32_t srcBLen,
-			   int32_t *  pRes){
+                           const uint32_t srcALen,
+                           const int16_t *  pSrcB,
+                           const uint32_t srcBLen,
+                           int32_t *  pRes){
 
 
   const int16_t *pIn1 = pSrcA;                               /* InputA pointer */
@@ -126,32 +126,32 @@ void plp_conv_i16s_xpulpv2(const int16_t *  pSrcA,
       /* Loop unrolling: Compute 4 outputs at a time */
       k = count >> 1U;
       while (k > 0U)
-	{
-	  _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);      
-	  sum = __SUMDOTP2(_x1,_y1,sum);
+        {
+          _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);      
+          sum = __SUMDOTP2(_x1,_y1,sum);
 
-	  px += 2;
-	  py -= 2;
+          px += 2;
+          py -= 2;
 	  
-	  _y1 = *((v2s*)(py-1));
-	  _x1 = *((v2s*)(px));
+          _y1 = *((v2s*)(py-1));
+          _x1 = *((v2s*)(px));
 	  
-	  k--;
-	}
+          k--;
+        }
 
       /* Loop unrolling: Compute remaining outputs */
       k = count % 0x2U;
 
       if(k){
-	sum = __MAC(sum,_x1[0],_y1[1]);
+        sum = __MAC(sum,_x1[0],_y1[1]);
       }
 #else
       /* Initialize k with number of samples */
       k = count;
 
       while(k){
-	sum = __MAC(sum, *px++,*py--);
-	k--;
+        sum = __MAC(sum, *px++,*py--);
+        k--;
       }
 
 #endif /* #if defined (PLP_MATH_LOOPUNROLL) */
@@ -205,111 +205,111 @@ void plp_conv_i16s_xpulpv2(const int16_t *  pSrcA,
       /* Loop unrolling: Compute 4 outputs at a time */
       blkCnt = blockSize2 >> 2U;
       while (blkCnt > 0U)
-	{
-	  /* Set all accumulators to zero */
-	  acc0 = 0;
-	  acc1 = 0;
-	  acc2 = 0;
-	  acc3 = 0;
+        {
+          /* Set all accumulators to zero */
+          acc0 = 0;
+          acc1 = 0;
+          acc2 = 0;
+          acc3 = 0;
 
-	  /* Apply loop unrolling and compute 4 MACs simultaneously. */
-	  k = srcBLen >> 2U;
+          /* Apply loop unrolling and compute 4 MACs simultaneously. */
+          k = srcBLen >> 2U;
 
-	  /* First part of the processing with loop unrolling.  Compute 4 MACs at a time.
-	  ** a second loop below computes MACs for the remaining 1 to 3 samples. */
-	  do
-	    {
+          /* First part of the processing with loop unrolling.  Compute 4 MACs at a time.
+          ** a second loop below computes MACs for the remaining 1 to 3 samples. */
+          do
+            {
 
-	      _y1 = *((v2s*)(py-1)); // { y[srcBLen - 2] , y[srcBLen - 1] }
-	      _y2 = *((v2s*)(py-3)); // { y[srcBLen - 4] , y[srcBLen - 3] }
+              _y1 = *((v2s*)(py-1)); // { y[srcBLen - 2] , y[srcBLen - 1] }
+              _y2 = *((v2s*)(py-3)); // { y[srcBLen - 4] , y[srcBLen - 3] }
 
-	      _x3 = *((v2s*)(px+2)); // {x[2], x[3]}
-	      _x5 = *((v2s*)(px+4)); // {x[4], x[5]}
-	      _x7 = *((v2s*)(px+6)); // {x[6], x[7]}
+              _x3 = *((v2s*)(px+2)); // {x[2], x[3]}
+              _x5 = *((v2s*)(px+4)); // {x[4], x[5]}
+              _x7 = *((v2s*)(px+6)); // {x[6], x[7]}
 	      
-	      _y1 = __builtin_shuffle(_y1,_y1,shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
+              _y1 = __builtin_shuffle(_y1,_y1,shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
 
-	      // Load _x1 later to keep it in the register
-	      _x1 = *((v2s*)(px)); // {x[0], x[1]}
+              // Load _x1 later to keep it in the register
+              _x1 = *((v2s*)(px)); // {x[0], x[1]}
 	     
-	      _x4 = __builtin_shuffle(_x3, _x5,shufflemask2); // {x[3], x[4]}
-	      _x2 = __builtin_shuffle(_x1, _x3,shufflemask2); // {x[1], x[2]}
+              _x4 = __builtin_shuffle(_x3, _x5,shufflemask2); // {x[3], x[4]}
+              _x2 = __builtin_shuffle(_x1, _x3,shufflemask2); // {x[1], x[2]}
 	      
-	      /* acc0 +=  x[0] * y[srcBLen - 1] +  x[1] * y[srcBLen - 2] */
-	      acc0 = __SUMDOTP2(_x1, _y1, acc0);
-	      /* acc1 +=  x[1] * y[srcBLen - 1] +  x[2] * y[srcBLen - 2] */
-	      acc1 = __SUMDOTP2(_x2, _y1, acc1);	      
-	      /* acc2 +=  x[2] * y[srcBLen - 1] +  x[3] * y[srcBLen - 2]*/
-	      acc2 = __SUMDOTP2(_x3, _y1, acc2);
-	      /* acc3 +=  x[3] * y[srcBLen - 1] +  x[4] * y[srcBLen - 2] */
-	      acc3 = __SUMDOTP2(_x4, _y1, acc3);
-	      /* Perform the multiply-accumulate */
+              /* acc0 +=  x[0] * y[srcBLen - 1] +  x[1] * y[srcBLen - 2] */
+              acc0 = __SUMDOTP2(_x1, _y1, acc0);
+              /* acc1 +=  x[1] * y[srcBLen - 1] +  x[2] * y[srcBLen - 2] */
+              acc1 = __SUMDOTP2(_x2, _y1, acc1);	      
+              /* acc2 +=  x[2] * y[srcBLen - 1] +  x[3] * y[srcBLen - 2]*/
+              acc2 = __SUMDOTP2(_x3, _y1, acc2);
+              /* acc3 +=  x[3] * y[srcBLen - 1] +  x[4] * y[srcBLen - 2] */
+              acc3 = __SUMDOTP2(_x4, _y1, acc3);
+              /* Perform the multiply-accumulate */
 
-	      // Shuffle _x6 later to make sure that _x5 and _x6 are in the register
-	      _x6 = __builtin_shuffle(_x5, _x7,shufflemask2); // {x[5], x[6]}
+              // Shuffle _x6 later to make sure that _x5 and _x6 are in the register
+              _x6 = __builtin_shuffle(_x5, _x7,shufflemask2); // {x[5], x[6]}
 
-	      // Shuffle _y2 later to be sure it is in the register
-	      _y2 = __builtin_shuffle(_y2,_y2,shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
+              // Shuffle _y2 later to be sure it is in the register
+              _y2 = __builtin_shuffle(_y2,_y2,shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
 
-	      /* acc0 +=  x[2] * y[srcBLen - 3] + x[3] * y[srcBLen - 4]  */
-	      acc0 = __SUMDOTP2(_x3, _y2, acc0);
-	      /* acc1 +=  x[3] * y[srcBLen - 3] + x[4] * y[srcBLen - 4] */
-	      acc1 = __SUMDOTP2(_x4, _y2, acc1);
-	      /* acc2 +=  x[4] * y[srcBLen - 3] + x[5] * y[srcBLen - 4]  */
-	      acc2 = __SUMDOTP2(_x5, _y2, acc2);
-	      /* acc3 +=  x[5] * y[srcBLen - 3] + x[6] * y[srcBLen - 4] */
-	      acc3 = __SUMDOTP2(_x6, _y2, acc3);
+              /* acc0 +=  x[2] * y[srcBLen - 3] + x[3] * y[srcBLen - 4]  */
+              acc0 = __SUMDOTP2(_x3, _y2, acc0);
+              /* acc1 +=  x[3] * y[srcBLen - 3] + x[4] * y[srcBLen - 4] */
+              acc1 = __SUMDOTP2(_x4, _y2, acc1);
+              /* acc2 +=  x[4] * y[srcBLen - 3] + x[5] * y[srcBLen - 4]  */
+              acc2 = __SUMDOTP2(_x5, _y2, acc2);
+              /* acc3 +=  x[5] * y[srcBLen - 3] + x[6] * y[srcBLen - 4] */
+              acc3 = __SUMDOTP2(_x6, _y2, acc3);
 	      
-	      px += 4U;
-	      py -= 4U;
+              px += 4U;
+              py -= 4U;
 	      
-	    } while (--k);
+            } while (--k);
 
-	  /* If the srcBLen is not a multiple of 4, compute any remaining MACs here.
-	  ** No loop unrolling is used. */
-	  k = srcBLen % 0x4U;
+          /* If the srcBLen is not a multiple of 4, compute any remaining MACs here.
+          ** No loop unrolling is used. */
+          k = srcBLen % 0x4U;
 
-	  while (k > 0U)
-	    {
-	      /* Read y[srcBLen - 5] sample */
-	      c0 = *py--;
+          while (k > 0U)
+            {
+              /* Read y[srcBLen - 5] sample */
+              c0 = *py--;
 	      
-	      _x1 = *((v2s*)(px)); // { x[0] , x[1] }
-	      _x2 = *((v2s*)(px+2)); // { x[2] , x[3] }
+              _x1 = *((v2s*)(px)); // { x[0] , x[1] }
+              _x2 = *((v2s*)(px+2)); // { x[2] , x[3] }
 
-	      px++;
+              px++;
 	      
-	      /* Perform the multiply-accumulate */
-	      /* acc0 +=  x[4] * y[srcBLen - 5] */
-	      acc0 += _x1[0] * c0;
-	      /* acc1 +=  x[5] * y[srcBLen - 5] */
-	      acc1 += _x1[1] * c0;
-	      /* acc2 +=  x[6] * y[srcBLen - 5] */
-	      acc2 += _x2[0] * c0;
-	      /* acc3 +=  x[7] * y[srcBLen - 5] */
-	      acc3 += _x2[1] * c0;
+              /* Perform the multiply-accumulate */
+              /* acc0 +=  x[4] * y[srcBLen - 5] */
+              acc0 += _x1[0] * c0;
+              /* acc1 +=  x[5] * y[srcBLen - 5] */
+              acc1 += _x1[1] * c0;
+              /* acc2 +=  x[6] * y[srcBLen - 5] */
+              acc2 += _x2[0] * c0;
+              /* acc3 +=  x[7] * y[srcBLen - 5] */
+              acc3 += _x2[1] * c0;
 
-	      /* Decrement the loop counter */
-	      k--;
-	    }
+              /* Decrement the loop counter */
+              k--;
+            }
 
-	  /* Store the result in the accumulator in the destination buffer. */
+          /* Store the result in the accumulator in the destination buffer. */
 
-	  *pOut++ = acc0;
-	  *pOut++ = acc1;
-	  *pOut++ = acc2;
-	  *pOut++ = acc3;
+          *pOut++ = acc0;
+          *pOut++ = acc1;
+          *pOut++ = acc2;
+          *pOut++ = acc3;
 		  
-	  /* Increment the pointer pIn1 index, count by 4 */
-	  count += 4U;
+          /* Increment the pointer pIn1 index, count by 4 */
+          count += 4U;
 
-	  /* Update the inputA and inputB pointers for next MAC calculation */
-	  px = pIn1 + count;
-	  py = pSrc2;
+          /* Update the inputA and inputB pointers for next MAC calculation */
+          px = pIn1 + count;
+          py = pSrc2;
 
-	  /* Decrement the loop counter */
-	  blkCnt--;
-	}
+          /* Decrement the loop counter */
+          blkCnt--;
+        }
 
       /* If the blockSize2 is not a multiple of 4, compute any remaining output samples here.
       ** No loop unrolling is used. */
@@ -323,63 +323,63 @@ void plp_conv_i16s_xpulpv2(const int16_t *  pSrcA,
 #endif /* #if defined (PLP_MATH_LOOPUNROLL)*/
 
       while (blkCnt > 0U)
-	{
-	  /* Accumulator is made zero for every iteration */
-	  _y1 = *((v2s*)(py-1));
-	  _x1 = *((v2s*)(px));
-	  sum = 0;
+        {
+          /* Accumulator is made zero for every iteration */
+          _y1 = *((v2s*)(py-1));
+          _x1 = *((v2s*)(px));
+          sum = 0;
 
 #if  defined (PLP_MATH_LOOPUNROLL)
-	  /* Loop unrolling: Compute 4 outputs at a time */
-	  k = srcBLen >> 1U;
-	  while (k > 0U)
-	    {
-	      /* Perform the multiply-accumulate */
-	      _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
+          /* Loop unrolling: Compute 4 outputs at a time */
+          k = srcBLen >> 1U;
+          while (k > 0U)
+            {
+              /* Perform the multiply-accumulate */
+              _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
 	  
-	      sum = __SUMDOTP2(_x1,_y1,sum);
+              sum = __SUMDOTP2(_x1,_y1,sum);
 
-	      py -= 2;	      
-	      px += 2;
+              py -= 2;	      
+              px += 2;
 	      
-	      _y1 = *((v2s*)(py-1));
-	      _x1 = *((v2s*)(px));
+              _y1 = *((v2s*)(py-1));
+              _x1 = *((v2s*)(px));
 	      
-	      k--;
+              k--;
 
-	    }
+            }
 
-	  /* Loop unrolling: Compute remaining outputs */
-	  k = srcBLen % 0x2U;
+          /* Loop unrolling: Compute remaining outputs */
+          k = srcBLen % 0x2U;
 
-	  if(k){
-	    sum = __MAC(sum,_x1[0],_y1[1]);
-	  }
+          if(k){
+            sum = __MAC(sum,_x1[0],_y1[1]);
+          }
 
 #else
-	  /* Initialize blkCnt with number of samples */
-	  k = srcBLen;
+          /* Initialize blkCnt with number of samples */
+          k = srcBLen;
 
-	  while(k){
-	    sum = __MAC(sum,*px++,*py--);
-	    k--;
-	  }
+          while(k){
+            sum = __MAC(sum,*px++,*py--);
+            k--;
+          }
 
 #endif /* #if defined (PLP_MATH_LOOPUNROLL) */
 	  
-	  /* Store the result in the accumulator in the destination buffer. */
-	  *pOut++ = sum;
+          /* Store the result in the accumulator in the destination buffer. */
+          *pOut++ = sum;
 
-	  /* Increment the MAC count */
-	  count++;
+          /* Increment the MAC count */
+          count++;
 
-	  /* Update the inputA and inputB pointers for next MAC calculation */
-	  px = pIn1 + count;
-	  py = pSrc2;
+          /* Update the inputA and inputB pointers for next MAC calculation */
+          px = pIn1 + count;
+          py = pSrc2;
 
-	  /* Decrement the loop counter */
-	  blkCnt--;
-	}
+          /* Decrement the loop counter */
+          blkCnt--;
+        }
     }
   else
     {
@@ -388,35 +388,35 @@ void plp_conv_i16s_xpulpv2(const int16_t *  pSrcA,
       blkCnt = blockSize2;
 
       while (blkCnt > 0U)
-	{
-	  /* Accumulator is made zero for every iteration */
-	  sum = 0;
+        {
+          /* Accumulator is made zero for every iteration */
+          sum = 0;
 
-	  /* srcBLen number of MACS should be performed */
-	  k = srcBLen;
+          /* srcBLen number of MACS should be performed */
+          k = srcBLen;
 
-	  while (k > 0U)
-	    {
-	      /* Perform the multiply-accumulate */
-	      /* sum += *px++ * *py--; */
-	      sum = __MAC(sum, *px++, *py--);
-	      /* Decrement the loop counter */
-	      k--;
-	    }
+          while (k > 0U)
+            {
+              /* Perform the multiply-accumulate */
+              /* sum += *px++ * *py--; */
+              sum = __MAC(sum, *px++, *py--);
+              /* Decrement the loop counter */
+              k--;
+            }
 
-	  /* Store the result in the accumulator in the destination buffer. */
-	  *pOut++ = sum;
+          /* Store the result in the accumulator in the destination buffer. */
+          *pOut++ = sum;
 
-	  /* Increment the MAC count */
-	  count++;
+          /* Increment the MAC count */
+          count++;
 
-	  /* Update the inputA and inputB pointers for next MAC calculation */
-	  px = pIn1 + count;
-	  py = pSrc2;
+          /* Update the inputA and inputB pointers for next MAC calculation */
+          px = pIn1 + count;
+          py = pSrc2;
 
-	  /* Decrement the loop counter */
-	  blkCnt--;
-	}
+          /* Decrement the loop counter */
+          blkCnt--;
+        }
     }
 
 
@@ -458,24 +458,24 @@ void plp_conv_i16s_xpulpv2(const int16_t *  pSrcA,
       /* Loop unrolling: Compute 4 outputs at a time */
       k = blockSize3 >> 1U;
       while (k > 0U)
-	{  
-	  _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
+        {  
+          _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
 	  
-	  sum = __SUMDOTP2(_x1,_y1,sum);
-	  px += 2;
-	  py -= 2;
+          sum = __SUMDOTP2(_x1,_y1,sum);
+          px += 2;
+          py -= 2;
 
-	  _y1 = *((v2s*)(py-1));
-	  _x1 = *((v2s*)(px));
+          _y1 = *((v2s*)(py-1));
+          _x1 = *((v2s*)(px));
 	  
-	  k--;	  
-	}
+          k--;	  
+        }
 
       /* Loop unrolling: Compute remaining outputs */
       k = blockSize3 % 0x2U;
 
       if(k){
-	sum = __MAC(sum,_x1[0],_y1[1]);
+        sum = __MAC(sum,_x1[0],_y1[1]);
       }
 #else
 
@@ -483,8 +483,8 @@ void plp_conv_i16s_xpulpv2(const int16_t *  pSrcA,
       k = blockSize3;
 
       while(k){
-	sum = __MAC(sum, *px++, *py--);
-	k--;
+        sum = __MAC(sum, *px++, *py--);
+        k--;
       }
 
 #endif /* defined (PLP_MATH_LOOPUNROLL)*/
