@@ -2679,6 +2679,20 @@ void plp_mat_mult_trans_i8vp_xpulpv2(
 
 
 /**
+  @brief         In-place 16 bit reversal function for RV32IM
+  @param[in,out] pSrc        points to in-place buffer of unknown 16-bit data type
+  @param[in]     bitRevLen   bit reversal table length
+  @param[in]     pBitRevTab  points to bit reversal table
+  @return        none
+*/
+
+void plp_bitreversal_16s_rv32im(
+        uint16_t *pSrc,
+  const uint16_t bitRevLen,
+  const uint16_t *pBitRevTab);
+
+
+/**
  * @brief         Glue code for quantized 16 bit complex fast fourier transform
  * @param[in]     S               points to an instance of the 16bit quantized CFFT structure
  * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
@@ -2695,6 +2709,15 @@ void plp_cfft_q16(
         uint32_t deciPoint);
 
 
+/**
+ * @brief         Quantized 16 bit complex fast fourier transform for RV32IM
+ * @param[in]     S               points to an instance of the 16bit quantized CFFT structure
+ * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
+ * @param[in]     ifftFlag        flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1) transform.
+ * @param[in]     bitReverseFlag  flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. 
+ * @param[in]     deciPoint       decimal point for right shift
+ */
+
 void plp_cfft_q16s_rv32im(
         const plp_cfft_instance_q16 *S,
         int16_t * p1,
@@ -2702,6 +2725,15 @@ void plp_cfft_q16s_rv32im(
         uint8_t bitReverseFlag,
         uint32_t deciPoint);
 
+
+/**
+ * @brief         Quantized 16 bit complex fast fourier transform for XPULPV2
+ * @param[in]     S               points to an instance of the 16bit quantized CFFT structure
+ * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
+ * @param[in]     ifftFlag        flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1) transform.
+ * @param[in]     bitReverseFlag  flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. 
+ * @param[in]     deciPoint       decimal point for right shift
+ */
 
 void plp_cfft_q16v_xpulpv2(
         const plp_cfft_instance_q16 *S,

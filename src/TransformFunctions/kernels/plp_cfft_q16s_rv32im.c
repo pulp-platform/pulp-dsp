@@ -39,40 +39,6 @@
  * @{
  */
 
-/**
-  @brief         In-place 16 bit reversal function.
-  @param[in,out] pSrc        points to in-place buffer of unknown 16-bit data type
-  @param[in]     bitRevLen   bit reversal table length
-  @param[in]     pBitRevTab  points to bit reversal table
-  @return        none
-*/
-
-void arm_bitreversal_16(
-        uint16_t *pSrc,
-  const uint16_t bitRevLen,
-  const uint16_t *pBitRevTab)
-{
-  uint16_t a, b, i, tmp;
-
-  for (i = 0; i < bitRevLen; )
-  {
-     a = pBitRevTab[i    ] >> 2;
-     b = pBitRevTab[i + 1] >> 2;
-
-     //real
-     tmp = pSrc[a];
-     pSrc[a] = pSrc[b];
-     pSrc[b] = tmp;
-
-     //complex
-     tmp = pSrc[a+1];
-     pSrc[a+1] = pSrc[b+1];
-     pSrc[b+1] = tmp;
-
-    i += 2;
-  }
-}
-
 
 static void plp_cfft_radix4by2_q16(
 	int16_t * pSrc,
@@ -113,7 +79,7 @@ void plp_cfft_q16s_rv32im(
 	}
 
 	if ( bitReverseFlag )
-		arm_bitreversal_16 ((uint16_t*) p1, S->bitRevLength, S->pBitRevTable);
+		plp_bitreversal_16s_rv32im ((uint16_t*) p1, S->bitRevLength, S->pBitRevTable);
 }
 
 
