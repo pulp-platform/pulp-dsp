@@ -15,6 +15,8 @@ import textwrap
 from textwrap import dedent
 import struct
 
+GENERATE_STIMULI = "gen_stimuli"
+
 
 class Variable(object):
     """Variable"""
@@ -52,7 +54,7 @@ class DynamicVariable(Variable):
 
 class Argument(object):
     """docstring for argument"""
-    def __init__(self, name, ctype, value, use_l1=None):
+    def __init__(self, name, ctype, value=None, use_l1=None):
         """
         name: name of the argument (in the function declaration)
         ctype: String, one of the following:
@@ -63,6 +65,10 @@ class Argument(object):
                - The name of a SweepVariable or DynamicVariable, to take their value
                - None for a random value
                - tuple(min, max) for a random value in the given range
+               - "gen_stimuli" (GENERATE_STIMULI): the function generate_stimuli in gen_stimuli.py
+                 will be called for generating the values. This function must take the argument
+                 itself, and the environment (dict(string, number)) as arguments, and return the
+                 desired value
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
         """
         super(Argument, self).__init__()
@@ -115,11 +121,13 @@ class Argument(object):
             return np.float32
         raise RuntimeError("Unknown type: %s" % self.ctype)
 
-    def generate_value(self, env):
+    def generate_value(self, env, gen_stimuli):
         """ Interpret the type of self.value and generate the stimuli """
-        if isinstance(self.value, str):
+        if self.value == GENERATE_STIMULI:
+            self.value = gen_stimuli(self, env)
+        elif isinstance(self.value, str):
             self.value = env[self.value]
-        if self.value is None or (isinstance(self.value, tuple) and len(self.value) == 2):
+        elif self.value is None or (isinstance(self.value, tuple) and len(self.value) == 2):
             if isinstance(self.value, tuple):
                 min_value, max_value = self.value
             else:
@@ -138,7 +146,7 @@ class Argument(object):
 
 class ArrayArgument(Argument):
     """Array Argument"""
-    def __init__(self, name, ctype, length, value, use_l1=None):
+    def __init__(self, name, ctype, length, value=None, use_l1=None):
         """
         name: name of the argument
         ctype: String, one of the following:
@@ -153,6 +161,10 @@ class ArrayArgument(Argument):
                - None for a random value
                - tuple(min, max) for a random value in the given range
                - np.ndarray for a constant initialization
+               - "gen_stimuli" (GENERATE_STIMULI): the function generate_stimuli in gen_stimuli.py
+                 will be called for generating the values. This function must take the argument
+                 itself, and the environment (dict(string, number)) as arguments, and return the
+                 numpy array.
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
         """
         super(ArrayArgument, self).__init__(name, ctype, value, use_l1)
@@ -184,11 +196,13 @@ class ArrayArgument(Argument):
             self.length = self.length
         assert isinstance(self.length, int)
 
-    def generate_value(self, env):
+    def generate_value(self, env, gen_stimuli):
         """ Generates the value of argument, stores it in self.value and returns it. """
         assert isinstance(self.length, int)
         dtype = self.get_dtype()
-        if isinstance(self.value, str):
+        if self.value == GENERATE_STIMULI:
+            self.value = gen_stimuli(self, env)
+        elif isinstance(self.value, str):
             self.value = env[self.value]
         elif self.value is None or (isinstance(self.value, tuple) and len(self.value) == 2):
             if isinstance(self.value, tuple):
@@ -238,13 +252,6 @@ class OutputArgument(ArrayArgument):
         if callable(self.tolerance):
             self.tolerance = self.tolerance(version)
         super(OutputArgument, self).apply(env, var_type, version, use_l1)
-
-    def generate_value(self, env):
-        """ Generates the value of argument, stores it in self.value and returns it. """
-        assert not isinstance(self.value, str)
-        assert isinstance(self.length, int)
-        self.value = np.zeros(self.length).astype(self.get_dtype())
-        return self.value
 
     def generate_reference(self, gen_function, header):
         """ Generates and writes reference value to header file """
@@ -517,8 +524,8 @@ class Test(object):
         any([header.write_check(arg, self.device_name, self.extended_output)
              for arg in self.arguments if isinstance(arg, OutputArgument)])
 
-    def generate_stimuli(self, header):
-        [arg.generate_value(self.env) for arg in self.arguments]
+    def generate_stimuli(self, header, gen_stimuli):
+        [arg.generate_value(self.env, gen_stimuli) for arg in self.arguments]
         [arg.generate_stimuli(header) for arg in self.arguments]
 
     def generate_reference(self, header, gen_function):
@@ -571,9 +578,9 @@ class HeaderWriter(object):
         self.fp.close()
         self.fp = None
 
-    def write_test(self, test, gen_function):
+    def write_test(self, test, gen_function, gen_stimuli):
         assert self.fp is not None
-        test.generate_stimuli(self)
+        test.generate_stimuli(self, gen_stimuli)
         test.generate_reference(self, gen_function)
         self.generate_check(test)
         self.generate_fsig(test)
@@ -797,6 +804,10 @@ def main():
         sys.path.append(test_dir)
         # import gen_stimuli
         from gen_stimuli import compute_result
+        try:
+            from gen_stimuli import generate_stimuli
+        except ImportError:
+            generate_stimuli = None
 
         # parse json
         json_str = ' '.join(args.json)
@@ -804,7 +815,7 @@ def main():
 
         # write header file
         with HeaderWriter(allow_l1=test.device_name == 'riscy') as writer:
-            writer.write_test(test, compute_result)
+            writer.write_test(test, compute_result, generate_stimuli)
 
 
 def setup(device):
