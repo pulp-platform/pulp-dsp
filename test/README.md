@@ -150,7 +150,7 @@ This argument represents an array, to which the function writes the result. A fu
   - The name of a `SweepVariable` or `DynamicVariable` to set the length to the value of this variable at the current iteration.
   - Tuple `(min, max)` for a random length.
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
-- (optional) `tolerance`: Constant number (`float`) or a funciton, which maps the current `version` (without the `_parallel` suffix) to a float value representing the *relative tolerance*. The tolerance is respected for both integer type arrays and floating-point arrays.
+- (optional) `tolerance`: Constant number (`float`) or a funciton, which maps the current `version` (without the `_parallel` suffix) to a float value representing the relative *or* absolute tolerance. The tolerance is respected for both integer type arrays and floating-point arrays. If the value is less than 1, the tolerance is interpreted as relative tolerance. If the value is greater than 1, it is interpreted as absolute tolerance. For floating-point types, only relative tolerance is allowed.
 - (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized and checked.
 
 The expected output must be computed in the [`compute_result` function](#compute_result). The test framework will automatically generate a test to check that every element matches the expected result.
@@ -162,7 +162,7 @@ This represents the value, which is returned by the function. If nothing is retu
 - `name`: Name of the argument. This is only used internally, and does not need to match the one from the function declaration.
 - `ctype`: String, representing the type in `C` to be used (like `int16_t`). If the type is dependent on the `version`, you can use either the string `var_type` or `ret_type` (see [`generate_test`](#generate_test)).
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
-- (optional) `tolerance`: Constant number (`float`) or a funciton, which maps the current `version` (without the `_parallel` suffix) to a float value representing the *relative tolerance*. The tolerance is respected for both integer type arrays and floating-point arrays.
+- (optional) `tolerance`: Constant number (`float`) or a funciton, which maps the current `version` (without the `_parallel` suffix) to a float value representing the relative *or* absolute tolerance. The tolerance is respected for both integer type arrays and floating-point arrays. If the value is less than 1, the tolerance is interpreted as relative tolerance. If the value is greater than 1, it is interpreted as absolute tolerance. For floating-point types, only relative tolerance is allowed.
 - (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized and checked.
 
 The expected output must be computed in the [`compute_result` function](#compute_result). The test framework will automatically generate a test to check that every element matches the expected result.

@@ -239,7 +239,9 @@ class OutputArgument(ArrayArgument):
         ctype: type of the argument (or 'var_type', 'ret_type')
         length: Length of the array, or SweepVariable, or None for random value
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
-        tolerance: constant or function, which maps the output variable type to a tolerance.
+        tolerance: constant or function, which maps the output variable type to a relative or
+                   absolute tolerance. If the value is greater or equal to 1, it is interpreted
+                   as absolute.
         in_function: Boolean, if True, add this argument to the function signature. Set this to
                      False, and use CustomArgument to create struts.
         """
@@ -272,7 +274,9 @@ class ReturnValue(Argument):
         """
         ctype: type of the argument (or 'var_type', 'ret_type')
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
-        tolerance: constant or function, which maps the output variable type to a relative tolerance
+        tolerance: constant or function, which maps the output variable type to a relative or
+                   absolute tolerance. If the value is greater or equal to 1, it is interpreted
+                   as absolute.
         """
         super(ReturnValue, self).__init__("return_value", ctype, 0, use_l1, False)
         self.reference_name = self.name + "_reference"
@@ -685,6 +689,8 @@ class HeaderWriter(object):
         # into account. Therefore, we check for all three different cases.
         if arg.tolerance != 0:
             if arg.ctype == "float":
+                # only relative tolerance is allowed
+                assert arg.tolerance < 1
                 # In case of float: add a tiny absolute offset of 0.0001
                 check_str = dedent(
                     """\
@@ -694,56 +700,106 @@ class HeaderWriter(object):
                     """
                 ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
                          tol=arg.tolerance, ty=arg.ctype)
-            elif target == "ibex":
-                # in this case, we cannot use floating point! But make sure that the fraction is at
-                # least 1.
-                check_str = dedent(
-                    """\
-                    {sp}{sp}{ty} __tol_t = ABS({exp}[i] / {tol_fraction}) + 1;\\
-                    {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
-                    {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
-                    {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
-                    {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
-                    {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
-                    {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
-                    {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
-                    {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
-                    {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
-                    {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
-                    """
-                ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
-                         ty=arg.ctype, tol_fraction=int(1 / arg.tolerance),
-                         type_min=-(1 << 7) if arg.ctype == "int8_t"
-                                  else -(1 << 15) if arg.ctype == "int16_t"
-                                  else -(1 << 31),
-                         type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
-                                  else (1 << 15) - 1 if arg.ctype == "int16_t"
-                                  else (1 << 31) - 1)
+            elif arg.tolerance < 1:
+                # interpret tolerance as relative tolerance
+                if target == "ibex":
+                    # in this case, we cannot use floating point! But make sure that the fraction is at
+                    # least 1.
+                    check_str = dedent(
+                        """\
+                        {sp}{sp}{ty} __tol_t = ABS({exp}[i] / {tol_fraction}) + 1;\\
+                        {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
+                        {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
+                        {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
+                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
+                        {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
+                        {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
+                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
+                        """
+                    ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
+                            ty=arg.ctype, tol_fraction=int(1 / arg.tolerance),
+                            type_min=-(1 << 7) if arg.ctype == "int8_t"
+                                    else -(1 << 15) if arg.ctype == "int16_t"
+                                    else -(1 << 31),
+                            type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
+                                    else (1 << 15) - 1 if arg.ctype == "int16_t"
+                                    else (1 << 31) - 1)
+                else:
+                    # Here, we can use float. But for the int-version, we want to round up.
+                    check_str = dedent(
+                        """\
+                        {sp}{sp}float __tol = ABS({tol:E} * (float){exp}[i]);\\
+                        {sp}{sp}{ty} __tol_t = ({ty})(__tol + 0.999);\\
+                        {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
+                        {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
+                        {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
+                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
+                        {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
+                        {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
+                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
+                        """
+                    ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
+                            tol=arg.tolerance, ty=arg.ctype,
+                            type_min=-(1 << 7) if arg.ctype == "int8_t"
+                                    else -(1 << 15) if arg.ctype == "int16_t"
+                                    else -(1 << 31),
+                            type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
+                                    else (1 << 15) - 1 if arg.ctype == "int16_t"
+                                    else (1 << 31) - 1)
             else:
-                # Here, we can use float. But for the int-version, we want to round up.
-                check_str = dedent(
-                    """\
-                    {sp}{sp}float __tol = ABS({tol:E} * (float){exp}[i]);\\
-                    {sp}{sp}{ty} __tol_t = ({ty})(__tol + 0.999);\\
-                    {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
-                    {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
-                    {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
-                    {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
-                    {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
-                    {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
-                    {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
-                    {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
-                    {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
-                    {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
-                    """
-                ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
-                         tol=arg.tolerance, ty=arg.ctype,
-                         type_min=-(1 << 7) if arg.ctype == "int8_t"
-                                  else -(1 << 15) if arg.ctype == "int16_t"
-                                  else -(1 << 31),
-                         type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
-                                  else (1 << 15) - 1 if arg.ctype == "int16_t"
-                                  else (1 << 31) - 1)
+                # interpret tolerance as absolute tolerance
+                if target == "ibex":
+                    check_str = dedent(
+                        """\
+                        {sp}{sp}{ty} __tol_t = {tol};\\
+                        {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
+                        {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
+                        {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
+                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
+                        {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
+                        {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
+                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
+                        """
+                    ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
+                            ty=arg.ctype, tol=int(arg.tolerance),
+                            type_min=-(1 << 7) if arg.ctype == "int8_t"
+                                    else -(1 << 15) if arg.ctype == "int16_t"
+                                    else -(1 << 31),
+                            type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
+                                    else (1 << 15) - 1 if arg.ctype == "int16_t"
+                                    else (1 << 31) - 1)
+                elif target == "riscy" and arg.tolerance >= 1:
+                    check_str = dedent(
+                        """\
+                        {sp}{sp}{ty} __tol_t = {tol};\\
+                        {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
+                        {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
+                        {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
+                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
+                        {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
+                        {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
+                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
+                        """
+                    ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
+                            tol=int(arg.tolerance), ty=arg.ctype,
+                            type_min=-(1 << 7) if arg.ctype == "int8_t"
+                                    else -(1 << 15) if arg.ctype == "int16_t"
+                                    else -(1 << 31),
+                            type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
+                                    else (1 << 15) - 1 if arg.ctype == "int16_t"
+                                    else (1 << 31) - 1)
         self.fp.write('%sfor (int i = 0; i < %s; i++) {\\\n' % (self.tab, arg.length))
         if print_errors:
             self.fp.write(check_str)
