@@ -268,6 +268,50 @@ class OutputArgument(ArrayArgument):
         header.write_array(self.reference_name, self.ctype, reference, False)
 
 
+class InplaceArgument(OutputArgument):
+    """ Array, that is both used as input and output
+    It must be handled differently in order to make the various benchmark passes identical (in case
+    the runtime of the function is data dependent).
+
+    It will produce three arrays in total: One with the original values (which will never be
+    modified), one with the expected result (which will also never be modified), and one on which
+    the computation is performed. Before each new call of the function, the data from the original
+    array needs to be copied to the actual computation array.
+    """
+    def __init__(self, name, ctype, length, value=None, use_l1=None, tolerance=0, in_function=True):
+        """
+        name: name of the argument
+        ctype: type of the argument (or 'var_type', 'ret_type')
+        length: Length of the array, or SweepVariable, or None for random value
+        value: One of the following:
+               - Number for constant initialization, all elements will have the same value
+               - None for a random value
+               - tuple(min, max) for a random value in the given range
+               - np.ndarray for a constant initialization
+               - "gen_stimuli" (GENERATE_STIMULI): the function generate_stimuli in gen_stimuli.py
+                 will be called for generating the values. This function must take the argument
+                 itself, and the environment (dict(string, number)) as arguments, and return the
+                 numpy array.
+        use_l1: if True, use L1 memory. If None, use default value configured in generate_test
+        tolerance: constant or function, which maps the output variable type to a relative or
+                   absolute tolerance. If the value is greater or equal to 1, it is interpreted
+                   as absolute.
+        in_function: Boolean, if True, add this argument to the function signature. Set this to
+                     False, and use CustomArgument to create struts.
+        """
+        super(InplaceArgument, self).__init__(name, ctype, length, use_l1, tolerance, in_function)
+        # overwrite the value
+        self.value = value
+        self.original_name = self.name + "_original"
+
+    def generate_stimuli(self, header):
+        """ Writes stimuli value to header file
+        The data is written twice, once for the original data, and once for the working data. The
+        original data will be located at L2 to save memory."""
+        header.write_array(self.original_name, self.ctype, self.value, False)
+        header.write_array(self.name, self.ctype, self.value, self.use_l1)
+
+
 class ReturnValue(Argument):
     """ result value """
     def __init__(self, ctype, use_l1=None, tolerance=0):
@@ -526,6 +570,8 @@ class Test(object):
             arg = ArrayArgument("tmp", "tmp", 1, 0)
         elif d['class'] == OutputArgument.__name__:
             arg = OutputArgument("tmp", "tmp", 1)
+        elif d['class'] == InplaceArgument.__name__:
+            arg = InplaceArgument("tmp", "tmp", 1, 0)
         elif d['class'] == FixPointArgument.__name__:
             arg = FixPointArgument("tmp", "tmp", 0)
         elif d['class'] == ParallelArgument.__name__:
@@ -585,6 +631,9 @@ class Test(object):
         any([header.write_check(arg, self.device_name, self.extended_output)
              for arg in self.arguments if isinstance(arg, OutputArgument)])
 
+    def generate_setup(self, header):
+        any([header.write_setup(arg) for arg in self.arguments if isinstance(arg, InplaceArgument)])
+
     def generate_stimuli(self, header, gen_stimuli):
         [arg.generate_value(self.env, gen_stimuli) for arg in self.arguments]
         [arg.generate_stimuli(header) for arg in self.arguments]
@@ -593,7 +642,8 @@ class Test(object):
         # build input dictionary
         inputs = {arg.name: arg
                   for arg in self.arguments
-                  if not isinstance(arg, (ReturnValue, OutputArgument))}
+                  if isinstance(arg, InplaceArgument) or not isinstance(arg, (ReturnValue,
+                                                                              OutputArgument))}
         gen_function_prep = partial(gen_function, inputs=inputs, env=self.env,
                                     fix_point=self.fix_point)
         any([arg.generate_reference(gen_function_prep, header)
@@ -643,6 +693,7 @@ class HeaderWriter(object):
         assert self.fp is not None
         test.generate_stimuli(self, gen_stimuli)
         test.generate_reference(self, gen_function)
+        self.generate_setup(test)
         self.generate_check(test)
         self.generate_fsig(test)
         self.generate_bench()
@@ -675,6 +726,24 @@ class HeaderWriter(object):
                                                                          var_type, name))
         else:
             self.fp.write('%s %s %s = %s;\n\n' % (target_loc, var_type, name, value))
+
+    def generate_setup(self, test):
+        self.fp.write('#define SETUP {\\\n')
+        test.generate_setup(self)
+        self.fp.write('}\n\n')
+
+    def write_setup(self, arg):
+        assert isinstance(arg, InplaceArgument)
+        self.fp.write(
+            dedent(
+                """\
+                {tab}for (int setup_i = 0; setup_i < {len}; setup_i++) {{\\
+                {tab}{tab}{workspace}[setup_i] = {original}[setup_i];\\
+                {tab}}}\\
+                """.format(tab=self.tab, len=arg.length, workspace=arg.name,
+                           original=arg.original_name)
+            )
+        )
 
     def generate_check(self, test):
         self.fp.write('#define CHECK {\\\n')
@@ -975,6 +1044,7 @@ def setup_ibex():
         #include "data.h"
         static int do_bench(rt_perf_t *perf, int events, int do_check)
         {
+            SETUP
             rt_perf_conf(perf, events);
             rt_perf_reset(perf);
             rt_perf_start(perf);
@@ -1034,6 +1104,7 @@ def setup_riscy():
         #include "data.h"
         static int do_bench(rt_perf_t *perf, int events, int do_check)
         {
+            SETUP
             rt_perf_conf(perf, events);
             rt_perf_reset(perf);
             rt_perf_start(perf);

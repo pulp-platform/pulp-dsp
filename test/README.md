@@ -27,6 +27,8 @@ New tests can be generated using the test_template located at `test/mrWolf/test_
       - [`ParallelArgument`](#parallelargument)
       - [`OutputArgument`](#outputargument)
       - [`ReturnValue`](#returnvalue)
+      - [`InplaceArgument`](#inplaceargument)
+      - [`CustomArgument`](#customargument)
    3. Edit the [`implemented` dictionary](#generate_test).
    4. Create the function [`n_ops`](#generate_test).
    5. (Optional) Create a dictionary [`arg_ret_type`](#generate_test).
@@ -154,6 +156,28 @@ This argument represents an array, to which the function writes the result. A fu
 - (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized and checked.
 
 The expected output must be computed in the [`compute_result` function](#compute_result). The test framework will automatically generate a test to check that every element matches the expected result.
+
+##### InplaceArgument
+
+This argument represents an array, which is used as both input and output (if the operation is done inplace). As for `OutputArgument`, there can be mulitple `InplaceArgument`s (and `OutputArgument`s). This argument is passed to the function as a pointer. The constructor has the following parameters:
+
+- `name`: Name of the argument. This is only used internally, and does not need to match the one from the function declaration.
+- `ctype`: String, representing the type in `C` to be used (like `int16_t`). If the type is dependent on the `version`, you can use either the string `var_type` or `ret_type` (see [`generate_test`](#generate_test)).
+- `length`: This represents the length of the array. It can be one of the following:
+  - Number for a constant-sized array
+  - The name of a `SweepVariable` or `DynamicVariable` to set the length to the value of this variable at the current iteration.
+  - Tuple `(min, max)` for a random length.
+- `value`: This is the value which should be used: It can be one of the following:
+  - Number for constant initialization, where all elements of the array will have this value,
+  - `np.ndarray` to set the array to this constant value (the length must match!)
+  - None for a random value
+  - Tuple `(min, max)` for a random value in the given range
+  - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). in this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli)
+- (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
+- (optional) `tolerance`: Constant number (`float`) or a funciton, which maps the current `version` (without the `_parallel` suffix) to a float value representing the relative *or* absolute tolerance. The tolerance is respected for both integer type arrays and floating-point arrays. If the value is less than 1, the tolerance is interpreted as relative tolerance. If the value is greater than 1, it is interpreted as absolute tolerance. For floating-point types, only relative tolerance is allowed.
+- (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized and checked.
+
+The expected output must be computed in the [`compute_result` function](#compute_result). The test framework will automatically generate a test to check that every element matches the expected result. The test framework will also automatically generate setup procedure to reset the array every time the function is called. This way, we make sure that the benchmark always runs on the same data (in case the runtime of the funciton is dependent on the data).
 
 ##### ReturnValue
 
