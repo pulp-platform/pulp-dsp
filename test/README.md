@@ -116,7 +116,7 @@ This argument represents a single scalar argument for the function. It's constru
 - `value`: This is the value which should be used: It can be one of the following:
   - Number for constant initialization
   - The name of a `SweepVariable` or `DynamicVariable`, to take their value for the current iteration.
-  - None for a random value
+  - `None` for a random value
   - Tuple `(min, max)` for a random value in the given range
   - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). in this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli)
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
@@ -135,7 +135,7 @@ This argument represents an array argument for the function, which is passed via
 - `value`: This is the value which should be used: It can be one of the following:
   - Number for constant initialization, where all elements of the array will have this value,
   - `np.ndarray` to set the array to this constant value (the length must match!)
-  - None for a random value
+  - `None` for a random value
   - Tuple `(min, max)` for a random value in the given range
   - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). in this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli)
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
@@ -170,7 +170,7 @@ This argument represents an array, which is used as both input and output (if th
 - `value`: This is the value which should be used: It can be one of the following:
   - Number for constant initialization, where all elements of the array will have this value,
   - `np.ndarray` to set the array to this constant value (the length must match!)
-  - None for a random value
+  - `None` for a random value
   - Tuple `(min, max)` for a random value in the given range
   - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). in this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli)
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
@@ -199,7 +199,7 @@ This is very similar to the [default `Argument`](#default-argument), but it repr
 - `value`: This is the value which should be used: It can be one of the following:
   - Number for constant initialization
   - The name of a `SweepVariable` or `DynamicVariable`, to take their value for the current iteration.
-  - None for a random value
+  - `None` for a random value
   - Tuple `(min, max)` for a random value in the given range
   - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). in this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli)
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
@@ -213,7 +213,7 @@ This is very similar to the [default `Argument`](#default-argument), but it repr
 - `value`: This is the value which should be used: It can be one of the following:
   - Number for constant initialization
   - The name of a `SweepVariable` or `DynamicVariable`, to take their value for the current iteration.
-  - None for a random value
+  - `None` for a random value
   - Tuple `(min, max)` for a random value in the given range
   - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). in this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli)
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
