@@ -54,7 +54,7 @@ class DynamicVariable(Variable):
 
 class Argument(object):
     """docstring for argument"""
-    def __init__(self, name, ctype, value=None, use_l1=None):
+    def __init__(self, name, ctype, value=None, use_l1=None, in_function=True):
         """
         name: name of the argument (in the function declaration)
         ctype: String, one of the following:
@@ -70,12 +70,15 @@ class Argument(object):
                  itself, and the environment (dict(string, number)) as arguments, and return the
                  desired value
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
+        in_function: Boolean, if True, add this argument to the function signature. Set this to
+                     False, and use CustomArgument to create struts.
         """
         super(Argument, self).__init__()
         self.name = name
         self.ctype = ctype
         self.value = value
         self.use_l1 = use_l1
+        self.in_function = in_function
         if isinstance(self.value, SweepVariable):
             self.value = self.value.name
 
@@ -146,7 +149,7 @@ class Argument(object):
 
 class ArrayArgument(Argument):
     """Array Argument"""
-    def __init__(self, name, ctype, length, value=None, use_l1=None):
+    def __init__(self, name, ctype, length, value=None, use_l1=None, in_function=True):
         """
         name: name of the argument
         ctype: String, one of the following:
@@ -166,8 +169,10 @@ class ArrayArgument(Argument):
                  itself, and the environment (dict(string, number)) as arguments, and return the
                  numpy array.
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
+        in_function: Boolean, if True, add this argument to the function signature. Set this to
+                     False, and use CustomArgument to create struts.
         """
-        super(ArrayArgument, self).__init__(name, ctype, value, use_l1)
+        super(ArrayArgument, self).__init__(name, ctype, value, use_l1, in_function)
         self.length = length
         if isinstance(self.length, SweepVariable):
             self.length = self.length.name
@@ -228,15 +233,17 @@ class ArrayArgument(Argument):
 
 class OutputArgument(ArrayArgument):
     """Output Array Argument"""
-    def __init__(self, name, ctype, length, use_l1=None, tolerance=0):
+    def __init__(self, name, ctype, length, use_l1=None, tolerance=0, in_function=True):
         """
         name: name of the argument
         ctype: type of the argument (or 'var_type', 'ret_type')
         length: Length of the array, or SweepVariable, or None for random value
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
         tolerance: constant or function, which maps the output variable type to a tolerance.
+        in_function: Boolean, if True, add this argument to the function signature. Set this to
+                     False, and use CustomArgument to create struts.
         """
-        super(OutputArgument, self).__init__(name, ctype, length, 0, use_l1)
+        super(OutputArgument, self).__init__(name, ctype, length, 0, use_l1, in_function)
         self.reference_name = self.name + "_reference"
         self.tolerance = tolerance
 
@@ -267,7 +274,7 @@ class ReturnValue(Argument):
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
         tolerance: constant or function, which maps the output variable type to a relative tolerance
         """
-        super(ReturnValue, self).__init__("return_value", ctype, 0, use_l1)
+        super(ReturnValue, self).__init__("return_value", ctype, 0, use_l1, False)
         self.reference_name = self.name + "_reference"
         self.tolerance = tolerance
 
@@ -291,24 +298,28 @@ class ReturnValue(Argument):
 
 class FixPointArgument(Argument):
     """fixpoint argument for setting the decimal point, ctype is always set to uint32_t"""
-    def __init__(self, name, value, use_l1=None):
+    def __init__(self, name, value, use_l1=None, in_function=True):
         """
         name: name of the argument (in the function declaration)
         value: Number for initialization, or SweepVariable, or None for random value
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
+        in_function: Boolean, if True, add this argument to the function signature. Set this to
+                     False, and use CustomArgument to create struts.
         """
-        super(FixPointArgument, self).__init__(name, "uint32_t", value, use_l1)
+        super(FixPointArgument, self).__init__(name, "uint32_t", value, use_l1, in_function)
 
 
 class ParallelArgument(Argument):
     """Argument for choosing the number of cores argument. ctype is always set to uint32_t"""
-    def __init__(self, name, value, use_l1=None):
+    def __init__(self, name, value, use_l1=None, in_function=True):
         """
         name: name of the argument
         value: Number for initialization, or SweepVariable, or None for random value
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
+        in_function: Boolean, if True, add this argument to the function signature. Set this to
+                     False, and use CustomArgument to create struts.
         """
-        super(ParallelArgument, self).__init__(name, "uint32_t", value, use_l1)
+        super(ParallelArgument, self).__init__(name, "uint32_t", value, use_l1, in_function)
 
 
 def check_output(config, output, test_obj):
@@ -507,7 +518,7 @@ class Test(object):
                         timeout=1000000)
 
     def function_signature(self):
-        arguments_str = ', '.join([arg.name for arg in self.arguments])
+        arguments_str = ', '.join([arg.name for arg in self.arguments if arg.in_function])
         return_value_str = ""
         return_value_list = [arg for arg in self.arguments if isinstance(arg, ReturnValue)]
         assert len(return_value_list) <= 1
