@@ -27,6 +27,8 @@ New tests can be generated using the test_template located at `test/mrWolf/test_
       - [`ParallelArgument`](#parallelargument)
       - [`OutputArgument`](#outputargument)
       - [`ReturnValue`](#returnvalue)
+      - [`InplaceArgument`](#inplaceargument)
+      - [`CustomArgument`](#customargument)
    3. Edit the [`implemented` dictionary](#generate_test).
    4. Create the function [`n_ops`](#generate_test).
    5. (Optional) Create a dictionary [`arg_ret_type`](#generate_test).
@@ -114,10 +116,11 @@ This argument represents a single scalar argument for the function. It's constru
 - `value`: This is the value which should be used: It can be one of the following:
   - Number for constant initialization
   - The name of a `SweepVariable` or `DynamicVariable`, to take their value for the current iteration.
-  - None for a random value
+  - `None` for a random value
   - Tuple `(min, max)` for a random value in the given range
   - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). in this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli)
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
+- (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized.
 
 ##### ArrayArgument
 
@@ -132,10 +135,11 @@ This argument represents an array argument for the function, which is passed via
 - `value`: This is the value which should be used: It can be one of the following:
   - Number for constant initialization, where all elements of the array will have this value,
   - `np.ndarray` to set the array to this constant value (the length must match!)
-  - None for a random value
+  - `None` for a random value
   - Tuple `(min, max)` for a random value in the given range
   - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). in this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli)
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
+- (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized.
 
 ##### OutputArgument
 
@@ -148,9 +152,32 @@ This argument represents an array, to which the function writes the result. A fu
   - The name of a `SweepVariable` or `DynamicVariable` to set the length to the value of this variable at the current iteration.
   - Tuple `(min, max)` for a random length.
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
-- (optional) `tolerance`: Constant number (`float`) or a funciton, which maps the current `version` (without the `_parallel` suffix) to a float value representing the *relative tolerance*. The tolerance is respected for both integer type arrays and floating-point arrays.
+- (optional) `tolerance`: Constant number (`float`) or a funciton, which maps the current `version` (without the `_parallel` suffix) to a float value representing the relative *or* absolute tolerance. The tolerance is respected for both integer type arrays and floating-point arrays. If the value is less than 1, the tolerance is interpreted as relative tolerance. If the value is greater than 1, it is interpreted as absolute tolerance. For floating-point types, only relative tolerance is allowed.
+- (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized and checked.
 
 The expected output must be computed in the [`compute_result` function](#compute_result). The test framework will automatically generate a test to check that every element matches the expected result.
+
+##### InplaceArgument
+
+This argument represents an array, which is used as both input and output (if the operation is done inplace). As for `OutputArgument`, there can be mulitple `InplaceArgument`s (and `OutputArgument`s). This argument is passed to the function as a pointer. The constructor has the following parameters:
+
+- `name`: Name of the argument. This is only used internally, and does not need to match the one from the function declaration.
+- `ctype`: String, representing the type in `C` to be used (like `int16_t`). If the type is dependent on the `version`, you can use either the string `var_type` or `ret_type` (see [`generate_test`](#generate_test)).
+- `length`: This represents the length of the array. It can be one of the following:
+  - Number for a constant-sized array
+  - The name of a `SweepVariable` or `DynamicVariable` to set the length to the value of this variable at the current iteration.
+  - Tuple `(min, max)` for a random length.
+- `value`: This is the value which should be used: It can be one of the following:
+  - Number for constant initialization, where all elements of the array will have this value,
+  - `np.ndarray` to set the array to this constant value (the length must match!)
+  - `None` for a random value
+  - Tuple `(min, max)` for a random value in the given range
+  - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). in this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli)
+- (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
+- (optional) `tolerance`: Constant number (`float`) or a funciton, which maps the current `version` (without the `_parallel` suffix) to a float value representing the relative *or* absolute tolerance. The tolerance is respected for both integer type arrays and floating-point arrays. If the value is less than 1, the tolerance is interpreted as relative tolerance. If the value is greater than 1, it is interpreted as absolute tolerance. For floating-point types, only relative tolerance is allowed.
+- (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized and checked.
+
+The expected output must be computed in the [`compute_result` function](#compute_result). The test framework will automatically generate a test to check that every element matches the expected result. The test framework will also automatically generate setup procedure to reset the array every time the function is called. This way, we make sure that the benchmark always runs on the same data (in case the runtime of the funciton is dependent on the data).
 
 ##### ReturnValue
 
@@ -159,7 +186,8 @@ This represents the value, which is returned by the function. If nothing is retu
 - `name`: Name of the argument. This is only used internally, and does not need to match the one from the function declaration.
 - `ctype`: String, representing the type in `C` to be used (like `int16_t`). If the type is dependent on the `version`, you can use either the string `var_type` or `ret_type` (see [`generate_test`](#generate_test)).
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
-- (optional) `tolerance`: Constant number (`float`) or a funciton, which maps the current `version` (without the `_parallel` suffix) to a float value representing the *relative tolerance*. The tolerance is respected for both integer type arrays and floating-point arrays.
+- (optional) `tolerance`: Constant number (`float`) or a funciton, which maps the current `version` (without the `_parallel` suffix) to a float value representing the relative *or* absolute tolerance. The tolerance is respected for both integer type arrays and floating-point arrays. If the value is less than 1, the tolerance is interpreted as relative tolerance. If the value is greater than 1, it is interpreted as absolute tolerance. For floating-point types, only relative tolerance is allowed.
+- (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized and checked.
 
 The expected output must be computed in the [`compute_result` function](#compute_result). The test framework will automatically generate a test to check that every element matches the expected result.
 
@@ -171,10 +199,11 @@ This is very similar to the [default `Argument`](#default-argument), but it repr
 - `value`: This is the value which should be used: It can be one of the following:
   - Number for constant initialization
   - The name of a `SweepVariable` or `DynamicVariable`, to take their value for the current iteration.
-  - None for a random value
+  - `None` for a random value
   - Tuple `(min, max)` for a random value in the given range
   - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). in this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli)
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
+- (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized
 
 ##### ParallelArgument
 
@@ -184,10 +213,44 @@ This is very similar to the [default `Argument`](#default-argument), but it repr
 - `value`: This is the value which should be used: It can be one of the following:
   - Number for constant initialization
   - The name of a `SweepVariable` or `DynamicVariable`, to take their value for the current iteration.
-  - None for a random value
+  - `None` for a random value
   - Tuple `(min, max)` for a random value in the given range
   - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). in this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli)
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
+- (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized
+
+##### CustomArgument
+
+Custom arguments allow tests to be very flexible. They can either be used to [link](#link-to-static-struct) to a static variable / array / struct, or they can be used to [generate a struct](#generating-structs). It has the following arguments:
+
+- `name`: Name of the argument, which is only used internally, and does not need to match the one from the function declaration.
+- `value`: Function, which should return a string for initializing the `CustomVariable`. By using other arguments (for which you have set `in_function=False`), you can craft structs. This function can produce a multi-line initialization string. The function has the following arguments:
+  - `env: dict(name: str, value: number)`: Dictionary with the environment
+  - `version: str`: Version string
+  - `var_type: tuple(str, str)`, which contains `(var_type, ret_type)`
+  - `use_l1`: Bool, wether to use L1 memory.
+  The function *must* return the entire string for initialization, including the type and the name of the variable.
+- (optional) `as_ptr`: Boolean to tell the framework how to pass the variable to the function. Default is `False`.
+- (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized
+
+The string, which is returned by the `value` function, will be inserted into the `data.h` file. Thus, you can even define types, structs, and do fancy things with `CustomArgument`s.
+
+#### Generating Structs
+
+The test framework allows you to generate structs, but it needs a bit more work. Assume, that you wish to create a struct, which contains several values, and some pointers to arrays. Also, assume that the struct type was already defined in the Pulp-DSP  library.
+
+First, we create all attributes as [`Argument`s](#arguments), but we set `in_function=False`. This case, they are treated as regular arguments, are initialized regularly (and are checked if they are `OutputArguments`), but will not appear in the funciton call. Additionally, for [`compute_result`](#compute_result), the arguments will appear normally, so you can use it to compute the result. Note, that this needs to be done in the list before we create the [`CustomArgument`](#customargument).
+
+Then, we can create the [`CustomArgument`](#customargument). For `value`, we write a funciton, which will initialize the struct of the required type normally. As attributes, we can use the names from the previously defined arguments. We can use the arguments (as described [here](#customargument)) to generate the required type for the struct, and for all the attributes.
+
+#### Link to Static Structs
+
+To link to a static struct, which is defined somewhere in the pulp dsp library. This can be done by using a [`CustomArgument`](#customargument). Write the `value` function, such that:
+1. the respective header file from pulp-dsp is included, (if necessary),
+2. the variable is declared and defined, by giving it the requred type, and setting it to the required value (probably the address of the target struct).
+Then, set `as_ptr` respectively.
+
+Alternatively, you can also define the struct type right before defining the variable.
 
 ### gen_stimuli.py
 

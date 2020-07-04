@@ -54,7 +54,7 @@ class DynamicVariable(Variable):
 
 class Argument(object):
     """docstring for argument"""
-    def __init__(self, name, ctype, value=None, use_l1=None):
+    def __init__(self, name, ctype, value=None, use_l1=None, in_function=True):
         """
         name: name of the argument (in the function declaration)
         ctype: String, one of the following:
@@ -70,12 +70,15 @@ class Argument(object):
                  itself, and the environment (dict(string, number)) as arguments, and return the
                  desired value
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
+        in_function: Boolean, if True, add this argument to the function signature. Set this to
+                     False, and use CustomArgument to create struts.
         """
         super(Argument, self).__init__()
         self.name = name
         self.ctype = ctype
         self.value = value
         self.use_l1 = use_l1
+        self.in_function = in_function
         if isinstance(self.value, SweepVariable):
             self.value = self.value.name
 
@@ -146,7 +149,7 @@ class Argument(object):
 
 class ArrayArgument(Argument):
     """Array Argument"""
-    def __init__(self, name, ctype, length, value=None, use_l1=None):
+    def __init__(self, name, ctype, length, value=None, use_l1=None, in_function=True):
         """
         name: name of the argument
         ctype: String, one of the following:
@@ -166,8 +169,10 @@ class ArrayArgument(Argument):
                  itself, and the environment (dict(string, number)) as arguments, and return the
                  numpy array.
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
+        in_function: Boolean, if True, add this argument to the function signature. Set this to
+                     False, and use CustomArgument to create struts.
         """
-        super(ArrayArgument, self).__init__(name, ctype, value, use_l1)
+        super(ArrayArgument, self).__init__(name, ctype, value, use_l1, in_function)
         self.length = length
         if isinstance(self.length, SweepVariable):
             self.length = self.length.name
@@ -228,15 +233,19 @@ class ArrayArgument(Argument):
 
 class OutputArgument(ArrayArgument):
     """Output Array Argument"""
-    def __init__(self, name, ctype, length, use_l1=None, tolerance=0):
+    def __init__(self, name, ctype, length, use_l1=None, tolerance=0, in_function=True):
         """
         name: name of the argument
         ctype: type of the argument (or 'var_type', 'ret_type')
         length: Length of the array, or SweepVariable, or None for random value
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
-        tolerance: constant or function, which maps the output variable type to a tolerance.
+        tolerance: constant or function, which maps the output variable type to a relative or
+                   absolute tolerance. If the value is greater or equal to 1, it is interpreted
+                   as absolute.
+        in_function: Boolean, if True, add this argument to the function signature. Set this to
+                     False, and use CustomArgument to create struts.
         """
-        super(OutputArgument, self).__init__(name, ctype, length, 0, use_l1)
+        super(OutputArgument, self).__init__(name, ctype, length, 0, use_l1, in_function)
         self.reference_name = self.name + "_reference"
         self.tolerance = tolerance
 
@@ -259,15 +268,61 @@ class OutputArgument(ArrayArgument):
         header.write_array(self.reference_name, self.ctype, reference, False)
 
 
+class InplaceArgument(OutputArgument):
+    """ Array, that is both used as input and output
+    It must be handled differently in order to make the various benchmark passes identical (in case
+    the runtime of the function is data dependent).
+
+    It will produce three arrays in total: One with the original values (which will never be
+    modified), one with the expected result (which will also never be modified), and one on which
+    the computation is performed. Before each new call of the function, the data from the original
+    array needs to be copied to the actual computation array.
+    """
+    def __init__(self, name, ctype, length, value=None, use_l1=None, tolerance=0, in_function=True):
+        """
+        name: name of the argument
+        ctype: type of the argument (or 'var_type', 'ret_type')
+        length: Length of the array, or SweepVariable, or None for random value
+        value: One of the following:
+               - Number for constant initialization, all elements will have the same value
+               - None for a random value
+               - tuple(min, max) for a random value in the given range
+               - np.ndarray for a constant initialization
+               - "gen_stimuli" (GENERATE_STIMULI): the function generate_stimuli in gen_stimuli.py
+                 will be called for generating the values. This function must take the argument
+                 itself, and the environment (dict(string, number)) as arguments, and return the
+                 numpy array.
+        use_l1: if True, use L1 memory. If None, use default value configured in generate_test
+        tolerance: constant or function, which maps the output variable type to a relative or
+                   absolute tolerance. If the value is greater or equal to 1, it is interpreted
+                   as absolute.
+        in_function: Boolean, if True, add this argument to the function signature. Set this to
+                     False, and use CustomArgument to create struts.
+        """
+        super(InplaceArgument, self).__init__(name, ctype, length, use_l1, tolerance, in_function)
+        # overwrite the value
+        self.value = value
+        self.original_name = self.name + "_original"
+
+    def generate_stimuli(self, header):
+        """ Writes stimuli value to header file
+        The data is written twice, once for the original data, and once for the working data. The
+        original data will be located at L2 to save memory."""
+        header.write_array(self.original_name, self.ctype, self.value, False)
+        header.write_array(self.name, self.ctype, self.value, self.use_l1)
+
+
 class ReturnValue(Argument):
     """ result value """
     def __init__(self, ctype, use_l1=None, tolerance=0):
         """
         ctype: type of the argument (or 'var_type', 'ret_type')
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
-        tolerance: constant or function, which maps the output variable type to a relative tolerance
+        tolerance: constant or function, which maps the output variable type to a relative or
+                   absolute tolerance. If the value is greater or equal to 1, it is interpreted
+                   as absolute.
         """
-        super(ReturnValue, self).__init__("return_value", ctype, 0, use_l1)
+        super(ReturnValue, self).__init__("return_value", ctype, 0, use_l1, False)
         self.reference_name = self.name + "_reference"
         self.tolerance = tolerance
 
@@ -291,24 +346,71 @@ class ReturnValue(Argument):
 
 class FixPointArgument(Argument):
     """fixpoint argument for setting the decimal point, ctype is always set to uint32_t"""
-    def __init__(self, name, value, use_l1=None):
+    def __init__(self, name, value, use_l1=None, in_function=True):
         """
         name: name of the argument (in the function declaration)
         value: Number for initialization, or SweepVariable, or None for random value
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
+        in_function: Boolean, if True, add this argument to the function signature. Set this to
+                     False, and use CustomArgument to create struts.
         """
-        super(FixPointArgument, self).__init__(name, "uint32_t", value, use_l1)
+        super(FixPointArgument, self).__init__(name, "uint32_t", value, use_l1, in_function)
 
 
 class ParallelArgument(Argument):
     """Argument for choosing the number of cores argument. ctype is always set to uint32_t"""
-    def __init__(self, name, value, use_l1=None):
+    def __init__(self, name, value, use_l1=None, in_function=True):
         """
         name: name of the argument
         value: Number for initialization, or SweepVariable, or None for random value
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
+        in_function: Boolean, if True, add this argument to the function signature. Set this to
+                     False, and use CustomArgument to create struts.
         """
-        super(ParallelArgument, self).__init__(name, "uint32_t", value, use_l1)
+        super(ParallelArgument, self).__init__(name, "uint32_t", value, use_l1, in_function)
+
+
+class CustomArgument(Argument):
+    """ Custom Argument
+    With this argument, you can write your own initialization. It can be used either to point to an
+    externally defined variable, struct or array. But it can also be used to create a struct with
+    fields, which may point to other arguments.
+    """
+    def __init__(self, name, value, as_ptr=False, in_function=True):
+        """
+        name: Name of the argument (in the initialization and function declaration)
+        value: Function, which should return a string for initializing the CustomVariable.
+               By using other arguments (for which you have set in_function=False), you can craft
+               structs. This function can produce a multi-line initialization string. The function
+               has the following arguments:
+               - env: dict(name: str, value: number): Dictionary with the environment
+               - version: str: Version string
+               - var_type: tuple(str, str), which contains (var_type, ret_type)
+               - use_l1: Bool, wether to use L1 memory.
+               The function *must* return the entire string for initialization, including the type
+               and the name of the variable.
+        as_ptr: Boolean, if True, the struct is passed as pointer to the function. Else, it is
+                passed without referencing it.
+        in_function: Boolean, if True, add this argument to the function signature. Set this to
+                     False, and use CustomArgument to create struts.
+        """
+        super(CustomArgument, self).__init__(name, None, value, None, in_function)
+        self.as_ptr = as_ptr
+
+    def apply(self, env, var_type, version, use_l1):
+        """
+        Prepares the value (initialization string) of the custom argument
+        """
+        self.value = self.value(env, version, var_type, use_l1)
+
+    def generate_value(self, env, gen_stimuli):
+        """ Nothing to do here! the init string was already created """
+        pass
+
+    def generate_stimuli(self, header):
+        """ generate the header stimuli """
+        header.fp.write(self.value)
+        header.fp.write("\n\n")
 
 
 def check_output(config, output, test_obj):
@@ -458,7 +560,8 @@ class Test(object):
         d['arguments'] = [arg.to_dict(self.env, self.var_type, self.version, self.use_l1)
                           for arg in self.arguments]
         json_str = json.dumps(d)
-        return json_str.replace('\"', '\\\"')
+        json_str_escaped = json_str.replace('\\', '\\\\').replace('\"', '\\\"')
+        return json_str_escaped
 
     def argument_from_dict(self, d):
         if d['class'] == Argument.__name__:
@@ -467,12 +570,16 @@ class Test(object):
             arg = ArrayArgument("tmp", "tmp", 1, 0)
         elif d['class'] == OutputArgument.__name__:
             arg = OutputArgument("tmp", "tmp", 1)
+        elif d['class'] == InplaceArgument.__name__:
+            arg = InplaceArgument("tmp", "tmp", 1, 0)
         elif d['class'] == FixPointArgument.__name__:
             arg = FixPointArgument("tmp", "tmp", 0)
         elif d['class'] == ParallelArgument.__name__:
             arg = ParallelArgument("tmp", "tmp", 0)
         elif d['class'] == ReturnValue.__name__:
             arg = ReturnValue("tmp")
+        elif d['class'] == CustomArgument.__name__:
+            arg = CustomArgument("tmp", None)
         else:
             raise RuntimeError("Unknown class name")
         arg.__dict__ = d['dict']
@@ -507,7 +614,7 @@ class Test(object):
                         timeout=1000000)
 
     def function_signature(self):
-        arguments_str = ', '.join([arg.name for arg in self.arguments])
+        arguments_str = ', '.join([arg.name for arg in self.arguments if arg.in_function])
         return_value_str = ""
         return_value_list = [arg for arg in self.arguments if isinstance(arg, ReturnValue)]
         assert len(return_value_list) <= 1
@@ -524,6 +631,9 @@ class Test(object):
         any([header.write_check(arg, self.device_name, self.extended_output)
              for arg in self.arguments if isinstance(arg, OutputArgument)])
 
+    def generate_setup(self, header):
+        any([header.write_setup(arg) for arg in self.arguments if isinstance(arg, InplaceArgument)])
+
     def generate_stimuli(self, header, gen_stimuli):
         [arg.generate_value(self.env, gen_stimuli) for arg in self.arguments]
         [arg.generate_stimuli(header) for arg in self.arguments]
@@ -532,7 +642,8 @@ class Test(object):
         # build input dictionary
         inputs = {arg.name: arg
                   for arg in self.arguments
-                  if not isinstance(arg, (ReturnValue, OutputArgument))}
+                  if isinstance(arg, InplaceArgument) or not isinstance(arg, (ReturnValue,
+                                                                              OutputArgument))}
         gen_function_prep = partial(gen_function, inputs=inputs, env=self.env,
                                     fix_point=self.fix_point)
         any([arg.generate_reference(gen_function_prep, header)
@@ -582,6 +693,7 @@ class HeaderWriter(object):
         assert self.fp is not None
         test.generate_stimuli(self, gen_stimuli)
         test.generate_reference(self, gen_function)
+        self.generate_setup(test)
         self.generate_check(test)
         self.generate_fsig(test)
         self.generate_bench()
@@ -615,6 +727,24 @@ class HeaderWriter(object):
         else:
             self.fp.write('%s %s %s = %s;\n\n' % (target_loc, var_type, name, value))
 
+    def generate_setup(self, test):
+        self.fp.write('#define SETUP {\\\n')
+        test.generate_setup(self)
+        self.fp.write('}\n\n')
+
+    def write_setup(self, arg):
+        assert isinstance(arg, InplaceArgument)
+        self.fp.write(
+            dedent(
+                """\
+                {tab}for (int setup_i = 0; setup_i < {len}; setup_i++) {{\\
+                {tab}{tab}{workspace}[setup_i] = {original}[setup_i];\\
+                {tab}}}\\
+                """.format(tab=self.tab, len=arg.length, workspace=arg.name,
+                           original=arg.original_name)
+            )
+        )
+
     def generate_check(self, test):
         self.fp.write('#define CHECK {\\\n')
         test.generate_check(self)
@@ -628,6 +758,8 @@ class HeaderWriter(object):
         # into account. Therefore, we check for all three different cases.
         if arg.tolerance != 0:
             if arg.ctype == "float":
+                # only relative tolerance is allowed
+                assert arg.tolerance < 1
                 # In case of float: add a tiny absolute offset of 0.0001
                 check_str = dedent(
                     """\
@@ -637,56 +769,106 @@ class HeaderWriter(object):
                     """
                 ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
                          tol=arg.tolerance, ty=arg.ctype)
-            elif target == "ibex":
-                # in this case, we cannot use floating point! But make sure that the fraction is at
-                # least 1.
-                check_str = dedent(
-                    """\
-                    {sp}{sp}{ty} __tol_t = ABS({exp}[i] / {tol_fraction}) + 1;\\
-                    {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
-                    {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
-                    {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
-                    {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
-                    {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
-                    {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
-                    {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
-                    {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
-                    {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
-                    {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
-                    """
-                ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
-                         ty=arg.ctype, tol_fraction=int(1 / arg.tolerance),
-                         type_min=-(1 << 7) if arg.ctype == "int8_t"
-                                  else -(1 << 15) if arg.ctype == "int16_t"
-                                  else -(1 << 31),
-                         type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
-                                  else (1 << 15) - 1 if arg.ctype == "int16_t"
-                                  else (1 << 31) - 1)
+            elif arg.tolerance < 1:
+                # interpret tolerance as relative tolerance
+                if target == "ibex":
+                    # in this case, we cannot use floating point! But make sure that the fraction is at
+                    # least 1.
+                    check_str = dedent(
+                        """\
+                        {sp}{sp}{ty} __tol_t = ABS({exp}[i] / {tol_fraction}) + 1;\\
+                        {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
+                        {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
+                        {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
+                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
+                        {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
+                        {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
+                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
+                        """
+                    ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
+                            ty=arg.ctype, tol_fraction=int(1 / arg.tolerance),
+                            type_min=-(1 << 7) if arg.ctype == "int8_t"
+                                    else -(1 << 15) if arg.ctype == "int16_t"
+                                    else -(1 << 31),
+                            type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
+                                    else (1 << 15) - 1 if arg.ctype == "int16_t"
+                                    else (1 << 31) - 1)
+                else:
+                    # Here, we can use float. But for the int-version, we want to round up.
+                    check_str = dedent(
+                        """\
+                        {sp}{sp}float __tol = ABS({tol:E} * (float){exp}[i]);\\
+                        {sp}{sp}{ty} __tol_t = ({ty})(__tol + 0.999);\\
+                        {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
+                        {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
+                        {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
+                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
+                        {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
+                        {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
+                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
+                        """
+                    ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
+                            tol=arg.tolerance, ty=arg.ctype,
+                            type_min=-(1 << 7) if arg.ctype == "int8_t"
+                                    else -(1 << 15) if arg.ctype == "int16_t"
+                                    else -(1 << 31),
+                            type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
+                                    else (1 << 15) - 1 if arg.ctype == "int16_t"
+                                    else (1 << 31) - 1)
             else:
-                # Here, we can use float. But for the int-version, we want to round up.
-                check_str = dedent(
-                    """\
-                    {sp}{sp}float __tol = ABS({tol:E} * (float){exp}[i]);\\
-                    {sp}{sp}{ty} __tol_t = ({ty})(__tol + 0.999);\\
-                    {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
-                    {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
-                    {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
-                    {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
-                    {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
-                    {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
-                    {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
-                    {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
-                    {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
-                    {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
-                    """
-                ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
-                         tol=arg.tolerance, ty=arg.ctype,
-                         type_min=-(1 << 7) if arg.ctype == "int8_t"
-                                  else -(1 << 15) if arg.ctype == "int16_t"
-                                  else -(1 << 31),
-                         type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
-                                  else (1 << 15) - 1 if arg.ctype == "int16_t"
-                                  else (1 << 31) - 1)
+                # interpret tolerance as absolute tolerance
+                if target == "ibex":
+                    check_str = dedent(
+                        """\
+                        {sp}{sp}{ty} __tol_t = {tol};\\
+                        {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
+                        {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
+                        {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
+                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
+                        {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
+                        {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
+                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
+                        """
+                    ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
+                            ty=arg.ctype, tol=int(arg.tolerance),
+                            type_min=-(1 << 7) if arg.ctype == "int8_t"
+                                    else -(1 << 15) if arg.ctype == "int16_t"
+                                    else -(1 << 31),
+                            type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
+                                    else (1 << 15) - 1 if arg.ctype == "int16_t"
+                                    else (1 << 31) - 1)
+                elif target == "riscy" and arg.tolerance >= 1:
+                    check_str = dedent(
+                        """\
+                        {sp}{sp}{ty} __tol_t = {tol};\\
+                        {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
+                        {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
+                        {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
+                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
+                        {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
+                        {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
+                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
+                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
+                        """
+                    ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
+                            tol=int(arg.tolerance), ty=arg.ctype,
+                            type_min=-(1 << 7) if arg.ctype == "int8_t"
+                                    else -(1 << 15) if arg.ctype == "int16_t"
+                                    else -(1 << 31),
+                            type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
+                                    else (1 << 15) - 1 if arg.ctype == "int16_t"
+                                    else (1 << 31) - 1)
         self.fp.write('%sfor (int i = 0; i < %s; i++) {\\\n' % (self.tab, arg.length))
         if print_errors:
             self.fp.write(check_str)
@@ -862,6 +1044,7 @@ def setup_ibex():
         #include "data.h"
         static int do_bench(rt_perf_t *perf, int events, int do_check)
         {
+            SETUP
             rt_perf_conf(perf, events);
             rt_perf_reset(perf);
             rt_perf_start(perf);
@@ -921,6 +1104,7 @@ def setup_riscy():
         #include "data.h"
         static int do_bench(rt_perf_t *perf, int events, int do_check)
         {
+            SETUP
             rt_perf_conf(perf, events);
             rt_perf_reset(perf);
             rt_perf_start(perf);
