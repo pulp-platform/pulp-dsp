@@ -195,6 +195,39 @@ This is very similar to the [default `Argument`](#default-argument), but it repr
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
 - (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized
 
+##### CustomArgument
+
+Custom arguments allow tests to be very flexible. They can either be used to [link](#link-to-static-struct) to a static variable / array / struct, or they can be used to [generate a struct](#generating-structs). It has the following arguments:
+
+- `name`: Name of the argument, which is only used internally, and does not need to match the one from the function declaration.
+- `value`: Function, which should return a string for initializing the `CustomVariable`. By using other arguments (for which you have set `in_function=False`), you can craft structs. This function can produce a multi-line initialization string. The function has the following arguments:
+  - `env: dict(name: str, value: number)`: Dictionary with the environment
+  - `version: str`: Version string
+  - `var_type: tuple(str, str)`, which contains `(var_type, ret_type)`
+  - `use_l1`: Bool, wether to use L1 memory.
+  The function *must* return the entire string for initialization, including the type and the name of the variable.
+- (optional) `as_ptr`: Boolean to tell the framework how to pass the variable to the function. Default is `False`.
+- (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized
+
+The string, which is returned by the `value` function, will be inserted into the `data.h` file. Thus, you can even define types, structs, and do fancy things with `CustomArgument`s.
+
+#### Generating Structs
+
+The test framework allows you to generate structs, but it needs a bit more work. Assume, that you wish to create a struct, which contains several values, and some pointers to arrays. Also, assume that the struct type was already defined in the Pulp-DSP  library.
+
+First, we create all attributes as [`Argument`s](#arguments), but we set `in_function=False`. This case, they are treated as regular arguments, are initialized regularly (and are checked if they are `OutputArguments`), but will not appear in the funciton call. Additionally, for [`compute_result`](#compute_result), the arguments will appear normally, so you can use it to compute the result. Note, that this needs to be done in the list before we create the [`CustomArgument`](#customargument).
+
+Then, we can create the [`CustomArgument`](#customargument). For `value`, we write a funciton, which will initialize the struct of the required type normally. As attributes, we can use the names from the previously defined arguments. We can use the arguments (as described [here](#customargument)) to generate the required type for the struct, and for all the attributes.
+
+#### Link to Static Structs
+
+To link to a static struct, which is defined somewhere in the pulp dsp library. This can be done by using a [`CustomArgument`](#customargument). Write the `value` function, such that:
+1. the respective header file from pulp-dsp is included, (if necessary),
+2. the variable is declared and defined, by giving it the requred type, and setting it to the required value (probably the address of the target struct).
+Then, set `as_ptr` respectively.
+
+Alternatively, you can also define the struct type right before defining the variable.
+
 ### gen_stimuli.py
 
 This file contains the functions for generating the stimuli and the expected result.

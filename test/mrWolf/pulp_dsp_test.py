@@ -322,6 +322,49 @@ class ParallelArgument(Argument):
         super(ParallelArgument, self).__init__(name, "uint32_t", value, use_l1, in_function)
 
 
+class CustomArgument(Argument):
+    """ Custom Argument
+    With this argument, you can write your own initialization. It can be used either to point to an
+    externally defined variable, struct or array. But it can also be used to create a struct with
+    fields, which may point to other arguments.
+    """
+    def __init__(self, name, value, as_ptr=False, in_function=True):
+        """
+        name: Name of the argument (in the initialization and function declaration)
+        value: Function, which should return a string for initializing the CustomVariable.
+               By using other arguments (for which you have set in_function=False), you can craft
+               structs. This function can produce a multi-line initialization string. The function
+               has the following arguments:
+               - env: dict(name: str, value: number): Dictionary with the environment
+               - version: str: Version string
+               - var_type: tuple(str, str), which contains (var_type, ret_type)
+               - use_l1: Bool, wether to use L1 memory.
+               The function *must* return the entire string for initialization, including the type
+               and the name of the variable.
+        as_ptr: Boolean, if True, the struct is passed as pointer to the function. Else, it is
+                passed without referencing it.
+        in_function: Boolean, if True, add this argument to the function signature. Set this to
+                     False, and use CustomArgument to create struts.
+        """
+        super(CustomArgument, self).__init__(name, None, value, None, in_function)
+        self.as_ptr = as_ptr
+
+    def apply(self, env, var_type, version, use_l1):
+        """
+        Prepares the value (initialization string) of the custom argument
+        """
+        self.value = self.value(env, version, var_type, use_l1)
+
+    def generate_value(self, env, gen_stimuli):
+        """ Nothing to do here! the init string was already created """
+        pass
+
+    def generate_stimuli(self, header):
+        """ generate the header stimuli """
+        header.fp.write(self.value)
+        header.fp.write("\n\n")
+
+
 def check_output(config, output, test_obj):
     # print(output)
     passed = False
@@ -469,7 +512,8 @@ class Test(object):
         d['arguments'] = [arg.to_dict(self.env, self.var_type, self.version, self.use_l1)
                           for arg in self.arguments]
         json_str = json.dumps(d)
-        return json_str.replace('\"', '\\\"')
+        json_str_escaped = json_str.replace('\\', '\\\\').replace('\"', '\\\"')
+        return json_str_escaped
 
     def argument_from_dict(self, d):
         if d['class'] == Argument.__name__:
@@ -484,6 +528,8 @@ class Test(object):
             arg = ParallelArgument("tmp", "tmp", 0)
         elif d['class'] == ReturnValue.__name__:
             arg = ReturnValue("tmp")
+        elif d['class'] == CustomArgument.__name__:
+            arg = CustomArgument("tmp", None)
         else:
             raise RuntimeError("Unknown class name")
         arg.__dict__ = d['dict']
