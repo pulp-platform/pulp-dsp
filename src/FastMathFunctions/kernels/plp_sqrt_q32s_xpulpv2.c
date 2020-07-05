@@ -1,6 +1,6 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_sqrt_q16s_rv32im.c
+ * Title:        plp_sqrt_q32s_xpulpv2.c
  * Description:  
  *
  * $Date:        02.07.2020        
@@ -62,49 +62,54 @@
 */
 
 /**
-   @brief         Square root of a 16-bit fixed point number for RV32IM extension.
+   @brief         Square root of a 32-bit fixed point number for XPULPV2 extension.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
    @param[out]    pRes    sum of squares returned here
    @return        none
 */
 
-void plp_sqrt_q16s_rv32im(
-                           const int16_t * __restrict__ pSrc,
+void plp_sqrt_q32s_xpulpv2(
+                           const int32_t * __restrict__ pSrc,
                            const uint32_t deciPoint,
-                           int16_t * __restrict__ pRes){
-  int16_t x,n;
+                           int32_t * __restrict__ pRes){
 
-  n = *pSrc;
-  x = 1 << (15-deciPoint);
+  register int32_t root, remHi, remLo, testDiv, count;
 
-  const int16_t three = 3 << (16-deciPoint);
-  int16_t x_square, nx_square, final;
+  root = 0;
+  remHi = 0;
+  remLo = *pSrc;
+  count = 15 + ((32-deciPoint) >> 1);
   
 #if defined(PLP_MATH_LOOPUNROLL)
+  do {
+    remHi = (remHi << 2) | (remLo >> 30);
+    remLo <<= 2;
+    root <<= 1;
+    testDiv = (root << 1) + 1;
+    if (remHi >= testDiv) {
+      remHi -= testDiv;
+      root += 1;
+    }
+  } while(count-- != 0);
 
-  for (int i=0; i<2; i++){
-
-    x_square = (x*x)>>deciPoint;
-    nx_square  = (n*x_square)>>deciPoint;
-    final = (x*(three-nx_square))>>deciPoint;
+  *pRes = root;
     
-    x = final;
-  }
-
-  *pRes = x*n >> deciPoint;
 #else
 
-  for (int i=0; i<2; i++){
+  do {
+    remHi = (remHi << 2) | (remLo >> 30);
+    remLo <<= 2;
+    root <<= 1;
+    testDiv = (root << 1) + 1;
+    if (remHi >= testDiv) {
+      remHi -= testDiv;
+      root += 1;
+    }
+  } while(count-- != 0);
 
-    x_square = (x*x)>>deciPoint;
-    nx_square  = (n*x_square)>>deciPoint;
-    final = (x*(three-nx_square))>>deciPoint;
-    
-    x = final;
-  }
+  *pRes = root;
 
-  *pRes = x*n >> deciPoint;  
 #endif
 
  

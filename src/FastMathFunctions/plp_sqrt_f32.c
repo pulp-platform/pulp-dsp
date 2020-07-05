@@ -1,9 +1,9 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_sqrt_q16s_xpulpv2.c
- * Description:  
+ * Title:        plp_sqrt_f32.c
+ * Description:  Calculates the sum of squares of an input vector
  *
- * $Date:        02.07.2020        
+ * $Date:        30.06.2020        
  *
  * Target Processor: PULP cores
  * ===================================================================== */
@@ -27,17 +27,15 @@
  * limitations under the License.
  */
 
-
 #include "plp_math.h"
 
-
 /**
-   @ingroup sqrt
+   @ingroup groupStats
 */
 
 /**
-   @defgroup sqrtKernels Sqrt Kernels
-   Calculates the square root of the input number.
+   @defgroup sqrt Sqrt
+   Calculates the square root of a floating point number
    There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
@@ -57,60 +55,32 @@
 */
 
 /**
-   @addtogroup sqrtKernels
+   @addtogroup sqrt
    @{
 */
 
+
 /**
-   @brief         Square root of a 16-bit fixed point number for XPULPV2 extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
+   @brief         Glue code for square root of a 32-bit floating point number.
+   @param[in]     pSrc       points to the input vectoro
    @param[out]    pRes    sum of squares returned here
    @return        none
-*/
+ */
 
-void plp_sqrt_q16s_xpulpv2(
-                           const int16_t * __restrict__ pSrc,
-                           const uint32_t deciPoint,
-                           int16_t * __restrict__ pRes){
 
-  register int16_t root, remHi, remLo, testDiv, count;
-
-  root = 0;
-  remHi = 0;
-  remLo = *pSrc;
-  count = 7 + ((16-deciPoint) >> 1);
+void plp_sqrt_f32(
+                         const float * __restrict__ pSrc,
+                         float * __restrict__ pRes){
   
-#if defined(PLP_MATH_LOOPUNROLL)
-  do {
-    remHi = (remHi << 2) | (remLo >> 14);
-    remLo <<= 2;
-    root <<= 1;
-    testDiv = (root << 1) + 1;
-    if (remHi >= testDiv) {
-      remHi -= testDiv;
-      root += 1;
-    }
-  } while(count-- != 0);
+  if (rt_cluster_id() == ARCHI_FC_CID){
+    *pRes = 0.f;
+  }
+  else{
+    plp_sqrt_f32s_xpulpv2(pSrc, pRes);
+  }
 
-  *pRes = root;
-    
-#else
-
-  do {
-    remHi = (remHi << 2) | (remLo >> 14);
-    remLo <<= 2;
-    root <<= 1;
-    testDiv = (root << 1) + 1;
-    if (remHi >= testDiv) {
-      remHi -= testDiv;
-      root += 1;
-    }
-  } while(count-- != 0);
-
-  *pRes = root;
-
-#endif
-
- 
 }
+
+/**
+  @} end of sqrt group
+ */
