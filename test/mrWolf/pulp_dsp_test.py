@@ -144,8 +144,6 @@ class Argument(object):
 
     def arg_str(self):
         """ Returns the string to show for funciton argument """
-        if not self.in_function:
-            return None
         if self.ctype == "float":
             # floats are defined as unions, so we take the float variant
             return "%s.f" % self.name
@@ -213,10 +211,7 @@ class ArrayArgument(Argument):
 
     def arg_str(self):
         """ Returns the string to show for funciton argument """
-        if not self.in_function:
-            return None
-        else:
-            return "%s" % (self.name)
+        return self.name
 
     def generate_value(self, env, gen_stimuli):
         """ Generates the value of argument, stores it in self.value and returns it. """
@@ -648,12 +643,12 @@ class Test(object):
 
     def function_signature(self):
         arguments_str = ', '.join([arg.arg_str()
-                                   for arg in self.arguments if arg.arg_str() is not None])
+                                   for arg in self.arguments if arg.in_function])
         return_value_str = ""
         return_value_list = [arg for arg in self.arguments if isinstance(arg, ReturnValue)]
         assert len(return_value_list) <= 1
         if len(return_value_list) == 1:
-            return_value_str = "%s = " % return_value_list[0].name
+            return_value_str = "%s = " % return_value_list[0].arg_str()
         return "%s%s(%s)" % (return_value_str, self.function_name, arguments_str)
 
     def generate_check(self, header):
@@ -981,6 +976,7 @@ def tolerance_check_str(acq, exp, tolerance, ctype, indent, target):
 
 def generate_test(function_name, arguments, variables, implemented, use_l1=False,
                   extended_output=True, n_ops=None, arg_ret_type=None):
+    """ Entry-Point of the phase 1 """
     visible_env = [v.name for v in variables if v.visible]
     testsets = [
         Testset(
@@ -1028,6 +1024,7 @@ def main():
     elif args.setup:
         setup(args.device)
     elif args.gen:
+        # Entry point of phase 2
         # get the test directory
         test_dir = os.environ['PLPTEST_PATH']
         # add the location of gen_stimuli.py to the path
