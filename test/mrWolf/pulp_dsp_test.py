@@ -893,10 +893,10 @@ def tolerance_check_str(acq, exp, tolerance, ctype, indent, target):
             {indent}      {acq} <= ({ty})({exp} + __tol))) {{\\
             """
         ).format(indent=indent, acq=acq, exp=exp, tol=tolerance, ty=ctype)
-    elif tolerance < 1:
-        unsigned_bits = 7 if ctype == "int8_t" else 15 if ctype == "int16_t" else 31
-        type_min = -(1 << unsigned_bits)
-        type_max = (1 << unsigned_bits) - 1
+    unsigned_bits = 7 if ctype == "int8_t" else 15 if ctype == "int16_t" else 31
+    type_min = -(1 << unsigned_bits)
+    type_max = (1 << unsigned_bits) - 1
+    if tolerance < 1:
         # interpret tolerance as relative tolerance
         if target == "ibex":
             # in this case, we cannot use floating point! But make sure that the fraction is at
