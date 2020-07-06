@@ -1,5 +1,4 @@
 FC_SRCS = \
-	src/StatisticsFunctions/plp_entropy_f32.c \
 	src/StatisticsFunctions/plp_mean_f32.c \
 	src/StatisticsFunctions/plp_mean_i32.c src/StatisticsFunctions/kernels/plp_mean_i32s_rv32im.c \
 	src/StatisticsFunctions/plp_mean_i16.c src/StatisticsFunctions/kernels/plp_mean_i16s_rv32im.c \
@@ -103,10 +102,17 @@ FC_SRCS = \
 	src/MatrixFunctions/mat_sub/plp_mat_sub_i32_parallel.c \
 	src/MatrixFunctions/mat_sub/plp_mat_sub_i16_parallel.c \
 	src/MatrixFunctions/mat_sub/plp_mat_sub_i8_parallel.c \
-	src/MatrixFunctions/mat_sub/plp_mat_sub_f32_parallel.c
+	src/MatrixFunctions/mat_sub/plp_mat_sub_f32_parallel.c \
+	src/MatrixFunctions/mat_scale/plp_mat_scale_i32.c src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i32s_rv32im.c \
+	src/MatrixFunctions/mat_scale/plp_mat_scale_i16.c src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i16s_rv32im.c \
+	src/MatrixFunctions/mat_scale/plp_mat_scale_i8.c src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i8s_rv32im.c \
+	src/MatrixFunctions/mat_scale/plp_mat_scale_f32.c \
+	src/MatrixFunctions/mat_scale/plp_mat_scale_i32_parallel.c \
+	src/MatrixFunctions/mat_scale/plp_mat_scale_i16_parallel.c \
+	src/MatrixFunctions/mat_scale/plp_mat_scale_i8_parallel.c \
+	src/MatrixFunctions/mat_scale/plp_mat_scale_f32_parallel.c
 
 CL_SRCS = \
-	src/StatisticsFunctions/kernels/plp_entropy_f32s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_mean_f32s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_mean_i32s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_mean_i16s_xpulpv2.c \
@@ -212,7 +218,15 @@ CL_SRCS = \
 	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i8v_xpulpv2.c \
 	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i8vp_xpulpv2.c \
 	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_f32s_xpulpv2.c \
-	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_f32p_xpulpv2.c
+	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_f32p_xpulpv2.c \
+	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i32s_xpulpv2.c \
+	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i32p_xpulpv2.c \
+	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i16v_xpulpv2.c \
+	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i16vp_xpulpv2.c \
+	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i8v_xpulpv2.c \
+	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i8vp_xpulpv2.c \
+	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_f32s_xpulpv2.c \
+	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_f32p_xpulpv2.c
 
 
 PULP_LIBS = plpdsp # the name of the library, after installing it into the pulp-sdk, add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project to use this library.
