@@ -27,7 +27,7 @@
  * limitations under the License.
  */
 
-
+#define sqrt2 0b1011010100000100
 #include "plp_math.h"
 
 

@@ -2069,6 +2069,178 @@ void plp_var_q8s_xpulpv2(
                            int8_t * __restrict__ pRes);
 
 
+/** -------------------------------------------------------
+   @brief         Glue code for Statisical standard deviation of a 32-bit floating point vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Statisical standard deviation returned here
+   @return        none
+*/
+
+
+void plp_std_f32(
+                  const float * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  float * __restrict__ pRes);
+
+/** -------------------------------------------------------
+   @brief         Kernel for Statisical standard deviation of a 32-bit float vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Statisical standard deviation returned here
+   @return        none
+*/
+
+void plp_std_f32_xpulpv2(
+                  const float * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  float * __restrict__ pRes);
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for Statisical standard deviation of a 32-bit fixed point vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Statisical standard deviation returned here
+   @return        none
+*/
+
+void plp_std_q32(
+                  const int32_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  uint32_t deciPoint,
+                  int32_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Statisical standard deviation of a 32-bit fixed point vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Statisical standard deviation value returned here
+   @return        none
+*/
+
+void plp_std_q32s_rv32im(
+                          const int32_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          uint32_t deciPoint,
+                          int32_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Statisical standard deviation of a 32-bit fixed point vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    Statisical standard deviation returned here
+   @return        none
+*/
+
+void plp_std_q32s_xpulpv2(
+                           const int32_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           uint32_t deciPoint,
+                           int32_t * __restrict__ pRes);
+
+/** -------------------------------------------------------
+   @brief         Glue code for Statisical standard deviation of a 16-bit fixed point vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Statisical standard deviation returned here
+   @return        none
+*/
+
+void plp_std_q16(
+                  const int16_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  uint32_t deciPoint,
+                  int16_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Statisical standard deviation of a 16-bit fixed point vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Statisical standard deviation returned here
+   @return        none
+*/
+
+void plp_std_q16s_rv32im(
+                          const int16_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          uint32_t deciPoint,
+                          int16_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Statisical standard deviation of a 16-bit fixed point vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    Statisical standard deviation returned here
+   @return        none
+*/
+
+void plp_std_q16s_xpulpv2(
+                           const int16_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           uint32_t deciPoint,
+                           int16_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for Statisical standard deviation of a 8-bit fixed point vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Statisical standard deviation returned here
+   @return        none
+*/
+
+void plp_std_q8(
+                  const int8_t * __restrict__ pSrc,
+                  uint32_t blockSize,
+                  uint32_t deciPoint,
+                  int8_t * __restrict__ pRes);
+
+
+
+
+/** -------------------------------------------------------
+   @brief         Statisical standard deviation of a 8-bit fixed point vector for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pResult    Statisical standard deviation returned here
+   @return        none
+*/
+
+void plp_std_q8s_rv32im(
+                          const int8_t * __restrict__ pSrc,
+                          uint32_t blockSize,
+                          uint32_t deciPoint,
+                          int8_t * __restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+   @brief         Statisical standard deviation of a 8-bit fixed point vector for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    Statisical standard deviation value returned here
+   @return        none
+*/
+
+void plp_std_q8s_xpulpv2(
+                           const int8_t * __restrict__ pSrc,
+                           uint32_t blockSize,
+                           uint32_t deciPoint,
+                           int8_t * __restrict__ pRes);
+
+
 
 /** -------------------------------------------------------
    @brief         Glue code for square root of a 32-bit fixed point number.

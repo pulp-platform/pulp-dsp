@@ -27,7 +27,7 @@
  * limitations under the License.
  */
 
-
+#define sqrt2 0b1011010100000100
 #include "plp_math.h"
 
 
@@ -75,15 +75,8 @@ void plp_sqrt_q32s_xpulpv2(
                            int32_t * __restrict__ pRes){
 
   int16_t number, temp1, intermediate_fixpoint, signBits, half;
-  int32_t bits_val1;
-  float temp_float1;
-  union
-  {
-    int32_t fracval;
-    float floatval;
-  } tempconv;
 
-  number = (*pSrc) >> 16;
+  number = *pSrc >> 16;
 
   /* If the input is a positive number then compute the signBits. */
   if (number > 0)
@@ -104,20 +97,29 @@ void plp_sqrt_q32s_xpulpv2(
       half = number >> 1;
       /* Store the number for later use */
       temp1 = number;
+      /* Initial guess for 1/(2sqrt(x)) */
+      intermediate_fixpoint = (temp1)>>2;
 
-      /* Convert to float */
-      temp_float1 = number * 3.051757812500000e-005f;
-      /*Store as integer */
-      tempconv.floatval = temp_float1;
-      bits_val1 = tempconv.fracval;
-      /* Subtract the shifted value from the magic number to give intial guess */
-      bits_val1 = 0x5f3759df - (bits_val1 >> 1);  /* gives initial guess */
-      /* Store as float */
-      tempconv.fracval = bits_val1;
-      temp_float1 = tempconv.floatval;
-      /* Convert to integer format */
-      intermediate_fixpoint = (int32_t) (temp_float1 * 16384);
+      intermediate_fixpoint = ((int16_t) ((int32_t) intermediate_fixpoint * (0x3000 -
+                                       ((int16_t)
+                                        ((((int16_t)
+                                           (((int32_t) intermediate_fixpoint * intermediate_fixpoint) >> 15)) *
+                                          (int32_t) half) >> 15))) >> 15)) << 2;
 
+      intermediate_fixpoint = ((int16_t) ((int32_t) intermediate_fixpoint * (0x3000 -
+                                       ((int16_t)
+                                        ((((int16_t)
+                                           (((int32_t) intermediate_fixpoint * intermediate_fixpoint) >> 15)) *
+                                          (int32_t) half) >> 15))) >> 15)) << 2;
+
+      
+      intermediate_fixpoint = ((int16_t) ((int32_t) intermediate_fixpoint * (0x3000 -
+                                       ((int16_t)
+                                        ((((int16_t)
+                                           (((int32_t) intermediate_fixpoint * intermediate_fixpoint) >> 15)) *
+                                          (int32_t) half) >> 15))) >> 15)) << 2;
+      
+      
       intermediate_fixpoint = ((int16_t) ((int32_t) intermediate_fixpoint * (0x3000 -
                                        ((int16_t)
                                         ((((int16_t)
@@ -130,6 +132,20 @@ void plp_sqrt_q32s_xpulpv2(
                                            (((int32_t) intermediate_fixpoint * intermediate_fixpoint) >> 15)) *
                                           (int32_t) half) >> 15))) >> 15)) << 2;
      
+      intermediate_fixpoint = ((int16_t) ((int32_t) intermediate_fixpoint * (0x3000 -
+                                       ((int16_t)
+                                        ((((int16_t)
+                                           (((int32_t) intermediate_fixpoint * intermediate_fixpoint) >> 15)) *
+                                          (int32_t) half) >> 15))) >> 15)) << 2;
+
+
+      intermediate_fixpoint = ((int16_t) ((int32_t) intermediate_fixpoint * (0x3000 -
+                                       ((int16_t)
+                                        ((((int16_t)
+                                           (((int32_t) intermediate_fixpoint * intermediate_fixpoint) >> 15)) *
+                                          (int32_t) half) >> 15))) >> 15)) << 2;
+ 
+
       intermediate_fixpoint = ((int16_t) ((int32_t) intermediate_fixpoint * (0x3000 -
                                        ((int16_t)
                                         ((((int16_t)
@@ -157,7 +173,6 @@ void plp_sqrt_q32s_xpulpv2(
           intermediate_fixpoint = intermediate_fixpoint >> ((signBits - 1) / 2);
         }
       *pRes = intermediate_fixpoint;
-
     }
 
   else
