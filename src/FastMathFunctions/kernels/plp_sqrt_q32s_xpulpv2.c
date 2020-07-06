@@ -74,43 +74,95 @@ void plp_sqrt_q32s_xpulpv2(
                            const uint32_t deciPoint,
                            int32_t * __restrict__ pRes){
 
-  register int32_t root, remHi, remLo, testDiv, count;
+  int16_t number, temp1, intermediate_fixpoint, signBits, half;
+  int32_t bits_val1;
+  float temp_float1;
+  union
+  {
+    int32_t fracval;
+    float floatval;
+  } tempconv;
 
-  root = 0;
-  remHi = 0;
-  remLo = *pSrc;
-  count = 15 + ((32-deciPoint) >> 1);
-  
-#if defined(PLP_MATH_LOOPUNROLL)
-  do {
-    remHi = (remHi << 2) | (remLo >> 30);
-    remLo <<= 2;
-    root <<= 1;
-    testDiv = (root << 1) + 1;
-    if (remHi >= testDiv) {
-      remHi -= testDiv;
-      root += 1;
+  number = (*pSrc) >> 16;
+
+  /* If the input is a positive number then compute the signBits. */
+  if (number > 0)
+    {
+      signBits = __builtin_clz(number) - 17;
+
+      /* Shift by the number of signBits */
+      if ((signBits % 2) == 0)
+        {
+          number = number << signBits;
+        }
+      else
+        {
+          number = number << (signBits - 1);
+        }
+
+      /* Calculate half value of the number */
+      half = number >> 1;
+      /* Store the number for later use */
+      temp1 = number;
+
+      /* Convert to float */
+      temp_float1 = number * 3.051757812500000e-005f;
+      /*Store as integer */
+      tempconv.floatval = temp_float1;
+      bits_val1 = tempconv.fracval;
+      /* Subtract the shifted value from the magic number to give intial guess */
+      bits_val1 = 0x5f3759df - (bits_val1 >> 1);  /* gives initial guess */
+      /* Store as float */
+      tempconv.fracval = bits_val1;
+      temp_float1 = tempconv.floatval;
+      /* Convert to integer format */
+      intermediate_fixpoint = (int32_t) (temp_float1 * 16384);
+
+      intermediate_fixpoint = ((int16_t) ((int32_t) intermediate_fixpoint * (0x3000 -
+                                       ((int16_t)
+                                        ((((int16_t)
+                                           (((int32_t) intermediate_fixpoint * intermediate_fixpoint) >> 15)) *
+                                          (int32_t) half) >> 15))) >> 15)) << 2;
+      
+      intermediate_fixpoint = ((int16_t) ((int32_t) intermediate_fixpoint * (0x3000 -
+                                       ((int16_t)
+                                        ((((int16_t)
+                                           (((int32_t) intermediate_fixpoint * intermediate_fixpoint) >> 15)) *
+                                          (int32_t) half) >> 15))) >> 15)) << 2;
+     
+      intermediate_fixpoint = ((int16_t) ((int32_t) intermediate_fixpoint * (0x3000 -
+                                       ((int16_t)
+                                        ((((int16_t)
+                                           (((int32_t) intermediate_fixpoint * intermediate_fixpoint) >> 15)) *
+                                          (int32_t) half) >> 15))) >> 15)) << 2;
+
+      
+      intermediate_fixpoint = ((int16_t) (((int32_t) temp1 * intermediate_fixpoint) >> 15)) << 1;
+
+
+      if(deciPoint > 1){
+        intermediate_fixpoint = intermediate_fixpoint >> ((int32_t)(deciPoint)>>1);
+        if(deciPoint%2==0){
+          intermediate_fixpoint = ((int32_t)intermediate_fixpoint * sqrt2) >> 15;
+        }
+      }
+      
+
+      if ((signBits % 2) == 0)
+        {
+          intermediate_fixpoint = intermediate_fixpoint >> (signBits / 2);
+        }
+      else
+        {
+          intermediate_fixpoint = intermediate_fixpoint >> ((signBits - 1) / 2);
+        }
+      *pRes = intermediate_fixpoint;
+
     }
-  } while(count-- != 0);
 
-  *pRes = root;
-    
-#else
-
-  do {
-    remHi = (remHi << 2) | (remLo >> 30);
-    remLo <<= 2;
-    root <<= 1;
-    testDiv = (root << 1) + 1;
-    if (remHi >= testDiv) {
-      remHi -= testDiv;
-      root += 1;
+  else
+    {
+      *pRes = 0;
     }
-  } while(count-- != 0);
-
-  *pRes = root;
-
-#endif
-
- 
 }
+

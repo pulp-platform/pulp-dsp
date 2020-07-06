@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_sqrt_q32.c
- * Description:  Calculates the sum of squares of an input vector
+ * Description:  Calculates the square root of an input number
  *
  * $Date:        30.06.2020        
  *
@@ -35,7 +35,7 @@
 
 /**
    @defgroup sqrt Sqrt
-   Calculates the sum of squares of the input vector. 
+   Calculates the square root of a fixed point number
    There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
