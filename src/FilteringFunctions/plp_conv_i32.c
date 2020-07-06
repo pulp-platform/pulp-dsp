@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and University of Bologna. All rights reserved.
+ * Copyright (C) 2019 ETH Zurich and University of Bologna. 
  *
  * Author: Moritz Scherer
  *
@@ -38,11 +38,11 @@ static int32_t* _pRes1_32;
 */
 
 /**
-  @defgroup BasicConvolution Basic Convolution
-  This module contains the glue code for Basic Convolution. The kernel codes (kernels) are in the Moducle Basic Convolution Kernels.
+   @defgroup BasicConvolution Basic Convolution
+   This module contains the glue code for Basic Convolution. The kernel codes (kernels) are in the Moducle Basic Convolution Kernels.
 
 
- */
+*/
 
 /**
    @addtogroup BasicConvolution
@@ -59,11 +59,11 @@ static int32_t* _pRes1_32;
    @return        none
 */
 void plp_conv_i32(
-		  const int32_t *  pSrcA,
-		  const uint32_t srcALen,
-		  const int32_t *  pSrcB,
-		  const uint32_t srcBLen,
-		  int32_t * __restrict__ pRes){
+                  const int32_t *  pSrcA,
+                  const uint32_t srcALen,
+                  const int32_t *  pSrcB,
+                  const uint32_t srcBLen,
+                  int32_t * __restrict__ pRes){
 
   uint32_t in1Len, in2Len;
   const int32_t* pIn1;
@@ -110,19 +110,19 @@ void plp_conv_i32(
       k = resultsoffset >> 1;
       while(k){
 
-	temp1 = *_pRes++;
-	temp2 = *_pRes++;
+        temp1 = *_pRes++;
+        temp2 = *_pRes++;
 	
-	*pOut++ += temp1;
-	*pOut++ += temp2;
+        *pOut++ += temp1;
+        *pOut++ += temp2;
 
-	k--;
+        k--;
       }
 
       k = resultsoffset % 2U;
 
       if(k){
-	*pOut++ += *_pRes++;
+        *pOut++ += *_pRes++;
       }
       
     }
@@ -168,19 +168,19 @@ void plp_conv_i32(
       k = resultsoffset >> 1;
       while(k){
 
-	temp1 = *_pRes++;
-	temp2 = *_pRes++;
+        temp1 = *_pRes++;
+        temp2 = *_pRes++;
 	
-	*pOut++ += temp1;
-	*pOut++ += temp2;
+        *pOut++ += temp1;
+        *pOut++ += temp2;
 
-	k--;
+        k--;
       }
 
       k = resultsoffset % 2U;
 
       if(k){
-	*pOut++ += *_pRes++;
+        *pOut++ += *_pRes++;
       }
     }    
     

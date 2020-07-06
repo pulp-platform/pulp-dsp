@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and University of Bologna. All rights reserved.
+ * Copyright (C) 2019 ETH Zurich and University of Bologna. 
  *
  * Author: Moritz Scherer, ETH Zurich
  *
@@ -54,10 +54,10 @@
 // Pre-condition: srcALen >= 2 and srcBLen >= 2, otherwise use vector dot product
 
 void plp_conv_i8s_rv32im(const int8_t *  pSrcA,
-			  const uint32_t srcALen,
-			  const int8_t *  pSrcB,
-			  const uint32_t srcBLen,
-			  int32_t *  pRes){
+                         const uint32_t srcALen,
+                         const int8_t *  pSrcB,
+                         const uint32_t srcBLen,
+                         int32_t *  pRes){
 
 
   const int8_t *pIn1 = pSrcA;                               /* InputA pointer */
@@ -116,38 +116,38 @@ void plp_conv_i8s_rv32im(const int8_t *  pSrcA,
       /* Loop unrolling: Compute 4 outputs at a time */
       k = count >> 2U;
       while (k > 0U)
-	{
+        {
 
-	  temp1=*px++;
-	  temp2=*py--;
-	  temp3=*px++;
-	  temp4=*py--;
+          temp1=*px++;
+          temp2=*py--;
+          temp3=*px++;
+          temp4=*py--;
 	  
-	  /* x[0] * y[srcBLen - 1] */
-	  //sum = __MAC(sum, *px++, *py--);
-	  sum += temp1*temp2;
+          /* x[0] * y[srcBLen - 1] */
+          //sum = __MAC(sum, *px++, *py--);
+          sum += temp1*temp2;
 
-	  temp1=*px++;
-	  temp2=*py--;
+          temp1=*px++;
+          temp2=*py--;
 
-	  /* x[1] * y[srcBLen - 2] */
-	  //sum = __MAC(sum, *px++, *py--);
-	  sum += temp3*temp4;
+          /* x[1] * y[srcBLen - 2] */
+          //sum = __MAC(sum, *px++, *py--);
+          sum += temp3*temp4;
 
-	  temp3=*px++;
-	  temp4=*py--;
+          temp3=*px++;
+          temp4=*py--;
 	  
-	  /* x[2] * y[srcBLen - 3] */
-	  //sum = __MAC(sum, *px++, *py--);
-	  sum += temp1*temp2;
+          /* x[2] * y[srcBLen - 3] */
+          //sum = __MAC(sum, *px++, *py--);
+          sum += temp1*temp2;
 	  
-	  /* x[3] * y[srcBLen - 4] */
-	  //sum = __MAC(sum, *px++, *py--);
-	  sum += temp3*temp4;
+          /* x[3] * y[srcBLen - 4] */
+          //sum = __MAC(sum, *px++, *py--);
+          sum += temp3*temp4;
 
-	  /* Decrement loop counter */
-	  k--;
-	}
+          /* Decrement loop counter */
+          k--;
+        }
 
       /* Loop unrolling: Compute remaining outputs */
       k = count % 0x4U;
@@ -158,13 +158,13 @@ void plp_conv_i8s_rv32im(const int8_t *  pSrcA,
 #endif /* #if defined (PLP_MATH_LOOPUNROLL) */
 
       while (k > 0U)
-	{
-	  /* Perform the multiply-accumulate */
-	  sum += *px++ * *py--;
+        {
+          /* Perform the multiply-accumulate */
+          sum += *px++ * *py--;
 
-	  /* Decrement loop counter */
-	  k--;
-	}
+          /* Decrement loop counter */
+          k--;
+        }
 
       /* Store the result in the accumulator in the destination buffer. */
       *pOut++ = sum;
@@ -216,133 +216,133 @@ void plp_conv_i8s_rv32im(const int8_t *  pSrcA,
       blkCnt = blockSize2 >> 2U;
 
       while (blkCnt > 0U)
-	{
-	  /* Set all accumulators to zero */
-	  acc0 = 0;
-	  acc1 = 0;
-	  acc2 = 0;
-	  acc3 = 0;
+        {
+          /* Set all accumulators to zero */
+          acc0 = 0;
+          acc1 = 0;
+          acc2 = 0;
+          acc3 = 0;
 
-	  /* Apply loop unrolling and compute 4 MACs simultaneously. */
-	  k = srcBLen >> 2U;
-	  /* read x[0], x[1], x[2] samples */
-	  x0 = *px++;
-	  x1 = *px++;
-	  x2 = *px++;
+          /* Apply loop unrolling and compute 4 MACs simultaneously. */
+          k = srcBLen >> 2U;
+          /* read x[0], x[1], x[2] samples */
+          x0 = *px++;
+          x1 = *px++;
+          x2 = *px++;
 
-	  /* First part of the processing with loop unrolling.  Compute 4 MACs at a time.
-	  ** a second loop below computes MACs for the remaining 1 to 3 samples. */
-	  do
-	    {
-	      /* Read y[srcBLen - 1] sample */
-	      c0 = *py--;
-	      /* Read x[3] sample */
-	      x3 = *(px);
+          /* First part of the processing with loop unrolling.  Compute 4 MACs at a time.
+          ** a second loop below computes MACs for the remaining 1 to 3 samples. */
+          do
+            {
+              /* Read y[srcBLen - 1] sample */
+              c0 = *py--;
+              /* Read x[3] sample */
+              x3 = *(px);
 
-	      /* Perform the multiply-accumulate */
-	      /* acc0 +=  x[0] * y[srcBLen - 1] */
-	      acc0 += x0 * c0;
-	      /* acc1 +=  x[1] * y[srcBLen - 1] */
-	      acc1 += x1 * c0;
-	      /* acc2 +=  x[2] * y[srcBLen - 1] */
-	      acc2 += x2 * c0;
-	      /* acc3 +=  x[3] * y[srcBLen - 1] */
-	      acc3 += x3 * c0;
+              /* Perform the multiply-accumulate */
+              /* acc0 +=  x[0] * y[srcBLen - 1] */
+              acc0 += x0 * c0;
+              /* acc1 +=  x[1] * y[srcBLen - 1] */
+              acc1 += x1 * c0;
+              /* acc2 +=  x[2] * y[srcBLen - 1] */
+              acc2 += x2 * c0;
+              /* acc3 +=  x[3] * y[srcBLen - 1] */
+              acc3 += x3 * c0;
 
-	      /* Read y[srcBLen - 2] sample */
-	      c0 = *py--;
-	      /* Read x[4] sample */
-	      x0 = *(px + 1U);
+              /* Read y[srcBLen - 2] sample */
+              c0 = *py--;
+              /* Read x[4] sample */
+              x0 = *(px + 1U);
 
-	      /* Perform the multiply-accumulate */
-	      /* acc0 +=  x[1] * y[srcBLen - 2] */
-	      acc0 += x1 * c0;
-	      /* acc1 +=  x[2] * y[srcBLen - 2] */
-	      acc1 += x2 * c0;
-	      /* acc2 +=  x[3] * y[srcBLen - 2] */
-	      acc2 += x3 * c0;
-	      /* acc3 +=  x[4] * y[srcBLen - 2] */
-	      acc3 += x0 * c0;
+              /* Perform the multiply-accumulate */
+              /* acc0 +=  x[1] * y[srcBLen - 2] */
+              acc0 += x1 * c0;
+              /* acc1 +=  x[2] * y[srcBLen - 2] */
+              acc1 += x2 * c0;
+              /* acc2 +=  x[3] * y[srcBLen - 2] */
+              acc2 += x3 * c0;
+              /* acc3 +=  x[4] * y[srcBLen - 2] */
+              acc3 += x0 * c0;
 
-	      /* Read y[srcBLen - 3] sample */
-	      c0 = *py--;
-	      /* Read x[5] sample */
-	      x1 = *(px + 2U);
+              /* Read y[srcBLen - 3] sample */
+              c0 = *py--;
+              /* Read x[5] sample */
+              x1 = *(px + 2U);
 
-	      /* Perform the multiply-accumulate */
-	      /* acc0 +=  x[2] * y[srcBLen - 3] */
-	      acc0 += x2 * c0;
-	      /* acc1 +=  x[3] * y[srcBLen - 2] */
-	      acc1 += x3 * c0;
-	      /* acc2 +=  x[4] * y[srcBLen - 2] */
-	      acc2 += x0 * c0;
-	      /* acc3 +=  x[5] * y[srcBLen - 2] */
-	      acc3 += x1 * c0;
+              /* Perform the multiply-accumulate */
+              /* acc0 +=  x[2] * y[srcBLen - 3] */
+              acc0 += x2 * c0;
+              /* acc1 +=  x[3] * y[srcBLen - 2] */
+              acc1 += x3 * c0;
+              /* acc2 +=  x[4] * y[srcBLen - 2] */
+              acc2 += x0 * c0;
+              /* acc3 +=  x[5] * y[srcBLen - 2] */
+              acc3 += x1 * c0;
 
-	      /* Read y[srcBLen - 4] sample */
-	      c0 = *py--;
-	      /* Read x[6] sample */
-	      x2 = *(px + 3U);
-	      px += 4U;
+              /* Read y[srcBLen - 4] sample */
+              c0 = *py--;
+              /* Read x[6] sample */
+              x2 = *(px + 3U);
+              px += 4U;
 
-	      /* Perform the multiply-accumulate */
-	      /* acc0 +=  x[3] * y[srcBLen - 4] */
-	      acc0 += x3 * c0;
-	      /* acc1 +=  x[4] * y[srcBLen - 4] */
-	      acc1 += x0 * c0;
-	      /* acc2 +=  x[5] * y[srcBLen - 4] */
-	      acc2 += x1 * c0;
-	      /* acc3 +=  x[6] * y[srcBLen - 4] */
-	      acc3 += x2 * c0;
+              /* Perform the multiply-accumulate */
+              /* acc0 +=  x[3] * y[srcBLen - 4] */
+              acc0 += x3 * c0;
+              /* acc1 +=  x[4] * y[srcBLen - 4] */
+              acc1 += x0 * c0;
+              /* acc2 +=  x[5] * y[srcBLen - 4] */
+              acc2 += x1 * c0;
+              /* acc3 +=  x[6] * y[srcBLen - 4] */
+              acc3 += x2 * c0;
 
-	    } while (--k);
+            } while (--k);
 
-	  /* If the srcBLen is not a multiple of 4, compute any remaining MACs here.
-	  ** No loop unrolling is used. */
-	  k = srcBLen % 0x4U;
+          /* If the srcBLen is not a multiple of 4, compute any remaining MACs here.
+          ** No loop unrolling is used. */
+          k = srcBLen % 0x4U;
 
-	  while (k > 0U)
-	    {
-	      /* Read y[srcBLen - 5] sample */
-	      c0 = *py--;
-	      /* Read x[7] sample */
-	      x3 = *px++;
+          while (k > 0U)
+            {
+              /* Read y[srcBLen - 5] sample */
+              c0 = *py--;
+              /* Read x[7] sample */
+              x3 = *px++;
 
-	      /* Perform the multiply-accumulate */
-	      /* acc0 +=  x[4] * y[srcBLen - 5] */
-	      acc0 += x0 * c0;
-	      /* acc1 +=  x[5] * y[srcBLen - 5] */
-	      acc1 += x1 * c0;
-	      /* acc2 +=  x[6] * y[srcBLen - 5] */
-	      acc2 += x2 * c0;
-	      /* acc3 +=  x[7] * y[srcBLen - 5] */
-	      acc3 += x3 * c0;
+              /* Perform the multiply-accumulate */
+              /* acc0 +=  x[4] * y[srcBLen - 5] */
+              acc0 += x0 * c0;
+              /* acc1 +=  x[5] * y[srcBLen - 5] */
+              acc1 += x1 * c0;
+              /* acc2 +=  x[6] * y[srcBLen - 5] */
+              acc2 += x2 * c0;
+              /* acc3 +=  x[7] * y[srcBLen - 5] */
+              acc3 += x3 * c0;
 
-	      /* Reuse the present samples for the next MAC */
-	      x0 = x1;
-	      x1 = x2;
-	      x2 = x3;
+              /* Reuse the present samples for the next MAC */
+              x0 = x1;
+              x1 = x2;
+              x2 = x3;
 
-	      /* Decrement the loop counter */
-	      k--;
-	    }
+              /* Decrement the loop counter */
+              k--;
+            }
 
-	  /* Store the result in the accumulator in the destination buffer. */
-	  *pOut++ = acc0;
-	  *pOut++ = acc1;
-	  *pOut++ = acc2;
-	  *pOut++ = acc3;
+          /* Store the result in the accumulator in the destination buffer. */
+          *pOut++ = acc0;
+          *pOut++ = acc1;
+          *pOut++ = acc2;
+          *pOut++ = acc3;
 
-	  /* Increment the pointer pIn1 index, count by 4 */
-	  count += 4U;
+          /* Increment the pointer pIn1 index, count by 4 */
+          count += 4U;
 
-	  /* Update the inputA and inputB pointers for next MAC calculation */
-	  px = pIn1 + count;
-	  py = pSrc2;
+          /* Update the inputA and inputB pointers for next MAC calculation */
+          px = pIn1 + count;
+          py = pSrc2;
 
-	  /* Decrement the loop counter */
-	  blkCnt--;
-	}
+          /* Decrement the loop counter */
+          blkCnt--;
+        }
 
       /* If the blockSize2 is not a multiple of 4, compute any remaining output samples here.
       ** No loop unrolling is used. */
@@ -356,56 +356,56 @@ void plp_conv_i8s_rv32im(const int8_t *  pSrcA,
 #endif /* #if defined (PLP_MATH_LOOPUNROLL)*/
 
       while (blkCnt > 0U)
-	{
-	  /* Accumulator is made zero for every iteration */
-	  sum = 0.0f;
+        {
+          /* Accumulator is made zero for every iteration */
+          sum = 0.0f;
 
 #if  defined (PLP_MATH_LOOPUNROLL)
-	  /* Loop unrolling: Compute 4 outputs at a time */
-	  k = srcBLen >> 2U;
-	  while (k > 0U)
-	    {
-	      /* Perform the multiply-accumulate */
-	      sum += *px++ * *py--;
-	      sum += *px++ * *py--;
-	      sum += *px++ * *py--;
-	      sum += *px++ * *py--;
+          /* Loop unrolling: Compute 4 outputs at a time */
+          k = srcBLen >> 2U;
+          while (k > 0U)
+            {
+              /* Perform the multiply-accumulate */
+              sum += *px++ * *py--;
+              sum += *px++ * *py--;
+              sum += *px++ * *py--;
+              sum += *px++ * *py--;
 
-	      /* Decrement loop counter */
-	      k--;
-	    }
+              /* Decrement loop counter */
+              k--;
+            }
 
-	  /* Loop unrolling: Compute remaining outputs */
-	  k = srcBLen % 0x4U;
+          /* Loop unrolling: Compute remaining outputs */
+          k = srcBLen % 0x4U;
 
 #else
-	  /* Initialize blkCnt with number of samples */
-	  k = srcBLen;
+          /* Initialize blkCnt with number of samples */
+          k = srcBLen;
 
 #endif /* #if defined (PLP_MATH_LOOPUNROLL) */
 
-	  while (k > 0U)
-	    {
-	      /* Perform the multiply-accumulate */
-	      sum += *px++ * *py--;
+          while (k > 0U)
+            {
+              /* Perform the multiply-accumulate */
+              sum += *px++ * *py--;
 
-	      /* Decrement the loop counter */
-	      k--;
-	    }
+              /* Decrement the loop counter */
+              k--;
+            }
 
-	  /* Store the result in the accumulator in the destination buffer. */
-	  *pOut++ = sum;
+          /* Store the result in the accumulator in the destination buffer. */
+          *pOut++ = sum;
 
-	  /* Increment the MAC count */
-	  count++;
+          /* Increment the MAC count */
+          count++;
 
-	  /* Update the inputA and inputB pointers for next MAC calculation */
-	  px = pIn1 + count;
-	  py = pSrc2;
+          /* Update the inputA and inputB pointers for next MAC calculation */
+          px = pIn1 + count;
+          py = pSrc2;
 
-	  /* Decrement the loop counter */
-	  blkCnt--;
-	}
+          /* Decrement the loop counter */
+          blkCnt--;
+        }
     }
   else
     {
@@ -414,35 +414,35 @@ void plp_conv_i8s_rv32im(const int8_t *  pSrcA,
       blkCnt = blockSize2;
 
       while (blkCnt > 0U)
-	{
-	  /* Accumulator is made zero for every iteration */
-	  sum = 0.0f;
+        {
+          /* Accumulator is made zero for every iteration */
+          sum = 0.0f;
 
-	  /* srcBLen number of MACS should be performed */
-	  k = srcBLen;
+          /* srcBLen number of MACS should be performed */
+          k = srcBLen;
 
-	  while (k > 0U)
-	    {
-	      /* Perform the multiply-accumulate */
-	      sum += *px++ * *py--;
+          while (k > 0U)
+            {
+              /* Perform the multiply-accumulate */
+              sum += *px++ * *py--;
 
-	      /* Decrement the loop counter */
-	      k--;
-	    }
+              /* Decrement the loop counter */
+              k--;
+            }
 
-	  /* Store the result in the accumulator in the destination buffer. */
-	  *pOut++ = sum;
+          /* Store the result in the accumulator in the destination buffer. */
+          *pOut++ = sum;
 
-	  /* Increment the MAC count */
-	  count++;
+          /* Increment the MAC count */
+          count++;
 
-	  /* Update the inputA and inputB pointers for next MAC calculation */
-	  px = pIn1 + count;
-	  py = pSrc2;
+          /* Update the inputA and inputB pointers for next MAC calculation */
+          px = pIn1 + count;
+          py = pSrc2;
 
-	  /* Decrement the loop counter */
-	  blkCnt--;
-	}
+          /* Decrement the loop counter */
+          blkCnt--;
+        }
     }
 
 
@@ -480,23 +480,23 @@ void plp_conv_i8s_rv32im(const int8_t *  pSrcA,
       /* Loop unrolling: Compute 4 outputs at a time */
       k = blockSize3 >> 2U;
       while (k > 0U)
-	{
-	  /* Perform the multiply-accumulate */
-	  /* sum += x[srcALen - srcBLen + 1] * y[srcBLen - 1] */
-	  sum += *px++ * *py--;
+        {
+          /* Perform the multiply-accumulate */
+          /* sum += x[srcALen - srcBLen + 1] * y[srcBLen - 1] */
+          sum += *px++ * *py--;
 
-	  /* sum += x[srcALen - srcBLen + 2] * y[srcBLen - 2] */
-	  sum += *px++ * *py--;
+          /* sum += x[srcALen - srcBLen + 2] * y[srcBLen - 2] */
+          sum += *px++ * *py--;
 
-	  /* sum += x[srcALen - srcBLen + 3] * y[srcBLen - 3] */
-	  sum += *px++ * *py--;
+          /* sum += x[srcALen - srcBLen + 3] * y[srcBLen - 3] */
+          sum += *px++ * *py--;
 
-	  /* sum += x[srcALen - srcBLen + 4] * y[srcBLen - 4] */
-	  sum += *px++ * *py--;
+          /* sum += x[srcALen - srcBLen + 4] * y[srcBLen - 4] */
+          sum += *px++ * *py--;
 
-	  /* Decrement loop counter */
-	  k--;
-	}
+          /* Decrement loop counter */
+          k--;
+        }
 
       /* Loop unrolling: Compute remaining outputs */
       k = blockSize3 % 0x4U;
@@ -508,14 +508,14 @@ void plp_conv_i8s_rv32im(const int8_t *  pSrcA,
 #endif /* defined (PLP_MATH_LOOPUNROLL)*/
 
       while (k > 0U)
-	{
-	  /* Perform the multiply-accumulate */
-	  /* sum +=  x[srcALen-1] * y[srcBLen-1] */
-	  sum += *px++ * *py--;
+        {
+          /* Perform the multiply-accumulate */
+          /* sum +=  x[srcALen-1] * y[srcBLen-1] */
+          sum += *px++ * *py--;
 
-	  /* Decrement loop counter */
-	  k--;
-	}
+          /* Decrement loop counter */
+          k--;
+        }
 
       /* Store the result in the accumulator in the destination buffer. */
       *pOut++ = sum;
