@@ -243,6 +243,56 @@ First, we create all attributes as [`Argument`s](#arguments), but we set `in_fun
 
 Then, we can create the [`CustomArgument`](#customargument). For `value`, we write a funciton, which will initialize the struct of the required type normally. As attributes, we can use the names from the previously defined arguments. We can use the arguments (as described [here](#customargument)) to generate the required type for the struct, and for all the attributes.
 
+In the following example, we will call the function `void plp_mat_mult_i8vp_xpulpv2(void* args)`, and pass in the argument `plp_mat_mult_instance_i8`, which is defined as follows:
+
+```
+// in plp_math.h
+typedef struct
+{
+    const int8_t * __restrict__ pSrcA;
+    const int8_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t nPE;
+    int32_t * __restrict__ pDstC;
+} plp_mat_mult_instance_i8;
+```
+
+To use this struct and pass it to the function under test, we first write a python function for the `CustomArgument`, which returns a string to initialize the struct. For this, we can add constants (like `.nPE = 8`), refer to arguments in the `arguments` list (with their name), we can access a `SweepVariable` or `DynamicVariable` in the `env` dictionary, or use the `version`, `var_type` or the `use_l1` flag. This is a normal python function, so you can build whatever you like here. Since the function `plp_mat_mult_i8vp_xpulpv2` takes a `void*` pointer as an input argument, we create a `void*` pointer `pArgs` to pass to the function. This will make sure that there will be no compiler warnings or errors.
+```
+from textwrap import dedent
+def mat_mult_instance(env, version, var_type, use_l1):
+    version_prefix = version.split("_")[0] # remove the _parallel from the version
+    return dedent(
+        """\
+        plp_mat_mult_instance_{ver} args = {
+            .pSrcA = pSrcA,
+            .pSrcB = pSrcB,
+            .M = {m},
+            .N = {n},
+            .O = {o},
+            .nPE = 8,
+            .pDstC = pDst
+        };
+        void* pArgs = (void*)&args;
+        """.format(ver=version_prefix, m=env['len_m'], n=env['len_n'], o=env['len_o'])
+    )
+```
+
+Then, we generate generate the arguments list by adding all arrays, but setting `in_function=False`. In the end, we create the `CustomArgument`.
+
+```
+arguments = [
+	ArrayArgument('pSrcA', 'var_type', 'len_srcA', in_function=False),
+	ArrayArgument('pSrcB', 'var_type', 'len_srcB', in_function=False),
+	OutputArgument('pDst', 'ret_type', 'len_res', in_function=False),
+    CustomArgument('pArgs', mat_mult_instance, as_ptr=False)
+]
+```
+
+Note, that the name of the `CustomArgument`, `pArgs`, is also used to initialize the struct. In the `gen_stimuli.py` file, the function `compute_result` is still called for `pDst`, and the argument `inputs` will contain `pSrcA` and `pSrcB`. But those arguments will not be written to the arguments list. We set `as_ptr=False`, because we already pass a pointer to `void` into the function.
+
 #### Link to Static Structs
 
 To link to a static struct, which is defined somewhere in the pulp dsp library. This can be done by using a [`CustomArgument`](#customargument). Write the `value` function, such that:
