@@ -284,9 +284,9 @@ Then, we generate generate the arguments list by adding all arrays, but setting 
 
 ```
 arguments = [
-	ArrayArgument('pSrcA', 'var_type', 'len_srcA', in_function=False),
-	ArrayArgument('pSrcB', 'var_type', 'len_srcB', in_function=False),
-	OutputArgument('pDst', 'ret_type', 'len_res', in_function=False),
+    ArrayArgument('pSrcA', 'var_type', 'len_srcA', in_function=False),
+    ArrayArgument('pSrcB', 'var_type', 'len_srcB', in_function=False),
+    OutputArgument('pDst', 'ret_type', 'len_res', in_function=False),
     CustomArgument('pArgs', mat_mult_instance, as_ptr=False)
 ]
 ```
