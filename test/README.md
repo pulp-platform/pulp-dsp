@@ -231,6 +231,7 @@ Custom arguments allow tests to be very flexible. They can either be used to [li
   - `use_l1`: Bool, wether to use L1 memory.
   The function *must* return the entire string for initialization, including the type and the name of the variable.
 - (optional) `as_ptr`: Boolean to tell the framework how to pass the variable to the function. Default is `False`.
+- (optional) `deref`: Boolean to tell the framework to dereference the variable before passing it to the function. Default is `False`.
 - (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized
 
 The string, which is returned by the `value` function, will be inserted into the `data.h` file. Thus, you can even define types, structs, and do fancy things with `CustomArgument`s.

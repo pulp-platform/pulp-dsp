@@ -130,7 +130,7 @@ class Argument(object):
             self.value = gen_stimuli(self, env)
         elif isinstance(self.value, str):
             self.value = env[self.value]
-        elif self.value is None or (isinstance(self.value, tuple) and len(self.value) == 2):
+        elif self.value is None or (isinstance(self.value, (tuple, list)) and len(self.value) == 2):
             if isinstance(self.value, tuple):
                 min_value, max_value = self.value
             else:
@@ -139,8 +139,18 @@ class Argument(object):
                 self.value = np.random.uniform(low=min_value, high=max_value)
             else:
                 self.value = np.random.randint(low=min_value, high=max_value + 1)
-            self.value = self.value.astype(self.get_dtype())
+            self.value = self.get_dtype()(self.value).item()
         assert isinstance(self.value, (float, int))
+
+    def arg_str(self):
+        """ Returns the string to show for funciton argument """
+        if not self.in_function:
+            return None
+        if self.ctype == "float":
+            # floats are defined as unions, so we take the float variant
+            return "%s.f" % self.name
+        else:
+            return self.name
 
     def generate_stimuli(self, header):
         """ Writes stimuli value to header file """
@@ -201,6 +211,13 @@ class ArrayArgument(Argument):
             self.length = self.length
         assert isinstance(self.length, int)
 
+    def arg_str(self):
+        """ Returns the string to show for funciton argument """
+        if not self.in_function:
+            return None
+        else:
+            return "%s" % (self.name)
+
     def generate_value(self, env, gen_stimuli):
         """ Generates the value of argument, stores it in self.value and returns it. """
         assert isinstance(self.length, int)
@@ -209,7 +226,7 @@ class ArrayArgument(Argument):
             self.value = gen_stimuli(self, env)
         elif isinstance(self.value, str):
             self.value = env[self.value]
-        elif self.value is None or (isinstance(self.value, tuple) and len(self.value) == 2):
+        elif self.value is None or (isinstance(self.value, (tuple, list)) and len(self.value) == 2):
             if isinstance(self.value, tuple):
                 min_value, max_value = self.value
             else:
@@ -325,6 +342,9 @@ class ReturnValue(Argument):
         super(ReturnValue, self).__init__("return_value", ctype, 0, use_l1, False)
         self.reference_name = self.name + "_reference"
         self.tolerance = tolerance
+        self.in_function = False
+        if self.tolerance != 0:
+            raise NotImplementedError("Tolerance is not yet implemented for return values")
 
     def apply(self, env, var_type, version, use_l1):
         """
@@ -376,7 +396,7 @@ class CustomArgument(Argument):
     externally defined variable, struct or array. But it can also be used to create a struct with
     fields, which may point to other arguments.
     """
-    def __init__(self, name, value, as_ptr=False, in_function=True):
+    def __init__(self, name, value, as_ptr=False, deref=False, in_function=True):
         """
         name: Name of the argument (in the initialization and function declaration)
         value: Function, which should return a string for initializing the CustomVariable.
@@ -391,17 +411,32 @@ class CustomArgument(Argument):
                and the name of the variable.
         as_ptr: Boolean, if True, the struct is passed as pointer to the function. Else, it is
                 passed without referencing it.
+        deref: Boolean, if True, the struct is dereferenced before passing to the function. Else, it
+               is passed without dereferencing it.
         in_function: Boolean, if True, add this argument to the function signature. Set this to
                      False, and use CustomArgument to create struts.
         """
         super(CustomArgument, self).__init__(name, None, value, None, in_function)
         self.as_ptr = as_ptr
+        self.deref = deref
+        assert not (self.as_ptr and self.deref)
 
     def apply(self, env, var_type, version, use_l1):
         """
         Prepares the value (initialization string) of the custom argument
         """
         self.value = self.value(env, version, var_type, use_l1)
+
+    def arg_str(self):
+        """ Returns the string to show for funciton argument """
+        if not self.in_function:
+            return None
+        if self.as_ptr:
+            return "&%s" % (self.name)
+        if self.deref:
+            return "*%s" % (self.name)
+        else:
+            return self.name
 
     def generate_value(self, env, gen_stimuli):
         """ Nothing to do here! the init string was already created """
@@ -614,7 +649,8 @@ class Test(object):
                         timeout=1000000)
 
     def function_signature(self):
-        arguments_str = ', '.join([arg.name for arg in self.arguments if arg.in_function])
+        arguments_str = ', '.join([arg.arg_str()
+                                   for arg in self.arguments if arg.arg_str() is not None])
         return_value_str = ""
         return_value_list = [arg for arg in self.arguments if isinstance(arg, ReturnValue)]
         assert len(return_value_list) <= 1
@@ -624,7 +660,7 @@ class Test(object):
 
     def generate_check(self, header):
         # generate return check
-        any([header.write_return_check(arg.name, arg.reference_name, self.extended_output)
+        any([header.write_return_check(arg, self.extended_output)
              for arg in self.arguments if isinstance(arg, ReturnValue)])
 
         # generate result check
@@ -683,9 +719,27 @@ class HeaderWriter(object):
 
     def __enter__(self):
         self.fp = open(self.filename, 'w')
+        self.fp.write('#ifndef __PULP_TEST__DATA_H__\n')
+        self.fp.write('#define __PULP_TEST__DATA_H__\n\n')
+        # Union for reinterpret cast of a uint32_t to a float
+        # This is because we want to pass the exact float value in bits, and not in
+        # decimal "string" representation.
+        self.fp.write(dedent(
+            """\
+            // Union for reinterpret cast of a uint32_t to a float
+            // This is because we want to pass the exact float value in bits, and not in
+            // decimal "string" representation.
+            typedef union {
+                uint32_t u;
+                float f;
+            } __u2f;\
+            """
+        ))
+        self.fp.write("\n\n")
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        self.fp.write('#endif//__PULP_TEST__DATA_H__')
         self.fp.close()
         self.fp = None
 
@@ -703,11 +757,14 @@ class HeaderWriter(object):
         target_loc = 'RT_L1_DATA' if use_l1 and self.allow_l1 else 'RT_L2_DATA'
         nl = '\n' + self.tab
         if var_type == "float":
+            # We store float values in their hex representation. This way, we do not use the
+            # inaccurate decimal "string" representation, and we guarantee that the data is the
+            # exact same as when computeing the expected result.
             self.fp.write('%s uint32_t %s__int[%s] = {\n' % (target_loc, name, len(arr)))
             self.fp.write(self.tab)
             self.fp.write(nl.join(textwrap.wrap(', '.join([fmt_float(x) for x in arr]),
                                                 width=self.width)))
-            self.fp.write('\n};\n')
+            self.fp.write('\n};\n\n')
             self.fp.write('%s %s* %s = (%s*)((void*)%s__int);' % (target_loc, var_type, name,
                                                                   var_type, name))
             self.fp.write('\n\n')
@@ -721,9 +778,12 @@ class HeaderWriter(object):
     def write_scalar(self, name, var_type, value, use_l1):
         target_loc = 'L1_DATA' if use_l1 and self.allow_l1 else 'L2_DATA'
         if var_type == "float":
-            self.fp.write('%s uint32_t %s__int = %s;\n' % (target_loc, name, fmt_float(value)))
-            self.fp.write('%s %s %s = *((%s*)((void*)&%s__int));\n\n' % (target_loc, var_type, name,
-                                                                         var_type, name))
+            # We want to write the floating point as hex representation to the header file (and not
+            # as a decimal "string"). Then, we want to typecast it to a float. One way is to get the
+            # address of the variable, and then cast it to a float pointer. However, it is not
+            # possible to dereference a pointer in a .h file. Therefore, we use the second method;
+            # generating a union with a float (.f) and a unsigned int (.u).
+            self.fp.write('%s __u2f %s = {.u = %sU};\n\n' % (target_loc, name, fmt_float(value)))
         else:
             self.fp.write('%s %s %s = %s;\n\n' % (target_loc, var_type, name, value))
 
@@ -882,16 +942,20 @@ class HeaderWriter(object):
                                                                      arg.reference_name))
         self.fp.write('%s}\\\n' % self.tab)
 
-    def write_return_check(self, result_name, reference_name, print_errors=False):
+    def write_return_check(self, arg, print_errors=False):
         if print_errors:
-            self.fp.write('%sif (%s != %s) {\\\n' % (self.tab, result_name, reference_name))
+            # For float, the value is stored in a union. To interpret the data as floating-point,
+            # we need to call value.f.
+            # TODO implement tolerance for return value
+            result_name = "%s.f" % arg.name if arg.ctype == "float" else arg.name
+            self.fp.write('%sif (%s != %s) {\\\n' % (self.tab, result_name, arg.reference_name))
             self.fp.write('%spassed = 0;\\\n' % self.tab * 2)
             self.fp.write('%sprintf("<Mismatch> return: acq=%%d, exp=%%d", %s, %s);\\\n'
-                          % (self.tab * 2, result_name, reference_name))
+                          % (self.tab * 2, result_name, arg.reference_name))
             self.fp.write('%s}\\\n' % self.tab)
         else:
             self.fp.write('%sif (%s != %s) passed = 0;\\\n'
-                          % (self.tab, result_name, reference_name))
+                          % (self.tab, result_name, arg.reference_name))
 
     def generate_fsig(self, test):
         self.fp.write('#define FSIG {\\\n')
@@ -902,7 +966,7 @@ class HeaderWriter(object):
         self.fp.write(
             dedent(
                 """\
-                #define BENCH {{\\
+                #define BENCHMARK {{\\
                 {tab}rt_perf_t perf;\\
                 {tab}rt_perf_init(&perf);\\
                 {tab}int passed = do_bench(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR), 1);\\
@@ -925,6 +989,9 @@ class HeaderWriter(object):
 
 
 def fmt_float(val):
+    """ This function returns the hex representation of a float """
+    if isinstance(val, float):
+        val = np.float32(val)
     assert(val.dtype == np.float32)
     packed = struct.pack('!f', val)
     int_val = sum([b << ((3 - i) * 8) for i, b in enumerate(packed)])
@@ -1057,7 +1124,7 @@ def setup_ibex():
             return passed;
         }
         int main(){
-            BENCH
+            BENCHMARK
             return 0;
         }
         """
@@ -1117,7 +1184,7 @@ def setup_riscy():
             return passed;
         }
         void cluster_entry(void *arg){
-            BENCH
+            BENCHMARK
             return;
         }
         """
