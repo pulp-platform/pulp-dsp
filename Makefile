@@ -28,7 +28,7 @@ FC_SRCS = \
 	src/StatisticsFunctions/plp_var_q32.c src/StatisticsFunctions/kernels/plp_var_q32s_rv32im.c \
 	src/StatisticsFunctions/plp_var_q16.c src/StatisticsFunctions/kernels/plp_var_q16s_rv32im.c \
 	src/StatisticsFunctions/plp_var_q8.c src/StatisticsFunctions/kernels/plp_var_q8s_rv32im.c \
-  src/BasicMathFunctions/plp_dot_prod_f32_parallel.c \
+	src/BasicMathFunctions/plp_dot_prod_f32_parallel.c \
 	src/BasicMathFunctions/plp_dot_prod_q32_parallel.c \
 	src/BasicMathFunctions/plp_dot_prod_i32_parallel.c \
 	src/SupportFunctions/plp_copy_i32.c src/SupportFunctions/kernels/plp_copy_i32s_rv32im.c \
@@ -45,8 +45,8 @@ FC_SRCS = \
 	src/FilteringFunctions/plp_correlate_i16.c src/FilteringFunctions/kernels/plp_correlate_i16s_rv32im.c \
 	src/FilteringFunctions/plp_correlate_i8.c src/FilteringFunctions/kernels/plp_correlate_i8s_rv32im.c \
 	src/FilteringFunctions/plp_correlate_q8.c src/FilteringFunctions/kernels/plp_correlate_q8s_rv32im.c \
-  src/FilteringFunctions/plp_correlate_q16.c src/FilteringFunctions/kernels/plp_correlate_q16s_rv32im.c \
-  src/FilteringFunctions/plp_correlate_q32.c src/FilteringFunctions/kernels/plp_correlate_q32s_rv32im.c \
+	src/FilteringFunctions/plp_correlate_q16.c src/FilteringFunctions/kernels/plp_correlate_q16s_rv32im.c \
+	src/FilteringFunctions/plp_correlate_q32.c src/FilteringFunctions/kernels/plp_correlate_q32s_rv32im.c \
 	src/FilteringFunctions/plp_conv_i32.c src/FilteringFunctions/kernels/plp_conv_i32s_rv32im.c \
 	src/FilteringFunctions/plp_conv_i16.c src/FilteringFunctions/kernels/plp_conv_i16s_rv32im.c \
 	src/FilteringFunctions/plp_conv_i8.c src/FilteringFunctions/kernels/plp_conv_i8s_rv32im.c \
@@ -123,8 +123,8 @@ CL_SRCS = \
 	src/StatisticsFunctions/kernels/plp_var_q8s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_sqrt_q32s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_sqrt_q16s_xpulpv2.c \
-src/BasicMathFunctions/kernels/plp_dot_prod_f32s_xpulpv2.c \
-  src/BasicMathFunctions/kernels/plp_dot_prod_f32p_xpulpv2.c \
+	src/BasicMathFunctions/kernels/plp_dot_prod_f32s_xpulpv2.c \
+	src/BasicMathFunctions/kernels/plp_dot_prod_f32p_xpulpv2.c \
 	src/BasicMathFunctions/kernels/plp_dot_prod_q32p_xpulpv2.c \
 	src/BasicMathFunctions/kernels/plp_dot_prod_i32p_xpulpv2.c \
 	src/SupportFunctions/kernels/plp_copy_i32s_xpulpv2.c \
