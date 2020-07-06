@@ -19,8 +19,9 @@ FC_SRCS = \
 	src/StatisticsFunctions/plp_power_q32.c src/StatisticsFunctions/kernels/plp_power_q32s_rv32im.c \
 	src/StatisticsFunctions/plp_power_q16.c src/StatisticsFunctions/kernels/plp_power_q16s_rv32im.c \
 	src/StatisticsFunctions/plp_power_q8.c src/StatisticsFunctions/kernels/plp_power_q8s_rv32im.c \
-	src/StatisticsFunctions/plp_sqrt_q32.c src/StatisticsFunctions/kernels/plp_sqrt_q32s_rv32im.c \
-	src/StatisticsFunctions/plp_sqrt_q16.c src/StatisticsFunctions/kernels/plp_sqrt_q16s_rv32im.c \
+	src/FastMathFunctions/plp_sqrt_f32.c \
+	src/FastMathFunctions/plp_sqrt_q32.c src/FastMathFunctions/kernels/plp_sqrt_q32s_rv32im.c \
+	src/FastMathFunctions/plp_sqrt_q16.c src/FastMathFunctions/kernels/plp_sqrt_q16s_rv32im.c \
 	src/StatisticsFunctions/plp_var_f32.c \
 	src/StatisticsFunctions/plp_var_i32.c src/StatisticsFunctions/kernels/plp_var_i32s_rv32im.c \
 	src/StatisticsFunctions/plp_var_i16.c src/StatisticsFunctions/kernels/plp_var_i16s_rv32im.c \
@@ -109,8 +110,9 @@ CL_SRCS = \
 	src/StatisticsFunctions/kernels/plp_var_q32s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_var_q16s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_var_q8s_xpulpv2.c \
-	src/StatisticsFunctions/kernels/plp_sqrt_q32s_xpulpv2.c \
-	src/StatisticsFunctions/kernels/plp_sqrt_q16s_xpulpv2.c \
+	src/FastMathFunctions/kernels/plp_sqrt_f32s_xpulpv2.c \
+	src/FastMathFunctions/kernels/plp_sqrt_q32s_xpulpv2.c \
+	src/FastMathFunctions/kernels/plp_sqrt_q16s_xpulpv2.c \
 src/BasicMathFunctions/kernels/plp_dot_prod_f32s_xpulpv2.c \
   src/BasicMathFunctions/kernels/plp_dot_prod_f32p_xpulpv2.c \
 	src/BasicMathFunctions/kernels/plp_dot_prod_q32p_xpulpv2.c \

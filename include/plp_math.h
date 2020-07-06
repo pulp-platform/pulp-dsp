@@ -1984,7 +1984,7 @@ void plp_var_q16(
                   const int16_t * __restrict__ pSrc,
                   uint32_t blockSize,
                   uint32_t deciPoint,
-                  int32_t * __restrict__ pRes);
+                  int16_t * __restrict__ pRes);
 
 
 
@@ -2001,7 +2001,7 @@ void plp_var_q16s_rv32im(
                           const int16_t * __restrict__ pSrc,
                           uint32_t blockSize,
                           uint32_t deciPoint,
-                          int32_t * __restrict__ pRes);
+                          int16_t * __restrict__ pRes);
 
 
 
@@ -2017,7 +2017,7 @@ void plp_var_q16s_xpulpv2(
                            const int16_t * __restrict__ pSrc,
                            uint32_t blockSize,
                            uint32_t deciPoint,
-                           int32_t * __restrict__ pRes);
+                           int16_t * __restrict__ pRes);
 
 
 
@@ -2033,7 +2033,7 @@ void plp_var_q8(
                   const int8_t * __restrict__ pSrc,
                   uint32_t blockSize,
                   uint32_t deciPoint,
-                  int32_t * __restrict__ pRes);
+                  int8_t * __restrict__ pRes);
 
 
 
@@ -2050,7 +2050,7 @@ void plp_var_q8s_rv32im(
                           const int8_t * __restrict__ pSrc,
                           uint32_t blockSize,
                           uint32_t deciPoint,
-                          int32_t * __restrict__ pRes);
+                          int8_t * __restrict__ pRes);
 
 
 
@@ -2066,7 +2066,7 @@ void plp_var_q8s_xpulpv2(
                            const int8_t * __restrict__ pSrc,
                            uint32_t blockSize,
                            uint32_t deciPoint,
-                           int32_t * __restrict__ pRes);
+                           int8_t * __restrict__ pRes);
 
 
 
