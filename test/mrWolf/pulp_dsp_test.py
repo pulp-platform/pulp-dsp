@@ -10,6 +10,7 @@ from copy import deepcopy
 import numpy as np
 from textwrap import dedent, indent, wrap
 import struct
+import traceback
 
 GENERATE_STIMULI = "gen_stimuli"
 
@@ -98,7 +99,7 @@ class Argument(object):
         self.name = "t{}__{}".format(idx, self.name)
         return self
 
-    def original_name(self):
+    def general_name(self):
         """ returns the name without txx__ prefix """
         splits = self.name.split("__")
         if len(splits) == 0 or not splits[0].startswith("t"):
@@ -595,7 +596,7 @@ class AggregatedTestCase(object):
         content += "\n"
 
         # prepare inputs dictionary
-        inputs = {arg.original_name(): arg
+        inputs = {arg.general_name(): arg
                   for arg in self.arguments
                   if isinstance(arg, InplaceArgument) or not isinstance(arg, (ReturnValue,
                                                                               OutputArgument))}
@@ -603,9 +604,9 @@ class AggregatedTestCase(object):
         # prepare the gen_result function
         gen_result_prep = partial(gen_result, inputs=inputs, env=self.env, fix_point=self.fix_point)
 
-        content += "\n".join([arg.reference_header_str(gen_result_prep)
-                              for arg in self.arguments
-                              if isinstance(arg, (ReturnValue, OutputArgument))])
+        content += "\n".join([x for x in [arg.reference_header_str(gen_result_prep)
+                                          for arg in self.arguments]
+                              if x is not None])
 
         return content
 
@@ -995,18 +996,25 @@ class AggregatedTest(object):
 
 def generate_test_program(_config, _output, test_obj):
     """ generate the test program without serialization and deserialization """
-    gen_stimuli_file = os.path.join(os.getcwd(), "gen_stimuli.py")
-    # import gen_stimuli
-    import runpy
-    gen_stimuli = runpy.run_path(gen_stimuli_file)
-    compute_result = gen_stimuli['compute_result']
+    # wrap everything in a try block in order to see the error message
     try:
-        generate_stimuli = gen_stimuli['generate_stimuli']
-    except KeyError:
-        generate_stimuli = None
+        gen_stimuli_file = os.path.join(os.getcwd(), "gen_stimuli.py")
+        # import gen_stimuli
+        import runpy
+        gen_stimuli = runpy.run_path(gen_stimuli_file)
+        compute_result = gen_stimuli['compute_result']
+        try:
+            generate_stimuli = gen_stimuli['generate_stimuli']
+        except KeyError:
+            generate_stimuli = None
 
-    test_obj.generate_test_program(generate_stimuli, compute_result)
-    return (True, None)
+        test_obj.generate_test_program(generate_stimuli, compute_result)
+        return (True, None)
+
+    except Exception:
+        print("generate_test_program failed")
+        print(traceback.format_exc())
+        return (False, None)
 
 
 def check_output(config, output, test_obj):
