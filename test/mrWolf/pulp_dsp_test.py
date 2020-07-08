@@ -11,8 +11,7 @@ from copy import deepcopy
 import argparse
 import numpy as np
 import json
-import textwrap
-from textwrap import dedent
+from textwrap import dedent, indent, wrap
 import struct
 
 GENERATE_STIMULI = "gen_stimuli"
@@ -82,18 +81,22 @@ class Argument(object):
         if isinstance(self.value, SweepVariable):
             self.value = self.value.name
 
-    def to_dict(self, env, var_type, version, use_l1):
+    def copy_apply_to_dict(self, env, var_type, version, use_l1, idx):
         """ returns the serialized object """
         obj = deepcopy(self)
         obj.apply(env, var_type, version, use_l1)
-        return {'class': type(self).__name__, 'dict': obj.__dict__}
+        return obj.to_dict()
 
-    def apply(self, env, var_type, version, use_l1):
+    def to_dict(self):
+        return {'class': type(self).__name__, 'dict': self.__dict__}
+
+    def apply(self, env, var_type, version, use_l1, idx):
         """
         Prepare the variable for the specific test case. The following is done:
         - Apply the environment (current iteration of the sweep variables)
         - Apply the version (var_type or ret_type)
         - Apply use_l1 flag
+        - Alter the name to contain the test id
         """
         # set the use_l1 flag
         if self.use_l1 is None:
@@ -103,6 +106,17 @@ class Argument(object):
             self.ctype = var_type[0]
         if self.ctype == 'ret_type':
             self.ctype = var_type[1]
+        # change the name
+        self.name = "t{}__{}".format(idx, self.name)
+        return self
+
+    def original_name(self):
+        """ returns the name without txx__ prefix """
+        splits = self.name.split("__")
+        if len(splits) == 0 or not splits[0].startswith("t"):
+            return self.name
+        else:
+            return self.name[len(splits[0] + "__"):]
 
     def get_range(self):
         """ return the range for random values based on the ctype """
@@ -124,6 +138,30 @@ class Argument(object):
             return np.float32
         raise RuntimeError("Unknown type: %s" % self.ctype)
 
+    def arg_str(self):
+        """ Returns the string to show for funciton argument """
+        if self.ctype == "float":
+            # floats are defined as unions, so we take the float variant
+            return "%s.f" % self.name
+        else:
+            return self.name
+
+    def do_bench_setup_str(self):
+        """ returns the string for setup in do_bench function """
+        return None
+
+    def run_test_setup_str(self):
+        """ returns the string for setup the variable """
+        return None
+
+    def run_test_free_str(self):
+        """ string to free up memory for the variable """
+        return None
+
+    def check_str(self, target):
+        """ returns the string to check the result """
+        return None
+
     def generate_value(self, env, gen_stimuli):
         """ Interpret the type of self.value and generate the stimuli """
         if self.value == GENERATE_STIMULI:
@@ -140,19 +178,15 @@ class Argument(object):
             else:
                 self.value = np.random.randint(low=min_value, high=max_value + 1)
             self.value = self.get_dtype()(self.value).item()
+
+    def header_str(self):
+        """ return the string for delclaring and initializing the data """
         assert isinstance(self.value, (float, int))
+        return declare_scalar(self.name, self.ctype, self.value)
 
-    def arg_str(self):
-        """ Returns the string to show for funciton argument """
-        if self.ctype == "float":
-            # floats are defined as unions, so we take the float variant
-            return "%s.f" % self.name
-        else:
-            return self.name
-
-    def generate_stimuli(self, header):
-        """ Writes stimuli value to header file """
-        header.write_scalar(self.name, self.ctype, self.value, self.use_l1)
+    def reference_header_str(self, gen_function):
+        """ return the header string for declaring and initializing the reference """
+        return None
 
 
 class ArrayArgument(Argument):
@@ -185,18 +219,22 @@ class ArrayArgument(Argument):
         if isinstance(self.length, SweepVariable):
             self.length = self.length.name
 
-    def apply(self, env, var_type, version, use_l1):
+    def apply(self, env, var_type, version, use_l1, idx):
         """
         Prepare the variable for the specific test case. The following is done:
         - Apply the environment (current iteration of the sweep variables)
         - Apply the version (var_type or ret_type)
         - Apply use_l1 flag
         - Interpret the length of the variable
+        - Alter the name to contain the test id
         """
         # interpret the length
         self.interpret_length(env)
         # do the same thing as a regular Argument
-        super(ArrayArgument, self).apply(env, var_type, version, use_l1)
+        return super(ArrayArgument, self).apply(env, var_type, version, use_l1, idx)
+
+    def l2_data_name(self):
+        return self.name + "__l2"
 
     def interpret_length(self, env):
         """ interpret the length of the variable based on the environment """
@@ -213,8 +251,36 @@ class ArrayArgument(Argument):
         """ Returns the string to show for funciton argument """
         return self.name
 
+    def run_test_setup_str(self):
+        """ returns the string for setup the variable """
+        if self.use_l1:
+            return dedent(
+                """\
+                {l1_name} = rt_alloc(RT_ALLOC_CL_DATA, sizeof({ctype}) * {len});
+                rt_dma_memcpy((unsigned int){l2_name},
+                              (unsigned int){l1_name},
+                              sizeof({ctype}) * {len},
+                              RT_DMA_DIR_EXT2LOC, 0, &copy);
+                rt_dma_wait(&copy);
+                """
+            ).format(l1_name=self.name, l2_name=self.l2_data_name(), ctype=self.ctype,
+                           len=self.length)
+        else:
+            return None
+
+    def run_test_free_str(self):
+        """ string to free up memory for the variable """
+        if self.use_l1:
+            return dedent(
+                """\
+                rt_free(RT_ALLOC_CL_DATA, {l1_name}, sizeof({ctype}) * {len});
+                """
+            ).format(l1_name=self.name, ctype=self.ctype, len=self.length)
+        else:
+            return None
+
     def generate_value(self, env, gen_stimuli):
-        """ Generates the value of argument, stores it in self.value and returns it. """
+        """ Interpret the type of self.value and generate the stimuli """
         assert isinstance(self.length, int)
         dtype = self.get_dtype()
         if self.value == GENERATE_STIMULI:
@@ -235,12 +301,21 @@ class ArrayArgument(Argument):
             self.value = (np.ones(self.length) * self.value).astype(dtype)
         elif isinstance(self.value, np.ndarray):
             pass # nothing to do
-        assert isinstance(self.value, np.ndarray)
-        assert len(self.value) == self.length
 
-    def generate_stimuli(self, header):
-        """ Writes stimuli value to header file """
-        header.write_array(self.name, self.ctype, self.value, self.use_l1)
+    def header_str(self):
+        """ return the string for delclaring and initializing the data """
+        assert isinstance(self.value, np.ndarray)
+        if self.use_l1:
+            return dedent(
+                """\
+                {ctype}* {name};
+                {l2_array}\
+                """
+            ).format(ctype=self.ctype, name=self.name,
+                     l2_array=declare_array(self.l2_data_name(), self.ctype, self.length,
+                                            self.value))
+        else:
+            return declare_array(self.name, self.ctype, self.length, self.value)
 
 
 class OutputArgument(ArrayArgument):
@@ -258,10 +333,12 @@ class OutputArgument(ArrayArgument):
                      False, and use CustomArgument to create struts.
         """
         super(OutputArgument, self).__init__(name, ctype, length, 0, use_l1, in_function)
-        self.reference_name = self.name + "_reference"
         self.tolerance = tolerance
 
-    def apply(self, env, var_type, version, use_l1):
+    def reference_name(self):
+        return self.name + "__reference"
+
+    def apply(self, env, var_type, version, use_l1, idx):
         """
         Prepare the variable for the specific test case. The following is done:
         - Apply the environment (current iteration of the sweep variables)
@@ -269,15 +346,36 @@ class OutputArgument(ArrayArgument):
         - Apply use_l1 flag
         - Interpret the length of the variable
         - Apply the tolerance
+        - Alter the name to contain the test id
         """
         if callable(self.tolerance):
             self.tolerance = self.tolerance(version)
-        super(OutputArgument, self).apply(env, var_type, version, use_l1)
+        return super(OutputArgument, self).apply(env, var_type, version, use_l1, idx)
 
-    def generate_reference(self, gen_function, header):
+    def check_str(self, target):
+        """ returns the string to check the result """
+        display_format = "%.10f" if self.ctype == "float" else "%d"
+        check_str = tolerance_check_str("%s[i]" % self.name, "%s[i]" % self.reference_name(),
+                                        self.tolerance, self.ctype, "    ", target)
+        return dedent(
+            """\
+            for (int i = 0; i < {len}; i++) {{
+            {check_str}
+                    passed = 0;
+                    printf("    <Mismatch> {acq}[%d]: acq={fmt}, exp={fmt}\\n", i, {acq}[i], {exp}[i]);
+                }}
+            }}
+            """
+        ).format(len=self.length,
+                 check_str=check_str,
+                 acq=self.name,
+                 exp=self.reference_name(),
+                 fmt=display_format)
+
+    def reference_header_str(self, gen_function):
         """ Generates and writes reference value to header file """
         reference = gen_function(self)
-        header.write_array(self.reference_name, self.ctype, reference, False)
+        return declare_array(self.reference_name(), self.ctype, self.length, reference)
 
 
 class InplaceArgument(OutputArgument):
@@ -314,14 +412,31 @@ class InplaceArgument(OutputArgument):
         super(InplaceArgument, self).__init__(name, ctype, length, use_l1, tolerance, in_function)
         # overwrite the value
         self.value = value
-        self.original_name = self.name + "_original"
 
-    def generate_stimuli(self, header):
-        """ Writes stimuli value to header file
-        The data is written twice, once for the original data, and once for the working data. The
-        original data will be located at L2 to save memory."""
-        header.write_array(self.original_name, self.ctype, self.value, False)
-        header.write_array(self.name, self.ctype, self.value, self.use_l1)
+    def original_name(self):
+        return self.name + "__original"
+
+    def do_bench_setup_str(self):
+        """ returns the string for setup in do_bench function """
+        return dedent(
+            """\
+            for (int i = 0; i < {len}; i++) {{
+                {data}[i] = {original}[i];
+            }}
+            """
+        ).format(len=self.length, data=self.name, original=self.original_name())
+
+    def header_str(self):
+        """ return the string for delclaring and initializing the data """
+        assert isinstance(self.value, np.ndarray)
+        return dedent(
+            """\
+            {super_init}
+            {original_init}\
+            """
+        ).format(super_init=super(InplaceArgument, self).header_str(),
+                 original_init=declare_array(self.original_name(), self.ctype, self.length,
+                                             self.value))
 
 
 class ReturnValue(Argument):
@@ -335,26 +450,46 @@ class ReturnValue(Argument):
                    as absolute.
         """
         super(ReturnValue, self).__init__("return_value", ctype, 0, use_l1, False)
-        self.reference_name = self.name + "_reference"
         self.tolerance = tolerance
         self.in_function = False
 
-    def apply(self, env, var_type, version, use_l1):
+    def reference_name(self):
+        return self.name + "__reference"
+
+    def apply(self, env, var_type, version, use_l1, idx):
         """
         Prepare the variable for the specific test case. The following is done:
         - Apply the environment (current iteration of the sweep variables)
         - Apply the version (var_type or ret_type)
         - Apply use_l1 flag
         - Apply the tolerance
+        - Alter the name to contain the test id
         """
         if callable(self.tolerance):
             self.tolerance = self.tolerance(version)
-        super(ReturnValue, self).apply(env, var_type, version, use_l1)
+        return super(ReturnValue, self).apply(env, var_type, version, use_l1, idx)
 
-    def generate_reference(self, gen_function, header):
+    def check_str(self, target):
+        """ returns the string to check the result """
+        display_format = "%.10f" if self.ctype == "float" else "%d"
+        check_str = tolerance_check_str(self.name, self.reference_name(),
+                                        self.tolerance, self.ctype, "", target)
+        return dedent(
+            """\
+            {check_str}
+                passed = 0;
+                printf("    <Mismatch> {acq}[%d]: acq={fmt}, exp={fmt}\\n", i, {acq}[i], {exp}[i]);
+            }}
+            """
+        ).format(check_str=check_str,
+                 acq=self.name,
+                 exp=self.reference_name(),
+                 fmt=display_format)
+
+    def reference_header_str(self, gen_function):
         """ Generates and writes reference value to header file """
         reference = gen_function(self)
-        header.write_scalar(self.reference_name, self.ctype, reference, False)
+        return declare_scalar(self.reference_name(), self.ctype, reference)
 
 
 class FixPointArgument(Argument):
@@ -400,6 +535,10 @@ class CustomArgument(Argument):
                - version: str: Version string
                - var_type: tuple(str, str), which contains (var_type, ret_type)
                - use_l1: Bool, wether to use L1 memory.
+               - arg_name: F: str -> str: Function which transforms the name of an argument to the
+                 name which will actually appear in the test program. Each iteration of the
+                 accumulated test will use different variable names. Therefore, all references need
+                 to be transformed.
                The function *must* return the entire string for initialization, including the type
                and the name of the variable.
         as_ptr: Boolean, if True, the struct is passed as pointer to the function. Else, it is
@@ -414,11 +553,14 @@ class CustomArgument(Argument):
         self.deref = deref
         assert not (self.as_ptr and self.deref)
 
-    def apply(self, env, var_type, version, use_l1):
+    def apply(self, env, var_type, version, use_l1, idx):
         """
-        Prepares the value (initialization string) of the custom argument
+        Prepares the value (initialization string) of the custom argument, and the name to include
+        the test id
         """
-        self.value = self.value(env, version, var_type, use_l1)
+        self.name = "t{}__{}".format(idx, self.name)
+        self.value = self.value(env, version, var_type, use_l1, lambda f: "t{}__{}".format(idx, f))
+        return self
 
     def arg_str(self):
         """ Returns the string to show for funciton argument """
@@ -432,66 +574,584 @@ class CustomArgument(Argument):
             return self.name
 
     def generate_value(self, env, gen_stimuli):
-        """ Nothing to do here! the init string was already created """
+        """ Interpret the type of self.value and generate the stimuli """
+        # Nothing to do here! the init string was already created
         pass
 
-    def generate_stimuli(self, header):
-        """ generate the header stimuli """
-        header.fp.write(self.value)
-        header.fp.write("\n\n")
+    def header_str(self):
+        """ return the string for delclaring and initializing the data """
+        # here, we just need to return self.value, since this is the initialization string.
+        return self.value
+
+
+def argument_from_dict(d):
+    if d['class'] == Argument.__name__:
+        arg = Argument("tmp", "tmp", 0)
+    elif d['class'] == ArrayArgument.__name__:
+        arg = ArrayArgument("tmp", "tmp", 1, 0)
+    elif d['class'] == OutputArgument.__name__:
+        arg = OutputArgument("tmp", "tmp", 1)
+    elif d['class'] == InplaceArgument.__name__:
+        arg = InplaceArgument("tmp", "tmp", 1, 0)
+    elif d['class'] == FixPointArgument.__name__:
+        arg = FixPointArgument("tmp", "tmp", 0)
+    elif d['class'] == ParallelArgument.__name__:
+        arg = ParallelArgument("tmp", "tmp", 0)
+    elif d['class'] == ReturnValue.__name__:
+        arg = ReturnValue("tmp")
+    elif d['class'] == CustomArgument.__name__:
+        arg = CustomArgument("tmp", None)
+    else:
+        raise RuntimeError("Unknown class name")
+    arg.__dict__ = d['dict']
+    return arg
+
+
+class AggregatedTestCase(object):
+    """ Structure for one testcase in the aggregated tests """
+    def __init__(self, idx=0, arguments=None, env=None, n_ops=0):
+        """ constructor. Arguments must already be applied! """
+        self.idx = idx
+        self.arguments = arguments or []
+        self.env = env
+        self.n_ops = n_ops
+
+        # get the fix point
+        self.fix_point = ([arg.value for arg
+                           in self.arguments
+                           if isinstance(arg, FixPointArgument)] or [None])[0]
+        assert self.fix_point is None or isinstance(self.fix_point, int)
+
+    def to_dict(self):
+        """ returns a dictionary for serialization """
+        d = self.__dict__
+        d['arguments'] = [arg.to_dict() for arg in self.arguments]
+        return d
+
+    @staticmethod
+    def from_dict(d):
+        d['arguments'] = [argument_from_dict(arg_dict) for arg_dict in d['arguments']]
+        case = AggregatedTestCase()
+        case.__dict__ = d
+        return case
+
+    def generate_header_content(self, gen_stimuli, gen_result):
+        """ generate all stimuli values and compute the expected result """
+        # generate value of all arguments
+        [arg.generate_value(self.env, gen_stimuli) for arg in self.arguments]
+        content = "\n".join([arg.header_str() for arg in self.arguments])
+        content += "\n"
+
+        # prepare inputs dictionary
+        inputs = {arg.original_name(): arg
+                  for arg in self.arguments
+                  if isinstance(arg, InplaceArgument) or not isinstance(arg, (ReturnValue,
+                                                                              OutputArgument))}
+
+        # prepare the gen_result function
+        gen_result_prep = partial(gen_result, inputs=inputs, env=self.env, fix_point=self.fix_point)
+
+        content += "\n".join([arg.reference_header_str(gen_result_prep)
+                              for arg in self.arguments
+                              if isinstance(arg, (ReturnValue, OutputArgument))])
+
+        return content
+
+    def get_do_bench_function(self, function_name, target):
+        """ returns the do_bench function for the current test """
+        ret_str = ([a.arg_str() for a in self.arguments if isinstance(a, ReturnValue)] or [""])[0]
+        return dedent(
+            """\
+            static int t{idx}__do_bench(rt_perf_t *perf, int events, int do_check) {{
+                // setup variables (like resetting InplaceArguments)
+            {setup}
+
+                // start the performance counters
+                rt_perf_conf(perf, events);
+                rt_perf_reset(perf);
+                rt_perf_start(perf);
+
+                // call the function-under-test
+                {ret_str}{fname}({args});
+
+                rt_perf_stop(perf);
+
+                // check the result
+                int passed = 1;
+                if (do_check) {{
+            {check}
+                }}
+                return passed;
+            }}
+            """
+        ).format(idx=self.idx,
+                 setup=indent("\n".join([arg.do_bench_setup_str()
+                                         for arg in self.arguments
+                                         if arg.do_bench_setup_str() is not None]),
+                              "    "),
+                 ret_str=ret_str,
+                 fname=function_name,
+                 args=", ".join([a.arg_str() for a in self.arguments if a.in_function]),
+                 check=indent("\n".join([arg.check_str(target)
+                                         for arg in self.arguments
+                                         if arg.check_str(target) is not None]),
+                              "        "))
+
+    def get_run_test_function_call(self):
+        return "t{}__run_test();".format(self.idx)
+
+    def get_run_test_function(self):
+        """ returns the run_test function for the current test """
+        return dedent(
+            """\
+            static void t{idx}__run_test(void) {{
+                printf("\\ntestcase {idx} {{\\n");
+
+                // setup the test
+                rt_dma_copy_t copy;
+
+            {setup}
+
+                // setup performance counter
+                rt_perf_t perf;
+                rt_perf_init(&perf);
+
+                // run 1: check result and get numebr of cycles / instructions
+                int passed = t{idx}__do_bench(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR), 1);
+                printf("    passed: %d\\n", passed);
+                printf("    cycles: %d\\n", rt_perf_read(RT_PERF_CYCLES));
+                printf("    instructions: %d\\n", rt_perf_read(RT_PERF_INSTR));
+
+                // run 2: count load stalls
+                t{idx}__do_bench(&perf, 1<<RT_PERF_LD_STALL, 0);
+                printf("    load_stalls: %d\\n", rt_perf_read(RT_PERF_LD_STALL));
+
+                // run 3: count instruction cache misses
+                t{idx}__do_bench(&perf, 1<<RT_PERF_IMISS, 0);
+                printf("    icache_miss: %d\\n", rt_perf_read(RT_PERF_IMISS));
+
+                // run 4: count TCDM contentions
+                t{idx}__do_bench(&perf, 1<<RT_PERF_TCDM_CONT, 0);
+                printf("    tcdm_cont: %d\\n", rt_perf_read(RT_PERF_TCDM_CONT));
+
+                // free up all memory
+            {free}
+
+                printf("}}\\n");
+            }}
+            """
+        ).format(idx=self.idx,
+                 setup=indent("\n".join([arg.run_test_setup_str()
+                                         for arg in self.arguments
+                                         if arg.run_test_setup_str() is not None]),
+                              "    "),
+                 free=indent("".join([arg.run_test_free_str()
+                                      for arg in self.arguments
+                                      if arg.run_test_free_str() is not None]),
+                             "    "))
+
+    def get_header_filename(self):
+        """ returns the name of the header file """
+        return "data_t{}.h".format(self.idx)
+
+    def get_header_file_str(self, gen_stimuli, gen_result):
+        """ returns the header file of this test as a string """
+        return dedent(
+            """\
+            #ifndef __PULP_DSP_TEST__DATA_T{idx}_H__
+            #define __PULP_DSP_TEST__DATA_T{idx}_H__
+
+            // include the common header
+            #include "common.h"
+
+            {content}
+
+            #endif//__PULP_DSP_TEST__DATA_T{idx}_H__
+            """
+        ).format(idx=self.idx, content=self.generate_header_content(gen_stimuli, gen_result))
+
+
+class AggregatedTest(object):
+    """ Test structure for aggregated tests
+    Aggregated tests work by generating all required arrays for all iterations at once, and storing
+    them into L2 memory. Then, at runtime, each iteration is executed one by one, and all data for
+    L1 memory is copied to L1 storage. For this, the largest size of each array is allocated
+    statically.
+    """
+
+    def __init__(self):
+        """ Constructor returning default values for an empty test, used for deserializing """
+        self.function_name = None
+        self.version = None
+        self.device_name = None
+        self.extended_output = True
+        self.visible_env = []
+        self.cases = []
+
+    def build(self, function_name, version, arg_ret_type, arguments, variables, visible_env,
+              device_name, use_l1, extended_output=True, n_ops=None):
+        """ Build an aggregated test. This will also apply all arguments for all versions """
+        self.function_name = function_name
+        self.version = version
+        self.device_name = device_name
+        self.extended_output = extended_output
+        self.visible_env = visible_env
+
+        # extend funciton name
+        self.function_name += "_" + self.version
+
+        # set use_l1 to false for ibex
+        if self.device_name == "ibex":
+            use_l1 = False
+
+        # set n_ops function
+        if n_ops is None:
+            n_ops = lambda env: 0
+        elif isinstance(n_ops, int):
+            n_ops = lambda env: n_ops
+        elif callable(n_ops):
+            n_ops = n_ops
+        else:
+            raise RuntimeError("Unknown type for n_ops: {}".format(type(n_ops)))
+
+        # prepare var_type
+        version_type = version.split('_')[0]
+        if arg_ret_type is not None and version_type in arg_ret_type:
+            var_type = arg_ret_type[version_type]
+        elif version.startswith('i32') or version.startswith('q32'):
+            var_type = ['int32_t', 'int32_t']
+        elif version.startswith('i16') or version.startswith('q16'):
+            var_type = ['int16_t', 'int32_t']
+        elif version.startswith('i8') or version.startswith('q8'):
+            var_type = ['int8_t', 'int32_t']
+        else:
+            var_type = ['float', 'float']
+
+        # arguments based on if fix-point and parallel is used
+        if not version.startswith('q') and not version.endswith('parallel'):
+            arguments = [arg for arg in arguments
+                         if not isinstance(arg, (FixPointArgument, ParallelArgument))]
+        if not version.startswith('q') and version.endswith('parallel'):
+            arguments = [arg for arg in arguments if not isinstance(arg, FixPointArgument)]
+        if version.startswith('q') and not version.endswith('parallel'):
+            arguments = [arg for arg in arguments if not isinstance(arg, ParallelArgument)]
+        if version.startswith('q') and version.endswith('parallel'):
+            arguments = arguments
+
+        # check parallel argument
+        if version.endswith('parallel'):
+            assert len([arg for arg in arguments if isinstance(arg, ParallelArgument)]) == 1
+
+        # check fixpoint stuff
+        if version.startswith('q'):
+            assert len([arg for arg in arguments if isinstance(arg, FixPointArgument)]) == 1
+
+        # generate all aggregated tests
+        self.cases = [
+            AggregatedTestCase(
+                idx=i,
+                arguments=[
+                    deepcopy(arg).apply(env, var_type, self.version, use_l1, i)
+                    for arg in arguments
+                ],
+                env=env,
+                n_ops=n_ops(env)
+            )
+            for (i, env) in enumerate(Sweep(variables))
+        ]
+
+        return self
+
+    def to_plptest(self):
+        """ Returns the PulpTest structure """
+        test_name = self.function_name
+        build_dir = "test_%s_%s" % (self.device_name, self.version)
+        json_str = self.to_json()
+        flags = "GARGS=\'\' BUILD_DIR_EXT=%s" % (build_dir)
+        gen_flags = "--json %s" % (json_str)
+        # set the platform for compatibility with various different Pulp-SDK versions
+        platform_str = "platform=gvsoc" # default platform
+        if "TEST_PLATFORM" in os.environ:
+            platform_str = "platform=%s" % (os.environ["TEST_PLATFORM"])
+        elif "PULP_CURRENT_CONFIG_ARGS" in os.environ:
+            platform_str = os.environ["PULP_CURRENT_CONFIG_ARGS"]
+        file_name = os.path.abspath(__file__)
+        return PulpTest(name=test_name,
+                        commands=[
+                            Shell('gen', 'python3 %s --gen %s' % (file_name, gen_flags)),
+                            Shell('clean', 'make clean %s' % (flags)),
+                            Shell('build', 'make all %s' % (flags)),
+                            Shell('run', 'make run %s %s' % (platform_str, flags)),
+                            Shell('clean_dir', 'python3 %s --clean' % file_name),
+                            Check('check', check_output, test_obj=self)
+                        ],
+                        timeout=1000000)
+
+    def to_json(self):
+        """ generate a json object string from the aggregated test """
+        d = self.__dict__
+        d['cases'] = [case.to_dict() for case in self.cases]
+        json_str = json.dumps(d)
+        json_str_escaped = json_str.replace('\\', '\\\\').replace('\"', '\\\"')
+        return json_str_escaped
+
+    @staticmethod
+    def from_json(json_str):
+        """ deserialize a json string into a AggregatedTest """
+        d = json.loads(json_str)
+        d['cases'] = [AggregatedTestCase.from_dict(case) for case in d['cases']]
+        test = AggregatedTest()
+        test.__dict__ = d
+        return test
+
+    def get_common_header_str(self):
+        return dedent(
+            """\
+            #ifndef __PULP_DSP_TEST__COMMON_H__
+            #define __PULP_DSP_TEST__COMMON_H__
+
+            typedef union {
+                uint32_t u;
+                float f;
+            } __u2f;
+
+            #define ABS(x) (x > 0 ? x : -x)
+
+            #endif//__PULP_DSP_TEST__COMMON_H__
+            """
+        )
+
+    def get_main_imports(self):
+        """ returns a string containing all imports of the test case headers """
+        return "\n".join(["#include \"{}\"".format(case.get_header_filename())
+                          for case in self.cases])
+
+    def get_test_entry_function(self):
+        """ write the test_entry function. """
+        return dedent(
+            """\
+            void test_entry(void) {{
+            {}
+            }}
+            """
+        ).format(indent("\n".join([case.get_run_test_function_call()
+                                   for case in self.cases]),
+                        "    "))
+
+    def generate_test_program(self, gen_stimuli, gen_result):
+        """ generate all files needed for the test """
+        # first, we generate all necessary header files (independent of device name)
+        # common header
+        with open("common.h", "w") as fp:
+            fp.write(self.get_common_header_str())
+
+        # header of all tests
+        for case in self.cases:
+            with open(case.get_header_filename(), "w") as fp:
+                fp.write(case.get_header_file_str(gen_stimuli, gen_result))
+
+        # next, generate the remaining test structure
+        if self.device_name == "ibex":
+            self.generate_ibex_test_program()
+        elif self.device_name == "riscy":
+            self.generate_riscy_test_program()
+        else:
+            raise RuntimeError("Unknown device name: {}".format(self.device_name))
+
+    def generate_ibex_test_program(self):
+        """ generate all files needed for the ibex test """
+        with open("test.c", "w") as fp:
+            fp.write(
+                dedent(
+                    """\
+                    #include "rt/rt_api.h"
+                    #include "stdio.h"
+                    #include "plp_math.h"
+
+                    #include "common.h"
+                    {includes}
+
+                    {do_benchs}
+
+                    {run_tests}
+
+                    {test_entry}
+
+                    int main(void) {{
+                    test_entry();
+                    return 0;
+                    }}
+                    """
+                ).format(includes=self.get_main_imports(),
+                         test_entry=self.get_test_entry_function(),
+                         run_tests="\n".join([case.get_run_test_function() for case in self.cases]),
+                         do_benchs="\n".join([case.get_do_bench_function(self.function_name,
+                                                                         self.device_name)
+                                              for case in self.cases]))
+            )
+
+        with open("Makefile", "w") as fp:
+            fp.write(dedent(
+                """\
+                PULP_APP = test
+                PULP_APP_FC_SRCS = test.c
+                PULP_LDFLAGS += -lplpdsp
+                PULP_CFLAGS += -I$(CONFIG_BUILD_DIR) -O3 -g
+                ifdef TFLAGS
+                    PULP_CFLAGS += $(TFLAGS)
+                endif
+                include $(PULP_SDK_HOME)/install/rules/pulp_rt.mk
+                PULP_CFLAGS += -D DATA=$(CONFIG_BUILD_DIR)$(BUILD_DIR_EXT)
+                """
+            ))
+
+    def generate_riscy_test_program(self):
+        """ generate all files needed for the riscy test """
+        with open("test.c", "w") as fp:
+            fp.write(dedent(
+                """\
+                #include "rt/rt_api.h"
+                #include "stdio.h"
+                #include "cluster.h"
+                int main(){
+                    rt_cluster_mount(1, 0, 0, NULL);
+                    rt_cluster_call(NULL, 0, cluster_entry, NULL, NULL, 0, 0, 0, NULL);
+                    rt_cluster_mount(0, 0, 0, NULL);
+                    return 0;
+                }
+                """
+            ))
+
+        with open("cluster.h", "w") as fp:
+            fp.write(dedent(
+                """\
+                #ifndef __PULP_DSP_TEST__CLUSTER_H__
+                #define __PULP_DSP_TEST__CLUSTER_H__
+                void cluster_entry(void *arg);
+                #endif//__PULP_DSP_TEST__CLUSTER_H__
+                """
+            ))
+
+        with open("cluster.c", "w") as fp:
+            fp.write(
+                dedent(
+                    """\
+                    #include "rt/rt_api.h"
+                    #include "stdio.h"
+                    #include "plp_math.h"
+
+                    #include "common.h"
+                    {includes}
+
+                    {do_benchs}
+
+                    {run_tests}
+
+                    {test_entry}
+
+                    void cluster_entry(void* args) {{
+                        test_entry();
+                    }}
+                    """
+                ).format(includes=self.get_main_imports(),
+                         test_entry=self.get_test_entry_function(),
+                         run_tests="\n".join([case.get_run_test_function() for case in self.cases]),
+                         do_benchs="\n".join([case.get_do_bench_function(self.function_name,
+                                                                         self.device_name)
+                                              for case in self.cases]))
+            )
+
+        with open("Makefile", "w") as fp:
+            fp.write(dedent(
+                """\
+                PULP_APP = test
+                PULP_APP_FC_SRCS = test.c
+                PULP_APP_CL_SRCS = cluster.c
+                PULP_LDFLAGS += -lplpdsp
+                PULP_CFLAGS += -I$(CONFIG_BUILD_DIR) -O3 -g
+                ifdef TFLAGS
+                    PULP_CFLAGS += $(TFLAGS)
+                endif
+                include $(PULP_SDK_HOME)/install/rules/pulp_rt.mk
+                PULP_CFLAGS += -D DATA=$(CONFIG_BUILD_DIR)$(BUILD_DIR_EXT)
+                """
+            ))
 
 
 def check_output(config, output, test_obj):
-    # print(output)
-    passed = False
-    performance = {'cycles': 0,
-                   'instructions': 0,
-                   'load_stalls': 0,
-                   'icache_miss': 0,
-                   'tcdm_cont': 0}
-    mistakes = []
-    for item in output.split('\n'):
-        if 'passed:' in item:
-            if item.find('1') != -1:
-                passed = True
-        elif 'cycles:' in item:
-            performance['cycles'] = int(item.split(": ")[1])
-        elif 'instructions:' in item:
-            performance['instructions'] = int(item.split(": ")[1])
-        elif 'load_stalls:' in item:
-            performance['load_stalls'] = int(item.split(": ")[1])
-        elif 'icache_miss:' in item:
-            performance['icache_miss'] = int(item.split(": ")[1])
-        elif 'tcdm_cont:' in item:
-            performance['tcdm_cont'] = int(item.split(": ")[1])
-        elif '<Mismatch>' in item:
-            mistakes.append("Mismatch: %s" % item[11:])
-    result_format = ", ".join(["%s=%s" % (k, v) for k, v in performance.items()])
-    if mistakes:
-        print("\n".join(mistakes))
-        result_format += "\n"
-        result_format += "\n".join(mistakes)
-    # generate / update benchmark file
-    if passed:
-        bench_output(performance, test_obj)
-    return (passed, result_format)
+    """ parses the output and prints the results """
+    # parse the output and get all cases
+    cases_result = parse_output(output)
+    passed = all([c['passed'] for c in cases_result] or [False])
+
+    for case, result in zip(test_obj.cases, cases_result):
+        # print the result
+        if result['passed']:
+            status = '\033[1;32mOK:\033[0m  '
+        else:
+            status = '\033[1;31mKO:\033[0m  '
+        print("{} {}".format(status, ", ".join(["{}={}".format(k, case['env'][k])
+                                                for k in test_obj.visible_env])))
+        # print mismatches
+        if result['mismatches']:
+            print(indent("\n".join(result['mismatches']), "      "))
+
+        bench_output(result, test_obj, case)
+
+    return (passed, None)
+
+
+def parse_output(output):
+    cases = []
+    current_case = -1
+    for line in output.split('\n'):
+        line = line.strip()
+        if line == "}":
+            current_case = -1
+        elif line.startswith("testcase") and line.endswith("{"):
+            current_case = int(line[len("testcase "):-len(" {")])
+            assert len(cases) == current_case
+            cases.append({'passed': False,
+                          'cycles': 0,
+                          'instructions': 0,
+                          'load_stalls': 0,
+                          'icache_miss': 0,
+                          'tcdm_cont': 0,
+                          'mismatches': []})
+        elif line.startswith('passed:'):
+            cases[current_case]['passed'] = line.find('1') != -1
+        elif line.startswith('cycles'):
+            cases[current_case]['cycles'] = int(line.split(": ")[1])
+        elif line.startswith('instructions'):
+            cases[current_case]['instructions'] = int(line.split(": ")[1])
+        elif line.startswith('load_stalls'):
+            cases[current_case]['load_stalls'] = int(line.split(": ")[1])
+        elif line.startswith('icache_miss'):
+            cases[current_case]['icache_miss'] = int(line.split(": ")[1])
+        elif line.startswith('tcdm_cont'):
+            cases[current_case]['tcdm_cont'] = int(line.split(": ")[1])
+        elif line.startswith('<Mismatch>'):
+            cases[current_case]['mismatches'].append("Mismatch: %s" % line[11:])
+    return cases
 
 
 BENCHMARK_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                               "bench_{}.csv".format(time.strftime("%Y-%m-%d_%H:%M:%S")))
 
 
-def bench_output(performance, test_obj):
+def bench_output(performance, test_obj, test_case):
     # generate file and first header line if it does not yet exist
     if not os.path.isfile(BENCHMARK_FILE):
         # create file and write header
         with open(BENCHMARK_FILE, "w") as f:
-            f.write("name,device,dimension,cycles,instructions,ipc,imiss,ld_stall,tcdm_cont,ops,mpc\n")
+            f.write(
+                "name,device,dimension,cycles,instructions,ipc,imiss,ld_stall,tcdm_cont,ops,mpc\n"
+            )
 
     # extract relevant fields
-    dimension = "; ".join(["%s=%s" % (k, str(test_obj.env[k])) for k in test_obj.visible_env])
+    dimension = "; ".join(["%s=%s" % (k, str(test_case['env'][k])) for k in test_obj.visible_env])
     insn_per_cycles = performance['instructions'] / performance['cycles']
-    ops_per_cycle = test_obj.n_ops / performance['cycles']
+    ops_per_cycle = test_case['n_ops'] / performance['cycles']
     # write the new line
     with open(BENCHMARK_FILE, "a") as f:
         f.write(",".join([test_obj.function_name,
@@ -503,180 +1163,9 @@ def bench_output(performance, test_obj):
                           str(performance['icache_miss']),
                           str(performance['load_stalls']),
                           str(performance['tcdm_cont']),
-                          str(test_obj.n_ops),
+                          str(test_case['n_ops']),
                           str(ops_per_cycle)]))
         f.write("\n")
-
-
-class Test(object):
-    """Test structure """
-    def __init__(self):
-        self.test_idx = 0
-        self.function_name = None
-        self.var_type = []
-        self.arguments = []
-        self.env = {}
-        self.visible_env = []
-        self.use_l1 = False
-        self.fix_point = None
-        self.extended_output = True
-        self.version = ''
-        self.device_name = ''
-
-    def build(self, test_idx, function_name, version, arg_ret_type, arguments, env, visible_env,
-              device_name, use_l1, extended_output=True, n_ops=None):
-        self.test_idx = test_idx
-        self.function_name = "%s_%s" % (function_name, version)
-        self.version = version
-        self.env = env
-        self.visible_env = visible_env
-        self.device_name = device_name
-        self.use_l1 = use_l1
-        self.extended_output = extended_output
-        self.n_ops = n_ops(env) if env is not None else 0
-
-        # prepare var_type
-        version_type = version.split('_')[0]
-        if arg_ret_type is not None and version_type in arg_ret_type:
-            self.var_type = arg_ret_type[version_type]
-        elif version.startswith('i32') or version.startswith('q32'):
-            self.var_type = ['int32_t', 'int32_t']
-        elif version.startswith('i16') or version.startswith('q16'):
-            self.var_type = ['int16_t', 'int32_t']
-        elif version.startswith('i8') or version.startswith('q8'):
-            self.var_type = ['int8_t', 'int32_t']
-        else:
-            self.var_type = ['float', 'float']
-
-        # arguments based on if fix-point and parallel is used
-        if not version.startswith('q') and not version.endswith('parallel'):
-            self.arguments = [arg for arg in arguments
-                              if not isinstance(arg, (FixPointArgument, ParallelArgument))]
-        if not version.startswith('q') and version.endswith('parallel'):
-            self.arguments = [arg for arg in arguments if not isinstance(arg, FixPointArgument)]
-        if version.startswith('q') and not version.endswith('parallel'):
-            self.arguments = [arg for arg in arguments if not isinstance(arg, ParallelArgument)]
-        if version.startswith('q') and version.endswith('parallel'):
-            self.arguments = arguments
-
-        # prepare fixpoint stuff
-        if version.startswith('q'):
-            fix_point_args = [arg for arg in arguments if isinstance(arg, FixPointArgument)]
-            assert len(fix_point_args) == 1
-            fix_point_copy = deepcopy(fix_point_args[0])
-            fix_point_copy.apply(self.env, self.var_type, self.version, self.use_l1)
-            self.fix_point = fix_point_copy.value
-            assert isinstance(self.fix_point, int)
-        else:
-            self.fix_point = None
-
-        # check parallel argument
-        if version.endswith('parallel'):
-            assert len([arg for arg in arguments if isinstance(arg, ParallelArgument)]) == 1
-
-        return self
-
-    def from_json(self, json_string):
-        d = json.loads(json_string)
-        d['arguments'] = [self.argument_from_dict(arg) for arg in d['arguments']]
-        self.__dict__ = d
-        return self
-
-    def to_json(self):
-        d = self.__dict__
-        # overwrite arguments
-        d['arguments'] = [arg.to_dict(self.env, self.var_type, self.version, self.use_l1)
-                          for arg in self.arguments]
-        json_str = json.dumps(d)
-        json_str_escaped = json_str.replace('\\', '\\\\').replace('\"', '\\\"')
-        return json_str_escaped
-
-    def argument_from_dict(self, d):
-        if d['class'] == Argument.__name__:
-            arg = Argument("tmp", "tmp", 0)
-        elif d['class'] == ArrayArgument.__name__:
-            arg = ArrayArgument("tmp", "tmp", 1, 0)
-        elif d['class'] == OutputArgument.__name__:
-            arg = OutputArgument("tmp", "tmp", 1)
-        elif d['class'] == InplaceArgument.__name__:
-            arg = InplaceArgument("tmp", "tmp", 1, 0)
-        elif d['class'] == FixPointArgument.__name__:
-            arg = FixPointArgument("tmp", "tmp", 0)
-        elif d['class'] == ParallelArgument.__name__:
-            arg = ParallelArgument("tmp", "tmp", 0)
-        elif d['class'] == ReturnValue.__name__:
-            arg = ReturnValue("tmp")
-        elif d['class'] == CustomArgument.__name__:
-            arg = CustomArgument("tmp", None)
-        else:
-            raise RuntimeError("Unknown class name")
-        arg.__dict__ = d['dict']
-        return arg
-
-    def to_plptest(self):
-        test_name = "%s(%s)" % (self.function_name,
-                                ", ".join(["%s=%s" % (k, str(self.env[k]))
-                                           for k in self.visible_env]))
-        build_dir = "test_%s_t%d" % (self.version, self.test_idx)
-        json_str = self.to_json()
-        flags = "GARGS=\'\' BUILD_DIR_EXT=%s" % (build_dir)
-        setup_flags = "--device %s" % self.device_name
-        gen_flags = "--json %s" % (json_str)
-        # set the platform for compatibility with various different Pulp-SDK versions
-        platform_str = "platform=gvsoc" # default platform
-        if "TEST_PLATFORM" in os.environ:
-            platform_str = "platform=%s" % (os.environ["TEST_PLATFORM"])
-        elif "PULP_CURRENT_CONFIG_ARGS" in os.environ:
-            platform_str = os.environ["PULP_CURRENT_CONFIG_ARGS"]
-        file_name = os.path.abspath(__file__)
-        return PulpTest(name=test_name,
-                        commands=[
-                            Shell('setup_dir', 'python3 %s --setup %s' % (file_name, setup_flags)),
-                            Shell('clean', 'make clean %s' % (flags)),
-                            Shell('gen', 'python3 %s --gen %s' % (file_name, gen_flags)),
-                            Shell('build', 'make all %s' % (flags)),
-                            Shell('run', 'make run %s %s' % (platform_str, flags)),
-                            Shell('clean_dir', 'python3 %s --clean %s' % (file_name, setup_flags)),
-                            Check('check', check_output, test_obj=self)
-                        ],
-                        timeout=1000000)
-
-    def function_signature(self):
-        arguments_str = ', '.join([arg.arg_str()
-                                   for arg in self.arguments if arg.in_function])
-        return_value_str = ""
-        return_value_list = [arg for arg in self.arguments if isinstance(arg, ReturnValue)]
-        assert len(return_value_list) <= 1
-        if len(return_value_list) == 1:
-            return_value_str = "%s = " % return_value_list[0].arg_str()
-        return "%s%s(%s)" % (return_value_str, self.function_name, arguments_str)
-
-    def generate_check(self, header):
-        # generate return check
-        any([header.write_return_check(arg, self.device_name, self.extended_output)
-             for arg in self.arguments if isinstance(arg, ReturnValue)])
-
-        # generate result check
-        any([header.write_check(arg, self.device_name, self.extended_output)
-             for arg in self.arguments if isinstance(arg, OutputArgument)])
-
-    def generate_setup(self, header):
-        any([header.write_setup(arg) for arg in self.arguments if isinstance(arg, InplaceArgument)])
-
-    def generate_stimuli(self, header, gen_stimuli):
-        [arg.generate_value(self.env, gen_stimuli) for arg in self.arguments]
-        [arg.generate_stimuli(header) for arg in self.arguments]
-
-    def generate_reference(self, header, gen_function):
-        # build input dictionary
-        inputs = {arg.name: arg
-                  for arg in self.arguments
-                  if isinstance(arg, InplaceArgument) or not isinstance(arg, (ReturnValue,
-                                                                              OutputArgument))}
-        gen_function_prep = partial(gen_function, inputs=inputs, env=self.env,
-                                    fix_point=self.fix_point)
-        any([arg.generate_reference(gen_function_prep, header)
-             for arg in self.arguments if isinstance(arg, (OutputArgument, ReturnValue))])
 
 
 class Sweep:
@@ -701,196 +1190,74 @@ class Sweep:
         return env
 
 
-class HeaderWriter(object):
-    """ writes .h header files """
-    def __init__(self, filename='data.h', indent=4, max_line_len=100, allow_l1=True):
-        self.filename = filename
-        self.tab = ' ' * indent
-        self.width = max_line_len
-        self.fp = None
-        self.allow_l1 = allow_l1
-
-    def __enter__(self):
-        self.fp = open(self.filename, 'w')
-        self.fp.write('#ifndef __PULP_TEST__DATA_H__\n')
-        self.fp.write('#define __PULP_TEST__DATA_H__\n\n')
-        # Union for reinterpret cast of a uint32_t to a float
-        # This is because we want to pass the exact float value in bits, and not in
-        # decimal "string" representation.
-        self.fp.write(dedent(
-            """\
-            // Union for reinterpret cast of a uint32_t to a float
-            // This is because we want to pass the exact float value in bits, and not in
-            // decimal "string" representation.
-            typedef union {
-                uint32_t u;
-                float f;
-            } __u2f;\
-            """
-        ))
-        self.fp.write("\n\n")
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.fp.write('#endif//__PULP_TEST__DATA_H__')
-        self.fp.close()
-        self.fp = None
-
-    def write_test(self, test, gen_function, gen_stimuli):
-        assert self.fp is not None
-        test.generate_stimuli(self, gen_stimuli)
-        test.generate_reference(self, gen_function)
-        self.generate_setup(test)
-        self.generate_check(test)
-        self.generate_fsig(test)
-        self.generate_bench()
-        self.generate_abs()
-
-    def write_array(self, name, var_type, arr, use_l1):
-        target_loc = 'RT_L1_DATA' if use_l1 and self.allow_l1 else 'RT_L2_DATA'
-        nl = '\n' + self.tab
-        if var_type == "float":
-            # We store float values in their hex representation. This way, we do not use the
-            # inaccurate decimal "string" representation, and we guarantee that the data is the
-            # exact same as when computeing the expected result.
-            self.fp.write('%s uint32_t %s__int[%s] = {\n' % (target_loc, name, len(arr)))
-            self.fp.write(self.tab)
-            self.fp.write(nl.join(textwrap.wrap(', '.join([fmt_float(x) for x in arr]),
-                                                width=self.width)))
-            self.fp.write('\n};\n\n')
-            self.fp.write('%s %s* %s = (%s*)((void*)%s__int);' % (target_loc, var_type, name,
-                                                                  var_type, name))
-            self.fp.write('\n\n')
-        else:
-            self.fp.write('%s %s %s[%s] = {\n' % (target_loc, var_type, name, len(arr)))
-            self.fp.write(self.tab)
-            self.fp.write(nl.join(textwrap.wrap(', '.join([str(x) for x in arr]),
-                                                width=self.width)))
-            self.fp.write('\n};\n\n')
-
-    def write_scalar(self, name, var_type, value, use_l1):
-        target_loc = 'L1_DATA' if use_l1 and self.allow_l1 else 'L2_DATA'
-        if var_type == "float":
-            # We want to write the floating point as hex representation to the header file (and not
-            # as a decimal "string"). Then, we want to typecast it to a float. One way is to get the
-            # address of the variable, and then cast it to a float pointer. However, it is not
-            # possible to dereference a pointer in a .h file. Therefore, we use the second method;
-            # generating a union with a float (.f) and a unsigned int (.u).
-            self.fp.write('%s __u2f %s = {.u = %sU};\n\n' % (target_loc, name, fmt_float(value)))
-        else:
-            self.fp.write('%s %s %s = %s;\n\n' % (target_loc, var_type, name, value))
-
-    def generate_setup(self, test):
-        self.fp.write('#define SETUP {\\\n')
-        test.generate_setup(self)
-        self.fp.write('}\n\n')
-
-    def write_setup(self, arg):
-        assert isinstance(arg, InplaceArgument)
-        self.fp.write(
-            dedent(
-                """\
-                {tab}for (int setup_i = 0; setup_i < {len}; setup_i++) {{\\
-                {tab}{tab}{workspace}[setup_i] = {original}[setup_i];\\
-                {tab}}}\\
-                """.format(tab=self.tab, len=arg.length, workspace=arg.name,
-                           original=arg.original_name)
-            )
-        )
-
-    def generate_check(self, test):
-        self.fp.write('#define CHECK {\\\n')
-        test.generate_check(self)
-        self.fp.write('}\n\n')
-
-    def write_check(self, arg, target, print_errors=False):
-        display_format = "%.10f" if arg.ctype == "float" else "%d"
-        check_str = tolerance_check_str("%s[i]" % arg.name, "%s[i]" % arg.reference_name,
-                                        arg.tolerance, arg.ctype, self.tab * 2, target)
-        self.fp.write('%sfor (int i = 0; i < %s; i++) {\\\n' % (self.tab, arg.length))
-        if print_errors:
-            self.fp.write(check_str)
-            self.fp.write('%spassed=0;\\\n' % (self.tab * 3))
-            self.fp.write('%sprintf("<Mismatch> %s[%%d]: acq=%s, exp=%s\\n", i, %s[i], %s[i]);\\\n'
-                          % (self.tab * 3, arg.name, display_format, display_format, arg.name,
-                             arg.reference_name))
-            self.fp.write('%s}\\\n' % (self.tab * 2))
-        else:
-            self.fp.write('%sif (%s[i] != %s[i]) passed = 0;\\\n' % (self.tab * 2, arg.name,
-                                                                     arg.reference_name))
-        self.fp.write('%s}\\\n' % self.tab)
-
-    def write_return_check(self, arg, target, print_errors=False):
-        if print_errors:
-            # For float, the value is stored in a union. To interpret the data as floating-point,
-            # we need to call value.f.
-            result_name = "%s.f" % arg.name if arg.ctype == "float" else arg.name
-            check_str = tolerance_check_str(result_name, arg.reference_name, arg.tolerance,
-                                            arg.ctype, self.tab, target)
-            self.fp.write(check_str)
-            self.fp.write('%spassed = 0;\\\n' % self.tab * 2)
-            self.fp.write('%sprintf("<Mismatch> return: acq=%%d, exp=%%d", %s, %s);\\\n'
-                          % (self.tab * 2, result_name, arg.reference_name))
-            self.fp.write('%s}\\\n' % self.tab)
-        else:
-            self.fp.write('%sif (%s != %s) passed = 0;\\\n'
-                          % (self.tab, result_name, arg.reference_name))
-
-    def generate_fsig(self, test):
-        self.fp.write('#define FSIG {\\\n')
-        self.fp.write('%s%s;\\\n' % (self.tab, test.function_signature()))
-        self.fp.write('}\n\n')
-
-    def generate_bench(self):
-        self.fp.write(
-            dedent(
-                """\
-                #define BENCHMARK {{\\
-                {tab}rt_perf_t perf;\\
-                {tab}rt_perf_init(&perf);\\
-                {tab}int passed = do_bench(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR), 1);\\
-                {tab}printf(\"passed: %d\\n\", passed);\\
-                {tab}printf(\"cycles: %d\\n\", rt_perf_read(RT_PERF_CYCLES));\\
-                {tab}printf(\"instructions: %d\\n\", rt_perf_read(RT_PERF_INSTR));\\
-                {tab}do_bench(&perf, 1<<RT_PERF_LD_STALL, 0);\\
-                {tab}printf(\"load_stalls: %d\\n\", rt_perf_read(RT_PERF_LD_STALL));\\
-                {tab}do_bench(&perf, 1<<RT_PERF_IMISS, 0);\\
-                {tab}printf(\"icache_miss: %d\\n\", rt_perf_read(RT_PERF_IMISS));\\
-                {tab}do_bench(&perf, 1<<RT_PERF_TCDM_CONT, 0);\\
-                {tab}printf(\"tcdm_cont: %d\\n\", rt_perf_read(RT_PERF_TCDM_CONT));\\
-                }}\\""".format(tab=self.tab)
-            )
-        )
-        self.fp.write('\n\n')
-
-    def generate_abs(self):
-        self.fp.write("#define ABS(x) (x > 0 ? x : -x)\n\n")
-
-
 def fmt_float(val):
     """ This function returns the hex representation of a float """
     if isinstance(val, float):
         val = np.float32(val)
-    assert(val.dtype == np.float32)
+    assert isinstance(val, np.float32)
     packed = struct.pack('!f', val)
     int_val = sum([b << ((3 - i) * 8) for i, b in enumerate(packed)])
     return hex(int_val)
+
+
+def declare_scalar(name, ctype, value):
+    """ returns a string to declare and initialize a scalar value """
+    assert isinstance(value, (int, float, np.int8, np.int16, np.int32, np.float32))
+    if ctype == "float":
+        # We want to write the floating point as hex representation to the header file (and not
+        # as a decimal "string"). Then, we want to typecast it to a float. One way is to get the
+        # address of the variable, and then cast it to a float pointer. However, it is not
+        # possible to dereference a pointer in a .h file. Therefore, we use the second method;
+        # generating a union with a float (.f) and a unsigned int (.u).
+        return "__u2f %s = {.u = %sU}\n" % (name, fmt_float(value))
+    else:
+        return('%s %s = %s;\n' % (ctype, name, value))
+
+
+def declare_array(name, ctype, length, arr):
+    assert isinstance(arr, (np.ndarray, list))
+    assert length == len(arr)
+
+    if ctype == "float":
+        values_str = ", ".join([fmt_float(x) for x in arr])
+        # We store float values in their hex representation. This way, we do not use the
+        # inaccurate decimal "string" representation, and we guarantee that the data is the
+        # exact same as when computeing the expected result.
+        return dedent(
+            """\
+            RT_L2_DATA uint32_t {name}__int[{len}] = {{
+            {content}
+            }};
+
+            float* {name} = (float*)((void*){name}__int);
+            """
+        ).format(name=name, len=length, content=indent("\n".join(wrap(values_str, 96)), "    "))
+    else:
+        values_str = ", ".join([str(x) for x in arr])
+        return dedent(
+            """\
+            RT_L2_DATA {ctype} {name}[{len}] = {{
+            {content}
+            }};
+            """
+        ).format(ctype=ctype, name=name, len=length,
+                 content=indent("\n".join(wrap(values_str, 96)), "    "))
 
 
 def tolerance_check_str(acq, exp, tolerance, ctype, indent, target):
     """ returns a string which performs the check of acq and exp.
     The check will properly add the tolerance, including all possible overflow cases."""
     if tolerance == 0:
-        return "%sif (%s != %s) {\\\n" % (indent, exp, acq)
+        return "%sif (%s != %s) {" % (indent, exp, acq)
     elif ctype == "float":
         # only relative tolerance is allowed
         assert tolerance < 1
         # In case of float: add a tiny absolute offset of 0.0001
         return dedent(
             """\
-            {indent}float __tol = ABS({tol:E} * (float){exp} + 0.0001);\\
-            {indent}if (!({acq} >= ({ty})({exp} - __tol) &&\\
-            {indent}      {acq} <= ({ty})({exp} + __tol))) {{\\
+            {indent}float __tol = ABS({tol:E} * (float){exp} + 0.0001);
+            {indent}if (!({acq} >= ({ty})({exp} - __tol) &&
+            {indent}      {acq} <= ({ty})({exp} + __tol))) {{\
             """
         ).format(indent=indent, acq=acq, exp=exp, tol=tolerance, ty=ctype)
     unsigned_bits = 7 if ctype == "int8_t" else 15 if ctype == "int16_t" else 31
@@ -903,17 +1270,17 @@ def tolerance_check_str(acq, exp, tolerance, ctype, indent, target):
             # least 1.
             return dedent(
                 """\
-                {indent}{ty} __tol_t = ABS({exp} / {tol_fraction}) + 1;\\
-                {indent}if (!(({exp} < {type_min} + __tol_t &&\\
-                {indent}       ({acq} <= {exp} + __tol_t ||\\
-                {indent}        {acq} >= {exp} - __tol_t)) ||\\
-                {indent}      ({exp} > {type_max} - __tol_t &&\\
-                {indent}       ({acq} >= {exp} - __tol_t ||\\
-                {indent}        {acq} <= {exp} + __tol_t)) ||\\
-                {indent}      ({exp} >= {type_min} + __tol_t &&\\
-                {indent}       {exp} <= {type_max} - __tol_t &&\\
-                {indent}       ({acq} >= {exp} - __tol_t &&\\
-                {indent}        {acq} <= {exp} + __tol_t)))) {{\\
+                {indent}{ty} __tol_t = ABS({exp} / {tol_fraction}) + 1;
+                {indent}if (!(({exp} < {type_min} + __tol_t &&
+                {indent}       ({acq} <= {exp} + __tol_t ||
+                {indent}        {acq} >= {exp} - __tol_t)) ||
+                {indent}      ({exp} > {type_max} - __tol_t &&
+                {indent}       ({acq} >= {exp} - __tol_t ||
+                {indent}        {acq} <= {exp} + __tol_t)) ||
+                {indent}      ({exp} >= {type_min} + __tol_t &&
+                {indent}       {exp} <= {type_max} - __tol_t &&
+                {indent}       ({acq} >= {exp} - __tol_t &&
+                {indent}        {acq} <= {exp} + __tol_t)))) {{\
                 """
             ).format(indent=indent, acq=acq, exp=exp, ty=ctype, tol_fraction=int(1 / tolerance),
                      type_min=type_min, type_max=type_max)
@@ -921,18 +1288,18 @@ def tolerance_check_str(acq, exp, tolerance, ctype, indent, target):
             # Here, we can use float. But for the int-version, we want to round up.
             return dedent(
                 """\
-                {indent}float __tol = ABS({tol:E} * (float){exp});\\
-                {indent}{ty} __tol_t = ({ty})(__tol + 0.999);\\
-                {indent}if (!(({exp} < {type_min} + __tol_t &&\\
-                {indent}       ({acq} <= {exp} + __tol_t ||\\
-                {indent}        {acq} >= {exp} - __tol_t)) ||\\
-                {indent}      ({exp} > {type_max} - __tol_t &&\\
-                {indent}       ({acq} >= {exp} - __tol_t ||\\
-                {indent}        {acq} <= {exp} + __tol_t)) ||\\
-                {indent}      ({exp} >= {type_min} + __tol_t &&\\
-                {indent}       {exp} <= {type_max} - __tol_t &&\\
-                {indent}       ({acq} >= {exp} - __tol_t &&\\
-                {indent}        {acq} <= {exp} + __tol_t)))) {{\\
+                {indent}float __tol = ABS({tol:E} * (float){exp});
+                {indent}{ty} __tol_t = ({ty})(__tol + 0.999);
+                {indent}if (!(({exp} < {type_min} + __tol_t &&
+                {indent}       ({acq} <= {exp} + __tol_t ||
+                {indent}        {acq} >= {exp} - __tol_t)) ||
+                {indent}      ({exp} > {type_max} - __tol_t &&
+                {indent}       ({acq} >= {exp} - __tol_t ||
+                {indent}        {acq} <= {exp} + __tol_t)) ||
+                {indent}      ({exp} >= {type_min} + __tol_t &&
+                {indent}       {exp} <= {type_max} - __tol_t &&
+                {indent}       ({acq} >= {exp} - __tol_t &&
+                {indent}        {acq} <= {exp} + __tol_t)))) {{\
                 """
             ).format(indent=indent, acq=acq, exp=exp, tol=tolerance, ty=ctype,
                      type_min=type_min, type_max=type_max)
@@ -941,34 +1308,34 @@ def tolerance_check_str(acq, exp, tolerance, ctype, indent, target):
         if target == "ibex":
             return dedent(
                 """\
-                {indent}{ty} __tol_t = {tol};\\
-                {indent}if (!(({exp} < {type_min} + __tol_t &&\\
-                {indent}       ({acq} <= {exp} + __tol_t ||\\
-                {indent}        {acq} >= {exp} - __tol_t)) ||\\
-                {indent}      ({exp} > {type_max} - __tol_t &&\\
-                {indent}       ({acq} >= {exp} - __tol_t ||\\
-                {indent}        {acq} <= {exp} + __tol_t)) ||\\
-                {indent}      ({exp} >= {type_min} + __tol_t &&\\
-                {indent}       {exp} <= {type_max} - __tol_t &&\\
-                {indent}       ({acq} >= {exp} - __tol_t &&\\
-                {indent}        {acq} <= {exp} + __tol_t)))) {{\\
+                {indent}{ty} __tol_t = {tol};
+                {indent}if (!(({exp} < {type_min} + __tol_t &&
+                {indent}       ({acq} <= {exp} + __tol_t ||
+                {indent}        {acq} >= {exp} - __tol_t)) ||
+                {indent}      ({exp} > {type_max} - __tol_t &&
+                {indent}       ({acq} >= {exp} - __tol_t ||
+                {indent}        {acq} <= {exp} + __tol_t)) ||
+                {indent}      ({exp} >= {type_min} + __tol_t &&
+                {indent}       {exp} <= {type_max} - __tol_t &&
+                {indent}       ({acq} >= {exp} - __tol_t &&
+                {indent}        {acq} <= {exp} + __tol_t)))) {{\
                 """
             ).format(indent=indent, acq=acq, exp=exp, ty=ctype, tol=int(tolerance),
                      type_min=type_min, type_max=type_max)
         else:
             return dedent(
                 """\
-                {indent}{ty} __tol_t = {tol};\\
-                {indent}if (!(({exp} < {type_min} + __tol_t &&\\
-                {indent}       ({acq} <= {exp} + __tol_t ||\\
-                {indent}        {acq} >= {exp} - __tol_t)) ||\\
-                {indent}      ({exp} > {type_max} - __tol_t &&\\
-                {indent}       ({acq} >= {exp} - __tol_t ||\\
-                {indent}        {acq} <= {exp} + __tol_t)) ||\\
-                {indent}      ({exp} >= {type_min} + __tol_t &&\\
-                {indent}       {exp} <= {type_max} - __tol_t &&\\
-                {indent}       ({acq} >= {exp} - __tol_t &&\\
-                {indent}        {acq} <= {exp} + __tol_t)))) {{\\
+                {indent}{ty} __tol_t = {tol};
+                {indent}if (!(({exp} < {type_min} + __tol_t &&
+                {indent}       ({acq} <= {exp} + __tol_t ||
+                {indent}        {acq} >= {exp} - __tol_t)) ||
+                {indent}      ({exp} > {type_max} - __tol_t &&
+                {indent}       ({acq} >= {exp} - __tol_t ||
+                {indent}        {acq} <= {exp} + __tol_t)) ||
+                {indent}      ({exp} >= {type_min} + __tol_t &&
+                {indent}       {exp} <= {type_max} - __tol_t &&
+                {indent}       ({acq} >= {exp} - __tol_t &&
+                {indent}        {acq} <= {exp} + __tol_t)))) {{\
                 """
             ).format(indent=indent, acq=acq, exp=exp, tol=int(tolerance), ty=ctype,
                      type_min=type_min, type_max=type_max)
@@ -981,22 +1348,17 @@ def generate_test(function_name, arguments, variables, implemented, use_l1=False
     testsets = [
         Testset(
             name=device_name,
-            testsets=[
-                Testset(
-                    name=v,
-                    tests=[Test().build(test_idx=i,
-                                        function_name=function_name,
-                                        version=v,
-                                        arg_ret_type=arg_ret_type,
-                                        arguments=arguments,
-                                        env=e,
-                                        visible_env=visible_env,
-                                        device_name=device_name,
-                                        use_l1=use_l1,
-                                        extended_output=extended_output,
-                                        n_ops=n_ops).to_plptest()
-                           for i, e in enumerate(Sweep(variables))]
-                )
+            tests=[
+                AggregatedTest().build(function_name=function_name,
+                                       version=v,
+                                       arg_ret_type=arg_ret_type,
+                                       arguments=arguments,
+                                       variables=variables,
+                                       visible_env=visible_env,
+                                       device_name=device_name,
+                                       use_l1=use_l1,
+                                       extended_output=extended_output,
+                                       n_ops=n_ops).to_plptest()
                 for v in impl if impl[v]
             ]
         )
@@ -1011,18 +1373,14 @@ def main():
     Does either a setup or a clean of the test project
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument('--setup', action="store_true")
     parser.add_argument('--clean', action="store_true")
     parser.add_argument('--gen', action="store_true")
-    parser.add_argument('--device')
     parser.add_argument('--folder')
     parser.add_argument('--json', nargs='*')
     args = parser.parse_args()
 
     if args.clean:
         clean()
-    elif args.setup:
-        setup(args.device)
     elif args.gen:
         # Entry point of phase 2
         # get the test directory
@@ -1038,170 +1396,25 @@ def main():
 
         # parse json
         json_str = ' '.join(args.json)
-        test = Test().from_json(json_str)
+        test = AggregatedTest().from_json(json_str)
 
-        # write header file
-        with HeaderWriter(allow_l1=test.device_name == 'riscy') as writer:
-            writer.write_test(test, compute_result, generate_stimuli)
-
-
-def setup(device):
-    """
-    Setup the test environment
-    """
-    # first, make sure that all the files are removed
-    clean()
-
-    # check for the target device
-    if device == "ibex":
-        setup_ibex()
-    elif device == "riscy":
-        setup_riscy()
-    else:
-        raise RuntimeError("Invalid device: %s" % device)
-
-
-def setup_ibex():
-    """
-    Setup test environment for ibex test
-    """
-    # write makefile
-    _write_file("Makefile", dedent(
-        """\
-        PULP_APP = test
-        PULP_APP_FC_SRCS = test.c
-        PULP_LDFLAGS += -lplpdsp
-        PULP_CFLAGS += -I$(CONFIG_BUILD_DIR) -O3 -g
-        ifdef TFLAGS
-            PULP_CFLAGS += $(TFLAGS)
-        endif
-        include $(PULP_SDK_HOME)/install/rules/pulp_rt.mk
-        PULP_CFLAGS += -D DATA=$(CONFIG_BUILD_DIR)$(BUILD_DIR_EXT)
-        """
-    ))
-
-    # write test.c
-    _write_file("test.c", dedent(
-        """\
-        #include "rt/rt_api.h"
-        #include "stdio.h"
-        #include "plp_math.h"
-        #include "data.h"
-        static int do_bench(rt_perf_t *perf, int events, int do_check)
-        {
-            SETUP
-            rt_perf_conf(perf, events);
-            rt_perf_reset(perf);
-            rt_perf_start(perf);
-            FSIG
-            rt_perf_stop(perf);
-            int passed = 1;
-            if (do_check) {
-                CHECK
-            }
-            return passed;
-        }
-        int main(){
-            BENCHMARK
-            return 0;
-        }
-        """
-    ))
-
-
-def setup_riscy():
-    """
-    Setup test environment for riscy test
-    """
-    _write_file("Makefile", dedent(
-        """\
-        PULP_APP = test
-        PULP_APP_FC_SRCS = test.c cluster.c
-        PULP_LDFLAGS += -lplpdsp
-        PULP_CFLAGS += -I$(CONFIG_BUILD_DIR) -O3 -g
-        ifdef TFLAGS
-            PULP_CFLAGS += $(TFLAGS)
-        endif
-        include $(PULP_SDK_HOME)/install/rules/pulp_rt.mk
-        PULP_CFLAGS += -D DATA=$(CONFIG_BUILD_DIR)$(BUILD_DIR_EXT)
-        """
-    ))
-
-    _write_file("test.c", dedent(
-        """\
-        #include "rt/rt_api.h"
-        #include "stdio.h"
-        #include "cluster.h"
-        int main(){
-            rt_cluster_mount(1, 0, 0, NULL);
-            rt_cluster_call(NULL, 0, cluster_entry, NULL, NULL, 0, 0, 0, NULL);
-            rt_cluster_mount(0, 0, 0, NULL);
-            return 0;
-        }
-        """
-    ))
-
-    _write_file("cluster.c", dedent(
-        """\
-        #include "rt/rt_api.h"
-        #include "stdio.h"
-        #include "plp_math.h"
-        #include "data.h"
-        static int do_bench(rt_perf_t *perf, int events, int do_check)
-        {
-            SETUP
-            rt_perf_conf(perf, events);
-            rt_perf_reset(perf);
-            rt_perf_start(perf);
-            FSIG
-            rt_perf_stop(perf);
-            int passed = 1;
-            if (do_check) {
-                CHECK
-            }
-            return passed;
-        }
-        void cluster_entry(void *arg){
-            BENCHMARK
-            return;
-        }
-        """
-    ))
-
-    _write_file("cluster.h", dedent(
-        """\
-        #ifndef __INC_CLUSTER_H__
-        #define __INC_CLUSTER_H__
-        void cluster_entry(void *arg);
-        #endif
-        """
-    ))
-
-
-def _write_file(filename, content):
-    with open(filename, "w") as f:
-        f.write(content)
+        # generate the program
+        test.generate_test_program(generate_stimuli, compute_result)
 
 
 def clean():
     """
     Clean the test environment
     """
-    if os.path.isfile("Makefile"):
-        print("removing Makefile")
-        os.remove("Makefile")
-    if os.path.isfile("cluster.c"):
-        print("removing cluster.c")
-        os.remove("cluster.c")
-    if os.path.isfile("cluster.h"):
-        print("removing cluster.h")
-        os.remove("cluster.h")
-    if os.path.isfile("test.c"):
-        print("removing test.c")
-        os.remove("test.c")
-    if os.path.isfile("data.h"):
-        print("removing data.h")
-        os.remove("data.h")
+    for fname in os.listdir("."):
+        delete = False
+        if fname in ["Makefile", "cluster.c", "cluster.h", "test.c", "common.h"]:
+            delete = True
+        if fname.startswith("data_t") and fname.endswith(".h"):
+            delete = True
+        if delete:
+            print("Removing {}".format(fname))
+            os.remove(fname)
 
 
 if __name__ == "__main__":
