@@ -730,18 +730,8 @@ class AggregatedTest(object):
     L1 memory is copied to L1 storage. For this, the largest size of each array is allocated
     statically.
     """
-
-    def __init__(self):
-        """ Constructor returning default values for an empty test, used for deserializing """
-        self.function_name = None
-        self.version = None
-        self.device_name = None
-        self.extended_output = True
-        self.visible_env = []
-        self.cases = []
-
-    def build(self, function_name, version, arg_ret_type, arguments, variables, visible_env,
-              device_name, use_l1, extended_output=True, n_ops=None):
+    def __init__(self, function_name, version, arg_ret_type, arguments, variables, visible_env,
+                 device_name, use_l1, extended_output=True, n_ops=None):
         """ Build an aggregated test. This will also apply all arguments for all versions """
         self.function_name = function_name
         self.version = version
@@ -808,8 +798,6 @@ class AggregatedTest(object):
             for (i, env) in enumerate(Sweep(variables))
         ]
 
-        return self
-
     def to_plptest(self):
         """ Returns the PulpTest structure """
         test_name = self.function_name
@@ -823,7 +811,7 @@ class AggregatedTest(object):
             platform_str = os.environ["PULP_CURRENT_CONFIG_ARGS"]
         return PulpTest(name=test_name,
                         commands=[
-                            Check('gen', generate_test_program, test_obj=deepcopy(self)),
+                            Check('gen', generate_test_program, test_obj=self),
                             Shell('clean', 'make clean %s' % (flags)),
                             Shell('build', 'make all %s' % (flags)),
                             Shell('run', 'make run %s %s' % (platform_str, flags)),
@@ -1295,16 +1283,16 @@ def generate_test(function_name, arguments, variables, implemented, use_l1=False
         Testset(
             name=device_name,
             tests=[
-                AggregatedTest().build(function_name=function_name,
-                                       version=v,
-                                       arg_ret_type=arg_ret_type,
-                                       arguments=arguments,
-                                       variables=variables,
-                                       visible_env=visible_env,
-                                       device_name=device_name,
-                                       use_l1=use_l1,
-                                       extended_output=extended_output,
-                                       n_ops=n_ops).to_plptest()
+                AggregatedTest(function_name=function_name,
+                               version=v,
+                               arg_ret_type=arg_ret_type,
+                               arguments=arguments,
+                               variables=variables,
+                               visible_env=visible_env,
+                               device_name=device_name,
+                               use_l1=use_l1,
+                               extended_output=extended_output,
+                               n_ops=n_ops).to_plptest()
                 for v in impl if impl[v]
             ]
         )
