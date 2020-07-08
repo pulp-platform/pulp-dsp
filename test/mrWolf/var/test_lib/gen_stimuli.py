@@ -20,41 +20,33 @@ def compute_result(result_parameter, inputs, env, fix_point):
     fix_point: None (if no fixpoint is used) or decimal point
     """
     bS = inputs['blockSize'].value
+    if(fix_point == None):
+        fix_point = 0
     if result_parameter.ctype == 'int32_t':
         p = inputs['pSrc'].value.astype(np.int32)
         result = np.zeros(1, dtype=np.int32)
-        if fix_point is None or fix_point == 0:
-            result[0] = q_sat(np.var(p))
-        else:
-            if fix_point != 0:
-                for xa, xb in zip(p, p):
-                    result[0] = q_add(result[0], (xa * xb) >> fix_point)/bS
-                result[0] = q_add(result[0],-np.mean(p))
+        for xa, xb in zip(p, p):
+            result[0] = q_add(result[0], (xa * xb) >> fix_point)
+        sq_mean = (np.square(np.mean(p)))
+        result[0] = q_add(result[0]/bS,-(int(sq_mean)>>fix_point))
     elif result_parameter.ctype == 'int16_t':
         p = inputs['pSrc'].value.astype(np.int16)
         result = np.zeros(1, dtype=np.int16)
-        if fix_point is None or fix_point == 0:
-            result[0] = q_sat(np.var(p))
-        else:
-            if fix_point != 0:
-                for xa, xb in zip(p, p):
-                    result[0] = q_add(result[0], (xa * xb) >> fix_point)/bS
-                result[0] = q_add(result[0],-np.mean(p))
+        for xa, xb in zip(p, p):
+            result[0] = q_add(result[0], (xa * xb) >> fix_point)
+        sq_mean = (np.square(np.mean(p)))/(2**fix_point)
+        result[0] = q_add(result[0]/bS,-(int(sq_mean)>>fix_point))
     elif result_parameter.ctype == 'int8_t':
         p = inputs['pSrc'].value.astype(np.int8)
         result = np.zeros(1, dtype=np.int8)
-        if fix_point is None or fix_point == 0:
-            result[0] = q_sat(np.var(p))
-        else:
-            if fix_point != 0:
-                for xa, xb in zip(p, p):
-                    result[0] = q_add(result[0], (xa * xb) >> fix_point)/bS
-                result[0] = q_add(result[0],-np.mean(p))
+        for xa, xb in zip(p, p):
+            result[0] = q_add(result[0], (xa * xb) >> fix_point)
+        sq_mean = (np.square(np.mean(p)))/(2**fix_point)
+        result[0] = q_add(result[0]/bS,-(int(sq_mean)>>fix_point))
     elif result_parameter.ctype == 'float':
         p = inputs['pSrc'].value.astype(np.float32)
         result = np.zeros(1, dtype=np.float32)
         result[0] = np.var(p)
-        
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
 

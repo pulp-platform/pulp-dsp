@@ -51,7 +51,6 @@
    method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
    isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
-
    </pre>
 
 */

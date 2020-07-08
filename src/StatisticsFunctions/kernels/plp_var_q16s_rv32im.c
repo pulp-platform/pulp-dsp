@@ -73,7 +73,7 @@ void plp_var_q16s_rv32im(
                          const int16_t * __restrict__ pSrc,
                          uint32_t blockSize,
                          uint32_t deciPoint,
-                         int32_t * __restrict__ pRes){
+                         int16_t * __restrict__ pRes){
 
    
   int32_t square_of_mean;

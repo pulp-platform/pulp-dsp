@@ -1,6 +1,6 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_sqrt_q32s_xpulpv2.c
+ * Title:        plp_sqrt_f32s_xpulpv2.c
  * Description:  
  *
  * $Date:        02.07.2020        
@@ -27,7 +27,7 @@
  * limitations under the License.
  */
 
-
+#define numIters 5
 #include "plp_math.h"
 
 
@@ -62,55 +62,27 @@
 */
 
 /**
-   @brief         Square root of a 32-bit fixed point number for XPULPV2 extension.
+   @brief         Square root of a 32-bit floating point number for XPULPV2 extension.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
    @param[out]    pRes    sum of squares returned here
    @return        none
 */
 
-void plp_sqrt_q32s_xpulpv2(
-                           const int32_t * __restrict__ pSrc,
-                           const uint32_t deciPoint,
-                           int32_t * __restrict__ pRes){
+void plp_sqrt_f32s_xpulpv2(
+                           const float * __restrict__ pSrc,
+                           float * __restrict__ pRes){
 
-  register int32_t root, remHi, remLo, testDiv, count;
+  float intermediate = (1/(2 * (*pSrc)));
+  float half = (*pSrc)/2;
+  if(half > 0){
+    for(int i=0;i<numIters;i++){
+      intermediate = intermediate*(1.5f - (intermediate*intermediate*half));
+    }
 
-  root = 0;
-  remHi = 0;
-  remLo = *pSrc;
-  count = 15 + ((32-deciPoint) >> 1);
+    *pRes = intermediate * (*pSrc);
+  } else {
+    *pRes = 0.f;
+  }
   
-#if defined(PLP_MATH_LOOPUNROLL)
-  do {
-    remHi = (remHi << 2) | (remLo >> 30);
-    remLo <<= 2;
-    root <<= 1;
-    testDiv = (root << 1) + 1;
-    if (remHi >= testDiv) {
-      remHi -= testDiv;
-      root += 1;
-    }
-  } while(count-- != 0);
-
-  *pRes = root;
-    
-#else
-
-  do {
-    remHi = (remHi << 2) | (remLo >> 30);
-    remLo <<= 2;
-    root <<= 1;
-    testDiv = (root << 1) + 1;
-    if (remHi >= testDiv) {
-      remHi -= testDiv;
-      root += 1;
-    }
-  } while(count-- != 0);
-
-  *pRes = root;
-
-#endif
-
- 
 }

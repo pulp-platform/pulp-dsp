@@ -36,9 +36,9 @@
 /**
    @defgroup var Var
    Calculates the varimum of the input vector. Var is defined as the the greatest value in the vector.
-   There are separate functions for floating point, integer, and fixed point 32- 8- 8-bit data types. For lower precision integers (8- and 8-bit), functions exploiting SIMD instructions are provided.
+   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
 
-   The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i8s):
+   The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i16s):
    <pre>
    \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
 
@@ -73,7 +73,7 @@ void plp_var_q8(
                          const int8_t * __restrict__ pSrc,
                          uint32_t blockSize,
                          uint32_t deciPoint,
-                         int32_t * __restrict__ pRes){
+                         int8_t * __restrict__ pRes){
   
   if (rt_cluster_id() == ARCHI_FC_CID){
     plp_var_q8s_rv32im(pSrc, blockSize, deciPoint, pRes);

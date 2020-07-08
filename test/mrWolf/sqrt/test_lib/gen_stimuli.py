@@ -39,7 +39,13 @@ def compute_result(result_parameter, inputs, env, fix_point):
         raise RuntimeError("Int8 not implemented")
     
     elif result_parameter.ctype == 'float':
-        raise RuntimeError("Float not implemented")
+        p = inputs['pSrc'].value.astype(np.float32)
+        result = np.zeros(1, dtype=np.float32)
+        if(p>0):
+            result[0] = np.sqrt(p)
+        else:
+            result[0] = 0
+        
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
 
