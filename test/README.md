@@ -229,6 +229,7 @@ Custom arguments allow tests to be very flexible. They can either be used to [li
   - `version: str`: Version string
   - `var_type: tuple(str, str)`, which contains `(var_type, ret_type)`
   - `use_l1`: Bool, wether to use L1 memory.
+  - `arg_name: F: str -> str`: funciton which maps the argument name to the name of the correct iteration. Every reference to any argument (including current `CustomArgument` itself) **must** be transformed with this function.
   The function *must* return the entire string for initialization, including the type and the name of the variable.
 - (optional) `as_ptr`: Boolean to tell the framework how to pass the variable to the function. Default is `False`.
 - (optional) `deref`: Boolean to tell the framework to dereference the variable before passing it to the function. Default is `False`.
@@ -263,21 +264,23 @@ typedef struct
 To use this struct and pass it to the function under test, we first write a python function for the `CustomArgument`, which returns a string to initialize the struct. For this, we can add constants (like `.nPE = 8`), refer to arguments in the `arguments` list (with their name), we can access a `SweepVariable` or `DynamicVariable` in the `env` dictionary, or use the `version`, `var_type` or the `use_l1` flag. This is a normal python function, so you can build whatever you like here. Since the function `plp_mat_mult_i8vp_xpulpv2` takes a `void*` pointer as an input argument, we create a `void*` pointer `pArgs` to pass to the function. This will make sure that there will be no compiler warnings or errors.
 ```
 from textwrap import dedent
-def mat_mult_instance(env, version, var_type, use_l1):
+def mat_mult_instance(env, version, var_type, use_l1, arg_name):
     version_prefix = version.split("_")[0] # remove the _parallel from the version
     return dedent(
         """\
-        plp_mat_mult_instance_{ver} args = {
-            .pSrcA = pSrcA,
-            .pSrcB = pSrcB,
+        plp_mat_mult_instance_{ver} {args} = {
+            .pSrcA = {pSrcA},
+            .pSrcB = {pSrcB},
             .M = {m},
             .N = {n},
             .O = {o},
             .nPE = 8,
-            .pDstC = pDst
+            .pDstC = {pDst}
         };
         void* pArgs = (void*)&args;
-        """.format(ver=version_prefix, m=env['len_m'], n=env['len_n'], o=env['len_o'])
+        """.format(ver=version_prefix, m=env['len_m'], n=env['len_n'], o=env['len_o'],
+                   args=arg_name("args"), pSrcA=arg_name("pSrcA"), pSrcB=arg_name("pSrcB"),
+                   pDst=arg_name("pDst"))
     )
 ```
 
@@ -375,53 +378,49 @@ The test will generate all necessary source files automatically. But, they are r
 
 ## Explenation of the internals
 
-This test framework is based around `plptest`. In `plptest`, every test is configured in the class `plptest.Test` (renamed to `PulpTest` in `pulp_dsp_test.py`). Such a test can have a name, and commands to execute. Based on this architecture, this test framework is built around two different phases: The [Test Declaration](#test-declaration) phase, and the [Test Definition](#test-definition) phase. The first test declares the test to have execute the following commands:
+This test framework is based around `plptest`. In `plptest`, every test is configured in the class `plptest.Test` (renamed to `PulpTest` in `pulp_dsp_test.py`). Such a test can have a name, and commands to execute. 
 
-1. `python3 pulp_dsp_test.py --setup --device [ibex|riscy]`: The following files are created:
-   - For `ibex`: `test.c` (main), which calls the function-under-test multiple times, and the `Makefile`.
-   - for `riscy`: `test.c` (main), which calls the cluster code, `cluster.c` and `cluster.h` which calls the function-under-test, and the `Makefile`.
+1. Generate (written as `plptest.Check`): Calls `generate_test_program`, which generate all stimuli, compute the expected results, and generate the entire test program with all necessary files. We use `plptest.Check` because this allows us to pass the test object without serializing and deserializing.
 2. `make clean --build-dir=BUILD_DIR`: clear the build directory
-3. `python3 pulp_dsp_test.py --gen --json JSON_STRING`: Generate all stimuli, compute the expected results, and write everything into `data.h`.
-4. `make all --build-dir=BUILD_DIR`: Compile the test
-5. `make run --build-dir=BUILD_DIR`: Run the test
-6. `python3 pulp_dsp_test --clean --device [ibex|riscy]`: Remove all files created in step 1 and 3.
-7. Check, which calls `check_output` in `pulp_dsp_test.py`. Here, we can reuse the test object by using the parameter `test_obj`.
+3. `make all --build-dir=BUILD_DIR`: Compile the test
+4. `make run --build-dir=BUILD_DIR`: Run the test
+6. Check (written as `plptest.Check`): Calls `check_output` in `pulp_dsp_test.py`. Here, we can reuse the test object by using the parameter `test_obj`. It also clears all program files of the test.
 
-The funciton `main` (for `ibex`) or `cluster_entry` (for `riscy`) calls the function `do_bench` multiple times, with different performance (hardware) counter configurations:
+Each test program will check multiple different cases. All iterations of `SweepVariable`s and `DynamicVariable`s will be grouped to getter for all functions and versions. This way, we reduce the total amount of work required by approximately factor 8. Also, the programmer does not need to think about the test time before adding more test cases and iterations of `SweepVariable`s. The generated test program will have the following files:
 
-1. Count the number of cycles and instructions. The first iteratoion also checks every element of every `OutputArgument`, `ReturnValue` and `InplaceArgument`. 
-2. Count the number of load stalls
-3. Count all instruction cache misses
-4. Count all TCDM contentions
+- `common.h`: Common declarations (like the union `__u2f` and the macro `ABS`)
+- `data_tXX.h`: The stimuli and the expected result, stored for each test case separately.
+- `test.c` (`cluster.c` for `riscy` tests): Contains the function `test_entry`, which calls all test cases. Each test case is represented as a function, called `tXX__run_test`. Each of these functions does the following:
+   - Setup the test (e.g. copy all necessary data from L2 to L1)
+   - Execute `tXX__do_bench` multiple times. Each time, the performance counters (hardware counters) count different metrics:
+     1. Count the number of cycles and instructions. The first iteration also checks every element of every `OutputArgument`, `ReturnValue` and `InplaceArgument`. 
+     2. Count the number of load stalls
+     3. Count all instruction cache misses
+     4. Count all TCDM contentions
 
-The result is then written to `stdout`. The function `check_output` in `pulp_dsp_test.py` will then parse the output to find those performance numbers.
+All results of all test cases will be written to `stdout`. The function `check_output` then parses the output, to assign those performance numbers to the correct test case. Afterwards, the benchmark file will be written.
 
 ### Two phases
 
-We divide the test into two different phases because of the following two reasons:
+The tests (assigning concrete values to the name, length, type and value of `Argument`s) are generated in two different phases.
 
-1. Serializing entire functions is very difficult to do without the use of external libraries. (A design goal of the test framework is not to require any external libraries, such that we don't interfear with the SDK and `plptest`.)
-2. We don't want to pass all values of the arrays via strings, because this would result in all arrays being stored on memory in an extremely inefficient format (string representation of numbers might use ~4x more memory). Also, the command line output (when using `--stdout`) would then be way too long to reasonably use it for finding bugs.
+1. In the first phase, we instantiate all names, types and sizes of all arguments. This is done when creating the `AggregateTestCases` in `AggregatedTest.__init__` in the `apply` function of every `Argument`. 
+2. In the second phase, the stimuli and the expected result is created. This is done when the data is written to the file. This way, we never store the data in the class, but drop it after the test is written. This reduces the total memory usage.
 
-#### Serialization and Deserialization
-In order to pass information from the first phase to the next one, the data is serialized to a json string. This json string is then passed as command line arguments to the second phase. The serialization and deserialization is done partially manually. We transform each class into a dictionary, including all member variables (using `self.__dict__`) and the class name (using `type(self).__name__`):
+### Naming Convention
 
-```
-{
-    "class": type(self).__name__,
-    "dict": self.__dict__
-}
-```
+- All variables, arguments and functions of a specific test case are suffixed with `tXX__`.
+- The function `tXX__run_test()` sets up some arguments (e.g. copy data from L2 to L1), and calls `tXX__do_bench` multiple times to measure several performance numbers
+- The function `tXX__do_bench()` sets up some arguments (e.g. reset the values of an `InplaceArgument`), configures the hardware counter, calls the function-under-test and checks the result (but only on the first iteration).
+- For some arguments, multiple variables are generated:
+  - `tXX__NAME`: This is the variable which is (usually) passed to the function-under-test.
+  - `tXX__NAME__reference`: This is the variable containing the expected result.
+  - `tXX__NAME__original`: This is the array containing the original data, used only for `InplaceArgument`.
+  - `tXX__NAME__l2`: The l2 data for all arrays, for which `use_l1` is set to true. This way, we can copy the data from `tXX__NAME__l2` to `tXX__NAME` at the start of `tXX__run_test()`.
 
-For deserializing, we compare the class name, to generate the appropriate class, and fill it's members by setting the `__dict__`. We use `json.dumps` and `json.loads` to serialize and deserialze the dictionary to a string, and reversed. However, in order to pass it as command line arguments to the second phase, we need to escape various characters. First, we escape every `\` to a `\\` (in python: `str.replace("\\", "\\\\")`), and then ``"` to a `\"` (in python: `str.replace("\n", "\\\n")`). The first `\\` makes sure that escaped characters in the json string will remain escaped after reading the json string in the second phase, and the `\n` will make sure that the quotes are not interpreted as single arguments (by the shell), but as characters. This way, we can serialize and deserialize multiline strings, containing various escaped characters.
+### Large test programs
 
-#### Phase I: Test Declaration
-
-The entry-point of the first phase is the function `generate_test`. In the first phase, all test cases are accumulated. Since we cannot serialize a function, all arguments, in which the programmer can pass functions, must be evaluated in this first phase. However, we don't wish to generate the stimuli and the expected output (reason is already described above). Therefore, all `Argument`s contain the function `apply`, which prepares all arguments, but does not yet generate the stimuli. This function is always called inside the function `to_dict`. In addition, the function `to_dict` will generate a deepcopy of the object, and call `apply` on this, in order to reuse the same argument for the next iteration (next value of the `SweepVariable`s). This phase also selects which arguments to draw, based on the version (hide `FixPointArgument` for all non-fix-point versions, and hide the `ParallelArgument` for all single-core versions).
-
-#### Phase II: Test Generation
-
-The entry-point of this phase is the function `main` (inside the branch `elif args.gen`). In this phase, we first deserialize the json input, and recreate the `Test` object. Then, we generate and write the header file. During this, we generate all stimuli of the input arguments, and compute the expected results of all output arguments (all of this happens in `HeaderWriter.write_test`.
+We now group multiple test cases to a single test program. Therefore, one test program may contain 20+ test cases, which all need their own data. Thus, it is not possible to store everything directly to L1. Instead, the test framework stores all data into `RT_L2_DATA` as the variable `tXX__NAME__l2`. In addition, for all arrays with `use_l1=True`, we generate an additional pointer (`tXX__NAME`), which is not yet initialized. At the start of `tXX__run_test()`, we allocate the required memory in L1, and store the pointer in `tXX__NAME`. Then, we perform a `memcpy` to copy the data from `tXX__NAME__l2` to `tXX__NAME`. This way, we can generate as many data as fits into `RT_L2_DATA` (which is 448 kB).
 
 ### Handling floating-point arguments
 
@@ -459,23 +458,4 @@ We cannot know the order in which `plptest` executes the tests. Therefore, we al
 
 ### Limitations, Speed and Future Work
 
-The main limitation of the current framework is the speed. As of the time of writing this part of the documentation, there already exists more than 1200 individual test cases. Every test takes around 3.5 seconds, which makes the total execution time larger than 1 hour. And this is only with a limited number of functions, and we can expect the total number of tests to get around 5000. In this case, waiting 5 hours is no longer feasible. We need to improve the performance of the test framework. Here is a measurement of how long each part takes:
-
-- `python3 pulp_dsp_test.py --setup --device riscy`: *0.20s*
-- `make clean`: *0.34s*
-- `python3 pulp_dsp_test.py --gen --json JSON_DATA`: *0.22s*
-- `make all`: *1.31s*
-- `make run`: *0.92s*, where starting the program takes the longest, and actually running it is very quick.
-- `python3 pulp_dsp_test.py --clean`: *0.18s*
-
-From those measurements, we can see that all calls to gcc and to `pulp_run` take the longest. Also, importing `pulp_dsp_test.py` takes around 0.17s, which is not very significant. The following things can be done:
-
-- Simply adding all tests to the same test program and compiling it once does not work, because the L1 memory (and maybe also L2) is way too small.
-- *TODO* Reduce the number of calls to `pulp_dsp_test.py` by calling clean, setup and gen at once. Unfortunately, this can only reduce the execution time by about 0.35s, which is about 10%.
-- *TODO* group all iterations of the tests together. Make sure that all iterations (of the same function, on the same device and of the same version) work on the same data (just use different parts of it). However, the result vectors would still need to be present for all different iterations. This is not a real problem, however, because we can put the expected result on L2 memory, and only use one single output buffer, large enough for the largest iteration. This would definately increase compilation time, and maybe also other parts of the execution. But it would still reduce the running time by a significant factor (I expect the speedup to be about factor 8 if there are 16 different iterations to be tested).
-- *TODO* completely change the architecture: compile one program and pass in all data via `stdin`, compute and get the computed results back from `stdout`. This requires major changes to the test infrastructure, but it might give the best speedup, because we only need to compile one program.
-
-#### Other TODOs
-
-- *TODO* Maybe, we can skip the entire serialization and deserialization step by using the check functionality of `plptest`. One has to test if you can declare mutliple check commands, and what to return such that all remaining commands will be executed. This, however, would simplify things, because we don't have to distinguish between those different phases. However, this would increase the memory size dramatically, since all test objects with all arguments and their values will be stored in memory at the same time. It would probably not improve performance that much!
-- *TODO* Instead of passing everything via command line arguments, another possiblity would be to pickle the data into files. We would still pass in something like a test identifier, with which we can find the pickled file. But in this case, we would not need to distinguish between the two phases.
+The main limitation of the current framework is the speed. As of the time of writing this part of the documentation, there already exists more than 1200 individual test cases. Every test takes around 3.5 seconds, which makes the total execution time around 80 minutes. By grouping all iterations of a single function and version into one single executable, the testing time could be reduced from 80 minutes down to 9 minutes (speedup of approx. **9x**). This performance can be increased even more by combining all versions of the same target device together. However, one must make sure that the L1 memory (448kB) is not exceeded.
