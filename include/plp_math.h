@@ -248,6 +248,20 @@ typedef struct{
   uint8_t coresPerVector;
 } plp_conv_tree_add_instance;
 
+/**
+ * @brief Instance structure for the fixed-point CFFT/CIFFT function.
+ * @param[in]   fftLen              length of the FFT
+ * @param[in]   pTwiddle            points to the Twiddle factor table
+ * @param[in]   pBitRevTable        points to the bit reversal table
+ * @param[in]   bitRevTableLength   bit reversal table length
+ */
+typedef struct{
+  uint16_t fftLen;              /*< length of the FFT. */
+  const int16_t *pTwiddle;      /*< points to the Twiddle factor table. */
+  const int16_t *pBitRevTable;  /*< points to the bit reversal table. */
+  uint16_t bitRevLength;        /*< bit reversal table length. */
+} plp_cfft_instance_q16;
+
 /** -------------------------------------------------------
     @struct plp_rfft_instance_f32
     @brief Instance structure for floating-point FFT
@@ -4300,7 +4314,95 @@ void plp_mat_mult_trans_f32p_xpulpv2(
 
 
 
+/**
+  @brief         In-place 16 bit reversal function for RV32IM
+  @param[in,out] pSrc        points to in-place buffer of unknown 16-bit data type
+  @param[in]     bitRevLen   bit reversal table length
+  @param[in]     pBitRevTab  points to bit reversal table
+  @return        none
+*/
 
+void plp_bitreversal_16s_rv32im(
+        uint16_t *pSrc,
+  const uint16_t bitRevLen,
+  const uint16_t *pBitRevTab);
+
+
+/**
+  @brief         In-place 16 bit reversal function for XPULPV2
+  @param[in,out] pSrc        points to in-place buffer of unknown 16-bit data type
+  @param[in]     bitRevLen   bit reversal table length
+  @param[in]     pBitRevTab  points to bit reversal table
+  @return        none
+*/
+
+void plp_bitreversal_16v_xpulpv2(
+        uint16_t *pSrc,
+  const uint16_t bitRevLen,
+  const uint16_t *pBitRevTab);
+
+
+/**
+ * @brief         Glue code for quantized 16 bit complex fast fourier transform
+ * 
+ * Fixed point units input -> output dependent on length:
+ * len=16:    Q1.15 -> Q5.11
+ * len=32:    Q1.15 -> Q6.10
+ * len=64:    Q1.15 -> Q7.9
+ * len=128:   Q1.15 -> Q8.8
+ * len=256:   Q1.15 -> Q9.7
+ * len=512:   Q1.15 -> Q10.6
+ * len=1024:  Q1.15 -> Q11.5
+ * len=2048:  Q1.15 -> Q12.4
+ * len=4096:  Q1.15 -> Q13.3
+ * 
+ * @param[in]     S               points to an instance of the 16bit quantized CFFT structure
+ * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
+ * @param[in]     ifftFlag        flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1) transform.
+ * @param[in]     bitReverseFlag  flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. 
+ * @param[in]     deciPoint       decimal point for right shift
+ */
+
+void plp_cfft_q16(
+        const plp_cfft_instance_q16 *S,
+        int16_t * p1,
+        uint8_t ifftFlag,
+        uint8_t bitReverseFlag,
+        uint32_t deciPoint);
+
+
+/**
+ * @brief         Quantized 16 bit complex fast fourier transform for RV32IM
+ * @param[in]     S               points to an instance of the 16bit quantized CFFT structure
+ * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
+ * @param[in]     ifftFlag        flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1) transform.
+ * @param[in]     bitReverseFlag  flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. 
+ * @param[in]     deciPoint       decimal point for right shift
+ */
+
+void plp_cfft_q16s_rv32im(
+        const plp_cfft_instance_q16 *S,
+        int16_t * p1,
+        uint8_t ifftFlag,
+        uint8_t bitReverseFlag,
+        uint32_t deciPoint);
+
+
+/**
+ * @brief         Quantized 16 bit complex fast fourier transform for XPULPV2
+ * @param[in]     S               points to an instance of the 16bit quantized CFFT structure
+ * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
+ * @param[in]     ifftFlag        flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1) transform.
+ * @param[in]     bitReverseFlag  flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. 
+ * @param[in]     deciPoint       decimal point for right shift
+ */
+
+void plp_cfft_q16v_xpulpv2(
+        const plp_cfft_instance_q16 *S,
+        int16_t * p1,
+        uint8_t ifftFlag,
+        uint8_t bitReverseFlag,
+        uint32_t deciPoint);
 
 
 /**
