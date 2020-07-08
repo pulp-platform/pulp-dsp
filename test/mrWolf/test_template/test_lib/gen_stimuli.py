@@ -3,6 +3,28 @@
 import numpy as np
 
 
+####################
+# generate_stimuli #
+####################
+
+
+def generate_stimuli(arg, env):
+    """
+    Function to generate the stimuli
+
+    Arguments
+    ---------
+    arg: Argument for which to generate stimuli (either Argument or ArrayArgument)
+    env: Dict mapping the variable (SweepVariable or DynamicVariable) names to their value.
+    """
+    # name = arg.name
+    # if name == "srcA":
+    #     # generate and return stimuli for srcA
+    # if name == "srcB":
+    #     # generate and return stimuli for srcB
+    # ...
+
+
 ##################
 # compute_result #
 ##################
@@ -39,7 +61,7 @@ def compute_result(result_parameter, inputs, env, fix_point):
             for i in range((len(a) // groups) * groups, len(a)):
                 result[0] = q_add(result[0], q_roundnorm(a[i] * b[i], fix_point))
     elif result_parameter.ctype == 'float':
-        # for float implementation, it is important to always use float32 for intermediate operations!
+        # for float implementation, it is important to always use float32 for intermediate ops!
         a = inputs['srcA'].value.astype(np.float32)
         b = inputs['srcB'].value.astype(np.float32)
         res = np.float32(0)
