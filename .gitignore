@@ -8,6 +8,8 @@ cscope.*
 test_data
 !test_data/gen_stimuli.py
 
+test/mrWolf/bench_*.csv
+
 junit-reports
 
 doc/html/
