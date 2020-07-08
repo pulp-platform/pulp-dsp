@@ -409,6 +409,190 @@ typedef struct
 }plp_mat_mult_instance_q32;
 
 
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel matrix addition.
+ */
+typedef struct
+{
+    const int8_t * __restrict__ pSrcA;
+    const int8_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int8_t * __restrict__ pDst;
+} plp_mat_add_instance_i8;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel matrix addition.
+ */
+typedef struct
+{
+    const int16_t * __restrict__ pSrcA;
+    const int16_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int16_t * __restrict__ pDst;
+} plp_mat_add_instance_i16;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel matrix addition.
+ */
+typedef struct
+{
+    const int32_t * __restrict__ pSrcA;
+    const int32_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int32_t * __restrict__ pDst;
+} plp_mat_add_instance_i32;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for floating-point parallel matrix addition.
+ */
+typedef struct
+{
+    const float * __restrict__ pSrcA;
+    const float * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    float * __restrict__ pDst;
+} plp_mat_add_instance_f32;
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel matrix subtraction.
+ */
+typedef struct
+{
+    const int8_t * __restrict__ pSrcA;
+    const int8_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int8_t * __restrict__ pDst;
+} plp_mat_sub_instance_i8;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel matrix subtraction.
+ */
+typedef struct
+{
+    const int16_t * __restrict__ pSrcA;
+    const int16_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int16_t * __restrict__ pDst;
+} plp_mat_sub_instance_i16;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel matrix subtraction.
+ */
+typedef struct
+{
+    const int32_t * __restrict__ pSrcA;
+    const int32_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int32_t * __restrict__ pDst;
+} plp_mat_sub_instance_i32;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for floating-point parallel matrix subtraction.
+ */
+typedef struct
+{
+    const float * __restrict__ pSrcA;
+    const float * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    float * __restrict__ pDst;
+} plp_mat_sub_instance_f32;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel matrix scale.
+ */
+typedef struct
+{
+    const int8_t * __restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    int8_t scaleFactor;
+    int32_t shift;
+    uint32_t nPE;
+    int8_t * __restrict__ pDst;
+} plp_mat_scale_instance_i8;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel matrix scale.
+ */
+typedef struct
+{
+    const int16_t * __restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    int16_t scaleFactor;
+    int32_t shift;
+    uint32_t nPE;
+    int16_t * __restrict__ pDst;
+} plp_mat_scale_instance_i16;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel matrix scale.
+ */
+typedef struct
+{
+    const int32_t * __restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    int32_t scaleFactor;
+    int32_t shift;
+    uint32_t nPE;
+    int32_t * __restrict__ pDst;
+} plp_mat_scale_instance_i32;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for floating-point parallel matrix scale.
+ */
+typedef struct
+{
+    const float * __restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    float scaleFactor;
+    uint32_t nPE;
+    float * __restrict__ pDst;
+} plp_mat_scale_instance_f32;
+
+
+
+
+
 
 /** -------------------------------------------------------
     @brief Glue code for parallel dot product of 32-bit integer vectors.
@@ -4450,6 +4634,1011 @@ void plp_rfft_f32_xpulpv2(
    @return      none
 */
 void plp_rfft_f32_xpulpv2_parallel(plp_rfft_parallel_arg_f32 *arg);
+
+
+
+/** -------------------------------------------------------
+  @brief   Glue code for matrix addition of a 32-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_i32(const int32_t * __restrict__ pSrcA,
+                     const int32_t * __restrict__ pSrcB,
+                     uint32_t M,
+                     uint32_t N,
+                     int32_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief   matrix addition of a 32-bit integer matrices for RV32IM extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_i32s_rv32im(const int32_t * __restrict__ pSrcA,
+                             const int32_t * __restrict__ pSrcB,
+                             uint32_t M,
+                             uint32_t N,
+                             int32_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix addition of a 32-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_i32s_xpulpv2(const int32_t * __restrict__ pSrcA,
+                              const int32_t * __restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              int32_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix addition of a 32-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  nPE     Number of cores to use
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_i32_parallel(const int32_t * __restrict__ pSrcA,
+                              const int32_t * __restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t nPE,
+                              int32_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Parallel matrix addition of a 32-bit integer matrices for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_add_instance_i32 struct initialized by plp_mat_add_i32_parallel
+  @return     none
+*/
+
+void plp_mat_add_i32p_xpulpv2(void* args);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix addition of a 16-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_i16(const int16_t * __restrict__ pSrcA,
+                     const int16_t * __restrict__ pSrcB,
+                     uint32_t M,
+                     uint32_t N,
+                     int16_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix addition of a 16-bit integer matrices for RV32IM extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_i16s_rv32im(const int16_t * __restrict__ pSrcA,
+                             const int16_t * __restrict__ pSrcB,
+                             uint32_t M,
+                             uint32_t N,
+                             int16_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix addition of a 16-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_add_i16v_xpulpv2(const int16_t * __restrict__ pSrcA,
+                              const int16_t * __restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              int16_t * __restrict__ pDst);
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix addition of a 16-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  nPE     Number of cores to use
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_i16_parallel(const int16_t * __restrict__ pSrcA,
+                              const int16_t * __restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t nPE,
+                              int16_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief Parallel matrix addition of 16-bit integer matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_add_instance_i16 struct initialized by plp_mat_add_i16_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_add_i16vp_xpulpv2(void* args);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix addition of a 8-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_i8(const int8_t * __restrict__ pSrcA,
+                    const int8_t * __restrict__ pSrcB,
+                    uint32_t M,
+                    uint32_t N,
+                    int8_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix addition of a 8-bit integer matrices for RV32IM extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_i8s_rv32im(const int8_t * __restrict__ pSrcA,
+                            const int8_t * __restrict__ pSrcB,
+                            uint32_t M,
+                            uint32_t N,
+                            int8_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix addition of a 8-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_add_i8v_xpulpv2(const int8_t * __restrict__ pSrcA,
+                             const int8_t * __restrict__ pSrcB,
+                             uint32_t M,
+                             uint32_t N,
+                             int8_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix addition of a 8-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  nPE     Number of cores to use
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_i8_parallel(const int8_t * __restrict__ pSrcA,
+                             const int8_t * __restrict__ pSrcB,
+                             uint32_t M,
+                             uint32_t N,
+                             uint32_t nPE,
+                             int8_t * __restrict__ pDst);
+
+
+/** -------------------------------------------------------
+  @brief Parallel matrix addition of 8-bit integer matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_add_instance_i8 struct initialized by plp_mat_add_i8_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_add_i8vp_xpulpv2(void* args);
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix addition of a 32-bit floating-point matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+
+void plp_mat_add_f32(const float * __restrict__ pSrcA,
+                     const float * __restrict__ pSrcB,
+                     uint32_t M,
+                     uint32_t N,
+                     float * __restrict__ pDst);
+
+
+/** -------------------------------------------------------
+  @brief      matrix addition of a 32-bit floating-point matrices for XPULPV2 extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_f32s_xpulpv2(const float * __restrict__ pSrcA,
+                              const float * __restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              float * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix addition of a 32-bit floating-point matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  nPE     Number of cores to use
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_f32_parallel(const float * __restrict__ pSrcA,
+                              const float * __restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t nPE,
+                              float * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief Parallel matrix addition of 32-bit floating-point matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_add_instance_f32 struct initialized by plp_mat_add_f32_parallel
+  @return     none
+*/
+
+void plp_mat_add_f32p_xpulpv2(void* args);
+
+
+
+/** -------------------------------------------------------
+  @brief   Glue code for matrix subtraction of a 32-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_i32(const int32_t * __restrict__ pSrcA,
+                     const int32_t * __restrict__ pSrcB,
+                     uint32_t M,
+                     uint32_t N,
+                     int32_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief   matrix subtraction of a 32-bit integer matrices for RV32IM extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_i32s_rv32im(const int32_t * __restrict__ pSrcA,
+                             const int32_t * __restrict__ pSrcB,
+                             uint32_t M,
+                             uint32_t N,
+                             int32_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix subtraction of a 32-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_i32s_xpulpv2(const int32_t * __restrict__ pSrcA,
+                              const int32_t * __restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              int32_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix subtraction of a 32-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  nPE     Number of cores to use
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_i32_parallel(const int32_t * __restrict__ pSrcA,
+                              const int32_t * __restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t nPE,
+                              int32_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Parallel matrix subtraction of a 32-bit integer matrices for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_sub_instance_i32 struct initialized by plp_mat_sub_i32_parallel
+  @return     none
+*/
+
+void plp_mat_sub_i32p_xpulpv2(void* args);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix subtraction of a 16-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_i16(const int16_t * __restrict__ pSrcA,
+                     const int16_t * __restrict__ pSrcB,
+                     uint32_t M,
+                     uint32_t N,
+                     int16_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix subtraction of a 16-bit integer matrices for RV32IM extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_i16s_rv32im(const int16_t * __restrict__ pSrcA,
+                             const int16_t * __restrict__ pSrcB,
+                             uint32_t M,
+                             uint32_t N,
+                             int16_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix subtraction of a 16-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_sub_i16v_xpulpv2(const int16_t * __restrict__ pSrcA,
+                              const int16_t * __restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              int16_t * __restrict__ pDst);
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix subtraction of a 16-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  nPE     Number of cores to use
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_i16_parallel(const int16_t * __restrict__ pSrcA,
+                              const int16_t * __restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t nPE,
+                              int16_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief Parallel matrix subtraction of 16-bit integer matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_sub_instance_i16 struct initialized by plp_mat_sub_i16_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_sub_i16vp_xpulpv2(void* args);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix subtraction of a 8-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_i8(const int8_t * __restrict__ pSrcA,
+                    const int8_t * __restrict__ pSrcB,
+                    uint32_t M,
+                    uint32_t N,
+                    int8_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix subtraction of a 8-bit integer matrices for RV32IM extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_i8s_rv32im(const int8_t * __restrict__ pSrcA,
+                            const int8_t * __restrict__ pSrcB,
+                            uint32_t M,
+                            uint32_t N,
+                            int8_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix subtraction of a 8-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_sub_i8v_xpulpv2(const int8_t * __restrict__ pSrcA,
+                             const int8_t * __restrict__ pSrcB,
+                             uint32_t M,
+                             uint32_t N,
+                             int8_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix subtraction of a 8-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  nPE     Number of cores to use
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_i8_parallel(const int8_t * __restrict__ pSrcA,
+                             const int8_t * __restrict__ pSrcB,
+                             uint32_t M,
+                             uint32_t N,
+                             uint32_t nPE,
+                             int8_t * __restrict__ pDst);
+
+
+/** -------------------------------------------------------
+  @brief Parallel matrix subtraction of 8-bit integer matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_sub_instance_i8 struct initialized by plp_mat_sub_i8_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_sub_i8vp_xpulpv2(void* args);
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix subtraction of a 32-bit floating-point matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+
+void plp_mat_sub_f32(const float * __restrict__ pSrcA,
+                     const float * __restrict__ pSrcB,
+                     uint32_t M,
+                     uint32_t N,
+                     float * __restrict__ pDst);
+
+
+/** -------------------------------------------------------
+  @brief      matrix subtraction of a 32-bit floating-point matrices for XPULPV2 extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_f32s_xpulpv2(const float * __restrict__ pSrcA,
+                              const float * __restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              float * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix subtraction of a 32-bit floating-point matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  nPE     Number of cores to use
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_f32_parallel(const float * __restrict__ pSrcA,
+                              const float * __restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t nPE,
+                              float * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief Parallel matrix subtraction of 32-bit floating-point matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_sub_instance_f32 struct initialized by plp_mat_sub_f32_parallel
+  @return     none
+*/
+
+void plp_mat_sub_f32p_xpulpv2(void* args);
+
+
+
+/** -------------------------------------------------------
+  @brief   Glue code for matrix scale of a 32-bit integer matrices.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return  none
+*/
+
+void plp_mat_scale_i32(const int32_t * __restrict__ pSrc,
+                       uint32_t M,
+                       uint32_t N,
+                       int32_t scaleFactor,
+                       int32_t shift,
+                       int32_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief   matrix scale of a 32-bit integer matrices for RV32IM extension.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return  none
+*/
+
+void plp_mat_scale_i32s_rv32im(const int32_t * __restrict__ pSrc,
+                               uint32_t M,
+                               uint32_t N,
+                               int32_t scaleFactor,
+                               int32_t shift,
+                               int32_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix scale of a 32-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_i32s_xpulpv2(const int32_t * __restrict__ pSrc,
+                                uint32_t M,
+                                uint32_t N,
+                                int32_t scaleFactor,
+                                int32_t shift,
+                                int32_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix scale of a 32-bit integer matrices.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[in]  nPE         Number of cores to use for computation
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_i32_parallel(const int32_t * __restrict__ pSrc,
+                                uint32_t M,
+                                uint32_t N,
+                                int32_t scaleFactor,
+                                int32_t shift,
+                                uint32_t nPE,
+                                int32_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Parallel matrix scale of a 32-bit integer matrices for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_scale_instance_i32 struct initialized by plp_mat_scale_i32_parallel
+  @return     none
+*/
+
+void plp_mat_scale_i32p_xpulpv2(void* args);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix scale of a 16-bit integer matrices.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_i16(const int16_t * __restrict__ pSrc,
+                       uint32_t M,
+                       uint32_t N,
+                       int16_t scaleFactor,
+                       int32_t shift,
+                       int16_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix scale of a 16-bit integer matrices for RV32IM extension.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_i16s_rv32im(const int16_t * __restrict__ pSrc,
+                               uint32_t M,
+                               uint32_t N,
+                               int16_t scaleFactor,
+                               int32_t shift,
+                               int16_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix scale of a 16-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_scale_i16v_xpulpv2(const int16_t * __restrict__ pSrc,
+                                uint32_t M,
+                                uint32_t N,
+                                int16_t scaleFactor,
+                                int32_t shift,
+                                int16_t * __restrict__ pDst);
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix scale of a 16-bit integer matrices.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[in]  nPE         Number of cores to use for computation
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_i16_parallel(const int16_t * __restrict__ pSrc,
+                                uint32_t M,
+                                uint32_t N,
+                                int16_t scaleFactor,
+                                int32_t shift,
+                                uint32_t nPE,
+                                int16_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief Parallel matrix scale of 16-bit integer matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_scale_instance_i16 struct initialized by plp_mat_scale_i16_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_scale_i16vp_xpulpv2(void* args);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix scale of a 8-bit integer matrices.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_i8(const int8_t * __restrict__ pSrc,
+                      uint32_t M,
+                      uint32_t N,
+                      int8_t scaleFactor,
+                      int32_t shift,
+                      int8_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix scale of a 8-bit integer matrices for RV32IM extension.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_i8s_rv32im(const int8_t * __restrict__ pSrc,
+                              uint32_t M,
+                              uint32_t N,
+                              int8_t scaleFactor,
+                              int32_t shift,
+                              int8_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix scale of a 8-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_scale_i8v_xpulpv2(const int8_t * __restrict__ pSrc,
+                               uint32_t M,
+                               uint32_t N,
+                               int8_t scaleFactor,
+                               int32_t shift,
+                               int8_t * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix scale of a 8-bit integer matrices.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[in]  nPE         Number of cores to use for computation
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_i8_parallel(const int8_t * __restrict__ pSrc,
+                               uint32_t M,
+                               uint32_t N,
+                               int8_t scaleFactor,
+                               int32_t shift,
+                               uint32_t nPE,
+                               int8_t * __restrict__ pDst);
+
+
+/** -------------------------------------------------------
+  @brief Parallel matrix scale of 8-bit integer matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_scale_instance_i8 struct initialized by plp_mat_scale_i8_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_scale_i8vp_xpulpv2(void* args);
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix scale of a 32-bit floating-point matrices.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  scaleFactor Factor to mulitply all elements
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+
+void plp_mat_scale_f32(const float * __restrict__ pSrc,
+                       uint32_t M,
+                       uint32_t N,
+                       float scaleFactor,
+                       float * __restrict__ pDst);
+
+
+/** -------------------------------------------------------
+  @brief      matrix scale of a 32-bit floating-point matrices for XPULPV2 extension.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  scaleFactor Factor to mulitply all elements
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_f32s_xpulpv2(const float * __restrict__ pSrc,
+                                uint32_t M,
+                                uint32_t N,
+                                float scaleFactor,
+                                float * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix scale of a 32-bit floating-point matrices.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  scaleFactor Factor to mulitply all elements
+  @param[in]  nPE         Number of cores to use for computation
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_f32_parallel(const float * __restrict__ pSrc,
+                                uint32_t M,
+                                uint32_t N,
+                                float scaleFactor,
+                                uint32_t nPE,
+                                float * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief Parallel matrix scale of 32-bit floating-point matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_scale_instance_f32 struct initialized by plp_mat_scale_f32_parallel
+  @return  none
+*/
+
+void plp_mat_scale_f32p_xpulpv2(void* args);
 
 
 #endif // __PLP_MATH_H__

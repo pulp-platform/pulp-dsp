@@ -130,7 +130,7 @@ class Argument(object):
             self.value = gen_stimuli(self, env)
         elif isinstance(self.value, str):
             self.value = env[self.value]
-        elif self.value is None or (isinstance(self.value, tuple) and len(self.value) == 2):
+        elif self.value is None or (isinstance(self.value, (tuple, list)) and len(self.value) == 2):
             if isinstance(self.value, tuple):
                 min_value, max_value = self.value
             else:
@@ -139,8 +139,16 @@ class Argument(object):
                 self.value = np.random.uniform(low=min_value, high=max_value)
             else:
                 self.value = np.random.randint(low=min_value, high=max_value + 1)
-            self.value = self.value.astype(self.get_dtype())
+            self.value = self.get_dtype()(self.value).item()
         assert isinstance(self.value, (float, int))
+
+    def arg_str(self):
+        """ Returns the string to show for funciton argument """
+        if self.ctype == "float":
+            # floats are defined as unions, so we take the float variant
+            return "%s.f" % self.name
+        else:
+            return self.name
 
     def generate_stimuli(self, header):
         """ Writes stimuli value to header file """
@@ -201,6 +209,10 @@ class ArrayArgument(Argument):
             self.length = self.length
         assert isinstance(self.length, int)
 
+    def arg_str(self):
+        """ Returns the string to show for funciton argument """
+        return self.name
+
     def generate_value(self, env, gen_stimuli):
         """ Generates the value of argument, stores it in self.value and returns it. """
         assert isinstance(self.length, int)
@@ -209,7 +221,7 @@ class ArrayArgument(Argument):
             self.value = gen_stimuli(self, env)
         elif isinstance(self.value, str):
             self.value = env[self.value]
-        elif self.value is None or (isinstance(self.value, tuple) and len(self.value) == 2):
+        elif self.value is None or (isinstance(self.value, (tuple, list)) and len(self.value) == 2):
             if isinstance(self.value, tuple):
                 min_value, max_value = self.value
             else:
@@ -325,6 +337,7 @@ class ReturnValue(Argument):
         super(ReturnValue, self).__init__("return_value", ctype, 0, use_l1, False)
         self.reference_name = self.name + "_reference"
         self.tolerance = tolerance
+        self.in_function = False
 
     def apply(self, env, var_type, version, use_l1):
         """
@@ -376,7 +389,7 @@ class CustomArgument(Argument):
     externally defined variable, struct or array. But it can also be used to create a struct with
     fields, which may point to other arguments.
     """
-    def __init__(self, name, value, as_ptr=False, in_function=True):
+    def __init__(self, name, value, as_ptr=False, deref=False, in_function=True):
         """
         name: Name of the argument (in the initialization and function declaration)
         value: Function, which should return a string for initializing the CustomVariable.
@@ -391,17 +404,32 @@ class CustomArgument(Argument):
                and the name of the variable.
         as_ptr: Boolean, if True, the struct is passed as pointer to the function. Else, it is
                 passed without referencing it.
+        deref: Boolean, if True, the struct is dereferenced before passing to the function. Else, it
+               is passed without dereferencing it.
         in_function: Boolean, if True, add this argument to the function signature. Set this to
                      False, and use CustomArgument to create struts.
         """
         super(CustomArgument, self).__init__(name, None, value, None, in_function)
         self.as_ptr = as_ptr
+        self.deref = deref
+        assert not (self.as_ptr and self.deref)
 
     def apply(self, env, var_type, version, use_l1):
         """
         Prepares the value (initialization string) of the custom argument
         """
         self.value = self.value(env, version, var_type, use_l1)
+
+    def arg_str(self):
+        """ Returns the string to show for funciton argument """
+        if not self.in_function:
+            return None
+        if self.as_ptr:
+            return "&%s" % (self.name)
+        if self.deref:
+            return "*%s" % (self.name)
+        else:
+            return self.name
 
     def generate_value(self, env, gen_stimuli):
         """ Nothing to do here! the init string was already created """
@@ -614,17 +642,18 @@ class Test(object):
                         timeout=1000000)
 
     def function_signature(self):
-        arguments_str = ', '.join([arg.name for arg in self.arguments if arg.in_function])
+        arguments_str = ', '.join([arg.arg_str()
+                                   for arg in self.arguments if arg.in_function])
         return_value_str = ""
         return_value_list = [arg for arg in self.arguments if isinstance(arg, ReturnValue)]
         assert len(return_value_list) <= 1
         if len(return_value_list) == 1:
-            return_value_str = "%s = " % return_value_list[0].name
+            return_value_str = "%s = " % return_value_list[0].arg_str()
         return "%s%s(%s)" % (return_value_str, self.function_name, arguments_str)
 
     def generate_check(self, header):
         # generate return check
-        any([header.write_return_check(arg.name, arg.reference_name, self.extended_output)
+        any([header.write_return_check(arg, self.device_name, self.extended_output)
              for arg in self.arguments if isinstance(arg, ReturnValue)])
 
         # generate result check
@@ -683,9 +712,27 @@ class HeaderWriter(object):
 
     def __enter__(self):
         self.fp = open(self.filename, 'w')
+        self.fp.write('#ifndef __PULP_TEST__DATA_H__\n')
+        self.fp.write('#define __PULP_TEST__DATA_H__\n\n')
+        # Union for reinterpret cast of a uint32_t to a float
+        # This is because we want to pass the exact float value in bits, and not in
+        # decimal "string" representation.
+        self.fp.write(dedent(
+            """\
+            // Union for reinterpret cast of a uint32_t to a float
+            // This is because we want to pass the exact float value in bits, and not in
+            // decimal "string" representation.
+            typedef union {
+                uint32_t u;
+                float f;
+            } __u2f;\
+            """
+        ))
+        self.fp.write("\n\n")
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        self.fp.write('#endif//__PULP_TEST__DATA_H__')
         self.fp.close()
         self.fp = None
 
@@ -703,11 +750,14 @@ class HeaderWriter(object):
         target_loc = 'RT_L1_DATA' if use_l1 and self.allow_l1 else 'RT_L2_DATA'
         nl = '\n' + self.tab
         if var_type == "float":
+            # We store float values in their hex representation. This way, we do not use the
+            # inaccurate decimal "string" representation, and we guarantee that the data is the
+            # exact same as when computeing the expected result.
             self.fp.write('%s uint32_t %s__int[%s] = {\n' % (target_loc, name, len(arr)))
             self.fp.write(self.tab)
             self.fp.write(nl.join(textwrap.wrap(', '.join([fmt_float(x) for x in arr]),
                                                 width=self.width)))
-            self.fp.write('\n};\n')
+            self.fp.write('\n};\n\n')
             self.fp.write('%s %s* %s = (%s*)((void*)%s__int);' % (target_loc, var_type, name,
                                                                   var_type, name))
             self.fp.write('\n\n')
@@ -721,9 +771,12 @@ class HeaderWriter(object):
     def write_scalar(self, name, var_type, value, use_l1):
         target_loc = 'L1_DATA' if use_l1 and self.allow_l1 else 'L2_DATA'
         if var_type == "float":
-            self.fp.write('%s uint32_t %s__int = %s;\n' % (target_loc, name, fmt_float(value)))
-            self.fp.write('%s %s %s = *((%s*)((void*)&%s__int));\n\n' % (target_loc, var_type, name,
-                                                                         var_type, name))
+            # We want to write the floating point as hex representation to the header file (and not
+            # as a decimal "string"). Then, we want to typecast it to a float. One way is to get the
+            # address of the variable, and then cast it to a float pointer. However, it is not
+            # possible to dereference a pointer in a .h file. Therefore, we use the second method;
+            # generating a union with a float (.f) and a unsigned int (.u).
+            self.fp.write('%s __u2f %s = {.u = %sU};\n\n' % (target_loc, name, fmt_float(value)))
         else:
             self.fp.write('%s %s %s = %s;\n\n' % (target_loc, var_type, name, value))
 
@@ -752,123 +805,8 @@ class HeaderWriter(object):
 
     def write_check(self, arg, target, print_errors=False):
         display_format = "%.10f" if arg.ctype == "float" else "%d"
-        check_str = "%sif (%s[i] != %s[i]) {\\\n" % (self.tab * 2, arg.name, arg.reference_name)
-        # Generate the check string
-        # For the fix-point and integer check string with tolerance, we need to take the wrapping
-        # into account. Therefore, we check for all three different cases.
-        if arg.tolerance != 0:
-            if arg.ctype == "float":
-                # only relative tolerance is allowed
-                assert arg.tolerance < 1
-                # In case of float: add a tiny absolute offset of 0.0001
-                check_str = dedent(
-                    """\
-                    {sp}{sp}float __tol = ABS({tol:E} * (float){exp}[i] + 0.0001);\\
-                    {sp}{sp}if (!({acq}[i] >= ({ty})({exp}[i] - __tol) &&\\
-                    {sp}{sp}      {acq}[i] <= ({ty})({exp}[i] + __tol))) {{\\
-                    """
-                ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
-                         tol=arg.tolerance, ty=arg.ctype)
-            elif arg.tolerance < 1:
-                # interpret tolerance as relative tolerance
-                if target == "ibex":
-                    # in this case, we cannot use floating point! But make sure that the fraction is at
-                    # least 1.
-                    check_str = dedent(
-                        """\
-                        {sp}{sp}{ty} __tol_t = ABS({exp}[i] / {tol_fraction}) + 1;\\
-                        {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
-                        {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
-                        {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
-                        {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
-                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
-                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
-                        {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
-                        {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
-                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
-                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
-                        """
-                    ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
-                            ty=arg.ctype, tol_fraction=int(1 / arg.tolerance),
-                            type_min=-(1 << 7) if arg.ctype == "int8_t"
-                                    else -(1 << 15) if arg.ctype == "int16_t"
-                                    else -(1 << 31),
-                            type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
-                                    else (1 << 15) - 1 if arg.ctype == "int16_t"
-                                    else (1 << 31) - 1)
-                else:
-                    # Here, we can use float. But for the int-version, we want to round up.
-                    check_str = dedent(
-                        """\
-                        {sp}{sp}float __tol = ABS({tol:E} * (float){exp}[i]);\\
-                        {sp}{sp}{ty} __tol_t = ({ty})(__tol + 0.999);\\
-                        {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
-                        {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
-                        {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
-                        {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
-                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
-                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
-                        {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
-                        {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
-                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
-                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
-                        """
-                    ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
-                            tol=arg.tolerance, ty=arg.ctype,
-                            type_min=-(1 << 7) if arg.ctype == "int8_t"
-                                    else -(1 << 15) if arg.ctype == "int16_t"
-                                    else -(1 << 31),
-                            type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
-                                    else (1 << 15) - 1 if arg.ctype == "int16_t"
-                                    else (1 << 31) - 1)
-            else:
-                # interpret tolerance as absolute tolerance
-                if target == "ibex":
-                    check_str = dedent(
-                        """\
-                        {sp}{sp}{ty} __tol_t = {tol};\\
-                        {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
-                        {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
-                        {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
-                        {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
-                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
-                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
-                        {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
-                        {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
-                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
-                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
-                        """
-                    ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
-                            ty=arg.ctype, tol=int(arg.tolerance),
-                            type_min=-(1 << 7) if arg.ctype == "int8_t"
-                                    else -(1 << 15) if arg.ctype == "int16_t"
-                                    else -(1 << 31),
-                            type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
-                                    else (1 << 15) - 1 if arg.ctype == "int16_t"
-                                    else (1 << 31) - 1)
-                elif target == "riscy" and arg.tolerance >= 1:
-                    check_str = dedent(
-                        """\
-                        {sp}{sp}{ty} __tol_t = {tol};\\
-                        {sp}{sp}if (!(({exp}[i] < {type_min} + __tol_t &&\\
-                        {sp}{sp}       ({acq}[i] <= {exp}[i] + __tol_t ||\\
-                        {sp}{sp}        {acq}[i] >= {exp}[i] - __tol_t)) ||\\
-                        {sp}{sp}      ({exp}[i] > {type_max} - __tol_t &&\\
-                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t ||\\
-                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)) ||\\
-                        {sp}{sp}      ({exp}[i] >= {type_min} + __tol_t &&\\
-                        {sp}{sp}       {exp}[i] <= {type_max} - __tol_t &&\\
-                        {sp}{sp}       ({acq}[i] >= {exp}[i] - __tol_t &&\\
-                        {sp}{sp}        {acq}[i] <= {exp}[i] + __tol_t)))) {{\\
-                        """
-                    ).format(sp=self.tab, acq=arg.name, exp=arg.reference_name,
-                            tol=int(arg.tolerance), ty=arg.ctype,
-                            type_min=-(1 << 7) if arg.ctype == "int8_t"
-                                    else -(1 << 15) if arg.ctype == "int16_t"
-                                    else -(1 << 31),
-                            type_max=(1 << 7) - 1 if arg.ctype == "int8_t"
-                                    else (1 << 15) - 1 if arg.ctype == "int16_t"
-                                    else (1 << 31) - 1)
+        check_str = tolerance_check_str("%s[i]" % arg.name, "%s[i]" % arg.reference_name,
+                                        arg.tolerance, arg.ctype, self.tab * 2, target)
         self.fp.write('%sfor (int i = 0; i < %s; i++) {\\\n' % (self.tab, arg.length))
         if print_errors:
             self.fp.write(check_str)
@@ -882,16 +820,21 @@ class HeaderWriter(object):
                                                                      arg.reference_name))
         self.fp.write('%s}\\\n' % self.tab)
 
-    def write_return_check(self, result_name, reference_name, print_errors=False):
+    def write_return_check(self, arg, target, print_errors=False):
         if print_errors:
-            self.fp.write('%sif (%s != %s) {\\\n' % (self.tab, result_name, reference_name))
+            # For float, the value is stored in a union. To interpret the data as floating-point,
+            # we need to call value.f.
+            result_name = "%s.f" % arg.name if arg.ctype == "float" else arg.name
+            check_str = tolerance_check_str(result_name, arg.reference_name, arg.tolerance,
+                                            arg.ctype, self.tab, target)
+            self.fp.write(check_str)
             self.fp.write('%spassed = 0;\\\n' % self.tab * 2)
             self.fp.write('%sprintf("<Mismatch> return: acq=%%d, exp=%%d", %s, %s);\\\n'
-                          % (self.tab * 2, result_name, reference_name))
+                          % (self.tab * 2, result_name, arg.reference_name))
             self.fp.write('%s}\\\n' % self.tab)
         else:
             self.fp.write('%sif (%s != %s) passed = 0;\\\n'
-                          % (self.tab, result_name, reference_name))
+                          % (self.tab, result_name, arg.reference_name))
 
     def generate_fsig(self, test):
         self.fp.write('#define FSIG {\\\n')
@@ -902,7 +845,7 @@ class HeaderWriter(object):
         self.fp.write(
             dedent(
                 """\
-                #define BENCH {{\\
+                #define BENCHMARK {{\\
                 {tab}rt_perf_t perf;\\
                 {tab}rt_perf_init(&perf);\\
                 {tab}int passed = do_bench(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR), 1);\\
@@ -925,14 +868,115 @@ class HeaderWriter(object):
 
 
 def fmt_float(val):
+    """ This function returns the hex representation of a float """
+    if isinstance(val, float):
+        val = np.float32(val)
     assert(val.dtype == np.float32)
     packed = struct.pack('!f', val)
     int_val = sum([b << ((3 - i) * 8) for i, b in enumerate(packed)])
     return hex(int_val)
 
 
+def tolerance_check_str(acq, exp, tolerance, ctype, indent, target):
+    """ returns a string which performs the check of acq and exp.
+    The check will properly add the tolerance, including all possible overflow cases."""
+    if tolerance == 0:
+        return "%sif (%s != %s) {\\\n" % (indent, exp, acq)
+    elif ctype == "float":
+        # only relative tolerance is allowed
+        assert tolerance < 1
+        # In case of float: add a tiny absolute offset of 0.0001
+        return dedent(
+            """\
+            {indent}float __tol = ABS({tol:E} * (float){exp} + 0.0001);\\
+            {indent}if (!({acq} >= ({ty})({exp} - __tol) &&\\
+            {indent}      {acq} <= ({ty})({exp} + __tol))) {{\\
+            """
+        ).format(indent=indent, acq=acq, exp=exp, tol=tolerance, ty=ctype)
+    unsigned_bits = 7 if ctype == "int8_t" else 15 if ctype == "int16_t" else 31
+    type_min = -(1 << unsigned_bits)
+    type_max = (1 << unsigned_bits) - 1
+    if tolerance < 1:
+        # interpret tolerance as relative tolerance
+        if target == "ibex":
+            # in this case, we cannot use floating point! But make sure that the fraction is at
+            # least 1.
+            return dedent(
+                """\
+                {indent}{ty} __tol_t = ABS({exp} / {tol_fraction}) + 1;\\
+                {indent}if (!(({exp} < {type_min} + __tol_t &&\\
+                {indent}       ({acq} <= {exp} + __tol_t ||\\
+                {indent}        {acq} >= {exp} - __tol_t)) ||\\
+                {indent}      ({exp} > {type_max} - __tol_t &&\\
+                {indent}       ({acq} >= {exp} - __tol_t ||\\
+                {indent}        {acq} <= {exp} + __tol_t)) ||\\
+                {indent}      ({exp} >= {type_min} + __tol_t &&\\
+                {indent}       {exp} <= {type_max} - __tol_t &&\\
+                {indent}       ({acq} >= {exp} - __tol_t &&\\
+                {indent}        {acq} <= {exp} + __tol_t)))) {{\\
+                """
+            ).format(indent=indent, acq=acq, exp=exp, ty=ctype, tol_fraction=int(1 / tolerance),
+                     type_min=type_min, type_max=type_max)
+        else:
+            # Here, we can use float. But for the int-version, we want to round up.
+            return dedent(
+                """\
+                {indent}float __tol = ABS({tol:E} * (float){exp});\\
+                {indent}{ty} __tol_t = ({ty})(__tol + 0.999);\\
+                {indent}if (!(({exp} < {type_min} + __tol_t &&\\
+                {indent}       ({acq} <= {exp} + __tol_t ||\\
+                {indent}        {acq} >= {exp} - __tol_t)) ||\\
+                {indent}      ({exp} > {type_max} - __tol_t &&\\
+                {indent}       ({acq} >= {exp} - __tol_t ||\\
+                {indent}        {acq} <= {exp} + __tol_t)) ||\\
+                {indent}      ({exp} >= {type_min} + __tol_t &&\\
+                {indent}       {exp} <= {type_max} - __tol_t &&\\
+                {indent}       ({acq} >= {exp} - __tol_t &&\\
+                {indent}        {acq} <= {exp} + __tol_t)))) {{\\
+                """
+            ).format(indent=indent, acq=acq, exp=exp, tol=tolerance, ty=ctype,
+                     type_min=type_min, type_max=type_max)
+    else:
+        # interpret tolerance as absolute tolerance
+        if target == "ibex":
+            return dedent(
+                """\
+                {indent}{ty} __tol_t = {tol};\\
+                {indent}if (!(({exp} < {type_min} + __tol_t &&\\
+                {indent}       ({acq} <= {exp} + __tol_t ||\\
+                {indent}        {acq} >= {exp} - __tol_t)) ||\\
+                {indent}      ({exp} > {type_max} - __tol_t &&\\
+                {indent}       ({acq} >= {exp} - __tol_t ||\\
+                {indent}        {acq} <= {exp} + __tol_t)) ||\\
+                {indent}      ({exp} >= {type_min} + __tol_t &&\\
+                {indent}       {exp} <= {type_max} - __tol_t &&\\
+                {indent}       ({acq} >= {exp} - __tol_t &&\\
+                {indent}        {acq} <= {exp} + __tol_t)))) {{\\
+                """
+            ).format(indent=indent, acq=acq, exp=exp, ty=ctype, tol=int(tolerance),
+                     type_min=type_min, type_max=type_max)
+        else:
+            return dedent(
+                """\
+                {indent}{ty} __tol_t = {tol};\\
+                {indent}if (!(({exp} < {type_min} + __tol_t &&\\
+                {indent}       ({acq} <= {exp} + __tol_t ||\\
+                {indent}        {acq} >= {exp} - __tol_t)) ||\\
+                {indent}      ({exp} > {type_max} - __tol_t &&\\
+                {indent}       ({acq} >= {exp} - __tol_t ||\\
+                {indent}        {acq} <= {exp} + __tol_t)) ||\\
+                {indent}      ({exp} >= {type_min} + __tol_t &&\\
+                {indent}       {exp} <= {type_max} - __tol_t &&\\
+                {indent}       ({acq} >= {exp} - __tol_t &&\\
+                {indent}        {acq} <= {exp} + __tol_t)))) {{\\
+                """
+            ).format(indent=indent, acq=acq, exp=exp, tol=int(tolerance), ty=ctype,
+                     type_min=type_min, type_max=type_max)
+
+
 def generate_test(function_name, arguments, variables, implemented, use_l1=False,
                   extended_output=True, n_ops=None, arg_ret_type=None):
+    """ Entry-Point of the phase 1 """
     visible_env = [v.name for v in variables if v.visible]
     testsets = [
         Testset(
@@ -980,6 +1024,7 @@ def main():
     elif args.setup:
         setup(args.device)
     elif args.gen:
+        # Entry point of phase 2
         # get the test directory
         test_dir = os.environ['PLPTEST_PATH']
         # add the location of gen_stimuli.py to the path
@@ -1057,7 +1102,7 @@ def setup_ibex():
             return passed;
         }
         int main(){
-            BENCH
+            BENCHMARK
             return 0;
         }
         """
@@ -1117,7 +1162,7 @@ def setup_riscy():
             return passed;
         }
         void cluster_entry(void *arg){
-            BENCH
+            BENCHMARK
             return;
         }
         """
