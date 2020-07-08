@@ -56,12 +56,12 @@ RT_CL_DATA int32_t* resultsBuffer;
 //#define PLP_CONV_SEQUENTIALADDING 1
 
 void plp_conv_i32_parallel(
-			   const int32_t *  pSrcA,
-			   const uint32_t srcALen,
-			   const int32_t *  pSrcB,
-			   const uint32_t srcBLen,
-			   const uint8_t nPE,
-			   int32_t *  pRes){
+                           const int32_t *  pSrcA,
+                           const uint32_t srcALen,
+                           const int32_t *  pSrcB,
+                           const uint32_t srcBLen,
+                           const uint8_t nPE,
+                           int32_t *  pRes){
   
   if (rt_cluster_id() == ARCHI_FC_CID){
     printf("parallel processing supported only for cluster side\n");
@@ -100,7 +100,7 @@ void plp_conv_i32_parallel(
       resultsBuffer = (int32_t*)rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*resultsoffset*nPE);
       resBuf = resultsBuffer;
       for(uint32_t i=resultsLen;i<resultsoffset*nPE;i++){
-	resultsBuffer[i] = 0;
+        resultsBuffer[i] = 0;
       }
       //printf("Address of resultsBuffer: 0x%x, End: 0x%x\n", resultsBuffer, resultsBuffer + sizeof(int32_t)*resultsLen);
     } else {
@@ -135,7 +135,7 @@ void plp_conv_i32_parallel(
       
       for(int32_t i=1;i<nPE-1;i++){
       	for(uint32_t j=0;j<resultsoffset;j++){
-	  pRes[i*srcAoffset+j] += resultsBuffer[j+i*resultsoffset];
+          pRes[i*srcAoffset+j] += resultsBuffer[j+i*resultsoffset];
       	}
       }
       
@@ -154,24 +154,24 @@ void plp_conv_i32_parallel(
       int32_t temp1, temp2;
       
       while(k){
-	temp1 = *resultsBuffer++;
-	temp2 = *resultsBuffer++;
+        temp1 = *resultsBuffer++;
+        temp2 = *resultsBuffer++;
 
-	*pRes++ = temp1;
-	*pRes++ = temp2;
+        *pRes++ = temp1;
+        *pRes++ = temp2;
 	
-	k--;
+        k--;
       }
 
       k = (srcALen + srcBLen - 1) % 0x2U;
 
       if(k){
-	*pRes++ = *resultsBuffer++;
+        *pRes++ = *resultsBuffer++;
       }
       
 #else
       for(uint32_t i = 0; i<srcALen + srcBLen - 1; i++){
-	pRes[i] = resultsBuffer[i];
+        pRes[i] = resultsBuffer[i];
       }
 #endif
       rt_free(RT_ALLOC_CL_DATA, resBuf, sizeof(int32_t)*resultsoffset*nPE);
