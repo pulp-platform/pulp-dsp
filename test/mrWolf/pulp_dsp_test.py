@@ -351,12 +351,13 @@ class OutputArgument(ArrayArgument):
             for (int i = 0; i < {len}; i++) {{
             {check_str}
                     passed = 0;
-                    printf("    <Mismatch> {acq}[%d]: acq={fmt}, exp={fmt}\\n", i, {acq}[i], {exp}[i]);
+                    printf("    <Mismatch> {name}[%d]: acq={fmt}, exp={fmt}\\n", i, {acq}[i], {exp}[i]);
                 }}
             }}
             """
         ).format(len=self.length,
                  check_str=check_str,
+                 name=self.general_name(),
                  acq=self.name,
                  exp=self.reference_name(),
                  fmt=display_format)
@@ -467,10 +468,11 @@ class ReturnValue(Argument):
             """\
             {check_str}
                 passed = 0;
-                printf("    <Mismatch> {acq}[%d]: acq={fmt}, exp={fmt}\\n", i, {acq}[i], {exp}[i]);
+                printf("    <Mismatch> {name}[%d]: acq={fmt}, exp={fmt}\\n", i, {acq}[i], {exp}[i]);
             }}
             """
         ).format(check_str=check_str,
+                 name=self.general_name(),
                  acq=self.name,
                  exp=self.reference_name(),
                  fmt=display_format)
