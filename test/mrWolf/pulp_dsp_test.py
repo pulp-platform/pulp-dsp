@@ -885,7 +885,7 @@ class AggregatedTest(object):
                             Shell('clean_dir', 'python3 %s --clean' % file_name),
                             Check('check', check_output, test_obj=self)
                         ],
-                        timeout=1000000)
+                        timeout=10)
 
     def to_json(self):
         """ generate a json object string from the aggregated test """
@@ -1087,9 +1087,9 @@ def check_output(config, output, test_obj):
     for case, result in zip(test_obj.cases, cases_result):
         # print the result
         if result['passed']:
-            status = '\033[1;32mOK:\033[0m  '
+            status = '\033[92mOK:\033[0m  '
         else:
-            status = '\033[1;31mKO:\033[0m  '
+            status = '\033[91mKO:\033[0m  '
         print("{} {}".format(status, ", ".join(["{}={}".format(k, case['env'][k])
                                                 for k in test_obj.visible_env])))
         # print mismatches
