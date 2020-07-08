@@ -1,5 +1,4 @@
 import os
-import sys
 import time
 import random
 from plptest import Test as PulpTest, Testset
@@ -8,9 +7,7 @@ from itertools import product
 from functools import partial
 from collections import OrderedDict
 from copy import deepcopy
-import argparse
 import numpy as np
-import json
 from textwrap import dedent, indent, wrap
 import struct
 
@@ -80,15 +77,6 @@ class Argument(object):
         self.in_function = in_function
         if isinstance(self.value, SweepVariable):
             self.value = self.value.name
-
-    def copy_apply_to_dict(self, env, var_type, version, use_l1, idx):
-        """ returns the serialized object """
-        obj = deepcopy(self)
-        obj.apply(env, var_type, version, use_l1)
-        return obj.to_dict()
-
-    def to_dict(self):
-        return {'class': type(self).__name__, 'dict': self.__dict__}
 
     def apply(self, env, var_type, version, use_l1, idx):
         """
@@ -584,29 +572,6 @@ class CustomArgument(Argument):
         return self.value
 
 
-def argument_from_dict(d):
-    if d['class'] == Argument.__name__:
-        arg = Argument("tmp", "tmp", 0)
-    elif d['class'] == ArrayArgument.__name__:
-        arg = ArrayArgument("tmp", "tmp", 1, 0)
-    elif d['class'] == OutputArgument.__name__:
-        arg = OutputArgument("tmp", "tmp", 1)
-    elif d['class'] == InplaceArgument.__name__:
-        arg = InplaceArgument("tmp", "tmp", 1, 0)
-    elif d['class'] == FixPointArgument.__name__:
-        arg = FixPointArgument("tmp", "tmp", 0)
-    elif d['class'] == ParallelArgument.__name__:
-        arg = ParallelArgument("tmp", "tmp", 0)
-    elif d['class'] == ReturnValue.__name__:
-        arg = ReturnValue("tmp")
-    elif d['class'] == CustomArgument.__name__:
-        arg = CustomArgument("tmp", None)
-    else:
-        raise RuntimeError("Unknown class name")
-    arg.__dict__ = d['dict']
-    return arg
-
-
 class AggregatedTestCase(object):
     """ Structure for one testcase in the aggregated tests """
     def __init__(self, idx=0, arguments=None, env=None, n_ops=0):
@@ -621,19 +586,6 @@ class AggregatedTestCase(object):
                            in self.arguments
                            if isinstance(arg, FixPointArgument)] or [None])[0]
         assert self.fix_point is None or isinstance(self.fix_point, int)
-
-    def to_dict(self):
-        """ returns a dictionary for serialization """
-        d = self.__dict__
-        d['arguments'] = [arg.to_dict() for arg in self.arguments]
-        return d
-
-    @staticmethod
-    def from_dict(d):
-        d['arguments'] = [argument_from_dict(arg_dict) for arg_dict in d['arguments']]
-        case = AggregatedTestCase()
-        case.__dict__ = d
-        return case
 
     def generate_header_content(self, gen_stimuli, gen_result):
         """ generate all stimuli values and compute the expected result """
@@ -806,11 +758,11 @@ class AggregatedTest(object):
 
         # set n_ops function
         if n_ops is None:
-            n_ops = lambda env: 0
+            self.n_ops = lambda env: 0
         elif isinstance(n_ops, int):
-            n_ops = lambda env: n_ops
+            self.n_ops = lambda env: n_ops
         elif callable(n_ops):
-            n_ops = n_ops
+            self.n_ops = n_ops
         else:
             raise RuntimeError("Unknown type for n_ops: {}".format(type(n_ops)))
 
@@ -838,10 +790,6 @@ class AggregatedTest(object):
         if version.startswith('q') and version.endswith('parallel'):
             arguments = arguments
 
-        # check parallel argument
-        if version.endswith('parallel'):
-            assert len([arg for arg in arguments if isinstance(arg, ParallelArgument)]) == 1
-
         # check fixpoint stuff
         if version.startswith('q'):
             assert len([arg for arg in arguments if isinstance(arg, FixPointArgument)]) == 1
@@ -855,7 +803,7 @@ class AggregatedTest(object):
                     for arg in arguments
                 ],
                 env=env,
-                n_ops=n_ops(env)
+                n_ops=self.n_ops(env)
             )
             for (i, env) in enumerate(Sweep(variables))
         ]
@@ -866,43 +814,22 @@ class AggregatedTest(object):
         """ Returns the PulpTest structure """
         test_name = self.function_name
         build_dir = "test_%s_%s" % (self.device_name, self.version)
-        json_str = self.to_json()
         flags = "GARGS=\'\' BUILD_DIR_EXT=%s" % (build_dir)
-        gen_flags = "--json %s" % (json_str)
         # set the platform for compatibility with various different Pulp-SDK versions
         platform_str = "platform=gvsoc" # default platform
         if "TEST_PLATFORM" in os.environ:
             platform_str = "platform=%s" % (os.environ["TEST_PLATFORM"])
         elif "PULP_CURRENT_CONFIG_ARGS" in os.environ:
             platform_str = os.environ["PULP_CURRENT_CONFIG_ARGS"]
-        file_name = os.path.abspath(__file__)
         return PulpTest(name=test_name,
                         commands=[
-                            Shell('gen', 'python3 %s --gen %s' % (file_name, gen_flags)),
+                            Check('gen', generate_test_program, test_obj=deepcopy(self)),
                             Shell('clean', 'make clean %s' % (flags)),
                             Shell('build', 'make all %s' % (flags)),
                             Shell('run', 'make run %s %s' % (platform_str, flags)),
-                            Shell('clean_dir', 'python3 %s --clean' % file_name),
                             Check('check', check_output, test_obj=self)
                         ],
                         timeout=10)
-
-    def to_json(self):
-        """ generate a json object string from the aggregated test """
-        d = self.__dict__
-        d['cases'] = [case.to_dict() for case in self.cases]
-        json_str = json.dumps(d)
-        json_str_escaped = json_str.replace('\\', '\\\\').replace('\"', '\\\"')
-        return json_str_escaped
-
-    @staticmethod
-    def from_json(json_str):
-        """ deserialize a json string into a AggregatedTest """
-        d = json.loads(json_str)
-        d['cases'] = [AggregatedTestCase.from_dict(case) for case in d['cases']]
-        test = AggregatedTest()
-        test.__dict__ = d
-        return test
 
     def get_common_header_str(self):
         return dedent(
@@ -1078,6 +1005,22 @@ class AggregatedTest(object):
             ))
 
 
+def generate_test_program(_config, _output, test_obj):
+    """ generate the test program without serialization and deserialization """
+    gen_stimuli_file = os.path.join(os.getcwd(), "gen_stimuli.py")
+    # import gen_stimuli
+    import runpy
+    gen_stimuli = runpy.run_path(gen_stimuli_file)
+    compute_result = gen_stimuli['compute_result']
+    try:
+        generate_stimuli = gen_stimuli['generate_stimuli']
+    except KeyError:
+        generate_stimuli = None
+
+    test_obj.generate_test_program(generate_stimuli, compute_result)
+    return (True, None)
+
+
 def check_output(config, output, test_obj):
     """ parses the output and prints the results """
     # parse the output and get all cases
@@ -1090,13 +1033,16 @@ def check_output(config, output, test_obj):
             status = '\033[92mOK:\033[0m  '
         else:
             status = '\033[91mKO:\033[0m  '
-        print("{} {}".format(status, ", ".join(["{}={}".format(k, case['env'][k])
+        print("{} {}".format(status, ", ".join(["{}={}".format(k, case.env[k])
                                                 for k in test_obj.visible_env])))
         # print mismatches
         if result['mismatches']:
             print(indent("\n".join(result['mismatches']), "      "))
 
         bench_output(result, test_obj, case)
+
+    # clean the directory
+    clean()
 
     return (passed, None)
 
@@ -1149,9 +1095,9 @@ def bench_output(performance, test_obj, test_case):
             )
 
     # extract relevant fields
-    dimension = "; ".join(["%s=%s" % (k, str(test_case['env'][k])) for k in test_obj.visible_env])
+    dimension = "; ".join(["%s=%s" % (k, str(test_case.env[k])) for k in test_obj.visible_env])
     insn_per_cycles = performance['instructions'] / performance['cycles']
-    ops_per_cycle = test_case['n_ops'] / performance['cycles']
+    ops_per_cycle = test_case.n_ops / performance['cycles']
     # write the new line
     with open(BENCHMARK_FILE, "a") as f:
         f.write(",".join([test_obj.function_name,
@@ -1163,7 +1109,7 @@ def bench_output(performance, test_obj, test_case):
                           str(performance['icache_miss']),
                           str(performance['load_stalls']),
                           str(performance['tcdm_cont']),
-                          str(test_case['n_ops']),
+                          str(test_case.n_ops),
                           str(ops_per_cycle)]))
         f.write("\n")
 
@@ -1368,54 +1314,12 @@ def generate_test(function_name, arguments, variables, implemented, use_l1=False
     return {'testsets': testsets}
 
 
-def main():
-    """
-    Does either a setup or a clean of the test project
-    """
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--clean', action="store_true")
-    parser.add_argument('--gen', action="store_true")
-    parser.add_argument('--folder')
-    parser.add_argument('--json', nargs='*')
-    args = parser.parse_args()
-
-    if args.clean:
-        clean()
-    elif args.gen:
-        # Entry point of phase 2
-        # get the test directory
-        test_dir = os.environ['PLPTEST_PATH']
-        # add the location of gen_stimuli.py to the path
-        sys.path.append(test_dir)
-        # import gen_stimuli
-        from gen_stimuli import compute_result
-        try:
-            from gen_stimuli import generate_stimuli
-        except ImportError:
-            generate_stimuli = None
-
-        # parse json
-        json_str = ' '.join(args.json)
-        test = AggregatedTest().from_json(json_str)
-
-        # generate the program
-        test.generate_test_program(generate_stimuli, compute_result)
-
-
 def clean():
     """
     Clean the test environment
     """
     for fname in os.listdir("."):
-        delete = False
         if fname in ["Makefile", "cluster.c", "cluster.h", "test.c", "common.h"]:
-            delete = True
-        if fname.startswith("data_t") and fname.endswith(".h"):
-            delete = True
-        if delete:
-            print("Removing {}".format(fname))
             os.remove(fname)
-
-
-if __name__ == "__main__":
-    main()
+        if fname.startswith("data_t") and fname.endswith(".h"):
+            os.remove(fname)
