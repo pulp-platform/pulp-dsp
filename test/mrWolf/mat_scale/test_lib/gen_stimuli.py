@@ -3,28 +3,6 @@
 import numpy as np
 
 
-####################
-# generate_stimuli #
-####################
-
-
-def generate_stimuli(arg, env):
-    """
-    Function to generate the stimuli
-
-    Arguments
-    ---------
-    arg: Argument for which to generate stimuli (either Argument or ArrayArgument)
-    env: Dict mapping the variable (SweepVariable or DynamicVariable) names to their value.
-    """
-    # name = arg.name
-    # if name == "srcA":
-    #     # generate and return stimuli for srcA
-    # if name == "srcB":
-    #     # generate and return stimuli for srcB
-    # ...
-
-
 ##################
 # compute_result #
 ##################
