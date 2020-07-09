@@ -4669,6 +4669,21 @@ void plp_mat_mult_trans_f32p_xpulpv2(
                          void* args);
 
 
+/**
+ * @brief      calculates the complex magnitude
+ *
+ * @param[in]  pSrc        The source
+ * @param[in]  deciPoint   The decimal point
+ * @param      pRes        The result
+ * @param[in]  numSamples  The number of samples
+ */
+void plp_cmplx_mag_q16(
+  const int16_t * pSrc,
+  const uint32_t deciPoint, 
+  int16_t * pRes,
+  uint32_t numSamples);
+
+
 
 /**
   @brief         In-place 16 bit reversal function for RV32IM
