@@ -105,20 +105,23 @@ If there are other parameters, which depend on `SweepVariable`s, but are differe
 
 #### Arguments
 
-With arguments, you describe how the function, which is tested, looks like. There are several different argument types:
+With arguments, you describe how the function, which is tested, looks like. There are several different argument types.
 
 ##### Default Argument
 
 This argument represents a single scalar argument for the function. It's constructor has the following parameters:
 
 - `name`: Name of the argument. This is only used internally, and does not need to match the one from the function declaration.
-- `ctype`: String, representing the type in `C` to be used (like `int16_t`). If the type is dependent on the `version`, you can use either the string `var_type` or `ret_type` (see [`generate_test`](#generate_test)).
+- `ctype`: This represents the type in `C` (like `int16_t`). It can be one of the following:
+  - String, representing the type. If the type is dependent on the `version`, you can use either the string `var_type` or `ret_type` (see [`generate_test`](#generate_test)).
+  - [Function](#dynamic-function), which returns the type as a string.
 - `value`: This is the value which should be used: It can be one of the following:
   - Number for constant initialization
   - The name of a `SweepVariable` or `DynamicVariable`, to take their value for the current iteration.
   - `None` for a random value
   - Tuple `(min, max)` for a random value in the given range
-  - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). in this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli)
+  - [Function](#dynamic-function), which returns the value as a number. This function can also return a type described above (like `None`, a `tuple` or a name of a `Variable`), which will lead to the behavior described above.
+  - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). In this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli) (The [Function](#dynamic-function) should return the resulting value)
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
 - (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized.
 
@@ -127,17 +130,21 @@ This argument represents a single scalar argument for the function. It's constru
 This argument represents an array argument for the function, which is passed via a pointer. It's constructor has the following parameters:
 
 - `name`: Name of the argument. This is only used internally, and does not need to match the one from the function declaration.
-- `ctype`: String, representing the type in `C` to be used (like `int16_t`). If the type is dependent on the `version`, you can use either the string `var_type` or `ret_type` (see [`generate_test`](#generate_test)).
+- `ctype`: This represents the type in `C` (like `int16_t`). It can be one of the following:
+  - String, representing the type. If the type is dependent on the `version`, you can use either the string `var_type` or `ret_type` (see [`generate_test`](#generate_test)).
+  - [Function](#dynamic-function), which returns the type as a string.
 - `length`: This represents the length of the array. It can be one of the following:
   - Number for a constant-sized array
   - The name of a `SweepVariable` or `DynamicVariable` to set the length to the value of this variable at the current iteration.
   - Tuple `(min, max)` for a random length.
+  - [Function](#dynamic-function), which returns the the length as a number.
 - `value`: This is the value which should be used: It can be one of the following:
   - Number for constant initialization, where all elements of the array will have this value,
   - `np.ndarray` to set the array to this constant value (the length must match!)
   - `None` for a random value
   - Tuple `(min, max)` for a random value in the given range
-  - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). in this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli)
+  - [Function](#dynamic-function), which returns the value as a `np.ndarray`. This function can also return a type described above (like `None`, a `tuple` or a name of a `Variable`), which will lead to the behavior described above.
+  - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). In this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli). (The [Function](#dynamic-function) should return the resulting array)
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
 - (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized.
 
@@ -146,13 +153,18 @@ This argument represents an array argument for the function, which is passed via
 This argument represents an array, to which the function writes the result. A funciton declaration can have multiple `OutputArgument`. This argument is passed to the function as a pointer. The constructor has the following parameters:
 
 - `name`: Name of the argument. This is only used internally, and does not need to match the one from the function declaration.
-- `ctype`: String, representing the type in `C` to be used (like `int16_t`). If the type is dependent on the `version`, you can use either the string `var_type` or `ret_type` (see [`generate_test`](#generate_test)).
+- `ctype`: This represents the type in `C` (like `int16_t`). It can be one of the following:
+  - String, representing the type. If the type is dependent on the `version`, you can use either the string `var_type` or `ret_type` (see [`generate_test`](#generate_test)).
+  - [Function](#dynamic-function), which returns the type as a string.
 - `length`: This represents the length of the array. It can be one of the following:
   - Number for a constant-sized array
   - The name of a `SweepVariable` or `DynamicVariable` to set the length to the value of this variable at the current iteration.
   - Tuple `(min, max)` for a random length.
+  - [Function](#dynamic-function), which returns the the length as a number.
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
-- (optional) `tolerance`: Constant number (`float`) or a funciton, which maps the current `version` (without the `_parallel` suffix) to a float value representing the relative *or* absolute tolerance. The tolerance is respected for both integer type arrays and floating-point arrays. If the value is less than 1, the tolerance is interpreted as relative tolerance. If the value is greater than 1, it is interpreted as absolute tolerance. For floating-point types, only relative tolerance is allowed.
+- (optional) `tolerance`: This is the tolerance for comparing the acquired to the expected value. If the number is greater or equal to 1, it will be interpreted as a absolute tolerance. If it is smaller than 1, it will be interpreted as relative tolerance. This can be one of:
+  - `float`, for a constant number,
+  - [Function](#dynamic-function), which returns the the tolerance as a number.
 - (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized and checked.
 
 The expected output must be computed in the [`compute_result` function](#compute_result). The test framework will automatically generate a test to check that every element matches the expected result.
@@ -162,19 +174,25 @@ The expected output must be computed in the [`compute_result` function](#compute
 This argument represents an array, which is used as both input and output (if the operation is done inplace). As for `OutputArgument`, there can be mulitple `InplaceArgument`s (and `OutputArgument`s). This argument is passed to the function as a pointer. The constructor has the following parameters:
 
 - `name`: Name of the argument. This is only used internally, and does not need to match the one from the function declaration.
-- `ctype`: String, representing the type in `C` to be used (like `int16_t`). If the type is dependent on the `version`, you can use either the string `var_type` or `ret_type` (see [`generate_test`](#generate_test)).
+- `ctype`: This represents the type in `C` (like `int16_t`). It can be one of the following:
+  - String, representing the type. If the type is dependent on the `version`, you can use either the string `var_type` or `ret_type` (see [`generate_test`](#generate_test)).
+  - [Function](#dynamic-function), which returns the type as a string.
 - `length`: This represents the length of the array. It can be one of the following:
   - Number for a constant-sized array
   - The name of a `SweepVariable` or `DynamicVariable` to set the length to the value of this variable at the current iteration.
   - Tuple `(min, max)` for a random length.
+  - [Function](#dynamic-function), which returns the the length as a number.
 - `value`: This is the value which should be used: It can be one of the following:
   - Number for constant initialization, where all elements of the array will have this value,
   - `np.ndarray` to set the array to this constant value (the length must match!)
   - `None` for a random value
   - Tuple `(min, max)` for a random value in the given range
-  - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). in this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli)
+  - [Function](#dynamic-function), which returns the value as a `np.ndarray`. This function can also return a type described above (like `None`, a `tuple` or a name of a `Variable`), which will lead to the behavior described above.
+  - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). In this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli). (The [Function](#dynamic-function) should return the resulting array)
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
-- (optional) `tolerance`: Constant number (`float`) or a funciton, which maps the current `version` (without the `_parallel` suffix) to a float value representing the relative *or* absolute tolerance. The tolerance is respected for both integer type arrays and floating-point arrays. If the value is less than 1, the tolerance is interpreted as relative tolerance. If the value is greater than 1, it is interpreted as absolute tolerance. For floating-point types, only relative tolerance is allowed.
+- (optional) `tolerance`: This is the tolerance for comparing the acquired to the expected value. If the number is greater or equal to 1, it will be interpreted as a absolute tolerance. If it is smaller than 1, it will be interpreted as relative tolerance. This can be one of:
+  - `float`, for a constant number,
+  - [Function](#dynamic-function), which returns the the tolerance as a number.
 - (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized and checked.
 
 The expected output must be computed in the [`compute_result` function](#compute_result). The test framework will automatically generate a test to check that every element matches the expected result. The test framework will also automatically generate setup procedure to reset the array every time the function is called. This way, we make sure that the benchmark always runs on the same data (in case the runtime of the funciton is dependent on the data).
@@ -184,9 +202,13 @@ The expected output must be computed in the [`compute_result` function](#compute
 This represents the value, which is returned by the function. If nothing is returned by the function, then this argument cannot be used!. The constructor has the following parameters:
 
 - `name`: Name of the argument. This is only used internally, and does not need to match the one from the function declaration.
-- `ctype`: String, representing the type in `C` to be used (like `int16_t`). If the type is dependent on the `version`, you can use either the string `var_type` or `ret_type` (see [`generate_test`](#generate_test)).
+- `ctype`: This represents the type in `C` (like `int16_t`). It can be one of the following:
+  - String, representing the type. If the type is dependent on the `version`, you can use either the string `var_type` or `ret_type` (see [`generate_test`](#generate_test)).
+  - [Function](#dynamic-function), which returns the type as a string.
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
-- (optional) `tolerance`: Constant number (`float`) or a funciton, which maps the current `version` (without the `_parallel` suffix) to a float value representing the relative *or* absolute tolerance. The tolerance is respected for both integer type arrays and floating-point arrays. If the value is less than 1, the tolerance is interpreted as relative tolerance. If the value is greater than 1, it is interpreted as absolute tolerance. For floating-point types, only relative tolerance is allowed.
+- (optional) `tolerance`: This is the tolerance for comparing the acquired to the expected value. If the number is greater or equal to 1, it will be interpreted as a absolute tolerance. If it is smaller than 1, it will be interpreted as relative tolerance. This can be one of:
+  - `float`, for a constant number,
+  - [Function](#dynamic-function), which returns the the tolerance as a number.
 - (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized and checked.
 
 The expected output must be computed in the [`compute_result` function](#compute_result). The test framework will automatically generate a test to check that every element matches the expected result.
@@ -201,6 +223,7 @@ This is very similar to the [default `Argument`](#default-argument), but it repr
   - The name of a `SweepVariable` or `DynamicVariable`, to take their value for the current iteration.
   - `None` for a random value
   - Tuple `(min, max)` for a random value in the given range
+  - [Function](#dynamic-function), which returns the value as a number. This function can also return a type described above (like `None`, a `tuple` or a name of a `Variable`), which will lead to the behavior described above.
   - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). in this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli)
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
 - (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized
@@ -215,6 +238,7 @@ This is very similar to the [default `Argument`](#default-argument), but it repr
   - The name of a `SweepVariable` or `DynamicVariable`, to take their value for the current iteration.
   - `None` for a random value
   - Tuple `(min, max)` for a random value in the given range
+  - [Function](#dynamic-function), which returns the value as a number. This function can also return a type described above (like `None`, a `tuple` or a name of a `Variable`), which will lead to the behavior described above.
   - The string `"gen_stimuli"` (or the constant `pulp_dsp_test.GENERATE_STIMULI`). in this case, the values can be computed in the [`generate_stimuli` function](#generate_stimuli)
 - (optional) `use_l1`: Boolean to tell if L1 storage should be used. This overwrites the argument in [`generate_test`](#generate_test).
 - (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized
@@ -224,18 +248,42 @@ This is very similar to the [default `Argument`](#default-argument), but it repr
 Custom arguments allow tests to be very flexible. They can either be used to [link](#link-to-static-struct) to a static variable / array / struct, or they can be used to [generate a struct](#generating-structs). It has the following arguments:
 
 - `name`: Name of the argument, which is only used internally, and does not need to match the one from the function declaration.
-- `value`: Function, which should return a string for initializing the `CustomVariable`. By using other arguments (for which you have set `in_function=False`), you can craft structs. This function can produce a multi-line initialization string. The function has the following arguments:
-  - `env: dict(name: str, value: number)`: Dictionary with the environment
-  - `version: str`: Version string
-  - `var_type: tuple(str, str)`, which contains `(var_type, ret_type)`
-  - `use_l1`: Bool, wether to use L1 memory.
-  - `arg_name: F: str -> str`: funciton which maps the argument name to the name of the correct iteration. Every reference to any argument (including current `CustomArgument` itself) **must** be transformed with this function.
-  The function *must* return the entire string for initialization, including the type and the name of the variable.
+- `value`: [Function](#dynamic-function), which should return a string for initializing the `CustomVariable`. By using other arguments (for which you have set `in_function=False`), you can craft structs. This function can produce a multi-line initialization string. The function *must* return the entire string for initialization, including the type and the name of the variable. Note, that every reference to another argument **must** be transformed using the function `arg_name` (passed as argument).
 - (optional) `as_ptr`: Boolean to tell the framework how to pass the variable to the function. Default is `False`.
 - (optional) `deref`: Boolean to tell the framework to dereference the variable before passing it to the function. Default is `False`.
 - (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized
 
 The string, which is returned by the `value` function, will be inserted into the `data.h` file. Thus, you can even define types, structs, and do fancy things with `CustomArgument`s.
+
+##### Dynamic Functions
+
+Several Arguments can be setup with functions, which give you fine-grained control over how the test should be built. The arguments for these functions can be chosen dynamically, and the framework will automatically choose the correct parameters to pass in. For this to work, the arguments must have a specific name. The following list shows the possible arguments, their types and the names which you need to choose:
+
+| description                                                   | type                  | possible names                             |
+|---------------------------------------------------------------|-----------------------|--------------------------------------------|
+| environment, containing the different [variables](#variables) | `dict(str -> number)` | `e`, `env`, `environ`, `environment`       |
+| version name (like `q8` or `i32_parallel`)                    | `str`                 | `v`, `ver`, `version`                      |
+| target device name (`riscy` or `ibex`)                        | `str`                 | `d`, `dev`, `device`, `t`, `tar`, `target` |
+| variable type (tuple: `(var_type, ret_type`)                  | `tuple(str, str)`     | `var`, `vars`, `var_type`, `var_types`     |
+
+For the `value` function in `CustomArgument`s, there are the following additional arguments:
+
+| description                            | type            | possible names                 |
+|----------------------------------------|-----------------|--------------------------------|
+| if L1 is enabled or disabled           | `bool`          | `l1`, `use_l1`                 |
+| Function to transform an argument name | `f: str -> str` | `a`, `arg`, `name`, `arg_name` |
+
+For the `generate_stimuli` funciton in `gen_stimuli.py`, there is an additional argument:
+
+| description                                | type       | possible names         |
+|--------------------------------------------|------------|------------------------|
+| Argument for which to generate the stimuli | `Argument` | `a`, `arg`, `argument` |
+
+To write such a funciton, you don't need to add all arguments, but just the ones you need. However, the name of the arguments need to match one of the possible names, listed above. The order of the arguments does not matter. As an example, if you write a function and need the environment and the version, then you can use:
+
+```
+lambda e, v: do_some_work(e, v)
+```
 
 #### Generating Structs
 

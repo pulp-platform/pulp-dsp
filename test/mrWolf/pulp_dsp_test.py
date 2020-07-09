@@ -57,6 +57,9 @@ class Argument(object):
         ctype: String, one of the following:
                - C type of the argument (like 'int32_t')
                - 'var_type' or 'ret_type', which is determined based on the current version.
+               - Function, returning the ctype.
+               - A function, returning the ctype. The function can take the arguments: env, version,
+                 device, var_type.
         value: One of the following:
                - Number for constant initialization
                - The name of a SweepVariable or DynamicVariable, to take their value
@@ -79,7 +82,7 @@ class Argument(object):
         if isinstance(self.value, SweepVariable):
             self.value = self.value.name
 
-    def apply(self, env, var_type, version, use_l1, idx):
+    def apply(self, env, var_type, version, use_l1, idx, device):
         """
         Prepare the variable for the specific test case. The following is done:
         - Apply the environment (current iteration of the sweep variables)
@@ -91,9 +94,11 @@ class Argument(object):
         if self.use_l1 is None:
             self.use_l1 = use_l1
         # apply the ctype
+        if callable(self.ctype):
+            self.ctype = call_dynamic_function(self.ctype, env, version, device)
         if self.ctype == 'var_type':
             self.ctype = var_type[0]
-        if self.ctype == 'ret_type':
+        elif self.ctype == 'ret_type':
             self.ctype = var_type[1]
         # change the name
         self.name = "t{}__{}".format(idx, self.name)
@@ -151,13 +156,15 @@ class Argument(object):
         """ returns the string to check the result """
         return None
 
-    def generate_value(self, env, gen_stimuli):
+    def generate_value(self, env, version, device, gen_stimuli):
         """ Interpret the type of self.value and generate the stimuli """
+        if callable(self.value):
+            self.value = call_dynamic_function(self.value, env, version, device)
         if self.value == GENERATE_STIMULI:
-            self.value = gen_stimuli(self, env)
-        elif isinstance(self.value, str):
+            self.value = call_dynamic_function(gen_stimuli, env, version, device, variable=self)
+        if isinstance(self.value, str):
             self.value = env[self.value]
-        elif self.value is None or (isinstance(self.value, (tuple, list)) and len(self.value) == 2):
+        if self.value is None or (isinstance(self.value, (tuple, list)) and len(self.value) == 2):
             if isinstance(self.value, tuple):
                 min_value, max_value = self.value
             else:
@@ -167,6 +174,7 @@ class Argument(object):
             else:
                 self.value = np.random.randint(low=min_value, high=max_value + 1)
             self.value = self.get_dtype()(self.value).item()
+        assert isinstance(self.value, (int, np.int8, np.int16, np.int32, float, np.float32))
 
     def header_str(self):
         """ return the string for delclaring and initializing the data """
@@ -186,10 +194,14 @@ class ArrayArgument(Argument):
         ctype: String, one of the following:
                - C type of the argument (like 'int32_t')
                - 'var_type' or 'ret_type', which is determined based on the current version.
+               - A function, returning the type. The function can take the arguments: env, version,
+                 device, var_type.
         length: One of the following:
                 - Integer for a constant length
                 - The name of a SweepVariable or DynamicVariable, to take their value
                 - tuple(min, max) for random value in the given range
+                - A function, returning the length. The function can take the arguments: env,
+                  version, device, var_type.
         value: One of the following:
                - Number for constant initialization, all elements will have the same value
                - None for a random value
@@ -208,7 +220,7 @@ class ArrayArgument(Argument):
         if isinstance(self.length, SweepVariable):
             self.length = self.length.name
 
-    def apply(self, env, var_type, version, use_l1, idx):
+    def apply(self, env, var_type, version, use_l1, idx, device):
         """
         Prepare the variable for the specific test case. The following is done:
         - Apply the environment (current iteration of the sweep variables)
@@ -218,15 +230,8 @@ class ArrayArgument(Argument):
         - Alter the name to contain the test id
         """
         # interpret the length
-        self.interpret_length(env)
-        # do the same thing as a regular Argument
-        return super(ArrayArgument, self).apply(env, var_type, version, use_l1, idx)
-
-    def l2_data_name(self):
-        return self.name + "__l2"
-
-    def interpret_length(self, env):
-        """ interpret the length of the variable based on the environment """
+        if callable(self.length):
+            self.length = call_dynamic_function(self.length, env, version, device)
         if isinstance(self.length, tuple):
             assert len(self.length) == 2
             self.length = random.randint(*self.length)
@@ -235,6 +240,11 @@ class ArrayArgument(Argument):
         if isinstance(self.length, int):
             self.length = self.length
         assert isinstance(self.length, int)
+        # do the same thing as a regular Argument
+        return super(ArrayArgument, self).apply(env, var_type, version, use_l1, idx, device)
+
+    def l2_data_name(self):
+        return self.name + "__l2"
 
     def arg_str(self):
         """ Returns the string to show for funciton argument """
@@ -268,15 +278,17 @@ class ArrayArgument(Argument):
         else:
             return None
 
-    def generate_value(self, env, gen_stimuli):
+    def generate_value(self, env, version, device, gen_stimuli):
         """ Interpret the type of self.value and generate the stimuli """
         assert isinstance(self.length, int)
         dtype = self.get_dtype()
+        if callable(self.value):
+            self.value = call_dynamic_function(self.value, env, version, device)
         if self.value == GENERATE_STIMULI:
-            self.value = gen_stimuli(self, env)
-        elif isinstance(self.value, str):
+            self.value = call_dynamic_function(gen_stimuli, env, version, device, variable=self)
+        if isinstance(self.value, str):
             self.value = env[self.value]
-        elif self.value is None or (isinstance(self.value, (tuple, list)) and len(self.value) == 2):
+        if self.value is None or (isinstance(self.value, (tuple, list)) and len(self.value) == 2):
             if isinstance(self.value, tuple):
                 min_value, max_value = self.value
             else:
@@ -286,10 +298,11 @@ class ArrayArgument(Argument):
             else:
                 self.value = np.random.randint(low=min_value, high=max_value + 1, size=self.length)
             self.value = self.value.astype(dtype)
-        elif isinstance(self.value, (int, float)):
+        if isinstance(self.value, (int, float)):
             self.value = (np.ones(self.length) * self.value).astype(dtype)
-        elif isinstance(self.value, np.ndarray):
+        if isinstance(self.value, np.ndarray):
             pass # nothing to do
+        assert isinstance(self.value, (list, np.ndarray))
 
     def header_str(self):
         """ return the string for delclaring and initializing the data """
@@ -312,12 +325,21 @@ class OutputArgument(ArrayArgument):
     def __init__(self, name, ctype, length, use_l1=None, tolerance=0, in_function=True):
         """
         name: name of the argument
-        ctype: type of the argument (or 'var_type', 'ret_type')
-        length: Length of the array, or SweepVariable, or None for random value
+        ctype: String, one of the following:
+               - C type of the argument (like 'int32_t')
+               - 'var_type' or 'ret_type', which is determined based on the current version.
+               - A function, returning the type. The function can take the arguments: env, version,
+                 device, var_type.
+        length: One of the following:
+                - Integer for a constant length
+                - The name of a SweepVariable or DynamicVariable, to take their value
+                - tuple(min, max) for random value in the given range
+                - A function, returning the length. The function can take the arguments: env,
+                  version, device, var_type.
         use_l1: if True, use L1 memory. If None, use default value configured in generate_test
-        tolerance: constant or function, which maps the output variable type to a relative or
-                   absolute tolerance. If the value is greater or equal to 1, it is interpreted
-                   as absolute.
+        tolerance: constant or function, which returns the tolerance. Values larger or equal to 1
+                   will be interpreted as absolute tolerance. The funciton can thake the arguments:
+                   env, version, device, var_type.
         in_function: Boolean, if True, add this argument to the function signature. Set this to
                      False, and use CustomArgument to create struts.
         """
@@ -327,7 +349,7 @@ class OutputArgument(ArrayArgument):
     def reference_name(self):
         return self.name + "__reference"
 
-    def apply(self, env, var_type, version, use_l1, idx):
+    def apply(self, env, var_type, version, use_l1, idx, device):
         """
         Prepare the variable for the specific test case. The following is done:
         - Apply the environment (current iteration of the sweep variables)
@@ -338,8 +360,8 @@ class OutputArgument(ArrayArgument):
         - Alter the name to contain the test id
         """
         if callable(self.tolerance):
-            self.tolerance = self.tolerance(version)
-        return super(OutputArgument, self).apply(env, var_type, version, use_l1, idx)
+            self.tolerance = call_dynamic_function(self.tolerance, env, version, device)
+        return super(OutputArgument, self).apply(env, var_type, version, use_l1, idx, device)
 
     def check_str(self, target):
         """ returns the string to check the result """
@@ -521,11 +543,12 @@ class CustomArgument(Argument):
         value: Function, which should return a string for initializing the CustomVariable.
                By using other arguments (for which you have set in_function=False), you can craft
                structs. This function can produce a multi-line initialization string. The function
-               has the following arguments:
+               has the following arguments (can use only a subset of those):
                - env: dict(name: str, value: number): Dictionary with the environment
                - version: str: Version string
                - var_type: tuple(str, str), which contains (var_type, ret_type)
                - use_l1: Bool, wether to use L1 memory.
+               - target: name of the target device (ibex or riscy)
                - arg_name: F: str -> str: Function which transforms the name of an argument to the
                  name which will actually appear in the test program. Each iteration of the
                  accumulated test will use different variable names. Therefore, all references need
@@ -544,13 +567,16 @@ class CustomArgument(Argument):
         self.deref = deref
         assert not (self.as_ptr and self.deref)
 
-    def apply(self, env, var_type, version, use_l1, idx):
+    def apply(self, env, var_type, version, use_l1, idx, device):
         """
         Prepares the value (initialization string) of the custom argument, and the name to include
         the test id
         """
-        self.name = "t{}__{}".format(idx, self.name)
-        self.value = self.value(env, version, var_type, use_l1, lambda f: "t{}__{}".format(idx, f))
+        def arg_name(name):
+            return "t{}__{}".format(idx, name)
+        self.name = arg_name(self.name)
+        self.value = call_dynamic_function(self.value, env, version, device, use_l1=use_l1,
+                                           arg_name=arg_name)
         return self
 
     def arg_str(self):
@@ -564,7 +590,7 @@ class CustomArgument(Argument):
         else:
             return self.name
 
-    def generate_value(self, env, gen_stimuli):
+    def generate_value(self, env, version, device, gen_stimuli):
         """ Interpret the type of self.value and generate the stimuli """
         # Nothing to do here! the init string was already created
         pass
@@ -577,12 +603,14 @@ class CustomArgument(Argument):
 
 class AggregatedTestCase(object):
     """ Structure for one testcase in the aggregated tests """
-    def __init__(self, idx=0, arguments=None, env=None, n_ops=0):
+    def __init__(self, idx, arguments, env, n_ops, version, device_name):
         """ constructor. Arguments must already be applied! """
         self.idx = idx
         self.arguments = arguments or []
         self.env = env
         self.n_ops = n_ops
+        self.version = version
+        self.device_name = device_name
 
         # get the fix point
         self.fix_point = ([arg.value for arg
@@ -593,7 +621,7 @@ class AggregatedTestCase(object):
     def generate_header_content(self, gen_stimuli, gen_result):
         """ generate all stimuli values and compute the expected result """
         # generate value of all arguments
-        [arg.generate_value(self.env, gen_stimuli) for arg in self.arguments]
+        [arg.generate_value(self.env, self.version, self.device_name, gen_stimuli) for arg in self.arguments]
         content = "\n".join([arg.header_str() for arg in self.arguments])
         content += "\n"
 
@@ -612,7 +640,7 @@ class AggregatedTestCase(object):
 
         return content
 
-    def get_do_bench_function(self, function_name, target):
+    def get_do_bench_function(self, function_name):
         """ returns the do_bench function for the current test """
         ret_str = ([a.arg_str() for a in self.arguments if isinstance(a, ReturnValue)] or [""])[0]
         return dedent(
@@ -647,9 +675,9 @@ class AggregatedTestCase(object):
                  ret_str=ret_str,
                  fname=function_name,
                  args=", ".join([a.arg_str() for a in self.arguments if a.in_function]),
-                 check=indent("\n".join([arg.check_str(target)
+                 check=indent("\n".join([arg.check_str(self.device_name)
                                          for arg in self.arguments
-                                         if arg.check_str(target) is not None]),
+                                         if arg.check_str(self.device_name) is not None]),
                               "        "))
 
     def get_run_test_function_call(self):
@@ -792,11 +820,13 @@ class AggregatedTest(object):
             AggregatedTestCase(
                 idx=i,
                 arguments=[
-                    deepcopy(arg).apply(env, var_type, self.version, use_l1, i)
+                    deepcopy(arg).apply(env, var_type, self.version, use_l1, i, self.device_name)
                     for arg in arguments
                 ],
                 env=env,
-                n_ops=self.n_ops(env)
+                n_ops=self.n_ops(env),
+                version=self.version,
+                device_name=self.device_name
             )
             for (i, env) in enumerate(Sweep(variables))
         ]
@@ -903,8 +933,7 @@ class AggregatedTest(object):
                 ).format(includes=self.get_main_imports(),
                          test_entry=self.get_test_entry_function(),
                          run_tests="\n".join([case.get_run_test_function() for case in self.cases]),
-                         do_benchs="\n".join([case.get_do_bench_function(self.function_name,
-                                                                         self.device_name)
+                         do_benchs="\n".join([case.get_do_bench_function(self.function_name)
                                               for case in self.cases]))
             )
 
@@ -974,8 +1003,7 @@ class AggregatedTest(object):
                 ).format(includes=self.get_main_imports(),
                          test_entry=self.get_test_entry_function(),
                          run_tests="\n".join([case.get_run_test_function() for case in self.cases]),
-                         do_benchs="\n".join([case.get_do_bench_function(self.function_name,
-                                                                         self.device_name)
+                         do_benchs="\n".join([case.get_do_bench_function(self.function_name)
                                               for case in self.cases]))
             )
 
@@ -1310,6 +1338,68 @@ def generate_test(function_name, arguments, variables, implemented, use_l1=False
     ]
 
     return {'testsets': testsets}
+
+
+def call_dynamic_function(f, env, version, device, arg_name=None, argument=None, use_l1=None):
+    """ Calls the funciton f and passes env, version, device or var_types, based on the arguments of
+    the function """
+    possible_args = {
+        'e': (env, "environment: dict(str -> value)"),
+        'env': (env, "environment: dict(str -> value)"),
+        'environ': (env, "environment: dict(str -> value)"),
+        'environment': (env, "environment: dict(str -> value)"),
+        'v': (version, "version: str"),
+        'ver': (version, "version: str"),
+        'version': (version, "version: str"),
+        'd': (device, "device: str"),
+        'dev': (device, "device: str"),
+        'device': (device, "device: str"),
+        't': (device, "device: str"),
+        'tar': (device, "device: str"),
+        'target': (device, "device: str")
+    }
+
+    assert not (arg_name is not None and argument is not None)
+
+    if arg_name is not None:
+        possible_args.update({
+            'a': (arg_name, "arg_name: F: str -> str"),
+            'arg': (arg_name, "arg_name: F: str -> str"),
+            'name': (arg_name, "arg_name: F: str -> str"),
+            'arg_name': (arg_name, "arg_name: F: str -> str"),
+        })
+
+    if argument is not None:
+        possible_args.update({
+            'a': (argument, "arg_name: F: str -> str"),
+            'arg': (argument, "arg_name: F: str -> str"),
+            'argument': (argument, "arg_name: F: str -> str"),
+        })
+
+    if use_l1 is not None:
+        possible_args.update({
+            'l1': (argument, "use_l1: bool"),
+            'use_l1': (argument, "use_l1: bool"),
+        })
+
+    # __code__.co_varnames returns the list of argument names of the function
+    arg_list = f.__code__.co_varnames
+
+    if not set(arg_list).issubset(possible_args.keys()):
+        valid_options = "\n".join(["{:11} -> {}".format(k, v[1]) for k, v in sorted(
+            possible_args.items(), key=lambda t: "{}:{}".format(t[1][1], t[0])
+        )])
+        raise RuntimeError(
+            "Function '{}' can use only the following argument names: \n\n{}\n\n{}" .format(
+                f.__name__,
+                indent(valid_options, "    "),
+                "InvalidArgument: '%s'" % [a for a in arg_list if a not in possible_args][0]
+            )
+        )
+
+    args = (possible_args[arg_name][0] for arg_name in arg_list)
+
+    return f(*args)
 
 
 def clean():
