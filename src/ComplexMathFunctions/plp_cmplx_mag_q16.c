@@ -29,16 +29,25 @@
 
 #include "plp_math.h"
 
+/**
+ * @brief      calculates the complex magnitude. 
+ *
+ * @param[in]  pSrc        The source
+ * @param[in]  deciPoint   The decimal point. Fromat: Q(16-deciPoint).deciPoint
+ * @param      pRes        The result
+ * @param[in]  numSamples  The number of samples
+ */
+
 void plp_cmplx_mag_q16(
 	const int16_t * pSrc,
 	const uint32_t deciPoint, 
 	int16_t * pRes,
 	uint32_t numSamples){
 
+	// Initial implementation, needs improvement
 	int16_t real, cmplx, sqr;
 	for (int i = 0; i < numSamples; i++) {
 
-		// TODO fix bit shift for decipoint
 		real = (pSrc[2*i] * pSrc[2*i])>>16;
 		cmplx = (pSrc[2*i + 1] * pSrc[2*i + 1])>>16;
 		if (deciPoint % 2 == 0) {

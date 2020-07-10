@@ -58,7 +58,7 @@ def compute_result(result_parameter, inputs, env, fix_point):
     cmplx_a = np.zeros(int(len(a)/2), dtype=np.csingle)
     for i in range(len(a)>>1):
         cmplx_a[i] = a[2*i].astype(np.csingle)/(2**(inputs['deciPoint'].value)) + (a[2*i + 1].astype(np.csingle)/(2**(inputs['deciPoint'].value)))*1j
-    result = np.clip((np.absolute(cmplx_a)*(2**(inputs['deciPoint'].value))), -2**15, 2**15).astype(my_type)
+    result = np.clip((np.absolute(cmplx_a)*(2**(inputs['deciPoint'].value))), np.iinfo(my_type).min, np.iinfo(my_type).max).astype(my_type)
     return result
 
 

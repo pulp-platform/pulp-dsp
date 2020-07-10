@@ -4670,10 +4670,10 @@ void plp_mat_mult_trans_f32p_xpulpv2(
 
 
 /**
- * @brief      calculates the complex magnitude
+ * @brief      calculates the complex magnitude. 
  *
  * @param[in]  pSrc        The source
- * @param[in]  deciPoint   The decimal point
+ * @param[in]  deciPoint   The decimal point. Fromat: Q(16-deciPoint).deciPoint
  * @param      pRes        The result
  * @param[in]  numSamples  The number of samples
  */
