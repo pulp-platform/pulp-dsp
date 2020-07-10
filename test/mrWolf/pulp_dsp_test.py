@@ -612,16 +612,11 @@ class AggregatedTestCase(object):
         self.version = version
         self.device_name = device_name
 
-        # get the fix point
-        self.fix_point = ([arg.value for arg
-                           in self.arguments
-                           if isinstance(arg, FixPointArgument)] or [None])[0]
-        assert self.fix_point is None or isinstance(self.fix_point, int)
-
     def generate_header_content(self, gen_stimuli, gen_result):
         """ generate all stimuli values and compute the expected result """
         # generate value of all arguments
-        [arg.generate_value(self.env, self.version, self.device_name, gen_stimuli) for arg in self.arguments]
+        [arg.generate_value(self.env, self.version, self.device_name, gen_stimuli)
+         for arg in self.arguments]
         content = "\n".join([arg.header_str() for arg in self.arguments])
         content += "\n"
 
@@ -631,8 +626,14 @@ class AggregatedTestCase(object):
                   if isinstance(arg, InplaceArgument) or not isinstance(arg, (ReturnValue,
                                                                               OutputArgument))}
 
+        # get the fix point
+        fix_point = ([arg.value for arg
+                      in self.arguments
+                      if isinstance(arg, FixPointArgument)] or [None])[0]
+        assert fix_point is None or isinstance(fix_point, int)
+
         # prepare the gen_result function
-        gen_result_prep = partial(gen_result, inputs=inputs, env=self.env, fix_point=self.fix_point)
+        gen_result_prep = partial(gen_result, inputs=inputs, env=self.env, fix_point=fix_point)
 
         content += "\n".join([x for x in [arg.reference_header_str(gen_result_prep)
                                           for arg in self.arguments]
