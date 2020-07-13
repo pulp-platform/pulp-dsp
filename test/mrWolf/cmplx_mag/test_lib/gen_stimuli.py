@@ -3,6 +3,28 @@
 import numpy as np
 
 
+####################
+# generate_stimuli #
+####################
+
+
+def generate_stimuli(arg, env):
+    """
+    Function to generate the stimuli
+
+    Arguments
+    ---------
+    arg: Argument for which to generate stimuli (either Argument or ArrayArgument)
+    env: Dict mapping the variable (SweepVariable or DynamicVariable) names to their value.
+    """
+    # name = arg.name
+    # if name == "srcA":
+    #     # generate and return stimuli for srcA
+    # if name == "srcB":
+    #     # generate and return stimuli for srcB
+    # ...
+
+
 ##################
 # compute_result #
 ##################
@@ -20,20 +42,7 @@ def compute_result(result_parameter, inputs, env, fix_point):
     fix_point: None (if no fixpoint is used) or decimal point
     """
 
-    # Q16:
-    # len=16:    Q1.15 -> Q5.11
-    # len=32:    Q1.15 -> Q6.10
-    # len=64:    Q1.15 -> Q7.9
-    # len=128:   Q1.15 -> Q8.8
-    # len=256:   Q1.15 -> Q9.7
-    # len=512:   Q1.15 -> Q10.6
-    # len=1024:  Q1.15 -> Q11.5
-    # len=2048:  Q1.15 -> Q12.4
-    # len=4096:  Q1.15 -> Q13.3
-    bit_shift_dict = {16:11, 32:10, 64: 9, 128: 8, 256: 7, 512: 6, 1024: 5, 2048: 4, 4096: 3}
-
-
-    ctype = inputs['p1'].ctype;
+    ctype = inputs['pSrc'].ctype;
     if ctype == 'int32_t':
         my_type = np.int32
     elif ctype == 'int16_t':
@@ -45,20 +54,11 @@ def compute_result(result_parameter, inputs, env, fix_point):
     else:
         raise RuntimeError("Unrecognized result type: %s" % ctype)
 
-    a = inputs['p1'].value.astype(my_type)
-    result = np.zeros(len(a), dtype=my_type)
-    complex_a = np.zeros(int(len(a)/2), dtype=np.csingle)
-    complex_result = np.zeros(len(a)>>1, dtype=np.csingle)
-    if fix_point is None or fix_point == 0:
-        raise RuntimeError("no fixpoint not implemented")
-    else:
-        for i in range(len(a)>>1):
-            complex_a[i] = a[2*i].astype(np.csingle)/(2**(inputs['deciPoint'].value)) + (a[2*i + 1].astype(np.csingle)/(2**(inputs['deciPoint'].value)))*1j
-        complex_result = np.fft.fft(complex_a)
-        for i in range(int(len(a)/2)):
-            result[2*i] = (np.real(complex_result[i])*(2**(bit_shift_dict[int(len(a)/2)]))).astype(my_type)
-            result[2*i+1] = (np.imag(complex_result[i])*(2**(bit_shift_dict[int(len(a)/2)]))).astype(my_type)
-
+    a = inputs['pSrc'].value.astype(my_type)
+    cmplx_a = np.zeros(int(len(a)/2), dtype=np.csingle)
+    for i in range(len(a)>>1):
+        cmplx_a[i] = a[2*i].astype(np.csingle)/(2**(inputs['deciPoint'].value)) + (a[2*i + 1].astype(np.csingle)/(2**(inputs['deciPoint'].value)))*1j
+    result = np.clip((np.absolute(cmplx_a)*(2**(inputs['deciPoint'].value))), np.iinfo(my_type).min, np.iinfo(my_type).max).astype(my_type)
     return result
 
 

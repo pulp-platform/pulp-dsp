@@ -118,7 +118,8 @@ FC_SRCS = \
 	src/MatrixFunctions/mat_scale/plp_mat_scale_i32_parallel.c \
 	src/MatrixFunctions/mat_scale/plp_mat_scale_i16_parallel.c \
 	src/MatrixFunctions/mat_scale/plp_mat_scale_i8_parallel.c \
-	src/MatrixFunctions/mat_scale/plp_mat_scale_f32_parallel.c
+	src/MatrixFunctions/mat_scale/plp_mat_scale_f32_parallel.c \
+	src/ComplexMathFunctions/plp_cmplx_mag_q16.c
 
 
 CL_SRCS = \
