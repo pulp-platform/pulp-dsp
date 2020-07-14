@@ -6144,4 +6144,57 @@ void plp_mat_trans_f32_parallel(const float* __restrict__ pSrc,
                                 float* __restrict__ pDst);
 
 
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix inverse of a 32-bit floating-point matrices.
+  @param[in]  pSrc Points to the first input matrix. pSrc is modified by this funciton
+  @param[in]  N    Width and height of both matrices
+  @param[out] pDst Points to the output matrix
+  @return     none
+*/
+
+
+int plp_mat_inv_f32(float * __restrict__ pSrc,
+                    uint32_t N,
+                    float * __restrict__ pDst);
+
+
+/** -------------------------------------------------------
+  @brief      matrix inverse of a 32-bit floating-point matrices for XPULPV2 extension.
+  @param[in]  pSrc Points to the first input matrix. pSrc is modified by this funciton
+  @param[in]  N    Width and height of both matrices
+  @param[out] pDst Points to the output matrix
+  @return     0: Success, 1: Matrix is singular
+*/
+
+int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
+                             uint32_t N,
+                             float * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix inverse of a 32-bit floating-point matrices.
+  @param[in]  pSrc Points to the first input matrix. pSrc is modified by this funciton
+  @param[in]  N    Width and height of both matrices
+  @param[in]  nPE  Number of cores to use for computation
+  @param[out] pDst Points to the output matrix
+  @return     0: Success, 1: Matrix is singular, 2: operation not supported
+*/
+
+int plp_mat_inv_f32_parallel(float * __restrict__ pSrc,
+                             uint32_t N,
+                             uint32_t nPE,
+                             float * __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief Parallel matrix inverse of 32-bit floating-point matrices kernel for XPULPV2 extension.
+  @param[in]  args pointer to plp_mat_inv_instance_f32 struct initialized by plp_mat_inv_f32_parallel
+  @return     0: Success, 1: Matrix is singular
+*/
+
+int plp_mat_inv_f32p_xpulpv2(void* args);
+
 #endif // __PLP_MATH_H__
