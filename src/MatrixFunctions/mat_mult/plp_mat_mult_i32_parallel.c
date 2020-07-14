@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2019 ETH Zurich and University of Bologna.
  *
  * Author: Tom Kuchler, ETH Zurich
  *

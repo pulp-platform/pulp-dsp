@@ -166,6 +166,7 @@ This argument represents an array, to which the function writes the result. A fu
   - `float`, for a constant number,
   - [Function](#dynamic-functions), which returns the the tolerance as a number.
 - (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized and checked.
+- (optional) `skip_check`: Boolean, if `True`, the check is skipped, and the expected result is not generated. If `False` (default), then this argument is checked during the test.
 
 The expected output must be computed in the [`compute_result` function](#compute_result). The test framework will automatically generate a test to check that every element matches the expected result.
 
@@ -194,8 +195,11 @@ This argument represents an array, which is used as both input and output (if th
   - `float`, for a constant number,
   - [Function](#dynamic-functions), which returns the the tolerance as a number.
 - (optional) `in_function`: Boolean if `True` (default), this argument will appear in the function arguments. If `False` it is only initialized and checked.
+- (optional) `skip_check`: Boolean, if `True`, the check is skipped, and the expected result is not generated. If `False` (default), then this argument is checked during the test.
 
 The expected output must be computed in the [`compute_result` function](#compute_result). The test framework will automatically generate a test to check that every element matches the expected result. The test framework will also automatically generate setup procedure to reset the array every time the function is called. This way, we make sure that the benchmark always runs on the same data (in case the runtime of the funciton is dependent on the data).
+
+For Functions, where the input arguments are changed during the funciton call, but are not used as an output, use an `InplaceArgument`, with the option `skip_check=True`.
 
 ##### ReturnValue
 
