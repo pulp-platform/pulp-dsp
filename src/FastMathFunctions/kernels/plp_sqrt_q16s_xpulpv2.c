@@ -147,9 +147,9 @@ void plp_sqrt_q16s_xpulpv2(
       intermediate_fixpoint = ((int16_t) (((int32_t) temp1 * intermediate_fixpoint) >> 15)) << 1;
 
 
-      if(fracBits > 1){
-        intermediate_fixpoint = intermediate_fixpoint >> ((int32_t)(fracBits)>>1);
-        if(fracBits%2==0){
+      if((16-fracBits) > 1){
+        intermediate_fixpoint = intermediate_fixpoint >> ((int32_t)(16-fracBits)>>1);
+        if((16-fracBits)%2==0){
           intermediate_fixpoint = ((int32_t)intermediate_fixpoint * sqrt2) >> 15;
         }
       }
