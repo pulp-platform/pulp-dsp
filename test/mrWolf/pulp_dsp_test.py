@@ -373,7 +373,8 @@ class OutputArgument(ArrayArgument):
             for (int i = 0; i < {len}; i++) {{
             {check_str}
                     passed = 0;
-                    printf("    <Mismatch> {name}[%d]: acq={fmt}, exp={fmt}\\n", i, {acq}[i], {exp}[i]);
+                    printf("    <Mismatch> {name}[%d]: acq={fmt}, exp={fmt}\\n",
+                           i, {acq}[i], {exp}[i]);
                 }}
             }}
             """
