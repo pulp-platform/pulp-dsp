@@ -72,7 +72,7 @@
 void plp_power_q16s_rv32im(
                          const int16_t * __restrict__ pSrc,
                          uint32_t blockSize,
-                         uint32_t deciPoint,
+                         uint32_t fracBits,
                          int32_t * __restrict__ pRes){
 
   uint32_t blkCnt = 0;
@@ -84,20 +84,20 @@ void plp_power_q16s_rv32im(
   for(blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
     x1 = *pSrc++;
     x2 = *pSrc++;
-    sum += ((x1*x1) >> deciPoint);
-    sum += ((x2*x2) >> deciPoint);
+    sum += ((x1*x1) >> fracBits);
+    sum += ((x2*x2) >> fracBits);
   }
 
   if(blockSize%2 == 1){
     x1 = *pSrc++;
-    sum += ((x1*x1) >> deciPoint);
+    sum += ((x1*x1) >> fracBits);
   }
   
 #else
 
   for(blkCnt=0;blkCnt<blockSize;blkCnt++){
     x1 = *pSrc++;
-    sum += ((x1*x1) >> deciPoint);
+    sum += ((x1*x1) >> fracBits);
   }
 
 #endif

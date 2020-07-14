@@ -72,7 +72,7 @@
 void plp_var_q16s_xpulpv2(
                          const int16_t * __restrict__ pSrc,
                          uint32_t blockSize,
-                         uint32_t deciPoint,
+                         uint32_t fracBits,
                          int16_t * __restrict__ pRes){
     
   int32_t square_of_mean;
@@ -81,9 +81,9 @@ void plp_var_q16s_xpulpv2(
   int16_t mean;
 
   plp_mean_i16(pSrc, blockSize, &mean);
-  square_of_mean = (mean * mean) >> deciPoint;
+  square_of_mean = (mean * mean) >> fracBits;
 
-  plp_power_q16(pSrc, blockSize, deciPoint, &square_of_values);
+  plp_power_q16(pSrc, blockSize, fracBits, &square_of_values);
   
   *pRes = (square_of_values/blockSize - square_of_mean);
 

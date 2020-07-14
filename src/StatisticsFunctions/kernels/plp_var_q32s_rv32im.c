@@ -72,7 +72,7 @@
 void plp_var_q32s_rv32im(
                          const int32_t * __restrict__ pSrc,
                          uint32_t blockSize,
-                         uint32_t deciPoint,
+                         uint32_t fracBits,
                          int32_t * __restrict__ pRes){
 
    
@@ -82,9 +82,9 @@ void plp_var_q32s_rv32im(
   int32_t mean;
 
   plp_mean_i32(pSrc, blockSize, &mean);
-  square_of_mean = (mean * mean) >> deciPoint;
+  square_of_mean = (mean * mean) >> fracBits;
 
-  plp_power_q32(pSrc, blockSize, deciPoint, &square_of_values);
+  plp_power_q32(pSrc, blockSize, fracBits, &square_of_values);
   
   *pRes = (square_of_values/blockSize - square_of_mean);
 

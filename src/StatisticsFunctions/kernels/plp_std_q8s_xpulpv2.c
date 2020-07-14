@@ -72,7 +72,7 @@
 void plp_std_q8s_xpulpv2(
                          const int8_t * __restrict__ pSrc,
                          uint32_t blockSize,
-                         uint32_t deciPoint,
+                         uint32_t fracBits,
                          int8_t * __restrict__ pRes){
     
  
@@ -80,11 +80,11 @@ void plp_std_q8s_xpulpv2(
   int16_t final;
   int16_t intermediate;
   
-  plp_var_q8(pSrc, blockSize, deciPoint, &variance);
+  plp_var_q8(pSrc, blockSize, fracBits, &variance);
 
   intermediate = variance;
 
-  plp_sqrt_q16(&intermediate,deciPoint,&final);
+  plp_sqrt_q16(&intermediate,fracBits,&final);
 
   *pRes = (int8_t)final;
   

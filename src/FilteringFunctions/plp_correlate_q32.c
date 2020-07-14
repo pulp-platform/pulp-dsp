@@ -59,14 +59,14 @@ void plp_correlate_q32(
                   const uint32_t srcALen,
                   const int32_t *  pSrcB,
                   const uint32_t srcBLen,
-                  uint32_t deciPoint,
+                  uint32_t fracBits,
                   int32_t * __restrict__ pRes){
 
   if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_correlate_q32s_rv32im(pSrcA, srcALen, pSrcB, srcBLen, deciPoint, pRes);
+    plp_correlate_q32s_rv32im(pSrcA, srcALen, pSrcB, srcBLen, fracBits, pRes);
   }
   else{
-    plp_correlate_q32s_xpulpv2(pSrcA, srcALen, pSrcB, srcBLen, deciPoint, pRes);
+    plp_correlate_q32s_xpulpv2(pSrcA, srcALen, pSrcB, srcBLen, fracBits, pRes);
   }
   
   
