@@ -37,7 +37,18 @@
 
 /**
   @defgroup MatTransKernels matrix transpose Kernels
-  <GROUP_DESCRIPTION>
+  This module contains the glue code for matrix transpose. The kernel codes
+  (kernels) are in the Module matrix transpose Kernels.
+
+  The transpose of a matrix of shape MxN is another matrix of shape NxM, where
+  the the matrix is flipped:
+
+  <pre>
+    pDst[n, m] = pSrc[m, n]
+  </pre>
+
+  There are functions for integer 32- 16- and 8-bit data types, as well as for
+  floating-point. These functions can also be used for fix-point matrices.
  */
 
 /**
