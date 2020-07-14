@@ -52,10 +52,10 @@
  */
 
 void plp_mat_trans_i8_parallel(const int8_t* __restrict__ pSrc,
-    uint32_t M,
-    uint32_t N,
-    uint32_t nPE,
-    int8_t* __restrict__ pDst){
+                               uint32_t M,
+                               uint32_t N,
+                               uint32_t nPE,
+                               int8_t* __restrict__ pDst){
 
     if (rt_cluster_id() == ARCHI_FC_CID){
         printf("parallel processing supported only for cluster side\n");

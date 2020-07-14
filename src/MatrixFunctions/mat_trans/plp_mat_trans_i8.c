@@ -50,9 +50,9 @@
  */
 
 void plp_mat_trans_i8(const int8_t* __restrict__ pSrc,
-    uint32_t M,
-    uint32_t N,
-    int8_t* __restrict__ pDst){
+                      uint32_t M,
+                      uint32_t N,
+                      int8_t* __restrict__ pDst){
 
     if (rt_cluster_id() == ARCHI_FC_CID){
         plp_mat_trans_i8s_rv32im(pSrc, M, N, pDst);
