@@ -322,7 +322,8 @@ class ArrayArgument(Argument):
 
 class OutputArgument(ArrayArgument):
     """Output Array Argument"""
-    def __init__(self, name, ctype, length, use_l1=None, tolerance=0, in_function=True):
+    def __init__(self, name, ctype, length, use_l1=None, tolerance=0, in_function=True,
+                 skip_check=False):
         """
         name: name of the argument
         ctype: String, one of the following:
@@ -342,9 +343,11 @@ class OutputArgument(ArrayArgument):
                    env, version, device, var_type.
         in_function: Boolean, if True, add this argument to the function signature. Set this to
                      False, and use CustomArgument to create struts.
+        skip_check: Boolean, if True, the output is not checked.
         """
         super(OutputArgument, self).__init__(name, ctype, length, 0, use_l1, in_function)
         self.tolerance = tolerance
+        self.skip_check = skip_check
 
     def reference_name(self):
         return self.name + "__reference"
@@ -365,6 +368,9 @@ class OutputArgument(ArrayArgument):
 
     def check_str(self, target):
         """ returns the string to check the result """
+        if self.skip_check:
+            return ""
+
         display_format = "%.10f" if self.ctype == "float" else "%d"
         check_str = tolerance_check_str("%s[i]" % self.name, "%s[i]" % self.reference_name(),
                                         self.tolerance, self.ctype, "    ", target)
@@ -387,6 +393,9 @@ class OutputArgument(ArrayArgument):
 
     def reference_header_str(self, gen_function):
         """ Generates and writes reference value to header file """
+        if self.skip_check:
+            return ""
+
         reference = gen_function(self)
         return declare_array(self.reference_name(), self.ctype, self.length, reference)
 
@@ -401,7 +410,8 @@ class InplaceArgument(OutputArgument):
     the computation is performed. Before each new call of the function, the data from the original
     array needs to be copied to the actual computation array.
     """
-    def __init__(self, name, ctype, length, value=None, use_l1=None, tolerance=0, in_function=True):
+    def __init__(self, name, ctype, length, value=None, use_l1=None, tolerance=0, in_function=True,
+                 skip_check=False):
         """
         name: name of the argument
         ctype: type of the argument (or 'var_type', 'ret_type')
@@ -421,8 +431,10 @@ class InplaceArgument(OutputArgument):
                    as absolute.
         in_function: Boolean, if True, add this argument to the function signature. Set this to
                      False, and use CustomArgument to create struts.
+        skip_check: Boolean, if True, the output is not checked.
         """
-        super(InplaceArgument, self).__init__(name, ctype, length, use_l1, tolerance, in_function)
+        super(InplaceArgument, self).__init__(name, ctype, length, use_l1, tolerance, in_function,
+                                              skip_check)
         # overwrite the value
         self.value = value
 
@@ -469,7 +481,7 @@ class ReturnValue(Argument):
     def reference_name(self):
         return self.name + "__reference"
 
-    def apply(self, env, var_type, version, use_l1, idx):
+    def apply(self, env, var_type, version, use_l1, idx, device):
         """
         Prepare the variable for the specific test case. The following is done:
         - Apply the environment (current iteration of the sweep variables)
@@ -479,8 +491,8 @@ class ReturnValue(Argument):
         - Alter the name to contain the test id
         """
         if callable(self.tolerance):
-            self.tolerance = self.tolerance(version)
-        return super(ReturnValue, self).apply(env, var_type, version, use_l1, idx)
+            self.tolerance = call_dynamic_function(self.tolerance, env, version, device)
+        return super(ReturnValue, self).apply(env, var_type, version, use_l1, idx, device)
 
     def check_str(self, target):
         """ returns the string to check the result """
@@ -491,7 +503,7 @@ class ReturnValue(Argument):
             """\
             {check_str}
                 passed = 0;
-                printf("    <Mismatch> {name}[%d]: acq={fmt}, exp={fmt}\\n", i, {acq}[i], {exp}[i]);
+                printf("    <Mismatch> {name}: acq={fmt}, exp={fmt}\\n", {acq}, {exp});
             }}
             """
         ).format(check_str=check_str,
@@ -644,7 +656,7 @@ class AggregatedTestCase(object):
 
     def get_do_bench_function(self, function_name):
         """ returns the do_bench function for the current test """
-        ret_str = ([a.arg_str() for a in self.arguments if isinstance(a, ReturnValue)] or [""])[0]
+        ret_str = ([a.arg_str() + " = " for a in self.arguments if isinstance(a, ReturnValue)] or [""])[0]
         return dedent(
             """\
             static int t{idx}__do_bench(rt_perf_t *perf, int events, int do_check) {{
