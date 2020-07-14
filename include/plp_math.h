@@ -1869,7 +1869,7 @@ void plp_power_i8s_xpulpv2(
 void plp_power_q32(
                    const int32_t * __restrict__ pSrc,
                    uint32_t blockSize,
-                   uint32_t deciPoint,
+                   uint32_t fracBits,
                    int32_t * __restrict__ pRes);
 
 
@@ -1886,7 +1886,7 @@ void plp_power_q32(
 void plp_power_q32s_rv32im(
                            const int32_t * __restrict__ pSrc,
                            uint32_t blockSize,
-                           uint32_t deciPoint,
+                           uint32_t fracBits,
                            int32_t * __restrict__ pRes);
 
 
@@ -1902,7 +1902,7 @@ void plp_power_q32s_rv32im(
 void plp_power_q32s_xpulpv2(
                             const int32_t * __restrict__ pSrc,
                             uint32_t blockSize,
-                            uint32_t deciPoint,
+                            uint32_t fracBits,
                             int32_t * __restrict__ pRes);
 
 /** -------------------------------------------------------
@@ -1916,7 +1916,7 @@ void plp_power_q32s_xpulpv2(
 void plp_power_q16(
                    const int16_t * __restrict__ pSrc,
                    uint32_t blockSize,
-                   uint32_t deciPoint,
+                   uint32_t fracBits,
                    int32_t * __restrict__ pRes);
 
 
@@ -1933,7 +1933,7 @@ void plp_power_q16(
 void plp_power_q16s_rv32im(
                            const int16_t * __restrict__ pSrc,
                            uint32_t blockSize,
-                           uint32_t deciPoint,
+                           uint32_t fracBits,
                            int32_t * __restrict__ pRes);
 
 
@@ -1949,7 +1949,7 @@ void plp_power_q16s_rv32im(
 void plp_power_q16s_xpulpv2(
                             const int16_t * __restrict__ pSrc,
                             uint32_t blockSize,
-                            uint32_t deciPoint,
+                            uint32_t fracBits,
                             int32_t * __restrict__ pRes);
 
 
@@ -1965,7 +1965,7 @@ void plp_power_q16s_xpulpv2(
 void plp_power_q8(
                   const int8_t * __restrict__ pSrc,
                   uint32_t blockSize,
-                  uint32_t deciPoint,
+                  uint32_t fracBits,
                   int32_t * __restrict__ pRes);
 
 
@@ -1982,7 +1982,7 @@ void plp_power_q8(
 void plp_power_q8s_rv32im(
                           const int8_t * __restrict__ pSrc,
                           uint32_t blockSize,
-                          uint32_t deciPoint,
+                          uint32_t fracBits,
                           int32_t * __restrict__ pRes);
 
 
@@ -1998,7 +1998,7 @@ void plp_power_q8s_rv32im(
 void plp_power_q8s_xpulpv2(
                            const int8_t * __restrict__ pSrc,
                            uint32_t blockSize,
-                           uint32_t deciPoint,
+                           uint32_t fracBits,
                            int32_t * __restrict__ pRes);
 
 
@@ -2174,7 +2174,7 @@ void plp_var_i8s_xpulpv2(
 void plp_var_q32(
                   const int32_t * __restrict__ pSrc,
                   uint32_t blockSize,
-                  uint32_t deciPoint,
+                  uint32_t fracBits,
                   int32_t * __restrict__ pRes);
 
 
@@ -2191,7 +2191,7 @@ void plp_var_q32(
 void plp_var_q32s_rv32im(
                           const int32_t * __restrict__ pSrc,
                           uint32_t blockSize,
-                          uint32_t deciPoint,
+                          uint32_t fracBits,
                           int32_t * __restrict__ pRes);
 
 
@@ -2207,7 +2207,7 @@ void plp_var_q32s_rv32im(
 void plp_var_q32s_xpulpv2(
                            const int32_t * __restrict__ pSrc,
                            uint32_t blockSize,
-                           uint32_t deciPoint,
+                           uint32_t fracBits,
                            int32_t * __restrict__ pRes);
 
 /** -------------------------------------------------------
@@ -2221,7 +2221,7 @@ void plp_var_q32s_xpulpv2(
 void plp_var_q16(
                   const int16_t * __restrict__ pSrc,
                   uint32_t blockSize,
-                  uint32_t deciPoint,
+                  uint32_t fracBits,
                   int16_t * __restrict__ pRes);
 
 
@@ -2238,7 +2238,7 @@ void plp_var_q16(
 void plp_var_q16s_rv32im(
                           const int16_t * __restrict__ pSrc,
                           uint32_t blockSize,
-                          uint32_t deciPoint,
+                          uint32_t fracBits,
                           int16_t * __restrict__ pRes);
 
 
@@ -2254,7 +2254,7 @@ void plp_var_q16s_rv32im(
 void plp_var_q16s_xpulpv2(
                            const int16_t * __restrict__ pSrc,
                            uint32_t blockSize,
-                           uint32_t deciPoint,
+                           uint32_t fracBits,
                            int16_t * __restrict__ pRes);
 
 
@@ -2270,7 +2270,7 @@ void plp_var_q16s_xpulpv2(
 void plp_var_q8(
                   const int8_t * __restrict__ pSrc,
                   uint32_t blockSize,
-                  uint32_t deciPoint,
+                  uint32_t fracBits,
                   int8_t * __restrict__ pRes);
 
 
@@ -2287,7 +2287,7 @@ void plp_var_q8(
 void plp_var_q8s_rv32im(
                           const int8_t * __restrict__ pSrc,
                           uint32_t blockSize,
-                          uint32_t deciPoint,
+                          uint32_t fracBits,
                           int8_t * __restrict__ pRes);
 
 
@@ -2303,7 +2303,7 @@ void plp_var_q8s_rv32im(
 void plp_var_q8s_xpulpv2(
                            const int8_t * __restrict__ pSrc,
                            uint32_t blockSize,
-                           uint32_t deciPoint,
+                           uint32_t fracBits,
                            int8_t * __restrict__ pRes);
 
 
@@ -2346,7 +2346,7 @@ void plp_std_f32_xpulpv2(
 void plp_std_q32(
                   const int32_t * __restrict__ pSrc,
                   uint32_t blockSize,
-                  uint32_t deciPoint,
+                  uint32_t fracBits,
                   int32_t * __restrict__ pRes);
 
 
@@ -2363,7 +2363,7 @@ void plp_std_q32(
 void plp_std_q32s_rv32im(
                           const int32_t * __restrict__ pSrc,
                           uint32_t blockSize,
-                          uint32_t deciPoint,
+                          uint32_t fracBits,
                           int32_t * __restrict__ pRes);
 
 
@@ -2379,7 +2379,7 @@ void plp_std_q32s_rv32im(
 void plp_std_q32s_xpulpv2(
                            const int32_t * __restrict__ pSrc,
                            uint32_t blockSize,
-                           uint32_t deciPoint,
+                           uint32_t fracBits,
                            int32_t * __restrict__ pRes);
 
 /** -------------------------------------------------------
@@ -2393,7 +2393,7 @@ void plp_std_q32s_xpulpv2(
 void plp_std_q16(
                   const int16_t * __restrict__ pSrc,
                   uint32_t blockSize,
-                  uint32_t deciPoint,
+                  uint32_t fracBits,
                   int16_t * __restrict__ pRes);
 
 
@@ -2410,7 +2410,7 @@ void plp_std_q16(
 void plp_std_q16s_rv32im(
                           const int16_t * __restrict__ pSrc,
                           uint32_t blockSize,
-                          uint32_t deciPoint,
+                          uint32_t fracBits,
                           int16_t * __restrict__ pRes);
 
 
@@ -2426,7 +2426,7 @@ void plp_std_q16s_rv32im(
 void plp_std_q16s_xpulpv2(
                            const int16_t * __restrict__ pSrc,
                            uint32_t blockSize,
-                           uint32_t deciPoint,
+                           uint32_t fracBits,
                            int16_t * __restrict__ pRes);
 
 
@@ -2442,7 +2442,7 @@ void plp_std_q16s_xpulpv2(
 void plp_std_q8(
                   const int8_t * __restrict__ pSrc,
                   uint32_t blockSize,
-                  uint32_t deciPoint,
+                  uint32_t fracBits,
                   int8_t * __restrict__ pRes);
 
 
@@ -2459,7 +2459,7 @@ void plp_std_q8(
 void plp_std_q8s_rv32im(
                           const int8_t * __restrict__ pSrc,
                           uint32_t blockSize,
-                          uint32_t deciPoint,
+                          uint32_t fracBits,
                           int8_t * __restrict__ pRes);
 
 
@@ -2475,7 +2475,7 @@ void plp_std_q8s_rv32im(
 void plp_std_q8s_xpulpv2(
                            const int8_t * __restrict__ pSrc,
                            uint32_t blockSize,
-                           uint32_t deciPoint,
+                           uint32_t fracBits,
                            int8_t * __restrict__ pRes);
 
 
@@ -2489,7 +2489,7 @@ void plp_std_q8s_xpulpv2(
 
 void plp_sqrt_q32(
                            const int32_t* __restrict__ pSrc,
-                           const uint32_t deciPoint,
+                           const uint32_t fracBits,
                            int32_t * __restrict__ pRes);
 
 
@@ -2502,7 +2502,7 @@ void plp_sqrt_q32(
 
 void plp_sqrt_q32s_rv32im(
                            const int32_t* __restrict__ pSrc,
-                           const uint32_t deciPoint,
+                           const uint32_t fracBits,
                            int32_t * __restrict__ pRes);
 
 
@@ -2515,7 +2515,7 @@ void plp_sqrt_q32s_rv32im(
 
 void plp_sqrt_q32s_xpulpv2(
                            const int32_t* __restrict__ pSrc,
-                           const uint32_t deciPoint,
+                           const uint32_t fracBits,
                            int32_t * __restrict__ pRes);
 
 
@@ -2528,7 +2528,7 @@ void plp_sqrt_q32s_xpulpv2(
 
 void plp_sqrt_q16(
                            const int16_t* __restrict__ pSrc,
-                           const uint32_t deciPoint,
+                           const uint32_t fracBits,
                            int16_t * __restrict__ pRes);
 
 
@@ -2541,7 +2541,7 @@ void plp_sqrt_q16(
 
 void plp_sqrt_q16s_rv32im(
                            const int16_t* __restrict__ pSrc,
-                           const uint32_t deciPoint,
+                           const uint32_t fracBits,
                            int16_t * __restrict__ pRes);
 
 /** -------------------------------------------------------
@@ -2553,7 +2553,7 @@ void plp_sqrt_q16s_rv32im(
 
 void plp_sqrt_q16s_xpulpv2(
                            const int16_t* __restrict__ pSrc,
-                           const uint32_t deciPoint,
+                           const uint32_t fracBits,
                            int16_t * __restrict__ pRes);
 
 

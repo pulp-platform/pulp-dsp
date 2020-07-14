@@ -26,7 +26,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 
+ *
+ * Notice: project inspired by ARM CMSIS DSP and parts of source code
+ * ported and adopted for RISC-V PULP platform from ARM CMSIS DSP
+ * released under Copyright (C) 2010-2019 ARM Limited or its affiliates
+ * with Apache-2.0.
  */
+
 
 #define sqrt2 0b1011010100000100
 #include "plp_math.h"
@@ -72,7 +78,7 @@
 
 void plp_sqrt_q16s_xpulpv2(
                            const int16_t * __restrict__ pSrc,
-                           const uint32_t deciPoint,
+                           const uint32_t fracBits,
                            int16_t * __restrict__ pRes){
 
   int16_t number, temp1, intermediate_fixpoint, signBits, half;
@@ -141,9 +147,9 @@ void plp_sqrt_q16s_xpulpv2(
       intermediate_fixpoint = ((int16_t) (((int32_t) temp1 * intermediate_fixpoint) >> 15)) << 1;
 
 
-      if(deciPoint > 1){
-        intermediate_fixpoint = intermediate_fixpoint >> ((int32_t)(deciPoint)>>1);
-        if(deciPoint%2==0){
+      if((16-fracBits) > 1){
+        intermediate_fixpoint = intermediate_fixpoint >> ((int32_t)(16-fracBits)>>1);
+        if((16-fracBits)%2==0){
           intermediate_fixpoint = ((int32_t)intermediate_fixpoint * sqrt2) >> 15;
         }
       }

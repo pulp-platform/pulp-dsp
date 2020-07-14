@@ -52,7 +52,7 @@ void plp_correlate_q8s_rv32im(const int8_t *  pSrcA,
                                const uint32_t srcALen,
                                const int8_t *  pSrcB,
                                const uint32_t srcBLen,
-                               uint32_t deciPoint,
+                               uint32_t fracBits,
                                int32_t *  pRes){
 
   const int8_t *pSrc1, *pSrc2;
@@ -77,7 +77,7 @@ void plp_correlate_q8s_rv32im(const int8_t *  pSrcA,
   
   for(int i=1;i<src2Len;i++){
     for(int j=0;j<i;j++){
-      temp += pSrc1[j]*pSrc2[src2Len-i+j] >> deciPoint;
+      temp += pSrc1[j]*pSrc2[src2Len-i+j] >> fracBits;
     }
     *pRes++ = temp;
     temp = 0;
@@ -87,7 +87,7 @@ void plp_correlate_q8s_rv32im(const int8_t *  pSrcA,
   
   for(int i=0;i<=offset;i++){
     for(int j=0;j<src2Len;j++){
-      temp += pSrc1[j+i]*pSrc2[j] >> deciPoint;
+      temp += pSrc1[j+i]*pSrc2[j] >> fracBits;
     }
     *pRes++ = temp;
     temp = 0;
@@ -97,7 +97,7 @@ void plp_correlate_q8s_rv32im(const int8_t *  pSrcA,
   
   for(int i=src2Len-1;i>0;i--){
     for(int j=0;j<i;j++){
-      temp += pSrc1[offset+src2Len-i+j]*pSrc2[j] >> deciPoint;
+      temp += pSrc1[offset+src2Len-i+j]*pSrc2[j] >> fracBits;
     }
     *pRes++ = temp;
     temp = 0;
