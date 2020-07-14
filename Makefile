@@ -31,7 +31,7 @@ FC_SRCS = \
 	src/StatisticsFunctions/plp_std_q32.c src/StatisticsFunctions/kernels/plp_std_q32s_rv32im.c \
 	src/StatisticsFunctions/plp_std_q16.c src/StatisticsFunctions/kernels/plp_std_q16s_rv32im.c \
 	src/StatisticsFunctions/plp_std_q8.c src/StatisticsFunctions/kernels/plp_std_q8s_rv32im.c \
-  src/BasicMathFunctions/plp_dot_prod_f32_parallel.c \
+	src/BasicMathFunctions/plp_dot_prod_f32_parallel.c \
 	src/BasicMathFunctions/plp_dot_prod_q32_parallel.c \
 	src/BasicMathFunctions/plp_dot_prod_i32_parallel.c \
 	src/SupportFunctions/plp_copy_i32.c src/SupportFunctions/kernels/plp_copy_i32s_rv32im.c \
@@ -95,7 +95,7 @@ FC_SRCS = \
 	src/TransformFunctions/plp_rfft_f32_parallel.c \
 	src/CommonTables/plp_common_tables.c \
 	src/CommonTables/plp_const_structs.c \
-  src/MatrixFunctions/mat_add/plp_mat_add_i32.c src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32s_rv32im.c \
+	src/MatrixFunctions/mat_add/plp_mat_add_i32.c src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32s_rv32im.c \
 	src/MatrixFunctions/mat_add/plp_mat_add_i16.c src/MatrixFunctions/mat_add/kernels/plp_mat_add_i16s_rv32im.c \
 	src/MatrixFunctions/mat_add/plp_mat_add_i8.c src/MatrixFunctions/mat_add/kernels/plp_mat_add_i8s_rv32im.c \
 	src/MatrixFunctions/mat_add/plp_mat_add_f32.c \
@@ -119,6 +119,14 @@ FC_SRCS = \
 	src/MatrixFunctions/mat_scale/plp_mat_scale_i16_parallel.c \
 	src/MatrixFunctions/mat_scale/plp_mat_scale_i8_parallel.c \
 	src/MatrixFunctions/mat_scale/plp_mat_scale_f32_parallel.c \
+	src/MatrixFunctions/mat_trans/plp_mat_trans_i32.c src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i32s_rv32im.c \
+	src/MatrixFunctions/mat_trans/plp_mat_trans_i16.c src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i16s_rv32im.c \
+	src/MatrixFunctions/mat_trans/plp_mat_trans_i8.c src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i8s_rv32im.c \
+	src/MatrixFunctions/mat_trans/plp_mat_trans_f32.c \
+	src/MatrixFunctions/mat_trans/plp_mat_trans_i32_parallel.c \
+	src/MatrixFunctions/mat_trans/plp_mat_trans_i16_parallel.c \
+	src/MatrixFunctions/mat_trans/plp_mat_trans_i8_parallel.c \
+	src/MatrixFunctions/mat_trans/plp_mat_trans_f32_parallel.c \
 	src/ComplexMathFunctions/plp_cmplx_mag_q16.c
 
 
@@ -155,8 +163,8 @@ CL_SRCS = \
 	src/FastMathFunctions/kernels/plp_sqrt_f32s_xpulpv2.c \
 	src/FastMathFunctions/kernels/plp_sqrt_q32s_xpulpv2.c \
 	src/FastMathFunctions/kernels/plp_sqrt_q16s_xpulpv2.c \
-  src/BasicMathFunctions/kernels/plp_dot_prod_f32s_xpulpv2.c \
-  src/BasicMathFunctions/kernels/plp_dot_prod_f32p_xpulpv2.c \
+	src/BasicMathFunctions/kernels/plp_dot_prod_f32s_xpulpv2.c \
+	src/BasicMathFunctions/kernels/plp_dot_prod_f32p_xpulpv2.c \
 	src/BasicMathFunctions/kernels/plp_dot_prod_q32p_xpulpv2.c \
 	src/BasicMathFunctions/kernels/plp_dot_prod_i32p_xpulpv2.c \
 	src/SupportFunctions/kernels/plp_copy_i32s_xpulpv2.c \
@@ -220,7 +228,7 @@ CL_SRCS = \
 	src/TransformFunctions/kernels/plp_bitreversal_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_cfft_q16v_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c \
-  src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32s_xpulpv2.c \
+	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32s_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32p_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i16v_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i16vp_xpulpv2.c \
@@ -243,7 +251,13 @@ CL_SRCS = \
 	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i8v_xpulpv2.c \
 	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i8vp_xpulpv2.c \
 	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_f32s_xpulpv2.c \
-	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_f32p_xpulpv2.c
+	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_f32p_xpulpv2.c \
+	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i32s_xpulpv2.c \
+	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i32p_xpulpv2.c \
+	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i16v_xpulpv2.c \
+	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i16vp_xpulpv2.c \
+	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i8v_xpulpv2.c \
+	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i8vp_xpulpv2.c
 
 
 PULP_LIBS = plpdsp # the name of the library, after installing it into the pulp-sdk, add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project to use this library.

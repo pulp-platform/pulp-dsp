@@ -591,6 +591,46 @@ typedef struct
 
 
 
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel matrix transpose.
+ */
+typedef struct
+{
+    const int8_t* __restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int8_t* __restrict__ pDst;
+} plp_mat_trans_instance_i8;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel matrix transpose.
+ */
+typedef struct
+{
+    const int16_t* __restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int16_t* __restrict__ pDst;
+} plp_mat_trans_instance_i16;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel matrix transpose.
+ */
+typedef struct
+{
+    const int32_t* __restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int32_t* __restrict__ pDst;
+} plp_mat_trans_instance_i32;
+
 
 
 
@@ -5826,6 +5866,282 @@ void plp_mat_scale_f32_parallel(const float * __restrict__ pSrc,
 */
 
 void plp_mat_scale_f32p_xpulpv2(void* args);
+
+
+
+/** -------------------------------------------------------
+  @brief   Glue code for matrix transpose of a 32-bit integer matrices.
+  @param[in]  pSrc Points to the input matrix of shape MxN
+  @param[in]  M    Height of the input matrix and width of the output matrix
+  @param[in]  N    Width of the input matrix and height of the output matrix
+  @param[out] pDst Points to the output matrix of shape NxM
+  @return  none
+*/
+
+void plp_mat_trans_i32(const int32_t* __restrict__ pSrc,
+                       uint32_t M,
+                       uint32_t N,
+                       int32_t* __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief   matrix transpose of a 32-bit integer matrices for RV32IM extension.
+  @param[in]  pSrc Points to the input matrix of shape MxN
+  @param[in]  M    Height of the input matrix and width of the output matrix
+  @param[in]  N    Width of the input matrix and height of the output matrix
+  @param[out] pDst Points to the output matrix of shape NxM
+  @return  none
+*/
+
+void plp_mat_trans_i32s_rv32im(const int32_t* __restrict__ pSrc,
+                               uint32_t M,
+                               uint32_t N,
+                               int32_t* __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix transpose of a 32-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrc Points to the input matrix of shape MxN
+  @param[in]  M    Height of the input matrix and width of the output matrix
+  @param[in]  N    Width of the input matrix and height of the output matrix
+  @param[out] pDst Points to the output matrix of shape NxM
+  @return     none
+*/
+
+void plp_mat_trans_i32s_xpulpv2(const int32_t* __restrict__ pSrc,
+                                uint32_t M,
+                                uint32_t N,
+                                int32_t* __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix transpose of a 32-bit integer matrices.
+  @param[in]  pSrc Points to the input matrix of shape MxN
+  @param[in]  M    Height of the input matrix and width of the output matrix
+  @param[in]  N    Width of the input matrix and height of the output matrix
+  @param[in]  nPE  Number of cores to use for computation
+  @param[out] pDst Points to the output matrix of shape NxM
+  @return     none
+*/
+
+void plp_mat_trans_i32_parallel(const int32_t* __restrict__ pSrc,
+                                uint32_t M,
+                                uint32_t N,
+                                uint32_t nPE,
+                                int32_t* __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Parallel matrix transpose of a 32-bit integer matrices for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_trans_instance_i32 struct initialized by plp_mat_trans_i32_parallel
+  @return     none
+*/
+
+void plp_mat_trans_i32p_xpulpv2(void* args);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix transpose of a 16-bit integer matrices.
+  @param[in]  pSrc Points to the input matrix of shape MxN
+  @param[in]  M    Height of the input matrix and width of the output matrix
+  @param[in]  N    Width of the input matrix and height of the output matrix
+  @param[out] pDst Points to the output matrix of shape NxM
+  @return     none
+*/
+
+void plp_mat_trans_i16(const int16_t* __restrict__ pSrc,
+                       uint32_t M,
+                       uint32_t N,
+                       int16_t* __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix transpose of a 16-bit integer matrices for RV32IM extension.
+  @param[in]  pSrc Points to the input matrix of shape MxN
+  @param[in]  M    Height of the input matrix and width of the output matrix
+  @param[in]  N    Width of the input matrix and height of the output matrix
+  @param[out] pDst Points to the output matrix of shape NxM
+  @return     none
+*/
+
+void plp_mat_trans_i16s_rv32im(const int16_t* __restrict__ pSrc,
+                               uint32_t M,
+                               uint32_t N,
+                               int16_t* __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix transpose of a 16-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrc Points to the input matrix of shape MxN
+  @param[in]  M    Height of the input matrix and width of the output matrix
+  @param[in]  N    Width of the input matrix and height of the output matrix
+  @param[out] pDst Points to the output matrix of shape NxM
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_trans_i16v_xpulpv2(const int16_t* __restrict__ pSrc,
+                                uint32_t M,
+                                uint32_t N,
+                                int16_t* __restrict__ pDst);
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix transpose of a 16-bit integer matrices.
+  @param[in]  pSrc Points to the input matrix of shape MxN
+  @param[in]  M    Height of the input matrix and width of the output matrix
+  @param[in]  N    Width of the input matrix and height of the output matrix
+  @param[in]  nPE  Number of cores to use for computation
+  @param[out] pDst Points to the output matrix of shape NxM
+  @return     none
+*/
+
+void plp_mat_trans_i16_parallel(const int16_t* __restrict__ pSrc,
+                                uint32_t M,
+                                uint32_t N,
+                                uint32_t nPE,
+                                int16_t* __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief Parallel matrix transpose of 16-bit integer matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_trans_instance_i16 struct initialized by plp_mat_trans_i16_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_trans_i16vp_xpulpv2(void* args);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix transpose of a 8-bit integer matrices.
+  @param[in]  pSrc Points to the input matrix of shape MxN
+  @param[in]  M    Height of the input matrix and width of the output matrix
+  @param[in]  N    Width of the input matrix and height of the output matrix
+  @param[out] pDst Points to the output matrix of shape NxM
+  @return     none
+*/
+
+void plp_mat_trans_i8(const int8_t* __restrict__ pSrc,
+                      uint32_t M,
+                      uint32_t N,
+                      int8_t* __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix transpose of a 8-bit integer matrices for RV32IM extension.
+  @param[in]  pSrc Points to the input matrix of shape MxN
+  @param[in]  M    Height of the input matrix and width of the output matrix
+  @param[in]  N    Width of the input matrix and height of the output matrix
+  @param[out] pDst Points to the output matrix of shape NxM
+  @return     none
+*/
+
+void plp_mat_trans_i8s_rv32im(const int8_t* __restrict__ pSrc,
+                              uint32_t M,
+                              uint32_t N,
+                              int8_t* __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      matrix transpose of a 8-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrc Points to the input matrix of shape MxN
+  @param[in]  M    Height of the input matrix and width of the output matrix
+  @param[in]  N    Width of the input matrix and height of the output matrix
+  @param[out] pDst Points to the output matrix of shape NxM
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_trans_i8v_xpulpv2(const int8_t* __restrict__ pSrc,
+                               uint32_t M,
+                               uint32_t N,
+                               int8_t* __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix transpose of a 8-bit integer matrices.
+  @param[in]  pSrc Points to the input matrix of shape MxN
+  @param[in]  M    Height of the input matrix and width of the output matrix
+  @param[in]  N    Width of the input matrix and height of the output matrix
+  @param[in]  nPE  Number of cores to use for computation
+  @param[out] pDst Points to the output matrix of shape NxM
+  @return     none
+*/
+
+void plp_mat_trans_i8_parallel(const int8_t* __restrict__ pSrc,
+                               uint32_t M,
+                               uint32_t N,
+                               uint32_t nPE,
+                               int8_t* __restrict__ pDst);
+
+
+/** -------------------------------------------------------
+  @brief Parallel matrix transpose of 8-bit integer matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_trans_instance_i8 struct initialized by plp_mat_trans_i8_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_trans_i8vp_xpulpv2(void* args);
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix transpose of a 32-bit float*ing-point matrices.
+  @param[in]  pSrc Points to the input matrix of shape MxN
+  @param[in]  M    Height of the input matrix and width of the output matrix
+  @param[in]  N    Width of the input matrix and height of the output matrix
+  @param[out] pDst Points to the output matrix of shape NxM
+  @return     none
+
+  @par This function will use plp_mat_trans_i32s_xpulpv2 for its computation.
+*/
+
+
+void plp_mat_trans_f32(const float* __restrict__ pSrc,
+                       uint32_t M,
+                       uint32_t N,
+                       float* __restrict__ pDst);
+
+
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix transpose of a 32-bit float*ing-point matrices.
+  @param[in]  pSrc Points to the input matrix of shape MxN
+  @param[in]  M    Height of the input matrix and width of the output matrix
+  @param[in]  N    Width of the input matrix and height of the output matrix
+  @param[in]  nPE  Number of cores to use for computation
+  @param[out] pDst Points to the output matrix of shape NxM
+  @return     none
+
+  @par This function will use plp_mat_trans_i32p_xpulpv2 for its computation.
+*/
+
+void plp_mat_trans_f32_parallel(const float* __restrict__ pSrc,
+                                uint32_t M,
+                                uint32_t N,
+                                uint32_t nPE,
+                                float* __restrict__ pDst);
 
 
 #endif // __PLP_MATH_H__
