@@ -129,6 +129,58 @@ FC_SRCS = \
 	src/MatrixFunctions/mat_trans/plp_mat_trans_f32_parallel.c \
 	src/MatrixFunctions/mat_inv/plp_mat_inv_f32.c \
 	src/MatrixFunctions/mat_inv/plp_mat_inv_f32_parallel.c \
+	src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i32.c src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i32s_rv32im.c \
+	src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i16.c src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i16s_rv32im.c \
+	src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i8.c src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i8s_rv32im.c \
+	src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q32.c src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q32s_rv32im.c \
+	src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q16.c src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q16s_rv32im.c \
+	src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q8.c src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q8s_rv32im.c \
+	src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i32_parallel.c \
+	src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i16_parallel.c \
+	src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i8_parallel.c \
+	src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q32_parallel.c \
+	src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q16_parallel.c \
+	src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q8_parallel.c \
+	src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_f32.c \
+	src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_f32_parallel.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/plp_mat_mult_trans_stride_i32.c src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i32s_rv32im.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/plp_mat_mult_trans_stride_i16.c src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i16s_rv32im.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/plp_mat_mult_trans_stride_i8.c src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i8s_rv32im.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/plp_mat_mult_trans_stride_i32_parallel.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/plp_mat_mult_trans_stride_i16_parallel.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/plp_mat_mult_trans_stride_i8_parallel.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/plp_mat_mult_trans_stride_q32.c src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q32s_rv32im.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/plp_mat_mult_trans_stride_q16.c src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q16s_rv32im.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/plp_mat_mult_trans_stride_q8.c src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q8s_rv32im.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/plp_mat_mult_trans_stride_q32_parallel.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/plp_mat_mult_trans_stride_q16_parallel.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/plp_mat_mult_trans_stride_q8_parallel.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/plp_mat_mult_trans_stride_f32.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/plp_mat_mult_trans_stride_f32_parallel.c \
+	src/MatrixFunctionsStride/mat_add_stride/plp_mat_add_stride_i32.c src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i32s_rv32im.c \
+	src/MatrixFunctionsStride/mat_add_stride/plp_mat_add_stride_i16.c src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i16s_rv32im.c \
+	src/MatrixFunctionsStride/mat_add_stride/plp_mat_add_stride_i8.c src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i8s_rv32im.c \
+	src/MatrixFunctionsStride/mat_add_stride/plp_mat_add_stride_f32.c \
+	src/MatrixFunctionsStride/mat_add_stride/plp_mat_add_stride_i32_parallel.c \
+	src/MatrixFunctionsStride/mat_add_stride/plp_mat_add_stride_i16_parallel.c \
+	src/MatrixFunctionsStride/mat_add_stride/plp_mat_add_stride_i8_parallel.c \
+	src/MatrixFunctionsStride/mat_add_stride/plp_mat_add_stride_f32_parallel.c \
+	src/MatrixFunctionsStride/mat_sub_stride/plp_mat_sub_stride_i32.c src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i32s_rv32im.c \
+	src/MatrixFunctionsStride/mat_sub_stride/plp_mat_sub_stride_i16.c src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i16s_rv32im.c \
+	src/MatrixFunctionsStride/mat_sub_stride/plp_mat_sub_stride_i8.c src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i8s_rv32im.c \
+	src/MatrixFunctionsStride/mat_sub_stride/plp_mat_sub_stride_f32.c \
+	src/MatrixFunctionsStride/mat_sub_stride/plp_mat_sub_stride_i32_parallel.c \
+	src/MatrixFunctionsStride/mat_sub_stride/plp_mat_sub_stride_i16_parallel.c \
+	src/MatrixFunctionsStride/mat_sub_stride/plp_mat_sub_stride_i8_parallel.c \
+	src/MatrixFunctionsStride/mat_sub_stride/plp_mat_sub_stride_f32_parallel.c \
+	src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i32.c src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i32s_rv32im.c \
+	src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i16.c src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i16s_rv32im.c \
+	src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i8.c src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i8s_rv32im.c \
+	src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_f32.c \
+	src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i32_parallel.c \
+	src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i16_parallel.c \
+	src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i8_parallel.c \
+	src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_f32_parallel.c \
 	src/ComplexMathFunctions/plp_cmplx_mag_q16.c
 
 
@@ -259,9 +311,61 @@ CL_SRCS = \
 	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i16v_xpulpv2.c \
 	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i16vp_xpulpv2.c \
 	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i8v_xpulpv2.c \
+	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i8vp_xpulpv2.c \
 	src/MatrixFunctions/mat_inv/kernels/plp_mat_inv_f32s_xpulpv2.c \
 	src/MatrixFunctions/mat_inv/kernels/plp_mat_inv_f32p_xpulpv2.c \
-	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i8vp_xpulpv2.c
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i32s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i16v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q32s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q16v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i32p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i16vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i8vp_xpulpv2.c	\
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q32p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q16vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q8vp_xpulpv2.c	\
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_f32s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_f32p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i32s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i16v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i32p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i16vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i8vp_xpulpv2.c	\
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q32s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q16v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q32p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q16vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q8vp_xpulpv2.c	\
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_f32s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_f32p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i32s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i32p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i16v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i16vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_f32s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_f32p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i32s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i32p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i16v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i16vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_f32s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_f32p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i32s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i32p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i16v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i16vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_f32s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_f32p_xpulpv2.c
 
 
 PULP_LIBS = plpdsp # the name of the library, after installing it into the pulp-sdk, add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project to use this library.

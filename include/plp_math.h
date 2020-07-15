@@ -632,6 +632,354 @@ typedef struct
 } plp_mat_trans_instance_i32;
 
 
+/** -------------------------------------------------------
+ * @brief Instance structure for strided integer parallel matrix multiplication.
+ */
+typedef struct
+{
+    const int8_t * __restrict__ pSrcA;
+    const int8_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t nPE;
+    int32_t * __restrict__ pDstC;
+} plp_mat_mult_stride_instance_i8;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided integer parallel matrix multiplication.
+ */
+typedef struct
+{
+    const int16_t * __restrict__ pSrcA;
+    const int16_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t nPE;
+    int32_t * __restrict__ pDstC;
+} plp_mat_mult_stride_instance_i16;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided integer parallel matrix multiplication.
+ */
+typedef struct
+{
+    const int32_t * __restrict__ pSrcA;
+    const int32_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t nPE;
+    int32_t * __restrict__ pDstC;
+} plp_mat_mult_stride_instance_i32;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided floating-point parallel matrix multiplication.
+ */
+typedef struct
+{
+    const float * __restrict__ pSrcA;
+    const float * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t nPE;
+    float * __restrict__ pDstC;
+} plp_mat_mult_stride_instance_f32;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided 8-bit fix-point parallel matrix multiplication.
+ */
+typedef struct
+{
+    const int8_t * __restrict__ pSrcA;
+    const int8_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t shift;
+    uint32_t nPE;
+    int8_t * __restrict__ pDstC;
+} plp_mat_mult_stride_instance_q8;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided 16-bit fix-point parallel matrix multiplication.
+ */
+typedef struct
+{
+    const int16_t * __restrict__ pSrcA;
+    const int16_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t shift;
+    uint32_t nPE;
+    int16_t * __restrict__ pDstC;
+} plp_mat_mult_stride_instance_q16;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided 32-bit fix-point parallel matrix multiplication.
+ */
+typedef struct
+{
+    const int32_t * __restrict__ pSrcA;
+    const int32_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t shift;
+    uint32_t nPE;
+    int32_t * __restrict__ pDstC;
+} plp_mat_mult_stride_instance_q32;
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided integer parallel matrix addition.
+ */
+typedef struct
+{
+    const int8_t * __restrict__ pSrcA;
+    const int8_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideY;
+    uint32_t nPE;
+    int8_t * __restrict__ pDst;
+} plp_mat_add_stride_instance_i8;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided integer parallel matrix addition.
+ */
+typedef struct
+{
+    const int16_t * __restrict__ pSrcA;
+    const int16_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideY;
+    uint32_t nPE;
+    int16_t * __restrict__ pDst;
+} plp_mat_add_stride_instance_i16;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided integer parallel matrix addition.
+ */
+typedef struct
+{
+    const int32_t * __restrict__ pSrcA;
+    const int32_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideY;
+    uint32_t nPE;
+    int32_t * __restrict__ pDst;
+} plp_mat_add_stride_instance_i32;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided floating-point parallel matrix addition.
+ */
+typedef struct
+{
+    const float * __restrict__ pSrcA;
+    const float * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideY;
+    uint32_t nPE;
+    float * __restrict__ pDst;
+} plp_mat_add_stride_instance_f32;
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided integer parallel matrix subtraction.
+ */
+typedef struct
+{
+    const int8_t * __restrict__ pSrcA;
+    const int8_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideY;
+    uint32_t nPE;
+    int8_t * __restrict__ pDst;
+} plp_mat_sub_stride_instance_i8;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided integer parallel matrix subtraction.
+ */
+typedef struct
+{
+    const int16_t * __restrict__ pSrcA;
+    const int16_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideY;
+    uint32_t nPE;
+    int16_t * __restrict__ pDst;
+} plp_mat_sub_stride_instance_i16;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided integer parallel matrix subtraction.
+ */
+typedef struct
+{
+    const int32_t * __restrict__ pSrcA;
+    const int32_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideY;
+    uint32_t nPE;
+    int32_t * __restrict__ pDst;
+} plp_mat_sub_stride_instance_i32;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided floating-point parallel matrix subtraction.
+ */
+typedef struct
+{
+    const float * __restrict__ pSrcA;
+    const float * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideY;
+    uint32_t nPE;
+    float * __restrict__ pDst;
+} plp_mat_sub_stride_instance_f32;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided integer parallel matrix scale.
+ */
+typedef struct
+{
+    const int8_t * __restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideSrc;
+    uint32_t strideDst;
+    int8_t scaleFactor;
+    int32_t shift;
+    uint32_t nPE;
+    int8_t * __restrict__ pDst;
+} plp_mat_scale_stride_instance_i8;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided integer parallel matrix scale.
+ */
+typedef struct
+{
+    const int16_t * __restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideSrc;
+    uint32_t strideDst;
+    int16_t scaleFactor;
+    int32_t shift;
+    uint32_t nPE;
+    int16_t * __restrict__ pDst;
+} plp_mat_scale_stride_instance_i16;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided integer parallel matrix scale.
+ */
+typedef struct
+{
+    const int32_t * __restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideSrc;
+    uint32_t strideDst;
+    int32_t scaleFactor;
+    int32_t shift;
+    uint32_t nPE;
+    int32_t * __restrict__ pDst;
+} plp_mat_scale_stride_instance_i32;
+
+
+
+/** -------------------------------------------------------
+ * @brief Instance structure for strided floating-point parallel matrix scale.
+ */
+typedef struct
+{
+    const float * __restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideSrc;
+    uint32_t strideDst;
+    float scaleFactor;
+    uint32_t nPE;
+    float * __restrict__ pDst;
+} plp_mat_scale_stride_instance_f32;
+
+
 
 
 /** -------------------------------------------------------
@@ -6196,5 +6544,2954 @@ int plp_mat_inv_f32_parallel(float * __restrict__ pSrc,
 */
 
 int plp_mat_inv_f32p_xpulpv2(void* args);
+
+
+
+/** -------------------------------------------------------
+   @brief         Glue code for strided matrix matrix multiplication of a 32-bit integer matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_stride_i32(const int32_t *__restrict__ pSrcA,
+                             const int32_t *__restrict__ pSrcB,
+                             uint32_t M,
+                             uint32_t N,
+                             uint32_t O,
+                             uint32_t strideA,
+                             uint32_t strideB,
+                             uint32_t strideC,
+                             int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix matrix multiplication of a 32-bit integer matrices for RV32IM
+                  extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_stride_i32s_rv32im(const int32_t *__restrict__ pSrcA,
+                                     const int32_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideC,
+                                     int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix matrix multiplication of a 32-bit integer matrices for XPULPV2
+                  extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_stride_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                                      const int32_t *__restrict__ pSrcB,
+                                      uint32_t M,
+                                      uint32_t N,
+                                      uint32_t O,
+                                      uint32_t strideA,
+                                      uint32_t strideB,
+                                      uint32_t strideC,
+                                      int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Glue code for strided matrix matrix multiplication of a 16-bit integer matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_stride_i16(const int16_t *__restrict__ pSrcA,
+                             const int16_t *__restrict__ pSrcB,
+                             uint32_t M,
+                             uint32_t N,
+                             uint32_t O,
+                             uint32_t strideA,
+                             uint32_t strideB,
+                             uint32_t strideC,
+                             int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix matrix multiplication of a 16-bit integer matrices for RV32IM
+                  extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
+                                     const int16_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideC,
+                                     int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix matrix multiplication of a 16-bit integer matrices for XPULPV2
+                  extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Exploiting SIMD instructions
+   The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+   performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+                                      const int16_t *__restrict__ pSrcB,
+                                      uint32_t M,
+                                      uint32_t N,
+                                      uint32_t O,
+                                      uint32_t strideA,
+                                      uint32_t strideB,
+                                      uint32_t strideC,
+                                      int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Glue code for strided matrix matrix multiplication of a 8-bit integer matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_stride_i8(const int8_t *__restrict__ pSrcA,
+                            const int8_t *__restrict__ pSrcB,
+                            uint32_t M,
+                            uint32_t N,
+                            uint32_t O,
+                            uint32_t strideA,
+                            uint32_t strideB,
+                            uint32_t strideC,
+                            int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix matrix multiplication of a 8-bit integer matrices for RV32IM
+                  extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
+                                    const int8_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t O,
+                                    uint32_t strideA,
+                                    uint32_t strideB,
+                                    uint32_t strideC,
+                                    int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix matrix multiplication of a 8-bit integer matrices for XPULPV2
+                  extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Exploiting SIMD instructions
+   The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+   performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                                     const int8_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideC,
+                                     int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel strided matrix matrix multiplication of a 32-bit integer
+                  matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_stride_i32_parallel(const int32_t *__restrict__ pSrcA,
+                                      const int32_t *__restrict__ pSrcB,
+                                      uint32_t M,
+                                      uint32_t N,
+                                      uint32_t O,
+                                      uint32_t strideA,
+                                      uint32_t strideB,
+                                      uint32_t strideC,
+                                      uint32_t nPE,
+                                      int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief      Parallel strided matrix matrix multiplication of a 32-bit integer matrices for
+               XPULPV2 extension.
+   @param[in]  args      pointer to plp_mat_mult_stride_instance_i32 struct initialized by
+                         plp_mat_mult_stride_i32_parallel
+   @return        none
+*/
+
+void plp_mat_mult_stride_i32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel strided matrix matrix multiplication of a 16-bit integer
+                  matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
+                                      const int16_t *__restrict__ pSrcB,
+                                      uint32_t M,
+                                      uint32_t N,
+                                      uint32_t O,
+                                      uint32_t strideA,
+                                      uint32_t strideB,
+                                      uint32_t strideC,
+                                      uint32_t nPE,
+                                      int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+    @brief Parallel matrix multiplication of 16-bit integer matrices kernel for XPULPV2 extension.
+    @param[in]  args  pointer to plp_mat_mult_stride_instance_i16 struct initialized by
+                      plp_mat_mult_stride_i16_parallel
+    @return     none
+
+    @par Exploiting SIMD instructions
+    The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+   performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_stride_i16vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel strided matrix matrix multiplication of a 8-bit integer
+                  matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_stride_i8_parallel(const int8_t *__restrict__ pSrcA,
+                                     const int8_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideC,
+                                     uint32_t nPE,
+                                     int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Glue code for strided matrix matrix multiplication of a 32-bit floating-point
+                  matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_stride_f32(const float *__restrict__ pSrcA,
+                             const float *__restrict__ pSrcB,
+                             uint32_t M,
+                             uint32_t N,
+                             uint32_t O,
+                             uint32_t strideA,
+                             uint32_t strideB,
+                             uint32_t strideC,
+                             float *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix matrix multiplication of a 32-bit floating-point matrices for
+                  XPULPV2 extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_stride_f32s_xpulpv2(const float *__restrict__ pSrcA,
+                                      const float *__restrict__ pSrcB,
+                                      uint32_t M,
+                                      uint32_t N,
+                                      uint32_t O,
+                                      uint32_t strideA,
+                                      uint32_t strideB,
+                                      uint32_t strideC,
+                                      float *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel strided matrix matrix multiplication of a 32-bit
+                  floating-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_stride_f32_parallel(const float *__restrict__ pSrcA,
+                                      const float *__restrict__ pSrcB,
+                                      uint32_t M,
+                                      uint32_t N,
+                                      uint32_t O,
+                                      uint32_t strideA,
+                                      uint32_t strideB,
+                                      uint32_t strideC,
+                                      uint32_t nPE,
+                                      float *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+    @brief Parallel matrix multiplication of 32-bit floating-point matrices kernel for XPULPV2
+           extension.
+    @param[in]  args pointer to plp_mat_mult_stride_instance_f32 struct initialized by
+                     plp_mat_mult_stride_f32_parallel
+    @return     none
+*/
+
+void plp_mat_mult_stride_f32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+   @brief Parallel matrix multiplication of 8-bit integer matrices kernel for XPULPV2 extension.
+   @param[in]  args pointer to plp_mat_mult_stride_instance_i8 struct initialized by
+                    plp_mat_mult_stride_i8_parallel
+   @return     none
+
+   @par Exploiting SIMD instructions
+   The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+   performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_stride_i8vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+   @brief         Glue code for strided matrix matrix multiplication of a 32-bit fix-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+ */
+
+void plp_mat_mult_stride_q32(const int32_t *__restrict__ pSrcA,
+                             const int32_t *__restrict__ pSrcB,
+                             uint32_t M,
+                             uint32_t N,
+                             uint32_t O,
+                             uint32_t strideA,
+                             uint32_t strideB,
+                             uint32_t strideC,
+                             uint32_t shift,
+                             int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel strided matrix matrix multiplication of a 32-bit fix-point
+                  matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+ */
+
+void plp_mat_mult_stride_q32_parallel(const int32_t *__restrict__ pSrcA,
+                                      const int32_t *__restrict__ pSrcB,
+                                      uint32_t M,
+                                      uint32_t N,
+                                      uint32_t O,
+                                      uint32_t strideA,
+                                      uint32_t strideB,
+                                      uint32_t strideC,
+                                      uint32_t shift,
+                                      uint32_t nPE,
+                                      int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix matrix multiplication of a 32-bit fix-point matrices for RV32IM
+                  extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+*/
+
+void plp_mat_mult_stride_q32s_rv32im(const int32_t *__restrict__ pSrcA,
+                                     const int32_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideC,
+                                     uint32_t shift,
+                                     int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix matrix multiplication of a 32-bit fix-point matrices for XPULPV2
+                  extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+*/
+
+void plp_mat_mult_stride_q32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                                      const int32_t *__restrict__ pSrcB,
+                                      uint32_t M,
+                                      uint32_t N,
+                                      uint32_t O,
+                                      uint32_t strideA,
+                                      uint32_t strideB,
+                                      uint32_t strideC,
+                                      uint32_t shift,
+                                      int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+    @brief Parallel matrix multiplication of 32-bit fix-point matrices kernel for XPULPV2 extension.
+    @param[in]  args pointer to plp_mat_mult_stride_instance_q32 struct initialized by
+                     plp_mat_mult_stride_q32_parallel
+    @return     none
+*/
+
+void plp_mat_mult_stride_q32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+   @brief         Glue code for strided matrix matrix multiplication of a 16-bit fix-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 16-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+ */
+
+void plp_mat_mult_stride_q16(const int16_t *__restrict__ pSrcA,
+                             const int16_t *__restrict__ pSrcB,
+                             uint32_t M,
+                             uint32_t N,
+                             uint32_t O,
+                             uint32_t strideA,
+                             uint32_t strideB,
+                             uint32_t strideC,
+                             uint32_t shift,
+                             int16_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel strided matrix matrix multiplication of a 16-bit fix-point
+                  matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 16-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+ */
+
+void plp_mat_mult_stride_q16_parallel(const int16_t *__restrict__ pSrcA,
+                                      const int16_t *__restrict__ pSrcB,
+                                      uint32_t M,
+                                      uint32_t N,
+                                      uint32_t O,
+                                      uint32_t strideA,
+                                      uint32_t strideB,
+                                      uint32_t strideC,
+                                      uint32_t shift,
+                                      uint32_t nPE,
+                                      int16_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix matrix multiplication of a 16-bit fix-point matrices for RV32IM
+                  extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 16-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+*/
+
+void plp_mat_mult_stride_q16s_rv32im(const int16_t *__restrict__ pSrcA,
+                                     const int16_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideC,
+                                     uint32_t shift,
+                                     int16_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix matrix multiplication of a 16-bit fix-point matrices for XPULPV2
+                  extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 16-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+*/
+
+void plp_mat_mult_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+                                      const int16_t *__restrict__ pSrcB,
+                                      uint32_t M,
+                                      uint32_t N,
+                                      uint32_t O,
+                                      uint32_t strideA,
+                                      uint32_t strideB,
+                                      uint32_t strideC,
+                                      uint32_t shift,
+                                      int16_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+    @brief Parallel matrix multiplication of 16-bit fix-point matrices kernel for XPULPV2 extension.
+    @param[in]  args      pointer to plp_mat_mult_stride_instance_q16 struct initialized by
+   plp_mat_mult_stride_q16_parallel
+    @return     none
+*/
+
+void plp_mat_mult_stride_q16vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+   @brief         Glue code for strided matrix matrix multiplication of a 8-bit fix-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 8-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+ */
+
+void plp_mat_mult_stride_q8(const int8_t *__restrict__ pSrcA,
+                            const int8_t *__restrict__ pSrcB,
+                            uint32_t M,
+                            uint32_t N,
+                            uint32_t O,
+                            uint32_t strideA,
+                            uint32_t strideB,
+                            uint32_t strideC,
+                            uint32_t shift,
+                            int8_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel strided matrix matrix multiplication of a 8-bit fix-point
+                  matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 8-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+ */
+
+void plp_mat_mult_stride_q8_parallel(const int8_t *__restrict__ pSrcA,
+                                     const int8_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideC,
+                                     uint32_t shift,
+                                     uint32_t nPE,
+                                     int8_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix matrix multiplication of a 8-bit fix-point matrices for RV32IM
+                  extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 8-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+*/
+
+void plp_mat_mult_stride_q8s_rv32im(const int8_t *__restrict__ pSrcA,
+                                    const int8_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t O,
+                                    uint32_t strideA,
+                                    uint32_t strideB,
+                                    uint32_t strideC,
+                                    uint32_t shift,
+                                    int8_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix matrix multiplication of a 8-bit fix-point matrices for XPULPV2
+                  extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 8-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+*/
+
+void plp_mat_mult_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                                     const int8_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideC,
+                                     uint32_t shift,
+                                     int8_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+    @brief Parallel matrix multiplication of 8-bit fix-point matrices kernel for XPULPV2 extension.
+    @param[in]  args pointer to plp_mat_mult_stride_instance_q8 struct initialized by
+                     plp_mat_mult_stride_q8_parallel
+    @return     none
+*/
+
+void plp_mat_mult_stride_q8vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+   @brief         Glue code for strided matrix transposed matrix multiplication of a 32-bit integer
+                  matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_trans_stride_i32(const int32_t *__restrict__ pSrcA,
+                                   const int32_t *__restrict__ pSrcB,
+                                   uint32_t M,
+                                   uint32_t N,
+                                   uint32_t O,
+                                   uint32_t strideA,
+                                   uint32_t strideB,
+                                   uint32_t strideC,
+                                   int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix transposed matrix multiplication of a 32-bit integer matrices for
+                  RV32IM extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_trans_stride_i32s_rv32im(const int32_t *__restrict__ pSrcA,
+                                           const int32_t *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           uint32_t strideA,
+                                           uint32_t strideB,
+                                           uint32_t strideC,
+                                           int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix transposed matrix multiplication of a 32-bit integer matrices for
+                  XPULPV2 extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_trans_stride_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                                            const int32_t *__restrict__ pSrcB,
+                                            uint32_t M,
+                                            uint32_t N,
+                                            uint32_t O,
+                                            uint32_t strideA,
+                                            uint32_t strideB,
+                                            uint32_t strideC,
+                                            int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Glue code for strided matrix transposed matrix multiplication of a 16-bit integer
+                  matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_trans_stride_i16(const int16_t *__restrict__ pSrcA,
+                                   const int16_t *__restrict__ pSrcB,
+                                   uint32_t M,
+                                   uint32_t N,
+                                   uint32_t O,
+                                   uint32_t strideA,
+                                   uint32_t strideB,
+                                   uint32_t strideC,
+                                   int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix transposed matrix multiplication of a 16-bit integer matrices for
+                  RV32IM extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_trans_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
+                                           const int16_t *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           uint32_t strideA,
+                                           uint32_t strideB,
+                                           uint32_t strideC,
+                                           int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix transposed matrix multiplication of a 16-bit integer matrices for
+                  XPULPV2 extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Exploiting SIMD instructions
+   The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+   performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_trans_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+                                            const int16_t *__restrict__ pSrcB,
+                                            uint32_t M,
+                                            uint32_t N,
+                                            uint32_t O,
+                                            uint32_t strideA,
+                                            uint32_t strideB,
+                                            uint32_t strideC,
+                                            int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Glue code for strided matrix transposed matrix multiplication of a 8-bit integer
+                  matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_trans_stride_i8(const int8_t *__restrict__ pSrcA,
+                                  const int8_t *__restrict__ pSrcB,
+                                  uint32_t M,
+                                  uint32_t N,
+                                  uint32_t O,
+                                  uint32_t strideA,
+                                  uint32_t strideB,
+                                  uint32_t strideC,
+                                  int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix transposed matrix multiplication of a 8-bit integer matrices for
+                  RV32IM extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_trans_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
+                                          const int8_t *__restrict__ pSrcB,
+                                          uint32_t M,
+                                          uint32_t N,
+                                          uint32_t O,
+                                          uint32_t strideA,
+                                          uint32_t strideB,
+                                          uint32_t strideC,
+                                          int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix transposed matrix multiplication of a 8-bit integer matrices for
+                  XPULPV2 extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Exploiting SIMD instructions
+   The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+   performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_trans_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                                           const int8_t *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           uint32_t strideA,
+                                           uint32_t strideB,
+                                           uint32_t strideC,
+                                           int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel strided matrix matrix multiplication of a 32-bit integer
+                  matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_trans_stride_i32_parallel(const int32_t *__restrict__ pSrcA,
+                                            const int32_t *__restrict__ pSrcB,
+                                            uint32_t M,
+                                            uint32_t N,
+                                            uint32_t O,
+                                            uint32_t strideA,
+                                            uint32_t strideB,
+                                            uint32_t strideC,
+                                            uint32_t nPE,
+                                            int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief      Parallel strided matrix transposed matrix multiplication of a 32-bit integer
+               matrices for RV32IM extension.
+   @param[in]  args  pointer to plp_mat_mult_stride_instance_i32 struct initialized by
+                     plp_mat_mult_stride_i32_parallel
+   @return     none
+*/
+
+void plp_mat_mult_trans_stride_i32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel strided matrix transposed matrix multiplication of a 16-bit
+                  integer matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_trans_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
+                                            const int16_t *__restrict__ pSrcB,
+                                            uint32_t M,
+                                            uint32_t N,
+                                            uint32_t O,
+                                            uint32_t strideA,
+                                            uint32_t strideB,
+                                            uint32_t strideC,
+                                            uint32_t nPE,
+                                            int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief      Parallel strided matrix transposed matrix multiplication of a 16-bit integer
+               matrices for XPULPV2 extension.
+   @param[in]  args  pointer to plp_mat_mult_stride_instance_i16 struct initialized by
+                     plp_mat_mult_stride_i16_parallel
+   @return     none
+
+   @par Exploiting SIMD instructions
+   The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+   performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_trans_stride_i16vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel strided matrix transposed matrix multiplication of a 8-bit
+                  integer matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_trans_stride_i8_parallel(const int8_t *__restrict__ pSrcA,
+                                           const int8_t *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           uint32_t strideA,
+                                           uint32_t strideB,
+                                           uint32_t strideC,
+                                           uint32_t nPE,
+                                           int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief      Parallel strided matrix transposed matrix multiplication of a 8-bit integer
+               matrices for XPULPV2 extension.
+   @param[in]  args  pointer to plp_mat_mult_stride_instance_i8 struct initialized by
+                     plp_mat_mult_stride_i8_parallel
+   @return     none
+
+   @par Exploiting SIMD instructions
+   The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+   performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_trans_stride_i8vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+   @brief         Glue code for strided matrix transposed matrix multiplication of a 32-bit
+                  fix-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+ */
+
+void plp_mat_mult_trans_stride_q32(const int32_t *__restrict__ pSrcA,
+                                   const int32_t *__restrict__ pSrcB,
+                                   uint32_t M,
+                                   uint32_t N,
+                                   uint32_t O,
+                                   uint32_t strideA,
+                                   uint32_t strideB,
+                                   uint32_t strideC,
+                                   uint32_t shift,
+                                   int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel strided matrix transposed matrix multiplication of a 32-bit
+                  fix-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+ */
+
+void plp_mat_mult_trans_stride_q32_parallel(const int32_t *__restrict__ pSrcA,
+                                            const int32_t *__restrict__ pSrcB,
+                                            uint32_t M,
+                                            uint32_t N,
+                                            uint32_t O,
+                                            uint32_t strideA,
+                                            uint32_t strideB,
+                                            uint32_t strideC,
+                                            uint32_t shift,
+                                            uint32_t nPE,
+                                            int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix transposed matrix multiplication of a 32-bit fix-point matrices for
+                  RV32IM extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+*/
+
+void plp_mat_mult_trans_stride_q32s_rv32im(const int32_t *__restrict__ pSrcA,
+                                           const int32_t *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           uint32_t strideA,
+                                           uint32_t strideB,
+                                           uint32_t strideC,
+                                           uint32_t shift,
+                                           int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix transposed matrix multiplication of a 32-bit fix-point matrices for
+                  XPULPV2 extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+*/
+
+void plp_mat_mult_trans_stride_q32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                                            const int32_t *__restrict__ pSrcB,
+                                            uint32_t M,
+                                            uint32_t N,
+                                            uint32_t O,
+                                            uint32_t strideA,
+                                            uint32_t strideB,
+                                            uint32_t strideC,
+                                            uint32_t shift,
+                                            int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+    @brief      Parallel strided matrix transposed matrix multiplication of 32-bit fix-point
+   matrices kernel for XPULPV2 extension.
+    @param[in]  args  pointer to plp_mat_mult_stride_instance_q32 struct initialized by
+                      plp_mat_mult_trans_stride_q32_parallel
+    @return     none
+*/
+
+void plp_mat_mult_trans_stride_q32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+   @brief         Glue code for strided matrix transposed matrix multiplication of a 16-bit
+                  fix-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 16-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+ */
+
+void plp_mat_mult_trans_stride_q16(const int16_t *__restrict__ pSrcA,
+                                   const int16_t *__restrict__ pSrcB,
+                                   uint32_t M,
+                                   uint32_t N,
+                                   uint32_t O,
+                                   uint32_t strideA,
+                                   uint32_t strideB,
+                                   uint32_t strideC,
+                                   uint32_t shift,
+                                   int16_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel strided matrix transposed matrix multiplication of a 16-bit
+                  fix-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 16-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+ */
+
+void plp_mat_mult_trans_stride_q16_parallel(const int16_t *__restrict__ pSrcA,
+                                            const int16_t *__restrict__ pSrcB,
+                                            uint32_t M,
+                                            uint32_t N,
+                                            uint32_t O,
+                                            uint32_t strideA,
+                                            uint32_t strideB,
+                                            uint32_t strideC,
+                                            uint32_t shift,
+                                            uint32_t nPE,
+                                            int16_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix transposed matrix multiplication of a 16-bit fix-point matrices for
+                  RV32IM extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 16-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+*/
+
+void plp_mat_mult_trans_stride_q16s_rv32im(const int16_t *__restrict__ pSrcA,
+                                           const int16_t *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           uint32_t strideA,
+                                           uint32_t strideB,
+                                           uint32_t strideC,
+                                           uint32_t shift,
+                                           int16_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix transposed matrix multiplication of a 16-bit fix-point matrices for
+                  XPULPV2 extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 16-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+*/
+
+void plp_mat_mult_trans_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+                                            const int16_t *__restrict__ pSrcB,
+                                            uint32_t M,
+                                            uint32_t N,
+                                            uint32_t O,
+                                            uint32_t strideA,
+                                            uint32_t strideB,
+                                            uint32_t strideC,
+                                            uint32_t shift,
+                                            int16_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+    @brief      Parallel strided matrix transposed matrix multiplication of 16-bit fix-point
+   matrices kernel for XPULPV2 extension.
+    @param[in]  args  pointer to plp_mat_mult_stride_instance_q16 struct initialized by
+                      plp_mat_mult_trans_stride_q16_parallel
+    @return     none
+*/
+
+void plp_mat_mult_trans_stride_q16vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+   @brief         Glue code for strided matrix transposed matrix multiplication of a 8-bit fix-point
+                  matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 8-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+ */
+
+void plp_mat_mult_trans_stride_q8(const int8_t *__restrict__ pSrcA,
+                                  const int8_t *__restrict__ pSrcB,
+                                  uint32_t M,
+                                  uint32_t N,
+                                  uint32_t O,
+                                  uint32_t strideA,
+                                  uint32_t strideB,
+                                  uint32_t strideC,
+                                  uint32_t shift,
+                                  int8_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel strided matrix transposed matrix multiplication of a 8-bit
+                  fix-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 8-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+ */
+
+void plp_mat_mult_trans_stride_q8_parallel(const int8_t *__restrict__ pSrcA,
+                                           const int8_t *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           uint32_t strideA,
+                                           uint32_t strideB,
+                                           uint32_t strideC,
+                                           uint32_t shift,
+                                           uint32_t nPE,
+                                           int8_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix transposed matrix multiplication of a 8-bit fix-point matrices for
+                  RV32IM extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 8-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+*/
+
+void plp_mat_mult_trans_stride_q8s_rv32im(const int8_t *__restrict__ pSrcA,
+                                          const int8_t *__restrict__ pSrcB,
+                                          uint32_t M,
+                                          uint32_t N,
+                                          uint32_t O,
+                                          uint32_t strideA,
+                                          uint32_t strideB,
+                                          uint32_t strideC,
+                                          uint32_t shift,
+                                          int8_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix transposed matrix multiplication of a 8-bit fix-point matrices for
+                  XPULPV2 extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     shift      Amount to shift the result of each multiplication.
+   @param[out]    pDstC      Output is written here
+   @return        none
+
+   @par Fix-Point and Shifting
+   The result will be shifted by the parameter `shift` to the right (multiplied
+   by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix
+   B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
+   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
+
+  The output of the matrix multiplication will also be stored as an 8-bit array.
+  Set the `shift` parameter such that no overflow ocurrs.
+*/
+
+void plp_mat_mult_trans_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                                           const int8_t *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           uint32_t strideA,
+                                           uint32_t strideB,
+                                           uint32_t strideC,
+                                           uint32_t shift,
+                                           int8_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+    @brief      Parallel strided matrix transposed matrix multiplication of 8-bit fix-point matrices
+                kernel for XPULPV2 extension.
+    @param[in]  args  pointer to plp_mat_mult_stride_instance_q8 struct initialized by
+                      plp_mat_mult_trans_stride_q8_parallel
+    @return     none
+*/
+
+void plp_mat_mult_trans_stride_q8vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+   @brief         Glue code for strided matrix transposed matrix multiplication of a 32-bit
+                  floating-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_trans_stride_f32(const float *__restrict__ pSrcA,
+                                   const float *__restrict__ pSrcB,
+                                   uint32_t M,
+                                   uint32_t N,
+                                   uint32_t O,
+                                   uint32_t strideA,
+                                   uint32_t strideB,
+                                   uint32_t strideC,
+                                   float *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         strided matrix transposed matrix multiplication of a 32-bit floating-point
+                  matrices for XPULPV2 extension.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_trans_stride_f32s_xpulpv2(const float *__restrict__ pSrcA,
+                                            const float *__restrict__ pSrcB,
+                                            uint32_t M,
+                                            uint32_t N,
+                                            uint32_t O,
+                                            uint32_t strideA,
+                                            uint32_t strideB,
+                                            uint32_t strideC,
+                                            float *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+   @brief         Glue code for parallel strided matrix transposed matrix multiplication of a 32-bit
+                  floating-point matrices.
+   @param[in]     pSrcA      points to first the input matrix
+   @param[in]     pSrcB      points to second the input matrix
+   @param[in]     M          Height of first matrix
+   @param[in]     N          Width of first and heigt of second matrix
+   @param[in]     O          Width of second matrix
+   @param[in]     strideA    Stride of matrix A (elements between each row)
+   @param[in]     strideB    Stride of matrix B (elements between each row)
+   @param[in]     strudeY    Stride of output matrix (elements between each row)
+   @param[in]     nPE        Number of cores to use
+   @param[out]    pDstC      Output is written here
+   @return        none
+*/
+
+void plp_mat_mult_trans_stride_f32_parallel(const float *__restrict__ pSrcA,
+                                            const float *__restrict__ pSrcB,
+                                            uint32_t M,
+                                            uint32_t N,
+                                            uint32_t O,
+                                            uint32_t strideA,
+                                            uint32_t strideB,
+                                            uint32_t strideC,
+                                            uint32_t nPE,
+                                            float *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+    @brief      Parallel strided matrix transposed matrix multiplication of 32-bit floating-point
+                matrices kernel for XPULPV2 extension.
+    @param[in]  args  pointer to plp_mat_mult_stride_instance_f32 struct initialized by
+                      plp_mat_mult_trans_stride_f32_parallel
+    @return     none
+*/
+
+void plp_mat_mult_trans_stride_f32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief   Glue code for matrix addition of a 32-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_stride_i32(const int32_t *__restrict__ pSrcA,
+                            const int32_t *__restrict__ pSrcB,
+                            uint32_t M,
+                            uint32_t N,
+                            uint32_t strideA,
+                            uint32_t strideB,
+                            uint32_t strideY,
+                            int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief   matrix addition of a 32-bit integer matrices for RV32IM extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_stride_i32s_rv32im(const int32_t *__restrict__ pSrcA,
+                                    const int32_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t strideA,
+                                    uint32_t strideB,
+                                    uint32_t strideY,
+                                    int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      matrix addition of a 32-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_stride_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                                     const int32_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideY,
+                                     int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix addition of a 32-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[in]  nPE     Number of cores to use
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_stride_i32_parallel(const int32_t *__restrict__ pSrcA,
+                                     const int32_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideY,
+                                     uint32_t nPE,
+                                     int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Parallel matrix addition of a 32-bit integer matrices for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_add_stride_instance_i32 struct initialized by
+                        plp_mat_add_stride_i32_parallel
+  @return     none
+*/
+
+void plp_mat_add_stride_i32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix addition of a 16-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_stride_i16(const int16_t *__restrict__ pSrcA,
+                            const int16_t *__restrict__ pSrcB,
+                            uint32_t M,
+                            uint32_t N,
+                            uint32_t strideA,
+                            uint32_t strideB,
+                            uint32_t strideY,
+                            int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      matrix addition of a 16-bit integer matrices for RV32IM extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
+                                    const int16_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t strideA,
+                                    uint32_t strideB,
+                                    uint32_t strideY,
+                                    int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      matrix addition of a 16-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_add_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+                                     const int16_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideY,
+                                     int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix addition of a 16-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[in]  nPE     Number of cores to use
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
+                                     const int16_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideY,
+                                     uint32_t nPE,
+                                     int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief Parallel matrix addition of 16-bit integer matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_add_stride_instance_i16 struct initialized by
+                        plp_mat_add_stride_i16_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_add_stride_i16vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix addition of a 8-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_stride_i8(const int8_t *__restrict__ pSrcA,
+                           const int8_t *__restrict__ pSrcB,
+                           uint32_t M,
+                           uint32_t N,
+                           uint32_t strideA,
+                           uint32_t strideB,
+                           uint32_t strideY,
+                           int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      matrix addition of a 8-bit integer matrices for RV32IM extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
+                                   const int8_t *__restrict__ pSrcB,
+                                   uint32_t M,
+                                   uint32_t N,
+                                   uint32_t strideA,
+                                   uint32_t strideB,
+                                   uint32_t strideY,
+                                   int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      matrix addition of a 8-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_add_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                                    const int8_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t strideA,
+                                    uint32_t strideB,
+                                    uint32_t strideY,
+                                    int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix addition of a 8-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[in]  nPE     Number of cores to use
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_stride_i8_parallel(const int8_t *__restrict__ pSrcA,
+                                    const int8_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t strideA,
+                                    uint32_t strideB,
+                                    uint32_t strideY,
+                                    uint32_t nPE,
+                                    int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief Parallel matrix addition of 8-bit integer matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_add_stride_instance_i8 struct initialized by
+                        plp_mat_add_stride_i8_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_add_stride_i8vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix addition of a 32-bit floating-point matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_stride_f32(const float *__restrict__ pSrcA,
+                            const float *__restrict__ pSrcB,
+                            uint32_t M,
+                            uint32_t N,
+                            uint32_t strideA,
+                            uint32_t strideB,
+                            uint32_t strideY,
+                            float *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      matrix addition of a 32-bit floating-point matrices for XPULPV2 extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_stride_f32s_xpulpv2(const float *__restrict__ pSrcA,
+                                     const float *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideY,
+                                     float *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix addition of a 32-bit floating-point matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[in]  nPE     Number of cores to use
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_add_stride_f32_parallel(const float *__restrict__ pSrcA,
+                                     const float *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideY,
+                                     uint32_t nPE,
+                                     float *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief Parallel matrix addition of 32-bit floating-point matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_add_stride_instance_f32 struct initialized by
+                        plp_mat_add_stride_f32_parallel
+  @return     none
+*/
+
+void plp_mat_add_stride_f32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief   Glue code for matrix subtraction of a 32-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_stride_i32(const int32_t *__restrict__ pSrcA,
+                            const int32_t *__restrict__ pSrcB,
+                            uint32_t M,
+                            uint32_t N,
+                            uint32_t strideA,
+                            uint32_t strideB,
+                            uint32_t strideY,
+                            int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief   matrix subtraction of a 32-bit integer matrices for RV32IM extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_stride_i32s_rv32im(const int32_t *__restrict__ pSrcA,
+                                    const int32_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t strideA,
+                                    uint32_t strideB,
+                                    uint32_t strideY,
+                                    int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      matrix subtraction of a 32-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_stride_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                                     const int32_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideY,
+                                     int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix subtraction of a 32-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[in]  nPE     Number of cores to use
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_stride_i32_parallel(const int32_t *__restrict__ pSrcA,
+                                     const int32_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideY,
+                                     uint32_t nPE,
+                                     int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Parallel matrix subtraction of a 32-bit integer matrices for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_sub_stride_instance_i32 struct initialized by
+                        plp_mat_sub_stride_i32_parallel
+  @return     none
+*/
+
+void plp_mat_sub_stride_i32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix subtraction of a 16-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_stride_i16(const int16_t *__restrict__ pSrcA,
+                            const int16_t *__restrict__ pSrcB,
+                            uint32_t M,
+                            uint32_t N,
+                            uint32_t strideA,
+                            uint32_t strideB,
+                            uint32_t strideY,
+                            int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      matrix subtraction of a 16-bit integer matrices for RV32IM extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
+                                    const int16_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t strideA,
+                                    uint32_t strideB,
+                                    uint32_t strideY,
+                                    int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      matrix subtraction of a 16-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_sub_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+                                     const int16_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideY,
+                                     int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix subtraction of a 16-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[in]  nPE     Number of cores to use
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
+                                     const int16_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideY,
+                                     uint32_t nPE,
+                                     int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief Parallel matrix subtraction of 16-bit integer matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_sub_stride_instance_i16 struct initialized by
+                        plp_mat_sub_stride_i16_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_sub_stride_i16vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix subtraction of a 8-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_stride_i8(const int8_t *__restrict__ pSrcA,
+                           const int8_t *__restrict__ pSrcB,
+                           uint32_t M,
+                           uint32_t N,
+                           uint32_t strideA,
+                           uint32_t strideB,
+                           uint32_t strideY,
+                           int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      matrix subtraction of a 8-bit integer matrices for RV32IM extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
+                                   const int8_t *__restrict__ pSrcB,
+                                   uint32_t M,
+                                   uint32_t N,
+                                   uint32_t strideA,
+                                   uint32_t strideB,
+                                   uint32_t strideY,
+                                   int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      matrix subtraction of a 8-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_sub_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                                    const int8_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t strideA,
+                                    uint32_t strideB,
+                                    uint32_t strideY,
+                                    int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix subtraction of a 8-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[in]  nPE     Number of cores to use
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_stride_i8_parallel(const int8_t *__restrict__ pSrcA,
+                                    const int8_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t strideA,
+                                    uint32_t strideB,
+                                    uint32_t strideY,
+                                    uint32_t nPE,
+                                    int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief Parallel matrix subtraction of 8-bit integer matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_sub_stride_instance_i8 struct initialized by
+                        plp_mat_sub_stride_i8_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_sub_stride_i8vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix subtraction of a 32-bit floating-point matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_stride_f32(const float *__restrict__ pSrcA,
+                            const float *__restrict__ pSrcB,
+                            uint32_t M,
+                            uint32_t N,
+                            uint32_t strideA,
+                            uint32_t strideB,
+                            uint32_t strideY,
+                            float *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      matrix subtraction of a 32-bit floating-point matrices for XPULPV2 extension.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_stride_f32s_xpulpv2(const float *__restrict__ pSrcA,
+                                     const float *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideY,
+                                     float *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel matrix subtraction of a 32-bit floating-point matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[in]  strideA Stride of matrix A (elements between each row)
+  @param[in]  strideB Stride of matrix B (elements between each row)
+  @param[in]  strideY Stride of output matrix (elements between each row)
+  @param[in]  nPE     Number of cores to use
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_sub_stride_f32_parallel(const float *__restrict__ pSrcA,
+                                     const float *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t strideA,
+                                     uint32_t strideB,
+                                     uint32_t strideY,
+                                     uint32_t nPE,
+                                     float *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief Parallel matrix subtraction of 32-bit floating-point matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_sub_stride_instance_f32 struct initialized by
+                        plp_mat_sub_stride_f32_parallel
+  @return     none
+*/
+
+void plp_mat_sub_stride_f32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief   Glue code for strided matrix scale of a 32-bit integer matrices.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  strideSrc   Stride for input matrix (elements between each row)
+  @param[in]  strideDst   Stride for output matrix (elements between each row)
+  @param[in]  strideSrc   Stride of input matrix (elements between each row)
+  @param[in]  strideDst   Stride of output matrix (elements between each row)
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return  none
+*/
+
+void plp_mat_scale_stride_i32(const int32_t *__restrict__ pSrc,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t strideSrc,
+                              uint32_t strideDst,
+                              int32_t scaleFactor,
+                              int32_t shift,
+                              int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief   strided matrix scale of a 32-bit integer matrices for RV32IM extension.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  strideSrc   Stride for input matrix (elements between each row)
+  @param[in]  strideDst   Stride for output matrix (elements between each row)
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return  none
+*/
+
+void plp_mat_scale_stride_i32s_rv32im(const int32_t *__restrict__ pSrc,
+                                      uint32_t M,
+                                      uint32_t N,
+                                      uint32_t strideSrc,
+                                      uint32_t strideDst,
+                                      int32_t scaleFactor,
+                                      int32_t shift,
+                                      int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      strided matrix scale of a 32-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  strideSrc   Stride for input matrix (elements between each row)
+  @param[in]  strideDst   Stride for output matrix (elements between each row)
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_stride_i32s_xpulpv2(const int32_t *__restrict__ pSrc,
+                                       uint32_t M,
+                                       uint32_t N,
+                                       uint32_t strideSrc,
+                                       uint32_t strideDst,
+                                       int32_t scaleFactor,
+                                       int32_t shift,
+                                       int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel strided matrix scale of a 32-bit integer matrices.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  strideSrc   Stride for input matrix (elements between each row)
+  @param[in]  strideDst   Stride for output matrix (elements between each row)
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[in]  nPE         Number of cores to use for computation
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_stride_i32_parallel(const int32_t *__restrict__ pSrc,
+                                       uint32_t M,
+                                       uint32_t N,
+                                       uint32_t strideSrc,
+                                       uint32_t strideDst,
+                                       int32_t scaleFactor,
+                                       int32_t shift,
+                                       uint32_t nPE,
+                                       int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Parallel strided matrix scale of a 32-bit integer matrices for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_scale_stride_instance_i32 struct initialized by
+                        plp_mat_scale_stride_i32_parallel
+  @return     none
+*/
+
+void plp_mat_scale_stride_i32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for strided matrix scale of a 16-bit integer matrices.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  strideSrc   Stride for input matrix (elements between each row)
+  @param[in]  strideDst   Stride for output matrix (elements between each row)
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_stride_i16(const int16_t *__restrict__ pSrc,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t strideSrc,
+                              uint32_t strideDst,
+                              int16_t scaleFactor,
+                              int32_t shift,
+                              int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      strided matrix scale of a 16-bit integer matrices for RV32IM extension.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  strideSrc   Stride for input matrix (elements between each row)
+  @param[in]  strideDst   Stride for output matrix (elements between each row)
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_stride_i16s_rv32im(const int16_t *__restrict__ pSrc,
+                                      uint32_t M,
+                                      uint32_t N,
+                                      uint32_t strideSrc,
+                                      uint32_t strideDst,
+                                      int16_t scaleFactor,
+                                      int32_t shift,
+                                      int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      strided matrix scale of a 16-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  strideSrc   Stride for input matrix (elements between each row)
+  @param[in]  strideDst   Stride for output matrix (elements between each row)
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_scale_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrc,
+                                       uint32_t M,
+                                       uint32_t N,
+                                       uint32_t strideSrc,
+                                       uint32_t strideDst,
+                                       int16_t scaleFactor,
+                                       int32_t shift,
+                                       int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel strided matrix scale of a 16-bit integer matrices.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  strideSrc   Stride for input matrix (elements between each row)
+  @param[in]  strideDst   Stride for output matrix (elements between each row)
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[in]  nPE         Number of cores to use for computation
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_stride_i16_parallel(const int16_t *__restrict__ pSrc,
+                                       uint32_t M,
+                                       uint32_t N,
+                                       uint32_t strideSrc,
+                                       uint32_t strideDst,
+                                       int16_t scaleFactor,
+                                       int32_t shift,
+                                       uint32_t nPE,
+                                       int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief Parallel strided matrix scale of 16-bit integer matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_scale_stride_instance_i16 struct initialized by
+                        plp_mat_scale_stride_i16_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_scale_stride_i16vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for strided matrix scale of a 8-bit integer matrices.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  strideSrc   Stride for input matrix (elements between each row)
+  @param[in]  strideDst   Stride for output matrix (elements between each row)
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_stride_i8(const int8_t *__restrict__ pSrc,
+                             uint32_t M,
+                             uint32_t N,
+                             uint32_t strideSrc,
+                             uint32_t strideDst,
+                             int8_t scaleFactor,
+                             int32_t shift,
+                             int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      strided matrix scale of a 8-bit integer matrices for RV32IM extension.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  strideSrc   Stride for input matrix (elements between each row)
+  @param[in]  strideDst   Stride for output matrix (elements between each row)
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_stride_i8s_rv32im(const int8_t *__restrict__ pSrc,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t strideSrc,
+                                     uint32_t strideDst,
+                                     int8_t scaleFactor,
+                                     int32_t shift,
+                                     int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      strided matrix scale of a 8-bit integer matrices for XPULPV2 extension.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  strideSrc   Stride for input matrix (elements between each row)
+  @param[in]  strideDst   Stride for output matrix (elements between each row)
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[out] pDst        Points to the output matrix
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_scale_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrc,
+                                      uint32_t M,
+                                      uint32_t N,
+                                      uint32_t strideSrc,
+                                      uint32_t strideDst,
+                                      int8_t scaleFactor,
+                                      int32_t shift,
+                                      int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel strided matrix scale of a 8-bit integer matrices.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  strideSrc   Stride for input matrix (elements between each row)
+  @param[in]  strideDst   Stride for output matrix (elements between each row)
+  @param[in]  scaleFactor Factor to mulitply all elements before shifting
+  @param[in]  shift       Amount to shift each element
+  @param[in]  nPE         Number of cores to use for computation
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_stride_i8_parallel(const int8_t *__restrict__ pSrc,
+                                      uint32_t M,
+                                      uint32_t N,
+                                      uint32_t strideSrc,
+                                      uint32_t strideDst,
+                                      int8_t scaleFactor,
+                                      int32_t shift,
+                                      uint32_t nPE,
+                                      int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief Parallel strided matrix scale of 8-bit integer matrices kernel for XPULPV2 extension.
+  @param[in]  args      pointer to plp_mat_scale_stride_instance_i8 struct initialized by
+                        plp_mat_scale_stride_i8_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_scale_stride_i8vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for strided matrix scale of a 32-bit floating-point matrices.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  strideSrc   Stride for input matrix (elements between each row)
+  @param[in]  strideDst   Stride for output matrix (elements between each row)
+  @param[in]  scaleFactor Factor to mulitply all elements
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_stride_f32(const float *__restrict__ pSrc,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t strideSrc,
+                              uint32_t strideDst,
+                              float scaleFactor,
+                              float *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      strided matrix scale of a 32-bit floating-point matrices for XPULPV2 extension.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  strideSrc   Stride for input matrix (elements between each row)
+  @param[in]  strideDst   Stride for output matrix (elements between each row)
+  @param[in]  scaleFactor Factor to mulitply all elements
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_stride_f32s_xpulpv2(const float *__restrict__ pSrc,
+                                       uint32_t M,
+                                       uint32_t N,
+                                       uint32_t strideSrc,
+                                       uint32_t strideDst,
+                                       float scaleFactor,
+                                       float *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for parallel strided matrix scale of a 32-bit floating-point matrices.
+  @param[in]  pSrc        Points to the input matrix
+  @param[in]  M           Height of both matrices
+  @param[in]  N           Width of both matrices
+  @param[in]  strideSrc   Stride for input matrix (elements between each row)
+  @param[in]  strideDst   Stride for output matrix (elements between each row)
+  @param[in]  scaleFactor Factor to mulitply all elements
+  @param[in]  nPE         Number of cores to use for computation
+  @param[out] pDst        Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_scale_stride_f32_parallel(const float *__restrict__ pSrc,
+                                       uint32_t M,
+                                       uint32_t N,
+                                       uint32_t strideSrc,
+                                       uint32_t strideDst,
+                                       float scaleFactor,
+                                       uint32_t nPE,
+                                       float *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief Parallel strided matrix scale of 32-bit floating-point matrices kernel for XPULPV2
+         extension.
+  @param[in]  args      pointer to plp_mat_scale_stride_instance_f32 struct initialized by
+                        plp_mat_scale_stride_f32_parallel
+  @return  none
+*/
+
+void plp_mat_scale_stride_f32p_xpulpv2(void *args);
+
 
 #endif // __PLP_MATH_H__
