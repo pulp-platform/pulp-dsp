@@ -75,11 +75,11 @@ void plp_mat_mult_trans_stride_q16(const int16_t *__restrict__ pSrcA,
                                    int16_t *__restrict__ pDstC) {
 
     if (rt_cluster_id() == ARCHI_FC_CID) {
-        plp_mat_mult_trans_stride_q16s_rv32im(
-            pSrcA, pSrcB, M, N, O, strideA, strideB, strideC, shift, pDstC);
+        plp_mat_mult_trans_stride_q16s_rv32im(pSrcA, pSrcB, M, N, O, strideA, strideB, strideC,
+                                              shift, pDstC);
     } else {
-        plp_mat_mult_trans_stride_q16v_xpulpv2(
-            pSrcA, pSrcB, M, N, O, strideA, strideB, strideC, shift, pDstC);
+        plp_mat_mult_trans_stride_q16v_xpulpv2(pSrcA, pSrcB, M, N, O, strideA, strideB, strideC,
+                                               shift, pDstC);
     }
 }
 

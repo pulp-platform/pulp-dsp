@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup MatSub
  */
-
 
 /**
   @addtogroup MatSubKernels
@@ -43,30 +41,32 @@
 
 /**
   @brief Parallel matrix subtraction of 16-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_sub_instance_i16 struct initialized by plp_mat_sub_i16_parallel
+  @param[in]  args  pointer to plp_mat_sub_instance_i16 struct initialized by
+                    plp_mat_sub_i16_parallel
   @return     none
 
   @par Exploiting SIMD instructions
-  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_i16vp_xpulpv2(void* args) {
+void plp_mat_sub_i16vp_xpulpv2(void *args) {
 
     int core_id = rt_core_id();
 
-    plp_mat_sub_instance_i16* a = (plp_mat_sub_instance_i16*)args;
+    plp_mat_sub_instance_i16 *a = (plp_mat_sub_instance_i16 *)args;
 
-    const int16_t * __restrict__ pSrcA = a->pSrcA;
-    const int16_t * __restrict__ pSrcB = a->pSrcB;
+    const int16_t *__restrict__ pSrcA = a->pSrcA;
+    const int16_t *__restrict__ pSrcB = a->pSrcB;
     uint32_t M = a->M;
     uint32_t N = a->N;
     uint32_t nPE = a->nPE;
-    int16_t * __restrict__ pDst = a->pDst;
+    int16_t *__restrict__ pDst = a->pDst;
 
 #define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 #ifdef BASIC_VERSION
 
-    uint32_t m, n;  // loop counters
+    uint32_t m, n; // loop counters
 
     for (m = core_id; m < M; m += nPE) {
         for (n = 0; n < N; n++) {
@@ -74,13 +74,12 @@ void plp_mat_sub_i16vp_xpulpv2(void* args) {
         }
     }
 
-#else 
+#else
 
     // TODO: Hackathon
 
 #endif
 #undef BASIC_VERSION
-
 }
 
 /**

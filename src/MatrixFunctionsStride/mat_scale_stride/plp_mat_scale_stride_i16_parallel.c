@@ -67,15 +67,15 @@ void plp_mat_scale_stride_i16_parallel(const int16_t *__restrict__ pSrc,
         printf("parallel processing supported only for cluster side\n");
         return;
     } else {
-        plp_mat_scale_stride_instance_i16 args = {.pSrc = pSrc,
-                                                  .M = M,
-                                                  .N = N,
-                                                  .strideSrc = strideSrc,
-                                                  .strideDst = strideDst,
-                                                  .scaleFactor = scaleFactor,
-                                                  .shift = shift,
-                                                  .nPE = nPE,
-                                                  .pDst = pDst};
+        plp_mat_scale_stride_instance_i16 args = { .pSrc = pSrc,
+                                                   .M = M,
+                                                   .N = N,
+                                                   .strideSrc = strideSrc,
+                                                   .strideDst = strideDst,
+                                                   .scaleFactor = scaleFactor,
+                                                   .shift = shift,
+                                                   .nPE = nPE,
+                                                   .pDst = pDst };
 
         rt_team_fork(nPE, plp_mat_scale_stride_i16vp_xpulpv2, (void *)&args);
     }

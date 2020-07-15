@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMatrix
  */
@@ -50,23 +49,19 @@
   @return     none
  */
 
-void plp_mat_sub_i32(const int32_t * __restrict__ pSrcA,
-                     const int32_t * __restrict__ pSrcB,
+void plp_mat_sub_i32(const int32_t *__restrict__ pSrcA,
+                     const int32_t *__restrict__ pSrcB,
                      uint32_t M,
                      uint32_t N,
-                     int32_t * __restrict__ pDst){
+                     int32_t *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_mat_sub_i32s_rv32im(pSrcA, pSrcB, M, N, pDst);
-    }
-    else{
+    } else {
         plp_mat_sub_i32s_xpulpv2(pSrcA, pSrcB, M, N, pDst);
     }
-
 }
 
 /**
   @} end of MatSub group
  */
-
-

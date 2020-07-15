@@ -1,4 +1,4 @@
-/** =====================================================================
+/* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_mat_trans_i16.c
  * Description:  16-bit integer matrix transpose glue code
@@ -8,7 +8,7 @@
  *
  * Target Processor: PULP cores
  * ===================================================================== */
-/**
+/*
  * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
@@ -29,7 +29,6 @@
  */
 
 #include "plp_math.h"
-
 
 /**
   @ingroup groupMatrix
@@ -65,22 +64,18 @@
   @return     none
  */
 
-void plp_mat_trans_i16(const int16_t* __restrict__ pSrc,
+void plp_mat_trans_i16(const int16_t *__restrict__ pSrc,
                        uint32_t M,
                        uint32_t N,
-                       int16_t* __restrict__ pDst){
+                       int16_t *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_mat_trans_i16s_rv32im(pSrc, M, N, pDst);
-    }
-    else{
+    } else {
         plp_mat_trans_i16v_xpulpv2(pSrc, M, N, pDst);
     }
-
 }
 
 /**
   @} end of MatTrans group
  */
-
-

@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMatrix
  */
@@ -48,28 +47,23 @@
   @param[in]  N         width of the first input matrix and hight of the second
   @param[in]  O         width of the second input matrix
   @param[out] pDstC     points to the output matrix
-  @return        none
+  @return     none
  */
 
-void plp_mat_mult_trans_i16(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_mat_mult_trans_i16s_rv32im(pSrcA, pSrcB, M, N, O, pDstC);
-  }
-  else{
-    plp_mat_mult_trans_i16v_xpulpv2(pSrcA, pSrcB, M, N, O, pDstC);
-  }
+void plp_mat_mult_trans_i16(const int16_t *__restrict__ pSrcA,
+                            const int16_t *__restrict__ pSrcB,
+                            uint32_t M,
+                            uint32_t N,
+                            uint32_t O,
+                            int32_t *__restrict__ pDstC) {
 
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        plp_mat_mult_trans_i16s_rv32im(pSrcA, pSrcB, M, N, O, pDstC);
+    } else {
+        plp_mat_mult_trans_i16v_xpulpv2(pSrcA, pSrcB, M, N, O, pDstC);
+    }
 }
 
 /**
   @} end of MatMultTrans group
  */
-
-

@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMatrix BasicMatMult
  */
-
 
 /**
   @addtogroup BasicMatMultKernels
@@ -43,7 +41,8 @@
 
 /**
   @brief Parallel Matrix multiplication of 8-bit fix-point matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_mult_instance_q8 struct initialized by plp_mat_mult_q8_parallel
+  @param[in]  args  pointer to plp_mat_mult_instance_q8 struct initialized by
+                    plp_mat_mult_q8_parallel
   @return     none
 
   @par Fix-Point and Shifting
@@ -56,20 +55,20 @@
   array. Set the `shift` parameter such that no overflow ocurrs.
  */
 
-void plp_mat_mult_q8vp_xpulpv2(void* args) {
+void plp_mat_mult_q8vp_xpulpv2(void *args) {
 
     int core_id = rt_core_id();
 
-    plp_mat_mult_instance_q8* a = (plp_mat_mult_instance_q8*)args;
-    
-    const int8_t * __restrict__ pSrcA = a->pSrcA;
-    const int8_t * __restrict__ pSrcB = a->pSrcB;
+    plp_mat_mult_instance_q8 *a = (plp_mat_mult_instance_q8 *)args;
+
+    const int8_t *__restrict__ pSrcA = a->pSrcA;
+    const int8_t *__restrict__ pSrcB = a->pSrcB;
     uint32_t M = a->M;
     uint32_t N = a->N;
     uint32_t O = a->O;
     uint32_t shift = a->shift;
     uint32_t nPE = a->nPE;
-    int8_t * __restrict__ pDstC = a->pDstC;
+    int8_t *__restrict__ pDstC = a->pDstC;
 
 #define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 #ifdef BASIC_VERSION
@@ -78,10 +77,10 @@ void plp_mat_mult_q8vp_xpulpv2(void* args) {
     uint32_t n; // loop counter
     uint32_t o; // loop counter
 
-    for(m = core_id; m < M; m += nPE){
-        for(o = 0; o < O; o++){
+    for (m = core_id; m < M; m += nPE) {
+        for (o = 0; o < O; o++) {
             int32_t sum = 0;
-            for(n = 0; n < N; n++){
+            for (n = 0; n < N; n++) {
                 int32_t valA = (int32_t)pSrcA[m * N + n];
                 int32_t valB = (int32_t)pSrcB[n * O + o];
                 sum += __ROUNDNORM_REG(valA * valB, shift);
@@ -90,13 +89,12 @@ void plp_mat_mult_q8vp_xpulpv2(void* args) {
         }
     }
 
-#else 
+#else
 
-        // TODO hackathon
+    // TODO hackathon
 
 #endif
 #undef BASIC_VERSION
-
 }
 
 /**

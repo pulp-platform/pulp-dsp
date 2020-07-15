@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
    @ingroup groupMatrix
  */
@@ -49,7 +48,7 @@
   @param[in]  O         width of the second input matrix
   @param[in]  shift     Amount to shift the result of each multiplication.
   @param[out] pDstC     points to the output matrix
-  @return        none
+  @return     none
 
   @par Fix-Point and Shifting
   The result will be shifted by the parameter `shift` to the right (multiplied
@@ -61,25 +60,21 @@
   array. Set the `shift` parameter such that no overflow ocurrs.
  */
 
-void plp_mat_mult_trans_q16(const int16_t * __restrict__ pSrcA,
-                            const int16_t * __restrict__ pSrcB,
+void plp_mat_mult_trans_q16(const int16_t *__restrict__ pSrcA,
+                            const int16_t *__restrict__ pSrcB,
                             uint32_t M,
                             uint32_t N,
                             uint32_t O,
                             uint32_t shift,
-                            int16_t * __restrict__ pDstC) {
+                            int16_t *__restrict__ pDstC) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_mat_mult_trans_q16s_rv32im(pSrcA, pSrcB, M, N, O, shift, pDstC);
-    }
-    else{
+    } else {
         plp_mat_mult_trans_q16v_xpulpv2(pSrcA, pSrcB, M, N, O, shift, pDstC);
     }
-
 }
 
 /**
   @} end of MatMultTrans group
  */
-
-

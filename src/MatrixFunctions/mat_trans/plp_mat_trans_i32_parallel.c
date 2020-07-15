@@ -1,4 +1,4 @@
-/** =====================================================================
+/* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_mat_trans_i32_parallel.c
  * Description:  parallel 16-bit integer matrix transpose glue code
@@ -8,7 +8,7 @@
  *
  * Target Processor: PULP cores
  * ===================================================================== */
-/**
+/*
  * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMatrix
  */
-
 
 /**
   @addtogroup MatTrans
@@ -47,32 +45,24 @@
   @return     none
  */
 
-void plp_mat_trans_i32_parallel(const int32_t* __restrict__ pSrc,
+void plp_mat_trans_i32_parallel(const int32_t *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
                                 uint32_t nPE,
-                                int32_t* __restrict__ pDst){
+                                int32_t *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         printf("parallel processing supported only for cluster side\n");
         return;
-    }
-    else{
+    } else {
         plp_mat_trans_instance_i32 args = {
-            .pSrc = pSrc,
-            .M = M,
-            .N = N,
-            .nPE = nPE,
-            .pDst = pDst
+            .pSrc = pSrc, .M = M, .N = N, .nPE = nPE, .pDst = pDst
         };
 
-        rt_team_fork(nPE, plp_mat_trans_i32p_xpulpv2, (void*) &args);
+        rt_team_fork(nPE, plp_mat_trans_i32p_xpulpv2, (void *)&args);
     }
-
 }
 
 /**
   @} end of MatTrans group
  */
-
-

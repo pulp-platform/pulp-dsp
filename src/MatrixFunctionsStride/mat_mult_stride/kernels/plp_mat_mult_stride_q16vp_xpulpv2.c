@@ -100,7 +100,6 @@ void plp_mat_mult_stride_q16vp_xpulpv2(void *args) {
 #undef BASIC_VERSION
 
     rt_team_barrier();
-
 }
 
 /**

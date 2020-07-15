@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMatrix
  */
-
 
 /**
   @addtogroup MatInv
@@ -53,24 +51,20 @@
   single-core implementation!
  */
 
-int plp_mat_inv_f32_parallel(float* __restrict__ pSrc,
+int plp_mat_inv_f32_parallel(float *__restrict__ pSrc,
                              uint32_t N,
                              uint32_t nPE,
-                             float* __restrict__ pDst) {
+                             float *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         printf("parallel and floating-point processing supported only for cluster side\n");
         return 2;
-    }
-    else{
+    } else {
         // TODO, for now, we only call the singlecore implementation, until it is implemented
         return plp_mat_inv_f32s_xpulpv2(pSrc, N, pDst);
     }
-
 }
 
 /**
   @} end of MatInv group
  */
-
-

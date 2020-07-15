@@ -1,4 +1,4 @@
-/** =====================================================================
+/* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_mat_trans_i32s_rv32im.c
  * Description:  32-bit matrix transpose kernel for RV32IM
@@ -8,7 +8,7 @@
  *
  * Target Processor: PULP cores
  * ===================================================================== */
-/**
+/*
  * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup MatTrans
  */
@@ -49,11 +48,10 @@
   @return     none
  */
 
-
-void plp_mat_trans_i32s_rv32im(const int32_t* __restrict__ pSrc,
+void plp_mat_trans_i32s_rv32im(const int32_t *__restrict__ pSrc,
                                uint32_t M,
                                uint32_t N,
-                               int32_t* __restrict__ pDst) {
+                               int32_t *__restrict__ pDst) {
 
 #define BASIC_VERSION // if used don' forget to also use undefine at end of file
 #ifdef BASIC_VERSION
@@ -70,10 +68,8 @@ void plp_mat_trans_i32s_rv32im(const int32_t* __restrict__ pSrc,
 
 #endif
 #undef BASIC_VERSION
-
 }
 
 /**
    @} end of MatTransKernels group
 */
-

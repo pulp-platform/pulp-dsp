@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
    @ingroup groupMatrix
  */
@@ -51,24 +50,20 @@
   @return     none
  */
 
-void plp_mat_add_f32(const float * __restrict__ pSrcA,
-                     const float * __restrict__ pSrcB,
+void plp_mat_add_f32(const float *__restrict__ pSrcA,
+                     const float *__restrict__ pSrcB,
                      uint32_t M,
                      uint32_t N,
-                     float * __restrict__ pDst) {
+                     float *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         printf("Floating point is supported only for cluster side\n");
         return;
-    }
-    else{
+    } else {
         plp_mat_add_f32s_xpulpv2(pSrcA, pSrcB, M, N, pDst);
     }
-
 }
 
 /**
   @} end of MatAdd group
  */
-
-

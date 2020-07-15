@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup MatAdd
  */
-
 
 /**
   @addtogroup MatAddKernels
@@ -43,27 +41,28 @@
 
 /**
   @brief Parallel matrix addition of 32-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_add_instance_i32 struct initialized by plp_mat_add_i32_parallel
+  @param[in]  args  pointer to plp_mat_add_instance_i32 struct initialized by
+                    plp_mat_add_i32_parallel
   @return     none
  */
 
-void plp_mat_add_i32p_xpulpv2( void* args) {
+void plp_mat_add_i32p_xpulpv2(void *args) {
 
     int core_id = rt_core_id();
 
-    plp_mat_add_instance_i32* a = (plp_mat_add_instance_i32*)args;
+    plp_mat_add_instance_i32 *a = (plp_mat_add_instance_i32 *)args;
 
-    const int32_t * __restrict__ pSrcA = a->pSrcA;
-    const int32_t * __restrict__ pSrcB = a->pSrcB;
+    const int32_t *__restrict__ pSrcA = a->pSrcA;
+    const int32_t *__restrict__ pSrcB = a->pSrcB;
     uint32_t M = a->M;
     uint32_t N = a->N;
     uint32_t nPE = a->nPE;
-    int32_t * __restrict__ pDst = a->pDst;
+    int32_t *__restrict__ pDst = a->pDst;
 
 #define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 #ifdef BASIC_VERSION
 
-    uint32_t m, n;  // loop counters
+    uint32_t m, n; // loop counters
 
     for (m = core_id; m < M; m += nPE) {
         for (n = 0; n < N; n++) {
@@ -71,13 +70,12 @@ void plp_mat_add_i32p_xpulpv2( void* args) {
         }
     }
 
-#else 
+#else
 
     // TODO: Hackathon
 
 #endif
 #undef BASIC_VERSION
-
 }
 
 /**
