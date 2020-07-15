@@ -41,8 +41,8 @@
 
 /**
   @brief Parallel matrix transpose of 8-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_trans_instance_i8 struct initialized by
-  plp_mat_trans_i8_parallel
+  @param[in]  args  pointer to plp_mat_trans_instance_i8 struct initialized by
+                    plp_mat_trans_i8_parallel
   @return     none
 
   @par Exploiting SIMD instructions

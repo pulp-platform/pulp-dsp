@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup MatScale
  */
-
 
 /**
   @addtogroup MatScaleKernels
@@ -52,30 +50,29 @@
   @return     none
  */
 
-void plp_mat_scale_i16v_xpulpv2(const int16_t * __restrict__ pSrc,
+void plp_mat_scale_i16v_xpulpv2(const int16_t *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
                                 int16_t scaleFactor,
                                 int32_t shift,
-                                int16_t * __restrict__ pDst) {
+                                int16_t *__restrict__ pDst) {
 
 #define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 #ifdef BASIC_VERSION
 
-    for(int m = 0; m < M; m++) {
-        for(int n = 0; n < N; n++) {
+    for (int m = 0; m < M; m++) {
+        for (int n = 0; n < N; n++) {
             int32_t val = ((int32_t)pSrc[m * N + n]) * ((int32_t)scaleFactor);
             pDst[m * N + n] = (int16_t)(val >> shift);
         }
     }
 
-#else 
+#else
 
     // TODO: Hackathon
 
 #endif
 #undef BASIC_VERSION
-
 }
 /**
    @} end of MatScaleKernels group

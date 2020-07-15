@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup MatInv
  */
@@ -42,20 +41,19 @@
 
 /**
    @brief Parallel matrix inversion of 32-bit floating-point matrices kernel for XPULPV2 extension.
-   @param[in]  args      pointer to plp_mat_inv_instance_f32 struct initialized by plp_mat_inv_f32_parallel
+   @param[in]  args  pointer to plp_mat_inv_instance_f32 struct initialized by
+                    plp_mat_inv_f32_parallel
    @return     0: Success, 1: Matrix is singular
 
    @warn Not yet implemented
 */
 
-int plp_mat_inv_f32p_xpulpv2(void* args) {
+int plp_mat_inv_f32p_xpulpv2(void *args) {
 
     // TODO
 
     return 1;
-
 }
-
 
 /**
    @} end of MatInvKernels group

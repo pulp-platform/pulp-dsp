@@ -41,8 +41,8 @@
 
 /**
   @brief Parallel matrix transpose of 32-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_trans_instance_i32 struct initialized by
-  plp_mat_trans_i32_parallel
+  @param[in]  args  pointer to plp_mat_trans_instance_i32 struct initialized by
+                    plp_mat_trans_i32_parallel
   @return     none
  */
 

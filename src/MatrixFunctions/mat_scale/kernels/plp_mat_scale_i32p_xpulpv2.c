@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup MatScale
  */
-
 
 /**
   @addtogroup MatScaleKernels
@@ -43,41 +41,41 @@
 
 /**
   @brief Parallel matrix scale of 32-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_scale_instance_i32 struct initialized by plp_mat_scale_i32_parallel
+  @param[in]  args  pointer to plp_mat_scale_instance_i32 struct initialized by
+                    plp_mat_scale_i32_parallel
   @return     none
  */
 
-void plp_mat_scale_i32p_xpulpv2( void* args) {
+void plp_mat_scale_i32p_xpulpv2(void *args) {
 
     int core_id = rt_core_id();
 
-    plp_mat_scale_instance_i32* a = (plp_mat_scale_instance_i32*)args;
+    plp_mat_scale_instance_i32 *a = (plp_mat_scale_instance_i32 *)args;
 
-    const int32_t * __restrict__ pSrc = a->pSrc;
+    const int32_t *__restrict__ pSrc = a->pSrc;
     uint32_t M = a->M;
     uint32_t N = a->N;
     int32_t scaleFactor = a->scaleFactor;
     int32_t shift = a->shift;
     uint32_t nPE = a->nPE;
-    int32_t * __restrict__ pDst = a->pDst;
+    int32_t *__restrict__ pDst = a->pDst;
 
 #define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 #ifdef BASIC_VERSION
 
-    for(int m = core_id; m < M; m += nPE) {
-        for(int n = 0; n < N; n++) {
+    for (int m = core_id; m < M; m += nPE) {
+        for (int n = 0; n < N; n++) {
             int32_t val = ((int32_t)pSrc[m * N + n]) * ((int32_t)scaleFactor);
             pDst[m * N + n] = (int32_t)(val >> shift);
         }
     }
 
-#else 
+#else
 
     // TODO: Hackathon
 
 #endif
 #undef BASIC_VERSION
-
 }
 
 /**

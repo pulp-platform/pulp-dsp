@@ -75,7 +75,7 @@
   @param[in]  N         width of the first input matrix and hight of the second
   @param[in]  O         width of the second input matrix
   @param[out] pDstC     points to the output matrix
-  @return        none
+  @return     none
  */
 
 // #define BASIC_VERSION // if used don' forget to also use undefine at end of file

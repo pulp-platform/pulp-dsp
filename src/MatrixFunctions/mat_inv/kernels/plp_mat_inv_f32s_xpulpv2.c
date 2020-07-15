@@ -35,7 +35,6 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup MatInv
  */
@@ -77,9 +76,7 @@
   @return     0: Success, 1: Matrix is singular
  */
 
-int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
-                             uint32_t N,
-                             float * __restrict__ pDst) {
+int plp_mat_inv_f32s_xpulpv2(float *__restrict__ pSrc, uint32_t N, float *__restrict__ pDst) {
 
     /*--------------------------------------------------------------------------------------------------------------
      * Matrix Inverse can be solved using elementary row operations.
@@ -116,15 +113,15 @@ int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
      *         Therefore, the matrix to the right of the bar is our solution(pDst matrix, pDst).
      *----------------------------------------------------------------------------------------------------------------*/
 
-    float *pSrcT1, *pSrcT2;                          /* Temporary input data matrix pointer */
-    float *pDstT1, *pDstT2;                          /* Temporary output data matrix pointer */
-    float *pPivotRowIn;                              /* Temporary input and output data matrix pointer */
-    float *pPRT_in, *pPivotRowDst, *pPRT_pDst;       /* Temporary input and output data matrix pointer */
+    float *pSrcT1, *pSrcT2;                    /* Temporary input data matrix pointer */
+    float *pDstT1, *pDstT2;                    /* Temporary output data matrix pointer */
+    float *pPivotRowIn;                        /* Temporary input and output data matrix pointer */
+    float *pPRT_in, *pPivotRowDst, *pPRT_pDst; /* Temporary input and output data matrix pointer */
 
     float Xchg, in = 0.0f, in1;                      /* Temporary input values  */
     uint32_t i, rowCnt, flag = 0U, j, loopCnt, k, l; /* loop counters */
 
-    uint32_t M = N;                                  /* M is the number of rows. However, the matirces must be square. */
+    uint32_t M = N; /* M is the number of rows. However, the matirces must be square. */
 
     /* Working pointer for destination matrix */
     pDstT1 = pDst;
@@ -133,12 +130,10 @@ int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
     rowCnt = M;
 
     /* Making the destination matrix as identity matrix */
-    while (rowCnt > 0U)
-    {
+    while (rowCnt > 0U) {
         /* Writing all zeroes in lower triangle of the destination matrix */
         j = M - rowCnt;
-        while (j > 0U)
-        {
+        while (j > 0U) {
             *pDstT1++ = 0.0f;
             j--;
         }
@@ -148,8 +143,7 @@ int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
 
         /* Writing all zeroes in upper triangle of the destination matrix */
         j = rowCnt - 1U;
-        while (j > 0U)
-        {
+        while (j > 0U) {
             *pDstT1++ = 0.0f;
             j--;
         }
@@ -165,8 +159,7 @@ int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
     /* Index modifier to navigate through the columns */
     l = 0U;
 
-    while (loopCnt > 0U)
-    {
+    while (loopCnt > 0U) {
         /* Check if the pivot element is zero..
          * If it is zero then interchange the row with non zero row below.
          * If there is no non zero element to replace in the rows below,
@@ -183,31 +176,26 @@ int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
         /* Temporary variable to hold the pivot value */
         in = *pSrcT1;
 
-
         /* Destination pointer modifier */
         k = 1U;
 
         /* Check if the pivot element is zero */
-        if (*pSrcT1 == 0.0f)
-        {
+        if (*pSrcT1 == 0.0f) {
             /* Loop over the number rows present below */
 
-            for (i = (l + 1U); i < M; i++)
-            {
+            for (i = (l + 1U); i < M; i++) {
                 /* Update the input and destination pointers */
                 pSrcT2 = pSrcT1 + (N * i);
                 pDstT2 = pDstT1 + (N * k);
 
                 /* Check if there is a non zero pivot element to
                  * replace in the rows below */
-                if (*pSrcT2 != 0.0f)
-                {
+                if (*pSrcT2 != 0.0f) {
                     /* Loop over number of columns
                      * to the right of the pilot element */
                     j = N - l;
 
-                    while (j > 0U)
-                    {
+                    while (j > 0U) {
                         /* Exchange the row elements of the input matrix */
                         Xchg = *pSrcT2;
                         *pSrcT2++ = *pSrcT1;
@@ -220,8 +208,7 @@ int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
                     /* Loop over number of columns of the destination matrix */
                     j = N;
 
-                    while (j > 0U)
-                    {
+                    while (j > 0U) {
                         /* Exchange the row elements of the destination matrix */
                         Xchg = *pDstT2;
                         *pDstT2++ = *pDstT1;
@@ -246,8 +233,7 @@ int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
         }
 
         /* Update the status if the matrix is singular */
-        if ((flag != 1U) && (in == 0.0f))
-        {
+        if ((flag != 1U) && (in == 0.0f)) {
             return 1;
         }
 
@@ -266,8 +252,7 @@ int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
          * to the right of the pilot element */
         j = (N - l);
 
-        while (j > 0U)
-        {
+        while (j > 0U) {
             /* Divide each element of the row of the input matrix
              * by the pivot element */
             in1 = *pSrcT1;
@@ -280,8 +265,7 @@ int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
         /* Loop over number of columns of the destination matrix */
         j = N;
 
-        while (j > 0U)
-        {
+        while (j > 0U) {
             /* Divide each element of the row of the destination matrix
              * by the pivot element */
             in1 = *pSrcT2;
@@ -305,19 +289,15 @@ int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
         /*  to be replaced by the sum of that row and a multiple of row i */
         k = M;
 
-        while (k > 0U)
-        {
+        while (k > 0U) {
             /* Check for the pivot element */
-            if (i == l)
-            {
+            if (i == l) {
                 /* If the processing element is the pivot element,
                    only the columns to the right are to be processed */
                 pSrcT1 += N - l;
 
                 pSrcT2 += N;
-            }
-            else
-            {
+            } else {
                 /* Element of the reference row */
                 in = *pSrcT1;
 
@@ -329,8 +309,7 @@ int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
                    to replace the elements in the input matrix */
                 j = (N - l);
 
-                while (j > 0U)
-                {
+                while (j > 0U) {
                     /* Replace the element by the sum of that row
                        and a multiple of the reference row  */
                     in1 = *pSrcT1;
@@ -344,8 +323,7 @@ int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
                    replace the elements in the destination matrix */
                 j = N;
 
-                while (j > 0U)
-                {
+                while (j > 0U) {
                     /* Replace the element by the sum of that row
                        and a multiple of the reference row  */
                     in1 = *pSrcT2;
@@ -354,7 +332,6 @@ int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
                     /* Decrement loop counter */
                     j--;
                 }
-
             }
 
             /* Increment temporary input pointer */
@@ -375,13 +352,10 @@ int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
 
         /* Increment the index modifier */
         l++;
-
     }
 
-    if ((flag != 1U) && (in == 0.0f))
-    {
-        for (i = 0; i < M * N; i++)
-        {
+    if ((flag != 1U) && (in == 0.0f)) {
+        for (i = 0; i < M * N; i++) {
             if (pSrc[i] != 0.0f)
                 break;
         }
@@ -391,9 +365,7 @@ int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
     }
 
     return 0;
-
 }
-
 
 /**
    @} end of MatInvKernels group

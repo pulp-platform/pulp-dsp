@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup MatMultTrans
  */
@@ -48,121 +47,121 @@
   @param[in]  N         width of the first input matrix and hight of the second
   @param[in]  O         width of the second input matrix
   @param[out] pDstC     points to the output matrix
-  @return        none
+  @return     none
  */
-
 
 // #define BASIC_VERSION // if used don' forget to also use undefine at end of file
 
 #ifdef BASIC_VERSION
 
-void plp_mat_mult_trans_i8s_rv32im(
-                              const int8_t * __restrict__ pSrcA,
-                              const int8_t * __restrict__ pSrcB,
-                              uint32_t M,
-                              uint32_t N,
-                              uint32_t O,
-                              int32_t * __restrict__ pDstC) {
-        
-        uint32_t i = 0; // loop counter
-        uint32_t j = 0; // loop counter
-        uint32_t k = 0; // loop counter
+void plp_mat_mult_trans_i8s_rv32im(const int8_t *__restrict__ pSrcA,
+                                   const int8_t *__restrict__ pSrcB,
+                                   uint32_t M,
+                                   uint32_t N,
+                                   uint32_t O,
+                                   int32_t *__restrict__ pDstC) {
 
-        for(i=0; i < M; i++){
-          for(k=0; k < O; k++){
+    uint32_t i = 0; // loop counter
+    uint32_t j = 0; // loop counter
+    uint32_t k = 0; // loop counter
+
+    for (i = 0; i < M; i++) {
+        for (k = 0; k < O; k++) {
             int32_t sum = 0;
-            for(j=0; j<N; j++){
-              sum = sum + pSrcA[i*N + j]*pSrcB[k*N + j];
+            for (j = 0; j < N; j++) {
+                sum = sum + pSrcA[i * N + j] * pSrcB[k * N + j];
             }
-            pDstC[i*O +k] = sum;
-          }
+            pDstC[i * O + k] = sum;
         }
+    }
 }
 
 #else
 
-void plp_mat_mult_trans_i8s_rv32im(
-                              const int8_t * __restrict__ pSrcA,
-                              const int8_t * __restrict__ pSrcB,
-                              uint32_t M,
-                              uint32_t N,
-                              uint32_t O,
-                              int32_t * __restrict__ pDstC) {
-        
-        uint32_t i= 0; // loop counter
-        uint32_t j= 0; // loop counter
-        uint32_t k= 0; // loop counter
-        
-        uint32_t mod = N & 0x3;
+void plp_mat_mult_trans_i8s_rv32im(const int8_t *__restrict__ pSrcA,
+                                   const int8_t *__restrict__ pSrcB,
+                                   uint32_t M,
+                                   uint32_t N,
+                                   uint32_t O,
+                                   int32_t *__restrict__ pDstC) {
 
-        if(mod == 3){
-          for(i=0; i < M; i++){
-            for(k=0; k < O; k++){
-              int32_t sum1 = 0;
-              int32_t sum2 = 0;
-              int32_t sum3 = 0;
-              int32_t sum4 = 0;
-              for(j=0; j<N/4; j++){
-                sum1 = sum1 + pSrcA[i*N + j*4]*pSrcB[k*N + j*4];
-                sum2 = sum2 + pSrcA[i*N + j*4+1]*pSrcB[k*N + j*4+1];
-                sum3 = sum3 + pSrcA[i*N + j*4+2]*pSrcB[k*N + j*4+2];
-                sum4 = sum4 + pSrcA[i*N + j*4+3]*pSrcB[k*N + j*4+3];
-              }
-              int32_t remaining = pSrcA[i*N + N-1]*pSrcB[k*N + N-1] + pSrcA[i*N + N-2]*pSrcB[k*N + N-2] + pSrcA[i*N + N-3]*pSrcB[k*N + N-3];
-              pDstC[i*O +k] = sum1 + sum2 + sum3 + sum4 + remaining;
+    uint32_t i = 0; // loop counter
+    uint32_t j = 0; // loop counter
+    uint32_t k = 0; // loop counter
+
+    uint32_t mod = N & 0x3;
+
+    if (mod == 3) {
+        for (i = 0; i < M; i++) {
+            for (k = 0; k < O; k++) {
+                int32_t sum1 = 0;
+                int32_t sum2 = 0;
+                int32_t sum3 = 0;
+                int32_t sum4 = 0;
+                for (j = 0; j < N / 4; j++) {
+                    sum1 = sum1 + pSrcA[i * N + j * 4] * pSrcB[k * N + j * 4];
+                    sum2 = sum2 + pSrcA[i * N + j * 4 + 1] * pSrcB[k * N + j * 4 + 1];
+                    sum3 = sum3 + pSrcA[i * N + j * 4 + 2] * pSrcB[k * N + j * 4 + 2];
+                    sum4 = sum4 + pSrcA[i * N + j * 4 + 3] * pSrcB[k * N + j * 4 + 3];
+                }
+                int32_t remaining = pSrcA[i * N + N - 1] * pSrcB[k * N + N - 1] +
+                                    pSrcA[i * N + N - 2] * pSrcB[k * N + N - 2] +
+                                    pSrcA[i * N + N - 3] * pSrcB[k * N + N - 3];
+                pDstC[i * O + k] = sum1 + sum2 + sum3 + sum4 + remaining;
             }
-          }
-        } else if(mod == 2){
-          for(i=0; i < M; i++){
-            for(k=0; k < O; k++){
-              int32_t sum1 = 0;
-              int32_t sum2 = 0;
-              int32_t sum3 = 0;
-              int32_t sum4 = 0;
-              for(j=0; j<N/4; j++){
-                sum1 = sum1 + pSrcA[i*N + j*4]*pSrcB[k*N + j*4];
-                sum2 = sum2 + pSrcA[i*N + j*4+1]*pSrcB[k*N + j*4+1];
-                sum3 = sum3 + pSrcA[i*N + j*4+2]*pSrcB[k*N + j*4+2];
-                sum4 = sum4 + pSrcA[i*N + j*4+3]*pSrcB[k*N + j*4+3];
-              }
-              int32_t remaining = pSrcA[i*N + N-1]*pSrcB[k*N + N-1] + pSrcA[i*N + N-2]*pSrcB[k*N + N-2];
-              pDstC[i*O +k] = sum1 + sum2 + sum3 + sum4 + remaining;
-            }
-          }
-        } else if(mod == 1){
-          for(i=0; i < M; i++){
-            for(k=0; k < O; k++){
-              int32_t sum1 = 0;
-              int32_t sum2 = 0;
-              int32_t sum3 = 0;
-              int32_t sum4 = 0;
-              for(j=0; j<N/4; j++){
-                sum1 = sum1 + pSrcA[i*N + j*4]*pSrcB[k*N + j*4];
-                sum2 = sum2 + pSrcA[i*N + j*4+1]*pSrcB[k*N + j*4+1];
-                sum3 = sum3 + pSrcA[i*N + j*4+2]*pSrcB[k*N + j*4+2];
-                sum4 = sum4 + pSrcA[i*N + j*4+3]*pSrcB[k*N + j*4+3];
-              }
-              pDstC[i*O +k] = sum1 + sum2 + sum3 + sum4 + pSrcA[i*N + N-1]*pSrcB[k*N + N-1];
-            }
-          }
-        } else {
-          for(i=0; i < M; i++){
-            for(k=0; k < O; k++){
-              int32_t sum1 = 0;
-              int32_t sum2 = 0;
-              int32_t sum3 = 0;
-              int32_t sum4 = 0;
-              for(j=0; j<N/4; j++){
-                sum1 = sum1 + pSrcA[i*N + j*4]*pSrcB[k*N + j*4];
-                sum2 = sum2 + pSrcA[i*N + j*4+1]*pSrcB[k*N + j*4+1];
-                sum3 = sum3 + pSrcA[i*N + j*4+2]*pSrcB[k*N + j*4+2];
-                sum4 = sum4 + pSrcA[i*N + j*4+3]*pSrcB[k*N + j*4+3];
-              }
-              pDstC[i*O +k] = sum1 + sum2 + sum3 + sum4;
-            }
-          }
         }
-
+    } else if (mod == 2) {
+        for (i = 0; i < M; i++) {
+            for (k = 0; k < O; k++) {
+                int32_t sum1 = 0;
+                int32_t sum2 = 0;
+                int32_t sum3 = 0;
+                int32_t sum4 = 0;
+                for (j = 0; j < N / 4; j++) {
+                    sum1 = sum1 + pSrcA[i * N + j * 4] * pSrcB[k * N + j * 4];
+                    sum2 = sum2 + pSrcA[i * N + j * 4 + 1] * pSrcB[k * N + j * 4 + 1];
+                    sum3 = sum3 + pSrcA[i * N + j * 4 + 2] * pSrcB[k * N + j * 4 + 2];
+                    sum4 = sum4 + pSrcA[i * N + j * 4 + 3] * pSrcB[k * N + j * 4 + 3];
+                }
+                int32_t remaining = pSrcA[i * N + N - 1] * pSrcB[k * N + N - 1] +
+                                    pSrcA[i * N + N - 2] * pSrcB[k * N + N - 2];
+                pDstC[i * O + k] = sum1 + sum2 + sum3 + sum4 + remaining;
+            }
+        }
+    } else if (mod == 1) {
+        for (i = 0; i < M; i++) {
+            for (k = 0; k < O; k++) {
+                int32_t sum1 = 0;
+                int32_t sum2 = 0;
+                int32_t sum3 = 0;
+                int32_t sum4 = 0;
+                for (j = 0; j < N / 4; j++) {
+                    sum1 = sum1 + pSrcA[i * N + j * 4] * pSrcB[k * N + j * 4];
+                    sum2 = sum2 + pSrcA[i * N + j * 4 + 1] * pSrcB[k * N + j * 4 + 1];
+                    sum3 = sum3 + pSrcA[i * N + j * 4 + 2] * pSrcB[k * N + j * 4 + 2];
+                    sum4 = sum4 + pSrcA[i * N + j * 4 + 3] * pSrcB[k * N + j * 4 + 3];
+                }
+                pDstC[i * O + k] =
+                    sum1 + sum2 + sum3 + sum4 + pSrcA[i * N + N - 1] * pSrcB[k * N + N - 1];
+            }
+        }
+    } else {
+        for (i = 0; i < M; i++) {
+            for (k = 0; k < O; k++) {
+                int32_t sum1 = 0;
+                int32_t sum2 = 0;
+                int32_t sum3 = 0;
+                int32_t sum4 = 0;
+                for (j = 0; j < N / 4; j++) {
+                    sum1 = sum1 + pSrcA[i * N + j * 4] * pSrcB[k * N + j * 4];
+                    sum2 = sum2 + pSrcA[i * N + j * 4 + 1] * pSrcB[k * N + j * 4 + 1];
+                    sum3 = sum3 + pSrcA[i * N + j * 4 + 2] * pSrcB[k * N + j * 4 + 2];
+                    sum4 = sum4 + pSrcA[i * N + j * 4 + 3] * pSrcB[k * N + j * 4 + 3];
+                }
+                pDstC[i * O + k] = sum1 + sum2 + sum3 + sum4;
+            }
+        }
+    }
 }
 
 #endif
@@ -172,4 +171,3 @@ void plp_mat_mult_trans_i8s_rv32im(
 /**
    @} end of BasicDotProdKernels group
 */
-

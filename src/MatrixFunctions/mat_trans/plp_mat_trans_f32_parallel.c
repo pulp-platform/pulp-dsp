@@ -62,7 +62,8 @@ void plp_mat_trans_f32_parallel(const float *__restrict__ pSrc,
         return;
     } else {
         plp_mat_trans_instance_i32 args = {
-            .pSrc = (int32_t *)pSrc, .M = M, .N = N, .nPE = nPE, .pDst = (int32_t *)pDst};
+            .pSrc = (int32_t *)pSrc, .M = M, .N = N, .nPE = nPE, .pDst = (int32_t *)pDst
+        };
 
         rt_team_fork(nPE, plp_mat_trans_i32p_xpulpv2, (void *)&args);
     }

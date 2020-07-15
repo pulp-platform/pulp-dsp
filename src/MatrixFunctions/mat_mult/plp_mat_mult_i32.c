@@ -74,7 +74,7 @@
   @param[in]  N         width of the first input matrix and hight of the second
   @param[in]  O         width of the second input matrix
   @param[out] pDstC     points to the output matrix
-  @return        none
+  @return     none
  */
 
 void plp_mat_mult_i32(const int32_t *__restrict__ pSrcA,
