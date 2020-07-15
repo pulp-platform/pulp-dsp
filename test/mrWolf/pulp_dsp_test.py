@@ -1195,7 +1195,7 @@ def declare_scalar(name, ctype, value):
         # address of the variable, and then cast it to a float pointer. However, it is not
         # possible to dereference a pointer in a .h file. Therefore, we use the second method;
         # generating a union with a float (.f) and a unsigned int (.u).
-        return "__u2f %s = {.u = %sU}\n" % (name, fmt_float(value))
+        return "__u2f %s = {.u = %sU};\n" % (name, fmt_float(value))
     else:
         return('%s %s = %s;\n' % (ctype, name, value))
 
