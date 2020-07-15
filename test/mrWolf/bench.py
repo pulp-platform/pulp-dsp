@@ -71,6 +71,8 @@ def compare(args):
     # compare and match
     new_runs, old_runs = match_two_runs(new_runs, old_runs)
 
+    assert len(new_runs) != 0
+
     # print comparison
     print_comparison(new_runs, old_runs)
 
