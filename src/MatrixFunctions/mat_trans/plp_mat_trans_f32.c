@@ -1,4 +1,4 @@
-/** =====================================================================
+/* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_mat_trans_f32.c
  * Description:  32-bit floating-point matrix transpose glue code
@@ -8,7 +8,7 @@
  *
  * Target Processor: PULP cores
  * ===================================================================== */
-/**
+/*
  * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
    @ingroup groupMatrix
  */
@@ -51,23 +50,19 @@
   @par This function will use plp_mat_trans_i32s_xpulpv2 for its computation.
  */
 
-void plp_mat_trans_f32(const float* __restrict__ pSrc,
+void plp_mat_trans_f32(const float *__restrict__ pSrc,
                        uint32_t M,
                        uint32_t N,
-                       float* __restrict__ pDst) {
+                       float *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         printf("Floating point is supported only for cluster side\n");
         return;
+    } else {
+        plp_mat_trans_i32s_xpulpv2((int32_t *)pSrc, M, N, (int32_t *)pDst);
     }
-    else{
-        plp_mat_trans_i32s_xpulpv2((int32_t*)pSrc, M, N, (int32_t*)pDst);
-    }
-
 }
 
 /**
   @} end of MatTrans group
  */
-
-

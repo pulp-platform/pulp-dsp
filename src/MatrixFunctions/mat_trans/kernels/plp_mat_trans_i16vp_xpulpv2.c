@@ -1,4 +1,4 @@
-/** =====================================================================
+/* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_mat_trans_i16vp_xpulpv2.c
  * Description:  parallel 16-bit integer matrix transpose for XPULPV2
@@ -8,7 +8,7 @@
  *
  * Target Processor: PULP cores
  * ===================================================================== */
-/**
+/*
  * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup MatTrans
  */
-
 
 /**
   @addtogroup MatTransKernels
@@ -43,24 +41,26 @@
 
 /**
   @brief Parallel matrix transpose of 16-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_trans_instance_i16 struct initialized by plp_mat_trans_i16_parallel
+  @param[in]  args      pointer to plp_mat_trans_instance_i16 struct initialized by
+  plp_mat_trans_i16_parallel
   @return     none
 
   @par Exploiting SIMD instructions
-  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_trans_i16vp_xpulpv2(void* args) {
+void plp_mat_trans_i16vp_xpulpv2(void *args) {
 
     int core_id = rt_core_id();
 
-    plp_mat_trans_instance_i16* a = (plp_mat_trans_instance_i16*)args;
+    plp_mat_trans_instance_i16 *a = (plp_mat_trans_instance_i16 *)args;
 
-    const int16_t* __restrict__ pSrc = a->pSrc;
+    const int16_t *__restrict__ pSrc = a->pSrc;
     uint32_t M = a->M;
     uint32_t N = a->N;
     uint32_t nPE = a->nPE;
-    int16_t* __restrict__ pDst = a->pDst;
+    int16_t *__restrict__ pDst = a->pDst;
 
 #define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 #ifdef BASIC_VERSION
@@ -77,7 +77,6 @@ void plp_mat_trans_i16vp_xpulpv2(void* args) {
 
 #endif
 #undef BASIC_VERSION
-
 }
 
 /**

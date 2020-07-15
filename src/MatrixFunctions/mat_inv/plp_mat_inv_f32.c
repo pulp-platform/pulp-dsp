@@ -1,4 +1,4 @@
-/** =====================================================================
+/* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_mat_inv_f32.c
  * Description:  32-bit floating-point matrix inversion glue code
@@ -8,7 +8,7 @@
  *
  * Target Processor: PULP cores
  * ===================================================================== */
-/**
+/*
  * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
@@ -29,7 +29,6 @@
  */
 
 #include "plp_math.h"
-
 
 /**
    @ingroup groupMatrix
@@ -60,7 +59,6 @@
   identity matrix yields the inverse matrix.
  */
 
-
 /**
   @addtogroup MatInv
   @{
@@ -76,22 +74,16 @@
   @par This function will use plp_mat_inv_i32s_xpulpv2 for its computation.
  */
 
-int plp_mat_inv_f32(float* __restrict__ pSrc,
-                    uint32_t N,
-                    float* __restrict__ pDst) {
+int plp_mat_inv_f32(float *__restrict__ pSrc, uint32_t N, float *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         printf("Floating point is supported only for cluster side\n");
         return 2;
-    }
-    else{
+    } else {
         return plp_mat_inv_f32s_xpulpv2(pSrc, N, pDst);
     }
-
 }
 
 /**
   @} end of MatInv group
  */
-
-

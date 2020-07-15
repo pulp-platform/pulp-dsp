@@ -1,4 +1,4 @@
-/** =====================================================================
+/* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_mat_trans_i32s_xpulpv2.c
  * Description:  32-bit integer matrix transpose for XPULPV2
@@ -8,7 +8,7 @@
  *
  * Target Processor: PULP cores
  * ===================================================================== */
-/**
+/*
  * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup MatTrans
  */
-
 
 /**
   @addtogroup MatTransKernels
@@ -50,11 +48,10 @@
   @return     none
  */
 
-void plp_mat_trans_i32s_xpulpv2(const int32_t* __restrict__ pSrc,
+void plp_mat_trans_i32s_xpulpv2(const int32_t *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
-                                int32_t* __restrict__ pDst) {
-
+                                int32_t *__restrict__ pDst) {
 
 #define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 #ifdef BASIC_VERSION
@@ -71,7 +68,6 @@ void plp_mat_trans_i32s_xpulpv2(const int32_t* __restrict__ pSrc,
 
 #endif
 #undef BASIC_VERSION
-
 }
 
 /**

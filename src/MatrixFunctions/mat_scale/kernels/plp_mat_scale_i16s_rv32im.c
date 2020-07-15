@@ -30,14 +30,34 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup MatScale
  */
 
 /**
   @defgroup MatScaleKernels matrix scale Kernels
-  <GROUP_DESCRIPTION>
+  This module contains the kernel functions for matrix scale.
+
+  The Matrix Scale applies a scalar multiplication, followed by a bitshift operation to every
+  element in the matrix. For floating-point implementations, the bitshift operation is not applied.
+
+      `pDst[m,n] = (pSrc[m,n] * scale) >> shift`
+
+  There are functions for integer 32- 16- and 8-bit data types. For lower precision integers (16-
+  and 8-bit), functions exploiting SIMD instructions are provided.
+
+  The naming scheme of the functions follows the following pattern (for example
+  `plp_mat_scale_i32s_xpulpv2`):
+
+      `plp_<function name>_<data type><precision><method>_<isa_extension>`
+
+  name          | description
+  ------------- | ---------------------------------------------------------
+  function_name | `mat_scale`
+  data type     | {f, i, q} respectively for floats, integers, fixed points
+  precision     | {32, 16, 8} bits
+  method        | {`s`, `v`, `p`} meaning scalar, vectorized (i.e. SIMD) and parallel, respectively
+  isa_extension | {`rv32im`, `xpulpv2`} respectively for ibex and riscy
  */
 
 /**
@@ -56,19 +76,18 @@
   @return     none
  */
 
-
-void plp_mat_scale_i16s_rv32im(const int16_t * __restrict__ pSrc,
+void plp_mat_scale_i16s_rv32im(const int16_t *__restrict__ pSrc,
                                uint32_t M,
                                uint32_t N,
                                int16_t scaleFactor,
                                int32_t shift,
-                               int16_t * __restrict__ pDst) {
+                               int16_t *__restrict__ pDst) {
 
 #define BASIC_VERSION // if used don' forget to also use undefine at end of file
 #ifdef BASIC_VERSION
 
-    for(int m = 0; m < M; m++) {
-        for(int n = 0; n < N; n++) {
+    for (int m = 0; m < M; m++) {
+        for (int n = 0; n < N; n++) {
             int32_t val = ((int32_t)pSrc[m * N + n]) * ((int32_t)scaleFactor);
             pDst[m * N + n] = (int16_t)(val >> shift);
         }
@@ -80,10 +99,8 @@ void plp_mat_scale_i16s_rv32im(const int16_t * __restrict__ pSrc,
 
 #endif
 #undef BASIC_VERSION
-
 }
 
 /**
    @} end of MatScaleKernels group
 */
-

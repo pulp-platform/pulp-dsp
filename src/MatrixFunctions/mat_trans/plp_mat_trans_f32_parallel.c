@@ -1,4 +1,4 @@
-/** =====================================================================
+/* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_mat_trans_f32_parallel.c
  * Description:  parallel 32-bit floating-point matrix transpose glue code
@@ -8,7 +8,7 @@
  *
  * Target Processor: PULP cores
  * ===================================================================== */
-/**
+/*
  * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMatrix
  */
-
 
 /**
   @addtogroup MatTrans
@@ -53,32 +51,23 @@
   @par This function will use plp_mat_trans_i32p_xpulpv2 for its computation.
  */
 
-void plp_mat_trans_f32_parallel(const float* __restrict__ pSrc,
+void plp_mat_trans_f32_parallel(const float *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
                                 uint32_t nPE,
-                                float* __restrict__ pDst) {
+                                float *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         printf("parallel and floating-point processing supported only for cluster side\n");
         return;
-    }
-    else{
+    } else {
         plp_mat_trans_instance_i32 args = {
-            .pSrc = (int32_t*)pSrc,
-            .M = M,
-            .N = N,
-            .nPE = nPE,
-            .pDst = (int32_t*)pDst
-        };
+            .pSrc = (int32_t *)pSrc, .M = M, .N = N, .nPE = nPE, .pDst = (int32_t *)pDst};
 
-        rt_team_fork(nPE, plp_mat_trans_i32p_xpulpv2, (void*) &args);
+        rt_team_fork(nPE, plp_mat_trans_i32p_xpulpv2, (void *)&args);
     }
-
 }
 
 /**
   @} end of MatTrans group
  */
-
-
