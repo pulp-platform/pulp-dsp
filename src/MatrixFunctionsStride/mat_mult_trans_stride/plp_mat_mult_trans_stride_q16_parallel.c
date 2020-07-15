@@ -80,17 +80,17 @@ void plp_mat_mult_trans_stride_q16_parallel(const int16_t *__restrict__ pSrcA,
         printf("parallel processing supported only for cluster side\n");
         return;
     } else {
-        plp_mat_mult_stride_instance_q16 args = {.pSrcA = pSrcA,
-                                                 .pSrcB = pSrcB,
-                                                 .M = M,
-                                                 .N = N,
-                                                 .O = O,
-                                                 .strideA = strideA,
-                                                 .strideB = strideB,
-                                                 .strideC = strideC,
-                                                 .shift = shift,
-                                                 .nPE = nPE,
-                                                 .pDstC = pDstC};
+        plp_mat_mult_stride_instance_q16 args = { .pSrcA = pSrcA,
+                                                  .pSrcB = pSrcB,
+                                                  .M = M,
+                                                  .N = N,
+                                                  .O = O,
+                                                  .strideA = strideA,
+                                                  .strideB = strideB,
+                                                  .strideC = strideC,
+                                                  .shift = shift,
+                                                  .nPE = nPE,
+                                                  .pDstC = pDstC };
         rt_team_fork(nPE, plp_mat_mult_trans_stride_q16vp_xpulpv2, (void *)&args);
     }
 }

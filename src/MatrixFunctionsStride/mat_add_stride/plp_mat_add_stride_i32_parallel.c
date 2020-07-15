@@ -67,15 +67,15 @@ void plp_mat_add_stride_i32_parallel(const int32_t *__restrict__ pSrcA,
         printf("parallel processing supported only for cluster side\n");
         return;
     } else {
-        plp_mat_add_stride_instance_i32 args = {.pSrcA = pSrcA,
-                                                .pSrcB = pSrcB,
-                                                .M = M,
-                                                .N = N,
-                                                .strideA = strideA,
-                                                .strideB = strideB,
-                                                .strideY = strideY,
-                                                .nPE = nPE,
-                                                .pDst = pDst};
+        plp_mat_add_stride_instance_i32 args = { .pSrcA = pSrcA,
+                                                 .pSrcB = pSrcB,
+                                                 .M = M,
+                                                 .N = N,
+                                                 .strideA = strideA,
+                                                 .strideB = strideB,
+                                                 .strideY = strideY,
+                                                 .nPE = nPE,
+                                                 .pDst = pDst };
 
         rt_team_fork(nPE, plp_mat_add_stride_i32p_xpulpv2, (void *)&args);
     }

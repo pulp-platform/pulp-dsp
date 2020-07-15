@@ -67,8 +67,8 @@ void plp_mat_mult_trans_stride_f32(const float *__restrict__ pSrcA,
         printf("Floating point is supported only for cluster side\n");
         return;
     } else {
-        plp_mat_mult_trans_stride_f32s_xpulpv2(
-            pSrcA, pSrcB, M, N, O, strideA, strideB, strideC, pDstC);
+        plp_mat_mult_trans_stride_f32s_xpulpv2(pSrcA, pSrcB, M, N, O, strideA, strideB, strideC,
+                                               pDstC);
     }
 }
 

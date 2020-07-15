@@ -64,8 +64,8 @@ void plp_mat_scale_stride_i8(const int8_t *__restrict__ pSrc,
     if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_mat_scale_stride_i8s_rv32im(pSrc, M, N, strideSrc, strideDst, scaleFactor, shift, pDst);
     } else {
-        plp_mat_scale_stride_i8v_xpulpv2(
-            pSrc, M, N, strideSrc, strideDst, scaleFactor, shift, pDst);
+        plp_mat_scale_stride_i8v_xpulpv2(pSrc, M, N, strideSrc, strideDst, scaleFactor, shift,
+                                         pDst);
     }
 }
 
