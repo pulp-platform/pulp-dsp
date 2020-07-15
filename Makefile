@@ -380,4 +380,13 @@ PULP_CFLAGS += -I$(IDIR) -O3 -g
 
 INSTALL_FILES += $(shell find include -name *.h)
 
-include $(PULP_SDK_HOME)/install/rules/pulp.mk
+-include $(PULP_SDK_HOME)/install/rules/pulp.mk
+
+.PHONY: doc fmt
+doc:
+	cd doc && doxygen doc_config
+
+fmt:
+	clang-format -style=file -i $(FC_SRCS) && \
+	clang-format -style=file -i $(CL_SRCS) && \
+	clang-format -style=file -i $(IDIR)/*
