@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup BasicDotProd
  */
-
 
 /**
   @addtogroup BasicDotProdKernels
@@ -42,23 +40,24 @@
  */
 
 /**
-  @brief Parallel dot product with interleaved access of 32-bit fixed point vectors kernel for XPULPV2 extension.
+  @brief Parallel dot product with interleaved access of 32-bit fixed point vectors kernel for
+  XPULPV2 extension.
   @param[in]  S     points to the instance structure for fixed point parallel dot product
   @return        none
  */
 
-void plp_dot_prod_q32p_xpulpv2(void * S) {
+void plp_dot_prod_q32p_xpulpv2(void *S) {
 
     int core_id = rt_core_id();
 
-    plp_dot_prod_instance_q32* args = (plp_dot_prod_instance_q32*)S;
+    plp_dot_prod_instance_q32 *args = (plp_dot_prod_instance_q32 *)S;
 
-    int32_t * pSrcA = (int32_t*)(args->pSrcA);
-    int32_t * pSrcB = (int32_t*)(args->pSrcB);
+    int32_t *pSrcA = (int32_t *)(args->pSrcA);
+    int32_t *pSrcB = (int32_t *)(args->pSrcB);
     uint32_t blkSizePE = args->blkSizePE;
     uint32_t deciPoint = args->deciPoint;
     uint32_t nPE = args->nPE;
-    int32_t * resBufferPE = &(args->resBuffer[core_id]);
+    int32_t *resBufferPE = &(args->resBuffer[core_id]);
 
     // *NOTICE* here, we can do something better for performance, by splitting it more evenly.
     // If (blkSizePe / nPE) is odd, then each core will process (blkSizePe / nPE) - 1 elements.
@@ -83,7 +82,7 @@ void plp_dot_prod_q32p_xpulpv2(void * S) {
 
 #if defined(PLP_MATH_LOOPUNROLL)
 
-    for (i = 0; i<blkSize - 1; i += 2){
+    for (i = 0; i < blkSize - 1; i += 2) {
         int32_t x0 = pSrcA[i] * pSrcB[i];
         int32_t x1 = pSrcA[i + 1] * pSrcB[i + 1];
         sum += __ADDROUNDNORM_REG(x0, x1, deciPoint);
@@ -101,8 +100,7 @@ void plp_dot_prod_q32p_xpulpv2(void * S) {
 
 #endif // PLP_MATH_LOOPUNROLL
 
-    * resBufferPE = sum;
-
+    *resBufferPE = sum;
 }
 
 /**

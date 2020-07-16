@@ -34,44 +34,41 @@
   @ingroup groupTransforms
  */
 
+/**
+  @defgroup fft  FFT transforms
+  This module contains the code to perform FFT transforms.
 
- /**
-   @defgroup fft  FFT transforms
-   This module contains the code to perform FFT transforms.
 
-
-  */
-
- /**
-    @addtogroup fft
-    @{
  */
 
- /**
-    @brief Floating-point FFT on real input data (parallel version).
-    @param[in]   S       points to an instance of the floating-point FFT structure
-    @param[in]   pSrc    points to the input buffer (real data)
-    @param[in]   nPE     number of parallel processing units
-    @param[out]  pDst    points to the output buffer (complex data)
-    @return      none
- */
- void plp_rfft_f32_parallel(
-         const plp_rfft_instance_f32 *S,
- 		     const float32_t * __restrict__ pSrc,
-         const uint32_t nPE,
- 	 	     float32_t * __restrict__ pDst){
+/**
+   @addtogroup fft
+   @{
+*/
 
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    printf("Parallel processing supported only for cluster side\n");
-    return;
-  }
+/**
+   @brief Floating-point FFT on real input data (parallel version).
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrc    points to the input buffer (real data)
+   @param[in]   nPE     number of parallel processing units
+   @param[out]  pDst    points to the output buffer (complex data)
+   @return      none
+*/
+void plp_rfft_f32_parallel(const plp_rfft_instance_f32 *S,
+                           const float32_t *__restrict__ pSrc,
+                           const uint32_t nPE,
+                           float32_t *__restrict__ pDst) {
 
-  plp_rfft_parallel_arg_f32 arg = (plp_rfft_parallel_arg_f32) {S, pSrc, nPE, pDst};
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        printf("Parallel processing supported only for cluster side\n");
+        return;
+    }
 
-  rt_team_fork(nPE, plp_rfft_f32_xpulpv2_parallel, (void *)&arg);
+    plp_rfft_parallel_arg_f32 arg = (plp_rfft_parallel_arg_f32){ S, pSrc, nPE, pDst };
 
- }
+    rt_team_fork(nPE, plp_rfft_f32_xpulpv2_parallel, (void *)&arg);
+}
 
- /**
-    @} end of FFT group
- */
+/**
+   @} end of FFT group
+*/

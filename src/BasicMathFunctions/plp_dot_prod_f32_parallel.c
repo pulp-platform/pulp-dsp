@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMath
  */
-
 
 /**
   @addtogroup BasicDotProd
@@ -51,66 +49,60 @@
   @return        none
  */
 
-void plp_dot_prod_f32_parallel(
-                         const float32_t * __restrict__ pSrcA,
-                         const float32_t * __restrict__ pSrcB,
-                         uint32_t blockSize,
-                         uint32_t nPE,
-                         float32_t * __restrict__ pRes){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    printf("parallel processing supported only for cluster side\n");
-    return;
-  }
-  else{
+void plp_dot_prod_f32_parallel(const float32_t *__restrict__ pSrcA,
+                               const float32_t *__restrict__ pSrcB,
+                               uint32_t blockSize,
+                               uint32_t nPE,
+                               float32_t *__restrict__ pRes) {
 
-    uint32_t i, tmpblkSizePE = blockSize/nPE;
-    float32_t resBuffer[rt_nb_pe()];
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        printf("parallel processing supported only for cluster side\n");
+        return;
+    } else {
 
-    plp_dot_prod_instance_f32 S;
+        uint32_t i, tmpblkSizePE = blockSize / nPE;
+        float32_t resBuffer[rt_nb_pe()];
 
-    // Initialize the plp_dot_prod_instance
-    S.pSrcA = pSrcA;
-    //printf("pSrcA[0] %d\n", pSrcA[0]);
-    S.pSrcB = pSrcB;
-    S.blkSizePE = tmpblkSizePE;
-    S.nPE = nPE;
-    S.resBuffer = resBuffer;
+        plp_dot_prod_instance_f32 S;
 
-    // Fork the dot product to nPE cores (i.e. processing units)
-    rt_team_fork(nPE, plp_dot_prod_f32p_xpulpv2, (void *)&S);
+        // Initialize the plp_dot_prod_instance
+        S.pSrcA = pSrcA;
+        // printf("pSrcA[0] %d\n", pSrcA[0]);
+        S.pSrcB = pSrcB;
+        S.blkSizePE = tmpblkSizePE;
+        S.nPE = nPE;
+        S.resBuffer = resBuffer;
 
-    float32_t sum = 0;
-    for (i=0; i<nPE; i++){ // not necessary rt_nb_pe()
-      sum += resBuffer[i];
+        // Fork the dot product to nPE cores (i.e. processing units)
+        rt_team_fork(nPE, plp_dot_prod_f32p_xpulpv2, (void *)&S);
+
+        float32_t sum = 0;
+        for (i = 0; i < nPE; i++) { // not necessary rt_nb_pe()
+            sum += resBuffer[i];
+        }
+
+        /* #if defined(PLP_MATH_LOOPUNROLL) */
+        /* #undef PLP_MATH_LOOPUNROLL */
+        /* #endif */
+
+        /* #if defined(PLP_MATH_LOOPUNROLL) */
+        /*     //uint32_t blkCnt = blockSize/nPE/2 * 2 * nPE; */
+        /*     //printf("blkCnt %d\n", blkCnt); */
+        /*     for (i= ((tmpblkSizePE>>1) <<1) * nPE; i<blockSize; i++){ */
+        /*       sum += pSrcA[i] * pSrcB[i]; */
+        /*     } */
+        /* #else // PLP_MATH_LOOPUNROLL */
+        for (i = (tmpblkSizePE)*nPE; i < blockSize; i++) {
+            sum += pSrcA[i] * pSrcB[i];
+        }
+        /* #endif */
+
+        *pRes = sum;
+
+        /* #define PLP_MATH_LOOPUNROLL */
     }
-
-/* #if defined(PLP_MATH_LOOPUNROLL) */
-/* #undef PLP_MATH_LOOPUNROLL */
-/* #endif */
-
-/* #if defined(PLP_MATH_LOOPUNROLL) */
-/*     //uint32_t blkCnt = blockSize/nPE/2 * 2 * nPE; */
-/*     //printf("blkCnt %d\n", blkCnt); */
-/*     for (i= ((tmpblkSizePE>>1) <<1) * nPE; i<blockSize; i++){ */
-/*       sum += pSrcA[i] * pSrcB[i]; */
-/*     } */
-/* #else // PLP_MATH_LOOPUNROLL */
-    for (i= (tmpblkSizePE) * nPE; i<blockSize; i++){
-      sum += pSrcA[i]*pSrcB[i];
-    }
-/* #endif */
-
-    *pRes = sum;
-
-/* #define PLP_MATH_LOOPUNROLL */
-
-  }
-
 }
 
 /**
   @} end of BasicDotProd group
  */
-
-

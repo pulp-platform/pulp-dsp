@@ -3,12 +3,12 @@
  * Title:        plp_min_i32s_xpulpv2.c
  * Description:  Min value of a 32-bit integer vector for XPULPV2
  *
- * $Date:        29.06.2020        
+ * $Date:        29.06.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Moritz Scherer, ETH Zurich
  *
@@ -27,9 +27,7 @@
  * limitations under the License.
  */
 
-
 #include "plp_math.h"
-
 
 /**
   @ingroup min
@@ -37,8 +35,10 @@
 
 /**
    @defgroup minKernels Min Kernels
-   Calculates the min of the input vector. Min is defined as the greatest of the elements in the vector.
-   There are separate functions for floating point, integer, and fixed point 32- 32- 8-bit data types. For lower precision integers (32- and 8-bit), functions exploiting SIMD instructions are provided.
+   Calculates the min of the input vector. Min is defined as the greatest of the elements in the
+   vector. There are separate functions for floating point, integer, and fixed point 32- 32- 8-bit
+   data types. For lower precision integers (32- and 8-bit), functions exploiting SIMD instructions
+   are provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
    <pre>
@@ -48,7 +48,8 @@
 
    precision = {32, 32, 8} bits
 
-   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
+   SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
    isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
@@ -69,48 +70,47 @@
    @return        none
 */
 
-void plp_min_i32s_xpulpv2(
-                  const int32_t * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  int32_t * __restrict__ pRes){
+void plp_min_i32s_xpulpv2(const int32_t *__restrict__ pSrc,
+                          uint32_t blockSize,
+                          int32_t *__restrict__ pRes) {
 
-  uint32_t blkCnt = 0;
-  int32_t x1, x2;
-  int32_t min = 0x7FFFFFFF;
-  
+    uint32_t blkCnt = 0;
+    int32_t x1, x2;
+    int32_t min = 0x7FFFFFFF;
+
 #if defined(PLP_MATH_LOOPUNROLL)
 
-  for(blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
-    x1 = *pSrc++;
-    x2 = *pSrc++;
-    if(x1 < min) {
-      if(x2 < x1){
-        min = x2;
-      } else {
-        min = x1;
-      }
-    } else if(x2 < min) {
-      min = x2;
-    }  
-  }
-
-  if(blockSize%2 == 1){
-    x1 = *pSrc++;
-    if(x1 < min) {
-      min = x1;
+    for (blkCnt = 0; blkCnt < (blockSize >> 1); blkCnt++) {
+        x1 = *pSrc++;
+        x2 = *pSrc++;
+        if (x1 < min) {
+            if (x2 < x1) {
+                min = x2;
+            } else {
+                min = x1;
+            }
+        } else if (x2 < min) {
+            min = x2;
+        }
     }
-  }
-  
+
+    if (blockSize % 2 == 1) {
+        x1 = *pSrc++;
+        if (x1 < min) {
+            min = x1;
+        }
+    }
+
 #else
 
-  for(blkCnt=0;blkCnt<blockSize;blkCnt++){
-    x1 = *pSrc++;
-    if(x1 < min){
-      min = x1; 
+    for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+        x1 = *pSrc++;
+        if (x1 < min) {
+            min = x1;
+        }
     }
-  }
 
 #endif
 
-  *pRes = min;
+    *pRes = min;
 }

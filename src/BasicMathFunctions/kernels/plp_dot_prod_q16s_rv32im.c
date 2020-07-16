@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup BasicDotProd
  */
@@ -50,44 +49,43 @@
   @return        none
 
   @par Exploiting SIMD instructions
-  When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
+  When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the
+  two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM
+  doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
  */
 
-void plp_dot_prod_q16s_rv32im(
-                              const int16_t * __restrict__ pSrcA,
-                              const int16_t * __restrict__ pSrcB,
+void plp_dot_prod_q16s_rv32im(const int16_t *__restrict__ pSrcA,
+                              const int16_t *__restrict__ pSrcB,
                               uint32_t blockSize,
                               uint32_t deciPoint,
-                              int32_t * __restrict__ pRes){
-        uint32_t blkCnt;                               /* Loop counter */
-        int32_t sum = 0;                          /* Temporary return variable */
+                              int32_t *__restrict__ pRes) {
+    uint32_t blkCnt; /* Loop counter */
+    int32_t sum = 0; /* Temporary return variable */
 
-#if defined (PLP_MATH_LOOPUNROLL)
+#if defined(PLP_MATH_LOOPUNROLL)
 
-        for (blkCnt=0; blkCnt<(blockSize>>2); blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
-          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
-          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
-          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
-        }
+    for (blkCnt = 0; blkCnt < (blockSize >> 2); blkCnt++) {
+        sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+        sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+        sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+        sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+    }
 
-        for (blkCnt=0; blkCnt<(blockSize%4U); blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
-        }
+    for (blkCnt = 0; blkCnt < (blockSize % 4U); blkCnt++) {
+        sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+    }
 
 #else // PLP_MATH_LOOPUNROLL
 
-        for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
-        }
+    for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+        sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+    }
 
 #endif // PLP_MATH_LOOPUNROLL
 
-        * pRes = sum;
-
+    *pRes = sum;
 }
 
 /**
    @} end of BasicDotProdKernels group
 */
-

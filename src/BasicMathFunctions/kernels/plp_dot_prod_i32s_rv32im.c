@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup BasicDotProd
  */
@@ -42,7 +41,8 @@
   <pre>
       sum = pSrcA[0]*pSrcB[0] + pSrcA[1]*pSrcB[1] + ... + pSrcA[blockSize-1]*pSrcB[blockSize-1]
   </pre>
-  There are separate functions for floating-point, int8, int16, and int32 data types. For lower precision integers (int8, int16), functions exploiting SIMD instructions are provided.
+  There are separate functions for floating-point, int8, int16, and int32 data types. For lower
+  precision integers (int8, int16), functions exploiting SIMD instructions are provided.
 
   The naming of the functions follows the following pattern (for example plp_dot_prod_i32s_rv32im):
   <pre>
@@ -52,7 +52,8 @@
 
       precision = {32, 16, 8} bits
 
-      method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+      method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e.
+  using SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
       isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
@@ -75,40 +76,37 @@
   @return        none
  */
 
-void plp_dot_prod_i32s_rv32im(
-                              const int32_t * __restrict__ pSrcA,
-                              const int32_t * __restrict__ pSrcB,
+void plp_dot_prod_i32s_rv32im(const int32_t *__restrict__ pSrcA,
+                              const int32_t *__restrict__ pSrcB,
                               uint32_t blockSize,
-                              int32_t * __restrict__ pRes) {
-        uint32_t blkCnt;                               /* Loop counter */
-        int32_t sum = 0;                          /* Temporary return variable */
+                              int32_t *__restrict__ pRes) {
+    uint32_t blkCnt; /* Loop counter */
+    int32_t sum = 0; /* Temporary return variable */
 
-#if defined (PLP_MATH_LOOPUNROLL)
+#if defined(PLP_MATH_LOOPUNROLL)
 
-        for (blkCnt=0; blkCnt<(blockSize>>2); blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++);
-          sum += (*pSrcA++) * (*pSrcB++);
-          sum += (*pSrcA++) * (*pSrcB++);
-          sum += (*pSrcA++) * (*pSrcB++);
-        }
+    for (blkCnt = 0; blkCnt < (blockSize >> 2); blkCnt++) {
+        sum += (*pSrcA++) * (*pSrcB++);
+        sum += (*pSrcA++) * (*pSrcB++);
+        sum += (*pSrcA++) * (*pSrcB++);
+        sum += (*pSrcA++) * (*pSrcB++);
+    }
 
-        for (blkCnt=0; blkCnt<(blockSize%4U); blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++);
-        }
+    for (blkCnt = 0; blkCnt < (blockSize % 4U); blkCnt++) {
+        sum += (*pSrcA++) * (*pSrcB++);
+    }
 
 #else // PLP_MATH_LOOPUNROLL
 
-        for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++);
-        }
+    for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+        sum += (*pSrcA++) * (*pSrcB++);
+    }
 
 #endif // PLP_MATH_LOOPUNROLL
 
-        * pRes = sum;
-
+    *pRes = sum;
 }
 
 /**
    @} end of BasicDotProdKernels group
 */
-

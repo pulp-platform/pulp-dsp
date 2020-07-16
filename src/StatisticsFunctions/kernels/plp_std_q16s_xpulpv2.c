@@ -3,12 +3,12 @@
  * Title:        plp_std_q16s_xpulpv2.c
  * Description:  Calculates the sum of squares on XPULPV2 cores
  *
- * $Date:        30.06.2020        
+ * $Date:        30.06.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Moritz Scherer, ETH Zurich
  *
@@ -27,9 +27,7 @@
  * limitations under the License.
  */
 
-
 #include "plp_math.h"
-
 
 /**
    @ingroup std
@@ -38,7 +36,9 @@
 /**
    @defgroup stdKernels Std Kernels
    Calculates the sum of squares of the input vector.
-   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
+   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+   types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
+   provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
    <pre>
@@ -48,7 +48,8 @@
 
    precision = {32, 16, 8} bits
 
-   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
+   SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
    isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
@@ -69,17 +70,14 @@
    @return        none
 */
 
-void plp_std_q16s_xpulpv2(
-                         const int16_t * __restrict__ pSrc,
-                         uint32_t blockSize,
-                         uint32_t fracBits,
-                         int16_t * __restrict__ pRes){
-    
- 
-  int16_t variance;
-  plp_var_q16(pSrc, blockSize, fracBits, &variance);
+void plp_std_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
+                          uint32_t blockSize,
+                          uint32_t fracBits,
+                          int16_t *__restrict__ pRes) {
 
-  int32_t intermediate = variance;
-  plp_sqrt_q16(&intermediate,fracBits,pRes); 
-  
+    int16_t variance;
+    plp_var_q16(pSrc, blockSize, fracBits, &variance);
+
+    int32_t intermediate = variance;
+    plp_sqrt_q16(&intermediate, fracBits, pRes);
 }

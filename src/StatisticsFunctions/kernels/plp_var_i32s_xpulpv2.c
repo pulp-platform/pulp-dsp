@@ -3,12 +3,12 @@
  * Title:        plp_var_i32s_xpulpv2.c
  * Description:  Var value of a 32-bit integer vector for XPULPV2
  *
- * $Date:        29.06.2020        
+ * $Date:        29.06.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Moritz Scherer, ETH Zurich
  *
@@ -27,9 +27,7 @@
  * limitations under the License.
  */
 
-
 #include "plp_math.h"
-
 
 /**
   @ingroup var
@@ -37,8 +35,10 @@
 
 /**
    @defgroup varKernels Var Kernels
-   Calculates the var of the input vector. Var is defined as the greatest of the elements in the vector.
-   There are separate functions for floating point, integer, and fixed point 32- 32- 8-bit data types. For lower precision integers (32- and 8-bit), functions exploiting SIMD instructions are provided.
+   Calculates the var of the input vector. Var is defined as the greatest of the elements in the
+   vector. There are separate functions for floating point, integer, and fixed point 32- 32- 8-bit
+   data types. For lower precision integers (32- and 8-bit), functions exploiting SIMD instructions
+   are provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
    <pre>
@@ -48,7 +48,8 @@
 
    precision = {32, 32, 8} bits
 
-   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
+   SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
    isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
@@ -69,21 +70,19 @@
    @return        none
 */
 
-void plp_var_i32s_xpulpv2(
-                  const int32_t * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  int32_t * __restrict__ pRes){
+void plp_var_i32s_xpulpv2(const int32_t *__restrict__ pSrc,
+                          uint32_t blockSize,
+                          int32_t *__restrict__ pRes) {
 
-  int32_t square_of_mean;
-  int32_t square_of_values;
+    int32_t square_of_mean;
+    int32_t square_of_values;
 
-  int32_t mean;
+    int32_t mean;
 
-  plp_mean_i32(pSrc, blockSize, &mean);
-  square_of_mean = mean * mean;
+    plp_mean_i32(pSrc, blockSize, &mean);
+    square_of_mean = mean * mean;
 
-  plp_power_i32(pSrc, blockSize, &square_of_values);
-  
-  *pRes = (square_of_values/blockSize - square_of_mean);
+    plp_power_i32(pSrc, blockSize, &square_of_values);
 
+    *pRes = (square_of_values / blockSize - square_of_mean);
 }

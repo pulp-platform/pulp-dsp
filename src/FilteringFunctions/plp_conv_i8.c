@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2019 ETH Zurich and University of Bologna.
  *
  * Author: Moritz Scherer
  *
@@ -31,8 +31,7 @@
 #include "plp_math.h"
 
 #define OLARATIO8 8
-static int32_t* _pRes1_8;
-
+static int32_t *_pRes1_8;
 
 /**
    @ingroup groupFilters
@@ -52,158 +51,156 @@ static int32_t* _pRes1_8;
    @param[out] pRes     output result returned here
    @return        none
 */
-void plp_conv_i8(
-                 const int8_t *  pSrcA,
+void plp_conv_i8(const int8_t *pSrcA,
                  const uint32_t srcALen,
-                 const int8_t *  pSrcB,
+                 const int8_t *pSrcB,
                  const uint32_t srcBLen,
-                 int32_t *  pRes){
-  
-  uint32_t in1Len, in2Len;
-  const int8_t* pIn1;
-  const int8_t* pIn2;
+                 int32_t *pRes) {
 
-  if(srcALen >= srcBLen){
-    in1Len = srcALen;
-    in2Len = srcBLen;
-    pIn1 = pSrcA;
-    pIn2 = pSrcB;
-  } else {
-    in2Len = srcALen;
-    in1Len = srcBLen;
-    pIn2 = pSrcA;
-    pIn1 = pSrcB;
-  }
-  
-  uint32_t nPE = (OLARATIO8/(in1Len/in2Len));
-  nPE = nPE > 0 ? nPE : 1;
-  uint32_t src2Offset = ((in2Len+nPE-1)/nPE);
-  uint32_t resultsoffset = src2Offset + in1Len - 1;
-  uint32_t lastresultLen = (in2Len - (src2Offset * (nPE-1))) + in1Len - 1;
+    uint32_t in1Len, in2Len;
+    const int8_t *pIn1;
+    const int8_t *pIn2;
 
-  uint32_t temp1,temp2,k;
-  
-  for(uint32_t i=0;i<srcALen+srcBLen-1;i++){
-    pRes[i] = 0;
-  }
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-
-    _pRes1_8 = rt_alloc(RT_ALLOC_FC_DATA, sizeof(int32_t)*(resultsoffset)); 
-
-    int32_t* pOut = pRes;
-    int32_t* _pRes = _pRes1_8;
-  
-    for(uint32_t i=0;i<nPE-1;i++){
-      plp_conv_i8s_rv32im(pIn1, in1Len, pIn2+i*src2Offset, src2Offset, _pRes1_8);
-
-      pOut = pRes + i*src2Offset;
-      _pRes = _pRes1_8;
-      
-      k = resultsoffset >> 1;
-      while(k){
-
-        temp1 = *_pRes++;
-        temp2 = *_pRes++;
-	
-        *pOut++ += temp1;
-        *pOut++ += temp2;
-
-        k--;
-      }
-
-      k = resultsoffset % 2U;
-
-      if(k){
-        *pOut++ += *_pRes++;
-      }
-      
-    }
-      
-    plp_conv_i8s_rv32im(pIn1, in1Len, pIn2+(nPE-1)*src2Offset, in2Len - (src2Offset * (nPE-1)), _pRes1_8);
-
-    pOut = pRes + (nPE-1)*src2Offset;
-    _pRes = _pRes1_8;
-    
-    k = lastresultLen >> 1;
-
-    while(k){
-
-      temp1 = *_pRes++;
-      temp2 = *_pRes++;
-	
-      *pOut++ += temp1;
-      *pOut++ += temp2;
-
-      k--;
+    if (srcALen >= srcBLen) {
+        in1Len = srcALen;
+        in2Len = srcBLen;
+        pIn1 = pSrcA;
+        pIn2 = pSrcB;
+    } else {
+        in2Len = srcALen;
+        in1Len = srcBLen;
+        pIn2 = pSrcA;
+        pIn1 = pSrcB;
     }
 
-    k = lastresultLen % 2U;
+    uint32_t nPE = (OLARATIO8 / (in1Len / in2Len));
+    nPE = nPE > 0 ? nPE : 1;
+    uint32_t src2Offset = ((in2Len + nPE - 1) / nPE);
+    uint32_t resultsoffset = src2Offset + in1Len - 1;
+    uint32_t lastresultLen = (in2Len - (src2Offset * (nPE - 1))) + in1Len - 1;
 
-    if(k){
-      *pOut++ += *_pRes++;
+    uint32_t temp1, temp2, k;
+
+    for (uint32_t i = 0; i < srcALen + srcBLen - 1; i++) {
+        pRes[i] = 0;
     }
 
-  } else {
-    
-    _pRes1_8 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*(resultsoffset)); 
+    if (rt_cluster_id() == ARCHI_FC_CID) {
 
-    int32_t* pOut = pRes;
-    int32_t* _pRes = _pRes1_8;
-    
-    for(uint32_t i=0;i<nPE-1;i++){
-      plp_conv_i8s_xpulpv2(pIn1, in1Len, pIn2+i*src2Offset, src2Offset, _pRes1_8);
+        _pRes1_8 = rt_alloc(RT_ALLOC_FC_DATA, sizeof(int32_t) * (resultsoffset));
 
-      pOut = pRes + i*src2Offset;
-      _pRes = _pRes1_8;
-      
-      k = resultsoffset >> 1;
-      while(k){
+        int32_t *pOut = pRes;
+        int32_t *_pRes = _pRes1_8;
 
-        temp1 = *_pRes++;
-        temp2 = *_pRes++;
-	
-        *pOut++ += temp1;
-        *pOut++ += temp2;
+        for (uint32_t i = 0; i < nPE - 1; i++) {
+            plp_conv_i8s_rv32im(pIn1, in1Len, pIn2 + i * src2Offset, src2Offset, _pRes1_8);
 
-        k--;
-      }
+            pOut = pRes + i * src2Offset;
+            _pRes = _pRes1_8;
 
-      k = resultsoffset % 2U;
+            k = resultsoffset >> 1;
+            while (k) {
 
-      if(k){
-        *pOut++ += *_pRes++;
-      }
-    }    
-    
-    plp_conv_i8s_xpulpv2(pIn1, in1Len, pIn2+(nPE-1)*src2Offset, in2Len - (src2Offset * (nPE-1)), _pRes1_8);
+                temp1 = *_pRes++;
+                temp2 = *_pRes++;
 
-    pOut = pRes + (nPE-1)*src2Offset;
-    _pRes = _pRes1_8;
-    
-    k = lastresultLen >> 1;
+                *pOut++ += temp1;
+                *pOut++ += temp2;
 
-    while(k){
+                k--;
+            }
 
-      temp1 = *_pRes++;
-      temp2 = *_pRes++;
-	
-      *pOut++ += temp1;
-      *pOut++ += temp2;
+            k = resultsoffset % 2U;
 
-      k--;
+            if (k) {
+                *pOut++ += *_pRes++;
+            }
+        }
+
+        plp_conv_i8s_rv32im(pIn1, in1Len, pIn2 + (nPE - 1) * src2Offset,
+                            in2Len - (src2Offset * (nPE - 1)), _pRes1_8);
+
+        pOut = pRes + (nPE - 1) * src2Offset;
+        _pRes = _pRes1_8;
+
+        k = lastresultLen >> 1;
+
+        while (k) {
+
+            temp1 = *_pRes++;
+            temp2 = *_pRes++;
+
+            *pOut++ += temp1;
+            *pOut++ += temp2;
+
+            k--;
+        }
+
+        k = lastresultLen % 2U;
+
+        if (k) {
+            *pOut++ += *_pRes++;
+        }
+
+    } else {
+
+        _pRes1_8 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t) * (resultsoffset));
+
+        int32_t *pOut = pRes;
+        int32_t *_pRes = _pRes1_8;
+
+        for (uint32_t i = 0; i < nPE - 1; i++) {
+            plp_conv_i8s_xpulpv2(pIn1, in1Len, pIn2 + i * src2Offset, src2Offset, _pRes1_8);
+
+            pOut = pRes + i * src2Offset;
+            _pRes = _pRes1_8;
+
+            k = resultsoffset >> 1;
+            while (k) {
+
+                temp1 = *_pRes++;
+                temp2 = *_pRes++;
+
+                *pOut++ += temp1;
+                *pOut++ += temp2;
+
+                k--;
+            }
+
+            k = resultsoffset % 2U;
+
+            if (k) {
+                *pOut++ += *_pRes++;
+            }
+        }
+
+        plp_conv_i8s_xpulpv2(pIn1, in1Len, pIn2 + (nPE - 1) * src2Offset,
+                             in2Len - (src2Offset * (nPE - 1)), _pRes1_8);
+
+        pOut = pRes + (nPE - 1) * src2Offset;
+        _pRes = _pRes1_8;
+
+        k = lastresultLen >> 1;
+
+        while (k) {
+
+            temp1 = *_pRes++;
+            temp2 = *_pRes++;
+
+            *pOut++ += temp1;
+            *pOut++ += temp2;
+
+            k--;
+        }
+
+        k = lastresultLen % 2U;
+
+        if (k) {
+            *pOut++ += *_pRes++;
+        }
     }
-
-    k = lastresultLen % 2U;
-
-    if(k){
-      *pOut++ += *_pRes++;
-    }
-
-  }
-  rt_free(RT_ALLOC_CL_DATA, _pRes1_8, sizeof(int32_t)*(resultsoffset));
+    rt_free(RT_ALLOC_CL_DATA, _pRes1_8, sizeof(int32_t) * (resultsoffset));
 }
-
 
 /**
    @} end of BasicConvolution group

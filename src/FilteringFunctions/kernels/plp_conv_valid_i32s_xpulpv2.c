@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Moritz Scherer, Tibor Schneider, ETH Zurich
  *
@@ -53,11 +53,11 @@
 // Pre-condition: pRes has enough allocated memory, i.e. srcALen + srcBLen-1u
 // Pre-condition: srcALen >= 2 and srcBLen >= 2, otherwise use vector dot product
 
-void plp_conv_valid_i32s_xpulpv2(const int32_t* pSrcA,
+void plp_conv_valid_i32s_xpulpv2(const int32_t *pSrcA,
                                  const uint32_t srcALen,
-                                 const int32_t* pSrcB,
+                                 const int32_t *pSrcB,
                                  const uint32_t srcBLen,
-                                 int32_t *  pRes){
+                                 int32_t *pRes) {
 
     const int32_t *pIn1 = pSrcA;                 /* InputA pointer */
     const int32_t *pIn2 = pSrcB;                 /* InputB pointer */
@@ -69,9 +69,9 @@ void plp_conv_valid_i32s_xpulpv2(const int32_t* pSrcA,
     uint32_t blockSize1, blockSize2, blockSize3; /* Loop counters */
     uint32_t j, k, count, blkCnt;                /* Loop counters */
 
-#if defined (PLP_MATH_LOOPUNROLL)
-    int32_t acc0, acc1, acc2, acc3;              /* Accumulators */
-    int32_t x0, x1, x2, x3, c0;                  /* Temporary variables to hold state and coefficient values */
+#if defined(PLP_MATH_LOOPUNROLL)
+    int32_t acc0, acc1, acc2, acc3; /* Accumulators */
+    int32_t x0, x1, x2, x3, c0;     /* Temporary variables to hold state and coefficient values */
 #endif
 
     int32_t temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8;
@@ -87,7 +87,8 @@ void plp_conv_valid_i32s_xpulpv2(const int32_t* pSrcA,
     /* sum = x[0] * y[srcBLen-1] + x[1] * y[srcBLen-2] +...+ x[srcBLen-1] * y[0]
      * sum = x[1] * y[srcBLen-1] + x[2] * y[srcBLen-2] +...+ x[srcBLen]   * y[0]
      * ....
-     * sum = x[srcALen-srcBLen-2] * y[srcBLen-1] + x[srcALen] * y[srcBLen-2] +...+ x[srcALen-1] * y[0]
+     * sum = x[srcALen-srcBLen-2] * y[srcBLen-1] + x[srcALen] * y[srcBLen-2] +...+ x[srcALen-1] *
+     * y[0]
      */
 
     /* Working pointer of inputA */
@@ -108,8 +109,8 @@ void plp_conv_valid_i32s_xpulpv2(const int32_t* pSrcA,
      * So, to loop unroll over blockSize2,
      * srcBLen should be greater than or equal to 4 */
     if (srcBLen >= 4U) {
-   
-#if defined (PLP_MATH_LOOPUNROLL)
+
+#if defined(PLP_MATH_LOOPUNROLL)
 
         /* Loop unrolling: Compute 4 outputs at a time */
         blkCnt = blockSize2 >> 2U;
@@ -254,22 +255,22 @@ void plp_conv_valid_i32s_xpulpv2(const int32_t* pSrcA,
             temp1 = *px;
             temp2 = *py;
 
-#if  defined (PLP_MATH_LOOPUNROLL)
+#if defined(PLP_MATH_LOOPUNROLL)
             /* Loop unrolling: Compute 4 outputs at a time */
             k = srcBLen >> 1U;
             while (k > 0U) {
-                temp3 = *(px+1);
-                temp4 = *(py-1);
+                temp3 = *(px + 1);
+                temp4 = *(py - 1);
 
                 sum = __MAC(sum, temp1, temp2);
                 sum = __MAC(sum, temp3, temp4);
 
-                temp1 = *(px+2);
-                temp2 = *(py-2);
+                temp1 = *(px + 2);
+                temp2 = *(py - 2);
 
-                px+=2;
-                py-=2;
-          
+                px += 2;
+                py -= 2;
+
                 /* Decrement loop counter */
                 k--;
             }
@@ -277,7 +278,7 @@ void plp_conv_valid_i32s_xpulpv2(const int32_t* pSrcA,
             /* Loop unrolling: Compute remaining outputs */
             k = srcBLen % 0x2U;
 
-            if(k) {
+            if (k) {
                 sum = __MAC(sum, temp1, temp2);
             }
 

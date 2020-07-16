@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMath
  */
-
 
 /**
   @addtogroup BasicDotProd
@@ -52,45 +50,41 @@
   @return        none
  */
 
-void plp_dot_prod_q32_parallel(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t blockSize,
-                         uint32_t deciPoint,
-                         uint32_t nPE,
-                         int32_t * __restrict__ pRes){
+void plp_dot_prod_q32_parallel(const int32_t *__restrict__ pSrcA,
+                               const int32_t *__restrict__ pSrcB,
+                               uint32_t blockSize,
+                               uint32_t deciPoint,
+                               uint32_t nPE,
+                               int32_t *__restrict__ pRes) {
 
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    printf("parallel processing supported only for cluster side\n");
-    return;
-  }
-  else{
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        printf("parallel processing supported only for cluster side\n");
+        return;
+    } else {
 
-    uint32_t i;
-    int32_t resBuffer[rt_nb_pe()];
+        uint32_t i;
+        int32_t resBuffer[rt_nb_pe()];
 
-    plp_dot_prod_instance_q32 S;
+        plp_dot_prod_instance_q32 S;
 
-    // Initialize the plp_dot_prod_instance
-    S.pSrcA = pSrcA;
-    S.pSrcB = pSrcB;
-    S.blkSizePE = blockSize;
-    S.deciPoint = deciPoint;
-    S.nPE = nPE;
-    S.resBuffer = resBuffer;
+        // Initialize the plp_dot_prod_instance
+        S.pSrcA = pSrcA;
+        S.pSrcB = pSrcB;
+        S.blkSizePE = blockSize;
+        S.deciPoint = deciPoint;
+        S.nPE = nPE;
+        S.resBuffer = resBuffer;
 
-    // Fork the dot product to nPE cores (i.e. processing units)
-    rt_team_fork(nPE, plp_dot_prod_q32p_xpulpv2, (void *)&S);
+        // Fork the dot product to nPE cores (i.e. processing units)
+        rt_team_fork(nPE, plp_dot_prod_q32p_xpulpv2, (void *)&S);
 
-    int sum = 0;
-    for (i=0; i<nPE; i++){ // not necessary rt_nb_pe()
-      sum += resBuffer[i];
+        int sum = 0;
+        for (i = 0; i < nPE; i++) { // not necessary rt_nb_pe()
+            sum += resBuffer[i];
+        }
+
+        *pRes = sum;
     }
-
-    *pRes = sum;
-
-  }
-
 }
 
 /**
