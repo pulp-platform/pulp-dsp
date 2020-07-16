@@ -3,12 +3,12 @@
  * Title:        plp_power_q32s_rv32im.c
  * Description:  Calculates the sum of squares on RV32IM cores
  *
- * $Date:        30.06.2020        
+ * $Date:        30.06.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Moritz Scherer, ETH Zurich
  *
@@ -27,9 +27,7 @@
  * limitations under the License.
  */
 
-
 #include "plp_math.h"
-
 
 /**
    @ingroup power
@@ -38,7 +36,9 @@
 /**
    @defgroup powerKernels Power Kernels
    Calculates the sum of squares of the input vector.
-   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
+   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+   types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
+   provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
    <pre>
@@ -48,7 +48,8 @@
 
    precision = {32, 16, 8} bits
 
-   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
+   SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
    isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
@@ -69,38 +70,37 @@
    @return        none
 */
 
-void plp_power_q32s_rv32im(
-                         const int32_t * __restrict__ pSrc,
-                         uint32_t blockSize,
-                         uint32_t fracBits,
-                         int32_t * __restrict__ pRes){
+void plp_power_q32s_rv32im(const int32_t *__restrict__ pSrc,
+                           uint32_t blockSize,
+                           uint32_t fracBits,
+                           int32_t *__restrict__ pRes) {
 
-  uint32_t blkCnt = 0;
-  int32_t x1, x2;
-  int32_t sum = 0;
-  
+    uint32_t blkCnt = 0;
+    int32_t x1, x2;
+    int32_t sum = 0;
+
 #if defined(PLP_MATH_LOOPUNROLL)
-  
-  for(blkCnt=0; blkCnt<(blockSize>>1); blkCnt++){
-    x1 = *pSrc++;
-    x2 = *pSrc++;
-    sum += ((x1*x1) >> fracBits);
-    sum += ((x2*x2) >> fracBits);
-  }
 
-  if(blockSize%2 == 1){
-    x1 = *pSrc++;
-    sum += ((x1*x1) >> fracBits);
-  }
-  
+    for (blkCnt = 0; blkCnt < (blockSize >> 1); blkCnt++) {
+        x1 = *pSrc++;
+        x2 = *pSrc++;
+        sum += ((x1 * x1) >> fracBits);
+        sum += ((x2 * x2) >> fracBits);
+    }
+
+    if (blockSize % 2 == 1) {
+        x1 = *pSrc++;
+        sum += ((x1 * x1) >> fracBits);
+    }
+
 #else
 
-  for(blkCnt=0;blkCnt<blockSize;blkCnt++){
-    x1 = *pSrc++;
-    sum += ((x1*x1) >> fracBits);
-  }
+    for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+        x1 = *pSrc++;
+        sum += ((x1 * x1) >> fracBits);
+    }
 
 #endif
 
-  *pRes = sum;
+    *pRes = sum;
 }

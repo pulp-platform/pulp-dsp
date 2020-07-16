@@ -25,8 +25,8 @@
 #ifndef __PLP_CONST_STRUCTS_H__
 #define __PLP_CONST_STRUCTS_H__
 
-#include "plp_math.h"
 #include "plp_common_tables.h"
+#include "plp_math.h"
 
 extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len16;
 extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len32;

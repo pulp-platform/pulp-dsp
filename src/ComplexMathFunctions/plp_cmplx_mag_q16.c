@@ -3,12 +3,12 @@
  * Title:        plp_cmplx_mag_q16.c
  * Description:  Calculates the sum of squares of an input vector
  *
- * $Date:        09.07.2020        
+ * $Date:        09.07.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Michael Rogenmoser, ETH Zurich
  *
@@ -30,7 +30,7 @@
 #include "plp_math.h"
 
 /**
- * @brief      calculates the complex magnitude. 
+ * @brief      calculates the complex magnitude.
  *
  * @param[in]  pSrc        The source
  * @param[in]  deciPoint   The decimal point. Fromat: Q(16-deciPoint).deciPoint
@@ -38,24 +38,23 @@
  * @param[in]  numSamples  The number of samples
  */
 
-void plp_cmplx_mag_q16(
-	const int16_t * pSrc,
-	const uint32_t deciPoint, 
-	int16_t * pRes,
-	uint32_t numSamples){
+void plp_cmplx_mag_q16(const int16_t *pSrc,
+                       const uint32_t deciPoint,
+                       int16_t *pRes,
+                       uint32_t numSamples) {
 
-	// Initial implementation, needs improvement
-	int16_t real, cmplx, sqr;
-	for (int i = 0; i < numSamples; i++) {
+    // Initial implementation, needs improvement
+    int16_t real, cmplx, sqr;
+    for (int i = 0; i < numSamples; i++) {
 
-		real = (pSrc[2*i] * pSrc[2*i])>>16;
-		cmplx = (pSrc[2*i + 1] * pSrc[2*i + 1])>>16;
-		if (deciPoint % 2 == 0) {
-			sqr = __CLIP(real + cmplx, 15);
-		} else {
-			sqr = __CLIP((real + cmplx) << 1, 15);
-		}
-		plp_sqrt_q16(&sqr, 16-deciPoint, &pRes[i]);
-		pRes[i] = pRes[i] << ((16-deciPoint)/2);
-	}
+        real = (pSrc[2 * i] * pSrc[2 * i]) >> 16;
+        cmplx = (pSrc[2 * i + 1] * pSrc[2 * i + 1]) >> 16;
+        if (deciPoint % 2 == 0) {
+            sqr = __CLIP(real + cmplx, 15);
+        } else {
+            sqr = __CLIP((real + cmplx) << 1, 15);
+        }
+        plp_sqrt_q16(&sqr, 16 - deciPoint, &pRes[i]);
+        pRes[i] = pRes[i] << ((16 - deciPoint) / 2);
+    }
 }

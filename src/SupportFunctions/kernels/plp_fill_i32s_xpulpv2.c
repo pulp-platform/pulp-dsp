@@ -47,37 +47,33 @@
   @return        none
  */
 
-void plp_fill_i32s_xpulpv2(
-                  int32_t value,
-                  int32_t * __restrict__ pDst,
-                  uint32_t blockSize){
+void plp_fill_i32s_xpulpv2(int32_t value, int32_t *__restrict__ pDst, uint32_t blockSize) {
 
-  uint32_t blkCnt, tmpBS;                     /* Loop counter, temporal BlockSize */
-  int32_t value1 = value; // comment: it performs the same with or without temporary values.
+    uint32_t blkCnt, tmpBS; /* Loop counter, temporal BlockSize */
+    int32_t value1 = value; // comment: it performs the same with or without temporary values.
 
-#if defined (PLP_MATH_LOOPUNROLL)
+#if defined(PLP_MATH_LOOPUNROLL)
 
-  tmpBS = (blockSize>>1);
+    tmpBS = (blockSize >> 1);
 
-  for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-    *pDst++ = value;
-    *pDst++ = value1;
-  }
+    for (blkCnt = 0; blkCnt < tmpBS; blkCnt++) {
+        *pDst++ = value;
+        *pDst++ = value1;
+    }
 
-  tmpBS = (blockSize%2U);
+    tmpBS = (blockSize % 2U);
 
-  for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-    *pDst++ = value;
-  }
+    for (blkCnt = 0; blkCnt < tmpBS; blkCnt++) {
+        *pDst++ = value;
+    }
 
 #else
 
-  for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-    *pDst++ = value;
-  }
+    for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+        *pDst++ = value;
+    }
 
 #endif // PLP_MATH_LOOPUNROLL
-
 }
 
 /**

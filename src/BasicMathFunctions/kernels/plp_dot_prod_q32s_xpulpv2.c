@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup BasicDotProd
  */
-
 
 /**
   @addtogroup BasicDotProdKernels
@@ -51,60 +49,57 @@
   @return        none
  */
 
-void plp_dot_prod_q32s_xpulpv2(
-                               const int32_t * __restrict__ pSrcA,
-                               const int32_t * __restrict__ pSrcB,
+void plp_dot_prod_q32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                               const int32_t *__restrict__ pSrcB,
                                uint32_t blockSize,
                                uint32_t deciPoint,
-                               int32_t * __restrict__ pRes){
-  uint32_t blkCnt, tmpBS;                   /* Loop counter, temporal BlockSize */
-        int32_t sum = 0; //, sum1 =0;                          /* Temporary return variable */
-//int32_t prod=0;
-  //int32_t deci = deciPoint;
+                               int32_t *__restrict__ pRes) {
+    uint32_t blkCnt, tmpBS; /* Loop counter, temporal BlockSize */
+    int32_t sum = 0;        //, sum1 =0;                          /* Temporary return variable */
+    // int32_t prod=0;
+    // int32_t deci = deciPoint;
 
 #if defined(PLP_MATH_LOOPUNROLL)
 
-        tmpBS = (blockSize>>1);
+    tmpBS = (blockSize >> 1);
 
-        for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
+    for (blkCnt = 0; blkCnt < tmpBS; blkCnt++) {
 
-//	prod = (*pSrcA++) * (*pSrcB++);
-//	sum = __ADDNORMU_REG(sum, prod, deciPoint);
+        //	prod = (*pSrcA++) * (*pSrcB++);
+        //	sum = __ADDNORMU_REG(sum, prod, deciPoint);
 
-//	prod = (*pSrcA++) * (*pSrcB++);
-//	sum = __ADDNORMU_REG(sum, prod, deciPoint);
-	
-            int32_t x0 = (*pSrcA++) * (*pSrcB++);
-            int32_t x1 = (*pSrcA++) * (*pSrcB++);
-            sum += __ADDROUNDNORM_REG(x0, x1, deciPoint);
+        //	prod = (*pSrcA++) * (*pSrcB++);
+        //	sum = __ADDNORMU_REG(sum, prod, deciPoint);
 
-//	sum = __MACSN(sum, (*pSrcA++), (*pSrcB++), 0);
-//	sum1 = __MACSN(sum1, (*pSrcA++), (*pSrcB++), 0);
-/*
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-          sum = sum >> deciPoint;
-          sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-          sum = sum >> deciPoint;
-*/
-        }
+        int32_t x0 = (*pSrcA++) * (*pSrcB++);
+        int32_t x1 = (*pSrcA++) * (*pSrcB++);
+        sum += __ADDROUNDNORM_REG(x0, x1, deciPoint);
 
-        for (blkCnt=0; blkCnt<(blockSize%2U); blkCnt++){
-            sum += __ADDROUNDNORM_REG((*pSrcA++) * (*pSrcB++), 0, deciPoint);
-        }
+        //	sum = __MACSN(sum, (*pSrcA++), (*pSrcB++), 0);
+        //	sum1 = __MACSN(sum1, (*pSrcA++), (*pSrcB++), 0);
+        /*
+                  sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+                  sum = sum >> deciPoint;
+                  sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+                  sum = sum >> deciPoint;
+        */
+    }
+
+    for (blkCnt = 0; blkCnt < (blockSize % 2U); blkCnt++) {
+        sum += __ADDROUNDNORM_REG((*pSrcA++) * (*pSrcB++), 0, deciPoint);
+    }
 
 #else // PLP_MATH_LOOPUNROLL
 
-        for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-            sum += __ADDROUNDNORM_REG((*pSrcA++) * (*pSrcB++), 0, deciPoint);
-        }
+    for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+        sum += __ADDROUNDNORM_REG((*pSrcA++) * (*pSrcB++), 0, deciPoint);
+    }
 
 #endif // PLP_MATH_LOOPUNROLL
 
-        * pRes = sum; // + sum1;
-
+    *pRes = sum; // + sum1;
 }
 
 /**
    @} end of BasicDotProdKernels group
 */
-

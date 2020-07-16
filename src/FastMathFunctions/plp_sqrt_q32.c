@@ -3,12 +3,12 @@
  * Title:        plp_sqrt_q32.c
  * Description:  Calculates the square root of an input number
  *
- * $Date:        30.06.2020        
+ * $Date:        30.06.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Moritz Scherer, ETH Zurich
  *
@@ -32,7 +32,6 @@
  * with Apache-2.0.
  */
 
-
 #include "plp_math.h"
 
 /**
@@ -42,7 +41,9 @@
 /**
    @defgroup sqrt Sqrt
    Calculates the square root of a fixed point number
-   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
+   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+   types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
+   provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
    <pre>
@@ -52,7 +53,8 @@
 
    precision = {32, 16, 8} bits
 
-   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
+   SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
    isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
@@ -65,7 +67,6 @@
    @{
 */
 
-
 /**
    @brief         Glue code for square root of a 32-bit fixed point number.
    @param[in]     pSrc       points to the input vector
@@ -74,19 +75,15 @@
    @return        none
  */
 
+void plp_sqrt_q32(const int32_t *__restrict__ pSrc,
+                  const uint32_t fracBits,
+                  int32_t *__restrict__ pRes) {
 
-void plp_sqrt_q32(
-                         const int32_t * __restrict__ pSrc,
-                         const uint32_t fracBits,
-                         int32_t * __restrict__ pRes){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_sqrt_q32s_rv32im(pSrc, fracBits, pRes);
-  }
-  else{
-    plp_sqrt_q32s_xpulpv2(pSrc, fracBits, pRes);
-  }
-
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        plp_sqrt_q32s_rv32im(pSrc, fracBits, pRes);
+    } else {
+        plp_sqrt_q32s_xpulpv2(pSrc, fracBits, pRes);
+    }
 }
 
 /**

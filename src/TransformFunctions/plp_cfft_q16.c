@@ -42,33 +42,32 @@
 /**
  * @brief         Glue code for quantized 16 bit complex fast fourier transform
  * @param[in]     S               points to an instance of the 16bit quantized CFFT structure
- * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
- * @param[in]     ifftFlag        flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1) transform.
- * @param[in]     bitReverseFlag  flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. 
+ * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>.
+ * Processing occurs in-place.
+ * @param[in]     ifftFlag        flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1)
+ * transform.
+ * @param[in]     bitReverseFlag  flag that enables (bitReverseFlag=1) of disables
+ * (bitReverseFlag=0) bit reversal of output.
  * @param[in]     deciPoint       decimal point for right shift
  */
 
-void plp_cfft_q16(
-	const plp_cfft_instance_q16 * S,
-	int16_t * p1,
-	uint8_t ifftFlag,
-	uint8_t bitReverseFlag,
-	uint32_t deciPoint) {
+void plp_cfft_q16(const plp_cfft_instance_q16 *S,
+                  int16_t *p1,
+                  uint8_t ifftFlag,
+                  uint8_t bitReverseFlag,
+                  uint32_t deciPoint) {
 
-	if (deciPoint != 15) {
-		printf("Only Q1.15 fixed point supported currently.\n");
-		return;
-	}
+    if (deciPoint != 15) {
+        printf("Only Q1.15 fixed point supported currently.\n");
+        return;
+    }
 
-	if (rt_cluster_id() == ARCHI_FC_CID){
-		plp_cfft_q16s_rv32im(S, p1, ifftFlag, bitReverseFlag, deciPoint);
-	} 
-	else {
-		plp_cfft_q16v_xpulpv2(S, p1, ifftFlag, bitReverseFlag, deciPoint);
-	}
-
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        plp_cfft_q16s_rv32im(S, p1, ifftFlag, bitReverseFlag, deciPoint);
+    } else {
+        plp_cfft_q16v_xpulpv2(S, p1, ifftFlag, bitReverseFlag, deciPoint);
+    }
 }
-
 
 /**
  * @} end of FFT group

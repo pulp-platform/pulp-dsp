@@ -52,15 +52,16 @@
 
 /**
  * @defgroup groupMath Basic Math Functions
- * The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s_rv32im):
- <pre>
+ * The naming scheme of the functions follows the following pattern (for example
+ plp_dot_prod_i32s_rv32im): <pre>
  \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
 
  data type = {f, i, q} respectively for floats, integers, fixed points
 
  precision = {32, 16, 8} bits
 
- method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+ method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
+ SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
  isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
@@ -74,15 +75,16 @@
 
 /**
  * @defgroup groupMatrix Matrix Functions
- * The naming scheme of the functions follows the following pattern (for example plp_mat_mult_i32s_rv32im):
- <pre>
+ * The naming scheme of the functions follows the following pattern (for example
+ plp_mat_mult_i32s_rv32im): <pre>
  \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
 
  data type = {f, i, q} respectively for floats, integers, fixed points
 
  precision = {32, 16, 8} bits
 
- method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+ method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
+ SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
  isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
@@ -106,19 +108,17 @@
  * @defgroup groupSupport Support Functions
  */
 
-
 #ifndef __PLP_MATH_H__
 #define __PLP_MATH_H__
 
-#include "rt/rt_api.h"
 #include "math.h"
+#include "rt/rt_api.h"
 
 typedef float float32_t;
 
 #define PLP_MATH_IBEX // previously called zero-riscy
 //#define PLP_MATH_RISCY
 #define PLP_MATH_LOOPUNROLL
-
 
 /** -------------------------------------------------------
     @struct plp_dot_prod_instance_i32
@@ -129,13 +129,12 @@ typedef float float32_t;
     @param[in]  nPE        number of parallel processing units
     @param[out] resBuffer  pointer to the result buffer
 */
-typedef struct
-{
-  int32_t * pSrcA;     // pointer to the first vector
-  int32_t * pSrcB;     // pointer to the second vector
-  uint32_t blkSizePE;     // number of samples in each vector
-  uint32_t nPE;        // number of processing units
-  int32_t * resBuffer;      // pointer to result vector
+typedef struct {
+    int32_t *pSrcA;     // pointer to the first vector
+    int32_t *pSrcB;     // pointer to the second vector
+    uint32_t blkSizePE; // number of samples in each vector
+    uint32_t nPE;       // number of processing units
+    int32_t *resBuffer; // pointer to result vector
 } plp_dot_prod_instance_i32;
 
 /** -------------------------------------------------------
@@ -146,14 +145,13 @@ typedef struct
     @param[in]  nPE        number of parallel processing units
     @param[out] resBuffer  pointer to the result buffer
 */
-typedef struct
-{
-  int32_t * pSrcA;     // pointer to the first vector
-  int32_t * pSrcB;     // pointer to the second vector
-  uint32_t blkSizePE;     // number of samples in each vector
-  uint32_t deciPoint;    // decimal point for right shift
-  uint32_t nPE;        // number of processing units
-  int32_t * resBuffer;      // pointer to result vector
+typedef struct {
+    int32_t *pSrcA;     // pointer to the first vector
+    int32_t *pSrcB;     // pointer to the second vector
+    uint32_t blkSizePE; // number of samples in each vector
+    uint32_t deciPoint; // decimal point for right shift
+    uint32_t nPE;       // number of processing units
+    int32_t *resBuffer; // pointer to result vector
 } plp_dot_prod_instance_q32;
 
 /** -------------------------------------------------------
@@ -165,13 +163,12 @@ typedef struct
     @param[in]  nPE        number of parallel processing units
     @param[out] resBuffer  pointer to the result buffer
 */
-typedef struct
-{
-  const float32_t * pSrcA; // pointer to the first vector
-  const float32_t * pSrcB; // pointer to the second vector
-  uint32_t blkSizePE;      // number of samples in each vector
-  uint32_t nPE;            // number of processing units
-  float32_t * resBuffer;   // pointer to result vector
+typedef struct {
+    const float32_t *pSrcA; // pointer to the first vector
+    const float32_t *pSrcB; // pointer to the second vector
+    uint32_t blkSizePE;     // number of samples in each vector
+    uint32_t nPE;           // number of processing units
+    float32_t *resBuffer;   // pointer to result vector
 } plp_dot_prod_instance_f32;
 
 /** -------------------------------------------------------
@@ -184,12 +181,12 @@ typedef struct
     @param[out] pRes       output result returned here
 */
 typedef struct {
-  const int32_t * pSrcA;     // pointer to the first vector
-  uint32_t srcALen;
-  const int32_t * pSrcB;     // pointer to the second vector
-  uint32_t srcBLen;     // number of samples in each vector
-  uint8_t nPE;        // number of processing units
-  int32_t * pRes;      // pointer to result vector
+    const int32_t *pSrcA; // pointer to the first vector
+    uint32_t srcALen;
+    const int32_t *pSrcB; // pointer to the second vector
+    uint32_t srcBLen;     // number of samples in each vector
+    uint8_t nPE;          // number of processing units
+    int32_t *pRes;        // pointer to result vector
 } plp_conv_instance_i32;
 
 /** -------------------------------------------------------
@@ -202,12 +199,12 @@ typedef struct {
     @param[out] pRes       output result returned here
 */
 typedef struct {
-  const int16_t * pSrcA;     // pointer to the first vector
-  uint32_t srcALen;
-  const int16_t * pSrcB;     // pointer to the second vector
-  uint32_t srcBLen;     // number of samples in each vector
-  uint8_t nPE;        // number of processing units
-  int32_t * pRes;      // pointer to result vector
+    const int16_t *pSrcA; // pointer to the first vector
+    uint32_t srcALen;
+    const int16_t *pSrcB; // pointer to the second vector
+    uint32_t srcBLen;     // number of samples in each vector
+    uint8_t nPE;          // number of processing units
+    int32_t *pRes;        // pointer to result vector
 } plp_conv_instance_i16;
 
 /** -------------------------------------------------------
@@ -220,12 +217,12 @@ typedef struct {
     @param[out] pRes       output result returned here
 */
 typedef struct {
-  const int8_t * pSrcA;     // pointer to the first vector
-  uint32_t srcALen;
-  const int8_t * pSrcB;     // pointer to the second vector
-  uint32_t srcBLen;     // number of samples in each vector
-  uint8_t nPE;        // number of processing units
-  int32_t * pRes;      // pointer to result vector
+    const int8_t *pSrcA; // pointer to the first vector
+    uint32_t srcALen;
+    const int8_t *pSrcB; // pointer to the second vector
+    uint32_t srcBLen;    // number of samples in each vector
+    uint8_t nPE;         // number of processing units
+    int32_t *pRes;       // pointer to result vector
 } plp_conv_instance_i8;
 
 /** -------------------------------------------------------
@@ -238,14 +235,14 @@ typedef struct {
     @param[out] pRes       output result returned here
     @param[in]  coresPerVector
 */
-typedef struct{
-  uint32_t addOffset;
-  uint32_t addLengthfirst;
-  uint32_t addLengthsecond;
-  uint32_t numVectors;
-  uint32_t blockOffset;
-  int32_t* pRes;
-  uint8_t coresPerVector;
+typedef struct {
+    uint32_t addOffset;
+    uint32_t addLengthfirst;
+    uint32_t addLengthsecond;
+    uint32_t numVectors;
+    uint32_t blockOffset;
+    int32_t *pRes;
+    uint8_t coresPerVector;
 } plp_conv_tree_add_instance;
 
 /**
@@ -255,18 +252,19 @@ typedef struct{
  * @param[in]   pBitRevTable        points to the bit reversal table
  * @param[in]   bitRevTableLength   bit reversal table length
  */
-typedef struct{
-  uint16_t fftLen;              /*< length of the FFT. */
-  const int16_t *pTwiddle;      /*< points to the Twiddle factor table. */
-  const int16_t *pBitRevTable;  /*< points to the bit reversal table. */
-  uint16_t bitRevLength;        /*< bit reversal table length. */
+typedef struct {
+    uint16_t fftLen;             /*< length of the FFT. */
+    const int16_t *pTwiddle;     /*< points to the Twiddle factor table. */
+    const int16_t *pBitRevTable; /*< points to the bit reversal table. */
+    uint16_t bitRevLength;       /*< bit reversal table length. */
 } plp_cfft_instance_q16;
 
 /** -------------------------------------------------------
     @struct plp_rfft_instance_f32
     @brief Instance structure for floating-point FFT
     @param[in]  length data length of the FFT
-    @param[in]  bitReverseFlag  flag that enables (bitReverseFlagR=1) or disables (bitReverseFlagR=0) bit reversal of output
+    @param[in]  bitReverseFlag  flag that enables (bitReverseFlagR=1) or disables
+                                (bitReverseFlagR=0) bit reversal of output
     @param[in]  pTwiddleFactors pointer to the twiddle factors.
     These values must be computed using this formula:
     \f$W_N^k =   e^{-j \frac{\pi}{N} k}\f$,
@@ -276,369 +274,305 @@ typedef struct{
     This table must include \f$N\f$ elements in the range \f$0 .. N-1\f$,
     where each location \f$k\f$ contains the value \f$bitreverse(k)\f$.
 */
-typedef struct{
-  uint32_t          FFTLength;
-  uint8_t 	        bitReverseFlag;
-  const float32_t * pTwiddleFactors;
-  const uint16_t  * pBitReverseLUT;
+typedef struct {
+    uint32_t FFTLength;
+    uint8_t bitReverseFlag;
+    const float32_t *pTwiddleFactors;
+    const uint16_t *pBitReverseLUT;
 } plp_rfft_instance_f32;
 
-typedef struct{
-  plp_rfft_instance_f32 * S;
-  const float32_t * pSrc;
-  const uint32_t nPE;
-  float32_t * pDst;
+typedef struct {
+    plp_rfft_instance_f32 *S;
+    const float32_t *pSrc;
+    const uint32_t nPE;
+    float32_t *pDst;
 } plp_rfft_parallel_arg_f32;
 
-typedef struct{
-  float32_t re;
-  float32_t im;
+typedef struct {
+    float32_t re;
+    float32_t im;
 } Complex_type_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix multiplication.
  */
-typedef struct
-{
-  const int8_t * __restrict__ pSrcA;
-  const int8_t * __restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t nPE;
-  int32_t * __restrict__ pDstC;
-}plp_mat_mult_instance_i8;
-
-
+typedef struct {
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
+} plp_mat_mult_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix multiplication.
  */
-typedef struct
-{
-  const int16_t * __restrict__ pSrcA;
-  const int16_t * __restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t nPE;
-  int32_t * __restrict__ pDstC;
-}plp_mat_mult_instance_i16;
-
-
+typedef struct {
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
+} plp_mat_mult_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix multiplication.
  */
-typedef struct
-{
-  const int32_t * __restrict__ pSrcA;
-  const int32_t * __restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t nPE;
-  int32_t * __restrict__ pDstC;
-}plp_mat_mult_instance_i32;
-
-
+typedef struct {
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
+} plp_mat_mult_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel matrix multiplication.
  */
-typedef struct
-{
-  const float * __restrict__ pSrcA;
-  const float * __restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t nPE;
-  float * __restrict__ pDstC;
-}plp_mat_mult_instance_f32;
-
-
+typedef struct {
+    const float *__restrict__ pSrcA;
+    const float *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t nPE;
+    float *__restrict__ pDstC;
+} plp_mat_mult_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 8-bit fix-point parallel matrix multiplication.
  */
-typedef struct
-{
-  const int8_t * __restrict__ pSrcA;
-  const int8_t * __restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t shift;
-  uint32_t nPE;
-  int8_t * __restrict__ pDstC;
-}plp_mat_mult_instance_q8;
-
-
+typedef struct {
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t shift;
+    uint32_t nPE;
+    int8_t *__restrict__ pDstC;
+} plp_mat_mult_instance_q8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 16-bit fix-point parallel matrix multiplication.
  */
-typedef struct
-{
-  const int16_t * __restrict__ pSrcA;
-  const int16_t * __restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t shift;
-  uint32_t nPE;
-  int16_t * __restrict__ pDstC;
-}plp_mat_mult_instance_q16;
-
-
+typedef struct {
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t shift;
+    uint32_t nPE;
+    int16_t *__restrict__ pDstC;
+} plp_mat_mult_instance_q16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 32-bit fix-point parallel matrix multiplication.
  */
-typedef struct
-{
-  const int32_t * __restrict__ pSrcA;
-  const int32_t * __restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t shift;
-  uint32_t nPE;
-  int32_t * __restrict__ pDstC;
-}plp_mat_mult_instance_q32;
-
+typedef struct {
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t shift;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
+} plp_mat_mult_instance_q32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix addition.
  */
-typedef struct
-{
-    const int8_t * __restrict__ pSrcA;
-    const int8_t * __restrict__ pSrcB;
+typedef struct {
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t nPE;
-    int8_t * __restrict__ pDst;
+    int8_t *__restrict__ pDst;
 } plp_mat_add_instance_i8;
 
-
-
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix addition.
  */
-typedef struct
-{
-    const int16_t * __restrict__ pSrcA;
-    const int16_t * __restrict__ pSrcB;
+typedef struct {
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t nPE;
-    int16_t * __restrict__ pDst;
+    int16_t *__restrict__ pDst;
 } plp_mat_add_instance_i16;
 
-
-
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix addition.
  */
-typedef struct
-{
-    const int32_t * __restrict__ pSrcA;
-    const int32_t * __restrict__ pSrcB;
+typedef struct {
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t nPE;
-    int32_t * __restrict__ pDst;
+    int32_t *__restrict__ pDst;
 } plp_mat_add_instance_i32;
-
-
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel matrix addition.
  */
-typedef struct
-{
-    const float * __restrict__ pSrcA;
-    const float * __restrict__ pSrcB;
+typedef struct {
+    const float *__restrict__ pSrcA;
+    const float *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t nPE;
-    float * __restrict__ pDst;
+    float *__restrict__ pDst;
 } plp_mat_add_instance_f32;
 
-
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix subtraction.
  */
-typedef struct
-{
-    const int8_t * __restrict__ pSrcA;
-    const int8_t * __restrict__ pSrcB;
+typedef struct {
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t nPE;
-    int8_t * __restrict__ pDst;
+    int8_t *__restrict__ pDst;
 } plp_mat_sub_instance_i8;
 
-
-
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix subtraction.
  */
-typedef struct
-{
-    const int16_t * __restrict__ pSrcA;
-    const int16_t * __restrict__ pSrcB;
+typedef struct {
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t nPE;
-    int16_t * __restrict__ pDst;
+    int16_t *__restrict__ pDst;
 } plp_mat_sub_instance_i16;
 
-
-
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix subtraction.
  */
-typedef struct
-{
-    const int32_t * __restrict__ pSrcA;
-    const int32_t * __restrict__ pSrcB;
+typedef struct {
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t nPE;
-    int32_t * __restrict__ pDst;
+    int32_t *__restrict__ pDst;
 } plp_mat_sub_instance_i32;
-
-
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel matrix subtraction.
  */
-typedef struct
-{
-    const float * __restrict__ pSrcA;
-    const float * __restrict__ pSrcB;
+typedef struct {
+    const float *__restrict__ pSrcA;
+    const float *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t nPE;
-    float * __restrict__ pDst;
+    float *__restrict__ pDst;
 } plp_mat_sub_instance_f32;
-
-
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix scale.
  */
-typedef struct
-{
-    const int8_t * __restrict__ pSrc;
+typedef struct {
+    const int8_t *__restrict__ pSrc;
     uint32_t M;
     uint32_t N;
     int8_t scaleFactor;
     int32_t shift;
     uint32_t nPE;
-    int8_t * __restrict__ pDst;
+    int8_t *__restrict__ pDst;
 } plp_mat_scale_instance_i8;
-
-
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix scale.
  */
-typedef struct
-{
-    const int16_t * __restrict__ pSrc;
+typedef struct {
+    const int16_t *__restrict__ pSrc;
     uint32_t M;
     uint32_t N;
     int16_t scaleFactor;
     int32_t shift;
     uint32_t nPE;
-    int16_t * __restrict__ pDst;
+    int16_t *__restrict__ pDst;
 } plp_mat_scale_instance_i16;
-
-
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix scale.
  */
-typedef struct
-{
-    const int32_t * __restrict__ pSrc;
+typedef struct {
+    const int32_t *__restrict__ pSrc;
     uint32_t M;
     uint32_t N;
     int32_t scaleFactor;
     int32_t shift;
     uint32_t nPE;
-    int32_t * __restrict__ pDst;
+    int32_t *__restrict__ pDst;
 } plp_mat_scale_instance_i32;
-
-
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel matrix scale.
  */
-typedef struct
-{
-    const float * __restrict__ pSrc;
+typedef struct {
+    const float *__restrict__ pSrc;
     uint32_t M;
     uint32_t N;
     float scaleFactor;
     uint32_t nPE;
-    float * __restrict__ pDst;
+    float *__restrict__ pDst;
 } plp_mat_scale_instance_f32;
 
-
-
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix transpose.
  */
-typedef struct
-{
-    const int8_t* __restrict__ pSrc;
+typedef struct {
+    const int8_t *__restrict__ pSrc;
     uint32_t M;
     uint32_t N;
     uint32_t nPE;
-    int8_t* __restrict__ pDst;
+    int8_t *__restrict__ pDst;
 } plp_mat_trans_instance_i8;
 
-
-
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix transpose.
  */
-typedef struct
-{
-    const int16_t* __restrict__ pSrc;
+typedef struct {
+    const int16_t *__restrict__ pSrc;
     uint32_t M;
     uint32_t N;
     uint32_t nPE;
-    int16_t* __restrict__ pDst;
+    int16_t *__restrict__ pDst;
 } plp_mat_trans_instance_i16;
 
-
-
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix transpose.
  */
-typedef struct
-{
-    const int32_t* __restrict__ pSrc;
+typedef struct {
+    const int32_t *__restrict__ pSrc;
     uint32_t M;
     uint32_t N;
     uint32_t nPE;
-    int32_t* __restrict__ pDst;
+    int32_t *__restrict__ pDst;
 } plp_mat_trans_instance_i32;
 
-
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix multiplication.
  */
-typedef struct
-{
-    const int8_t * __restrict__ pSrcA;
-    const int8_t * __restrict__ pSrcB;
+typedef struct {
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t O;
@@ -646,18 +580,15 @@ typedef struct
     uint32_t strideB;
     uint32_t strideC;
     uint32_t nPE;
-    int32_t * __restrict__ pDstC;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_i8;
 
-
-
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix multiplication.
  */
-typedef struct
-{
-    const int16_t * __restrict__ pSrcA;
-    const int16_t * __restrict__ pSrcB;
+typedef struct {
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t O;
@@ -665,18 +596,15 @@ typedef struct
     uint32_t strideB;
     uint32_t strideC;
     uint32_t nPE;
-    int32_t * __restrict__ pDstC;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_i16;
 
-
-
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix multiplication.
  */
-typedef struct
-{
-    const int32_t * __restrict__ pSrcA;
-    const int32_t * __restrict__ pSrcB;
+typedef struct {
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t O;
@@ -684,18 +612,15 @@ typedef struct
     uint32_t strideB;
     uint32_t strideC;
     uint32_t nPE;
-    int32_t * __restrict__ pDstC;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_i32;
-
-
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided floating-point parallel matrix multiplication.
  */
-typedef struct
-{
-    const float * __restrict__ pSrcA;
-    const float * __restrict__ pSrcB;
+typedef struct {
+    const float *__restrict__ pSrcA;
+    const float *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t O;
@@ -703,18 +628,15 @@ typedef struct
     uint32_t strideB;
     uint32_t strideC;
     uint32_t nPE;
-    float * __restrict__ pDstC;
+    float *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_f32;
-
-
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided 8-bit fix-point parallel matrix multiplication.
  */
-typedef struct
-{
-    const int8_t * __restrict__ pSrcA;
-    const int8_t * __restrict__ pSrcB;
+typedef struct {
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t O;
@@ -723,18 +645,15 @@ typedef struct
     uint32_t strideC;
     uint32_t shift;
     uint32_t nPE;
-    int8_t * __restrict__ pDstC;
+    int8_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_q8;
-
-
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided 16-bit fix-point parallel matrix multiplication.
  */
-typedef struct
-{
-    const int16_t * __restrict__ pSrcA;
-    const int16_t * __restrict__ pSrcB;
+typedef struct {
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t O;
@@ -743,18 +662,15 @@ typedef struct
     uint32_t strideC;
     uint32_t shift;
     uint32_t nPE;
-    int16_t * __restrict__ pDstC;
+    int16_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_q16;
-
-
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided 32-bit fix-point parallel matrix multiplication.
  */
-typedef struct
-{
-    const int32_t * __restrict__ pSrcA;
-    const int32_t * __restrict__ pSrcB;
+typedef struct {
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t O;
@@ -763,159 +679,134 @@ typedef struct
     uint32_t strideC;
     uint32_t shift;
     uint32_t nPE;
-    int32_t * __restrict__ pDstC;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_q32;
 
-
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix addition.
  */
-typedef struct
-{
-    const int8_t * __restrict__ pSrcA;
-    const int8_t * __restrict__ pSrcB;
+typedef struct {
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t strideA;
     uint32_t strideB;
     uint32_t strideY;
     uint32_t nPE;
-    int8_t * __restrict__ pDst;
+    int8_t *__restrict__ pDst;
 } plp_mat_add_stride_instance_i8;
 
-
-
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix addition.
  */
-typedef struct
-{
-    const int16_t * __restrict__ pSrcA;
-    const int16_t * __restrict__ pSrcB;
+typedef struct {
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t strideA;
     uint32_t strideB;
     uint32_t strideY;
     uint32_t nPE;
-    int16_t * __restrict__ pDst;
+    int16_t *__restrict__ pDst;
 } plp_mat_add_stride_instance_i16;
 
-
-
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix addition.
  */
-typedef struct
-{
-    const int32_t * __restrict__ pSrcA;
-    const int32_t * __restrict__ pSrcB;
+typedef struct {
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t strideA;
     uint32_t strideB;
     uint32_t strideY;
     uint32_t nPE;
-    int32_t * __restrict__ pDst;
+    int32_t *__restrict__ pDst;
 } plp_mat_add_stride_instance_i32;
-
-
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided floating-point parallel matrix addition.
  */
-typedef struct
-{
-    const float * __restrict__ pSrcA;
-    const float * __restrict__ pSrcB;
+typedef struct {
+    const float *__restrict__ pSrcA;
+    const float *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t strideA;
     uint32_t strideB;
     uint32_t strideY;
     uint32_t nPE;
-    float * __restrict__ pDst;
+    float *__restrict__ pDst;
 } plp_mat_add_stride_instance_f32;
 
-
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix subtraction.
  */
-typedef struct
-{
-    const int8_t * __restrict__ pSrcA;
-    const int8_t * __restrict__ pSrcB;
+typedef struct {
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t strideA;
     uint32_t strideB;
     uint32_t strideY;
     uint32_t nPE;
-    int8_t * __restrict__ pDst;
+    int8_t *__restrict__ pDst;
 } plp_mat_sub_stride_instance_i8;
 
-
-
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix subtraction.
  */
-typedef struct
-{
-    const int16_t * __restrict__ pSrcA;
-    const int16_t * __restrict__ pSrcB;
+typedef struct {
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t strideA;
     uint32_t strideB;
     uint32_t strideY;
     uint32_t nPE;
-    int16_t * __restrict__ pDst;
+    int16_t *__restrict__ pDst;
 } plp_mat_sub_stride_instance_i16;
 
-
-
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix subtraction.
  */
-typedef struct
-{
-    const int32_t * __restrict__ pSrcA;
-    const int32_t * __restrict__ pSrcB;
+typedef struct {
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t strideA;
     uint32_t strideB;
     uint32_t strideY;
     uint32_t nPE;
-    int32_t * __restrict__ pDst;
+    int32_t *__restrict__ pDst;
 } plp_mat_sub_stride_instance_i32;
-
-
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided floating-point parallel matrix subtraction.
  */
-typedef struct
-{
-    const float * __restrict__ pSrcA;
-    const float * __restrict__ pSrcB;
+typedef struct {
+    const float *__restrict__ pSrcA;
+    const float *__restrict__ pSrcB;
     uint32_t M;
     uint32_t N;
     uint32_t strideA;
     uint32_t strideB;
     uint32_t strideY;
     uint32_t nPE;
-    float * __restrict__ pDst;
+    float *__restrict__ pDst;
 } plp_mat_sub_stride_instance_f32;
-
-
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix scale.
  */
-typedef struct
-{
-    const int8_t * __restrict__ pSrc;
+typedef struct {
+    const int8_t *__restrict__ pSrc;
     uint32_t M;
     uint32_t N;
     uint32_t strideSrc;
@@ -923,17 +814,14 @@ typedef struct
     int8_t scaleFactor;
     int32_t shift;
     uint32_t nPE;
-    int8_t * __restrict__ pDst;
+    int8_t *__restrict__ pDst;
 } plp_mat_scale_stride_instance_i8;
-
-
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix scale.
  */
-typedef struct
-{
-    const int16_t * __restrict__ pSrc;
+typedef struct {
+    const int16_t *__restrict__ pSrc;
     uint32_t M;
     uint32_t N;
     uint32_t strideSrc;
@@ -941,17 +829,14 @@ typedef struct
     int16_t scaleFactor;
     int32_t shift;
     uint32_t nPE;
-    int16_t * __restrict__ pDst;
+    int16_t *__restrict__ pDst;
 } plp_mat_scale_stride_instance_i16;
-
-
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix scale.
  */
-typedef struct
-{
-    const int32_t * __restrict__ pSrc;
+typedef struct {
+    const int32_t *__restrict__ pSrc;
     uint32_t M;
     uint32_t N;
     uint32_t strideSrc;
@@ -959,28 +844,22 @@ typedef struct
     int32_t scaleFactor;
     int32_t shift;
     uint32_t nPE;
-    int32_t * __restrict__ pDst;
+    int32_t *__restrict__ pDst;
 } plp_mat_scale_stride_instance_i32;
-
-
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided floating-point parallel matrix scale.
  */
-typedef struct
-{
-    const float * __restrict__ pSrc;
+typedef struct {
+    const float *__restrict__ pSrc;
     uint32_t M;
     uint32_t N;
     uint32_t strideSrc;
     uint32_t strideDst;
     float scaleFactor;
     uint32_t nPE;
-    float * __restrict__ pDst;
+    float *__restrict__ pDst;
 } plp_mat_scale_stride_instance_f32;
-
-
-
 
 /** -------------------------------------------------------
     @brief Glue code for parallel dot product of 32-bit integer vectors.
@@ -989,17 +868,14 @@ typedef struct
     @param[in]  blockSize  number of samples in each vector
     @param[in]  nPE        number of parallel processing units
     @param[out] pRes     output result returned here
-    @return        none
+    @return     none
 */
 
-void plp_dot_prod_i32_parallel(
-                               const int32_t * __restrict__ pSrcA,
-                               const int32_t * __restrict__ pSrcB,
+void plp_dot_prod_i32_parallel(const int32_t *__restrict__ pSrcA,
+                               const int32_t *__restrict__ pSrcB,
                                uint32_t blockSize,
                                uint32_t nPE,
-                               int32_t * __restrict__ pRes);
-
-
+                               int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Glue code for parallel dot product of 32-bit fixed point vectors.
@@ -1009,17 +885,15 @@ void plp_dot_prod_i32_parallel(
     @param[in]  deciPoint  decimal point for right shift
     @param[in]  nPE        number of parallel processing units
     @param[out] pRes     output result returned here
-    @return        none
+    @return     none
 */
 
-void plp_dot_prod_q32_parallel(
-                               const int32_t * __restrict__ pSrcA,
-                               const int32_t * __restrict__ pSrcB,
+void plp_dot_prod_q32_parallel(const int32_t *__restrict__ pSrcA,
+                               const int32_t *__restrict__ pSrcB,
                                uint32_t blockSize,
                                uint32_t deciPoint,
                                uint32_t nPE,
-                               int32_t * __restrict__ pRes);
-
+                               int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Glue code for parallel dot product of 32-bit float vectors.
@@ -1028,90 +902,77 @@ void plp_dot_prod_q32_parallel(
     @param[in]  blockSize  number of samples in each vector
     @param[in]  nPE        number of parallel processing units
     @param[out] pRes     output result returned here
-    @return        none
+    @return     none
 */
 
-void plp_dot_prod_f32_parallel(
-                               const float32_t * __restrict__ pSrcA,
-                               const float32_t * __restrict__ pSrcB,
+void plp_dot_prod_f32_parallel(const float32_t *__restrict__ pSrcA,
+                               const float32_t *__restrict__ pSrcB,
                                uint32_t blockSize,
                                uint32_t nPE,
-                               float32_t * __restrict__ pRes);
-
+                               float32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief Parallel dot product with interleaved access of 32-bit integer vectors kernel for XPULPV2 extension.
+    @brief Parallel dot product with interleaved access of 32-bit integer vectors kernel for XPULPV2
+           extension.
     @param[in]  S     points to the instance structure for integer parallel dot product
-    @return        none
+    @return     none
 */
 
-void plp_dot_prod_i32p_xpulpv2(void * S);
-
-
+void plp_dot_prod_i32p_xpulpv2(void *S);
 
 /** -------------------------------------------------------
-    @brief Parallel dot product with interleaved access of 32-bit fixed point vectors kernel for XPULPV2 extension.
+    @brief Parallel dot product with interleaved access of 32-bit fixed point vectors kernel for
+           XPULPV2 extension.
     @param[in]  S     points to the instance structure for fixed point parallel dot product
-    @return        none
+    @return     none
 */
 
-void plp_dot_prod_q32p_xpulpv2(void * S);
-
-
+void plp_dot_prod_q32p_xpulpv2(void *S);
 
 /** -------------------------------------------------------
-    @brief Parallel dot product with interleaved access of 32-bit float vectors kernel for XPULPV2 extension.
+    @brief Parallel dot product with interleaved access of 32-bit float vectors kernel for XPULPV2
+           extension.
     @param[in]  S     points to the instance structure for float parallel dot product
-    @return        none
+    @return     none
 */
 
-void plp_dot_prod_f32p_xpulpv2(void * S);
-
-
+void plp_dot_prod_f32p_xpulpv2(void *S);
 
 /** -------------------------------------------------------
- * @brief Glue code for dot product of 32-bit integer vectors.
- * @param[in]  pSrcA      points to the first input vector
- * @param[in]  pSrcB      points to the second input vector
- * @param[in]  blockSize  number of samples in each vector
- * @param[out] pRes     output result returned here
+   @brief Glue code for dot product of 32-bit integer vectors.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  blockSize  number of samples in each vector
+   @param[out] pRes       output result returned here
  */
-void plp_dot_prod_i32(
-                      const int32_t * __restrict__ pSrcA,
-                      const int32_t * __restrict__ pSrcB,
+void plp_dot_prod_i32(const int32_t *__restrict__ pSrcA,
+                      const int32_t *__restrict__ pSrcB,
                       uint32_t blockSize,
-                      int32_t * __restrict__ pRes);
-
-
+                      int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
- * @brief Scalar dot product of 32-bit integer vectors kernel for RV32IM extension.
- * @param[in]  pSrcA      points to the first input vector
- * @param[in]  pSrcB      points to the second input vector
- * @param[in]  blockSize  number of samples in each vector
- * @param[out] pRes     output result returned here
+   @brief Scalar dot product of 32-bit integer vectors kernel for RV32IM extension.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  blockSize  number of samples in each vector
+   @param[out] pRes       output result returned here
  */
-void plp_dot_prod_i32s_rv32im(
-                              const int32_t * __restrict__ pSrcA,
-                              const int32_t * __restrict__ pSrcB,
+void plp_dot_prod_i32s_rv32im(const int32_t *__restrict__ pSrcA,
+                              const int32_t *__restrict__ pSrcB,
                               uint32_t blockSize,
-                              int32_t * __restrict__ pRes);
-
-
+                              int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
- * @brief Scalar dot product of 32-bit integer vectors kernel for XPULPV2 extension.
- * @param[in]  pSrcA      points to the first input vector
- * @param[in]  pSrcB      points to the second input vector
- * @param[in]  blockSize  number of samples in each vector
- * @param[out] pRes     output result returned here
+   @brief Scalar dot product of 32-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]  pSrcA      points to the first input vector
+   @param[in]  pSrcB      points to the second input vector
+   @param[in]  blockSize  number of samples in each vector
+   @param[out] pRes       output result returned here
  */
-void plp_dot_prod_i32s_xpulpv2(
-                               const int32_t * __restrict__ pSrcA,
-                               const int32_t * __restrict__ pSrcB,
+void plp_dot_prod_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                               const int32_t *__restrict__ pSrcB,
                                uint32_t blockSize,
-                               int32_t * __restrict__ pRes);
-
+                               int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Glue code for dot product of 32-bit fixed point vectors.
@@ -1119,18 +980,15 @@ void plp_dot_prod_i32s_xpulpv2(
     @param[in]  pSrcB      points to the second input vector
     @param[in]  blockSize  number of samples in each vector
     @param[in]  deciPoint  decimal point for right shift
-    @param[out] pRes     output result returned here
-    @return        none
+    @param[out] pRes       output result returned here
+    @return     none
 */
 
-void plp_dot_prod_q32(
-                      const int32_t * __restrict__ pSrcA,
-                      const int32_t * __restrict__ pSrcB,
+void plp_dot_prod_q32(const int32_t *__restrict__ pSrcA,
+                      const int32_t *__restrict__ pSrcB,
                       uint32_t blockSize,
                       uint32_t deciPoint,
-                      int32_t * __restrict__ pRes);
-
-
+                      int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Scalar dot product of 32-bit fixed point vectors kernel for RV32IM extension.
@@ -1138,18 +996,15 @@ void plp_dot_prod_q32(
     @param[in]  pSrcB      points to the second input vector
     @param[in]  blockSize  number of samples in each vector
     @param[in]  deciPoint  decimal point for right shift
-    @param[out] pRes     output result returned here
-    @return        none
+    @param[out] pRes       output result returned here
+    @return     none
 */
 
-void plp_dot_prod_q32s_rv32im(
-                              const int32_t * __restrict__ pSrcA,
-                              const int32_t * __restrict__ pSrcB,
+void plp_dot_prod_q32s_rv32im(const int32_t *__restrict__ pSrcA,
+                              const int32_t *__restrict__ pSrcB,
                               uint32_t blockSize,
                               uint32_t deciPoint,
-                              int32_t * __restrict__ pRes);
-
-
+                              int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Scalar dot product of 32-bit fixed point vectors kernel for XPULPV2 extension.
@@ -1157,107 +1012,96 @@ void plp_dot_prod_q32s_rv32im(
     @param[in]  pSrcB      points to the second input vector
     @param[in]  blockSize  number of samples in each vector
     @param[in]  deciPoint  decimal point for right shift
-    @param[out] pRes     output result returned here
-    @return        none
+    @param[out] pRes       output result returned here
+    @return     none
 */
 
-void plp_dot_prod_q32s_xpulpv2(
-                               const int32_t * __restrict__ pSrcA,
-                               const int32_t * __restrict__ pSrcB,
+void plp_dot_prod_q32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                               const int32_t *__restrict__ pSrcB,
                                uint32_t blockSize,
                                uint32_t deciPoint,
-                               int32_t * __restrict__ pRes);
-
+                               int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Glue code for dot product of 32-bit float vectors.
     @param[in]  pSrcA      points to the first input vector
     @param[in]  pSrcB      points to the second input vector
     @param[in]  blockSize  number of samples in each vector
-    @param[out] pRes     output result returned here
-    @return        none
+    @param[out] pRes       output result returned here
+    @return     none
 */
 
-void plp_dot_prod_f32(
-                      const float32_t * __restrict__ pSrcA,
-                      const float32_t * __restrict__ pSrcB,
+void plp_dot_prod_f32(const float32_t *__restrict__ pSrcA,
+                      const float32_t *__restrict__ pSrcB,
                       uint32_t blockSize,
-                      float32_t * __restrict__ pRes);
-
+                      float32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Glue code for dot product of 32-bit float vectors.
     @param[in]  pSrcA      points to the first input vector
     @param[in]  pSrcB      points to the second input vector
     @param[in]  blockSize  number of samples in each vector
-    @param[out] pRes     output result returned here
-    @return        none
+    @param[out] pRes       output result returned here
+    @return     none
 */
 
-void plp_dot_prod_f32s_xpulpv2(
-                               const float32_t * __restrict__ pSrcA,
-                               const float32_t * __restrict__ pSrcB,
+void plp_dot_prod_f32s_xpulpv2(const float32_t *__restrict__ pSrcA,
+                               const float32_t *__restrict__ pSrcB,
                                uint32_t blockSize,
-                               float32_t * __restrict__ pRes);
-
+                               float32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
- * @brief Glue code for dot product of 16-bit integer vectors.
- * @param[in]  pSrcA      points to the first input vector [16 bit]
- * @param[in]  pSrcB      points to the second input vector [16 bit]
- * @param[in]  blockSize  number of samples in each vector
- * @param[out] pRes     output result returned here [32 bit]
- *
- * @par Exploiting SIMD instructions
- When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
+   @brief Glue code for dot product of 16-bit integer vectors.
+   @param[in]  pSrcA      points to the first input vector [16 bit]
+   @param[in]  pSrcB      points to the second input vector [16 bit]
+   @param[in]  blockSize  number of samples in each vector
+   @param[out] pRes       output result returned here [32 bit]
+
+   @par Exploiting SIMD instructions
+   When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the
+   two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
 */
-void plp_dot_prod_i16(
-                      const int16_t * pSrcA,
-                      const int16_t * pSrcB,
+void plp_dot_prod_i16(const int16_t *pSrcA,
+                      const int16_t *pSrcB,
                       uint32_t blockSize,
-                      int32_t * __restrict__ pRes);
-
-
+                      int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief Vectorized dot product of 16-bit integer vectors kernel for RV32IM extension.
-    @param[in]  pSrcA      points to the first input vector [16 bit]
-    @param[in]  pSrcB      points to the second input vector [16 bit]
-    @param[in]  blockSize  number of samples in each vector
-    @param[out] pRes     output result returned here [32 bit]
-    @return        none
+   @brief Vectorized dot product of 16-bit integer vectors kernel for RV32IM extension.
+   @param[in]  pSrcA      points to the first input vector [16 bit]
+   @param[in]  pSrcB      points to the second input vector [16 bit]
+   @param[in]  blockSize  number of samples in each vector
+   @param[out] pRes       output result returned here [32 bit]
+   @return     none
 
-    @par Exploiting SIMD instructions
-    When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
+   @par Exploiting SIMD instructions
+   When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the
+   two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM
+   doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
 */
 
-void plp_dot_prod_i16s_rv32im(
-                              const int16_t * __restrict__ pSrcA,
-                              const int16_t * __restrict__ pSrcB,
+void plp_dot_prod_i16s_rv32im(const int16_t *__restrict__ pSrcA,
+                              const int16_t *__restrict__ pSrcB,
                               uint32_t blockSize,
-                              int32_t * __restrict__ pRes);
-
-
+                              int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Vectorized dot product of 16-bit integer vectors kernel for XPULPV2 extension.
     @param[in]  pSrcA      points to the first input vector [16 bit]
     @param[in]  pSrcB      points to the second input vector [16 bit]
     @param[in]  blockSize  number of samples in each vector
-    @param[out] pRes     output result returned here [32 bit]
-    @return        none
+    @param[out] pRes       output result returned here [32 bit]
+    @return     none
 
     @par Exploiting SIMD instructions
-    The 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors.
+    The 16 bit values are packed two by two into 32 bit vectors and then the two dot products are
+    performed simultaneously on 32 bit vectors.
 */
 
-void plp_dot_prod_i16v_xpulpv2(
-                               const int16_t * __restrict__ pSrcA,
-                               const int16_t * __restrict__ pSrcB,
+void plp_dot_prod_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+                               const int16_t *__restrict__ pSrcB,
                                uint32_t blockSize,
-                               int32_t * __restrict__ pRes);
-
-
+                               int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Glue code for dot product of 16-bit fixed point vectors.
@@ -1265,21 +1109,19 @@ void plp_dot_prod_i16v_xpulpv2(
     @param[in]  pSrcB      points to the second input vector [16 bit]
     @param[in]  blockSize  number of samples in each vector
     @param[in]  deciPoint  decimal point for right shift
-    @param[out] pRes     output result returned here [32 bit]
-    @return        none
+    @param[out] pRes       output result returned here [32 bit]
+    @return     none
 
     @par Exploiting SIMD instructions
-    The 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
+    The 16 bit values are packed two by two into 32 bit vectors and then the two dot products are
+    performed simultaneously on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_dot_prod_q16(
-                      const int16_t * __restrict__ pSrcA,
-                      const int16_t * __restrict__ pSrcB,
+void plp_dot_prod_q16(const int16_t *__restrict__ pSrcA,
+                      const int16_t *__restrict__ pSrcB,
                       uint32_t blockSize,
                       uint32_t deciPoint,
-                      int32_t * __restrict__ pRes);
-
-
+                      int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Scalar dot product of 16-bit fixed point vectors kernel for RV32IM extension.
@@ -1287,21 +1129,20 @@ void plp_dot_prod_q16(
     @param[in]  pSrcB      points to the second input vector [16 bit]
     @param[in]  blockSize  number of samples in each vector
     @param[in]  deciPoint  decimal point for right shift
-    @param[out] pRes     output result returned here [32 bit]
-    @return        none
+    @param[out] pRes       output result returned here [32 bit]
+    @return     none
 
     @par Exploiting SIMD instructions
-    When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
+    When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the
+    two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM
+    doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
 */
 
-void plp_dot_prod_q16s_rv32im(
-                              const int16_t * __restrict__ pSrcA,
-                              const int16_t * __restrict__ pSrcB,
+void plp_dot_prod_q16s_rv32im(const int16_t *__restrict__ pSrcA,
+                              const int16_t *__restrict__ pSrcB,
                               uint32_t blockSize,
                               uint32_t deciPoint,
-                              int32_t * __restrict__ pRes);
-
-
+                              int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Vectorized dot product of 16-bit fixed point vectors kernel for XPULPV2 extension.
@@ -1309,81 +1150,74 @@ void plp_dot_prod_q16s_rv32im(
     @param[in]  pSrcB      points to the second input vector [16 bit]
     @param[in]  blockSize  number of samples in each vector
     @param[in]  deciPoint  decimal point for right shift
-    @param[out] pRes     output result returned here [32 bit]
-    @return        none
+    @param[out] pRes       output result returned here [32 bit]
+    @return     none
 
     @par Exploiting SIMD instructions
-    The 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
+    The 16 bit values are packed two by two into 32 bit vectors and then the two dot products are
+    performed simultaneously on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_dot_prod_q16v_xpulpv2(
-                               const int16_t * __restrict__ pSrcA,
-                               const int16_t * __restrict__ pSrcB,
+void plp_dot_prod_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+                               const int16_t *__restrict__ pSrcB,
                                uint32_t blockSize,
                                uint32_t deciPoint,
-                               int32_t * __restrict__ pRes);
-
-
+                               int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Glue code for dot product of 8-bit integer vectors.
     @param[in]  pSrcA      points to the first input vector [8 bit]
     @param[in]  pSrcB      points to the second input vector [8 bit]
     @param[in]  blockSize  number of samples in each vector
-    @param[out] pRes     output result returned here [32 bit]
-    @return        none
+    @param[out] pRes       output result returned here [32 bit]
+    @return     none
 
     @par Exploiting SIMD instructions
-    When the ISA supports, the 8 bit values are packed four by four into 32 bit vectors and then the four dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
+    When the ISA supports, the 8 bit values are packed four by four into 32 bit vectors and then the
+    four dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_dot_prod_i8(
-                     const int8_t * __restrict__ pSrcA,
-                     const int8_t * __restrict__ pSrcB,
+void plp_dot_prod_i8(const int8_t *__restrict__ pSrcA,
+                     const int8_t *__restrict__ pSrcB,
                      uint32_t blockSize,
-                     int32_t * __restrict__ pRes);
-
-
+                     int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Vectorized dot product of 8-bit integer vectors kernel for RV32IM extension.
     @param[in]  pSrcA      points to the first input vector [8] bit]
     @param[in]  pSrcB      points to the second input vector [8 bit]
     @param[in]  blockSize  number of samples in each vector
-    @param[out] pRes     output result returned here [32 bit]
-    @return        none
+    @param[out] pRes       output result returned here [32 bit]
+    @return     none
 
     @par Exploiting SIMD instructions
-    When the ISA supports, the 8 bit values are packed four by four into 32 bit vectors and then the four dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
+    When the ISA supports, the 8 bit values are packed four by four into 32 bit vectors and then the
+    four dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
+    RV32IM doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
 */
 
-void plp_dot_prod_i8s_rv32im(
-                             const int8_t * __restrict__ pSrcA,
-                             const int8_t * __restrict__ pSrcB,
+void plp_dot_prod_i8s_rv32im(const int8_t *__restrict__ pSrcA,
+                             const int8_t *__restrict__ pSrcB,
                              uint32_t blockSize,
-                             int32_t * __restrict__ pRes);
-
-
+                             int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Vectorized dot product of 8-bit integer vectors kernel for XPULPV2 extension.
     @param[in]  pSrcA      points to the first input vector [8 bit]
     @param[in]  pSrcB      points to the second input vector [8 bit]
     @param[in]  blockSize  number of samples in each vector
-    @param[out] pRes     output result returned here [32 bit]
-    @return        none
+    @param[out] pRes       output result returned here [32 bit]
+    @return     none
 
     @par Exploiting SIMD instructions
-    The 8 bit values are packed four by four into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+    The 8 bit values are packed four by four into 32 bit vectors and then the four dot products are
+    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_dot_prod_i8v_xpulpv2(
-                              const int8_t * __restrict__ pSrcA,
-                              const int8_t * __restrict__ pSrcB,
+void plp_dot_prod_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                              const int8_t *__restrict__ pSrcB,
                               uint32_t blockSize,
-                              int32_t * __restrict__ pRes);
-
-
+                              int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Glue code for dot product of 8-bit fixed point vectors.
@@ -1391,21 +1225,19 @@ void plp_dot_prod_i8v_xpulpv2(
     @param[in]  pSrcB      points to the second input vector [8 bit]
     @param[in]  blockSize  number of samples in each vector
     @param[in]  deciPoint  decimal point for right shift
-    @param[out] pRes     output result returned here [32 bit]
-    @return        none
+    @param[out] pRes       output result returned here [32 bit]
+    @return     none
 
     @par Exploiting SIMD instructions
-    When the ISA supports, the 8 bit values are packed four by four into 32 bit vectors and then the four dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
+    When the ISA supports, the 8 bit values are packed four by four into 32 bit vectors and then the
+    four dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_dot_prod_q8(
-                     const int8_t * __restrict__ pSrcA,
-                     const int8_t * __restrict__ pSrcB,
+void plp_dot_prod_q8(const int8_t *__restrict__ pSrcA,
+                     const int8_t *__restrict__ pSrcB,
                      uint32_t blockSize,
                      uint32_t deciPoint,
-                     int32_t * __restrict__ pRes);
-
-
+                     int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Scalar dot product of 8-bit fixed point vectors kernel for RV32IM extension.
@@ -1413,21 +1245,20 @@ void plp_dot_prod_q8(
     @param[in]  pSrcB      points to the second input vector [8 bit]
     @param[in]  blockSize  number of samples in each vector
     @param[in]  deciPoint  decimal point for right shift
-    @param[out] pRes     output result returned here [32 bit]
-    @return        none
+    @param[out] pRes       output result returned here [32 bit]
+    @return     none
 
     @par Exploiting SIMD instructions
-    When the ISA supports, the 8 bit values are packed four by four into 32 bit vectors and then the four dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
+    When the ISA supports, the 8 bit values are packed four by four into 32 bit vectors and then the
+    four dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
+    RV32IM doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
 */
 
-void plp_dot_prod_q8s_rv32im(
-                             const int8_t * __restrict__ pSrcA,
-                             const int8_t * __restrict__ pSrcB,
+void plp_dot_prod_q8s_rv32im(const int8_t *__restrict__ pSrcA,
+                             const int8_t *__restrict__ pSrcB,
                              uint32_t blockSize,
                              uint32_t deciPoint,
-                             int32_t * __restrict__ pRes);
-
-
+                             int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief Scalar dot product of 8-bit fixed point vectors kernel for XPULPV2 extension.
@@ -1435,2039 +1266,1716 @@ void plp_dot_prod_q8s_rv32im(
     @param[in]  pSrcB      points to the second input vector [8 bit]
     @param[in]  blockSize  number of samples in each vector
     @param[in]  deciPoint  decimal point for right shift
-    @param[out] pRes     output result returned here [32 bit]
-    @return        none
+    @param[out] pRes       output result returned here [32 bit]
+    @return     none
 
     @par Exploiting SIMD instructions
-    The 8 bit values are packed four by four into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+    The 8 bit values are packed four by four into 32 bit vectors and then the four dot products are
+    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_dot_prod_q8v_xpulpv2(
-                              const int8_t * __restrict__ pSrcA,
-                              const int8_t * __restrict__ pSrcB,
+void plp_dot_prod_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                              const int8_t *__restrict__ pSrcB,
                               uint32_t blockSize,
                               uint32_t deciPoint,
-                              int32_t * __restrict__ pRes);
+                              int32_t *__restrict__ pRes);
 /** -------------------------------------------------------
-    @brief         Glue code for filling a constant value into a 32-bit integer vector.
-    @param[in]     value      input value to be filled
-    @param[out]    pDst       points to output vector
-    @param[in]     blockSize  number of samples in each vector
-    @return        none
+    @brief      Glue code for filling a constant value into a 32-bit integer vector.
+    @param[in]  value      input value to be filled
+    @param[out] pDst       points to output vector
+    @param[in]  blockSize  number of samples in each vector
+    @return     none
 */
 
-void plp_fill_i32(
-                  int32_t value,
-                  int32_t * __restrict__ pDst,
-                  uint32_t blockSize);
-
-
+void plp_fill_i32(int32_t value, int32_t *__restrict__ pDst, uint32_t blockSize);
 
 /** -------------------------------------------------------
-    @brief         Fills a constant value into a 32-bit integer vector for RV32IM extension.
-    @param[in]     value      input value to be filled
-    @param[out]    pDst       points to output vector
-    @param[in]     blockSize  number of samples in each vector
-    @return        none
+    @brief      Fills a constant value into a 32-bit integer vector for RV32IM extension.
+    @param[in]  value      input value to be filled
+    @param[out] pDst       points to output vector
+    @param[in]  blockSize  number of samples in each vector
+    @return     none
 */
 
-void plp_fill_i32s_rv32im(
-                          int32_t value,
-                          int32_t * __restrict__ pDst,
+void plp_fill_i32s_rv32im(int32_t value, int32_t *__restrict__ pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief      Fills a constant value into a 32-bit integer vector for XPULPV2 extension.
+    @param[in]  value      input value to be filled
+    @param[out] pDst       points to output vector
+    @param[in]  blockSize  number of samples in each vector
+    @return     none
+*/
+
+void plp_fill_i32s_xpulpv2(int32_t value, int32_t *__restrict__ pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief      Glue code for copying the elements of a 32-bit integer vector
+    @param[in]  pSrc       points to input vector
+    @param[out] pDst       points to output vector
+    @param[in]  blockSize  number of samples in each vector
+    @return     none
+*/
+
+void plp_copy_i32(int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief      Copies the elements of a 32-bit integer vector for RV32IM extension.
+    @param[in]  pSrc       points to input vector
+    @param[out] pDst       points to output vector
+    @param[in]  blockSize  number of samples in each vector
+    @return     none
+*/
+
+void plp_copy_i32s_rv32im(int32_t *__restrict__ pSrc,
+                          int32_t *__restrict__ pDst,
                           uint32_t blockSize);
 
-
-
 /** -------------------------------------------------------
-    @brief         Fills a constant value into a 32-bit integer vector for XPULPV2 extension.
-    @param[in]     value      input value to be filled
-    @param[out]    pDst       points to output vector
-    @param[in]     blockSize  number of samples in each vector
-    @return        none
+    @brief      Copies the elements of a 32-bit integer vector for XPULPV2 extension.
+    @param[in]  pSrc       points to input vector
+    @param[out] pDst       points to output vector
+    @param[in]  blockSize  number of samples in each vector
+    @return     none
 */
 
-void plp_fill_i32s_xpulpv2(
-                           int32_t value,
-                           int32_t * __restrict__ pDst,
+void plp_copy_i32s_xpulpv2(int32_t *__restrict__ pSrc,
+                           int32_t *__restrict__ pDst,
                            uint32_t blockSize);
 
-
-
 /** -------------------------------------------------------
-    @brief         Glue code for copying the elements of a 32-bit integer vector
-    @param[in]     pSrc       points to input vector
-    @param[out]    pDst       points to output vector
-    @param[in]     blockSize  number of samples in each vector
-    @return        none
+    @brief      Glue code for copying the elements of a 32-bit float vector
+    @param[in]  pSrc       points to input vector
+    @param[out] pDst       points to output vector
+    @param[in]  blockSize  number of samples in each vector
+    @return     none
 */
 
-void plp_copy_i32(
-                  int32_t * __restrict__ pSrc,
-                  int32_t * __restrict__ pDst,
-                  uint32_t blockSize);
-
-
+void plp_copy_f32(float32_t *__restrict__ pSrc, float32_t *__restrict__ pDst, uint32_t blockSize);
 
 /** -------------------------------------------------------
-    @brief         Copies the elements of a 32-bit integer vector for RV32IM extension.
-    @param[in]     pSrc       points to input vector
-    @param[out]    pDst       points to output vector
-    @param[in]     blockSize  number of samples in each vector
-    @return        none
+    @brief      Copies the elements of a 32-bit integer vector for XPULPV2 extension.
+    @param[in]  pSrc       points to input vector
+    @param[out] pDst       points to output vector
+    @param[in]  blockSize  number of samples in each vector
+    @return     none
 */
 
-void plp_copy_i32s_rv32im(
-                          int32_t * __restrict__ pSrc,
-                          int32_t * __restrict__ pDst,
-                          uint32_t blockSize);
-
-
-
-/** -------------------------------------------------------
-    @brief         Copies the elements of a 32-bit integer vector for XPULPV2 extension.
-    @param[in]     pSrc       points to input vector
-    @param[out]    pDst       points to output vector
-    @param[in]     blockSize  number of samples in each vector
-    @return        none
-*/
-
-void plp_copy_i32s_xpulpv2(
-                           int32_t * __restrict__ pSrc,
-                           int32_t * __restrict__ pDst,
+void plp_copy_f32s_xpulpv2(float32_t *__restrict__ pSrc,
+                           float32_t *__restrict__ pDst,
                            uint32_t blockSize);
 
-
 /** -------------------------------------------------------
-    @brief         Glue code for copying the elements of a 32-bit float vector
-    @param[in]     pSrc       points to input vector
-    @param[out]    pDst       points to output vector
-    @param[in]     blockSize  number of samples in each vector
-    @return        none
+    @brief      Glue code for mean value of a 32-bit float vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    mean value returned here
+    @return     none
 */
 
-void plp_copy_f32(
-                  float32_t * __restrict__ pSrc,
-                  float32_t * __restrict__ pDst,
-                  uint32_t blockSize);
-
+void plp_mean_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Copies the elements of a 32-bit integer vector for XPULPV2 extension.
-    @param[in]     pSrc       points to input vector
-    @param[out]    pDst       points to output vector
-    @param[in]     blockSize  number of samples in each vector
-    @return        none
+    @brief      Glue code for mean value of a 32-bit float vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    mean value returned here
+    @return     none
 */
 
-void plp_copy_f32s_xpulpv2(
-                           float32_t * __restrict__ pSrc,
-                           float32_t * __restrict__ pDst,
-                           uint32_t blockSize);
-
-
-/** -------------------------------------------------------
-    @brief         Glue code for mean value of a 32-bit float vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    mean value returned here
-    @return        none
-*/
-
-void plp_mean_f32(
-                  const float * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  float * __restrict__ pRes);
-
-/** -------------------------------------------------------
-    @brief         Glue code for mean value of a 32-bit float vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    mean value returned here
-    @return        none
-*/
-
-void plp_mean_f32s_xpulpv2(
-                           const float * __restrict__ pSrc,
+void plp_mean_f32s_xpulpv2(const float *__restrict__ pSrc,
                            uint32_t blockSize,
-                           float * __restrict__ pRes);
-
-
-/** -------------------------------------------------------
-    @brief         Glue code for mean value of a 32-bit integer vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    mean value returned here
-    @return        none
-*/
-
-void plp_mean_i32(
-                  const int32_t * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  int32_t * __restrict__ pRes);
-
+                           float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Mean value of a 32-bit integer vector for RV32IM extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    mean value returned here
-    @return        none
+    @brief      Glue code for mean value of a 32-bit integer vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    mean value returned here
+    @return     none
 */
 
-void plp_mean_i32s_rv32im(
-                          const int32_t * __restrict__ pSrc,
+void plp_mean_i32(const int32_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Mean value of a 32-bit integer vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    mean value returned here
+    @return     none
+*/
+
+void plp_mean_i32s_rv32im(const int32_t *__restrict__ pSrc,
                           uint32_t blockSize,
-                          int32_t * __restrict__ pRes);
-
-
+                          int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Mean value of a 32-bit integer vector for XPULPV2 extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pRes    mean value returned here
-    @return        none
+    @brief      Mean value of a 32-bit integer vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes    mean value returned here
+    @return     none
 */
 
-void plp_mean_i32s_xpulpv2(
-                           const int32_t * __restrict__ pSrc,
+void plp_mean_i32s_xpulpv2(const int32_t *__restrict__ pSrc,
                            uint32_t blockSize,
-                           int32_t * __restrict__ pRes);
-
-
-/** -------------------------------------------------------
-    @brief         Glue code for mean value of a 16-bit integer vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    mean value returned here
-    @return        none
-*/
-
-void plp_mean_i16(
-                  const int16_t * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  int16_t * __restrict__ pRes);
-
+                           int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Mean value of a 16-bit integer vector for RV32IM extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    mean value returned here
-    @return        none
+    @brief      Glue code for mean value of a 16-bit integer vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    mean value returned here
+    @return     none
 */
 
-void plp_mean_i16s_rv32im(
-                          const int16_t * __restrict__ pSrc,
+void plp_mean_i16(const int16_t *__restrict__ pSrc, uint32_t blockSize, int16_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Mean value of a 16-bit integer vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    mean value returned here
+    @return     none
+*/
+
+void plp_mean_i16s_rv32im(const int16_t *__restrict__ pSrc,
                           uint32_t blockSize,
-                          int16_t * __restrict__ pRes);
-
-
+                          int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Mean value of a 16-bit integer vector for XPULPV2 extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pRes    mean value returned here
-    @return        none
+    @brief      Mean value of a 16-bit integer vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes    mean value returned here
+    @return     none
 */
 
-void plp_mean_i16s_xpulpv2(
-                           const int16_t * __restrict__ pSrc,
+void plp_mean_i16s_xpulpv2(const int16_t *__restrict__ pSrc,
                            uint32_t blockSize,
-                           int16_t * __restrict__ pRes);
-
-
-/** -------------------------------------------------------
-    @brief         Glue code for mean value of a 8-bit integer vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    mean value returned here
-    @return        none
-*/
-
-void plp_mean_i8(
-                 const int8_t * __restrict__ pSrc,
-                 uint32_t blockSize,
-                 int8_t * __restrict__ pRes);
-
-
-
+                           int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Mean value of a 8-bit integer vector for RV32IM extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    mean value returned here
-    @return        none
+    @brief      Glue code for mean value of a 8-bit integer vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    mean value returned here
+    @return     none
 */
 
-void plp_mean_i8s_rv32im(
-                         const int8_t * __restrict__ pSrc,
+void plp_mean_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Mean value of a 8-bit integer vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    mean value returned here
+    @return     none
+*/
+
+void plp_mean_i8s_rv32im(const int8_t *__restrict__ pSrc,
                          uint32_t blockSize,
-                         int8_t * __restrict__ pRes);
-
-
+                         int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Mean value of a 8-bit integer vector for XPULPV2 extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pRes    mean value returned here
-    @return        none
+    @brief      Mean value of a 8-bit integer vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes    mean value returned here
+    @return     none
 */
 
-void plp_mean_i8s_xpulpv2(
-                          const int8_t * __restrict__ pSrc,
+void plp_mean_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
                           uint32_t blockSize,
-                          int8_t * __restrict__ pRes);
-
-
-/** -------------------------------------------------------
-    @brief         Glue code for max value of a 32-bit float vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    max value returned here
-    @return        none
-*/
-
-void plp_max_f32(
-                 const float* __restrict__ pSrc,
-                 uint32_t blockSize,
-                 float * __restrict__ pRes);
-
+                          int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Kernel for max value of a 32-bit float vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    max value returned here
-    @return        none
+    @brief      Glue code for max value of a 32-bit float vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    max value returned here
+    @return     none
 */
 
-void plp_max_f32s_xpulpv2(
-                          const float* __restrict__ pSrc,
+void plp_max_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Kernel for max value of a 32-bit float vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    max value returned here
+    @return     none
+*/
+
+void plp_max_f32s_xpulpv2(const float *__restrict__ pSrc,
                           uint32_t blockSize,
-                          float * __restrict__ pRes);
-
-
-/** -------------------------------------------------------
-    @brief         Glue code for max value of a 32-bit integer vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    max value returned here
-    @return        none
-*/
-
-void plp_max_i32(
-                 const int32_t * __restrict__ pSrc,
-                 uint32_t blockSize,
-                 int32_t * __restrict__ pRes);
-
-
-
+                          float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Max value of a 32-bit integer vector for RV32IM extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    max value returned here
-    @return        none
+    @brief      Glue code for max value of a 32-bit integer vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    max value returned here
+    @return     none
 */
 
-void plp_max_i32s_rv32im(
-                         const int32_t * __restrict__ pSrc,
+void plp_max_i32(const int32_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Max value of a 32-bit integer vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    max value returned here
+    @return     none
+*/
+
+void plp_max_i32s_rv32im(const int32_t *__restrict__ pSrc,
                          uint32_t blockSize,
-                         int32_t * __restrict__ pRes);
-
-
+                         int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Max value of a 32-bit integer vector for XPULPV2 extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pRes    max value returned here
-    @return        none
+    @brief      Max value of a 32-bit integer vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes    max value returned here
+    @return     none
 */
 
-void plp_max_i32s_xpulpv2(
-                          const int32_t * __restrict__ pSrc,
+void plp_max_i32s_xpulpv2(const int32_t *__restrict__ pSrc,
                           uint32_t blockSize,
-                          int32_t * __restrict__ pRes);
+                          int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Glue code for max value of a 16-bit integer vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    max value returned here
-    @return        none
+    @brief      Glue code for max value of a 16-bit integer vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    max value returned here
+    @return     none
 */
 
-void plp_max_i16(
-                 const int16_t * __restrict__ pSrc,
-                 uint32_t blockSize,
-                 int16_t * __restrict__ pRes);
-
-
-
+void plp_max_i16(const int16_t *__restrict__ pSrc, uint32_t blockSize, int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Max value of a 16-bit integer vector for RV32IM extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    max value returned here
-    @return        none
+    @brief      Max value of a 16-bit integer vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    max value returned here
+    @return     none
 */
 
-void plp_max_i16s_rv32im(
-                         const int16_t * __restrict__ pSrc,
+void plp_max_i16s_rv32im(const int16_t *__restrict__ pSrc,
                          uint32_t blockSize,
-                         int16_t * __restrict__ pRes);
-
-
+                         int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Max value of a 16-bit integer vector for XPULPV2 extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pRes    max value returned here
-    @return        none
+    @brief      Max value of a 16-bit integer vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes    max value returned here
+    @return     none
 */
 
-void plp_max_i16s_xpulpv2(
-                          const int16_t * __restrict__ pSrc,
+void plp_max_i16s_xpulpv2(const int16_t *__restrict__ pSrc,
                           uint32_t blockSize,
-                          int16_t * __restrict__ pRes);
-
-
-/** -------------------------------------------------------
-    @brief         Glue code for max value of a 8-bit integer vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    max value returned here
-    @return        none
-*/
-
-void plp_max_i8(
-                const int8_t * __restrict__ pSrc,
-                uint32_t blockSize,
-                int8_t * __restrict__ pRes);
-
-
-
+                          int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Max value of a 8-bit integer vector for RV32IM extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    max value returned here
-    @return        none
+    @brief      Glue code for max value of a 8-bit integer vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    max value returned here
+    @return     none
 */
 
-void plp_max_i8s_rv32im(
-                        const int8_t * __restrict__ pSrc,
+void plp_max_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Max value of a 8-bit integer vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    max value returned here
+    @return     none
+*/
+
+void plp_max_i8s_rv32im(const int8_t *__restrict__ pSrc,
                         uint32_t blockSize,
-                        int8_t * __restrict__ pRes);
-
-
+                        int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Max value of a 8-bit integer vector for XPULPV2 extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pRes    max value returned here
-    @return        none
+    @brief      Max value of a 8-bit integer vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes    max value returned here
+    @return     none
 */
 
-void plp_max_i8s_xpulpv2(
-                         const int8_t * __restrict__ pSrc,
+void plp_max_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
                          uint32_t blockSize,
-                         int8_t * __restrict__ pRes);
+                         int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Glue code for min value of a 32-bit float vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    min value returned here
-    @return        none
+    @brief      Glue code for min value of a 32-bit float vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    min value returned here
+    @return     none
 */
 
-void plp_min_f32(
-                 const float * __restrict__ pSrc,
-                 uint32_t blockSize,
-                 float * __restrict__ pRes);
-
+void plp_min_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Kernel for min value of a 32-bit float vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    min value returned here
-    @return        none
+    @brief      Kernel for min value of a 32-bit float vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    min value returned here
+    @return     none
 */
 
-void plp_min_f32s_xpulpv2(
-                          const float * __restrict__ pSrc,
+void plp_min_f32s_xpulpv2(const float *__restrict__ pSrc,
                           uint32_t blockSize,
-                          float * __restrict__ pRes);
-
-
-/** -------------------------------------------------------
-    @brief         Glue code for min value of a 32-bit integer vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    min value returned here
-    @return        none
-*/
-
-void plp_min_i32(
-                 const int32_t * __restrict__ pSrc,
-                 uint32_t blockSize,
-                 int32_t * __restrict__ pRes);
-
-
-
+                          float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Min value of a 32-bit integer vector for RV32IM extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    min value returned here
-    @return        none
+    @brief      Glue code for min value of a 32-bit integer vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    min value returned here
+    @return     none
 */
 
-void plp_min_i32s_rv32im(
-                         const int32_t * __restrict__ pSrc,
+void plp_min_i32(const int32_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Min value of a 32-bit integer vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    min value returned here
+    @return     none
+*/
+
+void plp_min_i32s_rv32im(const int32_t *__restrict__ pSrc,
                          uint32_t blockSize,
-                         int32_t * __restrict__ pRes);
-
-
+                         int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Min value of a 32-bit integer vector for XPULPV2 extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pRes    min value returned here
-    @return        none
+    @brief      Min value of a 32-bit integer vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes    min value returned here
+    @return     none
 */
 
-void plp_min_i32s_xpulpv2(
-                          const int32_t * __restrict__ pSrc,
+void plp_min_i32s_xpulpv2(const int32_t *__restrict__ pSrc,
                           uint32_t blockSize,
-                          int32_t * __restrict__ pRes);
+                          int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Glue code for min value of a 16-bit integer vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    min value returned here
-    @return        none
+    @brief      Glue code for min value of a 16-bit integer vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    min value returned here
+    @return     none
 */
 
-void plp_min_i16(
-                 const int16_t * __restrict__ pSrc,
-                 uint32_t blockSize,
-                 int16_t * __restrict__ pRes);
-
-
-
+void plp_min_i16(const int16_t *__restrict__ pSrc, uint32_t blockSize, int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Min value of a 16-bit integer vector for RV32IM extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    min value returned here
-    @return        none
+    @brief      Min value of a 16-bit integer vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    min value returned here
+    @return     none
 */
 
-void plp_min_i16s_rv32im(
-                         const int16_t * __restrict__ pSrc,
+void plp_min_i16s_rv32im(const int16_t *__restrict__ pSrc,
                          uint32_t blockSize,
-                         int16_t * __restrict__ pRes);
-
-
+                         int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Min value of a 16-bit integer vector for XPULPV2 extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pRes    min value returned here
-    @return        none
+    @brief      Min value of a 16-bit integer vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes    min value returned here
+    @return     none
 */
 
-void plp_min_i16s_xpulpv2(
-                          const int16_t * __restrict__ pSrc,
+void plp_min_i16s_xpulpv2(const int16_t *__restrict__ pSrc,
                           uint32_t blockSize,
-                          int16_t * __restrict__ pRes);
-
-
-/** -------------------------------------------------------
-    @brief         Glue code for min value of a 8-bit integer vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    min value returned here
-    @return        none
-*/
-
-void plp_min_i8(
-                const int8_t * __restrict__ pSrc,
-                uint32_t blockSize,
-                int8_t * __restrict__ pRes);
-
-
-
+                          int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Min value of a 8-bit integer vector for RV32IM extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    min value returned here
-    @return        none
+    @brief      Glue code for min value of a 8-bit integer vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    min value returned here
+    @return     none
 */
 
-void plp_min_i8s_rv32im(
-                        const int8_t * __restrict__ pSrc,
+void plp_min_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Min value of a 8-bit integer vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    min value returned here
+    @return     none
+*/
+
+void plp_min_i8s_rv32im(const int8_t *__restrict__ pSrc,
                         uint32_t blockSize,
-                        int8_t * __restrict__ pRes);
-
-
+                        int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Min value of a 8-bit integer vector for XPULPV2 extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pRes    min value returned here
-    @return        none
+    @brief      Min value of a 8-bit integer vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes    min value returned here
+    @return     none
 */
 
-void plp_min_i8s_xpulpv2(
-                         const int8_t * __restrict__ pSrc,
+void plp_min_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
                          uint32_t blockSize,
-                         int8_t * __restrict__ pRes);
+                         int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Glue code for Sum of squares of a 32-bit float vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    Sum of squares returned here
-    @return        none
+    @brief      Glue code for Sum of squares of a 32-bit float vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Sum of squares returned here
+    @return     none
 */
 
-void plp_power_f32(
-                   const float * __restrict__ pSrc,
-                   uint32_t blockSize,
-                   float * __restrict__ pRes);
+void plp_power_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Kernel for Sum of squares of a 32-bit float vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    Sum of squares returned here
-    @return        none
+    @brief      Kernel for Sum of squares of a 32-bit float vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Sum of squares returned here
+    @return     none
 */
 
-void plp_power_f32_xpulpv2(
-                           const float * __restrict__ pSrc,
+void plp_power_f32_xpulpv2(const float *__restrict__ pSrc,
                            uint32_t blockSize,
-                           float * __restrict__ pRes);
-
+                           float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Glue code for Sum of squares of a 32-bit integer vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    Sum of squares returned here
-    @return        none
+    @brief      Glue code for Sum of squares of a 32-bit integer vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Sum of squares returned here
+    @return     none
 */
 
-void plp_power_i32(
-                   const int32_t * __restrict__ pSrc,
+void plp_power_i32(const int32_t *__restrict__ pSrc,
                    uint32_t blockSize,
-                   int32_t * __restrict__ pRes);
-
-
-
+                   int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Sum of squares of a 32-bit integer vector for RV32IM extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    Sum of squares returned here
-    @return        none
+    @brief      Sum of squares of a 32-bit integer vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Sum of squares returned here
+    @return     none
 */
 
-void plp_power_i32s_rv32im(
-                           const int32_t * __restrict__ pSrc,
+void plp_power_i32s_rv32im(const int32_t *__restrict__ pSrc,
                            uint32_t blockSize,
-                           int32_t * __restrict__ pRes);
-
-
+                           int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Sum of squares of a 32-bit integer vector for XPULPV2 extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pRes    Sum of squares returned here
-    @return        none
+    @brief      Sum of squares of a 32-bit integer vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes    Sum of squares returned here
+    @return     none
 */
 
-void plp_power_i32s_xpulpv2(
-                            const int32_t * __restrict__ pSrc,
+void plp_power_i32s_xpulpv2(const int32_t *__restrict__ pSrc,
                             uint32_t blockSize,
-                            int32_t * __restrict__ pRes);
+                            int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Glue code for Sum of squares of a 16-bit integer vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    Sum of squares returned here
-    @return        none
+    @brief      Glue code for Sum of squares of a 16-bit integer vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Sum of squares returned here
+    @return     none
 */
 
-void plp_power_i16(
-                   const int16_t * __restrict__ pSrc,
+void plp_power_i16(const int16_t *__restrict__ pSrc,
                    uint32_t blockSize,
-                   int32_t * __restrict__ pRes);
-
-
-
+                   int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Sum of squares of a 16-bit integer vector for RV32IM extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    Sum of squares returned here
-    @return        none
+    @brief      Sum of squares of a 16-bit integer vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Sum of squares returned here
+    @return     none
 */
 
-void plp_power_i16s_rv32im(
-                           const int16_t * __restrict__ pSrc,
+void plp_power_i16s_rv32im(const int16_t *__restrict__ pSrc,
                            uint32_t blockSize,
-                           int32_t * __restrict__ pRes);
-
-
+                           int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Sum of squares of a 16-bit integer vector for XPULPV2 extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pRes    Sum of squares returned here
-    @return        none
+    @brief      Sum of squares of a 16-bit integer vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes    Sum of squares returned here
+    @return     none
 */
 
-void plp_power_i16s_xpulpv2(
-                            const int16_t * __restrict__ pSrc,
+void plp_power_i16s_xpulpv2(const int16_t *__restrict__ pSrc,
                             uint32_t blockSize,
-                            int32_t * __restrict__ pRes);
-
-
-/** -------------------------------------------------------
-    @brief         Glue code for Sum of squares of a 8-bit integer vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    Sum of squares returned here
-    @return        none
-*/
-
-void plp_power_i8(
-                  const int8_t * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  int32_t * __restrict__ pRes);
-
-
-
+                            int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Sum of squares of a 8-bit integer vector for RV32IM extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    Sum of squares returned here
-    @return        none
+    @brief      Glue code for Sum of squares of a 8-bit integer vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Sum of squares returned here
+    @return     none
 */
 
-void plp_power_i8s_rv32im(
-                          const int8_t * __restrict__ pSrc,
+void plp_power_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Sum of squares of a 8-bit integer vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Sum of squares returned here
+    @return     none
+*/
+
+void plp_power_i8s_rv32im(const int8_t *__restrict__ pSrc,
                           uint32_t blockSize,
-                          int32_t * __restrict__ pRes);
-
-
+                          int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Sum of squares of a 8-bit integer vector for XPULPV2 extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pRes    Sum of squares value returned here
-    @return        none
+    @brief      Sum of squares of a 8-bit integer vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes    Sum of squares value returned here
+    @return     none
 */
 
-void plp_power_i8s_xpulpv2(
-                           const int8_t * __restrict__ pSrc,
+void plp_power_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
                            uint32_t blockSize,
-                           int32_t * __restrict__ pRes);
-
+                           int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Glue code for Sum of squares of a 32-bit fixed point vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    Sum of squares returned here
-    @return        none
+    @brief      Glue code for Sum of squares of a 32-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Sum of squares returned here
+    @return     none
 */
 
-void plp_power_q32(
-                   const int32_t * __restrict__ pSrc,
+void plp_power_q32(const int32_t *__restrict__ pSrc,
                    uint32_t blockSize,
                    uint32_t fracBits,
-                   int32_t * __restrict__ pRes);
-
-
-
+                   int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Sum of squares of a 32-bit fixed point vector for RV32IM extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    Sum of squares value returned here
-    @return        none
+    @brief      Sum of squares of a 32-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Sum of squares value returned here
+    @return     none
 */
 
-void plp_power_q32s_rv32im(
-                           const int32_t * __restrict__ pSrc,
+void plp_power_q32s_rv32im(const int32_t *__restrict__ pSrc,
                            uint32_t blockSize,
                            uint32_t fracBits,
-                           int32_t * __restrict__ pRes);
-
-
+                           int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Sum of squares of a 32-bit fixed point vector for XPULPV2 extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pRes    Sum of squares returned here
-    @return        none
+    @brief      Sum of squares of a 32-bit fixed point vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Sum of squares returned here
+    @return     none
 */
 
-void plp_power_q32s_xpulpv2(
-                            const int32_t * __restrict__ pSrc,
+void plp_power_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
                             uint32_t blockSize,
                             uint32_t fracBits,
-                            int32_t * __restrict__ pRes);
+                            int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Glue code for Sum of squares of a 16-bit fixed point vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    Sum of squares returned here
-    @return        none
+    @brief      Glue code for Sum of squares of a 16-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Sum of squares returned here
+    @return     none
 */
 
-void plp_power_q16(
-                   const int16_t * __restrict__ pSrc,
+void plp_power_q16(const int16_t *__restrict__ pSrc,
                    uint32_t blockSize,
                    uint32_t fracBits,
-                   int32_t * __restrict__ pRes);
-
-
-
+                   int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Sum of squares of a 16-bit fixed point vector for RV32IM extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    Sum of squares returned here
-    @return        none
+    @brief      Sum of squares of a 16-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Sum of squares returned here
+    @return     none
 */
 
-void plp_power_q16s_rv32im(
-                           const int16_t * __restrict__ pSrc,
+void plp_power_q16s_rv32im(const int16_t *__restrict__ pSrc,
                            uint32_t blockSize,
                            uint32_t fracBits,
-                           int32_t * __restrict__ pRes);
-
-
+                           int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Sum of squares of a 16-bit fixed point vector for XPULPV2 extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pRes    Sum of squares returned here
-    @return        none
+    @brief      Sum of squares of a 16-bit fixed point vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Sum of squares returned here
+    @return     none
 */
 
-void plp_power_q16s_xpulpv2(
-                            const int16_t * __restrict__ pSrc,
+void plp_power_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
                             uint32_t blockSize,
                             uint32_t fracBits,
-                            int32_t * __restrict__ pRes);
-
-
+                            int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Glue code for Sum of squares of a 8-bit fixed point vector.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    Sum of squares returned here
-    @return        none
+    @brief      Glue code for Sum of squares of a 8-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Sum of squares returned here
+    @return     none
 */
 
-void plp_power_q8(
-                  const int8_t * __restrict__ pSrc,
+void plp_power_q8(const int8_t *__restrict__ pSrc,
                   uint32_t blockSize,
                   uint32_t fracBits,
-                  int32_t * __restrict__ pRes);
-
-
-
+                  int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Sum of squares of a 8-bit fixed point vector for RV32IM extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pResult    Sum of squares returned here
-    @return        none
+    @brief      Sum of squares of a 8-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Sum of squares returned here
+    @return     none
 */
 
-void plp_power_q8s_rv32im(
-                          const int8_t * __restrict__ pSrc,
+void plp_power_q8s_rv32im(const int8_t *__restrict__ pSrc,
                           uint32_t blockSize,
                           uint32_t fracBits,
-                          int32_t * __restrict__ pRes);
-
-
+                          int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief         Sum of squares of a 8-bit fixed point vector for XPULPV2 extension.
-    @param[in]     pSrc       points to the input vector
-    @param[in]     blockSize  number of samples in input vector
-    @param[out]    pRes    Sum of squares value returned here
-    @return        none
+    @brief      Sum of squares of a 8-bit fixed point vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Sum of squares value returned here
+    @return     none
 */
 
-void plp_power_q8s_xpulpv2(
-                           const int8_t * __restrict__ pSrc,
+void plp_power_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
                            uint32_t blockSize,
                            uint32_t fracBits,
-                           int32_t * __restrict__ pRes);
-
-
-/** -------------------------------------------------------
-    @brief         Glue code for Statisical variance of a 32-bit float vector.
-    @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical variance returned here
-   @return        none
-*/
-
-void plp_var_f32(
-                  const float * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  float * __restrict__ pRes);
+                           int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Kernel for Statisical variance of a 32-bit float vector.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical variance returned here
-   @return        none
+   @brief      Glue code for Statisical variance of a 32-bit float vector.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical variance returned here
+   @return     none
 */
 
-void plp_var_f32_xpulpv2(
-                  const float * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  float * __restrict__ pRes);
-
+void plp_var_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Glue code for Statisical variance of a 32-bit integer vector.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical variance returned here
-   @return        none
+   @brief      Kernel for Statisical variance of a 32-bit float vector.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical variance returned here
+   @return     none
 */
 
-void plp_var_i32(
-                  const int32_t * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  int32_t * __restrict__ pRes);
-
-
-
+void plp_var_f32_xpulpv2(const float *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Statisical variance of a 32-bit integer vector for RV32IM extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical variance returned here
-   @return        none
+   @brief      Glue code for Statisical variance of a 32-bit integer vector.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical variance returned here
+   @return     none
 */
 
-void plp_var_i32s_rv32im(
-                          const int32_t * __restrict__ pSrc,
+void plp_var_i32(const int32_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+   @brief      Statisical variance of a 32-bit integer vector for RV32IM extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical variance returned here
+   @return     none
+*/
+
+void plp_var_i32s_rv32im(const int32_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+   @brief      Statisical variance of a 32-bit integer vector for XPULPV2 extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pRes    Statisical variance returned here
+   @return     none
+*/
+
+void plp_var_i32s_xpulpv2(const int32_t *__restrict__ pSrc,
                           uint32_t blockSize,
-                          int32_t * __restrict__ pRes);
-
-
+                          int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Statisical variance of a 32-bit integer vector for XPULPV2 extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    Statisical variance returned here
-   @return        none
+   @brief      Glue code for Statisical variance of a 16-bit integer vector.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical variance returned here
+   @return     none
 */
 
-void plp_var_i32s_xpulpv2(
-                           const int32_t * __restrict__ pSrc,
-                           uint32_t blockSize,
-                           int32_t * __restrict__ pRes);
+void plp_var_i16(const int16_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Glue code for Statisical variance of a 16-bit integer vector.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical variance returned here
-   @return        none
+   @brief      Statisical variance of a 16-bit integer vector for RV32IM extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical variance returned here
+   @return     none
 */
 
-void plp_var_i16(
-                  const int16_t * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  int32_t * __restrict__ pRes);
-
-
-
+void plp_var_i16s_rv32im(const int16_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Statisical variance of a 16-bit integer vector for RV32IM extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical variance returned here
-   @return        none
+   @brief      Statisical variance of a 16-bit integer vector for XPULPV2 extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pRes       Statisical variance returned here
+   @return     none
 */
 
-void plp_var_i16s_rv32im(
-                          const int16_t * __restrict__ pSrc,
+void plp_var_i16s_xpulpv2(const int16_t *__restrict__ pSrc,
                           uint32_t blockSize,
-                          int32_t * __restrict__ pRes);
-
-
+                          int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Statisical variance of a 16-bit integer vector for XPULPV2 extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    Statisical variance returned here
-   @return        none
+   @brief      Glue code for Statisical variance of a 8-bit integer vector.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical variance returned here
+   @return     none
 */
 
-void plp_var_i16s_xpulpv2(
-                           const int16_t * __restrict__ pSrc,
-                           uint32_t blockSize,
-                           int32_t * __restrict__ pRes);
-
+void plp_var_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Glue code for Statisical variance of a 8-bit integer vector.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical variance returned here
-   @return        none
+   @brief      Statisical variance of a 8-bit integer vector for RV32IM extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical variance returned here
+   @return     none
 */
 
-void plp_var_i8(
-                  const int8_t * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  int32_t * __restrict__ pRes);
-
-
-
+void plp_var_i8s_rv32im(const int8_t *__restrict__ pSrc,
+                        uint32_t blockSize,
+                        int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Statisical variance of a 8-bit integer vector for RV32IM extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical variance returned here
-   @return        none
+   @brief      Statisical variance of a 8-bit integer vector for XPULPV2 extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pRes       Statisical variance value returned here
+   @return     none
 */
 
-void plp_var_i8s_rv32im(
-                          const int8_t * __restrict__ pSrc,
-                          uint32_t blockSize,
-                          int32_t * __restrict__ pRes);
-
-
+void plp_var_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Statisical variance of a 8-bit integer vector for XPULPV2 extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    Statisical variance value returned here
-   @return        none
+   @brief      Glue code for Statisical variance of a 32-bit fixed point vector.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical variance returned here
+   @return     none
 */
 
-void plp_var_i8s_xpulpv2(
-                           const int8_t * __restrict__ pSrc,
-                           uint32_t blockSize,
-                           int32_t * __restrict__ pRes);
-
+void plp_var_q32(const int32_t *__restrict__ pSrc,
+                 uint32_t blockSize,
+                 uint32_t fracBits,
+                 int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Glue code for Statisical variance of a 32-bit fixed point vector.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical variance returned here
-   @return        none
+   @brief      Statisical variance of a 32-bit fixed point vector for RV32IM extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical variance value returned here
+   @return     none
 */
 
-void plp_var_q32(
-                  const int32_t * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  uint32_t fracBits,
-                  int32_t * __restrict__ pRes);
-
-
-
+void plp_var_q32s_rv32im(const int32_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         uint32_t fracBits,
+                         int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Statisical variance of a 32-bit fixed point vector for RV32IM extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical variance value returned here
-   @return        none
+   @brief      Statisical variance of a 32-bit fixed point vector for XPULPV2 extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pRes       Statisical variance returned here
+   @return     none
 */
 
-void plp_var_q32s_rv32im(
-                          const int32_t * __restrict__ pSrc,
+void plp_var_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
                           uint32_t blockSize,
                           uint32_t fracBits,
-                          int32_t * __restrict__ pRes);
-
-
+                          int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Statisical variance of a 32-bit fixed point vector for XPULPV2 extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    Statisical variance returned here
-   @return        none
+   @brief      Glue code for Statisical variance of a 16-bit fixed point vector.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical variance returned here
+   @return     none
 */
 
-void plp_var_q32s_xpulpv2(
-                           const int32_t * __restrict__ pSrc,
-                           uint32_t blockSize,
-                           uint32_t fracBits,
-                           int32_t * __restrict__ pRes);
+void plp_var_q16(const int16_t *__restrict__ pSrc,
+                 uint32_t blockSize,
+                 uint32_t fracBits,
+                 int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Glue code for Statisical variance of a 16-bit fixed point vector.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical variance returned here
-   @return        none
+   @brief      Statisical variance of a 16-bit fixed point vector for RV32IM extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical variance returned here
+   @return     none
 */
 
-void plp_var_q16(
-                  const int16_t * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  uint32_t fracBits,
-                  int16_t * __restrict__ pRes);
-
-
-
+void plp_var_q16s_rv32im(const int16_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         uint32_t fracBits,
+                         int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Statisical variance of a 16-bit fixed point vector for RV32IM extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical variance returned here
-   @return        none
+   @brief      Statisical variance of a 16-bit fixed point vector for XPULPV2 extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pRes       Statisical variance returned here
+   @return     none
 */
 
-void plp_var_q16s_rv32im(
-                          const int16_t * __restrict__ pSrc,
+void plp_var_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
                           uint32_t blockSize,
                           uint32_t fracBits,
-                          int16_t * __restrict__ pRes);
-
-
+                          int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Statisical variance of a 16-bit fixed point vector for XPULPV2 extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    Statisical variance returned here
-   @return        none
+   @brief      Glue code for Statisical variance of a 8-bit fixed point vector.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical variance returned here
+   @return     none
 */
 
-void plp_var_q16s_xpulpv2(
-                           const int16_t * __restrict__ pSrc,
-                           uint32_t blockSize,
-                           uint32_t fracBits,
-                           int16_t * __restrict__ pRes);
-
-
+void plp_var_q8(const int8_t *__restrict__ pSrc,
+                uint32_t blockSize,
+                uint32_t fracBits,
+                int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Glue code for Statisical variance of a 8-bit fixed point vector.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical variance returned here
-   @return        none
+   @brief      Statisical variance of a 8-bit fixed point vector for RV32IM extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical variance returned here
+   @return     none
 */
 
-void plp_var_q8(
-                  const int8_t * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  uint32_t fracBits,
-                  int8_t * __restrict__ pRes);
-
-
-
+void plp_var_q8s_rv32im(const int8_t *__restrict__ pSrc,
+                        uint32_t blockSize,
+                        uint32_t fracBits,
+                        int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Statisical variance of a 8-bit fixed point vector for RV32IM extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical variance returned here
-   @return        none
+   @brief      Statisical variance of a 8-bit fixed point vector for XPULPV2 extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pRes       Statisical variance value returned here
+   @return     none
 */
 
-void plp_var_q8s_rv32im(
-                          const int8_t * __restrict__ pSrc,
+void plp_var_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         uint32_t fracBits,
+                         int8_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+   @brief      Glue code for Statisical standard deviation of a 32-bit floating point vector.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical standard deviation returned here
+   @return     none
+*/
+
+void plp_std_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
+
+/** -------------------------------------------------------
+   @brief      Kernel for Statisical standard deviation of a 32-bit float vector.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical standard deviation returned here
+   @return     none
+*/
+
+void plp_std_f32_xpulpv2(const float *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         float *__restrict__ pRes);
+
+/** -------------------------------------------------------
+   @brief      Glue code for Statisical standard deviation of a 32-bit fixed point vector.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical standard deviation returned here
+   @return     none
+*/
+
+void plp_std_q32(const int32_t *__restrict__ pSrc,
+                 uint32_t blockSize,
+                 uint32_t fracBits,
+                 int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+   @brief      Statisical standard deviation of a 32-bit fixed point vector for RV32IM extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical standard deviation value returned here
+   @return     none
+*/
+
+void plp_std_q32s_rv32im(const int32_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         uint32_t fracBits,
+                         int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+   @brief      Statisical standard deviation of a 32-bit fixed point vector for XPULPV2
+   extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pRes       Statisical standard deviation returned here
+   @return     none
+*/
+
+void plp_std_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
                           uint32_t blockSize,
                           uint32_t fracBits,
-                          int8_t * __restrict__ pRes);
-
-
+                          int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Statisical variance of a 8-bit fixed point vector for XPULPV2 extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    Statisical variance value returned here
-   @return        none
+   @brief      Glue code for Statisical standard deviation of a 16-bit fixed point vector.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical standard deviation returned here
+   @return     none
 */
 
-void plp_var_q8s_xpulpv2(
-                           const int8_t * __restrict__ pSrc,
-                           uint32_t blockSize,
-                           uint32_t fracBits,
-                           int8_t * __restrict__ pRes);
-
+void plp_std_q16(const int16_t *__restrict__ pSrc,
+                 uint32_t blockSize,
+                 uint32_t fracBits,
+                 int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Glue code for Statisical standard deviation of a 32-bit floating point vector.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical standard deviation returned here
-   @return        none
+   @brief      Statisical standard deviation of a 16-bit fixed point vector for RV32IM extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical standard deviation returned here
+   @return     none
 */
 
-
-void plp_std_f32(
-                  const float * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  float * __restrict__ pRes);
+void plp_std_q16s_rv32im(const int16_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         uint32_t fracBits,
+                         int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Kernel for Statisical standard deviation of a 32-bit float vector.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical standard deviation returned here
-   @return        none
+   @brief      Statisical standard deviation of a 16-bit fixed point vector for XPULPV2
+   extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pRes       Statisical standard deviation returned here
+   @return     none
 */
 
-void plp_std_f32_xpulpv2(
-                  const float * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  float * __restrict__ pRes);
-
-
-/** -------------------------------------------------------
-   @brief         Glue code for Statisical standard deviation of a 32-bit fixed point vector.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical standard deviation returned here
-   @return        none
-*/
-
-void plp_std_q32(
-                  const int32_t * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  uint32_t fracBits,
-                  int32_t * __restrict__ pRes);
-
-
-
-
-/** -------------------------------------------------------
-   @brief         Statisical standard deviation of a 32-bit fixed point vector for RV32IM extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical standard deviation value returned here
-   @return        none
-*/
-
-void plp_std_q32s_rv32im(
-                          const int32_t * __restrict__ pSrc,
+void plp_std_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
                           uint32_t blockSize,
                           uint32_t fracBits,
-                          int32_t * __restrict__ pRes);
-
-
+                          int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Statisical standard deviation of a 32-bit fixed point vector for XPULPV2 extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    Statisical standard deviation returned here
-   @return        none
+   @brief      Glue code for Statisical standard deviation of a 8-bit fixed point vector.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical standard deviation returned here
+   @return     none
 */
 
-void plp_std_q32s_xpulpv2(
-                           const int32_t * __restrict__ pSrc,
-                           uint32_t blockSize,
-                           uint32_t fracBits,
-                           int32_t * __restrict__ pRes);
+void plp_std_q8(const int8_t *__restrict__ pSrc,
+                uint32_t blockSize,
+                uint32_t fracBits,
+                int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Glue code for Statisical standard deviation of a 16-bit fixed point vector.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical standard deviation returned here
-   @return        none
+   @brief      Statisical standard deviation of a 8-bit fixed point vector for RV32IM extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pResult    Statisical standard deviation returned here
+   @return     none
 */
 
-void plp_std_q16(
-                  const int16_t * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  uint32_t fracBits,
-                  int16_t * __restrict__ pRes);
-
-
-
+void plp_std_q8s_rv32im(const int8_t *__restrict__ pSrc,
+                        uint32_t blockSize,
+                        uint32_t fracBits,
+                        int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Statisical standard deviation of a 16-bit fixed point vector for RV32IM extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical standard deviation returned here
-   @return        none
+   @brief      Statisical standard deviation of a 8-bit fixed point vector for XPULPV2 extension.
+   @param[in]  pSrc       points to the input vector
+   @param[in]  blockSize  number of samples in input vector
+   @param[out] pRes       Statisical standard deviation value returned here
+   @return     none
 */
 
-void plp_std_q16s_rv32im(
-                          const int16_t * __restrict__ pSrc,
-                          uint32_t blockSize,
-                          uint32_t fracBits,
-                          int16_t * __restrict__ pRes);
-
-
+void plp_std_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         uint32_t fracBits,
+                         int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Statisical standard deviation of a 16-bit fixed point vector for XPULPV2 extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    Statisical standard deviation returned here
-   @return        none
+   @brief      Glue code for square root of a 32-bit fixed point number.
+   @param[in]  in   32-Bit input integer
+   @param[out] out  Square root of the input
+   @return     none
 */
 
-void plp_std_q16s_xpulpv2(
-                           const int16_t * __restrict__ pSrc,
-                           uint32_t blockSize,
-                           uint32_t fracBits,
-                           int16_t * __restrict__ pRes);
-
-
+void plp_sqrt_q32(const int32_t *__restrict__ pSrc,
+                  const uint32_t fracBits,
+                  int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Glue code for Statisical standard deviation of a 8-bit fixed point vector.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical standard deviation returned here
-   @return        none
+   @brief      Square root of a 32-bit fixed point number for XPULPV2 extension.
+   @param[in]  in   32-Bit input integer
+   @param[out] out  Square root of the input
+   @return     none
 */
 
-void plp_std_q8(
-                  const int8_t * __restrict__ pSrc,
-                  uint32_t blockSize,
-                  uint32_t fracBits,
-                  int8_t * __restrict__ pRes);
-
-
-
+void plp_sqrt_q32s_rv32im(const int32_t *__restrict__ pSrc,
+                          const uint32_t fracBits,
+                          int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Statisical standard deviation of a 8-bit fixed point vector for RV32IM extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pResult    Statisical standard deviation returned here
-   @return        none
+   @brief      Square root of a 32-bit fixed point number for XPULPV2 extension.
+   @param[in]  in   32-Bit input integer
+   @param[out] out  Square root of the input
+   @return     none
 */
 
-void plp_std_q8s_rv32im(
-                          const int8_t * __restrict__ pSrc,
-                          uint32_t blockSize,
-                          uint32_t fracBits,
-                          int8_t * __restrict__ pRes);
-
-
-
-/** -------------------------------------------------------
-   @brief         Statisical standard deviation of a 8-bit fixed point vector for XPULPV2 extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    Statisical standard deviation value returned here
-   @return        none
-*/
-
-void plp_std_q8s_xpulpv2(
-                           const int8_t * __restrict__ pSrc,
-                           uint32_t blockSize,
-                           uint32_t fracBits,
-                           int8_t * __restrict__ pRes);
-
-
-
-/** -------------------------------------------------------
-   @brief         Glue code for square root of a 32-bit fixed point number.
-   @param[in]     in  32-Bit input integer
-   @param[out]    out    Square root of the input
-   @return        none
-*/
-
-void plp_sqrt_q32(
-                           const int32_t* __restrict__ pSrc,
+void plp_sqrt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
                            const uint32_t fracBits,
-                           int32_t * __restrict__ pRes);
-
-
-/** -------------------------------------------------------
-   @brief         Square root of a 32-bit fixed point number for XPULPV2 extension.
-   @param[in]     in  32-Bit input integer
-   @param[out]    out    Square root of the input
-   @return        none
-*/
-
-void plp_sqrt_q32s_rv32im(
-                           const int32_t* __restrict__ pSrc,
-                           const uint32_t fracBits,
-                           int32_t * __restrict__ pRes);
-
+                           int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Square root of a 32-bit fixed point number for XPULPV2 extension.
-   @param[in]     in  32-Bit input integer
-   @param[out]    out    Square root of the input
-   @return        none
+   @brief      Glue code for square root of a 16-bit fixed point number.
+   @param[in]  in   16-Bit input integer
+   @param[out] out  Square root of the input
+   @return     none
 */
 
-void plp_sqrt_q32s_xpulpv2(
-                           const int32_t* __restrict__ pSrc,
-                           const uint32_t fracBits,
-                           int32_t * __restrict__ pRes);
-
+void plp_sqrt_q16(const int16_t *__restrict__ pSrc,
+                  const uint32_t fracBits,
+                  int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Glue code for square root of a 16-bit fixed point number.
-   @param[in]     in  16-Bit input integer
-   @param[out]    out    Square root of the input
-   @return        none
+   @brief      Square root of a 16-bit fixed point number for XPULPV2 extension.
+   @param[in]  in   16-Bit input integer
+   @param[out] out  Square root of the input
+   @return     none
 */
 
-void plp_sqrt_q16(
-                           const int16_t* __restrict__ pSrc,
-                           const uint32_t fracBits,
-                           int16_t * __restrict__ pRes);
-
+void plp_sqrt_q16s_rv32im(const int16_t *__restrict__ pSrc,
+                          const uint32_t fracBits,
+                          int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief         Square root of a 16-bit fixed point number for XPULPV2 extension.
-   @param[in]     in  16-Bit input integer
-   @param[out]    out    Square root of the input
-   @return        none
+   @brief      Square root of a 16-bit fixed point number for XPULPV2 extension.
+   @param[in]  in   16-Bit input integer
+   @param[out] out  Square root of the input
+   @return     none
 */
 
-void plp_sqrt_q16s_rv32im(
-                           const int16_t* __restrict__ pSrc,
+void plp_sqrt_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
                            const uint32_t fracBits,
-                           int16_t * __restrict__ pRes);
-
-/** -------------------------------------------------------
-   @brief         Square root of a 16-bit fixed point number for XPULPV2 extension.
-   @param[in]     in  16-Bit input integer
-   @param[out]    out    Square root of the input
-   @return        none
-*/
-
-void plp_sqrt_q16s_xpulpv2(
-                           const int16_t* __restrict__ pSrc,
-                           const uint32_t fracBits,
-                           int16_t * __restrict__ pRes);
-
+                           int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
   @brief Glue code for correlation of 32-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  srcBLen   Length of the second input vector
-  @param[out] pRes     output result returned here
-  @return        none
+  @param[in]  pSrcA   points to the first input vector
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector
+  @param[in]  srcBLen Length of the second input vector
+  @param[out] pRes    output result returned here
+  @return     none
  */
 
-void plp_correlate_i32(
-                       const int32_t * pSrcA,
-		       const uint32_t srcALen,
-                       const int32_t * pSrcB,
-		       const uint32_t srcBLen,
-                       int32_t * pRes);
-
+void plp_correlate_i32(const int32_t *pSrcA,
+                       const uint32_t srcALen,
+                       const int32_t *pSrcB,
+                       const uint32_t srcBLen,
+                       int32_t *pRes);
 
 /** -------------------------------------------------------
    @brief Correlation of 32-bit integer vectors kernel for RV32IM extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  srcALen   Length of the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
 */
 
-void plp_correlate_i32s_rv32im(const int32_t * pSrcA,
-			      const uint32_t srcALen,
-			      const int32_t * pSrcB,
-			      const uint32_t srcBLen,
-			      int32_t * pRes);
+void plp_correlate_i32s_rv32im(const int32_t *pSrcA,
+                               const uint32_t srcALen,
+                               const int32_t *pSrcB,
+                               const uint32_t srcBLen,
+                               int32_t *pRes);
 
 /** -------------------------------------------------------
    @brief Correlation of 32-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  srcALen   Length of the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none */
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none */
 
-void plp_correlate_i32s_xpulpv2(const int32_t * __restrict__ pSrcA,
-			      const uint32_t srcALen,
-			      const int32_t * __restrict__ pSrcB,
-			      const uint32_t srcBLen,
-			      int32_t * __restrict__ pRes);
-
+void plp_correlate_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                                const uint32_t srcALen,
+                                const int32_t *__restrict__ pSrcB,
+                                const uint32_t srcBLen,
+                                int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
   @brief Glue code for correlation of 16-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  srcBLen   Length of the second input vector
-  @param[out] pRes     output result returned here
-  @return        none
+  @param[in]  pSrcA   points to the first input vector
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector
+  @param[in]  srcBLen Length of the second input vector
+  @param[out] pRes    result returned here
+  @return     none
  */
 
-void plp_correlate_i16(const int16_t *  pSrcA,
-		  const uint32_t srcALen,
-		  const int16_t *  pSrcB,
-		  const uint32_t srcBLen,
-		  int32_t *  pRes);
-
+void plp_correlate_i16(const int16_t *pSrcA,
+                       const uint32_t srcALen,
+                       const int16_t *pSrcB,
+                       const uint32_t srcBLen,
+                       int32_t *pRes);
 
 /** -------------------------------------------------------
    @brief Correlation of 16-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  srcALen   Length of the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
 */
 
-void plp_correlate_i16s_xpulpv2(const int16_t *  pSrcA,
-			   const uint32_t srcALen,
-			   const int16_t *  pSrcB,
-			   const uint32_t srcBLen,
-			   int32_t *  pRes);
+void plp_correlate_i16s_xpulpv2(const int16_t *pSrcA,
+                                const uint32_t srcALen,
+                                const int16_t *pSrcB,
+                                const uint32_t srcBLen,
+                                int32_t *pRes);
 
 /** -------------------------------------------------------
    @brief Correlation of 16-bit integer vectors kernel for RV32IM extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  srcALen   Length of the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
 */
 
-void plp_correlate_i16s_rv32im(const int16_t *  pSrcA,
-			  const uint32_t srcALen,
-			  const int16_t *  pSrcB,
-			  const uint32_t srcBLen,
-			  int32_t *  pRes);
+void plp_correlate_i16s_rv32im(const int16_t *pSrcA,
+                               const uint32_t srcALen,
+                               const int16_t *pSrcB,
+                               const uint32_t srcBLen,
+                               int32_t *pRes);
 
 /** -------------------------------------------------------
   @brief Glue code for correlation of 8-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  srcBLen   Length of the second input vector
-  @param[out] pRes     output result returned here
-  @return        none
+  @param[in]  pSrcA   points to the first input vector
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector
+  @param[in]  srcBLen Length of the second input vector
+  @param[out] pRes    output result returned here
+  @return     none
  */
 
-void plp_correlate_i8(const int8_t *  pSrcA,
-		  const uint32_t srcALen,
-		  const int8_t *  pSrcB,
-		  const uint32_t srcBLen,
-		  int32_t *  pRes);
-
+void plp_correlate_i8(const int8_t *pSrcA,
+                      const uint32_t srcALen,
+                      const int8_t *pSrcB,
+                      const uint32_t srcBLen,
+                      int32_t *pRes);
 
 /** -------------------------------------------------------
   @brief Glue code for correlation (valid) of 8-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  srcBLen   Length of the second input vector
-  @param[out] pRes     output result returned here
-  @return        none
+  @param[in]  pSrcA   points to the first input vector
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector
+  @param[in]  srcBLen Length of the second input vector
+  @param[out] pRes    output result returned here
+  @return     none
  */
 
-void plp_correlate_valid_i8(const int8_t *  pSrcA,
-		  const uint32_t srcALen,
-		  const int8_t *  pSrcB,
-		  const uint32_t srcBLen,
-		  int32_t *  pRes);
-
+void plp_correlate_valid_i8(const int8_t *pSrcA,
+                            const uint32_t srcALen,
+                            const int8_t *pSrcB,
+                            const uint32_t srcBLen,
+                            int32_t *pRes);
 
 /** -------------------------------------------------------
    @brief Correlation of 8-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  srcALen   Length of the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
 */
 
-void plp_correlate_i8s_xpulpv2(const int8_t *  pSrcA,
-			   const uint32_t srcALen,
-			   const int8_t *  pSrcB,
-			   const uint32_t srcBLen,
-			   int32_t *  pRes);
-
+void plp_correlate_i8s_xpulpv2(const int8_t *pSrcA,
+                               const uint32_t srcALen,
+                               const int8_t *pSrcB,
+                               const uint32_t srcBLen,
+                               int32_t *pRes);
 
 /** -------------------------------------------------------
    @brief Correlation of 8-bit integer vectors kernel for RV32IM extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  srcALen   Length of the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
 */
 
-void plp_correlate_i8s_rv32im(const int8_t *  pSrcA,
-			  const uint32_t srcALen,
-			  const int8_t *  pSrcB,
-			  const uint32_t srcBLen,
-			  int32_t *  pRes);
-
+void plp_correlate_i8s_rv32im(const int8_t *pSrcA,
+                              const uint32_t srcALen,
+                              const int8_t *pSrcB,
+                              const uint32_t srcBLen,
+                              int32_t *pRes);
 
 /** -------------------------------------------------------
   @brief Glue code for convolution of 32-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  srcBLen   Length of the second input vector
-  @param[out] pRes     output result returned here
-  @return        none
+  @param[in]  pSrcA    points to the first input vector
+  @param[in]  srcALen  Length of the first input vector
+  @param[in]  pSrcB    points to the second input vector
+  @param[in]  srcBLen  Length of the second input vector
+  @param[out] pRes     result returned here
+  @return     none
  */
 
-void plp_conv_i32(
-                       const int32_t * pSrcA,
-		       const uint32_t srcALen,
-                       const int32_t * pSrcB,
-		       const uint32_t srcBLen,
-                       int32_t * pRes);
+void plp_conv_i32(const int32_t *pSrcA,
+                  const uint32_t srcALen,
+                  const int32_t *pSrcB,
+                  const uint32_t srcBLen,
+                  int32_t *pRes);
 
 /** -------------------------------------------------------
   @brief Glue code for convolution (valid) of 32-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  srcBLen   Length of the second input vector
-  @param[out] pRes     output result returned here
-  @return        none
+  @param[in]  pSrcA   points to the first input vector
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector
+  @param[in]  srcBLen Length of the second input vector
+  @param[out] pRes    output result returned here
+  @return     none
  */
 
-void plp_conv_valid_i32(
-                       const int32_t * pSrcA,
-		       const uint32_t srcALen,
-                       const int32_t * pSrcB,
-		       const uint32_t srcBLen,
-                       int32_t * pRes);
+void plp_conv_valid_i32(const int32_t *pSrcA,
+                        const uint32_t srcALen,
+                        const int32_t *pSrcB,
+                        const uint32_t srcBLen,
+                        int32_t *pRes);
 
 /** -------------------------------------------------------
    @brief Convolution of 32-bit integer vectors kernel for RV32IM extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  srcALen   Length of the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
 */
 
-void plp_conv_i32s_rv32im(const int32_t * pSrcA,
-			      const uint32_t srcALen,
-			      const int32_t * pSrcB,
-			      const uint32_t srcBLen,
-			      int32_t * pRes);
+void plp_conv_i32s_rv32im(const int32_t *pSrcA,
+                          const uint32_t srcALen,
+                          const int32_t *pSrcB,
+                          const uint32_t srcBLen,
+                          int32_t *pRes);
 
 /** -------------------------------------------------------
    @brief Convolution of 32-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  srcALen   Length of the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none */
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
+*/
 
-void plp_conv_i32s_xpulpv2(const int32_t * __restrict__ pSrcA,
-			      const uint32_t srcALen,
-			      const int32_t * __restrict__ pSrcB,
-			      const uint32_t srcBLen,
-			      int32_t * __restrict__ pRes);
+void plp_conv_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                           const uint32_t srcALen,
+                           const int32_t *__restrict__ pSrcB,
+                           const uint32_t srcBLen,
+                           int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
    @brief Convolution (valid) of 32-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  srcALen   Length of the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none */
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none */
 
-void plp_conv_valid_i32s_xpulpv2(const int32_t * __restrict__ pSrcA,
-			      const uint32_t srcALen,
-			      const int32_t * __restrict__ pSrcB,
-			      const uint32_t srcBLen,
-			      int32_t * __restrict__ pRes);
-
+void plp_conv_valid_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                                 const uint32_t srcALen,
+                                 const int32_t *__restrict__ pSrcB,
+                                 const uint32_t srcBLen,
+                                 int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
   @brief Glue code for convolution of 16-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  srcBLen   Length of the second input vector
-  @param[out] pRes     output result returned here
-  @return        none
+  @param[in]  pSrcA   points to the first input vector
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector
+  @param[in]  srcBLen Length of the second input vector
+  @param[out] pRes    output result returned here
+  @return     none
  */
 
-void plp_conv_i16(const int16_t *  pSrcA,
-		  const uint32_t srcALen,
-		  const int16_t *  pSrcB,
-		  const uint32_t srcBLen,
-		  int32_t *  pRes);
-
+void plp_conv_i16(const int16_t *pSrcA,
+                  const uint32_t srcALen,
+                  const int16_t *pSrcB,
+                  const uint32_t srcBLen,
+                  int32_t *pRes);
 
 /** -------------------------------------------------------
   @brief Glue code for convolution (valid) of 16-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  srcBLen   Length of the second input vector
-  @param[out] pRes     output result returned here
-  @return        none
+  @param[in]  pSrcA   points to the first input vector
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector
+  @param[in]  srcBLen Length of the second input vector
+  @param[out] pRes    output result returned here
+  @return     none
  */
 
-void plp_conv_valid_i16(const int16_t *  pSrcA,
-		  const uint32_t srcALen,
-		  const int16_t *  pSrcB,
-		  const uint32_t srcBLen,
-		  int32_t *  pRes);
-
+void plp_conv_valid_i16(const int16_t *pSrcA,
+                        const uint32_t srcALen,
+                        const int16_t *pSrcB,
+                        const uint32_t srcBLen,
+                        int32_t *pRes);
 
 /** -------------------------------------------------------
   @brief Glue code for convolution (valid with replication) of 16-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  srcBLen   Length of the second input vector
-  @param[out] pRes     output result returned here
-  @return        none
+  @param[in]  pSrcA   points to the first input vector
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector
+  @param[in]  srcBLen Length of the second input vector
+  @param[out] pRes    output result returned here
+  @return     none
  */
 
-void plp_conv_valid_rep_i16(const int16_t *  pSrcA,
-		  const uint32_t srcALen,
-		  const int16_t *  pSrcB,
-		  const uint32_t srcBLen,
-		  int32_t *  pRes);
+void plp_conv_valid_rep_i16(const int16_t *pSrcA,
+                            const uint32_t srcALen,
+                            const int16_t *pSrcB,
+                            const uint32_t srcBLen,
+                            int32_t *pRes);
 
 /** -------------------------------------------------------
    @brief Convolution of 16-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  srcALen   Length of the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
 */
 
-void plp_conv_i16s_xpulpv2(const int16_t *  pSrcA,
-			   const uint32_t srcALen,
-			   const int16_t *  pSrcB,
-			   const uint32_t srcBLen,
-			   int32_t *  pRes);
+void plp_conv_i16s_xpulpv2(const int16_t *pSrcA,
+                           const uint32_t srcALen,
+                           const int16_t *pSrcB,
+                           const uint32_t srcBLen,
+                           int32_t *pRes);
 
 /** -------------------------------------------------------
    @brief Convolution (valid) of 16-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  srcALen   Length of the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
 */
 
-void plp_conv_valid_i16s_xpulpv2(const int16_t *  pSrcA,
-			   const uint32_t srcALen,
-			   const int16_t *  pSrcB,
-			   const uint32_t srcBLen,
-			   int32_t *  pRes);
-
+void plp_conv_valid_i16s_xpulpv2(const int16_t *pSrcA,
+                                 const uint32_t srcALen,
+                                 const int16_t *pSrcB,
+                                 const uint32_t srcBLen,
+                                 int32_t *pRes);
 
 /** -------------------------------------------------------
-   @brief Convolution (valid with data replication) of 16-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA      points to the first input vector of the replicated data
-   @param[in]  srcALen   Number of elements in (unreplicated) vector a
-   @param[in]  srcAMem   Number of elements between each replication
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none
+   @brief Convolution (valid with data replication) of 16-bit integer vectors kernel for XPULPV2
+   extension.
+   @param[in]  pSrcA   points to the first input vector of the replicated data
+   @param[in]  srcALen Number of elements in (unreplicated) vector a
+   @param[in]  srcAMem Number of elements between each replication
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
 */
 
-void plp_conv_valid_rep_i16s_xpulpv2(const int16_t *  pSrcA,
-			   const uint32_t srcALen,
-			   const uint32_t srcAMem,
-			   const int16_t*  pSrcB,
-			   const uint32_t srcBLen,
-			   int32_t *  pRes);
+void plp_conv_valid_rep_i16s_xpulpv2(const int16_t *pSrcA,
+                                     const uint32_t srcALen,
+                                     const uint32_t srcAMem,
+                                     const int16_t *pSrcB,
+                                     const uint32_t srcBLen,
+                                     int32_t *pRes);
 
 /** -------------------------------------------------------
    @brief Convolution of 16-bit integer vectors kernel for RV32IM extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  srcALen   Length of the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
 */
 
-void plp_conv_i16s_rv32im(const int16_t *  pSrcA,
-			  const uint32_t srcALen,
-			  const int16_t *  pSrcB,
-			  const uint32_t srcBLen,
-			  int32_t *  pRes);
+void plp_conv_i16s_rv32im(const int16_t *pSrcA,
+                          const uint32_t srcALen,
+                          const int16_t *pSrcB,
+                          const uint32_t srcBLen,
+                          int32_t *pRes);
 
 /** -------------------------------------------------------
   @brief Glue code for convolution of 8-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  srcBLen   Length of the second input vector
-  @param[out] pRes     output result returned here
-  @return        none
+  @param[in]  pSrcA   points to the first input vector
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector
+  @param[in]  srcBLen Length of the second input vector
+  @param[out] pRes    output result returned here
+  @return     none
  */
 
-void plp_conv_i8(const int8_t *  pSrcA,
-		  const uint32_t srcALen,
-		  const int8_t *  pSrcB,
-		  const uint32_t srcBLen,
-		  int32_t *  pRes);
-
+void plp_conv_i8(const int8_t *pSrcA,
+                 const uint32_t srcALen,
+                 const int8_t *pSrcB,
+                 const uint32_t srcBLen,
+                 int32_t *pRes);
 
 /** -------------------------------------------------------
   @brief Glue code for convolution (valid) of 8-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  srcBLen   Length of the second input vector
-  @param[out] pRes     output result returned here
-  @return        none
+  @param[in]  pSrcA   points to the first input vector
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector
+  @param[in]  srcBLen Length of the second input vector
+  @param[out] pRes    output result returned here
+  @return     none
  */
 
-void plp_conv_valid_i8(const int8_t *  pSrcA,
-		  const uint32_t srcALen,
-		  const int8_t *  pSrcB,
-		  const uint32_t srcBLen,
-		  int32_t *  pRes);
-
+void plp_conv_valid_i8(const int8_t *pSrcA,
+                       const uint32_t srcALen,
+                       const int8_t *pSrcB,
+                       const uint32_t srcBLen,
+                       int32_t *pRes);
 
 /** -------------------------------------------------------
   @brief Glue code for convolution (valid with data replication) of 8-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector (in L2)
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector (in L2)
-  @param[in]  srcBLen   Length of the second input vector
-  @param[out] pRes     output result returned here (preferably in L1)
-  @return        none
+  @param[in]  pSrcA   points to the first input vector (in L2)
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector (in L2)
+  @param[in]  srcBLen Length of the second input vector
+  @param[out] pRes    output result returned here (preferably in L1)
+  @return     none
  */
 
-void plp_conv_valid_rep_i8(const int8_t *  pSrcA,
-		  const uint32_t srcALen,
-		  const int8_t *  pSrcB,
-		  const uint32_t srcBLen,
-		  int32_t *  pRes);
-
+void plp_conv_valid_rep_i8(const int8_t *pSrcA,
+                           const uint32_t srcALen,
+                           const int8_t *pSrcB,
+                           const uint32_t srcBLen,
+                           int32_t *pRes);
 
 /** -------------------------------------------------------
    @brief Convolution of 8-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  srcALen   Length of the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
 */
 
-void plp_conv_i8s_xpulpv2(const int8_t *  pSrcA,
-			   const uint32_t srcALen,
-			   const int8_t *  pSrcB,
-			   const uint32_t srcBLen,
-			   int32_t *  pRes);
-
+void plp_conv_i8s_xpulpv2(const int8_t *pSrcA,
+                          const uint32_t srcALen,
+                          const int8_t *pSrcB,
+                          const uint32_t srcBLen,
+                          int32_t *pRes);
 
 /** -------------------------------------------------------
    @brief Convolution (valid) of 8-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  srcALen   Length of the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
 */
 
-void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
-			   const uint32_t srcALen,
-			   const int8_t *  pSrcB,
-			   const uint32_t srcBLen,
-			   int32_t *  pRes);
-
+void plp_conv_valid_i8s_xpulpv2(const int8_t *pSrcA,
+                                const uint32_t srcALen,
+                                const int8_t *pSrcB,
+                                const uint32_t srcBLen,
+                                int32_t *pRes);
 
 /** -------------------------------------------------------
-   @brief Convolution (valid with data replication) of 8-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA      points to the first input vector of the replicated data
-   @param[in]  srcALen   Number of elements in (unreplicated) vector a
-   @param[in]  srcAMem   Number of elements between each replication
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none
+   @brief Convolution (valid with data replication) of 8-bit integer vectors kernel for XPULPV2
+   extension.
+   @param[in]  pSrcA   points to the first input vector of the replicated data
+   @param[in]  srcALen Number of elements in (unreplicated) vector a
+   @param[in]  srcAMem Number of elements between each replication
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
 */
 
-void plp_conv_valid_rep_i8s_xpulpv2(const int8_t *  pSrcA,
-			   const uint32_t srcALen,
-			   const uint32_t srcAMem,
-			   const int8_t *  pSrcB,
-			   const uint32_t srcBLen,
-			   int32_t *  pRes);
-
+void plp_conv_valid_rep_i8s_xpulpv2(const int8_t *pSrcA,
+                                    const uint32_t srcALen,
+                                    const uint32_t srcAMem,
+                                    const int8_t *pSrcB,
+                                    const uint32_t srcBLen,
+                                    int32_t *pRes);
 
 /** -------------------------------------------------------
    @brief Convolution of 8-bit integer vectors kernel for RV32IM extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  srcALen   Length of the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  srcBLen   Length of the second input vector
-   @param[out] pRes     output result returned here
-   @return        none
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
 */
 
-void plp_conv_i8s_rv32im(const int8_t *  pSrcA,
-			  const uint32_t srcALen,
-			  const int8_t *  pSrcB,
-			  const uint32_t srcBLen,
-			  int32_t *  pRes);
+void plp_conv_i8s_rv32im(const int8_t *pSrcA,
+                         const uint32_t srcALen,
+                         const int8_t *pSrcB,
+                         const uint32_t srcBLen,
+                         int32_t *pRes);
 
 /** -------------------------------------------------------
   @brief Glue code for parallel convolution of 32-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  srcBLen   Length of the second input vector
-  @param[in]  nPE       Number of cores to compute on
-  @param[out] pRes     output result returned here
-  @return        none
+  @param[in]  pSrcA   points to the first input vector
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector
+  @param[in]  srcBLen Length of the second input vector
+  @param[in]  nPE     Number of cores to compute on
+  @param[out] pRes    output result returned here
+  @return     none
  */
 
-void plp_conv_i32_parallel(
-                       const int32_t *  pSrcA,
-		       const uint32_t srcALen,
-                       const int32_t *  pSrcB,
-		       const uint32_t srcBLen,
-		       const uint8_t nPE,
-                       int32_t *  pRes);
+void plp_conv_i32_parallel(const int32_t *pSrcA,
+                           const uint32_t srcALen,
+                           const int32_t *pSrcB,
+                           const uint32_t srcBLen,
+                           const uint8_t nPE,
+                           int32_t *pRes);
 
 /** -------------------------------------------------------
   @brief Setup code for parallel convolution of 32-bit integer vectors.
-  @param[in]  task_args      pointer to plp_conv_instance_i32 struct initialized by plp_conv_i32_parallel
-  @return        none
+  @param[in]  task_args      pointer to plp_conv_instance_i32 struct initialized by
+                             plp_conv_i32_parallel
+  @return     none
  */
 
-void plp_conv_i32p_xpulpv2(void* task_args);
+void plp_conv_i32p_xpulpv2(void *task_args);
 
 /** -------------------------------------------------------
   @brief Glue code for parallel convolution of 16-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  srcBLen   Length of the second input vector
-  @param[in]  nPE       Number of cores to compute on
-  @param[out] pRes     output result returned here
-  @return        none
+  @param[in]  pSrcA   points to the first input vector
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector
+  @param[in]  srcBLen Length of the second input vector
+  @param[in]  nPE     Number of cores to compute on
+  @param[out] pRes    output result returned here
+  @return     none
  */
 
-void plp_conv_i16_parallel(
-                       const int16_t *  pSrcA,
-		       const uint32_t srcALen,
-                       const int16_t *  pSrcB,
-		       const uint32_t srcBLen,
-		       const uint8_t nPE,
-                       int32_t *  pRes);
+void plp_conv_i16_parallel(const int16_t *pSrcA,
+                           const uint32_t srcALen,
+                           const int16_t *pSrcB,
+                           const uint32_t srcBLen,
+                           const uint8_t nPE,
+                           int32_t *pRes);
 /** -------------------------------------------------------
   @brief Setup code for parallel convolution of 16-bit integer vectors.
-  @param[in]  task_args      pointer to plp_conv_instance_i16 struct initialized by plp_conv_i16_parallel
-  @return        none
+  @param[in]  task_args  pointer to plp_conv_instance_i16 struct initialized by
+                         plp_conv_i16_parallel
+  @return     none
  */
 
-void plp_conv_i16p_xpulpv2(void* task_args);
+void plp_conv_i16p_xpulpv2(void *task_args);
 
 /** -------------------------------------------------------
   @brief Glue code for parallel convolution of 8-bit integer vectors.
-  @param[in]  pSrcA      points to the first input vector
-  @param[in]  srcALen   Length of the first input vector
-  @param[in]  pSrcB      points to the second input vector
-  @param[in]  srcBLen   Length of the second input vector
-  @param[in]  nPE       Number of cores to compute on
-  @param[out] pRes     output result returned here
-  @return        none
+  @param[in]  pSrcA   points to the first input vector
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector
+  @param[in]  srcBLen Length of the second input vector
+  @param[in]  nPE     Number of cores to compute on
+  @param[out] pRes    output result returned here
+  @return     none
  */
 
-void plp_conv_i8_parallel(
-                       const int8_t *  pSrcA,
-		       const uint32_t srcALen,
-                       const int8_t *  pSrcB,
-		       const uint32_t srcBLen,
-		       const uint8_t nPE,
-                       int32_t *  pRes);
+void plp_conv_i8_parallel(const int8_t *pSrcA,
+                          const uint32_t srcALen,
+                          const int8_t *pSrcB,
+                          const uint32_t srcBLen,
+                          const uint8_t nPE,
+                          int32_t *pRes);
 /** -------------------------------------------------------
   @brief Setup code for parallel convolution of 8-bit integer vectors.
-  @param[in]  task_args      pointer to plp_conv_instance_i8 struct initialized by plp_conv_i8_parallel
-  @return        none
+  @param[in]  task_args  pointer to plp_conv_instance_i8 struct initialized by
+                         plp_conv_i8_parallel
+  @return     none
  */
 
-void plp_conv_i8p_xpulpv2(void* task_args);
+void plp_conv_i8p_xpulpv2(void *task_args);
 
 /** -------------------------------------------------------
    @brief Helper function for parallelized overlap-adding of partial convolution results
@@ -3478,403 +2986,363 @@ void plp_conv_i8p_xpulpv2(void* task_args);
    @return none
 */
 
-void plp_conv_parallel_OLA(uint32_t nPE, uint32_t srcALen, uint32_t srcBLen, int32_t* resultsBuffer);
+void plp_conv_parallel_OLA(uint32_t nPE,
+                           uint32_t srcALen,
+                           uint32_t srcBLen,
+                           int32_t *resultsBuffer);
 
 /** -------------------------------------------------------
    @brief Helper function for parallelized overlap-adding of partial convolution results
    @param[in] task_args  Holds the plp_conv_tree_add_instance that describes the vector parameters
    @return none
 */
-void plp_conv_parallel_OLA_kernel(void* task_args);
-
+void plp_conv_parallel_OLA_kernel(void *task_args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for matrix matrix multiplication of a 32-bit integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for matrix matrix multiplication of a 32-bit integer matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_i32(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
-
+void plp_mat_mult_i32(const int32_t *__restrict__ pSrcA,
+                      const int32_t *__restrict__ pSrcB,
+                      uint32_t M,
+                      uint32_t N,
+                      uint32_t O,
+                      int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix matrix multiplication of a 32-bit integer matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix matrix multiplication of a 32-bit integer matrices for RV32IM extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_i32s_rv32im(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_i32s_rv32im(const int32_t *__restrict__ pSrcA,
+                              const int32_t *__restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t O,
+                              int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix matrix multiplication of a 32-bit integer matrices for XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix matrix multiplication of a 32-bit integer matrices for XPULPV2 extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_i32s_xpulpv2(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                               const int32_t *__restrict__ pSrcB,
+                               uint32_t M,
+                               uint32_t N,
+                               uint32_t O,
+                               int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for matrix matrix multiplication of a 16-bit integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for matrix matrix multiplication of a 16-bit integer matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_i16(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_i16(const int16_t *__restrict__ pSrcA,
+                      const int16_t *__restrict__ pSrcB,
+                      uint32_t M,
+                      uint32_t N,
+                      uint32_t O,
+                      int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix matrix multiplication of a 16-bit integer matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix matrix multiplication of a 16-bit integer matrices for RV32IM extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_i16s_rv32im(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_i16s_rv32im(const int16_t *__restrict__ pSrcA,
+                              const int16_t *__restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t O,
+                              int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix matrix multiplication of a 16-bit integer matrices for XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix matrix multiplication of a 16-bit integer matrices for XPULPV2 extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Exploiting SIMD instructions
-   The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+   The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_i16v_xpulpv2(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+                               const int16_t *__restrict__ pSrcB,
+                               uint32_t M,
+                               uint32_t N,
+                               uint32_t O,
+                               int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for matrix matrix multiplication of a 8-bit integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for matrix matrix multiplication of a 8-bit integer matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_i8(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_i8(const int8_t *__restrict__ pSrcA,
+                     const int8_t *__restrict__ pSrcB,
+                     uint32_t M,
+                     uint32_t N,
+                     uint32_t O,
+                     int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix matrix multiplication of a 8-bit integer matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix matrix multiplication of a 8-bit integer matrices for RV32IM extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_i8s_rv32im(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_i8s_rv32im(const int8_t *__restrict__ pSrcA,
+                             const int8_t *__restrict__ pSrcB,
+                             uint32_t M,
+                             uint32_t N,
+                             uint32_t O,
+                             int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix matrix multiplication of a 8-bit integer matrices for XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix matrix multiplication of a 8-bit integer matrices for XPULPV2 extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Exploiting SIMD instructions
-   The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+   The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_i8v_xpulpv2(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                              const int8_t *__restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t O,
+                              int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel matrix matrix multiplication of a 32-bit integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel matrix matrix multiplication of a 32-bit integer matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  nPE   Number of cores to use
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_i32_parallel(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t nPE,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_i32_parallel(const int32_t *__restrict__ pSrcA,
+                               const int32_t *__restrict__ pSrcB,
+                               uint32_t M,
+                               uint32_t N,
+                               uint32_t O,
+                               uint32_t nPE,
+                               int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Parallel matrix matrix multiplication of a 32-bit integer matrices for XPULPV2 extension.
-   @param[in]  args      pointer to plp_mat_mult_instance_i32 struct initialized by plp_mat_mult_i32_parallel
-   @return        none
+   @brief      Parallel matrix matrix multiplication of a 32-bit integer matrices for XPULPV2
+               extension.
+   @param[in]  args  pointer to plp_mat_mult_instance_i32 struct initialized by
+                     plp_mat_mult_i32_parallel
+   @return     none
 */
 
-void plp_mat_mult_i32p_xpulpv2(
-                         void* args);
-
+void plp_mat_mult_i32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel matrix matrix multiplication of a 16-bit integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel matrix matrix multiplication of a 16-bit integer matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  nPE   Number of cores to use
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_i16_parallel(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t nPE,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_i16_parallel(const int16_t *__restrict__ pSrcA,
+                               const int16_t *__restrict__ pSrcB,
+                               uint32_t M,
+                               uint32_t N,
+                               uint32_t O,
+                               uint32_t nPE,
+                               int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
     @brief Parallel matrix multiplication of 16-bit integer matrices kernel for XPULPV2 extension.
-    @param[in]  args      pointer to plp_mat_mult_instance_i16 struct initialized by plp_mat_mult_i16_parallel
-    @return        none
+    @param[in]  args  pointer to plp_mat_mult_instance_i16 struct initialized by
+                      plp_mat_mult_i16_parallel
+    @return     none
 
     @par Exploiting SIMD instructions
-    The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+    The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_i16vp_xpulpv2(
-                         void* args);
-
-
+void plp_mat_mult_i16vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel matrix matrix multiplication of a 8-bit integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel matrix matrix multiplication of a 8-bit integer matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  nPE   Number of cores to use
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_i8_parallel(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t nPE,
-                         int32_t * __restrict__ pDstC);
-
+void plp_mat_mult_i8_parallel(const int8_t *__restrict__ pSrcA,
+                              const int8_t *__restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t O,
+                              uint32_t nPE,
+                              int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for matrix matrix multiplication of a 32-bit floating-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for matrix matrix multiplication of a 32-bit floating-point matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-
-void plp_mat_mult_f32(
-                         const float * __restrict__ pSrcA,
-                         const float * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         float * __restrict__ pDstC);
-
+void plp_mat_mult_f32(const float *__restrict__ pSrcA,
+                      const float *__restrict__ pSrcB,
+                      uint32_t M,
+                      uint32_t N,
+                      uint32_t O,
+                      float *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix matrix multiplication of a 32-bit floating-point matrices for XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix matrix multiplication of a 32-bit floating-point matrices for XPULPV2
+               extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_f32s_xpulpv2(
-                         const float * __restrict__ pSrcA,
-                         const float * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         float * __restrict__ pDstC);
-
-
+void plp_mat_mult_f32s_xpulpv2(const float *__restrict__ pSrcA,
+                               const float *__restrict__ pSrcB,
+                               uint32_t M,
+                               uint32_t N,
+                               uint32_t O,
+                               float *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel matrix matrix multiplication of a 32-bit floating-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel matrix matrix multiplication of a 32-bit floating-point
+   matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  nPE   Number of cores to use
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_f32_parallel(
-                         const float * __restrict__ pSrcA,
-                         const float * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t nPE,
-                         float * __restrict__ pDstC);
-
-
+void plp_mat_mult_f32_parallel(const float *__restrict__ pSrcA,
+                               const float *__restrict__ pSrcB,
+                               uint32_t M,
+                               uint32_t N,
+                               uint32_t O,
+                               uint32_t nPE,
+                               float *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-    @brief Parallel matrix multiplication of 32-bit floating-point matrices kernel for XPULPV2 extension.
-    @param[in]  args      pointer to plp_mat_mult_instance_f32 struct initialized by plp_mat_mult_f32_parallel
+    @brief      Parallel matrix multiplication of 32-bit floating-point matrices kernel for XPULPV2
+                extension.
+    @param[in]  args  pointer to plp_mat_mult_instance_f32 struct initialized by
+                      plp_mat_mult_f32_parallel
     @return     none
 */
 
-void plp_mat_mult_f32p_xpulpv2(
-                         void* args);
-
+void plp_mat_mult_f32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief Parallel matrix multiplication of 8-bit integer matrices kernel for XPULPV2 extension.
-   @param[in]  args      pointer to plp_mat_mult_instance_i8 struct initialized by plp_mat_mult_i8_parallel
-   @return        none
+   @brief      Parallel matrix multiplication of 8-bit integer matrices kernel for XPULPV2
+               extension.
+   @param[in]  args  pointer to plp_mat_mult_instance_i8 struct initialized by
+                     plp_mat_mult_i8_parallel
+   @return     none
 
    @par Exploiting SIMD instructions
-   The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+   The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_i8vp_xpulpv2(
-                         void* args);
-
-
+void plp_mat_mult_i8vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for matrix matrix multiplication of a 32-bit fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for matrix matrix multiplication of a 32-bit fix-point matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -3883,28 +3351,26 @@ void plp_mat_mult_i8vp_xpulpv2(
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
  */
 
-void plp_mat_mult_q32(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_q32(const int32_t *__restrict__ pSrcA,
+                      const int32_t *__restrict__ pSrcB,
+                      uint32_t M,
+                      uint32_t N,
+                      uint32_t O,
+                      uint32_t shift,
+                      int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel matrix matrix multiplication of a 32-bit fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel matrix matrix multiplication of a 32-bit fix-point
+               matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[in]  nPE   Number of cores to use
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -3913,28 +3379,25 @@ void plp_mat_mult_q32(
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
  */
 
-void plp_mat_mult_q32_parallel(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         uint32_t nPE,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_q32_parallel(const int32_t *__restrict__ pSrcA,
+                               const int32_t *__restrict__ pSrcB,
+                               uint32_t M,
+                               uint32_t N,
+                               uint32_t O,
+                               uint32_t shift,
+                               uint32_t nPE,
+                               int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix matrix multiplication of a 32-bit fix-point matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix matrix multiplication of a 32-bit fix-point matrices for RV32IM extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -3943,27 +3406,24 @@ void plp_mat_mult_q32_parallel(
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 */
 
-void plp_mat_mult_q32s_rv32im(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_q32s_rv32im(const int32_t *__restrict__ pSrcA,
+                              const int32_t *__restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t O,
+                              uint32_t shift,
+                              int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix matrix multiplication of a 32-bit fix-point matrices for XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix matrix multiplication of a 32-bit fix-point matrices for XPULPV2 extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -3972,37 +3432,33 @@ void plp_mat_mult_q32s_rv32im(
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 */
 
-void plp_mat_mult_q32s_xpulpv2(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_q32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                               const int32_t *__restrict__ pSrcB,
+                               uint32_t M,
+                               uint32_t N,
+                               uint32_t O,
+                               uint32_t shift,
+                               int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
     @brief Parallel matrix multiplication of 32-bit fix-point matrices kernel for XPULPV2 extension.
-    @param[in]  args      pointer to plp_mat_mult_instance_q32 struct initialized by plp_mat_mult_q32_parallel
+    @param[in]  args  pointer to plp_mat_mult_instance_q32 struct initialized by
+                      plp_mat_mult_q32_parallel
     @return     none
 */
 
-void plp_mat_mult_q32p_xpulpv2(void* args);
-
-
+void plp_mat_mult_q32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for matrix matrix multiplication of a 16-bit fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for matrix matrix multiplication of a 16-bit fix-point matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4010,32 +3466,30 @@ void plp_mat_mult_q32p_xpulpv2(void* args);
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 16-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 16-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
  */
 
-void plp_mat_mult_q16(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int16_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_q16(const int16_t *__restrict__ pSrcA,
+                      const int16_t *__restrict__ pSrcB,
+                      uint32_t M,
+                      uint32_t N,
+                      uint32_t O,
+                      uint32_t shift,
+                      int16_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel matrix matrix multiplication of a 16-bit fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel matrix matrix multiplication of a 16-bit fix-point
+  matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[in]  nPE   Number of cores to use
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4043,32 +3497,29 @@ void plp_mat_mult_q16(
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 16-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 16-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
  */
 
-void plp_mat_mult_q16_parallel(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         uint32_t nPE,
-                         int16_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_q16_parallel(const int16_t *__restrict__ pSrcA,
+                               const int16_t *__restrict__ pSrcB,
+                               uint32_t M,
+                               uint32_t N,
+                               uint32_t O,
+                               uint32_t shift,
+                               uint32_t nPE,
+                               int16_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix matrix multiplication of a 16-bit fix-point matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix matrix multiplication of a 16-bit fix-point matrices for RV32IM extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4076,31 +3527,28 @@ void plp_mat_mult_q16_parallel(
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 16-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 16-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_q16s_rv32im(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int16_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_q16s_rv32im(const int16_t *__restrict__ pSrcA,
+                              const int16_t *__restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t O,
+                              uint32_t shift,
+                              int16_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix matrix multiplication of a 16-bit fix-point matrices for XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix matrix multiplication of a 16-bit fix-point matrices for XPULPV2 extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4108,41 +3556,37 @@ void plp_mat_mult_q16s_rv32im(
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 16-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 16-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_q16v_xpulpv2(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int16_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+                               const int16_t *__restrict__ pSrcB,
+                               uint32_t M,
+                               uint32_t N,
+                               uint32_t O,
+                               uint32_t shift,
+                               int16_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
     @brief Parallel matrix multiplication of 16-bit fix-point matrices kernel for XPULPV2 extension.
-    @param[in]  args      pointer to plp_mat_mult_instance_q16 struct initialized by plp_mat_mult_q16_parallel
+    @param[in]  args  pointer to plp_mat_mult_instance_q16 struct initialized by
+                      plp_mat_mult_q16_parallel
     @return     none
 */
 
-void plp_mat_mult_q16vp_xpulpv2(void* args);
-
-
+void plp_mat_mult_q16vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for matrix matrix multiplication of a 8-bit fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for matrix matrix multiplication of a 8-bit fix-point matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4150,32 +3594,29 @@ void plp_mat_mult_q16vp_xpulpv2(void* args);
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 8-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 8-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
  */
 
-void plp_mat_mult_q8(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int8_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_q8(const int8_t *__restrict__ pSrcA,
+                     const int8_t *__restrict__ pSrcB,
+                     uint32_t M,
+                     uint32_t N,
+                     uint32_t O,
+                     uint32_t shift,
+                     int8_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel matrix matrix multiplication of a 8-bit fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel matrix matrix multiplication of a 8-bit fix-point matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[in]  nPE   Number of cores to use
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4183,32 +3624,29 @@ void plp_mat_mult_q8(
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 8-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 8-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
  */
 
-void plp_mat_mult_q8_parallel(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         uint32_t nPE,
-                         int8_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_q8_parallel(const int8_t *__restrict__ pSrcA,
+                              const int8_t *__restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t O,
+                              uint32_t shift,
+                              uint32_t nPE,
+                              int8_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix matrix multiplication of a 8-bit fix-point matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix matrix multiplication of a 8-bit fix-point matrices for RV32IM extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4216,31 +3654,28 @@ void plp_mat_mult_q8_parallel(
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 8-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 8-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_q8s_rv32im(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int8_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_q8s_rv32im(const int8_t *__restrict__ pSrcA,
+                             const int8_t *__restrict__ pSrcB,
+                             uint32_t M,
+                             uint32_t N,
+                             uint32_t O,
+                             uint32_t shift,
+                             int8_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix matrix multiplication of a 8-bit fix-point matrices for XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix matrix multiplication of a 8-bit fix-point matrices for XPULPV2 extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4248,343 +3683,316 @@ void plp_mat_mult_q8s_rv32im(
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 8-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 8-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_q8v_xpulpv2(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int8_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                              const int8_t *__restrict__ pSrcB,
+                              uint32_t M,
+                              uint32_t N,
+                              uint32_t O,
+                              uint32_t shift,
+                              int8_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
     @brief Parallel matrix multiplication of 8-bit fix-point matrices kernel for XPULPV2 extension.
-    @param[in]  args      pointer to plp_mat_mult_instance_q8 struct initialized by plp_mat_mult_q8_parallel
+    @param[in]  args  pointer to plp_mat_mult_instance_q8 struct initialized by
+                      plp_mat_mult_q8_parallel
     @return     none
 */
 
-void plp_mat_mult_q8vp_xpulpv2(void* args);
-
-
+void plp_mat_mult_q8vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for matrix transposed matrix multiplication of a 32-bit integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for matrix transposed matrix multiplication of a 32-bit integer
+               matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_trans_i32(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_i32(const int32_t *__restrict__ pSrcA,
+                            const int32_t *__restrict__ pSrcB,
+                            uint32_t M,
+                            uint32_t N,
+                            uint32_t O,
+                            int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix transposed matrix multiplication of a 32-bit integer matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix transposed matrix multiplication of a 32-bit integer matrices for RV32IM
+               extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_trans_i32s_rv32im(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_i32s_rv32im(const int32_t *__restrict__ pSrcA,
+                                    const int32_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t O,
+                                    int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix transposed matrix multiplication of a 32-bit integer matrices for XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix transposed matrix multiplication of a 32-bit integer matrices for XPULPV2
+               extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_trans_i32s_xpulpv2(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                                     const int32_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for matrix transposed matrix multiplication of a 16-bit integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for matrix transposed matrix multiplication of a 16-bit integer
+               matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_trans_i16(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_i16(const int16_t *__restrict__ pSrcA,
+                            const int16_t *__restrict__ pSrcB,
+                            uint32_t M,
+                            uint32_t N,
+                            uint32_t O,
+                            int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix transposed matrix multiplication of a 16-bit integer matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix transposed matrix multiplication of a 16-bit integer matrices for RV32IM
+               extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_trans_i16s_rv32im(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_i16s_rv32im(const int16_t *__restrict__ pSrcA,
+                                    const int16_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t O,
+                                    int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix transposed matrix multiplication of a 16-bit integer matrices for XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix transposed matrix multiplication of a 16-bit integer matrices for XPULPV2
+               extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Exploiting SIMD instructions
-   The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+   The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_i16v_xpulpv2(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+                                     const int16_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for matrix transposed matrix multiplication of a 8-bit integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for matrix transposed matrix multiplication of a 8-bit integer matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_trans_i8(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_i8(const int8_t *__restrict__ pSrcA,
+                           const int8_t *__restrict__ pSrcB,
+                           uint32_t M,
+                           uint32_t N,
+                           uint32_t O,
+                           int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix transposed matrix multiplication of a 8-bit integer matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix transposed matrix multiplication of a 8-bit integer matrices for RV32IM
+   extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_trans_i8s_rv32im(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_i8s_rv32im(const int8_t *__restrict__ pSrcA,
+                                   const int8_t *__restrict__ pSrcB,
+                                   uint32_t M,
+                                   uint32_t N,
+                                   uint32_t O,
+                                   int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Matrix transposed matrix multiplication of a 8-bit integer matrices for XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Matrix transposed matrix multiplication of a 8-bit integer matrices for XPULPV2
+   extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Exploiting SIMD instructions
-   The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+   The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_i8v_xpulpv2(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                                    const int8_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t O,
+                                    int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel matrix matrix multiplication of a 32-bit integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel matrix matrix multiplication of a 32-bit integer matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  nPE   Number of cores to use
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_trans_i32_parallel(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t nPE,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_i32_parallel(const int32_t *__restrict__ pSrcA,
+                                     const int32_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     uint32_t nPE,
+                                     int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Parallel matrix transposed matrix multiplication of a 32-bit integer matrices for RV32IM extension.
-   @param[in]  args      pointer to plp_mat_mult_instance_i32 struct initialized by plp_mat_mult_i32_parallel
-   @return        none
+   @brief      Parallel matrix transposed matrix multiplication of a 32-bit integer matrices for
+               RV32IM extension.
+   @param[in]  args  pointer to plp_mat_mult_instance_i32 struct initialized by
+                     plp_mat_mult_i32_parallel
+   @return     none
 */
 
-void plp_mat_mult_trans_i32p_xpulpv2(
-                         void* args);
-
+void plp_mat_mult_trans_i32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel matrix transposed matrix multiplication of a 16-bit integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel matrix transposed matrix multiplication of a 16-bit integer
+               matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  nPE   Number of cores to use
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_trans_i16_parallel(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t nPE,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_i16_parallel(const int16_t *__restrict__ pSrcA,
+                                     const int16_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     uint32_t nPE,
+                                     int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Parallel matrix transposed matrix multiplication of a 16-bit integer matrices for XPULPV2 extension.
-   @param[in]  args      pointer to plp_mat_mult_instance_i16 struct initialized by plp_mat_mult_i16_parallel
-   @return        none
+   @brief      Parallel matrix transposed matrix multiplication of a 16-bit integer matrices for
+               XPULPV2 extension.
+   @param[in]  args  pointer to plp_mat_mult_instance_i16 struct initialized by
+                     plp_mat_mult_i16_parallel
+   @return     none
 
    @par Exploiting SIMD instructions
-   The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+   The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_i16vp_xpulpv2(
-                         void* args);
-
-
+void plp_mat_mult_trans_i16vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel matrix transposed matrix multiplication of a 8-bit integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel matrix transposed matrix multiplication of a 8-bit integer
+               matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  nPE   Number of cores to use
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_trans_i8_parallel(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t nPE,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_i8_parallel(const int8_t *__restrict__ pSrcA,
+                                    const int8_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t O,
+                                    uint32_t nPE,
+                                    int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Parallel matrix transposed matrix multiplication of a 8-bit integer matrices for XPULPV2 extension.
-   @param[in]  args      pointer to plp_mat_mult_instance_i8 struct initialized by plp_mat_mult_i8_parallel
-   @return        none
+   @brief      Parallel matrix transposed matrix multiplication of a 8-bit integer matrices for
+               XPULPV2 extension.
+   @param[in]  args  pointer to plp_mat_mult_instance_i8 struct initialized by
+                     plp_mat_mult_i8_parallel
+   @return     none
 
    @par Exploiting SIMD instructions
-   The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+   The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_i8vp_xpulpv2(
-                         void* args);
-
-
+void plp_mat_mult_trans_i8vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for matrix transposed matrix multiplication of a 32-bit fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for matrix transposed matrix multiplication of a 32-bit fix-point
+               matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4593,28 +4001,26 @@ void plp_mat_mult_trans_i8vp_xpulpv2(
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
  */
 
-void plp_mat_mult_trans_q32(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_q32(const int32_t *__restrict__ pSrcA,
+                            const int32_t *__restrict__ pSrcB,
+                            uint32_t M,
+                            uint32_t N,
+                            uint32_t O,
+                            uint32_t shift,
+                            int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel matrix transposed matrix multiplication of a 32-bit fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel matrix transposed matrix multiplication of a 32-bit
+               fix-point matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[in]  nPE   Number of cores to use
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4623,28 +4029,26 @@ void plp_mat_mult_trans_q32(
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
  */
 
-void plp_mat_mult_trans_q32_parallel(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         uint32_t nPE,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_q32_parallel(const int32_t *__restrict__ pSrcA,
+                                     const int32_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     uint32_t shift,
+                                     uint32_t nPE,
+                                     int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         matrix transposed matrix multiplication of a 32-bit fix-point matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      matrix transposed matrix multiplication of a 32-bit fix-point matrices for RV32IM
+               extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4653,27 +4057,25 @@ void plp_mat_mult_trans_q32_parallel(
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 */
 
-void plp_mat_mult_trans_q32s_rv32im(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_q32s_rv32im(const int32_t *__restrict__ pSrcA,
+                                    const int32_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t O,
+                                    uint32_t shift,
+                                    int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         matrix transposed matrix multiplication of a 32-bit fix-point matrices for XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      matrix transposed matrix multiplication of a 32-bit fix-point matrices for XPULPV2
+               extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4682,37 +4084,35 @@ void plp_mat_mult_trans_q32s_rv32im(
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 */
 
-void plp_mat_mult_trans_q32s_xpulpv2(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int32_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_q32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                                     const int32_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     uint32_t shift,
+                                     int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-    @brief Parallel matrix transposed matrix multiplication of 32-bit fix-point matrices kernel for XPULPV2 extension.
-    @param[in]  args      pointer to plp_mat_mult_instance_q32 struct initialized by plp_mat_mult_trans_q32_parallel
+    @brief      Parallel matrix transposed matrix multiplication of 32-bit fix-point matrices kernel
+                for XPULPV2 extension.
+    @param[in]  args  pointer to plp_mat_mult_instance_q32 struct initialized by
+                      plp_mat_mult_trans_q32_parallel
     @return     none
 */
 
-void plp_mat_mult_trans_q32p_xpulpv2(void* args);
-
-
+void plp_mat_mult_trans_q32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for matrix transposed matrix multiplication of a 16-bit fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for matrix transposed matrix multiplication of a 16-bit fix-point
+               matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4720,32 +4120,30 @@ void plp_mat_mult_trans_q32p_xpulpv2(void* args);
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 16-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 16-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
  */
 
-void plp_mat_mult_trans_q16(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int16_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_q16(const int16_t *__restrict__ pSrcA,
+                            const int16_t *__restrict__ pSrcB,
+                            uint32_t M,
+                            uint32_t N,
+                            uint32_t O,
+                            uint32_t shift,
+                            int16_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel matrix transposed matrix multiplication of a 16-bit fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel matrix transposed matrix multiplication of a 16-bit
+               fix-point matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[in]  nPE   Number of cores to use
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4753,32 +4151,30 @@ void plp_mat_mult_trans_q16(
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 16-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 16-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
  */
 
-void plp_mat_mult_trans_q16_parallel(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         uint32_t nPE,
-                         int16_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_q16_parallel(const int16_t *__restrict__ pSrcA,
+                                     const int16_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     uint32_t shift,
+                                     uint32_t nPE,
+                                     int16_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         matrix transposed matrix multiplication of a 16-bit fix-point matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      matrix transposed matrix multiplication of a 16-bit fix-point matrices for RV32IM
+               extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4786,31 +4182,29 @@ void plp_mat_mult_trans_q16_parallel(
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 16-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 16-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_trans_q16s_rv32im(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int16_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_q16s_rv32im(const int16_t *__restrict__ pSrcA,
+                                    const int16_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t O,
+                                    uint32_t shift,
+                                    int16_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         matrix transposed matrix multiplication of a 16-bit fix-point matrices for XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      matrix transposed matrix multiplication of a 16-bit fix-point matrices for XPULPV2
+               extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4818,41 +4212,39 @@ void plp_mat_mult_trans_q16s_rv32im(
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 16-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 16-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_trans_q16v_xpulpv2(
-                         const int16_t * __restrict__ pSrcA,
-                         const int16_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int16_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+                                     const int16_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     uint32_t shift,
+                                     int16_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-    @brief Parallel matrix transposed matrix multiplication of 16-bit fix-point matrices kernel for XPULPV2 extension.
-    @param[in]  args      pointer to plp_mat_mult_instance_q16 struct initialized by plp_mat_mult_trans_q16_parallel
+    @brief      Parallel matrix transposed matrix multiplication of 16-bit fix-point matrices kernel
+                for XPULPV2 extension.
+    @param[in]  args  pointer to plp_mat_mult_instance_q16 struct initialized by
+                      plp_mat_mult_trans_q16_parallel
     @return     none
 */
 
-void plp_mat_mult_trans_q16vp_xpulpv2(void* args);
-
-
+void plp_mat_mult_trans_q16vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for matrix transposed matrix multiplication of a 8-bit fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for matrix transposed matrix multiplication of a 8-bit fix-point
+               matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4860,32 +4252,30 @@ void plp_mat_mult_trans_q16vp_xpulpv2(void* args);
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 8-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 8-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
  */
 
-void plp_mat_mult_trans_q8(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int8_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_q8(const int8_t *__restrict__ pSrcA,
+                           const int8_t *__restrict__ pSrcB,
+                           uint32_t M,
+                           uint32_t N,
+                           uint32_t O,
+                           uint32_t shift,
+                           int8_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel matrix transposed matrix multiplication of a 8-bit fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel matrix transposed matrix multiplication of a 8-bit
+               fix-point matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[in]  nPE   Number of cores to use
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4893,32 +4283,30 @@ void plp_mat_mult_trans_q8(
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 8-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 8-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
  */
 
-void plp_mat_mult_trans_q8_parallel(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         uint32_t nPE,
-                         int8_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_q8_parallel(const int8_t *__restrict__ pSrcA,
+                                    const int8_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t O,
+                                    uint32_t shift,
+                                    uint32_t nPE,
+                                    int8_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         matrix transposed matrix multiplication of a 8-bit fix-point matrices for RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      matrix transposed matrix multiplication of a 8-bit fix-point matrices for RV32IM
+               extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4926,31 +4314,29 @@ void plp_mat_mult_trans_q8_parallel(
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 8-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 8-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_trans_q8s_rv32im(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int8_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_q8s_rv32im(const int8_t *__restrict__ pSrcA,
+                                   const int8_t *__restrict__ pSrcB,
+                                   uint32_t M,
+                                   uint32_t N,
+                                   uint32_t O,
+                                   uint32_t shift,
+                                   int8_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         matrix transposed matrix multiplication of a 8-bit fix-point matrices for XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      matrix transposed matrix multiplication of a 8-bit fix-point matrices for XPULPV2
+               extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  shift Amount to shift the result of each multiplication.
+   @param[out] pDstC Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -4958,152 +4344,137 @@ void plp_mat_mult_trans_q8s_rv32im(
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 8-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 8-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_trans_q8v_xpulpv2(
-                         const int8_t * __restrict__ pSrcA,
-                         const int8_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t shift,
-                         int8_t * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                                    const int8_t *__restrict__ pSrcB,
+                                    uint32_t M,
+                                    uint32_t N,
+                                    uint32_t O,
+                                    uint32_t shift,
+                                    int8_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-    @brief Parallel matrix transposed matrix multiplication of 8-bit fix-point matrices kernel for XPULPV2 extension.
-    @param[in]  args      pointer to plp_mat_mult_instance_q8 struct initialized by plp_mat_mult_trans_q8_parallel
+    @brief      Parallel matrix transposed matrix multiplication of 8-bit fix-point matrices kernel
+                for XPULPV2 extension.
+    @param[in]  args  pointer to plp_mat_mult_instance_q8 struct initialized by
+                      plp_mat_mult_trans_q8_parallel
     @return     none
 */
 
-void plp_mat_mult_trans_q8vp_xpulpv2(void* args);
-
+void plp_mat_mult_trans_q8vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for matrix transposed matrix multiplication of a 32-bit floating-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for matrix transposed matrix multiplication of a 32-bit floating-point
+               matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-
-void plp_mat_mult_trans_f32(
-                         const float * __restrict__ pSrcA,
-                         const float * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         float * __restrict__ pDstC);
-
+void plp_mat_mult_trans_f32(const float *__restrict__ pSrcA,
+                            const float *__restrict__ pSrcB,
+                            uint32_t M,
+                            uint32_t N,
+                            uint32_t O,
+                            float *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         matrix transposed matrix multiplication of a 32-bit floating-point matrices for XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      matrix transposed matrix multiplication of a 32-bit floating-point matrices for
+               XPULPV2 extension.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_trans_f32s_xpulpv2(
-                         const float * __restrict__ pSrcA,
-                         const float * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         float * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_f32s_xpulpv2(const float *__restrict__ pSrcA,
+                                     const float *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     float *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel matrix transposed matrix multiplication of a 32-bit floating-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel matrix transposed matrix multiplication of a 32-bit
+               floating-point matrices.
+   @param[in]  pSrcA points to first the input matrix
+   @param[in]  pSrcB points to second the input matrix
+   @param[in]  M     Height of first matrix
+   @param[in]  N     Width of first and heigt of second matrix
+   @param[in]  O     Width of second matrix
+   @param[in]  nPE   Number of cores to use
+   @param[out] pDstC Output is written here
+   @return     none
 */
 
-void plp_mat_mult_trans_f32_parallel(
-                         const float * __restrict__ pSrcA,
-                         const float * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t nPE,
-                         float * __restrict__ pDstC);
-
-
+void plp_mat_mult_trans_f32_parallel(const float *__restrict__ pSrcA,
+                                     const float *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     uint32_t nPE,
+                                     float *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-    @brief Parallel matrix transposed matrix multiplication of 32-bit floating-point matrices kernel for XPULPV2 extension.
-    @param[in]  args      pointer to plp_mat_mult_instance_f32 struct initialized by plp_mat_mult_trans_f32_parallel
+    @brief      Parallel matrix transposed matrix multiplication of 32-bit floating-point matrices
+                kernel for XPULPV2 extension.
+    @param[in]  args  pointer to plp_mat_mult_instance_f32 struct initialized by
+                      plp_mat_mult_trans_f32_parallel
     @return     none
 */
 
-void plp_mat_mult_trans_f32p_xpulpv2(
-                         void* args);
-
+void plp_mat_mult_trans_f32p_xpulpv2(void *args);
 
 /**
- * @brief      calculates the complex magnitude. 
+ * @brief      calculates the complex magnitude.
  *
  * @param[in]  pSrc        The source
  * @param[in]  deciPoint   The decimal point. Fromat: Q(16-deciPoint).deciPoint
  * @param      pRes        The result
  * @param[in]  numSamples  The number of samples
  */
-void plp_cmplx_mag_q16(
-  const int16_t * pSrc,
-  const uint32_t deciPoint, 
-  int16_t * pRes,
-  uint32_t numSamples);
-
-
+void plp_cmplx_mag_q16(const int16_t *pSrc,
+                       const uint32_t deciPoint,
+                       int16_t *pRes,
+                       uint32_t numSamples);
 
 /**
-  @brief         In-place 16 bit reversal function for RV32IM
+  @brief      In-place 16 bit reversal function for RV32IM
   @param[in,out] pSrc        points to in-place buffer of unknown 16-bit data type
-  @param[in]     bitRevLen   bit reversal table length
-  @param[in]     pBitRevTab  points to bit reversal table
-  @return        none
+  @param[in]  bitRevLen   bit reversal table length
+  @param[in]  pBitRevTab  points to bit reversal table
+  @return     none
 */
 
-void plp_bitreversal_16s_rv32im(
-        uint16_t *pSrc,
-  const uint16_t bitRevLen,
-  const uint16_t *pBitRevTab);
-
+void plp_bitreversal_16s_rv32im(uint16_t *pSrc,
+                                const uint16_t bitRevLen,
+                                const uint16_t *pBitRevTab);
 
 /**
-  @brief         In-place 16 bit reversal function for XPULPV2
+  @brief      In-place 16 bit reversal function for XPULPV2
   @param[in,out] pSrc        points to in-place buffer of unknown 16-bit data type
-  @param[in]     bitRevLen   bit reversal table length
-  @param[in]     pBitRevTab  points to bit reversal table
-  @return        none
+  @param[in]  bitRevLen   bit reversal table length
+  @param[in]  pBitRevTab  points to bit reversal table
+  @return     none
 */
 
-void plp_bitreversal_16v_xpulpv2(
-        uint16_t *pSrc,
-  const uint16_t bitRevLen,
-  const uint16_t *pBitRevTab);
-
+void plp_bitreversal_16v_xpulpv2(uint16_t *pSrc,
+                                 const uint16_t bitRevLen,
+                                 const uint16_t *pBitRevTab);
 
 /**
- * @brief         Glue code for quantized 16 bit complex fast fourier transform
- * 
+ * @brief      Glue code for quantized 16 bit complex fast fourier transform
+ *
  * Fixed point units input -> output dependent on length:
  * len=16:    Q1.15 -> Q5.11
  * len=32:    Q1.15 -> Q6.10
@@ -5114,55 +4485,58 @@ void plp_bitreversal_16v_xpulpv2(
  * len=1024:  Q1.15 -> Q11.5
  * len=2048:  Q1.15 -> Q12.4
  * len=4096:  Q1.15 -> Q13.3
- * 
- * @param[in]     S               points to an instance of the 16bit quantized CFFT structure
- * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
- * @param[in]     ifftFlag        flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1) transform.
- * @param[in]     bitReverseFlag  flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. 
- * @param[in]     deciPoint       decimal point for right shift
+ *
+ * @param[in]  S               points to an instance of the 16bit quantized CFFT structure
+ * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>.
+ * Processing occurs in-place.
+ * @param[in]  ifftFlag        flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1)
+ * transform.
+ * @param[in]  bitReverseFlag  flag that enables (bitReverseFlag=1) of disables
+ * (bitReverseFlag=0) bit reversal of output.
+ * @param[in]  deciPoint       decimal point for right shift
  */
 
-void plp_cfft_q16(
-        const plp_cfft_instance_q16 *S,
-        int16_t * p1,
-        uint8_t ifftFlag,
-        uint8_t bitReverseFlag,
-        uint32_t deciPoint);
-
+void plp_cfft_q16(const plp_cfft_instance_q16 *S,
+                  int16_t *p1,
+                  uint8_t ifftFlag,
+                  uint8_t bitReverseFlag,
+                  uint32_t deciPoint);
 
 /**
- * @brief         Quantized 16 bit complex fast fourier transform for RV32IM
- * @param[in]     S               points to an instance of the 16bit quantized CFFT structure
- * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
- * @param[in]     ifftFlag        flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1) transform.
- * @param[in]     bitReverseFlag  flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. 
- * @param[in]     deciPoint       decimal point for right shift
+ * @brief      Quantized 16 bit complex fast fourier transform for RV32IM
+ * @param[in]  S               points to an instance of the 16bit quantized CFFT structure
+ * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>.
+ * Processing occurs in-place.
+ * @param[in]  ifftFlag        flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1)
+ * transform.
+ * @param[in]  bitReverseFlag  flag that enables (bitReverseFlag=1) of disables
+ * (bitReverseFlag=0) bit reversal of output.
+ * @param[in]  deciPoint       decimal point for right shift
  */
 
-void plp_cfft_q16s_rv32im(
-        const plp_cfft_instance_q16 *S,
-        int16_t * p1,
-        uint8_t ifftFlag,
-        uint8_t bitReverseFlag,
-        uint32_t deciPoint);
-
+void plp_cfft_q16s_rv32im(const plp_cfft_instance_q16 *S,
+                          int16_t *p1,
+                          uint8_t ifftFlag,
+                          uint8_t bitReverseFlag,
+                          uint32_t deciPoint);
 
 /**
- * @brief         Quantized 16 bit complex fast fourier transform for XPULPV2
- * @param[in]     S               points to an instance of the 16bit quantized CFFT structure
- * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
- * @param[in]     ifftFlag        flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1) transform.
- * @param[in]     bitReverseFlag  flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. 
- * @param[in]     deciPoint       decimal point for right shift
+ * @brief      Quantized 16 bit complex fast fourier transform for XPULPV2
+ * @param[in]  S               points to an instance of the 16bit quantized CFFT structure
+ * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>.
+ * Processing occurs in-place.
+ * @param[in]  ifftFlag        flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1)
+ * transform.
+ * @param[in]  bitReverseFlag  flag that enables (bitReverseFlag=1) of disables
+ * (bitReverseFlag=0) bit reversal of output.
+ * @param[in]  deciPoint       decimal point for right shift
  */
 
-void plp_cfft_q16v_xpulpv2(
-        const plp_cfft_instance_q16 *S,
-        int16_t * p1,
-        uint8_t ifftFlag,
-        uint8_t bitReverseFlag,
-        uint32_t deciPoint);
-
+void plp_cfft_q16v_xpulpv2(const plp_cfft_instance_q16 *S,
+                           int16_t *p1,
+                           uint8_t ifftFlag,
+                           uint8_t bitReverseFlag,
+                           uint32_t deciPoint);
 
 /**
    @brief Floating-point FFT on real input data.
@@ -5171,11 +4545,9 @@ void plp_cfft_q16v_xpulpv2(
    @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_rfft_f32(
-        const plp_rfft_instance_f32 *S,
-        const float32_t * __restrict__ pSrc,
-        float32_t * __restrict__ pDst);
-
+void plp_rfft_f32(const plp_rfft_instance_f32 *S,
+                  const float32_t *__restrict__ pSrc,
+                  float32_t *__restrict__ pDst);
 
 /**
    @brief Floating-point FFT on real input data (parallel version).
@@ -5185,11 +4557,10 @@ void plp_rfft_f32(
    @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_rfft_f32_parallel(
-        const plp_rfft_instance_f32 *S,
-        const float32_t * __restrict__ pSrc,
-        const uint32_t nPE,
-        float32_t * __restrict__ pDst);
+void plp_rfft_f32_parallel(const plp_rfft_instance_f32 *S,
+                           const float32_t *__restrict__ pSrc,
+                           const uint32_t nPE,
+                           float32_t *__restrict__ pDst);
 
 /**
    @brief  Floating-point FFT on real input data for XPULPV2 extension.
@@ -5198,10 +4569,9 @@ void plp_rfft_f32_parallel(
    @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_rfft_f32_xpulpv2(
-        const plp_rfft_instance_f32 *S,
-        const float32_t * __restrict__ pSrc,
-        float32_t * __restrict__ pDst);
+void plp_rfft_f32_xpulpv2(const plp_rfft_instance_f32 *S,
+                          const float32_t *__restrict__ pSrc,
+                          float32_t *__restrict__ pDst);
 
 /**
    @brief  Floating-point FFT on real input data for XPULPV2 extension (parallel version).
@@ -5210,10 +4580,8 @@ void plp_rfft_f32_xpulpv2(
 */
 void plp_rfft_f32_xpulpv2_parallel(plp_rfft_parallel_arg_f32 *arg);
 
-
-
 /** -------------------------------------------------------
-  @brief   Glue code for matrix addition of a 32-bit integer matrices.
+  @brief      Glue code for matrix addition of a 32-bit integer matrices.
   @param[in]  pSrcA   Points to the first input matrix
   @param[in]  pSrcB   Points to the second input matrix
   @param[in]  M       Height of the matrices
@@ -5222,16 +4590,14 @@ void plp_rfft_f32_xpulpv2_parallel(plp_rfft_parallel_arg_f32 *arg);
   @return     none
 */
 
-void plp_mat_add_i32(const int32_t * __restrict__ pSrcA,
-                     const int32_t * __restrict__ pSrcB,
+void plp_mat_add_i32(const int32_t *__restrict__ pSrcA,
+                     const int32_t *__restrict__ pSrcB,
                      uint32_t M,
                      uint32_t N,
-                     int32_t * __restrict__ pDst);
-
-
+                     int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
-  @brief   matrix addition of a 32-bit integer matrices for RV32IM extension.
+  @brief      matrix addition of a 32-bit integer matrices for RV32IM extension.
   @param[in]  pSrcA   Points to the first input matrix
   @param[in]  pSrcB   Points to the second input matrix
   @param[in]  M       Height of the matrices
@@ -5240,13 +4606,11 @@ void plp_mat_add_i32(const int32_t * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_add_i32s_rv32im(const int32_t * __restrict__ pSrcA,
-                             const int32_t * __restrict__ pSrcB,
+void plp_mat_add_i32s_rv32im(const int32_t *__restrict__ pSrcA,
+                             const int32_t *__restrict__ pSrcB,
                              uint32_t M,
                              uint32_t N,
-                             int32_t * __restrict__ pDst);
-
-
+                             int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix addition of a 32-bit integer matrices for XPULPV2 extension.
@@ -5258,13 +4622,11 @@ void plp_mat_add_i32s_rv32im(const int32_t * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_add_i32s_xpulpv2(const int32_t * __restrict__ pSrcA,
-                              const int32_t * __restrict__ pSrcB,
+void plp_mat_add_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                              const int32_t *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
-                              int32_t * __restrict__ pDst);
-
-
+                              int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix addition of a 32-bit integer matrices.
@@ -5277,24 +4639,21 @@ void plp_mat_add_i32s_xpulpv2(const int32_t * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_add_i32_parallel(const int32_t * __restrict__ pSrcA,
-                              const int32_t * __restrict__ pSrcB,
+void plp_mat_add_i32_parallel(const int32_t *__restrict__ pSrcA,
+                              const int32_t *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
                               uint32_t nPE,
-                              int32_t * __restrict__ pDst);
-
-
+                              int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Parallel matrix addition of a 32-bit integer matrices for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_add_instance_i32 struct initialized by plp_mat_add_i32_parallel
+  @param[in]  args  pointer to plp_mat_add_instance_i32 struct initialized by
+                    plp_mat_add_i32_parallel
   @return     none
 */
 
-void plp_mat_add_i32p_xpulpv2(void* args);
-
-
+void plp_mat_add_i32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix addition of a 16-bit integer matrices.
@@ -5306,13 +4665,11 @@ void plp_mat_add_i32p_xpulpv2(void* args);
   @return     none
 */
 
-void plp_mat_add_i16(const int16_t * __restrict__ pSrcA,
-                     const int16_t * __restrict__ pSrcB,
+void plp_mat_add_i16(const int16_t *__restrict__ pSrcA,
+                     const int16_t *__restrict__ pSrcB,
                      uint32_t M,
                      uint32_t N,
-                     int16_t * __restrict__ pDst);
-
-
+                     int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix addition of a 16-bit integer matrices for RV32IM extension.
@@ -5324,13 +4681,11 @@ void plp_mat_add_i16(const int16_t * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_add_i16s_rv32im(const int16_t * __restrict__ pSrcA,
-                             const int16_t * __restrict__ pSrcB,
+void plp_mat_add_i16s_rv32im(const int16_t *__restrict__ pSrcA,
+                             const int16_t *__restrict__ pSrcB,
                              uint32_t M,
                              uint32_t N,
-                             int16_t * __restrict__ pDst);
-
-
+                             int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix addition of a 16-bit integer matrices for XPULPV2 extension.
@@ -5342,15 +4697,15 @@ void plp_mat_add_i16s_rv32im(const int16_t * __restrict__ pSrcA,
   @return     none
 
   @par Exploiting SIMD instructions
-  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_i16v_xpulpv2(const int16_t * __restrict__ pSrcA,
-                              const int16_t * __restrict__ pSrcB,
+void plp_mat_add_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+                              const int16_t *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
-                              int16_t * __restrict__ pDst);
-
+                              int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix addition of a 16-bit integer matrices.
@@ -5363,27 +4718,25 @@ void plp_mat_add_i16v_xpulpv2(const int16_t * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_add_i16_parallel(const int16_t * __restrict__ pSrcA,
-                              const int16_t * __restrict__ pSrcB,
+void plp_mat_add_i16_parallel(const int16_t *__restrict__ pSrcA,
+                              const int16_t *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
                               uint32_t nPE,
-                              int16_t * __restrict__ pDst);
-
-
+                              int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief Parallel matrix addition of 16-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_add_instance_i16 struct initialized by plp_mat_add_i16_parallel
+  @param[in]  args  pointer to plp_mat_add_instance_i16 struct initialized by
+                    plp_mat_add_i16_parallel
   @return     none
 
   @par Exploiting SIMD instructions
-  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_i16vp_xpulpv2(void* args);
-
-
+void plp_mat_add_i16vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix addition of a 8-bit integer matrices.
@@ -5395,13 +4748,11 @@ void plp_mat_add_i16vp_xpulpv2(void* args);
   @return     none
 */
 
-void plp_mat_add_i8(const int8_t * __restrict__ pSrcA,
-                    const int8_t * __restrict__ pSrcB,
+void plp_mat_add_i8(const int8_t *__restrict__ pSrcA,
+                    const int8_t *__restrict__ pSrcB,
                     uint32_t M,
                     uint32_t N,
-                    int8_t * __restrict__ pDst);
-
-
+                    int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix addition of a 8-bit integer matrices for RV32IM extension.
@@ -5413,13 +4764,11 @@ void plp_mat_add_i8(const int8_t * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_add_i8s_rv32im(const int8_t * __restrict__ pSrcA,
-                            const int8_t * __restrict__ pSrcB,
+void plp_mat_add_i8s_rv32im(const int8_t *__restrict__ pSrcA,
+                            const int8_t *__restrict__ pSrcB,
                             uint32_t M,
                             uint32_t N,
-                            int8_t * __restrict__ pDst);
-
-
+                            int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix addition of a 8-bit integer matrices for XPULPV2 extension.
@@ -5431,16 +4780,15 @@ void plp_mat_add_i8s_rv32im(const int8_t * __restrict__ pSrcA,
   @return     none
 
   @par Exploiting SIMD instructions
-  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_i8v_xpulpv2(const int8_t * __restrict__ pSrcA,
-                             const int8_t * __restrict__ pSrcB,
+void plp_mat_add_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                             const int8_t *__restrict__ pSrcB,
                              uint32_t M,
                              uint32_t N,
-                             int8_t * __restrict__ pDst);
-
-
+                             int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix addition of a 8-bit integer matrices.
@@ -5453,25 +4801,25 @@ void plp_mat_add_i8v_xpulpv2(const int8_t * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_add_i8_parallel(const int8_t * __restrict__ pSrcA,
-                             const int8_t * __restrict__ pSrcB,
+void plp_mat_add_i8_parallel(const int8_t *__restrict__ pSrcA,
+                             const int8_t *__restrict__ pSrcB,
                              uint32_t M,
                              uint32_t N,
                              uint32_t nPE,
-                             int8_t * __restrict__ pDst);
-
+                             int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief Parallel matrix addition of 8-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_add_instance_i8 struct initialized by plp_mat_add_i8_parallel
+  @param[in]  args  pointer to plp_mat_add_instance_i8 struct initialized by
+                    plp_mat_add_i8_parallel
   @return     none
 
   @par Exploiting SIMD instructions
-  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_i8vp_xpulpv2(void* args);
-
+void plp_mat_add_i8vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix addition of a 32-bit floating-point matrices.
@@ -5483,13 +4831,11 @@ void plp_mat_add_i8vp_xpulpv2(void* args);
   @return     none
 */
 
-
-void plp_mat_add_f32(const float * __restrict__ pSrcA,
-                     const float * __restrict__ pSrcB,
+void plp_mat_add_f32(const float *__restrict__ pSrcA,
+                     const float *__restrict__ pSrcB,
                      uint32_t M,
                      uint32_t N,
-                     float * __restrict__ pDst);
-
+                     float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix addition of a 32-bit floating-point matrices for XPULPV2 extension.
@@ -5501,13 +4847,11 @@ void plp_mat_add_f32(const float * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_add_f32s_xpulpv2(const float * __restrict__ pSrcA,
-                              const float * __restrict__ pSrcB,
+void plp_mat_add_f32s_xpulpv2(const float *__restrict__ pSrcA,
+                              const float *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
-                              float * __restrict__ pDst);
-
-
+                              float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix addition of a 32-bit floating-point matrices.
@@ -5520,27 +4864,24 @@ void plp_mat_add_f32s_xpulpv2(const float * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_add_f32_parallel(const float * __restrict__ pSrcA,
-                              const float * __restrict__ pSrcB,
+void plp_mat_add_f32_parallel(const float *__restrict__ pSrcA,
+                              const float *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
                               uint32_t nPE,
-                              float * __restrict__ pDst);
-
-
+                              float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief Parallel matrix addition of 32-bit floating-point matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_add_instance_f32 struct initialized by plp_mat_add_f32_parallel
+  @param[in]  args  pointer to plp_mat_add_instance_f32 struct initialized by
+                    plp_mat_add_f32_parallel
   @return     none
 */
 
-void plp_mat_add_f32p_xpulpv2(void* args);
-
-
+void plp_mat_add_f32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-  @brief   Glue code for matrix subtraction of a 32-bit integer matrices.
+  @brief      Glue code for matrix subtraction of a 32-bit integer matrices.
   @param[in]  pSrcA   Points to the first input matrix
   @param[in]  pSrcB   Points to the second input matrix
   @param[in]  M       Height of the matrices
@@ -5549,16 +4890,14 @@ void plp_mat_add_f32p_xpulpv2(void* args);
   @return     none
 */
 
-void plp_mat_sub_i32(const int32_t * __restrict__ pSrcA,
-                     const int32_t * __restrict__ pSrcB,
+void plp_mat_sub_i32(const int32_t *__restrict__ pSrcA,
+                     const int32_t *__restrict__ pSrcB,
                      uint32_t M,
                      uint32_t N,
-                     int32_t * __restrict__ pDst);
-
-
+                     int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
-  @brief   matrix subtraction of a 32-bit integer matrices for RV32IM extension.
+  @brief      matrix subtraction of a 32-bit integer matrices for RV32IM extension.
   @param[in]  pSrcA   Points to the first input matrix
   @param[in]  pSrcB   Points to the second input matrix
   @param[in]  M       Height of the matrices
@@ -5567,13 +4906,11 @@ void plp_mat_sub_i32(const int32_t * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_sub_i32s_rv32im(const int32_t * __restrict__ pSrcA,
-                             const int32_t * __restrict__ pSrcB,
+void plp_mat_sub_i32s_rv32im(const int32_t *__restrict__ pSrcA,
+                             const int32_t *__restrict__ pSrcB,
                              uint32_t M,
                              uint32_t N,
-                             int32_t * __restrict__ pDst);
-
-
+                             int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix subtraction of a 32-bit integer matrices for XPULPV2 extension.
@@ -5585,13 +4922,11 @@ void plp_mat_sub_i32s_rv32im(const int32_t * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_sub_i32s_xpulpv2(const int32_t * __restrict__ pSrcA,
-                              const int32_t * __restrict__ pSrcB,
+void plp_mat_sub_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                              const int32_t *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
-                              int32_t * __restrict__ pDst);
-
-
+                              int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix subtraction of a 32-bit integer matrices.
@@ -5604,24 +4939,21 @@ void plp_mat_sub_i32s_xpulpv2(const int32_t * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_sub_i32_parallel(const int32_t * __restrict__ pSrcA,
-                              const int32_t * __restrict__ pSrcB,
+void plp_mat_sub_i32_parallel(const int32_t *__restrict__ pSrcA,
+                              const int32_t *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
                               uint32_t nPE,
-                              int32_t * __restrict__ pDst);
-
-
+                              int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Parallel matrix subtraction of a 32-bit integer matrices for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_sub_instance_i32 struct initialized by plp_mat_sub_i32_parallel
+  @param[in]  args  pointer to plp_mat_sub_instance_i32 struct initialized by
+                    plp_mat_sub_i32_parallel
   @return     none
 */
 
-void plp_mat_sub_i32p_xpulpv2(void* args);
-
-
+void plp_mat_sub_i32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix subtraction of a 16-bit integer matrices.
@@ -5633,13 +4965,11 @@ void plp_mat_sub_i32p_xpulpv2(void* args);
   @return     none
 */
 
-void plp_mat_sub_i16(const int16_t * __restrict__ pSrcA,
-                     const int16_t * __restrict__ pSrcB,
+void plp_mat_sub_i16(const int16_t *__restrict__ pSrcA,
+                     const int16_t *__restrict__ pSrcB,
                      uint32_t M,
                      uint32_t N,
-                     int16_t * __restrict__ pDst);
-
-
+                     int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix subtraction of a 16-bit integer matrices for RV32IM extension.
@@ -5651,13 +4981,11 @@ void plp_mat_sub_i16(const int16_t * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_sub_i16s_rv32im(const int16_t * __restrict__ pSrcA,
-                             const int16_t * __restrict__ pSrcB,
+void plp_mat_sub_i16s_rv32im(const int16_t *__restrict__ pSrcA,
+                             const int16_t *__restrict__ pSrcB,
                              uint32_t M,
                              uint32_t N,
-                             int16_t * __restrict__ pDst);
-
-
+                             int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix subtraction of a 16-bit integer matrices for XPULPV2 extension.
@@ -5669,15 +4997,15 @@ void plp_mat_sub_i16s_rv32im(const int16_t * __restrict__ pSrcA,
   @return     none
 
   @par Exploiting SIMD instructions
-  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_i16v_xpulpv2(const int16_t * __restrict__ pSrcA,
-                              const int16_t * __restrict__ pSrcB,
+void plp_mat_sub_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+                              const int16_t *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
-                              int16_t * __restrict__ pDst);
-
+                              int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix subtraction of a 16-bit integer matrices.
@@ -5690,27 +5018,25 @@ void plp_mat_sub_i16v_xpulpv2(const int16_t * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_sub_i16_parallel(const int16_t * __restrict__ pSrcA,
-                              const int16_t * __restrict__ pSrcB,
+void plp_mat_sub_i16_parallel(const int16_t *__restrict__ pSrcA,
+                              const int16_t *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
                               uint32_t nPE,
-                              int16_t * __restrict__ pDst);
-
-
+                              int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief Parallel matrix subtraction of 16-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_sub_instance_i16 struct initialized by plp_mat_sub_i16_parallel
+  @param[in]  args  pointer to plp_mat_sub_instance_i16 struct initialized by
+                    plp_mat_sub_i16_parallel
   @return     none
 
   @par Exploiting SIMD instructions
-  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_i16vp_xpulpv2(void* args);
-
-
+void plp_mat_sub_i16vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix subtraction of a 8-bit integer matrices.
@@ -5722,13 +5048,11 @@ void plp_mat_sub_i16vp_xpulpv2(void* args);
   @return     none
 */
 
-void plp_mat_sub_i8(const int8_t * __restrict__ pSrcA,
-                    const int8_t * __restrict__ pSrcB,
+void plp_mat_sub_i8(const int8_t *__restrict__ pSrcA,
+                    const int8_t *__restrict__ pSrcB,
                     uint32_t M,
                     uint32_t N,
-                    int8_t * __restrict__ pDst);
-
-
+                    int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix subtraction of a 8-bit integer matrices for RV32IM extension.
@@ -5740,13 +5064,11 @@ void plp_mat_sub_i8(const int8_t * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_sub_i8s_rv32im(const int8_t * __restrict__ pSrcA,
-                            const int8_t * __restrict__ pSrcB,
+void plp_mat_sub_i8s_rv32im(const int8_t *__restrict__ pSrcA,
+                            const int8_t *__restrict__ pSrcB,
                             uint32_t M,
                             uint32_t N,
-                            int8_t * __restrict__ pDst);
-
-
+                            int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix subtraction of a 8-bit integer matrices for XPULPV2 extension.
@@ -5758,16 +5080,15 @@ void plp_mat_sub_i8s_rv32im(const int8_t * __restrict__ pSrcA,
   @return     none
 
   @par Exploiting SIMD instructions
-  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_i8v_xpulpv2(const int8_t * __restrict__ pSrcA,
-                             const int8_t * __restrict__ pSrcB,
+void plp_mat_sub_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                             const int8_t *__restrict__ pSrcB,
                              uint32_t M,
                              uint32_t N,
-                             int8_t * __restrict__ pDst);
-
-
+                             int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix subtraction of a 8-bit integer matrices.
@@ -5780,25 +5101,25 @@ void plp_mat_sub_i8v_xpulpv2(const int8_t * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_sub_i8_parallel(const int8_t * __restrict__ pSrcA,
-                             const int8_t * __restrict__ pSrcB,
+void plp_mat_sub_i8_parallel(const int8_t *__restrict__ pSrcA,
+                             const int8_t *__restrict__ pSrcB,
                              uint32_t M,
                              uint32_t N,
                              uint32_t nPE,
-                             int8_t * __restrict__ pDst);
-
+                             int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief Parallel matrix subtraction of 8-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_sub_instance_i8 struct initialized by plp_mat_sub_i8_parallel
+  @param[in]  args  pointer to plp_mat_sub_instance_i8 struct initialized by
+                    plp_mat_sub_i8_parallel
   @return     none
 
   @par Exploiting SIMD instructions
-  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_i8vp_xpulpv2(void* args);
-
+void plp_mat_sub_i8vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix subtraction of a 32-bit floating-point matrices.
@@ -5810,13 +5131,11 @@ void plp_mat_sub_i8vp_xpulpv2(void* args);
   @return     none
 */
 
-
-void plp_mat_sub_f32(const float * __restrict__ pSrcA,
-                     const float * __restrict__ pSrcB,
+void plp_mat_sub_f32(const float *__restrict__ pSrcA,
+                     const float *__restrict__ pSrcB,
                      uint32_t M,
                      uint32_t N,
-                     float * __restrict__ pDst);
-
+                     float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix subtraction of a 32-bit floating-point matrices for XPULPV2 extension.
@@ -5828,13 +5147,11 @@ void plp_mat_sub_f32(const float * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_sub_f32s_xpulpv2(const float * __restrict__ pSrcA,
-                              const float * __restrict__ pSrcB,
+void plp_mat_sub_f32s_xpulpv2(const float *__restrict__ pSrcA,
+                              const float *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
-                              float * __restrict__ pDst);
-
-
+                              float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix subtraction of a 32-bit floating-point matrices.
@@ -5847,24 +5164,21 @@ void plp_mat_sub_f32s_xpulpv2(const float * __restrict__ pSrcA,
   @return     none
 */
 
-void plp_mat_sub_f32_parallel(const float * __restrict__ pSrcA,
-                              const float * __restrict__ pSrcB,
+void plp_mat_sub_f32_parallel(const float *__restrict__ pSrcA,
+                              const float *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
                               uint32_t nPE,
-                              float * __restrict__ pDst);
-
-
+                              float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief Parallel matrix subtraction of 32-bit floating-point matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_sub_instance_f32 struct initialized by plp_mat_sub_f32_parallel
+  @param[in]  args  pointer to plp_mat_sub_instance_f32 struct initialized by
+                    plp_mat_sub_f32_parallel
   @return     none
 */
 
-void plp_mat_sub_f32p_xpulpv2(void* args);
-
-
+void plp_mat_sub_f32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief   Glue code for matrix scale of a 32-bit integer matrices.
@@ -5877,14 +5191,12 @@ void plp_mat_sub_f32p_xpulpv2(void* args);
   @return  none
 */
 
-void plp_mat_scale_i32(const int32_t * __restrict__ pSrc,
+void plp_mat_scale_i32(const int32_t *__restrict__ pSrc,
                        uint32_t M,
                        uint32_t N,
                        int32_t scaleFactor,
                        int32_t shift,
-                       int32_t * __restrict__ pDst);
-
-
+                       int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief   matrix scale of a 32-bit integer matrices for RV32IM extension.
@@ -5897,14 +5209,12 @@ void plp_mat_scale_i32(const int32_t * __restrict__ pSrc,
   @return  none
 */
 
-void plp_mat_scale_i32s_rv32im(const int32_t * __restrict__ pSrc,
+void plp_mat_scale_i32s_rv32im(const int32_t *__restrict__ pSrc,
                                uint32_t M,
                                uint32_t N,
                                int32_t scaleFactor,
                                int32_t shift,
-                               int32_t * __restrict__ pDst);
-
-
+                               int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix scale of a 32-bit integer matrices for XPULPV2 extension.
@@ -5917,14 +5227,12 @@ void plp_mat_scale_i32s_rv32im(const int32_t * __restrict__ pSrc,
   @return     none
 */
 
-void plp_mat_scale_i32s_xpulpv2(const int32_t * __restrict__ pSrc,
+void plp_mat_scale_i32s_xpulpv2(const int32_t *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
                                 int32_t scaleFactor,
                                 int32_t shift,
-                                int32_t * __restrict__ pDst);
-
-
+                                int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix scale of a 32-bit integer matrices.
@@ -5938,25 +5246,22 @@ void plp_mat_scale_i32s_xpulpv2(const int32_t * __restrict__ pSrc,
   @return     none
 */
 
-void plp_mat_scale_i32_parallel(const int32_t * __restrict__ pSrc,
+void plp_mat_scale_i32_parallel(const int32_t *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
                                 int32_t scaleFactor,
                                 int32_t shift,
                                 uint32_t nPE,
-                                int32_t * __restrict__ pDst);
-
-
+                                int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Parallel matrix scale of a 32-bit integer matrices for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_scale_instance_i32 struct initialized by plp_mat_scale_i32_parallel
+  @param[in]  args  pointer to plp_mat_scale_instance_i32 struct initialized by
+                    plp_mat_scale_i32_parallel
   @return     none
 */
 
-void plp_mat_scale_i32p_xpulpv2(void* args);
-
-
+void plp_mat_scale_i32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix scale of a 16-bit integer matrices.
@@ -5969,14 +5274,12 @@ void plp_mat_scale_i32p_xpulpv2(void* args);
   @return     none
 */
 
-void plp_mat_scale_i16(const int16_t * __restrict__ pSrc,
+void plp_mat_scale_i16(const int16_t *__restrict__ pSrc,
                        uint32_t M,
                        uint32_t N,
                        int16_t scaleFactor,
                        int32_t shift,
-                       int16_t * __restrict__ pDst);
-
-
+                       int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix scale of a 16-bit integer matrices for RV32IM extension.
@@ -5989,14 +5292,12 @@ void plp_mat_scale_i16(const int16_t * __restrict__ pSrc,
   @return     none
 */
 
-void plp_mat_scale_i16s_rv32im(const int16_t * __restrict__ pSrc,
+void plp_mat_scale_i16s_rv32im(const int16_t *__restrict__ pSrc,
                                uint32_t M,
                                uint32_t N,
                                int16_t scaleFactor,
                                int32_t shift,
-                               int16_t * __restrict__ pDst);
-
-
+                               int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix scale of a 16-bit integer matrices for XPULPV2 extension.
@@ -6009,16 +5310,16 @@ void plp_mat_scale_i16s_rv32im(const int16_t * __restrict__ pSrc,
   @return     none
 
   @par Exploiting SIMD instructions
-  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_i16v_xpulpv2(const int16_t * __restrict__ pSrc,
+void plp_mat_scale_i16v_xpulpv2(const int16_t *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
                                 int16_t scaleFactor,
                                 int32_t shift,
-                                int16_t * __restrict__ pDst);
-
+                                int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix scale of a 16-bit integer matrices.
@@ -6032,28 +5333,26 @@ void plp_mat_scale_i16v_xpulpv2(const int16_t * __restrict__ pSrc,
   @return     none
 */
 
-void plp_mat_scale_i16_parallel(const int16_t * __restrict__ pSrc,
+void plp_mat_scale_i16_parallel(const int16_t *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
                                 int16_t scaleFactor,
                                 int32_t shift,
                                 uint32_t nPE,
-                                int16_t * __restrict__ pDst);
-
-
+                                int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief Parallel matrix scale of 16-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_scale_instance_i16 struct initialized by plp_mat_scale_i16_parallel
+  @param[in]  args  pointer to plp_mat_scale_instance_i16 struct initialized by
+                    plp_mat_scale_i16_parallel
   @return     none
 
   @par Exploiting SIMD instructions
-  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_i16vp_xpulpv2(void* args);
-
-
+void plp_mat_scale_i16vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix scale of a 8-bit integer matrices.
@@ -6066,14 +5365,12 @@ void plp_mat_scale_i16vp_xpulpv2(void* args);
   @return     none
 */
 
-void plp_mat_scale_i8(const int8_t * __restrict__ pSrc,
+void plp_mat_scale_i8(const int8_t *__restrict__ pSrc,
                       uint32_t M,
                       uint32_t N,
                       int8_t scaleFactor,
                       int32_t shift,
-                      int8_t * __restrict__ pDst);
-
-
+                      int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix scale of a 8-bit integer matrices for RV32IM extension.
@@ -6086,14 +5383,12 @@ void plp_mat_scale_i8(const int8_t * __restrict__ pSrc,
   @return     none
 */
 
-void plp_mat_scale_i8s_rv32im(const int8_t * __restrict__ pSrc,
+void plp_mat_scale_i8s_rv32im(const int8_t *__restrict__ pSrc,
                               uint32_t M,
                               uint32_t N,
                               int8_t scaleFactor,
                               int32_t shift,
-                              int8_t * __restrict__ pDst);
-
-
+                              int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix scale of a 8-bit integer matrices for XPULPV2 extension.
@@ -6106,17 +5401,16 @@ void plp_mat_scale_i8s_rv32im(const int8_t * __restrict__ pSrc,
   @return     none
 
   @par Exploiting SIMD instructions
-  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_i8v_xpulpv2(const int8_t * __restrict__ pSrc,
+void plp_mat_scale_i8v_xpulpv2(const int8_t *__restrict__ pSrc,
                                uint32_t M,
                                uint32_t N,
                                int8_t scaleFactor,
                                int32_t shift,
-                               int8_t * __restrict__ pDst);
-
-
+                               int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix scale of a 8-bit integer matrices.
@@ -6130,26 +5424,26 @@ void plp_mat_scale_i8v_xpulpv2(const int8_t * __restrict__ pSrc,
   @return     none
 */
 
-void plp_mat_scale_i8_parallel(const int8_t * __restrict__ pSrc,
+void plp_mat_scale_i8_parallel(const int8_t *__restrict__ pSrc,
                                uint32_t M,
                                uint32_t N,
                                int8_t scaleFactor,
                                int32_t shift,
                                uint32_t nPE,
-                               int8_t * __restrict__ pDst);
-
+                               int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief Parallel matrix scale of 8-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_scale_instance_i8 struct initialized by plp_mat_scale_i8_parallel
+  @param[in]  args  pointer to plp_mat_scale_instance_i8 struct initialized by
+                    plp_mat_scale_i8_parallel
   @return     none
 
   @par Exploiting SIMD instructions
-  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_i8vp_xpulpv2(void* args);
-
+void plp_mat_scale_i8vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix scale of a 32-bit floating-point matrices.
@@ -6161,13 +5455,11 @@ void plp_mat_scale_i8vp_xpulpv2(void* args);
   @return     none
 */
 
-
-void plp_mat_scale_f32(const float * __restrict__ pSrc,
+void plp_mat_scale_f32(const float *__restrict__ pSrc,
                        uint32_t M,
                        uint32_t N,
                        float scaleFactor,
-                       float * __restrict__ pDst);
-
+                       float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix scale of a 32-bit floating-point matrices for XPULPV2 extension.
@@ -6179,13 +5471,11 @@ void plp_mat_scale_f32(const float * __restrict__ pSrc,
   @return     none
 */
 
-void plp_mat_scale_f32s_xpulpv2(const float * __restrict__ pSrc,
+void plp_mat_scale_f32s_xpulpv2(const float *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
                                 float scaleFactor,
-                                float * __restrict__ pDst);
-
-
+                                float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix scale of a 32-bit floating-point matrices.
@@ -6198,24 +5488,21 @@ void plp_mat_scale_f32s_xpulpv2(const float * __restrict__ pSrc,
   @return     none
 */
 
-void plp_mat_scale_f32_parallel(const float * __restrict__ pSrc,
+void plp_mat_scale_f32_parallel(const float *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
                                 float scaleFactor,
                                 uint32_t nPE,
-                                float * __restrict__ pDst);
-
-
+                                float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief Parallel matrix scale of 32-bit floating-point matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_scale_instance_f32 struct initialized by plp_mat_scale_f32_parallel
+  @param[in]  args  pointer to plp_mat_scale_instance_f32 struct initialized by
+                    plp_mat_scale_f32_parallel
   @return  none
 */
 
-void plp_mat_scale_f32p_xpulpv2(void* args);
-
-
+void plp_mat_scale_f32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief   Glue code for matrix transpose of a 32-bit integer matrices.
@@ -6226,12 +5513,10 @@ void plp_mat_scale_f32p_xpulpv2(void* args);
   @return  none
 */
 
-void plp_mat_trans_i32(const int32_t* __restrict__ pSrc,
+void plp_mat_trans_i32(const int32_t *__restrict__ pSrc,
                        uint32_t M,
                        uint32_t N,
-                       int32_t* __restrict__ pDst);
-
-
+                       int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief   matrix transpose of a 32-bit integer matrices for RV32IM extension.
@@ -6242,12 +5527,10 @@ void plp_mat_trans_i32(const int32_t* __restrict__ pSrc,
   @return  none
 */
 
-void plp_mat_trans_i32s_rv32im(const int32_t* __restrict__ pSrc,
+void plp_mat_trans_i32s_rv32im(const int32_t *__restrict__ pSrc,
                                uint32_t M,
                                uint32_t N,
-                               int32_t* __restrict__ pDst);
-
-
+                               int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix transpose of a 32-bit integer matrices for XPULPV2 extension.
@@ -6258,12 +5541,10 @@ void plp_mat_trans_i32s_rv32im(const int32_t* __restrict__ pSrc,
   @return     none
 */
 
-void plp_mat_trans_i32s_xpulpv2(const int32_t* __restrict__ pSrc,
+void plp_mat_trans_i32s_xpulpv2(const int32_t *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
-                                int32_t* __restrict__ pDst);
-
-
+                                int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix transpose of a 32-bit integer matrices.
@@ -6275,23 +5556,20 @@ void plp_mat_trans_i32s_xpulpv2(const int32_t* __restrict__ pSrc,
   @return     none
 */
 
-void plp_mat_trans_i32_parallel(const int32_t* __restrict__ pSrc,
+void plp_mat_trans_i32_parallel(const int32_t *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
                                 uint32_t nPE,
-                                int32_t* __restrict__ pDst);
-
-
+                                int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Parallel matrix transpose of a 32-bit integer matrices for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_trans_instance_i32 struct initialized by plp_mat_trans_i32_parallel
+  @param[in]  args  pointer to plp_mat_trans_instance_i32 struct initialized by
+                    plp_mat_trans_i32_parallel
   @return     none
 */
 
-void plp_mat_trans_i32p_xpulpv2(void* args);
-
-
+void plp_mat_trans_i32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix transpose of a 16-bit integer matrices.
@@ -6302,12 +5580,10 @@ void plp_mat_trans_i32p_xpulpv2(void* args);
   @return     none
 */
 
-void plp_mat_trans_i16(const int16_t* __restrict__ pSrc,
+void plp_mat_trans_i16(const int16_t *__restrict__ pSrc,
                        uint32_t M,
                        uint32_t N,
-                       int16_t* __restrict__ pDst);
-
-
+                       int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix transpose of a 16-bit integer matrices for RV32IM extension.
@@ -6318,12 +5594,10 @@ void plp_mat_trans_i16(const int16_t* __restrict__ pSrc,
   @return     none
 */
 
-void plp_mat_trans_i16s_rv32im(const int16_t* __restrict__ pSrc,
+void plp_mat_trans_i16s_rv32im(const int16_t *__restrict__ pSrc,
                                uint32_t M,
                                uint32_t N,
-                               int16_t* __restrict__ pDst);
-
-
+                               int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix transpose of a 16-bit integer matrices for XPULPV2 extension.
@@ -6334,14 +5608,14 @@ void plp_mat_trans_i16s_rv32im(const int16_t* __restrict__ pSrc,
   @return     none
 
   @par Exploiting SIMD instructions
-  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_trans_i16v_xpulpv2(const int16_t* __restrict__ pSrc,
+void plp_mat_trans_i16v_xpulpv2(const int16_t *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
-                                int16_t* __restrict__ pDst);
-
+                                int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix transpose of a 16-bit integer matrices.
@@ -6353,26 +5627,24 @@ void plp_mat_trans_i16v_xpulpv2(const int16_t* __restrict__ pSrc,
   @return     none
 */
 
-void plp_mat_trans_i16_parallel(const int16_t* __restrict__ pSrc,
+void plp_mat_trans_i16_parallel(const int16_t *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
                                 uint32_t nPE,
-                                int16_t* __restrict__ pDst);
-
-
+                                int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief Parallel matrix transpose of 16-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_trans_instance_i16 struct initialized by plp_mat_trans_i16_parallel
+  @param[in]  args  pointer to plp_mat_trans_instance_i16 struct initialized by
+                    plp_mat_trans_i16_parallel
   @return     none
 
   @par Exploiting SIMD instructions
-  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_trans_i16vp_xpulpv2(void* args);
-
-
+void plp_mat_trans_i16vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix transpose of a 8-bit integer matrices.
@@ -6383,12 +5655,10 @@ void plp_mat_trans_i16vp_xpulpv2(void* args);
   @return     none
 */
 
-void plp_mat_trans_i8(const int8_t* __restrict__ pSrc,
+void plp_mat_trans_i8(const int8_t *__restrict__ pSrc,
                       uint32_t M,
                       uint32_t N,
-                      int8_t* __restrict__ pDst);
-
-
+                      int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix transpose of a 8-bit integer matrices for RV32IM extension.
@@ -6399,12 +5669,10 @@ void plp_mat_trans_i8(const int8_t* __restrict__ pSrc,
   @return     none
 */
 
-void plp_mat_trans_i8s_rv32im(const int8_t* __restrict__ pSrc,
+void plp_mat_trans_i8s_rv32im(const int8_t *__restrict__ pSrc,
                               uint32_t M,
                               uint32_t N,
-                              int8_t* __restrict__ pDst);
-
-
+                              int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix transpose of a 8-bit integer matrices for XPULPV2 extension.
@@ -6415,15 +5683,14 @@ void plp_mat_trans_i8s_rv32im(const int8_t* __restrict__ pSrc,
   @return     none
 
   @par Exploiting SIMD instructions
-  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_trans_i8v_xpulpv2(const int8_t* __restrict__ pSrc,
+void plp_mat_trans_i8v_xpulpv2(const int8_t *__restrict__ pSrc,
                                uint32_t M,
                                uint32_t N,
-                               int8_t* __restrict__ pDst);
-
-
+                               int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix transpose of a 8-bit integer matrices.
@@ -6435,24 +5702,24 @@ void plp_mat_trans_i8v_xpulpv2(const int8_t* __restrict__ pSrc,
   @return     none
 */
 
-void plp_mat_trans_i8_parallel(const int8_t* __restrict__ pSrc,
+void plp_mat_trans_i8_parallel(const int8_t *__restrict__ pSrc,
                                uint32_t M,
                                uint32_t N,
                                uint32_t nPE,
-                               int8_t* __restrict__ pDst);
-
+                               int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief Parallel matrix transpose of 8-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_trans_instance_i8 struct initialized by plp_mat_trans_i8_parallel
+  @param[in]  args      pointer to plp_mat_trans_instance_i8 struct initialized by
+  plp_mat_trans_i8_parallel
   @return     none
 
   @par Exploiting SIMD instructions
-  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_trans_i8vp_xpulpv2(void* args);
-
+void plp_mat_trans_i8vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix transpose of a 32-bit float*ing-point matrices.
@@ -6465,13 +5732,10 @@ void plp_mat_trans_i8vp_xpulpv2(void* args);
   @par This function will use plp_mat_trans_i32s_xpulpv2 for its computation.
 */
 
-
-void plp_mat_trans_f32(const float* __restrict__ pSrc,
+void plp_mat_trans_f32(const float *__restrict__ pSrc,
                        uint32_t M,
                        uint32_t N,
-                       float* __restrict__ pDst);
-
-
+                       float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix transpose of a 32-bit float*ing-point matrices.
@@ -6485,13 +5749,8 @@ void plp_mat_trans_f32(const float* __restrict__ pSrc,
   @par This function will use plp_mat_trans_i32p_xpulpv2 for its computation.
 */
 
-void plp_mat_trans_f32_parallel(const float* __restrict__ pSrc,
-                                uint32_t M,
-                                uint32_t N,
-                                uint32_t nPE,
-                                float* __restrict__ pDst);
-
-
+void plp_mat_trans_f32_parallel(
+    const float *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t nPE, float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix inverse of a 32-bit floating-point matrices.
@@ -6501,11 +5760,7 @@ void plp_mat_trans_f32_parallel(const float* __restrict__ pSrc,
   @return     none
 */
 
-
-int plp_mat_inv_f32(float * __restrict__ pSrc,
-                    uint32_t N,
-                    float * __restrict__ pDst);
-
+int plp_mat_inv_f32(float *__restrict__ pSrc, uint32_t N, float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      matrix inverse of a 32-bit floating-point matrices for XPULPV2 extension.
@@ -6515,11 +5770,7 @@ int plp_mat_inv_f32(float * __restrict__ pSrc,
   @return     0: Success, 1: Matrix is singular
 */
 
-int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
-                             uint32_t N,
-                             float * __restrict__ pDst);
-
-
+int plp_mat_inv_f32s_xpulpv2(float *__restrict__ pSrc, uint32_t N, float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix inverse of a 32-bit floating-point matrices.
@@ -6530,35 +5781,32 @@ int plp_mat_inv_f32s_xpulpv2(float * __restrict__ pSrc,
   @return     0: Success, 1: Matrix is singular, 2: operation not supported
 */
 
-int plp_mat_inv_f32_parallel(float * __restrict__ pSrc,
+int plp_mat_inv_f32_parallel(float *__restrict__ pSrc,
                              uint32_t N,
                              uint32_t nPE,
-                             float * __restrict__ pDst);
-
-
+                             float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief Parallel matrix inverse of 32-bit floating-point matrices kernel for XPULPV2 extension.
-  @param[in]  args pointer to plp_mat_inv_instance_f32 struct initialized by plp_mat_inv_f32_parallel
+  @param[in]  args  pointer to plp_mat_inv_instance_f32 struct initialized by
+                    plp_mat_inv_f32_parallel
   @return     0: Success, 1: Matrix is singular
 */
 
-int plp_mat_inv_f32p_xpulpv2(void* args);
-
-
+int plp_mat_inv_f32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for strided matrix matrix multiplication of a 32-bit integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for strided matrix matrix multiplication of a 32-bit integer matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_stride_i32(const int32_t *__restrict__ pSrcA,
@@ -6572,18 +5820,18 @@ void plp_mat_mult_stride_i32(const int32_t *__restrict__ pSrcA,
                              int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix matrix multiplication of a 32-bit integer matrices for RV32IM
-                  extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix matrix multiplication of a 32-bit integer matrices for RV32IM
+               extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_stride_i32s_rv32im(const int32_t *__restrict__ pSrcA,
@@ -6597,18 +5845,18 @@ void plp_mat_mult_stride_i32s_rv32im(const int32_t *__restrict__ pSrcA,
                                      int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix matrix multiplication of a 32-bit integer matrices for XPULPV2
-                  extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix matrix multiplication of a 32-bit integer matrices for XPULPV2
+               extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_stride_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
@@ -6622,17 +5870,17 @@ void plp_mat_mult_stride_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
                                       int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for strided matrix matrix multiplication of a 16-bit integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for strided matrix matrix multiplication of a 16-bit integer matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_stride_i16(const int16_t *__restrict__ pSrcA,
@@ -6646,18 +5894,18 @@ void plp_mat_mult_stride_i16(const int16_t *__restrict__ pSrcA,
                              int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix matrix multiplication of a 16-bit integer matrices for RV32IM
-                  extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix matrix multiplication of a 16-bit integer matrices for RV32IM
+               extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
@@ -6671,18 +5919,18 @@ void plp_mat_mult_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
                                      int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix matrix multiplication of a 16-bit integer matrices for XPULPV2
-                  extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix matrix multiplication of a 16-bit integer matrices for XPULPV2
+               extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Exploiting SIMD instructions
    The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
@@ -6700,17 +5948,17 @@ void plp_mat_mult_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
                                       int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for strided matrix matrix multiplication of a 8-bit integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for strided matrix matrix multiplication of a 8-bit integer matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_stride_i8(const int8_t *__restrict__ pSrcA,
@@ -6724,18 +5972,18 @@ void plp_mat_mult_stride_i8(const int8_t *__restrict__ pSrcA,
                             int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix matrix multiplication of a 8-bit integer matrices for RV32IM
-                  extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix matrix multiplication of a 8-bit integer matrices for RV32IM
+               extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
@@ -6749,18 +5997,18 @@ void plp_mat_mult_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
                                     int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix matrix multiplication of a 8-bit integer matrices for XPULPV2
-                  extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix matrix multiplication of a 8-bit integer matrices for XPULPV2
+               extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Exploiting SIMD instructions
    The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
@@ -6778,19 +6026,19 @@ void plp_mat_mult_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
                                      int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel strided matrix matrix multiplication of a 32-bit integer
-                  matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel strided matrix matrix multiplication of a 32-bit integer
+               matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  nPE        Number of cores to use
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_stride_i32_parallel(const int32_t *__restrict__ pSrcA,
@@ -6809,25 +6057,25 @@ void plp_mat_mult_stride_i32_parallel(const int32_t *__restrict__ pSrcA,
                XPULPV2 extension.
    @param[in]  args      pointer to plp_mat_mult_stride_instance_i32 struct initialized by
                          plp_mat_mult_stride_i32_parallel
-   @return        none
+   @return     none
 */
 
 void plp_mat_mult_stride_i32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel strided matrix matrix multiplication of a 16-bit integer
-                  matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel strided matrix matrix multiplication of a 16-bit integer
+               matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  nPE        Number of cores to use
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
@@ -6849,25 +6097,25 @@ void plp_mat_mult_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
 
     @par Exploiting SIMD instructions
     The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
-   performed on 32 bit vectors, with 32 bit accumulator.
+    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
 void plp_mat_mult_stride_i16vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel strided matrix matrix multiplication of a 8-bit integer
-                  matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel strided matrix matrix multiplication of a 8-bit integer
+               matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  nPE        Number of cores to use
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_stride_i8_parallel(const int8_t *__restrict__ pSrcA,
@@ -6882,18 +6130,18 @@ void plp_mat_mult_stride_i8_parallel(const int8_t *__restrict__ pSrcA,
                                      int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for strided matrix matrix multiplication of a 32-bit floating-point
-                  matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for strided matrix matrix multiplication of a 32-bit floating-point
+               matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_stride_f32(const float *__restrict__ pSrcA,
@@ -6907,18 +6155,18 @@ void plp_mat_mult_stride_f32(const float *__restrict__ pSrcA,
                              float *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix matrix multiplication of a 32-bit floating-point matrices for
-                  XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix matrix multiplication of a 32-bit floating-point matrices for
+               XPULPV2 extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_stride_f32s_xpulpv2(const float *__restrict__ pSrcA,
@@ -6932,19 +6180,19 @@ void plp_mat_mult_stride_f32s_xpulpv2(const float *__restrict__ pSrcA,
                                       float *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel strided matrix matrix multiplication of a 32-bit
-                  floating-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel strided matrix matrix multiplication of a 32-bit
+               floating-point matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  nPE        Number of cores to use
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_stride_f32_parallel(const float *__restrict__ pSrcA,
@@ -6982,18 +6230,18 @@ void plp_mat_mult_stride_f32p_xpulpv2(void *args);
 void plp_mat_mult_stride_i8vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for strided matrix matrix multiplication of a 32-bit fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for strided matrix matrix multiplication of a 32-bit fix-point matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7014,20 +6262,20 @@ void plp_mat_mult_stride_q32(const int32_t *__restrict__ pSrcA,
                              int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel strided matrix matrix multiplication of a 32-bit fix-point
-                  matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel strided matrix matrix multiplication of a 32-bit fix-point
+               matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[in]  nPE        Number of cores to use
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7049,19 +6297,19 @@ void plp_mat_mult_stride_q32_parallel(const int32_t *__restrict__ pSrcA,
                                       int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix matrix multiplication of a 32-bit fix-point matrices for RV32IM
-                  extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix matrix multiplication of a 32-bit fix-point matrices for RV32IM
+               extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7082,19 +6330,19 @@ void plp_mat_mult_stride_q32s_rv32im(const int32_t *__restrict__ pSrcA,
                                      int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix matrix multiplication of a 32-bit fix-point matrices for XPULPV2
-                  extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix matrix multiplication of a 32-bit fix-point matrices for XPULPV2
+               extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7124,18 +6372,18 @@ void plp_mat_mult_stride_q32s_xpulpv2(const int32_t *__restrict__ pSrcA,
 void plp_mat_mult_stride_q32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for strided matrix matrix multiplication of a 16-bit fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for strided matrix matrix multiplication of a 16-bit fix-point matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7159,20 +6407,20 @@ void plp_mat_mult_stride_q16(const int16_t *__restrict__ pSrcA,
                              int16_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel strided matrix matrix multiplication of a 16-bit fix-point
-                  matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel strided matrix matrix multiplication of a 16-bit fix-point
+               matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[in]  nPE        Number of cores to use
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7180,8 +6428,8 @@ void plp_mat_mult_stride_q16(const int16_t *__restrict__ pSrcA,
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 16-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 16-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
  */
 
 void plp_mat_mult_stride_q16_parallel(const int16_t *__restrict__ pSrcA,
@@ -7197,19 +6445,19 @@ void plp_mat_mult_stride_q16_parallel(const int16_t *__restrict__ pSrcA,
                                       int16_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix matrix multiplication of a 16-bit fix-point matrices for RV32IM
-                  extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix matrix multiplication of a 16-bit fix-point matrices for RV32IM
+               extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7217,8 +6465,8 @@ void plp_mat_mult_stride_q16_parallel(const int16_t *__restrict__ pSrcA,
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 16-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 16-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
 */
 
 void plp_mat_mult_stride_q16s_rv32im(const int16_t *__restrict__ pSrcA,
@@ -7233,19 +6481,19 @@ void plp_mat_mult_stride_q16s_rv32im(const int16_t *__restrict__ pSrcA,
                                      int16_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix matrix multiplication of a 16-bit fix-point matrices for XPULPV2
-                  extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix matrix multiplication of a 16-bit fix-point matrices for XPULPV2
+               extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7253,8 +6501,8 @@ void plp_mat_mult_stride_q16s_rv32im(const int16_t *__restrict__ pSrcA,
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 16-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 16-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
 */
 
 void plp_mat_mult_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
@@ -7278,18 +6526,18 @@ void plp_mat_mult_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
 void plp_mat_mult_stride_q16vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for strided matrix matrix multiplication of a 8-bit fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for strided matrix matrix multiplication of a 8-bit fix-point matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7297,8 +6545,8 @@ void plp_mat_mult_stride_q16vp_xpulpv2(void *args);
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 8-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 8-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
  */
 
 void plp_mat_mult_stride_q8(const int8_t *__restrict__ pSrcA,
@@ -7313,20 +6561,20 @@ void plp_mat_mult_stride_q8(const int8_t *__restrict__ pSrcA,
                             int8_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel strided matrix matrix multiplication of a 8-bit fix-point
-                  matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel strided matrix matrix multiplication of a 8-bit fix-point
+               matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[in]  nPE        Number of cores to use
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7334,8 +6582,8 @@ void plp_mat_mult_stride_q8(const int8_t *__restrict__ pSrcA,
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 8-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 8-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
  */
 
 void plp_mat_mult_stride_q8_parallel(const int8_t *__restrict__ pSrcA,
@@ -7351,19 +6599,19 @@ void plp_mat_mult_stride_q8_parallel(const int8_t *__restrict__ pSrcA,
                                      int8_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix matrix multiplication of a 8-bit fix-point matrices for RV32IM
-                  extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix matrix multiplication of a 8-bit fix-point matrices for RV32IM
+               extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7371,8 +6619,8 @@ void plp_mat_mult_stride_q8_parallel(const int8_t *__restrict__ pSrcA,
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 8-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 8-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
 */
 
 void plp_mat_mult_stride_q8s_rv32im(const int8_t *__restrict__ pSrcA,
@@ -7387,19 +6635,19 @@ void plp_mat_mult_stride_q8s_rv32im(const int8_t *__restrict__ pSrcA,
                                     int8_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix matrix multiplication of a 8-bit fix-point matrices for XPULPV2
-                  extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix matrix multiplication of a 8-bit fix-point matrices for XPULPV2
+               extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7407,8 +6655,8 @@ void plp_mat_mult_stride_q8s_rv32im(const int8_t *__restrict__ pSrcA,
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 8-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 8-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
 */
 
 void plp_mat_mult_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
@@ -7432,18 +6680,18 @@ void plp_mat_mult_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
 void plp_mat_mult_stride_q8vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for strided matrix transposed matrix multiplication of a 32-bit integer
-                  matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for strided matrix transposed matrix multiplication of a 32-bit integer
+               matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_trans_stride_i32(const int32_t *__restrict__ pSrcA,
@@ -7457,18 +6705,18 @@ void plp_mat_mult_trans_stride_i32(const int32_t *__restrict__ pSrcA,
                                    int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix transposed matrix multiplication of a 32-bit integer matrices for
-                  RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix transposed matrix multiplication of a 32-bit integer matrices for
+               RV32IM extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_trans_stride_i32s_rv32im(const int32_t *__restrict__ pSrcA,
@@ -7482,18 +6730,18 @@ void plp_mat_mult_trans_stride_i32s_rv32im(const int32_t *__restrict__ pSrcA,
                                            int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix transposed matrix multiplication of a 32-bit integer matrices for
-                  XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix transposed matrix multiplication of a 32-bit integer matrices for
+               XPULPV2 extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_trans_stride_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
@@ -7507,18 +6755,18 @@ void plp_mat_mult_trans_stride_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
                                             int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for strided matrix transposed matrix multiplication of a 16-bit integer
-                  matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for strided matrix transposed matrix multiplication of a 16-bit integer
+               matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_trans_stride_i16(const int16_t *__restrict__ pSrcA,
@@ -7532,18 +6780,18 @@ void plp_mat_mult_trans_stride_i16(const int16_t *__restrict__ pSrcA,
                                    int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix transposed matrix multiplication of a 16-bit integer matrices for
-                  RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix transposed matrix multiplication of a 16-bit integer matrices for
+               RV32IM extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_trans_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
@@ -7557,18 +6805,18 @@ void plp_mat_mult_trans_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
                                            int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix transposed matrix multiplication of a 16-bit integer matrices for
-                  XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix transposed matrix multiplication of a 16-bit integer matrices for
+               XPULPV2 extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Exploiting SIMD instructions
    The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
@@ -7586,18 +6834,18 @@ void plp_mat_mult_trans_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
                                             int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for strided matrix transposed matrix multiplication of a 8-bit integer
-                  matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for strided matrix transposed matrix multiplication of a 8-bit integer
+               matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_trans_stride_i8(const int8_t *__restrict__ pSrcA,
@@ -7611,18 +6859,18 @@ void plp_mat_mult_trans_stride_i8(const int8_t *__restrict__ pSrcA,
                                   int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix transposed matrix multiplication of a 8-bit integer matrices for
-                  RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix transposed matrix multiplication of a 8-bit integer matrices for
+               RV32IM extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_trans_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
@@ -7636,18 +6884,18 @@ void plp_mat_mult_trans_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
                                           int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix transposed matrix multiplication of a 8-bit integer matrices for
-                  XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix transposed matrix multiplication of a 8-bit integer matrices for
+               XPULPV2 extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Exploiting SIMD instructions
    The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
@@ -7665,19 +6913,19 @@ void plp_mat_mult_trans_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
                                            int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel strided matrix matrix multiplication of a 32-bit integer
-                  matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel strided matrix matrix multiplication of a 32-bit integer
+               matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  nPE        Number of cores to use
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_trans_stride_i32_parallel(const int32_t *__restrict__ pSrcA,
@@ -7702,19 +6950,19 @@ void plp_mat_mult_trans_stride_i32_parallel(const int32_t *__restrict__ pSrcA,
 void plp_mat_mult_trans_stride_i32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel strided matrix transposed matrix multiplication of a 16-bit
-                  integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel strided matrix transposed matrix multiplication of a 16-bit
+               integer matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  nPE        Number of cores to use
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_trans_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
@@ -7743,19 +6991,19 @@ void plp_mat_mult_trans_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
 void plp_mat_mult_trans_stride_i16vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel strided matrix transposed matrix multiplication of a 8-bit
-                  integer matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel strided matrix transposed matrix multiplication of a 8-bit
+               integer matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  nPE        Number of cores to use
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_trans_stride_i8_parallel(const int8_t *__restrict__ pSrcA,
@@ -7784,19 +7032,19 @@ void plp_mat_mult_trans_stride_i8_parallel(const int8_t *__restrict__ pSrcA,
 void plp_mat_mult_trans_stride_i8vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for strided matrix transposed matrix multiplication of a 32-bit
-                  fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for strided matrix transposed matrix multiplication of a 32-bit
+               fix-point matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7817,20 +7065,20 @@ void plp_mat_mult_trans_stride_q32(const int32_t *__restrict__ pSrcA,
                                    int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel strided matrix transposed matrix multiplication of a 32-bit
-                  fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel strided matrix transposed matrix multiplication of a 32-bit
+               fix-point matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[in]  nPE        Number of cores to use
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7852,19 +7100,19 @@ void plp_mat_mult_trans_stride_q32_parallel(const int32_t *__restrict__ pSrcA,
                                             int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix transposed matrix multiplication of a 32-bit fix-point matrices for
-                  RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix transposed matrix multiplication of a 32-bit fix-point matrices for
+               RV32IM extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7885,19 +7133,19 @@ void plp_mat_mult_trans_stride_q32s_rv32im(const int32_t *__restrict__ pSrcA,
                                            int32_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix transposed matrix multiplication of a 32-bit fix-point matrices for
-                  XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix transposed matrix multiplication of a 32-bit fix-point matrices for
+               XPULPV2 extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7919,7 +7167,7 @@ void plp_mat_mult_trans_stride_q32s_xpulpv2(const int32_t *__restrict__ pSrcA,
 
 /** -------------------------------------------------------
     @brief      Parallel strided matrix transposed matrix multiplication of 32-bit fix-point
-   matrices kernel for XPULPV2 extension.
+                matrices kernel for XPULPV2 extension.
     @param[in]  args  pointer to plp_mat_mult_stride_instance_q32 struct initialized by
                       plp_mat_mult_trans_stride_q32_parallel
     @return     none
@@ -7928,19 +7176,19 @@ void plp_mat_mult_trans_stride_q32s_xpulpv2(const int32_t *__restrict__ pSrcA,
 void plp_mat_mult_trans_stride_q32p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for strided matrix transposed matrix multiplication of a 16-bit
-                  fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for strided matrix transposed matrix multiplication of a 16-bit
+               fix-point matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7948,8 +7196,8 @@ void plp_mat_mult_trans_stride_q32p_xpulpv2(void *args);
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 16-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 16-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
  */
 
 void plp_mat_mult_trans_stride_q16(const int16_t *__restrict__ pSrcA,
@@ -7964,20 +7212,20 @@ void plp_mat_mult_trans_stride_q16(const int16_t *__restrict__ pSrcA,
                                    int16_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel strided matrix transposed matrix multiplication of a 16-bit
-                  fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel strided matrix transposed matrix multiplication of a 16-bit
+               fix-point matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[in]  nPE        Number of cores to use
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -7985,8 +7233,8 @@ void plp_mat_mult_trans_stride_q16(const int16_t *__restrict__ pSrcA,
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 16-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 16-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
  */
 
 void plp_mat_mult_trans_stride_q16_parallel(const int16_t *__restrict__ pSrcA,
@@ -8002,19 +7250,19 @@ void plp_mat_mult_trans_stride_q16_parallel(const int16_t *__restrict__ pSrcA,
                                             int16_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix transposed matrix multiplication of a 16-bit fix-point matrices for
-                  RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix transposed matrix multiplication of a 16-bit fix-point matrices for
+               RV32IM extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -8022,8 +7270,8 @@ void plp_mat_mult_trans_stride_q16_parallel(const int16_t *__restrict__ pSrcA,
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 16-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 16-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
 */
 
 void plp_mat_mult_trans_stride_q16s_rv32im(const int16_t *__restrict__ pSrcA,
@@ -8038,19 +7286,19 @@ void plp_mat_mult_trans_stride_q16s_rv32im(const int16_t *__restrict__ pSrcA,
                                            int16_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix transposed matrix multiplication of a 16-bit fix-point matrices for
-                  XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix transposed matrix multiplication of a 16-bit fix-point matrices for
+               XPULPV2 extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -8058,8 +7306,8 @@ void plp_mat_mult_trans_stride_q16s_rv32im(const int16_t *__restrict__ pSrcA,
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 16-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 16-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
 */
 
 void plp_mat_mult_trans_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
@@ -8084,19 +7332,19 @@ void plp_mat_mult_trans_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
 void plp_mat_mult_trans_stride_q16vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for strided matrix transposed matrix multiplication of a 8-bit fix-point
-                  matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for strided matrix transposed matrix multiplication of a 8-bit fix-point
+               matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -8104,8 +7352,8 @@ void plp_mat_mult_trans_stride_q16vp_xpulpv2(void *args);
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 8-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 8-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
  */
 
 void plp_mat_mult_trans_stride_q8(const int8_t *__restrict__ pSrcA,
@@ -8120,20 +7368,20 @@ void plp_mat_mult_trans_stride_q8(const int8_t *__restrict__ pSrcA,
                                   int8_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel strided matrix transposed matrix multiplication of a 8-bit
-                  fix-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel strided matrix transposed matrix multiplication of a 8-bit
+               fix-point matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[in]  nPE        Number of cores to use
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -8141,8 +7389,8 @@ void plp_mat_mult_trans_stride_q8(const int8_t *__restrict__ pSrcA,
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 8-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 8-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
  */
 
 void plp_mat_mult_trans_stride_q8_parallel(const int8_t *__restrict__ pSrcA,
@@ -8158,19 +7406,19 @@ void plp_mat_mult_trans_stride_q8_parallel(const int8_t *__restrict__ pSrcA,
                                            int8_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix transposed matrix multiplication of a 8-bit fix-point matrices for
-                  RV32IM extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix transposed matrix multiplication of a 8-bit fix-point matrices for
+               RV32IM extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -8178,8 +7426,8 @@ void plp_mat_mult_trans_stride_q8_parallel(const int8_t *__restrict__ pSrcA,
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 8-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 8-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
 */
 
 void plp_mat_mult_trans_stride_q8s_rv32im(const int8_t *__restrict__ pSrcA,
@@ -8194,19 +7442,19 @@ void plp_mat_mult_trans_stride_q8s_rv32im(const int8_t *__restrict__ pSrcA,
                                           int8_t *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix transposed matrix multiplication of a 8-bit fix-point matrices for
-                  XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     shift      Amount to shift the result of each multiplication.
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix transposed matrix multiplication of a 8-bit fix-point matrices for
+               XPULPV2 extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  shift      Amount to shift the result of each multiplication.
+   @param[out] pDstC      Output is written here
+   @return     none
 
    @par Fix-Point and Shifting
    The result will be shifted by the parameter `shift` to the right (multiplied
@@ -8214,8 +7462,8 @@ void plp_mat_mult_trans_stride_q8s_rv32im(const int8_t *__restrict__ pSrcA,
    B as pSrcB * 2^-y (in other words, A has it's x last digits after the binary
    point). Then, the output is represented as pDstC * 2^-(x + y - shift).
 
-  The output of the matrix multiplication will also be stored as an 8-bit array.
-  Set the `shift` parameter such that no overflow ocurrs.
+   The output of the matrix multiplication will also be stored as an 8-bit array.
+   Set the `shift` parameter such that no overflow ocurrs.
 */
 
 void plp_mat_mult_trans_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
@@ -8240,18 +7488,18 @@ void plp_mat_mult_trans_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
 void plp_mat_mult_trans_stride_q8vp_xpulpv2(void *args);
 
 /** -------------------------------------------------------
-   @brief         Glue code for strided matrix transposed matrix multiplication of a 32-bit
-                  floating-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for strided matrix transposed matrix multiplication of a 32-bit
+               floating-point matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_trans_stride_f32(const float *__restrict__ pSrcA,
@@ -8265,18 +7513,18 @@ void plp_mat_mult_trans_stride_f32(const float *__restrict__ pSrcA,
                                    float *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         strided matrix transposed matrix multiplication of a 32-bit floating-point
-                  matrices for XPULPV2 extension.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      strided matrix transposed matrix multiplication of a 32-bit floating-point
+               matrices for XPULPV2 extension.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_trans_stride_f32s_xpulpv2(const float *__restrict__ pSrcA,
@@ -8290,19 +7538,19 @@ void plp_mat_mult_trans_stride_f32s_xpulpv2(const float *__restrict__ pSrcA,
                                             float *__restrict__ pDstC);
 
 /** -------------------------------------------------------
-   @brief         Glue code for parallel strided matrix transposed matrix multiplication of a 32-bit
-                  floating-point matrices.
-   @param[in]     pSrcA      points to first the input matrix
-   @param[in]     pSrcB      points to second the input matrix
-   @param[in]     M          Height of first matrix
-   @param[in]     N          Width of first and heigt of second matrix
-   @param[in]     O          Width of second matrix
-   @param[in]     strideA    Stride of matrix A (elements between each row)
-   @param[in]     strideB    Stride of matrix B (elements between each row)
-   @param[in]     strudeY    Stride of output matrix (elements between each row)
-   @param[in]     nPE        Number of cores to use
-   @param[out]    pDstC      Output is written here
-   @return        none
+   @brief      Glue code for parallel strided matrix transposed matrix multiplication of a 32-bit
+               floating-point matrices.
+   @param[in]  pSrcA      points to first the input matrix
+   @param[in]  pSrcB      points to second the input matrix
+   @param[in]  M          Height of first matrix
+   @param[in]  N          Width of first and heigt of second matrix
+   @param[in]  O          Width of second matrix
+   @param[in]  strideA    Stride of matrix A (elements between each row)
+   @param[in]  strideB    Stride of matrix B (elements between each row)
+   @param[in]  strudeY    Stride of output matrix (elements between each row)
+   @param[in]  nPE        Number of cores to use
+   @param[out] pDstC      Output is written here
+   @return     none
 */
 
 void plp_mat_mult_trans_stride_f32_parallel(const float *__restrict__ pSrcA,
@@ -9492,6 +8740,5 @@ void plp_mat_scale_stride_f32_parallel(const float *__restrict__ pSrc,
 */
 
 void plp_mat_scale_stride_f32p_xpulpv2(void *args);
-
 
 #endif // __PLP_MATH_H__

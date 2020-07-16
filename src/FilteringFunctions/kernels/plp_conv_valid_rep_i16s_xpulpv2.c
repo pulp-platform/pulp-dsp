@@ -10,7 +10,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Moritz Scherer, Tibor Schneider, ETH Zurich
  *
@@ -31,9 +31,10 @@
 
 #include "plp_math.h"
 
-#define shufflemask1 (v2s){1,0}
-#define ymask (v2s){0xFFFF, 0x0000}
-
+#define shufflemask1                                                                               \
+    (v2s) { 1, 0 }
+#define ymask                                                                                      \
+    (v2s) { 0xFFFF, 0x0000 }
 
 /**
  * @ingroup BasicConvolution
@@ -60,24 +61,24 @@
 // Pre-condition: pRes has enough allocated memory, i.e. srcALen + srcBLen-1u
 // Pre-condition: srcALen >= 2 and srcBLen >= 2, otherwise use vector dot product
 
-void plp_conv_valid_rep_i16s_xpulpv2(const int16_t* pSrcA,
+void plp_conv_valid_rep_i16s_xpulpv2(const int16_t *pSrcA,
                                      const uint32_t srcALen,
                                      const uint32_t srcAMem,
-                                     const int16_t* pSrcB,
+                                     const int16_t *pSrcB,
                                      const uint32_t srcBLen,
-                                     int32_t * pRes){
+                                     int32_t *pRes) {
 
-    const int16_t* pSrcA_iter_0; // intermediate input a pointer (replication 0)
-    const int16_t* pSrcA_iter_1; // intermediate input a pointer (replication 1)
-    const int16_t* pSrcB_iter;   // intermediate input b pointer
+    const int16_t *pSrcA_iter_0; // intermediate input a pointer (replication 0)
+    const int16_t *pSrcA_iter_1; // intermediate input a pointer (replication 1)
+    const int16_t *pSrcB_iter;   // intermediate input b pointer
 
     int res_len = srcALen - srcBLen + 1; // length of output vector
 
 #ifdef PLP_MATH_LOOPUNROLL
 
-    const int16_t* pSrcB_end;          // Intermediate pointers
-    int32_t sum;                    // Accumulators
-    uint32_t j, k, count, blk_cnt;  // Loop counters
+    const int16_t *pSrcB_end;      // Intermediate pointers
+    int32_t sum;                   // Accumulators
+    uint32_t j, k, count, blk_cnt; // Loop counters
 
     // for loop unroll
     int32_t acc0, acc1, acc2, acc3; // Accumulators
@@ -85,7 +86,7 @@ void plp_conv_valid_rep_i16s_xpulpv2(const int16_t* pSrcA,
     v2s _x0, _x1, _x2, _x3, _x4, _x5; // local registers
     v2s _y1, _y2;                     // local registers
 
-    int16_t _a0, _a1, _a2, _b0;       // local registers for non-simd computation
+    int16_t _a0, _a1, _a2, _b0; // local registers for non-simd computation
 
     // Working pointer of inputA
     pSrcA_iter_0 = pSrcA + 0 * srcAMem;
@@ -119,18 +120,20 @@ void plp_conv_valid_rep_i16s_xpulpv2(const int16_t* pSrcA,
 
             do {
                 // load the data
-                _y1 = *((v2s*)(pSrcB_iter - 1)); // { y[srcBLen - 2] , y[srcBLen - 1] }
-                _y2 = *((v2s*)(pSrcB_iter - 3)); // { y[srcBLen - 4] , y[srcBLen - 3] }
+                _y1 = *((v2s *)(pSrcB_iter - 1)); // { y[srcBLen - 2] , y[srcBLen - 1] }
+                _y2 = *((v2s *)(pSrcB_iter - 3)); // { y[srcBLen - 4] , y[srcBLen - 3] }
 
-                _x0 = *((v2s*)(pSrcA_iter_0 + 0));  // {x[0],x[1]}
-                _x1 = *((v2s*)(pSrcA_iter_1 + 0));  // {x[1],x[2]}
-                _x2 = *((v2s*)(pSrcA_iter_0 + 2));  // {x[2],x[3]}
-                _x3 = *((v2s*)(pSrcA_iter_1 + 2));  // {x[3],x[4]}
-                _x4 = *((v2s*)(pSrcA_iter_0 + 4));  // {x[4],x[5]}
-                _x5 = *((v2s*)(pSrcA_iter_1 + 4));  // {x[5],x[6]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+                _x4 = *((v2s *)(pSrcA_iter_0 + 4)); // {x[4],x[5]}
+                _x5 = *((v2s *)(pSrcA_iter_1 + 4)); // {x[5],x[6]}
 
-                _y1 = __builtin_shuffle(_y1,_y1,shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
-                _y2 = __builtin_shuffle(_y2,_y2,shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
+                _y1 = __builtin_shuffle(_y1, _y1,
+                                        shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
+                _y2 = __builtin_shuffle(_y2, _y2,
+                                        shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
 
                 // update pointers
                 pSrcB_iter -= 4;
@@ -138,15 +141,15 @@ void plp_conv_valid_rep_i16s_xpulpv2(const int16_t* pSrcA,
                 pSrcA_iter_1 += 4;
 
                 // Perform the multiply-accumulate
-                acc0 = __SUMDOTP2(_x0,_y1,acc0);
-                acc1 = __SUMDOTP2(_x1,_y1,acc1);
-                acc2 = __SUMDOTP2(_x2,_y1,acc2);
-                acc3 = __SUMDOTP2(_x3,_y1,acc3);
+                acc0 = __SUMDOTP2(_x0, _y1, acc0);
+                acc1 = __SUMDOTP2(_x1, _y1, acc1);
+                acc2 = __SUMDOTP2(_x2, _y1, acc2);
+                acc3 = __SUMDOTP2(_x3, _y1, acc3);
 
-                acc0 = __SUMDOTP2(_x2,_y2,acc0);
-                acc1 = __SUMDOTP2(_x3,_y2,acc1);
-                acc2 = __SUMDOTP2(_x4,_y2,acc2);
-                acc3 = __SUMDOTP2(_x5,_y2,acc3);
+                acc0 = __SUMDOTP2(_x2, _y2, acc0);
+                acc1 = __SUMDOTP2(_x3, _y2, acc1);
+                acc2 = __SUMDOTP2(_x4, _y2, acc2);
+                acc3 = __SUMDOTP2(_x5, _y2, acc3);
 
             } while (--k);
 
@@ -159,65 +162,68 @@ void plp_conv_valid_rep_i16s_xpulpv2(const int16_t* pSrcA,
             if (k == 1) {
 
                 // load the data
-                _y1 = *((v2s*)(pSrcB_iter-1));   // {y[srcBLen - 2],y[srcBLen - 1]} 
-                _x0 = *((v2s*)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
-                _x1 = *((v2s*)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
-                _x2 = *((v2s*)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
-                _x3 = *((v2s*)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+                _y1 = *((v2s *)(pSrcB_iter - 1));   // {y[srcBLen - 2],y[srcBLen - 1]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
 
-                _y1 = __builtin_shuffle(_y1,_y1,shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
-                _y1 = __AND2(_y1,ymask);      
+                _y1 = __builtin_shuffle(_y1, _y1,
+                                        shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
+                _y1 = __AND2(_y1, ymask);
 
                 // Perform the multiply-accumulate
-                acc0 = __SUMDOTP2(_x0,_y1,acc0);
-                acc1 = __SUMDOTP2(_x1,_y1,acc1);
-                acc2 = __SUMDOTP2(_x2,_y1,acc2);
-                acc3 = __SUMDOTP2(_x3,_y1,acc3);
+                acc0 = __SUMDOTP2(_x0, _y1, acc0);
+                acc1 = __SUMDOTP2(_x1, _y1, acc1);
+                acc2 = __SUMDOTP2(_x2, _y1, acc2);
+                acc3 = __SUMDOTP2(_x3, _y1, acc3);
 
             } else if (k == 2) {
 
                 // load the data
-                _y1 = *((v2s*)(pSrcB_iter-1));   // {y[srcBLen - 2],y[srcBLen - 1]} 
-                _x0 = *((v2s*)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
-                _x1 = *((v2s*)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
-                _x2 = *((v2s*)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
-                _x3 = *((v2s*)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+                _y1 = *((v2s *)(pSrcB_iter - 1));   // {y[srcBLen - 2],y[srcBLen - 1]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
 
-                _y1 = __builtin_shuffle(_y1,_y1,shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
+                _y1 = __builtin_shuffle(_y1, _y1,
+                                        shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
 
                 // Perform the multiply-accumulate
-                acc0 = __SUMDOTP2(_x0,_y1,acc0);
-                acc1 = __SUMDOTP2(_x1,_y1,acc1);
-                acc2 = __SUMDOTP2(_x2,_y1,acc2);
-                acc3 = __SUMDOTP2(_x3,_y1,acc3);
+                acc0 = __SUMDOTP2(_x0, _y1, acc0);
+                acc1 = __SUMDOTP2(_x1, _y1, acc1);
+                acc2 = __SUMDOTP2(_x2, _y1, acc2);
+                acc3 = __SUMDOTP2(_x3, _y1, acc3);
 
             } else if (k == 3) {
 
                 // load the data
-                _y1 = *((v2s*)(pSrcB_iter-1));   // {y[srcBLen - 2],y[srcBLen - 1]} 
-                _y2 = *((v2s*)(pSrcB_iter-3));   // {y[srcBLen - 4],y[srcBLen - 3]} 
-                _x0 = *((v2s*)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
-                _x1 = *((v2s*)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
-                _x2 = *((v2s*)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
-                _x3 = *((v2s*)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
-                _x4 = *((v2s*)(pSrcA_iter_0 + 4)); // {x[4],x[5]}
-                _x5 = *((v2s*)(pSrcA_iter_1 + 4)); // {x[5],x[6]}
+                _y1 = *((v2s *)(pSrcB_iter - 1));   // {y[srcBLen - 2],y[srcBLen - 1]}
+                _y2 = *((v2s *)(pSrcB_iter - 3));   // {y[srcBLen - 4],y[srcBLen - 3]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+                _x4 = *((v2s *)(pSrcA_iter_0 + 4)); // {x[4],x[5]}
+                _x5 = *((v2s *)(pSrcA_iter_1 + 4)); // {x[5],x[6]}
 
-                _y1 = __builtin_shuffle(_y1,_y1,shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
-                _y2 = __builtin_shuffle(_y2,_y2,shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
-                _y2 = __AND2(_y2,ymask);
+                _y1 = __builtin_shuffle(_y1, _y1,
+                                        shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
+                _y2 = __builtin_shuffle(_y2, _y2,
+                                        shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
+                _y2 = __AND2(_y2, ymask);
 
                 // Perform the multiply-accumulate
-                acc0 = __SUMDOTP2(_x0,_y1,acc0);
-                acc1 = __SUMDOTP2(_x1,_y1,acc1);
-                acc2 = __SUMDOTP2(_x2,_y1,acc2);
-                acc3 = __SUMDOTP2(_x3,_y1,acc3);
+                acc0 = __SUMDOTP2(_x0, _y1, acc0);
+                acc1 = __SUMDOTP2(_x1, _y1, acc1);
+                acc2 = __SUMDOTP2(_x2, _y1, acc2);
+                acc3 = __SUMDOTP2(_x3, _y1, acc3);
 
-                acc0 = __SUMDOTP2(_x2,_y2,acc0);
-                acc1 = __SUMDOTP2(_x3,_y2,acc1);
-                acc2 = __SUMDOTP2(_x4,_y2,acc2);
-                acc3 = __SUMDOTP2(_x5,_y2,acc3);
-
+                acc0 = __SUMDOTP2(_x2, _y2, acc0);
+                acc1 = __SUMDOTP2(_x3, _y2, acc1);
+                acc2 = __SUMDOTP2(_x4, _y2, acc2);
+                acc3 = __SUMDOTP2(_x5, _y2, acc3);
             }
 
             /* Store the result in the accumulator in the destination buffer. */
@@ -254,16 +260,18 @@ void plp_conv_valid_rep_i16s_xpulpv2(const int16_t* pSrcA,
 
             do {
                 // Read y[srcBLen - 1] sample
-                _y1 = *((v2s*)(pSrcB_iter-1)); // {y[srcBLen - 2],y[srcBLen - 1]} 
-                _y2 = *((v2s*)(pSrcB_iter-3)); // {y[srcBLen - 4],y[srcBLen - 3]} 
-                _x0 = *((v2s*)(pSrcA_iter_0 + 0));  // {x[0],x[1]}
-                _x2 = *((v2s*)(pSrcA_iter_0 + 2));  // {x[2],x[3]}
+                _y1 = *((v2s *)(pSrcB_iter - 1));   // {y[srcBLen - 2],y[srcBLen - 1]}
+                _y2 = *((v2s *)(pSrcB_iter - 3));   // {y[srcBLen - 4],y[srcBLen - 3]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
 
-                _y1 = __builtin_shuffle(_y1,_y1,shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
-                _y2 = __builtin_shuffle(_y2,_y2,shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
+                _y1 = __builtin_shuffle(_y1, _y1,
+                                        shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
+                _y2 = __builtin_shuffle(_y2, _y2,
+                                        shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
 
-                acc0 = __SUMDOTP2(_x0,_y1,acc0);
-                acc0 = __SUMDOTP2(_x2,_y2,acc0);
+                acc0 = __SUMDOTP2(_x0, _y1, acc0);
+                acc0 = __SUMDOTP2(_x2, _y2, acc0);
 
                 pSrcB_iter -= 4;
                 pSrcA_iter_0 += 4;
@@ -300,20 +308,22 @@ void plp_conv_valid_rep_i16s_xpulpv2(const int16_t* pSrcA,
 
             do {
                 // Read y[srcBLen - 1] sample
-                _y1 = *((v2s*)(pSrcB_iter-1)); // {y[srcBLen - 2],y[srcBLen - 1]} 
-                _y2 = *((v2s*)(pSrcB_iter-3)); // {y[srcBLen - 4],y[srcBLen - 3]} 
-                _x0 = *((v2s*)(pSrcA_iter_0 + 0));  // {x[0],x[1]}
-                _x1 = *((v2s*)(pSrcA_iter_1 + 0));  // {x[1],x[2]}
-                _x2 = *((v2s*)(pSrcA_iter_0 + 2));  // {x[2],x[3]}
-                _x3 = *((v2s*)(pSrcA_iter_1 + 2));  // {x[3],x[4]}
+                _y1 = *((v2s *)(pSrcB_iter - 1));   // {y[srcBLen - 2],y[srcBLen - 1]}
+                _y2 = *((v2s *)(pSrcB_iter - 3));   // {y[srcBLen - 4],y[srcBLen - 3]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
 
-                _y1 = __builtin_shuffle(_y1,_y1,shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
-                _y2 = __builtin_shuffle(_y2,_y2,shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
+                _y1 = __builtin_shuffle(_y1, _y1,
+                                        shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
+                _y2 = __builtin_shuffle(_y2, _y2,
+                                        shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
 
-                acc0 = __SUMDOTP2(_x0,_y1,acc0);
-                acc1 = __SUMDOTP2(_x1,_y1,acc1);
-                acc0 = __SUMDOTP2(_x2,_y2,acc0);
-                acc1 = __SUMDOTP2(_x3,_y2,acc1);
+                acc0 = __SUMDOTP2(_x0, _y1, acc0);
+                acc1 = __SUMDOTP2(_x1, _y1, acc1);
+                acc0 = __SUMDOTP2(_x2, _y2, acc0);
+                acc1 = __SUMDOTP2(_x3, _y2, acc1);
 
                 pSrcB_iter -= 4;
                 pSrcA_iter_0 += 4;
@@ -354,24 +364,26 @@ void plp_conv_valid_rep_i16s_xpulpv2(const int16_t* pSrcA,
 
             do {
                 // Read y[srcBLen - 1] sample
-                _y1 = *((v2s*)(pSrcB_iter-1)); // {y[srcBLen - 2],y[srcBLen - 1]} 
-                _y2 = *((v2s*)(pSrcB_iter-3)); // {y[srcBLen - 4],y[srcBLen - 3]} 
-                _x0 = *((v2s*)(pSrcA_iter_0 + 0));  // {x[0],x[1]}
-                _x1 = *((v2s*)(pSrcA_iter_1 + 0));  // {x[1],x[2]}
-                _x2 = *((v2s*)(pSrcA_iter_0 + 2));  // {x[2],x[3]}
-                _x3 = *((v2s*)(pSrcA_iter_1 + 2));  // {x[3],x[4]}
-                _x4 = *((v2s*)(pSrcA_iter_0 + 4));  // {x[4],x[5]}
-                _x5 = *((v2s*)(pSrcA_iter_1 + 4));  // {x[5],x[6]}
+                _y1 = *((v2s *)(pSrcB_iter - 1));   // {y[srcBLen - 2],y[srcBLen - 1]}
+                _y2 = *((v2s *)(pSrcB_iter - 3));   // {y[srcBLen - 4],y[srcBLen - 3]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+                _x4 = *((v2s *)(pSrcA_iter_0 + 4)); // {x[4],x[5]}
+                _x5 = *((v2s *)(pSrcA_iter_1 + 4)); // {x[5],x[6]}
 
-                _y1 = __builtin_shuffle(_y1,_y1,shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
-                _y2 = __builtin_shuffle(_y2,_y2,shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
+                _y1 = __builtin_shuffle(_y1, _y1,
+                                        shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
+                _y2 = __builtin_shuffle(_y2, _y2,
+                                        shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
 
-                acc0 = __SUMDOTP2(_x0,_y1,acc0);
-                acc1 = __SUMDOTP2(_x1,_y1,acc1);
-                acc2 = __SUMDOTP2(_x2,_y1,acc2);
-                acc0 = __SUMDOTP2(_x2,_y2,acc0);
-                acc1 = __SUMDOTP2(_x3,_y2,acc1);
-                acc2 = __SUMDOTP2(_x4,_y2,acc2);
+                acc0 = __SUMDOTP2(_x0, _y1, acc0);
+                acc1 = __SUMDOTP2(_x1, _y1, acc1);
+                acc2 = __SUMDOTP2(_x2, _y1, acc2);
+                acc0 = __SUMDOTP2(_x2, _y2, acc0);
+                acc1 = __SUMDOTP2(_x3, _y2, acc1);
+                acc2 = __SUMDOTP2(_x4, _y2, acc2);
 
                 pSrcB_iter -= 4;
                 pSrcA_iter_0 += 4;
@@ -399,7 +411,6 @@ void plp_conv_valid_rep_i16s_xpulpv2(const int16_t* pSrcA,
             *pRes++ = acc0;
             *pRes++ = acc1;
             *pRes++ = acc2;
-
         }
 
     } else { // case: srcBLen < 4
@@ -410,16 +421,16 @@ void plp_conv_valid_rep_i16s_xpulpv2(const int16_t* pSrcA,
             printf("Error: use dot product instead of convolution!\n");
         } else if (srcBLen == 2) {
 
-            _y1 = *((v2s*)pSrcB);
-            _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
+            _y1 = *((v2s *)pSrcB);
+            _y1 = __builtin_shuffle(_y1, _y1, shufflemask1);
 
             while (blk_cnt > 0) {
 
                 // load data
-                _x0 = *((v2s*)(pSrcA_iter_0 + 0));  // {x[0],x[1]}
-                _x1 = *((v2s*)(pSrcA_iter_1 + 0));  // {x[1],x[2]}
-                _x2 = *((v2s*)(pSrcA_iter_0 + 2));  // {x[2],x[3]}
-                _x3 = *((v2s*)(pSrcA_iter_1 + 2));  // {x[3],x[4]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
 
                 // store dot product
                 *pRes++ = __DOTP2(_x0, _y1);
@@ -433,24 +444,23 @@ void plp_conv_valid_rep_i16s_xpulpv2(const int16_t* pSrcA,
 
                 // decrement iteration counter
                 blk_cnt--;
-
             }
 
             // do the remaining elements without loop unrolling
             blk_cnt = res_len % 4;
 
             if (blk_cnt == 1) {
-                _x0 = *((v2s*)(pSrcA_iter_0 + 0));  // {x[0],x[1]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
                 *pRes++ = __DOTP2(_x0, _y1);
             } else if (blk_cnt == 2) {
-                _x0 = *((v2s*)(pSrcA_iter_0 + 0));  // {x[0],x[1]}
-                _x1 = *((v2s*)(pSrcA_iter_1 + 0));  // {x[1],x[2]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
                 *pRes++ = __DOTP2(_x0, _y1);
                 *pRes++ = __DOTP2(_x1, _y1);
             } else if (blk_cnt == 3) {
-                _x0 = *((v2s*)(pSrcA_iter_0 + 0));  // {x[0],x[1]}
-                _x1 = *((v2s*)(pSrcA_iter_1 + 0));  // {x[1],x[2]}
-                _x2 = *((v2s*)(pSrcA_iter_0 + 2));  // {x[2],x[3]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
                 *pRes++ = __DOTP2(_x0, _y1);
                 *pRes++ = __DOTP2(_x1, _y1);
                 *pRes++ = __DOTP2(_x2, _y1);
@@ -458,20 +468,20 @@ void plp_conv_valid_rep_i16s_xpulpv2(const int16_t* pSrcA,
 
         } else if (srcBLen == 3) {
 
-            _y1 = *((v2s*)(pSrcB + 1));
-            _y2 = *((v2s*)(pSrcB + 0));
-            _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
+            _y1 = *((v2s *)(pSrcB + 1));
+            _y2 = *((v2s *)(pSrcB + 0));
+            _y1 = __builtin_shuffle(_y1, _y1, shufflemask1);
             _y2 = __AND2(_y2, ymask);
 
             while (blk_cnt > 0) {
 
                 // load data
-                _x0 = *((v2s*)(pSrcA_iter_0 + 0));  // {x[0],x[1]}
-                _x1 = *((v2s*)(pSrcA_iter_1 + 0));  // {x[1],x[2]}
-                _x2 = *((v2s*)(pSrcA_iter_0 + 2));  // {x[2],x[3]}
-                _x3 = *((v2s*)(pSrcA_iter_1 + 2));  // {x[3],x[4]}
-                _x4 = *((v2s*)(pSrcA_iter_0 + 4));  // {x[4],x[5]}
-                _x5 = *((v2s*)(pSrcA_iter_1 + 4));  // {x[5],x[6]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+                _x4 = *((v2s *)(pSrcA_iter_0 + 4)); // {x[4],x[5]}
+                _x5 = *((v2s *)(pSrcA_iter_1 + 4)); // {x[5],x[6]}
 
                 // compute dot product
                 acc0 = __DOTP2(_x0, _y1);
@@ -490,32 +500,31 @@ void plp_conv_valid_rep_i16s_xpulpv2(const int16_t* pSrcA,
 
                 // decrement iteration counter
                 blk_cnt--;
-
             }
 
             // do the remaining elements without loop unrolling
             blk_cnt = res_len % 4;
 
             if (blk_cnt == 1) {
-                _x0 = *((v2s*)(pSrcA_iter_0 + 0));  // {x[0],x[1]}
-                _x2 = *((v2s*)(pSrcA_iter_0 + 2));  // {x[2],x[3]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
                 acc0 = __DOTP2(_x0, _y1);
                 *pRes++ = __SUMDOTP2(_x2, _y2, acc0);
             } else if (blk_cnt == 2) {
-                _x0 = *((v2s*)(pSrcA_iter_0 + 0));  // {x[0],x[1]}
-                _x1 = *((v2s*)(pSrcA_iter_1 + 0));  // {x[1],x[2]}
-                _x2 = *((v2s*)(pSrcA_iter_0 + 2));  // {x[2],x[3]}
-                _x3 = *((v2s*)(pSrcA_iter_1 + 2));  // {x[3],x[4]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
                 acc0 = __DOTP2(_x0, _y1);
                 acc1 = __DOTP2(_x1, _y1);
                 *pRes++ = __SUMDOTP2(_x2, _y2, acc0);
                 *pRes++ = __SUMDOTP2(_x3, _y2, acc1);
             } else if (blk_cnt == 3) {
-                _x0 = *((v2s*)(pSrcA_iter_0 + 0));  // {x[0],x[1]}
-                _x1 = *((v2s*)(pSrcA_iter_1 + 0));  // {x[1],x[2]}
-                _x2 = *((v2s*)(pSrcA_iter_0 + 2));  // {x[2],x[3]}
-                _x3 = *((v2s*)(pSrcA_iter_1 + 2));  // {x[3],x[4]}
-                _x4 = *((v2s*)(pSrcA_iter_0 + 4));  // {x[4],x[5]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+                _x4 = *((v2s *)(pSrcA_iter_0 + 4)); // {x[4],x[5]}
                 acc0 = __DOTP2(_x0, _y1);
                 acc1 = __DOTP2(_x1, _y1);
                 acc2 = __DOTP2(_x2, _y1);
@@ -523,18 +532,15 @@ void plp_conv_valid_rep_i16s_xpulpv2(const int16_t* pSrcA,
                 *pRes++ = __SUMDOTP2(_x3, _y2, acc1);
                 *pRes++ = __SUMDOTP2(_x4, _y2, acc2);
             }
-
         }
-
     }
 
-#else//PLP_MATH_LOOPUNROLL
+#else // PLP_MATH_LOOPUNROLL
 
     // this makes no sense...
     printf("Error: not implemented!");
 
-#endif//PLP_MATH_LOOPUNROLL
-
+#endif // PLP_MATH_LOOPUNROLL
 }
 
 /**

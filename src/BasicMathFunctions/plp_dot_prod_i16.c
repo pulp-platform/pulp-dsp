@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMath
  */
-
 
 /**
   @addtogroup BasicDotProd
@@ -50,25 +48,22 @@
   @return        none
 
   @par Exploiting SIMD instructions
-       When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
+       When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then
+  the two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
  */
 
-void plp_dot_prod_i16(
-                       const int16_t * __restrict__ pSrcA,
-                       const int16_t * __restrict__ pSrcB,
-                       uint32_t blockSize,
-                       int32_t * __restrict__ pRes){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_dot_prod_i16s_rv32im(pSrcA, pSrcB, blockSize, pRes);
-  }
-  else{
-    plp_dot_prod_i16v_xpulpv2(pSrcA, pSrcB, blockSize, pRes);
-  }
+void plp_dot_prod_i16(const int16_t *__restrict__ pSrcA,
+                      const int16_t *__restrict__ pSrcB,
+                      uint32_t blockSize,
+                      int32_t *__restrict__ pRes) {
+
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        plp_dot_prod_i16s_rv32im(pSrcA, pSrcB, blockSize, pRes);
+    } else {
+        plp_dot_prod_i16v_xpulpv2(pSrcA, pSrcB, blockSize, pRes);
+    }
 }
 
 /**
   @} end of BasicDotProd group
  */
-
-

@@ -34,41 +34,37 @@
   @ingroup groupTransforms
  */
 
+/**
+  @defgroup fft  FFT transforms
+  This module contains the code to perform FFT transforms.
 
- /**
-   @defgroup fft  FFT transforms
-   This module contains the code to perform FFT transforms.
 
-
-  */
-
- /**
-    @addtogroup fft
-    @{
  */
 
- /**
-    @brief Floating-point FFT on real input data.
-    @param[in]   S       points to an instance of the floating-point FFT structure
-    @param[in]   pSrc    points to the input buffer (real data)
-    @param[out]  pDst    points to the output buffer (complex data)
-    @return      none
- */
- void plp_rfft_f32(
-         const plp_rfft_instance_f32 *S,
- 		     const float32_t * __restrict__ pSrc,
- 	 	     float32_t * __restrict__ pDst){
+/**
+   @addtogroup fft
+   @{
+*/
 
-   if (rt_cluster_id() == ARCHI_FC_CID){
-     printf("F extension is supported only for cluster side\n");
-     return;
-   }
-   
-   plp_rfft_f32_xpulpv2(S, pSrc, pDst);
+/**
+   @brief Floating-point FFT on real input data.
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrc    points to the input buffer (real data)
+   @param[out]  pDst    points to the output buffer (complex data)
+   @return      none
+*/
+void plp_rfft_f32(const plp_rfft_instance_f32 *S,
+                  const float32_t *__restrict__ pSrc,
+                  float32_t *__restrict__ pDst) {
 
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        printf("F extension is supported only for cluster side\n");
+        return;
+    }
 
- }
+    plp_rfft_f32_xpulpv2(S, pSrc, pDst);
+}
 
- /**
-    @} end of FFT group
- */
+/**
+   @} end of FFT group
+*/

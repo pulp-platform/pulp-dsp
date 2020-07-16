@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup BasicDotProd
  */
-
 
 /**
   @addtogroup BasicDotProdKernels
@@ -50,45 +48,42 @@
   @return        none
 
   @par Exploiting SIMD instructions
-  When the ISA supports, the 8 bit values are packed four by four into 32 bit vectors and then the four dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
+  When the ISA supports, the 8 bit values are packed four by four into 32 bit vectors and then the
+  four dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM
+  doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
  */
 
-void plp_dot_prod_i8s_rv32im(
-                             const int8_t * __restrict__ pSrcA,
-                             const int8_t * __restrict__ pSrcB,
+void plp_dot_prod_i8s_rv32im(const int8_t *__restrict__ pSrcA,
+                             const int8_t *__restrict__ pSrcB,
                              uint32_t blockSize,
-                             int32_t * __restrict__ pRes){
-        uint32_t blkCnt;                               /* Loop counter */
-        int32_t sum = 0;                          /* Temporary return variable */
+                             int32_t *__restrict__ pRes) {
+    uint32_t blkCnt; /* Loop counter */
+    int32_t sum = 0; /* Temporary return variable */
 
+#if defined(PLP_MATH_LOOPUNROLL)
 
-#if defined (PLP_MATH_LOOPUNROLL)
+    for (blkCnt = 0; blkCnt < (blockSize >> 2); blkCnt++) {
+        sum += (*pSrcA++) * (*pSrcB++);
+        sum += (*pSrcA++) * (*pSrcB++);
+        sum += (*pSrcA++) * (*pSrcB++);
+        sum += (*pSrcA++) * (*pSrcB++);
+    }
 
-        for (blkCnt=0; blkCnt<(blockSize>>2); blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++);
-          sum += (*pSrcA++) * (*pSrcB++);
-          sum += (*pSrcA++) * (*pSrcB++);
-          sum += (*pSrcA++) * (*pSrcB++);
-        }
-
-        for (blkCnt=0; blkCnt<(blockSize%4U); blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++);
-        }
+    for (blkCnt = 0; blkCnt < (blockSize % 4U); blkCnt++) {
+        sum += (*pSrcA++) * (*pSrcB++);
+    }
 
 #else // PLP_MATH_LOOPUNROLL
 
-        for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum += (*pSrcA++) * (*pSrcB++);
-        }
+    for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+        sum += (*pSrcA++) * (*pSrcB++);
+    }
 
 #endif // PLP_MATH_LOOPUNROLL
 
-        * pRes = sum;
-
+    *pRes = sum;
 }
 
 /**
   @} end of BasicDotProdKernels group
  */
-
-

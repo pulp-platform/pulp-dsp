@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup BasicDotProd
  */
-
 
 /**
   @addtogroup BasicDotProdKernels
@@ -50,57 +48,54 @@
   @return        none
 
   @par Exploiting SIMD instructions
-  The 8 bit values are packed four by four into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 8 bit values are packed four by four into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
  */
 
-void plp_dot_prod_i8v_xpulpv2(
-                              const int8_t * __restrict__ pSrcA,
-                              const int8_t * __restrict__ pSrcB,
+void plp_dot_prod_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                              const int8_t *__restrict__ pSrcB,
                               uint32_t blockSize,
-                              int32_t * __restrict__ pRes){
-  uint32_t blkCnt, tmpBS;                   /* Loop counter, temporal BlockSize */
-  int32_t sum1 = 0, sum2 = 0;                          /* Temporary return variable */
+                              int32_t *__restrict__ pRes) {
+    uint32_t blkCnt, tmpBS;     /* Loop counter, temporal BlockSize */
+    int32_t sum1 = 0, sum2 = 0; /* Temporary return variable */
 
 #if defined(PLP_MATH_LOOPUNROLL)
 
-        tmpBS = (blockSize>>3);
+    tmpBS = (blockSize >> 3);
 
-        for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
+    for (blkCnt = 0; blkCnt < tmpBS; blkCnt++) {
 
-          v4s a0 = *((v4s*)((void*)(pSrcA+8*blkCnt)));
-          v4s b0 = *((v4s*)((void*)(pSrcB+8*blkCnt)));
-          v4s a1 = *((v4s*)((void*)(pSrcA+8*blkCnt+4)));
-          v4s b1 = *((v4s*)((void*)(pSrcB+8*blkCnt+4)));
-          sum1 = __SUMDOTP4(a0, b0, sum1);
-          sum2 = __SUMDOTP4(a1, b1, sum2);
+        v4s a0 = *((v4s *)((void *)(pSrcA + 8 * blkCnt)));
+        v4s b0 = *((v4s *)((void *)(pSrcB + 8 * blkCnt)));
+        v4s a1 = *((v4s *)((void *)(pSrcA + 8 * blkCnt + 4)));
+        v4s b1 = *((v4s *)((void *)(pSrcB + 8 * blkCnt + 4)));
+        sum1 = __SUMDOTP4(a0, b0, sum1);
+        sum2 = __SUMDOTP4(a1, b1, sum2);
 
-          //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-          //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-        }
+        // sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+        // sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+    }
 
-        tmpBS = (blockSize%8U);
+    tmpBS = (blockSize % 8U);
 
-        for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-          int8_t a = *((int8_t*)(pSrcA+8*(blockSize/8)+blkCnt));
-          int8_t b = *((int8_t*)(pSrcB+8*(blockSize/8)+blkCnt));
-          sum1 += a*b;
-          //sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-        }
+    for (blkCnt = 0; blkCnt < tmpBS; blkCnt++) {
+        int8_t a = *((int8_t *)(pSrcA + 8 * (blockSize / 8) + blkCnt));
+        int8_t b = *((int8_t *)(pSrcB + 8 * (blockSize / 8) + blkCnt));
+        sum1 += a * b;
+        // sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+    }
 
 #else // PLP_MATH_LOOPUNROLL
 
-        for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum1 = __MAC(sum1, (*pSrcA++), (*pSrcB++));
-        }
+    for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+        sum1 = __MAC(sum1, (*pSrcA++), (*pSrcB++));
+    }
 
 #endif // PLP_MATH_LOOPUNROLL
 
-        * pRes = sum1 + sum2;
-
+    *pRes = sum1 + sum2;
 }
 
 /**
   @} end of BasicDotProdKernels group
  */
-
-

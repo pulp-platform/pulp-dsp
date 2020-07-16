@@ -3,12 +3,12 @@
  * Title:        plp_max_i8.c
  * Description:  Maximum value of a 8-bit integer vector glue code
  *
- * $Date:        29.06.2020        
+ * $Date:        29.06.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Moritz Scherer, ETH Zurich
  *
@@ -35,8 +35,10 @@
 
 /**
    @defgroup max Max
-   Calculates the maximum of the input vector. Max is defined as the the greatest value in the vector.
-   There are separate functions for floating point, integer, and fixed point 32- 8- 8-bit data types. For lower precision integers (8- and 8-bit), functions exploiting SIMD instructions are provided.
+   Calculates the maximum of the input vector. Max is defined as the the greatest value in the
+   vector. There are separate functions for floating point, integer, and fixed point 32- 8- 8-bit
+   data types. For lower precision integers (8- and 8-bit), functions exploiting SIMD instructions
+   are provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i8s):
    <pre>
@@ -46,7 +48,8 @@
 
    precision = {32, 16, 8} bits
 
-   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
+   SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
    isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
@@ -59,7 +62,6 @@
    @{
 */
 
-
 /**
    @brief         Glue code for max value of a 8-bit integer vector.
    @param[in]     pSrc       points to the input vector
@@ -68,19 +70,13 @@
    @return        none
  */
 
+void plp_max_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes) {
 
-void plp_max_i8(
-                         const int8_t * __restrict__ pSrc,
-                         uint32_t blockSize,
-                         int8_t * __restrict__ pRes){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_max_i8s_rv32im(pSrc, blockSize, pRes);
-  }
-  else{
-    plp_max_i8s_xpulpv2(pSrc, blockSize, pRes);
-  }
-
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        plp_max_i8s_rv32im(pSrc, blockSize, pRes);
+    } else {
+        plp_max_i8s_xpulpv2(pSrc, blockSize, pRes);
+    }
 }
 
 /**
