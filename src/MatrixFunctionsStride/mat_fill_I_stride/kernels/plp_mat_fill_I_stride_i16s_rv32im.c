@@ -35,7 +35,7 @@
  */
 
 /**
-  @defgroup MatFillIStrideKernels strided Identity Matrix Creation Kernels
+  @defgroup MatFillIStrideKernels Strided Identity Matrix Creation Kernels
 
   The identity matrix is a square matrix, with the value `1` on it's main diagonal, and all other
   values `0`.
