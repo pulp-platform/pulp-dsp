@@ -44,13 +44,13 @@
 
   There are functions for integer 32- 16- and 8-bit data types, as well as for floating-point. The
   naming scheme of the functions follows the following pattern (for example
-  `plp_mat_mat_fill_I_i32`):
+  `plp_mat_fill_I_i32`):
 
       `plp_<function name>_<data type><precision>[_parallel]`
 
   name          | description
   ------------- | ---------------------------------------------------------
-  function_name | `mat_mat_fill_I`
+  function_name | `mat_fill_I`
   data type     | {f, i, q} respectively for floats, integers, fixed points
   precision     | {32, 16, 8} bits
  */

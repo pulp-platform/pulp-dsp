@@ -41,7 +41,7 @@
 
 /**
   @brief      Create a 32-bit float identity matrix in parallel on XpulpV2
-  @param[in]  args  pointer to plp_mat_mat_fill_I_instance_f32 struct initialized by
+  @param[in]  args  pointer to plp_mat_fill_I_instance_f32 struct initialized by
                     plp_mat_fill_I_f32_parallel
   @return     none
 */

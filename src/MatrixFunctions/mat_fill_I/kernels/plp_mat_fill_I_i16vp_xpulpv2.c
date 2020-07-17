@@ -41,7 +41,7 @@
 
 /**
   @brief      Create a 16-bit integer identity matrix in parallel on XpulpV2
-  @param[in]  args  pointer to plp_mat_mat_fill_I_instance_i16 struct initialized by
+  @param[in]  args  pointer to plp_mat_fill_I_instance_i16 struct initialized by
                     plp_mat_fill_I_i16_parallel
   @return     none
 
