@@ -928,6 +928,79 @@ typedef struct {
 } plp_mat_scale_stride_instance_f32;
 
 /** -------------------------------------------------------
+ * @brief Instance structure for integer parallel strided identity matrix creation.
+ */
+typedef struct {
+    uint32_t N;
+    uint32_t stride;
+    uint32_t nPE;
+    int8_t *__restrict__ pDst;
+} plp_mat_fill_I_stride_instance_i8;
+
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel strided identity matrix creation.
+ */
+typedef struct {
+    uint32_t N;
+    uint32_t stride;
+    uint32_t nPE;
+    int16_t *__restrict__ pDst;
+} plp_mat_fill_I_stride_instance_i16;
+
+/** -------------------------------------------------------
+ * @brief Instance structure for integer parallel strided identity matrix creation.
+ */
+typedef struct {
+    uint32_t N;
+    uint32_t stride;
+    uint32_t nPE;
+    int32_t *__restrict__ pDst;
+} plp_mat_fill_I_stride_instance_i32;
+
+/** -------------------------------------------------------
+ * @brief Instance structure for floating-point parallel strided identity matrix creation.
+ */
+typedef struct {
+    uint32_t N;
+    uint32_t stride;
+    uint32_t nPE;
+    float *__restrict__ pDst;
+} plp_mat_fill_I_stride_instance_f32;
+
+/** -------------------------------------------------------
+ * @brief Instance structure for 8-bit fix-point parallel strided identity matrix creation.
+ */
+typedef struct {
+    uint32_t N;
+    uint32_t stride;
+    uint32_t nPE;
+    int32_t fracBits;
+    int8_t *__restrict__ pDst;
+} plp_mat_fill_I_stride_instance_q8;
+
+/** -------------------------------------------------------
+ * @brief Instance structure for 16-bit fix-point parallel strided identity matrix creation.
+ */
+typedef struct {
+    uint32_t N;
+    uint32_t stride;
+    uint32_t nPE;
+    int32_t fracBits;
+    int16_t *__restrict__ pDst;
+} plp_mat_fill_I_stride_instance_q16;
+
+/** -------------------------------------------------------
+ * @brief Instance structure for 32-bit fix-point parallel strided identity matrix creation.
+ */
+typedef struct {
+    uint32_t N;
+    uint32_t stride;
+    uint32_t nPE;
+    int32_t fracBits;
+    int32_t *__restrict__ pDst;
+} plp_mat_fill_I_stride_instance_q32;
+
+/** -------------------------------------------------------
     @brief Glue code for parallel dot product of 32-bit integer vectors.
     @param[in]  pSrcA      points to the first input vector
     @param[in]  pSrcB      points to the second input vector
@@ -9172,5 +9245,476 @@ void plp_mat_scale_stride_f32_parallel(const float *__restrict__ pSrc,
 */
 
 void plp_mat_scale_stride_f32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for creating a strided 32-bit integers identity matrix
+  @param[in]  N      Width and height of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pDst   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_I_stride_i32(uint32_t N, uint32_t stride, int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 32-bit integers identity matrix on RV32IM
+  @param[in]  N      Width and height of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pDst   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_I_stride_i32s_rv32im(uint32_t N, uint32_t stride, int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 32-bit integers identity matrix on XpulpV2
+  @param[in]  N      Width and height of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pDst   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_I_stride_i32s_xpulpv2(uint32_t N, uint32_t stride, int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for creating a strided 32-bit integers identity matrix in parallel
+  @param[in]  N      Width and height of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[in]  nPE    Number of cores to use for computation
+  @param[out] pDst   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_I_stride_i32_parallel(uint32_t N,
+                                        uint32_t stride,
+                                        uint32_t nPE,
+                                        int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 32-bit integers identity matrix on XpulpV2 in parallel
+  @param[in]  args  pointer to plp_mat_fill_I_stride_instance_i32 struct initialized by
+                    plp_mat_fill_I_stride_i32_parallel
+  @return     none
+*/
+
+void plp_mat_fill_I_stride_i32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for creating a strided 16-bit integers identity matrix
+  @param[in]  N      Width and height of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pDst   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_I_stride_i16(uint32_t N, uint32_t stride, int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 16-bit integers identity matrix on RV32IM
+  @param[in]  N      Width and height of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pDst   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_I_stride_i16s_rv32im(uint32_t N, uint32_t stride, int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 16-bit integers identity matrix on XpulpV2
+  @param[in]  N      Width and height of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pDst   Points to the output matrix
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_fill_I_stride_i16v_xpulpv2(uint32_t N, uint32_t stride, int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for creating a strided 16-bit integers identity matrix in parallel
+  @param[in]  N      Width and height of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[in]  nPE    Number of cores to use for computation
+  @param[out] pDst   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_I_stride_i16_parallel(uint32_t N,
+                                        uint32_t stride,
+                                        uint32_t nPE,
+                                        int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 16-bit integers identity matrix on XpulpV2 in parallel
+  @param[in]  args  pointer to plp_mat_fill_I_stride_instance_i16 struct initialized by
+                    plp_mat_fill_I_stride_i16_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_fill_I_stride_i16vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for creating a strided 8-bit integers identity matrix
+  @param[in]  N      Width and height of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pDst   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_I_stride_i8(uint32_t N, uint32_t stride, int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 8-bit integers identity matrix on RV32IM
+  @param[in]  N      Width and height of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pDst   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_I_stride_i8s_rv32im(uint32_t N, uint32_t stride, int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 8-bit integers identity matrix on XpulpV2
+  @param[in]  N      Width and height of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pDst   Points to the output matrix
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_fill_I_stride_i8v_xpulpv2(uint32_t N, uint32_t stride, int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for creating a strided 8-bit integers identity matrix in parallel
+  @param[in]  N      Width and height of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[in]  nPE    Number of cores to use for computation
+  @param[out] pDst   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_I_stride_i8_parallel(uint32_t N,
+                                       uint32_t stride,
+                                       uint32_t nPE,
+                                       int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 8-bit integers identity matrix on XpulpV2 in parallel
+  @param[in]  args  pointer to plp_mat_fill_I_stride_instance_i8 struct initialized by
+                    plp_mat_fill_I_stride_i8_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_fill_I_stride_i8vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for creating a strided 32-bit floats identity matrix
+  @param[in]  N      Width and height of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pDst   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_I_stride_f32(uint32_t N, uint32_t stride, float *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 32-bit floats identity matrix on XpulpV2
+  @param[in]  N      Width and height of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pDst   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_I_stride_f32s_xpulpv2(uint32_t N, uint32_t stride, float *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for creating a strided 32-bit floats identity matrix in parallel
+  @param[in]  N      Width and height of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[in]  nPE    Number of cores to use for computation
+  @param[out] pDst   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_I_stride_f32_parallel(uint32_t N,
+                                        uint32_t stride,
+                                        uint32_t nPE,
+                                        float *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 32-bit floats identity matrix on XpulpV2 in parallel
+  @param[in]  args  pointer to plp_mat_fill_I_stride_instance_f32 struct initialized by
+                    plp_mat_fill_I_stride_f32_parallel
+  @return     none
+*/
+
+void plp_mat_fill_I_stride_f32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for creating a strided 32-bit fix-point identity matrix
+  @param[in]  N        Width and height of the matrix
+  @param[in]  stride   Stride of the matrix (elements between each row)
+  @param[in]  fracBits Decimal point for the appropriate scale
+  @param[out] pDst     Points to the output matrix
+  @return     none
+
+  @par Fix-Point
+  The diagonal elements will be filled with the value: `1 << fracBits`.
+*/
+
+void plp_mat_fill_I_stride_q32(uint32_t N,
+                               uint32_t stride,
+                               int32_t fracBits,
+                               int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 32-bit fix-point identity matrix on RV32IM
+  @param[in]  N        Width and height of the matrix
+  @param[in]  stride   Stride of the matrix (elements between each row)
+  @param[in]  fracBits Decimal point for the appropriate scale
+  @param[out] pDst     Points to the output matrix
+  @return     none
+
+  @par Fix-Point
+  The diagonal elements will be filled with the value: `1 << fracBits`.
+*/
+
+void plp_mat_fill_I_stride_q32s_rv32im(uint32_t N,
+                                       uint32_t stride,
+                                       int32_t fracBits,
+                                       int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 32-bit fix-point identity matrix on XpulpV2
+  @param[in]  N        Width and height of the matrix
+  @param[in]  stride   Stride of the matrix (elements between each row)
+  @param[in]  fracBits Decimal point for the appropriate scale
+  @param[out] pDst     Points to the output matrix
+  @return     none
+
+  @par Fix-Point
+  The diagonal elements will be filled with the value: `1 << fracBits`.
+*/
+
+void plp_mat_fill_I_stride_q32s_xpulpv2(uint32_t N,
+                                        uint32_t stride,
+                                        int32_t fracBits,
+                                        int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for creating a strided 32-bit fix-point identity matrix in parallel
+  @param[in]  N        Width and height of the matrix
+  @param[in]  stride   Stride of the matrix (elements between each row)
+  @param[in]  fracBits Decimal point for the appropriate scale
+  @param[in]  nPE      Number of cores to use for computation
+  @param[out] pDst     Points to the output matrix
+  @return     none
+
+  @par Fix-Point
+  The diagonal elements will be filled with the value: `1 << fracBits`.
+*/
+
+void plp_mat_fill_I_stride_q32_parallel(
+    uint32_t N, uint32_t stride, int32_t fracBits, uint32_t nPE, int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 32-bit fix-point identity matrix on XpulpV2 in parallel
+  @param[in]  args  pointer to plp_mat_fill_I_stride_instance_q32 struct initialized by
+                    plp_mat_fill_I_stride_q32_parallel
+  @return     none
+
+  @par Fix-Point
+  The diagonal elements will be filled with the value: `1 << fracBits`.
+*/
+
+void plp_mat_fill_I_stride_q32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for creating a strided 16-bit fix-point identity matrix
+  @param[in]  N        Width and height of the matrix
+  @param[in]  stride   Stride of the matrix (elements between each row)
+  @param[in]  fracBits Decimal point for the appropriate scale
+  @param[out] pDst     Points to the output matrix
+  @return     none
+
+  @par Fix-Point
+  The diagonal elements will be filled with the value: `1 << fracBits`.
+*/
+
+void plp_mat_fill_I_stride_q16(uint32_t N,
+                               uint32_t stride,
+                               int32_t fracBits,
+                               int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 16-bit fix-point identity matrix on RV32IM
+  @param[in]  N        Width and height of the matrix
+  @param[in]  stride   Stride of the matrix (elements between each row)
+  @param[in]  fracBits Decimal point for the appropriate scale
+  @param[out] pDst     Points to the output matrix
+  @return     none
+
+  @par Fix-Point
+  The diagonal elements will be filled with the value: `1 << fracBits`.
+*/
+
+void plp_mat_fill_I_stride_q16s_rv32im(uint32_t N,
+                                       uint32_t stride,
+                                       int32_t fracBits,
+                                       int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 16-bit fix-point identity matrix on XpulpV2
+  @param[in]  N        Width and height of the matrix
+  @param[in]  stride   Stride of the matrix (elements between each row)
+  @param[in]  fracBits Decimal point for the appropriate scale
+  @param[out] pDst     Points to the output matrix
+  @return     none
+
+  @par Fix-Point
+  The diagonal elements will be filled with the value: `1 << fracBits`.
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_fill_I_stride_q16v_xpulpv2(uint32_t N,
+                                        uint32_t stride,
+                                        int32_t fracBits,
+                                        int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for creating a strided 16-bit fix-point identity matrix in parallel
+  @param[in]  N        Width and height of the matrix
+  @param[in]  stride   Stride of the matrix (elements between each row)
+  @param[in]  fracBits Decimal point for the appropriate scale
+  @param[in]  nPE      Number of cores to use for computation
+  @param[out] pDst     Points to the output matrix
+  @return     none
+
+  @par Fix-Point
+  The diagonal elements will be filled with the value: `1 << fracBits`.
+*/
+
+void plp_mat_fill_I_stride_q16_parallel(
+    uint32_t N, uint32_t stride, int32_t fracBits, uint32_t nPE, int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 16-bit fix-point identity matrix on XpulpV2 in parallel
+  @param[in]  args  pointer to plp_mat_fill_I_stride_instance_q16 struct initialized by
+                    plp_mat_fill_I_stride_q16_parallel
+  @return     none
+
+  @par Fix-Point
+  The diagonal elements will be filled with the value: `1 << fracBits`.
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_fill_I_stride_q16vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for creating a strided 8-bit fix-point identity matrix
+  @param[in]  N        Width and height of the matrix
+  @param[in]  stride   Stride of the matrix (elements between each row)
+  @param[in]  fracBits Decimal point for the appropriate scale
+  @param[out] pDst     Points to the output matrix
+  @return     none
+
+  @par Fix-Point
+  The diagonal elements will be filled with the value: `1 << fracBits`.
+*/
+
+void plp_mat_fill_I_stride_q8(uint32_t N,
+                              uint32_t stride,
+                              int32_t fracBits,
+                              int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 8-bit fix-point identity matrix on RV32IM
+  @param[in]  N        Width and height of the matrix
+  @param[in]  stride   Stride of the matrix (elements between each row)
+  @param[in]  fracBits Decimal point for the appropriate scale
+  @param[out] pDst     Points to the output matrix
+  @return     none
+
+  @par Fix-Point
+  The diagonal elements will be filled with the value: `1 << fracBits`.
+*/
+
+void plp_mat_fill_I_stride_q8s_rv32im(uint32_t N,
+                                      uint32_t stride,
+                                      int32_t fracBits,
+                                      int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 8-bit fix-point identity matrix on XpulpV2
+  @param[in]  N        Width and height of the matrix
+  @param[in]  stride   Stride of the matrix (elements between each row)
+  @param[in]  fracBits Decimal point for the appropriate scale
+  @param[out] pDst     Points to the output matrix
+  @return     none
+
+  @par Fix-Point
+  The diagonal elements will be filled with the value: `1 << fracBits`.
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_fill_I_stride_q8v_xpulpv2(uint32_t N,
+                                       uint32_t stride,
+                                       int32_t fracBits,
+                                       int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for creating a strided 8-bit fix-point identity matrix in parallel
+  @param[in]  N        Width and height of the matrix
+  @param[in]  stride   Stride of the matrix (elements between each row)
+  @param[in]  fracBits Decimal point for the appropriate scale
+  @param[in]  nPE      Number of cores to use for computation
+  @param[out] pDst     Points to the output matrix
+  @return     none
+
+  @par Fix-Point
+  The diagonal elements will be filled with the value: `1 << fracBits`.
+*/
+
+void plp_mat_fill_I_stride_q8_parallel(
+    uint32_t N, uint32_t stride, int32_t fracBits, uint32_t nPE, int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Create a strided 8-bit fix-point identity matrix on XpulpV2 in parallel
+  @param[in]  args  pointer to plp_mat_fill_I_stride_instance_q8 struct initialized by
+                    plp_mat_fill_I_stride_q8_parallel
+  @return     none
+
+  @par Fix-Point
+  The diagonal elements will be filled with the value: `1 << fracBits`.
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_fill_I_stride_q8vp_xpulpv2(void *args);
 
 #endif // __PLP_MATH_H__
