@@ -5522,6 +5522,768 @@ void plp_mat_mult_trans_f32_parallel(const float *__restrict__ pSrcA,
 
 void plp_mat_mult_trans_f32p_xpulpv2(void *args);
 
+/** -------------------------------------------------------
+  @brief      Glue code of matrix transpose matrix multiplication for complex 32-bit integers
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+*/
+
+void plp_mat_mult_trans_cmplx_i32(const int32_t *__restrict__ pSrcA,
+                                  const int32_t *__restrict__ pSrcB,
+                                  uint32_t M,
+                                  uint32_t N,
+                                  uint32_t O,
+                                  int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      matrix transpose matrix multiplication for complex 32-bit integers on RV32IM
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+*/
+
+void plp_mat_mult_trans_cmplx_i32s_rv32im(const int32_t *__restrict__ pSrcA,
+                                          const int32_t *__restrict__ pSrcB,
+                                          uint32_t M,
+                                          uint32_t N,
+                                          uint32_t O,
+                                          int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      matrix transpose matrix multiplication for complex 32-bit integers on XpulpV2
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+*/
+
+void plp_mat_mult_trans_cmplx_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                                           const int32_t *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      Glue code of parallel matrix transpose matrix multiplication for complex 32-bit
+              integers
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[in]  nPE   Number of cores to use for computation
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+*/
+
+void plp_mat_mult_trans_cmplx_i32_parallel(const int32_t *__restrict__ pSrcA,
+                                           const int32_t *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           uint32_t nPE,
+                                           int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      parallel matrix transpose matrix multiplication for complex 32-bit integers on XpulpV2
+  @param[in]  args  pointer to plp_mat_mult_cmplx_instance_i32 struct initialized by
+                    plp_mat_mult_trans_cmplx_i32_parallel
+  @return     none
+*/
+
+void plp_mat_mult_trans_cmplx_i32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code of matrix transpose matrix multiplication for complex 16-bit integers
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+*/
+
+void plp_mat_mult_trans_cmplx_i16(const int16_t *__restrict__ pSrcA,
+                                  const int16_t *__restrict__ pSrcB,
+                                  uint32_t M,
+                                  uint32_t N,
+                                  uint32_t O,
+                                  int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      matrix transpose matrix multiplication for complex 16-bit integers on RV32IM
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+*/
+
+void plp_mat_mult_trans_cmplx_i16s_rv32im(const int16_t *__restrict__ pSrcA,
+                                          const int16_t *__restrict__ pSrcB,
+                                          uint32_t M,
+                                          uint32_t N,
+                                          uint32_t O,
+                                          int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      matrix transpose matrix multiplication for complex 16-bit integers on XpulpV2
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_trans_cmplx_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+                                           const int16_t *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      Glue code of parallel matrix transpose matrix multiplication for complex 16-bit
+              integers
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[in]  nPE   Number of cores to use for computation
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+*/
+
+void plp_mat_mult_trans_cmplx_i16_parallel(const int16_t *__restrict__ pSrcA,
+                                           const int16_t *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           uint32_t nPE,
+                                           int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      parallel matrix transpose matrix multiplication for complex 16-bit integers on XpulpV2
+  @param[in]  args  pointer to plp_mat_mult_cmplx_instance_i16 struct initialized by
+                    plp_mat_mult_trans_cmplx_i16_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_trans_cmplx_i16vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code of matrix transpose matrix multiplication for complex 8-bit integers
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+*/
+
+void plp_mat_mult_trans_cmplx_i8(const int8_t *__restrict__ pSrcA,
+                                 const int8_t *__restrict__ pSrcB,
+                                 uint32_t M,
+                                 uint32_t N,
+                                 uint32_t O,
+                                 int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      matrix transpose matrix multiplication for complex 8-bit integers on RV32IM
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+*/
+
+void plp_mat_mult_trans_cmplx_i8s_rv32im(const int8_t *__restrict__ pSrcA,
+                                         const int8_t *__restrict__ pSrcB,
+                                         uint32_t M,
+                                         uint32_t N,
+                                         uint32_t O,
+                                         int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      matrix transpose matrix multiplication for complex 8-bit integers on XpulpV2
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_trans_cmplx_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                                          const int8_t *__restrict__ pSrcB,
+                                          uint32_t M,
+                                          uint32_t N,
+                                          uint32_t O,
+                                          int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      Glue code of parallel matrix transpose matrix multiplication for complex 8-bit
+              integers
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[in]  nPE   Number of cores to use for computation
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+*/
+
+void plp_mat_mult_trans_cmplx_i8_parallel(const int8_t *__restrict__ pSrcA,
+                                          const int8_t *__restrict__ pSrcB,
+                                          uint32_t M,
+                                          uint32_t N,
+                                          uint32_t O,
+                                          uint32_t nPE,
+                                          int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      parallel matrix transpose matrix multiplication for complex 8-bit integers on XpulpV2
+  @param[in]  args  pointer to plp_mat_mult_cmplx_instance_i8 struct initialized by
+                    plp_mat_mult_trans_cmplx_i8_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_trans_cmplx_i8vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code of matrix transpose matrix multiplication for complex 32-bit floats
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+*/
+
+void plp_mat_mult_trans_cmplx_f32(const float *__restrict__ pSrcA,
+                                  const float *__restrict__ pSrcB,
+                                  uint32_t M,
+                                  uint32_t N,
+                                  uint32_t O,
+                                  float *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      matrix transpose matrix multiplication for complex 32-bit floats on XpulpV2
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+*/
+
+void plp_mat_mult_trans_cmplx_f32s_xpulpv2(const float *__restrict__ pSrcA,
+                                           const float *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           float *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      Glue code of parallel matrix transpose matrix multiplication for complex 32-bit floats
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[in]  nPE   Number of cores to use for computation
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+*/
+
+void plp_mat_mult_trans_cmplx_f32_parallel(const float *__restrict__ pSrcA,
+                                           const float *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           uint32_t nPE,
+                                           float *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      parallel matrix transpose matrix multiplication for complex 32-bit floats on XpulpV2
+  @param[in]  args  pointer to plp_mat_mult_cmplx_instance_f32 struct initialized by
+                    plp_mat_mult_trans_cmplx_f32_parallel
+  @return     none
+*/
+
+void plp_mat_mult_trans_cmplx_f32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code of matrix transpose matrix multiplication for complex 32-bit fix-point
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[in]  shift Amount to shift the result of each multiplication ot the right
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+
+  @par Fix-Point
+  Fix-Point and Shifting
+  The result will be shifted by the parameter `shift` to the right (which corresponds to a
+  multiplication by `2^-shift`). Assume that matrix A is represente as `pSrcA * 2^-x` and matrix B
+  as `pSrcB * 2^-y` (which means that A has `x`, and B has `y` bits after the binary point). Then,
+  the output matrix C is represented as `pDstC * 2^-(x + y - shift)`.
+  The output matrix is also stored with the same number of bits as the inputs. Set the
+  `shift` parameter such that no overflow occurrs.
+*/
+
+void plp_mat_mult_trans_cmplx_q32(const int32_t *__restrict__ pSrcA,
+                                  const int32_t *__restrict__ pSrcB,
+                                  uint32_t M,
+                                  uint32_t N,
+                                  uint32_t O,
+                                  uint32_t shift,
+                                  int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      matrix transpose matrix multiplication for complex 32-bit fix-point on RV32IM
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[in]  shift Amount to shift the result of each multiplication ot the right
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+
+  @par Fix-Point
+  Fix-Point and Shifting
+  The result will be shifted by the parameter `shift` to the right (which corresponds to a
+  multiplication by `2^-shift`). Assume that matrix A is represente as `pSrcA * 2^-x` and matrix B
+  as `pSrcB * 2^-y` (which means that A has `x`, and B has `y` bits after the binary point). Then,
+  the output matrix C is represented as `pDstC * 2^-(x + y - shift)`.
+  The output matrix is also stored with the same number of bits as the inputs. Set the
+  `shift` parameter such that no overflow occurrs.
+*/
+
+void plp_mat_mult_trans_cmplx_q32s_rv32im(const int32_t *__restrict__ pSrcA,
+                                          const int32_t *__restrict__ pSrcB,
+                                          uint32_t M,
+                                          uint32_t N,
+                                          uint32_t O,
+                                          uint32_t shift,
+                                          int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      matrix transpose matrix multiplication for complex 32-bit fix-point on XpulpV2
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[in]  shift Amount to shift the result of each multiplication ot the right
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+
+  @par Fix-Point
+  Fix-Point and Shifting
+  The result will be shifted by the parameter `shift` to the right (which corresponds to a
+  multiplication by `2^-shift`). Assume that matrix A is represente as `pSrcA * 2^-x` and matrix B
+  as `pSrcB * 2^-y` (which means that A has `x`, and B has `y` bits after the binary point). Then,
+  the output matrix C is represented as `pDstC * 2^-(x + y - shift)`.
+  The output matrix is also stored with the same number of bits as the inputs. Set the
+  `shift` parameter such that no overflow occurrs.
+*/
+
+void plp_mat_mult_trans_cmplx_q32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                                           const int32_t *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           uint32_t shift,
+                                           int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      Glue code of parallel matrix transpose matrix multiplication for complex 32-bit
+              fix-point
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[in]  shift Amount to shift the result of each multiplication ot the right
+  @param[in]  nPE   Number of cores to use for computation
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+
+  @par Fix-Point
+  Fix-Point and Shifting
+  The result will be shifted by the parameter `shift` to the right (which corresponds to a
+  multiplication by `2^-shift`). Assume that matrix A is represente as `pSrcA * 2^-x` and matrix B
+  as `pSrcB * 2^-y` (which means that A has `x`, and B has `y` bits after the binary point). Then,
+  the output matrix C is represented as `pDstC * 2^-(x + y - shift)`.
+  The output matrix is also stored with the same number of bits as the inputs. Set the
+  `shift` parameter such that no overflow occurrs.
+*/
+
+void plp_mat_mult_trans_cmplx_q32_parallel(const int32_t *__restrict__ pSrcA,
+                                           const int32_t *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           uint32_t shift,
+                                           uint32_t nPE,
+                                           int32_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      parallel matrix transpose matrix multiplication for complex 32-bit fix-point on
+              XpulpV2
+  @param[in]  args  pointer to plp_mat_mult_cmplx_instance_q32 struct initialized by
+                    plp_mat_mult_trans_cmplx_q32_parallel
+  @return     none
+
+  @par Fix-Point
+  Fix-Point and Shifting
+  The result will be shifted by the parameter `shift` to the right (which corresponds to a
+  multiplication by `2^-shift`). Assume that matrix A is represente as `pSrcA * 2^-x` and matrix B
+  as `pSrcB * 2^-y` (which means that A has `x`, and B has `y` bits after the binary point). Then,
+  the output matrix C is represented as `pDstC * 2^-(x + y - shift)`.
+  The output matrix is also stored with the same number of bits as the inputs. Set the
+  `shift` parameter such that no overflow occurrs.
+*/
+
+void plp_mat_mult_trans_cmplx_q32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code of matrix transpose matrix multiplication for complex 16-bit fix-point
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[in]  shift Amount to shift the result of each multiplication ot the right
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+
+  @par Fix-Point
+  Fix-Point and Shifting
+  The result will be shifted by the parameter `shift` to the right (which corresponds to a
+  multiplication by `2^-shift`). Assume that matrix A is represente as `pSrcA * 2^-x` and matrix B
+  as `pSrcB * 2^-y` (which means that A has `x`, and B has `y` bits after the binary point). Then,
+  the output matrix C is represented as `pDstC * 2^-(x + y - shift)`.
+  The output matrix is also stored with the same number of bits as the inputs. Set the
+  `shift` parameter such that no overflow occurrs.
+*/
+
+void plp_mat_mult_trans_cmplx_q16(const int16_t *__restrict__ pSrcA,
+                                  const int16_t *__restrict__ pSrcB,
+                                  uint32_t M,
+                                  uint32_t N,
+                                  uint32_t O,
+                                  uint32_t shift,
+                                  int16_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      matrix transpose matrix multiplication for complex 16-bit fix-point on RV32IM
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[in]  shift Amount to shift the result of each multiplication ot the right
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+
+  @par Fix-Point
+  Fix-Point and Shifting
+  The result will be shifted by the parameter `shift` to the right (which corresponds to a
+  multiplication by `2^-shift`). Assume that matrix A is represente as `pSrcA * 2^-x` and matrix B
+  as `pSrcB * 2^-y` (which means that A has `x`, and B has `y` bits after the binary point). Then,
+  the output matrix C is represented as `pDstC * 2^-(x + y - shift)`.
+  The output matrix is also stored with the same number of bits as the inputs. Set the
+  `shift` parameter such that no overflow occurrs.
+*/
+
+void plp_mat_mult_trans_cmplx_q16s_rv32im(const int16_t *__restrict__ pSrcA,
+                                          const int16_t *__restrict__ pSrcB,
+                                          uint32_t M,
+                                          uint32_t N,
+                                          uint32_t O,
+                                          uint32_t shift,
+                                          int16_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      matrix transpose matrix multiplication for complex 16-bit fix-point on XpulpV2
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[in]  shift Amount to shift the result of each multiplication ot the right
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+
+  @par Fix-Point
+  Fix-Point and Shifting
+  The result will be shifted by the parameter `shift` to the right (which corresponds to a
+  multiplication by `2^-shift`). Assume that matrix A is represente as `pSrcA * 2^-x` and matrix B
+  as `pSrcB * 2^-y` (which means that A has `x`, and B has `y` bits after the binary point). Then,
+  the output matrix C is represented as `pDstC * 2^-(x + y - shift)`.
+  The output matrix is also stored with the same number of bits as the inputs. Set the
+  `shift` parameter such that no overflow occurrs.
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_trans_cmplx_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+                                           const int16_t *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           uint32_t shift,
+                                           int16_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      Glue code of parallel matrix transpose matrix multiplication for complex 16-bit
+              fix-point
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[in]  shift Amount to shift the result of each multiplication ot the right
+  @param[in]  nPE   Number of cores to use for computation
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+
+  @par Fix-Point
+  Fix-Point and Shifting
+  The result will be shifted by the parameter `shift` to the right (which corresponds to a
+  multiplication by `2^-shift`). Assume that matrix A is represente as `pSrcA * 2^-x` and matrix B
+  as `pSrcB * 2^-y` (which means that A has `x`, and B has `y` bits after the binary point). Then,
+  the output matrix C is represented as `pDstC * 2^-(x + y - shift)`.
+  The output matrix is also stored with the same number of bits as the inputs. Set the
+  `shift` parameter such that no overflow occurrs.
+*/
+
+void plp_mat_mult_trans_cmplx_q16_parallel(const int16_t *__restrict__ pSrcA,
+                                           const int16_t *__restrict__ pSrcB,
+                                           uint32_t M,
+                                           uint32_t N,
+                                           uint32_t O,
+                                           uint32_t shift,
+                                           uint32_t nPE,
+                                           int16_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      parallel matrix transpose matrix multiplication for complex 16-bit fix-point on
+              XpulpV2
+  @param[in]  args  pointer to plp_mat_mult_cmplx_instance_q16 struct initialized by
+                    plp_mat_mult_trans_cmplx_q16_parallel
+  @return     none
+
+  @par Fix-Point
+  Fix-Point and Shifting
+  The result will be shifted by the parameter `shift` to the right (which corresponds to a
+  multiplication by `2^-shift`). Assume that matrix A is represente as `pSrcA * 2^-x` and matrix B
+  as `pSrcB * 2^-y` (which means that A has `x`, and B has `y` bits after the binary point). Then,
+  the output matrix C is represented as `pDstC * 2^-(x + y - shift)`.
+  The output matrix is also stored with the same number of bits as the inputs. Set the
+  `shift` parameter such that no overflow occurrs.
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_trans_cmplx_q16vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code of matrix transpose matrix multiplication for complex 8-bit fix-point
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[in]  shift Amount to shift the result of each multiplication ot the right
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+
+  @par Fix-Point
+  Fix-Point and Shifting
+  The result will be shifted by the parameter `shift` to the right (which corresponds to a
+  multiplication by `2^-shift`). Assume that matrix A is represente as `pSrcA * 2^-x` and matrix B
+  as `pSrcB * 2^-y` (which means that A has `x`, and B has `y` bits after the binary point). Then,
+  the output matrix C is represented as `pDstC * 2^-(x + y - shift)`.
+  The output matrix is also stored with the same number of bits as the inputs. Set the
+  `shift` parameter such that no overflow occurrs.
+*/
+
+void plp_mat_mult_trans_cmplx_q8(const int8_t *__restrict__ pSrcA,
+                                 const int8_t *__restrict__ pSrcB,
+                                 uint32_t M,
+                                 uint32_t N,
+                                 uint32_t O,
+                                 uint32_t shift,
+                                 int8_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      matrix transpose matrix multiplication for complex 8-bit fix-point on RV32IM
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[in]  shift Amount to shift the result of each multiplication ot the right
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+
+  @par Fix-Point
+  Fix-Point and Shifting
+  The result will be shifted by the parameter `shift` to the right (which corresponds to a
+  multiplication by `2^-shift`). Assume that matrix A is represente as `pSrcA * 2^-x` and matrix B
+  as `pSrcB * 2^-y` (which means that A has `x`, and B has `y` bits after the binary point). Then,
+  the output matrix C is represented as `pDstC * 2^-(x + y - shift)`.
+  The output matrix is also stored with the same number of bits as the inputs. Set the
+  `shift` parameter such that no overflow occurrs.
+*/
+
+void plp_mat_mult_trans_cmplx_q8s_rv32im(const int8_t *__restrict__ pSrcA,
+                                         const int8_t *__restrict__ pSrcB,
+                                         uint32_t M,
+                                         uint32_t N,
+                                         uint32_t O,
+                                         uint32_t shift,
+                                         int8_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      matrix transpose matrix multiplication for complex 8-bit fix-point on XpulpV2
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[in]  shift Amount to shift the result of each multiplication ot the right
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+
+  @par Fix-Point
+  Fix-Point and Shifting
+  The result will be shifted by the parameter `shift` to the right (which corresponds to a
+  multiplication by `2^-shift`). Assume that matrix A is represente as `pSrcA * 2^-x` and matrix B
+  as `pSrcB * 2^-y` (which means that A has `x`, and B has `y` bits after the binary point). Then,
+  the output matrix C is represented as `pDstC * 2^-(x + y - shift)`.
+  The output matrix is also stored with the same number of bits as the inputs. Set the
+  `shift` parameter such that no overflow occurrs.
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_trans_cmplx_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+                                          const int8_t *__restrict__ pSrcB,
+                                          uint32_t M,
+                                          uint32_t N,
+                                          uint32_t O,
+                                          uint32_t shift,
+                                          int8_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      Glue code of parallel matrix transpose matrix multiplication for complex 8-bit
+              fix-point
+  @param[in]  pSrcA Points to the first input matrix of shape MxN
+  @param[in]  pSrcB Points to the second input matrix of shape OxN
+  @param[in]  M     Height of matrix SrcA and DstC
+  @param[in]  N     Width of matrix SrcA and SrcB
+  @param[in]  O     Height of matrix SrcB and width of matrix DstC
+  @param[in]  shift Amount to shift the result of each multiplication ot the right
+  @param[in]  nPE   Number of cores to use for computation
+  @param[out] pDstC Points to the output matrix of shape MxO
+  @return     none
+
+  @par Fix-Point
+  Fix-Point and Shifting
+  The result will be shifted by the parameter `shift` to the right (which corresponds to a
+  multiplication by `2^-shift`). Assume that matrix A is represente as `pSrcA * 2^-x` and matrix B
+  as `pSrcB * 2^-y` (which means that A has `x`, and B has `y` bits after the binary point). Then,
+  the output matrix C is represented as `pDstC * 2^-(x + y - shift)`.
+  The output matrix is also stored with the same number of bits as the inputs. Set the
+  `shift` parameter such that no overflow occurrs.
+*/
+
+void plp_mat_mult_trans_cmplx_q8_parallel(const int8_t *__restrict__ pSrcA,
+                                          const int8_t *__restrict__ pSrcB,
+                                          uint32_t M,
+                                          uint32_t N,
+                                          uint32_t O,
+                                          uint32_t shift,
+                                          uint32_t nPE,
+                                          int8_t *__restrict__ pDstC);
+
+/** -------------------------------------------------------
+  @brief      parallel matrix transpose matrix multiplication for complex 8-bit fix-point on XpulpV2
+  @param[in]  args  pointer to plp_mat_mult_cmplx_instance_q8 struct initialized by
+                    plp_mat_mult_trans_cmplx_q8_parallel
+  @return     none
+
+  @par Fix-Point
+  Fix-Point and Shifting
+  The result will be shifted by the parameter `shift` to the right (which corresponds to a
+  multiplication by `2^-shift`). Assume that matrix A is represente as `pSrcA * 2^-x` and matrix B
+  as `pSrcB * 2^-y` (which means that A has `x`, and B has `y` bits after the binary point). Then,
+  the output matrix C is represented as `pDstC * 2^-(x + y - shift)`.
+  The output matrix is also stored with the same number of bits as the inputs. Set the
+  `shift` parameter such that no overflow occurrs.
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_mult_trans_cmplx_q8vp_xpulpv2(void *args);
+
 /**
  * @brief      calculates the complex magnitude.
  *
