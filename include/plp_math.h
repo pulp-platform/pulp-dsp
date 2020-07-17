@@ -1001,6 +1001,54 @@ typedef struct {
 } plp_mat_fill_I_stride_instance_q32;
 
 /** -------------------------------------------------------
+ * @brief Instance structure for filling an integer matrix in parallel.
+ */
+typedef struct {
+    uint32_t M;
+    uint32_t N;
+    uint32_t stride;
+    int8_t value;
+    uint32_t nPE;
+    int8_t *__restrict__ pDst;
+} plp_mat_fill_stride_instance_i8;
+
+/** -------------------------------------------------------
+ * @brief Instance structure for filling an integer matrix in parallel.
+ */
+typedef struct {
+    uint32_t M;
+    uint32_t N;
+    uint32_t stride;
+    int16_t value;
+    uint32_t nPE;
+    int16_t *__restrict__ pDst;
+} plp_mat_fill_stride_instance_i16;
+
+/** -------------------------------------------------------
+ * @brief Instance structure for filling an integer matrix in parallel.
+ */
+typedef struct {
+    uint32_t M;
+    uint32_t N;
+    uint32_t stride;
+    int32_t value;
+    uint32_t nPE;
+    int32_t *__restrict__ pDst;
+} plp_mat_fill_stride_instance_i32;
+
+/** -------------------------------------------------------
+ * @brief Instance structure for filling a floating-point matrix in parallel.
+ */
+typedef struct {
+    uint32_t M;
+    uint32_t N;
+    uint32_t stride;
+    float value;
+    uint32_t nPE;
+    float *__restrict__ pDst;
+} plp_mat_fill_stride_instance_f32;
+
+/** -------------------------------------------------------
     @brief Glue code for parallel dot product of 32-bit integer vectors.
     @param[in]  pSrcA      points to the first input vector
     @param[in]  pSrcB      points to the second input vector
@@ -9716,5 +9764,249 @@ void plp_mat_fill_I_stride_q8_parallel(
 */
 
 void plp_mat_fill_I_stride_q8vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for filling an MxN strided 32-bit integers matrix
+  @param[in]  M      Height of the matrix
+  @param[in]  N      Width of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pSrc   Points to the output matrix
+  @return  none
+*/
+
+void plp_mat_fill_stride_i32(
+    uint32_t M, uint32_t N, uint32_t stride, int32_t value, int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Fill an MxN strided 32-bit integers matrix on RV32IM
+  @param[in]  M      Height of the matrix
+  @param[in]  N      Width of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pSrc   Points to the output matrix
+  @return  none
+*/
+
+void plp_mat_fill_stride_i32s_rv32im(
+    uint32_t M, uint32_t N, uint32_t stride, int32_t value, int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Fill an MxN strided 32-bit integers matrix on XpulpV2
+  @param[in]  M      Height of the matrix
+  @param[in]  N      Width of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pSrc   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_stride_i32s_xpulpv2(
+    uint32_t M, uint32_t N, uint32_t stride, int32_t value, int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for filling an MxN strided 32-bit integers matrix in parallel
+  @param[in]  M      Height of the matrix
+  @param[in]  N      Width of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[in]  nPE    Number of cores to use for processing
+  @param[out] pSrc   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_stride_i32_parallel(uint32_t M,
+                                      uint32_t N,
+                                      uint32_t stride,
+                                      int32_t value,
+                                      uint32_t nPE,
+                                      int32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Fill an MxN strided 32-bit integers matrix on XpulpV2 in parallel
+  @param[in]  args  pointer to plp_mat_fill_stride_instance_i32 struct initialized by
+                    plp_mat_fill_stride_i32_parallel
+  @return     none
+*/
+
+void plp_mat_fill_stride_i32p_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for filling an MxN strided 16-bit integers matrix
+  @param[in]  M      Height of the matrix
+  @param[in]  N      Width of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pSrc   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_stride_i16(
+    uint32_t M, uint32_t N, uint32_t stride, int16_t value, int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Fill an MxN strided 16-bit integers matrix on RV32IM
+  @param[in]  M      Height of the matrix
+  @param[in]  N      Width of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pSrc   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_stride_i16s_rv32im(
+    uint32_t M, uint32_t N, uint32_t stride, int16_t value, int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Fill an MxN strided 16-bit integers matrix on XpulpV2
+  @param[in]  M      Height of the matrix
+  @param[in]  N      Width of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pSrc   Points to the output matrix
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_fill_stride_i16v_xpulpv2(
+    uint32_t M, uint32_t N, uint32_t stride, int16_t value, int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for filling an MxN strided 16-bit integers matrix in parallel
+  @param[in]  M      Height of the matrix
+  @param[in]  N      Width of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[in]  nPE    Number of cores to use for processing
+  @param[out] pSrc   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_stride_i16_parallel(uint32_t M,
+                                      uint32_t N,
+                                      uint32_t stride,
+                                      int16_t value,
+                                      uint32_t nPE,
+                                      int16_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Fill an MxN strided 16-bit integers matrix on XpulpV2 in parallel
+  @param[in]  args  pointer to plp_mat_fill_stride_instance_i16 struct initialized by
+                    plp_mat_fill_stride_i16_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_fill_stride_i16vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for filling an MxN strided 8-bit integers matrix
+  @param[in]  M      Height of the matrix
+  @param[in]  N      Width of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pSrc   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_stride_i8(
+    uint32_t M, uint32_t N, uint32_t stride, int8_t value, int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Fill an MxN strided 8-bit integers matrix on RV32IM
+  @param[in]  M      Height of the matrix
+  @param[in]  N      Width of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pSrc   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_stride_i8s_rv32im(
+    uint32_t M, uint32_t N, uint32_t stride, int8_t value, int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Fill an MxN strided 8-bit integers matrix on XpulpV2
+  @param[in]  M      Height of the matrix
+  @param[in]  N      Width of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pSrc   Points to the output matrix
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_fill_stride_i8v_xpulpv2(
+    uint32_t M, uint32_t N, uint32_t stride, int8_t value, int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for filling an MxN strided 8-bit integers matrix in parallel
+  @param[in]  M      Height of the matrix
+  @param[in]  N      Width of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[in]  nPE    Number of cores to use for processing
+  @param[out] pSrc   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_stride_i8_parallel(
+    uint32_t M, uint32_t N, uint32_t stride, int8_t value, uint32_t nPE, int8_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Fill an MxN strided 8-bit integers matrix on XpulpV2 in parallel
+  @param[in]  args  pointer to plp_mat_fill_stride_instance_i8 struct initialized by
+                    plp_mat_fill_stride_i8_parallel
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_mat_fill_stride_i8vp_xpulpv2(void *args);
+
+/** -------------------------------------------------------
+  @brief      Glue code for filling an MxN strided 32-bit floats matrix
+  @param[in]  M      Height of the matrix
+  @param[in]  N      Width of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pSrc   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_stride_f32(
+    uint32_t M, uint32_t N, uint32_t stride, float value, float *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Fill an MxN strided 32-bit floats matrix on XpulpV2
+  @param[in]  M      Height of the matrix
+  @param[in]  N      Width of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[out] pSrc   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_stride_f32s_xpulpv2(
+    uint32_t M, uint32_t N, uint32_t stride, float value, float *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for filling an MxN strided 32-bit floats matrix in parallel
+  @param[in]  M      Height of the matrix
+  @param[in]  N      Width of the matrix
+  @param[in]  stride Stride of the matrix (elements between each row)
+  @param[in]  nPE    Number of cores to use for processing
+  @param[out] pSrc   Points to the output matrix
+  @return     none
+*/
+
+void plp_mat_fill_stride_f32_parallel(
+    uint32_t M, uint32_t N, uint32_t stride, float value, uint32_t nPE, float *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Fill an MxN strided 32-bit floats matrix on XpulpV2 in parallel
+  @param[in]  args  pointer to plp_mat_fill_stride_instance_f32 struct initialized by
+                    plp_mat_fill_stride_f32_parallel
+  @return  none
+*/
+
+void plp_mat_fill_stride_f32p_xpulpv2(void *args);
 
 #endif // __PLP_MATH_H__

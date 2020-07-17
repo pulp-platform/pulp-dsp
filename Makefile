@@ -209,6 +209,14 @@ FC_SRCS = \
 	src/MatrixFunctionsStride/mat_fill_I_stride/plp_mat_fill_I_stride_q8_parallel.c \
 	src/MatrixFunctionsStride/mat_fill_I_stride/plp_mat_fill_I_stride_f32.c \
 	src/MatrixFunctionsStride/mat_fill_I_stride/plp_mat_fill_I_stride_f32_parallel.c \
+	src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i32.c src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i32s_rv32im.c \
+	src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i16.c src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i16s_rv32im.c \
+	src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i8.c src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i8s_rv32im.c \
+	src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i32_parallel.c \
+	src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i16_parallel.c \
+	src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i8_parallel.c \
+	src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_f32.c \
+	src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_f32_parallel.c \
 	src/ComplexMathFunctions/plp_cmplx_mag_q16.c
 
 
@@ -421,7 +429,15 @@ CL_SRCS = \
 	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q16vp_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q8vp_xpulpv2.c	\
 	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_f32s_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_f32p_xpulpv2.c
+	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_f32p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i32s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i16v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i32p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i16vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i8vp_xpulpv2.c	\
+	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_f32s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_f32p_xpulpv2.c
 
 
 PULP_LIBS = plpdsp # the name of the library, after installing it into the pulp-sdk, add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project to use this library.
