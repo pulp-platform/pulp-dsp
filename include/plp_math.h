@@ -14382,7 +14382,7 @@ void plp_cmplx_dot_prod_q16_rv32im(
 
 
 /**
-  @brief Glue code for complex dot product of 32-bit float vectors.
+  @brief Glue code for complex multiplied with real of 32-bit float vectors.
   @param[in]     pSrc        points to the input vector
   @param[out]    pDst        points to the output vector
   @param[in]     numSamples  number of samples in each vector
@@ -14411,7 +14411,7 @@ void plp_cmplx_mult_real_f32_xpulpv2(
 
 
 /**
-  @brief Glue code for complex dot product of 32-bit integer vectors.
+  @brief Glue code for complex multiplied with real of 32-bit integer vectors.
   @param[in]     pSrc        points to the input vector
   @param[out]    pDst        points to the output vector
   @param[in]     numSamples  number of samples in each vector
@@ -14453,7 +14453,7 @@ void plp_cmplx_mult_real_i32_rv32im(
         uint32_t numSamples);
 
 /**
-  @brief Glue code for complex dot product of 16-bit integer vectors.
+  @brief Glue code for complex multiplied with real of 16-bit integer vectors.
   @param[in]     pSrc        points to the input vector
   @param[out]    pDst        points to the output vector
   @param[in]     numSamples  number of samples in each vector
@@ -14495,7 +14495,7 @@ void plp_cmplx_mult_real_i16_rv32im(
         uint32_t numSamples);
 
 /**
-  @brief Glue code for complex dot product of 8-bit integer vectors.
+  @brief Glue code for complex multiplied with real of 8-bit integer vectors.
   @param[in]     pSrc        points to the input vector
   @param[out]    pDst        points to the output vector
   @param[in]     numSamples  number of samples in each vector
@@ -14537,7 +14537,7 @@ void plp_cmplx_mult_real_i8_rv32im(
         uint32_t numSamples);
 
 /**
-  @brief Glue code for complex dot product of 32-bit fixed-point vectors.
+  @brief Glue code for complex multiplied with real of 32-bit fixed-point vectors.
   @param[in]     pSrc        points to the input vector
   @param[out]    pDst        points to the output vector
   @param[in]     numSamples  number of samples in each vector
@@ -14582,7 +14582,7 @@ void plp_cmplx_mult_real_q32_rv32im(
         uint32_t numSamples);
 
 /**
-  @brief Glue code for complex dot product of 16-bit fixed-point vectors.
+  @brief Glue code for complex multiplied with real of 16-bit fixed-point vectors.
   @param[in]     pSrc        points to the input vector
   @param[out]    pDst        points to the output vector
   @param[in]     numSamples  number of samples in each vector
@@ -14627,7 +14627,7 @@ void plp_cmplx_mult_real_q16_rv32im(
         uint32_t numSamples);
 
 /**
-  @brief Glue code for complex dot product of 8-bit fixed-point vectors.
+  @brief Glue code for complex multiplied with real of 8-bit fixed-point vectors.
   @param[in]     pSrc        points to the input vector
   @param[out]    pDst        points to the output vector
   @param[in]     numSamples  number of samples in each vector
@@ -14941,6 +14941,324 @@ void plp_cmplx_mag_squared_q8_xpulpv2(
         uint32_t deciPoint,
         uint32_t numSamples);
 
+/**
+  @brief Glue code for complex multiplied by complex of 32-bit float vectors.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_f32(
+  const float32_t * __restrict__  pSrcA,
+  const float32_t * __restrict__  pSrcB,
+        float32_t * __restrict__  pDst,
+        uint32_t numSamples);
+
+/**
+  @brief         Floating-point complex multiplied by complex.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_f32_xpulpv2(
+  const float32_t * __restrict__  pSrcA,
+  const float32_t * __restrict__  pSrcB,
+        float32_t * __restrict__  pDst,
+        uint32_t numSamples);
+
+
+/**
+  @brief Glue code for complex multiplied by complex of 32-bit integer vectors.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_i32(
+  const int32_t * __restrict__  pSrcA,
+  const int32_t * __restrict__  pSrcB,
+        int32_t * __restrict__  pDst,
+        uint32_t numSamples);
+
+/**
+  @brief         32-bit integer complex multiplied by complex.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_i32_xpulpv2(
+  const int32_t * __restrict__  pSrcA,
+  const int32_t * __restrict__  pSrcB,
+        int32_t * __restrict__  pDst,
+        uint32_t numSamples);
+
+/**
+  @brief         32-bit integer complex multiplied by complex.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_i32_rv32im(
+  const int32_t * __restrict__  pSrcA,
+  const int32_t * __restrict__  pSrcB,
+        int32_t * __restrict__  pDst,
+        uint32_t numSamples);
+
+/**
+  @brief Glue code for complex multiplied by complex of 16-bit integer vectors.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_i16(
+  const int16_t * __restrict__  pSrcA,
+  const int16_t * __restrict__  pSrcB,
+        int16_t * __restrict__  pDst,
+        uint32_t numSamples);
+
+/**
+  @brief         16-bit integer complex multiplied by complex.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_i16_xpulpv2(
+  const int16_t * __restrict__  pSrcA,
+  const int16_t * __restrict__  pSrcB,
+        int16_t * __restrict__  pDst,
+        uint32_t numSamples);
+
+/**
+  @brief         16-bit integer complex multiplied by complex.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_i16_rv32im(
+  const int16_t * __restrict__  pSrcA,
+  const int16_t * __restrict__  pSrcB,
+        int16_t * __restrict__  pDst,
+        uint32_t numSamples);
+
+/**
+  @brief Glue code for complex multiplied by complex of 8-bit integer vectors.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_i8(
+  const int8_t * __restrict__  pSrcA,
+  const int8_t * __restrict__  pSrcB,
+        int8_t * __restrict__  pDst,
+        uint32_t numSamples);
+
+/**
+  @brief         8-bit integer complex multiplied by complex.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_i8_xpulpv2(
+  const int8_t * __restrict__  pSrcA,
+  const int8_t * __restrict__  pSrcB,
+        int8_t * __restrict__  pDst,
+        uint32_t numSamples);
+
+/**
+  @brief         8-bit integer complex multiplied by complex.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_i8_rv32im(
+  const int8_t * __restrict__  pSrcA,
+  const int8_t * __restrict__  pSrcB,
+        int8_t * __restrict__  pDst,
+        uint32_t numSamples);
+
+/**
+  @brief Glue code for complex multiplied by complex of 32-bit fixed-point vectors.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     deciPoint   decimal point for right shift
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_q32(
+  const int32_t * __restrict__  pSrcA,
+  const int32_t * __restrict__  pSrcB,
+        int32_t * __restrict__  pDst,
+        uint32_t deciPoint,
+        uint32_t numSamples);
+
+/**
+  @brief         32-bit fixed-point complex multiplied by complex.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     deciPoint   decimal point for right shift
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_q32_xpulpv2(
+  const int32_t * __restrict__  pSrcA,
+  const int32_t * __restrict__  pSrcB,
+        int32_t * __restrict__  pDst,
+        uint32_t deciPoint,
+        uint32_t numSamples);
+
+/**
+  @brief         32-bit fixed-point complex multiplied by complex.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     deciPoint   decimal point for right shift
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_q32_rv32im(
+  const int32_t * __restrict__  pSrcA,
+  const int32_t * __restrict__  pSrcB,
+        int32_t * __restrict__  pDst,
+        uint32_t deciPoint,
+        uint32_t numSamples);
+
+/**
+  @brief Glue code for complex multiplied by complex of 16-bit fixed-point vectors.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     deciPoint   decimal point for right shift
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_q16(
+  const int16_t * __restrict__  pSrcA,
+  const int16_t * __restrict__  pSrcB,
+        int16_t * __restrict__  pDst,
+        uint32_t deciPoint,
+        uint32_t numSamples);
+
+/**
+  @brief         16-bit fixed-point complex multiplied by complex.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     deciPoint   decimal point for right shift
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_q16_xpulpv2(
+  const int16_t * __restrict__  pSrcA,
+  const int16_t * __restrict__  pSrcB,
+        int16_t * __restrict__  pDst,
+        uint32_t deciPoint,
+        uint32_t numSamples);
+
+/**
+  @brief         16-bit fixed-point complex multiplied by complex.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     deciPoint   decimal point for right shift
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_q16_rv32im(
+  const int16_t * __restrict__  pSrcA,
+  const int16_t * __restrict__  pSrcB,
+        int16_t * __restrict__  pDst,
+        uint32_t deciPoint,
+        uint32_t numSamples);
+
+/**
+  @brief Glue code for complex multiplied by complex of 8-bit fixed-point vectors.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     deciPoint   decimal point for right shift
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_q8(
+  const int8_t * __restrict__  pSrcA,
+  const int8_t * __restrict__  pSrcB,
+        int8_t * __restrict__  pDst,
+        uint32_t deciPoint,
+        uint32_t numSamples);
+
+/**
+  @brief         8-bit fixed-point complex multiplied by complex.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     deciPoint   decimal point for right shift
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_q8_xpulpv2(
+  const int8_t * __restrict__  pSrcA,
+  const int8_t * __restrict__  pSrcB,
+        int8_t * __restrict__  pDst,
+        uint32_t deciPoint,
+        uint32_t numSamples);
+
+/**
+  @brief         8-bit fixed-point complex multiplied by complex.
+  @param[in]     pSrcA       points to the first input vector
+  @param[in]     pSrcB       points to the second vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     deciPoint   decimal point for right shift
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mult_cmplx_q8_rv32im(
+  const int8_t * __restrict__  pSrcA,
+  const int8_t * __restrict__  pSrcB,
+        int8_t * __restrict__  pDst,
+        uint32_t deciPoint,
+        uint32_t numSamples);
 
 
 #endif // __PLP_MATH_H__

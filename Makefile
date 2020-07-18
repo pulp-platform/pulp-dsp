@@ -315,6 +315,19 @@ FC_SRCS = \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q16_rv32im.c \
 	src/ComplexMathFunctions/plp_cmplx_mult_real_q8.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q8_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_cmplx_f32.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_cmplx_i32.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i32_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_cmplx_i16.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i16_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_cmplx_i8.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i8_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_cmplx_q32.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q32_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_cmplx_q16.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q16_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_cmplx_q8.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q8_rv32im.c \
 	src/ComplexMathFunctions/plp_cmplx_mag_squared_f32.c \
 	src/ComplexMathFunctions/plp_cmplx_mag_squared_i32.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i32_rv32im.c \
@@ -633,6 +646,13 @@ CL_SRCS = \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q32_xpulpv2.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q16_xpulpv2.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q8_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_f32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i16_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i8_xpulpv2.c  \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q16_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q8_xpulpv2.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_f32_xpulpv2.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i32_xpulpv2.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i16_xpulpv2.c \
