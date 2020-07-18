@@ -1,6 +1,6 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_cmplx_conj_f32.c
+ * Title:        plp_cmplx_mult_real_f32.c
  * Description:  32-bit Floating-point complex by real multiplication
  *
  * $Date:        29. Jun 2020

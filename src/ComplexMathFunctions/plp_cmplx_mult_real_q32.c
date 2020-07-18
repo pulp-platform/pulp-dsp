@@ -1,6 +1,6 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_cmplx_conj_q32.c
+ * Title:        plp_cmplx_mult_real_q32.c
  * Description:  32-bit fixed-point complex by real multiplication
  *
  * $Date:        29. Jun 2020

@@ -1,6 +1,6 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_cmplx_conj_i8.c
+ * Title:        plp_cmplx_mult_real_i8.c
  * Description:  8-bit integer complex by real multiplication
  *
  * $Date:        29. Jun 2020
