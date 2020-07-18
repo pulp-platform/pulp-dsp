@@ -31,7 +31,7 @@
   ported and adopted for RISC-V PULP platform from ARM CMSIS DSP
  released under Copyright (C) 2010-2019 ARM Limited or its affiliates
   with Apache-2.0.
- /
+ */
 
 
 #include "plp_math.h"
@@ -73,6 +73,7 @@
   @param[in]     pSrcA       points to the first input vector
   @param[in]     pSrcB       points to the second input vector
   @param[in]     numSamples  number of samples in each vector
+  @param[in]     deciPoint  decimal point for right shift
   @param[out]    realResult  real part of the result returned here
   @param[out]    imagResult  imaginary part of the result returned here
   @return        none

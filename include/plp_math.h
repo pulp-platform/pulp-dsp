@@ -70,7 +70,7 @@
 */
 
 /**
- * @defgroup groupCmplxMath Complex math functions
+ * @defgroup groupCmplxMath Complex Math Functions
  */
 /**
 

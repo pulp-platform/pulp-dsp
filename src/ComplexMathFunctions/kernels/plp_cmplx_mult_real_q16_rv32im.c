@@ -31,7 +31,7 @@
   ported and adopted for RISC-V PULP platform from ARM CMSIS DSP
  released under Copyright (C) 2010-2019 ARM Limited or its affiliates
   with Apache-2.0.
- /
+ */
 
 
 #include "plp_math.h"
@@ -56,7 +56,7 @@
       pCmplxDst[(2*n)+1] = pSrcCmplx[(2*n)+1] * pSrcReal[n];
   }
   </pre>
-  There are separate functions for floating-point, Q15, and Q31 data types.
+  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types.
  */
 
 /**
@@ -69,6 +69,7 @@
   @param[in]     pSrcCmplx   points to complex input vector
   @param[in]     pSrcReal    points to real input vector
   @param[out]    pCmplxDst   points to complex output vector
+  @param[in]     deciPoint  decimal point for right shift
   @param[in]     numSamples  number of samples in each vector
   @return        none
  */

@@ -31,7 +31,7 @@
   ported and adopted for RISC-V PULP platform from ARM CMSIS DSP
  released under Copyright (C) 2010-2019 ARM Limited or its affiliates
   with Apache-2.0.
- /
+ */
 
 
 #include "plp_math.h"

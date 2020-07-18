@@ -1,6 +1,6 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_cmplx_conj_f32.c
+ * Title:        plp_cmplx_conj_i32.c
  * Description:  32-bit integer complex by real multiplication
  *
  * $Date:        29. Jun 2020
@@ -31,7 +31,7 @@
   ported and adopted for RISC-V PULP platform from ARM CMSIS DSP
  released under Copyright (C) 2010-2019 ARM Limited or its affiliates
   with Apache-2.0.
- /
+ */
 
 
 #include "plp_math.h"
@@ -57,7 +57,7 @@
       pCmplxDst[(2*n)+1] = pSrcCmplx[(2*n)+1] * pSrcReal[n];
   }
   </pre>
-  There are separate functions for floating-point, Q15, and Q31 data types.
+  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types.
  */
 
 /**
@@ -66,7 +66,7 @@
  */
 
 /**
-  @brief         32-biy integer complex-by-real multiplication.
+  @brief         32-bit integer complex-by-real multiplication.
   @param[in]     pSrcCmplx   points to complex input vector
   @param[in]     pSrcReal    points to real input vector
   @param[out]    pCmplxDst   points to complex output vector
