@@ -2816,38 +2816,38 @@ void plp_std_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
                          uint32_t fracBits,
                          int8_t *__restrict__ pRes);
 
-/* /\** ------------------------------------------------------- */
-/*    @brief      Glue code for square root of a 32-bit fixed point number. */
-/*    @param[in]  in   32-Bit input integer */
-/*    @param[out] out  Square root of the input */
-/*    @return     none */
-/* *\/ */
+/** -------------------------------------------------------
+   @brief      Glue code for square root of a 32-bit fixed point number.
+   @param[in]  in   32-Bit input integer
+   @param[out] out  Square root of the input
+   @return     none
+*/
 
-/* void plp_sqrt_q32(const int32_t *__restrict__ pSrc, */
-/*                   const uint32_t fracBits, */
-/*                   int32_t *__restrict__ pRes); */
+void plp_sqrt_q32(const int32_t *__restrict__ pSrc,
+                  const uint32_t fracBits,
+                  int32_t *__restrict__ pRes);
 
-/* /\** ------------------------------------------------------- */
-/*    @brief      Square root of a 32-bit fixed point number for XPULPV2 extension. */
-/*    @param[in]  in   32-Bit input integer */
-/*    @param[out] out  Square root of the input */
-/*    @return     none */
-/* *\/ */
+/** -------------------------------------------------------
+   @brief      Square root of a 32-bit fixed point number for XPULPV2 extension.
+   @param[in]  in   32-Bit input integer
+   @param[out] out  Square root of the input
+   @return     none
+*/
 
-/* void plp_sqrt_q32s_rv32im(const int32_t *__restrict__ pSrc, */
-/*                           const uint32_t fracBits, */
-/*                           int32_t *__restrict__ pRes); */
+void plp_sqrt_q32s_rv32im(const int32_t *__restrict__ pSrc,
+                          const uint32_t fracBits,
+                          int32_t *__restrict__ pRes);
 
-/* /\** ------------------------------------------------------- */
-/*    @brief      Square root of a 32-bit fixed point number for XPULPV2 extension. */
-/*    @param[in]  in   32-Bit input integer */
-/*    @param[out] out  Square root of the input */
-/*    @return     none */
-/* *\/ */
+/** -------------------------------------------------------
+   @brief      Square root of a 32-bit fixed point number for XPULPV2 extension.
+   @param[in]  in   32-Bit input integer
+   @param[out] out  Square root of the input
+   @return     none
+*/
 
-/* void plp_sqrt_q32s_xpulpv2(const int32_t *__restrict__ pSrc, */
-/*                            const uint32_t fracBits, */
-/*                            int32_t *__restrict__ pRes); */
+void plp_sqrt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
+                           const uint32_t fracBits,
+                           int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
    @brief      Glue code for square root of a 16-bit fixed point number.
