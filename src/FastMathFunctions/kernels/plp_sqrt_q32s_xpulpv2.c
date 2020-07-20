@@ -184,9 +184,9 @@ void plp_sqrt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
 
         intermediate_fixpoint = ((int16_t)(((int32_t)temp1 * intermediate_fixpoint) >> 15)) << 1;
 
-        if ((32 - fracBits) > 1) {
-            intermediate_fixpoint = intermediate_fixpoint >> ((int32_t)((32 - fracBits)) >> 1);
-            if ((32 - fracBits) % 2 == 0) {
+        if ((16 - fracBits) > 1) {
+            intermediate_fixpoint = intermediate_fixpoint >> ((int32_t)((16 - fracBits)) >> 1);
+            if ((16 - fracBits) % 2 == 0) {
                 intermediate_fixpoint = ((int32_t)intermediate_fixpoint * sqrt2) >> 15;
             }
         }
@@ -196,7 +196,7 @@ void plp_sqrt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
         } else {
             intermediate_fixpoint = intermediate_fixpoint >> ((signBits - 1) / 2);
         }
-        *pRes = intermediate_fixpoint;
+        *pRes = (int32_t)intermediate_fixpoint;
     }
 
     else {
