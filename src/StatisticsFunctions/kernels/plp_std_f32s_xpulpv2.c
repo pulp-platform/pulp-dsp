@@ -1,9 +1,9 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_sqrt_f32s_xpulpv2.c
- * Description:
+ * Title:        plp_std_f32s_xpulpv2.c
+ * Description:  Calculates the sum of squares on XPULPV2 cores
  *
- * $Date:        02.07.2020
+ * $Date:        30.06.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
@@ -25,23 +25,17 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Notice: project inspired by ARM CMSIS DSP and parts of source code
- * ported and adopted for RISC-V PULP platform from ARM CMSIS DSP
- * released under Copyright (C) 2010-2019 ARM Limited or its affiliates
- * with Apache-2.0.
  */
 
-#define numIters 15
 #include "plp_math.h"
 
 /**
-   @ingroup sqrt
+   @ingroup std
 */
 
 /**
-   @defgroup sqrtKernels Sqrt Kernels
-   Calculates the square root of the input number.
+   @defgroup stdKernels Std Kernels
+   Calculates the sum of squares of the input vector.
    There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
    types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
    provided.
@@ -64,30 +58,23 @@
 */
 
 /**
-   @addtogroup sqrtKernels
+   @addtogroup stdKernels
    @{
 */
 
 /**
-   @brief         Square root of a 32-bit floating point number for XPULPV2 extension.
+   @brief         Sum of squares of a 32-bit fixed point vector for XPULPV2 extension.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
    @param[out]    pRes    sum of squares returned here
    @return        none
 */
 
-void plp_sqrt_f32s_xpulpv2(const float *__restrict__ pSrc, float *__restrict__ pRes) {
+void plp_std_f32s_xpulpv2(const float *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         float *__restrict__ pRes) {
 
-  float intermediate = 1.f / (2.f * (*pSrc));
-  float half = *pSrc / 2;
-  
-  if (half > 0) {
-    for (int i = 0; i < numIters; i++) {
-      intermediate = intermediate * (1.5f - (intermediate * intermediate * half));
-    }
-    
-    *pRes = intermediate * (*pSrc);
-  } else {
-    *pRes = 0.f;
-  }
+    float variance;
+    plp_var_f32(pSrc, blockSize, &variance);
+    plp_sqrt_f32(&variance,  pRes);
 }
