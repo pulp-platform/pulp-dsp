@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_min_i8s_rv32im.c
- * Description:  Min value of a 8-bit integer vector for RV32IM
+ * Description:  Kernel for calculating the min of 8-Bit integer input vectors on RV32IM
  *
  * $Date:        29.06.2020
  *
@@ -35,25 +35,6 @@
 
 /**
    @defgroup minKernels Min Kernels
-   Calculates the min of the input vector. Min is defined as the greatest of the elements in the
-   vector. There are separate functions for floating point, integer, and fixed point 32- 8- 8-bit
-   data types. For lower precision integers (8- and 8-bit), functions exploiting SIMD instructions
-   are provided.
-
-   The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
-   <pre>
-   \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
-
-   data type = {f, i, q} respectively for floats, integers, fixed points
-
-   precision = {32, 8, 8} bits
-
-   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
-   SIMD instructions), and parallel (for multicore parallel computing), respectively.
-
-   isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
-
-   </pre>
 
  */
 
