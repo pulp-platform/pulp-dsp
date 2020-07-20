@@ -1,6 +1,6 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_conv_i16_xpulpv2.c
+ * Title:        plp_conv_i16p_xpulpv2.c
  * Description:  16-bit parallel integer convolution kernel for XPULPV2
  *
  * $Date:        01. July 2019
@@ -46,14 +46,14 @@
    @return        none
 */
 
-// Pre-condition: psrcALen >= psrcBLen, established by calling function plp_conv_i32
+// Pre-condition: psrcALen >= psrcBLen, established by calling function plp_conv_i16
 // Pre-condition: pRes has enough allocated memory, i.e. srcALen + srcBLen-1u
 // Pre-condition: srcALen >= 2 and srcBLen >= 2, otherwise use vector dot product
 
 void plp_conv_i16p_xpulpv2(void *task_args) {
 
     plp_conv_instance_i16 *S = (plp_conv_instance_i16 *)task_args;
-
+    
     uint32_t resultoffset = ((S->srcALen + S->nPE - 1) / S->nPE) + S->srcBLen - 1;
     uint32_t srcAoffset = ((S->srcALen + S->nPE - 1) / S->nPE);
 
@@ -68,16 +68,14 @@ void plp_conv_i16p_xpulpv2(void *task_args) {
     uint32_t pIn1Len;
     uint32_t pIn2Len;
 
+    // Unpack partial convolution vectors
     if (rt_core_id() == (S->nPE - 1)) {
-
+      
         pSrcA = (int16_t *)((S->pSrcA + srcAoffset * (S->nPE - 1)));
         srcALen = S->srcALen - (srcAoffset * (S->nPE - 1));
         pSrcB = (int16_t *)(S->pSrcB);
         srcBLen = S->srcBLen;
         pRes = (int32_t *)(S->pRes + resultoffset * (S->nPE - 1));
-
-        // printf("ID %i: 0x%x %i 0x%x %i 0x%x\n",rt_core_id(), pSrcA, srcALen, pSrcB, srcBLen,
-        // pRes);
 
     } else {
 
@@ -87,10 +85,8 @@ void plp_conv_i16p_xpulpv2(void *task_args) {
         srcBLen = S->srcBLen;
         pRes = (int32_t *)(S->pRes + resultoffset * (rt_core_id()));
 
-        // printf("ID %i: 0x%x %i 0x%x %i 0x%x\n",rt_core_id(), pSrcA, srcALen, pSrcB, srcBLen,
-        // pRes);
     }
-
+    // Reorder vectors; longest first
     if (srcALen >= srcBLen) {
         pIn1 = pSrcA;
         pIn1Len = srcALen;

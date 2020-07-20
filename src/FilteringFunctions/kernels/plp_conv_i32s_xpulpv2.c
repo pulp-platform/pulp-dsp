@@ -40,7 +40,7 @@
 */
 
 /**
-   @brief Convolution of 16-bit integer vectors kernel for XPULPV2 extension.
+   @brief Convolution of 32-bit integer vectors kernel for XPULPV2 extension.
    @param[in]  pSrcA      points to the first input vector
    @param[in]  srcALen   Length of the first input vector
    @param[in]  pSrcB      points to the second input vector

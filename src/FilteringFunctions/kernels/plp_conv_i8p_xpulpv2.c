@@ -45,7 +45,7 @@
    plp_conv_i8_parallel
    @return        none */
 
-// Pre-condition: psrcALen >= psrcBLen, established by calling function plp_conv_i32
+// Pre-condition: psrcALen >= psrcBLen, established by calling function plp_conv_i8
 // Pre-condition: pRes has enough allocated memory, i.e. srcALen + srcBLen-1u
 // Pre-condition: srcALen >= 2 and srcBLen >= 2, otherwise use vector dot product
 
@@ -67,6 +67,7 @@ void plp_conv_i8p_xpulpv2(void *task_args) {
     uint32_t pIn1Len;
     uint32_t pIn2Len;
 
+    // Unpack partial convolution vectors
     if (rt_core_id() == (S->nPE - 1)) {
 
         pSrcA = (int8_t *)((S->pSrcA + srcAoffset * (S->nPE - 1)));
@@ -74,9 +75,6 @@ void plp_conv_i8p_xpulpv2(void *task_args) {
         pSrcB = (int8_t *)(S->pSrcB);
         srcBLen = S->srcBLen;
         pRes = (int32_t *)(S->pRes + resultoffset * (S->nPE - 1));
-
-        // printf("ID %i: 0x%x %i 0x%x %i 0x%x\n",rt_core_id(), pSrcA, srcALen, pSrcB, srcBLen,
-        // pRes);
 
     } else {
 
@@ -86,10 +84,9 @@ void plp_conv_i8p_xpulpv2(void *task_args) {
         srcBLen = S->srcBLen;
         pRes = (int32_t *)(S->pRes + resultoffset * (rt_core_id()));
 
-        // printf("ID %i: 0x%x %i 0x%x %i 0x%x\n",rt_core_id(), pSrcA, srcALen, pSrcB, srcBLen,
-        // pRes);
     }
-
+    
+    // Reorder vectors; longest first
     if (srcALen >= srcBLen) {
         pIn1 = pSrcA;
         pIn1Len = srcALen;
@@ -103,6 +100,7 @@ void plp_conv_i8p_xpulpv2(void *task_args) {
     }
 
     plp_conv_i8s_xpulpv2(pIn1, pIn1Len, pIn2, pIn2Len, pRes);
+    rt_team_barrier();
 }
 
 /**

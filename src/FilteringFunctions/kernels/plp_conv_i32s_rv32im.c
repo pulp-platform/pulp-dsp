@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_conv_i32_rv32im.c
- * Description:  32-bit fixed point scalar dot product kernel for RV32IM
+ * Description:  32-bit integer singlecore convolution for RV32IM
  *
  * $Date:        01. July 2019
  * $Revision:    V0
