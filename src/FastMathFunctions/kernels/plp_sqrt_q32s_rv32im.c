@@ -26,10 +26,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Notice: project inspired by ARM CMSIS DSP and parts of source code
- * ported and adopted for RISC-V PULP platform from ARM CMSIS DSP
- * released under Copyright (C) 2010-2019 ARM Limited or its affiliates
- * with Apache-2.0.
  */
 
 #define sqrt2 0b1011010100000100
@@ -57,7 +53,7 @@
    method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
    SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
-   isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
+   isa extension = rv32im, rv32im, etc. of which rv32im is the most general one.
 
    </pre>
 
@@ -77,129 +73,40 @@
 */
 
 void plp_sqrt_q32s_rv32im(const int32_t *__restrict__ pSrc,
-                          const uint32_t fracBits,
-                          int32_t *__restrict__ pRes) {
-
-  int32_t number, temp1, intermediate_fixpoint, signBits, half;
-
-  number = *pSrc;
-
-  /* If the input is a positive number then compute the signBits. */
+                           const uint32_t fracBits,
+                           int32_t *__restrict__ pRes) {
+  
+  int32_t number = *pSrc;
+  int32_t root;
+  
+  int32_t start = 0;
+  int32_t end = number;
+  int32_t mid;
+ 
   if (number > 0) {
-    signBits = __builtin_clz(number) - 33;
 
-    /* Shift by the number of signBits */
-    if ((signBits % 2) == 0) {
-      number = number << signBits;
-    } else {
-      number = number << (signBits - 1);
-    }
+    while(start <= end) {
 
-    /* Calculate half value of the number */
-    half = number >> 1;
-    /* Store the number for later use */
-    temp1 = number;
-    /* Initial guess for 1/(2sqrt(x)) */
-    intermediate_fixpoint = (temp1) >> 2;
+      mid = (start+end) >> 1;
 
-    intermediate_fixpoint =
-      ((int16_t)((int32_t)intermediate_fixpoint *
-                 (0x3000 - ((int16_t)((((int16_t)(((int32_t)intermediate_fixpoint *
-                                                   intermediate_fixpoint) >>
-                                                  15)) *
-                                       (int32_t)half) >>
-                                      15))) >>
-                 15))
-      << 2;
+      if(((mid*mid) >> fracBits) == number){
+        root = mid;
+        break;
+      }
 
-    intermediate_fixpoint =
-      ((int16_t)((int32_t)intermediate_fixpoint *
-                 (0x3000 - ((int16_t)((((int16_t)(((int32_t)intermediate_fixpoint *
-                                                   intermediate_fixpoint) >>
-                                                  15)) *
-                                       (int32_t)half) >>
-                                      15))) >>
-                 15))
-      << 2;
+      if(((mid*mid) >> fracBits) < number){
+        start = mid + 1;
+        root = mid;
+      }
 
-    intermediate_fixpoint =
-      ((int16_t)((int32_t)intermediate_fixpoint *
-                 (0x3000 - ((int16_t)((((int16_t)(((int32_t)intermediate_fixpoint *
-                                                   intermediate_fixpoint) >>
-                                                  15)) *
-                                       (int32_t)half) >>
-                                      15))) >>
-                 15))
-      << 2;
-
-    intermediate_fixpoint =
-      ((int16_t)((int32_t)intermediate_fixpoint *
-                 (0x3000 - ((int16_t)((((int16_t)(((int32_t)intermediate_fixpoint *
-                                                   intermediate_fixpoint) >>
-                                                  15)) *
-                                       (int32_t)half) >>
-                                      15))) >>
-                 15))
-      << 2;
-
-    intermediate_fixpoint =
-      ((int16_t)((int32_t)intermediate_fixpoint *
-                 (0x3000 - ((int16_t)((((int16_t)(((int32_t)intermediate_fixpoint *
-                                                   intermediate_fixpoint) >>
-                                                  15)) *
-                                       (int32_t)half) >>
-                                      15))) >>
-                 15))
-      << 2;
-
-    intermediate_fixpoint =
-      ((int16_t)((int32_t)intermediate_fixpoint *
-                 (0x3000 - ((int16_t)((((int16_t)(((int32_t)intermediate_fixpoint *
-                                                   intermediate_fixpoint) >>
-                                                  15)) *
-                                       (int32_t)half) >>
-                                      15))) >>
-                 15))
-      << 2;
-
-    intermediate_fixpoint =
-      ((int16_t)((int32_t)intermediate_fixpoint *
-                 (0x3000 - ((int16_t)((((int16_t)(((int32_t)intermediate_fixpoint *
-                                                   intermediate_fixpoint) >>
-                                                  15)) *
-                                       (int32_t)half) >>
-                                      15))) >>
-                 15))
-      << 2;
-
-    intermediate_fixpoint =
-      ((int16_t)((int32_t)intermediate_fixpoint *
-                 (0x3000 - ((int16_t)((((int16_t)(((int32_t)intermediate_fixpoint *
-                                                   intermediate_fixpoint) >>
-                                                  15)) *
-                                       (int32_t)half) >>
-                                      15))) >>
-                 15))
-      << 2;
-
-    intermediate_fixpoint = ((int16_t)(((int32_t)temp1 * intermediate_fixpoint) >> 15)) << 1;
-
-    if ((16 - fracBits) > 1) {
-      intermediate_fixpoint = intermediate_fixpoint >> ((int32_t)((16 - fracBits)) >> 1);
-      if ((16 - fracBits) % 2 == 0) {
-        intermediate_fixpoint = ((int32_t)intermediate_fixpoint * sqrt2) >> 15;
+      else {
+        end = mid - 1;
       }
     }
 
-    if ((signBits % 2) == 0) {
-      intermediate_fixpoint = intermediate_fixpoint >> (signBits / 2);
-    } else {
-      intermediate_fixpoint = intermediate_fixpoint >> ((signBits - 1) / 2);
-    }
-    *pRes = (int32_t)intermediate_fixpoint;
-  }
-
-  else {
+    *pRes = root;
+    
+  } else {
     *pRes = 0;
   }
 }
