@@ -103,6 +103,8 @@ void plp_sqrt_q16s_rv32im(const int16_t *__restrict__ pSrc,
         /* Initial guess for 1/(2sqrt(x)) */
         intermediate_fixpoint = (temp1) >> 2;
 
+        for(int i=0;i<8;i++){
+        
         intermediate_fixpoint =
             ((int16_t)((int32_t)intermediate_fixpoint *
                            (0x3000 - ((int16_t)((((int16_t)(((int32_t)intermediate_fixpoint *
@@ -112,76 +114,8 @@ void plp_sqrt_q16s_rv32im(const int16_t *__restrict__ pSrc,
                                                 15))) >>
                        15))
             << 2;
-
-        intermediate_fixpoint =
-            ((int16_t)((int32_t)intermediate_fixpoint *
-                           (0x3000 - ((int16_t)((((int16_t)(((int32_t)intermediate_fixpoint *
-                                                             intermediate_fixpoint) >>
-                                                            15)) *
-                                                 (int32_t)half) >>
-                                                15))) >>
-                       15))
-            << 2;
-
-        intermediate_fixpoint =
-            ((int16_t)((int32_t)intermediate_fixpoint *
-                           (0x3000 - ((int16_t)((((int16_t)(((int32_t)intermediate_fixpoint *
-                                                             intermediate_fixpoint) >>
-                                                            15)) *
-                                                 (int32_t)half) >>
-                                                15))) >>
-                       15))
-            << 2;
-
-        intermediate_fixpoint =
-            ((int16_t)((int32_t)intermediate_fixpoint *
-                           (0x3000 - ((int16_t)((((int16_t)(((int32_t)intermediate_fixpoint *
-                                                             intermediate_fixpoint) >>
-                                                            15)) *
-                                                 (int32_t)half) >>
-                                                15))) >>
-                       15))
-            << 2;
-
-        intermediate_fixpoint =
-            ((int16_t)((int32_t)intermediate_fixpoint *
-                           (0x3000 - ((int16_t)((((int16_t)(((int32_t)intermediate_fixpoint *
-                                                             intermediate_fixpoint) >>
-                                                            15)) *
-                                                 (int32_t)half) >>
-                                                15))) >>
-                       15))
-            << 2;
-
-        intermediate_fixpoint =
-            ((int16_t)((int32_t)intermediate_fixpoint *
-                           (0x3000 - ((int16_t)((((int16_t)(((int32_t)intermediate_fixpoint *
-                                                             intermediate_fixpoint) >>
-                                                            15)) *
-                                                 (int32_t)half) >>
-                                                15))) >>
-                       15))
-            << 2;
-
-        intermediate_fixpoint =
-            ((int16_t)((int32_t)intermediate_fixpoint *
-                           (0x3000 - ((int16_t)((((int16_t)(((int32_t)intermediate_fixpoint *
-                                                             intermediate_fixpoint) >>
-                                                            15)) *
-                                                 (int32_t)half) >>
-                                                15))) >>
-                       15))
-            << 2;
-
-        intermediate_fixpoint =
-            ((int16_t)((int32_t)intermediate_fixpoint *
-                           (0x3000 - ((int16_t)((((int16_t)(((int32_t)intermediate_fixpoint *
-                                                             intermediate_fixpoint) >>
-                                                            15)) *
-                                                 (int32_t)half) >>
-                                                15))) >>
-                       15))
-            << 2;
+        
+        }
 
         intermediate_fixpoint = ((int16_t)(((int32_t)temp1 * intermediate_fixpoint) >> 15)) << 1;
 
