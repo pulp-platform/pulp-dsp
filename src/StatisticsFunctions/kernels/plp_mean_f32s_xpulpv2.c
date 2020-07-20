@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_mean_f32s_xpulpv2.c
- * Description:  Kernel for calculation the mean of 32-Bit input vectors on XPULPV2
+ * Description:  Kernel for calculation the mean of 32-Bit floating point input vectors on XPULPV2
  *
  * $Date:        01.07.2020
  *
