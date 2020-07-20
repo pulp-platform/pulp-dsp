@@ -32,7 +32,7 @@
  * with Apache-2.0.
  */
 
-#define numIters 10
+#define numIters 15
 #include "plp_math.h"
 
 /**
@@ -78,7 +78,7 @@
 
 void plp_sqrt_f32s_xpulpv2(const float *__restrict__ pSrc, float *__restrict__ pRes) {
 
-  float intermediate = 1.f;
+  float intermediate = 1.f / (2.f * (*pSrc));
   float half = *pSrc / 2;
   
   if (half > 0) {
