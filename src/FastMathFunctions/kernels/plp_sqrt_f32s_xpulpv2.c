@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_sqrt_f32s_xpulpv2.c
- * Description:
+ * Description:  32-Bit floating point square root kernel
  *
  * $Date:        02.07.2020
  *
@@ -41,26 +41,6 @@
 
 /**
    @defgroup sqrtKernels Sqrt Kernels
-   Calculates the square root of the input number.
-   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
-   types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
-   provided.
-
-   The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
-   <pre>
-   \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
-
-   data type = {f, i, q} respectively for floats, integers, fixed points
-
-   precision = {32, 16, 8} bits
-
-   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
-   SIMD instructions), and parallel (for multicore parallel computing), respectively.
-
-   isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
-
-   </pre>
-
 */
 
 /**
@@ -71,8 +51,7 @@
 /**
    @brief         Square root of a 32-bit floating point number for XPULPV2 extension.
    @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    sum of squares returned here
+   @param[out]    pRes    Square root returned here
    @return        none
 */
 
