@@ -59,7 +59,7 @@ void plp_sqrt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
   //  int32_t count = 0;
 
   int32_t start = 0;
-  int32_t end = number;
+  int32_t end = 46341; // smallest integer that is larger than sqrt(0x7FFFFFFF)
   int32_t mid;
  
   if (number > 0) {

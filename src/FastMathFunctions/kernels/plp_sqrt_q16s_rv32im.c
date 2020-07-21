@@ -80,9 +80,9 @@ void plp_sqrt_q16s_rv32im(const int16_t *__restrict__ pSrc,
         /* Store the number for later use */
         temp1 = number;
         /* Initial guess for 1/(2sqrt(x)) */
-        intermediate_fixpoint = (temp1) >> 2;
-
-        for(int i=0;i<8;i++){
+        intermediate_fixpoint = (sqrt2 >> 1) - (((sqrt2 >> 1)*(temp1-0x40000000))>>15); // Taylor at 0.5: sqrt(2)/2 - sqrt(2)/2*(x-0.5)
+ 
+        for(int i=0;i<12;i++){
         
         intermediate_fixpoint =
             ((int16_t)((int32_t)intermediate_fixpoint *
