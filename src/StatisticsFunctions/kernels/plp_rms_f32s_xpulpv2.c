@@ -70,10 +70,9 @@
    @return        none
 */
 
-void plp_rms_f32s_xpulpv2(const float *__restrict__ pSrc,
-                          uint32_t blockSize,
-                          float *__restrict__ pRes) {
+void
+plp_rms_f32s_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes) {
 
-  plp_power_f32(pSrc, blockSize, pRes);
-  *pRes = (*pRes)/blockSize;
+    plp_power_f32(pSrc, blockSize, pRes);
+    *pRes = (*pRes) / blockSize;
 }

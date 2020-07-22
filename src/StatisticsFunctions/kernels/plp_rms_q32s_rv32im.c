@@ -71,11 +71,10 @@
 */
 
 void plp_rms_q32s_rv32im(const int32_t *__restrict__ pSrc,
-                           uint32_t blockSize,
-                           uint32_t fracBits,
-                           int32_t *__restrict__ pRes) {
+                         uint32_t blockSize,
+                         uint32_t fracBits,
+                         int32_t *__restrict__ pRes) {
 
-  plp_power_q32(pSrc, blockSize, fracBits, pRes);
-  *pRes = (*pRes)/blockSize;
-
+    plp_power_q32(pSrc, blockSize, fracBits, pRes);
+    *pRes = (*pRes) / blockSize;
 }

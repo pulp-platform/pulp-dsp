@@ -130,11 +130,11 @@ typedef float float32_t;
     @param[out] resBuffer  pointer to the result buffer
 */
 typedef struct {
-  int32_t *pSrcA;     // pointer to the first vector
-  int32_t *pSrcB;     // pointer to the second vector
-  uint32_t blkSizePE; // number of samples in each vector
-  uint32_t nPE;       // number of processing units
-  int32_t *resBuffer; // pointer to result vector
+    int32_t *pSrcA;     // pointer to the first vector
+    int32_t *pSrcB;     // pointer to the second vector
+    uint32_t blkSizePE; // number of samples in each vector
+    uint32_t nPE;       // number of processing units
+    int32_t *resBuffer; // pointer to result vector
 } plp_dot_prod_instance_i32;
 
 /** -------------------------------------------------------
@@ -146,12 +146,12 @@ typedef struct {
     @param[out] resBuffer  pointer to the result buffer
 */
 typedef struct {
-  int32_t *pSrcA;     // pointer to the first vector
-  int32_t *pSrcB;     // pointer to the second vector
-  uint32_t blkSizePE; // number of samples in each vector
-  uint32_t deciPoint; // decimal point for right shift
-  uint32_t nPE;       // number of processing units
-  int32_t *resBuffer; // pointer to result vector
+    int32_t *pSrcA;     // pointer to the first vector
+    int32_t *pSrcB;     // pointer to the second vector
+    uint32_t blkSizePE; // number of samples in each vector
+    uint32_t deciPoint; // decimal point for right shift
+    uint32_t nPE;       // number of processing units
+    int32_t *resBuffer; // pointer to result vector
 } plp_dot_prod_instance_q32;
 
 /** -------------------------------------------------------
@@ -164,11 +164,11 @@ typedef struct {
     @param[out] resBuffer  pointer to the result buffer
 */
 typedef struct {
-  const float32_t *pSrcA; // pointer to the first vector
-  const float32_t *pSrcB; // pointer to the second vector
-  uint32_t blkSizePE;     // number of samples in each vector
-  uint32_t nPE;           // number of processing units
-  float32_t *resBuffer;   // pointer to result vector
+    const float32_t *pSrcA; // pointer to the first vector
+    const float32_t *pSrcB; // pointer to the second vector
+    uint32_t blkSizePE;     // number of samples in each vector
+    uint32_t nPE;           // number of processing units
+    float32_t *resBuffer;   // pointer to result vector
 } plp_dot_prod_instance_f32;
 
 /** -------------------------------------------------------
@@ -181,12 +181,12 @@ typedef struct {
     @param[out] pRes       output result returned here
 */
 typedef struct {
-  const int32_t *pSrcA; // pointer to the first vector
-  uint32_t srcALen;
-  const int32_t *pSrcB; // pointer to the second vector
-  uint32_t srcBLen;     // number of samples in each vector
-  uint8_t nPE;          // number of processing units
-  int32_t *pRes;        // pointer to result vector
+    const int32_t *pSrcA; // pointer to the first vector
+    uint32_t srcALen;
+    const int32_t *pSrcB; // pointer to the second vector
+    uint32_t srcBLen;     // number of samples in each vector
+    uint8_t nPE;          // number of processing units
+    int32_t *pRes;        // pointer to result vector
 } plp_conv_instance_i32;
 
 /** -------------------------------------------------------
@@ -199,12 +199,12 @@ typedef struct {
     @param[out] pRes       output result returned here
 */
 typedef struct {
-  const int16_t *pSrcA; // pointer to the first vector
-  uint32_t srcALen;
-  const int16_t *pSrcB; // pointer to the second vector
-  uint32_t srcBLen;     // number of samples in each vector
-  uint8_t nPE;          // number of processing units
-  int32_t *pRes;        // pointer to result vector
+    const int16_t *pSrcA; // pointer to the first vector
+    uint32_t srcALen;
+    const int16_t *pSrcB; // pointer to the second vector
+    uint32_t srcBLen;     // number of samples in each vector
+    uint8_t nPE;          // number of processing units
+    int32_t *pRes;        // pointer to result vector
 } plp_conv_instance_i16;
 
 /** -------------------------------------------------------
@@ -217,12 +217,12 @@ typedef struct {
     @param[out] pRes       output result returned here
 */
 typedef struct {
-  const int8_t *pSrcA; // pointer to the first vector
-  uint32_t srcALen;
-  const int8_t *pSrcB; // pointer to the second vector
-  uint32_t srcBLen;    // number of samples in each vector
-  uint8_t nPE;         // number of processing units
-  int32_t *pRes;       // pointer to result vector
+    const int8_t *pSrcA; // pointer to the first vector
+    uint32_t srcALen;
+    const int8_t *pSrcB; // pointer to the second vector
+    uint32_t srcBLen;    // number of samples in each vector
+    uint8_t nPE;         // number of processing units
+    int32_t *pRes;       // pointer to result vector
 } plp_conv_instance_i8;
 
 /** -------------------------------------------------------
@@ -236,13 +236,13 @@ typedef struct {
     @param[in]  coresPerVector
 */
 typedef struct {
-  uint32_t addOffset;
-  uint32_t addLengthfirst;
-  uint32_t addLengthsecond;
-  uint32_t numVectors;
-  uint32_t blockOffset;
-  int32_t *pRes;
-  uint8_t coresPerVector;
+    uint32_t addOffset;
+    uint32_t addLengthfirst;
+    uint32_t addLengthsecond;
+    uint32_t numVectors;
+    uint32_t blockOffset;
+    int32_t *pRes;
+    uint8_t coresPerVector;
 } plp_conv_tree_add_instance;
 
 /**
@@ -253,10 +253,10 @@ typedef struct {
  * @param[in]   bitRevTableLength   bit reversal table length
  */
 typedef struct {
-  uint16_t fftLen;             /*< length of the FFT. */
-  const int16_t *pTwiddle;     /*< points to the Twiddle factor table. */
-  const int16_t *pBitRevTable; /*< points to the bit reversal table. */
-  uint16_t bitRevLength;       /*< bit reversal table length. */
+    uint16_t fftLen;             /*< length of the FFT. */
+    const int16_t *pTwiddle;     /*< points to the Twiddle factor table. */
+    const int16_t *pBitRevTable; /*< points to the bit reversal table. */
+    uint16_t bitRevLength;       /*< bit reversal table length. */
 } plp_cfft_instance_q16;
 
 /** -------------------------------------------------------
@@ -275,619 +275,619 @@ typedef struct {
     where each location \f$k\f$ contains the value \f$bitreverse(k)\f$.
 */
 typedef struct {
-  uint32_t FFTLength;
-  uint8_t bitReverseFlag;
-  const float32_t *pTwiddleFactors;
-  const uint16_t *pBitReverseLUT;
+    uint32_t FFTLength;
+    uint8_t bitReverseFlag;
+    const float32_t *pTwiddleFactors;
+    const uint16_t *pBitReverseLUT;
 } plp_rfft_instance_f32;
 
 typedef struct {
-  plp_rfft_instance_f32 *S;
-  const float32_t *pSrc;
-  const uint32_t nPE;
-  float32_t *pDst;
+    plp_rfft_instance_f32 *S;
+    const float32_t *pSrc;
+    const uint32_t nPE;
+    float32_t *pDst;
 } plp_rfft_parallel_arg_f32;
 
 typedef struct {
-  float32_t re;
-  float32_t im;
+    float32_t re;
+    float32_t im;
 } Complex_type_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix multiplication.
  */
 typedef struct {
-  const int8_t *__restrict__ pSrcA;
-  const int8_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t nPE;
-  int32_t *__restrict__ pDstC;
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix multiplication.
  */
 typedef struct {
-  const int16_t *__restrict__ pSrcA;
-  const int16_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t nPE;
-  int32_t *__restrict__ pDstC;
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix multiplication.
  */
 typedef struct {
-  const int32_t *__restrict__ pSrcA;
-  const int32_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t nPE;
-  int32_t *__restrict__ pDstC;
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel matrix multiplication.
  */
 typedef struct {
-  const float *__restrict__ pSrcA;
-  const float *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t nPE;
-  float *__restrict__ pDstC;
+    const float *__restrict__ pSrcA;
+    const float *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t nPE;
+    float *__restrict__ pDstC;
 } plp_mat_mult_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 8-bit fix-point parallel matrix multiplication.
  */
 typedef struct {
-  const int8_t *__restrict__ pSrcA;
-  const int8_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t shift;
-  uint32_t nPE;
-  int8_t *__restrict__ pDstC;
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t shift;
+    uint32_t nPE;
+    int8_t *__restrict__ pDstC;
 } plp_mat_mult_instance_q8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 16-bit fix-point parallel matrix multiplication.
  */
 typedef struct {
-  const int16_t *__restrict__ pSrcA;
-  const int16_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t shift;
-  uint32_t nPE;
-  int16_t *__restrict__ pDstC;
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t shift;
+    uint32_t nPE;
+    int16_t *__restrict__ pDstC;
 } plp_mat_mult_instance_q16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 32-bit fix-point parallel matrix multiplication.
  */
 typedef struct {
-  const int32_t *__restrict__ pSrcA;
-  const int32_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t shift;
-  uint32_t nPE;
-  int32_t *__restrict__ pDstC;
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t shift;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_instance_q32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel complex matrix matrix multiplication.
  */
 typedef struct {
-  const int8_t *__restrict__ pSrcA;
-  const int8_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t nPE;
-  int32_t *__restrict__ pDstC;
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel complex matrix matrix multiplication.
  */
 typedef struct {
-  const int16_t *__restrict__ pSrcA;
-  const int16_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t nPE;
-  int32_t *__restrict__ pDstC;
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel complex matrix matrix multiplication.
  */
 typedef struct {
-  const int32_t *__restrict__ pSrcA;
-  const int32_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t nPE;
-  int32_t *__restrict__ pDstC;
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel complex matrix matrix multiplication.
  */
 typedef struct {
-  const float *__restrict__ pSrcA;
-  const float *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t nPE;
-  float *__restrict__ pDstC;
+    const float *__restrict__ pSrcA;
+    const float *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t nPE;
+    float *__restrict__ pDstC;
 } plp_mat_mult_cmplx_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 8-bit fix-point parallel complex matrix matrix multiplication.
  */
 typedef struct {
-  const int8_t *__restrict__ pSrcA;
-  const int8_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t shift;
-  uint32_t nPE;
-  int8_t *__restrict__ pDstC;
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t shift;
+    uint32_t nPE;
+    int8_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_instance_q8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 16-bit fix-point parallel complex matrix matrix multiplication.
  */
 typedef struct {
-  const int16_t *__restrict__ pSrcA;
-  const int16_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t shift;
-  uint32_t nPE;
-  int16_t *__restrict__ pDstC;
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t shift;
+    uint32_t nPE;
+    int16_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_instance_q16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 32-bit fix-point parallel complex matrix matrix multiplication.
  */
 typedef struct {
-  const int32_t *__restrict__ pSrcA;
-  const int32_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t shift;
-  uint32_t nPE;
-  int32_t *__restrict__ pDstC;
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t shift;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_instance_q32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix addition.
  */
 typedef struct {
-  const int8_t *__restrict__ pSrcA;
-  const int8_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t nPE;
-  int8_t *__restrict__ pDst;
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int8_t *__restrict__ pDst;
 } plp_mat_add_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix addition.
  */
 typedef struct {
-  const int16_t *__restrict__ pSrcA;
-  const int16_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t nPE;
-  int16_t *__restrict__ pDst;
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int16_t *__restrict__ pDst;
 } plp_mat_add_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix addition.
  */
 typedef struct {
-  const int32_t *__restrict__ pSrcA;
-  const int32_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t nPE;
-  int32_t *__restrict__ pDst;
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int32_t *__restrict__ pDst;
 } plp_mat_add_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel matrix addition.
  */
 typedef struct {
-  const float *__restrict__ pSrcA;
-  const float *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t nPE;
-  float *__restrict__ pDst;
+    const float *__restrict__ pSrcA;
+    const float *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    float *__restrict__ pDst;
 } plp_mat_add_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix subtraction.
  */
 typedef struct {
-  const int8_t *__restrict__ pSrcA;
-  const int8_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t nPE;
-  int8_t *__restrict__ pDst;
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int8_t *__restrict__ pDst;
 } plp_mat_sub_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix subtraction.
  */
 typedef struct {
-  const int16_t *__restrict__ pSrcA;
-  const int16_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t nPE;
-  int16_t *__restrict__ pDst;
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int16_t *__restrict__ pDst;
 } plp_mat_sub_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix subtraction.
  */
 typedef struct {
-  const int32_t *__restrict__ pSrcA;
-  const int32_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t nPE;
-  int32_t *__restrict__ pDst;
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int32_t *__restrict__ pDst;
 } plp_mat_sub_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel matrix subtraction.
  */
 typedef struct {
-  const float *__restrict__ pSrcA;
-  const float *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t nPE;
-  float *__restrict__ pDst;
+    const float *__restrict__ pSrcA;
+    const float *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    float *__restrict__ pDst;
 } plp_mat_sub_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix scale.
  */
 typedef struct {
-  const int8_t *__restrict__ pSrc;
-  uint32_t M;
-  uint32_t N;
-  int8_t scaleFactor;
-  int32_t shift;
-  uint32_t nPE;
-  int8_t *__restrict__ pDst;
+    const int8_t *__restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    int8_t scaleFactor;
+    int32_t shift;
+    uint32_t nPE;
+    int8_t *__restrict__ pDst;
 } plp_mat_scale_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix scale.
  */
 typedef struct {
-  const int16_t *__restrict__ pSrc;
-  uint32_t M;
-  uint32_t N;
-  int16_t scaleFactor;
-  int32_t shift;
-  uint32_t nPE;
-  int16_t *__restrict__ pDst;
+    const int16_t *__restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    int16_t scaleFactor;
+    int32_t shift;
+    uint32_t nPE;
+    int16_t *__restrict__ pDst;
 } plp_mat_scale_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix scale.
  */
 typedef struct {
-  const int32_t *__restrict__ pSrc;
-  uint32_t M;
-  uint32_t N;
-  int32_t scaleFactor;
-  int32_t shift;
-  uint32_t nPE;
-  int32_t *__restrict__ pDst;
+    const int32_t *__restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    int32_t scaleFactor;
+    int32_t shift;
+    uint32_t nPE;
+    int32_t *__restrict__ pDst;
 } plp_mat_scale_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel matrix scale.
  */
 typedef struct {
-  const float *__restrict__ pSrc;
-  uint32_t M;
-  uint32_t N;
-  float scaleFactor;
-  uint32_t nPE;
-  float *__restrict__ pDst;
+    const float *__restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    float scaleFactor;
+    uint32_t nPE;
+    float *__restrict__ pDst;
 } plp_mat_scale_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix transpose.
  */
 typedef struct {
-  const int8_t *__restrict__ pSrc;
-  uint32_t M;
-  uint32_t N;
-  uint32_t nPE;
-  int8_t *__restrict__ pDst;
+    const int8_t *__restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int8_t *__restrict__ pDst;
 } plp_mat_trans_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix transpose.
  */
 typedef struct {
-  const int16_t *__restrict__ pSrc;
-  uint32_t M;
-  uint32_t N;
-  uint32_t nPE;
-  int16_t *__restrict__ pDst;
+    const int16_t *__restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int16_t *__restrict__ pDst;
 } plp_mat_trans_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix transpose.
  */
 typedef struct {
-  const int32_t *__restrict__ pSrc;
-  uint32_t M;
-  uint32_t N;
-  uint32_t nPE;
-  int32_t *__restrict__ pDst;
+    const int32_t *__restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t nPE;
+    int32_t *__restrict__ pDst;
 } plp_mat_trans_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel identity matrix creation.
  */
 typedef struct {
-  uint32_t N;
-  uint32_t nPE;
-  int8_t *__restrict__ pDst;
+    uint32_t N;
+    uint32_t nPE;
+    int8_t *__restrict__ pDst;
 } plp_mat_fill_I_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel identity matrix creation.
  */
 typedef struct {
-  uint32_t N;
-  uint32_t nPE;
-  int16_t *__restrict__ pDst;
+    uint32_t N;
+    uint32_t nPE;
+    int16_t *__restrict__ pDst;
 } plp_mat_fill_I_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel identity matrix creation.
  */
 typedef struct {
-  uint32_t N;
-  uint32_t nPE;
-  int32_t *__restrict__ pDst;
+    uint32_t N;
+    uint32_t nPE;
+    int32_t *__restrict__ pDst;
 } plp_mat_fill_I_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel identity matrix creation.
  */
 typedef struct {
-  uint32_t N;
-  uint32_t nPE;
-  float *__restrict__ pDst;
+    uint32_t N;
+    uint32_t nPE;
+    float *__restrict__ pDst;
 } plp_mat_fill_I_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for fix-point parallel identity matrix creation.
  */
 typedef struct {
-  uint32_t N;
-  int32_t fracBits;
-  uint32_t nPE;
-  int8_t *__restrict__ pDst;
+    uint32_t N;
+    int32_t fracBits;
+    uint32_t nPE;
+    int8_t *__restrict__ pDst;
 } plp_mat_fill_I_instance_q8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for fix-point parallel identity matrix creation.
  */
 typedef struct {
-  uint32_t N;
-  uint32_t fracBits;
-  uint32_t nPE;
-  int16_t *__restrict__ pDst;
+    uint32_t N;
+    uint32_t fracBits;
+    uint32_t nPE;
+    int16_t *__restrict__ pDst;
 } plp_mat_fill_I_instance_q16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for fix-point parallel identity matrix creation.
  */
 typedef struct {
-  uint32_t N;
-  uint32_t fracBits;
-  uint32_t nPE;
-  int32_t *__restrict__ pDst;
+    uint32_t N;
+    uint32_t fracBits;
+    uint32_t nPE;
+    int32_t *__restrict__ pDst;
 } plp_mat_fill_I_instance_q32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix multiplication.
  */
 typedef struct {
-  const int8_t *__restrict__ pSrcA;
-  const int8_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideC;
-  uint32_t nPE;
-  int32_t *__restrict__ pDstC;
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix multiplication.
  */
 typedef struct {
-  const int16_t *__restrict__ pSrcA;
-  const int16_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideC;
-  uint32_t nPE;
-  int32_t *__restrict__ pDstC;
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix multiplication.
  */
 typedef struct {
-  const int32_t *__restrict__ pSrcA;
-  const int32_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideC;
-  uint32_t nPE;
-  int32_t *__restrict__ pDstC;
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided floating-point parallel matrix multiplication.
  */
 typedef struct {
-  const float *__restrict__ pSrcA;
-  const float *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideC;
-  uint32_t nPE;
-  float *__restrict__ pDstC;
+    const float *__restrict__ pSrcA;
+    const float *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t nPE;
+    float *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided 8-bit fix-point parallel matrix multiplication.
  */
 typedef struct {
-  const int8_t *__restrict__ pSrcA;
-  const int8_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideC;
-  uint32_t shift;
-  uint32_t nPE;
-  int8_t *__restrict__ pDstC;
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t shift;
+    uint32_t nPE;
+    int8_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_q8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided 16-bit fix-point parallel matrix multiplication.
  */
 typedef struct {
-  const int16_t *__restrict__ pSrcA;
-  const int16_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideC;
-  uint32_t shift;
-  uint32_t nPE;
-  int16_t *__restrict__ pDstC;
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t shift;
+    uint32_t nPE;
+    int16_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_q16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided 32-bit fix-point parallel matrix multiplication.
  */
 typedef struct {
-  const int32_t *__restrict__ pSrcA;
-  const int32_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideC;
-  uint32_t shift;
-  uint32_t nPE;
-  int32_t *__restrict__ pDstC;
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t shift;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_q32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel complex strided matrix matrix multiplication.
  */
 typedef struct {
-  const int8_t *__restrict__ pSrcA;
-  const int8_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideC;
-  uint32_t nPE;
-  int32_t *__restrict__ pDstC;
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_stride_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel complex strided matrix matrix multiplication.
  */
 typedef struct {
-  const int16_t *__restrict__ pSrcA;
-  const int16_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideC;
-  uint32_t nPE;
-  int32_t *__restrict__ pDstC;
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_stride_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel complex strided matrix matrix multiplication.
  */
 typedef struct {
-  const int32_t *__restrict__ pSrcA;
-  const int32_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideC;
-  uint32_t nPE;
-  int32_t *__restrict__ pDstC;
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_stride_instance_i32;
 
 /** -------------------------------------------------------
@@ -895,16 +895,16 @@ typedef struct {
  * multiplication.
  */
 typedef struct {
-  const float *__restrict__ pSrcA;
-  const float *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideC;
-  uint32_t nPE;
-  float *__restrict__ pDstC;
+    const float *__restrict__ pSrcA;
+    const float *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t nPE;
+    float *__restrict__ pDstC;
 } plp_mat_mult_cmplx_stride_instance_f32;
 
 /** -------------------------------------------------------
@@ -912,17 +912,17 @@ typedef struct {
  * multiplication.
  */
 typedef struct {
-  const int8_t *__restrict__ pSrcA;
-  const int8_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideC;
-  uint32_t shift;
-  uint32_t nPE;
-  int8_t *__restrict__ pDstC;
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t shift;
+    uint32_t nPE;
+    int8_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_stride_instance_q8;
 
 /** -------------------------------------------------------
@@ -930,17 +930,17 @@ typedef struct {
  * multiplication.
  */
 typedef struct {
-  const int16_t *__restrict__ pSrcA;
-  const int16_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideC;
-  uint32_t shift;
-  uint32_t nPE;
-  int16_t *__restrict__ pDstC;
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t shift;
+    uint32_t nPE;
+    int16_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_stride_instance_q16;
 
 /** -------------------------------------------------------
@@ -948,369 +948,369 @@ typedef struct {
  * multiplication.
  */
 typedef struct {
-  const int32_t *__restrict__ pSrcA;
-  const int32_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t O;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideC;
-  uint32_t shift;
-  uint32_t nPE;
-  int32_t *__restrict__ pDstC;
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideC;
+    uint32_t shift;
+    uint32_t nPE;
+    int32_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_stride_instance_q32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix addition.
  */
 typedef struct {
-  const int8_t *__restrict__ pSrcA;
-  const int8_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideY;
-  uint32_t nPE;
-  int8_t *__restrict__ pDst;
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideY;
+    uint32_t nPE;
+    int8_t *__restrict__ pDst;
 } plp_mat_add_stride_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix addition.
  */
 typedef struct {
-  const int16_t *__restrict__ pSrcA;
-  const int16_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideY;
-  uint32_t nPE;
-  int16_t *__restrict__ pDst;
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideY;
+    uint32_t nPE;
+    int16_t *__restrict__ pDst;
 } plp_mat_add_stride_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix addition.
  */
 typedef struct {
-  const int32_t *__restrict__ pSrcA;
-  const int32_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideY;
-  uint32_t nPE;
-  int32_t *__restrict__ pDst;
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideY;
+    uint32_t nPE;
+    int32_t *__restrict__ pDst;
 } plp_mat_add_stride_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided floating-point parallel matrix addition.
  */
 typedef struct {
-  const float *__restrict__ pSrcA;
-  const float *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideY;
-  uint32_t nPE;
-  float *__restrict__ pDst;
+    const float *__restrict__ pSrcA;
+    const float *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideY;
+    uint32_t nPE;
+    float *__restrict__ pDst;
 } plp_mat_add_stride_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix subtraction.
  */
 typedef struct {
-  const int8_t *__restrict__ pSrcA;
-  const int8_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideY;
-  uint32_t nPE;
-  int8_t *__restrict__ pDst;
+    const int8_t *__restrict__ pSrcA;
+    const int8_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideY;
+    uint32_t nPE;
+    int8_t *__restrict__ pDst;
 } plp_mat_sub_stride_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix subtraction.
  */
 typedef struct {
-  const int16_t *__restrict__ pSrcA;
-  const int16_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideY;
-  uint32_t nPE;
-  int16_t *__restrict__ pDst;
+    const int16_t *__restrict__ pSrcA;
+    const int16_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideY;
+    uint32_t nPE;
+    int16_t *__restrict__ pDst;
 } plp_mat_sub_stride_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix subtraction.
  */
 typedef struct {
-  const int32_t *__restrict__ pSrcA;
-  const int32_t *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideY;
-  uint32_t nPE;
-  int32_t *__restrict__ pDst;
+    const int32_t *__restrict__ pSrcA;
+    const int32_t *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideY;
+    uint32_t nPE;
+    int32_t *__restrict__ pDst;
 } plp_mat_sub_stride_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided floating-point parallel matrix subtraction.
  */
 typedef struct {
-  const float *__restrict__ pSrcA;
-  const float *__restrict__ pSrcB;
-  uint32_t M;
-  uint32_t N;
-  uint32_t strideA;
-  uint32_t strideB;
-  uint32_t strideY;
-  uint32_t nPE;
-  float *__restrict__ pDst;
+    const float *__restrict__ pSrcA;
+    const float *__restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideA;
+    uint32_t strideB;
+    uint32_t strideY;
+    uint32_t nPE;
+    float *__restrict__ pDst;
 } plp_mat_sub_stride_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix scale.
  */
 typedef struct {
-  const int8_t *__restrict__ pSrc;
-  uint32_t M;
-  uint32_t N;
-  uint32_t strideSrc;
-  uint32_t strideDst;
-  int8_t scaleFactor;
-  int32_t shift;
-  uint32_t nPE;
-  int8_t *__restrict__ pDst;
+    const int8_t *__restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideSrc;
+    uint32_t strideDst;
+    int8_t scaleFactor;
+    int32_t shift;
+    uint32_t nPE;
+    int8_t *__restrict__ pDst;
 } plp_mat_scale_stride_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix scale.
  */
 typedef struct {
-  const int16_t *__restrict__ pSrc;
-  uint32_t M;
-  uint32_t N;
-  uint32_t strideSrc;
-  uint32_t strideDst;
-  int16_t scaleFactor;
-  int32_t shift;
-  uint32_t nPE;
-  int16_t *__restrict__ pDst;
+    const int16_t *__restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideSrc;
+    uint32_t strideDst;
+    int16_t scaleFactor;
+    int32_t shift;
+    uint32_t nPE;
+    int16_t *__restrict__ pDst;
 } plp_mat_scale_stride_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix scale.
  */
 typedef struct {
-  const int32_t *__restrict__ pSrc;
-  uint32_t M;
-  uint32_t N;
-  uint32_t strideSrc;
-  uint32_t strideDst;
-  int32_t scaleFactor;
-  int32_t shift;
-  uint32_t nPE;
-  int32_t *__restrict__ pDst;
+    const int32_t *__restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideSrc;
+    uint32_t strideDst;
+    int32_t scaleFactor;
+    int32_t shift;
+    uint32_t nPE;
+    int32_t *__restrict__ pDst;
 } plp_mat_scale_stride_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided floating-point parallel matrix scale.
  */
 typedef struct {
-  const float *__restrict__ pSrc;
-  uint32_t M;
-  uint32_t N;
-  uint32_t strideSrc;
-  uint32_t strideDst;
-  float scaleFactor;
-  uint32_t nPE;
-  float *__restrict__ pDst;
+    const float *__restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideSrc;
+    uint32_t strideDst;
+    float scaleFactor;
+    uint32_t nPE;
+    float *__restrict__ pDst;
 } plp_mat_scale_stride_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel strided identity matrix creation.
  */
 typedef struct {
-  uint32_t N;
-  uint32_t stride;
-  uint32_t nPE;
-  int8_t *__restrict__ pDst;
+    uint32_t N;
+    uint32_t stride;
+    uint32_t nPE;
+    int8_t *__restrict__ pDst;
 } plp_mat_fill_I_stride_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel strided identity matrix creation.
  */
 typedef struct {
-  uint32_t N;
-  uint32_t stride;
-  uint32_t nPE;
-  int16_t *__restrict__ pDst;
+    uint32_t N;
+    uint32_t stride;
+    uint32_t nPE;
+    int16_t *__restrict__ pDst;
 } plp_mat_fill_I_stride_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel strided identity matrix creation.
  */
 typedef struct {
-  uint32_t N;
-  uint32_t stride;
-  uint32_t nPE;
-  int32_t *__restrict__ pDst;
+    uint32_t N;
+    uint32_t stride;
+    uint32_t nPE;
+    int32_t *__restrict__ pDst;
 } plp_mat_fill_I_stride_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel strided identity matrix creation.
  */
 typedef struct {
-  uint32_t N;
-  uint32_t stride;
-  uint32_t nPE;
-  float *__restrict__ pDst;
+    uint32_t N;
+    uint32_t stride;
+    uint32_t nPE;
+    float *__restrict__ pDst;
 } plp_mat_fill_I_stride_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 8-bit fix-point parallel strided identity matrix creation.
  */
 typedef struct {
-  uint32_t N;
-  uint32_t stride;
-  uint32_t nPE;
-  int32_t fracBits;
-  int8_t *__restrict__ pDst;
+    uint32_t N;
+    uint32_t stride;
+    uint32_t nPE;
+    int32_t fracBits;
+    int8_t *__restrict__ pDst;
 } plp_mat_fill_I_stride_instance_q8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 16-bit fix-point parallel strided identity matrix creation.
  */
 typedef struct {
-  uint32_t N;
-  uint32_t stride;
-  uint32_t nPE;
-  int32_t fracBits;
-  int16_t *__restrict__ pDst;
+    uint32_t N;
+    uint32_t stride;
+    uint32_t nPE;
+    int32_t fracBits;
+    int16_t *__restrict__ pDst;
 } plp_mat_fill_I_stride_instance_q16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 32-bit fix-point parallel strided identity matrix creation.
  */
 typedef struct {
-  uint32_t N;
-  uint32_t stride;
-  uint32_t nPE;
-  int32_t fracBits;
-  int32_t *__restrict__ pDst;
+    uint32_t N;
+    uint32_t stride;
+    uint32_t nPE;
+    int32_t fracBits;
+    int32_t *__restrict__ pDst;
 } plp_mat_fill_I_stride_instance_q32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for filling an integer matrix in parallel.
  */
 typedef struct {
-  uint32_t M;
-  uint32_t N;
-  uint32_t stride;
-  int8_t value;
-  uint32_t nPE;
-  int8_t *__restrict__ pDst;
+    uint32_t M;
+    uint32_t N;
+    uint32_t stride;
+    int8_t value;
+    uint32_t nPE;
+    int8_t *__restrict__ pDst;
 } plp_mat_fill_stride_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for filling an integer matrix in parallel.
  */
 typedef struct {
-  uint32_t M;
-  uint32_t N;
-  uint32_t stride;
-  int16_t value;
-  uint32_t nPE;
-  int16_t *__restrict__ pDst;
+    uint32_t M;
+    uint32_t N;
+    uint32_t stride;
+    int16_t value;
+    uint32_t nPE;
+    int16_t *__restrict__ pDst;
 } plp_mat_fill_stride_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for filling an integer matrix in parallel.
  */
 typedef struct {
-  uint32_t M;
-  uint32_t N;
-  uint32_t stride;
-  int32_t value;
-  uint32_t nPE;
-  int32_t *__restrict__ pDst;
+    uint32_t M;
+    uint32_t N;
+    uint32_t stride;
+    int32_t value;
+    uint32_t nPE;
+    int32_t *__restrict__ pDst;
 } plp_mat_fill_stride_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for filling a floating-point matrix in parallel.
  */
 typedef struct {
-  uint32_t M;
-  uint32_t N;
-  uint32_t stride;
-  float value;
-  uint32_t nPE;
-  float *__restrict__ pDst;
+    uint32_t M;
+    uint32_t N;
+    uint32_t stride;
+    float value;
+    uint32_t nPE;
+    float *__restrict__ pDst;
 } plp_mat_fill_stride_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel strided matrix copy.
  */
 typedef struct {
-  const int8_t *__restrict__ pSrc;
-  uint32_t M;
-  uint32_t N;
-  uint32_t strideSrc;
-  uint32_t strideDst;
-  uint32_t nPE;
-  int8_t *__restrict__ pDst;
+    const int8_t *__restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideSrc;
+    uint32_t strideDst;
+    uint32_t nPE;
+    int8_t *__restrict__ pDst;
 } plp_mat_copy_stride_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel strided matrix copy.
  */
 typedef struct {
-  const int16_t *__restrict__ pSrc;
-  uint32_t M;
-  uint32_t N;
-  uint32_t strideSrc;
-  uint32_t strideDst;
-  uint32_t nPE;
-  int16_t *__restrict__ pDst;
+    const int16_t *__restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideSrc;
+    uint32_t strideDst;
+    uint32_t nPE;
+    int16_t *__restrict__ pDst;
 } plp_mat_copy_stride_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel strided matrix copy.
  */
 typedef struct {
-  const int32_t *__restrict__ pSrc;
-  uint32_t M;
-  uint32_t N;
-  uint32_t strideSrc;
-  uint32_t strideDst;
-  uint32_t nPE;
-  int32_t *__restrict__ pDst;
+    const int32_t *__restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideSrc;
+    uint32_t strideDst;
+    uint32_t nPE;
+    int32_t *__restrict__ pDst;
 } plp_mat_copy_stride_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel strided matrix copy.
  */
 typedef struct {
-  const float *__restrict__ pSrc;
-  uint32_t M;
-  uint32_t N;
-  uint32_t strideSrc;
-  uint32_t strideDst;
-  uint32_t nPE;
-  float *__restrict__ pDst;
+    const float *__restrict__ pSrc;
+    uint32_t M;
+    uint32_t N;
+    uint32_t strideSrc;
+    uint32_t strideDst;
+    uint32_t nPE;
+    float *__restrict__ pDst;
 } plp_mat_copy_stride_instance_f32;
 
 /** -------------------------------------------------------
@@ -2716,7 +2716,8 @@ void plp_rms_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__re
     @return     none
 */
 
-void plp_rms_f32_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
+void
+plp_rms_f32_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for Statisical standard deviation of a 32-bit fixed point vector.
@@ -2836,8 +2837,6 @@ void plp_rms_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
                          uint32_t blockSize,
                          uint32_t fracBits,
                          int8_t *__restrict__ pRes);
-
-
 
 /** -------------------------------------------------------
     @brief      Glue code for square root of a 32-bit fixed point number.

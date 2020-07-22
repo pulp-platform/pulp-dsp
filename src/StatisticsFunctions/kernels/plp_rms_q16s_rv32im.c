@@ -71,15 +71,15 @@
 */
 
 void plp_rms_q16s_rv32im(const int16_t *__restrict__ pSrc,
-                           uint32_t blockSize,
-                           uint32_t fracBits,
-                           int16_t *__restrict__ pRes) {
-  int32_t accu = 0;
-  int32_t temp;
-  for(int i=0;i<blockSize;i++){
-    temp = (*pSrc++);
-    accu += ((temp * temp)>>fracBits);
-  }
- 
-  *pRes = accu/blockSize;  
+                         uint32_t blockSize,
+                         uint32_t fracBits,
+                         int16_t *__restrict__ pRes) {
+    int32_t accu = 0;
+    int32_t temp;
+    for (int i = 0; i < blockSize; i++) {
+        temp = (*pSrc++);
+        accu += ((temp * temp) >> fracBits);
+    }
+
+    *pRes = accu / blockSize;
 }
