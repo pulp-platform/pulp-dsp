@@ -130,11 +130,11 @@ typedef float float32_t;
     @param[out] resBuffer  pointer to the result buffer
 */
 typedef struct {
-    int32_t *pSrcA;     // pointer to the first vector
-    int32_t *pSrcB;     // pointer to the second vector
-    uint32_t blkSizePE; // number of samples in each vector
-    uint32_t nPE;       // number of processing units
-    int32_t *resBuffer; // pointer to result vector
+  int32_t *pSrcA;     // pointer to the first vector
+  int32_t *pSrcB;     // pointer to the second vector
+  uint32_t blkSizePE; // number of samples in each vector
+  uint32_t nPE;       // number of processing units
+  int32_t *resBuffer; // pointer to result vector
 } plp_dot_prod_instance_i32;
 
 /** -------------------------------------------------------
@@ -146,12 +146,12 @@ typedef struct {
     @param[out] resBuffer  pointer to the result buffer
 */
 typedef struct {
-    int32_t *pSrcA;     // pointer to the first vector
-    int32_t *pSrcB;     // pointer to the second vector
-    uint32_t blkSizePE; // number of samples in each vector
-    uint32_t deciPoint; // decimal point for right shift
-    uint32_t nPE;       // number of processing units
-    int32_t *resBuffer; // pointer to result vector
+  int32_t *pSrcA;     // pointer to the first vector
+  int32_t *pSrcB;     // pointer to the second vector
+  uint32_t blkSizePE; // number of samples in each vector
+  uint32_t deciPoint; // decimal point for right shift
+  uint32_t nPE;       // number of processing units
+  int32_t *resBuffer; // pointer to result vector
 } plp_dot_prod_instance_q32;
 
 /** -------------------------------------------------------
@@ -164,11 +164,11 @@ typedef struct {
     @param[out] resBuffer  pointer to the result buffer
 */
 typedef struct {
-    const float32_t *pSrcA; // pointer to the first vector
-    const float32_t *pSrcB; // pointer to the second vector
-    uint32_t blkSizePE;     // number of samples in each vector
-    uint32_t nPE;           // number of processing units
-    float32_t *resBuffer;   // pointer to result vector
+  const float32_t *pSrcA; // pointer to the first vector
+  const float32_t *pSrcB; // pointer to the second vector
+  uint32_t blkSizePE;     // number of samples in each vector
+  uint32_t nPE;           // number of processing units
+  float32_t *resBuffer;   // pointer to result vector
 } plp_dot_prod_instance_f32;
 
 /** -------------------------------------------------------
@@ -181,12 +181,12 @@ typedef struct {
     @param[out] pRes       output result returned here
 */
 typedef struct {
-    const int32_t *pSrcA; // pointer to the first vector
-    uint32_t srcALen;
-    const int32_t *pSrcB; // pointer to the second vector
-    uint32_t srcBLen;     // number of samples in each vector
-    uint8_t nPE;          // number of processing units
-    int32_t *pRes;        // pointer to result vector
+  const int32_t *pSrcA; // pointer to the first vector
+  uint32_t srcALen;
+  const int32_t *pSrcB; // pointer to the second vector
+  uint32_t srcBLen;     // number of samples in each vector
+  uint8_t nPE;          // number of processing units
+  int32_t *pRes;        // pointer to result vector
 } plp_conv_instance_i32;
 
 /** -------------------------------------------------------
@@ -199,12 +199,12 @@ typedef struct {
     @param[out] pRes       output result returned here
 */
 typedef struct {
-    const int16_t *pSrcA; // pointer to the first vector
-    uint32_t srcALen;
-    const int16_t *pSrcB; // pointer to the second vector
-    uint32_t srcBLen;     // number of samples in each vector
-    uint8_t nPE;          // number of processing units
-    int32_t *pRes;        // pointer to result vector
+  const int16_t *pSrcA; // pointer to the first vector
+  uint32_t srcALen;
+  const int16_t *pSrcB; // pointer to the second vector
+  uint32_t srcBLen;     // number of samples in each vector
+  uint8_t nPE;          // number of processing units
+  int32_t *pRes;        // pointer to result vector
 } plp_conv_instance_i16;
 
 /** -------------------------------------------------------
@@ -217,12 +217,12 @@ typedef struct {
     @param[out] pRes       output result returned here
 */
 typedef struct {
-    const int8_t *pSrcA; // pointer to the first vector
-    uint32_t srcALen;
-    const int8_t *pSrcB; // pointer to the second vector
-    uint32_t srcBLen;    // number of samples in each vector
-    uint8_t nPE;         // number of processing units
-    int32_t *pRes;       // pointer to result vector
+  const int8_t *pSrcA; // pointer to the first vector
+  uint32_t srcALen;
+  const int8_t *pSrcB; // pointer to the second vector
+  uint32_t srcBLen;    // number of samples in each vector
+  uint8_t nPE;         // number of processing units
+  int32_t *pRes;       // pointer to result vector
 } plp_conv_instance_i8;
 
 /** -------------------------------------------------------
@@ -236,13 +236,13 @@ typedef struct {
     @param[in]  coresPerVector
 */
 typedef struct {
-    uint32_t addOffset;
-    uint32_t addLengthfirst;
-    uint32_t addLengthsecond;
-    uint32_t numVectors;
-    uint32_t blockOffset;
-    int32_t *pRes;
-    uint8_t coresPerVector;
+  uint32_t addOffset;
+  uint32_t addLengthfirst;
+  uint32_t addLengthsecond;
+  uint32_t numVectors;
+  uint32_t blockOffset;
+  int32_t *pRes;
+  uint8_t coresPerVector;
 } plp_conv_tree_add_instance;
 
 /**
@@ -253,10 +253,10 @@ typedef struct {
  * @param[in]   bitRevTableLength   bit reversal table length
  */
 typedef struct {
-    uint16_t fftLen;             /*< length of the FFT. */
-    const int16_t *pTwiddle;     /*< points to the Twiddle factor table. */
-    const int16_t *pBitRevTable; /*< points to the bit reversal table. */
-    uint16_t bitRevLength;       /*< bit reversal table length. */
+  uint16_t fftLen;             /*< length of the FFT. */
+  const int16_t *pTwiddle;     /*< points to the Twiddle factor table. */
+  const int16_t *pBitRevTable; /*< points to the bit reversal table. */
+  uint16_t bitRevLength;       /*< bit reversal table length. */
 } plp_cfft_instance_q16;
 
 /** -------------------------------------------------------
@@ -264,7 +264,7 @@ typedef struct {
     @brief Instance structure for floating-point FFT
     @param[in]  length data length of the FFT
     @param[in]  bitReverseFlag  flag that enables (bitReverseFlagR=1) or disables
-                                (bitReverseFlagR=0) bit reversal of output
+    (bitReverseFlagR=0) bit reversal of output
     @param[in]  pTwiddleFactors pointer to the twiddle factors.
     These values must be computed using this formula:
     \f$W_N^k =   e^{-j \frac{\pi}{N} k}\f$,
@@ -275,619 +275,619 @@ typedef struct {
     where each location \f$k\f$ contains the value \f$bitreverse(k)\f$.
 */
 typedef struct {
-    uint32_t FFTLength;
-    uint8_t bitReverseFlag;
-    const float32_t *pTwiddleFactors;
-    const uint16_t *pBitReverseLUT;
+  uint32_t FFTLength;
+  uint8_t bitReverseFlag;
+  const float32_t *pTwiddleFactors;
+  const uint16_t *pBitReverseLUT;
 } plp_rfft_instance_f32;
 
 typedef struct {
-    plp_rfft_instance_f32 *S;
-    const float32_t *pSrc;
-    const uint32_t nPE;
-    float32_t *pDst;
+  plp_rfft_instance_f32 *S;
+  const float32_t *pSrc;
+  const uint32_t nPE;
+  float32_t *pDst;
 } plp_rfft_parallel_arg_f32;
 
 typedef struct {
-    float32_t re;
-    float32_t im;
+  float32_t re;
+  float32_t im;
 } Complex_type_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix multiplication.
  */
 typedef struct {
-    const int8_t *__restrict__ pSrcA;
-    const int8_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t nPE;
-    int32_t *__restrict__ pDstC;
+  const int8_t *__restrict__ pSrcA;
+  const int8_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t nPE;
+  int32_t *__restrict__ pDstC;
 } plp_mat_mult_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix multiplication.
  */
 typedef struct {
-    const int16_t *__restrict__ pSrcA;
-    const int16_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t nPE;
-    int32_t *__restrict__ pDstC;
+  const int16_t *__restrict__ pSrcA;
+  const int16_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t nPE;
+  int32_t *__restrict__ pDstC;
 } plp_mat_mult_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix multiplication.
  */
 typedef struct {
-    const int32_t *__restrict__ pSrcA;
-    const int32_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t nPE;
-    int32_t *__restrict__ pDstC;
+  const int32_t *__restrict__ pSrcA;
+  const int32_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t nPE;
+  int32_t *__restrict__ pDstC;
 } plp_mat_mult_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel matrix multiplication.
  */
 typedef struct {
-    const float *__restrict__ pSrcA;
-    const float *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t nPE;
-    float *__restrict__ pDstC;
+  const float *__restrict__ pSrcA;
+  const float *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t nPE;
+  float *__restrict__ pDstC;
 } plp_mat_mult_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 8-bit fix-point parallel matrix multiplication.
  */
 typedef struct {
-    const int8_t *__restrict__ pSrcA;
-    const int8_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t shift;
-    uint32_t nPE;
-    int8_t *__restrict__ pDstC;
+  const int8_t *__restrict__ pSrcA;
+  const int8_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t shift;
+  uint32_t nPE;
+  int8_t *__restrict__ pDstC;
 } plp_mat_mult_instance_q8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 16-bit fix-point parallel matrix multiplication.
  */
 typedef struct {
-    const int16_t *__restrict__ pSrcA;
-    const int16_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t shift;
-    uint32_t nPE;
-    int16_t *__restrict__ pDstC;
+  const int16_t *__restrict__ pSrcA;
+  const int16_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t shift;
+  uint32_t nPE;
+  int16_t *__restrict__ pDstC;
 } plp_mat_mult_instance_q16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 32-bit fix-point parallel matrix multiplication.
  */
 typedef struct {
-    const int32_t *__restrict__ pSrcA;
-    const int32_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t shift;
-    uint32_t nPE;
-    int32_t *__restrict__ pDstC;
+  const int32_t *__restrict__ pSrcA;
+  const int32_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t shift;
+  uint32_t nPE;
+  int32_t *__restrict__ pDstC;
 } plp_mat_mult_instance_q32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel complex matrix matrix multiplication.
  */
 typedef struct {
-    const int8_t *__restrict__ pSrcA;
-    const int8_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t nPE;
-    int32_t *__restrict__ pDstC;
+  const int8_t *__restrict__ pSrcA;
+  const int8_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t nPE;
+  int32_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel complex matrix matrix multiplication.
  */
 typedef struct {
-    const int16_t *__restrict__ pSrcA;
-    const int16_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t nPE;
-    int32_t *__restrict__ pDstC;
+  const int16_t *__restrict__ pSrcA;
+  const int16_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t nPE;
+  int32_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel complex matrix matrix multiplication.
  */
 typedef struct {
-    const int32_t *__restrict__ pSrcA;
-    const int32_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t nPE;
-    int32_t *__restrict__ pDstC;
+  const int32_t *__restrict__ pSrcA;
+  const int32_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t nPE;
+  int32_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel complex matrix matrix multiplication.
  */
 typedef struct {
-    const float *__restrict__ pSrcA;
-    const float *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t nPE;
-    float *__restrict__ pDstC;
+  const float *__restrict__ pSrcA;
+  const float *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t nPE;
+  float *__restrict__ pDstC;
 } plp_mat_mult_cmplx_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 8-bit fix-point parallel complex matrix matrix multiplication.
  */
 typedef struct {
-    const int8_t *__restrict__ pSrcA;
-    const int8_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t shift;
-    uint32_t nPE;
-    int8_t *__restrict__ pDstC;
+  const int8_t *__restrict__ pSrcA;
+  const int8_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t shift;
+  uint32_t nPE;
+  int8_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_instance_q8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 16-bit fix-point parallel complex matrix matrix multiplication.
  */
 typedef struct {
-    const int16_t *__restrict__ pSrcA;
-    const int16_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t shift;
-    uint32_t nPE;
-    int16_t *__restrict__ pDstC;
+  const int16_t *__restrict__ pSrcA;
+  const int16_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t shift;
+  uint32_t nPE;
+  int16_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_instance_q16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 32-bit fix-point parallel complex matrix matrix multiplication.
  */
 typedef struct {
-    const int32_t *__restrict__ pSrcA;
-    const int32_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t shift;
-    uint32_t nPE;
-    int32_t *__restrict__ pDstC;
+  const int32_t *__restrict__ pSrcA;
+  const int32_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t shift;
+  uint32_t nPE;
+  int32_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_instance_q32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix addition.
  */
 typedef struct {
-    const int8_t *__restrict__ pSrcA;
-    const int8_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t nPE;
-    int8_t *__restrict__ pDst;
+  const int8_t *__restrict__ pSrcA;
+  const int8_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t nPE;
+  int8_t *__restrict__ pDst;
 } plp_mat_add_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix addition.
  */
 typedef struct {
-    const int16_t *__restrict__ pSrcA;
-    const int16_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t nPE;
-    int16_t *__restrict__ pDst;
+  const int16_t *__restrict__ pSrcA;
+  const int16_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t nPE;
+  int16_t *__restrict__ pDst;
 } plp_mat_add_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix addition.
  */
 typedef struct {
-    const int32_t *__restrict__ pSrcA;
-    const int32_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t nPE;
-    int32_t *__restrict__ pDst;
+  const int32_t *__restrict__ pSrcA;
+  const int32_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t nPE;
+  int32_t *__restrict__ pDst;
 } plp_mat_add_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel matrix addition.
  */
 typedef struct {
-    const float *__restrict__ pSrcA;
-    const float *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t nPE;
-    float *__restrict__ pDst;
+  const float *__restrict__ pSrcA;
+  const float *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t nPE;
+  float *__restrict__ pDst;
 } plp_mat_add_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix subtraction.
  */
 typedef struct {
-    const int8_t *__restrict__ pSrcA;
-    const int8_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t nPE;
-    int8_t *__restrict__ pDst;
+  const int8_t *__restrict__ pSrcA;
+  const int8_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t nPE;
+  int8_t *__restrict__ pDst;
 } plp_mat_sub_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix subtraction.
  */
 typedef struct {
-    const int16_t *__restrict__ pSrcA;
-    const int16_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t nPE;
-    int16_t *__restrict__ pDst;
+  const int16_t *__restrict__ pSrcA;
+  const int16_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t nPE;
+  int16_t *__restrict__ pDst;
 } plp_mat_sub_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix subtraction.
  */
 typedef struct {
-    const int32_t *__restrict__ pSrcA;
-    const int32_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t nPE;
-    int32_t *__restrict__ pDst;
+  const int32_t *__restrict__ pSrcA;
+  const int32_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t nPE;
+  int32_t *__restrict__ pDst;
 } plp_mat_sub_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel matrix subtraction.
  */
 typedef struct {
-    const float *__restrict__ pSrcA;
-    const float *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t nPE;
-    float *__restrict__ pDst;
+  const float *__restrict__ pSrcA;
+  const float *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t nPE;
+  float *__restrict__ pDst;
 } plp_mat_sub_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix scale.
  */
 typedef struct {
-    const int8_t *__restrict__ pSrc;
-    uint32_t M;
-    uint32_t N;
-    int8_t scaleFactor;
-    int32_t shift;
-    uint32_t nPE;
-    int8_t *__restrict__ pDst;
+  const int8_t *__restrict__ pSrc;
+  uint32_t M;
+  uint32_t N;
+  int8_t scaleFactor;
+  int32_t shift;
+  uint32_t nPE;
+  int8_t *__restrict__ pDst;
 } plp_mat_scale_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix scale.
  */
 typedef struct {
-    const int16_t *__restrict__ pSrc;
-    uint32_t M;
-    uint32_t N;
-    int16_t scaleFactor;
-    int32_t shift;
-    uint32_t nPE;
-    int16_t *__restrict__ pDst;
+  const int16_t *__restrict__ pSrc;
+  uint32_t M;
+  uint32_t N;
+  int16_t scaleFactor;
+  int32_t shift;
+  uint32_t nPE;
+  int16_t *__restrict__ pDst;
 } plp_mat_scale_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix scale.
  */
 typedef struct {
-    const int32_t *__restrict__ pSrc;
-    uint32_t M;
-    uint32_t N;
-    int32_t scaleFactor;
-    int32_t shift;
-    uint32_t nPE;
-    int32_t *__restrict__ pDst;
+  const int32_t *__restrict__ pSrc;
+  uint32_t M;
+  uint32_t N;
+  int32_t scaleFactor;
+  int32_t shift;
+  uint32_t nPE;
+  int32_t *__restrict__ pDst;
 } plp_mat_scale_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel matrix scale.
  */
 typedef struct {
-    const float *__restrict__ pSrc;
-    uint32_t M;
-    uint32_t N;
-    float scaleFactor;
-    uint32_t nPE;
-    float *__restrict__ pDst;
+  const float *__restrict__ pSrc;
+  uint32_t M;
+  uint32_t N;
+  float scaleFactor;
+  uint32_t nPE;
+  float *__restrict__ pDst;
 } plp_mat_scale_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix transpose.
  */
 typedef struct {
-    const int8_t *__restrict__ pSrc;
-    uint32_t M;
-    uint32_t N;
-    uint32_t nPE;
-    int8_t *__restrict__ pDst;
+  const int8_t *__restrict__ pSrc;
+  uint32_t M;
+  uint32_t N;
+  uint32_t nPE;
+  int8_t *__restrict__ pDst;
 } plp_mat_trans_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix transpose.
  */
 typedef struct {
-    const int16_t *__restrict__ pSrc;
-    uint32_t M;
-    uint32_t N;
-    uint32_t nPE;
-    int16_t *__restrict__ pDst;
+  const int16_t *__restrict__ pSrc;
+  uint32_t M;
+  uint32_t N;
+  uint32_t nPE;
+  int16_t *__restrict__ pDst;
 } plp_mat_trans_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel matrix transpose.
  */
 typedef struct {
-    const int32_t *__restrict__ pSrc;
-    uint32_t M;
-    uint32_t N;
-    uint32_t nPE;
-    int32_t *__restrict__ pDst;
+  const int32_t *__restrict__ pSrc;
+  uint32_t M;
+  uint32_t N;
+  uint32_t nPE;
+  int32_t *__restrict__ pDst;
 } plp_mat_trans_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel identity matrix creation.
  */
 typedef struct {
-    uint32_t N;
-    uint32_t nPE;
-    int8_t *__restrict__ pDst;
+  uint32_t N;
+  uint32_t nPE;
+  int8_t *__restrict__ pDst;
 } plp_mat_fill_I_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel identity matrix creation.
  */
 typedef struct {
-    uint32_t N;
-    uint32_t nPE;
-    int16_t *__restrict__ pDst;
+  uint32_t N;
+  uint32_t nPE;
+  int16_t *__restrict__ pDst;
 } plp_mat_fill_I_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel identity matrix creation.
  */
 typedef struct {
-    uint32_t N;
-    uint32_t nPE;
-    int32_t *__restrict__ pDst;
+  uint32_t N;
+  uint32_t nPE;
+  int32_t *__restrict__ pDst;
 } plp_mat_fill_I_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel identity matrix creation.
  */
 typedef struct {
-    uint32_t N;
-    uint32_t nPE;
-    float *__restrict__ pDst;
+  uint32_t N;
+  uint32_t nPE;
+  float *__restrict__ pDst;
 } plp_mat_fill_I_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for fix-point parallel identity matrix creation.
  */
 typedef struct {
-    uint32_t N;
-    int32_t fracBits;
-    uint32_t nPE;
-    int8_t *__restrict__ pDst;
+  uint32_t N;
+  int32_t fracBits;
+  uint32_t nPE;
+  int8_t *__restrict__ pDst;
 } plp_mat_fill_I_instance_q8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for fix-point parallel identity matrix creation.
  */
 typedef struct {
-    uint32_t N;
-    uint32_t fracBits;
-    uint32_t nPE;
-    int16_t *__restrict__ pDst;
+  uint32_t N;
+  uint32_t fracBits;
+  uint32_t nPE;
+  int16_t *__restrict__ pDst;
 } plp_mat_fill_I_instance_q16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for fix-point parallel identity matrix creation.
  */
 typedef struct {
-    uint32_t N;
-    uint32_t fracBits;
-    uint32_t nPE;
-    int32_t *__restrict__ pDst;
+  uint32_t N;
+  uint32_t fracBits;
+  uint32_t nPE;
+  int32_t *__restrict__ pDst;
 } plp_mat_fill_I_instance_q32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix multiplication.
  */
 typedef struct {
-    const int8_t *__restrict__ pSrcA;
-    const int8_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideC;
-    uint32_t nPE;
-    int32_t *__restrict__ pDstC;
+  const int8_t *__restrict__ pSrcA;
+  const int8_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideC;
+  uint32_t nPE;
+  int32_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix multiplication.
  */
 typedef struct {
-    const int16_t *__restrict__ pSrcA;
-    const int16_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideC;
-    uint32_t nPE;
-    int32_t *__restrict__ pDstC;
+  const int16_t *__restrict__ pSrcA;
+  const int16_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideC;
+  uint32_t nPE;
+  int32_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix multiplication.
  */
 typedef struct {
-    const int32_t *__restrict__ pSrcA;
-    const int32_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideC;
-    uint32_t nPE;
-    int32_t *__restrict__ pDstC;
+  const int32_t *__restrict__ pSrcA;
+  const int32_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideC;
+  uint32_t nPE;
+  int32_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided floating-point parallel matrix multiplication.
  */
 typedef struct {
-    const float *__restrict__ pSrcA;
-    const float *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideC;
-    uint32_t nPE;
-    float *__restrict__ pDstC;
+  const float *__restrict__ pSrcA;
+  const float *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideC;
+  uint32_t nPE;
+  float *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided 8-bit fix-point parallel matrix multiplication.
  */
 typedef struct {
-    const int8_t *__restrict__ pSrcA;
-    const int8_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideC;
-    uint32_t shift;
-    uint32_t nPE;
-    int8_t *__restrict__ pDstC;
+  const int8_t *__restrict__ pSrcA;
+  const int8_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideC;
+  uint32_t shift;
+  uint32_t nPE;
+  int8_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_q8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided 16-bit fix-point parallel matrix multiplication.
  */
 typedef struct {
-    const int16_t *__restrict__ pSrcA;
-    const int16_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideC;
-    uint32_t shift;
-    uint32_t nPE;
-    int16_t *__restrict__ pDstC;
+  const int16_t *__restrict__ pSrcA;
+  const int16_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideC;
+  uint32_t shift;
+  uint32_t nPE;
+  int16_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_q16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided 32-bit fix-point parallel matrix multiplication.
  */
 typedef struct {
-    const int32_t *__restrict__ pSrcA;
-    const int32_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideC;
-    uint32_t shift;
-    uint32_t nPE;
-    int32_t *__restrict__ pDstC;
+  const int32_t *__restrict__ pSrcA;
+  const int32_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideC;
+  uint32_t shift;
+  uint32_t nPE;
+  int32_t *__restrict__ pDstC;
 } plp_mat_mult_stride_instance_q32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel complex strided matrix matrix multiplication.
  */
 typedef struct {
-    const int8_t *__restrict__ pSrcA;
-    const int8_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideC;
-    uint32_t nPE;
-    int32_t *__restrict__ pDstC;
+  const int8_t *__restrict__ pSrcA;
+  const int8_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideC;
+  uint32_t nPE;
+  int32_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_stride_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel complex strided matrix matrix multiplication.
  */
 typedef struct {
-    const int16_t *__restrict__ pSrcA;
-    const int16_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideC;
-    uint32_t nPE;
-    int32_t *__restrict__ pDstC;
+  const int16_t *__restrict__ pSrcA;
+  const int16_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideC;
+  uint32_t nPE;
+  int32_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_stride_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel complex strided matrix matrix multiplication.
  */
 typedef struct {
-    const int32_t *__restrict__ pSrcA;
-    const int32_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideC;
-    uint32_t nPE;
-    int32_t *__restrict__ pDstC;
+  const int32_t *__restrict__ pSrcA;
+  const int32_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideC;
+  uint32_t nPE;
+  int32_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_stride_instance_i32;
 
 /** -------------------------------------------------------
@@ -895,16 +895,16 @@ typedef struct {
  * multiplication.
  */
 typedef struct {
-    const float *__restrict__ pSrcA;
-    const float *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideC;
-    uint32_t nPE;
-    float *__restrict__ pDstC;
+  const float *__restrict__ pSrcA;
+  const float *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideC;
+  uint32_t nPE;
+  float *__restrict__ pDstC;
 } plp_mat_mult_cmplx_stride_instance_f32;
 
 /** -------------------------------------------------------
@@ -912,17 +912,17 @@ typedef struct {
  * multiplication.
  */
 typedef struct {
-    const int8_t *__restrict__ pSrcA;
-    const int8_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideC;
-    uint32_t shift;
-    uint32_t nPE;
-    int8_t *__restrict__ pDstC;
+  const int8_t *__restrict__ pSrcA;
+  const int8_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideC;
+  uint32_t shift;
+  uint32_t nPE;
+  int8_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_stride_instance_q8;
 
 /** -------------------------------------------------------
@@ -930,17 +930,17 @@ typedef struct {
  * multiplication.
  */
 typedef struct {
-    const int16_t *__restrict__ pSrcA;
-    const int16_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideC;
-    uint32_t shift;
-    uint32_t nPE;
-    int16_t *__restrict__ pDstC;
+  const int16_t *__restrict__ pSrcA;
+  const int16_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideC;
+  uint32_t shift;
+  uint32_t nPE;
+  int16_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_stride_instance_q16;
 
 /** -------------------------------------------------------
@@ -948,369 +948,369 @@ typedef struct {
  * multiplication.
  */
 typedef struct {
-    const int32_t *__restrict__ pSrcA;
-    const int32_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t O;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideC;
-    uint32_t shift;
-    uint32_t nPE;
-    int32_t *__restrict__ pDstC;
+  const int32_t *__restrict__ pSrcA;
+  const int32_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t O;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideC;
+  uint32_t shift;
+  uint32_t nPE;
+  int32_t *__restrict__ pDstC;
 } plp_mat_mult_cmplx_stride_instance_q32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix addition.
  */
 typedef struct {
-    const int8_t *__restrict__ pSrcA;
-    const int8_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideY;
-    uint32_t nPE;
-    int8_t *__restrict__ pDst;
+  const int8_t *__restrict__ pSrcA;
+  const int8_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideY;
+  uint32_t nPE;
+  int8_t *__restrict__ pDst;
 } plp_mat_add_stride_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix addition.
  */
 typedef struct {
-    const int16_t *__restrict__ pSrcA;
-    const int16_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideY;
-    uint32_t nPE;
-    int16_t *__restrict__ pDst;
+  const int16_t *__restrict__ pSrcA;
+  const int16_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideY;
+  uint32_t nPE;
+  int16_t *__restrict__ pDst;
 } plp_mat_add_stride_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix addition.
  */
 typedef struct {
-    const int32_t *__restrict__ pSrcA;
-    const int32_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideY;
-    uint32_t nPE;
-    int32_t *__restrict__ pDst;
+  const int32_t *__restrict__ pSrcA;
+  const int32_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideY;
+  uint32_t nPE;
+  int32_t *__restrict__ pDst;
 } plp_mat_add_stride_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided floating-point parallel matrix addition.
  */
 typedef struct {
-    const float *__restrict__ pSrcA;
-    const float *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideY;
-    uint32_t nPE;
-    float *__restrict__ pDst;
+  const float *__restrict__ pSrcA;
+  const float *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideY;
+  uint32_t nPE;
+  float *__restrict__ pDst;
 } plp_mat_add_stride_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix subtraction.
  */
 typedef struct {
-    const int8_t *__restrict__ pSrcA;
-    const int8_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideY;
-    uint32_t nPE;
-    int8_t *__restrict__ pDst;
+  const int8_t *__restrict__ pSrcA;
+  const int8_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideY;
+  uint32_t nPE;
+  int8_t *__restrict__ pDst;
 } plp_mat_sub_stride_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix subtraction.
  */
 typedef struct {
-    const int16_t *__restrict__ pSrcA;
-    const int16_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideY;
-    uint32_t nPE;
-    int16_t *__restrict__ pDst;
+  const int16_t *__restrict__ pSrcA;
+  const int16_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideY;
+  uint32_t nPE;
+  int16_t *__restrict__ pDst;
 } plp_mat_sub_stride_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix subtraction.
  */
 typedef struct {
-    const int32_t *__restrict__ pSrcA;
-    const int32_t *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideY;
-    uint32_t nPE;
-    int32_t *__restrict__ pDst;
+  const int32_t *__restrict__ pSrcA;
+  const int32_t *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideY;
+  uint32_t nPE;
+  int32_t *__restrict__ pDst;
 } plp_mat_sub_stride_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided floating-point parallel matrix subtraction.
  */
 typedef struct {
-    const float *__restrict__ pSrcA;
-    const float *__restrict__ pSrcB;
-    uint32_t M;
-    uint32_t N;
-    uint32_t strideA;
-    uint32_t strideB;
-    uint32_t strideY;
-    uint32_t nPE;
-    float *__restrict__ pDst;
+  const float *__restrict__ pSrcA;
+  const float *__restrict__ pSrcB;
+  uint32_t M;
+  uint32_t N;
+  uint32_t strideA;
+  uint32_t strideB;
+  uint32_t strideY;
+  uint32_t nPE;
+  float *__restrict__ pDst;
 } plp_mat_sub_stride_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix scale.
  */
 typedef struct {
-    const int8_t *__restrict__ pSrc;
-    uint32_t M;
-    uint32_t N;
-    uint32_t strideSrc;
-    uint32_t strideDst;
-    int8_t scaleFactor;
-    int32_t shift;
-    uint32_t nPE;
-    int8_t *__restrict__ pDst;
+  const int8_t *__restrict__ pSrc;
+  uint32_t M;
+  uint32_t N;
+  uint32_t strideSrc;
+  uint32_t strideDst;
+  int8_t scaleFactor;
+  int32_t shift;
+  uint32_t nPE;
+  int8_t *__restrict__ pDst;
 } plp_mat_scale_stride_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix scale.
  */
 typedef struct {
-    const int16_t *__restrict__ pSrc;
-    uint32_t M;
-    uint32_t N;
-    uint32_t strideSrc;
-    uint32_t strideDst;
-    int16_t scaleFactor;
-    int32_t shift;
-    uint32_t nPE;
-    int16_t *__restrict__ pDst;
+  const int16_t *__restrict__ pSrc;
+  uint32_t M;
+  uint32_t N;
+  uint32_t strideSrc;
+  uint32_t strideDst;
+  int16_t scaleFactor;
+  int32_t shift;
+  uint32_t nPE;
+  int16_t *__restrict__ pDst;
 } plp_mat_scale_stride_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix scale.
  */
 typedef struct {
-    const int32_t *__restrict__ pSrc;
-    uint32_t M;
-    uint32_t N;
-    uint32_t strideSrc;
-    uint32_t strideDst;
-    int32_t scaleFactor;
-    int32_t shift;
-    uint32_t nPE;
-    int32_t *__restrict__ pDst;
+  const int32_t *__restrict__ pSrc;
+  uint32_t M;
+  uint32_t N;
+  uint32_t strideSrc;
+  uint32_t strideDst;
+  int32_t scaleFactor;
+  int32_t shift;
+  uint32_t nPE;
+  int32_t *__restrict__ pDst;
 } plp_mat_scale_stride_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for strided floating-point parallel matrix scale.
  */
 typedef struct {
-    const float *__restrict__ pSrc;
-    uint32_t M;
-    uint32_t N;
-    uint32_t strideSrc;
-    uint32_t strideDst;
-    float scaleFactor;
-    uint32_t nPE;
-    float *__restrict__ pDst;
+  const float *__restrict__ pSrc;
+  uint32_t M;
+  uint32_t N;
+  uint32_t strideSrc;
+  uint32_t strideDst;
+  float scaleFactor;
+  uint32_t nPE;
+  float *__restrict__ pDst;
 } plp_mat_scale_stride_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel strided identity matrix creation.
  */
 typedef struct {
-    uint32_t N;
-    uint32_t stride;
-    uint32_t nPE;
-    int8_t *__restrict__ pDst;
+  uint32_t N;
+  uint32_t stride;
+  uint32_t nPE;
+  int8_t *__restrict__ pDst;
 } plp_mat_fill_I_stride_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel strided identity matrix creation.
  */
 typedef struct {
-    uint32_t N;
-    uint32_t stride;
-    uint32_t nPE;
-    int16_t *__restrict__ pDst;
+  uint32_t N;
+  uint32_t stride;
+  uint32_t nPE;
+  int16_t *__restrict__ pDst;
 } plp_mat_fill_I_stride_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel strided identity matrix creation.
  */
 typedef struct {
-    uint32_t N;
-    uint32_t stride;
-    uint32_t nPE;
-    int32_t *__restrict__ pDst;
+  uint32_t N;
+  uint32_t stride;
+  uint32_t nPE;
+  int32_t *__restrict__ pDst;
 } plp_mat_fill_I_stride_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel strided identity matrix creation.
  */
 typedef struct {
-    uint32_t N;
-    uint32_t stride;
-    uint32_t nPE;
-    float *__restrict__ pDst;
+  uint32_t N;
+  uint32_t stride;
+  uint32_t nPE;
+  float *__restrict__ pDst;
 } plp_mat_fill_I_stride_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 8-bit fix-point parallel strided identity matrix creation.
  */
 typedef struct {
-    uint32_t N;
-    uint32_t stride;
-    uint32_t nPE;
-    int32_t fracBits;
-    int8_t *__restrict__ pDst;
+  uint32_t N;
+  uint32_t stride;
+  uint32_t nPE;
+  int32_t fracBits;
+  int8_t *__restrict__ pDst;
 } plp_mat_fill_I_stride_instance_q8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 16-bit fix-point parallel strided identity matrix creation.
  */
 typedef struct {
-    uint32_t N;
-    uint32_t stride;
-    uint32_t nPE;
-    int32_t fracBits;
-    int16_t *__restrict__ pDst;
+  uint32_t N;
+  uint32_t stride;
+  uint32_t nPE;
+  int32_t fracBits;
+  int16_t *__restrict__ pDst;
 } plp_mat_fill_I_stride_instance_q16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for 32-bit fix-point parallel strided identity matrix creation.
  */
 typedef struct {
-    uint32_t N;
-    uint32_t stride;
-    uint32_t nPE;
-    int32_t fracBits;
-    int32_t *__restrict__ pDst;
+  uint32_t N;
+  uint32_t stride;
+  uint32_t nPE;
+  int32_t fracBits;
+  int32_t *__restrict__ pDst;
 } plp_mat_fill_I_stride_instance_q32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for filling an integer matrix in parallel.
  */
 typedef struct {
-    uint32_t M;
-    uint32_t N;
-    uint32_t stride;
-    int8_t value;
-    uint32_t nPE;
-    int8_t *__restrict__ pDst;
+  uint32_t M;
+  uint32_t N;
+  uint32_t stride;
+  int8_t value;
+  uint32_t nPE;
+  int8_t *__restrict__ pDst;
 } plp_mat_fill_stride_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for filling an integer matrix in parallel.
  */
 typedef struct {
-    uint32_t M;
-    uint32_t N;
-    uint32_t stride;
-    int16_t value;
-    uint32_t nPE;
-    int16_t *__restrict__ pDst;
+  uint32_t M;
+  uint32_t N;
+  uint32_t stride;
+  int16_t value;
+  uint32_t nPE;
+  int16_t *__restrict__ pDst;
 } plp_mat_fill_stride_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for filling an integer matrix in parallel.
  */
 typedef struct {
-    uint32_t M;
-    uint32_t N;
-    uint32_t stride;
-    int32_t value;
-    uint32_t nPE;
-    int32_t *__restrict__ pDst;
+  uint32_t M;
+  uint32_t N;
+  uint32_t stride;
+  int32_t value;
+  uint32_t nPE;
+  int32_t *__restrict__ pDst;
 } plp_mat_fill_stride_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for filling a floating-point matrix in parallel.
  */
 typedef struct {
-    uint32_t M;
-    uint32_t N;
-    uint32_t stride;
-    float value;
-    uint32_t nPE;
-    float *__restrict__ pDst;
+  uint32_t M;
+  uint32_t N;
+  uint32_t stride;
+  float value;
+  uint32_t nPE;
+  float *__restrict__ pDst;
 } plp_mat_fill_stride_instance_f32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel strided matrix copy.
  */
 typedef struct {
-    const int8_t *__restrict__ pSrc;
-    uint32_t M;
-    uint32_t N;
-    uint32_t strideSrc;
-    uint32_t strideDst;
-    uint32_t nPE;
-    int8_t *__restrict__ pDst;
+  const int8_t *__restrict__ pSrc;
+  uint32_t M;
+  uint32_t N;
+  uint32_t strideSrc;
+  uint32_t strideDst;
+  uint32_t nPE;
+  int8_t *__restrict__ pDst;
 } plp_mat_copy_stride_instance_i8;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel strided matrix copy.
  */
 typedef struct {
-    const int16_t *__restrict__ pSrc;
-    uint32_t M;
-    uint32_t N;
-    uint32_t strideSrc;
-    uint32_t strideDst;
-    uint32_t nPE;
-    int16_t *__restrict__ pDst;
+  const int16_t *__restrict__ pSrc;
+  uint32_t M;
+  uint32_t N;
+  uint32_t strideSrc;
+  uint32_t strideDst;
+  uint32_t nPE;
+  int16_t *__restrict__ pDst;
 } plp_mat_copy_stride_instance_i16;
 
 /** -------------------------------------------------------
  * @brief Instance structure for integer parallel strided matrix copy.
  */
 typedef struct {
-    const int32_t *__restrict__ pSrc;
-    uint32_t M;
-    uint32_t N;
-    uint32_t strideSrc;
-    uint32_t strideDst;
-    uint32_t nPE;
-    int32_t *__restrict__ pDst;
+  const int32_t *__restrict__ pSrc;
+  uint32_t M;
+  uint32_t N;
+  uint32_t strideSrc;
+  uint32_t strideDst;
+  uint32_t nPE;
+  int32_t *__restrict__ pDst;
 } plp_mat_copy_stride_instance_i32;
 
 /** -------------------------------------------------------
  * @brief Instance structure for floating-point parallel strided matrix copy.
  */
 typedef struct {
-    const float *__restrict__ pSrc;
-    uint32_t M;
-    uint32_t N;
-    uint32_t strideSrc;
-    uint32_t strideDst;
-    uint32_t nPE;
-    float *__restrict__ pDst;
+  const float *__restrict__ pSrc;
+  uint32_t M;
+  uint32_t N;
+  uint32_t strideSrc;
+  uint32_t strideDst;
+  uint32_t nPE;
+  float *__restrict__ pDst;
 } plp_mat_copy_stride_instance_f32;
 
 /** -------------------------------------------------------
@@ -1365,7 +1365,7 @@ void plp_dot_prod_f32_parallel(const float32_t *__restrict__ pSrcA,
 
 /** -------------------------------------------------------
     @brief Parallel dot product with interleaved access of 32-bit integer vectors kernel for XPULPV2
-           extension.
+    extension.
     @param[in]  S     points to the instance structure for integer parallel dot product
     @return     none
 */
@@ -1374,7 +1374,7 @@ void plp_dot_prod_i32p_xpulpv2(void *S);
 
 /** -------------------------------------------------------
     @brief Parallel dot product with interleaved access of 32-bit fixed point vectors kernel for
-           XPULPV2 extension.
+    XPULPV2 extension.
     @param[in]  S     points to the instance structure for fixed point parallel dot product
     @return     none
 */
@@ -1383,7 +1383,7 @@ void plp_dot_prod_q32p_xpulpv2(void *S);
 
 /** -------------------------------------------------------
     @brief Parallel dot product with interleaved access of 32-bit float vectors kernel for XPULPV2
-           extension.
+    extension.
     @param[in]  S     points to the instance structure for float parallel dot product
     @return     none
 */
@@ -1391,36 +1391,36 @@ void plp_dot_prod_q32p_xpulpv2(void *S);
 void plp_dot_prod_f32p_xpulpv2(void *S);
 
 /** -------------------------------------------------------
-   @brief Glue code for dot product of 32-bit integer vectors.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  blockSize  number of samples in each vector
-   @param[out] pRes       output result returned here
- */
+    @brief Glue code for dot product of 32-bit integer vectors.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blockSize  number of samples in each vector
+    @param[out] pRes       output result returned here
+*/
 void plp_dot_prod_i32(const int32_t *__restrict__ pSrcA,
                       const int32_t *__restrict__ pSrcB,
                       uint32_t blockSize,
                       int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief Scalar dot product of 32-bit integer vectors kernel for RV32IM extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  blockSize  number of samples in each vector
-   @param[out] pRes       output result returned here
- */
+    @brief Scalar dot product of 32-bit integer vectors kernel for RV32IM extension.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blockSize  number of samples in each vector
+    @param[out] pRes       output result returned here
+*/
 void plp_dot_prod_i32s_rv32im(const int32_t *__restrict__ pSrcA,
                               const int32_t *__restrict__ pSrcB,
                               uint32_t blockSize,
                               int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief Scalar dot product of 32-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  blockSize  number of samples in each vector
-   @param[out] pRes       output result returned here
- */
+    @brief Scalar dot product of 32-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blockSize  number of samples in each vector
+    @param[out] pRes       output result returned here
+*/
 void plp_dot_prod_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
                                const int32_t *__restrict__ pSrcB,
                                uint32_t blockSize,
@@ -1503,15 +1503,15 @@ void plp_dot_prod_f32s_xpulpv2(const float32_t *__restrict__ pSrcA,
                                float32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief Glue code for dot product of 16-bit integer vectors.
-   @param[in]  pSrcA      points to the first input vector [16 bit]
-   @param[in]  pSrcB      points to the second input vector [16 bit]
-   @param[in]  blockSize  number of samples in each vector
-   @param[out] pRes       output result returned here [32 bit]
+    @brief Glue code for dot product of 16-bit integer vectors.
+    @param[in]  pSrcA      points to the first input vector [16 bit]
+    @param[in]  pSrcB      points to the second input vector [16 bit]
+    @param[in]  blockSize  number of samples in each vector
+    @param[out] pRes       output result returned here [32 bit]
 
-   @par Exploiting SIMD instructions
-   When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the
-   two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
+    @par Exploiting SIMD instructions
+    When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the
+    two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
 */
 void plp_dot_prod_i16(const int16_t *pSrcA,
                       const int16_t *pSrcB,
@@ -1519,17 +1519,17 @@ void plp_dot_prod_i16(const int16_t *pSrcA,
                       int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief Vectorized dot product of 16-bit integer vectors kernel for RV32IM extension.
-   @param[in]  pSrcA      points to the first input vector [16 bit]
-   @param[in]  pSrcB      points to the second input vector [16 bit]
-   @param[in]  blockSize  number of samples in each vector
-   @param[out] pRes       output result returned here [32 bit]
-   @return     none
+    @brief Vectorized dot product of 16-bit integer vectors kernel for RV32IM extension.
+    @param[in]  pSrcA      points to the first input vector [16 bit]
+    @param[in]  pSrcB      points to the second input vector [16 bit]
+    @param[in]  blockSize  number of samples in each vector
+    @param[out] pRes       output result returned here [32 bit]
+    @return     none
 
-   @par Exploiting SIMD instructions
-   When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the
-   two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM
-   doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
+    @par Exploiting SIMD instructions
+    When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the
+    two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM
+    doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
 */
 
 void plp_dot_prod_i16s_rv32im(const int16_t *__restrict__ pSrcA,
@@ -1779,9 +1779,8 @@ void plp_copy_i32(int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32
     @return     none
 */
 
-void plp_copy_i32s_rv32im(int32_t *__restrict__ pSrc,
-                          int32_t *__restrict__ pDst,
-                          uint32_t blockSize);
+void
+plp_copy_i32s_rv32im(int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32_t blockSize);
 
 /** -------------------------------------------------------
     @brief      Copies the elements of a 32-bit integer vector for XPULPV2 extension.
@@ -1791,9 +1790,8 @@ void plp_copy_i32s_rv32im(int32_t *__restrict__ pSrc,
     @return     none
 */
 
-void plp_copy_i32s_xpulpv2(int32_t *__restrict__ pSrc,
-                           int32_t *__restrict__ pDst,
-                           uint32_t blockSize);
+void
+plp_copy_i32s_xpulpv2(int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32_t blockSize);
 
 /** -------------------------------------------------------
     @brief      Glue code for copying the elements of a 32-bit float vector
@@ -1835,9 +1833,8 @@ void plp_mean_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__r
     @return     none
 */
 
-void plp_mean_f32s_xpulpv2(const float *__restrict__ pSrc,
-                           uint32_t blockSize,
-                           float *__restrict__ pRes);
+void
+plp_mean_f32s_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for mean value of a 32-bit integer vector.
@@ -1925,9 +1922,8 @@ void plp_mean_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__
     @return     none
 */
 
-void plp_mean_i8s_rv32im(const int8_t *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         int8_t *__restrict__ pRes);
+void
+plp_mean_i8s_rv32im(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Mean value of a 8-bit integer vector for XPULPV2 extension.
@@ -1959,9 +1955,8 @@ void plp_max_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__re
     @return     none
 */
 
-void plp_max_f32s_xpulpv2(const float *__restrict__ pSrc,
-                          uint32_t blockSize,
-                          float *__restrict__ pRes);
+void
+plp_max_f32s_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for max value of a 32-bit integer vector.
@@ -2049,9 +2044,8 @@ void plp_max_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__r
     @return     none
 */
 
-void plp_max_i8s_rv32im(const int8_t *__restrict__ pSrc,
-                        uint32_t blockSize,
-                        int8_t *__restrict__ pRes);
+void
+plp_max_i8s_rv32im(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Max value of a 8-bit integer vector for XPULPV2 extension.
@@ -2061,9 +2055,8 @@ void plp_max_i8s_rv32im(const int8_t *__restrict__ pSrc,
     @return     none
 */
 
-void plp_max_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         int8_t *__restrict__ pRes);
+void
+plp_max_i8s_xpulpv2(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for min value of a 32-bit float vector.
@@ -2083,9 +2076,8 @@ void plp_min_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__re
     @return     none
 */
 
-void plp_min_f32s_xpulpv2(const float *__restrict__ pSrc,
-                          uint32_t blockSize,
-                          float *__restrict__ pRes);
+void
+plp_min_f32s_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for min value of a 32-bit integer vector.
@@ -2173,9 +2165,8 @@ void plp_min_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__r
     @return     none
 */
 
-void plp_min_i8s_rv32im(const int8_t *__restrict__ pSrc,
-                        uint32_t blockSize,
-                        int8_t *__restrict__ pRes);
+void
+plp_min_i8s_rv32im(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Min value of a 8-bit integer vector for XPULPV2 extension.
@@ -2185,9 +2176,8 @@ void plp_min_i8s_rv32im(const int8_t *__restrict__ pSrc,
     @return     none
 */
 
-void plp_min_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         int8_t *__restrict__ pRes);
+void
+plp_min_i8s_xpulpv2(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for Sum of squares of a 32-bit float vector.
@@ -2207,9 +2197,8 @@ void plp_power_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__
     @return     none
 */
 
-void plp_power_f32_xpulpv2(const float *__restrict__ pSrc,
-                           uint32_t blockSize,
-                           float *__restrict__ pRes);
+void
+plp_power_f32_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for Sum of squares of a 32-bit integer vector.
@@ -2219,9 +2208,8 @@ void plp_power_f32_xpulpv2(const float *__restrict__ pSrc,
     @return     none
 */
 
-void plp_power_i32(const int32_t *__restrict__ pSrc,
-                   uint32_t blockSize,
-                   int32_t *__restrict__ pRes);
+void
+plp_power_i32(const int32_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Sum of squares of a 32-bit integer vector for RV32IM extension.
@@ -2255,9 +2243,8 @@ void plp_power_i32s_xpulpv2(const int32_t *__restrict__ pSrc,
     @return     none
 */
 
-void plp_power_i16(const int16_t *__restrict__ pSrc,
-                   uint32_t blockSize,
-                   int32_t *__restrict__ pRes);
+void
+plp_power_i16(const int16_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Sum of squares of a 16-bit integer vector for RV32IM extension.
@@ -2435,33 +2422,32 @@ void plp_power_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
                            int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for Statisical variance of a 32-bit float vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
+    @brief      Glue code for Statisical variance of a 32-bit float vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical variance returned here
+    @return     none
 */
 
 void plp_var_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Kernel for Statisical variance of a 32-bit float vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
+    @brief      Kernel for Statisical variance of a 32-bit float vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical variance returned here
+    @return     none
 */
 
-void plp_var_f32_xpulpv2(const float *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         float *__restrict__ pRes);
+void
+plp_var_f32_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for Statisical variance of a 32-bit fixed point vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
+    @brief      Glue code for Statisical variance of a 32-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical variance returned here
+    @return     none
 */
 
 void plp_var_q32(const int32_t *__restrict__ pSrc,
@@ -2470,11 +2456,11 @@ void plp_var_q32(const int32_t *__restrict__ pSrc,
                  int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical variance of a 32-bit fixed point vector for RV32IM extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance value returned here
-   @return     none
+    @brief      Statisical variance of a 32-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical variance value returned here
+    @return     none
 */
 
 void plp_var_q32s_rv32im(const int32_t *__restrict__ pSrc,
@@ -2483,11 +2469,11 @@ void plp_var_q32s_rv32im(const int32_t *__restrict__ pSrc,
                          int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical variance of a 32-bit fixed point vector for XPULPV2 extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pRes       Statisical variance returned here
-   @return     none
+    @brief      Statisical variance of a 32-bit fixed point vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical variance returned here
+    @return     none
 */
 
 void plp_var_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
@@ -2496,11 +2482,11 @@ void plp_var_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
                           int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for Statisical variance of a 16-bit fixed point vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
+    @brief      Glue code for Statisical variance of a 16-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical variance returned here
+    @return     none
 */
 
 void plp_var_q16(const int16_t *__restrict__ pSrc,
@@ -2509,11 +2495,11 @@ void plp_var_q16(const int16_t *__restrict__ pSrc,
                  int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical variance of a 16-bit fixed point vector for RV32IM extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
+    @brief      Statisical variance of a 16-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical variance returned here
+    @return     none
 */
 
 void plp_var_q16s_rv32im(const int16_t *__restrict__ pSrc,
@@ -2522,11 +2508,11 @@ void plp_var_q16s_rv32im(const int16_t *__restrict__ pSrc,
                          int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical variance of a 16-bit fixed point vector for XPULPV2 extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pRes       Statisical variance returned here
-   @return     none
+    @brief      Statisical variance of a 16-bit fixed point vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical variance returned here
+    @return     none
 */
 
 void plp_var_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
@@ -2535,11 +2521,11 @@ void plp_var_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
                           int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for Statisical variance of a 8-bit fixed point vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
+    @brief      Glue code for Statisical variance of a 8-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical variance returned here
+    @return     none
 */
 
 void plp_var_q8(const int8_t *__restrict__ pSrc,
@@ -2548,11 +2534,11 @@ void plp_var_q8(const int8_t *__restrict__ pSrc,
                 int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical variance of a 8-bit fixed point vector for RV32IM extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
+    @brief      Statisical variance of a 8-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical variance returned here
+    @return     none
 */
 
 void plp_var_q8s_rv32im(const int8_t *__restrict__ pSrc,
@@ -2561,11 +2547,11 @@ void plp_var_q8s_rv32im(const int8_t *__restrict__ pSrc,
                         int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical variance of a 8-bit fixed point vector for XPULPV2 extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pRes       Statisical variance value returned here
-   @return     none
+    @brief      Statisical variance of a 8-bit fixed point vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical variance value returned here
+    @return     none
 */
 
 void plp_var_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
@@ -2574,33 +2560,32 @@ void plp_var_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
                          int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for Statisical standard deviation of a 32-bit floating point vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical standard deviation returned here
-   @return     none
+    @brief      Glue code for Statisical standard deviation of a 32-bit floating point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
 */
 
 void plp_std_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Kernel for Statisical standard deviation of a 32-bit float vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical standard deviation returned here
-   @return     none
+    @brief      Kernel for Statisical standard deviation of a 32-bit float vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
 */
 
-void plp_std_f32_xpulpv2(const float *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         float *__restrict__ pRes);
+void
+plp_std_f32_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for Statisical standard deviation of a 32-bit fixed point vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical standard deviation returned here
-   @return     none
+    @brief      Glue code for Statisical standard deviation of a 32-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
 */
 
 void plp_std_q32(const int32_t *__restrict__ pSrc,
@@ -2609,11 +2594,11 @@ void plp_std_q32(const int32_t *__restrict__ pSrc,
                  int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical standard deviation of a 32-bit fixed point vector for RV32IM extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical standard deviation value returned here
-   @return     none
+    @brief      Statisical standard deviation of a 32-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation value returned here
+    @return     none
 */
 
 void plp_std_q32s_rv32im(const int32_t *__restrict__ pSrc,
@@ -2622,12 +2607,12 @@ void plp_std_q32s_rv32im(const int32_t *__restrict__ pSrc,
                          int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical standard deviation of a 32-bit fixed point vector for XPULPV2
-   extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pRes       Statisical standard deviation returned here
-   @return     none
+    @brief      Statisical standard deviation of a 32-bit fixed point vector for XPULPV2
+    extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical standard deviation returned here
+    @return     none
 */
 
 void plp_std_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
@@ -2636,11 +2621,11 @@ void plp_std_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
                           int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for Statisical standard deviation of a 16-bit fixed point vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical standard deviation returned here
-   @return     none
+    @brief      Glue code for Statisical standard deviation of a 16-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
 */
 
 void plp_std_q16(const int16_t *__restrict__ pSrc,
@@ -2649,11 +2634,11 @@ void plp_std_q16(const int16_t *__restrict__ pSrc,
                  int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical standard deviation of a 16-bit fixed point vector for RV32IM extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical standard deviation returned here
-   @return     none
+    @brief      Statisical standard deviation of a 16-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
 */
 
 void plp_std_q16s_rv32im(const int16_t *__restrict__ pSrc,
@@ -2662,12 +2647,12 @@ void plp_std_q16s_rv32im(const int16_t *__restrict__ pSrc,
                          int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical standard deviation of a 16-bit fixed point vector for XPULPV2
-   extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pRes       Statisical standard deviation returned here
-   @return     none
+    @brief      Statisical standard deviation of a 16-bit fixed point vector for XPULPV2
+    extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical standard deviation returned here
+    @return     none
 */
 
 void plp_std_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
@@ -2676,11 +2661,11 @@ void plp_std_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
                           int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for Statisical standard deviation of a 8-bit fixed point vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical standard deviation returned here
-   @return     none
+    @brief      Glue code for Statisical standard deviation of a 8-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
 */
 
 void plp_std_q8(const int8_t *__restrict__ pSrc,
@@ -2689,11 +2674,11 @@ void plp_std_q8(const int8_t *__restrict__ pSrc,
                 int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical standard deviation of a 8-bit fixed point vector for RV32IM extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical standard deviation returned here
-   @return     none
+    @brief      Statisical standard deviation of a 8-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
 */
 
 void plp_std_q8s_rv32im(const int8_t *__restrict__ pSrc,
@@ -2702,34 +2687,173 @@ void plp_std_q8s_rv32im(const int8_t *__restrict__ pSrc,
                         int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical standard deviation of a 8-bit fixed point vector for XPULPV2 extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pRes       Statisical standard deviation value returned here
-   @return     none
+    @brief      Statisical standard deviation of a 8-bit fixed point vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical standard deviation value returned here
+    @return     none
 */
 
 void plp_std_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
                          uint32_t blockSize,
                          uint32_t fracBits,
                          int8_t *__restrict__ pRes);
-
 /** -------------------------------------------------------
-   @brief      Glue code for square root of a 32-bit fixed point number.
-   @param[in]  in   32-Bit input integer
-   @param[out] out  Square root of the input
-   @return     none
+    @brief      Glue code for Statisical standard deviation of a 32-bit floating point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
 */
 
-void plp_sqrt_q32(const int32_t *__restrict__ pSrc,
-                  const uint32_t fracBits,
-                  int32_t *__restrict__ pRes);
+void plp_rms_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Square root of a 32-bit fixed point number for XPULPV2 extension.
-   @param[in]  in   32-Bit input integer
-   @param[out] out  Square root of the input
-   @return     none
+    @brief      Kernel for Statisical standard deviation of a 32-bit float vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
+*/
+
+void plp_rms_f32_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Glue code for Statisical standard deviation of a 32-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
+*/
+
+void plp_rms_q32(const int32_t *__restrict__ pSrc,
+                 uint32_t blockSize,
+                 uint32_t fracBits,
+                 int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Statisical standard deviation of a 32-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation value returned here
+    @return     none
+*/
+
+void plp_rms_q32s_rv32im(const int32_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         uint32_t fracBits,
+                         int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Statisical standard deviation of a 32-bit fixed point vector for XPULPV2
+    extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical standard deviation returned here
+    @return     none
+*/
+
+void plp_rms_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
+                          uint32_t blockSize,
+                          uint32_t fracBits,
+                          int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Glue code for Statisical standard deviation of a 16-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
+*/
+
+void plp_rms_q16(const int16_t *__restrict__ pSrc,
+                 uint32_t blockSize,
+                 uint32_t fracBits,
+                 int16_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Statisical standard deviation of a 16-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
+*/
+
+void plp_rms_q16s_rv32im(const int16_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         uint32_t fracBits,
+                         int16_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Statisical standard deviation of a 16-bit fixed point vector for XPULPV2
+    extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical standard deviation returned here
+    @return     none
+*/
+
+void plp_rms_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
+                          uint32_t blockSize,
+                          uint32_t fracBits,
+                          int16_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Glue code for Statisical standard deviation of a 8-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
+*/
+
+void plp_rms_q8(const int8_t *__restrict__ pSrc,
+                uint32_t blockSize,
+                uint32_t fracBits,
+                int8_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Statisical standard deviation of a 8-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
+*/
+
+void plp_rms_q8s_rv32im(const int8_t *__restrict__ pSrc,
+                        uint32_t blockSize,
+                        uint32_t fracBits,
+                        int8_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Statisical standard deviation of a 8-bit fixed point vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical standard deviation value returned here
+    @return     none
+*/
+
+void plp_rms_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         uint32_t fracBits,
+                         int8_t *__restrict__ pRes);
+
+
+
+/** -------------------------------------------------------
+    @brief      Glue code for square root of a 32-bit fixed point number.
+    @param[in]  in   32-Bit input integer
+    @param[out] out  Square root of the input
+    @return     none
+*/
+
+void
+plp_sqrt_q32(const int32_t *__restrict__ pSrc, const uint32_t fracBits, int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Square root of a 32-bit fixed point number for XPULPV2 extension.
+    @param[in]  in   32-Bit input integer
+    @param[out] out  Square root of the input
+    @return     none
 */
 
 void plp_sqrt_q32s_rv32im(const int32_t *__restrict__ pSrc,
@@ -2737,10 +2861,10 @@ void plp_sqrt_q32s_rv32im(const int32_t *__restrict__ pSrc,
                           int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Square root of a 32-bit fixed point number for XPULPV2 extension.
-   @param[in]  in   32-Bit input integer
-   @param[out] out  Square root of the input
-   @return     none
+    @brief      Square root of a 32-bit fixed point number for XPULPV2 extension.
+    @param[in]  in   32-Bit input integer
+    @param[out] out  Square root of the input
+    @return     none
 */
 
 void plp_sqrt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
@@ -2748,21 +2872,20 @@ void plp_sqrt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
                            int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for square root of a 16-bit fixed point number.
-   @param[in]  in   16-Bit input integer
-   @param[out] out  Square root of the input
-   @return     none
+    @brief      Glue code for square root of a 16-bit fixed point number.
+    @param[in]  in   16-Bit input integer
+    @param[out] out  Square root of the input
+    @return     none
 */
 
-void plp_sqrt_q16(const int16_t *__restrict__ pSrc,
-                  const uint32_t fracBits,
-                  int16_t *__restrict__ pRes);
+void
+plp_sqrt_q16(const int16_t *__restrict__ pSrc, const uint32_t fracBits, int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Square root of a 16-bit fixed point number for XPULPV2 extension.
-   @param[in]  in   16-Bit input integer
-   @param[out] out  Square root of the input
-   @return     none
+    @brief      Square root of a 16-bit fixed point number for XPULPV2 extension.
+    @param[in]  in   16-Bit input integer
+    @param[out] out  Square root of the input
+    @return     none
 */
 
 void plp_sqrt_q16s_rv32im(const int16_t *__restrict__ pSrc,
@@ -2770,10 +2893,10 @@ void plp_sqrt_q16s_rv32im(const int16_t *__restrict__ pSrc,
                           int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Square root of a 16-bit fixed point number for XPULPV2 extension.
-   @param[in]  in   16-Bit input integer
-   @param[out] out  Square root of the input
-   @return     none
+    @brief      Square root of a 16-bit fixed point number for XPULPV2 extension.
+    @param[in]  in   16-Bit input integer
+    @param[out] out  Square root of the input
+    @return     none
 */
 
 void plp_sqrt_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
@@ -2781,14 +2904,14 @@ void plp_sqrt_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
                            int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-  @brief Glue code for correlation of 32-bit integer vectors.
-  @param[in]  pSrcA   points to the first input vector
-  @param[in]  srcALen Length of the first input vector
-  @param[in]  pSrcB   points to the second input vector
-  @param[in]  srcBLen Length of the second input vector
-  @param[out] pRes    output result returned here
-  @return     none
- */
+    @brief Glue code for correlation of 32-bit integer vectors.
+    @param[in]  pSrcA   points to the first input vector
+    @param[in]  srcALen Length of the first input vector
+    @param[in]  pSrcB   points to the second input vector
+    @param[in]  srcBLen Length of the second input vector
+    @param[out] pRes    output result returned here
+    @return     none
+*/
 
 void plp_correlate_i32(const int32_t *pSrcA,
                        const uint32_t srcALen,
@@ -2797,13 +2920,13 @@ void plp_correlate_i32(const int32_t *pSrcA,
                        int32_t *pRes);
 
 /** -------------------------------------------------------
-   @brief Correlation of 32-bit integer vectors kernel for RV32IM extension.
-   @param[in]  pSrcA   points to the first input vector
-   @param[in]  srcALen Length of the first input vector
-   @param[in]  pSrcB   points to the second input vector
-   @param[in]  srcBLen Length of the second input vector
-   @param[out] pRes    output result returned here
-   @return     none
+    @brief Correlation of 32-bit integer vectors kernel for RV32IM extension.
+    @param[in]  pSrcA   points to the first input vector
+    @param[in]  srcALen Length of the first input vector
+    @param[in]  pSrcB   points to the second input vector
+    @param[in]  srcBLen Length of the second input vector
+    @param[out] pRes    output result returned here
+    @return     none
 */
 
 void plp_correlate_i32s_rv32im(const int32_t *pSrcA,
@@ -2813,13 +2936,13 @@ void plp_correlate_i32s_rv32im(const int32_t *pSrcA,
                                int32_t *pRes);
 
 /** -------------------------------------------------------
-   @brief Correlation of 32-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA   points to the first input vector
-   @param[in]  srcALen Length of the first input vector
-   @param[in]  pSrcB   points to the second input vector
-   @param[in]  srcBLen Length of the second input vector
-   @param[out] pRes    output result returned here
-   @return     none */
+    @brief Correlation of 32-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]  pSrcA   points to the first input vector
+    @param[in]  srcALen Length of the first input vector
+    @param[in]  pSrcB   points to the second input vector
+    @param[in]  srcBLen Length of the second input vector
+    @param[out] pRes    output result returned here
+    @return     none */
 
 void plp_correlate_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
                                 const uint32_t srcALen,
@@ -3336,10 +3459,8 @@ void plp_conv_i8p_xpulpv2(void *task_args);
    @return none
 */
 
-void plp_conv_parallel_OLA(uint32_t nPE,
-                           uint32_t srcALen,
-                           uint32_t srcBLen,
-                           int32_t *resultsBuffer);
+void
+plp_conv_parallel_OLA(uint32_t nPE, uint32_t srcALen, uint32_t srcBLen, int32_t *resultsBuffer);
 
 /** -------------------------------------------------------
    @brief Helper function for parallelized overlap-adding of partial convolution results
@@ -6322,9 +6443,8 @@ void plp_cmplx_mag_q16(const int16_t *pSrc,
   @return     none
 */
 
-void plp_bitreversal_16s_rv32im(uint16_t *pSrc,
-                                const uint16_t bitRevLen,
-                                const uint16_t *pBitRevTab);
+void
+plp_bitreversal_16s_rv32im(uint16_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab);
 
 /**
   @brief      In-place 16 bit reversal function for XPULPV2
@@ -6334,9 +6454,8 @@ void plp_bitreversal_16s_rv32im(uint16_t *pSrc,
   @return     none
 */
 
-void plp_bitreversal_16v_xpulpv2(uint16_t *pSrc,
-                                 const uint16_t bitRevLen,
-                                 const uint16_t *pBitRevTab);
+void
+plp_bitreversal_16v_xpulpv2(uint16_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab);
 
 /**
  * @brief      Glue code for quantized 16 bit complex fast fourier transform
@@ -7598,10 +7717,8 @@ void plp_mat_trans_i8vp_xpulpv2(void *args);
   @par This function will use plp_mat_trans_i32s_xpulpv2 for its computation.
 */
 
-void plp_mat_trans_f32(const float *__restrict__ pSrc,
-                       uint32_t M,
-                       uint32_t N,
-                       float *__restrict__ pDst);
+void
+plp_mat_trans_f32(const float *__restrict__ pSrc, uint32_t M, uint32_t N, float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix transpose of a 32-bit float*ing-point matrices.
@@ -7891,10 +8008,8 @@ void plp_mat_fill_I_q32s_xpulpv2(uint32_t N, int32_t fracBits, int32_t *__restri
   @return     none
 */
 
-void plp_mat_fill_I_q32_parallel(uint32_t N,
-                                 int32_t fracBits,
-                                 uint32_t nPE,
-                                 int32_t *__restrict__ pDst);
+void
+plp_mat_fill_I_q32_parallel(uint32_t N, int32_t fracBits, uint32_t nPE, int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Create a 32-bit fix-point identity matrix in parallel on XpulpV2
@@ -7948,10 +8063,8 @@ void plp_mat_fill_I_q16v_xpulpv2(uint32_t N, int32_t fracBits, int16_t *__restri
   @return     none
 */
 
-void plp_mat_fill_I_q16_parallel(uint32_t N,
-                                 int32_t fracBits,
-                                 uint32_t nPE,
-                                 int16_t *__restrict__ pDst);
+void
+plp_mat_fill_I_q16_parallel(uint32_t N, int32_t fracBits, uint32_t nPE, int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Create a 16-bit fix-point identity matrix in parallel on XpulpV2
@@ -8009,10 +8122,8 @@ void plp_mat_fill_I_q8v_xpulpv2(uint32_t N, int32_t fracBits, int8_t *__restrict
   @return     none
 */
 
-void plp_mat_fill_I_q8_parallel(uint32_t N,
-                                int32_t fracBits,
-                                uint32_t nPE,
-                                int8_t *__restrict__ pDst);
+void
+plp_mat_fill_I_q8_parallel(uint32_t N, int32_t fracBits, uint32_t nPE, int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Create a 8-bit fix-point identity matrix in parallel on XpulpV2
@@ -13222,10 +13333,8 @@ void plp_mat_fill_I_stride_q16vp_xpulpv2(void *args);
   The diagonal elements will be filled with the value: `1 << fracBits`.
 */
 
-void plp_mat_fill_I_stride_q8(uint32_t N,
-                              uint32_t stride,
-                              int32_t fracBits,
-                              int8_t *__restrict__ pDst);
+void
+plp_mat_fill_I_stride_q8(uint32_t N, uint32_t stride, int32_t fracBits, int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Create a strided 8-bit fix-point identity matrix on RV32IM
