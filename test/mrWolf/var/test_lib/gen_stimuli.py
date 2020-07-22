@@ -49,10 +49,6 @@ def compute_result(result_parameter, inputs, env, fix_point):
         result[0] = np.var(p)
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
-
-    print("---------------------------------")
-    print(p)
-    print("---------------------------------")
     
     return result
 

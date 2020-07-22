@@ -1,9 +1,9 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_var_i16.c
- * Description:  Varimum value of a 16-bit integer vector glue code
+ * Title:        plp_rms_q32s_rv32im.c
+ * Description:  Calculates the RMS value on RV32IM cores
  *
- * $Date:        29.06.2020
+ * $Date:        30.06.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
@@ -30,17 +30,17 @@
 #include "plp_math.h"
 
 /**
-   @ingroup groupStats
+   @ingroup power
 */
 
 /**
-   @defgroup var Var
-   Calculates the varimum of the input vector. Var is defined as the the greatest value in the
-   vector. There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit
-   data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions
-   are provided.
+   @defgroup RMSkernels RMS Kernels
+   Calculates the RMS value of the input vector.
+   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+   types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
+   provided.
 
-   The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i16s):
+   The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
    <pre>
    \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
 
@@ -58,27 +58,23 @@
 */
 
 /**
-   @addtogroup var
+   @addtogroup RMSkernels
    @{
 */
 
 /**
-   @brief         Glue code for var value of a 16-bit integer vector.
+   @brief         RMS value of a 32-bit fixed point vector for RV32IM extension.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    var value returned here
+   @param[out]    pRes    RMS value returned here
    @return        none
- */
+*/
 
-void plp_var_i16(const int16_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes) {
+void plp_rms_q32s_rv32im(const int32_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         uint32_t fracBits,
+                         int32_t *__restrict__ pRes) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
-        plp_var_i16s_rv32im(pSrc, blockSize, pRes);
-    } else {
-        plp_var_i16s_xpulpv2(pSrc, blockSize, pRes);
-    }
+    plp_power_q32(pSrc, blockSize, fracBits, pRes);
+    *pRes = (*pRes) / blockSize;
 }
-
-/**
-  @} end of mean group
- */

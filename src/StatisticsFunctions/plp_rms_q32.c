@@ -1,9 +1,9 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_var_i8s_xpulpv2.c
- * Description:  Var value of a 8-bit integer vector for XPULPV2
+ * Title:        plp_rms_q32.c
+ * Description:  Calculates the RMS value of an input vector
  *
- * $Date:        29.06.2020
+ * $Date:        30.06.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
@@ -30,15 +30,15 @@
 #include "plp_math.h"
 
 /**
-  @ingroup var
- */
+   @ingroup groupStats
+*/
 
 /**
-   @defgroup varKernels Var Kernels
-   Calculates the var of the input vector. Var is defined as the greatest of the elements in the
-   vector. There are separate functions for floating point, integer, and fixed point 32- 8- 8-bit
-   data types. For lower precision integers (8- and 8-bit), functions exploiting SIMD instructions
-   are provided.
+   @defgroup power Power
+   Calculates the RMS value of the input vector.
+   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+   types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
+   provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
    <pre>
@@ -46,7 +46,7 @@
 
    data type = {f, i, q} respectively for floats, integers, fixed points
 
-   precision = {32, 8, 8} bits
+   precision = {32, 16, 8} bits
 
    method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
    SIMD instructions), and parallel (for multicore parallel computing), respectively.
@@ -55,34 +55,33 @@
 
    </pre>
 
- */
-
-/**
-  @addtogroup varKernels
-  @{
- */
-
-/**
-   @brief         Var value of a 8-bit integer vector for XPULPV2 extension.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    var value returned here
-   @return        none
 */
 
-void plp_var_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         int32_t *__restrict__ pRes) {
+/**
+   @addtogroup power
+   @{
+*/
 
-    int32_t square_of_mean;
-    int32_t square_of_values;
+/**
+   @brief         Glue code for RMS value of a 8-bit fixed point vector.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    RMS value returned here
+   @return        none
+ */
 
-    int8_t mean;
+void plp_rms_q32(const int32_t *__restrict__ pSrc,
+                   uint32_t blockSize,
+                   uint32_t fracBits,
+                   int32_t *__restrict__ pRes) {
 
-    plp_mean_i8(pSrc, blockSize, &mean);
-    square_of_mean = mean * mean;
-
-    plp_power_i8(pSrc, blockSize, &square_of_values);
-
-    *pRes = (square_of_values / blockSize - square_of_mean);
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        plp_rms_q32s_rv32im(pSrc, blockSize, fracBits, pRes);
+    } else {
+        plp_rms_q32s_xpulpv2(pSrc, blockSize, fracBits, pRes);
+    }
 }
+
+/**
+  @} end of power group
+ */

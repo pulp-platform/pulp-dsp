@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_sqrt_f32s_xpulpv2.c
- * Description:
+ * Description:  32-Bit floating point square root kernel
  *
  * $Date:        02.07.2020
  *
@@ -32,7 +32,7 @@
  * with Apache-2.0.
  */
 
-#define numIters 15
+#define numIters 5
 #include "plp_math.h"
 
 /**
@@ -41,26 +41,6 @@
 
 /**
    @defgroup sqrtKernels Sqrt Kernels
-   Calculates the square root of the input number.
-   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
-   types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
-   provided.
-
-   The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
-   <pre>
-   \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
-
-   data type = {f, i, q} respectively for floats, integers, fixed points
-
-   precision = {32, 16, 8} bits
-
-   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
-   SIMD instructions), and parallel (for multicore parallel computing), respectively.
-
-   isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
-
-   </pre>
-
 */
 
 /**
@@ -71,22 +51,37 @@
 /**
    @brief         Square root of a 32-bit floating point number for XPULPV2 extension.
    @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    sum of squares returned here
+   @param[out]    pRes    Square root returned here
    @return        none
 */
 
 void plp_sqrt_f32s_xpulpv2(const float *__restrict__ pSrc, float *__restrict__ pRes) {
 
-  float intermediate = 1.f / (2.f * (*pSrc));
+  float temp1 = *pSrc;
   float half = *pSrc / 2;
+
+  int32_t exponent;
+  
+  union {
+    float value;
+    int32_t intrep;
+  } number;
+  
+  number.value = 1.f/(4*temp1);
+  number.intrep = ((number.intrep & 0x7F000000)>>1)  + (number.intrep & 0xA07FFFFF); // shift the exponent down by one -> approximate square root
+  
+  float intermediate = number.value;
   
   if (half > 0) {
     for (int i = 0; i < numIters; i++) {
       intermediate = intermediate * (1.5f - (intermediate * intermediate * half));
     }
+
+    number.value = (intermediate * (*pSrc));
+    number.intrep = number.intrep & 0x7FFFFFFF; // Hack to make sure sign bit is 0
     
-    *pRes = intermediate * (*pSrc);
+    *pRes = number.value;
+    
   } else {
     *pRes = 0.f;
   }

@@ -264,7 +264,7 @@ typedef struct {
     @brief Instance structure for floating-point FFT
     @param[in]  length data length of the FFT
     @param[in]  bitReverseFlag  flag that enables (bitReverseFlagR=1) or disables
-                                (bitReverseFlagR=0) bit reversal of output
+    (bitReverseFlagR=0) bit reversal of output
     @param[in]  pTwiddleFactors pointer to the twiddle factors.
     These values must be computed using this formula:
     \f$W_N^k =   e^{-j \frac{\pi}{N} k}\f$,
@@ -1365,7 +1365,7 @@ void plp_dot_prod_f32_parallel(const float32_t *__restrict__ pSrcA,
 
 /** -------------------------------------------------------
     @brief Parallel dot product with interleaved access of 32-bit integer vectors kernel for XPULPV2
-           extension.
+    extension.
     @param[in]  S     points to the instance structure for integer parallel dot product
     @return     none
 */
@@ -1374,7 +1374,7 @@ void plp_dot_prod_i32p_xpulpv2(void *S);
 
 /** -------------------------------------------------------
     @brief Parallel dot product with interleaved access of 32-bit fixed point vectors kernel for
-           XPULPV2 extension.
+    XPULPV2 extension.
     @param[in]  S     points to the instance structure for fixed point parallel dot product
     @return     none
 */
@@ -1383,7 +1383,7 @@ void plp_dot_prod_q32p_xpulpv2(void *S);
 
 /** -------------------------------------------------------
     @brief Parallel dot product with interleaved access of 32-bit float vectors kernel for XPULPV2
-           extension.
+    extension.
     @param[in]  S     points to the instance structure for float parallel dot product
     @return     none
 */
@@ -1391,36 +1391,36 @@ void plp_dot_prod_q32p_xpulpv2(void *S);
 void plp_dot_prod_f32p_xpulpv2(void *S);
 
 /** -------------------------------------------------------
-   @brief Glue code for dot product of 32-bit integer vectors.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  blockSize  number of samples in each vector
-   @param[out] pRes       output result returned here
- */
+    @brief Glue code for dot product of 32-bit integer vectors.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blockSize  number of samples in each vector
+    @param[out] pRes       output result returned here
+*/
 void plp_dot_prod_i32(const int32_t *__restrict__ pSrcA,
                       const int32_t *__restrict__ pSrcB,
                       uint32_t blockSize,
                       int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief Scalar dot product of 32-bit integer vectors kernel for RV32IM extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  blockSize  number of samples in each vector
-   @param[out] pRes       output result returned here
- */
+    @brief Scalar dot product of 32-bit integer vectors kernel for RV32IM extension.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blockSize  number of samples in each vector
+    @param[out] pRes       output result returned here
+*/
 void plp_dot_prod_i32s_rv32im(const int32_t *__restrict__ pSrcA,
                               const int32_t *__restrict__ pSrcB,
                               uint32_t blockSize,
                               int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief Scalar dot product of 32-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA      points to the first input vector
-   @param[in]  pSrcB      points to the second input vector
-   @param[in]  blockSize  number of samples in each vector
-   @param[out] pRes       output result returned here
- */
+    @brief Scalar dot product of 32-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blockSize  number of samples in each vector
+    @param[out] pRes       output result returned here
+*/
 void plp_dot_prod_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
                                const int32_t *__restrict__ pSrcB,
                                uint32_t blockSize,
@@ -1503,15 +1503,15 @@ void plp_dot_prod_f32s_xpulpv2(const float32_t *__restrict__ pSrcA,
                                float32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief Glue code for dot product of 16-bit integer vectors.
-   @param[in]  pSrcA      points to the first input vector [16 bit]
-   @param[in]  pSrcB      points to the second input vector [16 bit]
-   @param[in]  blockSize  number of samples in each vector
-   @param[out] pRes       output result returned here [32 bit]
+    @brief Glue code for dot product of 16-bit integer vectors.
+    @param[in]  pSrcA      points to the first input vector [16 bit]
+    @param[in]  pSrcB      points to the second input vector [16 bit]
+    @param[in]  blockSize  number of samples in each vector
+    @param[out] pRes       output result returned here [32 bit]
 
-   @par Exploiting SIMD instructions
-   When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the
-   two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
+    @par Exploiting SIMD instructions
+    When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the
+    two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator.
 */
 void plp_dot_prod_i16(const int16_t *pSrcA,
                       const int16_t *pSrcB,
@@ -1519,17 +1519,17 @@ void plp_dot_prod_i16(const int16_t *pSrcA,
                       int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief Vectorized dot product of 16-bit integer vectors kernel for RV32IM extension.
-   @param[in]  pSrcA      points to the first input vector [16 bit]
-   @param[in]  pSrcB      points to the second input vector [16 bit]
-   @param[in]  blockSize  number of samples in each vector
-   @param[out] pRes       output result returned here [32 bit]
-   @return     none
+    @brief Vectorized dot product of 16-bit integer vectors kernel for RV32IM extension.
+    @param[in]  pSrcA      points to the first input vector [16 bit]
+    @param[in]  pSrcB      points to the second input vector [16 bit]
+    @param[in]  blockSize  number of samples in each vector
+    @param[out] pRes       output result returned here [32 bit]
+    @return     none
 
-   @par Exploiting SIMD instructions
-   When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the
-   two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM
-   doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
+    @par Exploiting SIMD instructions
+    When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the
+    two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM
+    doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
 */
 
 void plp_dot_prod_i16s_rv32im(const int16_t *__restrict__ pSrcA,
@@ -1779,9 +1779,8 @@ void plp_copy_i32(int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32
     @return     none
 */
 
-void plp_copy_i32s_rv32im(int32_t *__restrict__ pSrc,
-                          int32_t *__restrict__ pDst,
-                          uint32_t blockSize);
+void
+plp_copy_i32s_rv32im(int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32_t blockSize);
 
 /** -------------------------------------------------------
     @brief      Copies the elements of a 32-bit integer vector for XPULPV2 extension.
@@ -1791,9 +1790,8 @@ void plp_copy_i32s_rv32im(int32_t *__restrict__ pSrc,
     @return     none
 */
 
-void plp_copy_i32s_xpulpv2(int32_t *__restrict__ pSrc,
-                           int32_t *__restrict__ pDst,
-                           uint32_t blockSize);
+void
+plp_copy_i32s_xpulpv2(int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32_t blockSize);
 
 /** -------------------------------------------------------
     @brief      Glue code for copying the elements of a 32-bit float vector
@@ -1835,9 +1833,8 @@ void plp_mean_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__r
     @return     none
 */
 
-void plp_mean_f32s_xpulpv2(const float *__restrict__ pSrc,
-                           uint32_t blockSize,
-                           float *__restrict__ pRes);
+void
+plp_mean_f32s_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for mean value of a 32-bit integer vector.
@@ -1925,9 +1922,8 @@ void plp_mean_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__
     @return     none
 */
 
-void plp_mean_i8s_rv32im(const int8_t *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         int8_t *__restrict__ pRes);
+void
+plp_mean_i8s_rv32im(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Mean value of a 8-bit integer vector for XPULPV2 extension.
@@ -1959,9 +1955,8 @@ void plp_max_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__re
     @return     none
 */
 
-void plp_max_f32s_xpulpv2(const float *__restrict__ pSrc,
-                          uint32_t blockSize,
-                          float *__restrict__ pRes);
+void
+plp_max_f32s_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for max value of a 32-bit integer vector.
@@ -2049,9 +2044,8 @@ void plp_max_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__r
     @return     none
 */
 
-void plp_max_i8s_rv32im(const int8_t *__restrict__ pSrc,
-                        uint32_t blockSize,
-                        int8_t *__restrict__ pRes);
+void
+plp_max_i8s_rv32im(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Max value of a 8-bit integer vector for XPULPV2 extension.
@@ -2061,9 +2055,8 @@ void plp_max_i8s_rv32im(const int8_t *__restrict__ pSrc,
     @return     none
 */
 
-void plp_max_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         int8_t *__restrict__ pRes);
+void
+plp_max_i8s_xpulpv2(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for min value of a 32-bit float vector.
@@ -2083,9 +2076,8 @@ void plp_min_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__re
     @return     none
 */
 
-void plp_min_f32s_xpulpv2(const float *__restrict__ pSrc,
-                          uint32_t blockSize,
-                          float *__restrict__ pRes);
+void
+plp_min_f32s_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for min value of a 32-bit integer vector.
@@ -2173,9 +2165,8 @@ void plp_min_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__r
     @return     none
 */
 
-void plp_min_i8s_rv32im(const int8_t *__restrict__ pSrc,
-                        uint32_t blockSize,
-                        int8_t *__restrict__ pRes);
+void
+plp_min_i8s_rv32im(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Min value of a 8-bit integer vector for XPULPV2 extension.
@@ -2185,9 +2176,8 @@ void plp_min_i8s_rv32im(const int8_t *__restrict__ pSrc,
     @return     none
 */
 
-void plp_min_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         int8_t *__restrict__ pRes);
+void
+plp_min_i8s_xpulpv2(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for Sum of squares of a 32-bit float vector.
@@ -2207,9 +2197,8 @@ void plp_power_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__
     @return     none
 */
 
-void plp_power_f32_xpulpv2(const float *__restrict__ pSrc,
-                           uint32_t blockSize,
-                           float *__restrict__ pRes);
+void
+plp_power_f32_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for Sum of squares of a 32-bit integer vector.
@@ -2219,9 +2208,8 @@ void plp_power_f32_xpulpv2(const float *__restrict__ pSrc,
     @return     none
 */
 
-void plp_power_i32(const int32_t *__restrict__ pSrc,
-                   uint32_t blockSize,
-                   int32_t *__restrict__ pRes);
+void
+plp_power_i32(const int32_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Sum of squares of a 32-bit integer vector for RV32IM extension.
@@ -2255,9 +2243,8 @@ void plp_power_i32s_xpulpv2(const int32_t *__restrict__ pSrc,
     @return     none
 */
 
-void plp_power_i16(const int16_t *__restrict__ pSrc,
-                   uint32_t blockSize,
-                   int32_t *__restrict__ pRes);
+void
+plp_power_i16(const int16_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Sum of squares of a 16-bit integer vector for RV32IM extension.
@@ -2435,135 +2422,32 @@ void plp_power_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
                            int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for Statisical variance of a 32-bit float vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
+    @brief      Glue code for Statisical variance of a 32-bit float vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical variance returned here
+    @return     none
 */
 
 void plp_var_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Kernel for Statisical variance of a 32-bit float vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
+    @brief      Kernel for Statisical variance of a 32-bit float vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical variance returned here
+    @return     none
 */
 
-void plp_var_f32_xpulpv2(const float *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         float *__restrict__ pRes);
+void
+plp_var_f32_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for Statisical variance of a 32-bit integer vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
-*/
-
-void plp_var_i32(const int32_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes);
-
-/** -------------------------------------------------------
-   @brief      Statisical variance of a 32-bit integer vector for RV32IM extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
-*/
-
-void plp_var_i32s_rv32im(const int32_t *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         int32_t *__restrict__ pRes);
-
-/** -------------------------------------------------------
-   @brief      Statisical variance of a 32-bit integer vector for XPULPV2 extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pRes    Statisical variance returned here
-   @return     none
-*/
-
-void plp_var_i32s_xpulpv2(const int32_t *__restrict__ pSrc,
-                          uint32_t blockSize,
-                          int32_t *__restrict__ pRes);
-
-/** -------------------------------------------------------
-   @brief      Glue code for Statisical variance of a 16-bit integer vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
-*/
-
-void plp_var_i16(const int16_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes);
-
-/** -------------------------------------------------------
-   @brief      Statisical variance of a 16-bit integer vector for RV32IM extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
-*/
-
-void plp_var_i16s_rv32im(const int16_t *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         int32_t *__restrict__ pRes);
-
-/** -------------------------------------------------------
-   @brief      Statisical variance of a 16-bit integer vector for XPULPV2 extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pRes       Statisical variance returned here
-   @return     none
-*/
-
-void plp_var_i16s_xpulpv2(const int16_t *__restrict__ pSrc,
-                          uint32_t blockSize,
-                          int32_t *__restrict__ pRes);
-
-/** -------------------------------------------------------
-   @brief      Glue code for Statisical variance of a 8-bit integer vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
-*/
-
-void plp_var_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes);
-
-/** -------------------------------------------------------
-   @brief      Statisical variance of a 8-bit integer vector for RV32IM extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
-*/
-
-void plp_var_i8s_rv32im(const int8_t *__restrict__ pSrc,
-                        uint32_t blockSize,
-                        int32_t *__restrict__ pRes);
-
-/** -------------------------------------------------------
-   @brief      Statisical variance of a 8-bit integer vector for XPULPV2 extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pRes       Statisical variance value returned here
-   @return     none
-*/
-
-void plp_var_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         int32_t *__restrict__ pRes);
-
-/** -------------------------------------------------------
-   @brief      Glue code for Statisical variance of a 32-bit fixed point vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
+    @brief      Glue code for Statisical variance of a 32-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical variance returned here
+    @return     none
 */
 
 void plp_var_q32(const int32_t *__restrict__ pSrc,
@@ -2572,11 +2456,11 @@ void plp_var_q32(const int32_t *__restrict__ pSrc,
                  int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical variance of a 32-bit fixed point vector for RV32IM extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance value returned here
-   @return     none
+    @brief      Statisical variance of a 32-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical variance value returned here
+    @return     none
 */
 
 void plp_var_q32s_rv32im(const int32_t *__restrict__ pSrc,
@@ -2585,11 +2469,11 @@ void plp_var_q32s_rv32im(const int32_t *__restrict__ pSrc,
                          int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical variance of a 32-bit fixed point vector for XPULPV2 extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pRes       Statisical variance returned here
-   @return     none
+    @brief      Statisical variance of a 32-bit fixed point vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical variance returned here
+    @return     none
 */
 
 void plp_var_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
@@ -2598,11 +2482,11 @@ void plp_var_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
                           int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for Statisical variance of a 16-bit fixed point vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
+    @brief      Glue code for Statisical variance of a 16-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical variance returned here
+    @return     none
 */
 
 void plp_var_q16(const int16_t *__restrict__ pSrc,
@@ -2611,11 +2495,11 @@ void plp_var_q16(const int16_t *__restrict__ pSrc,
                  int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical variance of a 16-bit fixed point vector for RV32IM extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
+    @brief      Statisical variance of a 16-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical variance returned here
+    @return     none
 */
 
 void plp_var_q16s_rv32im(const int16_t *__restrict__ pSrc,
@@ -2624,11 +2508,11 @@ void plp_var_q16s_rv32im(const int16_t *__restrict__ pSrc,
                          int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical variance of a 16-bit fixed point vector for XPULPV2 extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pRes       Statisical variance returned here
-   @return     none
+    @brief      Statisical variance of a 16-bit fixed point vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical variance returned here
+    @return     none
 */
 
 void plp_var_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
@@ -2637,11 +2521,11 @@ void plp_var_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
                           int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for Statisical variance of a 8-bit fixed point vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
+    @brief      Glue code for Statisical variance of a 8-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical variance returned here
+    @return     none
 */
 
 void plp_var_q8(const int8_t *__restrict__ pSrc,
@@ -2650,11 +2534,11 @@ void plp_var_q8(const int8_t *__restrict__ pSrc,
                 int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical variance of a 8-bit fixed point vector for RV32IM extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical variance returned here
-   @return     none
+    @brief      Statisical variance of a 8-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical variance returned here
+    @return     none
 */
 
 void plp_var_q8s_rv32im(const int8_t *__restrict__ pSrc,
@@ -2663,11 +2547,11 @@ void plp_var_q8s_rv32im(const int8_t *__restrict__ pSrc,
                         int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical variance of a 8-bit fixed point vector for XPULPV2 extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pRes       Statisical variance value returned here
-   @return     none
+    @brief      Statisical variance of a 8-bit fixed point vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical variance value returned here
+    @return     none
 */
 
 void plp_var_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
@@ -2676,33 +2560,32 @@ void plp_var_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
                          int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for Statisical standard deviation of a 32-bit floating point vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical standard deviation returned here
-   @return     none
+    @brief      Glue code for Statisical standard deviation of a 32-bit floating point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
 */
 
 void plp_std_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Kernel for Statisical standard deviation of a 32-bit float vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical standard deviation returned here
-   @return     none
+    @brief      Kernel for Statisical standard deviation of a 32-bit float vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
 */
 
-void plp_std_f32_xpulpv2(const float *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         float *__restrict__ pRes);
+void
+plp_std_f32_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for Statisical standard deviation of a 32-bit fixed point vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical standard deviation returned here
-   @return     none
+    @brief      Glue code for Statisical standard deviation of a 32-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
 */
 
 void plp_std_q32(const int32_t *__restrict__ pSrc,
@@ -2711,11 +2594,11 @@ void plp_std_q32(const int32_t *__restrict__ pSrc,
                  int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical standard deviation of a 32-bit fixed point vector for RV32IM extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical standard deviation value returned here
-   @return     none
+    @brief      Statisical standard deviation of a 32-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation value returned here
+    @return     none
 */
 
 void plp_std_q32s_rv32im(const int32_t *__restrict__ pSrc,
@@ -2724,12 +2607,12 @@ void plp_std_q32s_rv32im(const int32_t *__restrict__ pSrc,
                          int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical standard deviation of a 32-bit fixed point vector for XPULPV2
-   extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pRes       Statisical standard deviation returned here
-   @return     none
+    @brief      Statisical standard deviation of a 32-bit fixed point vector for XPULPV2
+    extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical standard deviation returned here
+    @return     none
 */
 
 void plp_std_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
@@ -2738,11 +2621,11 @@ void plp_std_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
                           int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for Statisical standard deviation of a 16-bit fixed point vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical standard deviation returned here
-   @return     none
+    @brief      Glue code for Statisical standard deviation of a 16-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
 */
 
 void plp_std_q16(const int16_t *__restrict__ pSrc,
@@ -2751,11 +2634,11 @@ void plp_std_q16(const int16_t *__restrict__ pSrc,
                  int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical standard deviation of a 16-bit fixed point vector for RV32IM extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical standard deviation returned here
-   @return     none
+    @brief      Statisical standard deviation of a 16-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
 */
 
 void plp_std_q16s_rv32im(const int16_t *__restrict__ pSrc,
@@ -2764,12 +2647,12 @@ void plp_std_q16s_rv32im(const int16_t *__restrict__ pSrc,
                          int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical standard deviation of a 16-bit fixed point vector for XPULPV2
-   extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pRes       Statisical standard deviation returned here
-   @return     none
+    @brief      Statisical standard deviation of a 16-bit fixed point vector for XPULPV2
+    extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical standard deviation returned here
+    @return     none
 */
 
 void plp_std_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
@@ -2778,11 +2661,11 @@ void plp_std_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
                           int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for Statisical standard deviation of a 8-bit fixed point vector.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical standard deviation returned here
-   @return     none
+    @brief      Glue code for Statisical standard deviation of a 8-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
 */
 
 void plp_std_q8(const int8_t *__restrict__ pSrc,
@@ -2791,11 +2674,11 @@ void plp_std_q8(const int8_t *__restrict__ pSrc,
                 int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical standard deviation of a 8-bit fixed point vector for RV32IM extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pResult    Statisical standard deviation returned here
-   @return     none
+    @brief      Statisical standard deviation of a 8-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
 */
 
 void plp_std_q8s_rv32im(const int8_t *__restrict__ pSrc,
@@ -2804,34 +2687,172 @@ void plp_std_q8s_rv32im(const int8_t *__restrict__ pSrc,
                         int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Statisical standard deviation of a 8-bit fixed point vector for XPULPV2 extension.
-   @param[in]  pSrc       points to the input vector
-   @param[in]  blockSize  number of samples in input vector
-   @param[out] pRes       Statisical standard deviation value returned here
-   @return     none
+    @brief      Statisical standard deviation of a 8-bit fixed point vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical standard deviation value returned here
+    @return     none
 */
 
 void plp_std_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
                          uint32_t blockSize,
                          uint32_t fracBits,
                          int8_t *__restrict__ pRes);
-
 /** -------------------------------------------------------
-   @brief      Glue code for square root of a 32-bit fixed point number.
-   @param[in]  in   32-Bit input integer
-   @param[out] out  Square root of the input
-   @return     none
+    @brief      Glue code for Statisical standard deviation of a 32-bit floating point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
 */
 
-void plp_sqrt_q32(const int32_t *__restrict__ pSrc,
-                  const uint32_t fracBits,
-                  int32_t *__restrict__ pRes);
+void plp_rms_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Square root of a 32-bit fixed point number for XPULPV2 extension.
-   @param[in]  in   32-Bit input integer
-   @param[out] out  Square root of the input
-   @return     none
+    @brief      Kernel for Statisical standard deviation of a 32-bit float vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
+*/
+
+void
+plp_rms_f32_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Glue code for Statisical standard deviation of a 32-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
+*/
+
+void plp_rms_q32(const int32_t *__restrict__ pSrc,
+                 uint32_t blockSize,
+                 uint32_t fracBits,
+                 int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Statisical standard deviation of a 32-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation value returned here
+    @return     none
+*/
+
+void plp_rms_q32s_rv32im(const int32_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         uint32_t fracBits,
+                         int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Statisical standard deviation of a 32-bit fixed point vector for XPULPV2
+    extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical standard deviation returned here
+    @return     none
+*/
+
+void plp_rms_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
+                          uint32_t blockSize,
+                          uint32_t fracBits,
+                          int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Glue code for Statisical standard deviation of a 16-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
+*/
+
+void plp_rms_q16(const int16_t *__restrict__ pSrc,
+                 uint32_t blockSize,
+                 uint32_t fracBits,
+                 int16_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Statisical standard deviation of a 16-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
+*/
+
+void plp_rms_q16s_rv32im(const int16_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         uint32_t fracBits,
+                         int16_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Statisical standard deviation of a 16-bit fixed point vector for XPULPV2
+    extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical standard deviation returned here
+    @return     none
+*/
+
+void plp_rms_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
+                          uint32_t blockSize,
+                          uint32_t fracBits,
+                          int16_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Glue code for Statisical standard deviation of a 8-bit fixed point vector.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
+*/
+
+void plp_rms_q8(const int8_t *__restrict__ pSrc,
+                uint32_t blockSize,
+                uint32_t fracBits,
+                int8_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Statisical standard deviation of a 8-bit fixed point vector for RV32IM extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pResult    Statisical standard deviation returned here
+    @return     none
+*/
+
+void plp_rms_q8s_rv32im(const int8_t *__restrict__ pSrc,
+                        uint32_t blockSize,
+                        uint32_t fracBits,
+                        int8_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Statisical standard deviation of a 8-bit fixed point vector for XPULPV2 extension.
+    @param[in]  pSrc       points to the input vector
+    @param[in]  blockSize  number of samples in input vector
+    @param[out] pRes       Statisical standard deviation value returned here
+    @return     none
+*/
+
+void plp_rms_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         uint32_t fracBits,
+                         int8_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Glue code for square root of a 32-bit fixed point number.
+    @param[in]  in   32-Bit input integer
+    @param[out] out  Square root of the input
+    @return     none
+*/
+
+void
+plp_sqrt_q32(const int32_t *__restrict__ pSrc, const uint32_t fracBits, int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+    @brief      Square root of a 32-bit fixed point number for XPULPV2 extension.
+    @param[in]  in   32-Bit input integer
+    @param[out] out  Square root of the input
+    @return     none
 */
 
 void plp_sqrt_q32s_rv32im(const int32_t *__restrict__ pSrc,
@@ -2839,10 +2860,10 @@ void plp_sqrt_q32s_rv32im(const int32_t *__restrict__ pSrc,
                           int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Square root of a 32-bit fixed point number for XPULPV2 extension.
-   @param[in]  in   32-Bit input integer
-   @param[out] out  Square root of the input
-   @return     none
+    @brief      Square root of a 32-bit fixed point number for XPULPV2 extension.
+    @param[in]  in   32-Bit input integer
+    @param[out] out  Square root of the input
+    @return     none
 */
 
 void plp_sqrt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
@@ -2850,21 +2871,20 @@ void plp_sqrt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
                            int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Glue code for square root of a 16-bit fixed point number.
-   @param[in]  in   16-Bit input integer
-   @param[out] out  Square root of the input
-   @return     none
+    @brief      Glue code for square root of a 16-bit fixed point number.
+    @param[in]  in   16-Bit input integer
+    @param[out] out  Square root of the input
+    @return     none
 */
 
-void plp_sqrt_q16(const int16_t *__restrict__ pSrc,
-                  const uint32_t fracBits,
-                  int16_t *__restrict__ pRes);
+void
+plp_sqrt_q16(const int16_t *__restrict__ pSrc, const uint32_t fracBits, int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Square root of a 16-bit fixed point number for XPULPV2 extension.
-   @param[in]  in   16-Bit input integer
-   @param[out] out  Square root of the input
-   @return     none
+    @brief      Square root of a 16-bit fixed point number for XPULPV2 extension.
+    @param[in]  in   16-Bit input integer
+    @param[out] out  Square root of the input
+    @return     none
 */
 
 void plp_sqrt_q16s_rv32im(const int16_t *__restrict__ pSrc,
@@ -2872,10 +2892,10 @@ void plp_sqrt_q16s_rv32im(const int16_t *__restrict__ pSrc,
                           int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-   @brief      Square root of a 16-bit fixed point number for XPULPV2 extension.
-   @param[in]  in   16-Bit input integer
-   @param[out] out  Square root of the input
-   @return     none
+    @brief      Square root of a 16-bit fixed point number for XPULPV2 extension.
+    @param[in]  in   16-Bit input integer
+    @param[out] out  Square root of the input
+    @return     none
 */
 
 void plp_sqrt_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
@@ -2883,14 +2903,14 @@ void plp_sqrt_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
                            int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-  @brief Glue code for correlation of 32-bit integer vectors.
-  @param[in]  pSrcA   points to the first input vector
-  @param[in]  srcALen Length of the first input vector
-  @param[in]  pSrcB   points to the second input vector
-  @param[in]  srcBLen Length of the second input vector
-  @param[out] pRes    output result returned here
-  @return     none
- */
+    @brief Glue code for correlation of 32-bit integer vectors.
+    @param[in]  pSrcA   points to the first input vector
+    @param[in]  srcALen Length of the first input vector
+    @param[in]  pSrcB   points to the second input vector
+    @param[in]  srcBLen Length of the second input vector
+    @param[out] pRes    output result returned here
+    @return     none
+*/
 
 void plp_correlate_i32(const int32_t *pSrcA,
                        const uint32_t srcALen,
@@ -2899,13 +2919,13 @@ void plp_correlate_i32(const int32_t *pSrcA,
                        int32_t *pRes);
 
 /** -------------------------------------------------------
-   @brief Correlation of 32-bit integer vectors kernel for RV32IM extension.
-   @param[in]  pSrcA   points to the first input vector
-   @param[in]  srcALen Length of the first input vector
-   @param[in]  pSrcB   points to the second input vector
-   @param[in]  srcBLen Length of the second input vector
-   @param[out] pRes    output result returned here
-   @return     none
+    @brief Correlation of 32-bit integer vectors kernel for RV32IM extension.
+    @param[in]  pSrcA   points to the first input vector
+    @param[in]  srcALen Length of the first input vector
+    @param[in]  pSrcB   points to the second input vector
+    @param[in]  srcBLen Length of the second input vector
+    @param[out] pRes    output result returned here
+    @return     none
 */
 
 void plp_correlate_i32s_rv32im(const int32_t *pSrcA,
@@ -2915,13 +2935,13 @@ void plp_correlate_i32s_rv32im(const int32_t *pSrcA,
                                int32_t *pRes);
 
 /** -------------------------------------------------------
-   @brief Correlation of 32-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  pSrcA   points to the first input vector
-   @param[in]  srcALen Length of the first input vector
-   @param[in]  pSrcB   points to the second input vector
-   @param[in]  srcBLen Length of the second input vector
-   @param[out] pRes    output result returned here
-   @return     none */
+    @brief Correlation of 32-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]  pSrcA   points to the first input vector
+    @param[in]  srcALen Length of the first input vector
+    @param[in]  pSrcB   points to the second input vector
+    @param[in]  srcBLen Length of the second input vector
+    @param[out] pRes    output result returned here
+    @return     none */
 
 void plp_correlate_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
                                 const uint32_t srcALen,
@@ -3438,10 +3458,8 @@ void plp_conv_i8p_xpulpv2(void *task_args);
    @return none
 */
 
-void plp_conv_parallel_OLA(uint32_t nPE,
-                           uint32_t srcALen,
-                           uint32_t srcBLen,
-                           int32_t *resultsBuffer);
+void
+plp_conv_parallel_OLA(uint32_t nPE, uint32_t srcALen, uint32_t srcBLen, int32_t *resultsBuffer);
 
 /** -------------------------------------------------------
    @brief Helper function for parallelized overlap-adding of partial convolution results
@@ -6424,9 +6442,8 @@ void plp_cmplx_mag_q16(const int16_t *pSrc,
   @return     none
 */
 
-void plp_bitreversal_16s_rv32im(uint16_t *pSrc,
-                                const uint16_t bitRevLen,
-                                const uint16_t *pBitRevTab);
+void
+plp_bitreversal_16s_rv32im(uint16_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab);
 
 /**
   @brief      In-place 16 bit reversal function for XPULPV2
@@ -6436,9 +6453,8 @@ void plp_bitreversal_16s_rv32im(uint16_t *pSrc,
   @return     none
 */
 
-void plp_bitreversal_16v_xpulpv2(uint16_t *pSrc,
-                                 const uint16_t bitRevLen,
-                                 const uint16_t *pBitRevTab);
+void
+plp_bitreversal_16v_xpulpv2(uint16_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab);
 
 /**
  * @brief      Glue code for quantized 16 bit complex fast fourier transform
@@ -7700,10 +7716,8 @@ void plp_mat_trans_i8vp_xpulpv2(void *args);
   @par This function will use plp_mat_trans_i32s_xpulpv2 for its computation.
 */
 
-void plp_mat_trans_f32(const float *__restrict__ pSrc,
-                       uint32_t M,
-                       uint32_t N,
-                       float *__restrict__ pDst);
+void
+plp_mat_trans_f32(const float *__restrict__ pSrc, uint32_t M, uint32_t N, float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix transpose of a 32-bit float*ing-point matrices.
@@ -7993,10 +8007,8 @@ void plp_mat_fill_I_q32s_xpulpv2(uint32_t N, int32_t fracBits, int32_t *__restri
   @return     none
 */
 
-void plp_mat_fill_I_q32_parallel(uint32_t N,
-                                 int32_t fracBits,
-                                 uint32_t nPE,
-                                 int32_t *__restrict__ pDst);
+void
+plp_mat_fill_I_q32_parallel(uint32_t N, int32_t fracBits, uint32_t nPE, int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Create a 32-bit fix-point identity matrix in parallel on XpulpV2
@@ -8050,10 +8062,8 @@ void plp_mat_fill_I_q16v_xpulpv2(uint32_t N, int32_t fracBits, int16_t *__restri
   @return     none
 */
 
-void plp_mat_fill_I_q16_parallel(uint32_t N,
-                                 int32_t fracBits,
-                                 uint32_t nPE,
-                                 int16_t *__restrict__ pDst);
+void
+plp_mat_fill_I_q16_parallel(uint32_t N, int32_t fracBits, uint32_t nPE, int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Create a 16-bit fix-point identity matrix in parallel on XpulpV2
@@ -8111,10 +8121,8 @@ void plp_mat_fill_I_q8v_xpulpv2(uint32_t N, int32_t fracBits, int8_t *__restrict
   @return     none
 */
 
-void plp_mat_fill_I_q8_parallel(uint32_t N,
-                                int32_t fracBits,
-                                uint32_t nPE,
-                                int8_t *__restrict__ pDst);
+void
+plp_mat_fill_I_q8_parallel(uint32_t N, int32_t fracBits, uint32_t nPE, int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Create a 8-bit fix-point identity matrix in parallel on XpulpV2
@@ -13324,10 +13332,8 @@ void plp_mat_fill_I_stride_q16vp_xpulpv2(void *args);
   The diagonal elements will be filled with the value: `1 << fracBits`.
 */
 
-void plp_mat_fill_I_stride_q8(uint32_t N,
-                              uint32_t stride,
-                              int32_t fracBits,
-                              int8_t *__restrict__ pDst);
+void
+plp_mat_fill_I_stride_q8(uint32_t N, uint32_t stride, int32_t fracBits, int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Create a strided 8-bit fix-point identity matrix on RV32IM

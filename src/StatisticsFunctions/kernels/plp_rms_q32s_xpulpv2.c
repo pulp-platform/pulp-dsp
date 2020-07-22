@@ -1,9 +1,9 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_var_i32s_rv32im.c
- * Description:  Var value of a 32-bit integer vector for RV32IM
+ * Title:        plp_rms_q32s_xpulpv2.c
+ * Description:  Calculates the RMS value on XPULPV2 cores
  *
- * $Date:        29.06.2020
+ * $Date:        30.06.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
@@ -30,15 +30,15 @@
 #include "plp_math.h"
 
 /**
-   @ingroup var
+   @ingroup power
 */
 
 /**
-   @defgroup varKernels Var Kernels
-   Calculates the var of the input vector. Var is defined as the greatest of the elements in the
-   vector. There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit
-   data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions
-   are provided.
+   @defgroup RMSkernels RMS Kernels
+   Calculates the RMS value of the input vector.
+   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+   types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
+   provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
    <pre>
@@ -58,29 +58,23 @@
 */
 
 /**
-   @addtogroup varKernels
+   @addtogroup RMSkernels
    @{
 */
 
 /**
-   @brief         Var value of a 32-bit integer vector for RV32IM extension.
+   @brief         RMS value of a 32-bit fixed point vector for XPULPV2 extension.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    var value returned here
+   @param[out]    pRes    RMS value returned here
    @return        none
 */
 
-void plp_var_i32s_rv32im(const int32_t *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         int32_t *__restrict__ pRes) {
+void plp_rms_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
+                          uint32_t blockSize,
+                          uint32_t fracBits,
+                          int32_t *__restrict__ pRes) {
 
-    int32_t square_of_mean;
-    int32_t square_of_values;
-
-    plp_mean_i32(pSrc, blockSize, &square_of_mean);
-    square_of_mean *= square_of_mean;
-
-    plp_power_i32(pSrc, blockSize, &square_of_mean);
-
-    *pRes = (square_of_values / blockSize - square_of_mean);
+    plp_power_q32(pSrc, blockSize, fracBits, pRes);
+    *pRes = (*pRes) / blockSize;
 }

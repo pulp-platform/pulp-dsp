@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_max_f32s_xpulpv2.c
- * Description:  Max value of a 32-bit integer vector for XPULPV2
+ * Description:  Kernel for calculating the max of 32-Bit floating point input vectors on XPULPV2
  *
  * $Date:        29.06.2020
  *

@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_min_f32.c
- * Description:
+ * Description:  Min value of a 32-bit floating point vector glue code
  *
  * $Date:        01.07.2020
  *
@@ -35,29 +35,6 @@
 
 /**
    @defgroup min Min
-   Calculates the min of the input vector. Min is defined as the average of the elements in the
-   vector. The underlying algorithm is used: <pre> Result = (pSrc[0] + pSrc[1] + pSrc[2] + ... +
-   pSrc[blockSize-1]) / blockSize;
-   </pre>
-   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
-   types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
-   provided.
-
-   The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
-   <pre>
-   \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
-
-   data type = {f, i, q} respectively for floats, integers, fixed points
-
-   precision = {32, 16, 8} bits
-
-   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
-   SIMD instructions), and parallel (for multicore parallel computing), respectively.
-
-   isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
-
-   </pre>
-
 */
 
 /**

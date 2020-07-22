@@ -1,9 +1,9 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_var_i16s_rv32im.c
- * Description:  Var value of a 16-bit integer vector for RV32IM
+ * Title:        plp_rms_f32.c
+ * Description:  Calculates the RMS value of an input vector
  *
- * $Date:        29.06.2020
+ * $Date:        30.06.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
@@ -30,15 +30,15 @@
 #include "plp_math.h"
 
 /**
-   @ingroup var
+   @ingroup groupStats
 */
 
 /**
-   @defgroup varKernels Var Kernels
-   Calculates the var of the input vector. Var is defined as the greatest of the elements in the
-   vector. There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit
-   data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions
-   are provided.
+   @defgroup power Power
+   Calculates the RMS value of the input vector.
+   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+   types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
+   provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
    <pre>
@@ -58,31 +58,27 @@
 */
 
 /**
-   @addtogroup varKernels
+   @addtogroup power
    @{
 */
 
 /**
-   @brief         Var value of a 16-bit integer vector for RV32IM extension.
+   @brief         Glue code for RMS value of a 32-bit float vector.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    var value returned here
+   @param[out]    pRes    RMS value returned here
    @return        none
-*/
+ */
 
-void plp_var_i16s_rv32im(const int16_t *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         int32_t *__restrict__ pRes) {
+void plp_rms_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes) {
 
-    int32_t square_of_mean;
-    int32_t square_of_values;
-
-    int16_t mean;
-
-    plp_mean_i16(pSrc, blockSize, &mean);
-    square_of_mean = mean * mean;
-
-    plp_power_i16(pSrc, blockSize, &square_of_values);
-
-    *pRes = (square_of_values / blockSize - square_of_mean);
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        *pRes = -1;
+    } else {
+        plp_rms_f32s_xpulpv2(pSrc, blockSize, pRes);
+    }
 }
+
+/**
+  @} end of power group
+ */

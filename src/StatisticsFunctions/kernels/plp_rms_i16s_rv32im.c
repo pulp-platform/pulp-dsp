@@ -1,9 +1,9 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_var_i32s_xpulpv2.c
- * Description:  Var value of a 32-bit integer vector for XPULPV2
+ * Title:        plp_rms_i16s_rv32im.c
+ * Description:  Calculates the RMS value on RV32IM cores
  *
- * $Date:        29.06.2020
+ * $Date:        30.06.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
@@ -30,15 +30,15 @@
 #include "plp_math.h"
 
 /**
-  @ingroup var
- */
+   @ingroup power
+*/
 
 /**
-   @defgroup varKernels Var Kernels
-   Calculates the var of the input vector. Var is defined as the greatest of the elements in the
-   vector. There are separate functions for floating point, integer, and fixed point 32- 32- 8-bit
-   data types. For lower precision integers (32- and 8-bit), functions exploiting SIMD instructions
-   are provided.
+   @defgroup RMSkernels RMS Kernels
+   Calculates the RMS value of the input vector.
+   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+   types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
+   provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
    <pre>
@@ -46,7 +46,7 @@
 
    data type = {f, i, q} respectively for floats, integers, fixed points
 
-   precision = {32, 32, 8} bits
+   precision = {32, 16, 8} bits
 
    method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
    SIMD instructions), and parallel (for multicore parallel computing), respectively.
@@ -55,34 +55,51 @@
 
    </pre>
 
- */
+*/
 
 /**
-  @addtogroup varKernels
-  @{
- */
+   @addtogroup RMSkernels
+   @{
+*/
 
 /**
-   @brief         Var value of a 32-bit integer vector for XPULPV2 extension.
+   @brief         RMS value of a 16-bit integer vector for RV32IM extension.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    var value returned here
+   @param[out]    pRes    RMS value returned here
    @return        none
 */
 
-void plp_var_i32s_xpulpv2(const int32_t *__restrict__ pSrc,
-                          uint32_t blockSize,
-                          int32_t *__restrict__ pRes) {
+void plp_rms_i16s_rv32im(const int16_t *__restrict__ pSrc,
+                           uint32_t blockSize,
+                           int32_t *__restrict__ pRes) {
 
-    int32_t square_of_mean;
-    int32_t square_of_values;
+    uint32_t blkCnt = 0;
+    int16_t x1, x2;
+    int32_t sum = 0;
 
-    int32_t mean;
+#if defined(PLP_MATH_LOOPUNROLL)
 
-    plp_mean_i32(pSrc, blockSize, &mean);
-    square_of_mean = mean * mean;
+    for (blkCnt = 0; blkCnt < (blockSize >> 1); blkCnt++) {
+        x1 = *pSrc++;
+        x2 = *pSrc++;
+        sum += x1 * x1;
+        sum += x2 * x2;
+    }
 
-    plp_power_i32(pSrc, blockSize, &square_of_values);
+    if (blockSize % 2 == 1) {
+        x1 = *pSrc++;
+        sum += x1 * x1;
+    }
 
-    *pRes = (square_of_values / blockSize - square_of_mean);
+#else
+
+    for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+        x1 = *pSrc++;
+        sum += x1 * x1;
+    }
+
+#endif
+
+    **pRes = sum;
 }

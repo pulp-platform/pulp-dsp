@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_conv_i8s_rv32im.c
- * Description:  8-bit fixed point scalar dot product kernel for RV32IM
+ * Description:  8-bit integer singlecore convolution for RV32IM
  *
  * $Date:        01. July 2019
  * $Revision:    V0
@@ -48,7 +48,7 @@
    @param[out] pRes     output result returned here
    @return        none */
 
-// Pre-condition: psrcALen >= psrcBLen, established by calling function plp_conv_i32
+// Pre-condition: psrcALen >= psrcBLen, established by calling function plp_conv_i8
 // Pre-condition: pRes has enough allocated memory, i.e. srcALen + srcBLen-1u
 // Pre-condition: srcALen >= 2 and srcBLen >= 2, otherwise use vector dot product
 
