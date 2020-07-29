@@ -17,23 +17,24 @@ GENERATE_STIMULI = "gen_stimuli"
 
 class Variable(object):
     """Variable"""
-    def __init__(self, name, visible=True):
+    def __init__(self, name, visible=True, active=None):
         """
         name: name for the variable
         """
         super(Variable, self).__init__()
         self.name = name
         self.visible = visible
+        self.active = active if callable(active) else lambda v: True
 
 
 class SweepVariable(Variable):
     """sweep variable"""
-    def __init__(self, name, values, visible=True):
+    def __init__(self, name, values, visible=True, active=None):
         """
         name: name for the sweep variable
         values: iterable over all possible values for this variable
         """
-        super(SweepVariable, self).__init__(name, visible)
+        super(SweepVariable, self).__init__(name, visible, active)
         self.values = values
 
 
@@ -842,7 +843,7 @@ class AggregatedTest(object):
                 version=self.version,
                 device_name=self.device_name
             )
-            for (i, env) in enumerate(Sweep(variables))
+            for (i, env) in enumerate(Sweep(variables, version))
         ]
 
     def to_plptest(self):
@@ -864,7 +865,7 @@ class AggregatedTest(object):
                             Shell('run', 'make run %s %s' % (platform_str, flags)),
                             Check('check', check_output, test_obj=self)
                         ],
-                        timeout=10)
+                        timeout=20)
 
     def get_common_header_str(self):
         return dedent(
@@ -1156,9 +1157,9 @@ def bench_output(performance, test_obj, test_case):
 
 class Sweep:
     """ Iterator over all variables and returns the environment"""
-    def __init__(self, variables):
+    def __init__(self, variables, version):
         self.variables = variables
-        self.prod_iter = product(*[v.values
+        self.prod_iter = product(*[v.values if v.active(version) else [v.values[0]]
                                    for v in self.variables
                                    if isinstance(v, SweepVariable)])
 
@@ -1330,7 +1331,6 @@ def tolerance_check_str(acq, exp, tolerance, ctype, indent, target):
 def generate_test(function_name, arguments, variables, implemented, use_l1=False,
                   extended_output=True, n_ops=None, arg_ret_type=None):
     """ Entry-Point of the phase 1 """
-    visible_env = [v.name for v in variables if v.visible]
     testsets = [
         Testset(
             name=device_name,
@@ -1340,7 +1340,7 @@ def generate_test(function_name, arguments, variables, implemented, use_l1=False
                                arg_ret_type=arg_ret_type,
                                arguments=arguments,
                                variables=variables,
-                               visible_env=visible_env,
+                               visible_env=[var.name for var in variables if var.visible and var.active(v)],
                                device_name=device_name,
                                use_l1=use_l1,
                                extended_output=extended_output,

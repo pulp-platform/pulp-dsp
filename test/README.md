@@ -94,6 +94,7 @@ These variables are used to define the sweeps. It's constructor has the followin
 - `name`: Name for the variable, which can be used later for [`Argument`s](#arguments)
 - `values`: List (or other iterable) over all values to be swept.
 - (optional) `visible`: Boolean. If `True`, this variable will appear in the test name. If `False`, the variable is hidden.
+- (optional) `active`: Function: `F: version: str -> bool` which tells the test framework to use the sweep variable based on the current version.
 
 ##### DynamicVariable
 
