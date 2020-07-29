@@ -58,8 +58,7 @@
 
   precision = {32, 16, 8} bits
 
-  method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
-  SIMD instructions), and parallel (for multicore parallel computing), respectively.
+  method = {s, p} respectively meaning single core or parallel multicore implementation.
 
   isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
