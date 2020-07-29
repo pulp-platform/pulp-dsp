@@ -26,7 +26,13 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Notice: project inspired by ARM CMSIS DSP and parts of source code
+ * ported and adopted for RISC-V PULP platform from ARM CMSIS DSP
+ * released under Copyright (C) 2010-2019 ARM Limited or its affiliates
+ * with Apache-2.0.
  */
+
 
 #include "plp_math.h"
 
