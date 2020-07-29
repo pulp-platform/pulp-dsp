@@ -865,7 +865,7 @@ class AggregatedTest(object):
                             Shell('run', 'make run %s %s' % (platform_str, flags)),
                             Check('check', check_output, test_obj=self)
                         ],
-                        timeout=20)
+                        timeout=40)
 
     def get_common_header_str(self):
         return dedent(
@@ -1077,7 +1077,7 @@ def check_output(config, output, test_obj):
         print("{} {}".format(status, ", ".join(["{}={}".format(k, case.env[k])
                                                 for k in test_obj.visible_env])))
         # print mismatches
-        if result['mismatches']:
+        if result['mismatches'] and test_obj.extended_output:
             print(indent("\n".join(result['mismatches']), "      "))
 
         bench_output(result, test_obj, case)
