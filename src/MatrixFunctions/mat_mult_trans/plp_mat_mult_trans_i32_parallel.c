@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2019 ETH Zurich and University of Bologna.
  *
  * Author: Tom Kuchler, ETH Zurich
  *
@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMatrix
  */
@@ -49,39 +48,28 @@
   @param[in]  O         width of the second input matrix
   @param[in]  nPE       Number of cores to use
   @param[out] pDstC     points to the output matrix
-  @return        none
+  @return     none
  */
 
-void plp_mat_mult_trans_i32_parallel(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t M,
-                         uint32_t N,
-                         uint32_t O,
-                         uint32_t nPE,
-                         int32_t * __restrict__ pDstC){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    printf("parallel processing supported only for cluster side\n");
-    return;
-  }
-  else{
-    plp_mat_mult_instance_i32 args = {
-      .pSrcA = pSrcA,
-      .pSrcB = pSrcB,
-      .M = M,
-      .N = N,
-      .O = O,
-      .nPE = nPE,
-      .pDstC = pDstC
-    };
-    rt_team_fork(nPE,plp_mat_mult_trans_i32p_xpulpv2, (void*) &args);
-  }
+void plp_mat_mult_trans_i32_parallel(const int32_t *__restrict__ pSrcA,
+                                     const int32_t *__restrict__ pSrcB,
+                                     uint32_t M,
+                                     uint32_t N,
+                                     uint32_t O,
+                                     uint32_t nPE,
+                                     int32_t *__restrict__ pDstC) {
 
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        printf("parallel processing supported only for cluster side\n");
+        return;
+    } else {
+        plp_mat_mult_instance_i32 args = {
+            .pSrcA = pSrcA, .pSrcB = pSrcB, .M = M, .N = N, .O = O, .nPE = nPE, .pDstC = pDstC
+        };
+        rt_team_fork(nPE, plp_mat_mult_trans_i32p_xpulpv2, (void *)&args);
+    }
 }
 
 /**
   @} end of MatMultTrans group
  */
-
-

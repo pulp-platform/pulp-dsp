@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
  *
@@ -30,28 +30,34 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMatrix
  */
 
 /**
   @defgroup MatSub matrix subtraction
-  This module contains the glue code for matrix subtraction. The kernel codes
-  (kernels) are in the Module matrix subtraction Kernels.
+  This module contains the glue code for matrix subtraction. The kernel codes (kernels) are in the
+  Module strided matrix addition Kernels.
 
-  The Matrx Subtraction subtracts two matrices, element wise. Both matrices, and
-  the output matrix have dimension MxN.
+  The Matrx Subtraction subtracts two matrices, element wise. Both matrices, and the output matrix
+  have dimension MxN.
 
-  <pre>
-    pDst[m, n] = pSrcA[m, n] - pSrcB[m, n]
-  </pre>
+      `pDst[m, n] = pSrcA[m, n] - pSrcB[m, n]`
 
-  There are functions for integer 32- 16- and 8-bit data types, as well as for
-  floating-point. These functions can also be used for fix-point matrices, if
-  they have their fix-point at the same location. The outpt matrix will then also
-  have the fix-point at the same location.
+  There are functions for integer 32- 16- and 8-bit data types, as well as for floating-point. These
+  functions can also be used for fix-point matrices, if they have their fix-point at the same
+  location. The outpt matrix will then also have the fix-point at the same location.
 
+  The naming scheme of the functions follows the following pattern (for example
+  `plp_mat_sub_i32`):
+
+      `plp_<function name>_<data type><precision>[_parallel]`
+
+  name          | description
+  ------------- | ---------------------------------------------------------
+  function_name | `mat_sub`
+  data type     | {f, i, q} respectively for floats, integers, fixed points
+  precision     | {32, 16, 8} bits
  */
 
 /**
@@ -69,23 +75,19 @@
   @return     none
  */
 
-void plp_mat_sub_i16(const int16_t * __restrict__ pSrcA,
-                     const int16_t * __restrict__ pSrcB,
+void plp_mat_sub_i16(const int16_t *__restrict__ pSrcA,
+                     const int16_t *__restrict__ pSrcB,
                      uint32_t M,
                      uint32_t N,
-                     int16_t * __restrict__ pDst){
+                     int16_t *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_mat_sub_i16s_rv32im(pSrcA, pSrcB, M, N, pDst);
-    }
-    else{
+    } else {
         plp_mat_sub_i16v_xpulpv2(pSrcA, pSrcB, M, N, pDst);
     }
-
 }
 
 /**
   @} end of MatSub group
  */
-
-

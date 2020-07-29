@@ -20,6 +20,7 @@ def compute_result(result_parameter, inputs, env, fix_point):
     fix_point: None (if no fixpoint is used) or decimal point
     """
 
+    # Q16:
     # len=16:    Q1.15 -> Q5.11
     # len=32:    Q1.15 -> Q6.10
     # len=64:    Q1.15 -> Q7.9

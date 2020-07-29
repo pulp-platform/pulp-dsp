@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
  *
@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMatrix
  */
-
 
 /**
   @addtogroup MatMultTrans
@@ -51,7 +49,7 @@
   @param[in]  shift     Amount to shift the result of each multiplication.
   @param[in]  nPE       Number of cores to use
   @param[out] pDstC     points to the output matrix
-  @return        none
+  @return     none
 
   @par Fix-Point and Shifting
   The result will be shifted by the parameter `shift` to the right (multiplied
@@ -63,37 +61,31 @@
   Set the `shift` parameter such that no overflow ocurrs.
  */
 
-void plp_mat_mult_trans_q8_parallel(const int8_t * __restrict__ pSrcA,
-                                    const int8_t * __restrict__ pSrcB,
+void plp_mat_mult_trans_q8_parallel(const int8_t *__restrict__ pSrcA,
+                                    const int8_t *__restrict__ pSrcB,
                                     uint32_t M,
                                     uint32_t N,
                                     uint32_t O,
                                     uint32_t shift,
                                     uint32_t nPE,
-                                    int8_t * __restrict__ pDstC){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    printf("parallel processing supported only for cluster side\n");
-    return;
-  }
-  else{
-    plp_mat_mult_instance_q8 args = {
-      .pSrcA = pSrcA,
-      .pSrcB = pSrcB,
-      .M = M,
-      .N = N,
-      .O = O,
-      .shift = shift,
-      .nPE = nPE,
-      .pDstC = pDstC
-    };
-    rt_team_fork(nPE,plp_mat_mult_trans_q8vp_xpulpv2, (void*) &args);
-  }
+                                    int8_t *__restrict__ pDstC) {
 
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        printf("parallel processing supported only for cluster side\n");
+        return;
+    } else {
+        plp_mat_mult_instance_q8 args = { .pSrcA = pSrcA,
+                                          .pSrcB = pSrcB,
+                                          .M = M,
+                                          .N = N,
+                                          .O = O,
+                                          .shift = shift,
+                                          .nPE = nPE,
+                                          .pDstC = pDstC };
+        rt_team_fork(nPE, plp_mat_mult_trans_q8vp_xpulpv2, (void *)&args);
+    }
 }
 
 /**
   @} end of MatMultTrans group
  */
-
-

@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
  *
@@ -30,15 +30,33 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMatrix
  */
 
 /**
   @defgroup MatScale matrix scale
-  This module contains the glue code for matrix scale. The kernel codes (kernels) are in the Module matrix scale Kernels.
-  <GROUP_DESCRIPTION>
+  This module contains the glue code for matrix scale. The kernel codes (kernels) are in the Module
+  strided matrix scale Kernels.
+
+  The Matrix Scale applies a scalar multiplication, followed by a bitshift operation to every
+  element in the matrix. For floating-point implementations, the bitshift operation is not applied.
+
+      `pDst[m,n] = (pSrc[m,n] * scale) >> shift`
+
+  There are functions for integer 32- 16- and 8-bit data types. For lower precision integers (16-
+  and 8-bit), functions exploiting SIMD instructions are provided.
+
+  The naming scheme of the functions follows the following pattern (for example
+  `plp_mat_stride_i32`):
+
+      `plp_<function name>_<data type><precision>[_parallel]`
+
+  name          | description
+  ------------- | ---------------------------------------------------------
+  function_name | `mat_scale`
+  data type     | {f, i, q} respectively for floats, integers, fixed points
+  precision     | {32, 16, 8} bits
  */
 
 /**
@@ -57,24 +75,20 @@
   @return     none
  */
 
-void plp_mat_scale_i16(const int16_t * __restrict__ pSrc,
+void plp_mat_scale_i16(const int16_t *__restrict__ pSrc,
                        uint32_t M,
                        uint32_t N,
                        int16_t scaleFactor,
                        int32_t shift,
-                       int16_t * __restrict__ pDst){
+                       int16_t *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_mat_scale_i16s_rv32im(pSrc, M, N, scaleFactor, shift, pDst);
-    }
-    else{
+    } else {
         plp_mat_scale_i16v_xpulpv2(pSrc, M, N, scaleFactor, shift, pDst);
     }
-
 }
 
 /**
   @} end of MatScale group
  */
-
-

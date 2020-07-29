@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
  *
@@ -29,7 +29,6 @@
  */
 
 #include "plp_math.h"
-
 
 /**
   @ingroup MatScale
@@ -51,19 +50,18 @@
   @return     none
  */
 
-
-void plp_mat_scale_i8s_rv32im(const int8_t * __restrict__ pSrc,
+void plp_mat_scale_i8s_rv32im(const int8_t *__restrict__ pSrc,
                               uint32_t M,
                               uint32_t N,
                               int8_t scaleFactor,
                               int32_t shift,
-                              int8_t * __restrict__ pDst) {
+                              int8_t *__restrict__ pDst) {
 
 #define BASIC_VERSION // if used don' forget to also use undefine at end of file
 #ifdef BASIC_VERSION
 
-    for(int m = 0; m < M; m++) {
-        for(int n = 0; n < N; n++) {
+    for (int m = 0; m < M; m++) {
+        for (int n = 0; n < N; n++) {
             int32_t val = ((int32_t)pSrc[m * N + n]) * ((int32_t)scaleFactor);
             pDst[m * N + n] = (int8_t)(val >> shift);
         }
@@ -75,10 +73,8 @@ void plp_mat_scale_i8s_rv32im(const int8_t * __restrict__ pSrc,
 
 #endif
 #undef BASIC_VERSION
-
 }
 
 /**
    @} end of MatScaleKernels group
 */
-

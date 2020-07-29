@@ -30,21 +30,23 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMath
  */
 
 /**
   @defgroup BasicDotProd Vector Dot Product
-  This module contains the glue code for Vector Dot Product. The kernel codes (kernels) are in the Moducle Vector Dot Product Kernels.
+  This module contains the glue code for Vector Dot Product. The kernel codes (kernels) are in the
+  Moducle Vector Dot Product Kernels.
 
   The Vector Dot Product computes the dot product of two vectors.
   The vectors are multiplied element-by-element and then summed.
   <pre>
       sum = pSrcA[0]*pSrcB[0] + pSrcA[1]*pSrcB[1] + ... + pSrcA[blockSize-1]*pSrcB[blockSize-1]
   </pre>
-  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
+  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+  types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
+  provided.
 
   The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
   <pre>
@@ -54,7 +56,8 @@
 
   precision = {32, 16, 8} bits
 
-  method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+  method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
+  SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
   isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
@@ -77,23 +80,18 @@
   @return        none
  */
 
-void plp_dot_prod_i32(
-                         const int32_t * __restrict__ pSrcA,
-                         const int32_t * __restrict__ pSrcB,
-                         uint32_t blockSize,
-                         int32_t * __restrict__ pRes){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_dot_prod_i32s_rv32im(pSrcA, pSrcB, blockSize, pRes);
-  }
-  else{
-    plp_dot_prod_i32s_xpulpv2(pSrcA, pSrcB, blockSize, pRes);
-  }
+void plp_dot_prod_i32(const int32_t *__restrict__ pSrcA,
+                      const int32_t *__restrict__ pSrcB,
+                      uint32_t blockSize,
+                      int32_t *__restrict__ pRes) {
 
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        plp_dot_prod_i32s_rv32im(pSrcA, pSrcB, blockSize, pRes);
+    } else {
+        plp_dot_prod_i32s_xpulpv2(pSrcA, pSrcB, blockSize, pRes);
+    }
 }
 
 /**
   @} end of BasicDotProd group
  */
-
-

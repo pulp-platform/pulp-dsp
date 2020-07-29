@@ -1,9 +1,9 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_correlate_i8s_xpulpv2.c
- * Description:  
+ * Description:
  *
- * $Date:        03.07.2020        
+ * $Date:        03.07.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
@@ -29,7 +29,6 @@
 
 #include "plp_math.h"
 
-
 /**
    @ingroup BasicCorrelation
 */
@@ -48,59 +47,59 @@
    @param[out] pRes     output result returned here
    @return        none */
 
-void plp_correlate_i8s_xpulpv2(const int8_t *  pSrcA,
-                           const uint32_t srcALen,
-                           const int8_t *  pSrcB,
-                           const uint32_t srcBLen,
-                           int32_t *  pRes){
+void plp_correlate_i8s_xpulpv2(const int8_t *pSrcA,
+                               const uint32_t srcALen,
+                               const int8_t *pSrcB,
+                               const uint32_t srcBLen,
+                               int32_t *pRes) {
 
-  const int8_t *pSrc1, *pSrc2;
-  int32_t src1Len, src2Len;
-  
-  if (srcALen > srcBLen) {
-    pSrc1 = pSrcA;
-    pSrc2 = pSrcB;
-    src1Len = srcALen;
-    src2Len = srcBLen;
-  } else {
-    pSrc2 = pSrcA;
-    pSrc1 = pSrcB;
-    src2Len = srcALen;
-    src1Len = srcBLen;
-  }
-  
-  int32_t temp = 0;
-  const int32_t offset = src1Len - src2Len;
+    const int8_t *pSrc1, *pSrc2;
+    int32_t src1Len, src2Len;
 
-  // Stage 1
-  
-  for(int i=1;i<src2Len;i++){
-    for(int j=0;j<i;j++){
-      temp += pSrc1[j]*pSrc2[src2Len-i+j];
+    if (srcALen > srcBLen) {
+        pSrc1 = pSrcA;
+        pSrc2 = pSrcB;
+        src1Len = srcALen;
+        src2Len = srcBLen;
+    } else {
+        pSrc2 = pSrcA;
+        pSrc1 = pSrcB;
+        src2Len = srcALen;
+        src1Len = srcBLen;
     }
-    *pRes++ = temp;
-    temp = 0;
-  }
 
-  // Stage 2
-  
-  for(int i=0;i<=offset;i++){
-    for(int j=0;j<src2Len;j++){
-      temp += pSrc1[j+i]*pSrc2[j];
+    int32_t temp = 0;
+    const int32_t offset = src1Len - src2Len;
+
+    // Stage 1
+
+    for (int i = 1; i < src2Len; i++) {
+        for (int j = 0; j < i; j++) {
+            temp += pSrc1[j] * pSrc2[src2Len - i + j];
+        }
+        *pRes++ = temp;
+        temp = 0;
     }
-    *pRes++ = temp;
-    temp = 0;
-  }
-  
-  // Stage 3
-  
-  for(int i=src2Len-1;i>0;i--){
-    for(int j=0;j<i;j++){
-      temp += pSrc1[offset+src2Len-i+j]*pSrc2[j];
+
+    // Stage 2
+
+    for (int i = 0; i <= offset; i++) {
+        for (int j = 0; j < src2Len; j++) {
+            temp += pSrc1[j + i] * pSrc2[j];
+        }
+        *pRes++ = temp;
+        temp = 0;
     }
-    *pRes++ = temp;
-    temp = 0;
-  }
+
+    // Stage 3
+
+    for (int i = src2Len - 1; i > 0; i--) {
+        for (int j = 0; j < i; j++) {
+            temp += pSrc1[offset + src2Len - i + j] * pSrc2[j];
+        }
+        *pRes++ = temp;
+        temp = 0;
+    }
 }
 
 /**

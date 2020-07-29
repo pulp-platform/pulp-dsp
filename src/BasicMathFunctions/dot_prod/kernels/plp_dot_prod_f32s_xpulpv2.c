@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup BasicDotProd
  */
@@ -49,19 +48,16 @@
   @return        none
  */
 
-void plp_dot_prod_f32s_xpulpv2(
-                         const float32_t * __restrict__ pSrcA,
-                         const float32_t * __restrict__ pSrcB,
-                         uint32_t blockSize,
-                         float32_t * __restrict__ pRes){
+void plp_dot_prod_f32s_xpulpv2(const float32_t *__restrict__ pSrcA,
+                               const float32_t *__restrict__ pSrcB,
+                               uint32_t blockSize,
+                               float32_t *__restrict__ pRes) {
 
-  for(int i = 0; i < blockSize; i++){
-    *pRes += *(pSrcA++)*(*(pSrcB++));
-  }
-
+    for (int i = 0; i < blockSize; i++) {
+        *pRes += *(pSrcA++) * (*(pSrcB++));
+    }
 }
 
 /**
   @} end of BasicDotProd group
  */
-

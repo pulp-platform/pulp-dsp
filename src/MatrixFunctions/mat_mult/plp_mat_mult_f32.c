@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
  *
@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
    @ingroup groupMatrix
  */
@@ -48,28 +47,24 @@
   @param[in]  N         width of the first input matrix and hight of the second
   @param[in]  O         width of the second input matrix
   @param[out] pDstC     points to the output matrix
-  @return        none
+  @return     none
  */
 
-void plp_mat_mult_f32(const float * __restrict__ pSrcA,
-                      const float * __restrict__ pSrcB,
+void plp_mat_mult_f32(const float *__restrict__ pSrcA,
+                      const float *__restrict__ pSrcB,
                       uint32_t M,
                       uint32_t N,
                       uint32_t O,
-                      float * __restrict__ pDstC) {
+                      float *__restrict__ pDstC) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         printf("Floating point is supported only for cluster side\n");
         return;
-    }
-    else{
+    } else {
         plp_mat_mult_f32s_xpulpv2(pSrcA, pSrcB, M, N, O, pDstC);
     }
-
 }
 
 /**
   @} end of BasicMatMult group
  */
-
-

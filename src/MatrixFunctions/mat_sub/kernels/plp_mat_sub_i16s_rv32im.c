@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
  *
@@ -30,24 +30,35 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup MatSub
  */
 
 /**
   @defgroup MatSubKernels matrix subtraction Kernels
-  The Matrx Subtraction subtracts two matrices, element wise. Both matrices, and
-  the output matrix have dimension MxN.
+  This module contains the kernels for matrix subtraction.
 
-  <pre>
-    pDst[m * N + n] = pSrcA[m * N + n] - pSrcB[m * N + n]
-  </pre>
+  The Matrx Subtraction subtracts two matrices, element wise. Both matrices, and the output matrix
+  have dimension MxN.
 
-  There are functions for integer 32- 16- and 8-bit data types, as well as for
-  floating-point. These functions can also be used for fix-point matrices, if
-  they have their fix-point at the same location. The outpt matrix will then also
-  have the fix-point at the same location.
+      `pDst[m, n] = pSrcA[m, n] - pSrcB[m, n]`
+
+  There are functions for integer 32- 16- and 8-bit data types, as well as for floating-point. These
+  functions can also be used for fix-point matrices, if they have their fix-point at the same
+  location. The outpt matrix will then also have the fix-point at the same location.
+
+  The naming scheme of the functions follows the following pattern (for example
+  `plp_mat_sub_i32s_xpulpv2`):
+
+      `plp_<function name>_<data type><precision><method>_<isa_extension>`
+
+  name          | description
+  ------------- | ---------------------------------------------------------
+  function_name | `mat_sub`
+  data type     | {f, i, q} respectively for floats, integers, fixed points
+  precision     | {32, 16, 8} bits
+  method        | {`s`, `v`, `p`} meaning scalar, vectorized (i.e. SIMD) and parallel, respectively
+  isa_extension | {`rv32im`, `xpulpv2`} respectively for ibex and riscy
  */
 
 /**
@@ -65,17 +76,16 @@
   @return     none
  */
 
-
-void plp_mat_sub_i16s_rv32im(const int16_t * __restrict__ pSrcA,
-                             const int16_t * __restrict__ pSrcB,
+void plp_mat_sub_i16s_rv32im(const int16_t *__restrict__ pSrcA,
+                             const int16_t *__restrict__ pSrcB,
                              uint32_t M,
                              uint32_t N,
-                             int16_t * __restrict__ pDst) {
+                             int16_t *__restrict__ pDst) {
 
 #define BASIC_VERSION // if used don' forget to also use undefine at end of file
 #ifdef BASIC_VERSION
 
-    uint32_t m, n;  // loop counters
+    uint32_t m, n; // loop counters
 
     for (m = 0; m < M; m++) {
         for (n = 0; n < N; n++) {
@@ -89,10 +99,8 @@ void plp_mat_sub_i16s_rv32im(const int16_t * __restrict__ pSrcA,
 
 #endif
 #undef BASIC_VERSION
-
 }
 
 /**
    @} end of MatSubKernels group
 */
-

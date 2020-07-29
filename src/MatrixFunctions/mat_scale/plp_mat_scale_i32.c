@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
  *
@@ -29,7 +29,6 @@
  */
 
 #include "plp_math.h"
-
 
 /**
   @ingroup groupMatrix
@@ -51,24 +50,20 @@
   @return     none
  */
 
-void plp_mat_scale_i32(const int32_t * __restrict__ pSrc,
+void plp_mat_scale_i32(const int32_t *__restrict__ pSrc,
                        uint32_t M,
                        uint32_t N,
                        int32_t scaleFactor,
                        int32_t shift,
-                       int32_t * __restrict__ pDst){
+                       int32_t *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_mat_scale_i32s_rv32im(pSrc, M, N, scaleFactor, shift, pDst);
-    }
-    else{
+    } else {
         plp_mat_scale_i32s_xpulpv2(pSrc, M, N, scaleFactor, shift, pDst);
     }
-
 }
 
 /**
   @} end of MatScale group
  */
-
-

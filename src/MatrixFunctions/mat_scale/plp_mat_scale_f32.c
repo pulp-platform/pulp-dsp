@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
  *
@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
    @ingroup groupMatrix
  */
@@ -50,24 +49,20 @@
   @return     none
  */
 
-void plp_mat_scale_f32(const float * __restrict__ pSrc,
+void plp_mat_scale_f32(const float *__restrict__ pSrc,
                        uint32_t M,
                        uint32_t N,
                        float scaleFactor,
-                       float * __restrict__ pDst) {
+                       float *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         printf("Floating point is supported only for cluster side\n");
         return;
-    }
-    else{
+    } else {
         plp_mat_scale_f32s_xpulpv2(pSrc, M, N, scaleFactor, pDst);
     }
-
 }
 
 /**
   @} end of MatScale group
  */
-
-

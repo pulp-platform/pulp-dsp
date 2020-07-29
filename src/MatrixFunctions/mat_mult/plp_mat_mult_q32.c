@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
  *
@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
    @ingroup groupMatrix
  */
@@ -49,7 +48,7 @@
   @param[in]  O         width of the second input matrix
   @param[in]  shift     Amount to shift the result of each multiplication.
   @param[out] pDstC     points to the output matrix
-  @return        none
+  @return     none
 
   @par Fix-Point and Shifting
   The result will be shifted by the parameter `shift` to the right (multiplied
@@ -58,25 +57,21 @@
   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
  */
 
-void plp_mat_mult_q32(const int32_t * __restrict__ pSrcA,
-                      const int32_t * __restrict__ pSrcB,
+void plp_mat_mult_q32(const int32_t *__restrict__ pSrcA,
+                      const int32_t *__restrict__ pSrcB,
                       uint32_t M,
                       uint32_t N,
                       uint32_t O,
                       uint32_t shift,
-                      int32_t * __restrict__ pDstC) {
+                      int32_t *__restrict__ pDstC) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_mat_mult_q32s_rv32im(pSrcA, pSrcB, M, N, O, shift, pDstC);
-    }
-    else{
+    } else {
         plp_mat_mult_q32s_xpulpv2(pSrcA, pSrcB, M, N, O, shift, pDstC);
     }
-
 }
 
 /**
   @} end of BasicMatMult group
  */
-
-

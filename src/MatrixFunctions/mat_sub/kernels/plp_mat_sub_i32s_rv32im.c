@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
  *
@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup MatSub
  */
@@ -50,17 +49,16 @@
   @return     none
  */
 
-
-void plp_mat_sub_i32s_rv32im(const int32_t * __restrict__ pSrcA,
-                             const int32_t * __restrict__ pSrcB,
+void plp_mat_sub_i32s_rv32im(const int32_t *__restrict__ pSrcA,
+                             const int32_t *__restrict__ pSrcB,
                              uint32_t M,
                              uint32_t N,
-                             int32_t * __restrict__ pDst) {
+                             int32_t *__restrict__ pDst) {
 
 #define BASIC_VERSION // if used don' forget to also use undefine at end of file
 #ifdef BASIC_VERSION
 
-    uint32_t m, n;  // loop counters
+    uint32_t m, n; // loop counters
 
     for (m = 0; m < M; m++) {
         for (n = 0; n < N; n++) {
@@ -74,10 +72,8 @@ void plp_mat_sub_i32s_rv32im(const int32_t * __restrict__ pSrcA,
 
 #endif
 #undef BASIC_VERSION
-
 }
 
 /**
    @} end of MatSubKernels group
 */
-

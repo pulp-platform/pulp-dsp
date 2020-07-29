@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup BasicDotProd
  */
-
 
 /**
   @addtogroup BasicDotProdKernels
@@ -50,39 +48,37 @@
   @return        none
  */
 
-void plp_dot_prod_i32s_xpulpv2(
-                               const int32_t * __restrict__ pSrcA,
-                               const int32_t * __restrict__ pSrcB,
+void plp_dot_prod_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                               const int32_t *__restrict__ pSrcB,
                                uint32_t blockSize,
-                               int32_t * __restrict__ pRes) {
-  uint32_t blkCnt, tmpBS;                      /* Loop counter, temporal BlockSize */
-  int32_t sum1 = 0, sum2=0;                          /* Temporary return variable */
+                               int32_t *__restrict__ pRes) {
+    uint32_t blkCnt, tmpBS;     /* Loop counter, temporal BlockSize */
+    int32_t sum1 = 0, sum2 = 0; /* Temporary return variable */
 
 #if defined(PLP_MATH_LOOPUNROLL)
 
-        tmpBS = (blockSize>>1);
+    tmpBS = (blockSize >> 1);
 
-        for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-          sum1 = __MAC(sum1, (*pSrcA++), (*pSrcB++));
-          sum2 = __MAC(sum2, (*pSrcA++), (*pSrcB++));
-        }
+    for (blkCnt = 0; blkCnt < tmpBS; blkCnt++) {
+        sum1 = __MAC(sum1, (*pSrcA++), (*pSrcB++));
+        sum2 = __MAC(sum2, (*pSrcA++), (*pSrcB++));
+    }
 
-        tmpBS = (blockSize%2U);
+    tmpBS = (blockSize % 2U);
 
-        for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-          sum1 = __MAC(sum1, (*pSrcA++), (*pSrcB++));
-        }
+    for (blkCnt = 0; blkCnt < tmpBS; blkCnt++) {
+        sum1 = __MAC(sum1, (*pSrcA++), (*pSrcB++));
+    }
 
 #else // PLP_MATH_LOOPUNROLL
 
-        for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-          sum1 = __MAC(sum1, (*pSrcA++), (*pSrcB++));
-        }
+    for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+        sum1 = __MAC(sum1, (*pSrcA++), (*pSrcB++));
+    }
 
 #endif // PLP_MATH_LOOPUNROLL
 
-        * pRes = sum1 + sum2;
-
+    *pRes = sum1 + sum2;
 }
 
 /**

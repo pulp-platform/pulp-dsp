@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Moritz Scherer, Tibor Schneider, ETH Zurich
  *
@@ -30,10 +30,14 @@
 
 #include "plp_math.h"
 
-#define shufflemask1 (v4s){3,2,1,0}
-#define shufflemask2 (v4s){1,2,3,4}
-#define shufflemask3 (v4s){2,3,4,5}
-#define shufflemask4 (v4s){3,4,5,6}
+#define shufflemask1                                                                               \
+    (v4s) { 3, 2, 1, 0 }
+#define shufflemask2                                                                               \
+    (v4s) { 1, 2, 3, 4 }
+#define shufflemask3                                                                               \
+    (v4s) { 2, 3, 4, 5 }
+#define shufflemask4                                                                               \
+    (v4s) { 3, 4, 5, 6 }
 
 /**
  * @ingroup BasicConvolution
@@ -58,32 +62,34 @@
 // Pre-condition: pRes has enough allocated memory, i.e. srcALen + srcBLen-1u
 // Pre-condition: srcALen >= 2 and srcBLen >= 2, otherwise use vector dot product
 
-void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
+void plp_conv_valid_i8s_xpulpv2(const int8_t *pSrcA,
                                 const uint32_t srcALen,
-                                const int8_t *  pSrcB,
+                                const int8_t *pSrcB,
                                 const uint32_t srcBLen,
-                                int32_t *  pRes){
+                                int32_t *pRes) {
 
-    const int8_t* p_a_iter; // intermediate inputA pointer
-    const int8_t* p_b_iter; // intermediate inputB pointer
+    const int8_t *p_a_iter; // intermediate inputA pointer
+    const int8_t *p_b_iter; // intermediate inputB pointer
 
     int res_len = srcALen - srcBLen + 1;
 
 #ifdef PLP_MATH_LOOPUNROLL
 
-    const int8_t* p_b_tmp;          // Intermediate pointers
-    int32_t sum;                    // Accumulators
-    uint32_t k, count, blk_cnt;     // Loop counters
+    const int8_t *p_b_tmp;      // Intermediate pointers
+    int32_t sum;                // Accumulators
+    uint32_t k, count, blk_cnt; // Loop counters
 
     // for loop unroll
     int32_t acc0, acc1, acc2, acc3; // Accumulators
 
-    v4s xmask[] = {(v4s){0,0,0,0}, (v4s){0xff,0,0,0}, (v4s){0xff,0xff,0,0}, (v4s){0xff,0xff,0xff,0}};
-    v4s ymask[] = {(v4s){0,0,0,0}, (v4s){0,0,0,0xff}, (v4s){0,0,0xff,0xff}, (v4s){0,0xff,0xff,0xff}};
+    v4s xmask[] = { (v4s){ 0, 0, 0, 0 }, (v4s){ 0xff, 0, 0, 0 }, (v4s){ 0xff, 0xff, 0, 0 },
+                    (v4s){ 0xff, 0xff, 0xff, 0 } };
+    v4s ymask[] = { (v4s){ 0, 0, 0, 0 }, (v4s){ 0, 0, 0, 0xff }, (v4s){ 0, 0, 0xff, 0xff },
+                    (v4s){ 0, 0xff, 0xff, 0xff } };
     v4s mask;
 
-    v4s _x1, _x2, _x3, _x4;         // local registers
-    v4s _y1;                        // local registers
+    v4s _x1, _x2, _x3, _x4; // local registers
+    v4s _y1;                // local registers
 
     // Working pointer of inputA
     p_a_iter = pSrcA;
@@ -116,25 +122,28 @@ void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
 
             do {
                 // Read y[srcBLen - 1] sample
-                _x1 = *((v4s*)p_a_iter);     // {x[0],x[1],x[2],x[3]}
-                _x4 = *((v4s*)(p_a_iter+4)); // {x[4],x[5],x[6],x[7]}
-                _y1 = *((v4s*)(p_b_iter-3)); // {y[srcBLen - 4],y[srcBLen - 3],y[srcBLen - 2],y[srcBLen - 1]} 
+                _x1 = *((v4s *)p_a_iter);       // {x[0],x[1],x[2],x[3]}
+                _x4 = *((v4s *)(p_a_iter + 4)); // {x[4],x[5],x[6],x[7]}
+                _y1 = *((v4s *)(p_b_iter - 3)); // {y[srcBLen - 4],y[srcBLen - 3],y[srcBLen -
+                                                // 2],y[srcBLen - 1]}
 
-                p_a_iter+=4U;
-                p_b_iter-=4U;
+                p_a_iter += 4U;
+                p_b_iter -= 4U;
 
-                _x2 = __builtin_shuffle(_x1,_x4, shufflemask2); // {x[1],x[2],x[3],x[4]}
-                _x3 = __builtin_shuffle(_x1,_x4, shufflemask3); // {x[2],x[3],x[4],x[5]}
-                _x4 = __builtin_shuffle(_x1,_x4, shufflemask4); // {x[2],x[3],x[4],x[5]}
+                _x2 = __builtin_shuffle(_x1, _x4, shufflemask2); // {x[1],x[2],x[3],x[4]}
+                _x3 = __builtin_shuffle(_x1, _x4, shufflemask3); // {x[2],x[3],x[4],x[5]}
+                _x4 = __builtin_shuffle(_x1, _x4, shufflemask4); // {x[2],x[3],x[4],x[5]}
 
-                _y1 = __builtin_shuffle(_y1,_y1,shufflemask1); // {y[srcBLen - 1],y[srcBLen - 2],y[srcBLen - 3],y[srcBLen - 4]} 
+                _y1 =
+                    __builtin_shuffle(_y1, _y1, shufflemask1); // {y[srcBLen - 1],y[srcBLen -
+                                                               // 2],y[srcBLen - 3],y[srcBLen - 4]}
 
                 // Perform the multiply-accumulate
 
-                acc0 = __SUMDOTP4(_x1,_y1,acc0);
-                acc1 = __SUMDOTP4(_x2,_y1,acc1);
-                acc2 = __SUMDOTP4(_x3,_y1,acc2);
-                acc3 = __SUMDOTP4(_x4,_y1,acc3);
+                acc0 = __SUMDOTP4(_x1, _y1, acc0);
+                acc1 = __SUMDOTP4(_x2, _y1, acc1);
+                acc2 = __SUMDOTP4(_x3, _y1, acc2);
+                acc3 = __SUMDOTP4(_x4, _y1, acc3);
 
             } while (--k);
 
@@ -145,26 +154,26 @@ void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
             k = srcBLen % 0x4U;
 
             if (k > 0) {
-                _x1 = *((v4s*)p_a_iter);     // {x[0],x[1],x[2],x[3]}
-                _x4 = *((v4s*)(p_a_iter+4)); // {x[4],x[5],x[6],x[7]}
-                _y1 = *((v4s*)(p_b_iter-3)); // {y[srcBLen - 4],y[srcBLen - 3],y[srcBLen - 2],y[srcBLen - 1]} 
+                _x1 = *((v4s *)p_a_iter);       // {x[0],x[1],x[2],x[3]}
+                _x4 = *((v4s *)(p_a_iter + 4)); // {x[4],x[5],x[6],x[7]}
+                _y1 = *((v4s *)(p_b_iter - 3)); // {y[srcBLen - 4],y[srcBLen - 3],y[srcBLen -
+                                                // 2],y[srcBLen - 1]}
 
                 mask = ymask[k];
 
-                _x2 = __builtin_shuffle(_x1,_x4, shufflemask2); // {x[1],x[2],x[3],x[4]}
-                _x3 = __builtin_shuffle(_x1,_x4, shufflemask3); // {x[2],x[3],x[4],x[5]}
-                _x4 = __builtin_shuffle(_x1,_x4, shufflemask4); // {x[3],x[4],x[5],x[6]}
+                _x2 = __builtin_shuffle(_x1, _x4, shufflemask2); // {x[1],x[2],x[3],x[4]}
+                _x3 = __builtin_shuffle(_x1, _x4, shufflemask3); // {x[2],x[3],x[4],x[5]}
+                _x4 = __builtin_shuffle(_x1, _x4, shufflemask4); // {x[3],x[4],x[5],x[6]}
 
-                _y1 = __AND4(_y1,mask);	  
-                _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
+                _y1 = __AND4(_y1, mask);
+                _y1 = __builtin_shuffle(_y1, _y1, shufflemask1);
 
                 // Perform the multiply-accumulate
 
-                acc0 = __SUMDOTP4(_x1,_y1,acc0);
-                acc1 = __SUMDOTP4(_x2,_y1,acc1);
-                acc2 = __SUMDOTP4(_x3,_y1,acc2);
-                acc3 = __SUMDOTP4(_x4,_y1,acc3);
-
+                acc0 = __SUMDOTP4(_x1, _y1, acc0);
+                acc1 = __SUMDOTP4(_x2, _y1, acc1);
+                acc2 = __SUMDOTP4(_x3, _y1, acc2);
+                acc3 = __SUMDOTP4(_x4, _y1, acc3);
             }
 
             /* Store the result in the accumulator in the destination buffer. */
@@ -193,23 +202,23 @@ void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
 
             // Accumulator is made zero for every iteration
 
-            _y1 = *((v4s*)(p_b_iter-3));
-            _x1 = *((v4s*)(p_a_iter));
+            _y1 = *((v4s *)(p_b_iter - 3));
+            _x1 = *((v4s *)(p_a_iter));
             sum = 0;
-            _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
+            _y1 = __builtin_shuffle(_y1, _y1, shufflemask1);
 
             /* Loop unrolling: Compute 8 outputs at a time */
             k = srcBLen >> 2U;
-            while (k > 0U) { 
-                sum = __SUMDOTP4(_x1,_y1,sum);
+            while (k > 0U) {
+                sum = __SUMDOTP4(_x1, _y1, sum);
 
-                _y1 = *((v4s*)(p_b_iter-7));
-                _x1 = *((v4s*)(p_a_iter+4));
+                _y1 = *((v4s *)(p_b_iter - 7));
+                _x1 = *((v4s *)(p_a_iter + 4));
 
                 p_a_iter += 4U;
                 p_b_iter -= 4U;
 
-                _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
+                _y1 = __builtin_shuffle(_y1, _y1, shufflemask1);
                 k--;
             }
 
@@ -217,8 +226,8 @@ void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
             k = srcBLen % 0x4U;
 
             mask = xmask[k];
-            _x1 = __AND4(_x1,mask);
-            sum = __SUMDOTP4(_x1,_y1,sum);
+            _x1 = __AND4(_x1, mask);
+            sum = __SUMDOTP4(_x1, _y1, sum);
 
             /* Store the result in the accumulator in the destination buffer. */
             *pRes++ = sum;
@@ -232,7 +241,6 @@ void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
 
             /* Decrement the loop counter */
             blk_cnt--;
-
         }
 
     } else { // case: srcBLen < 4
@@ -251,14 +259,14 @@ void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
             k = srcBLen;
             mask = xmask[k];
 
-            _y1 = *((v4s*)(p_b_iter-3));
-            _x1 = *((v4s*)(p_a_iter));
+            _y1 = *((v4s *)(p_b_iter - 3));
+            _x1 = *((v4s *)(p_a_iter));
 
-            _x1 = __AND4(_x1,mask);
-            _y1 = __builtin_shuffle(_y1,_y1,shufflemask1);
-	  
-            sum = __SUMDOTP4(_x1,_y1,sum);
-      
+            _x1 = __AND4(_x1, mask);
+            _y1 = __builtin_shuffle(_y1, _y1, shufflemask1);
+
+            sum = __SUMDOTP4(_x1, _y1, sum);
+
             /* Store the result in the accumulator in the destination buffer. */
             *pRes++ = sum;
 
@@ -272,10 +280,9 @@ void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
             /* Decrement the loop counter */
             blk_cnt--;
         }
-
     }
 
-#else//PLP_MATH_LOOPUNROLL
+#else // PLP_MATH_LOOPUNROLL
 
     for (int i_out = 0; i_out < res_len; i_out++) {
 
@@ -289,11 +296,9 @@ void plp_conv_valid_i8s_xpulpv2(const int8_t *  pSrcA,
         }
 
         pRes[i_out] = acc;
-
     }
 
-#endif//PLP_MATH_LOOPUNROLL
-
+#endif // PLP_MATH_LOOPUNROLL
 }
 
 /**

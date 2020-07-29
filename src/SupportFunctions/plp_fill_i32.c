@@ -40,7 +40,9 @@
   <pre>
       pDst[n] = value;   0 <= n < blockSize.
   </pre>
-  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
+  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+  types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
+  provided.
 
   The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
   <pre>
@@ -50,12 +52,13 @@
 
   precision = {32, 16, 8} bits
 
-  method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+  method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
+  SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
   isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
   </pre>
-  
+
  */
 
 /**
@@ -71,20 +74,15 @@
   @return        none
  */
 
-void plp_fill_i32(
-                  int32_t value,
-                  int32_t * __restrict__ pDst,
-                  uint32_t blockSize){
+void plp_fill_i32(int32_t value, int32_t *__restrict__ pDst, uint32_t blockSize) {
 
-  uint32_t blkCnt;                               /* Loop counter */
+    uint32_t blkCnt; /* Loop counter */
 
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_fill_i32s_rv32im(value, pDst, blockSize);
-  }
-  else{
-    plp_fill_i32s_xpulpv2(value, pDst, blockSize);
-  }
-
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        plp_fill_i32s_rv32im(value, pDst, blockSize);
+    } else {
+        plp_fill_i32s_xpulpv2(value, pDst, blockSize);
+    }
 }
 
 /**

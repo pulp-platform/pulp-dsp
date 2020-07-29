@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
  *
@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup MatAdd
  */
-
 
 /**
   @addtogroup MatAddKernels
@@ -43,30 +41,32 @@
 
 /**
   @brief Parallel matrix addition of 8-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_add_instance_i8 struct initialized by plp_mat_add_i8_parallel
+  @param[in]  args  pointer to plp_mat_add_instance_i8 struct initialized by
+                    plp_mat_add_i8_parallel
   @return     none
 
   @par Exploiting SIMD instructions
-  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator.
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_i8vp_xpulpv2(void* args) {
+void plp_mat_add_i8vp_xpulpv2(void *args) {
 
     int core_id = rt_core_id();
 
-    plp_mat_add_instance_i8* a = (plp_mat_add_instance_i8*)args;
+    plp_mat_add_instance_i8 *a = (plp_mat_add_instance_i8 *)args;
 
-    const int8_t * __restrict__ pSrcA = a->pSrcA;
-    const int8_t * __restrict__ pSrcB = a->pSrcB;
+    const int8_t *__restrict__ pSrcA = a->pSrcA;
+    const int8_t *__restrict__ pSrcB = a->pSrcB;
     uint32_t M = a->M;
     uint32_t N = a->N;
     uint32_t nPE = a->nPE;
-    int8_t * __restrict__ pDst = a->pDst;
+    int8_t *__restrict__ pDst = a->pDst;
 
 #define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 #ifdef BASIC_VERSION
 
-    uint32_t m, n;  // loop counters
+    uint32_t m, n; // loop counters
 
     for (m = 0; m < M; m++) {
         for (n = 0; n < N; n++) {
@@ -74,13 +74,12 @@ void plp_mat_add_i8vp_xpulpv2(void* args) {
         }
     }
 
-#else 
+#else
 
     // TODO: Hackathon
 
 #endif
 #undef BASIC_VERSION
-
 }
 
 /**

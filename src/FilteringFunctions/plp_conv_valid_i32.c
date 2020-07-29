@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Moritz Scherer, Tibor Schneider
  *
@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
  * @ingroup groupFilters
  */
@@ -49,17 +48,17 @@
  * @param[out] pRes    output result returned here, of size |srcALen - srcBLen| + 1
  * @return     none
  */
-void plp_conv_valid_i32(const int32_t*  pSrcA,
+void plp_conv_valid_i32(const int32_t *pSrcA,
                         const uint32_t srcALen,
-                        const int32_t*  pSrcB,
+                        const int32_t *pSrcB,
                         const uint32_t srcBLen,
-                        int32_t *  pRes){
-    
-    uint32_t in1Len, in2Len;
-    const int32_t* pIn1;
-    const int32_t* pIn2;
+                        int32_t *pRes) {
 
-    if(srcALen >= srcBLen){
+    uint32_t in1Len, in2Len;
+    const int32_t *pIn1;
+    const int32_t *pIn2;
+
+    if (srcALen >= srcBLen) {
         in1Len = srcALen;
         in2Len = srcBLen;
         pIn1 = pSrcA;
@@ -71,17 +70,15 @@ void plp_conv_valid_i32(const int32_t*  pSrcA,
         pIn1 = pSrcB;
     }
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
 
         printf("Errorr: Not Implemented!");
 
     } else {
 
         plp_conv_valid_i32s_xpulpv2(pIn1, in1Len, pIn2, in2Len, pRes);
-
     }
 }
-
 
 /**
  * @} end of BasicConvolution group

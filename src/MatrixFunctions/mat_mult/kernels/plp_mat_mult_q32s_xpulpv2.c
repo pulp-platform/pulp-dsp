@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
  *
@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMatrix BasicMatMult
  */
-
 
 /**
   @addtogroup BasicMatMultKernels
@@ -50,7 +48,7 @@
   @param[in]  O         width of the second input matrix
   @param[in]  shift     Amount to shift the result of each multiplication.
   @param[out] pDstC     points to the output matrix
-  @return        none
+  @return     none
 
   @par Fix-Point and Shifting
   The result will be shifted by the parameter `shift` to the right (multiplied
@@ -59,13 +57,13 @@
   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
  */
 
-void plp_mat_mult_q32s_xpulpv2(const int32_t * __restrict__ pSrcA,
-                               const int32_t * __restrict__ pSrcB,
+void plp_mat_mult_q32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                               const int32_t *__restrict__ pSrcB,
                                uint32_t M,
                                uint32_t N,
                                uint32_t O,
                                uint32_t shift,
-                               int32_t * __restrict__ pDstC) {
+                               int32_t *__restrict__ pDstC) {
 
 #define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 #ifdef BASIC_VERSION
@@ -74,23 +72,22 @@ void plp_mat_mult_q32s_xpulpv2(const int32_t * __restrict__ pSrcA,
     uint32_t n; // loop counter
     uint32_t o; // loop counter
 
-    for(m = 0; m < M; m++){
-        for(o = 0; o < O; o++){
+    for (m = 0; m < M; m++) {
+        for (o = 0; o < O; o++) {
             int32_t sum = 0;
-            for(n = 0; n < N; n++){
+            for (n = 0; n < N; n++) {
                 sum += __ROUNDNORM_REG(pSrcA[m * N + n] * pSrcB[n * O + o], shift);
             }
             pDstC[m * O + o] = sum;
         }
     }
 
-#else 
+#else
 
-        // TODO hackathon
+    // TODO hackathon
 
 #endif
 #undef BASIC_VERSION
-
 }
 
 /**

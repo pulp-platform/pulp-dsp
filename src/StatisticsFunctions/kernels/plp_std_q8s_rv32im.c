@@ -1,14 +1,14 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_std_q8s_rv32im.c
- * Description:  Calculates the sum of squares on RV32IM cores
+ * Description:  Kernel to calculate the standard deviation of a 8-bit fixed point vector glue code on RV32IM
  *
- * $Date:        30.06.2020        
+ * $Date:        30.06.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Moritz Scherer, ETH Zurich
  *
@@ -27,9 +27,7 @@
  * limitations under the License.
  */
 
-
 #include "plp_math.h"
-
 
 /**
    @ingroup std
@@ -37,22 +35,6 @@
 
 /**
    @defgroup stdKernels Std Kernels
-   Calculates the sum of squares of the input vector.
-   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
-
-   The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
-   <pre>
-   \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
-
-   data type = {f, i, q} respectively for floats, integers, fixed points
-
-   precision = {32, 16, 8} bits
-
-   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
-
-   isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
-
-   </pre>
 
 */
 
@@ -62,30 +44,27 @@
 */
 
 /**
-   @brief         Sum of squares of a 8-bit fixed point vector for RV32IM extension.
+   @brief         Standard deviation of a 8-bit fixed point vector for RV32IM extension.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    sum of squares returned here
+   @param[out]    pRes    standard deviation returned here
    @return        none
 */
 
-void plp_std_q8s_rv32im(
-                         const int8_t * __restrict__ pSrc,
-                         uint32_t blockSize,
-                         uint32_t deciPoint,
-                         int8_t * __restrict__ pRes){
-    
- 
-  int8_t variance;
-  int16_t final;
-  int16_t intermediate;
-  
-  plp_var_q8(pSrc, blockSize, deciPoint, &variance);
+void plp_std_q8s_rv32im(const int8_t *__restrict__ pSrc,
+                        uint32_t blockSize,
+                        uint32_t fracBits,
+                        int8_t *__restrict__ pRes) {
 
-  intermediate = variance;
+    int8_t variance;
+    int16_t final;
+    int16_t intermediate;
 
-  plp_sqrt_q16(&intermediate,deciPoint,&final);
+    plp_var_q8(pSrc, blockSize, fracBits, &variance);
 
-  *pRes = (int8_t)final;
-  
+    intermediate = variance;
+
+    plp_sqrt_q16(&intermediate, fracBits, &final);
+
+    *pRes = (int8_t) final;
 }

@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2019 ETH Zurich and University of Bologna.
  *
  * Author: Moritz Scherer, ETH Zurich
  *
@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
    @ingroup BasicConvolution
 */
@@ -42,69 +41,69 @@
 
 /**
    @brief Parallel convolution of 32-bit integer vectors kernel for XPULPV2 extension.
-   @param[in]  task_args      pointer to plp_conv_instance_i32 struct initialized by plp_conv_i32_parallel
+   @param[in]  task_args      pointer to plp_conv_instance_i32 struct initialized by
+   plp_conv_i32_parallel
    @return        none */
 
 // Pre-condition: psrcALen >= psrcBLen, established by calling function plp_conv_i32
 // Pre-condition: pRes has enough allocated memory, i.e. srcALen + srcBLen-1u
 // Pre-condition: srcALen >= 2 and srcBLen >= 2, otherwise use vector dot product
 
-void plp_conv_i32p_xpulpv2(void* task_args){
+void plp_conv_i32p_xpulpv2(void *task_args) {
 
-  plp_conv_instance_i32* S = (plp_conv_instance_i32*)task_args;
-  
-  int32_t resultoffset = ((S->srcALen+S->nPE-1)/S->nPE) + S->srcBLen - 1;
-  int32_t srcAoffset = ((S->srcALen+S->nPE-1)/S->nPE);
+    plp_conv_instance_i32 *S = (plp_conv_instance_i32 *)task_args;
 
-  int32_t *  pSrcA;
-  uint32_t srcALen;
-  int32_t *  pSrcB;
-  uint32_t srcBLen;
-  int32_t *  pRes;
+    int32_t resultoffset = ((S->srcALen + S->nPE - 1) / S->nPE) + S->srcBLen - 1;
+    int32_t srcAoffset = ((S->srcALen + S->nPE - 1) / S->nPE);
 
-  int32_t* pIn1;
-  int32_t* pIn2;
-  uint32_t pIn1Len;
-  uint32_t pIn2Len;
-  
-  if(rt_core_id() == (S->nPE - 1)){
+    int32_t *pSrcA;
+    uint32_t srcALen;
+    int32_t *pSrcB;
+    uint32_t srcBLen;
+    int32_t *pRes;
 
-    pSrcA = (int32_t*)((S->pSrcA + srcAoffset * (S->nPE-1)));
-    srcALen = S->srcALen - (srcAoffset * (S->nPE-1));
-    pSrcB = (int32_t*)(S->pSrcB);
-    srcBLen = S->srcBLen;
-    pRes = (int32_t*)(S->pRes + resultoffset*(S->nPE-1));
+    int32_t *pIn1;
+    int32_t *pIn2;
+    uint32_t pIn1Len;
+    uint32_t pIn2Len;
 
-    //printf("ID %i: 0x%x %i 0x%x %i 0x%x\n",rt_core_id(), pSrcA, srcALen, pSrcB, srcBLen, pRes);
+    // Unpack partial convolution vectors
     
-  } else {
-  
-    srcALen = srcAoffset;
-    pSrcA = (int32_t*)(S->pSrcA + (rt_core_id()*srcAoffset));
-    pSrcB = (int32_t*)S->pSrcB;
-    srcBLen = S->srcBLen;
-    pRes = (int32_t*)(S->pRes + resultoffset*(rt_core_id()));
+    if (rt_core_id() == (S->nPE - 1)) {
 
-    //printf("ID %i: 0x%x %i 0x%x %i 0x%x\n",rt_core_id(), pSrcA, srcALen, pSrcB, srcBLen, pRes);
+        pSrcA = (int32_t *)((S->pSrcA + srcAoffset * (S->nPE - 1)));
+        srcALen = S->srcALen - (srcAoffset * (S->nPE - 1));
+        pSrcB = (int32_t *)(S->pSrcB);
+        srcBLen = S->srcBLen;
+        pRes = (int32_t *)(S->pRes + resultoffset * (S->nPE - 1));
 
-  }
+    } else {
 
-  if(srcALen >= srcBLen){
-    pIn1 = pSrcA;
-    pIn1Len = srcALen;
-    pIn2 = pSrcB;
-    pIn2Len = srcBLen;
-  } else {
-    pIn1 = pSrcB;
-    pIn1Len = srcBLen;
-    pIn2 = pSrcA;
-    pIn2Len = srcALen;
-  }
-  
-  plp_conv_i32s_xpulpv2(pIn1, pIn1Len, pIn2, pIn2Len, pRes);
-  rt_team_barrier();
+        srcALen = srcAoffset;
+        pSrcA = (int32_t *)(S->pSrcA + (rt_core_id() * srcAoffset));
+        pSrcB = (int32_t *)S->pSrcB;
+        srcBLen = S->srcBLen;
+        pRes = (int32_t *)(S->pRes + resultoffset * (rt_core_id()));
+        
+    }
+
+    // Reorder vectors; longest first
+    
+    if (srcALen >= srcBLen) {
+        pIn1 = pSrcA;
+        pIn1Len = srcALen;
+        pIn2 = pSrcB;
+        pIn2Len = srcBLen;
+    } else {
+        pIn1 = pSrcB;
+        pIn1Len = srcBLen;
+        pIn2 = pSrcA;
+        pIn2Len = srcALen;
+    }
+
+    plp_conv_i32s_xpulpv2(pIn1, pIn1Len, pIn2, pIn2Len, pRes);
+    rt_team_barrier();
 }
-
 
 /**
    @} end of BasicConvolutionKernels

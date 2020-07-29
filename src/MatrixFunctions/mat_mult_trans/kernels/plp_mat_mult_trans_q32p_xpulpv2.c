@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
  *
@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMatrix MatMultTrans
  */
-
 
 /**
   @addtogroup MatMultTransKernels
@@ -43,7 +41,8 @@
 
 /**
   @brief Parallel Matrix multiplication of 32-bit fix-point matrices kernel for XPULPV2 extension.
-  @param[in]  args      pointer to plp_mat_mult_instance_q32 struct initialized by plp_mat_mult_trans_q32_parallel
+  @param[in]  args  pointer to plp_mat_mult_instance_q32 struct initialized by
+                    plp_mat_mult_trans_q32_parallel
   @return     none
 
   @par Fix-Point and Shifting
@@ -53,20 +52,20 @@
   point). Then, the output is represented as pDstC * 2^-(x + y - shift).
  */
 
-void plp_mat_mult_trans_q32p_xpulpv2(void* args) {
+void plp_mat_mult_trans_q32p_xpulpv2(void *args) {
 
     int core_id = rt_core_id();
 
-    plp_mat_mult_instance_q32* a = (plp_mat_mult_instance_q32*)args;
+    plp_mat_mult_instance_q32 *a = (plp_mat_mult_instance_q32 *)args;
 
-    const int32_t * __restrict__ pSrcA = a->pSrcA;
-    const int32_t * __restrict__ pSrcB = a->pSrcB;
+    const int32_t *__restrict__ pSrcA = a->pSrcA;
+    const int32_t *__restrict__ pSrcB = a->pSrcB;
     uint32_t M = a->M;
     uint32_t N = a->N;
     uint32_t O = a->O;
     uint32_t shift = a->shift;
     uint32_t nPE = a->nPE;
-    int32_t * __restrict__ pDstC = a->pDstC;
+    int32_t *__restrict__ pDstC = a->pDstC;
 
 #define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 #ifdef BASIC_VERSION
@@ -75,10 +74,10 @@ void plp_mat_mult_trans_q32p_xpulpv2(void* args) {
     uint32_t n; // loop counter
     uint32_t o; // loop counter
 
-    for(m = core_id; m < M; m += nPE){
-        for(o = 0; o < O; o++){
+    for (m = core_id; m < M; m += nPE) {
+        for (o = 0; o < O; o++) {
             int32_t sum = 0;
-            for(n = 0; n < N; n++){
+            for (n = 0; n < N; n++) {
                 int32_t valA = pSrcA[m * N + n];
                 int32_t valB = pSrcB[o * N + n];
                 sum += __ROUNDNORM_REG(valA * valB, shift);
@@ -87,13 +86,12 @@ void plp_mat_mult_trans_q32p_xpulpv2(void* args) {
         }
     }
 
-#else 
+#else
 
-        // TODO hackathon
+    // TODO hackathon
 
 #endif
 #undef BASIC_VERSION
-
 }
 
 /**

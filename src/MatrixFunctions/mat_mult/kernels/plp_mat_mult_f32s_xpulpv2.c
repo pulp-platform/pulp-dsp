@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
  *
@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup BasicMatMult
  */
-
 
 /**
   @addtogroup BasicMatMultKernels
@@ -52,37 +50,35 @@
   @return     none
  */
 
-void plp_mat_mult_f32s_xpulpv2(const float * __restrict__ pSrcA,
-                               const float * __restrict__ pSrcB,
+void plp_mat_mult_f32s_xpulpv2(const float *__restrict__ pSrcA,
+                               const float *__restrict__ pSrcB,
                                uint32_t M,
                                uint32_t N,
                                uint32_t O,
-                               float * __restrict__ pDstC) {
+                               float *__restrict__ pDstC) {
 
 #define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 #ifdef BASIC_VERSION
 
     uint32_t m, n, o;
 
-    for(m = 0; m < M; m++){
-        for(o = 0; o < O; o++){
+    for (m = 0; m < M; m++) {
+        for (o = 0; o < O; o++) {
             float sum = 0;
-            for(n = 0; n < N; n++){
-                sum = sum + pSrcA[m * N + n]*pSrcB[n * O + o];
+            for (n = 0; n < N; n++) {
+                sum = sum + pSrcA[m * N + n] * pSrcB[n * O + o];
             }
             pDstC[m * O + o] = sum;
         }
     }
 
-#else 
+#else
 
     // TODO: Hackathon
 
 #endif
 #undef BASIC_VERSION
-
 }
-
 
 /**
    @} end of BasicMatMultKernels group

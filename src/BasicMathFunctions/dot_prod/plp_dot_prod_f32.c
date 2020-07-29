@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMath
  */
@@ -49,24 +48,19 @@
   @return        none
  */
 
-void plp_dot_prod_f32(
-                      const float32_t * __restrict__ pSrcA,
-                         const float32_t * __restrict__ pSrcB,
-                         uint32_t blockSize,
-                         float32_t * __restrict__ pRes){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    printf("error: FC doesn't have FPU\n");
-    return;
-  }
-  else{
-    plp_dot_prod_f32s_xpulpv2(pSrcA, pSrcB, blockSize, pRes);
-  }
+void plp_dot_prod_f32(const float32_t *__restrict__ pSrcA,
+                      const float32_t *__restrict__ pSrcB,
+                      uint32_t blockSize,
+                      float32_t *__restrict__ pRes) {
 
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        printf("error: FC doesn't have FPU\n");
+        return;
+    } else {
+        plp_dot_prod_f32s_xpulpv2(pSrcA, pSrcB, blockSize, pRes);
+    }
 }
 
 /**
   @} end of BasicDotProd group
  */
-
-

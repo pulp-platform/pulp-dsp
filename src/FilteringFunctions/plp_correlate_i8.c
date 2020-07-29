@@ -3,7 +3,7 @@
  * Title:        plp_correlate_i8.c
  * Description:  Correlation glue code for 8-Bit integer vectors
  *
- * $Date:        03.07.2020        
+ * $Date:        03.07.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
@@ -35,7 +35,8 @@
 
 /**
    @defgroup BasicCorrelation Basic Correlation
-   This module contains the glue code for Basic Correlation. The kernel codes (kernels) are in the Moducle Basic Correlation Kernels.
+   This module contains the glue code for Basic Correlation. The kernel codes (kernels) are in the
+   Moducle Basic Correlation Kernels.
 
 
 */
@@ -54,21 +55,17 @@
    @param[out] pRes     output result returned here
    @return        none
 */
-void plp_correlate_i8(
-                  const int8_t *  pSrcA,
-                  const uint32_t srcALen,
-                  const int8_t *  pSrcB,
-                  const uint32_t srcBLen,
-                  int32_t * __restrict__ pRes){
+void plp_correlate_i8(const int8_t *pSrcA,
+                      const uint32_t srcALen,
+                      const int8_t *pSrcB,
+                      const uint32_t srcBLen,
+                      int32_t *__restrict__ pRes) {
 
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_correlate_i8s_rv32im(pSrcA, srcALen, pSrcB, srcBLen, pRes);
-  }
-  else{
-    plp_correlate_i8s_xpulpv2(pSrcA, srcALen, pSrcB, srcBLen, pRes);
-  }
-  
-  
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        plp_correlate_i8s_rv32im(pSrcA, srcALen, pSrcB, srcBLen, pRes);
+    } else {
+        plp_correlate_i8s_xpulpv2(pSrcA, srcALen, pSrcB, srcBLen, pRes);
+    }
 }
 
 /**

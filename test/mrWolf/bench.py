@@ -5,6 +5,7 @@ import re
 import argparse
 from collections import namedtuple
 
+
 def main():
     """ Main Function """
     parser = argparse.ArgumentParser(prog='bench',
@@ -21,12 +22,18 @@ def main():
     parser_cmp.add_argument('-f', '--function', type=str, help='Regex to only show the specified function')
     parser_cmp.add_argument('-d', '--device', type=str, help='Filter to only show the given device')
 
+    parser_score = subparsers.add_parser('score', help='compute a socre based on the imporvement of the benchmark')
+    parser_score.add_argument('-n', '--new-bench-file', type=str, help='Benchmark CSV file to be read. If unspecified, take the most recent.')
+    parser_score.add_argument('-o', '--old-bench-file', type=str, help='Benchmark CSV file to compare to.', required=True)
+
     args = parser.parse_args()
 
     if args.command == 'view':
         view(args)
     elif args.command == "compare":
         compare(args)
+    elif args.command == "score":
+        score(args)
 
 
 def view(args):
@@ -64,8 +71,51 @@ def compare(args):
     # compare and match
     new_runs, old_runs = match_two_runs(new_runs, old_runs)
 
+    assert len(new_runs) != 0
+
     # print comparison
     print_comparison(new_runs, old_runs)
+
+
+def score(args):
+    """ score the benchmark files """
+    if args.new_bench_file is None:
+        new_bench_file = get_most_recent_bench_filename()
+    else:
+        new_bench_file = args.new_bench_file
+
+    old_bench_file = args.old_bench_file
+
+    new_runs = read_bench(new_bench_file)
+    old_runs = read_bench(old_bench_file)
+
+    new_runs, old_runs = match_two_runs(new_runs, old_runs)
+
+    name_length = max([len(run.name) for run in new_runs])
+
+    bench_score = 0.0
+    for run_old, run_new in zip(old_runs, new_runs):
+        run_score = score_fun(run_old, run_new)
+        bench_score += run_score
+        print("{}: {}".format(run_old.name.ljust(name_length), run_score))
+    print("{}: {}".format("total score".ljust(name_length), bench_score))
+
+
+def score_fun(run_old, run_new):
+    x = 0.0
+    x += clamp((run_old.cycles - run_new.cycles) / run_old.cycles, -1.0, 1.0) * 3
+    x += clamp((run_old.imiss - run_new.imiss) / run_old.imiss, -1.0, 1.0)
+    x += clamp((run_old.ld_stall - run_new.ld_stall) / run_old.ld_stall, -1.0, 1.0)
+    x += clamp((run_old.tcdm_cont - run_new.tcdm_cont) / run_old.tcdm_cont, -1.0, 1.0)
+    return x
+
+
+def clamp(x, min_val, max_val):
+    if x < min_val:
+        return min_val
+    if x > max_val:
+        return max_val
+    return x
 
 
 def get_most_recent_bench_filename():
@@ -165,7 +215,8 @@ def print_comparison(new_runs, old_runs):
     column_width_19[0:3] = [max(column_width_19[i], len(TABLE_HEADER_COMP[i])) for i in range(3)]
     # adjust the length of the absolut columns, if they don't match the width of the title row
     for i in [3, 5, 7, 9, 11, 13, 15, 17]:
-        column_width_19[i] = max(column_width_19[i], len(TABLE_HEADER_COMP[i]) - column_width_19[i+1])
+        column_width_19[i] = max(column_width_19[i],
+                                 len(TABLE_HEADER_COMP[i]) - column_width_19[i+1])
     column_width_19 = tuple(column_width_19)
     column_width_11 = (column_width_19[0],
                        column_width_19[1],

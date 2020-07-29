@@ -3,12 +3,12 @@
  * Title:        plp_min_i8.c
  * Description:  Minimum value of a 8-bit integer vector glue code
  *
- * $Date:        29.06.2020        
+ * $Date:        29.06.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Moritz Scherer, ETH Zurich
  *
@@ -35,30 +35,12 @@
 
 /**
    @defgroup min Min
-   Calculates the minimum of the input vector. Min is defined as the the greatest value in the vector.
-   There are separate functions for floating point, integer, and fixed point 32- 8- 8-bit data types. For lower precision integers (8- and 8-bit), functions exploiting SIMD instructions are provided.
-
-   The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i8s):
-   <pre>
-   \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
-
-   data type = {f, i, q} respectively for floats, integers, fixed points
-
-   precision = {32, 16, 8} bits
-
-   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
-
-   isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
-
-   </pre>
-
 */
 
 /**
    @addtogroup min
    @{
 */
-
 
 /**
    @brief         Glue code for min value of a 8-bit integer vector.
@@ -68,19 +50,13 @@
    @return        none
  */
 
+void plp_min_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes) {
 
-void plp_min_i8(
-                         const int8_t * __restrict__ pSrc,
-                         uint32_t blockSize,
-                         int8_t * __restrict__ pRes){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_min_i8s_rv32im(pSrc, blockSize, pRes);
-  }
-  else{
-    plp_min_i8s_xpulpv2(pSrc, blockSize, pRes);
-  }
-
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        plp_min_i8s_rv32im(pSrc, blockSize, pRes);
+    } else {
+        plp_min_i8s_xpulpv2(pSrc, blockSize, pRes);
+    }
 }
 
 /**

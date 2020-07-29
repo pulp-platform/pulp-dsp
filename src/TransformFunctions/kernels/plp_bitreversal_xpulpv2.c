@@ -39,7 +39,6 @@
  * @{
  */
 
-
 /**
   @brief         In-place 16 bit reversal function.
   @param[in,out] pSrc        points to in-place buffer of unknown 16-bit data type
@@ -48,44 +47,40 @@
   @return        none
 */
 
-void plp_bitreversal_16v_xpulpv2(
-        uint16_t *pSrc,
-  const uint16_t bitRevLen,
-  const uint16_t *pBitRevTab)
-{
-  uint16_t a, b, i, tmp;
+void plp_bitreversal_16v_xpulpv2(uint16_t *pSrc,
+                                 const uint16_t bitRevLen,
+                                 const uint16_t *pBitRevTab) {
+    uint16_t a, b, i, tmp;
 
-  v2s c;
+    v2s c;
 
-  for (i = 0; i < bitRevLen; )
-  {
-     // a = pBitRevTab[i    ] >> 2;
-     // b = pBitRevTab[i + 1] >> 2;
+    for (i = 0; i < bitRevLen;) {
+        // a = pBitRevTab[i    ] >> 2;
+        // b = pBitRevTab[i + 1] >> 2;
 
-     c = __SRA2(*(v2s *) & pBitRevTab[i], ((v2s){2,2}));
+        c = __SRA2(*(v2s *)&pBitRevTab[i], ((v2s){ 2, 2 }));
 
-     //real
-     // tmp = pSrc[a];
-     // pSrc[a] = pSrc[b];
-     // pSrc[b] = tmp;
+        // real
+        // tmp = pSrc[a];
+        // pSrc[a] = pSrc[b];
+        // pSrc[b] = tmp;
 
-     tmp = pSrc[c[0]];
-     pSrc[c[0]] = pSrc[c[1]];
-     pSrc[c[1]] = tmp;
+        tmp = pSrc[c[0]];
+        pSrc[c[0]] = pSrc[c[1]];
+        pSrc[c[1]] = tmp;
 
-     //complex
-     // tmp = pSrc[a+1];
-     // pSrc[a+1] = pSrc[b+1];
-     // pSrc[b+1] = tmp;
+        // complex
+        // tmp = pSrc[a+1];
+        // pSrc[a+1] = pSrc[b+1];
+        // pSrc[b+1] = tmp;
 
-     tmp = pSrc[c[0]+1];
-     pSrc[c[0]+1] = pSrc[c[1]+1];
-     pSrc[c[1]+1] = tmp;
+        tmp = pSrc[c[0] + 1];
+        pSrc[c[0] + 1] = pSrc[c[1] + 1];
+        pSrc[c[1] + 1] = tmp;
 
-    i += 2;
-  }
+        i += 2;
+    }
 }
-
 
 /**
  * @} end of FFT group

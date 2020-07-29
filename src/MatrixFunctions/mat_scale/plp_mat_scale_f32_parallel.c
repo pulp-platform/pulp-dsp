@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and Ubiversity of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Tibor Schneider, ETH Zurich
  *
@@ -30,11 +30,9 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupMatrix
  */
-
 
 /**
   @addtogroup MatScale
@@ -52,34 +50,25 @@
   @return     none
  */
 
-void plp_mat_scale_f32_parallel(const float * __restrict__ pSrc,
+void plp_mat_scale_f32_parallel(const float *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
                                 float scaleFactor,
                                 uint32_t nPE,
-                                float * __restrict__ pDst) {
+                                float *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         printf("parallel and floating-point processing supported only for cluster side\n");
         return;
-    }
-    else{
+    } else {
         plp_mat_scale_instance_f32 args = {
-            .pSrc = pSrc,
-            .M = M,
-            .N = N,
-            .scaleFactor = scaleFactor,
-            .nPE = nPE,
-            .pDst = pDst
+            .pSrc = pSrc, .M = M, .N = N, .scaleFactor = scaleFactor, .nPE = nPE, .pDst = pDst
         };
 
-        rt_team_fork(nPE, plp_mat_scale_f32p_xpulpv2, (void*) &args);
+        rt_team_fork(nPE, plp_mat_scale_f32p_xpulpv2, (void *)&args);
     }
-
 }
 
 /**
   @} end of MatScale group
  */
-
-

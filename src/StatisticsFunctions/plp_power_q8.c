@@ -3,12 +3,12 @@
  * Title:        plp_power_q8.c
  * Description:  Calculates the sum of squares of an input vector
  *
- * $Date:        30.06.2020        
+ * $Date:        30.06.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
  * Author: Moritz Scherer, ETH Zurich
  *
@@ -35,8 +35,10 @@
 
 /**
    @defgroup power Power
-   Calculates the sum of squares of the input vector. 
-   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.
+   Calculates the sum of squares of the input vector.
+   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+   types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
+   provided.
 
    The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
    <pre>
@@ -46,7 +48,8 @@
 
    precision = {32, 16, 8} bits
 
-   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using SIMD instructions), and parallel (for multicore parallel computing), respectively.
+   method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
+   SIMD instructions), and parallel (for multicore parallel computing), respectively.
 
    isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
@@ -59,7 +62,6 @@
    @{
 */
 
-
 /**
    @brief         Glue code for sum of squares of a 8-bit fixed point vector.
    @param[in]     pSrc       points to the input vector
@@ -68,20 +70,16 @@
    @return        none
  */
 
+void plp_power_q8(const int8_t *__restrict__ pSrc,
+                  uint32_t blockSize,
+                  uint32_t fracBits,
+                  int32_t *__restrict__ pRes) {
 
-void plp_power_q8(
-                         const int8_t * __restrict__ pSrc,
-                         uint32_t blockSize,
-                         uint32_t deciPoint,
-                         int32_t * __restrict__ pRes){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_power_q8s_rv32im(pSrc, blockSize, deciPoint, pRes);
-  }
-  else{
-    plp_power_q8s_xpulpv2(pSrc, blockSize, deciPoint, pRes);
-  }
-
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        plp_power_q8s_rv32im(pSrc, blockSize, fracBits, pRes);
+    } else {
+        plp_power_q8s_xpulpv2(pSrc, blockSize, fracBits, pRes);
+    }
 }
 
 /**

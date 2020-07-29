@@ -3,7 +3,7 @@
  * Title:        plp_correlate_q32.c
  * Description:  Correlation glue code for 32-Bit fixed point vectors
  *
- * $Date:        03.07.2020        
+ * $Date:        03.07.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
@@ -35,7 +35,8 @@
 
 /**
    @defgroup BasicCorrelation Basic Correlation
-   This module contains the glue code for Basic Correlation. The kernel codes (kernels) are in the Moducle Basic Correlation Kernels.
+   This module contains the glue code for Basic Correlation. The kernel codes (kernels) are in the
+   Moducle Basic Correlation Kernels.
 
 
 */
@@ -54,22 +55,18 @@
    @param[out] pRes     output result returned here
    @return        none
 */
-void plp_correlate_q32(
-                  const int32_t *  pSrcA,
-                  const uint32_t srcALen,
-                  const int32_t *  pSrcB,
-                  const uint32_t srcBLen,
-                  uint32_t deciPoint,
-                  int32_t * __restrict__ pRes){
+void plp_correlate_q32(const int32_t *pSrcA,
+                       const uint32_t srcALen,
+                       const int32_t *pSrcB,
+                       const uint32_t srcBLen,
+                       uint32_t fracBits,
+                       int32_t *__restrict__ pRes) {
 
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_correlate_q32s_rv32im(pSrcA, srcALen, pSrcB, srcBLen, deciPoint, pRes);
-  }
-  else{
-    plp_correlate_q32s_xpulpv2(pSrcA, srcALen, pSrcB, srcBLen, deciPoint, pRes);
-  }
-  
-  
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        plp_correlate_q32s_rv32im(pSrcA, srcALen, pSrcB, srcBLen, fracBits, pRes);
+    } else {
+        plp_correlate_q32s_xpulpv2(pSrcA, srcALen, pSrcB, srcBLen, fracBits, pRes);
+    }
 }
 
 /**

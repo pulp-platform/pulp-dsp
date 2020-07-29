@@ -47,41 +47,36 @@
   @return        none
 */
 
-void plp_copy_i32s_xpulpv2(
-                           int32_t * __restrict__ pSrc,
-                           int32_t * __restrict__ pDst,
-                           uint32_t blockSize){
+void plp_copy_i32s_xpulpv2(int32_t *__restrict__ pSrc,
+                           int32_t *__restrict__ pDst,
+                           uint32_t blockSize) {
 
-  uint32_t blkCnt, tmpBS;                     /* Loop counter, temporal BlockSize */
+    uint32_t blkCnt, tmpBS; /* Loop counter, temporal BlockSize */
 
+#if defined(PLP_MATH_LOOPUNROLL)
 
-#if defined (PLP_MATH_LOOPUNROLL)
+    tmpBS = (blockSize >> 1);
 
-  tmpBS = (blockSize>>1);
+    for (blkCnt = 0; blkCnt < tmpBS; blkCnt++) {
 
-  for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
+        /* Copy and store result in destination buffer */
+        *pDst++ = *pSrc++;
+        *pDst++ = *pSrc++;
+    }
 
-    /* Copy and store result in destination buffer */
-    *pDst++ = *pSrc++;
-    *pDst++ = *pSrc++;
+    tmpBS = (blockSize % 2U);
 
-  }
-
-  tmpBS = (blockSize%2U);
-
-  for (blkCnt=0; blkCnt<tmpBS; blkCnt++){
-    *pDst++ = *pSrc++;
-  }
+    for (blkCnt = 0; blkCnt < tmpBS; blkCnt++) {
+        *pDst++ = *pSrc++;
+    }
 
 #else
 
-  for (blkCnt=0; blkCnt<blockSize; blkCnt++){
-    *pDst++ = *pSrc++;
-  }
+    for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+        *pDst++ = *pSrc++;
+    }
 
 #endif // PLP_MATH_LOOPUNROLL
-
-
 }
 
 /**

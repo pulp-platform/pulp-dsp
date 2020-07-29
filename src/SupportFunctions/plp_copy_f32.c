@@ -47,21 +47,16 @@
   @return        none
 */
 
-void plp_copy_f32(
-                  float32_t * __restrict__ pSrc,
-                  float32_t * __restrict__ pDst,
-                  uint32_t blockSize){
+void plp_copy_f32(float32_t *__restrict__ pSrc, float32_t *__restrict__ pDst, uint32_t blockSize) {
 
-  uint32_t blkCnt;                               /* Loop counter */
+    uint32_t blkCnt; /* Loop counter */
 
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    printf("error: FC doesn't have FPU\n");
-    return;
-  }
-  else{
-    plp_copy_f32s_xpulpv2(pSrc, pDst, blockSize);
-  }
-
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        printf("error: FC doesn't have FPU\n");
+        return;
+    } else {
+        plp_copy_f32s_xpulpv2(pSrc, pDst, blockSize);
+    }
 }
 
 /**
