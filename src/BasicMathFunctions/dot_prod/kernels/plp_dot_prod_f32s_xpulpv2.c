@@ -32,11 +32,11 @@
 
 
 /**
-  @ingroup groupMath
+  @ingroup BasicDotProd
  */
 
 /**
-  @addtogroup BasicDotProd
+  @addtogroup BasicDotProdKernels
   @{
  */
 
