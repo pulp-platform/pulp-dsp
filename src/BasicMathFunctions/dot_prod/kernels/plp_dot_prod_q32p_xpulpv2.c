@@ -84,6 +84,11 @@ void plp_dot_prod_q32p_xpulpv2(void *S) {
         blkSize = blkSizePE - (nPE - 1) * blkSize;
     }
 
+    if (blkSize == 0) {
+        *resBufferPE = 0;
+        return;
+    }
+
     int32_t i, sum = 0;
 
 #if defined(PLP_MATH_LOOPUNROLL)
