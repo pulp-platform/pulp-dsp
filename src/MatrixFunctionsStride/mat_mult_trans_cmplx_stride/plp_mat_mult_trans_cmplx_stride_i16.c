@@ -104,7 +104,7 @@ void plp_mat_mult_trans_cmplx_stride_i16(const int16_t *__restrict__ pSrcA,
         plp_mat_mult_trans_cmplx_stride_i16s_rv32im(pSrcA, pSrcB, M, N, O, strideA, strideB,
                                                     strideC, pDstC);
     } else {
-        plp_mat_mult_trans_cmplx_stride_i16v_xpulpv2(pSrcA, pSrcB, M, N, O, strideA, strideB,
+        plp_mat_mult_trans_cmplx_stride_i16s_xpulpv2(pSrcA, pSrcB, M, N, O, strideA, strideB,
                                                      strideC, pDstC);
     }
 }

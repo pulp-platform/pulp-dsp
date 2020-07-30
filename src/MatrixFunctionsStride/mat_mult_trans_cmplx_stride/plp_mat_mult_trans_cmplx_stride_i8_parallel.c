@@ -82,7 +82,7 @@ void plp_mat_mult_trans_cmplx_stride_i8_parallel(const int8_t *__restrict__ pSrc
                                                        .nPE = nPE,
                                                        .pDstC = pDstC };
 
-        rt_team_fork(nPE, plp_mat_mult_trans_cmplx_stride_i8vp_xpulpv2, (void *)&args);
+        rt_team_fork(nPE, plp_mat_mult_trans_cmplx_stride_i8p_xpulpv2, (void *)&args);
     }
 }
 

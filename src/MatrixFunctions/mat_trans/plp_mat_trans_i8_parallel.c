@@ -61,7 +61,7 @@ void plp_mat_trans_i8_parallel(const int8_t *__restrict__ pSrc,
     } else {
         plp_mat_trans_instance_i8 args = { .pSrc = pSrc, .M = M, .N = N, .nPE = nPE, .pDst = pDst };
 
-        rt_team_fork(nPE, plp_mat_trans_i8vp_xpulpv2, (void *)&args);
+        rt_team_fork(nPE, plp_mat_trans_i8p_xpulpv2, (void *)&args);
     }
 }
 

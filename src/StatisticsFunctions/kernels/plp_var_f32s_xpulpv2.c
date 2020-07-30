@@ -51,8 +51,9 @@
    @return        none
 */
 
-void
-plp_var_f32s_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes) {
+void plp_var_f32s_xpulpv2(const float *__restrict__ pSrc,
+                          uint32_t blockSize,
+                          float *__restrict__ pRes) {
 
     float square_of_mean;
     float square_of_values;

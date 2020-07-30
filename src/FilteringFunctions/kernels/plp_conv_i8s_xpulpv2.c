@@ -81,10 +81,10 @@ void plp_conv_i8s_xpulpv2(const int8_t *pSrcA,
 #endif
 
     int32_t temp1, temp2;
-    v4s xmask[] = {(v4s) { 0, 0, 0, 0 },       (v4s) { 0xff, 0, 0, 0 },
-                   (v4s) { 0xff, 0xff, 0, 0 }, (v4s) { 0xff, 0xff, 0xff, 0 } };
-    v4s ymask[] = {(v4s) { 0, 0, 0, 0 },       (v4s) { 0, 0, 0, 0xff },
-                   (v4s) { 0, 0, 0xff, 0xff }, (v4s) { 0, 0xff, 0xff, 0xff } };
+    v4s xmask[] = { (v4s){ 0, 0, 0, 0 }, (v4s){ 0xff, 0, 0, 0 }, (v4s){ 0xff, 0xff, 0, 0 },
+                    (v4s){ 0xff, 0xff, 0xff, 0 } };
+    v4s ymask[] = { (v4s){ 0, 0, 0, 0 }, (v4s){ 0, 0, 0, 0xff }, (v4s){ 0, 0, 0xff, 0xff },
+                    (v4s){ 0, 0xff, 0xff, 0xff } };
 
     v4s mask;
 

@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and Ubiversity of Bologna. 
+ * Copyright (C) 2019 ETH Zurich and Ubiversity of Bologna.
  *
  * Author: Hanna Mueller, ETH Zurich
  *
@@ -32,7 +32,6 @@
  released under Copyright (C) 2010-2019 ARM Limited or its affiliates
   with Apache-2.0.
  */
-
 
 #include "plp_math.h"
 
@@ -59,7 +58,8 @@
       imagResult += pSrcA[(2*n)+0] * pSrcB[(2*n)+1] + pSrcA[(2*n)+1] * pSrcB[(2*n)+0];
   }
   </pre>
-  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types.
+  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+  types.
  */
 
 /**
@@ -77,39 +77,36 @@
   @return        none
  */
 
-void plp_cmplx_dot_prod_f32_xpulpv2(
-  const float32_t * pSrcA,
-  const float32_t * pSrcB,
-        uint32_t numSamples,
-        float32_t * realResult,
-        float32_t * imagResult)
-{
-        uint32_t blkCnt;                               /* Loop counter */
-        float32_t real_sum = 0.0f, imag_sum = 0.0f;    /* Temporary result variables */
-        float32_t a0,b0,c0,d0;
+void plp_cmplx_dot_prod_f32_xpulpv2(const float32_t *pSrcA,
+                                    const float32_t *pSrcB,
+                                    uint32_t numSamples,
+                                    float32_t *realResult,
+                                    float32_t *imagResult) {
+    uint32_t blkCnt;                            /* Loop counter */
+    float32_t real_sum = 0.0f, imag_sum = 0.0f; /* Temporary result variables */
+    float32_t a0, b0, c0, d0;
 
-        /* Initialize blkCnt with number of samples */
-        blkCnt = numSamples;
-        while (blkCnt > 0U)
-        {
-                a0 = *pSrcA++;
-                b0 = *pSrcA++;
-                c0 = *pSrcB++;
-                d0 = *pSrcB++;
+    /* Initialize blkCnt with number of samples */
+    blkCnt = numSamples;
+    while (blkCnt > 0U) {
+        a0 = *pSrcA++;
+        b0 = *pSrcA++;
+        c0 = *pSrcB++;
+        d0 = *pSrcB++;
 
-                real_sum += a0 * c0;
-                imag_sum += a0 * d0;
-                real_sum -= b0 * d0;
-                imag_sum += b0 * c0;
+        real_sum += a0 * c0;
+        imag_sum += a0 * d0;
+        real_sum -= b0 * d0;
+        imag_sum += b0 * c0;
 
-                /* Decrement loop counter */
-                blkCnt--;
-        }
+        /* Decrement loop counter */
+        blkCnt--;
+    }
 
-        /* Store real and imaginary result in destination buffer. */
-        *realResult = real_sum;
-        *imagResult = imag_sum;
-        // printf("real %f imag %f\n", real_sum, imag_sum);
+    /* Store real and imaginary result in destination buffer. */
+    *realResult = real_sum;
+    *imagResult = imag_sum;
+    // printf("real %f imag %f\n", real_sum, imag_sum);
 }
 /**
   @} end of cmplx_conj group

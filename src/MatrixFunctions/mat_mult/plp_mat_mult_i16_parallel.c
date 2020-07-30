@@ -66,7 +66,7 @@ void plp_mat_mult_i16_parallel(const int16_t *__restrict__ pSrcA,
         plp_mat_mult_instance_i16 args = {
             .pSrcA = pSrcA, .pSrcB = pSrcB, .M = M, .N = N, .O = O, .nPE = nPE, .pDstC = pDstC
         };
-        rt_team_fork(nPE, plp_mat_mult_i16vp_xpulpv2, (void *)&args);
+        rt_team_fork(nPE, plp_mat_mult_i16p_xpulpv2, (void *)&args);
     }
 }
 

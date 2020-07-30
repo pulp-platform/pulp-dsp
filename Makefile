@@ -424,222 +424,222 @@ CL_SRCS = \
 	src/FilteringFunctions/kernels/plp_conv_parallel_OLA_kernel.c\
 	src/FilteringFunctions/kernels/plp_conv_parallel_OLA_kernel.c \
 	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i32s_xpulpv2.c \
-	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i16v_xpulpv2.c \
-	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8v_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i16s_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8s_xpulpv2.c \
 	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q32s_xpulpv2.c \
-	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q16v_xpulpv2.c \
-	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q8v_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q16s_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q8s_xpulpv2.c \
 	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i32p_xpulpv2.c \
-	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i16vp_xpulpv2.c \
-	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8vp_xpulpv2.c	\
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i16p_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8p_xpulpv2.c	\
 	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q32p_xpulpv2.c \
-	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q16vp_xpulpv2.c \
-	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q8vp_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q16p_xpulpv2.c \
+	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q8p_xpulpv2.c \
 	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_f32s_xpulpv2.c \
 	src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_f32p_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_i32s_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_i16v_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_i8v_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_i16s_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_i8s_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_q32s_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_q16v_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_q8v_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_q16s_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_q8s_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_i32p_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_i16vp_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_i8vp_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_i16p_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_i8p_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_q32p_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_q16vp_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_q8vp_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_q16p_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_q8p_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_f32s_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_cmplx/kernels/plp_mat_mult_cmplx_f32p_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i32s_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i16v_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i8v_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i16s_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i8s_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i32p_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i16vp_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i8vp_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i16p_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i8p_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q32s_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q16v_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q8v_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q16s_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q8s_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q32p_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q16vp_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q8vp_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q16p_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_q8p_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_f32s_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_f32p_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_i32s_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_i16v_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_i8v_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_i16s_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_i8s_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_q32s_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_q16v_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_q8v_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_q16s_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_q8s_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_i32p_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_i16vp_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_i8vp_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_i16p_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_i8p_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_q32p_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_q16vp_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_q8vp_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_q16p_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_q8p_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_f32s_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_f32p_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_bitreversal_xpulpv2.c \
-	src/TransformFunctions/kernels/plp_cfft_q16v_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_cfft_q16s_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32s_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32p_xpulpv2.c \
-	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i16v_xpulpv2.c \
-	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i16vp_xpulpv2.c \
-	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i8v_xpulpv2.c \
-	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i8vp_xpulpv2.c \
+	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i16s_xpulpv2.c \
+	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i16p_xpulpv2.c \
+	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i8s_xpulpv2.c \
+	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i8p_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_f32s_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_f32p_xpulpv2.c \
 	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i32s_xpulpv2.c \
 	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i32p_xpulpv2.c \
-	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i16v_xpulpv2.c \
-	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i16vp_xpulpv2.c \
-	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i8v_xpulpv2.c \
-	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i8vp_xpulpv2.c \
+	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i16s_xpulpv2.c \
+	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i16p_xpulpv2.c \
+	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i8s_xpulpv2.c \
+	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_i8p_xpulpv2.c \
 	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_f32s_xpulpv2.c \
 	src/MatrixFunctions/mat_sub/kernels/plp_mat_sub_f32p_xpulpv2.c \
 	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i32s_xpulpv2.c \
 	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i32p_xpulpv2.c \
-	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i16v_xpulpv2.c \
-	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i16vp_xpulpv2.c \
-	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i8v_xpulpv2.c \
-	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i8vp_xpulpv2.c \
+	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i16s_xpulpv2.c \
+	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i16p_xpulpv2.c \
+	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i8s_xpulpv2.c \
+	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i8p_xpulpv2.c \
 	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_f32s_xpulpv2.c \
 	src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_f32p_xpulpv2.c \
 	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i32s_xpulpv2.c \
 	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i32p_xpulpv2.c \
-	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i16v_xpulpv2.c \
-	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i16vp_xpulpv2.c \
-	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i8v_xpulpv2.c \
-	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i8vp_xpulpv2.c \
+	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i16s_xpulpv2.c \
+	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i16p_xpulpv2.c \
+	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i8s_xpulpv2.c \
+	src/MatrixFunctions/mat_trans/kernels/plp_mat_trans_i8p_xpulpv2.c \
 	src/MatrixFunctions/mat_inv/kernels/plp_mat_inv_f32s_xpulpv2.c \
 	src/MatrixFunctions/mat_inv/kernels/plp_mat_inv_f32p_xpulpv2.c \
 	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i32s_xpulpv2.c \
-	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i16v_xpulpv2.c \
-	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i8v_xpulpv2.c \
+	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i16s_xpulpv2.c \
+	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i8s_xpulpv2.c \
 	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q32s_xpulpv2.c \
-	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q16v_xpulpv2.c \
-	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q8v_xpulpv2.c \
+	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q16s_xpulpv2.c \
+	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q8s_xpulpv2.c \
 	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i32p_xpulpv2.c \
-	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i16vp_xpulpv2.c \
-	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i8vp_xpulpv2.c \
+	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i16p_xpulpv2.c \
+	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i8p_xpulpv2.c \
 	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q32p_xpulpv2.c \
-	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q16vp_xpulpv2.c \
-	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q8vp_xpulpv2.c \
+	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q16p_xpulpv2.c \
+	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q8p_xpulpv2.c \
 	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_f32s_xpulpv2.c \
 	src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_f32p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_i32s_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_i16v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_i8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_i16s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_i8s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_q32s_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_q16v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_q8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_q16s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_q8s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_i32p_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_i16vp_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_i8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_i16p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_i8p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_q32p_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_q16vp_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_q8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_q16p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_q8p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_f32s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_cmplx_stride/kernels/plp_mat_mult_cmplx_stride_f32p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_i32s_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_i16v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_i8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_i16s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_i8s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_i32p_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_i16vp_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_i8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_i16p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_i8p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_q32s_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_q16v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_q8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_q16s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_q8s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_q32p_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_q16vp_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_q8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_q16p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_q8p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_f32s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride/kernels/plp_mat_mult_trans_cmplx_stride_f32p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i32s_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i16v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i16s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i8s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q32s_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q16v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q16s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q8s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i32p_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i16vp_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i16p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_i8p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q32p_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q16vp_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q16p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_q8p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_f32s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_stride/kernels/plp_mat_mult_stride_f32p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i32s_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i16v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i16s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i8s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i32p_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i16vp_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i16p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_i8p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q32s_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q16v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q16s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q8s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q32p_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q16vp_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q16p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_q8p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_f32s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_mult_trans_stride/kernels/plp_mat_mult_trans_stride_f32p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i32s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i32p_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i16v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i16vp_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i8v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i16s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i16p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i8s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_i8p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_f32s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_add_stride/kernels/plp_mat_add_stride_f32p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i32s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i32p_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i16v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i16vp_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i8v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i16s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i16p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i8s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_i8p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_f32s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_sub_stride/kernels/plp_mat_sub_stride_f32p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i32s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i32p_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i16v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i16vp_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i8v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i16s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i16p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i8s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_i8p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_f32s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_scale_stride/kernels/plp_mat_scale_stride_f32p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i32s_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i16v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i16s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i8s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q32s_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q16v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q16s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q8s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i32p_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i16vp_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i16p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i8p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q32p_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q16vp_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q16p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q8p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_f32s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_f32p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i32s_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i16v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i16s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i8s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i32p_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i16vp_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i16p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_i8p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_f32s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_fill_stride/kernels/plp_mat_fill_stride_f32p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i32s_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i16v_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i8v_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i16s_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i8s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i32p_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i16vp_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i8vp_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i16p_xpulpv2.c \
+	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i8p_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_f32s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_f32p_xpulpv2.c \
-	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i8vp_xpulpv2.c	\
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i8p_xpulpv2.c	\
 	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_conj_f32_xpulpv2.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_conj_i32_xpulpv2.c \
@@ -682,7 +682,7 @@ IDIR=$(CURDIR)/include
 BUILD_DIR=$(CURDIR)/lib/build
 # the build folder is saved here.
 
-PULP_CFLAGS += -I$(IDIR) -O0 -g
+PULP_CFLAGS += -I$(IDIR) -O3 -g
 
 INSTALL_FILES += $(shell find include -name *.h)
 

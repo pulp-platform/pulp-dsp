@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and Ubiversity of Bologna. 
+ * Copyright (C) 2019 ETH Zurich and Ubiversity of Bologna.
  *
  * Author: Hanna Mueller, ETH Zurich
  *
@@ -33,7 +33,6 @@
   with Apache-2.0.
  */
 
-
 #include "plp_math.h"
 
 /**
@@ -56,7 +55,8 @@
       pDst[n] = pSrc[(2*n)+0]^2 + pSrc[(2*n)+1]^2;
   }
   </pre>
-  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types.
+  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+  types.
  */
 
 /**
@@ -73,30 +73,26 @@
   @return        none
  */
 
-void plp_cmplx_mag_squared_q32_rv32im(
-  const int32_t * __restrict__  pSrc,
-        int32_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples)
-{
-  uint32_t blkCnt;                               /* Loop counter */
-  int32_t real, imag;                          /* Temporary input variables */
+void plp_cmplx_mag_squared_q32_rv32im(const int32_t *__restrict__ pSrc,
+                                      int32_t *__restrict__ pDst,
+                                      uint32_t deciPoint,
+                                      uint32_t numSamples) {
+    uint32_t blkCnt;    /* Loop counter */
+    int32_t real, imag; /* Temporary input variables */
 
-  /* Initialize blkCnt with number of samples */
-  blkCnt = numSamples;
-  while (blkCnt > 0U)
-  {
-    /* C[0] = (A[0] * A[0] + A[1] * A[1]) */
+    /* Initialize blkCnt with number of samples */
+    blkCnt = numSamples;
+    while (blkCnt > 0U) {
+        /* C[0] = (A[0] * A[0] + A[1] * A[1]) */
 
-    real = *pSrc++;
-    imag = *pSrc++;
-    /* store result in destination buffer. */
-    *pDst++ = ((real * real ) >> deciPoint) + ((imag * imag ) >> deciPoint);
+        real = *pSrc++;
+        imag = *pSrc++;
+        /* store result in destination buffer. */
+        *pDst++ = ((real * real) >> deciPoint) + ((imag * imag) >> deciPoint);
 
-    /* Decrement loop counter */
-    blkCnt--;
-  }
-
+        /* Decrement loop counter */
+        blkCnt--;
+    }
 }
 
 /**

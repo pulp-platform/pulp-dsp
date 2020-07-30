@@ -68,7 +68,7 @@ void plp_mat_mult_trans_cmplx_i8_parallel(const int8_t *__restrict__ pSrcA,
             .pSrcA = pSrcA, .pSrcB = pSrcB, .M = M, .N = N, .O = O, .nPE = nPE, .pDstC = pDstC
         };
 
-        rt_team_fork(nPE, plp_mat_mult_trans_cmplx_i8vp_xpulpv2, (void *)&args);
+        rt_team_fork(nPE, plp_mat_mult_trans_cmplx_i8p_xpulpv2, (void *)&args);
     }
 }
 

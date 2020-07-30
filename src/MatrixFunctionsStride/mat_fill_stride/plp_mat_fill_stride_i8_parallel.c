@@ -64,7 +64,7 @@ void plp_mat_fill_stride_i8_parallel(uint32_t M,
             .M = M, .N = N, .stride = stride, .value = value, .nPE = nPE, .pDst = pDst
         };
 
-        rt_team_fork(nPE, plp_mat_fill_stride_i8vp_xpulpv2, (void *)&args);
+        rt_team_fork(nPE, plp_mat_fill_stride_i8p_xpulpv2, (void *)&args);
     }
 }
 

@@ -32,27 +32,27 @@
  * with Apache-2.0.
  */
 
-#include "plp_math.h"
 #include "plp_common_tables.h"
+#include "plp_math.h"
 
 /**
  * @brief      q32 cosine function for XPULPV2
  *
- * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0,
+ * 2*PI)
  *
  * @return     cos(x)
  */
 
-int32_t plp_cos_q32s_xpulpv2(int32_t x){
-    int32_t cosVal;                                  /* Temporary input, output variables */
-    int32_t index;                                   /* Index variable */
-    int32_t a, b;                                    /* Two nearest output values */
-    int32_t fract;                                   /* Temporary values for fractional values */
+int32_t plp_cos_q32s_xpulpv2(int32_t x) {
+    int32_t cosVal; /* Temporary input, output variables */
+    int32_t index;  /* Index variable */
+    int32_t a, b;   /* Two nearest output values */
+    int32_t fract;  /* Temporary values for fractional values */
 
     /* add 0.25 (pi/2) to read sine table */
     x = (uint32_t)x + 0x20000000;
-    if (x < 0)
-    { /* convert negative numbers to corresponding positive ones */
+    if (x < 0) { /* convert negative numbers to corresponding positive ones */
         x = (uint32_t)x + 0x80000000;
     }
 
@@ -64,11 +64,11 @@ int32_t plp_cos_q32s_xpulpv2(int32_t x){
 
     /* Read two nearest values of input value from the sin table */
     a = sinTable_q32[index];
-    b = sinTable_q32[index+1];
+    b = sinTable_q32[index + 1];
 
     /* Linear interpolation process */
-    cosVal = (int64_t) (0x80000000 - fract) * a >> 32;
-    cosVal = (int32_t) ((((int64_t) cosVal << 32) + ((int64_t) fract * b)) >> 32);
+    cosVal = (int64_t)(0x80000000 - fract) * a >> 32;
+    cosVal = (int32_t)((((int64_t)cosVal << 32) + ((int64_t)fract * b)) >> 32);
 
     /* Return output value */
     return (cosVal << 1);
