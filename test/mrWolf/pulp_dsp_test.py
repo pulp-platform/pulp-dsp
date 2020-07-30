@@ -1081,7 +1081,8 @@ def check_output(config, output, test_obj):
         if result['mismatches'] and test_obj.extended_output:
             print(indent("\n".join(result['mismatches']), "      "))
 
-        bench_output(result, test_obj, case)
+        if passed:
+            bench_output(result, test_obj, case)
 
     # clean the directory
     clean()
