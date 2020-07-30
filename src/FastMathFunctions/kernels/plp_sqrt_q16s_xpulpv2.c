@@ -146,9 +146,7 @@ void plp_sqrt_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
         }
         *pRes = intermediate_fixpoint;
 
-    }
-
-    else {
+    } else {
         *pRes = 0;
     }
 }

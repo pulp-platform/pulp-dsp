@@ -51,9 +51,8 @@
    @return        none
 */
 
-void plp_min_i8s_rv32im(const int8_t *__restrict__ pSrc,
-                        uint32_t blockSize,
-                        int8_t *__restrict__ pRes) {
+void
+plp_min_i8s_rv32im(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes) {
 
     uint32_t blkCnt = 0;
     int8_t x1, x2;

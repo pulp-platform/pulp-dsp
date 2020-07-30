@@ -1,7 +1,8 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_std_q8s_rv32im.c
- * Description:  Kernel to calculate the standard deviation of a 8-bit fixed point vector glue code on RV32IM
+ * Description:  Kernel to calculate the standard deviation of a 8-bit fixed point vector glue code
+ *on RV32IM
  *
  * $Date:        30.06.2020
  *
@@ -66,5 +67,5 @@ void plp_std_q8s_rv32im(const int8_t *__restrict__ pSrc,
 
     plp_sqrt_q16(&intermediate, fracBits, &final);
 
-    *pRes = (int8_t) final;
+    *pRes = (int8_t)final;
 }

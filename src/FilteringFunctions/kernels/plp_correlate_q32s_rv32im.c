@@ -57,49 +57,84 @@ void plp_correlate_q32s_rv32im(const int32_t *pSrcA,
     const int32_t *pSrc1, *pSrc2;
     int32_t src1Len, src2Len;
 
-    if (srcALen > srcBLen) {
+    int8_t switchOn = 0;
+
+    if (srcALen >= srcBLen) {
         pSrc1 = pSrcA;
         pSrc2 = pSrcB;
         src1Len = srcALen;
         src2Len = srcBLen;
+        switchOn = 0;
     } else {
         pSrc2 = pSrcA;
         pSrc1 = pSrcB;
         src2Len = srcALen;
         src1Len = srcBLen;
+        switchOn = 1;
     }
 
     int32_t temp = 0;
-    const int32_t offset = src1Len - src2Len;
-
+    const int32_t offset = src1Len - src2Len + 1;
+    const int32_t totLen = 2 * (src2Len - 1) + offset - 1;
+    pRes = pRes + (switchOn * totLen);
     // Stage 1
 
-    for (int i = 1; i < src2Len; i++) {
-        for (int j = 0; j < i; j++) {
-            temp += pSrc1[j] * pSrc2[src2Len - i + j] >> fracBits;
+    if (switchOn == 0) {
+        for (int i = 1; i < src2Len; i++) { // Length of overlap
+            for (int j = 0; j < i; j++) {
+                temp += (((pSrc1[j] * pSrc2[src2Len - i + j]) >> (fracBits - 1)) + 1) >> 1;
+            }
+            *pRes++ = temp;
+            temp = 0;
         }
-        *pRes++ = temp;
-        temp = 0;
+    } else {
+        for (int i = 1; i < src2Len; i++) { // Length of overlap
+            for (int j = 0; j < i; j++) {
+                temp += (((pSrc1[j] * pSrc2[src2Len - i + j]) >> (fracBits - 1)) + 1) >> 1;
+            }
+            *pRes-- = temp;
+            temp = 0;
+        }
     }
 
     // Stage 2
 
-    for (int i = 0; i <= offset; i++) {
-        for (int j = 0; j < src2Len; j++) {
-            temp += pSrc1[j + i] * pSrc2[j] >> fracBits;
+    if (switchOn == 0) {
+
+        for (int i = 0; i < offset; i++) {
+            for (int j = 0; j < src2Len; j++) {
+                temp += (((pSrc1[j + i] * pSrc2[j]) >> (fracBits - 1)) + 1) >> 1;
+            }
+            *pRes++ = temp;
+            temp = 0;
         }
-        *pRes++ = temp;
-        temp = 0;
+    } else {
+        for (int i = 0; i < offset; i++) {
+            for (int j = 0; j < src2Len; j++) {
+                temp += (((pSrc1[j + i] * pSrc2[j]) >> (fracBits - 1)) + 1) >> 1;
+            }
+            *pRes-- = temp;
+            temp = 0;
+        }
     }
 
     // Stage 3
-
-    for (int i = src2Len - 1; i > 0; i--) {
-        for (int j = 0; j < i; j++) {
-            temp += pSrc1[offset + src2Len - i + j] * pSrc2[j] >> fracBits;
+    if (switchOn == 0) {
+        for (int i = src2Len - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                temp += (((pSrc1[src1Len - i + j] * pSrc2[j]) >> (fracBits - 1)) + 1) >> 1;
+            }
+            *pRes++ = temp;
+            temp = 0;
         }
-        *pRes++ = temp;
-        temp = 0;
+    } else {
+        for (int i = src2Len - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                temp += (((pSrc1[src1Len - i + j] * pSrc2[j]) >> (fracBits - 1)) + 1) >> 1;
+            }
+            *pRes-- = temp;
+            temp = 0;
+        }
     }
 }
 

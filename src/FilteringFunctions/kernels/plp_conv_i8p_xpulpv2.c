@@ -83,9 +83,8 @@ void plp_conv_i8p_xpulpv2(void *task_args) {
         pSrcB = (int8_t *)S->pSrcB;
         srcBLen = S->srcBLen;
         pRes = (int32_t *)(S->pRes + resultoffset * (rt_core_id()));
-
     }
-    
+
     // Reorder vectors; longest first
     if (srcALen >= srcBLen) {
         pIn1 = pSrcA;

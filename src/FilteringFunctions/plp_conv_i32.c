@@ -125,8 +125,11 @@ void plp_conv_i32(const int32_t *pSrcA,
             }
         }
 
-        plp_conv_i32s_rv32im(pIn1, in1Len, pIn2 + (nPE - 1) * src2Offset,
-                             in2Len - (src2Offset * (nPE - 1)), _pRes1_32);
+        plp_conv_i32s_rv32im(pIn1,
+                             in1Len,
+                             pIn2 + (nPE - 1) * src2Offset,
+                             in2Len - (src2Offset * (nPE - 1)),
+                             _pRes1_32);
 
         pOut = pRes + (nPE - 1) * src2Offset;
         _pRes = _pRes1_32;
@@ -182,8 +185,11 @@ void plp_conv_i32(const int32_t *pSrcA,
             }
         }
 
-        plp_conv_i32s_xpulpv2(pIn1, in1Len, pIn2 + (nPE - 1) * src2Offset,
-                              in2Len - (src2Offset * (nPE - 1)), _pRes1_32);
+        plp_conv_i32s_xpulpv2(pIn1,
+                              in1Len,
+                              pIn2 + (nPE - 1) * src2Offset,
+                              in2Len - (src2Offset * (nPE - 1)),
+                              _pRes1_32);
 
         pOut = pRes + (nPE - 1) * src2Offset;
         _pRes = _pRes1_32;
