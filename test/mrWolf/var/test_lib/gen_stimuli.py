@@ -43,14 +43,14 @@ def compute_result(result_parameter, inputs, env, fix_point):
             result[0] = q_add(result[0], (xa * xb) >> fix_point)
         sq_mean = q_sat_8(np.square(np.mean(p)))
         result[0] = q_sat_8(q_add(result[0]/bS,-(int(sq_mean)>>fix_point)))
-        print(result)
+        #print(result)
     elif result_parameter.ctype == 'float':
         p = inputs['pSrc'].value.astype(np.float32)
         result = np.zeros(1, dtype=np.float32)
         result[0] = np.var(p)
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
-    print(result)
+    #print(result)
     return result
 
 
