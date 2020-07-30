@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2019 ETH Zurich and University of Bologna.
  *
  * Author: Hanna Mueller, ETH Zurich
  *
@@ -33,9 +33,7 @@
   with Apache-2.0.
  */
 
-
 #include "plp_math.h"
-
 
 /**
   @ingroup groupCmplxMath
@@ -57,7 +55,8 @@
       pDst[n] = pSrc[(2*n)+0]^2 + pSrc[(2*n)+1]^2;
   }
   </pre>
-  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types.
+  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+  types.
  */
 
 /**
@@ -74,23 +73,18 @@
   @return        none
  */
 
-void plp_cmplx_mag_squared_q16(
-                      const int16_t * __restrict__ pSrc,
-                            int16_t * __restrict__ pDst,
-                            uint32_t deciPoint,
-                            uint32_t numSamples){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_cmplx_mag_squared_q16_rv32im(pSrc, pDst, deciPoint, numSamples);
-  }
-  else{
-    plp_cmplx_mag_squared_q16_xpulpv2(pSrc, pDst, deciPoint, numSamples);
-  }
+void plp_cmplx_mag_squared_q16(const int16_t *__restrict__ pSrc,
+                               int16_t *__restrict__ pDst,
+                               uint32_t deciPoint,
+                               uint32_t numSamples) {
 
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        plp_cmplx_mag_squared_q16_rv32im(pSrc, pDst, deciPoint, numSamples);
+    } else {
+        plp_cmplx_mag_squared_q16_xpulpv2(pSrc, pDst, deciPoint, numSamples);
+    }
 }
 
 /**
   @} end of BasicDotProd group
  */
-
-

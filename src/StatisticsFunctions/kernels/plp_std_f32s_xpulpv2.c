@@ -51,8 +51,9 @@
    @return        none
 */
 
-void
-plp_std_f32s_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes) {
+void plp_std_f32s_xpulpv2(const float *__restrict__ pSrc,
+                          uint32_t blockSize,
+                          float *__restrict__ pRes) {
 
     float variance;
     plp_var_f32(pSrc, blockSize, &variance);

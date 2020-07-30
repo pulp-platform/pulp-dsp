@@ -37,14 +37,15 @@
 /**
  * @brief      Glue code for q32 cosine function
  *
- * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0,
+ * 2*PI)
  *
  * @return     cos(x)
  */
 
-int32_t plp_cos_q32(int32_t x){
+int32_t plp_cos_q32(int32_t x) {
 
-	if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         return plp_cos_q32s_rv32im(x);
     } else {
         return plp_cos_q32s_xpulpv2(x);

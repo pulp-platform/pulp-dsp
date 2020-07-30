@@ -32,26 +32,26 @@
  * with Apache-2.0.
  */
 
-#include "plp_math.h"
 #include "plp_common_tables.h"
+#include "plp_math.h"
 
 /**
  * @brief      q32 sine function for RV32IM
  *
- * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0,
+ * 2*PI)
  *
  * @return     sin(x)
  */
 
-int32_t plp_sin_q32s_rv32im(int32_t x){
+int32_t plp_sin_q32s_rv32im(int32_t x) {
 
-    int32_t sinVal;                                  /* Temporary variables for input, output */
-    int32_t index;                                   /* Index variable */
-    int32_t a, b;                                    /* Two nearest output values */
-    int32_t fract;                                   /* Temporary values for fractional values */
+    int32_t sinVal; /* Temporary variables for input, output */
+    int32_t index;  /* Index variable */
+    int32_t a, b;   /* Two nearest output values */
+    int32_t fract;  /* Temporary values for fractional values */
 
-    if (x < 0)
-    { /* convert negative numbers to corresponding positive ones */
+    if (x < 0) { /* convert negative numbers to corresponding positive ones */
         x = (uint32_t)x + 0x80000000;
     }
 
@@ -63,11 +63,11 @@ int32_t plp_sin_q32s_rv32im(int32_t x){
 
     /* Read two nearest values of input value from the sin table */
     a = sinTable_q32[index];
-    b = sinTable_q32[index+1];
+    b = sinTable_q32[index + 1];
 
     /* Linear interpolation process */
-    sinVal = (int64_t) (0x80000000 - fract) * a >> 32;
-    sinVal = (int32_t) ((((int64_t) sinVal << 32) + ((int64_t) fract * b)) >> 32);
+    sinVal = (int64_t)(0x80000000 - fract) * a >> 32;
+    sinVal = (int32_t)((((int64_t)sinVal << 32) + ((int64_t)fract * b)) >> 32);
 
     /* Return output value */
     return (sinVal << 1);

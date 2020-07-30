@@ -42,9 +42,9 @@
  * @return     cos(x)
  */
 
-float32_t plp_cos_f32(float32_t x){
+float32_t plp_cos_f32(float32_t x) {
 
-	if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         return 0.f;
     } else {
         return plp_cos_f32s_xpulpv2(x);

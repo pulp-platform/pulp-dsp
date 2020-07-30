@@ -117,11 +117,8 @@ void plp_conv_i8(const int8_t *pSrcA,
             }
         }
 
-        plp_conv_i8s_rv32im(pIn1,
-                            in1Len,
-                            pIn2 + (nPE - 1) * src2Offset,
-                            in2Len - (src2Offset * (nPE - 1)),
-                            _pRes1_8);
+        plp_conv_i8s_rv32im(pIn1, in1Len, pIn2 + (nPE - 1) * src2Offset,
+                            in2Len - (src2Offset * (nPE - 1)), _pRes1_8);
 
         pOut = pRes + (nPE - 1) * src2Offset;
         _pRes = _pRes1_8;
@@ -177,11 +174,8 @@ void plp_conv_i8(const int8_t *pSrcA,
             }
         }
 
-        plp_conv_i8s_xpulpv2(pIn1,
-                             in1Len,
-                             pIn2 + (nPE - 1) * src2Offset,
-                             in2Len - (src2Offset * (nPE - 1)),
-                             _pRes1_8);
+        plp_conv_i8s_xpulpv2(pIn1, in1Len, pIn2 + (nPE - 1) * src2Offset,
+                             in2Len - (src2Offset * (nPE - 1)), _pRes1_8);
 
         pOut = pRes + (nPE - 1) * src2Offset;
         _pRes = _pRes1_8;

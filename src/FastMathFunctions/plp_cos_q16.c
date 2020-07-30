@@ -37,14 +37,15 @@
 /**
  * @brief      Glue code for q16 cosine function
  *
- * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0,
+ * 2*PI)
  *
  * @return     cos(x)
  */
 
-int16_t plp_cos_q16(int16_t x){
+int16_t plp_cos_q16(int16_t x) {
 
-	if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (rt_cluster_id() == ARCHI_FC_CID) {
         return plp_cos_q16s_rv32im(x);
     } else {
         return plp_cos_q16s_xpulpv2(x);
