@@ -99,10 +99,10 @@ void plp_cmplx_dot_prod_q32_rv32im(
                 c0 = *pSrcB++;
                 d0 = *pSrcB++;
 
-                real_sum += (a0 * c0 + (1<<(deciPoint-1))) >> deciPoint;
-                imag_sum += (a0 * d0 + (1<<(deciPoint-1))) >> deciPoint;
-                real_sum -= (b0 * d0 + (1<<(deciPoint-1))) >> deciPoint;
-                imag_sum += (b0 * c0 + (1<<(deciPoint-1))) >> deciPoint;
+                real_sum += (a0 * c0 ) >> deciPoint;
+                imag_sum += (a0 * d0 ) >> deciPoint;
+                real_sum -= (b0 * d0 ) >> deciPoint;
+                imag_sum += (b0 * c0 ) >> deciPoint;
 
                 /* Decrement loop counter */
                 blkCnt--;

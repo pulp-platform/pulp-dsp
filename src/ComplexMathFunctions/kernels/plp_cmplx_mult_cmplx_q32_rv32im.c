@@ -51,7 +51,7 @@
       pDst[(2*n)+1] = pSrcA[(2*n)+0] * pSrcB[(2*n)+1] + pSrcA[(2*n)+1] * pSrcB[(2*n)+0];
   }
   </pre>
-  There are separate functions for floating-point, Q15, and Q31 data types.
+  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. 
  */
 
 /**
@@ -89,8 +89,8 @@ void plp_cmplx_mult_cmplx_q32_rv32im(
     d = *pSrcB++;
 
     /* store result in destination buffer. */
-    *pDst++ = (((a * c) + (1<<(deciPoint-1))) >> deciPoint) - (((b * d) + (1<<(deciPoint-1))) >> deciPoint);
-    *pDst++ = (((a * d) + (1<<(deciPoint-1))) >> deciPoint) + (((b * c) + (1<<(deciPoint-1))) >> deciPoint);
+    *pDst++ = (((a * c)  ) >> deciPoint) - (((b * d)  ) >> deciPoint);
+    *pDst++ = (((a * d)  ) >> deciPoint) + (((b * c)  ) >> deciPoint);
 
     /* Decrement loop counter */
     blkCnt--;

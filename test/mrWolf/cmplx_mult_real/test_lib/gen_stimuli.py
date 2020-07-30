@@ -42,7 +42,7 @@ def compute_result(result_parameter, inputs, env, fix_point):
     srcReal = inputs['srcReal'].value.astype(my_computeType)
     num_samples = inputs['num_samples'].value
     result = np.zeros(2*num_samples, dtype=my_type)
-    if fix_point is None or fix_point == 0:
+    if fix_point is None:# or fix_point == 0:
         for n in range(0, num_samples):
             result[(2*n)  ] =  srcCmplx[(2*n)  ] * srcReal[n];    # real part
             result[(2*n)+1] =  srcCmplx[(2*n)+1] * srcReal[n];    # imag part
@@ -86,7 +86,10 @@ def q_mul(a, b, p, bits=32):
 
 
 def q_roundnorm(a, p, bits=32):
-    rounding = 1 << (p - 1)
+    if p > 0:
+        rounding = 1 << (p - 1)
+    else:
+        rounding = 0
     # print(rounding)
     return q_sat((a + rounding) >> p, bits=bits)
 

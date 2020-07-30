@@ -89,8 +89,8 @@ void plp_cmplx_mult_cmplx_q16_rv32im(
     d = *pSrcB++;
 
     /* store result in destination buffer. */
-    *pDst++ = (((a * c) + (1<<(deciPoint-1))) >> deciPoint) - (((b * d) + (1<<(deciPoint-1))) >> deciPoint);
-    *pDst++ = (((a * d) + (1<<(deciPoint-1))) >> deciPoint) + (((b * c) + (1<<(deciPoint-1))) >> deciPoint);
+    *pDst++ = (((a * c) ) >> deciPoint) - (((b * d) ) >> deciPoint);
+    *pDst++ = (((a * d) ) >> deciPoint) + (((b * c) ) >> deciPoint);
 
     /* Decrement loop counter */
     blkCnt--;

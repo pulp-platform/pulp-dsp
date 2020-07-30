@@ -56,7 +56,7 @@
       pDst[(2*n)+1] = -pSrc[(2*n)+1];    // imag part
   }
   </pre>
-  There are separate functions for floating-point, Q15, and Q31 data types.
+  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. 
  */
 
 /**

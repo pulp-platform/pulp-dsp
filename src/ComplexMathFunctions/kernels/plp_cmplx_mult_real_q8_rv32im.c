@@ -95,10 +95,10 @@ void plp_cmplx_mult_real_q8_rv32im(
     {
       in = *pSrcReal++;
       /* store result in destination buffer. */
-      *pDst++ = ((*pSrcCmplx++ * in) + (1<<(deciPoint-1))) >> deciPoint;  
+      *pDst++ = ((*pSrcCmplx++ * in)  ) >> deciPoint;  
     } else
     {
-      *pDst++ = ((*pSrcCmplx++ * in) + (1<<(deciPoint-1))) >> deciPoint;  
+      *pDst++ = ((*pSrcCmplx++ * in)  ) >> deciPoint;  
     }
     even = !even;
     /* Decrement loop counter */

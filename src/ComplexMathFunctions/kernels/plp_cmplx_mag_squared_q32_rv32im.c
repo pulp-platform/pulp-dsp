@@ -91,7 +91,7 @@ void plp_cmplx_mag_squared_q32_rv32im(
     real = *pSrc++;
     imag = *pSrc++;
     /* store result in destination buffer. */
-    *pDst++ = ((real * real + (1<<(deciPoint-1))) >> deciPoint) + ((imag * imag + (1<<(deciPoint-1))) >> deciPoint);
+    *pDst++ = ((real * real ) >> deciPoint) + ((imag * imag ) >> deciPoint);
 
     /* Decrement loop counter */
     blkCnt--;
