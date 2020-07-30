@@ -29,23 +29,23 @@ FC_SRCS = \
 	src/StatisticsFunctions/plp_std_q32.c src/StatisticsFunctions/kernels/plp_std_q32s_rv32im.c \
 	src/StatisticsFunctions/plp_std_q16.c src/StatisticsFunctions/kernels/plp_std_q16s_rv32im.c \
 	src/StatisticsFunctions/plp_std_q8.c src/StatisticsFunctions/kernels/plp_std_q8s_rv32im.c \
+  src/BasicMathFunctions/dot_prod/plp_dot_prod_f32_parallel.c \
+	src/BasicMathFunctions/dot_prod/plp_dot_prod_q32_parallel.c \
+	src/BasicMathFunctions/dot_prod/plp_dot_prod_i32_parallel.c \
 	src/StatisticsFunctions/plp_rms_f32.c \
 	src/StatisticsFunctions/plp_rms_q32.c src/StatisticsFunctions/kernels/plp_rms_q32s_rv32im.c \
 	src/StatisticsFunctions/plp_rms_q16.c src/StatisticsFunctions/kernels/plp_rms_q16s_rv32im.c \
 	src/StatisticsFunctions/plp_rms_q8.c src/StatisticsFunctions/kernels/plp_rms_q8s_rv32im.c \
-	src/BasicMathFunctions/plp_dot_prod_f32_parallel.c \
-	src/BasicMathFunctions/plp_dot_prod_q32_parallel.c \
-	src/BasicMathFunctions/plp_dot_prod_i32_parallel.c \
 	src/SupportFunctions/plp_copy_i32.c src/SupportFunctions/kernels/plp_copy_i32s_rv32im.c \
 	src/SupportFunctions/plp_copy_f32.c \
 	src/SupportFunctions/plp_fill_i32.c src/SupportFunctions/kernels/plp_fill_i32s_rv32im.c \
-	src/BasicMathFunctions/plp_dot_prod_f32.c \
-	src/BasicMathFunctions/plp_dot_prod_q8.c src/BasicMathFunctions/kernels/plp_dot_prod_q8s_rv32im.c \
-	src/BasicMathFunctions/plp_dot_prod_q16.c src/BasicMathFunctions/kernels/plp_dot_prod_q16s_rv32im.c \
-	src/BasicMathFunctions/plp_dot_prod_q32.c src/BasicMathFunctions/kernels/plp_dot_prod_q32s_rv32im.c \
-	src/BasicMathFunctions/plp_dot_prod_i8.c src/BasicMathFunctions/kernels/plp_dot_prod_i8s_rv32im.c \
-	src/BasicMathFunctions/plp_dot_prod_i16.c src/BasicMathFunctions/kernels/plp_dot_prod_i16s_rv32im.c \
-	src/BasicMathFunctions/plp_dot_prod_i32.c src/BasicMathFunctions/kernels/plp_dot_prod_i32s_rv32im.c \
+	src/BasicMathFunctions/dot_prod/plp_dot_prod_f32.c \
+	src/BasicMathFunctions/dot_prod/plp_dot_prod_q8.c src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_q8s_rv32im.c \
+	src/BasicMathFunctions/dot_prod/plp_dot_prod_q16.c src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_q16s_rv32im.c \
+	src/BasicMathFunctions/dot_prod/plp_dot_prod_q32.c src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_q32s_rv32im.c \
+	src/BasicMathFunctions/dot_prod/plp_dot_prod_i8.c src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_i8s_rv32im.c \
+	src/BasicMathFunctions/dot_prod/plp_dot_prod_i16.c src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_i16s_rv32im.c \
+	src/BasicMathFunctions/dot_prod/plp_dot_prod_i32.c src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_i32s_rv32im.c \
 	src/FilteringFunctions/plp_correlate_i32.c src/FilteringFunctions/kernels/plp_correlate_i32s_rv32im.c \
 	src/FilteringFunctions/plp_correlate_i16.c src/FilteringFunctions/kernels/plp_correlate_i16s_rv32im.c \
 	src/FilteringFunctions/plp_correlate_i8.c src/FilteringFunctions/kernels/plp_correlate_i8s_rv32im.c \
@@ -283,7 +283,64 @@ FC_SRCS = \
 	src/MatrixFunctionsStride/mat_copy_stride/plp_mat_copy_stride_i8_parallel.c \
 	src/MatrixFunctionsStride/mat_copy_stride/plp_mat_copy_stride_f32.c \
 	src/MatrixFunctionsStride/mat_copy_stride/plp_mat_copy_stride_f32_parallel.c \
-	src/ComplexMathFunctions/plp_cmplx_mag_q16.c
+	src/ComplexMathFunctions/plp_cmplx_mag_q16.c \
+	src/ComplexMathFunctions/plp_cmplx_conj_f32.c \
+	src/ComplexMathFunctions/plp_cmplx_conj_i32.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_conj_i32_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_conj_i16.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_conj_i16_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_conj_i8.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_conj_i8_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_dot_prod_f32.c \
+	src/ComplexMathFunctions/plp_cmplx_dot_prod_i32.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i32_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_dot_prod_i16.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i16_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_dot_prod_q32.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_q32_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_dot_prod_q16.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_q16_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_dot_prod_i8.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i8_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_real_f32.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_real_i32.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i32_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_real_i16.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i16_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_real_i8.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i8_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_real_q32.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q32_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_real_q16.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q16_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_real_q8.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q8_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_cmplx_f32.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_cmplx_i32.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i32_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_cmplx_i16.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i16_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_cmplx_i8.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i8_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_cmplx_q32.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q32_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_cmplx_q16.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q16_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mult_cmplx_q8.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q8_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mag_squared_f32.c \
+	src/ComplexMathFunctions/plp_cmplx_mag_squared_i32.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i32_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mag_squared_i16.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i16_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mag_squared_i8.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i8_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mag_squared_q32.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q32_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mag_squared_q16.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q16_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mag_squared_q8.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q8_rv32im.c \
 
 
 CL_SRCS = \
@@ -321,19 +378,19 @@ CL_SRCS = \
 	src/FastMathFunctions/kernels/plp_sqrt_f32s_xpulpv2.c \
 	src/FastMathFunctions/kernels/plp_sqrt_q32s_xpulpv2.c \
 	src/FastMathFunctions/kernels/plp_sqrt_q16s_xpulpv2.c \
-	src/BasicMathFunctions/kernels/plp_dot_prod_f32s_xpulpv2.c \
-	src/BasicMathFunctions/kernels/plp_dot_prod_f32p_xpulpv2.c \
-	src/BasicMathFunctions/kernels/plp_dot_prod_q32p_xpulpv2.c \
-	src/BasicMathFunctions/kernels/plp_dot_prod_i32p_xpulpv2.c \
+  src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_f32s_xpulpv2.c \
+  src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_f32p_xpulpv2.c \
+	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_q32p_xpulpv2.c \
+	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_i32p_xpulpv2.c \
 	src/SupportFunctions/kernels/plp_copy_i32s_xpulpv2.c \
 	src/SupportFunctions/kernels/plp_copy_f32s_xpulpv2.c \
 	src/SupportFunctions/kernels/plp_fill_i32s_xpulpv2.c \
-	src/BasicMathFunctions/kernels/plp_dot_prod_q8v_xpulpv2.c \
-	src/BasicMathFunctions/kernels/plp_dot_prod_q16v_xpulpv2.c \
-	src/BasicMathFunctions/kernels/plp_dot_prod_q32s_xpulpv2.c \
-	src/BasicMathFunctions/kernels/plp_dot_prod_i8v_xpulpv2.c \
-	src/BasicMathFunctions/kernels/plp_dot_prod_i16v_xpulpv2.c \
-	src/BasicMathFunctions/kernels/plp_dot_prod_i32s_xpulpv2.c \
+	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_q8s_xpulpv2.c \
+	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_q16s_xpulpv2.c \
+	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_q32s_xpulpv2.c \
+	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_i8s_xpulpv2.c \
+	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_i16s_xpulpv2.c \
+	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_i32s_xpulpv2.c \
 	src/FilteringFunctions/kernels/plp_correlate_i32s_xpulpv2.c \
 	src/FilteringFunctions/kernels/plp_correlate_i16s_xpulpv2.c \
 	src/FilteringFunctions/kernels/plp_correlate_i8s_xpulpv2.c \
@@ -569,7 +626,40 @@ CL_SRCS = \
 	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i16vp_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i8vp_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_f32s_xpulpv2.c \
-	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_f32p_xpulpv2.c
+	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_f32p_xpulpv2.c \
+	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i8vp_xpulpv2.c	\
+	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_conj_f32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_conj_i32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_conj_i16_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_conj_i8_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_f32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i16_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_q32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_q16_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i8_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_f32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i16_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i8_xpulpv2.c  \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q16_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q8_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_f32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i16_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i8_xpulpv2.c  \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q16_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q8_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_f32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i16_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i8_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q16_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q8_xpulpv2.c \
 
 
 PULP_LIBS = plpdsp # the name of the library, after installing it into the pulp-sdk, add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project to use this library.
@@ -580,7 +670,7 @@ IDIR=$(CURDIR)/include
 BUILD_DIR=$(CURDIR)/lib/build
 # the build folder is saved here.
 
-PULP_CFLAGS += -I$(IDIR) -O3 -g
+PULP_CFLAGS += -I$(IDIR) -O0 -g
 
 INSTALL_FILES += $(shell find include -name *.h)
 

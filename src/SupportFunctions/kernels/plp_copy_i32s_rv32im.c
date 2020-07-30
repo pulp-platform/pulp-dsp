@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * -------------------------------------------------------------------- */
 /*
- * Copyright (C) 2019 ETH Zurich and University of Bologna. All rights reserved.
+ * Copyright (C) 2019 ETH Zurich and University of Bologna. 
  *
  * Author: Xiaying Wang, ETH Zurich
  *
@@ -26,7 +26,13 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Notice: project inspired by ARM CMSIS DSP and parts of source code
+ * ported and adopted for RISC-V PULP platform from ARM CMSIS DSP
+ * released under Copyright (C) 2010-2019 ARM Limited or its affiliates
+ * with Apache-2.0.
  */
+
 
 #include "plp_math.h"
 
@@ -52,8 +58,7 @@
 
   precision = {32, 16, 8} bits
 
-  method = {s, v, p} meaning single (or scalar, i.e. not using packed SIMD), vectorized (i.e. using
-  SIMD instructions), and parallel (for multicore parallel computing), respectively.
+  method = {s, p} respectively meaning single core or parallel multicore implementation.
 
   isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
 
