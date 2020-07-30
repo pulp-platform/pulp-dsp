@@ -162,7 +162,7 @@ class Argument(object):
         if callable(self.value):
             self.value = call_dynamic_function(self.value, env, version, device)
         if self.value == GENERATE_STIMULI:
-            self.value = call_dynamic_function(gen_stimuli, env, version, device, variable=self)
+            self.value = call_dynamic_function(gen_stimuli, env, version, device, argument=self)
         if isinstance(self.value, str):
             self.value = env[self.value]
         if self.value is None or (isinstance(self.value, (tuple, list)) and len(self.value) == 2):
