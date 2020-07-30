@@ -1542,7 +1542,7 @@ void plp_dot_prod_i16s_rv32im(const int16_t *__restrict__ pSrcA,
                               int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief Vectorized dot product of 16-bit integer vectors kernel for XPULPV2 extension.
+    @brief Vectorized dot product of 16-bit integer vectors kernel singlecore for XPULPV2 extension.
     @param[in]  pSrcA      points to the first input vector [16 bit]
     @param[in]  pSrcB      points to the second input vector [16 bit]
     @param[in]  blockSize  number of samples in each vector
@@ -1554,7 +1554,7 @@ void plp_dot_prod_i16s_rv32im(const int16_t *__restrict__ pSrcA,
     performed simultaneously on 32 bit vectors.
 */
 
-void plp_dot_prod_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_dot_prod_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                const int16_t *__restrict__ pSrcB,
                                uint32_t blockSize,
                                int32_t *__restrict__ pRes);
@@ -1601,7 +1601,7 @@ void plp_dot_prod_q16s_rv32im(const int16_t *__restrict__ pSrcA,
                               int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief Vectorized dot product of 16-bit fixed point vectors kernel for XPULPV2 extension.
+    @brief Vectorized dot product of 16-bit fixed point vectors singlecore kernel for XPULPV2 extension.
     @param[in]  pSrcA      points to the first input vector [16 bit]
     @param[in]  pSrcB      points to the second input vector [16 bit]
     @param[in]  blockSize  number of samples in each vector
@@ -1614,7 +1614,7 @@ void plp_dot_prod_q16s_rv32im(const int16_t *__restrict__ pSrcA,
     performed simultaneously on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_dot_prod_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_dot_prod_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                const int16_t *__restrict__ pSrcB,
                                uint32_t blockSize,
                                uint32_t deciPoint,
@@ -1658,7 +1658,7 @@ void plp_dot_prod_i8s_rv32im(const int8_t *__restrict__ pSrcA,
                              int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief Vectorized dot product of 8-bit integer vectors kernel for XPULPV2 extension.
+    @brief Vectorized dot product of 8-bit integer vectors singlecore kernel for XPULPV2 extension.
     @param[in]  pSrcA      points to the first input vector [8 bit]
     @param[in]  pSrcB      points to the second input vector [8 bit]
     @param[in]  blockSize  number of samples in each vector
@@ -1670,7 +1670,7 @@ void plp_dot_prod_i8s_rv32im(const int8_t *__restrict__ pSrcA,
     performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_dot_prod_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_dot_prod_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                               const int8_t *__restrict__ pSrcB,
                               uint32_t blockSize,
                               int32_t *__restrict__ pRes);
@@ -1717,7 +1717,7 @@ void plp_dot_prod_q8s_rv32im(const int8_t *__restrict__ pSrcA,
                              int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief Scalar dot product of 8-bit fixed point vectors kernel for XPULPV2 extension.
+    @brief Scalar dot product of 8-bit fixed point vectors singlecore kernel for XPULPV2 extension.
     @param[in]  pSrcA      points to the first input vector [8 bit]
     @param[in]  pSrcB      points to the second input vector [8 bit]
     @param[in]  blockSize  number of samples in each vector
@@ -1730,7 +1730,7 @@ void plp_dot_prod_q8s_rv32im(const int8_t *__restrict__ pSrcA,
     performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_dot_prod_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_dot_prod_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                               const int8_t *__restrict__ pSrcB,
                               uint32_t blockSize,
                               uint32_t deciPoint,

@@ -66,7 +66,7 @@ void plp_dot_prod_i8(const int8_t *__restrict__ pSrcA,
     if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_dot_prod_i8s_rv32im(pSrcA, pSrcB, blockSize, pRes);
     } else {
-        plp_dot_prod_i8v_xpulpv2(pSrcA, pSrcB, blockSize, pRes);
+        plp_dot_prod_i8s_xpulpv2(pSrcA, pSrcB, blockSize, pRes);
     }
 }
 

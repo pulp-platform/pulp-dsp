@@ -1,9 +1,9 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_dot_prod_i8v_xpulpv2.c
- * Description:  8-bit integer vectorized dot product for XPULPV2
+ * Title:        plp_dot_prod_q8s_xpulpv2.c
+ * Description:  8-bit fixed point vectorized dot product for XPULPV2
  *
- * $Date:        25. May 2019
+ * $Date:        28. May 2019
  * $Revision:    V0
  *
  * Target Processor: PULP cores
@@ -46,10 +46,11 @@
  */
 
 /**
-  @brief Vectorized dot product of 8-bit integer vectors kernel for XPULPV2 extension.
+  @brief Scalar dot product of 8-bit fixed point vectors singlecore kernel for XPULPV2 extension.
   @param[in]  pSrcA      points to the first input vector [8 bit]
   @param[in]  pSrcB      points to the second input vector [8 bit]
   @param[in]  blockSize  number of samples in each vector
+  @param[in]  deciPoint  decimal point for right shift
   @param[out] pRes     output result returned here [32 bit]
   @return        none
 
@@ -58,12 +59,14 @@
   performed on 32 bit vectors, with 32 bit accumulator.
  */
 
-void plp_dot_prod_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_dot_prod_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                               const int8_t *__restrict__ pSrcB,
                               uint32_t blockSize,
+                              uint32_t deciPoint,
                               int32_t *__restrict__ pRes) {
-    uint32_t blkCnt, tmpBS;     /* Loop counter, temporal BlockSize */
-    int32_t sum1 = 0, sum2 = 0; /* Temporary return variable */
+
+    uint32_t blkCnt, tmpBS; /* Loop counter, temporal BlockSize */
+    int32_t sum = 0;        /* Temporary return variable */
 
 #if defined(PLP_MATH_LOOPUNROLL)
 
@@ -75,8 +78,13 @@ void plp_dot_prod_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
         v4s b0 = *((v4s *)((void *)(pSrcB + 8 * blkCnt)));
         v4s a1 = *((v4s *)((void *)(pSrcA + 8 * blkCnt + 4)));
         v4s b1 = *((v4s *)((void *)(pSrcB + 8 * blkCnt + 4)));
-        sum1 = __SUMDOTP4(a0, b0, sum1);
-        sum2 = __SUMDOTP4(a1, b1, sum2);
+        // sum = __SUMDOTP4(a0, b0, sum);
+        // sum = sum >> deciPoint;
+        // sum = __SUMDOTP4(a1, b1, sum);
+        // sum = sum >> deciPoint;
+        int32_t x0 = __DOTP4(a0, b0);
+        int32_t x1 = __DOTP4(a1, b1);
+        sum += __ADDROUNDNORM_REG(x0, x1, deciPoint);
 
         // sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
         // sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
@@ -87,21 +95,25 @@ void plp_dot_prod_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
     for (blkCnt = 0; blkCnt < tmpBS; blkCnt++) {
         int8_t a = *((int8_t *)(pSrcA + 8 * (blockSize / 8) + blkCnt));
         int8_t b = *((int8_t *)(pSrcB + 8 * (blockSize / 8) + blkCnt));
-        sum1 += a * b;
+        // sum += a*b;
+        // sum = sum >> deciPoint;
+        sum += __ROUNDNORM_REG(a * b, deciPoint);
         // sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
     }
 
 #else // PLP_MATH_LOOPUNROLL
 
     for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
-        sum1 = __MAC(sum1, (*pSrcA++), (*pSrcB++));
+        // sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+        // sum = sum >> deciPoint;
+        sum += __ROUNDNORM_REG((*pSrcA++) * (*pSrcB++), deciPoint);
     }
 
 #endif // PLP_MATH_LOOPUNROLL
 
-    *pRes = sum1 + sum2;
+    *pRes = sum;
 }
 
 /**
-  @} end of BasicDotProdKernels group
- */
+   @} end of BasicDotProdKernels group
+*/

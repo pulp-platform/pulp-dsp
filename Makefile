@@ -385,11 +385,11 @@ CL_SRCS = \
 	src/SupportFunctions/kernels/plp_copy_i32s_xpulpv2.c \
 	src/SupportFunctions/kernels/plp_copy_f32s_xpulpv2.c \
 	src/SupportFunctions/kernels/plp_fill_i32s_xpulpv2.c \
-	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_q8v_xpulpv2.c \
-	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_q16v_xpulpv2.c \
+	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_q8s_xpulpv2.c \
+	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_q16s_xpulpv2.c \
 	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_q32s_xpulpv2.c \
-	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_i8v_xpulpv2.c \
-	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_i16v_xpulpv2.c \
+	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_i8s_xpulpv2.c \
+	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_i16s_xpulpv2.c \
 	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_i32s_xpulpv2.c \
 	src/FilteringFunctions/kernels/plp_correlate_i32s_xpulpv2.c \
 	src/FilteringFunctions/kernels/plp_correlate_i16s_xpulpv2.c \

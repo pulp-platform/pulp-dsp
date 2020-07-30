@@ -1,9 +1,9 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_dot_prod_i16v_xpulpv2.c
- * Description:  16-bit integer vectorized dot product for XPULPV2
+ * Title:        plp_dot_prod_q16s_xpulpv2.c
+ * Description:  16-bit fixed point vectorized dot product for XPULPV2
  *
- * $Date:        16. May 2019
+ * $Date:        26. May 2019
  * $Revision:    V0
  *
  * Target Processor: PULP cores
@@ -46,10 +46,11 @@
  */
 
 /**
-  @brief Vectorized dot product of 16-bit integer vectors kernel for XPULPV2 extension.
+  @brief Vectorized dot product of 16-bit fixed point vectors singlecore kernel for XPULPV2 extension.
   @param[in]  pSrcA      points to the first input vector [16 bit]
   @param[in]  pSrcB      points to the second input vector [16 bit]
   @param[in]  blockSize  number of samples in each vector
+  @param[in]  deciPoint  decimal point for right shift
   @param[out] pRes     output result returned here [32 bit]
   @return        none
 
@@ -58,12 +59,15 @@
   performed simultaneously on 32 bit vectors, with 32 bit accumulator.
  */
 
-void plp_dot_prod_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_dot_prod_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                const int16_t *__restrict__ pSrcB,
                                uint32_t blockSize,
+                               uint32_t deciPoint,
                                int32_t *__restrict__ pRes) {
-    uint32_t blkCnt, tmpBS;     /* Loop counter, temporal BlockSize */
-    int32_t sum1 = 0, sum2 = 0; /* Temporary return variable */
+
+    uint32_t blkCnt, tmpBS, remBS; /* Loop counter, temporal BlockSize */
+    int32_t sum = 0;
+    //  int32_t sum1 = 0, sum2 = 0;                          /* Temporary return variable */
 
 #if defined(PLP_MATH_LOOPUNROLL)
 
@@ -75,33 +79,41 @@ void plp_dot_prod_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
         v2s b0 = *((v2s *)((void *)(pSrcB + 4 * blkCnt)));
         v2s a1 = *((v2s *)((void *)(pSrcA + 4 * blkCnt + 2)));
         v2s b1 = *((v2s *)((void *)(pSrcB + 4 * blkCnt + 2)));
-        sum1 = __SUMDOTP2(a0, b0, sum1);
-        sum2 = __SUMDOTP2(a1, b1, sum2);
+        // sum = __SUMDOTP2(a0, b0, sum);
+        // sum = sum >> deciPoint;
+        // sum = __SUMDOTP2(a1, b1, sum);
+        // sum = sum >> deciPoint;
+        int32_t x0 = __DOTP2(a0, b0);
+        int32_t x1 = __DOTP2(a1, b1);
+        sum += __ADDROUNDNORM_REG(x0, x1, deciPoint);
 
         // sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
         // sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
     }
 
-    tmpBS = (blockSize % 4U);
+    remBS = (blockSize % 4U);
 
-    for (blkCnt = 0; blkCnt < tmpBS; blkCnt++) {
-        int16_t a = *((int16_t *)(pSrcA + 4 * (blockSize / 4) + blkCnt));
-        int16_t b = *((int16_t *)(pSrcB + 4 * (blockSize / 4) + blkCnt));
-        sum1 += a * b;
+    for (blkCnt = 0; blkCnt < remBS; blkCnt++) {
+        int16_t a = *(pSrcA + 4 * tmpBS + blkCnt);
+        int16_t b = *(pSrcB + 4 * tmpBS + blkCnt);
+        // sum += a*b;
+        // sum = sum >> deciPoint;
+        sum += __ROUNDNORM_REG(a * b, deciPoint);
         // sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
     }
 
 #else // PLP_MATH_LOOPUNROLL
 
     for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
-        sum1 = __MAC(sum1, (*pSrcA++), (*pSrcB++));
+        // sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
+        sum += __ROUNDNORM_REG((*pSrcA++) * (*pSrcB++), deciPoint);
     }
 
 #endif // PLP_MATH_LOOPUNROLL
 
-    *pRes = sum1 + sum2;
+    *pRes = sum; // sum1 + sum2;
 }
 
 /**
-  @} end of BasicDotProdKernels group
- */
+   @} end of BasicDotProdKernels group
+*/
