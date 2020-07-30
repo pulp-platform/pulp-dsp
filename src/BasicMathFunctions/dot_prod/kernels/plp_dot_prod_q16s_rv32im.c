@@ -68,23 +68,27 @@ void plp_dot_prod_q16s_rv32im(const int16_t *__restrict__ pSrcA,
     uint32_t blkCnt; /* Loop counter */
     int32_t sum = 0; /* Temporary return variable */
 
+    int32_t bias = 1 << (deciPoint - 1);
+
 #if defined(PLP_MATH_LOOPUNROLL)
 
     for (blkCnt = 0; blkCnt < (blockSize >> 2); blkCnt++) {
-        sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
-        sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
-        sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
-        sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+        int32_t tmp;
+        tmp = (*pSrcA++) * (*pSrcB++);
+        tmp += (*pSrcA++) * (*pSrcB++);
+        tmp += (*pSrcA++) * (*pSrcB++);
+        tmp += (*pSrcA++) * (*pSrcB++);
+        sum += (tmp + bias) >> deciPoint;
     }
 
     for (blkCnt = 0; blkCnt < (blockSize % 4U); blkCnt++) {
-        sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+        sum += (((*pSrcA++) * (*pSrcB++)) + bias) >> deciPoint;
     }
 
 #else // PLP_MATH_LOOPUNROLL
 
     for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
-        sum += (*pSrcA++) * (*pSrcB++) >> deciPoint;
+        sum += (((*pSrcA++) * (*pSrcB++)) + bias) >> deciPoint;
     }
 
 #endif // PLP_MATH_LOOPUNROLL
