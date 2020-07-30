@@ -498,8 +498,9 @@ class ReturnValue(Argument):
     def check_str(self, target):
         """ returns the string to check the result """
         display_format = "%.10f" if self.ctype == "float" else "%d"
-        check_str = tolerance_check_str(self.name, self.reference_name(),
-                                        self.tolerance, self.ctype, "", target)
+        val_name = self.name + ".f" if self.ctype == "float" else self.name
+        ref_name = self.reference_name() + ".f" if self.ctype == "float" else self.reference_name()
+        check_str = tolerance_check_str(val_name, ref_name, self.tolerance, self.ctype, "", target)
         return dedent(
             """\
             {check_str}
@@ -1179,6 +1180,8 @@ class Sweep:
 
 def fmt_float(val):
     """ This function returns the hex representation of a float """
+    if val == 0:
+        val = 0.0
     if isinstance(val, float):
         val = np.float32(val)
     assert isinstance(val, np.float32)
