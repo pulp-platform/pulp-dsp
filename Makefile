@@ -682,7 +682,7 @@ IDIR=$(CURDIR)/include
 BUILD_DIR=$(CURDIR)/lib/build
 # the build folder is saved here.
 
-PULP_CFLAGS += -I$(IDIR) -O0 -g
+PULP_CFLAGS += -I$(IDIR) -O3 -g
 
 INSTALL_FILES += $(shell find include -name *.h)
 
