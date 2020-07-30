@@ -71,9 +71,9 @@
  */
 
 void plp_rms_q32(const int32_t *__restrict__ pSrc,
-                   uint32_t blockSize,
-                   uint32_t fracBits,
-                   int32_t *__restrict__ pRes) {
+                 uint32_t blockSize,
+                 uint32_t fracBits,
+                 int32_t *__restrict__ pRes) {
 
     if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_rms_q32s_rv32im(pSrc, blockSize, fracBits, pRes);

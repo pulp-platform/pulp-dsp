@@ -27,29 +27,30 @@ def compute_result(result_parameter, inputs, env, fix_point):
         result = np.zeros(1, dtype=np.int32)
         for xa, xb in zip(p, p):
             result[0] = q_add(result[0], (xa * xb) >> fix_point)
-        sq_mean = q_sat(np.square(np.mean(p)))/(2**fix_point)
+        sq_mean = q_sat(np.square(np.mean(p)))
         result[0] = q_add(result[0]/bS,-(int(sq_mean)>>fix_point))
     elif result_parameter.ctype == 'int16_t':
         p = inputs['pSrc'].value.astype(np.int16)
         result = np.zeros(1, dtype=np.int16)
         for xa, xb in zip(p, p):
             result[0] = q_add(result[0], (xa * xb) >> fix_point)
-        sq_mean = q_sat(np.square(np.mean(p)))/(2**fix_point)
+        sq_mean = q_sat(np.square(np.mean(p)))
         result[0] = q_add(result[0]/bS,-(int(sq_mean)>>fix_point))
     elif result_parameter.ctype == 'int8_t':
         p = inputs['pSrc'].value.astype(np.int8)
         result = np.zeros(1, dtype=np.int8)
         for xa, xb in zip(p, p):
             result[0] = q_add(result[0], (xa * xb) >> fix_point)
-        sq_mean = q_sat(np.square(np.mean(p)))/(2**fix_point)
-        result[0] = q_add(result[0]/bS,-(int(sq_mean)>>fix_point))
+        sq_mean = q_sat_8(np.square(np.mean(p)))
+        result[0] = q_sat_8(q_add(result[0]/bS,-(int(sq_mean)>>fix_point)))
+        print(result)
     elif result_parameter.ctype == 'float':
         p = inputs['pSrc'].value.astype(np.float32)
         result = np.zeros(1, dtype=np.float32)
         result[0] = np.var(p)
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
-    
+    print(result)
     return result
 
 
@@ -66,6 +67,14 @@ def q_sat(x):
     else:
         return x
 
+def q_sat_8(x):
+    if x > 2**7 - 1:
+        return x - 2**8
+    elif x < -2**7:
+        return x + 2**8
+    else:
+        return x
+    
 
 def q_add(a, b):
     return q_sat(a + b)

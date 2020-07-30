@@ -51,9 +51,8 @@
    @return        none
  */
 
-void plp_mean_i32(const int32_t *__restrict__ pSrc,
-                  uint32_t blockSize,
-                  int32_t *__restrict__ pRes) {
+void
+plp_mean_i32(const int32_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes) {
 
     if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_mean_i32s_rv32im(pSrc, blockSize, pRes);

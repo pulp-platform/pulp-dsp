@@ -50,14 +50,12 @@
    @return        none
  */
 
-void plp_std_f32(const float *__restrict__ pSrc,
-                 uint32_t blockSize,
-                 float *__restrict__ pRes) {
+void plp_std_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes) {
 
     if (rt_cluster_id() == ARCHI_FC_CID) {
-      *pRes = 0.0f;
+        *pRes = 0.0f;
     } else {
-      plp_std_f32s_xpulpv2(pSrc, blockSize, pRes);
+        plp_std_f32s_xpulpv2(pSrc, blockSize, pRes);
     }
 }
 

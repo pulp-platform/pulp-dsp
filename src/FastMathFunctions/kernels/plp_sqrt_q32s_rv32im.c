@@ -52,40 +52,38 @@
 */
 
 void plp_sqrt_q32s_rv32im(const int32_t *__restrict__ pSrc,
-                           const uint32_t fracBits,
-                           int32_t *__restrict__ pRes) {
-  
-  int32_t number = *pSrc;
-  int32_t root;
-  
-  int32_t start = 0;
-  int32_t end = 46341; // smallest integer that is larger than sqrt(0x7FFFFFFF)
-  int32_t mid;
- 
-  if (number > 0) {
+                          const uint32_t fracBits,
+                          int32_t *__restrict__ pRes) {
 
-    while(start <= end) {
+    int32_t number = *pSrc;
+    int32_t root;
 
-      mid = (start+end) >> 1;
+    int32_t start = 0;
+    int32_t end = 46341; // smallest integer that is larger than sqrt(0x7FFFFFFF)
+    int32_t mid;
 
-      if(((mid*mid) >> fracBits) == number){
-        root = mid;
-        break;
-      }
+    if (number > 0) {
 
-      if(((mid*mid) >> fracBits) < number){
-        start = mid + 1;
-        root = mid;
-      }
+        while (start <= end) {
 
-      else {
-        end = mid - 1;
-      }
+            mid = (start + end) >> 1;
+
+            if (((mid * mid) >> fracBits) == number) {
+                root = mid;
+                break;
+            }
+
+            if (((mid * mid) >> fracBits) < number) {
+                start = mid + 1;
+                root = mid;
+            } else {
+                end = mid - 1;
+            }
+        }
+
+        *pRes = root;
+
+    } else {
+        *pRes = 0;
     }
-
-    *pRes = root;
-    
-  } else {
-    *pRes = 0;
-  }
 }
