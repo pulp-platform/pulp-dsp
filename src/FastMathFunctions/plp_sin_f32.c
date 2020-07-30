@@ -1,9 +1,9 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_cmplx_mag_q16.c
- * Description:  Calculates the sum of squares of an input vector
+ * Title:        plp_sin_f32.c
+ * Description:  Calculates sine of a floating point number in radians
  *
- * $Date:        09.07.2020
+ * $Date:        30.07.2020
  *
  * Target Processor: PULP cores
  * ===================================================================== */
@@ -25,31 +25,28 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Notice: project inspired by ARM CMSIS DSP and parts of source code
+ * ported and adopted for RISC-V PULP platform from ARM CMSIS DSP
+ * released under Copyright (C) 2010-2019 ARM Limited or its affiliates
+ * with Apache-2.0.
  */
 
 #include "plp_math.h"
 
 /**
- * @brief      calculates the complex magnitude.
+ * @brief      Glue code for f32 sine function
  *
- * @param[in]  pSrc        The source
- * @param[in]  deciPoint   The decimal point. Fromat: Q(16-deciPoint).deciPoint
- * @param      pRes        The result
- * @param[in]  numSamples  The number of samples
+ * @param[in]  x     input value in radians
+ *
+ * @return     sin(x)
  */
 
-void plp_cmplx_mag_q16(const int16_t *pSrc,
-                       const uint32_t deciPoint,
-                       int16_t *pRes,
-                       uint32_t numSamples) {
+float32_t plp_sin_f32(float32_t x){
 
-    // Initial implementation, needs improvement
-    int16_t real, cmplx, sqr;
-    for (int i = 0; i < numSamples; i++) {
-
-        real = (pSrc[2 * i] * pSrc[2 * i]) >> deciPoint;
-        cmplx = (pSrc[2 * i + 1] * pSrc[2 * i + 1]) >> deciPoint;
-        sqr = __CLIP(real + cmplx, 15);
-        plp_sqrt_q16(&sqr, deciPoint, &pRes[i]);
+	if (rt_cluster_id() == ARCHI_FC_CID) {
+        return 0.0f;
+    } else {
+        return plp_sin_f32s_xpulpv2(x);
     }
 }

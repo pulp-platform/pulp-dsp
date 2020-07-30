@@ -2906,6 +2906,177 @@ void plp_sqrt_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
                            const uint32_t fracBits,
                            int16_t *__restrict__ pRes);
 
+  /**
+   * @brief Macros required for SINE and COSINE Fast math approximations
+   */
+
+#define FAST_MATH_TABLE_SIZE  512
+#define FAST_MATH_Q32_SHIFT   (32 - 10)
+#define FAST_MATH_Q16_SHIFT   (16 - 10)
+#define CONTROLLER_Q32_SHIFT  (32 - 9)
+#define TABLE_SPACING_Q32     0x400000
+#define TABLE_SPACING_Q16     0x80
+
+/**
+ * @brief      Glue code for q32 cosine function
+ *
+ * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ *
+ * @return     cos(x)
+ */
+
+int32_t plp_cos_q32(int32_t x);
+
+/**
+ * @brief      q32 cosine function for RV32IM
+ *
+ * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ *
+ * @return     cos(x)
+ */
+
+int32_t plp_cos_q32s_rv32im(int32_t x);
+
+/**
+ * @brief      q32 cosine function for XPULPV2
+ *
+ * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ *
+ * @return     cos(x)
+ */
+
+int32_t plp_cos_q32s_xpulpv2(int32_t x);
+
+/**
+ * @brief      Glue code for q16 cosine function
+ *
+ * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ *
+ * @return     cos(x)
+ */
+
+int16_t plp_cos_q16(int16_t x);
+
+/**
+ * @brief      q16 cosine function for RV32IM
+ *
+ * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ *
+ * @return     cos(x)
+ */
+
+int16_t plp_cos_q16s_rv32im(int16_t x);
+
+/**
+ * @brief      q16 cosine function for XPULPV2
+ *
+ * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ *
+ * @return     cos(x)
+ */
+
+int16_t plp_cos_q16s_xpulpv2(int16_t x);
+
+/**
+ * @brief      Glue code for f32 cosine function
+ *
+ * @param[in]  x     input value in radians
+ *
+ * @return     cos(x)
+ */
+
+float32_t plp_cos_f32(float32_t x);
+
+/**
+ * @brief      F32 cosine function for XPULPV2
+ *
+ * @param[in]  x     input value in radians
+ *
+ * @return     cos(x)
+ */
+
+float32_t plp_cos_f32s_xpulpv2(float32_t x);
+
+/**
+ * @brief      Glue code for q32 sine function
+ *
+ * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ *
+ * @return     sin(x)
+ */
+
+int32_t plp_sin_q32(int32_t x);
+
+/**
+ * @brief      q32 sine function for RV32IM
+ *
+ * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ *
+ * @return     sin(x)
+ */
+
+int32_t plp_sin_q32s_rv32im(int32_t x);
+
+/**
+ * @brief      q32 sine function for XPULPV2
+ *
+ * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ *
+ * @return     sin(x)
+ */
+
+int32_t plp_sin_q32s_xpulpv2(int32_t x);
+
+/**
+ * @brief      Glue code for q16 sine function
+ *
+ * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ *
+ * @return     sin(x)
+ */
+
+int16_t plp_sin_q16(int16_t x);
+
+/**
+ * @brief      q16 sine function for RV32IM
+ *
+ * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ *
+ * @return     sin(x)
+ */
+
+int16_t plp_sin_q16s_rv32im(int16_t x);
+
+/**
+ * @brief      q16 sine function for XPULPV2
+ *
+ * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ *
+ * @return     sin(x)
+ */
+
+int16_t plp_sin_q16s_xpulpv2(int16_t x);
+
+/**
+ * @brief      Glue code for f32 sine function
+ *
+ * @param[in]  x     input value in radians
+ *
+ * @return     sin(x)
+ */
+
+float32_t plp_sin_f32(float32_t x);
+
+/**
+ * @brief      F32 sine function for XPULPV2
+ *
+ * @param[in]  x     input value in radians
+ *
+ * @return     sin(x)
+ */
+
+float32_t plp_sin_f32s_xpulpv2(float32_t x);
+
 /** -------------------------------------------------------
     @brief Glue code for correlation of 32-bit integer vectors.
     @param[in]  pSrcA   points to the first input vector
