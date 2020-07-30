@@ -57,6 +57,10 @@ extern const uint16_t plpBitRevIndexTable_fixed_1024[PLPBITREVINDEXTABLE_FIXED_1
 extern const uint16_t plpBitRevIndexTable_fixed_2048[PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH];
 extern const uint16_t plpBitRevIndexTable_fixed_4096[PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH];
 
+extern const float32_t sinTable_f32[FAST_MATH_TABLE_SIZE + 1];
+extern const int32_t sinTable_q32[FAST_MATH_TABLE_SIZE + 1];
+extern const int16_t sinTable_q16[FAST_MATH_TABLE_SIZE + 1];
+
 extern const Complex_type_f32 twiddleCoef_rfft_2048[1024];
 
 extern short bit_rev_radix2_LUT[2048];
