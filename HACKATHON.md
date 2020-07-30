@@ -1,13 +1,13 @@
 # Hackathon 31.07.2020
 
-Thank you for participating in our first PULP Hackathon. The goal of this hackathon is to optimize functions from [https://github.com/pulp-platform/pulp-dsp](pulp-dsp) for the PULP platform.
+Thank you for participating in our first PULP Hackathon. The goal of this hackathon is to optimize functions from [pulp-dsp](https://github.com/pulp-platform/pulp-dsp) for the PULP platform.
 
 This document will explain all steps for the hackathon, from choosing the functions to contributing to the project.
 
 ## Setup
 
 - First of all, make sure you have a working installation of the pulp-sdk. We have prepared a preconfigured VM. Ask us if you need any help.
-- Create a github fork of [https://github.com/pulp-platform/pulp-dsp](pulp-dsp). Commit all your changes to this repository, and create a pull request at the end of the hackathon (see [Contributing to the Project][#Contributing])
+- Create a github fork of [pulp-dsp](https://github.com/pulp-platform/pulp-dsp). Commit all your changes to this repository, and create a pull request at the end of the hackathon (see [Contributing to the Project](#Contributing))
 - Clone your repository to your local machine, where you have pulp-sdk installed.
 - Add the upstream repository and make sure that you use the latest version by rebasing to `upstream/master`
   ```
@@ -27,7 +27,7 @@ Generally speaking, Matrix functions are very important, and they can still be o
 Here is an incomplete list of common optimizations for such functions on PULP:
 - **Loop Unrolling**: Compute multiple elements in a single iteration of the loop to allow the compiler to reshuffle instructions. This way, we can reduce the number of load stalls, when data from memory is loaded, and used for computation in the next instruction.
 - **SIMD**: XpulpV2 supports vectorized instructions (both 8 and 16-bit). Use these instructions to gain a significant speedup
-- **Other specialized instructions**: XpulpV2 knows several unique instructions, which the compiler may not be able to insert automatically. Check the [https://www.pulp-platform.org/docs/ri5cy_user_manual.pdf](ri5cy user manual) which contains all special instructions on XpulpV2.
+- **Other specialized instructions**: XpulpV2 knows several unique instructions, which the compiler may not be able to insert automatically. Check the [ri5cy user manual](https://www.pulp-platform.org/docs/ri5cy_user_manual.pdf) which contains all special instructions on XpulpV2.
 - **Better work distribution for parallel implementation**: For the parallel implementation, the workload needs to be divided equally amongst all cores. However, the current split may not be the best. As an example, the matrix operations always split the data based on the columns of the first input matrix. However, if this dimension is 1, then only 1 core will be used.
 - **Do..While instead of for-loops**: This can remove unnecessary branches in the assembly, because the compiler cannot know beforehand if a dimension variable is 0 or not.
 - **Data Reuse**: For some funcitons, data may be used multiple times throughout the computation (e.g. matrix multiplication). By carefully unrolling the loops, you may be able to reuse a data loaded from memory for multiple operations.
