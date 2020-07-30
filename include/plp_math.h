@@ -3748,7 +3748,7 @@ void plp_mat_mult_i16s_rv32im(const int16_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                const int16_t *__restrict__ pSrcB,
                                uint32_t M,
                                uint32_t N,
@@ -3806,7 +3806,7 @@ void plp_mat_mult_i8s_rv32im(const int8_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                               const int8_t *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
@@ -3874,7 +3874,7 @@ void plp_mat_mult_i16_parallel(const int16_t *__restrict__ pSrcA,
     performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_i16vp_xpulpv2(void *args);
+void plp_mat_mult_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for parallel matrix matrix multiplication of a 8-bit integer matrices.
@@ -3976,7 +3976,7 @@ void plp_mat_mult_f32p_xpulpv2(void *args);
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_i8vp_xpulpv2(void *args);
+void plp_mat_mult_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for matrix matrix multiplication of a 32-bit fix-point matrices.
@@ -4205,7 +4205,7 @@ void plp_mat_mult_q16s_rv32im(const int16_t *__restrict__ pSrcA,
    Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                const int16_t *__restrict__ pSrcB,
                                uint32_t M,
                                uint32_t N,
@@ -4220,7 +4220,7 @@ void plp_mat_mult_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
     @return     none
 */
 
-void plp_mat_mult_q16vp_xpulpv2(void *args);
+void plp_mat_mult_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for matrix matrix multiplication of a 8-bit fix-point matrices.
@@ -4332,7 +4332,7 @@ void plp_mat_mult_q8s_rv32im(const int8_t *__restrict__ pSrcA,
    Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                               const int8_t *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
@@ -4347,7 +4347,7 @@ void plp_mat_mult_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
     @return     none
 */
 
-void plp_mat_mult_q8vp_xpulpv2(void *args);
+void plp_mat_mult_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of matrix matrix multiplication for complex 32-bit integers
@@ -4483,7 +4483,7 @@ void plp_mat_mult_cmplx_i16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_cmplx_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                      const int16_t *__restrict__ pSrcB,
                                      uint32_t M,
                                      uint32_t N,
@@ -4521,7 +4521,7 @@ void plp_mat_mult_cmplx_i16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_i16vp_xpulpv2(void *args);
+void plp_mat_mult_cmplx_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of matrix matrix multiplication for complex 8-bit integers
@@ -4574,7 +4574,7 @@ void plp_mat_mult_cmplx_i8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_cmplx_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                     const int8_t *__restrict__ pSrcB,
                                     uint32_t M,
                                     uint32_t N,
@@ -4612,7 +4612,7 @@ void plp_mat_mult_cmplx_i8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_i8vp_xpulpv2(void *args);
+void plp_mat_mult_cmplx_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of matrix matrix multiplication for complex 32-bit floats
@@ -4898,7 +4898,7 @@ void plp_mat_mult_cmplx_q16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_cmplx_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                      const int16_t *__restrict__ pSrcB,
                                      uint32_t M,
                                      uint32_t N,
@@ -4957,7 +4957,7 @@ void plp_mat_mult_cmplx_q16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_q16vp_xpulpv2(void *args);
+void plp_mat_mult_cmplx_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of matrix matrix multiplication for complex 8-bit fix-point
@@ -5042,7 +5042,7 @@ void plp_mat_mult_cmplx_q8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_cmplx_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                     const int8_t *__restrict__ pSrcB,
                                     uint32_t M,
                                     uint32_t N,
@@ -5101,7 +5101,7 @@ void plp_mat_mult_cmplx_q8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_q8vp_xpulpv2(void *args);
+void plp_mat_mult_cmplx_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for matrix transposed matrix multiplication of a 32-bit integer
@@ -5214,7 +5214,7 @@ void plp_mat_mult_trans_i16s_rv32im(const int16_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                      const int16_t *__restrict__ pSrcB,
                                      uint32_t M,
                                      uint32_t N,
@@ -5274,7 +5274,7 @@ void plp_mat_mult_trans_i8s_rv32im(const int8_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                     const int8_t *__restrict__ pSrcB,
                                     uint32_t M,
                                     uint32_t N,
@@ -5344,7 +5344,7 @@ void plp_mat_mult_trans_i16_parallel(const int16_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_i16vp_xpulpv2(void *args);
+void plp_mat_mult_trans_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for parallel matrix transposed matrix multiplication of a 8-bit integer
@@ -5379,7 +5379,7 @@ void plp_mat_mult_trans_i8_parallel(const int8_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_i8vp_xpulpv2(void *args);
+void plp_mat_mult_trans_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for matrix transposed matrix multiplication of a 32-bit fix-point
@@ -5615,7 +5615,7 @@ void plp_mat_mult_trans_q16s_rv32im(const int16_t *__restrict__ pSrcA,
    Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_trans_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                      const int16_t *__restrict__ pSrcB,
                                      uint32_t M,
                                      uint32_t N,
@@ -5631,7 +5631,7 @@ void plp_mat_mult_trans_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
     @return     none
 */
 
-void plp_mat_mult_trans_q16vp_xpulpv2(void *args);
+void plp_mat_mult_trans_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for matrix transposed matrix multiplication of a 8-bit fix-point
@@ -5747,7 +5747,7 @@ void plp_mat_mult_trans_q8s_rv32im(const int8_t *__restrict__ pSrcA,
    Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_trans_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                     const int8_t *__restrict__ pSrcB,
                                     uint32_t M,
                                     uint32_t N,
@@ -5763,7 +5763,7 @@ void plp_mat_mult_trans_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
     @return     none
 */
 
-void plp_mat_mult_trans_q8vp_xpulpv2(void *args);
+void plp_mat_mult_trans_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for matrix transposed matrix multiplication of a 32-bit floating-point
@@ -5969,7 +5969,7 @@ void plp_mat_mult_trans_cmplx_i16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_cmplx_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                            const int16_t *__restrict__ pSrcB,
                                            uint32_t M,
                                            uint32_t N,
@@ -6008,7 +6008,7 @@ void plp_mat_mult_trans_cmplx_i16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_i16vp_xpulpv2(void *args);
+void plp_mat_mult_trans_cmplx_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of matrix transpose matrix multiplication for complex 8-bit integers
@@ -6061,7 +6061,7 @@ void plp_mat_mult_trans_cmplx_i8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_cmplx_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                           const int8_t *__restrict__ pSrcB,
                                           uint32_t M,
                                           uint32_t N,
@@ -6100,7 +6100,7 @@ void plp_mat_mult_trans_cmplx_i8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_i8vp_xpulpv2(void *args);
+void plp_mat_mult_trans_cmplx_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of matrix transpose matrix multiplication for complex 32-bit floats
@@ -6388,7 +6388,7 @@ void plp_mat_mult_trans_cmplx_q16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_cmplx_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                            const int16_t *__restrict__ pSrcB,
                                            uint32_t M,
                                            uint32_t N,
@@ -6449,7 +6449,7 @@ void plp_mat_mult_trans_cmplx_q16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_q16vp_xpulpv2(void *args);
+void plp_mat_mult_trans_cmplx_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of matrix transpose matrix multiplication for complex 8-bit fix-point
@@ -6534,7 +6534,7 @@ void plp_mat_mult_trans_cmplx_q8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_cmplx_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                           const int8_t *__restrict__ pSrcB,
                                           uint32_t M,
                                           uint32_t N,
@@ -6594,7 +6594,7 @@ void plp_mat_mult_trans_cmplx_q8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_q8vp_xpulpv2(void *args);
+void plp_mat_mult_trans_cmplx_q8p_xpulpv2(void *args);
 
 /**
  * @brief      calculates the complex magnitude.
@@ -6691,7 +6691,7 @@ void plp_cfft_q16s_rv32im(const plp_cfft_instance_q16 *S,
  * @param[in]  deciPoint       decimal point for right shift
  */
 
-void plp_cfft_q16v_xpulpv2(const plp_cfft_instance_q16 *S,
+void plp_cfft_q16s_xpulpv2(const plp_cfft_instance_q16 *S,
                            int16_t *p1,
                            uint8_t ifftFlag,
                            uint8_t bitReverseFlag,
@@ -6860,7 +6860,7 @@ void plp_mat_add_i16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_add_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                               const int16_t *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
@@ -6895,7 +6895,7 @@ void plp_mat_add_i16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_i16vp_xpulpv2(void *args);
+void plp_mat_add_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix addition of a 8-bit integer matrices.
@@ -6943,7 +6943,7 @@ void plp_mat_add_i8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_add_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                              const int8_t *__restrict__ pSrcB,
                              uint32_t M,
                              uint32_t N,
@@ -6978,7 +6978,7 @@ void plp_mat_add_i8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_i8vp_xpulpv2(void *args);
+void plp_mat_add_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix addition of a 32-bit floating-point matrices.
@@ -7160,7 +7160,7 @@ void plp_mat_sub_i16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_sub_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                               const int16_t *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
@@ -7195,7 +7195,7 @@ void plp_mat_sub_i16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_i16vp_xpulpv2(void *args);
+void plp_mat_sub_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix subtraction of a 8-bit integer matrices.
@@ -7243,7 +7243,7 @@ void plp_mat_sub_i8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_sub_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                              const int8_t *__restrict__ pSrcB,
                              uint32_t M,
                              uint32_t N,
@@ -7278,7 +7278,7 @@ void plp_mat_sub_i8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_i8vp_xpulpv2(void *args);
+void plp_mat_sub_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix subtraction of a 32-bit floating-point matrices.
@@ -7473,7 +7473,7 @@ void plp_mat_scale_i16s_rv32im(const int16_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_i16v_xpulpv2(const int16_t *__restrict__ pSrc,
+void plp_mat_scale_i16s_xpulpv2(const int16_t *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
                                 int16_t scaleFactor,
@@ -7511,7 +7511,7 @@ void plp_mat_scale_i16_parallel(const int16_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_i16vp_xpulpv2(void *args);
+void plp_mat_scale_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix scale of a 8-bit integer matrices.
@@ -7564,7 +7564,7 @@ void plp_mat_scale_i8s_rv32im(const int8_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_i8v_xpulpv2(const int8_t *__restrict__ pSrc,
+void plp_mat_scale_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
                                uint32_t M,
                                uint32_t N,
                                int8_t scaleFactor,
@@ -7602,7 +7602,7 @@ void plp_mat_scale_i8_parallel(const int8_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_i8vp_xpulpv2(void *args);
+void plp_mat_scale_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix scale of a 32-bit floating-point matrices.
@@ -7771,7 +7771,7 @@ void plp_mat_trans_i16s_rv32im(const int16_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_trans_i16v_xpulpv2(const int16_t *__restrict__ pSrc,
+void plp_mat_trans_i16s_xpulpv2(const int16_t *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
                                 int16_t *__restrict__ pDst);
@@ -7803,7 +7803,7 @@ void plp_mat_trans_i16_parallel(const int16_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_trans_i16vp_xpulpv2(void *args);
+void plp_mat_trans_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix transpose of a 8-bit integer matrices.
@@ -7846,7 +7846,7 @@ void plp_mat_trans_i8s_rv32im(const int8_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_trans_i8v_xpulpv2(const int8_t *__restrict__ pSrc,
+void plp_mat_trans_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
                                uint32_t M,
                                uint32_t N,
                                int8_t *__restrict__ pDst);
@@ -7878,7 +7878,7 @@ void plp_mat_trans_i8_parallel(const int8_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_trans_i8vp_xpulpv2(void *args);
+void plp_mat_trans_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix transpose of a 32-bit float*ing-point matrices.
@@ -8027,7 +8027,7 @@ void plp_mat_fill_I_i16s_rv32im(uint32_t N, int16_t *__restrict__ pDst);
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_i16v_xpulpv2(uint32_t N, int16_t *__restrict__ pDst);
+void plp_mat_fill_I_i16s_xpulpv2(uint32_t N, int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a 16-bit integer identity matrix in parallel
@@ -8050,7 +8050,7 @@ void plp_mat_fill_I_i16_parallel(uint32_t N, uint32_t nPE, int16_t *__restrict__
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_i16vp_xpulpv2(void *args);
+void plp_mat_fill_I_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a 8-bit integer identity matrix
@@ -8081,7 +8081,7 @@ void plp_mat_fill_I_i8s_rv32im(uint32_t N, int8_t *__restrict__ pDst);
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_i8v_xpulpv2(uint32_t N, int8_t *__restrict__ pDst);
+void plp_mat_fill_I_i8s_xpulpv2(uint32_t N, int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a 8-bit integer identity matrix in parallel
@@ -8104,7 +8104,7 @@ void plp_mat_fill_I_i8_parallel(uint32_t N, uint32_t nPE, int8_t *__restrict__ p
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_i8vp_xpulpv2(void *args);
+void plp_mat_fill_I_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a 32-bit float identity matrix
@@ -8226,7 +8226,7 @@ void plp_mat_fill_I_q16s_rv32im(uint32_t N, int32_t fracBits, int16_t *__restric
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_q16v_xpulpv2(uint32_t N, int32_t fracBits, int16_t *__restrict__ pDst);
+void plp_mat_fill_I_q16s_xpulpv2(uint32_t N, int32_t fracBits, int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a 16-bit fix-point identity matrix in parallel
@@ -8251,7 +8251,7 @@ plp_mat_fill_I_q16_parallel(uint32_t N, int32_t fracBits, uint32_t nPE, int16_t 
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_q16vp_xpulpv2(void *args);
+void plp_mat_fill_I_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a 8-bit fix-point identity matrix
@@ -8285,7 +8285,7 @@ void plp_mat_fill_I_q8s_rv32im(uint32_t N, int32_t fracBits, int8_t *__restrict_
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_q8v_xpulpv2(uint32_t N, int32_t fracBits, int8_t *__restrict__ pDst);
+void plp_mat_fill_I_q8s_xpulpv2(uint32_t N, int32_t fracBits, int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a 8-bit fix-point identity matrix in parallel
@@ -8310,7 +8310,7 @@ plp_mat_fill_I_q8_parallel(uint32_t N, int32_t fracBits, uint32_t nPE, int8_t *_
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_q8vp_xpulpv2(void *args);
+void plp_mat_fill_I_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for strided matrix matrix multiplication of a 32-bit integer matrices.
@@ -8454,7 +8454,7 @@ void plp_mat_mult_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_stride_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                       const int16_t *__restrict__ pSrcB,
                                       uint32_t M,
                                       uint32_t N,
@@ -8532,7 +8532,7 @@ void plp_mat_mult_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_stride_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                      const int8_t *__restrict__ pSrcB,
                                      uint32_t M,
                                      uint32_t N,
@@ -8617,7 +8617,7 @@ void plp_mat_mult_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
     performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_stride_i16vp_xpulpv2(void *args);
+void plp_mat_mult_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for parallel strided matrix matrix multiplication of a 8-bit integer
@@ -8744,7 +8744,7 @@ void plp_mat_mult_stride_f32p_xpulpv2(void *args);
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_stride_i8vp_xpulpv2(void *args);
+void plp_mat_mult_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for strided matrix matrix multiplication of a 32-bit fix-point matrices.
@@ -9022,7 +9022,7 @@ void plp_mat_mult_stride_q16s_rv32im(const int16_t *__restrict__ pSrcA,
    Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_stride_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                       const int16_t *__restrict__ pSrcB,
                                       uint32_t M,
                                       uint32_t N,
@@ -9040,7 +9040,7 @@ void plp_mat_mult_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
     @return     none
 */
 
-void plp_mat_mult_stride_q16vp_xpulpv2(void *args);
+void plp_mat_mult_stride_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for strided matrix matrix multiplication of a 8-bit fix-point matrices.
@@ -9176,7 +9176,7 @@ void plp_mat_mult_stride_q8s_rv32im(const int8_t *__restrict__ pSrcA,
    Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_stride_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                      const int8_t *__restrict__ pSrcB,
                                      uint32_t M,
                                      uint32_t N,
@@ -9194,7 +9194,7 @@ void plp_mat_mult_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
     @return     none
 */
 
-void plp_mat_mult_stride_q8vp_xpulpv2(void *args);
+void plp_mat_mult_stride_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for strided matrix transposed matrix multiplication of a 32-bit integer
@@ -9340,7 +9340,7 @@ void plp_mat_mult_trans_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_stride_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                             const int16_t *__restrict__ pSrcB,
                                             uint32_t M,
                                             uint32_t N,
@@ -9419,7 +9419,7 @@ void plp_mat_mult_trans_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_stride_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                            const int8_t *__restrict__ pSrcB,
                                            uint32_t M,
                                            uint32_t N,
@@ -9505,7 +9505,7 @@ void plp_mat_mult_trans_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_stride_i16vp_xpulpv2(void *args);
+void plp_mat_mult_trans_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for parallel strided matrix transposed matrix multiplication of a 8-bit
@@ -9546,7 +9546,7 @@ void plp_mat_mult_trans_stride_i8_parallel(const int8_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_stride_i8vp_xpulpv2(void *args);
+void plp_mat_mult_trans_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for strided matrix transposed matrix multiplication of a 32-bit
@@ -9827,7 +9827,7 @@ void plp_mat_mult_trans_stride_q16s_rv32im(const int16_t *__restrict__ pSrcA,
    Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_trans_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_stride_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                             const int16_t *__restrict__ pSrcB,
                                             uint32_t M,
                                             uint32_t N,
@@ -9846,7 +9846,7 @@ void plp_mat_mult_trans_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
     @return     none
 */
 
-void plp_mat_mult_trans_stride_q16vp_xpulpv2(void *args);
+void plp_mat_mult_trans_stride_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for strided matrix transposed matrix multiplication of a 8-bit fix-point
@@ -9983,7 +9983,7 @@ void plp_mat_mult_trans_stride_q8s_rv32im(const int8_t *__restrict__ pSrcA,
    Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_trans_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_stride_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                            const int8_t *__restrict__ pSrcB,
                                            uint32_t M,
                                            uint32_t N,
@@ -10002,7 +10002,7 @@ void plp_mat_mult_trans_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
     @return     none
 */
 
-void plp_mat_mult_trans_stride_q8vp_xpulpv2(void *args);
+void plp_mat_mult_trans_stride_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for strided matrix transposed matrix multiplication of a 32-bit
@@ -10264,7 +10264,7 @@ void plp_mat_mult_cmplx_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_cmplx_stride_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                             const int16_t *__restrict__ pSrcB,
                                             uint32_t M,
                                             uint32_t N,
@@ -10311,7 +10311,7 @@ void plp_mat_mult_cmplx_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_stride_i16vp_xpulpv2(void *args);
+void plp_mat_mult_cmplx_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of strided matrix matrix multiplication for complex 8-bit integers
@@ -10379,7 +10379,7 @@ void plp_mat_mult_cmplx_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_cmplx_stride_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                            const int8_t *__restrict__ pSrcB,
                                            uint32_t M,
                                            uint32_t N,
@@ -10426,7 +10426,7 @@ void plp_mat_mult_cmplx_stride_i8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_stride_i8vp_xpulpv2(void *args);
+void plp_mat_mult_cmplx_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of strided matrix matrix multiplication for complex 32-bit floats
@@ -10770,7 +10770,7 @@ void plp_mat_mult_cmplx_stride_q16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_cmplx_stride_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                             const int16_t *__restrict__ pSrcB,
                                             uint32_t M,
                                             uint32_t N,
@@ -10839,7 +10839,7 @@ void plp_mat_mult_cmplx_stride_q16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_stride_q16vp_xpulpv2(void *args);
+void plp_mat_mult_cmplx_stride_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of strided matrix matrix multiplication for complex 8-bit fix-point
@@ -10939,7 +10939,7 @@ void plp_mat_mult_cmplx_stride_q8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_cmplx_stride_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                            const int8_t *__restrict__ pSrcB,
                                            uint32_t M,
                                            uint32_t N,
@@ -11007,7 +11007,7 @@ void plp_mat_mult_cmplx_stride_q8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_stride_q8vp_xpulpv2(void *args);
+void plp_mat_mult_cmplx_stride_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of strided matrix transpose matrix multiplication for complex 32-bit
@@ -11186,7 +11186,7 @@ void plp_mat_mult_trans_cmplx_stride_i16s_rv32im(const int16_t *__restrict__ pSr
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_cmplx_stride_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                                   const int16_t *__restrict__ pSrcB,
                                                   uint32_t M,
                                                   uint32_t N,
@@ -11235,7 +11235,7 @@ void plp_mat_mult_trans_cmplx_stride_i16_parallel(const int16_t *__restrict__ pS
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_stride_i16vp_xpulpv2(void *args);
+void plp_mat_mult_trans_cmplx_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of strided matrix transpose matrix multiplication for complex 8-bit integers
@@ -11303,7 +11303,7 @@ void plp_mat_mult_trans_cmplx_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_cmplx_stride_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                                  const int8_t *__restrict__ pSrcB,
                                                  uint32_t M,
                                                  uint32_t N,
@@ -11352,7 +11352,7 @@ void plp_mat_mult_trans_cmplx_stride_i8_parallel(const int8_t *__restrict__ pSrc
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_stride_i8vp_xpulpv2(void *args);
+void plp_mat_mult_trans_cmplx_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of strided matrix transpose matrix multiplication for complex 32-bit floats
@@ -11701,7 +11701,7 @@ void plp_mat_mult_trans_cmplx_stride_q16s_rv32im(const int16_t *__restrict__ pSr
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_cmplx_stride_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                                   const int16_t *__restrict__ pSrcB,
                                                   uint32_t M,
                                                   uint32_t N,
@@ -11771,7 +11771,7 @@ void plp_mat_mult_trans_cmplx_stride_q16_parallel(const int16_t *__restrict__ pS
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_stride_q16vp_xpulpv2(void *args);
+void plp_mat_mult_trans_cmplx_stride_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of strided matrix transpose matrix multiplication for complex 8-bit
@@ -11872,7 +11872,7 @@ void plp_mat_mult_trans_cmplx_stride_q8s_rv32im(const int8_t *__restrict__ pSrcA
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_cmplx_stride_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                                  const int8_t *__restrict__ pSrcB,
                                                  uint32_t M,
                                                  uint32_t N,
@@ -11942,7 +11942,7 @@ void plp_mat_mult_trans_cmplx_stride_q8_parallel(const int8_t *__restrict__ pSrc
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_stride_q8vp_xpulpv2(void *args);
+void plp_mat_mult_trans_cmplx_stride_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief   Glue code for matrix addition of a 32-bit integer matrices.
@@ -12104,7 +12104,7 @@ void plp_mat_add_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_add_stride_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                      const int16_t *__restrict__ pSrcB,
                                      uint32_t M,
                                      uint32_t N,
@@ -12148,7 +12148,7 @@ void plp_mat_add_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_stride_i16vp_xpulpv2(void *args);
+void plp_mat_add_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix addition of a 8-bit integer matrices.
@@ -12211,7 +12211,7 @@ void plp_mat_add_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_add_stride_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                     const int8_t *__restrict__ pSrcB,
                                     uint32_t M,
                                     uint32_t N,
@@ -12255,7 +12255,7 @@ void plp_mat_add_stride_i8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_stride_i8vp_xpulpv2(void *args);
+void plp_mat_add_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix addition of a 32-bit floating-point matrices.
@@ -12494,7 +12494,7 @@ void plp_mat_sub_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_sub_stride_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                      const int16_t *__restrict__ pSrcB,
                                      uint32_t M,
                                      uint32_t N,
@@ -12538,7 +12538,7 @@ void plp_mat_sub_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_stride_i16vp_xpulpv2(void *args);
+void plp_mat_sub_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix subtraction of a 8-bit integer matrices.
@@ -12601,7 +12601,7 @@ void plp_mat_sub_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_sub_stride_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                     const int8_t *__restrict__ pSrcB,
                                     uint32_t M,
                                     uint32_t N,
@@ -12645,7 +12645,7 @@ void plp_mat_sub_stride_i8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_stride_i8vp_xpulpv2(void *args);
+void plp_mat_sub_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix subtraction of a 32-bit floating-point matrices.
@@ -12886,7 +12886,7 @@ void plp_mat_scale_stride_i16s_rv32im(const int16_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrc,
+void plp_mat_scale_stride_i16s_xpulpv2(const int16_t *__restrict__ pSrc,
                                        uint32_t M,
                                        uint32_t N,
                                        uint32_t strideSrc,
@@ -12930,7 +12930,7 @@ void plp_mat_scale_stride_i16_parallel(const int16_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_stride_i16vp_xpulpv2(void *args);
+void plp_mat_scale_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for strided matrix scale of a 8-bit integer matrices.
@@ -12993,7 +12993,7 @@ void plp_mat_scale_stride_i8s_rv32im(const int8_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrc,
+void plp_mat_scale_stride_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
                                       uint32_t M,
                                       uint32_t N,
                                       uint32_t strideSrc,
@@ -13037,7 +13037,7 @@ void plp_mat_scale_stride_i8_parallel(const int8_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_stride_i8vp_xpulpv2(void *args);
+void plp_mat_scale_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for strided matrix scale of a 32-bit floating-point matrices.
@@ -13196,7 +13196,7 @@ void plp_mat_fill_I_stride_i16s_rv32im(uint32_t N, uint32_t stride, int16_t *__r
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_stride_i16v_xpulpv2(uint32_t N, uint32_t stride, int16_t *__restrict__ pDst);
+void plp_mat_fill_I_stride_i16s_xpulpv2(uint32_t N, uint32_t stride, int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a strided 16-bit integers identity matrix in parallel
@@ -13223,7 +13223,7 @@ void plp_mat_fill_I_stride_i16_parallel(uint32_t N,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_stride_i16vp_xpulpv2(void *args);
+void plp_mat_fill_I_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a strided 8-bit integers identity matrix
@@ -13257,7 +13257,7 @@ void plp_mat_fill_I_stride_i8s_rv32im(uint32_t N, uint32_t stride, int8_t *__res
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_stride_i8v_xpulpv2(uint32_t N, uint32_t stride, int8_t *__restrict__ pDst);
+void plp_mat_fill_I_stride_i8s_xpulpv2(uint32_t N, uint32_t stride, int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a strided 8-bit integers identity matrix in parallel
@@ -13284,7 +13284,7 @@ void plp_mat_fill_I_stride_i8_parallel(uint32_t N,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_stride_i8vp_xpulpv2(void *args);
+void plp_mat_fill_I_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a strided 32-bit floats identity matrix
@@ -13458,7 +13458,7 @@ void plp_mat_fill_I_stride_q16s_rv32im(uint32_t N,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_stride_q16v_xpulpv2(uint32_t N,
+void plp_mat_fill_I_stride_q16s_xpulpv2(uint32_t N,
                                         uint32_t stride,
                                         int32_t fracBits,
                                         int16_t *__restrict__ pDst);
@@ -13493,7 +13493,7 @@ void plp_mat_fill_I_stride_q16_parallel(
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_stride_q16vp_xpulpv2(void *args);
+void plp_mat_fill_I_stride_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a strided 8-bit fix-point identity matrix
@@ -13543,7 +13543,7 @@ void plp_mat_fill_I_stride_q8s_rv32im(uint32_t N,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_stride_q8v_xpulpv2(uint32_t N,
+void plp_mat_fill_I_stride_q8s_xpulpv2(uint32_t N,
                                        uint32_t stride,
                                        int32_t fracBits,
                                        int8_t *__restrict__ pDst);
@@ -13578,7 +13578,7 @@ void plp_mat_fill_I_stride_q8_parallel(
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_stride_q8vp_xpulpv2(void *args);
+void plp_mat_fill_I_stride_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for filling an MxN strided 32-bit integers matrix
@@ -13679,7 +13679,7 @@ void plp_mat_fill_stride_i16s_rv32im(
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_stride_i16v_xpulpv2(
+void plp_mat_fill_stride_i16s_xpulpv2(
     uint32_t M, uint32_t N, uint32_t stride, int16_t value, int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
@@ -13710,7 +13710,7 @@ void plp_mat_fill_stride_i16_parallel(uint32_t M,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_stride_i16vp_xpulpv2(void *args);
+void plp_mat_fill_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for filling an MxN strided 8-bit integers matrix
@@ -13749,7 +13749,7 @@ void plp_mat_fill_stride_i8s_rv32im(
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_stride_i8v_xpulpv2(
+void plp_mat_fill_stride_i8s_xpulpv2(
     uint32_t M, uint32_t N, uint32_t stride, int8_t value, int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
@@ -13776,7 +13776,7 @@ void plp_mat_fill_stride_i8_parallel(
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_stride_i8vp_xpulpv2(void *args);
+void plp_mat_fill_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for filling an MxN strided 32-bit floats matrix
@@ -13958,7 +13958,7 @@ void plp_mat_copy_stride_i16s_rv32im(const int16_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_copy_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrc,
+void plp_mat_copy_stride_i16s_xpulpv2(const int16_t *__restrict__ pSrc,
                                       uint32_t M,
                                       uint32_t N,
                                       uint32_t strideSrc,
@@ -13996,7 +13996,7 @@ void plp_mat_copy_stride_i16_parallel(const int16_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_copy_stride_i16vp_xpulpv2(void *args);
+void plp_mat_copy_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code to copy an MxN strided 8-bit integers matrix
@@ -14049,7 +14049,7 @@ void plp_mat_copy_stride_i8s_rv32im(const int8_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_copy_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrc,
+void plp_mat_copy_stride_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
                                      uint32_t M,
                                      uint32_t N,
                                      uint32_t strideSrc,
@@ -14087,7 +14087,7 @@ void plp_mat_copy_stride_i8_parallel(const int8_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_copy_stride_i8vp_xpulpv2(void *args);
+void plp_mat_copy_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code to copy an MxN strided 32-bit floats matrix

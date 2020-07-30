@@ -78,7 +78,7 @@ void plp_mat_mult_cmplx_stride_q8(const int8_t *__restrict__ pSrcA,
         plp_mat_mult_cmplx_stride_q8s_rv32im(pSrcA, pSrcB, M, N, O, strideA, strideB, strideC,
                                              shift, pDstC);
     } else {
-        plp_mat_mult_cmplx_stride_q8v_xpulpv2(pSrcA, pSrcB, M, N, O, strideA, strideB, strideC,
+        plp_mat_mult_cmplx_stride_q8s_xpulpv2(pSrcA, pSrcB, M, N, O, strideA, strideB, strideC,
                                               shift, pDstC);
     }
 }

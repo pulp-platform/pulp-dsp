@@ -71,7 +71,7 @@ void plp_mat_mult_cmplx_q16(const int16_t *__restrict__ pSrcA,
     if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_mat_mult_cmplx_q16s_rv32im(pSrcA, pSrcB, M, N, O, shift, pDstC);
     } else {
-        plp_mat_mult_cmplx_q16v_xpulpv2(pSrcA, pSrcB, M, N, O, shift, pDstC);
+        plp_mat_mult_cmplx_q16s_xpulpv2(pSrcA, pSrcB, M, N, O, shift, pDstC);
     }
 }
 

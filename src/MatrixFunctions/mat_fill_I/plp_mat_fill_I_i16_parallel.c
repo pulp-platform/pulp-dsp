@@ -55,7 +55,7 @@ void plp_mat_fill_I_i16_parallel(uint32_t N, uint32_t nPE, int16_t *__restrict__
     } else {
         plp_mat_fill_I_instance_i16 args = { .N = N, .nPE = nPE, .pDst = pDst };
 
-        rt_team_fork(nPE, plp_mat_fill_I_i16vp_xpulpv2, (void *)&args);
+        rt_team_fork(nPE, plp_mat_fill_I_i16p_xpulpv2, (void *)&args);
     }
 }
 

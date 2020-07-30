@@ -65,7 +65,7 @@ void plp_cfft_q16(const plp_cfft_instance_q16 *S,
     if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_cfft_q16s_rv32im(S, p1, ifftFlag, bitReverseFlag, deciPoint);
     } else {
-        plp_cfft_q16v_xpulpv2(S, p1, ifftFlag, bitReverseFlag, deciPoint);
+        plp_cfft_q16s_xpulpv2(S, p1, ifftFlag, bitReverseFlag, deciPoint);
     }
 }
 
