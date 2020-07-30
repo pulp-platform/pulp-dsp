@@ -45,7 +45,7 @@ def compute_result(result_parameter, inputs, env, fix_point):
             result[0] = q_add(result[0], (xa * xb) >> fix_point)
         sq_mean = (np.square(np.mean(p)))/(2**fix_point)
         result[0] = q_add(result[0]/bS,-int(sq_mean))
-        result[0] = int(2**(fix_point)*np.sqrt(float(result[0])/2**(fix_point)))
+        result[0] = q_sat_8(int(2**(fix_point)*np.sqrt(float(result[0])/2**(fix_point))))
     elif result_parameter.ctype == 'float':
         p = inputs['pSrc'].value.astype(np.float32)
         result = np.zeros(1, dtype=np.float32)
@@ -71,6 +71,15 @@ def q_sat(x):
     else:
         return x
 
+    
+def q_sat_8(x):
+    if x > 2**7 - 1:
+        return x - 2**8
+    elif x < -2**7:
+        return x + 2**8
+    else:
+        return x
+    
 
 def q_add(a, b):
     return q_sat(a + b)

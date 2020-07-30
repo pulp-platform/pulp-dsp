@@ -53,7 +53,7 @@
 void plp_conv_i16p_xpulpv2(void *task_args) {
 
     plp_conv_instance_i16 *S = (plp_conv_instance_i16 *)task_args;
-    
+
     uint32_t resultoffset = ((S->srcALen + S->nPE - 1) / S->nPE) + S->srcBLen - 1;
     uint32_t srcAoffset = ((S->srcALen + S->nPE - 1) / S->nPE);
 
@@ -70,7 +70,7 @@ void plp_conv_i16p_xpulpv2(void *task_args) {
 
     // Unpack partial convolution vectors
     if (rt_core_id() == (S->nPE - 1)) {
-      
+
         pSrcA = (int16_t *)((S->pSrcA + srcAoffset * (S->nPE - 1)));
         srcALen = S->srcALen - (srcAoffset * (S->nPE - 1));
         pSrcB = (int16_t *)(S->pSrcB);
@@ -84,7 +84,6 @@ void plp_conv_i16p_xpulpv2(void *task_args) {
         pSrcB = (int16_t *)S->pSrcB;
         srcBLen = S->srcBLen;
         pRes = (int32_t *)(S->pRes + resultoffset * (rt_core_id()));
-
     }
     // Reorder vectors; longest first
     if (srcALen >= srcBLen) {

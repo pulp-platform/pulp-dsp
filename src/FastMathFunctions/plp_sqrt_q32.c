@@ -36,7 +36,7 @@
 
 /**
    @defgroup sqrt Sqrt
-  
+
 */
 
 /**

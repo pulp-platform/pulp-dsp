@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_var_q8s_rv32im.c
- * Description:  Kernel to calculate the variance of a 8-bit fixed point vector glue code on RV32IM
+ * Description:  Kernel to calculate the variance of a 8-bit fixed point vector on RV32IM
  *
  * $Date:        30.06.2020
  *
@@ -61,7 +61,7 @@ void plp_var_q8s_rv32im(const int8_t *__restrict__ pSrc,
     int8_t mean;
 
     plp_mean_i8(pSrc, blockSize, &mean);
-    square_of_mean = (mean * mean) >> fracBits;
+    square_of_mean = ((int16_t)mean * (int16_t)mean) >> fracBits;
 
     plp_power_q8(pSrc, blockSize, fracBits, &square_of_values);
 
