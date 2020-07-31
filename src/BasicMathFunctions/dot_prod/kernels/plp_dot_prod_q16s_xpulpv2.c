@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2019 ETH Zurich and University of Bologna.
  *
  * Author: Xiaying Wang, ETH Zurich
  *
@@ -33,7 +33,6 @@
  * with Apache-2.0.
  */
 
-
 #include "plp_math.h"
 
 /**
@@ -46,7 +45,8 @@
  */
 
 /**
-  @brief Vectorized dot product of 16-bit fixed point vectors singlecore kernel for XPULPV2 extension.
+  @brief Vectorized dot product of 16-bit fixed point vectors singlecore kernel for XPULPV2
+  extension.
   @param[in]  pSrcA      points to the first input vector [16 bit]
   @param[in]  pSrcB      points to the second input vector [16 bit]
   @param[in]  blockSize  number of samples in each vector

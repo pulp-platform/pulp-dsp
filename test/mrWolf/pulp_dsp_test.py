@@ -162,7 +162,7 @@ class Argument(object):
         if callable(self.value):
             self.value = call_dynamic_function(self.value, env, version, device)
         if self.value == GENERATE_STIMULI:
-            self.value = call_dynamic_function(gen_stimuli, env, version, device, variable=self)
+            self.value = call_dynamic_function(gen_stimuli, env, version, device, argument=self)
         if isinstance(self.value, str):
             self.value = env[self.value]
         if self.value is None or (isinstance(self.value, (tuple, list)) and len(self.value) == 2):
@@ -498,8 +498,9 @@ class ReturnValue(Argument):
     def check_str(self, target):
         """ returns the string to check the result """
         display_format = "%.10f" if self.ctype == "float" else "%d"
-        check_str = tolerance_check_str(self.name, self.reference_name(),
-                                        self.tolerance, self.ctype, "", target)
+        val_name = self.name + ".f" if self.ctype == "float" else self.name
+        ref_name = self.reference_name() + ".f" if self.ctype == "float" else self.reference_name()
+        check_str = tolerance_check_str(val_name, ref_name, self.tolerance, self.ctype, "", target)
         return dedent(
             """\
             {check_str}
@@ -1080,7 +1081,8 @@ def check_output(config, output, test_obj):
         if result['mismatches'] and test_obj.extended_output:
             print(indent("\n".join(result['mismatches']), "      "))
 
-        bench_output(result, test_obj, case)
+        if passed:
+            bench_output(result, test_obj, case)
 
     # clean the directory
     clean()
@@ -1179,6 +1181,8 @@ class Sweep:
 
 def fmt_float(val):
     """ This function returns the hex representation of a float """
+    if val == 0:
+        val = 0.0
     if isinstance(val, float):
         val = np.float32(val)
     assert isinstance(val, np.float32)

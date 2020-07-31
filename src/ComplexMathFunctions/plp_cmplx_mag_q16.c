@@ -47,14 +47,9 @@ void plp_cmplx_mag_q16(const int16_t *pSrc,
     int16_t real, cmplx, sqr;
     for (int i = 0; i < numSamples; i++) {
 
-        real = (pSrc[2 * i] * pSrc[2 * i]) >> 16;
-        cmplx = (pSrc[2 * i + 1] * pSrc[2 * i + 1]) >> 16;
-        if (deciPoint % 2 == 0) {
-            sqr = __CLIP(real + cmplx, 15);
-        } else {
-            sqr = __CLIP((real + cmplx) << 1, 15);
-        }
-        plp_sqrt_q16(&sqr, 16 - deciPoint, &pRes[i]);
-        pRes[i] = pRes[i] << ((16 - deciPoint) / 2);
+        real = (pSrc[2 * i] * pSrc[2 * i]) >> deciPoint;
+        cmplx = (pSrc[2 * i + 1] * pSrc[2 * i + 1]) >> deciPoint;
+        sqr = __CLIP(real + cmplx, 15);
+        plp_sqrt_q16(&sqr, deciPoint, &pRes[i]);
     }
 }

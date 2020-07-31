@@ -79,7 +79,7 @@ void plp_mat_mult_trans_cmplx_stride_q16(const int16_t *__restrict__ pSrcA,
         plp_mat_mult_trans_cmplx_stride_q16s_rv32im(pSrcA, pSrcB, M, N, O, strideA, strideB,
                                                     strideC, shift, pDstC);
     } else {
-        plp_mat_mult_trans_cmplx_stride_q16v_xpulpv2(pSrcA, pSrcB, M, N, O, strideA, strideB,
+        plp_mat_mult_trans_cmplx_stride_q16s_xpulpv2(pSrcA, pSrcB, M, N, O, strideA, strideB,
                                                      strideC, shift, pDstC);
     }
 }

@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2019 ETH Zurich and University of Bologna.
  *
  * Author: Hanna Mueller, ETH Zurich
  *
@@ -33,9 +33,7 @@
   with Apache-2.0.
  */
 
-
 #include "plp_math.h"
-
 
 /**
   @ingroup groupCmplxMath
@@ -72,23 +70,18 @@
   @return        none
  */
 
-void plp_cmplx_conj_i16(
-                      const int16_t * __restrict__ pSrc,
-                         int16_t * __restrict__ pDst,
-                         uint32_t numSamples){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_cmplx_conj_i16_rv32im(pSrc, pDst, numSamples);
-    return;
-  }
-  else{
-    plp_cmplx_conj_i16_xpulpv2(pSrc, pDst, numSamples);
-  }
+void plp_cmplx_conj_i16(const int16_t *__restrict__ pSrc,
+                        int16_t *__restrict__ pDst,
+                        uint32_t numSamples) {
 
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        plp_cmplx_conj_i16_rv32im(pSrc, pDst, numSamples);
+        return;
+    } else {
+        plp_cmplx_conj_i16_xpulpv2(pSrc, pDst, numSamples);
+    }
 }
 
 /**
   @} end of BasicDotProd group
  */
-
-

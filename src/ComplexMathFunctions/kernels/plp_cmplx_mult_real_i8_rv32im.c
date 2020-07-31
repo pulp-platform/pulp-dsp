@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and Ubiversity of Bologna. 
+ * Copyright (C) 2019 ETH Zurich and Ubiversity of Bologna.
  *
  * Author: Hanna Mueller, ETH Zurich
  *
@@ -33,7 +33,6 @@
   with Apache-2.0.
  */
 
-
 #include "plp_math.h"
 
 /**
@@ -56,7 +55,8 @@
       pCmplxDst[(2*n)+1] = pSrcCmplx[(2*n)+1] * pSrcReal[n];
   }
   </pre>
-  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types.
+  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+  types.
  */
 
 /**
@@ -72,37 +72,31 @@
   @param[in]     numSamples  number of samples in each vector
   @return        none
  */
-void plp_cmplx_mult_real_i8_rv32im(
-  const int8_t * __restrict__  pSrcCmplx,
-  const int8_t * __restrict__  pSrcReal,
-        int8_t * __restrict__  pDst,
-        uint32_t numSamples)
-{
-  uint32_t blkCnt;                               /* Loop counter */
-  int8_t in;                                  /* Temporary variable */
+void plp_cmplx_mult_real_i8_rv32im(const int8_t *__restrict__ pSrcCmplx,
+                                   const int8_t *__restrict__ pSrcReal,
+                                   int8_t *__restrict__ pDst,
+                                   uint32_t numSamples) {
+    uint32_t blkCnt; /* Loop counter */
+    int8_t in;       /* Temporary variable */
 
-  /* Initialize blkCnt with number of samples */
-  blkCnt = 2*numSamples;
-  int8_t even = 1;
-  while (blkCnt > 0U)
-  {
-    /* C[2 * i    ] = A[2 * i    ] * B[i]. */
-    /* C[2 * i + 1] = A[2 * i + 1] * B[i]. */
+    /* Initialize blkCnt with number of samples */
+    blkCnt = 2 * numSamples;
+    int8_t even = 1;
+    while (blkCnt > 0U) {
+        /* C[2 * i    ] = A[2 * i    ] * B[i]. */
+        /* C[2 * i + 1] = A[2 * i + 1] * B[i]. */
 
-    if(even == 1)
-    {
-      in = *pSrcReal++;
-      /* store result in destination buffer. */
-      *pDst++ = *pSrcCmplx++ * in;  
-    } else
-    {
-      *pDst++ = *pSrcCmplx++ * in;
+        if (even == 1) {
+            in = *pSrcReal++;
+            /* store result in destination buffer. */
+            *pDst++ = *pSrcCmplx++ * in;
+        } else {
+            *pDst++ = *pSrcCmplx++ * in;
+        }
+        even = !even;
+        /* Decrement loop counter */
+        blkCnt--;
     }
-    even = !even;
-    /* Decrement loop counter */
-    blkCnt--;
-  }
-
 }
 
 /**

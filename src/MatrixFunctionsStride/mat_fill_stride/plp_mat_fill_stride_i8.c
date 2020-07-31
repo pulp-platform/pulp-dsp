@@ -54,7 +54,7 @@ void plp_mat_fill_stride_i8(
     if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_mat_fill_stride_i8s_rv32im(M, N, stride, value, pDst);
     } else {
-        plp_mat_fill_stride_i8v_xpulpv2(M, N, stride, value, pDst);
+        plp_mat_fill_stride_i8s_xpulpv2(M, N, stride, value, pDst);
     }
 }
 

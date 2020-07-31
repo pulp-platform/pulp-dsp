@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and Ubiversity of Bologna. 
+ * Copyright (C) 2019 ETH Zurich and Ubiversity of Bologna.
  *
  * Author: Hanna Mueller, ETH Zurich
  *
@@ -33,7 +33,6 @@
   with Apache-2.0.
  */
 
-
 #include "plp_math.h"
 
 /**
@@ -51,7 +50,8 @@
       pDst[(2*n)+1] = pSrcA[(2*n)+0] * pSrcB[(2*n)+1] + pSrcA[(2*n)+1] * pSrcB[(2*n)+0];
   }
   </pre>
-  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. 
+  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+  types.
  */
 
 /**
@@ -66,36 +66,32 @@
   @param[in]     numSamples  number of samples in each vector
   @return        none
  */
-void plp_cmplx_mult_cmplx_q32_rv32im(
-  const int32_t * __restrict__  pSrcA,
-  const int32_t * __restrict__  pSrcB,
-        int32_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples)
-{
-  uint32_t blkCnt;                               /* Loop counter */
-  int32_t a, b, c, d;  /* Temporary variables to store real and imaginary values */
+void plp_cmplx_mult_cmplx_q32_rv32im(const int32_t *__restrict__ pSrcA,
+                                     const int32_t *__restrict__ pSrcB,
+                                     int32_t *__restrict__ pDst,
+                                     uint32_t deciPoint,
+                                     uint32_t numSamples) {
+    uint32_t blkCnt;    /* Loop counter */
+    int32_t a, b, c, d; /* Temporary variables to store real and imaginary values */
 
-  /* Initialize blkCnt with number of samples */
-  blkCnt = numSamples;
-  while (blkCnt > 0U)
-  {
-    /* C[2 * i    ] = A[2 * i] * B[2 * i    ] - A[2 * i + 1] * B[2 * i + 1]. */
-    /* C[2 * i + 1] = A[2 * i] * B[2 * i + 1] + A[2 * i + 1] * B[2 * i    ]. */
+    /* Initialize blkCnt with number of samples */
+    blkCnt = numSamples;
+    while (blkCnt > 0U) {
+        /* C[2 * i    ] = A[2 * i] * B[2 * i    ] - A[2 * i + 1] * B[2 * i + 1]. */
+        /* C[2 * i + 1] = A[2 * i] * B[2 * i + 1] + A[2 * i + 1] * B[2 * i    ]. */
 
-    a = *pSrcA++;
-    b = *pSrcA++;
-    c = *pSrcB++;
-    d = *pSrcB++;
+        a = *pSrcA++;
+        b = *pSrcA++;
+        c = *pSrcB++;
+        d = *pSrcB++;
 
-    /* store result in destination buffer. */
-    *pDst++ = (((a * c)  ) >> deciPoint) - (((b * d)  ) >> deciPoint);
-    *pDst++ = (((a * d)  ) >> deciPoint) + (((b * c)  ) >> deciPoint);
+        /* store result in destination buffer. */
+        *pDst++ = (((a * c)) >> deciPoint) - (((b * d)) >> deciPoint);
+        *pDst++ = (((a * d)) >> deciPoint) + (((b * c)) >> deciPoint);
 
-    /* Decrement loop counter */
-    blkCnt--;
-  }
-
+        /* Decrement loop counter */
+        blkCnt--;
+    }
 }
 
 /**

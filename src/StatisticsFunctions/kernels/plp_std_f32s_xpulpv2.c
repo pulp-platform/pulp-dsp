@@ -1,7 +1,8 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_std_f32s_xpulpv2.c
- * Description:  Kernel to calculate the standard deviation of a 32-bit floating point vector glue code on XPULPV2
+ * Description:  Kernel to calculate the standard deviation of a 32-bit floating point vector glue
+ *code on XPULPV2
  *
  * $Date:        30.06.2020
  *
@@ -51,10 +52,10 @@
 */
 
 void plp_std_f32s_xpulpv2(const float *__restrict__ pSrc,
-                         uint32_t blockSize,
-                         float *__restrict__ pRes) {
+                          uint32_t blockSize,
+                          float *__restrict__ pRes) {
 
     float variance;
     plp_var_f32(pSrc, blockSize, &variance);
-    plp_sqrt_f32(&variance,  pRes);
+    plp_sqrt_f32(&variance, pRes);
 }

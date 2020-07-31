@@ -61,7 +61,7 @@ void plp_mat_fill_I_q8_parallel(uint32_t N,
             .N = N, .fracBits = fracBits, .nPE = nPE, .pDst = pDst
         };
 
-        rt_team_fork(nPE, plp_mat_fill_I_q8vp_xpulpv2, (void *)&args);
+        rt_team_fork(nPE, plp_mat_fill_I_q8p_xpulpv2, (void *)&args);
     }
 }
 

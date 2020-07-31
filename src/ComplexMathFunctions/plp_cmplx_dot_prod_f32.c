@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2019 ETH Zurich and University of Bologna.
  *
  * Author: Hanna Mueller, ETH Zurich
  *
@@ -33,9 +33,7 @@
   with Apache-2.0.
  */
 
-
 #include "plp_math.h"
-
 
 /**
   @ingroup groupCmplxMath
@@ -60,7 +58,8 @@
       imagResult += pSrcA[(2*n)+0] * pSrcB[(2*n)+1] + pSrcA[(2*n)+1] * pSrcB[(2*n)+0];
   }
   </pre>
-  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types.
+  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+  types.
  */
 
 /**
@@ -77,25 +76,20 @@
   @param[out]    imagResult  imaginary part of the result returned here
   @return        none
  */
-void plp_cmplx_dot_prod_f32(
-                        const float32_t * __restrict__ pSrcA,
-                        const float32_t * __restrict__ pSrcB,
-                        uint32_t numSamples,
-                        float32_t * __restrict__ realResult,
-                        float32_t * __restrict__ imagResult){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    printf("error: FC doesn't have FPU\n");
-    return;
-  }
-  else{
-    plp_cmplx_dot_prod_f32_xpulpv2(pSrcA, pSrcB, numSamples, realResult, imagResult);
-  }
+void plp_cmplx_dot_prod_f32(const float32_t *__restrict__ pSrcA,
+                            const float32_t *__restrict__ pSrcB,
+                            uint32_t numSamples,
+                            float32_t *__restrict__ realResult,
+                            float32_t *__restrict__ imagResult) {
 
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        printf("error: FC doesn't have FPU\n");
+        return;
+    } else {
+        plp_cmplx_dot_prod_f32_xpulpv2(pSrcA, pSrcB, numSamples, realResult, imagResult);
+    }
 }
 
 /**
   @} end of BasicDotProd group
  */
-
-

@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_var_f32s_xpulpv2.c
- * Description:  Kernel to calculate the variance of a 32-bit floating point vector glue code on XPULPV2
+ * Description:  Kernel to calculate the variance of a 32-bit floating point vector on XPULPV2
  *
  * $Date:        29.06.2020
  *

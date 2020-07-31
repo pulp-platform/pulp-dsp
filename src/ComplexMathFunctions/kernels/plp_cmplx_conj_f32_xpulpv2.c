@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and Ubiversity of Bologna. 
+ * Copyright (C) 2019 ETH Zurich and Ubiversity of Bologna.
  *
  * Author: Hanna Mueller, ETH Zurich
  *
@@ -33,7 +33,6 @@
   with Apache-2.0.
  */
 
-
 #include "plp_math.h"
 
 /**
@@ -56,7 +55,8 @@
       pDst[(2*n)+1] = -pSrc[(2*n)+1];    // imag part
   }
   </pre>
-  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types.
+  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+  types.
  */
 
 /**
@@ -72,33 +72,27 @@
   @return        none
  */
 
-void plp_cmplx_conj_f32_xpulpv2(
-  const float32_t * __restrict__  pSrc,
-        float32_t * __restrict__  pDst,
-        uint32_t numSamples)
-{
-  uint32_t blkCnt;                               /* Loop counter */
+void plp_cmplx_conj_f32_xpulpv2(const float32_t *__restrict__ pSrc,
+                                float32_t *__restrict__ pDst,
+                                uint32_t numSamples) {
+    uint32_t blkCnt; /* Loop counter */
 
-  /* Initialize blkCnt with number of samples */
-  blkCnt = 2*numSamples;
-  int8_t sign = 1;
-  while (blkCnt > 0U)
-  {
-    /* C[0] + jC[1] = A[0]+ j(-1)A[1] */
+    /* Initialize blkCnt with number of samples */
+    blkCnt = 2 * numSamples;
+    int8_t sign = 1;
+    while (blkCnt > 0U) {
+        /* C[0] + jC[1] = A[0]+ j(-1)A[1] */
 
-    /* Calculate Complex Conjugate and store result in destination buffer. */
-    if(sign == 1)
-    {
-      *pDst++ =  *pSrc++;  
-    } else
-    {
-      *pDst++ = -*pSrc++;
+        /* Calculate Complex Conjugate and store result in destination buffer. */
+        if (sign == 1) {
+            *pDst++ = *pSrc++;
+        } else {
+            *pDst++ = -*pSrc++;
+        }
+        sign *= -1;
+        /* Decrement loop counter */
+        blkCnt--;
     }
-    sign *= -1;
-    /* Decrement loop counter */
-    blkCnt--;
-  }
-
 }
 
 /**

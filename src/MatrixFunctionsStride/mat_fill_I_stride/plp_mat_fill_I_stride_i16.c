@@ -76,7 +76,7 @@ void plp_mat_fill_I_stride_i16(uint32_t N, uint32_t stride, int16_t *__restrict_
     if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_mat_fill_I_stride_i16s_rv32im(N, stride, pDst);
     } else {
-        plp_mat_fill_I_stride_i16v_xpulpv2(N, stride, pDst);
+        plp_mat_fill_I_stride_i16s_xpulpv2(N, stride, pDst);
     }
 }
 

@@ -96,7 +96,7 @@ void plp_mat_mult_trans_cmplx_i16(const int16_t *__restrict__ pSrcA,
     if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_mat_mult_trans_cmplx_i16s_rv32im(pSrcA, pSrcB, M, N, O, pDstC);
     } else {
-        plp_mat_mult_trans_cmplx_i16v_xpulpv2(pSrcA, pSrcB, M, N, O, pDstC);
+        plp_mat_mult_trans_cmplx_i16s_xpulpv2(pSrcA, pSrcB, M, N, O, pDstC);
     }
 }
 

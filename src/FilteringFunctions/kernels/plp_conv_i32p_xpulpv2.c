@@ -68,7 +68,7 @@ void plp_conv_i32p_xpulpv2(void *task_args) {
     uint32_t pIn2Len;
 
     // Unpack partial convolution vectors
-    
+
     if (rt_core_id() == (S->nPE - 1)) {
 
         pSrcA = (int32_t *)((S->pSrcA + srcAoffset * (S->nPE - 1)));
@@ -84,11 +84,10 @@ void plp_conv_i32p_xpulpv2(void *task_args) {
         pSrcB = (int32_t *)S->pSrcB;
         srcBLen = S->srcBLen;
         pRes = (int32_t *)(S->pRes + resultoffset * (rt_core_id()));
-        
     }
 
     // Reorder vectors; longest first
-    
+
     if (srcALen >= srcBLen) {
         pIn1 = pSrcA;
         pIn1Len = srcALen;

@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupCmplxMath
  */
@@ -66,23 +65,18 @@
   @return        none
  */
 
-void plp_cmplx_conj_i8(
-                      const int8_t * __restrict__ pSrc,
-                         int8_t * __restrict__ pDst,
-                         uint32_t numSamples){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    plp_cmplx_conj_i8_rv32im(pSrc, pDst, numSamples);
-    return;
-  }
-  else{
-    plp_cmplx_conj_i8_xpulpv2(pSrc, pDst, numSamples);
-  }
+void plp_cmplx_conj_i8(const int8_t *__restrict__ pSrc,
+                       int8_t *__restrict__ pDst,
+                       uint32_t numSamples) {
 
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        plp_cmplx_conj_i8_rv32im(pSrc, pDst, numSamples);
+        return;
+    } else {
+        plp_cmplx_conj_i8_xpulpv2(pSrc, pDst, numSamples);
+    }
 }
 
 /**
   @} end of BasicDotProd group
  */
-
-

@@ -23,38 +23,31 @@ def compute_result(result_parameter, inputs, env, fix_point):
         a = inputs['srcA'].value.astype(np.int32)
         b = inputs['srcB'].value.astype(np.int32)
         if fix_point is None:
-            b = np.flipud(b)
-            return np.convolve(a, b, mode='full')
+            return np.correlate(a, b, mode='full')
         else:
-            a = a.astype(float)
-            b = b.astype(float)
-            b = np.flipud(b)
-            c = np.convolve(a,b, mode='full')/2**(fix_point)
+            c = np.correlate(a, b, mode='full')
+            c = c/2**fix_point
             return c.astype(np.int32)
     elif result_parameter.ctype == 'int16_t':
-        a = inputs['srcA'].value.astype(np.int16)
-        b = inputs['srcB'].value.astype(np.int16)
-        if fix_point is None:
-            b = np.flipud(b)
-            return np.convolve(a, b, mode='full')
-        else:
-            a = a.astype(float)
-            b = b.astype(float)
-            b = np.flipud(b)
-            c = np.convolve(a,b, mode='full')/2**(fix_point)
-            return c.astype(np.int32)
+      a = inputs['srcA'].value.astype(np.int16)
+      b = inputs['srcB'].value.astype(np.int16)
+      if fix_point is None:
+          return np.correlate(a, b, mode='full')
+      else:
+          c = np.correlate(a, b, mode='full')
+          c = c/2**fix_point
+          return c.astype(np.int16)
+
     elif result_parameter.ctype == 'int8_t':
-        a = inputs['srcA'].value.astype(np.int8)
-        b = inputs['srcB'].value.astype(np.int8)
-        if fix_point is None:
-            b = np.flipud(b)
-            return np.convolve(a, b, mode='full')
-        else:
-            a = a.astype(float)
-            b = b.astype(float)
-            b = np.flipud(b)
-            c = np.convolve(a,b, mode='full')/2**(fix_point)
-            return c.astype(np.int32)
+      a = inputs['srcA'].value.astype(np.int8)
+      b = inputs['srcB'].value.astype(np.int8)
+      if fix_point is None:
+          return np.correlate(a, b, mode='full')
+      else:
+          c = np.correlate(a, b, mode='full')
+          c = c/2**fix_point
+          return c.astype(np.int8)
+
     elif result_parameter.ctype == 'float':
         raise RuntimeError("Float not implemented")
     else:
