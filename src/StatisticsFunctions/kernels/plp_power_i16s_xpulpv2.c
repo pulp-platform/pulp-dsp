@@ -73,32 +73,32 @@ void plp_power_i16s_xpulpv2(const int16_t *__restrict__ pSrc,
                             uint32_t blockSize,
                             int32_t *__restrict__ pRes) {
 
-    uint32_t blkCnt = 0;
-    int16_t x1, x2;
-    int32_t sum = 0;
+  uint32_t blkCnt = 0;
+  v2s x1;
+  int16_t x2;
+  int32_t sum = 0;
 
 #if defined(PLP_MATH_LOOPUNROLL)
 
-    for (blkCnt = 0; blkCnt < (blockSize >> 1); blkCnt++) {
-        x1 = *pSrc++;
-        x2 = *pSrc++;
-        sum += x1 * x1;
-        sum += x2 * x2;
-    }
+  for (blkCnt = 0; blkCnt < (blockSize >> 1); blkCnt++) {
+    x1 = *((v2s *)(pSrc));
+    pSrc+=2;
+    sum = __builtin_pulp_sdotsp2(x1,x1,sum);
+  }
 
-    if (blockSize % 2 == 1) {
-        x1 = *pSrc++;
-        sum += x1 * x1;
-    }
+  for(int i=0; i<blockSize%2;i++){
+    x2 = *pSrc++;
+    sum += ((x2 * x2));
+  }
 
 #else
 
-    for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
-        x1 = *pSrc++;
-        sum += x1 * x1;
-    }
+  for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+    x2 = *pSrc++;
+    sum += ((x2 * x2));
+  }
 
 #endif
 
-    *pRes = sum;
+  *pRes = sum;
 }
