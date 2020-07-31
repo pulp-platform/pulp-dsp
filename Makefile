@@ -298,7 +298,13 @@ FC_SRCS = \
 	src/MatrixFunctionsStride/mat_copy_stride/plp_mat_copy_stride_i8_parallel.c \
 	src/MatrixFunctionsStride/mat_copy_stride/plp_mat_copy_stride_f32.c \
 	src/MatrixFunctionsStride/mat_copy_stride/plp_mat_copy_stride_f32_parallel.c \
-	src/ComplexMathFunctions/plp_cmplx_mag_q16.c \
+	src/ComplexMathFunctions/plp_cmplx_mag_f32.c \
+	src/ComplexMathFunctions/plp_cmplx_mag_i16.c src/ComplexMathFunctions/kernels/plp_cmplx_mag_i16s_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mag_i32.c src/ComplexMathFunctions/kernels/plp_cmplx_mag_i32s_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mag_i8.c src/ComplexMathFunctions/kernels/plp_cmplx_mag_i8s_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mag_q16.c src/ComplexMathFunctions/kernels/plp_cmplx_mag_q16s_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mag_q32.c src/ComplexMathFunctions/kernels/plp_cmplx_mag_q32s_rv32im.c \
+	src/ComplexMathFunctions/plp_cmplx_mag_q8.c src/ComplexMathFunctions/kernels/plp_cmplx_mag_q8s_rv32im.c \
 	src/ComplexMathFunctions/plp_cmplx_conj_f32.c \
 	src/ComplexMathFunctions/plp_cmplx_conj_i32.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_conj_i32_rv32im.c \
@@ -659,6 +665,13 @@ CL_SRCS = \
 	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_f32p_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i8p_xpulpv2.c	\
 	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_f32s_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_i16s_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_i32s_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_i8s_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_q16s_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_q32s_xpulpv2.c \
+	src/ComplexMathFunctions/kernels/plp_cmplx_mag_q8s_xpulpv2.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_conj_f32_xpulpv2.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_conj_i32_xpulpv2.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_conj_i16_xpulpv2.c \

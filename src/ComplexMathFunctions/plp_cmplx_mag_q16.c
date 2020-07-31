@@ -30,26 +30,23 @@
 #include "plp_math.h"
 
 /**
- * @brief      calculates the complex magnitude.
+ * @brief      Glue code for complex magnitude calculation in 16-bit quantized integer
  *
- * @param[in]  pSrc        The source
- * @param[in]  deciPoint   The decimal point. Fromat: Q(16-deciPoint).deciPoint
- * @param      pRes        The result
+ * @param[in]  pSrc        pointer to source
+ * @param[in]  fracBits    fractional bits -> Q(32-fracBits).fracBits
+ * @param      pRes        pointer to result
  * @param[in]  numSamples  The number of samples
  */
 
 void plp_cmplx_mag_q16(const int16_t *pSrc,
-                       const uint32_t deciPoint,
+                       const uint32_t fracBits,
                        int16_t *pRes,
                        uint32_t numSamples) {
 
-    // Initial implementation, needs improvement
-    int16_t real, cmplx, sqr;
-    for (int i = 0; i < numSamples; i++) {
-
-        real = (pSrc[2 * i] * pSrc[2 * i]) >> deciPoint;
-        cmplx = (pSrc[2 * i + 1] * pSrc[2 * i + 1]) >> deciPoint;
-        sqr = __CLIP(real + cmplx, 15);
-        plp_sqrt_q16(&sqr, deciPoint, &pRes[i]);
+    if (rt_cluster_id() == ARCHI_FC_CID){
+        plp_cmplx_mag_q16s_rv32im(pSrc, fracBits, pRes, numSamples);
+    }
+    else{
+        plp_cmplx_mag_q16s_xpulpv2(pSrc, fracBits, pRes, numSamples);
     }
 }
