@@ -93,7 +93,7 @@ void plp_mat_scale_stride_i16(const int16_t *__restrict__ pSrc,
         plp_mat_scale_stride_i16s_rv32im(pSrc, M, N, strideSrc, strideDst, scaleFactor, shift,
                                          pDst);
     } else {
-        plp_mat_scale_stride_i16v_xpulpv2(pSrc, M, N, strideSrc, strideDst, scaleFactor, shift,
+        plp_mat_scale_stride_i16s_xpulpv2(pSrc, M, N, strideSrc, strideDst, scaleFactor, shift,
                                           pDst);
     }
 }

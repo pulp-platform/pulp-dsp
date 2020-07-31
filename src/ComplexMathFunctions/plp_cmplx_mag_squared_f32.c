@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2019 ETH Zurich and University of Bologna.
  *
  * Author: Hanna Mueller, ETH Zurich
  *
@@ -33,9 +33,7 @@
   with Apache-2.0.
  */
 
-
 #include "plp_math.h"
-
 
 /**
   @ingroup groupCmplxMath
@@ -57,7 +55,8 @@
       pDst[n] = pSrc[(2*n)+0]^2 + pSrc[(2*n)+1]^2;
   }
   </pre>
-  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types.
+  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+  types.
  */
 
 /**
@@ -73,23 +72,18 @@
   @return        none
  */
 
-void plp_cmplx_mag_squared_f32(
-                      const float32_t * __restrict__ pSrc,
-                            float32_t * __restrict__ pDst,
-                            uint32_t numSamples){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    printf("error: FC doesn't have FPU\n");
-    return;
-  }
-  else{
-    plp_cmplx_mag_squared_f32_xpulpv2(pSrc, pDst, numSamples);
-  }
+void plp_cmplx_mag_squared_f32(const float32_t *__restrict__ pSrc,
+                               float32_t *__restrict__ pDst,
+                               uint32_t numSamples) {
 
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        printf("error: FC doesn't have FPU\n");
+        return;
+    } else {
+        plp_cmplx_mag_squared_f32_xpulpv2(pSrc, pDst, numSamples);
+    }
 }
 
 /**
   @} end of BasicDotProd group
  */
-
-

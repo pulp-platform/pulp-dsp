@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and University of Bologna. 
+ * Copyright (C) 2019 ETH Zurich and University of Bologna.
  *
  * Author: Xiaying Wang, ETH Zurich
  *
@@ -32,7 +32,6 @@
  * released under Copyright (C) 2010-2019 ARM Limited or its affiliates
  * with Apache-2.0.
  */
-
 
 #include "plp_math.h"
 
@@ -57,8 +56,9 @@
    @return        none
  */
 
-void
-plp_mean_i32(const int32_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes) {
+void plp_mean_i32(const int32_t *__restrict__ pSrc,
+                  uint32_t blockSize,
+                  int32_t *__restrict__ pRes) {
 
     if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_mean_i32s_rv32im(pSrc, blockSize, pRes);

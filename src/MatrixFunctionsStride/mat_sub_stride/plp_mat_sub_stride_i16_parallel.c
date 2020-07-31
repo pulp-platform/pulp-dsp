@@ -77,7 +77,7 @@ void plp_mat_sub_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
                                                  .nPE = nPE,
                                                  .pDst = pDst };
 
-        rt_team_fork(nPE, plp_mat_sub_stride_i16vp_xpulpv2, (void *)&args);
+        rt_team_fork(nPE, plp_mat_sub_stride_i16p_xpulpv2, (void *)&args);
     }
 }
 

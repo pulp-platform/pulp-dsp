@@ -94,7 +94,7 @@ void plp_mat_mult_trans_cmplx_stride_q16_parallel(const int16_t *__restrict__ pS
                                                         .nPE = nPE,
                                                         .pDstC = pDstC };
 
-        rt_team_fork(nPE, plp_mat_mult_trans_cmplx_stride_q16vp_xpulpv2, (void *)&args);
+        rt_team_fork(nPE, plp_mat_mult_trans_cmplx_stride_q16p_xpulpv2, (void *)&args);
     }
 }
 

@@ -71,7 +71,7 @@ void plp_mat_mult_trans_cmplx_q8(const int8_t *__restrict__ pSrcA,
     if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_mat_mult_trans_cmplx_q8s_rv32im(pSrcA, pSrcB, M, N, O, shift, pDstC);
     } else {
-        plp_mat_mult_trans_cmplx_q8v_xpulpv2(pSrcA, pSrcB, M, N, O, shift, pDstC);
+        plp_mat_mult_trans_cmplx_q8s_xpulpv2(pSrcA, pSrcB, M, N, O, shift, pDstC);
     }
 }
 

@@ -1601,7 +1601,8 @@ void plp_dot_prod_q16s_rv32im(const int16_t *__restrict__ pSrcA,
                               int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
-    @brief Vectorized dot product of 16-bit fixed point vectors singlecore kernel for XPULPV2 extension.
+    @brief Vectorized dot product of 16-bit fixed point vectors singlecore kernel for XPULPV2
+   extension.
     @param[in]  pSrcA      points to the first input vector [16 bit]
     @param[in]  pSrcB      points to the second input vector [16 bit]
     @param[in]  blockSize  number of samples in each vector
@@ -1735,6 +1736,367 @@ void plp_dot_prod_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                               uint32_t blockSize,
                               uint32_t deciPoint,
                               int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+   @brief Glue code for absolute value of 32-bit integer vectors.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i32(const int32_t * pSrc,
+                 int32_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Element-by-element absolute value of 32-bit integer vectors kernel for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i32s_rv32im(const int32_t * pSrc,
+                         int32_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Element-by-element absolute value of 32-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i32s_xpulpv2(const int32_t * pSrc,
+                          int32_t * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Glue code for absolute value of 16-bit integer vectors.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i16(const int16_t * pSrc,
+                 int16_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Element-by-element absolute value of 16-bit integer vectors kernel for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i16s_rv32im(const int16_t * pSrc,
+                         int16_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Element-by-element absolute value of 16-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i16s_xpulpv2(const int16_t * pSrc,
+                          int16_t * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Glue code for absolute value of 8-bit integer vectors.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i8(const int8_t * pSrc,
+                 int8_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Element-by-element absolute value of 8-bit integer vectors kernel for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i8s_rv32im(const int8_t * pSrc,
+                         int8_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Element-by-element absolute value of 8-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i8s_xpulpv2(const int8_t * pSrc,
+                          int8_t * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Glue code for element-by-element addition of 32-bit integer vectors.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i32(const int32_t * pSrcA,
+                 const int32_t * pSrcB,
+                 int32_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element addition of 32-bit integer vectors kernel for RV32IM extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i32s_rv32im(const int32_t * pSrcA,
+                         const int32_t * pSrcB,
+                         int32_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element addition of 32-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i32s_xpulpv2(const int32_t * pSrcA,
+                          const int32_t * pSrcB,
+                          int32_t * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Glue code for element-by-element addition of 16-bit integer vectors.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i16(const int16_t * pSrcA,
+                 const int16_t * pSrcB,
+                 int32_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element addition of 16-bit integer vectors kernel for RV32IM extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i16s_rv32im(const int16_t * pSrcA,
+                         const int16_t * pSrcB,
+                         int32_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element addition of 16-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i16s_xpulpv2(const int16_t * pSrcA,
+                          const int16_t * pSrcB,
+                          int32_t * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Glue code for element-by-element addition of 8-bit integer vectors.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i8(const int8_t * pSrcA,
+                 const int8_t * pSrcB,
+                 int32_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element addition of 8-bit integer vectors kernel for RV32IM extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i8s_rv32im(const int8_t * pSrcA,
+                         const int8_t * pSrcB,
+                         int32_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element addition of 8-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i8s_xpulpv2(const int8_t * pSrcA,
+                          const int8_t * pSrcB,
+                          int32_t * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Glue code for element-by-element multiplication of 32-bit integer vectors.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i32(const int32_t * pSrcA,
+                 const int32_t * pSrcB,
+                 int32_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element multiplication of 32-bit integer vectors kernel for RV32IM extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i32s_rv32im(const int32_t * pSrcA,
+                         const int32_t * pSrcB,
+                         int32_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element multiplication of 32-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i32s_xpulpv2(const int32_t * pSrcA,
+                          const int32_t * pSrcB,
+                          int32_t * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Glue code for element-by-element multiplication of 16-bit integer vectors.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i16(const int16_t * pSrcA,
+                 const int16_t * pSrcB,
+                 int32_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element multiplication of 16-bit integer vectors kernel for RV32IM extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i16s_rv32im(const int16_t * pSrcA,
+                         const int16_t * pSrcB,
+                         int32_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element multiplication of 16-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i16s_xpulpv2(const int16_t * pSrcA,
+                          const int16_t * pSrcB,
+                          int32_t * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Glue code for element-by-element multiplication of 8-bit integer vectors.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i8(const int8_t * pSrcA,
+                 const int8_t * pSrcB,
+                 int32_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element multiplication of 8-bit integer vectors kernel for RV32IM extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i8s_rv32im(const int8_t * pSrcA,
+                         const int8_t * pSrcB,
+                         int32_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element multiplication of 8-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i8s_xpulpv2(const int8_t * pSrcA,
+                          const int8_t * pSrcB,
+                          int32_t * pDst,
+                          uint32_t blockSize);
+
 /** -------------------------------------------------------
     @brief      Glue code for filling a constant value into a 32-bit integer vector.
     @param[in]  value      input value to be filled
@@ -1783,8 +2145,9 @@ void plp_copy_i32(int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32
     @return     none
 */
 
-void
-plp_copy_i32s_rv32im(int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32_t blockSize);
+void plp_copy_i32s_rv32im(int32_t *__restrict__ pSrc,
+                          int32_t *__restrict__ pDst,
+                          uint32_t blockSize);
 
 /** -------------------------------------------------------
     @brief      Copies the elements of a 32-bit integer vector for XPULPV2 extension.
@@ -1794,8 +2157,9 @@ plp_copy_i32s_rv32im(int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uin
     @return     none
 */
 
-void
-plp_copy_i32s_xpulpv2(int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32_t blockSize);
+void plp_copy_i32s_xpulpv2(int32_t *__restrict__ pSrc,
+                           int32_t *__restrict__ pDst,
+                           uint32_t blockSize);
 
 /** -------------------------------------------------------
     @brief      Glue code for copying the elements of a 32-bit float vector
@@ -1837,8 +2201,9 @@ void plp_mean_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__r
     @return     none
 */
 
-void
-plp_mean_f32s_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
+void plp_mean_f32s_xpulpv2(const float *__restrict__ pSrc,
+                           uint32_t blockSize,
+                           float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for mean value of a 32-bit integer vector.
@@ -1926,8 +2291,9 @@ void plp_mean_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__
     @return     none
 */
 
-void
-plp_mean_i8s_rv32im(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
+void plp_mean_i8s_rv32im(const int8_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Mean value of a 8-bit integer vector for XPULPV2 extension.
@@ -1959,8 +2325,9 @@ void plp_max_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__re
     @return     none
 */
 
-void
-plp_max_f32s_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
+void plp_max_f32s_xpulpv2(const float *__restrict__ pSrc,
+                          uint32_t blockSize,
+                          float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for max value of a 32-bit integer vector.
@@ -2048,8 +2415,9 @@ void plp_max_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__r
     @return     none
 */
 
-void
-plp_max_i8s_rv32im(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
+void plp_max_i8s_rv32im(const int8_t *__restrict__ pSrc,
+                        uint32_t blockSize,
+                        int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Max value of a 8-bit integer vector for XPULPV2 extension.
@@ -2059,8 +2427,9 @@ plp_max_i8s_rv32im(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *
     @return     none
 */
 
-void
-plp_max_i8s_xpulpv2(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
+void plp_max_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for min value of a 32-bit float vector.
@@ -2080,8 +2449,9 @@ void plp_min_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__re
     @return     none
 */
 
-void
-plp_min_f32s_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
+void plp_min_f32s_xpulpv2(const float *__restrict__ pSrc,
+                          uint32_t blockSize,
+                          float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for min value of a 32-bit integer vector.
@@ -2169,8 +2539,9 @@ void plp_min_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__r
     @return     none
 */
 
-void
-plp_min_i8s_rv32im(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
+void plp_min_i8s_rv32im(const int8_t *__restrict__ pSrc,
+                        uint32_t blockSize,
+                        int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Min value of a 8-bit integer vector for XPULPV2 extension.
@@ -2180,8 +2551,9 @@ plp_min_i8s_rv32im(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *
     @return     none
 */
 
-void
-plp_min_i8s_xpulpv2(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes);
+void plp_min_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         int8_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for Sum of squares of a 32-bit float vector.
@@ -2201,8 +2573,9 @@ void plp_power_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__
     @return     none
 */
 
-void
-plp_power_f32_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
+void plp_power_f32_xpulpv2(const float *__restrict__ pSrc,
+                           uint32_t blockSize,
+                           float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for Sum of squares of a 32-bit integer vector.
@@ -2212,8 +2585,9 @@ plp_power_f32_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float 
     @return     none
 */
 
-void
-plp_power_i32(const int32_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes);
+void plp_power_i32(const int32_t *__restrict__ pSrc,
+                   uint32_t blockSize,
+                   int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Sum of squares of a 32-bit integer vector for RV32IM extension.
@@ -2247,8 +2621,9 @@ void plp_power_i32s_xpulpv2(const int32_t *__restrict__ pSrc,
     @return     none
 */
 
-void
-plp_power_i16(const int16_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes);
+void plp_power_i16(const int16_t *__restrict__ pSrc,
+                   uint32_t blockSize,
+                   int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Sum of squares of a 16-bit integer vector for RV32IM extension.
@@ -2443,8 +2818,9 @@ void plp_var_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__re
     @return     none
 */
 
-void
-plp_var_f32_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
+void plp_var_f32_xpulpv2(const float *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for Statisical variance of a 32-bit fixed point vector.
@@ -2581,8 +2957,9 @@ void plp_std_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__re
     @return     none
 */
 
-void
-plp_std_f32_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
+void plp_std_f32_xpulpv2(const float *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for Statisical standard deviation of a 32-bit fixed point vector.
@@ -2720,8 +3097,9 @@ void plp_rms_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__re
     @return     none
 */
 
-void
-plp_rms_f32_xpulpv2(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes);
+void plp_rms_f32_xpulpv2(const float *__restrict__ pSrc,
+                         uint32_t blockSize,
+                         float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for Statisical standard deviation of a 32-bit fixed point vector.
@@ -2849,8 +3227,9 @@ void plp_rms_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
     @return     none
 */
 
-void
-plp_sqrt_q32(const int32_t *__restrict__ pSrc, const uint32_t fracBits, int32_t *__restrict__ pRes);
+void plp_sqrt_q32(const int32_t *__restrict__ pSrc,
+                  const uint32_t fracBits,
+                  int32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Square root of a 32-bit fixed point number for XPULPV2 extension.
@@ -2881,8 +3260,9 @@ void plp_sqrt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
     @return     none
 */
 
-void
-plp_sqrt_q16(const int16_t *__restrict__ pSrc, const uint32_t fracBits, int16_t *__restrict__ pRes);
+void plp_sqrt_q16(const int16_t *__restrict__ pSrc,
+                  const uint32_t fracBits,
+                  int16_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Square root of a 16-bit fixed point number for XPULPV2 extension.
@@ -2906,21 +3286,22 @@ void plp_sqrt_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
                            const uint32_t fracBits,
                            int16_t *__restrict__ pRes);
 
-  /**
-   * @brief Macros required for SINE and COSINE Fast math approximations
-   */
+/**
+ * @brief Macros required for SINE and COSINE Fast math approximations
+ */
 
-#define FAST_MATH_TABLE_SIZE  512
-#define FAST_MATH_Q32_SHIFT   (32 - 10)
-#define FAST_MATH_Q16_SHIFT   (16 - 10)
-#define CONTROLLER_Q32_SHIFT  (32 - 9)
-#define TABLE_SPACING_Q32     0x400000
-#define TABLE_SPACING_Q16     0x80
+#define FAST_MATH_TABLE_SIZE 512
+#define FAST_MATH_Q32_SHIFT (32 - 10)
+#define FAST_MATH_Q16_SHIFT (16 - 10)
+#define CONTROLLER_Q32_SHIFT (32 - 9)
+#define TABLE_SPACING_Q32 0x400000
+#define TABLE_SPACING_Q16 0x80
 
 /**
  * @brief      Glue code for q32 cosine function
  *
- * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0,
+ * 2*PI)
  *
  * @return     cos(x)
  */
@@ -2930,7 +3311,8 @@ int32_t plp_cos_q32(int32_t x);
 /**
  * @brief      q32 cosine function for RV32IM
  *
- * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0,
+ * 2*PI)
  *
  * @return     cos(x)
  */
@@ -2940,7 +3322,8 @@ int32_t plp_cos_q32s_rv32im(int32_t x);
 /**
  * @brief      q32 cosine function for XPULPV2
  *
- * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0,
+ * 2*PI)
  *
  * @return     cos(x)
  */
@@ -2950,7 +3333,8 @@ int32_t plp_cos_q32s_xpulpv2(int32_t x);
 /**
  * @brief      Glue code for q16 cosine function
  *
- * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0,
+ * 2*PI)
  *
  * @return     cos(x)
  */
@@ -2960,7 +3344,8 @@ int16_t plp_cos_q16(int16_t x);
 /**
  * @brief      q16 cosine function for RV32IM
  *
- * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0,
+ * 2*PI)
  *
  * @return     cos(x)
  */
@@ -2970,7 +3355,8 @@ int16_t plp_cos_q16s_rv32im(int16_t x);
 /**
  * @brief      q16 cosine function for XPULPV2
  *
- * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0,
+ * 2*PI)
  *
  * @return     cos(x)
  */
@@ -3000,7 +3386,8 @@ float32_t plp_cos_f32s_xpulpv2(float32_t x);
 /**
  * @brief      Glue code for q32 sine function
  *
- * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0,
+ * 2*PI)
  *
  * @return     sin(x)
  */
@@ -3010,7 +3397,8 @@ int32_t plp_sin_q32(int32_t x);
 /**
  * @brief      q32 sine function for RV32IM
  *
- * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0,
+ * 2*PI)
  *
  * @return     sin(x)
  */
@@ -3020,7 +3408,8 @@ int32_t plp_sin_q32s_rv32im(int32_t x);
 /**
  * @brief      q32 sine function for XPULPV2
  *
- * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ * @param[in]  x     Scaled input value: Q1.31 value in range [0, +0.9999] and is mapped to [0,
+ * 2*PI)
  *
  * @return     sin(x)
  */
@@ -3030,7 +3419,8 @@ int32_t plp_sin_q32s_xpulpv2(int32_t x);
 /**
  * @brief      Glue code for q16 sine function
  *
- * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0,
+ * 2*PI)
  *
  * @return     sin(x)
  */
@@ -3040,7 +3430,8 @@ int16_t plp_sin_q16(int16_t x);
 /**
  * @brief      q16 sine function for RV32IM
  *
- * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0,
+ * 2*PI)
  *
  * @return     sin(x)
  */
@@ -3050,7 +3441,8 @@ int16_t plp_sin_q16s_rv32im(int16_t x);
 /**
  * @brief      q16 sine function for XPULPV2
  *
- * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0, 2*PI)
+ * @param[in]  x     Scaled input value: Q1.15 value in range [0, +0.9999] and is mapped to [0,
+ * 2*PI)
  *
  * @return     sin(x)
  */
@@ -3633,8 +4025,10 @@ void plp_conv_i8p_xpulpv2(void *task_args);
    @return none
 */
 
-void
-plp_conv_parallel_OLA(uint32_t nPE, uint32_t srcALen, uint32_t srcBLen, int32_t *resultsBuffer);
+void plp_conv_parallel_OLA(uint32_t nPE,
+                           uint32_t srcALen,
+                           uint32_t srcBLen,
+                           int32_t *resultsBuffer);
 
 /** -------------------------------------------------------
    @brief Helper function for parallelized overlap-adding of partial convolution results
@@ -3748,7 +4142,7 @@ void plp_mat_mult_i16s_rv32im(const int16_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                const int16_t *__restrict__ pSrcB,
                                uint32_t M,
                                uint32_t N,
@@ -3806,7 +4200,7 @@ void plp_mat_mult_i8s_rv32im(const int8_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                               const int8_t *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
@@ -3874,7 +4268,7 @@ void plp_mat_mult_i16_parallel(const int16_t *__restrict__ pSrcA,
     performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_i16vp_xpulpv2(void *args);
+void plp_mat_mult_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for parallel matrix matrix multiplication of a 8-bit integer matrices.
@@ -3976,7 +4370,7 @@ void plp_mat_mult_f32p_xpulpv2(void *args);
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_i8vp_xpulpv2(void *args);
+void plp_mat_mult_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for matrix matrix multiplication of a 32-bit fix-point matrices.
@@ -4205,7 +4599,7 @@ void plp_mat_mult_q16s_rv32im(const int16_t *__restrict__ pSrcA,
    Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                const int16_t *__restrict__ pSrcB,
                                uint32_t M,
                                uint32_t N,
@@ -4220,7 +4614,7 @@ void plp_mat_mult_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
     @return     none
 */
 
-void plp_mat_mult_q16vp_xpulpv2(void *args);
+void plp_mat_mult_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for matrix matrix multiplication of a 8-bit fix-point matrices.
@@ -4332,7 +4726,7 @@ void plp_mat_mult_q8s_rv32im(const int8_t *__restrict__ pSrcA,
    Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                               const int8_t *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
@@ -4347,7 +4741,7 @@ void plp_mat_mult_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
     @return     none
 */
 
-void plp_mat_mult_q8vp_xpulpv2(void *args);
+void plp_mat_mult_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of matrix matrix multiplication for complex 32-bit integers
@@ -4483,7 +4877,7 @@ void plp_mat_mult_cmplx_i16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_cmplx_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                      const int16_t *__restrict__ pSrcB,
                                      uint32_t M,
                                      uint32_t N,
@@ -4521,7 +4915,7 @@ void plp_mat_mult_cmplx_i16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_i16vp_xpulpv2(void *args);
+void plp_mat_mult_cmplx_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of matrix matrix multiplication for complex 8-bit integers
@@ -4574,7 +4968,7 @@ void plp_mat_mult_cmplx_i8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_cmplx_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                     const int8_t *__restrict__ pSrcB,
                                     uint32_t M,
                                     uint32_t N,
@@ -4612,7 +5006,7 @@ void plp_mat_mult_cmplx_i8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_i8vp_xpulpv2(void *args);
+void plp_mat_mult_cmplx_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of matrix matrix multiplication for complex 32-bit floats
@@ -4898,7 +5292,7 @@ void plp_mat_mult_cmplx_q16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_cmplx_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                      const int16_t *__restrict__ pSrcB,
                                      uint32_t M,
                                      uint32_t N,
@@ -4957,7 +5351,7 @@ void plp_mat_mult_cmplx_q16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_q16vp_xpulpv2(void *args);
+void plp_mat_mult_cmplx_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of matrix matrix multiplication for complex 8-bit fix-point
@@ -5042,7 +5436,7 @@ void plp_mat_mult_cmplx_q8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_cmplx_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                     const int8_t *__restrict__ pSrcB,
                                     uint32_t M,
                                     uint32_t N,
@@ -5101,7 +5495,7 @@ void plp_mat_mult_cmplx_q8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_q8vp_xpulpv2(void *args);
+void plp_mat_mult_cmplx_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for matrix transposed matrix multiplication of a 32-bit integer
@@ -5214,7 +5608,7 @@ void plp_mat_mult_trans_i16s_rv32im(const int16_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                      const int16_t *__restrict__ pSrcB,
                                      uint32_t M,
                                      uint32_t N,
@@ -5274,7 +5668,7 @@ void plp_mat_mult_trans_i8s_rv32im(const int8_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                     const int8_t *__restrict__ pSrcB,
                                     uint32_t M,
                                     uint32_t N,
@@ -5344,7 +5738,7 @@ void plp_mat_mult_trans_i16_parallel(const int16_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_i16vp_xpulpv2(void *args);
+void plp_mat_mult_trans_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for parallel matrix transposed matrix multiplication of a 8-bit integer
@@ -5379,7 +5773,7 @@ void plp_mat_mult_trans_i8_parallel(const int8_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_i8vp_xpulpv2(void *args);
+void plp_mat_mult_trans_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for matrix transposed matrix multiplication of a 32-bit fix-point
@@ -5615,7 +6009,7 @@ void plp_mat_mult_trans_q16s_rv32im(const int16_t *__restrict__ pSrcA,
    Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_trans_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                      const int16_t *__restrict__ pSrcB,
                                      uint32_t M,
                                      uint32_t N,
@@ -5631,7 +6025,7 @@ void plp_mat_mult_trans_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
     @return     none
 */
 
-void plp_mat_mult_trans_q16vp_xpulpv2(void *args);
+void plp_mat_mult_trans_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for matrix transposed matrix multiplication of a 8-bit fix-point
@@ -5747,7 +6141,7 @@ void plp_mat_mult_trans_q8s_rv32im(const int8_t *__restrict__ pSrcA,
    Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_trans_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                     const int8_t *__restrict__ pSrcB,
                                     uint32_t M,
                                     uint32_t N,
@@ -5763,7 +6157,7 @@ void plp_mat_mult_trans_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
     @return     none
 */
 
-void plp_mat_mult_trans_q8vp_xpulpv2(void *args);
+void plp_mat_mult_trans_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for matrix transposed matrix multiplication of a 32-bit floating-point
@@ -5969,7 +6363,7 @@ void plp_mat_mult_trans_cmplx_i16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_cmplx_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                            const int16_t *__restrict__ pSrcB,
                                            uint32_t M,
                                            uint32_t N,
@@ -6008,7 +6402,7 @@ void plp_mat_mult_trans_cmplx_i16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_i16vp_xpulpv2(void *args);
+void plp_mat_mult_trans_cmplx_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of matrix transpose matrix multiplication for complex 8-bit integers
@@ -6061,7 +6455,7 @@ void plp_mat_mult_trans_cmplx_i8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_cmplx_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                           const int8_t *__restrict__ pSrcB,
                                           uint32_t M,
                                           uint32_t N,
@@ -6100,7 +6494,7 @@ void plp_mat_mult_trans_cmplx_i8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_i8vp_xpulpv2(void *args);
+void plp_mat_mult_trans_cmplx_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of matrix transpose matrix multiplication for complex 32-bit floats
@@ -6388,7 +6782,7 @@ void plp_mat_mult_trans_cmplx_q16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_cmplx_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                            const int16_t *__restrict__ pSrcB,
                                            uint32_t M,
                                            uint32_t N,
@@ -6449,7 +6843,7 @@ void plp_mat_mult_trans_cmplx_q16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_q16vp_xpulpv2(void *args);
+void plp_mat_mult_trans_cmplx_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of matrix transpose matrix multiplication for complex 8-bit fix-point
@@ -6534,7 +6928,7 @@ void plp_mat_mult_trans_cmplx_q8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_cmplx_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                           const int8_t *__restrict__ pSrcB,
                                           uint32_t M,
                                           uint32_t N,
@@ -6594,7 +6988,7 @@ void plp_mat_mult_trans_cmplx_q8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_q8vp_xpulpv2(void *args);
+void plp_mat_mult_trans_cmplx_q8p_xpulpv2(void *args);
 
 /**
  * @brief      Glue code for complex magnitude calculation in float32
@@ -6862,8 +7256,9 @@ void plp_cmplx_mag_q16s_xpulpv2(const int16_t *pSrc,
   @return     none
 */
 
-void
-plp_bitreversal_16s_rv32im(uint16_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab);
+void plp_bitreversal_16s_rv32im(uint16_t *pSrc,
+                                const uint16_t bitRevLen,
+                                const uint16_t *pBitRevTab);
 
 /**
   @brief      In-place 16 bit reversal function for XPULPV2
@@ -6873,8 +7268,9 @@ plp_bitreversal_16s_rv32im(uint16_t *pSrc, const uint16_t bitRevLen, const uint1
   @return     none
 */
 
-void
-plp_bitreversal_16v_xpulpv2(uint16_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab);
+void plp_bitreversal_16v_xpulpv2(uint16_t *pSrc,
+                                 const uint16_t bitRevLen,
+                                 const uint16_t *pBitRevTab);
 
 /**
  * @brief      Glue code for quantized 16 bit complex fast fourier transform
@@ -6936,7 +7332,7 @@ void plp_cfft_q16s_rv32im(const plp_cfft_instance_q16 *S,
  * @param[in]  deciPoint       decimal point for right shift
  */
 
-void plp_cfft_q16v_xpulpv2(const plp_cfft_instance_q16 *S,
+void plp_cfft_q16s_xpulpv2(const plp_cfft_instance_q16 *S,
                            int16_t *p1,
                            uint8_t ifftFlag,
                            uint8_t bitReverseFlag,
@@ -7105,7 +7501,7 @@ void plp_mat_add_i16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_add_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                               const int16_t *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
@@ -7140,7 +7536,7 @@ void plp_mat_add_i16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_i16vp_xpulpv2(void *args);
+void plp_mat_add_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix addition of a 8-bit integer matrices.
@@ -7188,7 +7584,7 @@ void plp_mat_add_i8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_add_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                              const int8_t *__restrict__ pSrcB,
                              uint32_t M,
                              uint32_t N,
@@ -7223,7 +7619,7 @@ void plp_mat_add_i8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_i8vp_xpulpv2(void *args);
+void plp_mat_add_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix addition of a 32-bit floating-point matrices.
@@ -7405,7 +7801,7 @@ void plp_mat_sub_i16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_sub_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                               const int16_t *__restrict__ pSrcB,
                               uint32_t M,
                               uint32_t N,
@@ -7440,7 +7836,7 @@ void plp_mat_sub_i16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_i16vp_xpulpv2(void *args);
+void plp_mat_sub_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix subtraction of a 8-bit integer matrices.
@@ -7488,7 +7884,7 @@ void plp_mat_sub_i8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_sub_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                              const int8_t *__restrict__ pSrcB,
                              uint32_t M,
                              uint32_t N,
@@ -7523,7 +7919,7 @@ void plp_mat_sub_i8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_i8vp_xpulpv2(void *args);
+void plp_mat_sub_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix subtraction of a 32-bit floating-point matrices.
@@ -7718,7 +8114,7 @@ void plp_mat_scale_i16s_rv32im(const int16_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_i16v_xpulpv2(const int16_t *__restrict__ pSrc,
+void plp_mat_scale_i16s_xpulpv2(const int16_t *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
                                 int16_t scaleFactor,
@@ -7756,7 +8152,7 @@ void plp_mat_scale_i16_parallel(const int16_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_i16vp_xpulpv2(void *args);
+void plp_mat_scale_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix scale of a 8-bit integer matrices.
@@ -7809,7 +8205,7 @@ void plp_mat_scale_i8s_rv32im(const int8_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_i8v_xpulpv2(const int8_t *__restrict__ pSrc,
+void plp_mat_scale_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
                                uint32_t M,
                                uint32_t N,
                                int8_t scaleFactor,
@@ -7847,7 +8243,7 @@ void plp_mat_scale_i8_parallel(const int8_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_i8vp_xpulpv2(void *args);
+void plp_mat_scale_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix scale of a 32-bit floating-point matrices.
@@ -8016,7 +8412,7 @@ void plp_mat_trans_i16s_rv32im(const int16_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_trans_i16v_xpulpv2(const int16_t *__restrict__ pSrc,
+void plp_mat_trans_i16s_xpulpv2(const int16_t *__restrict__ pSrc,
                                 uint32_t M,
                                 uint32_t N,
                                 int16_t *__restrict__ pDst);
@@ -8048,7 +8444,7 @@ void plp_mat_trans_i16_parallel(const int16_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_trans_i16vp_xpulpv2(void *args);
+void plp_mat_trans_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix transpose of a 8-bit integer matrices.
@@ -8091,7 +8487,7 @@ void plp_mat_trans_i8s_rv32im(const int8_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_trans_i8v_xpulpv2(const int8_t *__restrict__ pSrc,
+void plp_mat_trans_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
                                uint32_t M,
                                uint32_t N,
                                int8_t *__restrict__ pDst);
@@ -8123,7 +8519,7 @@ void plp_mat_trans_i8_parallel(const int8_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_trans_i8vp_xpulpv2(void *args);
+void plp_mat_trans_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix transpose of a 32-bit float*ing-point matrices.
@@ -8136,8 +8532,10 @@ void plp_mat_trans_i8vp_xpulpv2(void *args);
   @par This function will use plp_mat_trans_i32s_xpulpv2 for its computation.
 */
 
-void
-plp_mat_trans_f32(const float *__restrict__ pSrc, uint32_t M, uint32_t N, float *__restrict__ pDst);
+void plp_mat_trans_f32(const float *__restrict__ pSrc,
+                       uint32_t M,
+                       uint32_t N,
+                       float *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix transpose of a 32-bit float*ing-point matrices.
@@ -8272,7 +8670,7 @@ void plp_mat_fill_I_i16s_rv32im(uint32_t N, int16_t *__restrict__ pDst);
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_i16v_xpulpv2(uint32_t N, int16_t *__restrict__ pDst);
+void plp_mat_fill_I_i16s_xpulpv2(uint32_t N, int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a 16-bit integer identity matrix in parallel
@@ -8295,7 +8693,7 @@ void plp_mat_fill_I_i16_parallel(uint32_t N, uint32_t nPE, int16_t *__restrict__
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_i16vp_xpulpv2(void *args);
+void plp_mat_fill_I_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a 8-bit integer identity matrix
@@ -8326,7 +8724,7 @@ void plp_mat_fill_I_i8s_rv32im(uint32_t N, int8_t *__restrict__ pDst);
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_i8v_xpulpv2(uint32_t N, int8_t *__restrict__ pDst);
+void plp_mat_fill_I_i8s_xpulpv2(uint32_t N, int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a 8-bit integer identity matrix in parallel
@@ -8349,7 +8747,7 @@ void plp_mat_fill_I_i8_parallel(uint32_t N, uint32_t nPE, int8_t *__restrict__ p
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_i8vp_xpulpv2(void *args);
+void plp_mat_fill_I_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a 32-bit float identity matrix
@@ -8427,8 +8825,10 @@ void plp_mat_fill_I_q32s_xpulpv2(uint32_t N, int32_t fracBits, int32_t *__restri
   @return     none
 */
 
-void
-plp_mat_fill_I_q32_parallel(uint32_t N, int32_t fracBits, uint32_t nPE, int32_t *__restrict__ pDst);
+void plp_mat_fill_I_q32_parallel(uint32_t N,
+                                 int32_t fracBits,
+                                 uint32_t nPE,
+                                 int32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Create a 32-bit fix-point identity matrix in parallel on XpulpV2
@@ -8471,7 +8871,7 @@ void plp_mat_fill_I_q16s_rv32im(uint32_t N, int32_t fracBits, int16_t *__restric
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_q16v_xpulpv2(uint32_t N, int32_t fracBits, int16_t *__restrict__ pDst);
+void plp_mat_fill_I_q16s_xpulpv2(uint32_t N, int32_t fracBits, int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a 16-bit fix-point identity matrix in parallel
@@ -8482,8 +8882,10 @@ void plp_mat_fill_I_q16v_xpulpv2(uint32_t N, int32_t fracBits, int16_t *__restri
   @return     none
 */
 
-void
-plp_mat_fill_I_q16_parallel(uint32_t N, int32_t fracBits, uint32_t nPE, int16_t *__restrict__ pDst);
+void plp_mat_fill_I_q16_parallel(uint32_t N,
+                                 int32_t fracBits,
+                                 uint32_t nPE,
+                                 int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Create a 16-bit fix-point identity matrix in parallel on XpulpV2
@@ -8496,7 +8898,7 @@ plp_mat_fill_I_q16_parallel(uint32_t N, int32_t fracBits, uint32_t nPE, int16_t 
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_q16vp_xpulpv2(void *args);
+void plp_mat_fill_I_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a 8-bit fix-point identity matrix
@@ -8530,7 +8932,7 @@ void plp_mat_fill_I_q8s_rv32im(uint32_t N, int32_t fracBits, int8_t *__restrict_
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_q8v_xpulpv2(uint32_t N, int32_t fracBits, int8_t *__restrict__ pDst);
+void plp_mat_fill_I_q8s_xpulpv2(uint32_t N, int32_t fracBits, int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a 8-bit fix-point identity matrix in parallel
@@ -8541,8 +8943,10 @@ void plp_mat_fill_I_q8v_xpulpv2(uint32_t N, int32_t fracBits, int8_t *__restrict
   @return     none
 */
 
-void
-plp_mat_fill_I_q8_parallel(uint32_t N, int32_t fracBits, uint32_t nPE, int8_t *__restrict__ pDst);
+void plp_mat_fill_I_q8_parallel(uint32_t N,
+                                int32_t fracBits,
+                                uint32_t nPE,
+                                int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Create a 8-bit fix-point identity matrix in parallel on XpulpV2
@@ -8555,7 +8959,7 @@ plp_mat_fill_I_q8_parallel(uint32_t N, int32_t fracBits, uint32_t nPE, int8_t *_
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_q8vp_xpulpv2(void *args);
+void plp_mat_fill_I_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for strided matrix matrix multiplication of a 32-bit integer matrices.
@@ -8699,7 +9103,7 @@ void plp_mat_mult_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_stride_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                       const int16_t *__restrict__ pSrcB,
                                       uint32_t M,
                                       uint32_t N,
@@ -8777,7 +9181,7 @@ void plp_mat_mult_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_stride_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                      const int8_t *__restrict__ pSrcB,
                                      uint32_t M,
                                      uint32_t N,
@@ -8862,7 +9266,7 @@ void plp_mat_mult_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
     performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_stride_i16vp_xpulpv2(void *args);
+void plp_mat_mult_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for parallel strided matrix matrix multiplication of a 8-bit integer
@@ -8989,7 +9393,7 @@ void plp_mat_mult_stride_f32p_xpulpv2(void *args);
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_stride_i8vp_xpulpv2(void *args);
+void plp_mat_mult_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for strided matrix matrix multiplication of a 32-bit fix-point matrices.
@@ -9267,7 +9671,7 @@ void plp_mat_mult_stride_q16s_rv32im(const int16_t *__restrict__ pSrcA,
    Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_stride_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                       const int16_t *__restrict__ pSrcB,
                                       uint32_t M,
                                       uint32_t N,
@@ -9285,7 +9689,7 @@ void plp_mat_mult_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
     @return     none
 */
 
-void plp_mat_mult_stride_q16vp_xpulpv2(void *args);
+void plp_mat_mult_stride_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for strided matrix matrix multiplication of a 8-bit fix-point matrices.
@@ -9421,7 +9825,7 @@ void plp_mat_mult_stride_q8s_rv32im(const int8_t *__restrict__ pSrcA,
    Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_stride_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                      const int8_t *__restrict__ pSrcB,
                                      uint32_t M,
                                      uint32_t N,
@@ -9439,7 +9843,7 @@ void plp_mat_mult_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
     @return     none
 */
 
-void plp_mat_mult_stride_q8vp_xpulpv2(void *args);
+void plp_mat_mult_stride_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for strided matrix transposed matrix multiplication of a 32-bit integer
@@ -9585,7 +9989,7 @@ void plp_mat_mult_trans_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_stride_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                             const int16_t *__restrict__ pSrcB,
                                             uint32_t M,
                                             uint32_t N,
@@ -9664,7 +10068,7 @@ void plp_mat_mult_trans_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_stride_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                            const int8_t *__restrict__ pSrcB,
                                            uint32_t M,
                                            uint32_t N,
@@ -9750,7 +10154,7 @@ void plp_mat_mult_trans_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_stride_i16vp_xpulpv2(void *args);
+void plp_mat_mult_trans_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for parallel strided matrix transposed matrix multiplication of a 8-bit
@@ -9791,7 +10195,7 @@ void plp_mat_mult_trans_stride_i8_parallel(const int8_t *__restrict__ pSrcA,
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_stride_i8vp_xpulpv2(void *args);
+void plp_mat_mult_trans_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for strided matrix transposed matrix multiplication of a 32-bit
@@ -10072,7 +10476,7 @@ void plp_mat_mult_trans_stride_q16s_rv32im(const int16_t *__restrict__ pSrcA,
    Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_trans_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_stride_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                             const int16_t *__restrict__ pSrcB,
                                             uint32_t M,
                                             uint32_t N,
@@ -10091,7 +10495,7 @@ void plp_mat_mult_trans_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
     @return     none
 */
 
-void plp_mat_mult_trans_stride_q16vp_xpulpv2(void *args);
+void plp_mat_mult_trans_stride_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for strided matrix transposed matrix multiplication of a 8-bit fix-point
@@ -10228,7 +10632,7 @@ void plp_mat_mult_trans_stride_q8s_rv32im(const int8_t *__restrict__ pSrcA,
    Set the `shift` parameter such that no overflow ocurrs.
 */
 
-void plp_mat_mult_trans_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_stride_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                            const int8_t *__restrict__ pSrcB,
                                            uint32_t M,
                                            uint32_t N,
@@ -10247,7 +10651,7 @@ void plp_mat_mult_trans_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
     @return     none
 */
 
-void plp_mat_mult_trans_stride_q8vp_xpulpv2(void *args);
+void plp_mat_mult_trans_stride_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
    @brief      Glue code for strided matrix transposed matrix multiplication of a 32-bit
@@ -10509,7 +10913,7 @@ void plp_mat_mult_cmplx_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_cmplx_stride_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                             const int16_t *__restrict__ pSrcB,
                                             uint32_t M,
                                             uint32_t N,
@@ -10556,7 +10960,7 @@ void plp_mat_mult_cmplx_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_stride_i16vp_xpulpv2(void *args);
+void plp_mat_mult_cmplx_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of strided matrix matrix multiplication for complex 8-bit integers
@@ -10624,7 +11028,7 @@ void plp_mat_mult_cmplx_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_cmplx_stride_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                            const int8_t *__restrict__ pSrcB,
                                            uint32_t M,
                                            uint32_t N,
@@ -10671,7 +11075,7 @@ void plp_mat_mult_cmplx_stride_i8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_stride_i8vp_xpulpv2(void *args);
+void plp_mat_mult_cmplx_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of strided matrix matrix multiplication for complex 32-bit floats
@@ -11015,7 +11419,7 @@ void plp_mat_mult_cmplx_stride_q16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_cmplx_stride_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                             const int16_t *__restrict__ pSrcB,
                                             uint32_t M,
                                             uint32_t N,
@@ -11084,7 +11488,7 @@ void plp_mat_mult_cmplx_stride_q16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_stride_q16vp_xpulpv2(void *args);
+void plp_mat_mult_cmplx_stride_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of strided matrix matrix multiplication for complex 8-bit fix-point
@@ -11184,7 +11588,7 @@ void plp_mat_mult_cmplx_stride_q8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_cmplx_stride_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                            const int8_t *__restrict__ pSrcB,
                                            uint32_t M,
                                            uint32_t N,
@@ -11252,7 +11656,7 @@ void plp_mat_mult_cmplx_stride_q8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_cmplx_stride_q8vp_xpulpv2(void *args);
+void plp_mat_mult_cmplx_stride_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of strided matrix transpose matrix multiplication for complex 32-bit
@@ -11431,7 +11835,7 @@ void plp_mat_mult_trans_cmplx_stride_i16s_rv32im(const int16_t *__restrict__ pSr
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_cmplx_stride_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                                   const int16_t *__restrict__ pSrcB,
                                                   uint32_t M,
                                                   uint32_t N,
@@ -11480,7 +11884,7 @@ void plp_mat_mult_trans_cmplx_stride_i16_parallel(const int16_t *__restrict__ pS
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_stride_i16vp_xpulpv2(void *args);
+void plp_mat_mult_trans_cmplx_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of strided matrix transpose matrix multiplication for complex 8-bit integers
@@ -11548,7 +11952,7 @@ void plp_mat_mult_trans_cmplx_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_cmplx_stride_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                                  const int8_t *__restrict__ pSrcB,
                                                  uint32_t M,
                                                  uint32_t N,
@@ -11597,7 +12001,7 @@ void plp_mat_mult_trans_cmplx_stride_i8_parallel(const int8_t *__restrict__ pSrc
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_stride_i8vp_xpulpv2(void *args);
+void plp_mat_mult_trans_cmplx_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of strided matrix transpose matrix multiplication for complex 32-bit floats
@@ -11946,7 +12350,7 @@ void plp_mat_mult_trans_cmplx_stride_q16s_rv32im(const int16_t *__restrict__ pSr
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_stride_q16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_cmplx_stride_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                                   const int16_t *__restrict__ pSrcB,
                                                   uint32_t M,
                                                   uint32_t N,
@@ -12016,7 +12420,7 @@ void plp_mat_mult_trans_cmplx_stride_q16_parallel(const int16_t *__restrict__ pS
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_stride_q16vp_xpulpv2(void *args);
+void plp_mat_mult_trans_cmplx_stride_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code of strided matrix transpose matrix multiplication for complex 8-bit
@@ -12117,7 +12521,7 @@ void plp_mat_mult_trans_cmplx_stride_q8s_rv32im(const int8_t *__restrict__ pSrcA
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_stride_q8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_mult_trans_cmplx_stride_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                                  const int8_t *__restrict__ pSrcB,
                                                  uint32_t M,
                                                  uint32_t N,
@@ -12187,7 +12591,7 @@ void plp_mat_mult_trans_cmplx_stride_q8_parallel(const int8_t *__restrict__ pSrc
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_mult_trans_cmplx_stride_q8vp_xpulpv2(void *args);
+void plp_mat_mult_trans_cmplx_stride_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief   Glue code for matrix addition of a 32-bit integer matrices.
@@ -12349,7 +12753,7 @@ void plp_mat_add_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_add_stride_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                      const int16_t *__restrict__ pSrcB,
                                      uint32_t M,
                                      uint32_t N,
@@ -12393,7 +12797,7 @@ void plp_mat_add_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_stride_i16vp_xpulpv2(void *args);
+void plp_mat_add_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix addition of a 8-bit integer matrices.
@@ -12456,7 +12860,7 @@ void plp_mat_add_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_add_stride_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                     const int8_t *__restrict__ pSrcB,
                                     uint32_t M,
                                     uint32_t N,
@@ -12500,7 +12904,7 @@ void plp_mat_add_stride_i8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_add_stride_i8vp_xpulpv2(void *args);
+void plp_mat_add_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix addition of a 32-bit floating-point matrices.
@@ -12739,7 +13143,7 @@ void plp_mat_sub_stride_i16s_rv32im(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrcA,
+void plp_mat_sub_stride_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                      const int16_t *__restrict__ pSrcB,
                                      uint32_t M,
                                      uint32_t N,
@@ -12783,7 +13187,7 @@ void plp_mat_sub_stride_i16_parallel(const int16_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_stride_i16vp_xpulpv2(void *args);
+void plp_mat_sub_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix subtraction of a 8-bit integer matrices.
@@ -12846,7 +13250,7 @@ void plp_mat_sub_stride_i8s_rv32im(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrcA,
+void plp_mat_sub_stride_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                                     const int8_t *__restrict__ pSrcB,
                                     uint32_t M,
                                     uint32_t N,
@@ -12890,7 +13294,7 @@ void plp_mat_sub_stride_i8_parallel(const int8_t *__restrict__ pSrcA,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_sub_stride_i8vp_xpulpv2(void *args);
+void plp_mat_sub_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix subtraction of a 32-bit floating-point matrices.
@@ -13131,7 +13535,7 @@ void plp_mat_scale_stride_i16s_rv32im(const int16_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrc,
+void plp_mat_scale_stride_i16s_xpulpv2(const int16_t *__restrict__ pSrc,
                                        uint32_t M,
                                        uint32_t N,
                                        uint32_t strideSrc,
@@ -13175,7 +13579,7 @@ void plp_mat_scale_stride_i16_parallel(const int16_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_stride_i16vp_xpulpv2(void *args);
+void plp_mat_scale_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for strided matrix scale of a 8-bit integer matrices.
@@ -13238,7 +13642,7 @@ void plp_mat_scale_stride_i8s_rv32im(const int8_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrc,
+void plp_mat_scale_stride_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
                                       uint32_t M,
                                       uint32_t N,
                                       uint32_t strideSrc,
@@ -13282,7 +13686,7 @@ void plp_mat_scale_stride_i8_parallel(const int8_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_scale_stride_i8vp_xpulpv2(void *args);
+void plp_mat_scale_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for strided matrix scale of a 32-bit floating-point matrices.
@@ -13441,7 +13845,7 @@ void plp_mat_fill_I_stride_i16s_rv32im(uint32_t N, uint32_t stride, int16_t *__r
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_stride_i16v_xpulpv2(uint32_t N, uint32_t stride, int16_t *__restrict__ pDst);
+void plp_mat_fill_I_stride_i16s_xpulpv2(uint32_t N, uint32_t stride, int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a strided 16-bit integers identity matrix in parallel
@@ -13468,7 +13872,7 @@ void plp_mat_fill_I_stride_i16_parallel(uint32_t N,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_stride_i16vp_xpulpv2(void *args);
+void plp_mat_fill_I_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a strided 8-bit integers identity matrix
@@ -13502,7 +13906,7 @@ void plp_mat_fill_I_stride_i8s_rv32im(uint32_t N, uint32_t stride, int8_t *__res
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_stride_i8v_xpulpv2(uint32_t N, uint32_t stride, int8_t *__restrict__ pDst);
+void plp_mat_fill_I_stride_i8s_xpulpv2(uint32_t N, uint32_t stride, int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a strided 8-bit integers identity matrix in parallel
@@ -13529,7 +13933,7 @@ void plp_mat_fill_I_stride_i8_parallel(uint32_t N,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_stride_i8vp_xpulpv2(void *args);
+void plp_mat_fill_I_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a strided 32-bit floats identity matrix
@@ -13703,7 +14107,7 @@ void plp_mat_fill_I_stride_q16s_rv32im(uint32_t N,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_stride_q16v_xpulpv2(uint32_t N,
+void plp_mat_fill_I_stride_q16s_xpulpv2(uint32_t N,
                                         uint32_t stride,
                                         int32_t fracBits,
                                         int16_t *__restrict__ pDst);
@@ -13738,7 +14142,7 @@ void plp_mat_fill_I_stride_q16_parallel(
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_stride_q16vp_xpulpv2(void *args);
+void plp_mat_fill_I_stride_q16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for creating a strided 8-bit fix-point identity matrix
@@ -13752,8 +14156,10 @@ void plp_mat_fill_I_stride_q16vp_xpulpv2(void *args);
   The diagonal elements will be filled with the value: `1 << fracBits`.
 */
 
-void
-plp_mat_fill_I_stride_q8(uint32_t N, uint32_t stride, int32_t fracBits, int8_t *__restrict__ pDst);
+void plp_mat_fill_I_stride_q8(uint32_t N,
+                              uint32_t stride,
+                              int32_t fracBits,
+                              int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Create a strided 8-bit fix-point identity matrix on RV32IM
@@ -13788,7 +14194,7 @@ void plp_mat_fill_I_stride_q8s_rv32im(uint32_t N,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_stride_q8v_xpulpv2(uint32_t N,
+void plp_mat_fill_I_stride_q8s_xpulpv2(uint32_t N,
                                        uint32_t stride,
                                        int32_t fracBits,
                                        int8_t *__restrict__ pDst);
@@ -13823,7 +14229,7 @@ void plp_mat_fill_I_stride_q8_parallel(
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_I_stride_q8vp_xpulpv2(void *args);
+void plp_mat_fill_I_stride_q8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for filling an MxN strided 32-bit integers matrix
@@ -13924,7 +14330,7 @@ void plp_mat_fill_stride_i16s_rv32im(
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_stride_i16v_xpulpv2(
+void plp_mat_fill_stride_i16s_xpulpv2(
     uint32_t M, uint32_t N, uint32_t stride, int16_t value, int16_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
@@ -13955,7 +14361,7 @@ void plp_mat_fill_stride_i16_parallel(uint32_t M,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_stride_i16vp_xpulpv2(void *args);
+void plp_mat_fill_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for filling an MxN strided 8-bit integers matrix
@@ -13994,7 +14400,7 @@ void plp_mat_fill_stride_i8s_rv32im(
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_stride_i8v_xpulpv2(
+void plp_mat_fill_stride_i8s_xpulpv2(
     uint32_t M, uint32_t N, uint32_t stride, int8_t value, int8_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
@@ -14021,7 +14427,7 @@ void plp_mat_fill_stride_i8_parallel(
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_fill_stride_i8vp_xpulpv2(void *args);
+void plp_mat_fill_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code for filling an MxN strided 32-bit floats matrix
@@ -14203,7 +14609,7 @@ void plp_mat_copy_stride_i16s_rv32im(const int16_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_copy_stride_i16v_xpulpv2(const int16_t *__restrict__ pSrc,
+void plp_mat_copy_stride_i16s_xpulpv2(const int16_t *__restrict__ pSrc,
                                       uint32_t M,
                                       uint32_t N,
                                       uint32_t strideSrc,
@@ -14241,7 +14647,7 @@ void plp_mat_copy_stride_i16_parallel(const int16_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_copy_stride_i16vp_xpulpv2(void *args);
+void plp_mat_copy_stride_i16p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code to copy an MxN strided 8-bit integers matrix
@@ -14294,7 +14700,7 @@ void plp_mat_copy_stride_i8s_rv32im(const int8_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_copy_stride_i8v_xpulpv2(const int8_t *__restrict__ pSrc,
+void plp_mat_copy_stride_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
                                      uint32_t M,
                                      uint32_t N,
                                      uint32_t strideSrc,
@@ -14332,7 +14738,7 @@ void plp_mat_copy_stride_i8_parallel(const int8_t *__restrict__ pSrc,
   performed on 32 bit vectors, with 32 bit accumulator.
 */
 
-void plp_mat_copy_stride_i8vp_xpulpv2(void *args);
+void plp_mat_copy_stride_i8p_xpulpv2(void *args);
 
 /** -------------------------------------------------------
   @brief      Glue code to copy an MxN strided 32-bit floats matrix
@@ -14406,10 +14812,9 @@ void plp_mat_copy_stride_f32p_xpulpv2(void *args);
   @param[in]     numSamples  number of samples in each vector
   @return        none
  */
-void plp_cmplx_conj_f32(
-                      const float32_t * __restrict__ pSrc,
-                         float32_t * __restrict__ pDst,
-                         uint32_t numSamples);
+void plp_cmplx_conj_f32(const float32_t *__restrict__ pSrc,
+                        float32_t *__restrict__ pDst,
+                        uint32_t numSamples);
 
 /**
   @brief         Floating-point complex conjugate.
@@ -14419,10 +14824,9 @@ void plp_cmplx_conj_f32(
   @return        none
  */
 
-void plp_cmplx_conj_f32_xpulpv2(
-  const float32_t * __restrict__ pSrc,
-        float32_t * __restrict__ pDst,
-        uint32_t numSamples);
+void plp_cmplx_conj_f32_xpulpv2(const float32_t *__restrict__ pSrc,
+                                float32_t *__restrict__ pDst,
+                                uint32_t numSamples);
 
 /**
   @brief Glue code for complex conjugate of 32-bit integer vectors.
@@ -14431,10 +14835,9 @@ void plp_cmplx_conj_f32_xpulpv2(
   @param[in]     numSamples  number of samples in each vector
   @return        none
  */
-void plp_cmplx_conj_i32(
-                      const int32_t * __restrict__ pSrc,
-                         int32_t * __restrict__ pDst,
-                         uint32_t numSamples);
+void plp_cmplx_conj_i32(const int32_t *__restrict__ pSrc,
+                        int32_t *__restrict__ pDst,
+                        uint32_t numSamples);
 
 /**
   @brief         32-bit integer complex conjugate.
@@ -14444,10 +14847,9 @@ void plp_cmplx_conj_i32(
   @return        none
  */
 
-void plp_cmplx_conj_i32_xpulpv2(
-  const int32_t * __restrict__ pSrc,
-        int32_t * __restrict__ pDst,
-        uint32_t numSamples);
+void plp_cmplx_conj_i32_xpulpv2(const int32_t *__restrict__ pSrc,
+                                int32_t *__restrict__ pDst,
+                                uint32_t numSamples);
 
 /**
   @brief         32-bit integer complex conjugate.
@@ -14457,10 +14859,9 @@ void plp_cmplx_conj_i32_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_conj_i32_rv32im(
-  const int32_t * __restrict__ pSrc,
-        int32_t * __restrict__ pDst,
-        uint32_t numSamples);
+void plp_cmplx_conj_i32_rv32im(const int32_t *__restrict__ pSrc,
+                               int32_t *__restrict__ pDst,
+                               uint32_t numSamples);
 
 /**
   @brief Glue code for complex conjugate of 16-bit integer vectors.
@@ -14469,10 +14870,9 @@ void plp_cmplx_conj_i32_rv32im(
   @param[in]     numSamples  number of samples in each vector
   @return        none
  */
-void plp_cmplx_conj_i16(
-                      const int16_t * __restrict__ pSrc,
-                         int16_t * __restrict__ pDst,
-                         uint32_t numSamples);
+void plp_cmplx_conj_i16(const int16_t *__restrict__ pSrc,
+                        int16_t *__restrict__ pDst,
+                        uint32_t numSamples);
 
 /**
   @brief         16-bit integer complex conjugate.
@@ -14482,10 +14882,9 @@ void plp_cmplx_conj_i16(
   @return        none
  */
 
-void plp_cmplx_conj_i16_xpulpv2(
-  const int16_t * __restrict__ pSrc,
-        int16_t * __restrict__ pDst,
-        uint32_t numSamples);
+void plp_cmplx_conj_i16_xpulpv2(const int16_t *__restrict__ pSrc,
+                                int16_t *__restrict__ pDst,
+                                uint32_t numSamples);
 
 /**
   @brief         16-bit integer complex conjugate.
@@ -14495,10 +14894,9 @@ void plp_cmplx_conj_i16_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_conj_i16_rv32im(
-  const int16_t * __restrict__ pSrc,
-        int16_t * __restrict__ pDst,
-        uint32_t numSamples);
+void plp_cmplx_conj_i16_rv32im(const int16_t *__restrict__ pSrc,
+                               int16_t *__restrict__ pDst,
+                               uint32_t numSamples);
 
 /**
   @brief Glue code for complex conjugate of 8-bit integer vectors.
@@ -14507,10 +14905,9 @@ void plp_cmplx_conj_i16_rv32im(
   @param[in]     numSamples  number of samples in each vector
   @return        none
  */
-void plp_cmplx_conj_i8(
-                      const int8_t * __restrict__ pSrc,
-                         int8_t * __restrict__ pDst,
-                         uint32_t numSamples);
+void plp_cmplx_conj_i8(const int8_t *__restrict__ pSrc,
+                       int8_t *__restrict__ pDst,
+                       uint32_t numSamples);
 
 /**
   @brief         8-bit integer complex conjugate.
@@ -14520,10 +14917,9 @@ void plp_cmplx_conj_i8(
   @return        none
  */
 
-void plp_cmplx_conj_i8_xpulpv2(
-  const int8_t * __restrict__ pSrc,
-        int8_t * __restrict__ pDst,
-        uint32_t numSamples);
+void plp_cmplx_conj_i8_xpulpv2(const int8_t *__restrict__ pSrc,
+                               int8_t *__restrict__ pDst,
+                               uint32_t numSamples);
 
 /**
   @brief         8-bit integer complex conjugate.
@@ -14533,10 +14929,9 @@ void plp_cmplx_conj_i8_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_conj_i8_rv32im(
-  const int8_t * __restrict__ pSrc,
-        int8_t * __restrict__ pDst,
-        uint32_t numSamples);
+void plp_cmplx_conj_i8_rv32im(const int8_t *__restrict__ pSrc,
+                              int8_t *__restrict__ pDst,
+                              uint32_t numSamples);
 
 /**
   @brief Glue code for complex dot product of 32-bit float vectors.
@@ -14545,12 +14940,11 @@ void plp_cmplx_conj_i8_rv32im(
   @param[in]     numSamples  number of samples in each vector
   @return        none
  */
-void plp_cmplx_dot_prod_f32(
-  const float32_t * pSrcA,
-  const float32_t * pSrcB,
-        uint32_t numSamples,
-        float32_t * realResult,
-        float32_t * imagResult);
+void plp_cmplx_dot_prod_f32(const float32_t *pSrcA,
+                            const float32_t *pSrcB,
+                            uint32_t numSamples,
+                            float32_t *realResult,
+                            float32_t *imagResult);
 
 /**
   @brief         Floating-point complex dot product.
@@ -14560,12 +14954,11 @@ void plp_cmplx_dot_prod_f32(
   @return        none
  */
 
-void plp_cmplx_dot_prod_f32_xpulpv2(
-  const float32_t * pSrcA,
-  const float32_t * pSrcB,
-        uint32_t numSamples,
-        float32_t * realResult,
-        float32_t * imagResult);
+void plp_cmplx_dot_prod_f32_xpulpv2(const float32_t *pSrcA,
+                                    const float32_t *pSrcB,
+                                    uint32_t numSamples,
+                                    float32_t *realResult,
+                                    float32_t *imagResult);
 
 /**
   @brief Glue code for complex dot product of 32-bit integer vectors.
@@ -14574,12 +14967,11 @@ void plp_cmplx_dot_prod_f32_xpulpv2(
   @param[in]     numSamples  number of samples in each vector
   @return        none
  */
-void plp_cmplx_dot_prod_i32(
-  const int32_t * pSrcA,
-  const int32_t * pSrcB,
-        uint32_t numSamples,
-        int32_t * realResult,
-        int32_t * imagResult);
+void plp_cmplx_dot_prod_i32(const int32_t *pSrcA,
+                            const int32_t *pSrcB,
+                            uint32_t numSamples,
+                            int32_t *realResult,
+                            int32_t *imagResult);
 
 /**
   @brief         32-bit integer complex dot product.
@@ -14589,12 +14981,11 @@ void plp_cmplx_dot_prod_i32(
   @return        none
  */
 
-void plp_cmplx_dot_prod_i32_xpulpv2(
-  const int32_t * pSrcA,
-  const int32_t * pSrcB,
-        uint32_t numSamples,
-        int32_t * realResult,
-        int32_t * imagResult);
+void plp_cmplx_dot_prod_i32_xpulpv2(const int32_t *pSrcA,
+                                    const int32_t *pSrcB,
+                                    uint32_t numSamples,
+                                    int32_t *realResult,
+                                    int32_t *imagResult);
 
 /**
   @brief         32-bit integer complex dot product.
@@ -14604,12 +14995,11 @@ void plp_cmplx_dot_prod_i32_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_dot_prod_i32_rv32im(
-  const int32_t * pSrcA,
-  const int32_t * pSrcB,
-        uint32_t numSamples,
-        int32_t * realResult,
-        int32_t * imagResult);
+void plp_cmplx_dot_prod_i32_rv32im(const int32_t *pSrcA,
+                                   const int32_t *pSrcB,
+                                   uint32_t numSamples,
+                                   int32_t *realResult,
+                                   int32_t *imagResult);
 
 /**
   @brief Glue code for complex dot product of 16-bit integer vectors.
@@ -14618,12 +15008,11 @@ void plp_cmplx_dot_prod_i32_rv32im(
   @param[in]     numSamples  number of samples in each vector
   @return        none
  */
-void plp_cmplx_dot_prod_i16(
-  const int16_t * pSrcA,
-  const int16_t * pSrcB,
-        uint32_t numSamples,
-        int16_t * realResult,
-        int16_t * imagResult);
+void plp_cmplx_dot_prod_i16(const int16_t *pSrcA,
+                            const int16_t *pSrcB,
+                            uint32_t numSamples,
+                            int16_t *realResult,
+                            int16_t *imagResult);
 
 /**
   @brief         16-bit integer complex dot product.
@@ -14633,12 +15022,11 @@ void plp_cmplx_dot_prod_i16(
   @return        none
  */
 
-void plp_cmplx_dot_prod_i16_xpulpv2(
-  const int16_t * pSrcA,
-  const int16_t * pSrcB,
-        uint32_t numSamples,
-        int16_t * realResult,
-        int16_t * imagResult);
+void plp_cmplx_dot_prod_i16_xpulpv2(const int16_t *pSrcA,
+                                    const int16_t *pSrcB,
+                                    uint32_t numSamples,
+                                    int16_t *realResult,
+                                    int16_t *imagResult);
 
 /**
   @brief         16-bit integer complex dot product.
@@ -14648,12 +15036,11 @@ void plp_cmplx_dot_prod_i16_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_dot_prod_i16_rv32im(
-  const int16_t * pSrcA,
-  const int16_t * pSrcB,
-        uint32_t numSamples,
-        int16_t * realResult,
-        int16_t * imagResult);
+void plp_cmplx_dot_prod_i16_rv32im(const int16_t *pSrcA,
+                                   const int16_t *pSrcB,
+                                   uint32_t numSamples,
+                                   int16_t *realResult,
+                                   int16_t *imagResult);
 
 /**
   @brief Glue code for complex dot product of 8-bit integer vectors.
@@ -14662,12 +15049,11 @@ void plp_cmplx_dot_prod_i16_rv32im(
   @param[in]     numSamples  number of samples in each vector
   @return        none
  */
-void plp_cmplx_dot_prod_i8(
-  const int8_t * pSrcA,
-  const int8_t * pSrcB,
-        uint32_t numSamples,
-        int8_t * realResult,
-        int8_t * imagResult);
+void plp_cmplx_dot_prod_i8(const int8_t *pSrcA,
+                           const int8_t *pSrcB,
+                           uint32_t numSamples,
+                           int8_t *realResult,
+                           int8_t *imagResult);
 
 /**
   @brief         8-bit integer complex dot product.
@@ -14677,12 +15063,11 @@ void plp_cmplx_dot_prod_i8(
   @return        none
  */
 
-void plp_cmplx_dot_prod_i8_xpulpv2(
-  const int8_t * pSrcA,
-  const int8_t * pSrcB,
-        uint32_t numSamples,
-        int8_t * realResult,
-        int8_t * imagResult);
+void plp_cmplx_dot_prod_i8_xpulpv2(const int8_t *pSrcA,
+                                   const int8_t *pSrcB,
+                                   uint32_t numSamples,
+                                   int8_t *realResult,
+                                   int8_t *imagResult);
 
 /**
   @brief         8-bit integer complex dot product.
@@ -14692,12 +15077,11 @@ void plp_cmplx_dot_prod_i8_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_dot_prod_i8_rv32im(
-  const int8_t * pSrcA,
-  const int8_t * pSrcB,
-        uint32_t numSamples,
-        int8_t * realResult,
-        int8_t * imagResult);
+void plp_cmplx_dot_prod_i8_rv32im(const int8_t *pSrcA,
+                                  const int8_t *pSrcB,
+                                  uint32_t numSamples,
+                                  int8_t *realResult,
+                                  int8_t *imagResult);
 
 /**
   @brief Glue code for complex dot product of 32-bit fixed-point vectors.
@@ -14706,13 +15090,12 @@ void plp_cmplx_dot_prod_i8_rv32im(
   @param[in]     numSamples  number of samples in each vector
   @return        none
  */
-void plp_cmplx_dot_prod_q32(
-  const int32_t * pSrcA,
-  const int32_t * pSrcB,
-        uint32_t numSamples,
-        uint32_t deciPoint,
-        int32_t * realResult,
-        int32_t * imagResult);
+void plp_cmplx_dot_prod_q32(const int32_t *pSrcA,
+                            const int32_t *pSrcB,
+                            uint32_t numSamples,
+                            uint32_t deciPoint,
+                            int32_t *realResult,
+                            int32_t *imagResult);
 
 /**
   @brief         32-bit fixed-point complex dot product.
@@ -14722,14 +15105,12 @@ void plp_cmplx_dot_prod_q32(
   @return        none
  */
 
-
-void plp_cmplx_dot_prod_q32_xpulpv2(
-  const int32_t * pSrcA,
-  const int32_t * pSrcB,
-        uint32_t numSamples,
-        uint32_t deciPoint,
-        int32_t * realResult,
-        int32_t * imagResult);
+void plp_cmplx_dot_prod_q32_xpulpv2(const int32_t *pSrcA,
+                                    const int32_t *pSrcB,
+                                    uint32_t numSamples,
+                                    uint32_t deciPoint,
+                                    int32_t *realResult,
+                                    int32_t *imagResult);
 
 /**
   @brief         32-bit integer complex dot product.
@@ -14739,13 +15120,12 @@ void plp_cmplx_dot_prod_q32_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_dot_prod_q32_rv32im(
-  const int32_t * pSrcA,
-  const int32_t * pSrcB,
-        uint32_t numSamples,
-        uint32_t deciPoint,
-        int32_t * realResult,
-        int32_t * imagResult);
+void plp_cmplx_dot_prod_q32_rv32im(const int32_t *pSrcA,
+                                   const int32_t *pSrcB,
+                                   uint32_t numSamples,
+                                   uint32_t deciPoint,
+                                   int32_t *realResult,
+                                   int32_t *imagResult);
 
 /**
   @brief Glue code for complex dot product of 16-bit fixed-point vectors.
@@ -14754,13 +15134,12 @@ void plp_cmplx_dot_prod_q32_rv32im(
   @param[in]     numSamples  number of samples in each vector
   @return        none
  */
-void plp_cmplx_dot_prod_q16(
-  const int16_t * pSrcA,
-  const int16_t * pSrcB,
-        uint32_t numSamples,
-        uint32_t deciPoint,
-        int16_t * realResult,
-        int16_t * imagResult);
+void plp_cmplx_dot_prod_q16(const int16_t *pSrcA,
+                            const int16_t *pSrcB,
+                            uint32_t numSamples,
+                            uint32_t deciPoint,
+                            int16_t *realResult,
+                            int16_t *imagResult);
 
 /**
   @brief         16-bit fixed-point complex dot product.
@@ -14770,13 +15149,12 @@ void plp_cmplx_dot_prod_q16(
   @return        none
  */
 
-void plp_cmplx_dot_prod_q16_xpulpv2(
-  const int16_t * pSrcA,
-  const int16_t * pSrcB,
-        uint32_t numSamples,
-        uint32_t deciPoint,
-        int16_t * realResult,
-        int16_t * imagResult);
+void plp_cmplx_dot_prod_q16_xpulpv2(const int16_t *pSrcA,
+                                    const int16_t *pSrcB,
+                                    uint32_t numSamples,
+                                    uint32_t deciPoint,
+                                    int16_t *realResult,
+                                    int16_t *imagResult);
 
 /**
   @brief         16-bit fixed-point complex dot product.
@@ -14786,14 +15164,12 @@ void plp_cmplx_dot_prod_q16_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_dot_prod_q16_rv32im(
-  const int16_t * pSrcA,
-  const int16_t * pSrcB,
-        uint32_t numSamples,
-        uint32_t deciPoint,
-        int16_t * realResult,
-        int16_t * imagResult);
-
+void plp_cmplx_dot_prod_q16_rv32im(const int16_t *pSrcA,
+                                   const int16_t *pSrcB,
+                                   uint32_t numSamples,
+                                   uint32_t deciPoint,
+                                   int16_t *realResult,
+                                   int16_t *imagResult);
 
 /**
   @brief Glue code for complex multiplied with real of 32-bit float vectors.
@@ -14803,11 +15179,10 @@ void plp_cmplx_dot_prod_q16_rv32im(
   @return        none
  */
 
-void plp_cmplx_mult_real_f32(
-  const float32_t * __restrict__  pSrcCmplx,
-  const float32_t * __restrict__  pSrcReal,
-        float32_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_f32(const float32_t *__restrict__ pSrcCmplx,
+                             const float32_t *__restrict__ pSrcReal,
+                             float32_t *__restrict__ pDst,
+                             uint32_t numSamples);
 
 /**
   @brief         Floating-point complex multiplied with real.
@@ -14817,12 +15192,10 @@ void plp_cmplx_mult_real_f32(
   @return        none
  */
 
-void plp_cmplx_mult_real_f32_xpulpv2(
-  const float32_t * __restrict__  pSrcCmplx,
-  const float32_t * __restrict__  pSrcReal,
-        float32_t * __restrict__  pDst,
-        uint32_t numSamples);
-
+void plp_cmplx_mult_real_f32_xpulpv2(const float32_t *__restrict__ pSrcCmplx,
+                                     const float32_t *__restrict__ pSrcReal,
+                                     float32_t *__restrict__ pDst,
+                                     uint32_t numSamples);
 
 /**
   @brief Glue code for complex multiplied with real of 32-bit integer vectors.
@@ -14832,11 +15205,10 @@ void plp_cmplx_mult_real_f32_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mult_real_i32(
-  const int32_t * __restrict__  pSrcCmplx,
-  const int32_t * __restrict__  pSrcReal,
-        int32_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_i32(const int32_t *__restrict__ pSrcCmplx,
+                             const int32_t *__restrict__ pSrcReal,
+                             int32_t *__restrict__ pDst,
+                             uint32_t numSamples);
 
 /**
   @brief         32-bit integer complex multiplied with real.
@@ -14846,11 +15218,10 @@ void plp_cmplx_mult_real_i32(
   @return        none
  */
 
-void plp_cmplx_mult_real_i32_xpulpv2(
-  const int32_t * __restrict__  pSrcCmplx,
-  const int32_t * __restrict__  pSrcReal,
-        int32_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_i32_xpulpv2(const int32_t *__restrict__ pSrcCmplx,
+                                     const int32_t *__restrict__ pSrcReal,
+                                     int32_t *__restrict__ pDst,
+                                     uint32_t numSamples);
 
 /**
   @brief         32-bit integer complex multiplied with real.
@@ -14860,11 +15231,10 @@ void plp_cmplx_mult_real_i32_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mult_real_i32_rv32im(
-  const int32_t * __restrict__  pSrcCmplx,
-  const int32_t * __restrict__  pSrcReal,
-        int32_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_i32_rv32im(const int32_t *__restrict__ pSrcCmplx,
+                                    const int32_t *__restrict__ pSrcReal,
+                                    int32_t *__restrict__ pDst,
+                                    uint32_t numSamples);
 
 /**
   @brief Glue code for complex multiplied with real of 16-bit integer vectors.
@@ -14874,11 +15244,10 @@ void plp_cmplx_mult_real_i32_rv32im(
   @return        none
  */
 
-void plp_cmplx_mult_real_i16(
-  const int16_t * __restrict__  pSrcCmplx,
-  const int16_t * __restrict__  pSrcReal,
-        int16_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_i16(const int16_t *__restrict__ pSrcCmplx,
+                             const int16_t *__restrict__ pSrcReal,
+                             int16_t *__restrict__ pDst,
+                             uint32_t numSamples);
 
 /**
   @brief         16-bit integer complex multiplied with real.
@@ -14888,11 +15257,10 @@ void plp_cmplx_mult_real_i16(
   @return        none
  */
 
-void plp_cmplx_mult_real_i16_xpulpv2(
-  const int16_t * __restrict__  pSrcCmplx,
-  const int16_t * __restrict__  pSrcReal,
-        int16_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_i16_xpulpv2(const int16_t *__restrict__ pSrcCmplx,
+                                     const int16_t *__restrict__ pSrcReal,
+                                     int16_t *__restrict__ pDst,
+                                     uint32_t numSamples);
 
 /**
   @brief         16-bit integer complex multiplied with real.
@@ -14902,11 +15270,10 @@ void plp_cmplx_mult_real_i16_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mult_real_i16_rv32im(
-  const int16_t * __restrict__  pSrcCmplx,
-  const int16_t * __restrict__  pSrcReal,
-        int16_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_i16_rv32im(const int16_t *__restrict__ pSrcCmplx,
+                                    const int16_t *__restrict__ pSrcReal,
+                                    int16_t *__restrict__ pDst,
+                                    uint32_t numSamples);
 
 /**
   @brief Glue code for complex multiplied with real of 8-bit integer vectors.
@@ -14916,11 +15283,10 @@ void plp_cmplx_mult_real_i16_rv32im(
   @return        none
  */
 
-void plp_cmplx_mult_real_i8(
-  const int8_t * __restrict__  pSrcCmplx,
-  const int8_t * __restrict__  pSrcReal,
-        int8_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_i8(const int8_t *__restrict__ pSrcCmplx,
+                            const int8_t *__restrict__ pSrcReal,
+                            int8_t *__restrict__ pDst,
+                            uint32_t numSamples);
 
 /**
   @brief         8-bit integer complex multiplied with real.
@@ -14930,11 +15296,10 @@ void plp_cmplx_mult_real_i8(
   @return        none
  */
 
-void plp_cmplx_mult_real_i8_xpulpv2(
-  const int8_t * __restrict__  pSrcCmplx,
-  const int8_t * __restrict__  pSrcReal,
-        int8_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_i8_xpulpv2(const int8_t *__restrict__ pSrcCmplx,
+                                    const int8_t *__restrict__ pSrcReal,
+                                    int8_t *__restrict__ pDst,
+                                    uint32_t numSamples);
 
 /**
   @brief         8-bit integer complex multiplied with real.
@@ -14944,11 +15309,10 @@ void plp_cmplx_mult_real_i8_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mult_real_i8_rv32im(
-  const int8_t * __restrict__  pSrcCmplx,
-  const int8_t * __restrict__  pSrcReal,
-        int8_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_i8_rv32im(const int8_t *__restrict__ pSrcCmplx,
+                                   const int8_t *__restrict__ pSrcReal,
+                                   int8_t *__restrict__ pDst,
+                                   uint32_t numSamples);
 
 /**
   @brief Glue code for complex multiplied with real of 32-bit fixed-point vectors.
@@ -14958,12 +15322,11 @@ void plp_cmplx_mult_real_i8_rv32im(
   @return        none
  */
 
-void plp_cmplx_mult_real_q32(
-  const int32_t * __restrict__  pSrcCmplx,
-  const int32_t * __restrict__  pSrcReal,
-        int32_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_q32(const int32_t *__restrict__ pSrcCmplx,
+                             const int32_t *__restrict__ pSrcReal,
+                             int32_t *__restrict__ pDst,
+                             uint32_t deciPoint,
+                             uint32_t numSamples);
 
 /**
   @brief         32-bit fixed-point complex multiplied with real.
@@ -14973,12 +15336,11 @@ void plp_cmplx_mult_real_q32(
   @return        none
  */
 
-void plp_cmplx_mult_real_q32_xpulpv2(
-  const int32_t * __restrict__  pSrcCmplx,
-  const int32_t * __restrict__  pSrcReal,
-        int32_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_q32_xpulpv2(const int32_t *__restrict__ pSrcCmplx,
+                                     const int32_t *__restrict__ pSrcReal,
+                                     int32_t *__restrict__ pDst,
+                                     uint32_t deciPoint,
+                                     uint32_t numSamples);
 
 /**
   @brief         32-bit fixed-point complex multiplied with real.
@@ -14988,12 +15350,11 @@ void plp_cmplx_mult_real_q32_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mult_real_q32_rv32im(
-  const int32_t * __restrict__  pSrcCmplx,
-  const int32_t * __restrict__  pSrcReal,
-        int32_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_q32_rv32im(const int32_t *__restrict__ pSrcCmplx,
+                                    const int32_t *__restrict__ pSrcReal,
+                                    int32_t *__restrict__ pDst,
+                                    uint32_t deciPoint,
+                                    uint32_t numSamples);
 
 /**
   @brief Glue code for complex multiplied with real of 16-bit fixed-point vectors.
@@ -15003,12 +15364,11 @@ void plp_cmplx_mult_real_q32_rv32im(
   @return        none
  */
 
-void plp_cmplx_mult_real_q16(
-  const int16_t * __restrict__  pSrcCmplx,
-  const int16_t * __restrict__  pSrcReal,
-        int16_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_q16(const int16_t *__restrict__ pSrcCmplx,
+                             const int16_t *__restrict__ pSrcReal,
+                             int16_t *__restrict__ pDst,
+                             uint32_t deciPoint,
+                             uint32_t numSamples);
 
 /**
   @brief         16-bit fixed-point complex multiplied with real.
@@ -15018,12 +15378,11 @@ void plp_cmplx_mult_real_q16(
   @return        none
  */
 
-void plp_cmplx_mult_real_q16_xpulpv2(
-  const int16_t * __restrict__  pSrcCmplx,
-  const int16_t * __restrict__  pSrcReal,
-        int16_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_q16_xpulpv2(const int16_t *__restrict__ pSrcCmplx,
+                                     const int16_t *__restrict__ pSrcReal,
+                                     int16_t *__restrict__ pDst,
+                                     uint32_t deciPoint,
+                                     uint32_t numSamples);
 
 /**
   @brief         16-bit fixed-point complex multiplied with real.
@@ -15033,12 +15392,11 @@ void plp_cmplx_mult_real_q16_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mult_real_q16_rv32im(
-  const int16_t * __restrict__  pSrcCmplx,
-  const int16_t * __restrict__  pSrcReal,
-        int16_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_q16_rv32im(const int16_t *__restrict__ pSrcCmplx,
+                                    const int16_t *__restrict__ pSrcReal,
+                                    int16_t *__restrict__ pDst,
+                                    uint32_t deciPoint,
+                                    uint32_t numSamples);
 
 /**
   @brief Glue code for complex multiplied with real of 8-bit fixed-point vectors.
@@ -15048,12 +15406,11 @@ void plp_cmplx_mult_real_q16_rv32im(
   @return        none
  */
 
-void plp_cmplx_mult_real_q8(
-  const int8_t * __restrict__  pSrcCmplx,
-  const int8_t * __restrict__  pSrcReal,
-        int8_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_q8(const int8_t *__restrict__ pSrcCmplx,
+                            const int8_t *__restrict__ pSrcReal,
+                            int8_t *__restrict__ pDst,
+                            uint32_t deciPoint,
+                            uint32_t numSamples);
 
 /**
   @brief         8-bit fixed-point complex multiplied with real.
@@ -15063,12 +15420,11 @@ void plp_cmplx_mult_real_q8(
   @return        none
  */
 
-void plp_cmplx_mult_real_q8_xpulpv2(
-  const int8_t * __restrict__  pSrcCmplx,
-  const int8_t * __restrict__  pSrcReal,
-        int8_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_q8_xpulpv2(const int8_t *__restrict__ pSrcCmplx,
+                                    const int8_t *__restrict__ pSrcReal,
+                                    int8_t *__restrict__ pDst,
+                                    uint32_t deciPoint,
+                                    uint32_t numSamples);
 
 /**
   @brief         8-bit fixed-point complex multiplied with real.
@@ -15078,12 +15434,11 @@ void plp_cmplx_mult_real_q8_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mult_real_q8_rv32im(
-  const int8_t * __restrict__  pSrcCmplx,
-  const int8_t * __restrict__  pSrcReal,
-        int8_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_real_q8_rv32im(const int8_t *__restrict__ pSrcCmplx,
+                                   const int8_t *__restrict__ pSrcReal,
+                                   int8_t *__restrict__ pDst,
+                                   uint32_t deciPoint,
+                                   uint32_t numSamples);
 
 /**
   @brief Glue code for complex squared magnitude of 32-bit float vectors.
@@ -15093,10 +15448,9 @@ void plp_cmplx_mult_real_q8_rv32im(
   @return        none
  */
 
-void plp_cmplx_mag_squared_f32(
-  const float32_t * __restrict__  pSrc,
-        float32_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_f32(const float32_t *__restrict__ pSrc,
+                               float32_t *__restrict__ pDst,
+                               uint32_t numSamples);
 
 /**
   @brief         Floating-point complex squared magnitude.
@@ -15106,10 +15460,9 @@ void plp_cmplx_mag_squared_f32(
   @return        none
  */
 
-void plp_cmplx_mag_squared_f32_xpulpv2(
-  const float32_t * __restrict__  pSrc,
-        float32_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_f32_xpulpv2(const float32_t *__restrict__ pSrc,
+                                       float32_t *__restrict__ pDst,
+                                       uint32_t numSamples);
 
 /**
   @brief Glue code for complex squared magnitude of 16-bit integer vectors.
@@ -15119,10 +15472,9 @@ void plp_cmplx_mag_squared_f32_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mag_squared_i16(
-  const int16_t * __restrict__  pSrc,
-        int16_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_i16(const int16_t *__restrict__ pSrc,
+                               int16_t *__restrict__ pDst,
+                               uint32_t numSamples);
 
 /**
   @brief         16-bit integer complex squared magnitude.
@@ -15132,10 +15484,9 @@ void plp_cmplx_mag_squared_i16(
   @return        none
  */
 
-void plp_cmplx_mag_squared_i16_rv32im(
-  const int16_t * __restrict__  pSrc,
-        int16_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_i16_rv32im(const int16_t *__restrict__ pSrc,
+                                      int16_t *__restrict__ pDst,
+                                      uint32_t numSamples);
 
 /**
   @brief         16 bit Integer complex squared magnitude.
@@ -15145,10 +15496,9 @@ void plp_cmplx_mag_squared_i16_rv32im(
   @return        none
  */
 
-void plp_cmplx_mag_squared_i16_xpulpv2(
-  const int16_t * __restrict__  pSrc,
-        int16_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_i16_xpulpv2(const int16_t *__restrict__ pSrc,
+                                       int16_t *__restrict__ pDst,
+                                       uint32_t numSamples);
 
 /**
   @brief Glue code for complex squared magnitude of 32-bit integer vectors.
@@ -15158,10 +15508,9 @@ void plp_cmplx_mag_squared_i16_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mag_squared_i32(
-  const int32_t * __restrict__  pSrc,
-        int32_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_i32(const int32_t *__restrict__ pSrc,
+                               int32_t *__restrict__ pDst,
+                               uint32_t numSamples);
 
 /**
   @brief         32-bit integer complex squared magnitude.
@@ -15171,10 +15520,9 @@ void plp_cmplx_mag_squared_i32(
   @return        none
  */
 
-void plp_cmplx_mag_squared_i32_rv32im(
-  const int32_t * __restrict__  pSrc,
-        int32_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_i32_rv32im(const int32_t *__restrict__ pSrc,
+                                      int32_t *__restrict__ pDst,
+                                      uint32_t numSamples);
 
 /**
   @brief         8 bit Integer complex squared magnitude.
@@ -15184,10 +15532,9 @@ void plp_cmplx_mag_squared_i32_rv32im(
   @return        none
  */
 
-void plp_cmplx_mag_squared_i8_xpulpv2(
-  const int8_t * __restrict__  pSrc,
-        int8_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_i8_xpulpv2(const int8_t *__restrict__ pSrc,
+                                      int8_t *__restrict__ pDst,
+                                      uint32_t numSamples);
 
 /**
   @brief Glue code for complex squared magnitude of 32-bit integer vectors.
@@ -15197,10 +15544,9 @@ void plp_cmplx_mag_squared_i8_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mag_squared_i8(
-  const int8_t * __restrict__  pSrc,
-        int8_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_i8(const int8_t *__restrict__ pSrc,
+                              int8_t *__restrict__ pDst,
+                              uint32_t numSamples);
 
 /**
   @brief         8-bit integer complex squared magnitude.
@@ -15210,10 +15556,9 @@ void plp_cmplx_mag_squared_i8(
   @return        none
  */
 
-void plp_cmplx_mag_squared_i8_rv32im(
-  const int8_t * __restrict__  pSrc,
-        int8_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_i8_rv32im(const int8_t *__restrict__ pSrc,
+                                     int8_t *__restrict__ pDst,
+                                     uint32_t numSamples);
 
 /**
   @brief         8 bit Integer complex squared magnitude.
@@ -15223,11 +15568,9 @@ void plp_cmplx_mag_squared_i8_rv32im(
   @return        none
  */
 
-void plp_cmplx_mag_squared_i8_xpulpv2(
-  const int8_t * __restrict__  pSrc,
-        int8_t * __restrict__  pDst,
-        uint32_t numSamples);
-
+void plp_cmplx_mag_squared_i8_xpulpv2(const int8_t *__restrict__ pSrc,
+                                      int8_t *__restrict__ pDst,
+                                      uint32_t numSamples);
 
 /**
   @brief Glue code for complex squared magnitude of 32-bit fixed-point vectors.
@@ -15237,11 +15580,10 @@ void plp_cmplx_mag_squared_i8_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mag_squared_q32(
-  const int32_t * __restrict__  pSrc,
-        int32_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_q32(const int32_t *__restrict__ pSrc,
+                               int32_t *__restrict__ pDst,
+                               uint32_t deciPoint,
+                               uint32_t numSamples);
 
 /**
   @brief         32-bit fixed-point complex squared magnitude.
@@ -15251,11 +15593,10 @@ void plp_cmplx_mag_squared_q32(
   @return        none
  */
 
-void plp_cmplx_mag_squared_q32_rv32im(
-  const int32_t * __restrict__  pSrc,
-        int32_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_q32_rv32im(const int32_t *__restrict__ pSrc,
+                                      int32_t *__restrict__ pDst,
+                                      uint32_t deciPoint,
+                                      uint32_t numSamples);
 
 /**
   @brief         32 bit fixed-point complex squared magnitude.
@@ -15265,11 +15606,10 @@ void plp_cmplx_mag_squared_q32_rv32im(
   @return        none
  */
 
-void plp_cmplx_mag_squared_q32_xpulpv2(
-  const int32_t * __restrict__  pSrc,
-        int32_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_q32_xpulpv2(const int32_t *__restrict__ pSrc,
+                                       int32_t *__restrict__ pDst,
+                                       uint32_t deciPoint,
+                                       uint32_t numSamples);
 
 /**
   @brief Glue code for complex squared magnitude of 16-bit fixed-point vectors.
@@ -15279,11 +15619,10 @@ void plp_cmplx_mag_squared_q32_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mag_squared_q16(
-  const int16_t * __restrict__  pSrc,
-        int16_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_q16(const int16_t *__restrict__ pSrc,
+                               int16_t *__restrict__ pDst,
+                               uint32_t deciPoint,
+                               uint32_t numSamples);
 
 /**
   @brief         16-bit fixed-point complex squared magnitude.
@@ -15293,11 +15632,10 @@ void plp_cmplx_mag_squared_q16(
   @return        none
  */
 
-void plp_cmplx_mag_squared_q16_rv32im(
-  const int16_t * __restrict__  pSrc,
-        int16_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_q16_rv32im(const int16_t *__restrict__ pSrc,
+                                      int16_t *__restrict__ pDst,
+                                      uint32_t deciPoint,
+                                      uint32_t numSamples);
 
 /**
   @brief         16 bit fixed-point complex squared magnitude.
@@ -15307,11 +15645,10 @@ void plp_cmplx_mag_squared_q16_rv32im(
   @return        none
  */
 
-void plp_cmplx_mag_squared_q16_xpulpv2(
-  const int16_t * __restrict__  pSrc,
-        int16_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_q16_xpulpv2(const int16_t *__restrict__ pSrc,
+                                       int16_t *__restrict__ pDst,
+                                       uint32_t deciPoint,
+                                       uint32_t numSamples);
 
 /**
   @brief Glue code for complex squared magnitude of 8-bit fixed-point vectors.
@@ -15321,11 +15658,10 @@ void plp_cmplx_mag_squared_q16_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mag_squared_q8(
-  const int8_t * __restrict__  pSrc,
-        int8_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_q8(const int8_t *__restrict__ pSrc,
+                              int8_t *__restrict__ pDst,
+                              uint32_t deciPoint,
+                              uint32_t numSamples);
 
 /**
   @brief         8-bit fixed-point complex squared magnitude.
@@ -15335,11 +15671,10 @@ void plp_cmplx_mag_squared_q8(
   @return        none
  */
 
-void plp_cmplx_mag_squared_q8_rv32im(
-  const int8_t * __restrict__  pSrc,
-        int8_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_q8_rv32im(const int8_t *__restrict__ pSrc,
+                                     int8_t *__restrict__ pDst,
+                                     uint32_t deciPoint,
+                                     uint32_t numSamples);
 
 /**
   @brief         8 bit fixed-point complex squared magnitude.
@@ -15349,11 +15684,10 @@ void plp_cmplx_mag_squared_q8_rv32im(
   @return        none
  */
 
-void plp_cmplx_mag_squared_q8_xpulpv2(
-  const int8_t * __restrict__  pSrc,
-        int8_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mag_squared_q8_xpulpv2(const int8_t *__restrict__ pSrc,
+                                      int8_t *__restrict__ pDst,
+                                      uint32_t deciPoint,
+                                      uint32_t numSamples);
 
 /**
   @brief Glue code for complex multiplied by complex of 32-bit float vectors.
@@ -15364,11 +15698,10 @@ void plp_cmplx_mag_squared_q8_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_f32(
-  const float32_t * __restrict__  pSrcA,
-  const float32_t * __restrict__  pSrcB,
-        float32_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_f32(const float32_t *__restrict__ pSrcA,
+                              const float32_t *__restrict__ pSrcB,
+                              float32_t *__restrict__ pDst,
+                              uint32_t numSamples);
 
 /**
   @brief         Floating-point complex multiplied by complex.
@@ -15379,12 +15712,10 @@ void plp_cmplx_mult_cmplx_f32(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_f32_xpulpv2(
-  const float32_t * __restrict__  pSrcA,
-  const float32_t * __restrict__  pSrcB,
-        float32_t * __restrict__  pDst,
-        uint32_t numSamples);
-
+void plp_cmplx_mult_cmplx_f32_xpulpv2(const float32_t *__restrict__ pSrcA,
+                                      const float32_t *__restrict__ pSrcB,
+                                      float32_t *__restrict__ pDst,
+                                      uint32_t numSamples);
 
 /**
   @brief Glue code for complex multiplied by complex of 32-bit integer vectors.
@@ -15395,11 +15726,10 @@ void plp_cmplx_mult_cmplx_f32_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_i32(
-  const int32_t * __restrict__  pSrcA,
-  const int32_t * __restrict__  pSrcB,
-        int32_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_i32(const int32_t *__restrict__ pSrcA,
+                              const int32_t *__restrict__ pSrcB,
+                              int32_t *__restrict__ pDst,
+                              uint32_t numSamples);
 
 /**
   @brief         32-bit integer complex multiplied by complex.
@@ -15410,11 +15740,10 @@ void plp_cmplx_mult_cmplx_i32(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_i32_xpulpv2(
-  const int32_t * __restrict__  pSrcA,
-  const int32_t * __restrict__  pSrcB,
-        int32_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_i32_xpulpv2(const int32_t *__restrict__ pSrcA,
+                                      const int32_t *__restrict__ pSrcB,
+                                      int32_t *__restrict__ pDst,
+                                      uint32_t numSamples);
 
 /**
   @brief         32-bit integer complex multiplied by complex.
@@ -15425,11 +15754,10 @@ void plp_cmplx_mult_cmplx_i32_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_i32_rv32im(
-  const int32_t * __restrict__  pSrcA,
-  const int32_t * __restrict__  pSrcB,
-        int32_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_i32_rv32im(const int32_t *__restrict__ pSrcA,
+                                     const int32_t *__restrict__ pSrcB,
+                                     int32_t *__restrict__ pDst,
+                                     uint32_t numSamples);
 
 /**
   @brief Glue code for complex multiplied by complex of 16-bit integer vectors.
@@ -15440,11 +15768,10 @@ void plp_cmplx_mult_cmplx_i32_rv32im(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_i16(
-  const int16_t * __restrict__  pSrcA,
-  const int16_t * __restrict__  pSrcB,
-        int16_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_i16(const int16_t *__restrict__ pSrcA,
+                              const int16_t *__restrict__ pSrcB,
+                              int16_t *__restrict__ pDst,
+                              uint32_t numSamples);
 
 /**
   @brief         16-bit integer complex multiplied by complex.
@@ -15455,11 +15782,10 @@ void plp_cmplx_mult_cmplx_i16(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_i16_xpulpv2(
-  const int16_t * __restrict__  pSrcA,
-  const int16_t * __restrict__  pSrcB,
-        int16_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_i16_xpulpv2(const int16_t *__restrict__ pSrcA,
+                                      const int16_t *__restrict__ pSrcB,
+                                      int16_t *__restrict__ pDst,
+                                      uint32_t numSamples);
 
 /**
   @brief         16-bit integer complex multiplied by complex.
@@ -15470,11 +15796,10 @@ void plp_cmplx_mult_cmplx_i16_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_i16_rv32im(
-  const int16_t * __restrict__  pSrcA,
-  const int16_t * __restrict__  pSrcB,
-        int16_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_i16_rv32im(const int16_t *__restrict__ pSrcA,
+                                     const int16_t *__restrict__ pSrcB,
+                                     int16_t *__restrict__ pDst,
+                                     uint32_t numSamples);
 
 /**
   @brief Glue code for complex multiplied by complex of 8-bit integer vectors.
@@ -15485,11 +15810,10 @@ void plp_cmplx_mult_cmplx_i16_rv32im(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_i8(
-  const int8_t * __restrict__  pSrcA,
-  const int8_t * __restrict__  pSrcB,
-        int8_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_i8(const int8_t *__restrict__ pSrcA,
+                             const int8_t *__restrict__ pSrcB,
+                             int8_t *__restrict__ pDst,
+                             uint32_t numSamples);
 
 /**
   @brief         8-bit integer complex multiplied by complex.
@@ -15500,11 +15824,10 @@ void plp_cmplx_mult_cmplx_i8(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_i8_xpulpv2(
-  const int8_t * __restrict__  pSrcA,
-  const int8_t * __restrict__  pSrcB,
-        int8_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_i8_xpulpv2(const int8_t *__restrict__ pSrcA,
+                                     const int8_t *__restrict__ pSrcB,
+                                     int8_t *__restrict__ pDst,
+                                     uint32_t numSamples);
 
 /**
   @brief         8-bit integer complex multiplied by complex.
@@ -15515,11 +15838,10 @@ void plp_cmplx_mult_cmplx_i8_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_i8_rv32im(
-  const int8_t * __restrict__  pSrcA,
-  const int8_t * __restrict__  pSrcB,
-        int8_t * __restrict__  pDst,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_i8_rv32im(const int8_t *__restrict__ pSrcA,
+                                    const int8_t *__restrict__ pSrcB,
+                                    int8_t *__restrict__ pDst,
+                                    uint32_t numSamples);
 
 /**
   @brief Glue code for complex multiplied by complex of 32-bit fixed-point vectors.
@@ -15531,12 +15853,11 @@ void plp_cmplx_mult_cmplx_i8_rv32im(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_q32(
-  const int32_t * __restrict__  pSrcA,
-  const int32_t * __restrict__  pSrcB,
-        int32_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_q32(const int32_t *__restrict__ pSrcA,
+                              const int32_t *__restrict__ pSrcB,
+                              int32_t *__restrict__ pDst,
+                              uint32_t deciPoint,
+                              uint32_t numSamples);
 
 /**
   @brief         32-bit fixed-point complex multiplied by complex.
@@ -15548,12 +15869,11 @@ void plp_cmplx_mult_cmplx_q32(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_q32_xpulpv2(
-  const int32_t * __restrict__  pSrcA,
-  const int32_t * __restrict__  pSrcB,
-        int32_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_q32_xpulpv2(const int32_t *__restrict__ pSrcA,
+                                      const int32_t *__restrict__ pSrcB,
+                                      int32_t *__restrict__ pDst,
+                                      uint32_t deciPoint,
+                                      uint32_t numSamples);
 
 /**
   @brief         32-bit fixed-point complex multiplied by complex.
@@ -15565,12 +15885,11 @@ void plp_cmplx_mult_cmplx_q32_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_q32_rv32im(
-  const int32_t * __restrict__  pSrcA,
-  const int32_t * __restrict__  pSrcB,
-        int32_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_q32_rv32im(const int32_t *__restrict__ pSrcA,
+                                     const int32_t *__restrict__ pSrcB,
+                                     int32_t *__restrict__ pDst,
+                                     uint32_t deciPoint,
+                                     uint32_t numSamples);
 
 /**
   @brief Glue code for complex multiplied by complex of 16-bit fixed-point vectors.
@@ -15582,12 +15901,11 @@ void plp_cmplx_mult_cmplx_q32_rv32im(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_q16(
-  const int16_t * __restrict__  pSrcA,
-  const int16_t * __restrict__  pSrcB,
-        int16_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_q16(const int16_t *__restrict__ pSrcA,
+                              const int16_t *__restrict__ pSrcB,
+                              int16_t *__restrict__ pDst,
+                              uint32_t deciPoint,
+                              uint32_t numSamples);
 
 /**
   @brief         16-bit fixed-point complex multiplied by complex.
@@ -15599,12 +15917,11 @@ void plp_cmplx_mult_cmplx_q16(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_q16_xpulpv2(
-  const int16_t * __restrict__  pSrcA,
-  const int16_t * __restrict__  pSrcB,
-        int16_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_q16_xpulpv2(const int16_t *__restrict__ pSrcA,
+                                      const int16_t *__restrict__ pSrcB,
+                                      int16_t *__restrict__ pDst,
+                                      uint32_t deciPoint,
+                                      uint32_t numSamples);
 
 /**
   @brief         16-bit fixed-point complex multiplied by complex.
@@ -15616,12 +15933,11 @@ void plp_cmplx_mult_cmplx_q16_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_q16_rv32im(
-  const int16_t * __restrict__  pSrcA,
-  const int16_t * __restrict__  pSrcB,
-        int16_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_q16_rv32im(const int16_t *__restrict__ pSrcA,
+                                     const int16_t *__restrict__ pSrcB,
+                                     int16_t *__restrict__ pDst,
+                                     uint32_t deciPoint,
+                                     uint32_t numSamples);
 
 /**
   @brief Glue code for complex multiplied by complex of 8-bit fixed-point vectors.
@@ -15633,12 +15949,11 @@ void plp_cmplx_mult_cmplx_q16_rv32im(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_q8(
-  const int8_t * __restrict__  pSrcA,
-  const int8_t * __restrict__  pSrcB,
-        int8_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_q8(const int8_t *__restrict__ pSrcA,
+                             const int8_t *__restrict__ pSrcB,
+                             int8_t *__restrict__ pDst,
+                             uint32_t deciPoint,
+                             uint32_t numSamples);
 
 /**
   @brief         8-bit fixed-point complex multiplied by complex.
@@ -15650,12 +15965,11 @@ void plp_cmplx_mult_cmplx_q8(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_q8_xpulpv2(
-  const int8_t * __restrict__  pSrcA,
-  const int8_t * __restrict__  pSrcB,
-        int8_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
+void plp_cmplx_mult_cmplx_q8_xpulpv2(const int8_t *__restrict__ pSrcA,
+                                     const int8_t *__restrict__ pSrcB,
+                                     int8_t *__restrict__ pDst,
+                                     uint32_t deciPoint,
+                                     uint32_t numSamples);
 
 /**
   @brief         8-bit fixed-point complex multiplied by complex.
@@ -15667,12 +15981,10 @@ void plp_cmplx_mult_cmplx_q8_xpulpv2(
   @return        none
  */
 
-void plp_cmplx_mult_cmplx_q8_rv32im(
-  const int8_t * __restrict__  pSrcA,
-  const int8_t * __restrict__  pSrcB,
-        int8_t * __restrict__  pDst,
-        uint32_t deciPoint,
-        uint32_t numSamples);
-
+void plp_cmplx_mult_cmplx_q8_rv32im(const int8_t *__restrict__ pSrcA,
+                                    const int8_t *__restrict__ pSrcB,
+                                    int8_t *__restrict__ pDst,
+                                    uint32_t deciPoint,
+                                    uint32_t numSamples);
 
 #endif // __PLP_MATH_H__

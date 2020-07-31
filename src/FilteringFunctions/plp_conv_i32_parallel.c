@@ -120,7 +120,7 @@ void plp_conv_i32_parallel(const int32_t *pSrcA,
 
         if (nPE > 1) {
 
-/* Sequential overlap-adding */
+            /* Sequential overlap-adding */
 
 #if defined(PLP_CONV_SEQUENTIALADDING)
 

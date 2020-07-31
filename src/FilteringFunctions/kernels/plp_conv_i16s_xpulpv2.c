@@ -223,8 +223,8 @@ void plp_conv_i16s_xpulpv2(const int16_t *pSrcA,
                 _x5 = *((v2s *)(px + 4)); // {x[4], x[5]}
                 _x7 = *((v2s *)(px + 6)); // {x[6], x[7]}
 
-                _y1 = __builtin_shuffle(
-                    _y1, _y1, shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
+                _y1 = __builtin_shuffle(_y1, _y1,
+                                        shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
 
                 // Load _x1 later to keep it in the register
                 _x1 = *((v2s *)(px)); // {x[0], x[1]}
@@ -246,8 +246,8 @@ void plp_conv_i16s_xpulpv2(const int16_t *pSrcA,
                 _x6 = __builtin_shuffle(_x5, _x7, shufflemask2); // {x[5], x[6]}
 
                 // Shuffle _y2 later to be sure it is in the register
-                _y2 = __builtin_shuffle(
-                    _y2, _y2, shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
+                _y2 = __builtin_shuffle(_y2, _y2,
+                                        shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
 
                 /* acc0 +=  x[2] * y[srcBLen - 3] + x[3] * y[srcBLen - 4]  */
                 acc0 = __SUMDOTP2(_x3, _y2, acc0);

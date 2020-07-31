@@ -67,5 +67,5 @@ void plp_std_q8s_rv32im(const int8_t *__restrict__ pSrc,
 
     plp_sqrt_q16(&intermediate, fracBits, &final);
 
-    *pRes = (int8_t)final;
+    *pRes = (int8_t) final;
 }

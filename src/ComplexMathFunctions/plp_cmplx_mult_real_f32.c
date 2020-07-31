@@ -30,7 +30,6 @@
 
 #include "plp_math.h"
 
-
 /**
   @ingroup groupCmplxMath
  */
@@ -51,7 +50,8 @@
       pCmplxDst[(2*n)+1] = pSrcCmplx[(2*n)+1] * pSrcReal[n];
   }
   </pre>
-  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types.
+  There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
+  types.
  */
 
 /**
@@ -68,24 +68,19 @@
   @return        none
  */
 
-void plp_cmplx_mult_real_f32(
-                      const float32_t * __restrict__ pSrcCmplx,
-                      const float32_t * __restrict__ pSrcReal,
-                         float32_t * __restrict__ pDst,
-                         uint32_t numSamples){
-  
-  if (rt_cluster_id() == ARCHI_FC_CID){
-    printf("error: FC doesn't have FPU\n");
-    return;
-  }
-  else{
-    plp_cmplx_mult_real_f32_xpulpv2(pSrcCmplx, pSrcReal, pDst, numSamples);
-  }
+void plp_cmplx_mult_real_f32(const float32_t *__restrict__ pSrcCmplx,
+                             const float32_t *__restrict__ pSrcReal,
+                             float32_t *__restrict__ pDst,
+                             uint32_t numSamples) {
 
+    if (rt_cluster_id() == ARCHI_FC_CID) {
+        printf("error: FC doesn't have FPU\n");
+        return;
+    } else {
+        plp_cmplx_mult_real_f32_xpulpv2(pSrcCmplx, pSrcReal, pDst, numSamples);
+    }
 }
 
 /**
   @} end of BasicDotProd group
  */
-
-

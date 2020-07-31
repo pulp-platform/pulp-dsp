@@ -117,11 +117,8 @@ void plp_conv_i16(const int16_t *pSrcA,
             }
         }
 
-        plp_conv_i16s_rv32im(pIn1,
-                             in1Len,
-                             pIn2 + (nPE - 1) * src2Offset,
-                             in2Len - (src2Offset * (nPE - 1)),
-                             _pRes1_16);
+        plp_conv_i16s_rv32im(pIn1, in1Len, pIn2 + (nPE - 1) * src2Offset,
+                             in2Len - (src2Offset * (nPE - 1)), _pRes1_16);
 
         pOut = pRes + (nPE - 1) * src2Offset;
         _pRes = _pRes1_16;
@@ -177,11 +174,8 @@ void plp_conv_i16(const int16_t *pSrcA,
             }
         }
 
-        plp_conv_i16s_xpulpv2(pIn1,
-                              in1Len,
-                              pIn2 + (nPE - 1) * src2Offset,
-                              in2Len - (src2Offset * (nPE - 1)),
-                              _pRes1_16);
+        plp_conv_i16s_xpulpv2(pIn1, in1Len, pIn2 + (nPE - 1) * src2Offset,
+                              in2Len - (src2Offset * (nPE - 1)), _pRes1_16);
 
         pOut = pRes + (nPE - 1) * src2Offset;
         _pRes = _pRes1_16;

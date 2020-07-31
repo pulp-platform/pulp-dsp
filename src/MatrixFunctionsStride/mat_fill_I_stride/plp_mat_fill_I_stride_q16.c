@@ -59,7 +59,7 @@ void plp_mat_fill_I_stride_q16(uint32_t N,
     if (rt_cluster_id() == ARCHI_FC_CID) {
         plp_mat_fill_I_stride_q16s_rv32im(N, stride, fracBits, pDst);
     } else {
-        plp_mat_fill_I_stride_q16v_xpulpv2(N, stride, fracBits, pDst);
+        plp_mat_fill_I_stride_q16s_xpulpv2(N, stride, fracBits, pDst);
     }
 }
 
