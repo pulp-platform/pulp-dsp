@@ -136,6 +136,7 @@ FC_SRCS = \
 	src/MatrixFunctions/mat_mult_trans_cmplx/plp_mat_mult_trans_cmplx_f32_parallel.c \
 	src/TransformFunctions/kernels/plp_bitreversal_rv32im.c \
 	src/TransformFunctions/plp_cfft_q16.c src/TransformFunctions/kernels/plp_cfft_q16s_rv32im.c \
+	src/TransformFunctions/plp_cfft_q32.c src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c \
 	src/TransformFunctions/plp_rfft_f32.c \
 	src/TransformFunctions/plp_rfft_f32_parallel.c \
 	src/CommonTables/plp_common_tables.c \
@@ -506,6 +507,7 @@ CL_SRCS = \
 	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_bitreversal_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_cfft_q16s_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_cfft_q32s_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32s_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32p_xpulpv2.c \
@@ -664,7 +666,6 @@ CL_SRCS = \
 	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_f32s_xpulpv2.c \
 	src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_f32p_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans/kernels/plp_mat_mult_trans_i8p_xpulpv2.c	\
-	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mag_f32s_xpulpv2.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mag_i16s_xpulpv2.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mag_i32s_xpulpv2.c \

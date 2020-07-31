@@ -1,9 +1,9 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_cfft_q16.c
- * Description:  16-bit fixed point Fast Fourier Transform on Complex Input Data
+ * Title:        plp_cfft_q32.c
+ * Description:  32-bit fixed point Fast Fourier Transform on Complex Input Data
  *
- * $Date:        27. June 2020
+ * $Date:        30. July 2020
  * $Revision:    V0
  *
  * Target Processor: PULP cores
@@ -40,32 +40,30 @@
  */
 
 /**
- * @brief         Glue code for quantized 16 bit complex fast fourier transform
- * @param[in]     S               points to an instance of the 16bit quantized CFFT structure
- * @param[in,out] p1              points to the complex data buffer of size <code>2*fftLen</code>.
- * Processing occurs in-place.
- * @param[in]     ifftFlag        flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1)
- * transform.
- * @param[in]     bitReverseFlag  flag that enables (bitReverseFlag=1) of disables
+ * @brief      Glue code for quantized 32-bit complex fast fourier transform
+ *
+ * @param[in]  S               points to an instance of the 32bit quantized CFFT structure
+ * @param      p1              points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
+ * @param[in]  ifftFlag        flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1)
+ * @param[in]  bitReverseFlag  flag that enables (bitReverseFlag=1) of disables
  * (bitReverseFlag=0) bit reversal of output.
- * @param[in]     deciPoint       decimal point for right shift
+ * @param[in]  fracBits        decimal point for right shift (input format Q(32-fracBits).fracBits)
  */
 
-void plp_cfft_q16(const plp_cfft_instance_q16 *S,
-                  int16_t *p1,
-                  uint8_t ifftFlag,
-                  uint8_t bitReverseFlag,
-                  uint32_t deciPoint) {
-
-    // if (deciPoint != 15) {
-    //     printf("Only Q1.15 fixed point supported currently.\n");
+void plp_cfft_q32(const plp_cfft_instance_q32 *S,
+                      int32_t *p1,
+                      uint8_t ifftFlag,
+                      uint8_t bitReverseFlag,
+                      uint32_t fracBits){
+    // if (fracBits != 31) {
+    //     printf("Only Q1.31 fixed point supported currently.\n");
     //     return;
     // }
 
     if (rt_cluster_id() == ARCHI_FC_CID) {
-        plp_cfft_q16s_rv32im(S, p1, ifftFlag, bitReverseFlag, deciPoint);
+        plp_cfft_q32s_rv32im(S, p1, ifftFlag, bitReverseFlag, fracBits);
     } else {
-        plp_cfft_q16s_xpulpv2(S, p1, ifftFlag, bitReverseFlag, deciPoint);
+        plp_cfft_q32s_xpulpv2(S, p1, ifftFlag, bitReverseFlag, fracBits);
     }
 }
 

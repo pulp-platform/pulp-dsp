@@ -37,6 +37,16 @@ extern const int16_t twiddleCoef_1024_q16[1536];
 extern const int16_t twiddleCoef_2048_q16[3072];
 extern const int16_t twiddleCoef_4096_q16[6144];
 
+extern const int32_t twiddleCoef_16_q32[24];
+extern const int32_t twiddleCoef_32_q32[48];
+extern const int32_t twiddleCoef_64_q32[96];
+extern const int32_t twiddleCoef_128_q32[192];
+extern const int32_t twiddleCoef_256_q32[384];
+extern const int32_t twiddleCoef_512_q32[768];
+extern const int32_t twiddleCoef_1024_q32[1536];
+extern const int32_t twiddleCoef_2048_q32[3072];
+extern const int32_t twiddleCoef_4096_q32[6144];
+
 #define PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH ((uint16_t)12)
 #define PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH ((uint16_t)24)
 #define PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH ((uint16_t)56)

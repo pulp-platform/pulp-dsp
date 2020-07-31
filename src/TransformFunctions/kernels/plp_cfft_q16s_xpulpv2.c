@@ -73,7 +73,7 @@ void plp_cfft_q16s_xpulpv2(const plp_cfft_instance_q16 *S,
     }
 
     if (bitReverseFlag)
-        plp_bitreversal_16v_xpulpv2((uint16_t *)p1, S->bitRevLength, S->pBitRevTable);
+        plp_bitreversal_16s_xpulpv2((uint16_t *)p1, S->bitRevLength, S->pBitRevTable);
 }
 
 void plp_cfft_radix4by2_q16(int16_t *pSrc, uint32_t fftLen, const int16_t *pCoef) {

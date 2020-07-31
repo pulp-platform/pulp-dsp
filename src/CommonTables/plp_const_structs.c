@@ -49,20 +49,55 @@ const plp_cfft_instance_q16 plp_cfft_sR_q16_len512 = { 512, twiddleCoef_512_q16,
                                                        plpBitRevIndexTable_fixed_512,
                                                        PLPBITREVINDEXTABLE_FIXED_512_TABLE_LENGTH };
 
-const plp_cfft_instance_q16 plp_cfft_sR_q16_len1024 = {
-    1024, twiddleCoef_1024_q16, plpBitRevIndexTable_fixed_1024,
-    PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH
-};
+const plp_cfft_instance_q16 plp_cfft_sR_q16_len1024 = { 1024, twiddleCoef_1024_q16, 
+                                                        plpBitRevIndexTable_fixed_1024,
+                                                        PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH };
 
-const plp_cfft_instance_q16 plp_cfft_sR_q16_len2048 = {
-    2048, twiddleCoef_2048_q16, plpBitRevIndexTable_fixed_2048,
-    PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH
-};
+const plp_cfft_instance_q16 plp_cfft_sR_q16_len2048 = { 2048, twiddleCoef_2048_q16,
+                                                        plpBitRevIndexTable_fixed_2048,
+                                                        PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH };
 
-const plp_cfft_instance_q16 plp_cfft_sR_q16_len4096 = {
-    4096, twiddleCoef_4096_q16, plpBitRevIndexTable_fixed_4096,
-    PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH
-};
+const plp_cfft_instance_q16 plp_cfft_sR_q16_len4096 = { 4096, twiddleCoef_4096_q16,
+                                                        plpBitRevIndexTable_fixed_4096,
+                                                        PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH };
+
+
+const plp_cfft_instance_q32 plp_cfft_sR_q32_len16 = { 16, twiddleCoef_16_q32,
+                                                      plpBitRevIndexTable_fixed_16,
+                                                      PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH };
+
+const plp_cfft_instance_q32 plp_cfft_sR_q32_len32 = { 32, twiddleCoef_32_q32,
+                                                      plpBitRevIndexTable_fixed_32,
+                                                      PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH };
+
+const plp_cfft_instance_q32 plp_cfft_sR_q32_len64 = { 64, twiddleCoef_64_q32,
+                                                      plpBitRevIndexTable_fixed_64,
+                                                      PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH };
+
+const plp_cfft_instance_q32 plp_cfft_sR_q32_len128 = { 128, twiddleCoef_128_q32,
+                                                       plpBitRevIndexTable_fixed_128,
+                                                       PLPBITREVINDEXTABLE_FIXED_128_TABLE_LENGTH };
+
+const plp_cfft_instance_q32 plp_cfft_sR_q32_len256 = { 256, twiddleCoef_256_q32,
+                                                       plpBitRevIndexTable_fixed_256,
+                                                       PLPBITREVINDEXTABLE_FIXED_256_TABLE_LENGTH };
+
+const plp_cfft_instance_q32 plp_cfft_sR_q32_len512 = { 512, twiddleCoef_512_q32,
+                                                       plpBitRevIndexTable_fixed_512,
+                                                       PLPBITREVINDEXTABLE_FIXED_512_TABLE_LENGTH };
+
+const plp_cfft_instance_q32 plp_cfft_sR_q32_len1024 = { 1024, twiddleCoef_1024_q32, 
+                                                        plpBitRevIndexTable_fixed_1024,
+                                                        PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH };
+
+const plp_cfft_instance_q32 plp_cfft_sR_q32_len2048 = { 2048, twiddleCoef_2048_q32,
+                                                        plpBitRevIndexTable_fixed_2048,
+                                                        PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH };
+
+const plp_cfft_instance_q32 plp_cfft_sR_q32_len4096 = { 4096, twiddleCoef_4096_q32,
+                                                        plpBitRevIndexTable_fixed_4096,
+                                                        PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH };
+
 
 const plp_rfft_instance_f32 plp_rfft_sR_f32_len2048 = { 2048, 0, (float32_t *)twiddleCoef_rfft_2048,
                                                         (uint16_t *)bit_rev_radix2_LUT };
