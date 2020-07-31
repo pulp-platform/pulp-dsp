@@ -54,11 +54,23 @@ def compute_result(result_parameter, inputs, env, fix_point):
     else:
         raise RuntimeError("Unrecognized result type: %s" % ctype)
 
+    if fix_point is None or fix_point == 0:
+        a = inputs['pSrc'].value.astype(my_type)
+        cmplx_a = np.zeros(int(len(a)/2), dtype=np.csingle)
+        for i in range(len(a)>>1):
+            cmplx_a[i] = a[2*i] + a[2*i+1]*1j
+        result = np.absolute(cmplx_a).astype(my_type)
+        for i in range(len(a)>>1):
+            if result[i] < 0.35:
+                result[i] = 0
+        return result
+
     a = inputs['pSrc'].value.astype(my_type)
     cmplx_a = np.zeros(int(len(a)/2), dtype=np.csingle)
     for i in range(len(a)>>1):
-        cmplx_a[i] = a[2*i].astype(np.csingle)/(2**(inputs['deciPoint'].value)) + (a[2*i + 1].astype(np.csingle)/(2**(inputs['deciPoint'].value)))*1j
-    result = np.clip((np.absolute(cmplx_a)*(2**(inputs['deciPoint'].value))), np.iinfo(my_type).min, np.iinfo(my_type).max).astype(my_type)
+        cmplx_a[i] = a[2*i].astype(np.csingle)/(2**(fix_point)) + (a[2*i + 1].astype(np.csingle)/(2**(fix_point)))*1j
+    # result = np.clip((np.absolute(cmplx_a)*(2**(fix_point))), np.iinfo(my_type).min, np.iinfo(my_type).max).astype(my_type)
+    result = (np.absolute(cmplx_a)*(2**fix_point)).astype(my_type)
     return result
 
 

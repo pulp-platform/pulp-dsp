@@ -6597,17 +6597,262 @@ void plp_mat_mult_trans_cmplx_q8_parallel(const int8_t *__restrict__ pSrcA,
 void plp_mat_mult_trans_cmplx_q8vp_xpulpv2(void *args);
 
 /**
- * @brief      calculates the complex magnitude.
+ * @brief      Glue code for complex magnitude calculation in float32
  *
- * @param[in]  pSrc        The source
- * @param[in]  deciPoint   The decimal point. Fromat: Q(16-deciPoint).deciPoint
- * @param      pRes        The result
- * @param[in]  numSamples  The number of samples
+ * @param[in]  pSrc        pointer to source
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
  */
-void plp_cmplx_mag_q16(const int16_t *pSrc,
-                       const uint32_t deciPoint,
+
+void plp_cmplx_mag_f32(const float32_t *pSrc,
+                       float32_t *pRes,
+                       uint32_t numSamples);
+
+/**
+ * @brief      complex magnitude for float32 on XPULPV2
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
+ */
+
+void plp_cmplx_mag_f32s_xpulpv2(const float32_t *pSrc,
+                                float32_t *pRes,
+                                uint32_t numSamples);
+
+/**
+ * @brief      Glue code for complex magnitude calculation for 32 bit fixpoint
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param[in]  fracBits    fractional bits -> Q(32-fracBits).fracBits
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
+ */
+
+void plp_cmplx_mag_q32(const int32_t *pSrc,
+                       const uint32_t fracBits,
+                       int32_t *pRes,
+                       uint32_t numSamples);
+
+/**
+ * @brief      complex magnitude for q32 on RV32IM
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param[in]  fracBits    fractional bits -> Q(32-fracBits).fracBits
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
+ */
+
+void plp_cmplx_mag_q32s_rv32im(const int32_t *pSrc,
+                               const uint32_t fracBits,
+                               int32_t *pRes,
+                               uint32_t numSamples);
+
+/**
+ * @brief      complex magnitude for q32 on XPULPV2
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param[in]  fracBits    fractional bits -> Q(32-fracBits).fracBits
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
+ */
+
+void plp_cmplx_mag_q32s_xpulpv2(const int32_t *pSrc,
+                                const uint32_t fracBits,
+                                int32_t *pRes,
+                                uint32_t numSamples);
+
+/**
+ * @brief      Glue code for complex magnitude calculation for 8 bit fixpoint
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param[in]  fracBits    fractional bits -> Q(8-fracBits).fracBits
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
+ */
+
+void plp_cmplx_mag_q8(const int8_t *pSrc,
+                       const uint32_t fracBits,
+                       int8_t *pRes,
+                       uint32_t numSamples);
+
+/**
+ * @brief      complex magnitude for q8 on RV32IM
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param[in]  fracBits    fractional bits -> Q(8-fracBits).fracBits
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
+ */
+
+void plp_cmplx_mag_q8s_rv32im(const int8_t *pSrc,
+                               const uint32_t fracBits,
+                               int8_t *pRes,
+                               uint32_t numSamples);
+
+/**
+ * @brief      complex magnitude for q8 on XPULPV2
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param[in]  fracBits    fractional bits -> Q(8-fracBits).fracBits
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
+ */
+
+void plp_cmplx_mag_q8s_xpulpv2(const int8_t *pSrc,
+                                const uint32_t fracBits,
+                                int8_t *pRes,
+                                uint32_t numSamples);
+
+/**
+ * @brief      Glue code for complex magnitude calculation in 16-bit integer
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
+ */
+
+void plp_cmplx_mag_i16(const int16_t *pSrc,
                        int16_t *pRes,
                        uint32_t numSamples);
+
+/**
+ * @brief      complex magnitude for i16 on RV32IM
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
+ */
+
+void plp_cmplx_mag_i16s_rv32im(const int16_t *pSrc,
+                               int16_t *pRes,
+                               uint32_t numSamples);
+
+/**
+ * @brief      complex magnitude for i16 on XPULPV2
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
+ */
+
+void plp_cmplx_mag_i16s_xpulpv2(const int16_t *pSrc,
+                                int16_t *pRes,
+                                uint32_t numSamples);
+
+/**
+ * @brief      Glue code for complex magnitude calculation in 32-bit integer
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
+ */
+
+void plp_cmplx_mag_i32(const int32_t *pSrc,
+                       int32_t *pRes,
+                       uint32_t numSamples);
+
+/**
+ * @brief      complex magnitude for i32 on RV32IM
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
+ */
+
+void plp_cmplx_mag_i32s_rv32im(const int32_t *pSrc,
+                               int32_t *pRes,
+                               uint32_t numSamples);
+
+/**
+ * @brief      complex magnitude for i32 on XPULPV2
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
+ */
+
+void plp_cmplx_mag_i32s_xpulpv2(const int32_t *pSrc,
+                                int32_t *pRes,
+                                uint32_t numSamples);
+
+/**
+ * @brief      Glue code for complex magnitude calculation in 8-bit integer
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
+ */
+
+void plp_cmplx_mag_i8(const int8_t *pSrc,
+                      int8_t *pRes,
+                      uint32_t numSamples);
+
+/**
+ * @brief      complex magnitude for i8 on RV32IM
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
+ */
+
+void plp_cmplx_mag_i8s_rv32im(const int8_t *pSrc,
+                              int8_t *pRes,
+                              uint32_t numSamples);
+
+/**
+ * @brief      complex magnitude for i8 on XPULPV2
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number samples
+ */
+
+void plp_cmplx_mag_i8s_xpulpv2(const int8_t *pSrc,
+                               int8_t *pRes,
+                               uint32_t numSamples);
+
+/**
+ * @brief      Glue code for complex magnitude calculation in 16-bit quantized integer
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param[in]  fracBits    fractional bits -> Q(32-fracBits).fracBits
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number of samples
+ */
+
+void plp_cmplx_mag_q16(const int16_t *pSrc,
+                       const uint32_t fracBits,
+                       int16_t *pRes,
+                       uint32_t numSamples);
+
+/**
+ * @brief      complex magnitude for q16 on RV32IM
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param[in]  fracBits    fractional bits -> Q(32-fracBits).fracBits
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number of samples
+ */
+
+void plp_cmplx_mag_q16s_rv32im(const int16_t *pSrc,
+                               const uint32_t fracBits,
+                               int16_t *pRes,
+                               uint32_t numSamples);
+
+/**
+ * @brief      complex magnitude for q16 on XPULPV2
+ *
+ * @param[in]  pSrc        pointer to source
+ * @param[in]  fracBits    fractional bits -> Q(32-fracBits).fracBits
+ * @param      pRes        pointer to result
+ * @param[in]  numSamples  The number of samples
+ */
+
+void plp_cmplx_mag_q16s_xpulpv2(const int16_t *pSrc,
+                                const uint32_t fracBits,
+                                int16_t *pRes,
+                                uint32_t numSamples);
 
 /**
   @brief      In-place 16 bit reversal function for RV32IM
