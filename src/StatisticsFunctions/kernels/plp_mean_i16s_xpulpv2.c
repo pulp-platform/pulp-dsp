@@ -50,21 +50,42 @@ void plp_mean_i16s_xpulpv2(const int16_t *__restrict__ pSrc,
                            uint32_t blockSize,
                            int16_t *__restrict__ pRes) {
 
-    uint32_t blkCnt; /* Loop counter, temporal BlockSize */
+    int32_t blkCnt; /* Loop counter, temporal BlockSize */
     int32_t sum = 0; /* Temporary return variable */
 
-    int16_t x1, x2;
+    v2s y1, y2;
+
+    const v2s v2s_ones = {1,1};
 
 #if defined(PLP_MATH_LOOPUNROLL)
 
-    for (blkCnt = 0; blkCnt < (blockSize >> 1); blkCnt++) {
-        x1 = *pSrc++;
-        x2 = *pSrc++;
-        sum += x1;
-        sum += x2;
+    if (blockSize > 3) {
+        y1 = *(v2s*) pSrc;
+        pSrc += 2;
+        y2 = *(v2s*) pSrc;
+        pSrc += 2;
+
+        for(blkCnt = 0; blkCnt < (blockSize >> 2)-1; blkCnt++) {
+            sum = __builtin_pulp_sdotsp2(v2s_ones, y1, sum);
+            y1 = *(v2s*) pSrc;
+            pSrc += 2;
+
+            sum = __builtin_pulp_sdotsp2(v2s_ones, y2, sum);
+            y2 = *(v2s*) pSrc;
+            pSrc += 2;
+        }
+
+        sum = __builtin_pulp_sdotsp2(v2s_ones, y1, sum);
+        sum = __builtin_pulp_sdotsp2(v2s_ones, y2, sum);
+
+        for(blkCnt = 0; blkCnt < (blockSize % 4); blkCnt++) {
+            sum += (*pSrc++);
+        }
     }
-    if (blockSize % 2 == 1) {
-        sum += (*pSrc++);
+    else {
+        for(blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+            sum += (*pSrc++);
+        }
     }
 
 #else // PLP_MATH_LOOPUNROLL

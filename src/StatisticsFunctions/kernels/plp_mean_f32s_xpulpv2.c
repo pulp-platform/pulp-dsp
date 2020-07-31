@@ -50,22 +50,43 @@ void plp_mean_f32s_xpulpv2(const float *__restrict__ pSrc,
                            uint32_t blockSize,
                            float *__restrict__ pRes) {
 
-    uint32_t blkCnt; /* Loop counter, temporal BlockSize */
+    int32_t blkCnt; /* Loop counter, temporal BlockSize */
     float sum = 0;   /* Temporary return variable */
 
-    volatile float x1, x2;
+    volatile float x1, x2, x3, x4;
 
 #if defined(PLP_MATH_LOOPUNROLL)
 
-    for (blkCnt = 0; blkCnt < (blockSize >> 1); blkCnt++) {
+    if (blockSize > 3) {
         x1 = *pSrc++;
         x2 = *pSrc++;
+        x3 = *pSrc++;
+        x4 = *pSrc++;
+
+        for(blkCnt = 0; blkCnt < (blockSize >> 2)-1; blkCnt++) {
+            sum += x1;
+            x1 = *pSrc++;
+            sum += x2;
+            x2 = *pSrc++;
+            sum += x3;
+            x3 = *pSrc++;
+            sum += x4;
+            x4 = *pSrc++;   
+        }
+
         sum += x1;
         sum += x2;
-    }
+        sum += x3;
+        sum += x4;
 
-    if (blockSize % 2 == 1) {
-        sum += (*pSrc++);
+        for(blkCnt = 0; blkCnt < (blockSize % 4); blkCnt++) {
+            sum += (*pSrc++);
+        }
+    }
+    else {
+        for(blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+            sum += (*pSrc++);
+        }
     }
 
 #else // PLP_MATH_LOOPUNROLL
