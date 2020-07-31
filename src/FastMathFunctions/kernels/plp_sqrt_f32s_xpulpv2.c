@@ -32,7 +32,7 @@
  * with Apache-2.0.
  */
 
-#define numIters 5
+#define numIters 4
 #include "plp_math.h"
 
 /**
