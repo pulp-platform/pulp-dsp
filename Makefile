@@ -46,6 +46,15 @@ FC_SRCS = \
 	src/BasicMathFunctions/dot_prod/plp_dot_prod_i8.c src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_i8s_rv32im.c \
 	src/BasicMathFunctions/dot_prod/plp_dot_prod_i16.c src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_i16s_rv32im.c \
 	src/BasicMathFunctions/dot_prod/plp_dot_prod_i32.c src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_i32s_rv32im.c \
+	src/BasicMathFunctions/abs/plp_abs_i32.c src/BasicMathFunctions/abs/kernels/plp_abs_i32s_rv32im.c \
+	src/BasicMathFunctions/abs/plp_abs_i16.c src/BasicMathFunctions/abs/kernels/plp_abs_i16s_rv32im.c \
+	src/BasicMathFunctions/abs/plp_abs_i8.c src/BasicMathFunctions/abs/kernels/plp_abs_i8s_rv32im.c \
+	src/BasicMathFunctions/add/plp_add_i32.c src/BasicMathFunctions/add/kernels/plp_add_i32s_rv32im.c \
+	src/BasicMathFunctions/add/plp_add_i16.c src/BasicMathFunctions/add/kernels/plp_add_i16s_rv32im.c \
+	src/BasicMathFunctions/add/plp_add_i8.c src/BasicMathFunctions/add/kernels/plp_add_i8s_rv32im.c \
+	src/BasicMathFunctions/mult/plp_mult_i32.c src/BasicMathFunctions/mult/kernels/plp_mult_i32s_rv32im.c \
+	src/BasicMathFunctions/mult/plp_mult_i16.c src/BasicMathFunctions/mult/kernels/plp_mult_i16s_rv32im.c \
+	src/BasicMathFunctions/mult/plp_mult_i8.c src/BasicMathFunctions/mult/kernels/plp_mult_i8s_rv32im.c \
 	src/FilteringFunctions/plp_correlate_i32.c src/FilteringFunctions/kernels/plp_correlate_i32s_rv32im.c \
 	src/FilteringFunctions/plp_correlate_i16.c src/FilteringFunctions/kernels/plp_correlate_i16s_rv32im.c \
 	src/FilteringFunctions/plp_correlate_i8.c src/FilteringFunctions/kernels/plp_correlate_i8s_rv32im.c \
@@ -382,6 +391,15 @@ CL_SRCS = \
   src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_f32p_xpulpv2.c \
 	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_q32p_xpulpv2.c \
 	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_i32p_xpulpv2.c \
+	src/BasicMathFunctions/abs/kernels/plp_abs_i32s_xpulpv2.c \
+	src/BasicMathFunctions/abs/kernels/plp_abs_i16s_xpulpv2.c \
+	src/BasicMathFunctions/abs/kernels/plp_abs_i8s_xpulpv2.c \
+	src/BasicMathFunctions/add/kernels/plp_add_i32s_xpulpv2.c \
+	src/BasicMathFunctions/add/kernels/plp_add_i16s_xpulpv2.c \
+	src/BasicMathFunctions/add/kernels/plp_add_i8s_xpulpv2.c \
+	src/BasicMathFunctions/mult/kernels/plp_mult_i32s_xpulpv2.c \
+	src/BasicMathFunctions/mult/kernels/plp_mult_i16s_xpulpv2.c \
+	src/BasicMathFunctions/mult/kernels/plp_mult_i8s_xpulpv2.c \
 	src/SupportFunctions/kernels/plp_copy_i32s_xpulpv2.c \
 	src/SupportFunctions/kernels/plp_copy_f32s_xpulpv2.c \
 	src/SupportFunctions/kernels/plp_fill_i32s_xpulpv2.c \
@@ -670,7 +688,7 @@ IDIR=$(CURDIR)/include
 BUILD_DIR=$(CURDIR)/lib/build
 # the build folder is saved here.
 
-PULP_CFLAGS += -I$(IDIR) -O0 -g
+PULP_CFLAGS += -I$(IDIR) -O3 -g
 
 INSTALL_FILES += $(shell find include -name *.h)
 

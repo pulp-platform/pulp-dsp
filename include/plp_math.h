@@ -1735,6 +1735,367 @@ void plp_dot_prod_q8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                               uint32_t blockSize,
                               uint32_t deciPoint,
                               int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+   @brief Glue code for absolute value of 32-bit integer vectors.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i32(const int32_t * pSrc,
+                 int32_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Element-by-element absolute value of 32-bit integer vectors kernel for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i32s_rv32im(const int32_t * pSrc,
+                         int32_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Element-by-element absolute value of 32-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i32s_xpulpv2(const int32_t * pSrc,
+                          int32_t * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Glue code for absolute value of 16-bit integer vectors.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i16(const int16_t * pSrc,
+                 int16_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Element-by-element absolute value of 16-bit integer vectors kernel for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i16s_rv32im(const int16_t * pSrc,
+                         int16_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Element-by-element absolute value of 16-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i16s_xpulpv2(const int16_t * pSrc,
+                          int16_t * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Glue code for absolute value of 8-bit integer vectors.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i8(const int8_t * pSrc,
+                 int8_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Element-by-element absolute value of 8-bit integer vectors kernel for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i8s_rv32im(const int8_t * pSrc,
+                         int8_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Element-by-element absolute value of 8-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i8s_xpulpv2(const int8_t * pSrc,
+                          int8_t * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Glue code for element-by-element addition of 32-bit integer vectors.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i32(const int32_t * pSrcA,
+                 const int32_t * pSrcB,
+                 int32_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element addition of 32-bit integer vectors kernel for RV32IM extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i32s_rv32im(const int32_t * pSrcA,
+                         const int32_t * pSrcB,
+                         int32_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element addition of 32-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i32s_xpulpv2(const int32_t * pSrcA,
+                          const int32_t * pSrcB,
+                          int32_t * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Glue code for element-by-element addition of 16-bit integer vectors.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i16(const int16_t * pSrcA,
+                 const int16_t * pSrcB,
+                 int32_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element addition of 16-bit integer vectors kernel for RV32IM extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i16s_rv32im(const int16_t * pSrcA,
+                         const int16_t * pSrcB,
+                         int32_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element addition of 16-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i16s_xpulpv2(const int16_t * pSrcA,
+                          const int16_t * pSrcB,
+                          int32_t * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Glue code for element-by-element addition of 8-bit integer vectors.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i8(const int8_t * pSrcA,
+                 const int8_t * pSrcB,
+                 int32_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element addition of 8-bit integer vectors kernel for RV32IM extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i8s_rv32im(const int8_t * pSrcA,
+                         const int8_t * pSrcB,
+                         int32_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element addition of 8-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i8s_xpulpv2(const int8_t * pSrcA,
+                          const int8_t * pSrcB,
+                          int32_t * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Glue code for element-by-element multiplication of 32-bit integer vectors.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i32(const int32_t * pSrcA,
+                 const int32_t * pSrcB,
+                 int32_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element multiplication of 32-bit integer vectors kernel for RV32IM extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i32s_rv32im(const int32_t * pSrcA,
+                         const int32_t * pSrcB,
+                         int32_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element multiplication of 32-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i32s_xpulpv2(const int32_t * pSrcA,
+                          const int32_t * pSrcB,
+                          int32_t * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Glue code for element-by-element multiplication of 16-bit integer vectors.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i16(const int16_t * pSrcA,
+                 const int16_t * pSrcB,
+                 int32_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element multiplication of 16-bit integer vectors kernel for RV32IM extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i16s_rv32im(const int16_t * pSrcA,
+                         const int16_t * pSrcB,
+                         int32_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element multiplication of 16-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i16s_xpulpv2(const int16_t * pSrcA,
+                          const int16_t * pSrcB,
+                          int32_t * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Glue code for element-by-element multiplication of 8-bit integer vectors.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i8(const int8_t * pSrcA,
+                 const int8_t * pSrcB,
+                 int32_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element multiplication of 8-bit integer vectors kernel for RV32IM extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i8s_rv32im(const int8_t * pSrcA,
+                         const int8_t * pSrcB,
+                         int32_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element multiplication of 8-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_i8s_xpulpv2(const int8_t * pSrcA,
+                          const int8_t * pSrcB,
+                          int32_t * pDst,
+                          uint32_t blockSize);
+
 /** -------------------------------------------------------
     @brief      Glue code for filling a constant value into a 32-bit integer vector.
     @param[in]  value      input value to be filled
