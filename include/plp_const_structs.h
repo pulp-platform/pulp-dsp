@@ -38,6 +38,16 @@ extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len1024;
 extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len2048;
 extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len4096;
 
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len16;
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len32;
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len64;
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len128;
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len256;
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len512;
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len1024;
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len2048;
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len4096;
+
 extern const plp_rfft_instance_f32 plp_rfft_sR_f32_len2048;
 
 #endif // PLP_CONST_STRUCTS_H
