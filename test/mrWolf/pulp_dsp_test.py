@@ -1,6 +1,7 @@
 import os
 import time
 import random
+import shutil
 from plptest import Test as PulpTest, Testset
 from plptest import Shell, Check
 from itertools import product
@@ -785,6 +786,7 @@ class AggregatedTest(object):
         self.device_name = device_name
         self.extended_output = extended_output
         self.visible_env = visible_env
+        self.sub_folder = "%s_%s_%s" % (self.function_name, self.version, self.device_name)
 
         # extend funciton name
         self.function_name += "_" + self.version
@@ -850,8 +852,6 @@ class AggregatedTest(object):
     def to_plptest(self):
         """ Returns the PulpTest structure """
         test_name = self.function_name
-        build_dir = "test_%s_%s" % (self.device_name, self.version)
-        flags = "GARGS=\'\' BUILD_DIR_EXT=%s" % (build_dir)
         # set the platform for compatibility with various different Pulp-SDK versions
         platform_str = "platform=gvsoc" # default platform
         if "TEST_PLATFORM" in os.environ:
@@ -861,9 +861,9 @@ class AggregatedTest(object):
         return PulpTest(name=test_name,
                         commands=[
                             Check('gen', generate_test_program, test_obj=self),
-                            Shell('clean', 'make clean %s' % (flags)),
-                            Shell('build', 'make all %s' % (flags)),
-                            Shell('run', 'make run %s %s' % (platform_str, flags)),
+                            Shell('clean', 'make -C %s clean' % self.sub_folder),
+                            Shell('build', 'make -C %s all' % self.sub_folder),
+                            Shell('start', 'make -C %s run %s' % (self.sub_folder, platform_str)),
                             Check('check', check_output, test_obj=self)
                         ],
                         timeout=40)
@@ -904,14 +904,19 @@ class AggregatedTest(object):
 
     def generate_test_program(self, gen_stimuli, gen_result):
         """ generate all files needed for the test """
-        # first, we generate all necessary header files (independent of device name)
+        # remove all files in the directory if it still exists
+        clean(self.sub_folder)
+        # create the fresh directory
+        os.mkdir(self.sub_folder)
+
+        # generate all necessary header files (independent of device name)
         # common header
-        with open("common.h", "w") as fp:
+        with open(os.path.join(self.sub_folder, "common.h"), "w") as fp:
             fp.write(self.get_common_header_str())
 
         # header of all tests
         for case in self.cases:
-            with open(case.get_header_filename(), "w") as fp:
+            with open(os.path.join(self.sub_folder, case.get_header_filename()), "w") as fp:
                 fp.write(case.get_header_file_str(gen_stimuli, gen_result))
 
         # next, generate the remaining test structure
@@ -924,7 +929,7 @@ class AggregatedTest(object):
 
     def generate_ibex_test_program(self):
         """ generate all files needed for the ibex test """
-        with open("test.c", "w") as fp:
+        with open(os.path.join(self.sub_folder, "test.c"), "w") as fp:
             fp.write(
                 dedent(
                     """\
@@ -953,7 +958,7 @@ class AggregatedTest(object):
                                               for case in self.cases]))
             )
 
-        with open("Makefile", "w") as fp:
+        with open(os.path.join(self.sub_folder, "Makefile"), "w") as fp:
             fp.write(dedent(
                 """\
                 PULP_APP = test
@@ -970,7 +975,7 @@ class AggregatedTest(object):
 
     def generate_riscy_test_program(self):
         """ generate all files needed for the riscy test """
-        with open("test.c", "w") as fp:
+        with open(os.path.join(self.sub_folder, "test.c"), "w") as fp:
             fp.write(dedent(
                 """\
                 #include "rt/rt_api.h"
@@ -985,7 +990,7 @@ class AggregatedTest(object):
                 """
             ))
 
-        with open("cluster.h", "w") as fp:
+        with open(os.path.join(self.sub_folder, "cluster.h"), "w") as fp:
             fp.write(dedent(
                 """\
                 #ifndef __PULP_DSP_TEST__CLUSTER_H__
@@ -995,7 +1000,7 @@ class AggregatedTest(object):
                 """
             ))
 
-        with open("cluster.c", "w") as fp:
+        with open(os.path.join(self.sub_folder, "cluster.c"), "w") as fp:
             fp.write(
                 dedent(
                     """\
@@ -1023,7 +1028,7 @@ class AggregatedTest(object):
                                               for case in self.cases]))
             )
 
-        with open("Makefile", "w") as fp:
+        with open(os.path.join(self.sub_folder, "Makefile"), "w") as fp:
             fp.write(dedent(
                 """\
                 PULP_APP = test
@@ -1085,7 +1090,7 @@ def check_output(config, output, test_obj):
             bench_output(result, test_obj, case)
 
     # clean the directory
-    clean()
+    clean(test_obj.sub_folder)
 
     return (passed, None)
 
@@ -1420,12 +1425,9 @@ def call_dynamic_function(f, env, version, device, arg_name=None, argument=None,
     return f(*args)
 
 
-def clean():
+def clean(sub_folder):
     """
     Clean the test environment
     """
-    for fname in os.listdir("."):
-        if fname in ["Makefile", "cluster.c", "cluster.h", "test.c", "common.h"]:
-            os.remove(fname)
-        if fname.startswith("data_t") and fname.endswith(".h"):
-            os.remove(fname)
+    if os.path.exists(sub_folder):
+        shutil.rmtree(sub_folder)
