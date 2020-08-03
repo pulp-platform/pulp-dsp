@@ -16,7 +16,7 @@ import re
 
 GENERATE_STIMULI = "gen_stimuli"
 # L2_MEM_SIZE_KB = 448
-TEST_MEM_SIZE_KB = 300
+TEST_MEM_SIZE_KB = 256
 
 
 class Variable(object):
@@ -909,7 +909,7 @@ class AggregatedTest(object):
         return PulpTest(
             name=test_name,
             commands=self.generate_test_commands(platform_str),
-            #timeout=40 # TODO with timeout, stuff crashes
+            # timeout=40 # Timeout is now handled with shell script in run.sh
         )
 
     def generate_test_commands(self, platform_str):
@@ -928,7 +928,6 @@ class AggregatedTest(object):
             used_mem += case_mem
             end_case_id = i + 1 if i + 1 == num_cases else i
             if used_mem > allowed_mem or end_case_id == num_cases:
-                print("program with %skB memory" % str(used_mem - case_mem))
                 used_mem = case_mem
                 gen_test_fn = partial(generate_test_program, start=start_case_id, end=end_case_id)
                 c.append(Check('gen', gen_test_fn, test_obj=self))
@@ -987,9 +986,18 @@ class AggregatedTest(object):
                 dedent(
                     """
                     cd $(dirname $0)
-                    make clean || echo "<ERROR>: clean"
-                    make all || echo "<ERROR>: build"
-                    timeout -k 1 5 make run $@ || echo "<ERROR>: run"
+                    make clean
+                    make all
+                    if [ $? -eq 0 ]; then
+                        timeout -k 1 5 make run $@
+                        if [ $? -eq 0 ]; then
+                            echo "<SUCCESS>"
+                        else
+                            echo "<ERROR>: run"
+                        fi
+                    else
+                        echo "<ERROR>: build"
+                    fi
                     cd ..
                     """
                 )
