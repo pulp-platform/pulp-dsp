@@ -424,7 +424,7 @@ Every test will measure it's cycles and instructions. After every test is comple
 Sometimes, it is nice to see what went wrong, when writing the tests. When the tests don't compile, the result will also be `KO` (just like if there was a mismatch). However, if there was a mismatch, it will be printed to `stdout` (except the flag `extended_output=False` is overwritten). To see what went wrong, start the tests as follows:
 
 ```
-plptest --stdout
+plptest --threads 1 --stdout
 ```
 
 The test will generate all necessary source files automatically. But, they are removed after the test passed or failed. You can still view the generated files by canceling the test during compilation (by pressing `Ctrl-C`). This should be done about 2 seconds after the test has started (when gcc is executed). Then, you can inspect the files. You can make changes on the fly, and check if it works by manually running `make clean all run`.
@@ -434,13 +434,16 @@ The test will generate all necessary source files automatically. But, they are r
 This test framework is based around `plptest`. In `plptest`, every test is configured in the class `plptest.Test` (renamed to `PulpTest` in `pulp_dsp_test.py`). Such a test can have a name, and commands to execute. 
 
 1. Generate (written as `plptest.Check`): Calls `generate_test_program`, which generate all stimuli, compute the expected results, and generate the entire test program with all necessary files. We use `plptest.Check` because this allows us to pass the test object without serializing and deserializing.
-2. `make clean --build-dir=BUILD_DIR`: clear the build directory
-3. `make all --build-dir=BUILD_DIR`: Compile the test
-4. `make run --build-dir=BUILD_DIR`: Run the test
-6. Check (written as `plptest.Check`): Calls `check_output` in `pulp_dsp_test.py`. Here, we can reuse the test object by using the parameter `test_obj`. It also clears all program files of the test.
+2. `bash TEST_FOLDER/run.sh platform=PLATFORM`: build the project and run it on gvsoc
+3. Check (written as `plptest.Check`): Calls `check_output` in `pulp_dsp_test.py`. Here, we can reuse the test object by using the parameter `test_obj`. It also clears all program files of the test.
 
-Each test program will check multiple different cases. All iterations of `SweepVariable`s and `DynamicVariable`s will be grouped to getter for all functions and versions. This way, we reduce the total amount of work required by approximately factor 8. Also, the programmer does not need to think about the test time before adding more test cases and iterations of `SweepVariable`s. The generated test program will have the following files:
+Each test program will check multiple different cases. All iterations of `SweepVariable`s and `DynamicVariable`s will be grouped to getter for all functions and versions. This way, we reduce the total amount of work required by approximately factor 8. Also, the programmer does not need to think about the test time before adding more test cases and iterations of `SweepVariable`s. 
 
+All data for the tests need to fit in L2 memory. This can be a limitation if the user creates large arrays, or uses many iterations. To mitigate this problem, the test framework approximates the memory requirement for each test case and aggregates cases, such that L2 memory is not exceeded. The variable `TEST_MEM_SIZE_KB=256` configures the total amount of memory allowed in the a single test program. The memory is approximated using the funciton `estimate_memory` (in `Variable` and all sub-classes, and in `AggregateTestCase`). Then, the steps 1 and 2 are repeated, with each iteration generating as many cases as fit into `TEST_MEM_SIZE_KB`, until all iterations are tested.
+
+The generated test program will have the following files, in a sub folder, which allows parallel execution:
+
+- `run.sh`: Executes `make clean all run`, and writes to stdout if something fails. This script always exists with status `0`. See [Error Handling and Parsing](error-handling-and-parsing).
 - `common.h`: Common declarations (like the union `__u2f` and the macro `ABS`)
 - `data_tXX.h`: The stimuli and the expected result, stored for each test case separately.
 - `test.c` (`cluster.c` for `riscy` tests): Contains the function `test_entry`, which calls all test cases. Each test case is represented as a function, called `tXX__run_test`. Each of these functions does the following:
@@ -504,6 +507,10 @@ This is done in the function `fmt_float`. The `data.h` file is created in the fo
   RT_L1_DATA __u2f <NAME> = {.u = 0xbf12d71dU};
   ```
   Finally, every time we use the variable (when passing it to the function, when writing to the return value and when checking the return value), we use `<NAME>.f` to interpret the data ase a floating-point number
+
+### Error Handling and Parsing
+
+For the user, it is convenient when the reason for failure is printed to stdout, without the need of using the `--stdout` flag. To print reasonable results, the generated `run.sh` script is written such that it always returns with status `0`. This way, `plptest` will not automatically assume the test failed, but will call the check function anyway. In `check_output`, the output of all test cases is parsed. It checks for errors, which are printed by `run.sh`. It also gets that gvsoc errors (e.g. invalid access) and prints those to stdout. The parser also accepts non-complete results, parses the ones that were successful and skips the check for all who came after the error.
 
 ### Benchmarking
 
