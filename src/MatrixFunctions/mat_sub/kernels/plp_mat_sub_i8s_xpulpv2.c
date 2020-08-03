@@ -59,12 +59,13 @@ void plp_mat_sub_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
     uint32_t total = M*N; // we can see it as a 1D operation
 #if defined(PLP_MATH_LOOPUNROLL)
     // loop over the matrix - the shift by one is for the loop unrolling
-    for (i = 0; i < total>>1; i++) {
-            pDst[2*i] = pSrcA[2*i] - pSrcB[2*i];
-            pDst[2*i+1] = pSrcA[2*i+1] - pSrcB[2*i+1];
+    for (i = 0; i < total>>3; i++) {
+        *((v4s*)(pDst + 8*i    )) = __SUB4(*((v4s*)(pSrcA + 8*i    )), *((v4s*)(pSrcB + 8*i    )));
+        *((v4s*)(pDst + 8*i + 4)) = __SUB4(*((v4s*)(pSrcA + 8*i + 4)), *((v4s*)(pSrcB + 8*i + 4)));
     }
     // to save the branch we just always compute the possibly remaining element
-    pDst[total - 1] = pSrcA[total - 1] - pSrcB[total - 1];
+    *((v4s*)(pDst + total - 4)) = __SUB4(*((v4s*)(pSrcA + total - 4)), *((v4s*)(pSrcB + total - 4)));
+    *((v4s*)(pDst + total - 8)) = __SUB4(*((v4s*)(pSrcA + total - 8)), *((v4s*)(pSrcB + total - 8)));
 #else // No PLP_MATH_LOOPUNROLL
     for (i = 0; i < total; i++) {
             pDst[i] = pSrcA[i] - pSrcB[i];

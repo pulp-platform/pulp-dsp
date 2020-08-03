@@ -67,22 +67,23 @@ void plp_mat_add_i8p_xpulpv2(void *args) {
     uint32_t total = M*N; // we can see it as a 1D operation
 #if defined(PLP_MATH_LOOPUNROLL)
     // amount of elements per core, rounded up to next even number
-    uint32_t per_core = ((total+nPE-1)/nPE + 1) & 0xFFFFFFFE;
+    uint32_t per_core = ((total+nPE-1)/nPE + 7) & 0xFFFFFFF8;
     // compute the last element of the area each core has to process
     uint32_t upper_bound = (core_id+1)*per_core;
     // as we always rounded up before (to distribute the load as equal as possible) we need to check if the upper bound is still in our matrix
     if(upper_bound > total ) upper_bound = total;
     // loop over the area assigned to the core - the shift by one is for the loop unrolling
-    for (i = core_id*(per_core>>1); i < (upper_bound>>1); i++) {
-            pDst[2*i] = pSrcA[2*i] + pSrcB[2*i];
-            pDst[2*i+1] = pSrcA[2*i+1] + pSrcB[2*i+1];
+    for (i = core_id*(per_core>>3); i < (upper_bound>>3); i++) {
+        *((v4s*)(pDst + 8*i    )) = __ADD4(*((v4s*)(pSrcA + 8*i    )), *((v4s*)(pSrcB + 8*i    )));
+        *((v4s*)(pDst + 8*i + 4)) = __ADD4(*((v4s*)(pSrcA + 8*i + 4)), *((v4s*)(pSrcB + 8*i + 4)));
     }
 
     // to save the branch we just compute the possibly remaining element always and with all cores
     // might lead to wait cycles due to contention while writing the same element
     // possible improvement 1: last core has least work to do if there is a remaining element, make use of this
     // possible improvement 2: if the cores that don't compute flush the pipeline, it should not be a waste of time, make use of this
-    pDst[total - 1] = pSrcA[total - 1] + pSrcB[total - 1];
+    *((v4s*)(pDst + total - 4)) = __ADD4(*((v4s*)(pSrcA + total - 4)), *((v4s*)(pSrcB + total - 4)));
+    *((v4s*)(pDst + total - 8)) = __ADD4(*((v4s*)(pSrcA + total - 8)), *((v4s*)(pSrcB + total - 8)));
 #else // No PLP_MATH_LOOPUNROLL
     // amount of elements per core, rounded up
     uint32_t per_core = (total+nPE-1)/nPE;
