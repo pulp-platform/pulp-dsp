@@ -80,7 +80,7 @@ void plp_mat_copy_stride_i16s_rv32im(const int16_t *__restrict__ pSrc,
                                      uint32_t strideDst,
                                      int16_t *__restrict__ pDst) {
 
-#define BASIC_VERSION // if used don' forget to also use undefine at end of file
+//#define BASIC_VERSION // if used don' forget to also use undefine at end of file
 #ifdef BASIC_VERSION
 
     for (int m = 0; m < M; m++) {
@@ -91,10 +91,27 @@ void plp_mat_copy_stride_i16s_rv32im(const int16_t *__restrict__ pSrc,
 
 #else
 
-    // TODO: Hackathon
+    unsigned int m;
+    unsigned int n;
+
+    unsigned int n_iter = N >> 1;
+    unsigned int n_rem = N & 0x00000001;
+
+    for (m = 0; m < M; m++) {
+        for (n = 0; n < n_iter; n++) {
+            *((int32_t *)pDst) = *((int32_t *)pSrc);
+            pDst += 2;
+            pSrc += 2;
+        }
+        if (n_rem) {
+            *pDst++ = *pSrc++;
+        }
+        pSrc += strideSrc - N;
+        pDst += strideDst - N;
+    }
 
 #endif
-#undef BASIC_VERSION
+    //#undef BASIC_VERSION
 }
 
 /**

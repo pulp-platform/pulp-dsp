@@ -71,7 +71,7 @@ void plp_mat_sub_stride_i8p_xpulpv2(void *args) {
 
     uint32_t m, n; // loop counters
 
-    for (m = 0; m < M; m++) {
+    for (m = core_id; m < M; m += nPE) {
         for (n = 0; n < N; n++) {
             pDst[m * strideY + n] = pSrcA[m * strideA + n] - pSrcB[m * strideB + n];
         }
@@ -79,7 +79,35 @@ void plp_mat_sub_stride_i8p_xpulpv2(void *args) {
 
 #else
 
-    // TODO: Hackathon
+    uint32_t m, n; // loop counters
+
+    unsigned int n_iter = N >> 2;
+    unsigned int n_rem = N & 0x3;
+
+    pSrcA += strideA * core_id;
+    pSrcB += strideB * core_id;
+    pDst += strideY * core_id;
+
+    unsigned int step_a = strideA * nPE - N;
+    unsigned int step_b = strideB * nPE - N;
+    unsigned int step_y = strideY * nPE - N;
+
+    for (m = core_id; m < M; m += nPE) {
+        for (n = 0; n < n_iter; n++) {
+            v4s a = *((v4s *)pSrcA);
+            v4s b = *((v4s *)pSrcB);
+            *((v4s *)pDst) = __SUB4(a, b);
+            pSrcA += 4;
+            pSrcB += 4;
+            pDst += 4;
+        }
+        for (n = 0; n < n_rem; n++) {
+            *pDst++ = *pSrcA++ - *pSrcB++;
+        }
+        pSrcA += step_a;
+        pSrcB += step_b;
+        pDst += step_y;
+    }
 
 #endif
 #undef BASIC_VERSION

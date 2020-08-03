@@ -392,7 +392,7 @@ This function *must* return the `np.ndarray` with the expected result.
 To execute the tests, you need to change directory into either `test/mrWolf`, or any of it's subdirectories. Then, start plptest with:
 
 ```
-plptest --threads 1
+plptest
 ```
 
 Running all tests will take a while. As soon as all tests are finished, plptest will show you a summary of all executed tests and if they passed or failed.
@@ -401,7 +401,7 @@ Running all tests will take a while. As soon as all tests are finished, plptest 
 
 In recent versions of Pulp-SDK, the platform configuration changed. In earlier versions, the platform could be chosen by sourcing `pulp-sdk/configs/platform-<PLATFORM>.sh`. However, this was removed in recent versions, and replaced by adding the `platform=<PLATFORM>` flag to `make run` (this flag is already available in earlier versions). In order to guarantee compatibility with different Pulp-SDK versions, the test framework chooses the platform in the following way:
 
-- If the environment variable `TEST_PLATFORM` is set, then the tests are run with `make run platform=$TEST_PLATFORM`. Simply run `TEST_PLATFORM=board plptest --threads 1` to execute the tests on an actual board.
+- If the environment variable `TEST_PLATFORM` is set, then the tests are run with `make run platform=$TEST_PLATFORM`. Simply run `TEST_PLATFORM=board plptest` to execute the tests on an actual board.
 - The old platform configuration script `pulp-sdk/configs/platform-<PLATFORM>.sh` sets the environment variable `PULP_CURRENT_CONFIG_ARGS=platform=<PLATFORM>`. If this variable is set (and `TEST_PLATFORM` is not), then the tests are executed with `make run $PULP_CURRENT_CONFIG_ARGS`. This will ensure that the configuration is applied.
 - If neither of the two environment variables `TEST_PLATFORM` or `PULP_CURRENT_CONFIG_ARGS` are set, then the tests are run with `make run platform=gvsoc`.
 
@@ -424,7 +424,7 @@ Every test will measure it's cycles and instructions. After every test is comple
 Sometimes, it is nice to see what went wrong, when writing the tests. When the tests don't compile, the result will also be `KO` (just like if there was a mismatch). However, if there was a mismatch, it will be printed to `stdout` (except the flag `extended_output=False` is overwritten). To see what went wrong, start the tests as follows:
 
 ```
-plptest --threads 1 --stdout
+plptest --stdout
 ```
 
 The test will generate all necessary source files automatically. But, they are removed after the test passed or failed. You can still view the generated files by canceling the test during compilation (by pressing `Ctrl-C`). This should be done about 2 seconds after the test has started (when gcc is executed). Then, you can inspect the files. You can make changes on the fly, and check if it works by manually running `make clean all run`.

@@ -60,7 +60,7 @@ void plp_mat_copy_stride_f32p_xpulpv2(void *args) {
     uint32_t nPE = a->nPE;
     float *__restrict__ pDst = a->pDst;
 
-#define BASIC_VERSION // if used don't forget to also use the undefine at end of file
+//#define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 #ifdef BASIC_VERSION
 
     for (int m = core_id; m < M; m += nPE) {
@@ -71,10 +71,35 @@ void plp_mat_copy_stride_f32p_xpulpv2(void *args) {
 
 #else
 
-    // TODO: Hackathon
+    const int32_t *__restrict__ pSrcI = (int32_t *)pSrc;
+    int32_t *__restrict__ pDstI = (int32_t *)pDst;
+
+    unsigned int m;
+    unsigned int n;
+
+    pSrcI += strideSrc * core_id;
+    pDstI += strideDst * core_id;
+
+    unsigned int src_offset = (strideSrc * nPE) - N;
+    unsigned int dst_offset = (strideDst * nPE) - N;
+
+    unsigned int n_iter = N >> 1;
+    unsigned int n_rem = N & 0x00000001;
+
+    for (m = core_id; m < M; m += nPE) {
+        for (n = 0; n < n_iter; n++) {
+            *pDstI++ = *pSrcI++;
+            *pDstI++ = *pSrcI++;
+        }
+        if (n_rem) {
+            *pDstI++ = *pSrcI++;
+        }
+        pSrcI += src_offset;
+        pDstI += dst_offset;
+    }
 
 #endif
-#undef BASIC_VERSION
+    //#undef BASIC_VERSION
 }
 
 /**
