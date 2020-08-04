@@ -556,7 +556,7 @@ class ReturnValue(Argument):
         """ returns an estimate of the number of bytes in L2 for this argument """
         # OutputArgument needs 2 scalars of ctype. In fact, just call estimate_memory on Argument
         # and multiply the result by 2
-        return super(ReturnValue, self) * 2
+        return super(ReturnValue, self).estimate_memory() * 2
 
 
 class FixPointArgument(Argument):
