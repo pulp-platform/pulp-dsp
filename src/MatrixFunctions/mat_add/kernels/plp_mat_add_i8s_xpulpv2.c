@@ -55,23 +55,23 @@ void plp_mat_add_i8s_xpulpv2(const int8_t *__restrict__ pSrcA,
                              uint32_t N,
                              int8_t *__restrict__ pDst) {
 
-#define BASIC_VERSION // if used don't forget to also use the undefine at end of file
-#ifdef BASIC_VERSION
-
-    uint32_t m, n; // loop counters
-
-    for (m = 0; m < M; m++) {
-        for (n = 0; n < N; n++) {
-            pDst[m * N + n] = pSrcA[m * N + n] + pSrcB[m * N + n];
-        }
+    uint32_t i; // loop counters
+    uint32_t total = M*N; // we can see it as a 1D operation
+#if defined(PLP_MATH_LOOPUNROLL)
+    // loop over the matrix - the shift by one is for the loop unrolling
+    for (i = 0; i < total>>3; i++) {
+        *((v4s*)(pDst + 8*i    )) = __ADD4(*((v4s*)(pSrcA + 8*i    )), *((v4s*)(pSrcB + 8*i    )));
+        *((v4s*)(pDst + 8*i + 4)) = __ADD4(*((v4s*)(pSrcA + 8*i + 4)), *((v4s*)(pSrcB + 8*i + 4)));
+    }
+    // to save the branch we just always compute the possibly remaining elements
+    *((v4s*)(pDst + total - 4)) = __ADD4(*((v4s*)(pSrcA + total - 4)), *((v4s*)(pSrcB + total - 4)));
+    *((v4s*)(pDst + total - 8)) = __ADD4(*((v4s*)(pSrcA + total - 8)), *((v4s*)(pSrcB + total - 8)));
+#else // No PLP_MATH_LOOPUNROLL
+    for (i = 0; i < total; i++) {
+            pDst[i] = pSrcA[i] + pSrcB[i];
     }
 
-#else
-
-    // TODO: Hackathon
-
-#endif
-#undef BASIC_VERSION
+#endif // PLP_MATH_LOOPUNROLL
 }
 /**
    @} end of MatAddKernels group

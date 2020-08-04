@@ -71,7 +71,6 @@ void plp_mat_add_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
     }
 
 #endif // PLP_MATH_LOOPUNROLL
->>>>>>> Optimizes matrix add/sub
 }
 
 /**

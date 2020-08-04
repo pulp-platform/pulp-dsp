@@ -73,7 +73,7 @@ void plp_mat_sub_i32p_xpulpv2(void *args) {
             pDst[2*i] = pSrcA[2*i] - pSrcB[2*i];
             pDst[2*i+1] = pSrcA[2*i+1] - pSrcB[2*i+1];
     }
-    
+
     // to save the branch we just compute the possibly remaining element always and with all cores
     // might lead to wait cycles due to contention while writing the same element
     // possible improvement 1: last core has least work to do if there is a remaining element, make use of this

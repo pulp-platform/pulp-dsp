@@ -68,13 +68,13 @@ void plp_mat_sub_f32p_xpulpv2(void *args) {
     // compute the last element of the area each core has to process
     uint32_t upper_bound = (core_id+1)*per_core;
     // as we always rounded up before (to distribute the load as equal as possible) we need to check if the upper bound is still in our matrix
-    if(upper_bound > total ) upper_bound = total; 
+    if(upper_bound > total ) upper_bound = total;
     // loop over the area assigned to the core - the shift by one is for the loop unrolling
     for (i = core_id*(per_core>>1); i < (upper_bound>>1); i++) {
             pDst[2*i] = pSrcA[2*i] - pSrcB[2*i];
             pDst[2*i+1] = pSrcA[2*i+1] - pSrcB[2*i+1];
     }
-    
+
     // to save the branch we just compute the possibly remaining element always and with all cores
     // might lead to wait cycles due to contention while writing the same element
     // possible improvement 1: last core has least work to do if there is a remaining element, make use of this
@@ -86,7 +86,7 @@ void plp_mat_sub_f32p_xpulpv2(void *args) {
     // compute the last element of the area each core has to process
     uint32_t upper_bound = (core_id+1)*per_core;
     // as we always rounded up before (to distribute the load as equal as possible) we need to check if the upper bound is still in our matrix
-    if(upper_bound > total ) upper_bound = total; 
+    if(upper_bound > total ) upper_bound = total;
     // loop over the area assigned to the core
     for (i = core_id*per_core; i < upper_bound; i++) {
             pDst[i] = pSrcA[i] - pSrcB[i];
