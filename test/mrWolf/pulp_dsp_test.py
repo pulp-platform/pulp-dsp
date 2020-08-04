@@ -398,7 +398,7 @@ class OutputArgument(ArrayArgument):
             for (int i = 0; i < {len}; i++) {{
             {check_str}
                     passed = 0;
-                    printf("    <Mismatch> {name}[%d]: acq={fmt}, exp={fmt}\\n",
+                    printf("\\n#@# mismatch {name}[%d]: acq={fmt}, exp={fmt}\\n",
                            i, {acq}[i], {exp}[i]);
                 }}
             }}
@@ -538,7 +538,7 @@ class ReturnValue(Argument):
             """\
             {check_str}
                 passed = 0;
-                printf("    <Mismatch> {name}: acq={fmt}, exp={fmt}\\n", {acq}, {exp});
+                printf("\\n#@# mismatch {name}: acq={fmt}, exp={fmt}\\n", {acq}, {exp});
             }}
             """
         ).format(check_str=check_str,
@@ -749,7 +749,7 @@ class AggregatedTestCase(object):
         return dedent(
             """\
             static void t{idx}__run_test(void) {{
-                printf("\\ntestcase {idx} {{\\n");
+                printf("\\n#@# testcase {idx} {{\\n");
 
                 // setup the test
                 rt_dma_copy_t copy;
@@ -762,26 +762,28 @@ class AggregatedTestCase(object):
 
                 // run 1: check result and get numebr of cycles / instructions
                 int passed = t{idx}__do_bench(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR), 1);
-                printf("    passed: %d\\n", passed);
-                printf("    cycles: %d\\n", rt_perf_read(RT_PERF_CYCLES));
-                printf("    instructions: %d\\n", rt_perf_read(RT_PERF_INSTR));
+                printf("\\n#@# passed: %d\\n", passed);
+                printf("#@# cycles: %d\\n", rt_perf_read(RT_PERF_CYCLES));
+                printf("#@# instructions: %d\\n", rt_perf_read(RT_PERF_INSTR));
 
                 // run 2: count load stalls
                 t{idx}__do_bench(&perf, 1<<RT_PERF_LD_STALL, 0);
-                printf("    load_stalls: %d\\n", rt_perf_read(RT_PERF_LD_STALL));
+                printf("\\n#@# load_stalls: %d\\n", rt_perf_read(RT_PERF_LD_STALL));
 
                 // run 3: count instruction cache misses
                 t{idx}__do_bench(&perf, 1<<RT_PERF_IMISS, 0);
-                printf("    icache_miss: %d\\n", rt_perf_read(RT_PERF_IMISS));
+                printf("\\n#@# icache_miss: %d\\n", rt_perf_read(RT_PERF_IMISS));
 
                 // run 4: count TCDM contentions
+                printf("\\n#@# output start\\n");
                 t{idx}__do_bench(&perf, 1<<RT_PERF_TCDM_CONT, 0);
-                printf("    tcdm_cont: %d\\n", rt_perf_read(RT_PERF_TCDM_CONT));
+                printf("\\n#@# output end\\n");
+                printf("#@# tcdm_cont: %d\\n", rt_perf_read(RT_PERF_TCDM_CONT));
 
                 // free up all memory
             {free}
 
-                printf("}}\\n");
+                printf("\\n#@# }}\\n");
             }}
             """
         ).format(idx=self.idx,
@@ -991,12 +993,12 @@ class AggregatedTest(object):
                     if [ $? -eq 0 ]; then
                         timeout -k 1 5 make run $@
                         if [ $? -eq 0 ]; then
-                            echo "<SUCCESS>"
+                            echo "#@# success"
                         else
-                            echo "<ERROR>: run"
+                            echo "#@# error: run"
                         fi
                     else
-                        echo "<ERROR>: build"
+                        echo "#@# error: build"
                     fi
                     cd ..
                     """
@@ -1187,6 +1189,10 @@ def check_output(config, output, test_obj):
         case = test_obj.cases[case_idx]
         tests_missing.remove(case_idx)
 
+        # print the user messages
+        if len(result['user_msg']) >= 1:
+            print("\n".join(result['user_msg']))
+
         # print the result
         if result['passed']:
             status = '\033[92mOK:\033[0m  '
@@ -1226,41 +1232,58 @@ def parse_output(output):
     """ Parse the output of running all tests (all test projects together) """
     cases = []
     current_case = -1
+    user_msg_mode = False
     gvsoc_error_str = []
     gvsoc_error_re = re.compile("^[0-9]*: [0-9]*: \[.*\]")
     for line in output.split('\n'):
+
+        if user_msg_mode:
+            # special mode where everything is added to user_msg
+            if "#@# output end" in line:
+                if len(cases[current_case]['user_msg']) > 0 and len(cases[current_case]['user_msg'][-1].strip()) == 0:
+                    del cases[current_case]['user_msg'][-1]
+                user_msg_mode = False
+            # do not add the line if it is empty and it is the first message
+            elif not (len(cases[current_case]['user_msg']) == 0 and len(line.strip()) == 0):
+                cases[current_case]['user_msg'].append(line)
+            continue
+
+        # normal parsing mode
         line = line.strip()
-        if line == "}":
+        if line == "#@# }":
             current_case = -1
             gvsoc_error_str = []
-        elif line.startswith("testcase") and line.endswith("{"):
-            current_case = int(line[len("testcase "):-len(" {")])
+        elif line.startswith("#@# testcase") and line.endswith("{"):
+            current_case = int(line[len("#@# testcase "):-len(" {")])
             assert len(cases) == current_case
             cases.append({'passed': False,
                           'error_msg': None,
+                          'user_msg': [],
                           'cycles': 0,
                           'instructions': 0,
                           'load_stalls': 0,
                           'icache_miss': 0,
                           'tcdm_cont': 0,
                           'mismatches': []})
-        elif line.startswith('passed:'):
+        elif line.startswith('#@# passed:'):
             cases[current_case]['passed'] = line.find('1') != -1
-        elif line.startswith('cycles'):
+        elif line.startswith('#@# cycles'):
             cases[current_case]['cycles'] = int(line.split(": ")[1])
-        elif line.startswith('instructions'):
+        elif line.startswith('#@# instructions'):
             cases[current_case]['instructions'] = int(line.split(": ")[1])
-        elif line.startswith('load_stalls'):
+        elif line.startswith('#@# load_stalls'):
             cases[current_case]['load_stalls'] = int(line.split(": ")[1])
-        elif line.startswith('icache_miss'):
+        elif line.startswith('#@# icache_miss'):
             cases[current_case]['icache_miss'] = int(line.split(": ")[1])
-        elif line.startswith('tcdm_cont'):
+        elif line.startswith('#@# tcdm_cont'):
             cases[current_case]['tcdm_cont'] = int(line.split(": ")[1])
-        elif line.startswith('<Mismatch>'):
-            cases[current_case]['mismatches'].append("Mismatch: %s" % line[11:])
+        elif line.startswith('#@# mismatch'):
+            cases[current_case]['mismatches'].append("Mismatch: %s" % line[13:])
+        elif "#@# output start" in line:
+            user_msg_mode = True
         elif gvsoc_error_re.match(line):
             gvsoc_error_str.append(line[line.find("["):])
-        elif line.startswith('<ERROR>:'):
+        elif line.startswith('#@# error:'):
             reason = line.split(": ")[1]
             if reason == "run":
                 cases[current_case]['passed'] = False
