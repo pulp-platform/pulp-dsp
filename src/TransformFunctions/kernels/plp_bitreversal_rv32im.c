@@ -52,7 +52,7 @@ void plp_bitreversal_16s_rv32im(uint16_t *pSrc,
                                 const uint16_t *pBitRevTab) {
     uint16_t a, b, i, tmp;
 
-    for (i = 0; i < bitRevLen;) {
+    for (i = 0; i < bitRevLen; i += 2) {
         a = pBitRevTab[i] >> 2;
         b = pBitRevTab[i + 1] >> 2;
 
@@ -66,7 +66,7 @@ void plp_bitreversal_16s_rv32im(uint16_t *pSrc,
         pSrc[a + 1] = pSrc[b + 1];
         pSrc[b + 1] = tmp;
 
-        i += 2;
+        // i += 2;
     }
 }
 
@@ -83,7 +83,7 @@ void plp_bitreversal_32s_rv32im(uint32_t *pSrc,
                                 const uint16_t *pBitRevTab) {
     uint32_t a, b, i, tmp;
 
-    for (i = 0; i < bitRevLen; )
+    for (i = 0; i < bitRevLen; i+= 2)
     {
         a = pBitRevTab[i    ] >> 2;
         b = pBitRevTab[i + 1] >> 2;
@@ -98,7 +98,7 @@ void plp_bitreversal_32s_rv32im(uint32_t *pSrc,
         pSrc[a+1] = pSrc[b+1];
         pSrc[b+1] = tmp;
 
-        i += 2;
+        // i += 2;
     }
 }
 

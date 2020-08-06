@@ -136,6 +136,7 @@ FC_SRCS = \
 	src/MatrixFunctions/mat_mult_trans_cmplx/plp_mat_mult_trans_cmplx_f32_parallel.c \
 	src/TransformFunctions/kernels/plp_bitreversal_rv32im.c \
 	src/TransformFunctions/plp_cfft_q16.c src/TransformFunctions/kernels/plp_cfft_q16s_rv32im.c \
+	src/TransformFunctions/plp_cfft_q16_parallel.c \
 	src/TransformFunctions/plp_cfft_q32.c src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c \
 	src/TransformFunctions/plp_rfft_f32.c \
 	src/TransformFunctions/plp_rfft_f32_parallel.c \
@@ -507,6 +508,7 @@ CL_SRCS = \
 	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_bitreversal_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_cfft_q16s_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_cfft_q16p_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_cfft_q32s_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32s_xpulpv2.c \
