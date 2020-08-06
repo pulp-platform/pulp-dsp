@@ -12,8 +12,11 @@ import numpy as np
 from textwrap import dedent, indent, wrap
 import struct
 import traceback
+import re
 
 GENERATE_STIMULI = "gen_stimuli"
+# L2_MEM_SIZE_KB = 448
+TEST_MEM_SIZE_KB = 256
 
 
 class Variable(object):
@@ -187,6 +190,12 @@ class Argument(object):
         """ return the header string for declaring and initializing the reference """
         return None
 
+    def estimate_memory(self):
+        """ returns an estimate of the number of bytes in L2 for this argument """
+        # argument only requires a single scalar of ctype. However, the compiler usually aligns
+        # memory. Thus, always use 4 bytes for each scalar
+        return 4
+
 
 class ArrayArgument(Argument):
     """Array Argument"""
@@ -321,6 +330,14 @@ class ArrayArgument(Argument):
         else:
             return declare_array(self.name, self.ctype, self.length, self.value)
 
+    def estimate_memory(self):
+        """ returns an estimate of the number of bytes in L2 for this argument """
+        # ArrayArgument needs only 1 array of defined length, and 4 bytes for the pointer. however,
+        # if the ctype is float, we need one pointer extra.
+        mem = ctype_mem_size(self.ctype) * self.length
+        mem += 8 if "float" in self.ctype else 4
+        return mem
+
 
 class OutputArgument(ArrayArgument):
     """Output Array Argument"""
@@ -381,7 +398,7 @@ class OutputArgument(ArrayArgument):
             for (int i = 0; i < {len}; i++) {{
             {check_str}
                     passed = 0;
-                    printf("    <Mismatch> {name}[%d]: acq={fmt}, exp={fmt}\\n",
+                    printf("\\n#@# mismatch {name}[%d]: acq={fmt}, exp={fmt}\\n",
                            i, {acq}[i], {exp}[i]);
                 }}
             }}
@@ -400,6 +417,14 @@ class OutputArgument(ArrayArgument):
 
         reference = gen_function(self)
         return declare_array(self.reference_name(), self.ctype, self.length, reference)
+
+    def estimate_memory(self):
+        """ returns an estimate of the number of bytes in L2 for this argument """
+        # OutputArgument needs 2 arrays of the same length, one to store the output and one for the
+        # reference, and the memory for storing two pointers. In fact, it is twice as much as for
+        # ArrayArgument, thus, just call estimate_memory of the super array.
+        return super(OutputArgument, self).estimate_memory() * 2
+        return ctype_mem_size(self.ctype) * self.length * 2
 
 
 class InplaceArgument(OutputArgument):
@@ -465,6 +490,13 @@ class InplaceArgument(OutputArgument):
                  original_init=declare_array(self.original_name(), self.ctype, self.length,
                                              self.value))
 
+    def estimate_memory(self):
+        """ returns an estimate of the number of bytes in L2 for this argument """
+        # OutputArgument needs 3 arrays of the same length, one to store the output, one for the
+        # original value to fall back, and one for the reference. Hence, just call estimate_memory
+        # of Output Argument, divide by 2 and multiply by 3.
+        return (super(InplaceArgument, self).estimate_memory() // 2) * 3
+
 
 class ReturnValue(Argument):
     """ result value """
@@ -506,7 +538,7 @@ class ReturnValue(Argument):
             """\
             {check_str}
                 passed = 0;
-                printf("    <Mismatch> {name}: acq={fmt}, exp={fmt}\\n", {acq}, {exp});
+                printf("\\n#@# mismatch {name}: acq={fmt}, exp={fmt}\\n", {acq}, {exp});
             }}
             """
         ).format(check_str=check_str,
@@ -519,6 +551,12 @@ class ReturnValue(Argument):
         """ Generates and writes reference value to header file """
         reference = gen_function(self)
         return declare_scalar(self.reference_name(), self.ctype, reference)
+
+    def estimate_memory(self):
+        """ returns an estimate of the number of bytes in L2 for this argument """
+        # OutputArgument needs 2 scalars of ctype. In fact, just call estimate_memory on Argument
+        # and multiply the result by 2
+        return super(ReturnValue, self).estimate_memory() * 2
 
 
 class FixPointArgument(Argument):
@@ -616,13 +654,19 @@ class CustomArgument(Argument):
         # here, we just need to return self.value, since this is the initialization string.
         return self.value
 
+    def estimate_memory(self):
+        """ returns an estimate of the number of bytes in L2 for this argument """
+        # for Custom Argument, we just add a constant value of 16 bytes.
+        # TODO add a function which the user can define!
+        return 16
+
 
 class AggregatedTestCase(object):
     """ Structure for one testcase in the aggregated tests """
     def __init__(self, idx, arguments, env, n_ops, version, device_name):
         """ constructor. Arguments must already be applied! """
         self.idx = idx
-        self.arguments = arguments or []
+        self.arguments = arguments
         self.env = env
         self.n_ops = n_ops
         self.version = version
@@ -705,7 +749,7 @@ class AggregatedTestCase(object):
         return dedent(
             """\
             static void t{idx}__run_test(void) {{
-                printf("\\ntestcase {idx} {{\\n");
+                printf("\\n#@# testcase {idx} {{\\n");
 
                 // setup the test
                 rt_dma_copy_t copy;
@@ -718,26 +762,28 @@ class AggregatedTestCase(object):
 
                 // run 1: check result and get numebr of cycles / instructions
                 int passed = t{idx}__do_bench(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR), 1);
-                printf("    passed: %d\\n", passed);
-                printf("    cycles: %d\\n", rt_perf_read(RT_PERF_CYCLES));
-                printf("    instructions: %d\\n", rt_perf_read(RT_PERF_INSTR));
+                printf("\\n#@# passed: %d\\n", passed);
+                printf("#@# cycles: %d\\n", rt_perf_read(RT_PERF_CYCLES));
+                printf("#@# instructions: %d\\n", rt_perf_read(RT_PERF_INSTR));
 
                 // run 2: count load stalls
                 t{idx}__do_bench(&perf, 1<<RT_PERF_LD_STALL, 0);
-                printf("    load_stalls: %d\\n", rt_perf_read(RT_PERF_LD_STALL));
+                printf("\\n#@# load_stalls: %d\\n", rt_perf_read(RT_PERF_LD_STALL));
 
                 // run 3: count instruction cache misses
                 t{idx}__do_bench(&perf, 1<<RT_PERF_IMISS, 0);
-                printf("    icache_miss: %d\\n", rt_perf_read(RT_PERF_IMISS));
+                printf("\\n#@# icache_miss: %d\\n", rt_perf_read(RT_PERF_IMISS));
 
                 // run 4: count TCDM contentions
+                printf("\\n#@# output start\\n");
                 t{idx}__do_bench(&perf, 1<<RT_PERF_TCDM_CONT, 0);
-                printf("    tcdm_cont: %d\\n", rt_perf_read(RT_PERF_TCDM_CONT));
+                printf("\\n#@# output end\\n");
+                printf("#@# tcdm_cont: %d\\n", rt_perf_read(RT_PERF_TCDM_CONT));
 
                 // free up all memory
             {free}
 
-                printf("}}\\n");
+                printf("\\n#@# }}\\n");
             }}
             """
         ).format(idx=self.idx,
@@ -769,6 +815,10 @@ class AggregatedTestCase(object):
             #endif//__PULP_DSP_TEST__DATA_T{idx}_H__
             """
         ).format(idx=self.idx, content=self.generate_header_content(gen_stimuli, gen_result))
+
+    def estimate_memory(self):
+        """ returns an estimate of the number of bytes needed on L2 """
+        return sum([arg.estimate_memory() for arg in self.arguments])
 
 
 class AggregatedTest(object):
@@ -858,15 +908,36 @@ class AggregatedTest(object):
             platform_str = "platform=%s" % (os.environ["TEST_PLATFORM"])
         elif "PULP_CURRENT_CONFIG_ARGS" in os.environ:
             platform_str = os.environ["PULP_CURRENT_CONFIG_ARGS"]
-        return PulpTest(name=test_name,
-                        commands=[
-                            Check('gen', generate_test_program, test_obj=self),
-                            Shell('clean', 'make -C %s clean' % self.sub_folder),
-                            Shell('build', 'make -C %s all' % self.sub_folder),
-                            Shell('start', 'make -C %s run %s' % (self.sub_folder, platform_str)),
-                            Check('check', check_output, test_obj=self)
-                        ],
-                        timeout=40)
+        return PulpTest(
+            name=test_name,
+            commands=self.generate_test_commands(platform_str),
+            # timeout=40 # Timeout is now handled with shell script in run.sh
+        )
+
+    def generate_test_commands(self, platform_str):
+        """
+        Generates the commands array for PulpTest. It will generate as many tests as necessary to
+        fit everything into L2 memory.
+        """
+        c = []
+        start_case_id = 0
+        used_mem = 0
+        allowed_mem = TEST_MEM_SIZE_KB * 1024
+        num_cases = len(self.cases)
+        for i, case in enumerate(self.cases):
+            case_mem = case.estimate_memory()
+            assert case_mem <= allowed_mem # Memory must be large enough to fit a single testcase.
+            used_mem += case_mem
+            end_case_id = i + 1 if i + 1 == num_cases else i
+            if used_mem > allowed_mem or end_case_id == num_cases:
+                used_mem = case_mem
+                gen_test_fn = partial(generate_test_program, start=start_case_id, end=end_case_id)
+                c.append(Check('gen', gen_test_fn, test_obj=self))
+                c.append(Shell('test', 'bash %s/run.sh %s' % (self.sub_folder, platform_str)))
+                start_case_id = end_case_id
+        assert start_case_id == num_cases
+        c.append(Check('check', check_output, test_obj=self))
+        return c
 
     def get_common_header_str(self):
         return dedent(
@@ -885,12 +956,12 @@ class AggregatedTest(object):
             """
         )
 
-    def get_main_imports(self):
+    def get_main_imports(self, start, end):
         """ returns a string containing all imports of the test case headers """
         return "\n".join(["#include \"{}\"".format(case.get_header_filename())
-                          for case in self.cases])
+                          for case in self.cases[start:end]])
 
-    def get_test_entry_function(self):
+    def get_test_entry_function(self, start, end):
         """ write the test_entry function. """
         return dedent(
             """\
@@ -899,15 +970,40 @@ class AggregatedTest(object):
             }}
             """
         ).format(indent("\n".join([case.get_run_test_function_call()
-                                   for case in self.cases]),
+                                   for case in self.cases[start:end]]),
                         "    "))
 
-    def generate_test_program(self, gen_stimuli, gen_result):
-        """ generate all files needed for the test """
+    def generate_test_program(self, gen_stimuli, gen_result, start, end):
+        """ generate all files needed for the test, from start to end """
         # remove all files in the directory if it still exists
         clean(self.sub_folder)
         # create the fresh directory
         os.mkdir(self.sub_folder)
+
+        # generate the run.sh script which will run the test but exit at timeout. The script will
+        # also always return with status 0, such that we can check the output and give meaningful
+        # error messages
+        with open(os.path.join(self.sub_folder, "run.sh"), "w") as fp:
+            fp.write(
+                dedent(
+                    """
+                    cd $(dirname $0)
+                    make clean
+                    make all
+                    if [ $? -eq 0 ]; then
+                        timeout -k 1 5 make run $@
+                        if [ $? -eq 0 ]; then
+                            echo "#@# success"
+                        else
+                            echo "#@# error: run"
+                        fi
+                    else
+                        echo "#@# error: build"
+                    fi
+                    cd ..
+                    """
+                )
+            )
 
         # generate all necessary header files (independent of device name)
         # common header
@@ -915,19 +1011,19 @@ class AggregatedTest(object):
             fp.write(self.get_common_header_str())
 
         # header of all tests
-        for case in self.cases:
+        for case in self.cases[start:end]:
             with open(os.path.join(self.sub_folder, case.get_header_filename()), "w") as fp:
                 fp.write(case.get_header_file_str(gen_stimuli, gen_result))
 
         # next, generate the remaining test structure
         if self.device_name == "ibex":
-            self.generate_ibex_test_program()
+            self.generate_ibex_test_program(start, end)
         elif self.device_name == "riscy":
-            self.generate_riscy_test_program()
+            self.generate_riscy_test_program(start, end)
         else:
             raise RuntimeError("Unknown device name: {}".format(self.device_name))
 
-    def generate_ibex_test_program(self):
+    def generate_ibex_test_program(self, start, end):
         """ generate all files needed for the ibex test """
         with open(os.path.join(self.sub_folder, "test.c"), "w") as fp:
             fp.write(
@@ -951,11 +1047,12 @@ class AggregatedTest(object):
                     return 0;
                     }}
                     """
-                ).format(includes=self.get_main_imports(),
-                         test_entry=self.get_test_entry_function(),
-                         run_tests="\n".join([case.get_run_test_function() for case in self.cases]),
+                ).format(includes=self.get_main_imports(start, end),
+                         test_entry=self.get_test_entry_function(start, end),
+                         run_tests="\n".join([case.get_run_test_function()
+                                              for case in self.cases[start:end]]),
                          do_benchs="\n".join([case.get_do_bench_function(self.function_name)
-                                              for case in self.cases]))
+                                              for case in self.cases[start:end]]))
             )
 
         with open(os.path.join(self.sub_folder, "Makefile"), "w") as fp:
@@ -973,7 +1070,7 @@ class AggregatedTest(object):
                 """
             ))
 
-    def generate_riscy_test_program(self):
+    def generate_riscy_test_program(self, start, end):
         """ generate all files needed for the riscy test """
         with open(os.path.join(self.sub_folder, "test.c"), "w") as fp:
             fp.write(dedent(
@@ -1021,11 +1118,12 @@ class AggregatedTest(object):
                         test_entry();
                     }}
                     """
-                ).format(includes=self.get_main_imports(),
-                         test_entry=self.get_test_entry_function(),
-                         run_tests="\n".join([case.get_run_test_function() for case in self.cases]),
+                ).format(includes=self.get_main_imports(start, end),
+                         test_entry=self.get_test_entry_function(start, end),
+                         run_tests="\n".join([case.get_run_test_function()
+                                              for case in self.cases[start:end]]),
                          do_benchs="\n".join([case.get_do_bench_function(self.function_name)
-                                              for case in self.cases]))
+                                              for case in self.cases[start:end]]))
             )
 
         with open(os.path.join(self.sub_folder, "Makefile"), "w") as fp:
@@ -1045,8 +1143,11 @@ class AggregatedTest(object):
             ))
 
 
-def generate_test_program(_config, _output, test_obj):
-    """ generate the test program without serialization and deserialization """
+def generate_test_program(_config, _output, test_obj, start, end):
+    """
+    generate the test program without serialization and deserialization
+    It will generate tests for cases from start up to, but not including end
+    """
     # wrap everything in a try block in order to see the error message
     try:
         gen_stimuli_file = os.path.join(os.getcwd(), "gen_stimuli.py")
@@ -1059,7 +1160,7 @@ def generate_test_program(_config, _output, test_obj):
         except KeyError:
             generate_stimuli = None
 
-        test_obj.generate_test_program(generate_stimuli, compute_result)
+        test_obj.generate_test_program(generate_stimuli, compute_result, start, end)
         return (True, None)
 
     except Exception:
@@ -1071,23 +1172,55 @@ def generate_test_program(_config, _output, test_obj):
 def check_output(config, output, test_obj):
     """ parses the output and prints the results """
     # parse the output and get all cases
-    cases_result = parse_output(output)
-    passed = all([c['passed'] for c in cases_result] or [False])
+    cases_result, err = parse_output(output)
 
-    for case, result in zip(test_obj.cases, cases_result):
+    if err:
+        status = '\033[91mKILL:\033[0m'
+        print("{} {}".format(status, err))
+        return (False, None)
+
+    passed = all([c['passed'] for c in cases_result] or [False])
+    passed = passed and len(cases_result) == len(test_obj.cases)
+
+    tests_missing = {i for i, _ in enumerate(test_obj.cases)}
+
+    for case_idx, result in enumerate(cases_result):
+
+        case = test_obj.cases[case_idx]
+        tests_missing.remove(case_idx)
+
+        # print the user messages
+        if len(result['user_msg']) >= 1:
+            print("\n".join(result['user_msg']))
+
         # print the result
         if result['passed']:
             status = '\033[92mOK:\033[0m  '
         else:
-            status = '\033[91mKO:\033[0m  '
+            if result['error_msg']:
+                status = '\033[91mKILL:\033[0m'
+            else:
+                status = '\033[91mFAIL:\033[0m'
         print("{} {}".format(status, ", ".join(["{}={}".format(k, case.env[k])
                                                 for k in test_obj.visible_env])))
+        # print error messages
+        if result['error_msg']:
+            err = "\033[1m%s\033[0m" % err
+            for msg in result['error_msg']:
+                print("      %s" % msg)
+
         # print mismatches
         if result['mismatches'] and test_obj.extended_output:
             print(indent("\n".join(result['mismatches']), "      "))
 
         if passed:
             bench_output(result, test_obj, case)
+
+    for case_idx in tests_missing:
+        case = test_obj.cases[case_idx]
+        status = '\033[93mSKIP:\033[0m'
+        print("{} {}".format(status, ", ".join(["{}={}".format(k, case.env[k])
+                                                for k in test_obj.visible_env])))
 
     # clean the directory
     clean(test_obj.sub_folder)
@@ -1096,37 +1229,72 @@ def check_output(config, output, test_obj):
 
 
 def parse_output(output):
+    """ Parse the output of running all tests (all test projects together) """
     cases = []
     current_case = -1
+    user_msg_mode = False
+    gvsoc_error_str = []
+    gvsoc_error_re = re.compile("^[0-9]*: [0-9]*: \[.*\]")
     for line in output.split('\n'):
+
+        if user_msg_mode:
+            # special mode where everything is added to user_msg
+            if "#@# output end" in line:
+                if len(cases[current_case]['user_msg']) > 0 and len(cases[current_case]['user_msg'][-1].strip()) == 0:
+                    del cases[current_case]['user_msg'][-1]
+                user_msg_mode = False
+            # do not add the line if it is empty and it is the first message
+            elif not (len(cases[current_case]['user_msg']) == 0 and len(line.strip()) == 0):
+                cases[current_case]['user_msg'].append(line)
+            continue
+
+        # normal parsing mode
         line = line.strip()
-        if line == "}":
+        if line == "#@# }":
             current_case = -1
-        elif line.startswith("testcase") and line.endswith("{"):
-            current_case = int(line[len("testcase "):-len(" {")])
+            gvsoc_error_str = []
+        elif line.startswith("#@# testcase") and line.endswith("{"):
+            current_case = int(line[len("#@# testcase "):-len(" {")])
             assert len(cases) == current_case
             cases.append({'passed': False,
+                          'error_msg': None,
+                          'user_msg': [],
                           'cycles': 0,
                           'instructions': 0,
                           'load_stalls': 0,
                           'icache_miss': 0,
                           'tcdm_cont': 0,
                           'mismatches': []})
-        elif line.startswith('passed:'):
+        elif line.startswith('#@# passed:'):
             cases[current_case]['passed'] = line.find('1') != -1
-        elif line.startswith('cycles'):
+        elif line.startswith('#@# cycles'):
             cases[current_case]['cycles'] = int(line.split(": ")[1])
-        elif line.startswith('instructions'):
+        elif line.startswith('#@# instructions'):
             cases[current_case]['instructions'] = int(line.split(": ")[1])
-        elif line.startswith('load_stalls'):
+        elif line.startswith('#@# load_stalls'):
             cases[current_case]['load_stalls'] = int(line.split(": ")[1])
-        elif line.startswith('icache_miss'):
+        elif line.startswith('#@# icache_miss'):
             cases[current_case]['icache_miss'] = int(line.split(": ")[1])
-        elif line.startswith('tcdm_cont'):
+        elif line.startswith('#@# tcdm_cont'):
             cases[current_case]['tcdm_cont'] = int(line.split(": ")[1])
-        elif line.startswith('<Mismatch>'):
-            cases[current_case]['mismatches'].append("Mismatch: %s" % line[11:])
-    return cases
+        elif line.startswith('#@# mismatch'):
+            cases[current_case]['mismatches'].append("Mismatch: %s" % line[13:])
+        elif "#@# output start" in line:
+            user_msg_mode = True
+        elif gvsoc_error_re.match(line):
+            gvsoc_error_str.append(line[line.find("["):])
+        elif line.startswith('#@# error:'):
+            reason = line.split(": ")[1]
+            if reason == "run":
+                cases[current_case]['passed'] = False
+                cases[current_case]['error_msg'] = gvsoc_error_str if gvsoc_error_str else ["Timeout"]
+                # clear the current case
+                current_case = -1
+            if reason == "clean":
+                return None, "Cannot clean test"
+            if reason == "build":
+                return None, "Cannot build test"
+    return cases, None
 
 
 BENCHMARK_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)),
@@ -1194,6 +1362,19 @@ def fmt_float(val):
     packed = struct.pack('!f', val)
     int_val = sum([b << ((3 - i) * 8) for i, b in enumerate(packed)])
     return hex(int_val)
+
+
+def ctype_mem_size(ctype):
+    """ returns the memory size for a specific ctype """
+    if "int8_t" in ctype:
+        return 1
+    if "int16_t" in ctype:
+        return 2
+    if "int32_t" in ctype:
+        return 4
+    if "float" in ctype:
+        return 4
+    raise RuntimeError("Memory size of ctype %s is unknown!", ctype)
 
 
 def declare_scalar(name, ctype, value):
