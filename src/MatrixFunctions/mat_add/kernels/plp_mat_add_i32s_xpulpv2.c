@@ -55,7 +55,7 @@ void plp_mat_add_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
                               uint32_t N,
                               int32_t *__restrict__ pDst) {
 
-#define BASIC_VERSION // if used don't forget to also use the undefine at end of file
+//#define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 #ifdef BASIC_VERSION
 
     uint32_t m, n; // loop counters
@@ -68,7 +68,48 @@ void plp_mat_add_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
 
 #else
 
-    // TODO: Hackathon
+    // Switch dimensions if necessary.
+    uint32_t Mloc, Nloc;
+    if (M > N) {
+        Mloc = N;
+        Nloc = M;
+    } else {
+        Mloc = M;
+        Nloc = N;
+    }
+
+    uint32_t m, n;
+    uint32_t N2 = Nloc >> 1;
+
+    // The regular part.
+    for (m = 0; m < Mloc; m++) {
+        uint32_t mN = m * Nloc;
+        uint32_t i0 = mN;
+        uint32_t i1 = mN + 1;
+        for (n = 0; n < N2; n++) {
+            pDst[i0] = pSrcA[i0] + pSrcB[i0];
+            pDst[i1] = pSrcA[i1] + pSrcB[i1];
+            i0 += 2;
+            i1 += 2;
+        }
+    }
+
+    // The irregular part.
+    if (Nloc & 0x1) {
+        uint32_t M2 = Mloc >> 1;
+        uint32_t i0 = Nloc - 1;
+        uint32_t i1 = i0 + Nloc;
+        for (m = 0; m < M2; m++) {
+            pDst[i0] = pSrcA[i0] + pSrcB[i0];
+            pDst[i1] = pSrcA[i1] + pSrcB[i1];
+            i0 += 2 * Nloc;
+            i1 += 2 * Nloc;
+        }
+        if (Mloc & 0x1) {
+            uint32_t i = i1 - Nloc;
+            pDst[i] = pSrcA[i] + pSrcB[i];
+        }
+    }
 
 #endif
 #undef BASIC_VERSION

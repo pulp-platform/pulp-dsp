@@ -32,7 +32,6 @@
  * with Apache-2.0.
  */
 
-#define numIters 5
 #include "plp_math.h"
 
 /**
@@ -57,33 +56,23 @@
 
 void plp_sqrt_f32s_xpulpv2(const float *__restrict__ pSrc, float *__restrict__ pRes) {
 
-    float temp1 = *pSrc;
-    float half = *pSrc / 2;
-
-    int32_t exponent;
+    const float threehalfs = 1.5f;
+    float x2, y;
 
     union {
-        float value;
-        int32_t intrep;
-    } number;
+        float f;
+        int32_t i;
+    } conv;
 
-    number.value = 1.f / (4 * temp1);
-    number.intrep =
-        ((number.intrep & 0x7F000000) >> 1) +
-        (number.intrep & 0xA07FFFFF); // shift the exponent down by one -> approximate square root
-
-    float intermediate = number.value;
-
-    if (half > 0) {
-        for (int i = 0; i < numIters; i++) {
-            intermediate = intermediate * (1.5f - (intermediate * intermediate * half));
-        }
-
-        number.value = (intermediate * (*pSrc));
-        number.intrep = number.intrep & 0x7FFFFFFF; // Hack to make sure sign bit is 0
-
-        *pRes = number.value;
-
+    if (*pSrc > 0) {
+        /* fast inverse square root with proper type punning */
+        x2 = *pSrc * 0.5f;
+        conv.f = *pSrc;
+        conv.i = 0x5f3759df - (conv.i >> 1); /* evil floating point bit level hacking */
+        y = conv.f;
+        y = y * (threehalfs - (x2 * y * y)); /* newton 1st iter */
+        y = y * (threehalfs - (x2 * y * y)); /* newton 2nd iter */
+        *pRes = *pSrc * y;                   /* to square root */
     } else {
         *pRes = 0.f;
     }

@@ -66,7 +66,7 @@ void plp_mat_add_stride_i8p_xpulpv2(void *args) {
     uint32_t nPE = a->nPE;
     int8_t *__restrict__ pDst = a->pDst;
 
-#define BASIC_VERSION // if used don't forget to also use the undefine at end of file
+//#define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 #ifdef BASIC_VERSION
 
     uint32_t m, n; // loop counters
@@ -79,10 +79,38 @@ void plp_mat_add_stride_i8p_xpulpv2(void *args) {
 
 #else
 
-    // TODO: Hackathon
+    uint32_t m, n; // loop counters
+
+    unsigned int n_iter = N >> 2;
+    unsigned int n_rem = N & 0x3;
+
+    pSrcA += strideA * core_id;
+    pSrcB += strideB * core_id;
+    pDst += strideY * core_id;
+
+    unsigned int step_a = strideA * nPE - N;
+    unsigned int step_b = strideB * nPE - N;
+    unsigned int step_y = strideY * nPE - N;
+
+    for (m = core_id; m < M; m += nPE) {
+        for (n = 0; n < n_iter; n++) {
+            v4s a = *((v4s *)pSrcA);
+            v4s b = *((v4s *)pSrcB);
+            *((v4s *)pDst) = __ADD4(a, b);
+            pSrcA += 4;
+            pSrcB += 4;
+            pDst += 4;
+        }
+        for (n = 0; n < n_rem; n++) {
+            *pDst++ = *pSrcA++ + *pSrcB++;
+        }
+        pSrcA += step_a;
+        pSrcB += step_b;
+        pDst += step_y;
+    }
 
 #endif
-#undef BASIC_VERSION
+    //#undef BASIC_VERSION
 }
 
 /**

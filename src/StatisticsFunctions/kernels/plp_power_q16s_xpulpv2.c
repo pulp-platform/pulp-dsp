@@ -74,32 +74,32 @@ void plp_power_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
                             uint32_t fracBits,
                             int32_t *__restrict__ pRes) {
 
-    uint32_t blkCnt = 0;
-    int16_t x1, x2;
-    int32_t sum = 0;
+  uint32_t blkCnt = 0;
+  v2s x1;
+  int16_t x2;
+  int32_t sum = 0;
 
 #if defined(PLP_MATH_LOOPUNROLL)
 
-    for (blkCnt = 0; blkCnt < (blockSize >> 1); blkCnt++) {
-        x1 = *pSrc++;
-        x2 = *pSrc++;
-        sum += ((x1 * x1) >> fracBits);
-        sum += ((x2 * x2) >> fracBits);
-    }
+  for (blkCnt = 0; blkCnt < (blockSize >> 1); blkCnt++) {
+    x1 = *((v2s *)(pSrc));
+    pSrc+=2;
+    sum = __builtin_pulp_sdotsp2(x1,x1,sum) >> fracBits;
+  }
 
-    if (blockSize % 2 == 1) {
-        x1 = *pSrc++;
-        sum += ((x1 * x1) >> fracBits);
-    }
+  for(int i=0; i<blockSize%2;i++){
+    x2 = *pSrc++;
+    sum += ((x2 * x2) >> fracBits);
+  }
 
 #else
 
-    for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
-        x1 = *pSrc++;
-        sum += ((x1 * x1) >> fracBits);
-    }
+  for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+    x2 = *pSrc++;
+    sum += ((x2 * x2) >> fracBits);
+  }
 
 #endif
 
-    *pRes = sum;
+  *pRes = sum;
 }

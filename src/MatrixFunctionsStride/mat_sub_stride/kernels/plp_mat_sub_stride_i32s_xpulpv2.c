@@ -61,7 +61,7 @@ void plp_mat_sub_stride_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
                                      uint32_t strideY,
                                      int32_t *__restrict__ pDst) {
 
-#define BASIC_VERSION // if used don't forget to also use the undefine at end of file
+//#define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 #ifdef BASIC_VERSION
 
     uint32_t m, n; // loop counters
@@ -74,10 +74,34 @@ void plp_mat_sub_stride_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
 
 #else
 
-    // TODO: Hackathon
+    uint32_t m, n; // loop counters
+
+    unsigned int n_iter = N >> 1;
+    unsigned int n_rem = N & 0x1;
+
+    unsigned int step_a = strideA - N;
+    unsigned int step_b = strideB - N;
+    unsigned int step_y = strideY - N;
+
+    for (m = 0; m < M; m++) {
+        for (n = 0; n < n_iter; n++) {
+            int32_t a1 = *pSrcA++;
+            int32_t a2 = *pSrcA++;
+            int32_t b1 = *pSrcB++;
+            int32_t b2 = *pSrcB++;
+            *pDst++ = a1 - b1;
+            *pDst++ = a2 - b2;
+        }
+        if (n_rem) {
+            *pDst++ = *pSrcA++ - *pSrcB++;
+        }
+        pSrcA += step_a;
+        pSrcB += step_b;
+        pDst += step_y;
+    }
 
 #endif
-#undef BASIC_VERSION
+    //#undef BASIC_VERSION
 }
 
 /**
