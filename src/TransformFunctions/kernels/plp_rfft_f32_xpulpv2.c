@@ -70,7 +70,7 @@ process_butterfly_last_radix2(Complex_type_f32 *input, Complex_type_f32 *output,
    @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_rfft_f32_xpulpv2(const plp_rfft_instance_f32 *S,
+void plp_rfft_f32_xpulpv2(const plp_fft_instance_f32 *S,
                           const float32_t *__restrict__ pSrc,
                           float32_t *__restrict__ pDst) {
 
@@ -174,11 +174,11 @@ void plp_rfft_f32_xpulpv2(const plp_rfft_instance_f32 *S,
    @param[in]   arg      points to an instance of the floating-point FFT structure
    @return      none
 */
-void plp_rfft_f32_xpulpv2_parallel(plp_rfft_parallel_arg_f32 *arg) {
+void plp_rfft_f32_xpulpv2_parallel(plp_fft_parallel_arg_f32 *arg) {
 
     int k, j, stage, step, d, index;
 
-    plp_rfft_instance_f32 *S = arg->S;
+    plp_fft_instance_f32 *S = arg->S;
     const float32_t *pSrc = arg->pSrc;
     const uint32_t nPE = arg->nPE;
     float32_t *pDst = arg->pDst;
