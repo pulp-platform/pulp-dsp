@@ -3,7 +3,7 @@
  * Title:        plp_cfft_f32_xpulpv2.c
  * Description:  Floating-point FFT on complex input data for XPULPV2
  *
- * $Date:        4. August 2020
+ * $Date:        10. August 2020
  * $Revision:    V1
  *
  * Target Processor: PULP cores with "F" support (wolfe, vega)
@@ -79,22 +79,27 @@ static void plp_cfft_radix8_f32_xpulpv2(const plp_fft_instance_f32 *S,
                                         const float32_t *pSrc,
                                         float32_t *pDst);
 
-static void plp_cfft_radix2_f32_xpulpv2_parallel(plp_fft_parallel_arg_f32 *arg);
-static void plp_cfft_radix4_f32_xpulpv2_parallel(plp_fft_parallel_arg_f32 *arg);
-static void plp_cfft_radix8_f32_xpulpv2_parallel(plp_fft_parallel_arg_f32 *arg);
+static void plp_cfft_radix2_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
+static void plp_cfft_radix4_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
+static void plp_cfft_radix8_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
 
 /**
   @ingroup fft
  */
 
 /**
-  @defgroup fftKernels FFT Kernels
-  These kernels calculate the FFT transform on the input data.
+  @defgroup complexFFTKernels FFT kernels on complex input values
+  These kernels calculate the FFT transform on complex input data.
+  If the dimension of the transform is FFTLen, both the input and the output
+  buffer must contain at least (2*FFTLen) float32 values, corresponding to
+  FFTLen complex values in the form (real part, complex part).
+  Input and output can refer to the same memory location (in-place computation).
+  The best algorithm is executed based on the val FFTLen.
   Supported algorithms: radix-2, radix-4, radix-8
 */
 
 /**
-  @addtogroup fftKernels
+  @addtogroup complexFFTKernels
   @{
  */
 
@@ -423,7 +428,7 @@ static void plp_cfft_radix8_f32_xpulpv2(const plp_fft_instance_f32 *S,
    @param[in]   arg      points to an instance of the floating-point FFT structure
    @return      none
 */
-void plp_cfft_f32_xpulpv2_parallel(plp_fft_parallel_arg_f32 *arg) {
+void plp_cfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
     switch(arg->S->FFTLength) {
       case 64:
       case 512:
@@ -442,7 +447,7 @@ void plp_cfft_f32_xpulpv2_parallel(plp_fft_parallel_arg_f32 *arg) {
     }
 }
 
-void plp_cfft_radix2_f32_xpulpv2_parallel(plp_fft_parallel_arg_f32 *arg) {
+void plp_cfft_radix2_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
 
     int k, j, stage, step, d, index;
 
@@ -569,7 +574,7 @@ void plp_cfft_radix2_f32_xpulpv2_parallel(plp_fft_parallel_arg_f32 *arg) {
     }
 }
 
-void plp_cfft_radix4_f32_xpulpv2_parallel(plp_fft_parallel_arg_f32 *arg) {
+void plp_cfft_radix4_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
 
     int k, j, stage, step, d, index;
 
@@ -595,7 +600,12 @@ void plp_cfft_radix4_f32_xpulpv2_parallel(plp_fft_parallel_arg_f32 *arg) {
     _out_ptr = (Complex_type_f32 *)&pDst[2 * core_id];
     _tw_ptr = (Complex_type_f32 *)S->pTwiddleFactors;
 
-    for (j = 0; j < nbutterfly / nPE; j++) {
+    int first_steps = nbutterfly / nPE;
+    if (first_steps == 0) {
+      // Fix for case FFTLen == 16 && nPE > 4
+      first_steps = (core_id < 4)? 1: 0;
+    }
+    for (j = 0; j < first_steps; j++) {
         process_butterfly_radix4(_in_ptr, _out_ptr, j * nPE + core_id, 0, dist, _tw_ptr);
         _in_ptr += nPE;
         _out_ptr += nPE;
@@ -640,7 +650,12 @@ void plp_cfft_radix4_f32_xpulpv2_parallel(plp_fft_parallel_arg_f32 *arg) {
     // LAST STAGE
     _in_ptr = (Complex_type_f32 *)&pDst[8 * core_id];
     index = 4 * core_id;
-    for (j = 0; j < S->FFTLength / (4 * nPE); j++) {
+    int last_steps = S->FFTLength / (4 * nPE);
+    if (last_steps == 0) {
+      // Fix for case FFTLen == 16 && nPE > 4      
+      last_steps = (core_id < 4)? 1: 0;
+    }
+    for (j = 0; j < last_steps; j++) {
         process_butterfly_last_radix4(_in_ptr, (Complex_type_f32 *)pDst, index);
         _in_ptr += 4 * nPE;
         index += 4 * nPE;
@@ -693,7 +708,7 @@ void plp_cfft_radix4_f32_xpulpv2_parallel(plp_fft_parallel_arg_f32 *arg) {
     }
 }
 
-void plp_cfft_radix8_f32_xpulpv2_parallel(plp_fft_parallel_arg_f32 *arg) {
+void plp_cfft_radix8_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
   int k, j, stage, step, d, index;
   plp_fft_instance_f32 *S = arg->S;
   const float32_t *pSrc = arg->pSrc;
@@ -819,7 +834,7 @@ void plp_cfft_radix8_f32_xpulpv2_parallel(plp_fft_parallel_arg_f32 *arg) {
 }
 
 /**
-   @} end of fftKernels group
+   @} end of complexFFTKernels group
 */
 
 int bit_rev_radix2(int index, int log2FFTLen) {
@@ -1117,13 +1132,13 @@ r2   1.0000 + 0.0000i   0.0000 - 1.0000i  -1.0000 - 0.0000i   0.0000 + 1.0000i  
 r3   1.0000 + 0.0000i  -0.7071 - 0.7071i  -0.0000 + 1.0000i   0.7071 - 0.7071i  -1.0000 - 0.0000i   0.7071 + 0.7071i   0.0000 - 1.0000i  -0.7071 + 0.7071i
   */
 
-   //Re(c1*c2) = c1.re*c2.re - c1.im*c2.im
+  // Re(c1*c2) = c1.re*c2.re - c1.im*c2.im
   r0.re = d0 + d1 + d2 + d3;
   r1.re = d0 - d2 - ( e3 - e1 );
   r2.re = d0 - d1 + d2 - d3;
   r3.re = d0 - d2 - ( e1 - e3 );
 
-  //Im(c1*c2) = c1.re*c2.im + c1.im*c2.re
+  // Im(c1*c2) = c1.re*c2.im + c1.im*c2.re
   r0.im = e0 + e1 + e2 + e3;
   r1.im = -d1 + d3 + e0 - e2;
   r2.im = e0 - e1 + e2 - e3;
@@ -1162,7 +1177,7 @@ static inline void process_butterfly_last_radix8 (Complex_type_f32* input, Compl
   e6         = input[index+6].im;
   e7         = input[index+7].im;
 
-  /* twiddles are all 1s*/
+  /* twiddles are all 1s */
   // Basic buttefly rotation
   /*
 r0   1.0000 + 0.0000i   1.0000 + 0.0000i   1.0000 + 0.0000i   1.0000 + 0.0000i   1.0000 + 0.0000i   1.0000 + 0.0000i   1.0000 + 0.0000i   1.0000 + 0.0000i
@@ -1176,7 +1191,7 @@ r6   1.0000 + 0.0000i   0.0000 + 1.0000i  -1.0000 - 0.0000i   0.0000 - 1.0000i  
 r7   1.0000 + 0.0000i   0.7071 + 0.7071i  -0.0000 + 1.0000i  -0.7071 + 0.7071i  -1.0000 - 0.0000i  -0.7071 - 0.7071i   0.0000 - 1.0000i   0.7071 - 0.7071i
   */
 
-  //Re(c1*c2) = c1.re*c2.re - c1.im*c2.im
+  // Re(c1*c2) = c1.re*c2.re - c1.im*c2.im
   float32_t d13 = d1 + d3;
   float32_t d1_3 = d1 - d3;
   float32_t e13 = e1 + e3;
@@ -1205,7 +1220,7 @@ r7   1.0000 + 0.0000i   0.7071 + 0.7071i  -0.0000 + 1.0000i  -0.7071 + 0.7071i  
 
   r0.re = d0246 + d1357;
 
-  //r1.re = d0 + ROT_CONST*d1 - ROT_CONST*d3 - d4 - ROT_CONST*d5 + ROT_CONST*d7;
+  // r1.re = d0 + ROT_CONST*d1 - ROT_CONST*d3 - d4 - ROT_CONST*d5 + ROT_CONST*d7;
   r1.re = d0_4 + temp1;
   r7.re = r1.re + (e_26 + temp1b);
   r1.re = r1.re - (e_26 + temp1b);
@@ -1214,7 +1229,7 @@ r7   1.0000 + 0.0000i   0.7071 + 0.7071i  -0.0000 + 1.0000i  -0.7071 + 0.7071i  
   r6.re = r2.re + e_13_57;
   r2.re = r2.re - e_13_57;
 
-  //r3.re = d0 - ROT_CONST*d1 + ROT_CONST*d3 - d4 + ROT_CONST*d5 - ROT_CONST*d7;
+  // r3.re = d0 - ROT_CONST*d1 + ROT_CONST*d3 - d4 + ROT_CONST*d5 - ROT_CONST*d7;
   r3.re = d0_4 - temp1;
   r5.re = r3.re + (e2_6 + temp1b);
   r3.re = r3.re - (e2_6 + temp1b);
@@ -1222,10 +1237,10 @@ r7   1.0000 + 0.0000i   0.7071 + 0.7071i  -0.0000 + 1.0000i  -0.7071 + 0.7071i  
   r4.re = d0246 - d1357;
 
 
-  //Im(c1*c2) = c1.re*c2.im + c1.im*c2.re
+  // Im(c1*c2) = c1.re*c2.im + c1.im*c2.re
   r0.im = e0246 + e1357;
 
-  //r1.im = -ROT_CONST*d1 - d2 - ROT_CONST*d3 + ROT_CONST*d5 + d6 + ROT_CONST*d7;
+  // r1.im = -ROT_CONST*d1 - d2 - ROT_CONST*d3 + ROT_CONST*d5 + d6 + ROT_CONST*d7;
   r1.im = d_26 + temp2;
   r7.im = -r1.im + ( e0_4 + temp2b);
   r1.im =  r1.im + ( e0_4 + temp2b);
@@ -1234,7 +1249,7 @@ r7   1.0000 + 0.0000i   0.7071 + 0.7071i  -0.0000 + 1.0000i  -0.7071 + 0.7071i  
   r6.im = -r2.im + e0_24_6;
   r2.im =  r2.im + e0_24_6;
 
-  //r3.im = -ROT_CONST*d1 + d2 - ROT_CONST*d3 + ROT_CONST*d5 - d6 + ROT_CONST*d7;
+  // r3.im = -ROT_CONST*d1 + d2 - ROT_CONST*d3 + ROT_CONST*d5 - d6 + ROT_CONST*d7;
   r3.im =  temp2 - d_26;
   r5.im = -r3.im + (e0_4 - temp2b);
   r3.im =  r3.im + (e0_4 - temp2b);

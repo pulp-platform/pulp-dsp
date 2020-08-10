@@ -320,13 +320,27 @@ typedef struct {
     const uint16_t *pBitReverseLUT;
 } plp_fft_instance_f32;
 
+/** -------------------------------------------------------
+    @struct plp_fft_instance_f32_parallel
+    @brief Instance structure for floating-point FFT (parallel version)
+    @param[in]  S         pointer to a plp_fft_instance_f32 data structure (FFT parameters)
+    @param[in]  pSrc      pointer to the input data buffer
+    @param[in]  nPE       number of cores
+    @param[out] pDst      pointer to the output data buffer
+*/
 typedef struct {
     plp_fft_instance_f32 *S;
     const float32_t *pSrc;
     const uint32_t nPE;
     float32_t *pDst;
-} plp_fft_parallel_arg_f32;
+} plp_fft_instance_f32_parallel;
 
+/** -------------------------------------------------------
+    @struct Complex_type_f32
+    @brief Helper type to represent complex values with float32 components.
+    @param  re  Real part
+    @param  im  Imaginary part
+*/
 typedef struct {
     float32_t re;
     float32_t im;
@@ -7550,7 +7564,7 @@ void plp_rfft_f32_xpulpv2(const plp_fft_instance_f32 *S,
    @param[in]   arg       points to an instance of the floating-point FFT structure
    @return      none
 */
-void plp_rfft_f32_xpulpv2_parallel(plp_fft_parallel_arg_f32 *arg);
+void plp_rfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
 
 /**
    @brief Floating-point FFT on complex input data.
@@ -7592,7 +7606,7 @@ void plp_cfft_f32_xpulpv2(const plp_fft_instance_f32 *S,
    @param[in]   arg       points to an instance of the floating-point FFT structure
    @return      none
 */
-void plp_cfft_f32_xpulpv2_parallel(plp_fft_parallel_arg_f32 *arg);
+void plp_cfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix addition of a 32-bit integer matrices.
