@@ -3321,6 +3321,18 @@ void plp_sqrt_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
                            const uint32_t fracBits,
                            int16_t *__restrict__ pRes);
 
+
+/**
+   @brief         Glue code for square root of a 32-bit floating point number.
+   @param[in]     pSrc       points to the input vectoro
+   @param[out]    pRes    Square root returned here
+   @return        none
+ */
+
+void plp_sqrt_f32(const float *__restrict__ pSrc, 
+                  float *__restrict__ pRes);
+
+
 /**
  * @brief Macros required for SINE and COSINE Fast math approximations
  */
