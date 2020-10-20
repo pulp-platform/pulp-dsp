@@ -392,7 +392,7 @@ This function *must* return the `np.ndarray` with the expected result.
 To execute the tests, you need to change directory into either `test/mrWolf`, or any of it's subdirectories. Then, start plptest with:
 
 ```
-plptest --threads 1
+plptest
 ```
 
 Running all tests will take a while. As soon as all tests are finished, plptest will show you a summary of all executed tests and if they passed or failed.
@@ -401,7 +401,7 @@ Running all tests will take a while. As soon as all tests are finished, plptest 
 
 In recent versions of Pulp-SDK, the platform configuration changed. In earlier versions, the platform could be chosen by sourcing `pulp-sdk/configs/platform-<PLATFORM>.sh`. However, this was removed in recent versions, and replaced by adding the `platform=<PLATFORM>` flag to `make run` (this flag is already available in earlier versions). In order to guarantee compatibility with different Pulp-SDK versions, the test framework chooses the platform in the following way:
 
-- If the environment variable `TEST_PLATFORM` is set, then the tests are run with `make run platform=$TEST_PLATFORM`. Simply run `TEST_PLATFORM=board plptest --threads 1` to execute the tests on an actual board.
+- If the environment variable `TEST_PLATFORM` is set, then the tests are run with `make run platform=$TEST_PLATFORM`. Simply run `TEST_PLATFORM=board plptest` to execute the tests on an actual board.
 - The old platform configuration script `pulp-sdk/configs/platform-<PLATFORM>.sh` sets the environment variable `PULP_CURRENT_CONFIG_ARGS=platform=<PLATFORM>`. If this variable is set (and `TEST_PLATFORM` is not), then the tests are executed with `make run $PULP_CURRENT_CONFIG_ARGS`. This will ensure that the configuration is applied.
 - If neither of the two environment variables `TEST_PLATFORM` or `PULP_CURRENT_CONFIG_ARGS` are set, then the tests are run with `make run platform=gvsoc`.
 
@@ -434,13 +434,16 @@ The test will generate all necessary source files automatically. But, they are r
 This test framework is based around `plptest`. In `plptest`, every test is configured in the class `plptest.Test` (renamed to `PulpTest` in `pulp_dsp_test.py`). Such a test can have a name, and commands to execute. 
 
 1. Generate (written as `plptest.Check`): Calls `generate_test_program`, which generate all stimuli, compute the expected results, and generate the entire test program with all necessary files. We use `plptest.Check` because this allows us to pass the test object without serializing and deserializing.
-2. `make clean --build-dir=BUILD_DIR`: clear the build directory
-3. `make all --build-dir=BUILD_DIR`: Compile the test
-4. `make run --build-dir=BUILD_DIR`: Run the test
-6. Check (written as `plptest.Check`): Calls `check_output` in `pulp_dsp_test.py`. Here, we can reuse the test object by using the parameter `test_obj`. It also clears all program files of the test.
+2. `bash TEST_FOLDER/run.sh platform=PLATFORM`: build the project and run it on gvsoc
+3. Check (written as `plptest.Check`): Calls `check_output` in `pulp_dsp_test.py`. Here, we can reuse the test object by using the parameter `test_obj`. It also clears all program files of the test.
 
-Each test program will check multiple different cases. All iterations of `SweepVariable`s and `DynamicVariable`s will be grouped to getter for all functions and versions. This way, we reduce the total amount of work required by approximately factor 8. Also, the programmer does not need to think about the test time before adding more test cases and iterations of `SweepVariable`s. The generated test program will have the following files:
+Each test program will check multiple different cases. All iterations of `SweepVariable`s and `DynamicVariable`s will be grouped to getter for all functions and versions. This way, we reduce the total amount of work required by approximately factor 8. Also, the programmer does not need to think about the test time before adding more test cases and iterations of `SweepVariable`s. 
 
+All data for the tests need to fit in L2 memory. This can be a limitation if the user creates large arrays, or uses many iterations. To mitigate this problem, the test framework approximates the memory requirement for each test case and aggregates cases, such that L2 memory is not exceeded. The variable `TEST_MEM_SIZE_KB=256` configures the total amount of memory allowed in the a single test program. The memory is approximated using the funciton `estimate_memory` (in `Variable` and all sub-classes, and in `AggregateTestCase`). Then, the steps 1 and 2 are repeated, with each iteration generating as many cases as fit into `TEST_MEM_SIZE_KB`, until all iterations are tested.
+
+The generated test program will have the following files, in a sub folder, which allows parallel execution:
+
+- `run.sh`: Executes `make clean all run`, and writes to stdout if something fails. This script always exists with status `0`. See [Error Handling and Parsing](error-handling-and-parsing).
 - `common.h`: Common declarations (like the union `__u2f` and the macro `ABS`)
 - `data_tXX.h`: The stimuli and the expected result, stored for each test case separately.
 - `test.c` (`cluster.c` for `riscy` tests): Contains the function `test_entry`, which calls all test cases. Each test case is represented as a function, called `tXX__run_test`. Each of these functions does the following:
@@ -504,6 +507,10 @@ This is done in the function `fmt_float`. The `data.h` file is created in the fo
   RT_L1_DATA __u2f <NAME> = {.u = 0xbf12d71dU};
   ```
   Finally, every time we use the variable (when passing it to the function, when writing to the return value and when checking the return value), we use `<NAME>.f` to interpret the data ase a floating-point number
+
+### Error Handling and Parsing
+
+For the user, it is convenient when the reason for failure is printed to stdout, without the need of using the `--stdout` flag. To print reasonable results, the generated `run.sh` script is written such that it always returns with status `0`. This way, `plptest` will not automatically assume the test failed, but will call the check function anyway. In `check_output`, the output of all test cases is parsed. It checks for errors, which are printed by `run.sh`. It also gets that gvsoc errors (e.g. invalid access) and prints those to stdout. The parser also accepts non-complete results, parses the ones that were successful and skips the check for all who came after the error.
 
 ### Benchmarking
 

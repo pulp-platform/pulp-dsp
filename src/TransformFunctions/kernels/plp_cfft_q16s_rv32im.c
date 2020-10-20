@@ -82,16 +82,14 @@ void plp_cfft_radix4by2_q16(int16_t *pSrc, uint32_t fftLen, const int16_t *pCoef
     uint32_t n2;
     int16_t p0, p1, p2, p3;
 
-    uint32_t ia, l;
+    uint32_t l;
     int16_t xt, yt, cosVal, sinVal;
 
     n2 = fftLen >> 1;
 
-    ia = 0;
     for (i = 0; i < n2; i++) {
-        cosVal = pCoef[ia * 2];
-        sinVal = pCoef[(ia * 2) + 1];
-        ia++;
+        cosVal = pCoef[i * 2];
+        sinVal = pCoef[(i * 2) + 1];
 
         l = i + n2;
 

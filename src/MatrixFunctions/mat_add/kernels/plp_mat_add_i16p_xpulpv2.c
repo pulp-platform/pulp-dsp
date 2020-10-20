@@ -63,23 +63,39 @@ void plp_mat_add_i16p_xpulpv2(void *args) {
     uint32_t nPE = a->nPE;
     int16_t *__restrict__ pDst = a->pDst;
 
-#define BASIC_VERSION // if used don't forget to also use the undefine at end of file
-#ifdef BASIC_VERSION
-
-    uint32_t m, n; // loop counters
-
-    for (m = core_id; m < M; m += nPE) {
-        for (n = 0; n < N; n++) {
-            pDst[m * N + n] = pSrcA[m * N + n] + pSrcB[m * N + n];
-        }
+    uint32_t i; // loop counters
+    uint32_t total = M*N; // we can see it as a 1D operation
+#if defined(PLP_MATH_LOOPUNROLL)
+    // amount of elements per core, rounded up to next even number
+    uint32_t per_core = ((total+nPE-1)/nPE + 3) & 0xFFFFFFFC;
+    // compute the last element of the area each core has to process
+    uint32_t upper_bound = (core_id+1)*per_core;
+    // as we always rounded up before (to distribute the load as equal as possible) we need to check if the upper bound is still in our matrix
+    if(upper_bound > total ) upper_bound = total;
+    // loop over the area assigned to the core - the shift by one is for the loop unrolling
+    for (i = core_id*(per_core>>2); i < (upper_bound>>2); i++) {
+        *((v2s*)(pDst + 4*i    )) = __ADD2(*((v2s*)(pSrcA + 4*i    )), *((v2s*)(pSrcB + 4*i    )));
+        *((v2s*)(pDst + 4*i + 2)) = __ADD2(*((v2s*)(pSrcA + 4*i + 2)), *((v2s*)(pSrcB + 4*i + 2)));
     }
 
-#else
-
-    // TODO: Hackathon
-
-#endif
-#undef BASIC_VERSION
+    // to save the branch we just compute the possibly remaining element always and with all cores
+    // might lead to wait cycles due to contention while writing the same element
+    // possible improvement 1: last core has least work to do if there is a remaining element, make use of this
+    // possible improvement 2: if the cores that don't compute flush the pipeline, it should not be a waste of time, make use of this
+    *((v2s*)(pDst + total - 2)) = __ADD2(*((v2s*)(pSrcA + total - 2)), *((v2s*)(pSrcB + total - 2)));
+    *((v2s*)(pDst + total - 4)) = __ADD2(*((v2s*)(pSrcA + total - 4)), *((v2s*)(pSrcB + total - 4)));
+#else // No PLP_MATH_LOOPUNROLL
+    // amount of elements per core, rounded up
+    uint32_t per_core = (total+nPE-1)/nPE;
+    // compute the last element of the area each core has to process
+    uint32_t upper_bound = (core_id+1)*per_core;
+    // as we always rounded up before (to distribute the load as equal as possible) we need to check if the upper bound is still in our matrix
+    if(upper_bound > total ) upper_bound = total;
+    // loop over the area assigned to the core
+    for (i = core_id*per_core; i < upper_bound; i++) {
+            pDst[i] = pSrcA[i] + pSrcB[i];
+    }
+#endif // PLP_MATH_LOOPUNROLL
 }
 
 /**

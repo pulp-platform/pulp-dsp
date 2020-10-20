@@ -3,7 +3,7 @@
  * Title:        plp_cfft_q16s_xpulpv2.c
  * Description:  16-bit fixed point Fast Fourier Transform on Compled Input Data
  *
- * $Date:        30. June 2020
+ * $Date:        05. August 2020
  * $Revision:    V0
  *
  * Target Processor: PULP cores
@@ -30,6 +30,9 @@
 
 #include "plp_math.h"
 
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
+#define MIN(x, y) (((x) < (y)) ? (x) : (y))
+
 /**
  * @ingroup groupTransforms
  */
@@ -39,62 +42,75 @@
  * @{
  */
 
-static void plp_cfft_radix4by2_q16(int16_t *pSrc, uint32_t fftLen, const int16_t *pCoef);
+static void plp_cfft_radix4by2_q16(int16_t *pSrc, uint32_t fftLen, const int16_t *pCoef, uint32_t nPE);
 
 static void plp_radix4_butterfly_q16(int16_t *pSrc16,
                                      uint32_t fftLen,
                                      int16_t *pCoef16,
-                                     uint32_t twidCoefModifier);
+                                     uint32_t twidCoefModifier,
+                                     uint32_t nPE);
 
-void plp_cfft_q16s_xpulpv2(const plp_cfft_instance_q16 *S,
-                           int16_t *p1,
-                           uint8_t ifftFlag,
-                           uint8_t bitReverseFlag,
-                           uint32_t deciPoint) {
+/**
+ * @brief      Parallel quantized 16 bit complex fast fourier transform for XPULPV2
+ * @param[in]   args    points to the plp_cfft_instance_q16_parallel
+ */
 
-    uint32_t L = S->fftLen;
+void plp_cfft_q16p_xpulpv2(void *args){
+	int core_id = rt_core_id();
+	plp_cfft_instance_q16_parallel *a = (plp_cfft_instance_q16_parallel *) args;
 
-    if (ifftFlag == 0) {
+	uint32_t L = a->S->fftLen;
+
+    if (a->ifftFlag == 0) {
         switch (L) {
         case 16:
         case 64:
         case 256:
         case 1024:
         case 4096:
-            plp_radix4_butterfly_q16(p1, L, (int16_t *)S->pTwiddle, 1);
+            plp_radix4_butterfly_q16(a->p1, L, (int16_t *)a->S->pTwiddle, 1, a->nPE);
             break;
         case 32:
         case 128:
         case 512:
         case 2048:
-            plp_cfft_radix4by2_q16(p1, L, (int16_t *)S->pTwiddle);
+            plp_cfft_radix4by2_q16(a->p1, L, (int16_t *)a->S->pTwiddle, a->nPE);
             break;
         }
     }
+    rt_team_barrier();
+    // if (core_id == 0) {
 
-    if (bitReverseFlag)
-        plp_bitreversal_16s_xpulpv2((uint16_t *)p1, S->bitRevLength, S->pBitRevTable);
+	    if (a->bitReverseFlag)
+	        plp_bitreversal_16p_xpulpv2((uint16_t *)a->p1, a->S->bitRevLength, a->S->pBitRevTable, a->nPE);
+	// }
 }
 
-void plp_cfft_radix4by2_q16(int16_t *pSrc, uint32_t fftLen, const int16_t *pCoef) {
+void plp_cfft_radix4by2_q16(int16_t *pSrc, uint32_t fftLen, const int16_t *pCoef, uint32_t nPE) {
+
+	int core_id = rt_core_id();
 
     uint32_t i;
-    uint32_t n2;
+    uint32_t n2, nCores;
     v2s pa, pb;
 
-    uint32_t ia, l;
+    uint32_t l;
     int16_t xt, yt, cosVal, sinVal;
     v2s CoSi;
     v2s a, b, t;
     int16_t testa, testb;
 
     n2 = fftLen >> 1;
+    if (n2 % nPE == 0) {
+    	nCores = n2/nPE;
+    } else {
+    	nCores = n2/nPE + 1;
+    }
 
-    ia = 0;
-    for (i = 0; i < n2; i++) {
+    uint32_t core_offset = core_id*nCores;
+    
+    for (i = core_offset; i < MIN(n2,core_offset + nCores); i++) {
         CoSi = *(v2s *)&pCoef[i * 2];
-
-        // ia++;
 
         l = i + n2;
 
@@ -120,12 +136,26 @@ void plp_cfft_radix4by2_q16(int16_t *pSrc, uint32_t fftLen, const int16_t *pCoef
         *((v2s *)&pSrc[l * 2]) = __PACK2(testa, testb);
     }
 
-    // first col
-    plp_radix4_butterfly_q16(pSrc, n2, (int16_t *)pCoef, 2U);
-    // second col
-    plp_radix4_butterfly_q16(pSrc + fftLen, n2, (int16_t *)pCoef, 2U);
+    rt_team_barrier();
 
-    for (i = 0; i < (fftLen >> 1); i++) {
+    if (nPE > 1){
+    	if (core_id < nPE/2){
+    		// first col
+    		plp_radix4_butterfly_q16(pSrc, n2, (int16_t *)pCoef, 2U, nPE/2);
+    	} else {
+    		// second col
+    		plp_radix4_butterfly_q16(pSrc + fftLen, n2, (int16_t *)pCoef, 2U, nPE - nPE/2);
+    	}
+    } else {
+	    // first col
+	    plp_radix4_butterfly_q16(pSrc, n2, (int16_t *)pCoef, 2U, nPE);
+	    // second col
+	    plp_radix4_butterfly_q16(pSrc + fftLen, n2, (int16_t *)pCoef, 2U, nPE);
+	}
+
+	rt_team_barrier();
+
+    for (i = core_offset; i < MIN((fftLen >> 1), core_offset + nCores); i++) {
         pa = *(v2s *)&pSrc[4 * i];
         pb = *(v2s *)&pSrc[4 * i + 2];
 
@@ -184,7 +214,9 @@ void plp_cfft_radix4by2_q16(int16_t *pSrc, uint32_t fftLen, const int16_t *pCoef
 void plp_radix4_butterfly_q16(int16_t *pSrc16,
                               uint32_t fftLen,
                               int16_t *pCoef16,
-                              uint32_t twidCoefModifier) {
+                              uint32_t twidCoefModifier,
+                              uint32_t nPE) {
+	int core_id = rt_core_id()%nPE;
     v2s R, S, T, U, V;
     v2s CoSi1, CoSi2, CoSi3, out;
     uint32_t n1, n2, ic, i0, i1, i2, i3, j, k;
@@ -201,16 +233,24 @@ void plp_radix4_butterfly_q16(int16_t *pSrc16,
     n2 >>= 2U;
 
     /*Index for twiddle coefficient */
-    ic = 0U;
+    // ic = 0U;
 
     /*Index for input read and output write */
-    i0 = 0U;
-    j = n2;
+    // i0 = 0U;
+    // j = n2;
+
+    uint32_t step;
+    if (n2 % nPE == 0) {
+    	step = n2/nPE;
+    } else {
+    	step = n2/nPE + 1;
+    }
+
 
     /* Input is in 1.15(q15) format */
 
     /* start of first stage process */
-    for (j = n2; j > 0; j--) // do
+    for (i0 = core_id * step; i0 < MIN(core_id * step + step, n2); i0++)
     {
         /* Butterfly implementation */
 
@@ -219,6 +259,9 @@ void plp_radix4_butterfly_q16(int16_t *pSrc16,
         i1 = i0 + n2;
         i2 = i1 + n2;
         i3 = i2 + n2;
+
+        /*  Twiddle coefficients index modifier */
+        ic = i0 * twidCoefModifier;
 
         /* Reading i0, i0+fftLen/2 inputs */
 
@@ -313,16 +356,12 @@ void plp_radix4_butterfly_q16(int16_t *pSrc16,
             __PACK2((int16_t)(__DOTP2(CoSi3, R) >> 16U),
                     (int16_t)(__DOTP2(__PACK2(-CoSi3[1], CoSi3[0]), R) >> 16U));
 
-        /*  Twiddle coefficients index modifier */
-        ic = ic + twidCoefModifier;
-
-        /*  Updating input index */
-        i0 = i0 + 1U;
-
-    } // while (--j);
+    } //while (--j>stop);}
     /* data is in 4.11(q11) format */
 
     /* end of first stage process */
+
+    rt_team_barrier();
 
     /* start of middle stage process */
 
@@ -334,18 +373,25 @@ void plp_radix4_butterfly_q16(int16_t *pSrc16,
         /*  Initializations for the middle stage */
         n1 = n2;
         n2 >>= 2U;
-        ic = 0U;
+        // ic = 0U;
 
-        for (j = 0U; j <= (n2 - 1U); j++) {
+	  	if (n2 % nPE == 0) {
+	    	step = n2/nPE;
+	    } else {
+	    	step = n2/nPE + 1;
+	    }
+
+
+        for (j = core_id * step; j < MIN(core_id * step + step, n2); j++) {
             /*  index calculation for the coefficients */
+
+            /*  Twiddle coefficients index modifier */
+            ic = twidCoefModifier * j;
 
             /*  index calculation for the coefficients */
             CoSi1 = *(v2s *)&pCoef16[ic * 2U];
             CoSi2 = *(v2s *)&pCoef16[2U * (ic * 2U)];
             CoSi3 = *(v2s *)&pCoef16[3U * (ic * 2U)];
-
-            /*  Twiddle coefficients index modifier */
-            ic = ic + twidCoefModifier;
 
             /*  Butterfly implementation */
             for (i0 = j; i0 < fftLen; i0 += n1) {
@@ -434,6 +480,7 @@ void plp_radix4_butterfly_q16(int16_t *pSrc16,
         }
         /*  Twiddle coefficients index modifier */
         twidCoefModifier <<= 2U;
+        rt_team_barrier();
     }
     /* end of middle stage process */
 
@@ -441,15 +488,27 @@ void plp_radix4_butterfly_q16(int16_t *pSrc16,
     /* data is in 8.8(q8) format for the 256 point */
     /* data is in 6.10(q10) format for the 64 point */
     /* data is in 4.12(q12) format for the 16 point */
-
     /*  Initializations for the last stage */
     n1 = n2;
     n2 >>= 2U;
 
-    /* start of last stage process */
+    // if (core_id == 0) {
 
+
+
+    int steps;
+    /* start of last stage process */
+  	steps = fftLen/n1;
+  	// printf("steps: %i at %i\n", steps, fftLen);
+  	if (steps % nPE == 0) {
+    	step = steps/nPE;
+    } else {
+    	step = steps/nPE + 1;
+    }
+
+    
     /*  Butterfly implementation */
-    for (i0 = 0U; i0 <= (fftLen - n1); i0 += n1) {
+    for (i0 = core_id * step * n1; i0 < MIN((core_id * step + step) * n1, fftLen); i0 += n1) {
         /*  index calculation for the input as, */
         /*  pSrc16[i0 + 0], pSrc16[i0 + fftLen/4], pSrc16[i0 + fftLen/2], pSrc16[i0 + 3fftLen/4] */
         i1 = i0 + n2;
@@ -520,8 +579,9 @@ void plp_radix4_butterfly_q16(int16_t *pSrc16,
     /* output is in 9.7(q7) format for the 256 point   */
     /* output is in 7.9(q9) format for the 64 point  */
     /* output is in 5.11(q11) format for the 16 point  */
+// }
 }
 
 /**
- * @} end of FFT group
+ * @} end group fft
  */
