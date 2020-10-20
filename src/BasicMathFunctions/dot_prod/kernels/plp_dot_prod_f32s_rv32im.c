@@ -1,9 +1,9 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_dot_prod_f32.c
- * Description:  32-bit float dot product glue code
+ * Title:        plp_dot_prod_f32s_rv32im.c
+ * Description:  32-bit floating point scalar dot product kernel for RV32IM
  *
- * $Date:        9. Jan 2020
+ * $Date:        21. October 2020
  * $Revision:    V0
  *
  * Target Processor: PULP cores
@@ -11,7 +11,7 @@
 /*
  * Copyright (C) 2019 ETH Zurich and University of Bologna.
  *
- * Author: Xiaying Wang, ETH Zurich
+ * Author: Xiaying Wang
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -26,21 +26,16 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Notice: project inspired by ARM CMSIS DSP and parts of source code
- * ported and adopted for RISC-V PULP platform from ARM CMSIS DSP
- * released under Copyright (C) 2010-2019 ARM Limited or its affiliates
- * with Apache-2.0.
  */
 
 #include "plp_math.h"
 
 /**
-  @ingroup groupMath
+  @ingroup BasicDotProd
  */
 
 /**
-  @addtogroup BasicDotProd
+  @addtogroup BasicDotProdKernels
   @{
  */
 
@@ -53,19 +48,16 @@
   @return        none
  */
 
-void plp_dot_prod_f32(const float32_t *__restrict__ pSrcA,
-                      const float32_t *__restrict__ pSrcB,
-                      uint32_t blockSize,
-                      float32_t *__restrict__ pRes) {
+void plp_dot_prod_f32s_rv32im(const float32_t *__restrict__ pSrcA,
+                               const float32_t *__restrict__ pSrcB,
+                               uint32_t blockSize,
+                               float32_t *__restrict__ pRes) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
-        //printf("Note: FC doesn't have FPU\n");
-        plp_dot_prod_f32s_rv32im(pSrcA, pSrcB, blockSize, pRes);
-    } else {
-        plp_dot_prod_f32s_xpulpv2(pSrcA, pSrcB, blockSize, pRes);
-    }
+  for (int i = 0; i < blockSize; i++) {
+    *pRes += *(pSrcA++) * (*(pSrcB++));
+  }
 }
 
 /**
-  @} end of BasicDotProd group
- */
+   @} end of BasicDotProd group
+*/

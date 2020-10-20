@@ -1521,6 +1521,21 @@ void plp_dot_prod_f32s_xpulpv2(const float32_t *__restrict__ pSrcA,
                                float32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
+    @brief Glue code for dot product of 32-bit float vectors.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blockSize  number of samples in each vector
+    @param[out] pRes       output result returned here
+    @return     none
+*/
+
+void plp_dot_prod_f32s_rv32im(const float32_t *__restrict__ pSrcA,
+                               const float32_t *__restrict__ pSrcB,
+                               uint32_t blockSize,
+                               float32_t *__restrict__ pRes);
+
+
+/** -------------------------------------------------------
     @brief Glue code for dot product of 16-bit integer vectors.
     @param[in]  pSrcA      points to the first input vector [16 bit]
     @param[in]  pSrcB      points to the second input vector [16 bit]
@@ -2194,6 +2209,18 @@ void plp_copy_f32(float32_t *__restrict__ pSrc, float32_t *__restrict__ pDst, ui
 */
 
 void plp_copy_f32s_xpulpv2(float32_t *__restrict__ pSrc,
+                           float32_t *__restrict__ pDst,
+                           uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief      Copies the elements of a 32-bit integer vector for XPULPV2 extension.
+    @param[in]  pSrc       points to input vector
+    @param[out] pDst       points to output vector
+    @param[in]  blockSize  number of samples in each vector
+    @return     none
+*/
+
+void plp_copy_f32s_rv32im(float32_t *__restrict__ pSrc,
                            float32_t *__restrict__ pDst,
                            uint32_t blockSize);
 

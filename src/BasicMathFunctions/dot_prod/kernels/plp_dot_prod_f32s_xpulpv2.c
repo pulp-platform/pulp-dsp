@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_dot_prod_f32.c
- * Description:  32-bit float dot product glue code
+ * Title:        plp_dot_prod_f32s_xpulpv2.c
+ * Description:  32-bit floating point scalar dot product kernel for XPULPV2
  *
  * $Date:        16. December 2019
  * $Revision:    V0
@@ -9,7 +9,7 @@
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and University of Bologna. All rights reserved.
+ * Copyright (C) 2019 ETH Zurich and University of Bologna.
  *
  * Author: Fabio Montagna
  *
