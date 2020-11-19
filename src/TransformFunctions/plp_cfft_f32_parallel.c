@@ -64,7 +64,7 @@ void plp_cfft_f32_parallel(const plp_fft_instance_f32 *S,
         return;
     }
 
-    plp_fft_parallel_arg_f32 arg = (plp_fft_parallel_arg_f32){ S, pSrc, nPE, pDst };
+    plp_fft_instance_f32_parallel arg = (plp_fft_instance_f32_parallel){ S, pSrc, nPE, pDst };
 
     rt_team_fork(nPE, plp_cfft_f32_xpulpv2_parallel, (void *)&arg);
 }

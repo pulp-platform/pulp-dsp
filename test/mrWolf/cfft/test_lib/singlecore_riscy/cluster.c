@@ -45,15 +45,15 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_stop(perf);
 
 
-  // float32_t real_acc = 0;
-  // float32_t imag_acc = 0;
-  // for(int i=0;i<FFT_LEN;i++)
-  // {
-  //   printf("%f, %f\n", Buffer_Signal_Out[i].re, Buffer_Signal_Out[i].im);
-  //   real_acc += Buffer_Signal_Out[i].re;
-  //   imag_acc += Buffer_Signal_Out[i].im;
-  // }
-  // printf("ACC = %f, %f\n", real_acc, imag_acc);
+  float32_t real_acc = 0;
+  float32_t imag_acc = 0;
+  for(int i=0;i<FFT_LEN;i++)
+  {
+    printf("%f, %f\n", Buffer_Signal_Out[i].re, Buffer_Signal_Out[i].im);
+    real_acc += Buffer_Signal_Out[i].re;
+    imag_acc += Buffer_Signal_Out[i].im;
+  }
+  printf("ACC = %f, %f\n", real_acc, imag_acc);
 
 
 }

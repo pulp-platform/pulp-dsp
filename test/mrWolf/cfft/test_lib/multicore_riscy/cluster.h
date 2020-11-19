@@ -7,10 +7,10 @@ void cluster_entry(void *arg);
 static void do_bench_0_pe(void *arg);
 //void cluster_entry(void *arg, void * v_p, void * u_p);
 
-#define TEST 1
+#define TEST 2
 
 #if TEST == 1
-#define FFT_LEN  2048
+#define FFT_LEN  16
 #elif TEST == 2
 #define FFT_LEN  1024
 #elif TEST == 3
