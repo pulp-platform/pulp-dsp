@@ -3,13 +3,13 @@
  * Title:        plp_rfft_f32_xpulpv2.c
  * Description:  Floating-point FFT on real input data for XPULPV2
  *
- * $Date:        16. Dec 2019
- * $Revision:    V0
+ * $Date:        10. Aug 2020
+ * $Revision:    V1
  *
  * Target Processor: PULP cores with "F" support (wolfe, vega)
  * ===================================================================== */
 /*
- * Copyright (C) 2019 ETH Zurich and University of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna. All rights reserved.
  *
  * Author: Giuseppe Tagliavini, University of Bologna
  *
@@ -45,21 +45,29 @@ static inline void process_butterfly_radix2(Complex_type_f32 *input,
                                             int index,
                                             int distance,
                                             Complex_type_f32 *twiddle_ptr);
-static inline void
-process_butterfly_last_radix2(Complex_type_f32 *input, Complex_type_f32 *output, int outindex);
+static inline void process_butterfly_last_radix2_partial(Complex_type_f32 *input,
+                                                         Complex_type_f32 *output,
+                                                         int outindex);
+static inline void process_butterfly_last_radix2_full(Complex_type_f32 *input,
+                                                      Complex_type_f32 *output,
+                                                      int outindex);
 
 /**
   @ingroup fft
  */
 
 /**
-  @defgroup fftKernels FFT Kernels
-  These kernels calculate the FFT transform on the input data.
+  @defgroup realFFTKernels FFT kernels on real input values
+  These kernels calculate the FFT transform on real input data.
+  If the dimension of input is FFTLen float32 numbers, the output buffer must contain
+  at least (2*FFTLen) float32 values (used for intermediate computations).
+  Due to the symmetry of real FFT only the first (FFTLen + 2) values of the result
+  are computed in the last stage, corresponding to (FFTLen / 2 + 1) complex values.
   Supported algorithms: radix-2
 */
 
 /**
-  @addtogroup fftKernels
+  @addtogroup realFFTKernels
   @{
  */
 
@@ -70,7 +78,7 @@ process_butterfly_last_radix2(Complex_type_f32 *input, Complex_type_f32 *output,
    @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_rfft_f32_xpulpv2(const plp_rfft_instance_f32 *S,
+void plp_rfft_f32_xpulpv2(const plp_fft_instance_f32 *S,
                           const float32_t *__restrict__ pSrc,
                           float32_t *__restrict__ pDst) {
 
@@ -86,7 +94,7 @@ void plp_rfft_f32_xpulpv2(const plp_rfft_instance_f32 *S,
     Complex_type_f32 *_out_ptr;
     Complex_type_f32 *_tw_ptr;
 
-    // FIRST STAGE, input is real, stage=1
+    // FIRST STAGE, input is real
     stage = 1;
 
     _in_ptr_real = pSrc;
@@ -111,7 +119,7 @@ void plp_rfft_f32_xpulpv2(const plp_rfft_instance_f32 *S,
                 process_butterfly_radix2(_in_ptr, d * butt, j * step, dist, _tw_ptr);
                 _in_ptr++;
             } // d
-        }     // j
+        } // j
         stage = stage + 1;
         dist = dist >> 1;
         butt = butt << 1;
@@ -120,8 +128,11 @@ void plp_rfft_f32_xpulpv2(const plp_rfft_instance_f32 *S,
     // LAST STAGE
     _in_ptr = (Complex_type_f32 *)pDst;
     index = 0;
-    for (j = 0; j < (S->FFTLength >> 1); j++) {
-        process_butterfly_last_radix2(_in_ptr, (Complex_type_f32 *)pDst, index);
+    process_butterfly_last_radix2_full(_in_ptr, (Complex_type_f32 *)pDst, index);
+    _in_ptr += 2;
+    index   += 2;
+    for (j = 1; j < (S->FFTLength >> 1); j++) {
+        process_butterfly_last_radix2_partial(_in_ptr, (Complex_type_f32 *)pDst, index);
         _in_ptr += 2;
         index += 2;
     } // j
@@ -174,11 +185,11 @@ void plp_rfft_f32_xpulpv2(const plp_rfft_instance_f32 *S,
    @param[in]   arg      points to an instance of the floating-point FFT structure
    @return      none
 */
-void plp_rfft_f32_xpulpv2_parallel(plp_rfft_parallel_arg_f32 *arg) {
+void plp_rfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
 
     int k, j, stage, step, d, index;
 
-    plp_rfft_instance_f32 *S = arg->S;
+    plp_fft_instance_f32 *S = arg->S;
     const float32_t *pSrc = arg->pSrc;
     const uint32_t nPE = arg->nPE;
     float32_t *pDst = arg->pDst;
@@ -221,7 +232,7 @@ void plp_rfft_f32_xpulpv2_parallel(plp_rfft_parallel_arg_f32 *arg) {
                                          _tw_ptr);
                 _in_ptr += nPE;
             } // d
-        }     // j
+        } // j
         stage = stage + 1;
         dist = dist >> 1;
         butt = butt << 1;
@@ -249,8 +260,17 @@ void plp_rfft_f32_xpulpv2_parallel(plp_rfft_parallel_arg_f32 *arg) {
     // LAST STAGE
     _in_ptr = (Complex_type_f32 *)&pDst[4 * core_id];
     index = 2 * core_id;
+    if(core_id ==0 ) {
+      process_butterfly_last_radix2_full(_in_ptr, (Complex_type_f32 *)pDst, index);
+      _in_ptr += 2 * nPE;
+      index += 2 * nPE;
+      j = 1;
+    }
+    else
+      j = 0;
+
     for (j = 0; j < S->FFTLength / (2 * nPE); j++) {
-        process_butterfly_last_radix2(_in_ptr, (Complex_type_f32 *)pDst, index);
+        process_butterfly_last_radix2_partial(_in_ptr, (Complex_type_f32 *)pDst, index);
         _in_ptr += 2 * nPE;
         index += 2 * nPE;
     } // j
@@ -303,7 +323,7 @@ void plp_rfft_f32_xpulpv2_parallel(plp_rfft_parallel_arg_f32 *arg) {
 }
 
 /**
-   @} end of fftKernels group
+   @} end of realFFTKernels group
 */
 
 int bit_rev_radix2(int index, int log2FFTLen) {
@@ -356,7 +376,6 @@ static inline void process_butterfly_real_radix2(const float32_t *input,
     Complex_type_f32 tw0 = twiddle_ptr[twiddle_index];
 
     output[index] = r0;
-    // printf("%f %f\n", r0.re, r0.im);
     output[index + distance] = complex_mul_real(r1.re, tw0);
 }
 
@@ -374,12 +393,10 @@ static inline void process_butterfly_radix2(Complex_type_f32 *input,
     float32_t e1 = input[index + distance].im;
 
     // Re(c1*c2) = c1.re*c2.re - c1.im*c2.im
-
     r0.re = d0 + d1;
     r1.re = d0 - d1;
 
     // Im(c1*c2) = c1.re*c2.im + c1.im*c2.re
-
     r0.im = e0 + e1;
     r1.im = e0 - e1;
 
@@ -389,8 +406,30 @@ static inline void process_butterfly_radix2(Complex_type_f32 *input,
     input[index + distance] = complex_mul(tw0, r1);
 }
 
-static inline void
-process_butterfly_last_radix2(Complex_type_f32 *input, Complex_type_f32 *output, int outindex) {
+static inline void process_butterfly_last_radix2_partial(Complex_type_f32 *input,
+                                                         Complex_type_f32 *output,
+                                                         int outindex) {
+
+    int index = 0;
+    Complex_type_f32 r0, r1;
+    float32_t d0 = input[index].re;
+    float32_t d1 = input[index + 1].re;
+    float32_t e0 = input[index].im;
+    float32_t e1 = input[index + 1].im;
+
+    // Re(c1*c2) = c1.re*c2.re - c1.im*c2.im
+    r0.re = d0 + d1;
+
+    // Im(c1*c2) = c1.re*c2.im + c1.im*c2.re
+    r0.im = e0 + e1;
+
+    /* In the Last step, twiddle factors are all 1 */
+    output[outindex] = r0;
+}
+
+static inline void process_butterfly_last_radix2_full(Complex_type_f32 *input,
+                                                      Complex_type_f32 *output,
+                                                      int outindex) {
 
     int index = 0;
     Complex_type_f32 r0, r1;
@@ -403,7 +442,6 @@ process_butterfly_last_radix2(Complex_type_f32 *input, Complex_type_f32 *output,
     r1.re = d0 - d1;
 
     // Im(c1*c2) = c1.re*c2.im + c1.im*c2.re
-
     r0.im = e0 + e1;
     r1.im = e0 - e1;
 

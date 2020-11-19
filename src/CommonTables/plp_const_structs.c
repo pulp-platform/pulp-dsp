@@ -99,5 +99,5 @@ const plp_cfft_instance_q32 plp_cfft_sR_q32_len4096 = { 4096, twiddleCoef_4096_q
                                                         PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH };
 
 
-const plp_rfft_instance_f32 plp_rfft_sR_f32_len2048 = { 2048, 0, (float32_t *)twiddleCoef_rfft_2048,
+const plp_fft_instance_f32 plp_rfft_sR_f32_len2048 = { 2048, 0, (float32_t *)twiddleCoef_rfft_2048,
                                                         (uint16_t *)bit_rev_radix2_LUT };

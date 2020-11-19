@@ -299,7 +299,7 @@ typedef struct {
 } plp_cfft_instance_q32;
 
 /** -------------------------------------------------------
-    @struct plp_rfft_instance_f32
+    @struct plp_fft_instance_f32
     @brief Instance structure for floating-point FFT
     @param[in]  length data length of the FFT
     @param[in]  bitReverseFlag  flag that enables (bitReverseFlagR=1) or disables
@@ -318,15 +318,29 @@ typedef struct {
     uint8_t bitReverseFlag;
     const float32_t *pTwiddleFactors;
     const uint16_t *pBitReverseLUT;
-} plp_rfft_instance_f32;
+} plp_fft_instance_f32;
 
+/** -------------------------------------------------------
+    @struct plp_fft_instance_f32_parallel
+    @brief Instance structure for floating-point FFT (parallel version)
+    @param[in]  S         pointer to a plp_fft_instance_f32 data structure (FFT parameters)
+    @param[in]  pSrc      pointer to the input data buffer
+    @param[in]  nPE       number of cores
+    @param[out] pDst      pointer to the output data buffer
+*/
 typedef struct {
-    plp_rfft_instance_f32 *S;
+    plp_fft_instance_f32 *S;
     const float32_t *pSrc;
     const uint32_t nPE;
     float32_t *pDst;
-} plp_rfft_parallel_arg_f32;
+} plp_fft_instance_f32_parallel;
 
+/** -------------------------------------------------------
+    @struct Complex_type_f32
+    @brief Helper type to represent complex values with float32 components.
+    @param  re  Real part
+    @param  im  Imaginary part
+*/
 typedef struct {
     float32_t re;
     float32_t im;
@@ -7489,7 +7503,7 @@ plp_bitreversal_32s_xpulpv2(uint32_t *pSrc, const uint16_t bitRevLen, const uint
 
 /**
  * @brief      Glue code for quantized 32-bit complex fast fourier transform
- * 
+ *
  * Fixed point units input -> output dependent on length:
  * len=16:    Q1.31 -> Q5.27
  * len=32:    Q1.31 -> Q6.26
@@ -7556,7 +7570,7 @@ void plp_cfft_q32s_xpulpv2(const plp_cfft_instance_q32 *S,
    @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_rfft_f32(const plp_rfft_instance_f32 *S,
+void plp_rfft_f32(const plp_fft_instance_f32 *S,
                   const float32_t *__restrict__ pSrc,
                   float32_t *__restrict__ pDst);
 
@@ -7568,7 +7582,7 @@ void plp_rfft_f32(const plp_rfft_instance_f32 *S,
    @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_rfft_f32_parallel(const plp_rfft_instance_f32 *S,
+void plp_rfft_f32_parallel(const plp_fft_instance_f32 *S,
                            const float32_t *__restrict__ pSrc,
                            const uint32_t nPE,
                            float32_t *__restrict__ pDst);
@@ -7580,7 +7594,7 @@ void plp_rfft_f32_parallel(const plp_rfft_instance_f32 *S,
    @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_rfft_f32_xpulpv2(const plp_rfft_instance_f32 *S,
+void plp_rfft_f32_xpulpv2(const plp_fft_instance_f32 *S,
                           const float32_t *__restrict__ pSrc,
                           float32_t *__restrict__ pDst);
 
@@ -7589,7 +7603,49 @@ void plp_rfft_f32_xpulpv2(const plp_rfft_instance_f32 *S,
    @param[in]   arg       points to an instance of the floating-point FFT structure
    @return      none
 */
-void plp_rfft_f32_xpulpv2_parallel(plp_rfft_parallel_arg_f32 *arg);
+void plp_rfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
+
+/**
+   @brief Floating-point FFT on complex input data.
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrc    points to the input buffer (complex data)
+   @param[out]  pDst    points to the output buffer (complex data)
+   @return      none
+*/
+void plp_cfft_f32(const plp_fft_instance_f32 *S,
+                  const float32_t *pSrc,
+                  float32_t *pDst);
+
+/**
+   @brief Floating-point FFT on complex input data (parallel version).
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrc    points to the input buffer (complex data)
+   @param[in]   nPE     number of parallel processing units
+   @param[out]  pDst    points to the output buffer (complex data)
+   @return      none
+*/
+void plp_cfft_f32_parallel(const plp_fft_instance_f32 *S,
+                           const float32_t *pSrc,
+                           const uint32_t nPE,
+                           float32_t *pDst);
+
+/**
+   @brief  Floating-point FFT on complex input data for XPULPV2 extension.
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrcA   points to the input buffer (complex data)
+   @param[out]  pDst    points to the output buffer (complex data)
+   @return      none
+*/
+void plp_cfft_f32_xpulpv2(const plp_fft_instance_f32 *S,
+                          const float32_t *pSrc,
+                          float32_t *pDst);
+
+/**
+   @brief  Floating-point FFT on complex input data for XPULPV2 extension (parallel version).
+   @param[in]   arg       points to an instance of the floating-point FFT structure
+   @return      none
+*/
+void plp_cfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix addition of a 32-bit integer matrices.

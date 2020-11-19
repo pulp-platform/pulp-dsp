@@ -1,0 +1,44 @@
+***** SIZE = 2048
+
+-- 2 CORES
+Total cycles: 121777
+Instructions: 117582
+
+-- 4 CORES
+Total cycles: 63424
+Instructions: 60610
+
+-- 8 CORES
+Total cycles: 33090
+Instructions: 30896
+
+
+
+***** SIZE = 1024
+
+-- 2 CORES
+Total cycles: 49377
+Instructions: 46909
+
+-- 4 CORES
+Total cycles: 26724
+Instructions: 24637
+
+-- 8 CORES
+Total cycles: 14323
+Instructions: 12527
+
+
+***** SIZE = 512
+
+-- 2 CORES
+Total cycles: 26240
+Instructions: 22883
+
+-- 4 CORES
+Total cycles: 13898
+Instructions: 11891
+
+-- 8 CORES
+Total cycles: 7837
+Instructions: 6395
