@@ -48,6 +48,6 @@ extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len1024;
 extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len2048;
 extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len4096;
 
-extern const plp_fft_instance_f32 plp_rfft_sR_f32_len2048;
+extern const plp_rfft_instance_f32 plp_rfft_sR_f32_len2048;
 
 #endif // PLP_CONST_STRUCTS_H
