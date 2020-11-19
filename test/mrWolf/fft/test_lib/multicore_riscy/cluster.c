@@ -15,7 +15,7 @@ RT_L1_DATA Complex_type_f32 Buffer_Signal_Out[FFT_LEN];
 // HW counter using the function rt_perf_read
 static void do_bench_0(rt_perf_t *perf, int events)
 {
-  plp_fft_instance_f32 S;
+  plp_rfft_instance_f32 S;
   S.FFTLength = FFT_LEN;
   S.bitReverseFlag = 1;
   S.pTwiddleFactors = (float32_t *) twiddle_factors;
