@@ -1556,6 +1556,21 @@ void plp_dot_prod_f32s_xpulpv2(const float32_t *__restrict__ pSrcA,
                                float32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
+    @brief Glue code for dot product of 32-bit float vectors.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blockSize  number of samples in each vector
+    @param[out] pRes       output result returned here
+    @return     none
+*/
+
+void plp_dot_prod_f32s_rv32im(const float32_t *__restrict__ pSrcA,
+                               const float32_t *__restrict__ pSrcB,
+                               uint32_t blockSize,
+                               float32_t *__restrict__ pRes);
+
+
+/** -------------------------------------------------------
     @brief Glue code for dot product of 16-bit integer vectors.
     @param[in]  pSrcA      points to the first input vector [16 bit]
     @param[in]  pSrcB      points to the second input vector [16 bit]
@@ -2229,6 +2244,18 @@ void plp_copy_f32(float32_t *__restrict__ pSrc, float32_t *__restrict__ pDst, ui
 */
 
 void plp_copy_f32s_xpulpv2(float32_t *__restrict__ pSrc,
+                           float32_t *__restrict__ pDst,
+                           uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief      Copies the elements of a 32-bit integer vector for XPULPV2 extension.
+    @param[in]  pSrc       points to input vector
+    @param[out] pDst       points to output vector
+    @param[in]  blockSize  number of samples in each vector
+    @return     none
+*/
+
+void plp_copy_f32s_rv32im(float32_t *__restrict__ pSrc,
                            float32_t *__restrict__ pDst,
                            uint32_t blockSize);
 
@@ -3334,6 +3361,18 @@ void plp_sqrt_q16s_rv32im(const int16_t *__restrict__ pSrc,
 void plp_sqrt_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
                            const uint32_t fracBits,
                            int16_t *__restrict__ pRes);
+
+
+/**
+   @brief         Glue code for square root of a 32-bit floating point number.
+   @param[in]     pSrc       points to the input vectoro
+   @param[out]    pRes    Square root returned here
+   @return        none
+ */
+
+void plp_sqrt_f32(const float *__restrict__ pSrc, 
+                  float *__restrict__ pRes);
+
 
 /**
  * @brief Macros required for SINE and COSINE Fast math approximations
@@ -7464,7 +7503,7 @@ plp_bitreversal_32s_xpulpv2(uint32_t *pSrc, const uint16_t bitRevLen, const uint
 
 /**
  * @brief      Glue code for quantized 32-bit complex fast fourier transform
- *
+ * 
  * Fixed point units input -> output dependent on length:
  * len=16:    Q1.31 -> Q5.27
  * len=32:    Q1.31 -> Q6.26
@@ -7566,6 +7605,16 @@ void plp_rfft_f32_xpulpv2(const plp_fft_instance_f32 *S,
 */
 void plp_rfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
 
+/** -------------------------------------------------------
+  @brief      Glue code for matrix addition of a 32-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
+
 /**
    @brief Floating-point FFT on complex input data.
    @param[in]   S       points to an instance of the floating-point FFT structure
@@ -7607,16 +7656,6 @@ void plp_cfft_f32_xpulpv2(const plp_fft_instance_f32 *S,
    @return      none
 */
 void plp_cfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
-
-/** -------------------------------------------------------
-  @brief      Glue code for matrix addition of a 32-bit integer matrices.
-  @param[in]  pSrcA   Points to the first input matrix
-  @param[in]  pSrcB   Points to the second input matrix
-  @param[in]  M       Height of the matrices
-  @param[in]  N       Width of the matrices
-  @param[out] pDst    Points to the output matrix
-  @return     none
-*/
 
 void plp_mat_add_i32(const int32_t *__restrict__ pSrcA,
                      const int32_t *__restrict__ pSrcB,
