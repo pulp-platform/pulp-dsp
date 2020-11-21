@@ -1,9 +1,9 @@
 /* ----------------------------------------------------------------------
  * Project:      PULP DSP Library
- * Title:        plp_copy_f32.c
- * Description:  Glue code for copying the elements of a 32-bit float vector
+ * Title:        plp_copy_f32s_rv32im.c
+ * Description:  Copies the elements of a 32-bit float vector for RV32IM
  *
- * $Date:        14. Jan 2020
+ * $Date:        21. Oct. 2020
  * $Revision:    V0
  *
  * Target Processor: PULP cores
@@ -36,33 +36,55 @@
 #include "plp_math.h"
 
 /**
-  @ingroup groupSupport
+  @ingroup Copy
  */
 
 /**
-  @addtogroup Copy
+  @addtogroup CopyKernels
   @{
  */
 
 /**
-  @brief         Glue code for copying the elements of a 32-bit integer vector
+  @brief         Copies the elements of a 32-bit integer vector for XPULPV2 extension.
   @param[in]     pSrc       points to input vector
   @param[out]    pDst       points to output vector
   @param[in]     blockSize  number of samples in each vector
   @return        none
 */
 
-void plp_copy_f32(float32_t *__restrict__ pSrc, float32_t *__restrict__ pDst, uint32_t blockSize) {
+void plp_copy_f32s_rv32im(float32_t *__restrict__ pSrc,
+                           float32_t *__restrict__ pDst,
+                           uint32_t blockSize) {
 
-    uint32_t blkCnt; /* Loop counter */
+    uint32_t blkCnt, tmpBS; /* Loop counter, temporal BlockSize */
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
-        plp_copy_f32s_rv32im(pSrc, pDst, blockSize);
-    } else {
-        plp_copy_f32s_xpulpv2(pSrc, pDst, blockSize);
+    /* #if defined (PLP_MATH_LOOPUNROLL) */
+
+    /*   tmpBS = (blockSize>>1); */
+
+    /*   for (blkCnt=0; blkCnt<tmpBS; blkCnt++){ */
+
+    /*     /\* Copy and store result in destination buffer *\/ */
+    /*     *pDst++ = *pSrc++; */
+    /*     *pDst++ = *pSrc++; */
+
+    /*   } */
+
+    /*   tmpBS = (blockSize%2U); */
+
+    /*   for (blkCnt=0; blkCnt<tmpBS; blkCnt++){ */
+    /*     *pDst++ = *pSrc++; */
+    /*   } */
+
+    /* #else */
+
+    for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+        *pDst++ = *pSrc++;
     }
+
+    /* #endif // PLP_MATH_LOOPUNROLL */
 }
 
 /**
-  @} end of Copy group
+  @} end of CopyKernels group
  */
