@@ -15,7 +15,7 @@ RT_L1_DATA Complex_type_f32 Buffer_Signal_Out[FFT_LEN];
 // HW counter using the function rt_perf_read
 static void do_bench_0(rt_perf_t *perf, int events)
 {
-  plp_rfft_instance_f32 S;
+  plp_fft_instance_f32 S;
   S.FFTLength = FFT_LEN;
   S.bitReverseFlag = 1;
   S.pTwiddleFactors = (float32_t *) twiddle_factors;
@@ -35,15 +35,15 @@ static void do_bench_0(rt_perf_t *perf, int events)
   rt_perf_stop(perf);
 
 
-  //float32_t real_acc = 0;
-  //float32_t imag_acc = 0;
-  //for(int i=0;i<FFT_LEN;i++)
-  //{
-  //  printf("%f, %f\n", Buffer_Signal_Out[i].re, Buffer_Signal_Out[i].im);
-  //  real_acc += Buffer_Signal_Out[i].re;
-  //  imag_acc += Buffer_Signal_Out[i].im;
-  //}
-  //printf("ACC = %f, %f\n", real_acc, imag_acc);
+  float32_t real_acc = 0;
+  float32_t imag_acc = 0;
+  for(int i=0;i<FFT_LEN/2+1;i++)
+  {
+    printf("%f, %f\n", Buffer_Signal_Out[i].re, Buffer_Signal_Out[i].im);
+    real_acc += Buffer_Signal_Out[i].re;
+    imag_acc += Buffer_Signal_Out[i].im;
+  }
+  printf("ACC = %f, %f\n", real_acc, imag_acc);
 
 
 }

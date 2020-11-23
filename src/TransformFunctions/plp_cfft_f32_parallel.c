@@ -1,15 +1,15 @@
 /* ----------------------------------------------------------------------
  * Project:      PULP DSP Library
- * Title:        plp_rfft_f32_parallel.c
- * Description:  Floating-point FFT on real input data (parallel version)
+ * Title:        plp_cfft_f32_parallel.c
+ * Description:  Floating-point FFT on complex input data (parallel version)
  *
- * $Date:        16. December 2019
+ * $Date:        4. August 2020
  * $Revision:    V0
  *
  * Target Processor: PULP cores with "F" support (wolfe, vega)
  * -------------------------------------------------------------------- */
 /*
- * Copyright (C) 2019 ETH Zurich and University of Bologna. All rights reserved.
+ * Copyright (C) 2020 ETH Zurich and University of Bologna. All rights reserved.
  *
  * Author: Giuseppe Tagliavini, University of Bologna
  *
@@ -47,14 +47,14 @@
 */
 
 /**
-   @brief Floating-point FFT on real input data (parallel version).
+   @brief Floating-point FFT on complex input data (parallel version).
    @param[in]   S       points to an instance of the floating-point FFT structure
-   @param[in]   pSrc    points to the input buffer (real data)
+   @param[in]   pSrc    points to the input buffer (complex data)
    @param[in]   nPE     number of parallel processing units
    @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_rfft_f32_parallel(const plp_fft_instance_f32 *S,
+void plp_cfft_f32_parallel(const plp_fft_instance_f32 *S,
                            const float32_t *__restrict__ pSrc,
                            const uint32_t nPE,
                            float32_t *__restrict__ pDst) {
@@ -66,7 +66,7 @@ void plp_rfft_f32_parallel(const plp_fft_instance_f32 *S,
 
     plp_fft_instance_f32_parallel arg = (plp_fft_instance_f32_parallel){ S, pSrc, nPE, pDst };
 
-    rt_team_fork(nPE, plp_rfft_f32_xpulpv2_parallel, (void *)&arg);
+    rt_team_fork(nPE, plp_cfft_f32_xpulpv2_parallel, (void *)&arg);
 }
 
 /**
