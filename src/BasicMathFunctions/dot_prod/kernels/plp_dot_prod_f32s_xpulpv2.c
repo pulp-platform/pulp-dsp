@@ -52,7 +52,7 @@ void plp_dot_prod_f32s_xpulpv2(const float32_t *__restrict__ pSrcA,
                                const float32_t *__restrict__ pSrcB,
                                uint32_t blockSize,
                                float32_t *__restrict__ pRes) {
-
+    *pRes = 0.0f;
     for (int i = 0; i < blockSize; i++) {
         *pRes += *(pSrcA++) * (*(pSrcB++));
     }
