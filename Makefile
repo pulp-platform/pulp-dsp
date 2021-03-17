@@ -61,6 +61,22 @@ FC_SRCS = \
 	src/BasicMathFunctions/mult/plp_mult_i32.c src/BasicMathFunctions/mult/kernels/plp_mult_i32s_rv32im.c \
 	src/BasicMathFunctions/mult/plp_mult_i16.c src/BasicMathFunctions/mult/kernels/plp_mult_i16s_rv32im.c \
 	src/BasicMathFunctions/mult/plp_mult_i8.c src/BasicMathFunctions/mult/kernels/plp_mult_i8s_rv32im.c \
+  src/BasicMathFunctions/negate/plp_negate_f32.c \
+  src/BasicMathFunctions/negate/plp_negate_i32.c src/BasicMathFunctions/negate/kernels/plp_negate_i32s_rv32im.c \
+	src/BasicMathFunctions/negate/plp_negate_i16.c src/BasicMathFunctions/negate/kernels/plp_negate_i16s_rv32im.c \
+	src/BasicMathFunctions/negate/plp_negate_i8.c src/BasicMathFunctions/negate/kernels/plp_negate_i8s_rv32im.c \
+  src/BasicMathFunctions/offset/plp_offset_f32.c \
+  src/BasicMathFunctions/offset/plp_offset_i32.c src/BasicMathFunctions/offset/kernels/plp_offset_i32s_rv32im.c \
+	src/BasicMathFunctions/offset/plp_offset_i16.c src/BasicMathFunctions/offset/kernels/plp_offset_i16s_rv32im.c \
+	src/BasicMathFunctions/offset/plp_offset_i8.c src/BasicMathFunctions/offset/kernels/plp_offset_i8s_rv32im.c \
+  src/BasicMathFunctions/sub/plp_sub_f32.c \
+  src/BasicMathFunctions/sub/plp_sub_i32.c src/BasicMathFunctions/sub/kernels/plp_sub_i32s_rv32im.c \
+	src/BasicMathFunctions/sub/plp_sub_i16.c src/BasicMathFunctions/sub/kernels/plp_sub_i16s_rv32im.c \
+	src/BasicMathFunctions/sub/plp_sub_i8.c src/BasicMathFunctions/sub/kernels/plp_sub_i8s_rv32im.c \
+  src/BasicMathFunctions/scale/plp_scale_f32.c \
+  src/BasicMathFunctions/scale/plp_scale_i32.c src/BasicMathFunctions/scale/kernels/plp_scale_i32s_rv32im.c \
+	src/BasicMathFunctions/scale/plp_scale_i16.c src/BasicMathFunctions/scale/kernels/plp_scale_i16s_rv32im.c \
+	src/BasicMathFunctions/scale/plp_scale_i8.c src/BasicMathFunctions/scale/kernels/plp_scale_i8s_rv32im.c \
 	src/FilteringFunctions/plp_correlate_i32.c src/FilteringFunctions/kernels/plp_correlate_i32s_rv32im.c \
 	src/FilteringFunctions/plp_correlate_i16.c src/FilteringFunctions/kernels/plp_correlate_i16s_rv32im.c \
 	src/FilteringFunctions/plp_correlate_i8.c src/FilteringFunctions/kernels/plp_correlate_i8s_rv32im.c \
@@ -422,6 +438,22 @@ CL_SRCS = \
 	src/BasicMathFunctions/mult/kernels/plp_mult_i32s_xpulpv2.c \
 	src/BasicMathFunctions/mult/kernels/plp_mult_i16s_xpulpv2.c \
 	src/BasicMathFunctions/mult/kernels/plp_mult_i8s_xpulpv2.c \
+  src/BasicMathFunctions/negate/kernels/plp_negate_f32s_xpulpv2.c \
+  src/BasicMathFunctions/negate/kernels/plp_negate_i32s_xpulpv2.c \
+	src/BasicMathFunctions/negate/kernels/plp_negate_i16s_xpulpv2.c \
+	src/BasicMathFunctions/negate/kernels/plp_negate_i8s_xpulpv2.c \
+  src/BasicMathFunctions/offset/kernels/plp_offset_f32s_xpulpv2.c \
+  src/BasicMathFunctions/offset/kernels/plp_offset_i32s_xpulpv2.c \
+	src/BasicMathFunctions/offset/kernels/plp_offset_i16s_xpulpv2.c \
+	src/BasicMathFunctions/offset/kernels/plp_offset_i8s_xpulpv2.c \
+	src/BasicMathFunctions/sub/kernels/plp_sub_f32s_xpulpv2.c \
+  src/BasicMathFunctions/sub/kernels/plp_sub_i32s_xpulpv2.c \
+	src/BasicMathFunctions/sub/kernels/plp_sub_i16s_xpulpv2.c \
+	src/BasicMathFunctions/sub/kernels/plp_sub_i8s_xpulpv2.c \
+  src/BasicMathFunctions/scale/kernels/plp_scale_f32s_xpulpv2.c \
+  src/BasicMathFunctions/scale/kernels/plp_scale_i32s_xpulpv2.c \
+	src/BasicMathFunctions/scale/kernels/plp_scale_i16s_xpulpv2.c \
+	src/BasicMathFunctions/scale/kernels/plp_scale_i8s_xpulpv2.c \
 	src/SupportFunctions/kernels/plp_copy_i32s_xpulpv2.c \
 	src/SupportFunctions/kernels/plp_copy_f32s_xpulpv2.c \
 	src/SupportFunctions/kernels/plp_fill_i32s_xpulpv2.c \

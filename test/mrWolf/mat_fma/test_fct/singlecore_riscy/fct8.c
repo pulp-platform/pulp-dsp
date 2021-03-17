@@ -12,7 +12,7 @@ RT_CL_DATA static v4s mask3 = {1,3,5,7};
 
 #if defined(BLOCK_VERSION_BIG_4)
 
-void plp_mat_mult_i8v_xpulpv2(
+void plp_mat_mult_i8s_xpulpv2(
                               const int8_t * __restrict__ pSrcA,
                               const int8_t * __restrict__ pSrcB,
                               uint32_t M,
@@ -160,7 +160,7 @@ void plp_mat_mult_i8v_xpulpv2(
 
 #elif defined(BLOCK_VERSION_BIG)
 
-void plp_mat_mult_i8v_xpulpv2(
+void plp_mat_mult_i8s_xpulpv2(
                               const int8_t * __restrict__ pSrcA,
                               const int8_t * __restrict__ pSrcB,
                               uint32_t M,
@@ -282,7 +282,7 @@ void plp_mat_mult_i8v_xpulpv2(
 
 #elif defined(BLOCK_VERSION)
 
-void plp_mat_mult_i8v_xpulpv2(
+void plp_mat_mult_i8s_xpulpv2(
                               const int8_t * __restrict__ pSrcA,
                               const int8_t * __restrict__ pSrcB,
                               uint32_t M,
@@ -404,7 +404,7 @@ void plp_mat_mult_i8v_xpulpv2(
 
 #else
 
-void plp_mat_mult_i8v_xpulpv2(
+void plp_mat_mult_i8s_xpulpv2(
                               const int8_t * __restrict__ pSrcA,
                               const int8_t * __restrict__ pSrcB,
                               uint32_t M,

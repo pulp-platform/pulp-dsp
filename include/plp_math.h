@@ -2162,6 +2162,520 @@ void plp_mult_i8s_xpulpv2(const int8_t * pSrcA,
                           uint32_t blockSize);
 
 /** -------------------------------------------------------
+    @brief      Glue code of negate the elements of a vector for 32-bit integers
+    @param[in]     pSrc       points to input vector.
+    @param[out]    pDst       points to output vector.
+    @param[in]     blockSize  number of samples in each vector.
+    @return     none
+*/
+
+void plp_negate_i32(const int32_t * pSrc, int32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief      negate the elements of a vector for 32-bit integers on RV32IM
+    @param[in]     pSrc       points to input vector.
+    @param[out]    pDst       points to output vector.
+    @param[in]     blockSize  number of samples in each vector.
+    @return     none
+*/
+
+void plp_negate_i32s_rv32im(const int32_t * pSrc, int32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief      negate the elements of a vector for 32-bit integers on XpulpV2
+    @param[in]     pSrc       points to input vector.
+    @param[out]    pDst       points to output vector.
+    @param[in]     blockSize  number of samples in each vector.
+    @return     none
+*/
+
+void plp_negate_i32s_xpulpv2(const int32_t * pSrc, int32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      Glue code of negate the elements of a vector for 16-bit integers
+  @param[in]     pSrc       points to input vector.
+  @param[out]    pDst       points to output vector.
+  @param[in]     blockSize  number of samples in each vector.
+  @return     none
+*/
+
+void plp_negate_i16(const int16_t * pSrc, int16_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      negate the elements of a vector for 16-bit integers on RV32IM
+  @param[in]     pSrc       points to input vector.
+  @param[out]    pDst       points to output vector.
+  @param[in]     blockSize  number of samples in each vector.
+  @return     none
+*/
+
+void plp_negate_i16s_rv32im(const int16_t * pSrc, int16_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      negate the elements of a vector for 16-bit integers on XpulpV2
+  @param[in]     pSrc       points to input vector.
+  @param[out]    pDst       points to output vector.
+  @param[in]     blockSize  number of samples in each vector.
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_negate_i16s_xpulpv2(const int16_t * pSrc, int16_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      Glue code of negate the elements of a vector for 8-bit integers
+  @param[in]     pSrc       points to input vector.
+  @param[out]    pDst       points to output vector.
+  @param[in]     blockSize  number of samples in each vector.
+  @return     none
+*/
+
+void plp_negate_i8(const int8_t * pSrc, int8_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      negate the elements of a vector for 8-bit integers on RV32IM
+  @param[in]     pSrc       points to input vector.
+  @param[out]    pDst       points to output vector.
+  @param[in]     blockSize  number of samples in each vector.
+  @return     none
+*/
+
+void plp_negate_i8s_rv32im(const int8_t * pSrc, int8_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      negate the elements of a vector for 8-bit integers on XpulpV2
+  @param[in]     pSrc       points to input vector.
+  @param[out]    pDst       points to output vector.
+  @param[in]     blockSize  number of samples in each vector.
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_negate_i8s_xpulpv2(const int8_t * pSrc, int8_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief      Glue code of negate the elements of a vector for 32-bit floats
+    @param[in]     pSrc       points to input vector.
+    @param[out]    pDst       points to output vector.
+    @param[in]     blockSize  number of samples in each vector.
+    @return     none
+*/
+
+void plp_negate_f32(const float32_t * pSrc, float32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief      negate the elements of a vector for 32-bit floats on XpulpV2
+    @param[in]     pSrc       points to input vector.
+    @param[out]    pDst       points to output vector.
+    @param[in]     blockSize  number of samples in each vector.
+    @return     none
+*/
+
+void plp_negate_f32s_xpulpv2(const float32_t * pSrc, float32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      Glue code of add a constant offset to a vector for 32-bit integers
+  @param[in]     pSrc       points to the input vector
+  @param[in]     offset     is the offset to be added
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_offset_i32(const int32_t * pSrc, int32_t offset, int32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      add a constant offset to a vector for 32-bit integers on RV32IM
+  @param[in]     pSrc       points to the input vector
+  @param[in]     offset     is the offset to be added
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_offset_i32s_rv32im(const int32_t * pSrc, int32_t offset, int32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      add a constant offset to a vector for 32-bit integers on XpulpV2
+  @param[in]     pSrc       points to the input vector
+  @param[in]     offset     is the offset to be added
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_offset_i32s_xpulpv2(const int32_t * pSrc, int32_t offset, int32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      Glue code of add a constant offset to a vector for 16-bit integers
+  @param[in]     pSrc       points to the input vector
+  @param[in]     offset     is the offset to be added
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_offset_i16(const int16_t * pSrc, int16_t offset, int16_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      add a constant offset to a vector for 16-bit integers on RV32IM
+  @param[in]     pSrc       points to the input vector
+  @param[in]     offset     is the offset to be added
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_offset_i16s_rv32im(const int16_t * pSrc, int16_t offset, int16_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      add a constant offset to a vector for 16-bit integers on XpulpV2
+  @param[in]     pSrc       points to the input vector
+  @param[in]     offset     is the offset to be added
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_offset_i16s_xpulpv2(const int16_t * pSrc, int16_t offset, int16_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      Glue code of add a constant offset to a vector for 8-bit integers
+  @param[in]     pSrc       points to the input vector
+  @param[in]     offset     is the offset to be added
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_offset_i8(const int8_t * pSrc, int8_t offset, int8_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      add a constant offset to a vector for 8-bit integers on RV32IM
+  @param[in]     pSrc       points to the input vector
+  @param[in]     offset     is the offset to be added
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_offset_i8s_rv32im(const int8_t * pSrc, int8_t offset, int8_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      add a constant offset to a vector for 8-bit integers on XpulpV2
+  @param[in]     pSrc       points to the input vector
+  @param[in]     offset     is the offset to be added
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_offset_i8s_xpulpv2(const int8_t * pSrc, int8_t offset, int8_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      Glue code of add a constant offset to a vector for 32-bit floats
+  @param[in]     pSrc       points to the input vector
+  @param[in]     offset     is the offset to be added
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_offset_f32(const float32_t * pSrc, float32_t offset, float32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      add a constant offset to a vector for 32-bit floats on XpulpV2
+  @param[in]     pSrc       points to the input vector
+  @param[in]     offset     is the offset to be added
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_offset_f32s_xpulpv2(const float32_t * pSrc, float32_t offset, float32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      Glue code of vector substraction for 32-bit integers
+  @param[in]     pSrcA      points to the first input vector
+  @param[in]     pSrcB      points to the second input vector
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_sub_i32(const int32_t * pSrcA, const int32_t * pSrcB, int32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      vector substraction for 32-bit integers on RV32IM
+  @param[in]     pSrcA      points to the first input vector
+  @param[in]     pSrcB      points to the second input vector
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_sub_i32s_rv32im(const int32_t * pSrcA, const int32_t * pSrcB, int32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      vector substraction for 32-bit integers on XpulpV2
+  @param[in]     pSrcA      points to the first input vector
+  @param[in]     pSrcB      points to the second input vector
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_sub_i32s_xpulpv2(const int32_t * pSrcA, const int32_t * pSrcB, int32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      Glue code of vector substraction for 16-bit integers
+  @param[in]     pSrcA      points to the first input vector
+  @param[in]     pSrcB      points to the second input vector
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_sub_i16(const int16_t * pSrcA, const int16_t * pSrcB, int32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      vector substraction for 16-bit integers on RV32IM
+  @param[in]     pSrcA      points to the first input vector
+  @param[in]     pSrcB      points to the second input vector
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_sub_i16s_rv32im(const int16_t * pSrcA, const int16_t * pSrcB, int32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      vector substraction for 16-bit integers on XpulpV2
+  @param[in]     pSrcA      points to the first input vector
+  @param[in]     pSrcB      points to the second input vector
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_sub_i16s_xpulpv2(const int16_t * pSrcA, const int16_t * pSrcB, int32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      Glue code of vector substraction for 8-bit integers
+  @param[in]     pSrcA      points to the first input vector
+  @param[in]     pSrcB      points to the second input vector
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_sub_i8(const int8_t * pSrcA, const int8_t * pSrcB, int32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      vector substraction for 8-bit integers on RV32IM
+  @param[in]     pSrcA      points to the first input vector
+  @param[in]     pSrcB      points to the second input vector
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_sub_i8s_rv32im(const int8_t * pSrcA, const int8_t * pSrcB, int32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      vector substraction for 8-bit integers on XpulpV2
+  @param[in]     pSrcA      points to the first input vector
+  @param[in]     pSrcB      points to the second input vector
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_sub_i8s_xpulpv2(const int8_t * pSrcA, const int8_t * pSrcB, int32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      Glue code of vector substraction for 32-bit floats
+  @param[in]     pSrcA      points to the first input vector
+  @param[in]     pSrcB      points to the second input vector
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_sub_f32(const float32_t * pSrcA, const float32_t * pSrcB, float32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      vector substraction for 32-bit floats on XpulpV2
+  @param[in]     pSrcA      points to the first input vector
+  @param[in]     pSrcB      points to the second input vector
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_sub_f32s_xpulpv2(const float32_t * pSrcA, const float32_t * pSrcB, float32_t * pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      Glue code of multiply a vector by a scalar for 32-bit integers
+  @param[in]     pSrc       points to the input vector
+  @param[in]     scaleFactor Factor to multiply all elements before shifting
+  @param[in]     shift      number of bits to shift the result by
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_scale_i32(const int32_t *__restrict__ pSrc, int32_t scaleFactor, int32_t shift, int32_t *__restrict__ pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      multiply a vector by a scalar for 32-bit integers on RV32IM
+  @param[in]     pSrc       points to the input vector
+  @param[in]     scaleFactor Factor to multiply all elements before shifting
+  @param[in]     shift      number of bits to shift the result by
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_scale_i32s_rv32im(const int32_t *__restrict__ pSrc, int32_t scaleFactor, int32_t shift, int32_t *__restrict__ pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      multiply a vector by a scalar for 32-bit integers on XpulpV2
+  @param[in]     pSrc       points to the input vector
+  @param[in]     scaleFactor Factor to multiply all elements before shifting
+  @param[in]     shift      number of bits to shift the result by
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_scale_i32s_xpulpv2(const int32_t *__restrict__ pSrc, int32_t scaleFactor, int32_t shift, int32_t *__restrict__ pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      Glue code of multiply a vector by a scalar for 16-bit integers
+  @param[in]     pSrc       points to the input vector
+  @param[in]     scaleFactor Factor to multiply all elements before shifting
+  @param[in]     shift      number of bits to shift the result by
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_scale_i16(const int16_t *__restrict__ pSrc, int16_t scaleFactor, int32_t shift, int16_t *__restrict__ pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      multiply a vector by a scalar for 16-bit integers on RV32IM
+  @param[in]     pSrc       points to the input vector
+  @param[in]     scaleFactor Factor to multiply all elements before shifting
+  @param[in]     shift      number of bits to shift the result by
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_scale_i16s_rv32im(const int16_t *__restrict__ pSrc, int16_t scaleFactor, int32_t shift, int16_t *__restrict__ pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      multiply a vector by a scalar for 16-bit integers on XpulpV2
+  @param[in]     pSrc       points to the input vector
+  @param[in]     scaleFactor Factor to multiply all elements before shifting
+  @param[in]     shift      number of bits to shift the result by
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two each into 32 bit vectors and then the two dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_scale_i16s_xpulpv2(const int16_t *__restrict__ pSrc, int16_t scaleFactor, int32_t shift, int16_t *__restrict__ pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      Glue code of multiply a vector by a scalar for 8-bit integers
+  @param[in]     pSrc       points to the input vector
+  @param[in]     scaleFactor Factor to multiply all elements before shifting
+  @param[in]     shift      number of bits to shift the result by
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_scale_i8(const int8_t *__restrict__ pSrc, int8_t scaleFactor, int32_t shift, int8_t *__restrict__ pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      multiply a vector by a scalar for 8-bit integers on RV32IM
+  @param[in]     pSrc       points to the input vector
+  @param[in]     scaleFactor Factor to multiply all elements before shifting
+  @param[in]     shift      number of bits to shift the result by
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_scale_i8s_rv32im(const int8_t *__restrict__ pSrc, int8_t scaleFactor, int32_t shift, int8_t *__restrict__ pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      multiply a vector by a scalar for 8-bit integers on XpulpV2
+  @param[in]     pSrc       points to the input vector
+  @param[in]     scaleFactor Factor to multiply all elements before shifting
+  @param[in]     shift      number of bits to shift the result by
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 8 bit values are packed four each into 32 bit vectors and then the four dot products are
+  performed on 32 bit vectors, with 32 bit accumulator.
+*/
+
+void plp_scale_i8s_xpulpv2(const int8_t *__restrict__ pSrc, int8_t scaleFactor, int32_t shift, int8_t *__restrict__ pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      Glue code of multiply a vector by a scalar for 32-bit floats
+  @param[in]     pSrc       points to the input vector
+  @param[in]     scaleFactor Factor to multiply all elements before shifting
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_scale_f32(const float32_t *__restrict__ pSrc, float32_t scaleFactor, float32_t *__restrict__ pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
+  @brief      multiply a vector by a scalar for 32-bit floats on XpulpV2
+  @param[in]     pSrc       points to the input vector
+  @param[in]     scaleFactor Factor to multiply all elements before shifting
+  @param[out]    pDst       points to the output vector
+  @param[in]     blockSize  number of samples in each vector
+  @return     none
+*/
+
+void plp_scale_f32s_xpulpv2(const float32_t *__restrict__ pSrc, float32_t scaleFactor, float32_t *__restrict__ pDst, uint32_t blockSize);
+
+/** -------------------------------------------------------
     @brief      Glue code for filling a constant value into a 32-bit integer vector.
     @param[in]  value      input value to be filled
     @param[out] pDst       points to output vector

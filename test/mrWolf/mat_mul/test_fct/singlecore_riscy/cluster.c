@@ -102,9 +102,9 @@ static void do_bench_0(rt_perf_t *perf, int events)
     };
     rt_team_fork(args.nPE, plp_mat_mult_i32p_xpulpv2, (void *)&args);
   #elif defined (TEST_8)
-    plp_mat_mult_i8v_xpulpv2(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
+    plp_mat_mult_i8s_xpulpv2(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
   #elif defined(TEST_16)
-    plp_mat_mult_i16v_xpulpv2(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
+    plp_mat_mult_i16s_xpulpv2(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
   #else
     plp_mat_mult_i32s_xpulpv2(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
   #endif

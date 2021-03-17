@@ -7,7 +7,7 @@
 
 #ifdef BLOCK_VERSION_PARALELL
 
-void plp_mat_mult_i16v_xpulpv2(
+void plp_mat_mult_i16s_xpulpv2(
                               const int16_t * __restrict__ pSrcA,
                               const int16_t * __restrict__ pSrcB,
                               uint32_t M,
@@ -134,7 +134,7 @@ void plp_mat_mult_i16v_xpulpv2(
 
 #elif defined(BLOCK_VERSION)
 
-void plp_mat_mult_i16v_xpulpv2(
+void plp_mat_mult_i16s_xpulpv2(
                               const int16_t * __restrict__ pSrcA,
                               const int16_t * __restrict__ pSrcB,
                               uint32_t M,
@@ -249,7 +249,7 @@ void plp_mat_mult_i16v_xpulpv2(
 
 #elif defined(BLOCK_VERSION_SHUFFLE)
 
-void plp_mat_mult_i16v_xpulpv2(
+void plp_mat_mult_i16s_xpulpv2(
                               const int16_t * __restrict__ pSrcA,
                               const int16_t * __restrict__ pSrcB,
                               uint32_t M,
@@ -372,7 +372,7 @@ void plp_mat_mult_i16v_xpulpv2(
 
 #else
 
-void plp_mat_mult_i16v_xpulpv2(
+void plp_mat_mult_i16s_xpulpv2(
                               const int16_t * __restrict__ pSrcA,
                               const int16_t * __restrict__ pSrcB,
                               uint32_t M,

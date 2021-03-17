@@ -616,7 +616,7 @@ Disassembly of section .text:
 1c0085d8:	03000613          	li	a2,48
 1c0085dc:	41458593          	addi	a1,a1,1044 # 10002414 <m_b>
 1c0085e0:	d1450513          	addi	a0,a0,-748 # 10002d14 <m_a>
-1c0085e4:	2a81                	jal	1c008734 <plp_mat_mult_i8v_xpulpv2>
+1c0085e4:	2a81                	jal	1c008734 <plp_mat_mult_i8s_xpulpv2>
 1c0085e6:	477d                	li	a4,31
 1c0085e8:	f14027f3          	csrr	a5,mhartid
 1c0085ec:	ca5797b3          	p.extractu	a5,a5,5,5
@@ -719,7 +719,7 @@ Disassembly of section .text:
 1c00872e:	7a179073          	csrw	pcmr,a5
 1c008732:	bdd1                	j	1c008606 <cluster_entry+0xd6>
 
-1c008734 <plp_mat_mult_i8v_xpulpv2>:
+1c008734 <plp_mat_mult_i8s_xpulpv2>:
 1c008734:	7175                	addi	sp,sp,-144
 1c008736:	00165293          	srli	t0,a2,0x1
 1c00873a:	c722                	sw	s0,140(sp)
@@ -741,7 +741,7 @@ Disassembly of section .text:
 1c00875a:	d036                	sw	a3,32(sp)
 1c00875c:	ca3a                	sw	a4,20(sp)
 1c00875e:	ccbe                	sw	a5,88(sp)
-1c008760:	3c028b63          	beqz	t0,1c008b36 <plp_mat_mult_i8v_xpulpv2+0x402>
+1c008760:	3c028b63          	beqz	t0,1c008b36 <plp_mat_mult_i8s_xpulpv2+0x402>
 1c008764:	00275313          	srli	t1,a4,0x2
 1c008768:	863e                	mv	a2,a5
 1c00876a:	00231793          	slli	a5,t1,0x2
@@ -773,7 +773,7 @@ Disassembly of section .text:
 1c0087b0:	00229d93          	slli	s11,t0,0x2
 1c0087b4:	c482                	sw	zero,72(sp)
 1c0087b6:	42b6                	lw	t0,76(sp)
-1c0087b8:	1e028963          	beqz	t0,1c0089aa <plp_mat_mult_i8v_xpulpv2+0x276>
+1c0087b8:	1e028963          	beqz	t0,1c0089aa <plp_mat_mult_i8s_xpulpv2+0x276>
 1c0087bc:	53d2                	lw	t2,52(sp)
 1c0087be:	4376                	lw	t1,92(sp)
 1c0087c0:	4486                	lw	s1,64(sp)
@@ -788,7 +788,7 @@ Disassembly of section .text:
 1c0087d4:	c832                	sw	a2,16(sp)
 1c0087d6:	ce3e                	sw	a5,28(sp)
 1c0087d8:	59a2                	lw	s3,40(sp)
-1c0087da:	1a098e63          	beqz	s3,1c008996 <plp_mat_mult_i8v_xpulpv2+0x262>
+1c0087da:	1a098e63          	beqz	s3,1c008996 <plp_mat_mult_i8s_xpulpv2+0x262>
 1c0087de:	5392                	lw	t2,36(sp)
 1c0087e0:	5332                	lw	t1,44(sp)
 1c0087e2:	44d2                	lw	s1,20(sp)
@@ -811,7 +811,7 @@ Disassembly of section .text:
 1c00880c:	4e81                	li	t4,0
 1c00880e:	4e01                	li	t3,0
 1c008810:	0505                	addi	a0,a0,1
-1c008812:	036540fb          	lp.setup	x1,a0,1c00887e <plp_mat_mult_i8v_xpulpv2+0x14a>
+1c008812:	036540fb          	lp.setup	x1,a0,1c00887e <plp_mat_mult_i8s_xpulpv2+0x14a>
 1c008816:	21bb768b          	p.lw	a3,s11(s6!)
 1c00881a:	21b9f30b          	p.lw	t1,s11(s3!)
 1c00881e:	21b9758b          	p.lw	a1,s11(s2!)
@@ -862,7 +862,7 @@ Disassembly of section .text:
 1c0088b2:	c636                	sw	a3,12(sp)
 1c0088b4:	cc3a                	sw	a4,24(sp)
 1c0088b6:	ce3e                	sw	a5,28(sp)
-1c0088b8:	f385                	bnez	a5,1c0087d8 <plp_mat_mult_i8v_xpulpv2+0xa4>
+1c0088b8:	f385                	bnez	a5,1c0087d8 <plp_mat_mult_i8s_xpulpv2+0xa4>
 1c0088ba:	4536                	lw	a0,76(sp)
 1c0088bc:	4616                	lw	a2,68(sp)
 1c0088be:	42a6                	lw	t0,72(sp)
@@ -882,17 +882,17 @@ Disassembly of section .text:
 1c0088da:	d226                	sw	s1,36(sp)
 1c0088dc:	d836                	sw	a3,48(sp)
 1c0088de:	d63a                	sw	a4,44(sp)
-1c0088e0:	ec599be3          	bne	s3,t0,1c0087b6 <plp_mat_mult_i8v_xpulpv2+0x82>
+1c0088e0:	ec599be3          	bne	s3,t0,1c0087b6 <plp_mat_mult_i8s_xpulpv2+0x82>
 1c0088e4:	42c6                	lw	t0,80(sp)
 1c0088e6:	0986                	slli	s3,s3,0x1
 1c0088e8:	dc4e                	sw	s3,56(sp)
 1c0088ea:	080a                	slli	a6,a6,0x2
 1c0088ec:	050a                	slli	a0,a0,0x2
-1c0088ee:	0d328063          	beq	t0,s3,1c0089ae <plp_mat_mult_i8v_xpulpv2+0x27a>
-1c0088f2:	e961                	bnez	a0,1c0089c2 <plp_mat_mult_i8v_xpulpv2+0x28e>
+1c0088ee:	0d328063          	beq	t0,s3,1c0089ae <plp_mat_mult_i8s_xpulpv2+0x27a>
+1c0088f2:	e961                	bnez	a0,1c0089c2 <plp_mat_mult_i8s_xpulpv2+0x28e>
 1c0088f4:	5662                	lw	a2,56(sp)
 1c0088f6:	49c6                	lw	s3,80(sp)
-1c0088f8:	09367163          	bleu	s3,a2,1c00897a <plp_mat_mult_i8v_xpulpv2+0x246>
+1c0088f8:	09367163          	bleu	s3,a2,1c00897a <plp_mat_mult_i8s_xpulpv2+0x246>
 1c0088fc:	5302                	lw	t1,32(sp)
 1c0088fe:	52f2                	lw	t0,60(sp)
 1c008900:	43d2                	lw	t2,20(sp)
@@ -901,17 +901,17 @@ Disassembly of section .text:
 1c008908:	02760f33          	mul	t5,a2,t2
 1c00890c:	42660e33          	p.mac	t3,a2,t1
 1c008910:	42d2                	lw	t0,20(sp)
-1c008912:	04557a63          	bleu	t0,a0,1c008966 <plp_mat_mult_i8v_xpulpv2+0x232>
+1c008912:	04557a63          	bleu	t0,a0,1c008966 <plp_mat_mult_i8s_xpulpv2+0x232>
 1c008916:	43e6                	lw	t2,88(sp)
 1c008918:	01e50333          	add	t1,a0,t5
 1c00891c:	030a                	slli	t1,t1,0x2
 1c00891e:	41fe0eb3          	sub	t4,t3,t6
 1c008922:	931e                	add	t1,t1,t2
 1c008924:	40a288b3          	sub	a7,t0,a0
-1c008928:	01e8c07b          	lp.setup	x0,a7,1c008964 <plp_mat_mult_i8v_xpulpv2+0x230>
+1c008928:	01e8c07b          	lp.setup	x0,a7,1c008964 <plp_mat_mult_i8s_xpulpv2+0x230>
 1c00892c:	5382                	lw	t2,32(sp)
 1c00892e:	4681                	li	a3,0
-1c008930:	02787863          	bleu	t2,a6,1c008960 <plp_mat_mult_i8v_xpulpv2+0x22c>
+1c008930:	02787863          	bleu	t2,a6,1c008960 <plp_mat_mult_i8s_xpulpv2+0x22c>
 1c008934:	44d2                	lw	s1,20(sp)
 1c008936:	872a                	mv	a4,a0
 1c008938:	5672                	lw	a2,60(sp)
@@ -923,7 +923,7 @@ Disassembly of section .text:
 1c008946:	410e07b3          	sub	a5,t3,a6
 1c00894a:	82a6                	mv	t0,s1
 1c00894c:	974e                	add	a4,a4,s3
-1c00894e:	0067c0fb          	lp.setup	x1,a5,1c00895a <plp_mat_mult_i8v_xpulpv2+0x226>
+1c00894e:	0067c0fb          	lp.setup	x1,a5,1c00895a <plp_mat_mult_i8s_xpulpv2+0x226>
 1c008952:	0018060b          	p.lb	a2,1(a6!)
 1c008956:	0057758b          	p.lb	a1,t0(a4!)
 1c00895a:	42c586b3          	p.mac	a3,a1,a2
@@ -938,7 +938,7 @@ Disassembly of section .text:
 1c008970:	dc26                	sw	s1,56(sp)
 1c008972:	9f32                	add	t5,t5,a2
 1c008974:	9e36                	add	t3,t3,a3
-1c008976:	f8999de3          	bne	s3,s1,1c008910 <plp_mat_mult_i8v_xpulpv2+0x1dc>
+1c008976:	f8999de3          	bne	s3,s1,1c008910 <plp_mat_mult_i8s_xpulpv2+0x1dc>
 1c00897a:	443a                	lw	s0,140(sp)
 1c00897c:	44aa                	lw	s1,136(sp)
 1c00897e:	491a                	lw	s2,132(sp)
@@ -962,19 +962,19 @@ Disassembly of section .text:
 1c0089a2:	4f01                	li	t5,0
 1c0089a4:	4e81                	li	t4,0
 1c0089a6:	4e01                	li	t3,0
-1c0089a8:	bdf1                	j	1c008884 <plp_mat_mult_i8v_xpulpv2+0x150>
+1c0089a8:	bdf1                	j	1c008884 <plp_mat_mult_i8s_xpulpv2+0x150>
 1c0089aa:	4501                	li	a0,0
-1c0089ac:	bf01                	j	1c0088bc <plp_mat_mult_i8v_xpulpv2+0x188>
+1c0089ac:	bf01                	j	1c0088bc <plp_mat_mult_i8s_xpulpv2+0x188>
 1c0089ae:	5302                	lw	t1,32(sp)
-1c0089b0:	f46811e3          	bne	a6,t1,1c0088f2 <plp_mat_mult_i8v_xpulpv2+0x1be>
+1c0089b0:	f46811e3          	bne	a6,t1,1c0088f2 <plp_mat_mult_i8s_xpulpv2+0x1be>
 1c0089b4:	44d2                	lw	s1,20(sp)
-1c0089b6:	fca482e3          	beq	s1,a0,1c00897a <plp_mat_mult_i8v_xpulpv2+0x246>
+1c0089b6:	fca482e3          	beq	s1,a0,1c00897a <plp_mat_mult_i8s_xpulpv2+0x246>
 1c0089ba:	5362                	lw	t1,56(sp)
-1c0089bc:	fa030fe3          	beqz	t1,1c00897a <plp_mat_mult_i8v_xpulpv2+0x246>
-1c0089c0:	bf0d                	j	1c0088f2 <plp_mat_mult_i8v_xpulpv2+0x1be>
-1c0089c2:	f20809e3          	beqz	a6,1c0088f4 <plp_mat_mult_i8v_xpulpv2+0x1c0>
+1c0089bc:	fa030fe3          	beqz	t1,1c00897a <plp_mat_mult_i8s_xpulpv2+0x246>
+1c0089c0:	bf0d                	j	1c0088f2 <plp_mat_mult_i8s_xpulpv2+0x1be>
+1c0089c2:	f20809e3          	beqz	a6,1c0088f4 <plp_mat_mult_i8s_xpulpv2+0x1c0>
 1c0089c6:	5482                	lw	s1,32(sp)
-1c0089c8:	08980263          	beq	a6,s1,1c008a4c <plp_mat_mult_i8v_xpulpv2+0x318>
+1c0089c8:	08980263          	beq	a6,s1,1c008a4c <plp_mat_mult_i8s_xpulpv2+0x318>
 1c0089cc:	59f2                	lw	s3,60(sp)
 1c0089ce:	4652                	lw	a2,20(sp)
 1c0089d0:	46e6                	lw	a3,88(sp)
@@ -994,15 +994,15 @@ Disassembly of section .text:
 1c0089fc:	00235313          	srli	t1,t1,0x2
 1c008a00:	8ea6                	mv	t4,s1
 1c008a02:	0305                	addi	t1,t1,1
-1c008a04:	01a3407b          	lp.setup	x0,t1,1c008a38 <plp_mat_mult_i8v_xpulpv2+0x304>
+1c008a04:	01a3407b          	lp.setup	x0,t1,1c008a38 <plp_mat_mult_i8s_xpulpv2+0x304>
 1c008a08:	5602                	lw	a2,32(sp)
 1c008a0a:	4781                	li	a5,0
-1c008a0c:	02c87263          	bleu	a2,a6,1c008a30 <plp_mat_mult_i8v_xpulpv2+0x2fc>
+1c008a0c:	02c87263          	bleu	a2,a6,1c008a30 <plp_mat_mult_i8s_xpulpv2+0x2fc>
 1c008a10:	8676                	mv	a2,t4
 1c008a12:	86fa                	mv	a3,t5
 1c008a14:	4781                	li	a5,0
 1c008a16:	41ef8733          	sub	a4,t6,t5
-1c008a1a:	00a740fb          	lp.setup	x1,a4,1c008a2e <plp_mat_mult_i8v_xpulpv2+0x2fa>
+1c008a1a:	00a740fb          	lp.setup	x1,a4,1c008a2e <plp_mat_mult_i8s_xpulpv2+0x2fa>
 1c008a1e:	49d2                	lw	s3,20(sp)
 1c008a20:	0016858b          	p.lb	a1,1(a3!)
 1c008a24:	0136788b          	p.lb	a7,s3(a2!)
@@ -1019,10 +1019,10 @@ Disassembly of section .text:
 1c008a42:	92ca                	add	t0,t0,s2
 1c008a44:	9f36                	add	t5,t5,a3
 1c008a46:	9fb6                	add	t6,t6,a3
-1c008a48:	fb33e5e3          	bltu	t2,s3,1c0089f2 <plp_mat_mult_i8v_xpulpv2+0x2be>
+1c008a48:	fb33e5e3          	bltu	t2,s3,1c0089f2 <plp_mat_mult_i8s_xpulpv2+0x2be>
 1c008a4c:	42d2                	lw	t0,20(sp)
-1c008a4e:	06550663          	beq	a0,t0,1c008aba <plp_mat_mult_i8v_xpulpv2+0x386>
-1c008a52:	06557463          	bleu	t0,a0,1c008aba <plp_mat_mult_i8v_xpulpv2+0x386>
+1c008a4e:	06550663          	beq	a0,t0,1c008aba <plp_mat_mult_i8s_xpulpv2+0x386>
+1c008a52:	06557463          	bleu	t0,a0,1c008aba <plp_mat_mult_i8s_xpulpv2+0x386>
 1c008a56:	43e6                	lw	t2,88(sp)
 1c008a58:	5652                	lw	a2,52(sp)
 1c008a5a:	5482                	lw	s1,32(sp)
@@ -1038,16 +1038,16 @@ Disassembly of section .text:
 1c008a76:	832a                	mv	t1,a0
 1c008a78:	8f16                	mv	t5,t0
 1c008a7a:	40ae88b3          	sub	a7,t4,a0
-1c008a7e:	0158c07b          	lp.setup	x0,a7,1c008aa8 <plp_mat_mult_i8v_xpulpv2+0x374>
+1c008a7e:	0158c07b          	lp.setup	x0,a7,1c008aa8 <plp_mat_mult_i8s_xpulpv2+0x374>
 1c008a82:	5602                	lw	a2,32(sp)
 1c008a84:	4701                	li	a4,0
-1c008a86:	ce19                	beqz	a2,1c008aa4 <plp_mat_mult_i8v_xpulpv2+0x370>
+1c008a86:	ce19                	beqz	a2,1c008aa4 <plp_mat_mult_i8s_xpulpv2+0x370>
 1c008a88:	44d2                	lw	s1,20(sp)
 1c008a8a:	861a                	mv	a2,t1
 1c008a8c:	86f2                	mv	a3,t3
 1c008a8e:	4701                	li	a4,0
 1c008a90:	41cf87b3          	sub	a5,t6,t3
-1c008a94:	0067c0fb          	lp.setup	x1,a5,1c008aa0 <plp_mat_mult_i8v_xpulpv2+0x36c>
+1c008a94:	0067c0fb          	lp.setup	x1,a5,1c008aa0 <plp_mat_mult_i8s_xpulpv2+0x36c>
 1c008a98:	0016858b          	p.lb	a1,1(a3!)
 1c008a9c:	0096780b          	p.lb	a6,s1(a2!)
 1c008aa0:	42b80733          	p.mac	a4,a6,a1
@@ -1059,12 +1059,12 @@ Disassembly of section .text:
 1c008ab0:	92a2                	add	t0,t0,s0
 1c008ab2:	9e36                	add	t3,t3,a3
 1c008ab4:	9fb6                	add	t6,t6,a3
-1c008ab6:	fd33e0e3          	bltu	t2,s3,1c008a76 <plp_mat_mult_i8v_xpulpv2+0x342>
+1c008ab6:	fd33e0e3          	bltu	t2,s3,1c008a76 <plp_mat_mult_i8s_xpulpv2+0x342>
 1c008aba:	42c6                	lw	t0,80(sp)
 1c008abc:	5362                	lw	t1,56(sp)
-1c008abe:	ea537ee3          	bleu	t0,t1,1c00897a <plp_mat_mult_i8v_xpulpv2+0x246>
+1c008abe:	ea537ee3          	bleu	t0,t1,1c00897a <plp_mat_mult_i8s_xpulpv2+0x246>
 1c008ac2:	43d2                	lw	t2,20(sp)
-1c008ac4:	ea038be3          	beqz	t2,1c00897a <plp_mat_mult_i8v_xpulpv2+0x246>
+1c008ac4:	ea038be3          	beqz	t2,1c00897a <plp_mat_mult_i8s_xpulpv2+0x246>
 1c008ac8:	5482                	lw	s1,32(sp)
 1c008aca:	4fe6                	lw	t6,88(sp)
 1c008acc:	00239293          	slli	t0,t2,0x2
@@ -1079,16 +1079,16 @@ Disassembly of section .text:
 1c008aea:	58d2                	lw	a7,52(sp)
 1c008aec:	837e                	mv	t1,t6
 1c008aee:	411e8833          	sub	a6,t4,a7
-1c008af2:	0168407b          	lp.setup	x0,a6,1c008b1e <plp_mat_mult_i8v_xpulpv2+0x3ea>
+1c008af2:	0168407b          	lp.setup	x0,a6,1c008b1e <plp_mat_mult_i8s_xpulpv2+0x3ea>
 1c008af6:	5382                	lw	t2,32(sp)
 1c008af8:	4701                	li	a4,0
-1c008afa:	02038063          	beqz	t2,1c008b1a <plp_mat_mult_i8v_xpulpv2+0x3e6>
+1c008afa:	02038063          	beqz	t2,1c008b1a <plp_mat_mult_i8s_xpulpv2+0x3e6>
 1c008afe:	49d2                	lw	s3,20(sp)
 1c008b00:	8646                	mv	a2,a7
 1c008b02:	86f2                	mv	a3,t3
 1c008b04:	4701                	li	a4,0
 1c008b06:	41cf07b3          	sub	a5,t5,t3
-1c008b0a:	0067c0fb          	lp.setup	x1,a5,1c008b16 <plp_mat_mult_i8v_xpulpv2+0x3e2>
+1c008b0a:	0067c0fb          	lp.setup	x1,a5,1c008b16 <plp_mat_mult_i8s_xpulpv2+0x3e2>
 1c008b0e:	0016858b          	p.lb	a1,1(a3!)
 1c008b12:	0136750b          	p.lb	a0,s3(a2!)
 1c008b16:	42b50733          	p.mac	a4,a0,a1
@@ -1102,16 +1102,16 @@ Disassembly of section .text:
 1c008b2a:	9f96                	add	t6,t6,t0
 1c008b2c:	9e32                	add	t3,t3,a2
 1c008b2e:	9f32                	add	t5,t5,a2
-1c008b30:	fa999de3          	bne	s3,s1,1c008aea <plp_mat_mult_i8v_xpulpv2+0x3b6>
-1c008b34:	b599                	j	1c00897a <plp_mat_mult_i8v_xpulpv2+0x246>
+1c008b30:	fa999de3          	bne	s3,s1,1c008aea <plp_mat_mult_i8s_xpulpv2+0x3b6>
+1c008b34:	b599                	j	1c00897a <plp_mat_mult_i8s_xpulpv2+0x246>
 1c008b36:	82b2                	mv	t0,a2
 1c008b38:	4801                	li	a6,0
 1c008b3a:	4501                	li	a0,0
-1c008b3c:	da061ce3          	bnez	a2,1c0088f4 <plp_mat_mult_i8v_xpulpv2+0x1c0>
-1c008b40:	e3069de3          	bne	a3,a6,1c00897a <plp_mat_mult_i8v_xpulpv2+0x246>
+1c008b3c:	da061ce3          	bnez	a2,1c0088f4 <plp_mat_mult_i8s_xpulpv2+0x1c0>
+1c008b40:	e3069de3          	bne	a3,a6,1c00897a <plp_mat_mult_i8s_xpulpv2+0x246>
 1c008b44:	dc16                	sw	t0,56(sp)
 1c008b46:	84ba                	mv	s1,a4
-1c008b48:	b5bd                	j	1c0089b6 <plp_mat_mult_i8v_xpulpv2+0x282>
+1c008b48:	b5bd                	j	1c0089b6 <plp_mat_mult_i8s_xpulpv2+0x282>
 
 1c008b4a <main>:
 1c008b4a:	1101                	addi	sp,sp,-32
