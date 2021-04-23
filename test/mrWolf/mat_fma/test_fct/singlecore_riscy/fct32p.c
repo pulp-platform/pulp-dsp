@@ -1,6 +1,6 @@
 #include "fct32p.h"
 #include <stdio.h>
-#include "rt/rt_api.h"
+#include "rtos_hal.h"
 
 
 // #define BETTER_BLOCK
@@ -22,10 +22,10 @@ void plp_mat_mult_i32p_xpulpv2( void* args) {
         uint32_t j; // loop counter for N
         uint32_t k; // loop counter for O
 
-        int core_id = rt_core_id();
+        int core_id = hal_core_id();
         int step = (O-1+nPE)/nPE;
         uint32_t START = step*core_id;
-        uint32_t END = (core_id != rt_nb_pe()-1) ? START+step : O;
+        uint32_t END = (core_id != hal_cl_nb_pe_cores()-1) ? START+step : O;
 
         // printf("core id: %i, start: %i, end: %i\n", core_id, START, END);
 
@@ -104,7 +104,7 @@ void plp_mat_mult_i32p_xpulpv2( void* args) {
           }
         }
 
-        rt_team_barrier();
+        hal_team_barrier();
 }
 
 #elif defined(BETTER_BLOCK_INTERLEAVED)
@@ -123,7 +123,7 @@ void plp_mat_mult_i32p_xpulpv2( void* args) {
         uint32_t j=0; // loop counter for N
         uint32_t k=0; // loop counter for O
 
-        int core_id = rt_core_id();
+        int core_id = hal_core_id();
 
         // printf("core id: %i, start: %i, end: %i\n", core_id, START, END);
 
@@ -208,7 +208,7 @@ void plp_mat_mult_i32p_xpulpv2( void* args) {
 
         }
 
-        rt_team_barrier();
+        hal_team_barrier();
 }
 
 #else
@@ -227,10 +227,10 @@ void plp_mat_mult_i32p_xpulpv2( void* args) {
         uint32_t j; // loop counter
         uint32_t k; // loop counter
 
-        int core_id = rt_core_id();
+        int core_id = hal_core_id();
         int step = (M-1+nPE)/nPE;
         uint32_t START = step*core_id;
-        uint32_t END = (core_id != rt_nb_pe()-1) ? START+step : M;
+        uint32_t END = (core_id != hal_cl_nb_pe_cores()-1) ? START+step : M;
         // printf("core id: %i, start: %i, end: %i\n", core_id, START, END);
         for(i=START; i < END; i++){
           for(k=0; k < O; k++){
@@ -242,7 +242,7 @@ void plp_mat_mult_i32p_xpulpv2( void* args) {
           }
         }
 
-        rt_team_barrier();
+        hal_team_barrier();
 }
 
 #endif

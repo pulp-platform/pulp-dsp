@@ -5,10 +5,10 @@
 #define BLOCK_VERSION_BIG
 // #define BLOCK_VERSION
 
-RT_CL_DATA static v4s mask0 = {0,1,4,5};
-RT_CL_DATA static v4s mask1 = {2,3,6,7};
-RT_CL_DATA static v4s mask2 = {0,2,4,6};
-RT_CL_DATA static v4s mask3 = {1,3,5,7};
+HAL_CL_L1 static v4s mask0 = {0,1,4,5};
+HAL_CL_L1 static v4s mask1 = {2,3,6,7};
+HAL_CL_L1 static v4s mask2 = {0,2,4,6};
+HAL_CL_L1 static v4s mask3 = {1,3,5,7};
 
 #if defined(BLOCK_VERSION_BIG_4)
 

@@ -63,7 +63,7 @@ void plp_mat_mult_cmplx_stride_i32(const int32_t *__restrict__ pSrcA,
                                    uint32_t strideC,
                                    int32_t *__restrict__ pDstC) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_mat_mult_cmplx_stride_i32s_rv32im(pSrcA, pSrcB, M, N, O, strideA, strideB, strideC,
                                               pDstC);
     } else {

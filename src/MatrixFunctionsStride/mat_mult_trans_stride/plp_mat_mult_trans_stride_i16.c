@@ -63,7 +63,7 @@ void plp_mat_mult_trans_stride_i16(const int16_t *__restrict__ pSrcA,
                                    uint32_t strideC,
                                    int32_t *__restrict__ pDstC) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_mat_mult_trans_stride_i16s_rv32im(pSrcA, pSrcB, M, N, O, strideA, strideB, strideC,
                                               pDstC);
     } else {

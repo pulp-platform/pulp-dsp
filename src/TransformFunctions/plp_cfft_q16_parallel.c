@@ -72,7 +72,7 @@ void plp_cfft_q16_parallel(const plp_cfft_instance_q16 *S,
                            uint32_t deciPoint,
                            uint32_t nPE){
 
-	if (rt_cluster_id() == ARCHI_FC_CID) {
+	if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("parallel processing supported only for cluster side\n");
         return;
     } else {
@@ -80,7 +80,7 @@ void plp_cfft_q16_parallel(const plp_cfft_instance_q16 *S,
             .S = S, .p1 = p1, .ifftFlag = ifftFlag, .bitReverseFlag = bitReverseFlag, .deciPoint = deciPoint, .nPE = nPE
         };
 
-        rt_team_fork(nPE, plp_cfft_q16p_xpulpv2, (void *)&args);
+        hal_cl_team_fork(nPE, plp_cfft_q16p_xpulpv2, (void *)&args);
     }
 }
 

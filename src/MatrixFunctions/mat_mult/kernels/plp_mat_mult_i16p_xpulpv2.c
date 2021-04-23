@@ -68,7 +68,7 @@ void plp_mat_mult_i16p_xpulpv2(void *args) {
     uint32_t j; // loop counter
     uint32_t k; // loop counter
 
-    int core_id = rt_core_id();
+    int core_id = hal_core_id();
 
     for (i = core_id; i < M; i += nPE) {
         for (k = 0; k < O; k++) {
@@ -80,7 +80,7 @@ void plp_mat_mult_i16p_xpulpv2(void *args) {
         }
     }
 
-    rt_team_barrier();
+    hal_team_barrier();
 }
 
 #else
@@ -99,7 +99,7 @@ void plp_mat_mult_i16p_xpulpv2(void *args) {
     uint32_t j = 0; // loop counter for N
     uint32_t k = 0; // loop counter for O
 
-    int core_id = rt_core_id();
+    int core_id = hal_core_id();
 
     for (k = core_id; k < O / 2; k += nPE) {
         for (i = 0; i < M / 4; i++) {
@@ -203,7 +203,7 @@ void plp_mat_mult_i16p_xpulpv2(void *args) {
         }
     }
 
-    rt_team_barrier();
+    hal_team_barrier();
 }
 
 #endif

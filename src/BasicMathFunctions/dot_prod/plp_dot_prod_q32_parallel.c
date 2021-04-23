@@ -62,13 +62,13 @@ void plp_dot_prod_q32_parallel(const int32_t *__restrict__ pSrcA,
                                uint32_t nPE,
                                int32_t *__restrict__ pRes) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("parallel processing supported only for cluster side\n");
         return;
     } else {
 
         uint32_t i;
-        int32_t resBuffer[rt_nb_pe()];
+        int32_t resBuffer[hal_cl_nb_pe_cores()];
 
         plp_dot_prod_instance_q32 S;
 
@@ -81,10 +81,10 @@ void plp_dot_prod_q32_parallel(const int32_t *__restrict__ pSrcA,
         S.resBuffer = resBuffer;
 
         // Fork the dot product to nPE cores (i.e. processing units)
-        rt_team_fork(nPE, plp_dot_prod_q32p_xpulpv2, (void *)&S);
+        hal_cl_team_fork(nPE, plp_dot_prod_q32p_xpulpv2, (void *)&S);
 
         int sum = 0;
-        for (i = 0; i < nPE; i++) { // not necessary rt_nb_pe()
+        for (i = 0; i < nPE; i++) { // not necessary hal_cl_nb_pe_cores()
             sum += resBuffer[i];
         }
 

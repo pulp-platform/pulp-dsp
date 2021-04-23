@@ -10,7 +10,7 @@ PULP_APP_FC_SRCS = test.c
 
 PULP_LDFLAGS += -lplpdsp
 #PULP_LDFLAGS += $(LIB)
-PULP_CFLAGS += -I$(IDIR) -O3 -g
+PULP_CFLAGS += -O3 -g
 
 ifdef TEST_8
 PULP_CFLAGS += -DTEST_8
@@ -29,5 +29,10 @@ PULP_CFLAGS += -DP_TEST_32
 endif
 
 
-
+ifeq '$(PULP_RTOS)'  'pmsis'
+PULP_CFLAGS += -DRTOS_PMSIS
+include $(RULES_DIR)/pmsis_rules.mk
+else
 include $(PULP_SDK_HOME)/install/rules/pulp_rt.mk
+endif
+

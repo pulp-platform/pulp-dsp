@@ -53,7 +53,7 @@
 
 void plp_mat_mult_trans_stride_i8p_xpulpv2(void *args) {
 
-    int core_id = rt_core_id();
+    int core_id = hal_core_id();
 
     plp_mat_mult_stride_instance_i8 *a = (plp_mat_mult_stride_instance_i8 *)args;
 

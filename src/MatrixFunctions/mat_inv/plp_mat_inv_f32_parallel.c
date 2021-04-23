@@ -56,7 +56,7 @@ int plp_mat_inv_f32_parallel(float *__restrict__ pSrc,
                              uint32_t nPE,
                              float *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("parallel and floating-point processing supported only for cluster side\n");
         return 2;
     } else {

@@ -69,7 +69,7 @@ void plp_cmplx_conj_i32(const int32_t *__restrict__ pSrc,
                         int32_t *__restrict__ pDst,
                         uint32_t numSamples) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_cmplx_conj_i32_rv32im(pSrc, pDst, numSamples);
         return;
     } else {

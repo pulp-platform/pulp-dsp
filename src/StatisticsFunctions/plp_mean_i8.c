@@ -52,7 +52,7 @@
 
 void plp_mean_i8(const int8_t *__restrict__ pSrc, uint32_t blockSize, int8_t *__restrict__ pRes) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_mean_i8s_rv32im(pSrc, blockSize, pRes);
     } else {
         plp_mean_i8s_xpulpv2(pSrc, blockSize, pRes);

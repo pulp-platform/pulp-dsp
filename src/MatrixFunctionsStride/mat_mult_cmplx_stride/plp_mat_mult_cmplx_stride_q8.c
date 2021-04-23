@@ -74,7 +74,7 @@ void plp_mat_mult_cmplx_stride_q8(const int8_t *__restrict__ pSrcA,
                                   uint32_t shift,
                                   int8_t *__restrict__ pDstC) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_mat_mult_cmplx_stride_q8s_rv32im(pSrcA, pSrcB, M, N, O, strideA, strideB, strideC,
                                              shift, pDstC);
     } else {

@@ -58,7 +58,7 @@ void plp_dot_prod_f32(const float32_t *__restrict__ pSrcA,
                       uint32_t blockSize,
                       float32_t *__restrict__ pRes) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         //printf("Note: FC doesn't have FPU\n");
         plp_dot_prod_f32s_rv32im(pSrcA, pSrcB, blockSize, pRes);
     } else {

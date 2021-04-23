@@ -65,7 +65,7 @@ void plp_mat_mult_trans_stride_f32_parallel(const float *__restrict__ pSrcA,
                                             uint32_t nPE,
                                             float *__restrict__ pDstC) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("parallel and floating-point processing supported only for cluster side\n");
         return;
     } else {
@@ -79,7 +79,7 @@ void plp_mat_mult_trans_stride_f32_parallel(const float *__restrict__ pSrcA,
                                                   .strideC = strideC,
                                                   .nPE = nPE,
                                                   .pDstC = pDstC };
-        rt_team_fork(nPE, plp_mat_mult_trans_stride_f32p_xpulpv2, (void *)&args);
+        hal_cl_team_fork(nPE, plp_mat_mult_trans_stride_f32p_xpulpv2, (void *)&args);
     }
 }
 

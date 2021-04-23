@@ -78,7 +78,7 @@ void plp_cmplx_mult_real_i16(const int16_t *__restrict__ pSrcCmplx,
                              int16_t *__restrict__ pDst,
                              uint32_t numSamples) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_cmplx_mult_real_i16_rv32im(pSrcCmplx, pSrcReal, pDst, numSamples);
     } else {
         plp_cmplx_mult_real_i16_xpulpv2(pSrcCmplx, pSrcReal, pDst, numSamples);

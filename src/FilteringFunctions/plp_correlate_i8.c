@@ -61,7 +61,7 @@ void plp_correlate_i8(const int8_t *pSrcA,
                       const uint32_t srcBLen,
                       int32_t *__restrict__ pRes) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_correlate_i8s_rv32im(pSrcA, srcALen, pSrcB, srcBLen, pRes);
     } else {
         plp_correlate_i8s_xpulpv2(pSrcA, srcALen, pSrcB, srcBLen, pRes);

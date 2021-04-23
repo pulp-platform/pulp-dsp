@@ -1,4 +1,4 @@
-#include "rt/rt_api.h"
+#include "rtos_hal.h"
 #include "stdio.h"
 
 // #define P_TEST_8
@@ -36,10 +36,10 @@
 static int cores_events;
 
 // This benchmark is a single shot so we can read the value directly out of the
-// HW counter using the function rt_perf_read
-static void do_bench_0(rt_perf_t *perf, int events)
+// HW counter using the function hal_perf_read
+static void do_bench_0(hal_perf_t *perf, int events)
 {
-  int32_t* result = (int32_t*)rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t)*O_LENGTH*M_LENGTH);
+  int32_t* result = (int32_t*)hal_cl_l1_malloc(sizeof(int32_t)*O_LENGTH*M_LENGTH);
 
   if(result == NULL){
     printf("no data allocation\n");
@@ -61,12 +61,12 @@ static void do_bench_0(rt_perf_t *perf, int events)
   #endif
 
   // Activate specified events
-  rt_perf_conf(perf, events);
+  hal_perf_conf(perf, events);
 
   // Reset HW counters now and start and stop counters so that we benchmark
   // only around the printf
-  rt_perf_reset(perf);
-  rt_perf_start(perf);
+  hal_perf_reset(perf);
+  hal_perf_start(perf);
 
   #if defined (P_TEST_8)
     mat_mult_p_args args = {
@@ -75,10 +75,10 @@ static void do_bench_0(rt_perf_t *perf, int events)
       .M = M_LENGTH,
       .N = N_LENGTH,
       .O = O_LENGTH,
-      .nPE =  rt_nb_pe(),
+      .nPE =  hal_cl_nb_pe_cores(),
       .pDstC = result
     };
-    rt_team_fork(args.nPE, plp_mat_mult_i8vp_xpulpv2, (void *)&args);
+    hal_cl_team_fork(args.nPE, plp_mat_mult_i8vp_xpulpv2, (void *)&args);
   #elif defined (P_TEST_16)
     mat_mult_p_args args = {
       .pSrcA = m_a,
@@ -86,10 +86,10 @@ static void do_bench_0(rt_perf_t *perf, int events)
       .M = M_LENGTH,
       .N = N_LENGTH,
       .O = O_LENGTH,
-      .nPE =  rt_nb_pe(),
+      .nPE =  hal_cl_nb_pe_cores(),
       .pDstC = result
     };
-    rt_team_fork(args.nPE, plp_mat_mult_i16vp_xpulpv2, (void *)&args);
+    hal_cl_team_fork(args.nPE, plp_mat_mult_i16vp_xpulpv2, (void *)&args);
   #elif defined (P_TEST_32)
     mat_mult_p_args args = {
       .pSrcA = m_a,
@@ -97,10 +97,10 @@ static void do_bench_0(rt_perf_t *perf, int events)
       .M = M_LENGTH,
       .N = N_LENGTH,
       .O = O_LENGTH,
-      .nPE =  rt_nb_pe(),
+      .nPE =  hal_cl_nb_pe_cores(),
       .pDstC = result
     };
-    rt_team_fork(args.nPE, plp_mat_mult_i32p_xpulpv2, (void *)&args);
+    hal_cl_team_fork(args.nPE, plp_mat_mult_i32p_xpulpv2, (void *)&args);
   #elif defined (TEST_8)
     plp_mat_mult_i8v_xpulpv2(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
   #elif defined(TEST_16)
@@ -110,7 +110,7 @@ static void do_bench_0(rt_perf_t *perf, int events)
   #endif
 
 
-  rt_perf_stop(perf);
+  hal_perf_stop(perf);
 
   int errors = 0;
   for(int i = 0; i < M_LENGTH; i++){
@@ -132,21 +132,21 @@ static void do_bench_0(rt_perf_t *perf, int events)
 
 void cluster_entry(void *arg){
 
-  printf("(%d, %d) Hello! Cluster entered\n", rt_cluster_id(), rt_core_id());
+  printf("(%d, %d) Hello! Cluster entered\n", hal_cluster_id(), hal_core_id());
 
-  rt_perf_t perf;
-  rt_perf_init(&perf);
+  hal_perf_t perf;
+  hal_perf_init(&perf);
   
   for (int i=0; i < 1; i++){
-    do_bench_0(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR) | (1<<RT_PERF_LD_STALL) | (1<<RT_PERF_TCDM_CONT));
+    do_bench_0(&perf, (1<<HAL_PERF_CYCLES) | (1<<HAL_PERF_INSTR) | (1<<HAL_PERF_LD_STALL) | (1<<HAL_PERF_TCDM_CONT));
   }
 
   unsigned int ops = M_LENGTH*O_LENGTH*N_LENGTH*2;
-  unsigned int cycles = rt_perf_read(RT_PERF_CYCLES);
-  unsigned int instr = rt_perf_read(RT_PERF_INSTR);
-  unsigned int ld_stall = rt_perf_read(RT_PERF_LD_STALL);
-  unsigned int cont = rt_perf_read(RT_PERF_TCDM_CONT);
-  // unsigned int misc = rt_perf_read(RT_PERF_DELAY_NOP);
+  unsigned int cycles = hal_perf_read(HAL_PERF_CYCLES);
+  unsigned int instr = hal_perf_read(HAL_PERF_INSTR);
+  unsigned int ld_stall = hal_perf_read(HAL_PERF_LD_STALL);
+  unsigned int cont = hal_perf_read(HAL_PERF_TCDM_CONT);
+  // unsigned int misc = hal_perf_read(HAL_PERF_DELAY_NOP);
   printf("Total cycles: %d\n", cycles);
   printf("Instructions: %d\n", instr);
   printf("Load stalls %d\n", ld_stall);

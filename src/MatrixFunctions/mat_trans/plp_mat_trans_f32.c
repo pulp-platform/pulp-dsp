@@ -55,7 +55,7 @@ void plp_mat_trans_f32(const float *__restrict__ pSrc,
                        uint32_t N,
                        float *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("Floating point is supported only for cluster side\n");
         return;
     } else {

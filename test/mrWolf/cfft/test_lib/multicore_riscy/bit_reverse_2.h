@@ -1,7 +1,7 @@
 #ifndef BIT_REVERSE_H
 #define BIT_REVERSE_H
 
-RT_L1_DATA short bit_rev_LUT[FFT_LEN] = {
+HAL_CL_L1 short bit_rev_LUT[FFT_LEN] = {
     0,
     256,
     512,

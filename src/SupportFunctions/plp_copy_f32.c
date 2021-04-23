@@ -56,7 +56,7 @@ void plp_copy_f32(float32_t *__restrict__ pSrc, float32_t *__restrict__ pDst, ui
 
     uint32_t blkCnt; /* Loop counter */
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_copy_f32s_rv32im(pSrc, pDst, blockSize);
     } else {
         plp_copy_f32s_xpulpv2(pSrc, pDst, blockSize);

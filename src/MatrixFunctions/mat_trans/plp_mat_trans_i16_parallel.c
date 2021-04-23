@@ -55,7 +55,7 @@ void plp_mat_trans_i16_parallel(const int16_t *__restrict__ pSrc,
                                 uint32_t nPE,
                                 int16_t *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("parallel processing supported only for cluster side\n");
         return;
     } else {
@@ -63,7 +63,7 @@ void plp_mat_trans_i16_parallel(const int16_t *__restrict__ pSrc,
             .pSrc = pSrc, .M = M, .N = N, .nPE = nPE, .pDst = pDst
         };
 
-        rt_team_fork(nPE, plp_mat_trans_i16p_xpulpv2, (void *)&args);
+        hal_cl_team_fork(nPE, plp_mat_trans_i16p_xpulpv2, (void *)&args);
     }
 }
 

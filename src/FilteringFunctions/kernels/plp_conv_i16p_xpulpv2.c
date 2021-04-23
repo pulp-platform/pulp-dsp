@@ -69,7 +69,7 @@ void plp_conv_i16p_xpulpv2(void *task_args) {
     uint32_t pIn2Len;
 
     // Unpack partial convolution vectors
-    if (rt_core_id() == (S->nPE - 1)) {
+    if (hal_core_id() == (S->nPE - 1)) {
 
         pSrcA = (int16_t *)((S->pSrcA + srcAoffset * (S->nPE - 1)));
         srcALen = S->srcALen - (srcAoffset * (S->nPE - 1));
@@ -80,10 +80,10 @@ void plp_conv_i16p_xpulpv2(void *task_args) {
     } else {
 
         srcALen = srcAoffset;
-        pSrcA = (int16_t *)(S->pSrcA + (rt_core_id() * srcAoffset));
+        pSrcA = (int16_t *)(S->pSrcA + (hal_core_id() * srcAoffset));
         pSrcB = (int16_t *)S->pSrcB;
         srcBLen = S->srcBLen;
-        pRes = (int32_t *)(S->pRes + resultoffset * (rt_core_id()));
+        pRes = (int32_t *)(S->pRes + resultoffset * (hal_core_id()));
     }
     // Reorder vectors; longest first
     if (srcALen >= srcBLen) {
@@ -99,7 +99,7 @@ void plp_conv_i16p_xpulpv2(void *task_args) {
     }
 
     plp_conv_i16s_xpulpv2(pIn1, pIn1Len, pIn2, pIn2Len, pRes);
-    rt_team_barrier();
+    hal_team_barrier();
 }
 
 /**

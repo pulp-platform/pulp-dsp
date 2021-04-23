@@ -62,7 +62,7 @@ void plp_mat_sub_stride_f32(const float *__restrict__ pSrcA,
                             uint32_t strideY,
                             float *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("Floating point is supported only for cluster side\n");
         return;
     } else {

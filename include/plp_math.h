@@ -116,7 +116,7 @@
 #define __PLP_MATH_H__
 
 #include "math.h"
-#include "rt/rt_api.h"
+#include "rtos_hal.h"
 
 typedef float float32_t;
 

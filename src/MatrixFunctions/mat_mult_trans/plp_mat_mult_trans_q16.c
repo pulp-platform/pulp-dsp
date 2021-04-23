@@ -68,7 +68,7 @@ void plp_mat_mult_trans_q16(const int16_t *__restrict__ pSrcA,
                             uint32_t shift,
                             int16_t *__restrict__ pDstC) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_mat_mult_trans_q16s_rv32im(pSrcA, pSrcB, M, N, O, shift, pDstC);
     } else {
         plp_mat_mult_trans_q16s_xpulpv2(pSrcA, pSrcB, M, N, O, shift, pDstC);
