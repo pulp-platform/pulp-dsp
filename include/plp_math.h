@@ -16495,6 +16495,18 @@ void plp_cmplx_mag_squared_i32_rv32im(const int32_t *__restrict__ pSrc,
                                       uint32_t numSamples);
 
 /**
+  @brief         32-bit integer complex squared magnitude.
+  @param[in]     pSrc        points to the input vector
+  @param[out]    pDst        points to the output vector
+  @param[in]     numSamples  number of samples in each vector
+  @return        none
+ */
+
+void plp_cmplx_mag_squared_i32_xpulpv2(const int32_t *__restrict__ pSrc,
+                                      int32_t *__restrict__ pDst,
+                                      uint32_t numSamples);
+
+/**
   @brief         8 bit Integer complex squared magnitude.
   @param[in]     pSrc        points to the input vector
   @param[out]    pDst        points to the output vector
