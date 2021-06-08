@@ -87,7 +87,7 @@ void plp_power_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
       sum = __builtin_pulp_sdotsp4(x1,x1,sum);
     }
 
-    for (int i=0;i<blockSize % 2 == 1;i++) {
+    for (int i=0;i<blockSize % 4;i++) {
       x2 = *pSrc++;
       sum += ((x2 * x2));
     }

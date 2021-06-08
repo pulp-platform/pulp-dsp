@@ -78,13 +78,12 @@ void plp_power_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
     v4s x1;
     int8_t x2;
     int32_t sum = 0;
-
 #if defined(PLP_MATH_LOOPUNROLL)
 
     for (blkCnt = 0; blkCnt < (blockSize >> 2); blkCnt++) {
       x1 = *((v4s*)pSrc);
       pSrc += 4;
-      sum = __builtin_pulp_sdotsp4(x1,x1,sum) >> fracBits;
+      sum += (__builtin_pulp_dotsp4(x1,x1) >> fracBits);
     }
 
     for (int i=0;i<blockSize % 4;i++) {

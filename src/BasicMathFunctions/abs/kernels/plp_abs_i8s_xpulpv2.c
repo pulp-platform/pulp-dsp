@@ -68,9 +68,9 @@ void plp_abs_i8s_xpulpv2(const int8_t * pSrc,
         /* C = |A| */
 
         /* Calculate absolute and store result in destination buffer. */
-        *pDst++ = abs(*pSrc++);
+        *pDst++ = __builtin_abs(*pSrc++);
 
-        *pDst++ = abs(*pSrc++);
+        *pDst++ = __builtin_abs(*pSrc++);
 
         /* Decrement loop counter */
         blkCnt--;
@@ -91,7 +91,7 @@ void plp_abs_i8s_xpulpv2(const int8_t * pSrc,
         /* C = |A| */
 
         /* Calculate absolute and store result in destination buffer. */
-        *pDst++ = abs(*pSrc++);
+        *pDst++ = __builtin_abs(*pSrc++);
 
         /* Decrement loop counter */
         blkCnt--;

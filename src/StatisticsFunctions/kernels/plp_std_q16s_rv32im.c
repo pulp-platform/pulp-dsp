@@ -58,7 +58,5 @@ void plp_std_q16s_rv32im(const int16_t *__restrict__ pSrc,
 
     int16_t variance;
     plp_var_q16(pSrc, blockSize, fracBits, &variance);
-
-    int32_t intermediate = variance;
-    plp_sqrt_q16(&intermediate, fracBits, pRes);
+    plp_sqrt_q16(&variance, fracBits, pRes);
 }

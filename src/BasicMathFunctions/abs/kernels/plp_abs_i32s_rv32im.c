@@ -45,7 +45,7 @@
   The Vector Absolute Value computes the absolute value of a vector on an element-by-element basis.
   The vectors are multiplied element-by-element and then summed.
   <pre>
-  pDst[n] = abs(pSrc[n]),   0 <= n < blockSize.
+  pDst[n] = __builtin_abs(pSrc[n]),   0 <= n < blockSize.
   </pre>
   There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
   types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
@@ -96,9 +96,9 @@ void plp_abs_i32s_rv32im(const int32_t * pSrc,
         /* C = |A| */
 
         /* Calculate absolute and store result in destination buffer. */
-        *pDst++ = abs(*pSrc++);
+        *pDst++ = __builtin_abs(*pSrc++);
 
-        *pDst++ = abs(*pSrc++);
+        *pDst++ = __builtin_abs(*pSrc++);
 
         /* Decrement loop counter */
         blkCnt--;
@@ -119,7 +119,7 @@ void plp_abs_i32s_rv32im(const int32_t * pSrc,
         /* C = |A| */
 
         /* Calculate absolute and store result in destination buffer. */
-        *pDst++ = abs(*pSrc++);
+        *pDst++ = __builtin_abs(*pSrc++);
 
         /* Decrement loop counter */
         blkCnt--;

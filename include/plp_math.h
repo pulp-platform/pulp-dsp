@@ -3163,7 +3163,7 @@ void plp_power_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__
     @return     none
 */
 
-void plp_power_f32_xpulpv2(const float *__restrict__ pSrc,
+void plp_power_f32s_xpulpv2(const float *__restrict__ pSrc,
                            uint32_t blockSize,
                            float *__restrict__ pRes);
 
@@ -3408,7 +3408,7 @@ void plp_var_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__re
     @return     none
 */
 
-void plp_var_f32_xpulpv2(const float *__restrict__ pSrc,
+void plp_var_f32s_xpulpv2(const float *__restrict__ pSrc,
                          uint32_t blockSize,
                          float *__restrict__ pRes);
 
@@ -3547,7 +3547,7 @@ void plp_std_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__re
     @return     none
 */
 
-void plp_std_f32_xpulpv2(const float *__restrict__ pSrc,
+void plp_std_f32s_xpulpv2(const float *__restrict__ pSrc,
                          uint32_t blockSize,
                          float *__restrict__ pRes);
 
@@ -3687,7 +3687,7 @@ void plp_rms_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__re
     @return     none
 */
 
-void plp_rms_f32_xpulpv2(const float *__restrict__ pSrc,
+void plp_rms_f32s_xpulpv2(const float *__restrict__ pSrc,
                          uint32_t blockSize,
                          float *__restrict__ pRes);
 
@@ -3879,13 +3879,31 @@ void plp_sqrt_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
 
 /**
    @brief         Glue code for square root of a 32-bit floating point number.
-   @param[in]     pSrc       points to the input vectoro
+   @param[in]     pSrc       points to the input vector
    @param[out]    pRes    Square root returned here
    @return        none
  */
 
 void plp_sqrt_f32(const float *__restrict__ pSrc, 
                   float *__restrict__ pRes);
+
+
+/**
+   @brief         Kernel for square root of a 32-bit floating point number.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pRes    Square root returned here
+   @return        none
+ */
+void plp_sqrt_f32s_xpulpv2(const float *__restrict__ pSrc,
+                           float *__restrict__ pRes);
+
+
+/**
+   @brief         Glue code for square root of a 32-bit floating point number.
+   @param[in]     pSrc       points to the input vectoro
+   @param[out]    pRes    Square root returned here
+   @return        none
+ */
 
 
 /**
@@ -4229,6 +4247,177 @@ void plp_correlate_i8s_rv32im(const int8_t *pSrcA,
                               const int8_t *pSrcB,
                               const uint32_t srcBLen,
                               int32_t *pRes);
+
+
+/** -------------------------------------------------------
+    @brief Glue code for correlation of 32-bit integer vectors.
+    @param[in]  pSrcA   points to the first input vector
+    @param[in]  srcALen Length of the first input vector
+    @param[in]  pSrcB   points to the second input vector
+    @param[in]  srcBLen Length of the second input vector
+    @param[out] pRes    output result returned here
+    @return     none
+*/
+
+void plp_correlate_q32(const int32_t *pSrcA,
+                       const uint32_t srcALen,
+                       const int32_t *pSrcB,
+                       const uint32_t srcBLen,
+		       const uint32_t fracBits,
+                       int32_t *pRes);
+
+/** -------------------------------------------------------
+    @brief Correlation of 32-bit integer vectors kernel for RV32IM extension.
+    @param[in]  pSrcA   points to the first input vector
+    @param[in]  srcALen Length of the first input vector
+    @param[in]  pSrcB   points to the second input vector
+    @param[in]  srcBLen Length of the second input vector
+    @param[out] pRes    output result returned here
+    @return     none
+*/
+
+void plp_correlate_q32s_rv32im(const int32_t *pSrcA,
+                               const uint32_t srcALen,
+                               const int32_t *pSrcB,
+                               const uint32_t srcBLen,
+			       const uint32_t fracBits,
+                               int32_t *pRes);
+
+/** -------------------------------------------------------
+    @brief Correlation of 32-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]  pSrcA   points to the first input vector
+    @param[in]  srcALen Length of the first input vector
+    @param[in]  pSrcB   points to the second input vector
+    @param[in]  srcBLen Length of the second input vector
+    @param[out] pRes    output result returned here
+    @return     none */
+
+void plp_correlate_q32s_xpulpv2(const int32_t *__restrict__ pSrcA,
+                                const uint32_t srcALen,
+                                const int32_t *__restrict__ pSrcB,
+                                const uint32_t srcBLen,
+				const uint32_t fracBits,
+                                int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
+  @brief Glue code for correlation of 16-bit integer vectors.
+  @param[in]  pSrcA   points to the first input vector
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector
+  @param[in]  srcBLen Length of the second input vector
+  @param[out] pRes    result returned here
+  @return     none
+ */
+
+void plp_correlate_q16(const int16_t *pSrcA,
+                       const uint32_t srcALen,
+                       const int16_t *pSrcB,
+                       const uint32_t srcBLen,
+		       const uint32_t fracBits,
+                       int32_t *pRes);
+
+/** -------------------------------------------------------
+   @brief Correlation of 16-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
+*/
+
+void plp_correlate_q16s_xpulpv2(const int16_t *pSrcA,
+                                const uint32_t srcALen,
+                                const int16_t *pSrcB,
+                                const uint32_t srcBLen,
+				const uint32_t fracBits,
+                                int32_t *pRes);
+
+/** -------------------------------------------------------
+   @brief Correlation of 16-bit integer vectors kernel for RV32IM extension.
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
+*/
+
+void plp_correlate_q16s_rv32im(const int16_t *pSrcA,
+                               const uint32_t srcALen,
+                               const int16_t *pSrcB,
+                               const uint32_t srcBLen,
+			       const uint32_t fracBits,
+                               int32_t *pRes);
+
+/** -------------------------------------------------------
+  @brief Glue code for correlation of 8-bit integer vectors.
+  @param[in]  pSrcA   points to the first input vector
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector
+  @param[in]  srcBLen Length of the second input vector
+  @param[out] pRes    output result returned here
+  @return     none
+ */
+
+void plp_correlate_q8(const int8_t *pSrcA,
+                      const uint32_t srcALen,
+                      const int8_t *pSrcB,
+                      const uint32_t srcBLen,
+		      const uint32_t fracBits,
+                      int32_t *pRes);
+
+/** -------------------------------------------------------
+  @brief Glue code for correlation (valid) of 8-bit integer vectors.
+  @param[in]  pSrcA   points to the first input vector
+  @param[in]  srcALen Length of the first input vector
+  @param[in]  pSrcB   points to the second input vector
+  @param[in]  srcBLen Length of the second input vector
+  @param[out] pRes    output result returned here
+  @return     none
+ */
+
+void plp_correlate_valid_q8(const int8_t *pSrcA,
+                            const uint32_t srcALen,
+                            const int8_t *pSrcB,
+                            const uint32_t srcBLen,
+			    const uint32_t fracBits,
+                            int32_t *pRes);
+
+/** -------------------------------------------------------
+   @brief Correlation of 8-bit integer vectors kernel for XPULPV2 extension.
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
+*/
+
+void plp_correlate_q8s_xpulpv2(const int8_t *pSrcA,
+                               const uint32_t srcALen,
+                               const int8_t *pSrcB,
+                               const uint32_t srcBLen,
+			       const uint32_t fracBits,
+                               int32_t *pRes);
+
+/** -------------------------------------------------------
+   @brief Correlation of 8-bit integer vectors kernel for RV32IM extension.
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
+*/
+
+void plp_correlate_q8s_rv32im(const int8_t *pSrcA,
+                              const uint32_t srcALen,
+                              const int8_t *pSrcB,
+                              const uint32_t srcBLen,
+			      const uint32_t fracBits,
+                              int32_t *pRes);
+
 
 /** -------------------------------------------------------
   @brief Glue code for convolution of 32-bit integer vectors.

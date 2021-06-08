@@ -84,7 +84,7 @@ void plp_power_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
   for (blkCnt = 0; blkCnt < (blockSize >> 1); blkCnt++) {
     x1 = *((v2s *)(pSrc));
     pSrc+=2;
-    sum = __builtin_pulp_sdotsp2(x1,x1,sum) >> fracBits;
+    sum += (__builtin_pulp_dotsp2(x1,x1) >> fracBits);
   }
 
   for(int i=0; i<blockSize%2;i++){
