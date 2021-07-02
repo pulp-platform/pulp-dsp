@@ -155,6 +155,7 @@ FC_SRCS = \
 	src/TransformFunctions/plp_cfft_q16_parallel.c \
 	src/TransformFunctions/plp_cfft_q32.c src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c \
 	src/TransformFunctions/plp_rfft_f32.c \
+	src/TransformFunctions/plp_rstft_f32.c \
 	src/TransformFunctions/plp_rfft_f32_parallel.c \
 	src/TransformFunctions/plp_cfft_f32.c \
         src/TransformFunctions/plp_cfft_f32_parallel.c \
