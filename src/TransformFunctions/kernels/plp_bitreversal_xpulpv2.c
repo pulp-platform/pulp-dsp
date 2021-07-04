@@ -100,7 +100,7 @@ void plp_bitreversal_16p_xpulpv2(uint16_t *pSrc,
     uint16_t a, b, i, tmp;
 
     v2s c;
-    int core_id = rt_core_id();
+    int core_id = hal_core_id();
     int step = bitRevLen/nPE;
     if(bitRevLen % nPE != 0) {
         step++;

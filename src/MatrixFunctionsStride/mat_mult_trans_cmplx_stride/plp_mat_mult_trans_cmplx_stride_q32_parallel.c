@@ -78,7 +78,7 @@ void plp_mat_mult_trans_cmplx_stride_q32_parallel(const int32_t *__restrict__ pS
                                                   uint32_t nPE,
                                                   int32_t *__restrict__ pDstC) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("parallel processing supported only for cluster side\n");
         return;
     } else {
@@ -94,7 +94,7 @@ void plp_mat_mult_trans_cmplx_stride_q32_parallel(const int32_t *__restrict__ pS
                                                         .nPE = nPE,
                                                         .pDstC = pDstC };
 
-        rt_team_fork(nPE, plp_mat_mult_trans_cmplx_stride_q32p_xpulpv2, (void *)&args);
+        hal_cl_team_fork(nPE, plp_mat_mult_trans_cmplx_stride_q32p_xpulpv2, (void *)&args);
     }
 }
 

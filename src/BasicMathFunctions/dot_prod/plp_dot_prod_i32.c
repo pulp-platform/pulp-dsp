@@ -89,7 +89,7 @@ void plp_dot_prod_i32(const int32_t *__restrict__ pSrcA,
                       uint32_t blockSize,
                       int32_t *__restrict__ pRes) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_dot_prod_i32s_rv32im(pSrcA, pSrcB, blockSize, pRes);
     } else {
         plp_dot_prod_i32s_xpulpv2(pSrcA, pSrcB, blockSize, pRes);

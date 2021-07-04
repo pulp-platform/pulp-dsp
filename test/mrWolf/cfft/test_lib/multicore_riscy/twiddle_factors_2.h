@@ -1,7 +1,7 @@
 #ifndef TWIDDLE_FACT_H
 #define TWIDDLE_FACT_H
 
-RT_L1_DATA Complex_type_f32  twiddle_factors[FFT_LEN] = {
+HAL_CL_L1 Complex_type_f32  twiddle_factors[FFT_LEN] = {
 {1.000000, 0.000000},
 {0.999981, -0.006136},
 {0.999925, -0.012272},

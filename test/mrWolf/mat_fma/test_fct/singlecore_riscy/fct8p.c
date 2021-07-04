@@ -3,10 +3,10 @@
 
 #define BLOCK_VERSION
 
-RT_CL_DATA static v4s mask0 = {0,1,4,5};
-RT_CL_DATA static v4s mask1 = {2,3,6,7};
-RT_CL_DATA static v4s mask2 = {0,2,4,6};
-RT_CL_DATA static v4s mask3 = {1,3,5,7};
+HAL_CL_L1 static v4s mask0 = {0,1,4,5};
+HAL_CL_L1 static v4s mask1 = {2,3,6,7};
+HAL_CL_L1 static v4s mask2 = {0,2,4,6};
+HAL_CL_L1 static v4s mask3 = {1,3,5,7};
 
 #if defined(BLOCK_VERSION)
 
@@ -25,7 +25,7 @@ void plp_mat_mult_i8vp_xpulpv2(void* args) {
         uint32_t j=0; // loop counter for N
         uint32_t k=0; // loop counter for O
         
-        uint32_t core_id = rt_core_id();
+        uint32_t core_id = hal_core_id();
 
         for(k=core_id; k < O/4; k+=nPE){
           for(i=0; i < M/2; i++){
@@ -140,7 +140,7 @@ void plp_mat_mult_i8vp_xpulpv2(void* args) {
 
         }
 
-      rt_team_barrier();
+      hal_team_barrier();
 }
 
 #else
@@ -170,7 +170,7 @@ void plp_mat_mult_i8vp_xpulpv2(void* args) {
           }
         }
 
-        rt_team_barrier();
+        hal_team_barrier();
 }
 
 #endif

@@ -59,14 +59,14 @@ void plp_mat_mult_i8_parallel(const int8_t *__restrict__ pSrcA,
                               uint32_t nPE,
                               int32_t *__restrict__ pDstC) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("parallel processing supported only for cluster side\n");
         return;
     } else {
         plp_mat_mult_instance_i8 args = {
             .pSrcA = pSrcA, .pSrcB = pSrcB, .M = M, .N = N, .O = O, .nPE = nPE, .pDstC = pDstC
         };
-        rt_team_fork(nPE, plp_mat_mult_i8p_xpulpv2, (void *)&args);
+        hal_cl_team_fork(nPE, plp_mat_mult_i8p_xpulpv2, (void *)&args);
     }
 }
 

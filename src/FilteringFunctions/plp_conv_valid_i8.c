@@ -70,7 +70,7 @@ void plp_conv_valid_i8(const int8_t *pSrcA,
         pIn1 = pSrcB;
     }
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
 
         printf("Errorr: Not Implemented!");
 

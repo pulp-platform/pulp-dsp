@@ -29,9 +29,9 @@
  */
 
 #include "plp_math.h"
-#include "rt/rt_api.h"
+#include "rtos_hal.h"
 
-RT_CL_DATA int32_t *resultsBuffer;
+HAL_CL_L1 int32_t *resultsBuffer;
 
 /**
    @ingroup groupFilters
@@ -62,7 +62,7 @@ void plp_conv_i32_parallel(const int32_t *pSrcA,
                            const uint8_t nPE,
                            int32_t *pRes) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("parallel processing supported only for cluster side\n");
         return;
     } else {
@@ -98,7 +98,7 @@ void plp_conv_i32_parallel(const int32_t *pSrcA,
 
         if (nPE > 1) {
             resultsBuffer =
-                (int32_t *)rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t) * resultsoffset * nPE);
+                (int32_t *)hal_cl_l1_malloc(sizeof(int32_t) * resultsoffset * nPE);
             resBuf = resultsBuffer;
             for (uint32_t i = resultsLen; i < resultsoffset * nPE; i++) {
                 resultsBuffer[i] = 0;
@@ -116,7 +116,7 @@ void plp_conv_i32_parallel(const int32_t *pSrcA,
                                     .pRes = resultsBuffer,
                                     .nPE = nPE };
 
-        rt_team_fork(nPE, plp_conv_i32p_xpulpv2, (void *)&S);
+        hal_cl_team_fork(nPE, plp_conv_i32p_xpulpv2, (void *)&S);
 
         if (nPE > 1) {
 
@@ -173,7 +173,7 @@ void plp_conv_i32_parallel(const int32_t *pSrcA,
                 pRes[i] = resultsBuffer[i];
             }
 #endif
-            rt_free(RT_ALLOC_CL_DATA, resBuf, sizeof(int32_t) * resultsoffset * nPE);
+            hal_cl_l1_free(resBuf, sizeof(int32_t) * resultsoffset * nPE);
 
 #endif
         }

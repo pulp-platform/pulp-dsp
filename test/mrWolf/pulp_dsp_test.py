@@ -266,12 +266,12 @@ class ArrayArgument(Argument):
         if self.use_l1:
             return dedent(
                 """\
-                {l1_name} = rt_alloc(RT_ALLOC_CL_DATA, sizeof({ctype}) * {len});
-                rt_dma_memcpy((unsigned int){l2_name},
+                {l1_name} = hal_cl_l1_malloc(sizeof({ctype}) * {len});
+                hal_cl_dma_cmd((unsigned int){l2_name},
                               (unsigned int){l1_name},
                               sizeof({ctype}) * {len},
-                              RT_DMA_DIR_EXT2LOC, 0, &copy);
-                rt_dma_wait(&copy);
+                              HAL_CL_DMA_DIR_EXT2LOC, 0, &copy);
+                hal_cl_dma_cmd_wait(&copy);
                 """
             ).format(l1_name=self.name, l2_name=self.l2_data_name(), ctype=self.ctype,
                            len=self.length)
@@ -283,7 +283,7 @@ class ArrayArgument(Argument):
         if self.use_l1:
             return dedent(
                 """\
-                rt_free(RT_ALLOC_CL_DATA, {l1_name}, sizeof({ctype}) * {len});
+                hal_cl_l1_free({l1_name}, sizeof({ctype}) * {len});
                 """
             ).format(l1_name=self.name, ctype=self.ctype, len=self.length)
         else:
@@ -706,19 +706,19 @@ class AggregatedTestCase(object):
         ret_str = ([a.arg_str() + " = " for a in self.arguments if isinstance(a, ReturnValue)] or [""])[0]
         return dedent(
             """\
-            static int t{idx}__do_bench(rt_perf_t *perf, int events, int do_check) {{
+            static int t{idx}__do_bench(hal_perf_t *perf, int events, int do_check) {{
                 // setup variables (like resetting InplaceArguments)
             {setup}
 
                 // start the performance counters
-                rt_perf_conf(perf, events);
-                rt_perf_reset(perf);
-                rt_perf_start(perf);
+                hal_perf_conf(perf, events);
+                hal_perf_reset(perf);
+                hal_perf_start(perf);
 
                 // call the function-under-test
                 {ret_str}{fname}({args});
 
-                rt_perf_stop(perf);
+                hal_perf_stop(perf);
 
                 // check the result
                 int passed = 1;
@@ -752,33 +752,33 @@ class AggregatedTestCase(object):
                 printf("\\n#@# testcase {idx} {{\\n");
 
                 // setup the test
-                rt_dma_copy_t copy;
+                hal_cl_dma_cmd_t copy;
 
             {setup}
 
                 // setup performance counter
-                rt_perf_t perf;
-                rt_perf_init(&perf);
+                hal_perf_t perf;
+                hal_perf_init(&perf);
 
                 // run 1: check result and get numebr of cycles / instructions
-                int passed = t{idx}__do_bench(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR), 1);
+                int passed = t{idx}__do_bench(&perf, (1<<HAL_PERF_CYCLES) | (1<<HAL_PERF_INSTR), 1);
                 printf("\\n#@# passed: %d\\n", passed);
-                printf("#@# cycles: %d\\n", rt_perf_read(RT_PERF_CYCLES));
-                printf("#@# instructions: %d\\n", rt_perf_read(RT_PERF_INSTR));
+                printf("#@# cycles: %d\\n", hal_perf_read(HAL_PERF_CYCLES));
+                printf("#@# instructions: %d\\n", hal_perf_read(HAL_PERF_INSTR));
 
                 // run 2: count load stalls
-                t{idx}__do_bench(&perf, 1<<RT_PERF_LD_STALL, 0);
-                printf("\\n#@# load_stalls: %d\\n", rt_perf_read(RT_PERF_LD_STALL));
+                t{idx}__do_bench(&perf, 1<<HAL_PERF_LD_STALL, 0);
+                printf("\\n#@# load_stalls: %d\\n", hal_perf_read(HAL_PERF_LD_STALL));
 
                 // run 3: count instruction cache misses
-                t{idx}__do_bench(&perf, 1<<RT_PERF_IMISS, 0);
-                printf("\\n#@# icache_miss: %d\\n", rt_perf_read(RT_PERF_IMISS));
+                t{idx}__do_bench(&perf, 1<<HAL_PERF_IMISS, 0);
+                printf("\\n#@# icache_miss: %d\\n", hal_perf_read(HAL_PERF_IMISS));
 
                 // run 4: count TCDM contentions
                 printf("\\n#@# output start\\n");
-                t{idx}__do_bench(&perf, 1<<RT_PERF_TCDM_CONT, 0);
+                t{idx}__do_bench(&perf, 1<<HAL_PERF_TCDM_CONT, 0);
                 printf("\\n#@# output end\\n");
-                printf("#@# tcdm_cont: %d\\n", rt_perf_read(RT_PERF_TCDM_CONT));
+                printf("#@# tcdm_cont: %d\\n", hal_perf_read(HAL_PERF_TCDM_CONT));
 
                 // free up all memory
             {free}
@@ -1029,7 +1029,7 @@ class AggregatedTest(object):
             fp.write(
                 dedent(
                     """\
-                    #include "rt/rt_api.h"
+                    #include "rtos_hal.h"
                     #include "stdio.h"
                     #include "plp_math.h"
 
@@ -1075,13 +1075,26 @@ class AggregatedTest(object):
         with open(os.path.join(self.sub_folder, "test.c"), "w") as fp:
             fp.write(dedent(
                 """\
-                #include "rt/rt_api.h"
+                #include "rtos_hal.h"
                 #include "stdio.h"
                 #include "cluster.h"
                 int main(){
+                #ifdef RTOS_PMSIS
+                    struct pi_device cluster_dev = {0};
+                    struct pi_cluster_conf conf;
+                    struct pi_cluster_task cluster_task = {0};
+                    pi_cluster_task(&cluster_task, cluster_entry, NULL);
+                    pi_cluster_conf_init(&conf);
+                    conf.id=0;
+                    pi_open_from_conf(&cluster_dev, &conf);
+                    pi_cluster_open(&cluster_dev);
+                    pi_cluster_send_task_to_cl(&cluster_dev, &cluster_task);
+                    pi_cluster_close(&cluster_dev);
+                #else
                     rt_cluster_mount(1, 0, 0, NULL);
                     rt_cluster_call(NULL, 0, cluster_entry, NULL, NULL, 0, 0, 0, NULL);
                     rt_cluster_mount(0, 0, 0, NULL);
+                #endif                
                     return 0;
                 }
                 """
@@ -1101,7 +1114,7 @@ class AggregatedTest(object):
             fp.write(
                 dedent(
                     """\
-                    #include "rt/rt_api.h"
+                    #include "rtos_hal.h"
                     #include "stdio.h"
                     #include "plp_math.h"
 
@@ -1129,16 +1142,21 @@ class AggregatedTest(object):
         with open(os.path.join(self.sub_folder, "Makefile"), "w") as fp:
             fp.write(dedent(
                 """\
-                PULP_APP = test
-                PULP_APP_FC_SRCS = test.c
-                PULP_APP_CL_SRCS = cluster.c
-                PULP_LDFLAGS += -lplpdsp
-                PULP_CFLAGS += -I$(CONFIG_BUILD_DIR) -O3 -g
-                ifdef TFLAGS
-                    PULP_CFLAGS += $(TFLAGS)
-                endif
-                include $(PULP_SDK_HOME)/install/rules/pulp_rt.mk
-                PULP_CFLAGS += -D DATA=$(CONFIG_BUILD_DIR)$(BUILD_DIR_EXT)
+                    PULP_APP = test
+                    PULP_APP_FC_SRCS = test.c
+                    PULP_APP_CL_SRCS = cluster.c
+                    PULP_LDFLAGS += -lplpdsp
+                    PULP_CFLAGS += -I$(CONFIG_BUILD_DIR) -O3 -g
+                    ifdef TFLAGS
+                        PULP_CFLAGS += $(TFLAGS)
+                    endif
+                    ifeq '$(PULP_RTOS)'  'pmsis'
+                    PULP_CFLAGS += -DRTOS_PMSIS
+                    include $(RULES_DIR)/pmsis_rules.mk
+                    else
+                    include $(PULP_SDK_HOME)/install/rules/pulp_rt.mk
+                    endif
+                    PULP_CFLAGS += -D DATA=$(CONFIG_BUILD_DIR)$(BUILD_DIR_EXT)                        
                 """
             ))
 
@@ -1402,7 +1420,7 @@ def declare_array(name, ctype, length, arr):
         # exact same as when computeing the expected result.
         return dedent(
             """\
-            RT_L2_DATA uint32_t {name}__int[{len}] = {{
+            HAL_L2 uint32_t {name}__int[{len}] = {{
             {content}
             }};
 
@@ -1413,7 +1431,7 @@ def declare_array(name, ctype, length, arr):
         values_str = ", ".join([str(x) for x in arr])
         return dedent(
             """\
-            RT_L2_DATA {ctype} {name}[{len}] = {{
+            HAL_L2 {ctype} {name}[{len}] = {{
             {content}
             }};
             """

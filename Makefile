@@ -748,19 +748,30 @@ CL_SRCS = \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q8_xpulpv2.c \
 
 
+IDIR=$(CURDIR)/include
+PULP_CFLAGS += -I$(IDIR) -O3 -g
+
+ifeq ($(PULP_RTOS), pmsis)
+# PMSIS rules
+PULP_STATIC_LIB = plpdsp
+PULP_CFLAGS += -DRTOS_PMSIS
+PULP_STATIC_LIB_SRCS = $(FC_SRCS) $(CL_SRCS)
+PULP_STATIC_LIB_HEADERS += $(shell find include -name *.h)
+else
+#PULP-RT rules
 PULP_LIBS = plpdsp # the name of the library, after installing it into the pulp-sdk, add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project to use this library.
 PULP_LIB_FC_SRCS_plpdsp = $(FC_SRCS)
 PULP_LIB_CL_SRCS_plpdsp = $(CL_SRCS)
-
-IDIR=$(CURDIR)/include
 BUILD_DIR=$(CURDIR)/lib/build
-# the build folder is saved here.
-
-PULP_CFLAGS += -I$(IDIR) -O3 -g
-
 INSTALL_FILES += $(shell find include -name *.h)
+endif
 
--include $(PULP_SDK_HOME)/install/rules/pulp.mk
+ifeq ($(PULP_RTOS), pmsis)
+include $(RULES_DIR)/pmsis_rules.mk
+else
+include $(PULP_SDK_HOME)/install/rules/pulp_rt.mk
+endif
+
 
 .PHONY: doc fmt
 doc:

@@ -53,7 +53,7 @@
 
 void plp_dot_prod_q32p_xpulpv2(void *S) {
 
-    int core_id = rt_core_id();
+    int core_id = hal_core_id();
 
     plp_dot_prod_instance_q32 *args = (plp_dot_prod_instance_q32 *)S;
 

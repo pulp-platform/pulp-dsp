@@ -60,19 +60,19 @@ void plp_dot_prod_i32_parallel(const int32_t *__restrict__ pSrcA,
                                uint32_t nPE,
                                int32_t *__restrict__ pRes) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("parallel processing supported only for cluster side\n");
         return;
     } else {
 
         uint32_t i, tmpblkSizePE = blockSize / nPE;
-        int32_t resBuffer[rt_nb_pe()];
+        int32_t resBuffer[hal_cl_nb_pe_cores()];
         // initialize results buffer
         /* not necessary
-        for (i=0; i<rt_nb_pe(); i++){
+        for (i=0; i<hal_cl_nb_pe_cores(); i++){
           resBuffer[i]=0;
-          //printf("i %d, buffer %d, rt_nb_pe %d, rt_core_id %d\n", i, resBuffer[i], rt_nb_pe(),
-        rt_core_id());
+          //printf("i %d, buffer %d, hal_cl_nb_pe_cores %d, hal_core_id %d\n", i, resBuffer[i], hal_cl_nb_pe_cores(),
+        hal_core_id());
         }
         */
 
@@ -87,10 +87,10 @@ void plp_dot_prod_i32_parallel(const int32_t *__restrict__ pSrcA,
         S.resBuffer = resBuffer;
 
         // Fork the dot product to nPE cores (i.e. processing units)
-        rt_team_fork(nPE, plp_dot_prod_i32p_xpulpv2, (void *)&S);
+        hal_cl_team_fork(nPE, plp_dot_prod_i32p_xpulpv2, (void *)&S);
 
         int sum = 0;
-        for (i = 0; i < nPE; i++) { // not necessary rt_nb_pe()
+        for (i = 0; i < nPE; i++) { // not necessary hal_cl_nb_pe_cores()
             sum += resBuffer[i];
         }
 #if defined(PLP_MATH_LOOPUNROLL)

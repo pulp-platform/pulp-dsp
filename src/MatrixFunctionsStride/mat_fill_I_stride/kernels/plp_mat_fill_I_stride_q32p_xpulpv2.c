@@ -51,7 +51,7 @@
 
 void plp_mat_fill_I_stride_q32p_xpulpv2(void *args) {
 
-    int core_id = rt_core_id();
+    int core_id = hal_core_id();
 
     plp_mat_fill_I_stride_instance_q32 *a = (plp_mat_fill_I_stride_instance_q32 *)args;
 

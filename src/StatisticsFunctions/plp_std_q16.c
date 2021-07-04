@@ -55,7 +55,7 @@ void plp_std_q16(const int16_t *__restrict__ pSrc,
                  uint32_t fracBits,
                  int16_t *__restrict__ pRes) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_std_q16s_rv32im(pSrc, blockSize, fracBits, pRes);
     } else {
         plp_std_q16s_xpulpv2(pSrc, blockSize, fracBits, pRes);

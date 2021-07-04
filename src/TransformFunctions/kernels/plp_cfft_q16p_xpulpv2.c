@@ -56,7 +56,7 @@ static void plp_radix4_butterfly_q16(int16_t *pSrc16,
  */
 
 void plp_cfft_q16p_xpulpv2(void *args){
-	int core_id = rt_core_id();
+	int core_id = hal_core_id();
 	plp_cfft_instance_q16_parallel *a = (plp_cfft_instance_q16_parallel *) args;
 
 	uint32_t L = a->S->fftLen;
@@ -78,7 +78,7 @@ void plp_cfft_q16p_xpulpv2(void *args){
             break;
         }
     }
-    rt_team_barrier();
+    hal_team_barrier();
     // if (core_id == 0) {
 
 	    if (a->bitReverseFlag)
@@ -88,7 +88,7 @@ void plp_cfft_q16p_xpulpv2(void *args){
 
 void plp_cfft_radix4by2_q16(int16_t *pSrc, uint32_t fftLen, const int16_t *pCoef, uint32_t nPE) {
 
-	int core_id = rt_core_id();
+	int core_id = hal_core_id();
 
     uint32_t i;
     uint32_t n2, nCores;
@@ -136,7 +136,7 @@ void plp_cfft_radix4by2_q16(int16_t *pSrc, uint32_t fftLen, const int16_t *pCoef
         *((v2s *)&pSrc[l * 2]) = __PACK2(testa, testb);
     }
 
-    rt_team_barrier();
+    hal_team_barrier();
 
     if (nPE > 1){
     	if (core_id < nPE/2){
@@ -153,7 +153,7 @@ void plp_cfft_radix4by2_q16(int16_t *pSrc, uint32_t fftLen, const int16_t *pCoef
 	    plp_radix4_butterfly_q16(pSrc + fftLen, n2, (int16_t *)pCoef, 2U, nPE);
 	}
 
-	rt_team_barrier();
+	hal_team_barrier();
 
     for (i = core_offset; i < MIN((fftLen >> 1), core_offset + nCores); i++) {
         pa = *(v2s *)&pSrc[4 * i];
@@ -216,7 +216,7 @@ void plp_radix4_butterfly_q16(int16_t *pSrc16,
                               int16_t *pCoef16,
                               uint32_t twidCoefModifier,
                               uint32_t nPE) {
-	int core_id = rt_core_id()%nPE;
+	int core_id = hal_core_id()%nPE;
     v2s R, S, T, U, V;
     v2s CoSi1, CoSi2, CoSi3, out;
     uint32_t n1, n2, ic, i0, i1, i2, i3, j, k;
@@ -361,7 +361,7 @@ void plp_radix4_butterfly_q16(int16_t *pSrc16,
 
     /* end of first stage process */
 
-    rt_team_barrier();
+    hal_team_barrier();
 
     /* start of middle stage process */
 
@@ -480,7 +480,7 @@ void plp_radix4_butterfly_q16(int16_t *pSrc16,
         }
         /*  Twiddle coefficients index modifier */
         twidCoefModifier <<= 2U;
-        rt_team_barrier();
+        hal_team_barrier();
     }
     /* end of middle stage process */
 

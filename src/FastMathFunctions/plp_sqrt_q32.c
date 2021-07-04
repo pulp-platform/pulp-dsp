@@ -55,7 +55,7 @@ void plp_sqrt_q32(const int32_t *__restrict__ pSrc,
                   const uint32_t fracBits,
                   int32_t *__restrict__ pRes) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_sqrt_q32s_rv32im(pSrc, fracBits, pRes);
     } else {
         plp_sqrt_q32s_xpulpv2(pSrc, fracBits, pRes);

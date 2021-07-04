@@ -63,7 +63,7 @@ void ex_dot_prod_i8(const int8_t *__restrict__ pSrcA,
                      uint32_t blockSize,
                      int32_t *__restrict__ pRes) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         ex_dot_prod_i8s_rv32im(pSrcA, pSrcB, blockSize, pRes);
     } else {
         ex_dot_prod_i8s_xpulpv2(pSrcA, pSrcB, blockSize, pRes);

@@ -54,4 +54,4 @@
 
         }
 
-        rt_team_barrier();
+        hal_team_barrier();

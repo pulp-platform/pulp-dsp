@@ -1,4 +1,4 @@
-#include "rt/rt_api.h"
+#include "rtos_hal.h"
 #include "stdio.h"
 #include "plp_math.h"
 
@@ -20,11 +20,11 @@
 
 static int cores_events;
 
-RT_L1_DATA Complex_type_f32 Buffer_Signal_Out[FFT_LEN];
+HAL_CL_L1 Complex_type_f32 Buffer_Signal_Out[FFT_LEN];
 
 // This benchmark is a single shot so we can read the value directly out of the
-// HW counter using the function rt_perf_read
-static void do_bench_0(rt_perf_t *perf, int events)
+// HW counter using the function hal_perf_read
+static void do_bench_0(hal_perf_t *perf, int events)
 {
   plp_fft_instance_f32 S;
   S.FFTLength = FFT_LEN;
@@ -33,16 +33,16 @@ static void do_bench_0(rt_perf_t *perf, int events)
   S.pBitReverseLUT = bit_rev_LUT;
 
   // Activate specified events
-  rt_perf_conf(perf, events);
+  hal_perf_conf(perf, events);
 
   // Reset HW counters now and start and stop counters so that we benchmark
   // only around the printf
-  rt_perf_reset(perf);
-  rt_perf_start(perf);
+  hal_perf_reset(perf);
+  hal_perf_start(perf);
 
   plp_cfft_f32_parallel(&S, (float32_t *)Input_Signal, 8, (float32_t *)Buffer_Signal_Out);
 
-  rt_perf_stop(perf);
+  hal_perf_stop(perf);
 
 
   float32_t real_acc = 0;
@@ -60,14 +60,14 @@ static void do_bench_0(rt_perf_t *perf, int events)
 
 void cluster_entry(void *arg){
 
-  rt_perf_t perf;
-  rt_perf_init(&perf);
+  hal_perf_t perf;
+  hal_perf_init(&perf);
 
   for (int i=0; i < 1; i++){
-    do_bench_0(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR));
+    do_bench_0(&perf, (1<<HAL_PERF_CYCLES) | (1<<HAL_PERF_INSTR));
   }
 
-  printf("Total cycles: %d\n", rt_perf_read(RT_PERF_CYCLES));
-  printf("Instructions: %d\n", rt_perf_read(RT_PERF_INSTR));
+  printf("Total cycles: %d\n", hal_perf_read(HAL_PERF_CYCLES));
+  printf("Instructions: %d\n", hal_perf_read(HAL_PERF_INSTR));
 
 }

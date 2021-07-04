@@ -53,17 +53,17 @@
 
 void plp_dot_prod_f32p_xpulpv2(void *S) {
 
-    float32_t *pSrcA = (float32_t *)(((plp_dot_prod_instance_f32 *)S)->pSrcA) + rt_core_id();
-    float32_t *pSrcB = (float32_t *)(((plp_dot_prod_instance_f32 *)S)->pSrcB) + rt_core_id();
+    float32_t *pSrcA = (float32_t *)(((plp_dot_prod_instance_f32 *)S)->pSrcA) + hal_core_id();
+    float32_t *pSrcB = (float32_t *)(((plp_dot_prod_instance_f32 *)S)->pSrcB) + hal_core_id();
     uint32_t blkSizePE = ((plp_dot_prod_instance_f32 *)S)->blkSizePE;
     uint32_t nPE = ((plp_dot_prod_instance_f32 *)S)->nPE;
-    float32_t *resBufferPE = &(((plp_dot_prod_instance_f32 *)S)->resBuffer[rt_core_id()]);
+    float32_t *resBufferPE = &(((plp_dot_prod_instance_f32 *)S)->resBuffer[hal_core_id()]);
 
     uint32_t blkCnt, tmpBS; /* Loop counter, temporal BlockSize */
     // float32_t sum1 = 0, sum2=0;                          /* Temporary return variable */
     float32_t sum1 = 0; /* Temporary return variable */
 
-    // rt_team_barrier();
+    // hal_team_barrier();
 
     /* #if defined(PLP_MATH_LOOPUNROLL) */
     /* #undef PLP_MATH_LOOPUNROLL */
@@ -91,7 +91,7 @@ void plp_dot_prod_f32p_xpulpv2(void *S) {
     //* resBufferPE = sum1 + sum2;
     *resBufferPE = sum1;
 
-    // printf("resBufferPE %d, core id %d\n", *resBufferPE, rt_core_id());
+    // printf("resBufferPE %d, core id %d\n", *resBufferPE, hal_core_id());
 }
 
 /* #define PLP_MATH_LOOPUNROLL */

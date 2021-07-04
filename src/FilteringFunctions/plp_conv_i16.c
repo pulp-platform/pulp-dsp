@@ -85,9 +85,9 @@ void plp_conv_i16(const int16_t *pSrcA,
         pRes[i] = 0;
     }
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
 
-        _pRes1_16 = rt_alloc(RT_ALLOC_FC_DATA, sizeof(int32_t) * (resultsoffset));
+        _pRes1_16 = hal_fc_l1_malloc(sizeof(int32_t) * (resultsoffset));
 
         int32_t *pOut = pRes;
         int32_t *_pRes = _pRes1_16;
@@ -144,7 +144,7 @@ void plp_conv_i16(const int16_t *pSrcA,
 
     } else {
 
-        _pRes1_16 = rt_alloc(RT_ALLOC_CL_DATA, sizeof(int32_t) * (resultsoffset));
+        _pRes1_16 = hal_cl_l1_malloc(sizeof(int32_t) * (resultsoffset));
 
         int32_t *pOut = pRes;
         int32_t *_pRes = _pRes1_16;
@@ -199,7 +199,7 @@ void plp_conv_i16(const int16_t *pSrcA,
             *pOut++ += *_pRes++;
         }
     }
-    rt_free(RT_ALLOC_CL_DATA, _pRes1_16, sizeof(int32_t) * (resultsoffset));
+    hal_cl_l1_free(_pRes1_16, sizeof(int32_t) * (resultsoffset));
 }
 
 /**

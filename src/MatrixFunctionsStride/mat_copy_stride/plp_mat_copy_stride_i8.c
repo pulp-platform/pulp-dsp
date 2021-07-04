@@ -57,7 +57,7 @@ void plp_mat_copy_stride_i8(const int8_t *__restrict__ pSrc,
                             uint32_t strideDst,
                             int8_t *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_mat_copy_stride_i8s_rv32im(pSrc, M, N, strideSrc, strideDst, pDst);
     } else {
         plp_mat_copy_stride_i8s_xpulpv2(pSrc, M, N, strideSrc, strideDst, pDst);
