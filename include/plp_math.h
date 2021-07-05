@@ -321,27 +321,6 @@ typedef struct {
 } plp_fft_instance_f32;
 
 /** -------------------------------------------------------
-    @struct plp_stft_instance_f32
-    @brief Instance structure for floating-point STFT (update this)
-    @param[in]  length data length of the FFT
-    @param[in]  bitReverseFlag  flag that enables (bitReverseFlagR=1) or disables
-    (bitReverseFlagR=0) bit reversal of output
-    @param[in]  pTwiddleFactors pointer to the twiddle factors.
-    These values must be computed using this formula:
-    \f$W_N^k =   e^{-j \frac{\pi}{N} k}\f$,
-    where \f$N\f$ is the data length and \f$k\f$ is the index.
-    The user must provide \f$\frac{N}{2}\f$ values (\f$k = 0 .. \frac{N}{2}-1\f$).
-    @param[in]  pBitReverseLUT  pointer to the lookup table used for the bit reversal of output.
-    This table must include \f$N\f$ elements in the range \f$0 .. N-1\f$,
-    where each location \f$k\f$ contains the value \f$bitreverse(k)\f$.
-*/
-typedef struct {
-    plp_fft_instance_f32 *FFTInstance;
-    uint32_t hopLength;
-    uint32_t nWindow;
-} plp_stft_instance_f32;
-
-/** -------------------------------------------------------
     @struct plp_fft_instance_f32_parallel
     @brief Instance structure for floating-point FFT (parallel version)
     @param[in]  S         pointer to a plp_fft_instance_f32 data structure (FFT parameters)
@@ -8338,17 +8317,6 @@ void plp_rfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
   @param[out] pDst    Points to the output matrix
   @return     none
 */
-
-/**
-   @brief Floating-point FFT on real input data.
-   @param[in]   S       points to an instance of the floating-point FFT structure
-   @param[in]   pSrc    points to the input buffer (real data)
-   @param[out]  pDst    points to the output buffer (complex data)
-   @return      none
-*/
-void plp_rstft_f32(const plp_stft_instance_f32 *S,
-                  const float32_t *__restrict__ pSrc,
-                  float32_t *__restrict__ pDst);
 
 /**
    @brief Floating-point FFT on complex input data.
