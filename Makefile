@@ -61,6 +61,7 @@ FC_SRCS = \
 	src/BasicMathFunctions/mult/plp_mult_i32.c src/BasicMathFunctions/mult/kernels/plp_mult_i32s_rv32im.c \
 	src/BasicMathFunctions/mult/plp_mult_i16.c src/BasicMathFunctions/mult/kernels/plp_mult_i16s_rv32im.c \
 	src/BasicMathFunctions/mult/plp_mult_i8.c src/BasicMathFunctions/mult/kernels/plp_mult_i8s_rv32im.c \
+	src/BasicMathFunctions/mult/plp_mult_f32.c \
   src/BasicMathFunctions/negate/plp_negate_f32.c \
   src/BasicMathFunctions/negate/plp_negate_i32.c src/BasicMathFunctions/negate/kernels/plp_negate_i32s_rv32im.c \
 	src/BasicMathFunctions/negate/plp_negate_i16.c src/BasicMathFunctions/negate/kernels/plp_negate_i16s_rv32im.c \
@@ -158,6 +159,8 @@ FC_SRCS = \
 	src/TransformFunctions/plp_rfft_f32_parallel.c \
 	src/TransformFunctions/plp_cfft_f32.c \
         src/TransformFunctions/plp_cfft_f32_parallel.c \
+	src/TransformFunctions/plp_dct2_f32.c \
+	src/TransformFunctions/plp_mfcc_f32.c \
 	src/CommonTables/plp_common_tables.c \
 	src/CommonTables/plp_const_structs.c \
 	src/MatrixFunctions/mat_add/plp_mat_add_i32.c src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32s_rv32im.c \
@@ -438,6 +441,7 @@ CL_SRCS = \
 	src/BasicMathFunctions/mult/kernels/plp_mult_i32s_xpulpv2.c \
 	src/BasicMathFunctions/mult/kernels/plp_mult_i16s_xpulpv2.c \
 	src/BasicMathFunctions/mult/kernels/plp_mult_i8s_xpulpv2.c \
+	src/BasicMathFunctions/mult/kernels/plp_mult_f32s_xpulpv2.c \
   src/BasicMathFunctions/negate/kernels/plp_negate_f32s_xpulpv2.c \
   src/BasicMathFunctions/negate/kernels/plp_negate_i32s_xpulpv2.c \
 	src/BasicMathFunctions/negate/kernels/plp_negate_i16s_xpulpv2.c \
