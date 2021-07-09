@@ -88,4 +88,6 @@ extern const float32_t melFbTable_f32_32[34];
 extern const uint16_t filterLengths_fb_32[32];
 extern const uint16_t startingIndices_fb_32[32];
 extern const float32_t values_fb_32[245];
+
+extern const float32_t hannWindow_f32_len512[512];
 #endif // PLP_COMMON_TABLES_H
