@@ -49,7 +49,8 @@
 /**
    @brief Floating-point DCT on real input data. Implementation of
    			John Makhoul's "A Fast Cosine Transform in One
-			and Two Dimensions" 1980 IEEE paper.
+			and Two Dimensions" 1980 IEEE paper. This
+			implementation assumes norm = None for pytorch's DCT.
    @param[in]   S       points to an instance of the floating-point FFT
    			structure with FFTLength = DCTLength
    @param[in]   pShift  points to twiddle coefficient table of 4*FFTLength,
