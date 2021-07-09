@@ -8443,6 +8443,7 @@ void plp_mfcc_f32(const plp_fft_instance_f32 *SFFT,
                   const plp_fft_instance_f32 *SDCT,
                   const Complex_type_f32 *__restrict__ pShift,
                   const plp_triangular_filter_f32 *__restrict__ filterBank,
+		  const float32_t *__restrict__ window,
                   const float32_t *__restrict__ pSrc,
                   float32_t *__restrict__ pDst);
 
