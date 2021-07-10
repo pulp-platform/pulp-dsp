@@ -8413,8 +8413,8 @@ void plp_cfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
    @return      none
 */
 void plp_dct2_f32(const plp_fft_instance_f32 *S,
-                  const Complex_type_f32 *__restrict__ pShift,
-                  const uint8_t *__restrict__ orthoNorm,
+                  const Complex_type_f32 *pShift,
+                  const uint8_t *orthoNorm,
                   const float32_t *__restrict__ pSrc,
                   float32_t *__restrict__ pBuf,
                   float32_t *__restrict__ pDst);
