@@ -1408,6 +1408,28 @@ typedef struct {
     float *__restrict__ pDst;
 } plp_mat_copy_stride_instance_f32;
 
+
+typedef struct {
+
+   uint32_t length;
+
+   float32_t *dec_lo; /* decomposition lowpass */
+   float32_t *dec_hi; /* decomposition highpass */
+} plp_dwt_wavelet_f32;
+
+
+typedef enum {
+    PLP_DWT_MODE_ZERO,
+    PLP_DWT_MODE_CONSTANT,
+    PLP_DWT_MODE_SYMMETRIC,
+    PLP_DWT_MODE_REFELCT,
+    PLP_DWT_MODE_PERIODIC,
+    PLP_DWT_MODE_ANTISYMMETRIC,
+    PLP_DWT_MODE_ANTIREFLECT
+} plp_dwt_extension_mode;
+
+
+
 /** -------------------------------------------------------
     @brief Glue code for parallel dot product of 32-bit integer vectors.
     @param[in]  pSrcA      points to the first input vector
@@ -8592,6 +8614,48 @@ void plp_mfcc_f32_parallel(const plp_fft_instance_f32 *SFFT,
   @param[out] pDst    Points to the output matrix
   @return     none
 */
+
+
+/**
+   @brief  Floating-point DWT on real input data for XPULPV2 extension.
+   @param[in]   pSrc     points to the input buffer (real data)
+   @param[in]   length   length of input buffer
+   @param[in]   wavelet  wavelet structure for calculating DWT
+   @param[in]   mode     boundary extension mode
+
+   @param[out]  pDstA    points to ouput buffer with Approximate coefficients
+   @param[out]  pDstD    points to ouput buffer with Detailed coefficients
+   @return      none
+*/
+void plp_dwt_f32(const float32_t *__restrict__ pSrc,
+                  uint32_t length,
+                  const plp_dwt_wavelet_f32 wavelet,
+                  plp_dwt_extension_mode mode,
+                  float32_t *__restrict__ pDstA,
+                  float32_t *__restrict__ pDstD);
+
+
+
+/**
+   @brief  Floating-point DWT on real input data for XPULPV2 extension.
+   @param[in]   pSrc     points to the input buffer (real data)
+   @param[in]   length   length of input buffer
+   @param[in]   wavelet  wavelet structure for calculating DWT
+   @param[in]   mode     boundary extension mode
+
+   @param[out]  pDstA    points to ouput buffer with Approximate coefficients
+   @param[out]  pDstD    points to ouput buffer with Detailed coefficients
+   @return      none
+*/
+void plp_dwt_f32_xpulpv2(const float32_t *__restrict__ pSrc,
+                  uint32_t length,
+                  const plp_dwt_wavelet_f32 wavelet,
+                  plp_dwt_extension_mode mode,
+                  float32_t *__restrict__ pDstA,
+                  float32_t *__restrict__ pDstD);
+
+
+
 
 void plp_mat_add_i32(const int32_t *__restrict__ pSrcA,
                      const int32_t *__restrict__ pSrcB,
