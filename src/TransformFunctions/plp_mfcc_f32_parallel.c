@@ -83,7 +83,7 @@ void plp_mfcc_f32_parallel(const plp_fft_instance_f32 *SFFT,
 	// Step 0: Windowing. Stored in buffer space of pDst.
 	uint32_t n_fft = SFFT->FFTLength;
 	float32_t *fft_in = pDst + 2*n_fft;
-	plp_mult_f32(window, pSrc, fft_in, n_fft);
+	plp_mult_f32_parallel(window, pSrc, n_fft, nPE, fft_in);
 	
 
 	// Step 1: FFT

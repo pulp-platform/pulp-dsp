@@ -176,6 +176,23 @@ typedef struct {
 } plp_dot_prod_instance_f32;
 
 /** -------------------------------------------------------
+    @struct plp_mult_instance_f32
+    @brief Instance structure for float parallel multiplication.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] resBuffer  pointer to the result buffer
+*/
+typedef struct {
+    const float32_t *pSrcA; // pointer to the first vector
+    const float32_t *pSrcB; // pointer to the second vector
+    uint32_t blkSizePE;     // number of samples in each vector
+    uint32_t nPE;           // number of processing units
+    float32_t *pDst;        // pointer to result vector
+} plp_mult_instance_f32;
+
+/** -------------------------------------------------------
     @brief Instance structure for basic integer convolution.
     @param[in]  pSrcA      points to the first input vector
     @param[in]  srcALen    length of the first input vector
@@ -2206,6 +2223,30 @@ void plp_mult_f32s_xpulpv2(const float32_t * pSrcA,
                           const float32_t * pSrcB,
                           float32_t * pDst,
                           uint32_t blockSize);
+
+/**
+  @brief Glue code for parallel dot product of 32-bit float vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  nPE        number of parallel processing units
+  @param[out] pDst       points to output vector
+  @return        none
+ */
+
+void plp_mult_f32_parallel(const float32_t *__restrict__ pSrcA,
+                               const float32_t *__restrict__ pSrcB,
+                               uint32_t blockSize,
+                               uint32_t nPE,
+                               float32_t *__restrict__ pDst);
+/**
+ *   @brief Parallel multiplication with interleaved access of 32-bit float vectors kernel for XPULPV2
+ *     extension.
+ *       @param[in]  S     points to the instance structure for float parallel multiplication
+ *         @return        none
+ *          */
+
+void plp_mult_f32p_xpulpv2(void *S);
 
 /** -------------------------------------------------------
     @brief      Glue code of negate the elements of a vector for 32-bit integers

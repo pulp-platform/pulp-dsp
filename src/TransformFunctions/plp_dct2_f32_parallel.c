@@ -48,7 +48,7 @@
 
 /**
    @brief 		Floating-point DCT on real input data. 
-   			Implementation of
+   			Parallelised implementation of
    			John Makhoul's "A Fast Cosine Transform in One
 			and Two Dimensions" 1980 IEEE paper. 
    @param[in]   S       points to an instance of the floating-point FFT
