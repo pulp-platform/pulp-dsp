@@ -60,13 +60,11 @@
 //    float32_t *dec_hi; /* decomposition highpass */
 // } plp_dwt_wavelet_f32;
 
-
 const plp_dwt_wavelet_f32 PLP_DWT_DB1 = {
-   .length = 2,
-   .dec_lo = (float32_t []){  0.7071067811865476f, 0.7071067811865476f },
-   .dec_hi = (float32_t []){ -0.7071067811865476f, 0.7071067811865476f }
+    .length = 2,
+    .dec_lo = (float32_t[]){ 0.7071067811865476f, 0.7071067811865476f },
+    .dec_hi = (float32_t[]){ -0.7071067811865476f, 0.7071067811865476f }
 };
-
 
 /**
    @brief  Floating-point DWT on real input data for XPULPV2 extension.
@@ -80,11 +78,11 @@ const plp_dwt_wavelet_f32 PLP_DWT_DB1 = {
    @return      none
 */
 void plp_dwt_f32(const float32_t *__restrict__ pSrc,
-                  uint32_t length,
-                  const plp_dwt_wavelet_f32 wavelet,
-                  plp_dwt_extension_mode mode,
-                  float32_t *__restrict__ pDstA,
-                  float32_t *__restrict__ pDstD) {
+                 uint32_t length,
+                 const plp_dwt_wavelet_f32 wavelet,
+                 plp_dwt_extension_mode mode,
+                 float32_t *__restrict__ pDstA,
+                 float32_t *__restrict__ pDstD) {
 
     if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("F extension is supported only for cluster side\n");
