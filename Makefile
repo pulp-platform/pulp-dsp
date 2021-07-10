@@ -160,7 +160,9 @@ FC_SRCS = \
 	src/TransformFunctions/plp_cfft_f32.c \
         src/TransformFunctions/plp_cfft_f32_parallel.c \
 	src/TransformFunctions/plp_dct2_f32.c \
+	src/TransformFunctions/plp_dct2_f32_parallel.c \
 	src/TransformFunctions/plp_mfcc_f32.c \
+	src/TransformFunctions/plp_mfcc_f32_parallel.c \
 	src/CommonTables/plp_common_tables.c \
 	src/CommonTables/plp_const_structs.c \
 	src/MatrixFunctions/mat_add/plp_mat_add_i32.c src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32s_rv32im.c \

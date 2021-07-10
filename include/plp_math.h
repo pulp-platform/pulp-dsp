@@ -8420,6 +8420,31 @@ void plp_dct2_f32(const plp_fft_instance_f32 *S,
                   float32_t *__restrict__ pDst);
 
 /**
+   @brief Floating-point DCT on real input data. Implementation of
+                        John Makhoul's "A Fast Cosine Transform in One
+                        and Two Dimensions" 1980 IEEE paper.
+   @param[in]   S       points to an instance of the floating-point FFT
+                        structure with FFTLength = DCTLength
+   @param[in]   pShift  points to twiddle coefficient table of 4*FFTLength,
+                        of which only the first quarter is necessary.
+   @param[in]   pSrc    points to the input buffer (real data) of size
+                        FFTLength 
+   @param[in]   nPE     number of parallel processing units
+   @param[out]  pBuf    points to buffer of size 2*FFTLength, used for 
+                        computation.
+   @param[out]  pDst    points to output buffer (real data) of size FFTLength,
+                        may be the same as pSrc.
+   @return      none
+*/
+void plp_dct2_f32_parallel(const plp_fft_instance_f32 *S,
+                  	   const Complex_type_f32 *pShift,
+                  	   const uint8_t orthoNorm,
+                  	   const float32_t *__restrict__ pSrc,
+			   const uint32_t nPE,
+                  	   float32_t *__restrict__ pBuf,
+                  	   float32_t *__restrict__ pDst);
+
+/**
    @brief MFCC on real input data.
    @param[in]   SFFT        points to an instance of the floating-point FFT
                             structure for the initial FFT (with FFTLength = n_fft).
@@ -8431,14 +8456,17 @@ void plp_dct2_f32(const plp_fft_instance_f32 *S,
                             FFTLength = 4*n_mels. Only first quarter necessary.
    @param[in]   filterBank  points to plp_triangular_filter_f32 instance with 
                             nFilters = n_mels.
+   @param[in]   window      vector to use for windowing
+   @param[in]   orthoNorm   whether to use dct orthonormalisation or not
    @param[in]   pSrc        points to the input buffer (real data, size n_fft)
-   @param[out]  pDst        points to the output buffer (complex data).
-                            Must be of length at least 3*n_fft.
+   @param[out]  pDst        points to the output buffer 
+                            of length at least 3*n_fft.
                             pSrc and pDst must not overlap, the calculation can
                             not be done in place. 
                             MFCCs are returned in the first n_mels spots.
    @return      none
 */
+
 
 void plp_mfcc_f32(const plp_fft_instance_f32 *SFFT,
                   const plp_fft_instance_f32 *SDCT,
@@ -8448,6 +8476,41 @@ void plp_mfcc_f32(const plp_fft_instance_f32 *SFFT,
 		  const uint8_t *orthoNorm,
                   const float32_t *__restrict__ pSrc,
                   float32_t *__restrict__ pDst);
+
+/**
+   @brief MFCC on real input data.
+   @param[in]   SFFT        points to an instance of the floating-point FFT
+                            structure for the initial FFT (with FFTLength = n_fft).
+                            bitReverseFlag should be on.
+   @param[in]   SDCT        points to an instance of the floating-point FFT
+                            structure for the DCT (with FFTLength = n_mels).
+                            bitReverseFlag should be on.
+   @param[in]   pShift      points to twiddle coefficient table with
+                            FFTLength = 4*n_mels. Only first quarter necessary.
+   @param[in]   filterBank  points to plp_triangular_filter_f32 instance with 
+                            nFilters = n_mels.
+   @param[in]   window      vector to use for windowing
+   @param[in]   orthoNorm   whether to use dct orthonormalisation or not
+   @param[in]   pSrc        points to the input buffer (real data, size n_fft)
+   @param[in]   nPE         number of parallel processing units
+   @param[out]  pDst        points to the output buffer 
+                            of length at least 3*n_fft.
+                            pSrc and pDst must not overlap, the calculation can
+                            not be done in place. 
+                            MFCCs are returned in the first n_mels spots.
+   @return      none
+*/
+
+
+void plp_mfcc_f32_parallel(const plp_fft_instance_f32 *SFFT,
+                	   const plp_fft_instance_f32 *SDCT,
+                	   const Complex_type_f32 *pShift,
+                	   const plp_triangular_filter_f32 *filterBank,
+			   const float32_t *window,
+			   const uint8_t *orthoNorm,
+                	   const float32_t *__restrict__ pSrc,
+			   const uint32_t nPE,
+                	   float32_t *__restrict__ pDst);
 
 /** -------------------------------------------------------
   @brief      Glue code for matrix addition of a 32-bit integer matrices.
