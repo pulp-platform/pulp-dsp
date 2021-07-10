@@ -29,24 +29,6 @@
  */
 
 #include "plp_math.h"
-#define PI 3.14159265358979323846
-void print_vec_t(float32_t *V, int n)
-{
-  printf("[");
-  for(int i=0;i<7;i++)
-  {
-    printf("%d: ", i);
-    printf("%e, ", V[i]);
-  }
-  printf("... ");
-  for(int i=7;i>0;i--)
-  {
-    printf("%d: ", n-i);
-    printf("%e, ", V[n-i]);
-  }
-  printf("]\n");
-}
-
 
 /**
   @ingroup groupTransforms
@@ -89,27 +71,19 @@ void plp_mfcc_f32(const plp_fft_instance_f32 *SFFT,
 		  const Complex_type_f32 *__restrict__ pShift,
 		  const plp_triangular_filter_f32 *__restrict__ filterBank,
 		  const float32_t *__restrict__ window,
+		  const uint8_t *__restrict__ orthoNorm,
                   const float32_t *__restrict__ pSrc,
                   float32_t *__restrict__ pDst) {
 
 
-	// Step 0: Periodic Hann windowing (could be left to user, 
-	// also should be precomputed).
-	// Stored in buffer space of pDst.
+	// Step 0: Windowing. Stored in buffer space of pDst.
 	uint32_t n_fft = SFFT->FFTLength;
 	float32_t *fft_in = pDst + 2*n_fft;
 	plp_mult_f32(window, pSrc, fft_in, n_fft);
-	//for (int i=0;i<n_fft;i++){
-		//fft_in[i] = pSrc[i]*(0.5f*(1-plp_cos_f32(2*PI*i/(n_fft))));
-	//}
-	//printf("AFTER HANN, BEFORE FFT\n"); //remove!
-	//print_vec_t(fft_in, n_fft); //remove!
 	
 
 	// Step 1: FFT
 	plp_rfft_f32(SFFT, fft_in, pDst);
-	//printf("AFTER FFT, BEFORE MAG\n"); //remove!
-	//print_vec_t(pDst, n_fft+2); //remove!
 	
 
 	// Step 2: ||.||^2 of each RFFT point / Take squared magnitude.
@@ -117,8 +91,6 @@ void plp_mfcc_f32(const plp_fft_instance_f32 *SFFT,
 	// the RFFT's (n_fft+2)-long output. 
 	float32_t *fft_mag = pDst + n_fft+2;
 	plp_cmplx_mag_squared_f32(pDst, fft_mag, n_fft/2 + 1);
-	//printf("AFTER MAG, BEFORE FB\n"); //remove!
-	//print_vec_t(fft_mag, n_fft/2 + 1); //remove!
 
 
 	// Step 3: Apply triangular filter bank.
@@ -135,8 +107,6 @@ void plp_mfcc_f32(const plp_fft_instance_f32 *SFFT,
                           fb_out+i);
 		filter_start += current_length;
   	}
-	//printf("AFTER FB, BEFORE LOG\n"); //remove!
-	//print_vec_t(fb_out, n_mels); //remove!
 
 
 	// Step 4: Take the log of the computed mel scale. 
@@ -146,19 +116,14 @@ void plp_mfcc_f32(const plp_fft_instance_f32 *SFFT,
 	for (int i=0;i<n_mels;i++){
         	float32_t log_i = log(fb_out[i]);
         	mel_logs[i] = log_i;
-        	//fft_h_out[n_dct-1-i] = log_i;	// why tf did I do this?
 	}
-	//printf("AFTER LOG, BEFORE DCT\n"); //remove!
-	//print_vec_t(fb_out, n_mels); //remove!
 
 
 	// Step 5: DCT of log mels
 	// corresponds to using pytorch MFCC with norm = None
 	float32_t *dct_inout = mel_logs;
 	float32_t *dct_buffer = pDst + n_mels;
-	plp_dct2_f32(SDCT, pShift, dct_inout, dct_buffer, dct_inout);
-	//printf("AFTER DCT\n"); //remove!
-	//print_vec_t(dct_inout, n_mels); //remove!
+	plp_dct2_f32(SDCT, pShift, orthoNorm, dct_inout, dct_buffer, dct_inout);
 }
 
 /**

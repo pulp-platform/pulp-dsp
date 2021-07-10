@@ -47,16 +47,17 @@
 */
 
 /**
-   @brief Floating-point DCT on real input data. Implementation of
+   @brief 		Floating-point DCT on real input data. 
+   			Implementation of
    			John Makhoul's "A Fast Cosine Transform in One
-			and Two Dimensions" 1980 IEEE paper. This
-			implementation assumes norm = None for pytorch's DCT.
+			and Two Dimensions" 1980 IEEE paper. 
    @param[in]   S       points to an instance of the floating-point FFT
    			structure with FFTLength = DCTLength
    @param[in]   pShift  points to twiddle coefficient table of 4*FFTLength,
-   			of which only the first quarter is necessary.
+   			of which only the first quadrant of the complex
+			unit circle is used.
    @param[in]   pSrc    points to the input buffer (real data) of size
-			FFTLength
+			FFTLength.
    @param[out]  pBuf    points to buffer of size 2*FFTLength, used for 
    			computation.
    @param[out]  pDst    points to output buffer (real data) of size FFTLength,
@@ -65,6 +66,7 @@
 */
 void plp_dct2_f32(const plp_fft_instance_f32 *S,
                   const Complex_type_f32 *__restrict__ pShift,
+		  const uint8_t *__restrict__ orthoNorm,
                   const float32_t *__restrict__ pSrc,
                   float32_t *__restrict__ pBuf,
                   float32_t *__restrict__ pDst) {
@@ -88,7 +90,7 @@ void plp_dct2_f32(const plp_fft_instance_f32 *S,
     // RFFT must be extended to all FFTLength complex coefficients,
     // using X[k] = X*[-k] for real x[t]
     for (int i=0;i<N/2-1;i++) {
-	pBuf[2*(N/2+1+i)] = pBuf[2*(N/2-1-i)]; 
+	pBuf[2*(N/2+1+i)] = pBuf[2*(N/2-1-i)];
 	pBuf[2*(N/2+1+i)+1] = (-1)*pBuf[2*(N/2-1-i)+1];
     }
     // 3: shift FFT in place in buffer
@@ -97,8 +99,13 @@ void plp_dct2_f32(const plp_fft_instance_f32 *S,
     for (int i=0;i<N;i++){
 	pDst[i] = pBuf[2*i];
     }
-    // 5: multiply by 2 in place in output
-    plp_scale_f32(pDst, 2, pDst, N);
+    // 5: multiply by 2 or normalise in place in output buffer
+    if (orthoNorm) {
+	pDst[0] *= M_SQRT1_2;
+	plp_scale_f32(pDst, sqrtf(2.f/(float32_t)N), pDst, N);
+    }
+    else
+    	plp_scale_f32(pDst, 2, pDst, N);
 }
 
 /**

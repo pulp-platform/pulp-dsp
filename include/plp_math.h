@@ -8414,6 +8414,7 @@ void plp_cfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
 */
 void plp_dct2_f32(const plp_fft_instance_f32 *S,
                   const Complex_type_f32 *__restrict__ pShift,
+                  const uint8_t *__restrict__ orthoNorm,
                   const float32_t *__restrict__ pSrc,
                   float32_t *__restrict__ pBuf,
                   float32_t *__restrict__ pDst);
@@ -8444,6 +8445,7 @@ void plp_mfcc_f32(const plp_fft_instance_f32 *SFFT,
                   const Complex_type_f32 *__restrict__ pShift,
                   const plp_triangular_filter_f32 *__restrict__ filterBank,
 		  const float32_t *__restrict__ window,
+		  const uint8_t *__restrict__ orthoNorm,
                   const float32_t *__restrict__ pSrc,
                   float32_t *__restrict__ pDst);
 
