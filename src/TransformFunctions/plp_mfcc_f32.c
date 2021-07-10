@@ -35,14 +35,14 @@
  */
 
 /**
-  @defgroup fft  FFT transforms
-  This module contains the code to perform FFT transforms.
+  @defgroup feature  feature transforms
+  This module contains the code to perform feature transforms.
 
 
  */
 
 /**
-   @addtogroup fft
+   @addtogroup feature
    @{
 */
 
@@ -58,9 +58,11 @@
    			    FFTLength = 4*n_mels. Only first quarter necessary.
    @param[in]   filterBank  points to plp_triangular_filter_f32 instance with 
    			    nFilters = n_mels.
+   @param[in]   window      vector to use for windowing
+   @param[in]   orthoNorm   whether to use dct orthonormalisation or not
    @param[in]   pSrc        points to the input buffer (real data, size n_fft)
-   @param[out]  pDst        points to the output buffer (complex data).
-   			    Must be of length at least 3*n_fft.
+   @param[out]  pDst        points to the output buffer 
+   			    of length at least 3*n_fft.
 			    pSrc and pDst must not overlap, the calculation can
 			    not be done in place. 
 			    MFCCs are returned in the first n_mels spots.
@@ -127,5 +129,5 @@ void plp_mfcc_f32(const plp_fft_instance_f32 *SFFT,
 }
 
 /**
-   @} end of FFT group
+   @} end of feature group
 */

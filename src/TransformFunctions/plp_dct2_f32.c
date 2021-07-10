@@ -56,6 +56,8 @@
    @param[in]   pShift  points to twiddle coefficient table of 4*FFTLength,
    			of which only the first quadrant of the complex
 			unit circle is used.
+			For example, if S contains twiddleCoef_rfft_32,
+			pShift can be set to twiddleCoef_rfft_128.
    @param[in]   pSrc    points to the input buffer (real data) of size
 			FFTLength.
    @param[out]  pBuf    points to buffer of size 2*FFTLength, used for 
