@@ -193,6 +193,21 @@ typedef struct {
 } plp_mult_instance_f32;
 
 /** -------------------------------------------------------
+    @struct plp_log_instance_f32
+    @brief Instance structure for float parallel log.
+    @param[in]  pSrc      points to the input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] pDst       pointer to the output vector
+*/
+typedef struct {
+    const float32_t *pSrc; // pointer to the vector
+    uint32_t blkSizePE;     // number of samples in each vector
+    uint32_t nPE;           // number of processing units
+    float32_t *pDst;        // pointer to result vector
+} plp_log_instance_f32;
+
+/** -------------------------------------------------------
     @brief Instance structure for basic integer convolution.
     @param[in]  pSrcA      points to the first input vector
     @param[in]  srcALen    length of the first input vector
@@ -2247,6 +2262,29 @@ void plp_mult_f32_parallel(const float32_t *__restrict__ pSrcA,
  *          */
 
 void plp_mult_f32p_xpulpv2(void *S);
+
+/**
+  @brief Glue code for parallel log of 32-bit float vectors.
+  @param[in]  pSrc       points to the input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  nPE        number of parallel processing units
+  @param[out] pDst       points to output vector
+  @return        none
+ */
+
+void plp_log_f32_parallel(const float32_t *__restrict__ pSrc,
+                               uint32_t blockSize,
+                               uint32_t nPE,
+                               float32_t *__restrict__ pDst);
+
+/**
+  @brief Parallel log with interleaved access of 32-bit float vectors kernel for XPULPV2
+  extension.
+  @param[in]  S     points to the instance structure for float parallel log
+  @return        none
+ */
+
+void plp_log_f32p_xpulpv2(void *S);
 
 /** -------------------------------------------------------
     @brief      Glue code of negate the elements of a vector for 32-bit integers

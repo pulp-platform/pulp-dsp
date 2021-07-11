@@ -63,6 +63,7 @@ FC_SRCS = \
 	src/BasicMathFunctions/mult/plp_mult_i8.c src/BasicMathFunctions/mult/kernels/plp_mult_i8s_rv32im.c \
 	src/BasicMathFunctions/mult/plp_mult_f32.c \
 	src/BasicMathFunctions/mult/plp_mult_f32_parallel.c \
+	src/BasicMathFunctions/log/plp_log_f32_parallel.c \
   src/BasicMathFunctions/negate/plp_negate_f32.c \
   src/BasicMathFunctions/negate/plp_negate_i32.c src/BasicMathFunctions/negate/kernels/plp_negate_i32s_rv32im.c \
 	src/BasicMathFunctions/negate/plp_negate_i16.c src/BasicMathFunctions/negate/kernels/plp_negate_i16s_rv32im.c \
@@ -446,6 +447,7 @@ CL_SRCS = \
 	src/BasicMathFunctions/mult/kernels/plp_mult_i8s_xpulpv2.c \
 	src/BasicMathFunctions/mult/kernels/plp_mult_f32s_xpulpv2.c \
 	src/BasicMathFunctions/mult/kernels/plp_mult_f32p_xpulpv2.c \
+	src/BasicMathFunctions/log/kernels/plp_log_f32p_xpulpv2.c \
   src/BasicMathFunctions/negate/kernels/plp_negate_f32s_xpulpv2.c \
   src/BasicMathFunctions/negate/kernels/plp_negate_i32s_xpulpv2.c \
 	src/BasicMathFunctions/negate/kernels/plp_negate_i16s_xpulpv2.c \
