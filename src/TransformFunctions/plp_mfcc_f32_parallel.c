@@ -116,7 +116,7 @@ void plp_mfcc_f32_parallel(const plp_fft_instance_f32 *SFFT,
 
 	// Step 4: Take the log of the computed mel scale. 
 	// the offset is copied from pytorch
-	plp_offset_f32(fb_out, 1e-6f, fb_out, 32);
+	plp_offset_f32(fb_out, 1e-6f, fb_out, n_mels);
 	float32_t *mel_logs = fb_out;
 	for (int i=0;i<n_mels;i++){
         	float32_t log_i = log(fb_out[i]);
