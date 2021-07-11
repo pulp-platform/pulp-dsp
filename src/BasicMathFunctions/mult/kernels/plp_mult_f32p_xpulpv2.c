@@ -1,6 +1,6 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_mult_i32p_xpulpv2.c
+ * Title:        plp_mult_f32p_xpulpv2.c
  * Description:  32-bit floating-point multiplication for XPULPV2 with interleaved access
  *
  * $Date:        10. July 2021
