@@ -32,6 +32,149 @@
 
 /* HELPER FUNCTIONS */
 
+/********************************************************************************
+ *  Left Edge Cases
+ * *****************************************************************************/
+#define CONSTANT_EDGE_LEFT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET)     \
+    for(; J < WAVELET.length ; J++){                                            \
+        SUM_LO += WAVELET.dec_lo[J] * SRC[0];                                   \
+        SUM_HI += WAVELET.dec_hi[J] * SRC[0];                                   \
+    }                                                                           \
+
+
+#define SYMMETRIC_EDGE_LEFT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET)    \
+    while(J < WAVELET.length){                                                  \
+        int32_t k;                                                              \
+        for(k=0; k < length && J < WAVELET.length; k++, J++) {                  \
+            SUM_LO += WAVELET.dec_lo[J] * SRC[k];                               \
+            SUM_HI += WAVELET.dec_hi[J] * SRC[k];                               \
+        }                                                                       \
+        for(k=0; k < LENGTH && J < WAVELET.length; k++, J++) {                  \
+            SUM_LO += WAVELET.dec_lo[J] * SRC[LENGTH-1-k];                      \
+            SUM_HI += WAVELET.dec_hi[J] * SRC[LENGTH-1-k];                      \
+        }                                                                       \
+    }                                                                           \
+
+
+#define REFELCT_EDGE_LEFT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET)      \
+    while(J < WAVELET.length){                                                  \
+        int32_t k;                                                              \
+        for(k=1; k < LENGTH && J < WAVELET.length; k++, J++) {                  \
+            SUM_LO += WAVELET.dec_lo[J] * SRC[k];                               \
+            SUM_HI += WAVELET.dec_hi[J] * SRC[k];                               \
+        }                                                                       \
+        for(k=1; k < LENGTH && J< WAVELET.length; k++, J++) {                   \
+                                                                                \
+            SUM_LO += WAVELET.dec_lo[J] * SRC[LENGTH-1-k];                      \
+            SUM_HI += WAVELET.dec_hi[J] * SRC[LENGTH-1-k];                      \
+        }                                                                       \
+    }                                                                           \
+
+
+#define ANTISYMMETRIC_EDGE_LEFT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET)\
+    while(J < WAVELET.length){                                                  \
+        int32_t k;                                                              \
+        for(k=0; k < LENGTH && J < WAVELET.length; k++, J++) {                  \
+            SUM_LO -= WAVELET.dec_lo[J] * SRC[k];                               \
+            SUM_HI -= WAVELET.dec_hi[J] * SRC[k];                               \
+        }                                                                       \
+        for(k=0; k < LENGTH && J< WAVELET.length; k++, J++) {                   \
+                                                                                \
+            SUM_LO += WAVELET.dec_lo[J] * SRC[LENGTH-1-k];                      \
+            SUM_HI += WAVELET.dec_hi[J] * SRC[LENGTH-1-k];                      \
+        }                                                                       \
+    }                                                                           \
+
+#define ANTIREFLECT_EDGE_LEFT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET)  \
+    while(J < WAVELET.length){                                                  \
+                int32_t k;                                                      \
+        for(k=1; k < LENGTH && J < WAVELET.length; k++, J++) {                  \
+                                                                                \
+            SUM_LO -= WAVELET.dec_lo[J] * SRC[k];                               \
+            SUM_HI -= WAVELET.dec_hi[J] * SRC[k];                               \
+        }                                                                       \
+        for(k=1; k < LENGTH && J< WAVELET.length; k++, J++) {                   \
+                                                                                \
+            SUM_LO += WAVELET.dec_lo[J] * SRC[LENGTH-1-k];                      \
+            SUM_HI += WAVELET.dec_hi[J] * SRC[LENGTH-1-k];                      \
+        }                                                                       \
+    }                                                                           \
+
+
+
+/********************************************************************************
+ *  Right Edge Cases
+ * *****************************************************************************/
+#define CONSTANT_EDGE_RIGHT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET)    \
+    for(; OFFSET - J >= LENGTH ; J++){                                          \
+        SUM_LO += WAVELET.dec_lo[J] * SRC[LENGTH-1];                            \
+        SUM_HI += WAVELET.dec_hi[J] * SRC[LENGTH-1];                            \
+    }                                                                           \
+
+
+#define SYMMETRIC_EDGE_RIGHT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET)   \
+    while(OFFSET - J >= LENGTH){                                                \
+        int32_t k;                                                              \
+        for(k=0; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
+                                                                                \
+            SUM_LO += WAVELET.dec_lo[OFFSET - LENGTH - J] * SRC[LENGTH - 1 - k];\
+            SUM_HI += WAVELET.dec_hi[OFFSET - LENGTH - J] * SRC[LENGTH - 1 - k];\
+        }                                                                       \
+        for(k=0; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
+                                                                                \
+            SUM_LO += WAVELET.dec_lo[OFFSET - LENGTH - J] * SRC[k];             \
+            SUM_HI += WAVELET.dec_hi[OFFSET - LENGTH - J] * SRC[k];             \
+        }                                                                       \
+    }                                                                           \
+
+
+#define REFELCT_EDGE_RIGHT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET)     \
+    while(OFFSET - J >= LENGTH){                                                \
+        int32_t k;                                                              \
+        for(k=1; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
+                                                                                \
+            SUM_LO += WAVELET.dec_lo[OFFSET - LENGTH - J] * SRC[LENGTH - 1 - k];\
+            SUM_HI += WAVELET.dec_hi[OFFSET - LENGTH - J] * SRC[LENGTH - 1 - k];\
+        }                                                                       \
+        for(k=1; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
+                                                                                \
+            SUM_LO += WAVELET.dec_lo[OFFSET - LENGTH - J] * SRC[k];             \
+            SUM_HI += WAVELET.dec_hi[OFFSET - LENGTH - J] * SRC[k];             \
+        }                                                                       \
+    }                                                                           \
+
+
+#define ANTISYMMETRIC_EDGE_RIGHT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET)\
+    while(OFFSET - J >= LENGTH){                                                \
+        int32_t k;                                                              \
+        for(k=0; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
+            SUM_LO -= WAVELET.dec_lo[OFFSET - LENGTH - J] * SRC[LENGTH - 1 - k];\
+            SUM_HI -= WAVELET.dec_hi[OFFSET - LENGTH - J] * SRC[LENGTH - 1 - k];\
+        }                                                                       \
+        for(k=0; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
+                                                                                \
+            SUM_LO += WAVELET.dec_lo[OFFSET - LENGTH - J] * SRC[k];             \
+            SUM_HI += WAVELET.dec_hi[OFFSET - LENGTH - J] * SRC[k];             \
+        }                                                                       \
+    }                                                                           \
+
+
+#define ANTIREFLECT_EDGE_RIGHT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET) \
+    while(OFFSET - J >= LENGTH){                                                \
+        int32_t k;                                                              \
+        for(k=1; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
+                                                                                \
+            SUM_LO -= WAVELET.dec_lo[OFFSET - LENGTH - J] * SRC[LENGTH - 1 - k];\
+            SUM_HI -= WAVELET.dec_hi[OFFSET - LENGTH - J] * SRC[LENGTH - 1 - k];\
+        }                                                                       \
+        for(k=1; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
+                                                                                \
+            SUM_LO += WAVELET.dec_lo[OFFSET - LENGTH - J] * SRC[k];             \
+            SUM_HI += WAVELET.dec_hi[OFFSET - LENGTH - J] * SRC[k];             \
+        }                                                                       \
+    }                                                                           \
+
+
 /**
   @ingroup dwt
  */
@@ -68,85 +211,210 @@ void plp_dwt_f32_xpulpv2(const float32_t *__restrict__ pSrc,
 
     static uint32_t step = 2;
 
-    int32_t offset, j;
+    int32_t offset;
+        
+    /***
+     * The filter convolution is done in 4 steps handling cases where
+     *  1. Filter is hanging over the left side of the signal
+     *  2. Filter is same size, or totally enclosed in signal
+     *  3. Filter is larger than the enclosed signal and hangs over both edges
+     *  4. Filter hangs over the right side of the signal
+     * 
+     *  Each of the cases, where signal hangs over the boundary of the signal, values are computed 
+     *  on demand based on the edge extension mode.
+     */
 
-    // We start convolving from the frist element and skip over by one.
-    // Make sure not to roll over the Array length and the wavelet length
-    // offset is the element in pSrc which alligns with current filter offset (can go beyond end)
-    for (offset = step - 1; offset < length + wavelet.length - 1; offset += step) {
-
+    
+    /*
+     *  Handle Left overhanging
+     *
+     * X() =  x x[A B C D E F]
+     * H() = [d c b a]
+     *          ^   ^
+     *          |   First compute the filter part overlapping with the signal
+     *          Then extend the signal (x x) by computing the values based on the extension mode
+     */
+    for(offset = step-1; offset < wavelet.length - 1 && offset < length; offset += step){
         float32_t sum_lo = 0;
         float32_t sum_hi = 0;
 
-        // = wavelet.length - 1; // Filter counter start at end of filter
-        printf("Computing Left\n===============\n");
+        uint32_t filt_j = 0;
 
-        j = wavelet.length - 1;
+        // Compute Filter overlapping with signal
+        for(; filt_j <= offset; filt_j++){
+            sum_lo += wavelet.dec_lo[filt_j] * pSrc[offset - filt_j];
+            sum_hi += wavelet.dec_hi[filt_j] * pSrc[offset - filt_j];
+        }
+
         // Compute Left edge extension
-        switch (mode) {
-        case PLP_DWT_MODE_CONSTANT:
+        switch(mode){
+            case PLP_DWT_MODE_CONSTANT:
+                CONSTANT_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_SYMMETRIC:
+                SYMMETRIC_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_REFELCT:
+                REFELCT_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_ANTISYMMETRIC:
+                ANTISYMMETRIC_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_ANTIREFLECT:
+                ANTIREFLECT_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_PERIODIC:
+            case PLP_DWT_MODE_ZERO:
+            default:
+                break;
+        }
+    
+    
+        *pCurrentA++ = sum_lo;
+        *pCurrentD++ = sum_hi;
+    }
 
-            for (; j > offset; j--) {
-                printf("Constat +=wavelet[%d] * pSrc[%d]\n", j, 0);
-                sum_lo += wavelet.dec_lo[j] * pSrc[0];
-                sum_hi += wavelet.dec_hi[j] * pSrc[0];
-            }
+    /*
+     *  Compute center (length >= wavelet.length)
+     *
+     *  X() = [A B C D E F]
+     *  h() =   [d c b a]
+     *                 ^
+     *                 Compute a full convolution of the filter with the signal
+     */    
+    for(;offset < length; offset += step){
 
-            break;
-        case PLP_DWT_MODE_SYMMETRIC:
-            break;
-        case PLP_DWT_MODE_REFELCT:
-            break;
-        case PLP_DWT_MODE_PERIODIC:
-            break;
-        case PLP_DWT_MODE_ANTISYMMETRIC:
-            break;
-        case PLP_DWT_MODE_ANTIREFLECT:
-            break;
-        case PLP_DWT_MODE_ZERO:
-        default:
-            break;
+        float32_t sum_lo = 0;
+        float32_t sum_hi = 0;
+        uint32_t filt_j = 0;
+
+        for(; filt_j < wavelet.length; filt_j++){
+            sum_lo += wavelet.dec_lo[filt_j] * pSrc[offset - filt_j];
+            sum_hi += wavelet.dec_hi[filt_j] * pSrc[offset - filt_j];
         }
 
-        // Compute convolution on both hi and lo filter
-        // Compute Center
+        *pCurrentA++ = sum_lo;
+        *pCurrentD++ = sum_hi;
+    }
 
-        // At center we start at the offset'th offset or wavelet end
-        j = MIN(offset, wavelet.length - 1);
-        printf("Computing Center\n===============\n");
-        printf("Offset %d, Starting at j: %d\n", offset, j);
+     /*
+     *  Compute center (length < wavelet.length)
+     *
+     *  X() =   y y[A B C]x x x
+     *  h() =  [h g f e d c b a]
+     *            ^     ^     ^
+     *            |     |     Compute Right extension (x x x) based on extension mode
+     *            |     Compute a full convolution of the filter overlapping with the signal
+     *            Compute Left extension (y y) based on extension mode
+     */      
 
-        for (; j >= 0 && offset - j < length; j--) {
-            printf("+=wavelet[%d] * pSrc[%d]\n", j, offset - j);
-            sum_lo += wavelet.dec_lo[j] * pSrc[offset - j];
-            sum_hi += wavelet.dec_hi[j] * pSrc[offset - j];
+    for(;offset < wavelet.length - 1; offset += step){
+        float32_t sum_lo = 0;
+        float32_t sum_hi = 0;
+
+        uint32_t filt_j = 0;
+
+        // Filter Right extension
+        switch(mode){
+            case PLP_DWT_MODE_CONSTANT:
+                CONSTANT_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_SYMMETRIC:
+                SYMMETRIC_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_REFELCT:
+                REFELCT_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_ANTISYMMETRIC:
+                ANTISYMMETRIC_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_ANTIREFLECT:
+                ANTIREFLECT_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_PERIODIC:
+            case PLP_DWT_MODE_ZERO:
+            default:
+                filt_j = offset - length + 1;
+                break;
         }
 
-        printf("Computing Right\n===============\n");
+        // Filter Center overlapp
+        for(; filt_j <= offset; filt_j++){
+            sum_lo += wavelet.dec_lo[filt_j] * pSrc[offset - filt_j];
+            sum_hi += wavelet.dec_hi[filt_j] * pSrc[offset - filt_j];
+        }   
 
-        // Compute Right edge extension
-        switch (mode) {
-        case PLP_DWT_MODE_CONSTANT:
-            for (j = offset - length; j >= 0; j--) {
-                printf("Constat += wavelet[%d] * pSrc[%d]\n", j, length - 1);
-                sum_lo += wavelet.dec_lo[j] * pSrc[length - 1];
-                sum_hi += wavelet.dec_hi[j] * pSrc[length - 1];
-            }
+        // Filter Left extension
+        switch(mode){
+            case PLP_DWT_MODE_CONSTANT:
+                CONSTANT_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_SYMMETRIC:
+                SYMMETRIC_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_REFELCT:
+                REFELCT_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_ANTISYMMETRIC:
+                ANTISYMMETRIC_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_ANTIREFLECT:
+                ANTIREFLECT_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_PERIODIC:
+            case PLP_DWT_MODE_ZERO:
+            default:
+                break;
+        }
 
-            break;
-        case PLP_DWT_MODE_SYMMETRIC:
-            break;
-        case PLP_DWT_MODE_REFELCT:
-            break;
-        case PLP_DWT_MODE_PERIODIC:
-            break;
-        case PLP_DWT_MODE_ANTISYMMETRIC:
-            break;
-        case PLP_DWT_MODE_ANTIREFLECT:
-            break;
-        case PLP_DWT_MODE_ZERO:
-        default:
-            break;
+        *pCurrentA++ = sum_lo;
+        *pCurrentD++ = sum_hi;
+    }
+
+
+    /*
+     *  Handle Right overhanging
+     *
+     * X() = [A B C D E F]x x
+     * H() =         [d c b a]
+     *                  ^   ^
+     *                  |   First extend the signal (x x) by computing the values based on the extension mode
+     *                  Then compute the filter part overlapping with the signal
+     */
+    for(; offset < length + wavelet.length - 1; offset += step){
+        float32_t sum_lo = 0;
+        float32_t sum_hi = 0;
+
+        uint32_t filt_j = 0;
+
+        // Compute Left edge extension
+        switch(mode){
+            case PLP_DWT_MODE_CONSTANT:
+                CONSTANT_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_SYMMETRIC:
+                SYMMETRIC_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_REFELCT:
+                REFELCT_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_ANTISYMMETRIC:
+                ANTISYMMETRIC_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_ANTIREFLECT:
+                ANTIREFLECT_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+                break;
+            case PLP_DWT_MODE_PERIODIC:
+            case PLP_DWT_MODE_ZERO:
+            default:
+                filt_j = offset - length + 1;
+                break;
+        }
+    
+        // Filter overlapping with signal
+        for(; filt_j < wavelet.length; filt_j++){
+            sum_lo += wavelet.dec_lo[filt_j] * pSrc[offset - filt_j];
+            sum_hi += wavelet.dec_hi[filt_j] * pSrc[offset - filt_j];
         }
 
         *pCurrentA++ = sum_lo;
