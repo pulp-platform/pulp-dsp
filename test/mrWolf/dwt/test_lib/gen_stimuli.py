@@ -44,6 +44,7 @@ def compute_result(result_parameter, inputs, env, fix_point):
     """
     wavelets = {
         'PLP_DWT_HAAR': 'haar',
+        'PLP_DWT_DB1': 'db1',
         'PLP_DWT_DB2': 'db2',
         'PLP_DWT_DB4': 'db4'
     }
@@ -52,7 +53,7 @@ def compute_result(result_parameter, inputs, env, fix_point):
         'PLP_DWT_MODE_ZERO': 'zero', 
         'PLP_DWT_MODE_CONSTANT': 'constant',
         'PLP_DWT_MODE_SYMMETRIC': 'symmetric',
-        'PLP_DWT_MODE_REFELCT': 'reflect',
+        'PLP_DWT_MODE_REFLECT': 'reflect',
         'PLP_DWT_MODE_ANTISYMMETRIC': 'antisymmetric',
         'PLP_DWT_MODE_ANTIREFLECT': 'antireflect'
     }
@@ -77,11 +78,7 @@ def compute_result(result_parameter, inputs, env, fix_point):
         src = inputs['pSrc'].value.astype(np.float32)
         mode = env['mode']
         wavelet = env['wavelet']
-        print(src, mode, wavelet)
         cA, cD = pywt.dwt(src, wavelets[wavelet], modes[mode])
-
-
-        print(result_parameter.name)
         if 'pDstA' in result_parameter.name:
             return cA
         elif 'pDstD' in result_parameter.name:
