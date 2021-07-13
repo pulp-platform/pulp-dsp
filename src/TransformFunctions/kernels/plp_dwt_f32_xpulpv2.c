@@ -86,20 +86,25 @@
     }                                                                           \
 
 #define ANTIREFLECT_EDGE_LEFT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET)  \
+{                                                                               \
+    float32_t left_edge = SRC[0];                                               \
+    float32_t tmp = 0;                                                          \
     while(J < WAVELET.length){                                                  \
-                int32_t k;                                                      \
+        int32_t k;                                                              \
         for(k=1; k < LENGTH && J < WAVELET.length; k++, J++) {                  \
-                                                                                \
-            SUM_LO -= WAVELET.dec_lo[J] * SRC[k];                               \
-            SUM_HI -= WAVELET.dec_hi[J] * SRC[k];                               \
+            tmp = left_edge - (SRC[k] - SRC[0]);                                \
+            SUM_LO += WAVELET.dec_lo[J] * tmp;                                  \
+            SUM_HI += WAVELET.dec_hi[J] * tmp;                                  \
         }                                                                       \
+        left_edge = tmp;                                                        \
         for(k=1; k < LENGTH && J< WAVELET.length; k++, J++) {                   \
-                                                                                \
-            SUM_LO += WAVELET.dec_lo[J] * SRC[LENGTH-1-k];                      \
-            SUM_HI += WAVELET.dec_hi[J] * SRC[LENGTH-1-k];                      \
+            tmp = left_edge + (SRC[LENGTH-1-k] - SRC[LENGTH-1]);                \
+            SUM_LO += WAVELET.dec_lo[J] * tmp;                                  \
+            SUM_HI += WAVELET.dec_hi[J] * tmp;                                  \
         }                                                                       \
+        left_edge = tmp;                                                        \
     }                                                                           \
-
+}                                                                               \
 
 
 /********************************************************************************
@@ -160,19 +165,25 @@
 
 
 #define ANTIREFLECT_EDGE_RIGHT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET) \
+{                                                                               \
+    float32_t right_edge = SRC[LENGTH -1];                                      \
+    float32_t tmp = 0;                                                          \
     while(OFFSET - J >= LENGTH){                                                \
         int32_t k;                                                              \
         for(k=1; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
-                                                                                \
-            SUM_LO -= WAVELET.dec_lo[OFFSET - LENGTH - J] * SRC[LENGTH - 1 - k];\
-            SUM_HI -= WAVELET.dec_hi[OFFSET - LENGTH - J] * SRC[LENGTH - 1 - k];\
+            tmp = right_edge - (SRC[LENGTH-1-k] - SRC[LENGTH-1]);               \
+            SUM_LO += WAVELET.dec_lo[OFFSET - LENGTH - J] * tmp;                \
+            SUM_HI += WAVELET.dec_hi[OFFSET - LENGTH - J] * tmp;                \
         }                                                                       \
+        right_edge = tmp;                                                       \
         for(k=1; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
-                                                                                \
-            SUM_LO += WAVELET.dec_lo[OFFSET - LENGTH - J] * SRC[k];             \
-            SUM_HI += WAVELET.dec_hi[OFFSET - LENGTH - J] * SRC[k];             \
+            tmp = right_edge + (SRC[k] - SRC[0]);                               \
+            SUM_LO += WAVELET.dec_lo[OFFSET - LENGTH - J] * tmp;                \
+            SUM_HI += WAVELET.dec_hi[OFFSET - LENGTH - J] * tmp;                \
         }                                                                       \
+        right_edge = tmp;                                                       \
     }                                                                           \
+}                                                                               \
 
 
 /**
