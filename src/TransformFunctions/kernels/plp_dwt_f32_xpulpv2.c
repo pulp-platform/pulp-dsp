@@ -29,7 +29,7 @@
  */
 
 #include "plp_math.h"
-
+#include "plp_const_structs.h"
 /* HELPER FUNCTIONS */
 
 /********************************************************************************
@@ -430,5 +430,110 @@ void plp_dwt_f32_xpulpv2(const float32_t *__restrict__ pSrc,
 
         *pCurrentA++ = sum_lo;
         *pCurrentD++ = sum_hi;
+    }
+}
+
+
+
+
+/**
+   @brief  Floating-point DWT kernel optimized for Haar Wavelet on real input data for XPULPV2 extension.
+   @param[in]   pSrc     points to the input buffer (real data)
+   @param[in]   length   length of input buffer
+   @param[in]   mode     boundary extension mode
+
+   @param[out]  pDstA    points to ouput buffer with Approximate coefficients
+   @param[out]  pDstD    points to ouput buffer with Detailed coefficients
+   @return      none
+*/
+void plp_dwt_haar_f32_xpulpv2(const float32_t *__restrict__ pSrc,
+                         uint32_t length,
+                         plp_dwt_extension_mode mode,
+                         float32_t *__restrict__ pDstA,
+                         float32_t *__restrict__ pDstD) {
+    float32_t *pCurrentA = pDstA;
+    float32_t *pCurrentD = pDstD;
+
+    static uint32_t step = 2;
+
+    int32_t offset;
+        
+    /***
+     * The filter convolution is done in 4 steps handling cases where
+     *  1. Filter is hanging over the left side of the signal
+     *  2. Filter is same size, or totally enclosed in signal
+     *  3. Filter is larger than the enclosed signal and hangs over both edges
+     *  4. Filter hangs over the right side of the signal
+     * 
+     *  Each of the cases, where signal hangs over the boundary of the signal, values are computed 
+     *  on demand based on the edge extension mode.
+     */
+
+    
+ 
+    /*
+     *  Compute center (length >= wavelet.length)
+     *
+     *  X() = [A B C D E F]
+     *  h() =       [b a]
+     *                 ^
+     *                 Compute a full convolution of the filter with the signal
+     */    
+    for(offset = step-1 ; offset < length; offset += step){
+
+        float32_t sum_lo = PLP_DWT_HAAR_f32.dec_lo[0] * pSrc[offset] + PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[offset - 1];
+        float32_t sum_hi = PLP_DWT_HAAR_f32.dec_hi[0] * pSrc[offset] + PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[offset - 1];
+
+        *pCurrentA++ = sum_lo;
+        *pCurrentD++ = sum_hi;
+    }
+
+   
+
+
+    /*
+     *  Handle Right overhanging
+     *
+     * X() = [A B C D E F]x x
+     * H() =         [d c b a]
+     *                  ^   ^
+     *                  |   First extend the signal (x x) by computing the values based on the extension mode
+     *                  Then compute the filter part overlapping with the signal
+     */
+    if(offset < length + 1){
+        float32_t sum_lo = 0;
+        float32_t sum_hi = 0;
+
+        uint32_t filt_j = 0;
+
+        // Compute Left edge extension
+        switch(mode){
+            case PLP_DWT_MODE_CONSTANT:
+            case PLP_DWT_MODE_SYMMETRIC:
+                sum_lo = PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_lo[0] * pSrc[length - 1];
+                sum_hi = PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_hi[0] * pSrc[length - 1];
+                break;
+            case PLP_DWT_MODE_REFLECT:
+                sum_lo = PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_lo[0] * pSrc[length - 2];
+                sum_hi = PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_hi[0] * pSrc[length - 2];
+                break;
+            case PLP_DWT_MODE_ANTISYMMETRIC:
+                sum_lo = PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1] - PLP_DWT_HAAR_f32.dec_lo[0] * pSrc[length - 1];
+                sum_hi = PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1] - PLP_DWT_HAAR_f32.dec_hi[0] * pSrc[length - 1];
+                break;
+            case PLP_DWT_MODE_ANTIREFLECT:
+                sum_lo = PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_lo[0] * (2*pSrc[length - 1] - pSrc[length - 2]);
+                sum_hi = PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_hi[0] * (2*pSrc[length - 1] - pSrc[length - 2]);
+                break;
+            case PLP_DWT_MODE_PERIODIC:
+            case PLP_DWT_MODE_ZERO:
+            default:
+                sum_lo = PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1];
+                sum_hi = PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1];
+                break;
+        }
+    
+        *pCurrentA = sum_lo;
+        *pCurrentD = sum_hi;
     }
 }

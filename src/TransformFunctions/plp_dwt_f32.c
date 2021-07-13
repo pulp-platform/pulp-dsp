@@ -68,8 +68,19 @@ void plp_dwt_f32(const float32_t *__restrict__ pSrc,
         printf("F extension is supported only for cluster side\n");
         return;
     }
+ 
 
-    plp_dwt_f32_xpulpv2(pSrc, length, wavelet, mode, pDstA, pDstD);
+   switch(wavelet.type) {
+   case PLP_DWT_WAVELET_HAAR:
+   case PLP_DWT_WAVELET_DB1:
+      plp_dwt_haar_f32_xpulpv2(pSrc, length, mode, pDstA, pDstD);
+      break;
+   default:
+      plp_dwt_f32_xpulpv2(pSrc, length, wavelet, mode, pDstA, pDstD);
+      break;
+   }
+
+
 }
 
 /**

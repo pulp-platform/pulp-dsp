@@ -8667,6 +8667,22 @@ void plp_dwt_f32_xpulpv2(const float32_t *__restrict__ pSrc,
                   float32_t *__restrict__ pDstA,
                   float32_t *__restrict__ pDstD);
 
+/**
+   @brief  Floating-point DWT kernel optimized for Haar Wavelet on real input data for XPULPV2 extension.
+   @param[in]   pSrc     points to the input buffer (real data)
+   @param[in]   length   length of input buffer
+   @param[in]   mode     boundary extension mode
+
+   @param[out]  pDstA    points to ouput buffer with Approximate coefficients
+   @param[out]  pDstD    points to ouput buffer with Detailed coefficients
+   @return      none
+*/
+void plp_dwt_haar_f32_xpulpv2(const float32_t *__restrict__ pSrc,
+                         uint32_t length,
+                         plp_dwt_extension_mode mode,
+                         float32_t *__restrict__ pDstA,
+                         float32_t *__restrict__ pDstD);
+
 
 
 
