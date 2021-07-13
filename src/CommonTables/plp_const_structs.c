@@ -119,21 +119,21 @@ const plp_triangular_filter_f32 plp_triangular_filter_f32_32 = {
 };
 
 
-const plp_dwt_wavelet_f32 PLP_DWT_HAAR = {
+const plp_dwt_wavelet_f32 PLP_DWT_HAAR_f32 = {
    .length = 2,
    .dec_lo = (float32_t []){  0.7071067811865476f, 0.7071067811865476f },
    .dec_hi = (float32_t []){ -0.7071067811865476f, 0.7071067811865476f }
 };
 
 
-const plp_dwt_wavelet_f32 PLP_DWT_DB1 = {
+const plp_dwt_wavelet_f32 PLP_DWT_DB1_f32 = {
    .length = 2,
    .dec_lo = (float32_t []){  0.7071067811865476f, 0.7071067811865476f },
    .dec_hi = (float32_t []){ -0.7071067811865476f, 0.7071067811865476f }
 };
 
 
-const plp_dwt_wavelet_f32 PLP_DWT_DB2 = {
+const plp_dwt_wavelet_f32 PLP_DWT_DB2_f32 = {
    .length = 4,
    .dec_lo = (float32_t []){  
        -0.12940952255092145f,
@@ -150,7 +150,7 @@ const plp_dwt_wavelet_f32 PLP_DWT_DB2 = {
 };
 
 
-const plp_dwt_wavelet_f32 PLP_DWT_DB3 = {
+const plp_dwt_wavelet_f32 PLP_DWT_DB3_f32 = {
    .length = 6,
    .dec_lo = (float32_t []){
         0.035226291882100656f,
@@ -170,7 +170,7 @@ const plp_dwt_wavelet_f32 PLP_DWT_DB3 = {
         }
 };
 
-const plp_dwt_wavelet_f32 PLP_DWT_DB4 = {
+const plp_dwt_wavelet_f32 PLP_DWT_DB4_f32 = {
    .length = 8,
    .dec_lo = (float32_t []){  
         -0.010597401784997278f,

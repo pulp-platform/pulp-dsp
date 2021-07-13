@@ -56,7 +56,7 @@
     }                                                                           \
 
 
-#define REFELCT_EDGE_LEFT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET)      \
+#define REFLECT_EDGE_LEFT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET)      \
     while(J < WAVELET.length){                                                  \
         int32_t k;                                                              \
         for(k=1; k < LENGTH && J < WAVELET.length; k++, J++) {                  \
@@ -128,7 +128,7 @@
     }                                                                           \
 
 
-#define REFELCT_EDGE_RIGHT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET)     \
+#define REFLECT_EDGE_RIGHT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET)     \
     while(OFFSET - J >= LENGTH){                                                \
         int32_t k;                                                              \
         for(k=1; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
@@ -254,8 +254,8 @@ void plp_dwt_f32_xpulpv2(const float32_t *__restrict__ pSrc,
             case PLP_DWT_MODE_SYMMETRIC:
                 SYMMETRIC_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
                 break;
-            case PLP_DWT_MODE_REFELCT:
-                REFELCT_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+            case PLP_DWT_MODE_REFLECT:
+                REFLECT_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
                 break;
             case PLP_DWT_MODE_ANTISYMMETRIC:
                 ANTISYMMETRIC_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
@@ -322,8 +322,8 @@ void plp_dwt_f32_xpulpv2(const float32_t *__restrict__ pSrc,
             case PLP_DWT_MODE_SYMMETRIC:
                 SYMMETRIC_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
                 break;
-            case PLP_DWT_MODE_REFELCT:
-                REFELCT_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+            case PLP_DWT_MODE_REFLECT:
+                REFLECT_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
                 break;
             case PLP_DWT_MODE_ANTISYMMETRIC:
                 ANTISYMMETRIC_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
@@ -352,8 +352,8 @@ void plp_dwt_f32_xpulpv2(const float32_t *__restrict__ pSrc,
             case PLP_DWT_MODE_SYMMETRIC:
                 SYMMETRIC_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
                 break;
-            case PLP_DWT_MODE_REFELCT:
-                REFELCT_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+            case PLP_DWT_MODE_REFLECT:
+                REFLECT_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
                 break;
             case PLP_DWT_MODE_ANTISYMMETRIC:
                 ANTISYMMETRIC_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
@@ -395,8 +395,8 @@ void plp_dwt_f32_xpulpv2(const float32_t *__restrict__ pSrc,
             case PLP_DWT_MODE_SYMMETRIC:
                 SYMMETRIC_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
                 break;
-            case PLP_DWT_MODE_REFELCT:
-                REFELCT_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
+            case PLP_DWT_MODE_REFLECT:
+                REFLECT_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
                 break;
             case PLP_DWT_MODE_ANTISYMMETRIC:
                 ANTISYMMETRIC_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
