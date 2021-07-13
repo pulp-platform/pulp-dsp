@@ -1409,9 +1409,22 @@ typedef struct {
 } plp_mat_copy_stride_instance_f32;
 
 
+
+typedef enum {
+    PLP_DWT_WAVELET_OTHER,
+    PLP_DWT_WAVELET_HAAR,
+    PLP_DWT_WAVELET_DB1,
+    PLP_DWT_WAVELET_DB2,
+    PLP_DWT_WAVELET_DB3,
+    PLP_DWT_WAVELET_DB4,
+    PLP_DWT_WAVELET_SYM
+} plp_dwt_wavelet_type;
+
+
 typedef struct {
 
    uint32_t length;
+   plp_dwt_wavelet_type type;
 
    float32_t *dec_lo; /* decomposition lowpass */
    float32_t *dec_hi; /* decomposition highpass */
