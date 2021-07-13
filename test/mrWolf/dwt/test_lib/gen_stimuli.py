@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import numpy as np
+import pywt
 
 
 ####################
@@ -41,37 +42,54 @@ def compute_result(result_parameter, inputs, env, fix_point):
     env: Dict mapping the variable (SweepVariable or DynamicVariable) names to their value.
     fix_point: None (if no fixpoint is used) or decimal point
     """
-    if result_parameter.ctype == 'int32_t':
-        a = inputs['srcA'].value.astype(np.int32)
-        b = inputs['srcB'].value.astype(np.int32)
-        result = np.zeros(1, dtype=np.int32)
-        if fix_point is None or fix_point == 0:
-            result[0] = np.dot(a, b)
-        else:
-            # group values and only regularize after grouping
-            ctype = inputs['srcA'].ctype
-            groups = 2 if ctype == 'int32_t' else 4 if ctype == 'int16_t' else 8
-            for g in range(len(a) // groups):
-                tmp_val = 0
-                for i in range(groups):
-                    j = g * groups + i
-                    tmp_val = q_add(tmp_val, a[j] * b[j])
-                result[0] = q_add(result[0], q_roundnorm(tmp_val, fix_point))
-            # do the remaining elements one by one
-            for i in range((len(a) // groups) * groups, len(a)):
-                result[0] = q_add(result[0], q_roundnorm(a[i] * b[i], fix_point))
+    wavelets = {
+        'PLP_DWT_HAAR': 'haar',
+        'PLP_DWT_DB2': 'db2',
+        'PLP_DWT_DB4': 'db4'
+    }
+
+    modes = {
+        'PLP_DWT_MODE_ZERO': 'zero', 
+        'PLP_DWT_MODE_CONSTANT': 'constant',
+        'PLP_DWT_MODE_SYMMETRIC': 'symmetric',
+        'PLP_DWT_MODE_REFELCT': 'reflect',
+        'PLP_DWT_MODE_ANTISYMMETRIC': 'antisymmetric',
+        'PLP_DWT_MODE_ANTIREFLECT': 'antireflect'
+    }
+
+
+
+    if fix_point is not None:
+        raise RuntimeError("FixPoint is not supported")
+    # elif result_parameter.ctype == 'int8_t':
+    #     a = inputs['pSrcA'].value.astype(np.int8)
+    #     b = inputs['pSrcB'].value.astype(np.int8)
+    #     result = np.add(a, b, dtype=np.int8)
+    # elif result_parameter.ctype == 'int16_t':
+    #     a = inputs['pSrcA'].value.astype(np.int16)
+    #     b = inputs['pSrcB'].value.astype(np.int16)
+    #     result = np.add(a, b, dtype=np.int16)
+    # elif result_parameter.ctype == 'int32_t':
+    #     a = inputs['pSrcA'].value.astype(np.int32)
+    #     b = inputs['pSrcB'].value.astype(np.int32)
+    #     result = np.add(a, b, dtype=np.int32)
     elif result_parameter.ctype == 'float':
-        # for float implementation, it is important to always use float32 for intermediate ops!
-        a = inputs['srcA'].value.astype(np.float32)
-        b = inputs['srcB'].value.astype(np.float32)
-        res = np.float32(0)
-        for x_a, x_b in zip(a, b):
-            res += x_a * x_b
-        result = np.array([res], dtype=np.float32)
+        src = inputs['pSrc'].value.astype(np.float32)
+        mode = env['mode']
+        wavelet = env['wavelet']
+        print(src, mode, wavelet)
+        cA, cD = pywt.dwt(src, wavelets[wavelet], modes[mode])
+
+
+        print(result_parameter.name)
+        if 'pDstA' in result_parameter.name:
+            return cA
+        elif 'pDstD' in result_parameter.name:
+            return cD
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
 
-    return result
+
 
 
 ######################
