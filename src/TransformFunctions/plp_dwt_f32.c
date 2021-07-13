@@ -46,26 +46,6 @@
    @{
 */
 
-// typedef enum {
-//    PLP_DWT_HAAR,
-//    PLP_DWT_DB1,
-//    PLP_DWT_DB1
-// } plp_dwt_wavelet;
-
-// typedef struct {
-
-//    uint32_t length;
-
-//    float32_t *dec_lo; /* decomposition lowpass */
-//    float32_t *dec_hi; /* decomposition highpass */
-// } plp_dwt_wavelet_f32;
-
-const plp_dwt_wavelet_f32 PLP_DWT_DB1 = {
-    .length = 2,
-    .dec_lo = (float32_t[]){ 0.7071067811865476f, 0.7071067811865476f },
-    .dec_hi = (float32_t[]){ -0.7071067811865476f, 0.7071067811865476f }
-};
-
 /**
    @brief  Floating-point DWT on real input data for XPULPV2 extension.
    @param[in]   pSrc     points to the input buffer (real data)
