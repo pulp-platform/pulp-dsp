@@ -68,7 +68,10 @@ void plp_dwt_f32(const float32_t *__restrict__ pSrc,
         printf("F extension is supported only for cluster side\n");
         return;
     }
- 
+    if((mode == PLP_DWT_MODE_ANTIREFLECT || mode == PLP_DWT_MODE_REFLECT) && length <= 1){
+      printf("F Cannot run [anti]reflect mode on length 1 signal.\n");
+      return;
+    }
 
    switch(wavelet.type) {
    case PLP_DWT_WAVELET_HAAR:
