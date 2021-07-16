@@ -46,7 +46,9 @@ def compute_result(result_parameter, inputs, env, fix_point):
         'PLP_DWT_HAAR': 'haar',
         'PLP_DWT_DB1': 'db1',
         'PLP_DWT_DB2': 'db2',
-        'PLP_DWT_DB4': 'db4'
+        'PLP_DWT_DB4': 'db4',
+        'PLP_DWT_COIF17': 'coif17',
+	    'PLP_DWT_SYM20': 'sym20'
     }
 
     modes = {
