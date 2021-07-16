@@ -1488,6 +1488,25 @@ typedef struct {
    
 } plp_dwt_wavelet_f32;
 
+typedef struct {
+
+   uint32_t length;
+   plp_dwt_wavelet_type type;
+
+   int32_t *dec_lo; /* decomposition lowpass */
+   int32_t *dec_hi; /* decomposition highpass */
+} plp_dwt_wavelet_q32;
+
+typedef struct {
+
+   uint32_t length;
+   plp_dwt_wavelet_type type;
+
+   int16_t *dec_lo; /* decomposition lowpass */
+   int16_t *dec_hi; /* decomposition highpass */
+} plp_dwt_wavelet_q16;
+
+
 
 typedef enum {
     PLP_DWT_MODE_ZERO,
@@ -8706,6 +8725,42 @@ void plp_dwt_f32(const float32_t *__restrict__ pSrc,
                   float32_t *__restrict__ pDstD);
 
 
+/**
+   @brief  32bit Fixed-point DWT  for XPULPV2 extension.
+   @param[in]   pSrc     points to the input buffer (real data)
+   @param[in]   length   length of input buffer
+   @param[in]   wavelet  wavelet structure for calculating DWT
+   @param[in]   mode     boundary extension mode
+
+   @param[out]  pDstA    points to ouput buffer with Approximate coefficients
+   @param[out]  pDstD    points to ouput buffer with Detailed coefficients
+   @return      none
+*/
+void plp_dwt_q32(const int32_t *__restrict__ pSrc,
+                  uint32_t length,
+                  const plp_dwt_wavelet_q32 wavelet,
+                  plp_dwt_extension_mode mode,
+                  int32_t *__restrict__ pDstA,
+                  int32_t *__restrict__ pDstD);
+
+
+/**
+   @brief  16bit Fixed-point DWT for XPULPV2 extension.
+   @param[in]   pSrc     points to the input buffer (real data)
+   @param[in]   length   length of input buffer
+   @param[in]   wavelet  wavelet structure for calculating DWT
+   @param[in]   mode     boundary extension mode
+
+   @param[out]  pDstA    points to ouput buffer with Approximate coefficients
+   @param[out]  pDstD    points to ouput buffer with Detailed coefficients
+   @return      none
+*/
+void plp_dwt_q16(const int16_t *__restrict__ pSrc,
+                  uint32_t length,
+                  const plp_dwt_wavelet_q16 wavelet,
+                  plp_dwt_extension_mode mode,
+                  int16_t *__restrict__ pDstA,
+                  int16_t *__restrict__ pDstD);
 
 /**
    @brief  Floating-point DWT on real input data for XPULPV2 extension.
@@ -8741,6 +8796,78 @@ void plp_dwt_haar_f32_xpulpv2(const float32_t *__restrict__ pSrc,
                          float32_t *__restrict__ pDstA,
                          float32_t *__restrict__ pDstD);
 
+
+
+
+/**
+   @brief  32bit Fixed-point DWT for XPULPV2 extension.
+   @param[in]   pSrc     points to the input buffer (real data)
+   @param[in]   length   length of input buffer
+   @param[in]   wavelet  wavelet structure for calculating DWT
+   @param[in]   mode     boundary extension mode
+
+   @param[out]  pDstA    points to ouput buffer with Approximate coefficients
+   @param[out]  pDstD    points to ouput buffer with Detailed coefficients
+   @return      none
+*/
+void plp_dwt_q32_xpulpv2(const int32_t *__restrict__ pSrc,
+                  uint32_t length,
+                  const plp_dwt_wavelet_q32 wavelet,
+                  plp_dwt_extension_mode mode,
+                  int32_t *__restrict__ pDstA,
+                  int32_t *__restrict__ pDstD);
+
+/**
+   @brief  32bit Fixed-point DWT  kernel optimized for Haar Wavelet on real input data for XPULPV2 extension.
+   @param[in]   pSrc     points to the input buffer (real data)
+   @param[in]   length   length of input buffer
+   @param[in]   mode     boundary extension mode
+
+   @param[out]  pDstA    points to ouput buffer with Approximate coefficients
+   @param[out]  pDstD    points to ouput buffer with Detailed coefficients
+   @return      none
+*/
+void plp_dwt_haar_q32_xpulpv2(const int32_t *__restrict__ pSrc,
+                         uint32_t length,
+                         plp_dwt_extension_mode mode,
+                         int32_t *__restrict__ pDstA,
+                         int32_t *__restrict__ pDstD);
+
+
+
+/**
+   @brief  16bit Fixed-point DWT for XPULPV2 extension.
+   @param[in]   pSrc     points to the input buffer (real data)
+   @param[in]   length   length of input buffer
+   @param[in]   wavelet  wavelet structure for calculating DWT
+   @param[in]   mode     boundary extension mode
+
+   @param[out]  pDstA    points to ouput buffer with Approximate coefficients
+   @param[out]  pDstD    points to ouput buffer with Detailed coefficients
+   @return      none
+*/
+void plp_dwt_q16_xpulpv2(const int16_t *__restrict__ pSrc,
+                  uint32_t length,
+                  const plp_dwt_wavelet_q16 wavelet,
+                  plp_dwt_extension_mode mode,
+                  int16_t *__restrict__ pDstA,
+                  int16_t *__restrict__ pDstD);
+
+/**
+   @brief  16bit Fixed-point DWT kernel optimized for Haar Wavelet on real input data for XPULPV2 extension.
+   @param[in]   pSrc     points to the input buffer (real data)
+   @param[in]   length   length of input buffer
+   @param[in]   mode     boundary extension mode
+
+   @param[out]  pDstA    points to ouput buffer with Approximate coefficients
+   @param[out]  pDstD    points to ouput buffer with Detailed coefficients
+   @return      none
+*/
+void plp_dwt_haar_q16_xpulpv2(const int16_t *__restrict__ pSrc,
+                         uint32_t length,
+                         plp_dwt_extension_mode mode,
+                         int16_t *__restrict__ pDstA,
+                         int16_t *__restrict__ pDstD);
 
 
 
