@@ -297,9 +297,8 @@ void plp_dwt_f32_xpulpv2(const float32_t *__restrict__ pSrc,
 
         float32_t sum_lo = 0;
         float32_t sum_hi = 0;
-        uint32_t filt_j = 0;
-
-        for(; filt_j < wavelet.length; filt_j++){
+        
+        for(uint32_t filt_j = 0; filt_j < wavelet.length; filt_j++){
             sum_lo += wavelet.dec_lo[filt_j] * pSrc[offset - filt_j];
             sum_hi += wavelet.dec_hi[filt_j] * pSrc[offset - filt_j];
         }
@@ -459,14 +458,10 @@ void plp_dwt_haar_f32_xpulpv2(const float32_t *__restrict__ pSrc,
     int32_t offset;
         
     /***
-     * The filter convolution is done in 4 steps handling cases where
-     *  1. Filter is hanging over the left side of the signal
-     *  2. Filter is same size, or totally enclosed in signal
-     *  3. Filter is larger than the enclosed signal and hangs over both edges
-     *  4. Filter hangs over the right side of the signal
+     * The filter convolution is done in 2 steps handling cases where
+     *  1. Filter is same size, or totally enclosed in signal
+     *  2. Filter hangs over the right side of the signal
      * 
-     *  Each of the cases, where signal hangs over the boundary of the signal, values are computed 
-     *  on demand based on the edge extension mode.
      */
 
     
