@@ -168,6 +168,7 @@ FC_SRCS = \
 	src/TransformFunctions/plp_dwt_f32.c \
 	src/TransformFunctions/plp_dwt_q32.c \
 	src/TransformFunctions/plp_dwt_q16.c \
+	src/TransformFunctions/plp_dwt_q8.c \
 	src/CommonTables/plp_common_tables.c \
 	src/CommonTables/plp_const_structs.c \
 	src/CommonTables/plp_dwt_structs.c \
@@ -568,6 +569,7 @@ CL_SRCS = \
 	src/TransformFunctions/kernels/plp_dwt_f32_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_dwt_q32_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_dwt_q16_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_dwt_q8_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32s_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32p_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i16s_xpulpv2.c \
