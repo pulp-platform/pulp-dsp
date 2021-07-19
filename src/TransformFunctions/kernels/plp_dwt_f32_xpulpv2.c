@@ -32,6 +32,9 @@
 #include "plp_const_structs.h"
 /* HELPER FUNCTIONS */
 
+#define HAAR_COEF 0.707106781186547570f
+
+
 /********************************************************************************
  *  Left Edge Cases
  * *****************************************************************************/
@@ -450,6 +453,8 @@ void plp_dwt_haar_f32_xpulpv2(const float32_t *__restrict__ pSrc,
                          plp_dwt_extension_mode mode,
                          float32_t *__restrict__ pDstA,
                          float32_t *__restrict__ pDstD) {
+
+
     float32_t *pCurrentA = pDstA;
     float32_t *pCurrentD = pDstD;
 
@@ -476,8 +481,8 @@ void plp_dwt_haar_f32_xpulpv2(const float32_t *__restrict__ pSrc,
      */    
     for(offset = step-1 ; offset < length; offset += step){
 
-        float32_t sum_lo = PLP_DWT_HAAR_f32.dec_lo[0] * pSrc[offset] + PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[offset - 1];
-        float32_t sum_hi = PLP_DWT_HAAR_f32.dec_hi[0] * pSrc[offset] + PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[offset - 1];
+        float32_t sum_lo = HAAR_COEF * (pSrc[offset - 1] + pSrc[offset]);
+        float32_t sum_hi = HAAR_COEF * (pSrc[offset - 1] - pSrc[offset]);
 
         *pCurrentA++ = sum_lo;
         *pCurrentD++ = sum_hi;
@@ -505,26 +510,26 @@ void plp_dwt_haar_f32_xpulpv2(const float32_t *__restrict__ pSrc,
         switch(mode){
             case PLP_DWT_MODE_CONSTANT:
             case PLP_DWT_MODE_SYMMETRIC:
-                sum_lo = PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_lo[0] * pSrc[length - 1];
-                sum_hi = PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_hi[0] * pSrc[length - 1];
+                sum_lo = 2.0f * HAAR_COEF * pSrc[length - 1]; // dec_lo[0] * src[N-1] + dec_lo[1] * src[N-1]
+                sum_hi = 0;                                  // dec_hi[0] * src[N-1] + dec_hi[1] * src[N-1] == -dec_hi[1] * src[N-1] + dec_hi[1] * src[N-1]
                 break;
             case PLP_DWT_MODE_REFLECT:
-                sum_lo = PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_lo[0] * pSrc[length - 2];
-                sum_hi = PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_hi[0] * pSrc[length - 2];
+                sum_lo = HAAR_COEF * (pSrc[length - 1] + pSrc[length - 2]);
+                sum_hi = HAAR_COEF * (pSrc[length - 1] - pSrc[length - 2]);
                 break;
             case PLP_DWT_MODE_ANTISYMMETRIC:
-                sum_lo = PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1] - PLP_DWT_HAAR_f32.dec_lo[0] * pSrc[length - 1];
-                sum_hi = PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1] - PLP_DWT_HAAR_f32.dec_hi[0] * pSrc[length - 1];
+                sum_lo = HAAR_COEF * (pSrc[length - 1] - pSrc[length - 1]);
+                sum_hi = HAAR_COEF * (pSrc[length - 1] + pSrc[length - 1]);
                 break;
             case PLP_DWT_MODE_ANTIREFLECT:
-                sum_lo = PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_lo[0] * (2*pSrc[length - 1] - pSrc[length - 2]);
-                sum_hi = PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_hi[0] * (2*pSrc[length - 1] - pSrc[length - 2]);
+                sum_lo = HAAR_COEF * (3*pSrc[length - 1] - pSrc[length - 2]);
+                sum_hi = HAAR_COEF * ( -pSrc[length - 1] + pSrc[length - 2]);
                 break;
             case PLP_DWT_MODE_PERIODIC:
             case PLP_DWT_MODE_ZERO:
             default:
-                sum_lo = PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1];
-                sum_hi = PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1];
+                sum_lo = HAAR_COEF * pSrc[length - 1];
+                sum_hi = HAAR_COEF * pSrc[length - 1];
                 break;
         }
     
