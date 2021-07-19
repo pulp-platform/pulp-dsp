@@ -486,11 +486,11 @@ void plp_dwt_haar_q32_xpulpv2(const int32_t *__restrict__ pSrc,
      */    
     for(offset = step-1 ; offset < length; offset += step){
 
-        int32_t sum_lo = PLP_DWT_HAAR_f32.dec_lo[0] * pSrc[offset] + PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[offset - 1];
-        int32_t sum_hi = PLP_DWT_HAAR_f32.dec_hi[0] * pSrc[offset] + PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[offset - 1];
+        int64_t sum_lo = (int64_t)PLP_DWT_HAAR_q32.dec_lo[0] * pSrc[offset] + (int64_t)PLP_DWT_HAAR_q32.dec_lo[1] * pSrc[offset - 1];
+        int64_t sum_hi = (int64_t)PLP_DWT_HAAR_q32.dec_hi[0] * pSrc[offset] + (int64_t)PLP_DWT_HAAR_q32.dec_hi[1] * pSrc[offset - 1];
 
-        *pCurrentA++ = sum_lo;
-        *pCurrentD++ = sum_hi;
+        *pCurrentA++ = sum_lo >> 31U;
+        *pCurrentD++ = sum_hi >> 31U;
     }
 
    
@@ -506,8 +506,8 @@ void plp_dwt_haar_q32_xpulpv2(const int32_t *__restrict__ pSrc,
      *                  Then compute the filter part overlapping with the signal
      */
     if(offset < length + 1){
-        int32_t sum_lo = 0;
-        int32_t sum_hi = 0;
+        int64_t sum_lo = 0;
+        int64_t sum_hi = 0;
 
         uint32_t filt_j = 0;
 
@@ -515,30 +515,30 @@ void plp_dwt_haar_q32_xpulpv2(const int32_t *__restrict__ pSrc,
         switch(mode){
             case PLP_DWT_MODE_CONSTANT:
             case PLP_DWT_MODE_SYMMETRIC:
-                sum_lo = PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_lo[0] * pSrc[length - 1];
-                sum_hi = PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_hi[0] * pSrc[length - 1];
+                sum_lo = (int64_t)PLP_DWT_HAAR_q32.dec_lo[1] * pSrc[length - 1] + (int64_t)PLP_DWT_HAAR_q32.dec_lo[0] * pSrc[length - 1];
+                sum_hi = (int64_t)PLP_DWT_HAAR_q32.dec_hi[1] * pSrc[length - 1] + (int64_t)PLP_DWT_HAAR_q32.dec_hi[0] * pSrc[length - 1];
                 break;
             case PLP_DWT_MODE_REFLECT:
-                sum_lo = PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_lo[0] * pSrc[length - 2];
-                sum_hi = PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_hi[0] * pSrc[length - 2];
+                sum_lo = (int64_t)PLP_DWT_HAAR_q32.dec_lo[1] * pSrc[length - 1] + (int64_t)PLP_DWT_HAAR_q32.dec_lo[0] * pSrc[length - 2];
+                sum_hi = (int64_t)PLP_DWT_HAAR_q32.dec_hi[1] * pSrc[length - 1] + (int64_t)PLP_DWT_HAAR_q32.dec_hi[0] * pSrc[length - 2];
                 break;
             case PLP_DWT_MODE_ANTISYMMETRIC:
-                sum_lo = PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1] - PLP_DWT_HAAR_f32.dec_lo[0] * pSrc[length - 1];
-                sum_hi = PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1] - PLP_DWT_HAAR_f32.dec_hi[0] * pSrc[length - 1];
+                sum_lo = (int64_t)PLP_DWT_HAAR_q32.dec_lo[1] * pSrc[length - 1] - (int64_t)PLP_DWT_HAAR_q32.dec_lo[0] * pSrc[length - 1];
+                sum_hi = (int64_t)PLP_DWT_HAAR_q32.dec_hi[1] * pSrc[length - 1] - (int64_t)PLP_DWT_HAAR_q32.dec_hi[0] * pSrc[length - 1];
                 break;
             case PLP_DWT_MODE_ANTIREFLECT:
-                sum_lo = PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_lo[0] * (2*pSrc[length - 1] - pSrc[length - 2]);
-                sum_hi = PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_hi[0] * (2*pSrc[length - 1] - pSrc[length - 2]);
+                sum_lo = (int64_t)PLP_DWT_HAAR_q32.dec_lo[1] * pSrc[length - 1] + (int64_t)PLP_DWT_HAAR_q32.dec_lo[0] * (2*pSrc[length - 1] - pSrc[length - 2]);
+                sum_hi = (int64_t)PLP_DWT_HAAR_q32.dec_hi[1] * pSrc[length - 1] + (int64_t)PLP_DWT_HAAR_q32.dec_hi[0] * (2*pSrc[length - 1] - pSrc[length - 2]);
                 break;
             case PLP_DWT_MODE_PERIODIC:
             case PLP_DWT_MODE_ZERO:
             default:
-                sum_lo = PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1];
-                sum_hi = PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1];
+                sum_lo = (int64_t)PLP_DWT_HAAR_q32.dec_lo[1] * pSrc[length - 1];
+                sum_hi = (int64_t)PLP_DWT_HAAR_q32.dec_hi[1] * pSrc[length - 1];
                 break;
         }
     
-        *pCurrentA = sum_lo;
-        *pCurrentD = sum_hi;
+        *pCurrentA = sum_lo >> 31U;
+        *pCurrentD = sum_hi >> 31U;
     }
 }
