@@ -26,6 +26,7 @@ def generate_stimuli(arg, env):
     # ...
 
 
+
 ##################
 # compute_result #
 ##################
@@ -60,40 +61,63 @@ def compute_result(result_parameter, inputs, env, fix_point):
         'PLP_DWT_MODE_ANTIREFLECT': 'antireflect'
     }
 
-
+    mode = env['mode']
+    wavelet = env['wavelet']
 
     if fix_point is not None:
-        raise RuntimeError("FixPoint is not supported")
-    # elif result_parameter.ctype == 'int8_t':
-    #     a = inputs['pSrcA'].value.astype(np.int8)
-    #     b = inputs['pSrcB'].value.astype(np.int8)
-    #     result = np.add(a, b, dtype=np.int8)
-    # elif result_parameter.ctype == 'int16_t':
-    #     a = inputs['pSrcA'].value.astype(np.int16)
-    #     b = inputs['pSrcB'].value.astype(np.int16)
-    #     result = np.add(a, b, dtype=np.int16)
-    # elif result_parameter.ctype == 'int32_t':
-    #     a = inputs['pSrcA'].value.astype(np.int32)
-    #     b = inputs['pSrcB'].value.astype(np.int32)
-    #     result = np.add(a, b, dtype=np.int32)
+
+        
+        if result_parameter.ctype == 'int8_t':
+            src = inputs['pSrc'].value.astype(np.float32) / 2**7
+            
+            cA, cD = pywt.dwt(src, wavelets[wavelet], modes[mode])
+            cA = to_fixed(cA, 'q8')
+            cD = to_fixed(cD, 'q8')
+
+        elif result_parameter.ctype == 'int16_t':
+            src = inputs['pSrc'].value.astype(np.float32) / 2**15
+     
+            cA, cD = pywt.dwt(src, wavelets[wavelet], modes[mode])
+            cA = to_fixed(cA, 'q16')
+            cD = to_fixed(cD, 'q16')
+
+        elif result_parameter.ctype == 'int32_t':
+            src = inputs['pSrc'].value.astype(np.float32) / 2**31
+
+            cA, cD = pywt.dwt(src, wavelets[wavelet], modes[mode])
+            cA = to_fixed(cA, 'q32')
+            cD = to_fixed(cD, 'q32')
+
     elif result_parameter.ctype == 'float':
         src = inputs['pSrc'].value.astype(np.float32)
-        mode = env['mode']
-        wavelet = env['wavelet']
+
         cA, cD = pywt.dwt(src, wavelets[wavelet], modes[mode])
-        if 'pDstA' in result_parameter.name:
-            return cA
-        elif 'pDstD' in result_parameter.name:
-            return cD
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
 
 
+    if 'pDstA' in result_parameter.name:
+        return cA
+    elif 'pDstD' in result_parameter.name:
+        return cD
 
 
 ######################
 # Fixpoint Functions #
 ######################
+
+
+def to_fixed(x, dtype):
+    if dtype == "q8":
+        x = np.clip(x, -1, 127/128)
+        return np.array(np.round(x * 2**7), dtype=np.int8)
+    elif dtype == "q16":
+        x = np.clip(x, -1, (2**15-1)/(2**15))
+        return np.array(np.round(x * 2**15), dtype=np.int16)
+    elif dtype == "q32":
+        x = np.clip(x, -1, (2**31-1)/(2**31))
+        return np.array(np.round(x * 2**31), dtype=np.int32)
+
 
 
 def q_sat(x):

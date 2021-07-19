@@ -1,7 +1,7 @@
 /* ----------------------------------------------------------------------
  * Project:      PULP DSP Library
- * Title:        plp_dwt_f32.c
- * Description:  Floating-point Discret Wavelet Transform
+ * Title:        plp_dwt_q32.c
+ * Description:  32bit Fixed-point Discret Wavelet Transform
  *
  * $Date:        10. Juli 2021
  * $Revision:    V1
@@ -47,7 +47,7 @@
 */
 
 /**
-   @brief  Floating-point DWT on real input data for XPULPV2 extension.
+   @brief  32bit Fixed-point DWT on real input data for XPULPV2 extension.
    @param[in]   pSrc     points to the input buffer (real data)
    @param[in]   length   length of input buffer
    @param[in]   wavelet  wavelet structure for calculating DWT
@@ -57,12 +57,12 @@
    @param[out]  pDstD    points to ouput buffer with Detailed coefficients
    @return      none
 */
-void plp_dwt_f32(const float32_t *__restrict__ pSrc,
+void plp_dwt_q32(const int32_t *__restrict__ pSrc,
                  uint32_t length,
-                 const plp_dwt_wavelet_f32 wavelet,
+                 const plp_dwt_wavelet_q32 wavelet,
                  plp_dwt_extension_mode mode,
-                 float32_t *__restrict__ pDstA,
-                 float32_t *__restrict__ pDstD) {
+                 int32_t *__restrict__ pDstA,
+                 int32_t *__restrict__ pDstD) {
 
     if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("F extension is supported only for cluster side\n");
@@ -76,10 +76,10 @@ void plp_dwt_f32(const float32_t *__restrict__ pSrc,
    switch(wavelet.type) {
    case PLP_DWT_WAVELET_HAAR:
    case PLP_DWT_WAVELET_DB1:
-      plp_dwt_haar_f32_xpulpv2(pSrc, length, mode, pDstA, pDstD);
-      break;
+      // plp_dwt_haar_f32_xpulpv2(pSrc, length, mode, pDstA, pDstD);
+      // break;
    default:
-      plp_dwt_f32_xpulpv2(pSrc, length, wavelet, mode, pDstA, pDstD);
+      plp_dwt_q32_xpulpv2(pSrc, length, wavelet, mode, pDstA, pDstD);
       break;
    }
 
