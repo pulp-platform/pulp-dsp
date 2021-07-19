@@ -208,7 +208,7 @@
  */
 
 /**
-   @brief  Floating-point DWT on real input data for XPULPV2 extension.
+   @brief  16bit fixed-point DWT on real input data for XPULPV2 extension.
    @param[in]   pSrc     points to the input buffer (real data)
    @param[in]   length   length of input buffer
    @param[in]   wavelet  wavelet structure for calculating DWT
@@ -445,7 +445,7 @@ void plp_dwt_q16_xpulpv2(const int16_t *__restrict__ pSrc,
 
 
 /**
-   @brief  Floating-point DWT kernel optimized for Haar Wavelet on real input data for XPULPV2 extension.
+   @brief 16bit fixed-point DWT kernel optimized for Haar Wavelet on real input data for XPULPV2 extension.
    @param[in]   pSrc     points to the input buffer (real data)
    @param[in]   length   length of input buffer
    @param[in]   mode     boundary extension mode
@@ -489,11 +489,11 @@ void plp_dwt_haar_q16_xpulpv2(const int16_t *__restrict__ pSrc,
      */    
     for(offset = step-1 ; offset < length; offset += step){
 
-        int16_t sum_lo = PLP_DWT_HAAR_f32.dec_lo[0] * pSrc[offset] + PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[offset - 1];
-        int16_t sum_hi = PLP_DWT_HAAR_f32.dec_hi[0] * pSrc[offset] + PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[offset - 1];
+        int32_t sum_lo = (int32_t)PLP_DWT_HAAR_q16.dec_lo[0] * pSrc[offset] + (int32_t)PLP_DWT_HAAR_q16.dec_lo[1] * pSrc[offset - 1];
+        int32_t sum_hi = (int32_t)PLP_DWT_HAAR_q16.dec_hi[0] * pSrc[offset] + (int32_t)PLP_DWT_HAAR_q16.dec_hi[1] * pSrc[offset - 1];
 
-        *pCurrentA++ = sum_lo;
-        *pCurrentD++ = sum_hi;
+        *pCurrentA++ = sum_lo >> 15U;
+        *pCurrentD++ = sum_hi >> 15U;
     }
 
    
@@ -509,8 +509,8 @@ void plp_dwt_haar_q16_xpulpv2(const int16_t *__restrict__ pSrc,
      *                  Then compute the filter part overlapping with the signal
      */
     if(offset < length + 1){
-        int16_t sum_lo = 0;
-        int16_t sum_hi = 0;
+        int32_t sum_lo = 0;
+        int32_t sum_hi = 0;
 
         uint32_t filt_j = 0;
 
@@ -518,30 +518,30 @@ void plp_dwt_haar_q16_xpulpv2(const int16_t *__restrict__ pSrc,
         switch(mode){
             case PLP_DWT_MODE_CONSTANT:
             case PLP_DWT_MODE_SYMMETRIC:
-                PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_lo[0] * pSrc[length - 1];
-                PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_hi[0] * pSrc[length - 1];
+                sum_lo = (int32_t)PLP_DWT_HAAR_q16.dec_lo[1] * pSrc[length - 1] + (int32_t)PLP_DWT_HAAR_q16.dec_lo[0] * pSrc[length - 1];
+                sum_hi = (int32_t)PLP_DWT_HAAR_q16.dec_hi[1] * pSrc[length - 1] + (int32_t)PLP_DWT_HAAR_q16.dec_hi[0] * pSrc[length - 1];
                 break;
             case PLP_DWT_MODE_REFLECT:
-                PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_lo[0] * pSrc[length - 2];
-                PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_hi[0] * pSrc[length - 2];
+                sum_lo = (int32_t)PLP_DWT_HAAR_q16.dec_lo[1] * pSrc[length - 1] + (int32_t)PLP_DWT_HAAR_q16.dec_lo[0] * pSrc[length - 2];
+                sum_hi = (int32_t)PLP_DWT_HAAR_q16.dec_hi[1] * pSrc[length - 1] + (int32_t)PLP_DWT_HAAR_q16.dec_hi[0] * pSrc[length - 2];
                 break;
             case PLP_DWT_MODE_ANTISYMMETRIC:
-                PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1] - PLP_DWT_HAAR_f32.dec_lo[0] * pSrc[length - 1];
-                PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1] - PLP_DWT_HAAR_f32.dec_hi[0] * pSrc[length - 1];
+                sum_lo = (int32_t)PLP_DWT_HAAR_q16.dec_lo[1] * pSrc[length - 1] - (int32_t)PLP_DWT_HAAR_q16.dec_lo[0] * pSrc[length - 1];
+                sum_hi = (int32_t)PLP_DWT_HAAR_q16.dec_hi[1] * pSrc[length - 1] - (int32_t)PLP_DWT_HAAR_q16.dec_hi[0] * pSrc[length - 1];
                 break;
             case PLP_DWT_MODE_ANTIREFLECT:
-                PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_lo[0] * (2*pSrc[length - 1] - pSrc[length - 2]);
-                PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1] + PLP_DWT_HAAR_f32.dec_hi[0] * (2*pSrc[length - 1] - pSrc[length - 2]);
+                sum_lo = (int32_t)PLP_DWT_HAAR_q16.dec_lo[1] * pSrc[length - 1] + (int32_t)PLP_DWT_HAAR_q16.dec_lo[0] * (2*pSrc[length - 1] - pSrc[length - 2]);
+                sum_hi = (int32_t)PLP_DWT_HAAR_q16.dec_hi[1] * pSrc[length - 1] + (int32_t)PLP_DWT_HAAR_q16.dec_hi[0] * (2*pSrc[length - 1] - pSrc[length - 2]);
                 break;
             case PLP_DWT_MODE_PERIODIC:
             case PLP_DWT_MODE_ZERO:
             default:
-                PLP_DWT_HAAR_f32.dec_lo[1] * pSrc[length - 1];
-                PLP_DWT_HAAR_f32.dec_hi[1] * pSrc[length - 1];
+                sum_lo = (int32_t)PLP_DWT_HAAR_q16.dec_lo[1] * pSrc[length - 1];
+                sum_hi = (int32_t)PLP_DWT_HAAR_q16.dec_hi[1] * pSrc[length - 1];
                 break;
         }
     
-        *pCurrentA = sum_lo;
-        *pCurrentD = sum_hi;
+        *pCurrentA = sum_lo >> 15U;
+        *pCurrentD = sum_hi >> 15U;
     }
 }

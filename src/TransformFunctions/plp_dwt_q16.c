@@ -76,8 +76,8 @@ void plp_dwt_q16(const int16_t *__restrict__ pSrc,
    switch(wavelet.type) {
    case PLP_DWT_WAVELET_HAAR:
    case PLP_DWT_WAVELET_DB1:
-      // plp_dwt_haar_q16_xpulpv2(pSrc, length, mode, pDstA, pDstD);
-      // break;
+      plp_dwt_haar_q16_xpulpv2(pSrc, length, mode, pDstA, pDstD);
+      break;
    default:
       plp_dwt_q16_xpulpv2(pSrc, length, wavelet, mode, pDstA, pDstD);
       break;
