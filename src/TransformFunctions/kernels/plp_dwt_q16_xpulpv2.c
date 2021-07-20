@@ -33,13 +33,15 @@
 
 /* HELPER FUNCTIONS */
 
+#define shufflemask1 (v2s) { 1, 0 }
 
-#define HAAR_COEF ((int32_t) 0x5a82)
 
-#define MAC_SHIFT 7U
+#define HAAR_COEF (0x5a82)
+
+#define MAC_SHIFT 15U
 // #define __MAC_16x16(Acc, A, B) Acc = __MACS(Acc, A, B);
-#define __MAC_16x16(Acc, A, B) Acc += ((int32_t)A * (int32_t)B) >> 8U;
-#define __MSU_16x16(Acc, A, B) Acc -= ((int32_t)A * (int32_t)B) >> 8U;
+#define __MAC_16x16(Acc, A, B) Acc += ((int32_t)A * (int32_t)B);
+#define __MSU_16x16(Acc, A, B) Acc -= ((int32_t)A * (int32_t)B);
 
 /********************************************************************************
  *  Left Edge Cases
@@ -302,17 +304,37 @@ void plp_dwt_q16_xpulpv2(const int16_t *__restrict__ pSrc,
      *  h() =   [d c b a]
      *                 ^
      *                 Compute a full convolution of the filter with the signal
-     */    
+     */ 
+
+
     for(;offset < length; offset += step){
 
         int32_t sum_lo = 0;
         int32_t sum_hi = 0;
-        uint32_t filt_j = 0;
+        
+        // We can process 2 elements at a time (This should always be even)
+        uint32_t blkCnt = wavelet.length >> 1U;
 
-        for(; filt_j < wavelet.length; filt_j++){
-            __MAC_16x16(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
-            __MAC_16x16(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
-            
+        const int16_t *pYlo = wavelet.dec_lo; // Start of wavelet lo
+        const int16_t *pYhi = wavelet.dec_hi; // Start of wavelet hi
+        const int16_t *pX = pSrc + offset;
+
+        while (blkCnt > 0U){
+            v2s v_ylo = *((v2s *)pYlo);     // {lo[0], lo[1]}
+            v2s v_yhi = *((v2s *)pYhi);     // {hi[0], hi[1]}
+            v2s v_x   = *((v2s *)(pX - 1)); // { x[0],  x[1]}
+
+            v2s v_sx = __builtin_shuffle(v_x, v_x, shufflemask1); // {x[1], x[0]}
+
+            sum_lo = __SUMDOTP2(v_sx, v_ylo, sum_lo);
+            sum_hi = __SUMDOTP2(v_sx, v_yhi, sum_hi);
+
+            pYlo += 2;
+            pYhi += 2;
+            pX   -= 2;
+
+
+            blkCnt--;
         }
 
         *pCurrentA++ = sum_lo >> MAC_SHIFT;
@@ -468,6 +490,12 @@ void plp_dwt_haar_q16_xpulpv2(const int16_t *__restrict__ pSrc,
     static uint32_t step = 2;
 
     int32_t offset;
+
+    static v2s v_ylo = (v2s){HAAR_COEF, HAAR_COEF};
+    static v2s v_yhi = (v2s){HAAR_COEF, -HAAR_COEF};
+    v2s v_x;
+
+
         
     /***
      * The filter convolution is done in 4 steps handling cases where
@@ -489,29 +517,34 @@ void plp_dwt_haar_q16_xpulpv2(const int16_t *__restrict__ pSrc,
      *  h() =       [b a]
      *                 ^
      *                 Compute a full convolution of the filter with the signal
-     */    
-    for(offset = step-1 ; offset < length; offset += step){
+     */
 
-        int32_t sum_lo = HAAR_COEF * (pSrc[offset - 1] + pSrc[offset]);
-        int32_t sum_hi = HAAR_COEF * (pSrc[offset - 1] - pSrc[offset]);
+    uint32_t blkCnt = length >> 1U;
+    const int16_t *pS = pSrc;
 
-        *pCurrentA++ = sum_lo >> 15U;
-        *pCurrentD++ = sum_hi >> 15U;
+    while(blkCnt > 0){
+
+        v_x   = *((v2s *)(pS));     // { x[0],  x[1]}
+
+        *pCurrentA++ = __DOTP2(v_x, v_ylo) >> MAC_SHIFT;
+        *pCurrentD++ = __DOTP2(v_x, v_yhi) >> MAC_SHIFT;
+
+        pS   += 2;
+        blkCnt--;
     }
-
    
 
 
     /*
      *  Handle Right overhanging
      *
-     * X() = [A B C D E F]x x
-     * H() =         [d c b a]
-     *                  ^   ^
-     *                  |   First extend the signal (x x) by computing the values based on the extension mode
-     *                  Then compute the filter part overlapping with the signal
+     * X() = [A B C D E]x
+     * H() =         [b a]
+     *                ^ ^
+     *                | First extend the signal (x x) by computing the values based on the extension mode
+     *                Then compute the filter part overlapping with the signal
      */
-    if(offset < length + 1){
+    if(length % 2U == 1){
         int32_t sum_lo = 0;
         int32_t sum_hi = 0;
 
@@ -544,7 +577,7 @@ void plp_dwt_haar_q16_xpulpv2(const int16_t *__restrict__ pSrc,
                 break;
         }
     
-        *pCurrentA = sum_lo >> 15U;
-        *pCurrentD = sum_hi >> 15U;
+        *pCurrentA = sum_lo >> MAC_SHIFT;
+        *pCurrentD = sum_hi >> MAC_SHIFT;
     }
 }

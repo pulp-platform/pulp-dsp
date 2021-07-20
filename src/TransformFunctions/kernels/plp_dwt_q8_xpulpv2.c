@@ -197,8 +197,7 @@
 
 
 
-#define shufflemask1                                                                               \
-    (v4s) { 3, 2, 1, 0 }
+#define shufflemask1 (v4s) { 3, 2, 1, 0 }
 
 
 /**
@@ -512,7 +511,7 @@ void plp_dwt_haar_q8_xpulpv2(const int8_t *__restrict__ pSrc,
     static v4s v_yhi_l = (v4s){HAAR_COEF, -HAAR_COEF, 0, 0};
     static v4s v_yhi_r = (v4s){0, 0, HAAR_COEF, -HAAR_COEF};
     v4s v_x;
-    
+
     /***
      * The filter convolution is done in 4 steps handling cases where
      *  1. Filter is hanging over the left side of the signal
