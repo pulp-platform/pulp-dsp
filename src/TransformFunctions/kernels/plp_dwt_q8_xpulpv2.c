@@ -34,12 +34,12 @@
 /* HELPER FUNCTIONS */
 
 
-#define HAAR_COEF ((int16_t) 0x5b)
+#define HAAR_COEF (0x5b)
 
-#define MAC_SHIFT 3U
-// #define __MAC_8x8(Acc, A, B) Acc = __MACS(Acc, A, B);
-#define __MAC_8x8(Acc, A, B) Acc += ((int16_t)A * (int16_t)B) >> 4U;
-#define __MSU_8x8(Acc, A, B) Acc -= ((int16_t)A * (int16_t)B) >> 4U;
+#define MAC_SHIFT 7U;
+// #define __MAC_8x8(Acc, A, B) Acc = __MACS(Acc, A, B); (Slower?)
+#define __MAC_8x8(Acc, A, B) Acc += ((int16_t)A * (int16_t)B);
+#define __MSU_8x8(Acc, A, B) Acc -= ((int16_t)A * (int16_t)B);
 
 /********************************************************************************
  *  Left Edge Cases
@@ -196,6 +196,11 @@
 
 
 
+
+#define shufflemask1                                                                               \
+    (v4s) { 3, 2, 1, 0 }
+
+
 /**
   @ingroup dwt
  */
@@ -305,18 +310,51 @@ void plp_dwt_q8_xpulpv2(const int8_t *__restrict__ pSrc,
      */    
     for(;offset < length; offset += step){
 
-        int16_t sum_lo = 0;
-        int16_t sum_hi = 0;
-        uint32_t filt_j = 0;
+        int32_t sum_lo = 0;
+        int32_t sum_hi = 0;
 
-        for(; filt_j < wavelet.length; filt_j++){
-            __MAC_8x8(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
-            __MAC_8x8(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
-            
+        // We can process 4 elements at a time
+        uint32_t blkCnt = wavelet.length >> 2U;
+
+        const int8_t *pYlo = wavelet.dec_lo; // Start of wavelet lo
+        const int8_t *pYhi = wavelet.dec_hi; // Start of wavelet hi
+        const int8_t *pX = pSrc + offset;
+
+        while (blkCnt > 0U){
+            v4s v_ylo = *((v4s *)pYlo);     // {lo[0], lo[1], lo[2], lo[3]}
+            v4s v_yhi = *((v4s *)pYhi);     // {hi[0], hi[1], hi[2], hi[3]}
+            v4s v_x   = *((v4s *)(pX - 3)); // { x[0],  x[1],  x[2],  x[3]}
+
+            v4s v_sx = __builtin_shuffle(v_x, v_x, shufflemask1); // {x[3], x[2], x[1], [0]}
+
+            sum_lo = __SUMDOTP4(v_sx, v_ylo, sum_lo);
+            sum_hi = __SUMDOTP4(v_sx, v_yhi, sum_hi);
+
+            pYlo += 4;
+            pYhi += 4;
+            pX   -= 4;
+
+            blkCnt--;
         }
 
-        *pCurrentA++ = sum_lo >> MAC_SHIFT;
-        *pCurrentD++ = sum_hi >> MAC_SHIFT;
+        // Wavelet length is not a multiple of 4. However it will always be multiple of 2.
+        // Thus just handel this case extra
+        if(wavelet.length % 4 > 0){
+            v4s v_ylo = *((v4s *)pYlo);     // {lo[0], lo[1],   XX ,   XX }
+            v4s v_yhi = *((v4s *)pYhi);     // {hi[0], hi[1],   XX ,   XX }
+            v4s v_x   = *((v4s *)(pX - 3)); // {  XX ,   XX ,  x[0],  x[1]}
+
+            v_x = __AND4(v_x, ((v4s){ 0, 0, 0xff, 0xff }));         // {  0 ,   0 , x[0], x[1]}
+            v4s v_sx = __builtin_shuffle(v_x, v_x, shufflemask1); // {x[1], x[0],   0 ,   0 }
+
+            sum_lo = __SUMDOTP4(v_sx, v_ylo, sum_lo);
+            sum_hi = __SUMDOTP4(v_sx, v_yhi, sum_hi);
+
+        }  
+
+
+        *pCurrentA++ = sum_lo >> 7U;
+        *pCurrentD++ = sum_hi >> 7U;
     }
 
      /*
@@ -467,8 +505,14 @@ void plp_dwt_haar_q8_xpulpv2(const int8_t *__restrict__ pSrc,
 
     static uint32_t step = 2;
 
-    int32_t offset;
-        
+    int32_t offset = step-1 ;
+
+    static v4s v_ylo_l = (v4s){HAAR_COEF, HAAR_COEF, 0, 0};
+    static v4s v_ylo_r = (v4s){0, 0, HAAR_COEF, HAAR_COEF};
+    static v4s v_yhi_l = (v4s){HAAR_COEF, -HAAR_COEF, 0, 0};
+    static v4s v_yhi_r = (v4s){0, 0, HAAR_COEF, -HAAR_COEF};
+    v4s v_x;
+    
     /***
      * The filter convolution is done in 4 steps handling cases where
      *  1. Filter is hanging over the left side of the signal
@@ -490,30 +534,50 @@ void plp_dwt_haar_q8_xpulpv2(const int8_t *__restrict__ pSrc,
      *                 ^
      *                 Compute a full convolution of the filter with the signal
      */ 
-    // offset = step-1;
 
-    // const int8_t * pSrcTmp = pSrc;
+    uint32_t blkCnt = length >> 2U;
+    const int8_t *pS = pSrc;
 
+    while(blkCnt > 0){
 
-    // while(offset + 4 < length){
-    //     int8_t v1 = *pSrcTmp++;
-    //     int8_t v2 = *pSrcTmp++;
-    //     int8_t v3 = *pSrcTmp++;
-    //     int8_t v4 = *pSrcTmp++;
+        v_x   = *((v4s *)(pS));     // { x[0],  x[1],  x[2],  x[3]}
 
+        *pCurrentA++ = __DOTP4(v_x, v_ylo_l) >> MAC_SHIFT;
+        *pCurrentD++ = __DOTP4(v_x, v_yhi_l) >> MAC_SHIFT;
 
-    //     offset += 4;
-    // }
-
-    for(offset = step-1 ; offset < length; offset += step){
-
-        int16_t sum_lo = __MULSN(HAAR_COEF, (pSrc[offset - 1] + pSrc[offset]), 7U);
-        int16_t sum_hi = __MULSN(HAAR_COEF, (pSrc[offset - 1] - pSrc[offset]), 7U);
-
-        *pCurrentA++ = sum_lo;
-        *pCurrentD++ = sum_hi;
+        *pCurrentA++ = __DOTP4(v_x, v_ylo_r) >> MAC_SHIFT;
+        *pCurrentD++ = __DOTP4(v_x, v_yhi_r) >> MAC_SHIFT;
+        pS   += 4;
+        blkCnt--;
     }
 
+    // Assume block fits perfectly into the signal length and we are now to beyond the signal (Will skip right overhang)
+    offset = length + 1; 
+
+
+    switch(length % 4U){
+    case 0:
+        // We are actually done, the signal fit perfectly
+        break;
+    case 3:
+        offset = length; // We still need to compute the offset but also the last full overlap pair
+    case 2:
+        // We compute the full overlap pair here
+
+        v_x   = *((v4s *)(pS));     // { x[0],  x[1],  x[2],  x[3]}
+
+        *pCurrentA++ = __DOTP4(v_x, v_ylo_l) >> MAC_SHIFT;
+        *pCurrentD++ = __DOTP4(v_x, v_yhi_l) >> MAC_SHIFT;
+
+        // *pCurrentA++ = __MULSN(HAAR_COEF, (pSrc[offset - 1] + pSrc[offset]), MAC_SHIFT);
+        // *pCurrentD++ = __MULSN(HAAR_COEF, (pSrc[offset - 1] - pSrc[offset]), MAC_SHIFT);
+        break;
+
+    case 1:
+        offset = length; // We still need to compute the offset but no full overlap
+        break;
+
+    }
    
 
 
