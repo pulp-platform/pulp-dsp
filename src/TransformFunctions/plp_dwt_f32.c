@@ -64,25 +64,25 @@ void plp_dwt_f32(const float32_t *__restrict__ pSrc,
                  float32_t *__restrict__ pDstA,
                  float32_t *__restrict__ pDstD) {
 
-    if (hal_cluster_id() == ARCHI_FC_CID) {
-        printf("F extension is supported only for cluster side\n");
-        return;
-    }
-    if((mode == PLP_DWT_MODE_ANTIREFLECT || mode == PLP_DWT_MODE_REFLECT) && length <= 1){
+   if((mode == PLP_DWT_MODE_ANTIREFLECT || mode == PLP_DWT_MODE_REFLECT) && length <= 1){
       printf("F Cannot run [anti]reflect mode on length 1 signal.\n");
       return;
-    }
-
-   switch(wavelet.type) {
-   case PLP_DWT_WAVELET_HAAR:
-   case PLP_DWT_WAVELET_DB1:
-      plp_dwt_haar_f32_xpulpv2(pSrc, length, mode, pDstA, pDstD);
-      break;
-   default:
-      plp_dwt_f32_xpulpv2(pSrc, length, wavelet, mode, pDstA, pDstD);
-      break;
    }
 
+   if (hal_cluster_id() == ARCHI_FC_CID) {
+      printf("F extension is supported only for cluster side\n");
+      return;
+   } else {
+      switch(wavelet.type) {
+      case PLP_DWT_WAVELET_HAAR:
+      case PLP_DWT_WAVELET_DB1:
+         plp_dwt_haar_f32_xpulpv2(pSrc, length, mode, pDstA, pDstD);
+         break;
+      default:
+         plp_dwt_f32_xpulpv2(pSrc, length, wavelet, mode, pDstA, pDstD);
+         break;
+      }
+   }
 
 }
 

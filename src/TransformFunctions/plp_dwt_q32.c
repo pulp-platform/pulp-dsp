@@ -35,10 +35,8 @@
  */
 
 /**
-  @defgroup dwt  DWT transforms
+  @defgroup dwt DWT transforms
   This module contains the code to perform DWT transforms.
-
-
  */
 
 /**
@@ -48,7 +46,7 @@
 
 /**
    @brief  32bit Fixed-point DWT on real input data for XPULPV2 extension.
-   @param[in]   pSrc     points to the input buffer (real data)
+   @param[in]   pSrc     points to the input buffer (q32)
    @param[in]   length   length of input buffer
    @param[in]   wavelet  wavelet structure for calculating DWT
    @param[in]   mode     boundary extension mode
@@ -63,24 +61,25 @@ void plp_dwt_q32(const int32_t *__restrict__ pSrc,
                  plp_dwt_extension_mode mode,
                  int32_t *__restrict__ pDstA,
                  int32_t *__restrict__ pDstD) {
-
-    if (hal_cluster_id() == ARCHI_FC_CID) {
-        printf("F extension is supported only for cluster side\n");
-        return;
-    }
-    if((mode == PLP_DWT_MODE_ANTIREFLECT || mode == PLP_DWT_MODE_REFLECT) && length <= 1){
+   
+   if((mode == PLP_DWT_MODE_ANTIREFLECT || mode == PLP_DWT_MODE_REFLECT) && length <= 1){
       printf("F Cannot run [anti]reflect mode on length 1 signal.\n");
       return;
-    }
+   }
 
-   switch(wavelet.type) {
-   case PLP_DWT_WAVELET_HAAR:
-   case PLP_DWT_WAVELET_DB1:
-      plp_dwt_haar_q32_xpulpv2(pSrc, length, mode, pDstA, pDstD);
-      break;
-   default:
-      plp_dwt_q32_xpulpv2(pSrc, length, wavelet, mode, pDstA, pDstD);
-      break;
+   if (hal_cluster_id() == ARCHI_FC_CID) {
+      printf("F extension is supported only for cluster side\n");
+      return;
+   }else {
+      switch(wavelet.type) {
+      case PLP_DWT_WAVELET_HAAR:
+      case PLP_DWT_WAVELET_DB1:
+         plp_dwt_haar_q32_xpulpv2(pSrc, length, mode, pDstA, pDstD);
+         break;
+      default:
+         plp_dwt_q32_xpulpv2(pSrc, length, wavelet, mode, pDstA, pDstD);
+         break;
+      }
    }
 
 
