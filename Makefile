@@ -165,6 +165,9 @@ FC_SRCS = \
 	src/TransformFunctions/plp_dct2_f32_parallel.c \
 	src/TransformFunctions/plp_mfcc_f32.c \
 	src/TransformFunctions/plp_mfcc_f32_parallel.c \
+	src/TransformFunctions/kernels/plp_dwt_q32s_rv32im.c \
+	src/TransformFunctions/kernels/plp_dwt_q16s_rv32im.c \
+	src/TransformFunctions/kernels/plp_dwt_q8s_rv32im.c \
 	src/TransformFunctions/plp_dwt_f32.c \
 	src/TransformFunctions/plp_dwt_q32.c \
 	src/TransformFunctions/plp_dwt_q16.c \

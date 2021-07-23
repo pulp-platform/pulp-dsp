@@ -1,7 +1,7 @@
 /* ----------------------------------------------------------------------
  * Project:      PULP DSP Library
- * Title:        plp_dwt_q32s_xpulpv2.c
- * Description:  32bit Fixed-point Discret Wavelet Transform on real input data for XPULPV2
+ * Title:        plp_dwt_q32s_rv32im.c
+ * Description:  32bit Fixed-point Discret Wavelet Transform
  *
  * $Date:        10. Juli 2021
  * $Revision:    V1
@@ -35,9 +35,9 @@
 #define HAAR_COEF ((int64_t) 0x5a82799a)
 
 
-#define MAC_SHIFT 31U
-#define MAC(Acc, A, B) (Acc + (int64_t)((int64_t) A * (int64_t) B))
-#define MSU(Acc, A, B) (Acc - (int64_t)((int64_t) A * (int64_t) B))
+#define MAC_SHIFT 15U
+#define __MAC_32x32(Acc, A, B) (Acc + (int64_t)(((int64_t) A * (int64_t) B) >> 16U))
+#define __MSU_32x32(Acc, A, B) (Acc - (int64_t)(((int64_t) A * (int64_t) B) >> 16U))
 
 
 /********************************************************************************
@@ -45,8 +45,8 @@
  * *****************************************************************************/
 #define CONSTANT_EDGE_LEFT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET)     \
     for(; J < WAVELET.length ; J++){                                            \
-        SUM_LO = MAC(SUM_LO, WAVELET.dec_lo[J], SRC[0]);                      \
-        SUM_HI = MAC(SUM_HI, WAVELET.dec_hi[J], SRC[0]);                      \
+        SUM_LO = __MAC_32x32(SUM_LO, WAVELET.dec_lo[J], SRC[0]);                      \
+        SUM_HI = __MAC_32x32(SUM_HI, WAVELET.dec_hi[J], SRC[0]);                      \
     }                                                                           \
 
 
@@ -54,12 +54,12 @@
     while(J < WAVELET.length){                                                  \
         int32_t k;                                                              \
         for(k=0; k < length && J < WAVELET.length; k++, J++) {                  \
-            SUM_LO = MAC(SUM_LO, WAVELET.dec_lo[J], SRC[k]);                  \
-            SUM_HI = MAC(SUM_HI, WAVELET.dec_hi[J], SRC[k]);                  \
+            SUM_LO = __MAC_32x32(SUM_LO, WAVELET.dec_lo[J], SRC[k]);                  \
+            SUM_HI = __MAC_32x32(SUM_HI, WAVELET.dec_hi[J], SRC[k]);                  \
         }                                                                       \
         for(k=0; k < LENGTH && J < WAVELET.length; k++, J++) {                  \
-            SUM_LO = MAC(SUM_LO, WAVELET.dec_lo[J], SRC[LENGTH-1-k]);         \
-            SUM_HI = MAC(SUM_HI, WAVELET.dec_hi[J], SRC[LENGTH-1-k]);         \
+            SUM_LO = __MAC_32x32(SUM_LO, WAVELET.dec_lo[J], SRC[LENGTH-1-k]);         \
+            SUM_HI = __MAC_32x32(SUM_HI, WAVELET.dec_hi[J], SRC[LENGTH-1-k]);         \
         }                                                                       \
     }                                                                           \
 
@@ -68,13 +68,13 @@
     while(J < WAVELET.length){                                                  \
         int32_t k;                                                              \
         for(k=1; k < LENGTH && J < WAVELET.length; k++, J++) {                  \
-            SUM_LO = MAC(SUM_LO, WAVELET.dec_lo[J], SRC[k]);                  \
-            SUM_HI = MAC(SUM_HI, WAVELET.dec_hi[J], SRC[k]);                  \
+            SUM_LO = __MAC_32x32(SUM_LO, WAVELET.dec_lo[J], SRC[k]);                  \
+            SUM_HI = __MAC_32x32(SUM_HI, WAVELET.dec_hi[J], SRC[k]);                  \
         }                                                                       \
         for(k=1; k < LENGTH && J< WAVELET.length; k++, J++) {                   \
                                                                                 \
-            SUM_LO = MAC(SUM_LO, WAVELET.dec_lo[J], SRC[LENGTH-1-k]);         \
-            SUM_HI = MAC(SUM_HI, WAVELET.dec_hi[J], SRC[LENGTH-1-k]);         \
+            SUM_LO = __MAC_32x32(SUM_LO, WAVELET.dec_lo[J], SRC[LENGTH-1-k]);         \
+            SUM_HI = __MAC_32x32(SUM_HI, WAVELET.dec_hi[J], SRC[LENGTH-1-k]);         \
         }                                                                       \
     }                                                                           \
 
@@ -83,13 +83,13 @@
     while(J < WAVELET.length){                                                  \
         int32_t k;                                                              \
         for(k=0; k < LENGTH && J < WAVELET.length; k++, J++) {                  \
-            SUM_LO = MSU(SUM_LO, WAVELET.dec_lo[J], SRC[k]);                  \
-            SUM_HI = MSU(SUM_HI, WAVELET.dec_hi[J], SRC[k]);                  \
+            SUM_LO = __MSU_32x32(SUM_LO, WAVELET.dec_lo[J], SRC[k]);                  \
+            SUM_HI = __MSU_32x32(SUM_HI, WAVELET.dec_hi[J], SRC[k]);                  \
         }                                                                       \
         for(k=0; k < LENGTH && J< WAVELET.length; k++, J++) {                   \
                                                                                 \
-            SUM_LO = MAC(SUM_LO, WAVELET.dec_lo[J], SRC[LENGTH-1-k]);         \
-            SUM_HI = MAC(SUM_HI, WAVELET.dec_hi[J], SRC[LENGTH-1-k]);         \
+            SUM_LO = __MAC_32x32(SUM_LO, WAVELET.dec_lo[J], SRC[LENGTH-1-k]);         \
+            SUM_HI = __MAC_32x32(SUM_HI, WAVELET.dec_hi[J], SRC[LENGTH-1-k]);         \
         }                                                                       \
     }                                                                           \
 
@@ -101,14 +101,14 @@
         int32_t k;                                                              \
         for(k=1; k < LENGTH && J < WAVELET.length; k++, J++) {                  \
             tmp = left_edge - (SRC[k] - SRC[0]);                                \
-            SUM_LO = MAC(SUM_LO, WAVELET.dec_lo[J], tmp);                     \
-            SUM_HI = MAC(SUM_HI, WAVELET.dec_hi[J], tmp);                     \
+            SUM_LO = __MAC_32x32(SUM_LO, WAVELET.dec_lo[J], tmp);                     \
+            SUM_HI = __MAC_32x32(SUM_HI, WAVELET.dec_hi[J], tmp);                     \
         }                                                                       \
         left_edge = tmp;                                                        \
         for(k=1; k < LENGTH && J< WAVELET.length; k++, J++) {                   \
             tmp = left_edge + (SRC[LENGTH-1-k] - SRC[LENGTH-1]);                \
-            SUM_LO = MAC(SUM_LO, WAVELET.dec_lo[J], tmp);                     \
-            SUM_HI = MAC(SUM_HI, WAVELET.dec_hi[J], tmp);                     \
+            SUM_LO = __MAC_32x32(SUM_LO, WAVELET.dec_lo[J], tmp);                     \
+            SUM_HI = __MAC_32x32(SUM_HI, WAVELET.dec_hi[J], tmp);                     \
         }                                                                       \
         left_edge = tmp;                                                        \
     }                                                                           \
@@ -120,8 +120,8 @@
  * *****************************************************************************/
 #define CONSTANT_EDGE_RIGHT(SUM_LO, SUM_HI, SRC, LENGTH, WAVELET, J, OFFSET)    \
     for(; OFFSET - J >= LENGTH ; J++){                                          \
-        SUM_LO = MAC(SUM_LO, WAVELET.dec_lo[J], SRC[LENGTH-1]);               \
-        SUM_HI = MAC(SUM_HI, WAVELET.dec_hi[J], SRC[LENGTH-1]);               \
+        SUM_LO = __MAC_32x32(SUM_LO, WAVELET.dec_lo[J], SRC[LENGTH-1]);               \
+        SUM_HI = __MAC_32x32(SUM_HI, WAVELET.dec_hi[J], SRC[LENGTH-1]);               \
     }                                                                           \
 
 
@@ -130,13 +130,13 @@
         int32_t k;                                                              \
         for(k=0; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
                                                                                 \
-            SUM_LO = MAC(SUM_LO, WAVELET.dec_lo[OFFSET - LENGTH - J], SRC[LENGTH - 1 - k]);\
-            SUM_HI = MAC(SUM_HI, WAVELET.dec_hi[OFFSET - LENGTH - J], SRC[LENGTH - 1 - k]);\
+            SUM_LO = __MAC_32x32(SUM_LO, WAVELET.dec_lo[OFFSET - LENGTH - J], SRC[LENGTH - 1 - k]);\
+            SUM_HI = __MAC_32x32(SUM_HI, WAVELET.dec_hi[OFFSET - LENGTH - J], SRC[LENGTH - 1 - k]);\
         }                                                                       \
         for(k=0; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
                                                                                 \
-            SUM_LO = MAC(SUM_LO, WAVELET.dec_lo[OFFSET - LENGTH - J], SRC[k]);\
-            SUM_HI = MAC(SUM_HI, WAVELET.dec_hi[OFFSET - LENGTH - J], SRC[k]);\
+            SUM_LO = __MAC_32x32(SUM_LO, WAVELET.dec_lo[OFFSET - LENGTH - J], SRC[k]);\
+            SUM_HI = __MAC_32x32(SUM_HI, WAVELET.dec_hi[OFFSET - LENGTH - J], SRC[k]);\
         }                                                                       \
     }                                                                           \
 
@@ -146,13 +146,13 @@
         int32_t k;                                                              \
         for(k=1; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
                                                                                 \
-            SUM_LO = MAC(SUM_LO, WAVELET.dec_lo[OFFSET - LENGTH - J], SRC[LENGTH - 1 - k]);\
-            SUM_HI = MAC(SUM_HI, WAVELET.dec_hi[OFFSET - LENGTH - J], SRC[LENGTH - 1 - k]);\
+            SUM_LO = __MAC_32x32(SUM_LO, WAVELET.dec_lo[OFFSET - LENGTH - J], SRC[LENGTH - 1 - k]);\
+            SUM_HI = __MAC_32x32(SUM_HI, WAVELET.dec_hi[OFFSET - LENGTH - J], SRC[LENGTH - 1 - k]);\
         }                                                                       \
         for(k=1; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
                                                                                 \
-            SUM_LO = MAC(SUM_LO, WAVELET.dec_lo[OFFSET - LENGTH - J], SRC[k]);\
-            SUM_HI = MAC(SUM_HI, WAVELET.dec_hi[OFFSET - LENGTH - J], SRC[k]);\
+            SUM_LO = __MAC_32x32(SUM_LO, WAVELET.dec_lo[OFFSET - LENGTH - J], SRC[k]);\
+            SUM_HI = __MAC_32x32(SUM_HI, WAVELET.dec_hi[OFFSET - LENGTH - J], SRC[k]);\
         }                                                                       \
     }                                                                           \
 
@@ -161,13 +161,13 @@
     while(OFFSET - J >= LENGTH){                                                \
         int32_t k;                                                              \
         for(k=0; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
-            SUM_LO = MSU(SUM_LO, WAVELET.dec_lo[OFFSET - LENGTH - J], SRC[LENGTH - 1 - k]);\
-            SUM_HI = MSU(SUM_HI, WAVELET.dec_hi[OFFSET - LENGTH - J], SRC[LENGTH - 1 - k]);\
+            SUM_LO = __MSU_32x32(SUM_LO, WAVELET.dec_lo[OFFSET - LENGTH - J], SRC[LENGTH - 1 - k]);\
+            SUM_HI = __MSU_32x32(SUM_HI, WAVELET.dec_hi[OFFSET - LENGTH - J], SRC[LENGTH - 1 - k]);\
         }                                                                       \
         for(k=0; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
                                                                                 \
-            SUM_LO = MAC(SUM_LO, WAVELET.dec_lo[OFFSET - LENGTH - J], SRC[k]);\
-            SUM_HI = MAC(SUM_HI, WAVELET.dec_hi[OFFSET - LENGTH - J], SRC[k]);\
+            SUM_LO = __MAC_32x32(SUM_LO, WAVELET.dec_lo[OFFSET - LENGTH - J], SRC[k]);\
+            SUM_HI = __MAC_32x32(SUM_HI, WAVELET.dec_hi[OFFSET - LENGTH - J], SRC[k]);\
         }                                                                       \
     }                                                                           \
 
@@ -180,14 +180,14 @@
         int32_t k;                                                              \
         for(k=1; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
             tmp = right_edge - (SRC[LENGTH-1-k] - SRC[LENGTH-1]);               \
-            SUM_LO = MAC(SUM_LO, WAVELET.dec_lo[OFFSET - LENGTH - J], tmp);   \
-            SUM_HI = MAC(SUM_HI, WAVELET.dec_hi[OFFSET - LENGTH - J], tmp);   \
+            SUM_LO = __MAC_32x32(SUM_LO, WAVELET.dec_lo[OFFSET - LENGTH - J], tmp);   \
+            SUM_HI = __MAC_32x32(SUM_HI, WAVELET.dec_hi[OFFSET - LENGTH - J], tmp);   \
         }                                                                       \
         right_edge = tmp;                                                       \
         for(k=1; k < LENGTH && OFFSET - J >= LENGTH; k++, J++) {                \
             tmp = right_edge + (SRC[k] - SRC[0]);                               \
-            SUM_LO = MAC(SUM_LO, WAVELET.dec_lo[OFFSET - LENGTH - J], tmp);   \
-            SUM_HI = MAC(SUM_HI, WAVELET.dec_hi[OFFSET - LENGTH - J], tmp);   \
+            SUM_LO = __MAC_32x32(SUM_LO, WAVELET.dec_lo[OFFSET - LENGTH - J], tmp);   \
+            SUM_HI = __MAC_32x32(SUM_HI, WAVELET.dec_hi[OFFSET - LENGTH - J], tmp);   \
         }                                                                       \
         right_edge = tmp;                                                       \
     }                                                                           \
@@ -199,17 +199,17 @@
  */
 
 /**
-  @defgroup q32DWTKernels DWT kernels on Q31 input values
-  These kernels calculate the DWT transform on Q31 fixed point data.
+  @defgroup realDWTKernels DWT kernels on real input values
+  These kernels calculate the DWT transform on real input data.
 */
 
 /**
-  @addtogroup q32DWTKernels
+  @addtogroup realDWTKernels
   @{
  */
 
 /**
-   @brief  Q31 fixed-point DWT on real input data for XPULPV2 extension.
+   @brief  Q32 Fixed-point DWT on real input data.
    @param[in]   pSrc     points to the input buffer (real data)
    @param[in]   length   length of input buffer
    @param[in]   wavelet  wavelet structure for calculating DWT
@@ -219,7 +219,7 @@
    @param[out]  pDstD    points to ouput buffer with Detailed coefficients
    @return      none
 */
-void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
+void plp_dwt_q32s_rv32im(const int32_t *__restrict__ pSrc,
                          uint32_t length,
                          const plp_dwt_wavelet_q32 wavelet,
                          plp_dwt_extension_mode mode,
@@ -244,7 +244,7 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
      */
 
     
-    /*  Step 1.
+    /*
      *  Handle Left overhanging
      *
      * X() =  x x[A B C D E F]
@@ -261,8 +261,8 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
 
         // Compute Filter overlapping with signal
         for(; filt_j <= offset; filt_j++){
-            sum_lo = MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
-            sum_hi = MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
+            sum_lo = __MAC_32x32(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
+            sum_hi = __MAC_32x32(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
         }
 
         // Compute Left edge extension
@@ -293,7 +293,7 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
         *pCurrentD++ = sum_hi >> MAC_SHIFT;
     }
 
-    /*  Step 2.
+    /*
      *  Compute center (length >= wavelet.length)
      *
      *  X() = [A B C D E F]
@@ -308,15 +308,15 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
         uint32_t filt_j = 0;
 
         for(; filt_j < wavelet.length; filt_j++){
-            sum_lo = MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
-            sum_hi = MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
+            sum_lo = __MAC_32x32(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
+            sum_hi = __MAC_32x32(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
         }
 
         *pCurrentA++ = sum_lo >> MAC_SHIFT;
         *pCurrentD++ = sum_hi >> MAC_SHIFT;
     }
 
-    /*  Step 3.
+     /*
      *  Compute center (length < wavelet.length)
      *
      *  X() =   y y[A B C]x x x
@@ -359,8 +359,8 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
 
         // Filter Center overlapp
         for(; filt_j <= offset; filt_j++){
-            sum_lo = MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
-            sum_hi = MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
+            sum_lo = __MAC_32x32(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
+            sum_hi = __MAC_32x32(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
         }   
 
         // Filter Left extension
@@ -391,7 +391,7 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
     }
 
 
-    /*  Step 4.
+    /*
      *  Handle Right overhanging
      *
      * X() = [A B C D E F]x x
@@ -432,8 +432,8 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
     
         // Filter overlapping with signal
         for(; filt_j < wavelet.length; filt_j++){
-            sum_lo = MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
-            sum_hi = MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
+            sum_lo = __MAC_32x32(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
+            sum_hi = __MAC_32x32(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
         }
 
         *pCurrentA++ = sum_lo >> MAC_SHIFT;
@@ -445,8 +445,8 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
 
 
 /**
-   @brief  Q31 Fixed-point DWT kernel optimized for Haar Wavelet for XPULPV2 extension.
-   @param[in]   pSrc     points to the input buffer (q31)
+   @brief  32bit Fixed-point DWT kernel optimized for Haar Wavelet on real input data.
+   @param[in]   pSrc     points to the input buffer (real data)
    @param[in]   length   length of input buffer
    @param[in]   mode     boundary extension mode
 
@@ -454,7 +454,7 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
    @param[out]  pDstD    points to ouput buffer with Detailed coefficients
    @return      none
 */
-void plp_dwt_haar_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
+void plp_dwt_haar_q32s_rv32im(const int32_t *__restrict__ pSrc,
                          uint32_t length,
                          plp_dwt_extension_mode mode,
                          int32_t *__restrict__ pDstA,
@@ -467,45 +467,48 @@ void plp_dwt_haar_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
     int32_t offset;
         
     /***
-     * The filter convolution is done in 2 steps handling cases where
-     *  1. Filter is same size, or totally enclosed in signal center
-     *  2. Filter hangs over the right side of the signal
+     * The filter convolution is done in 4 steps handling cases where
+     *  1. Filter is hanging over the left side of the signal
+     *  2. Filter is same size, or totally enclosed in signal
+     *  3. Filter is larger than the enclosed signal and hangs over both edges
+     *  4. Filter hangs over the right side of the signal
      * 
-     *  In of the cases, where signal hangs over the boundary of the signal, values are computed 
+     *  Each of the cases, where signal hangs over the boundary of the signal, values are computed 
      *  on demand based on the edge extension mode.
      */
 
+    
  
-    /*  Step 1.
+    /*
      *  Compute center (length >= wavelet.length)
      *
      *  X() = [A B C D E F]
      *  h() =       [b a]
      *                 ^
      *                 Compute a full convolution of the filter with the signal
-     */ 
+     */    
     for(offset = step-1 ; offset < length; offset += step){
 
         int64_t sum_lo = HAAR_COEF * (pSrc[offset - 1] + pSrc[offset]);
         int64_t sum_hi = HAAR_COEF * (pSrc[offset - 1] - pSrc[offset]);
 
-        *pCurrentA++ = sum_lo >> MAC_SHIFT;
-        *pCurrentD++ = sum_hi >> MAC_SHIFT;
+        *pCurrentA++ = sum_lo >> 31U;
+        *pCurrentD++ = sum_hi >> 31U;
     }
 
    
 
 
-    /*  Step 2.
-     *  Handle Right overhanging (only for odd signal lengths)
+    /*
+     *  Handle Right overhanging
      *
-     * X() = [A B C D E F]x
-     * H() =           [b a]
-     *                  ^ ^
-     *                  | Extend the signal (x) by computing the values based on the extension mode
+     * X() = [A B C D E F]x x
+     * H() =         [d c b a]
+     *                  ^   ^
+     *                  |   First extend the signal (x x) by computing the values based on the extension mode
      *                  Then compute the filter part overlapping with the signal
      */
-    if(length % 2U){
+    if(offset < length + 1){
         int64_t sum_lo = 0;
         int64_t sum_hi = 0;
 
@@ -538,7 +541,7 @@ void plp_dwt_haar_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
                 break;
         }
     
-        *pCurrentA = sum_lo >> MAC_SHIFT;
-        *pCurrentD = sum_hi >> MAC_SHIFT;
+        *pCurrentA = sum_lo >> 31U;
+        *pCurrentD = sum_hi >> 31U;
     }
 }

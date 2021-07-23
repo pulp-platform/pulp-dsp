@@ -1,12 +1,12 @@
 /* ----------------------------------------------------------------------
  * Project:      PULP DSP Library
  * Title:        plp_dwt_q8s_xpulpv2.c
- * Description:  Floating-point Discret Wavelet Transform on real input data for XPULPV2
+ * Description:  Q8 Fixed-point Discret Wavelet Transform for XPULPV2
  *
  * $Date:        10. Juli 2021
  * $Revision:    V1
  *
- * Target Processor: PULP cores with "F" support (wolfe)
+ * Target Processor: PULP cores
  * -------------------------------------------------------------------- */
 /*
  * Copyright (C) 2021 ETH Zurich and University of Bologna. All rights reserved.

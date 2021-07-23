@@ -6,7 +6,7 @@
  * $Date:        10. Juli 2021
  * $Revision:    V1
  *
- * Target Processor: PULP cores with "F" support (wolfe)
+ * Target Processor: PULP cores
  * -------------------------------------------------------------------- */
 /*
  * Copyright (C) 2021 ETH Zurich and University of Bologna. All rights reserved.
@@ -68,8 +68,15 @@ void plp_dwt_q32(const int32_t *__restrict__ pSrc,
    }
 
    if (hal_cluster_id() == ARCHI_FC_CID) {
-      printf("F extension is supported only for cluster side\n");
-      return;
+      switch(wavelet.type) {
+      case PLP_DWT_WAVELET_HAAR:
+      case PLP_DWT_WAVELET_DB1:
+         plp_dwt_haar_q32s_rv32im(pSrc, length, mode, pDstA, pDstD);
+         break;
+      default:
+         plp_dwt_q32s_rv32im(pSrc, length, wavelet, mode, pDstA, pDstD);
+         break;
+      }
    }else {
       switch(wavelet.type) {
       case PLP_DWT_WAVELET_HAAR:

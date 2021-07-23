@@ -70,7 +70,7 @@ void plp_dwt_f32(const float32_t *__restrict__ pSrc,
    }
 
    if (hal_cluster_id() == ARCHI_FC_CID) {
-      printf("F extension is supported only for cluster side\n");
+      printf("error: FC doesn't have FPU\n");
       return;
    } else {
       switch(wavelet.type) {
