@@ -566,10 +566,10 @@ CL_SRCS = \
 	src/TransformFunctions/kernels/plp_cfft_q16p_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_cfft_q32s_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c \
-	src/TransformFunctions/kernels/plp_dwt_f32_xpulpv2.c \
-	src/TransformFunctions/kernels/plp_dwt_q32_xpulpv2.c \
-	src/TransformFunctions/kernels/plp_dwt_q16_xpulpv2.c \
-	src/TransformFunctions/kernels/plp_dwt_q8_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_dwt_f32s_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_dwt_q32s_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_dwt_q16s_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_dwt_q8s_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32s_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32p_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i16s_xpulpv2.c \

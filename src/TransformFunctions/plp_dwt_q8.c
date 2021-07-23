@@ -76,10 +76,10 @@ void plp_dwt_q8(const int8_t *__restrict__ pSrc,
       switch(wavelet.type) {
       case PLP_DWT_WAVELET_HAAR:
       case PLP_DWT_WAVELET_DB1:
-         plp_dwt_haar_q8_xpulpv2(pSrc, length, mode, pDstA, pDstD);
+         plp_dwt_haar_q8s_xpulpv2(pSrc, length, mode, pDstA, pDstD);
          break;
       default:
-         plp_dwt_q8_xpulpv2(pSrc, length, wavelet, mode, pDstA, pDstD);
+         plp_dwt_q8s_xpulpv2(pSrc, length, wavelet, mode, pDstA, pDstD);
          break;
       }
    }
