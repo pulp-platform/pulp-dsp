@@ -36,10 +36,10 @@
 
 #define HAAR_COEF ((int32_t) 0x5a82)
 
-#define MAC_SHIFT 7U
+#define MAC_SHIFT 15U
 // #define MAC(Acc, A, B) Acc = __MACS(Acc, A, B);
-#define MAC(Acc, A, B) Acc += ((int32_t)A * (int32_t)B) >> 8U;
-#define MSU(Acc, A, B) Acc -= ((int32_t)A * (int32_t)B) >> 8U;
+#define MAC(Acc, A, B) Acc += ((int32_t)A * (int32_t)B);
+#define MSU(Acc, A, B) Acc -= ((int32_t)A * (int32_t)B);
 
 
 #include "plp_dwt_signal_ext.h"
@@ -344,8 +344,8 @@ void plp_dwt_haar_q16s_rv32im(const int16_t *__restrict__ pSrc,
         int32_t sum_lo = HAAR_COEF * (pSrc[offset - 1] + pSrc[offset]);
         int32_t sum_hi = HAAR_COEF * (pSrc[offset - 1] - pSrc[offset]);
 
-        *pCurrentA++ = sum_lo >> 15U;
-        *pCurrentD++ = sum_hi >> 15U;
+        *pCurrentA++ = sum_lo >> MAC_SHIFT;
+        *pCurrentD++ = sum_hi >> MAC_SHIFT;
     }
 
    
@@ -393,7 +393,7 @@ void plp_dwt_haar_q16s_rv32im(const int16_t *__restrict__ pSrc,
                 break;
         }
     
-        *pCurrentA = sum_lo >> 15U;
-        *pCurrentD = sum_hi >> 15U;
+        *pCurrentA = sum_lo >> MAC_SHIFT;
+        *pCurrentD = sum_hi >> MAC_SHIFT;
     }
 }
