@@ -71,6 +71,7 @@ void plp_dwt_q32p_xpulpv2(const int32_t *__restrict__ pSrc,
                          uint32_t length,
                          const plp_dwt_wavelet_q32 wavelet,
                          plp_dwt_extension_mode mode,
+                         uint32_t nPE,
                          int32_t *__restrict__ pDstA,
                          int32_t *__restrict__ pDstD) {
     int32_t *pCurrentA = pDstA;
@@ -305,6 +306,7 @@ void plp_dwt_q32p_xpulpv2(const int32_t *__restrict__ pSrc,
 void plp_dwt_haar_q32p_xpulpv2(const int32_t *__restrict__ pSrc,
                          uint32_t length,
                          plp_dwt_extension_mode mode,
+                         uint32_t nPE,
                          int32_t *__restrict__ pDstA,
                          int32_t *__restrict__ pDstD) {
     int32_t *pCurrentA = pDstA;

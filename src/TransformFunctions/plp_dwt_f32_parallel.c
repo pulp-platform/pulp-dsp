@@ -78,10 +78,10 @@ void plp_dwt_f32_parallel(const float32_t *__restrict__ pSrc,
       switch(wavelet.type) {
       case PLP_DWT_WAVELET_HAAR:
       case PLP_DWT_WAVELET_DB1:
-         plp_dwt_haar_f32p_xpulpv2(pSrc, length, mode, pDstA, pDstD);
+         plp_dwt_haar_f32p_xpulpv2(pSrc, length, mode, nPE, pDstA, pDstD);
          break;
       default:
-         plp_dwt_f32p_xpulpv2(pSrc, length, wavelet, mode, pDstA, pDstD);
+         plp_dwt_f32p_xpulpv2(pSrc, length, wavelet, mode, nPE, pDstA, pDstD);
          break;
       }
    }

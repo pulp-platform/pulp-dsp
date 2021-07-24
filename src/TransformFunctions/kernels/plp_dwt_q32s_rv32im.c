@@ -92,7 +92,7 @@ void plp_dwt_q32s_rv32im(const int32_t *__restrict__ pSrc,
      */
 
     
-    /*
+    /*  Step 1.
      *  Handle Left overhanging
      *
      * X() =  x x[A B C D E F]
@@ -141,7 +141,7 @@ void plp_dwt_q32s_rv32im(const int32_t *__restrict__ pSrc,
         *pCurrentD++ = sum_hi >> MAC_SHIFT;
     }
 
-    /*
+    /*  Step 2.
      *  Compute center (length >= wavelet.length)
      *
      *  X() = [A B C D E F]
@@ -164,7 +164,7 @@ void plp_dwt_q32s_rv32im(const int32_t *__restrict__ pSrc,
         *pCurrentD++ = sum_hi >> MAC_SHIFT;
     }
 
-     /*
+    /*  Step 3.
      *  Compute center (length < wavelet.length)
      *
      *  X() =   y y[A B C]x x x
@@ -239,7 +239,7 @@ void plp_dwt_q32s_rv32im(const int32_t *__restrict__ pSrc,
     }
 
 
-    /*
+    /*  Step 4. 
      *  Handle Right overhanging
      *
      * X() = [A B C D E F]x x
@@ -315,26 +315,23 @@ void plp_dwt_haar_q32s_rv32im(const int32_t *__restrict__ pSrc,
     int32_t offset;
         
     /***
-     * The filter convolution is done in 4 steps handling cases where
-     *  1. Filter is hanging over the left side of the signal
-     *  2. Filter is same size, or totally enclosed in signal
-     *  3. Filter is larger than the enclosed signal and hangs over both edges
-     *  4. Filter hangs over the right side of the signal
+     * The filter convolution is done in 2 steps handling cases where
+     *  1. Filter is same size, or totally enclosed in signal center
+     *  2. Filter hangs over the right side of the signal
      * 
-     *  Each of the cases, where signal hangs over the boundary of the signal, values are computed 
+     *  In of the cases, where signal hangs over the boundary of the signal, values are computed 
      *  on demand based on the edge extension mode.
      */
 
-    
  
-    /*
+    /*  Step 1.
      *  Compute center (length >= wavelet.length)
      *
      *  X() = [A B C D E F]
      *  h() =       [b a]
      *                 ^
      *                 Compute a full convolution of the filter with the signal
-     */    
+     */   
     for(offset = step-1 ; offset < length; offset += step){
 
         int64_t sum_lo = HAAR_COEF * (pSrc[offset - 1] + pSrc[offset]);
@@ -347,16 +344,16 @@ void plp_dwt_haar_q32s_rv32im(const int32_t *__restrict__ pSrc,
    
 
 
-    /*
-     *  Handle Right overhanging
+    /*  Step 2.
+     *  Handle Right overhanging (only for odd signal lengths)
      *
-     * X() = [A B C D E F]x x
-     * H() =         [d c b a]
-     *                  ^   ^
-     *                  |   First extend the signal (x x) by computing the values based on the extension mode
+     * X() = [A B C D E F]x
+     * H() =           [b a]
+     *                  ^ ^
+     *                  | Extend the signal (x) by computing the values based on the extension mode
      *                  Then compute the filter part overlapping with the signal
      */
-    if(offset < length + 1){
+    if(length % 2U){
         int64_t sum_lo = 0;
         int64_t sum_hi = 0;
 
