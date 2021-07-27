@@ -82,7 +82,7 @@ void plp_fill_i32(int32_t value, int32_t *__restrict__ pDst, uint32_t blockSize)
 
     uint32_t blkCnt; /* Loop counter */
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_fill_i32s_rv32im(value, pDst, blockSize);
     } else {
         plp_fill_i32s_xpulpv2(value, pDst, blockSize);

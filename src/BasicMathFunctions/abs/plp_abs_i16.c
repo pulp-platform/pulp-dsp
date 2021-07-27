@@ -57,7 +57,7 @@ void plp_abs_i16(const int16_t * pSrc,
                  int16_t * pDst,
                  uint32_t blockSize) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
       plp_abs_i16s_rv32im(pSrc, pDst, blockSize);
     } else {
       plp_abs_i16s_xpulpv2(pSrc, pDst, blockSize);

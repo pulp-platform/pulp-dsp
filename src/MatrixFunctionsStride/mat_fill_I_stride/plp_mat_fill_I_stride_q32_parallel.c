@@ -55,7 +55,7 @@
 void plp_mat_fill_I_stride_q32_parallel(
     uint32_t N, uint32_t stride, int32_t fracBits, uint32_t nPE, int32_t *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("parallel processing supported only for cluster side\n");
         return;
     } else {
@@ -63,7 +63,7 @@ void plp_mat_fill_I_stride_q32_parallel(
             .N = N, .stride = stride, .fracBits = fracBits, .nPE = nPE, .pDst = pDst
         };
 
-        rt_team_fork(nPE, plp_mat_fill_I_stride_q32p_xpulpv2, (void *)&args);
+        hal_cl_team_fork(nPE, plp_mat_fill_I_stride_q32p_xpulpv2, (void *)&args);
     }
 }
 

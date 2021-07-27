@@ -57,7 +57,7 @@ void plp_cfft_f32(const plp_fft_instance_f32 *S,
                   const float32_t *__restrict__ pSrc,
                   float32_t *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("F extension is supported only for cluster side\n");
         return;
     }

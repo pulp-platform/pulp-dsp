@@ -29,7 +29,7 @@
  */
 
 #include "plp_math.h"
-#include "rt/rt_api.h"
+#include "rtos_hal.h"
 
 /**
    @ingroup BasicConvolution
@@ -74,7 +74,7 @@ void plp_conv_parallel_OLA(uint32_t nPE,
 
     while (remainingcycles > 1U) {
 
-        rt_team_fork((S.coresPerVector * (S.numVectors >> 1)), plp_conv_parallel_OLA_kernel,
+        hal_cl_team_fork((S.coresPerVector * (S.numVectors >> 1)), plp_conv_parallel_OLA_kernel,
                      (void *)&S);
 
         S.numVectors = S.numVectors - participants;

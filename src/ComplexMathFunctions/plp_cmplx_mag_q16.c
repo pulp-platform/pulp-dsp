@@ -43,7 +43,7 @@ void plp_cmplx_mag_q16(const int16_t *pSrc,
                        int16_t *pRes,
                        uint32_t numSamples) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (hal_cluster_id() == ARCHI_FC_CID){
         plp_cmplx_mag_q16s_rv32im(pSrc, fracBits, pRes, numSamples);
     }
     else{

@@ -62,7 +62,7 @@ void plp_correlate_q16(const int16_t *pSrcA,
                        uint32_t fracBits,
                        int32_t *__restrict__ pRes) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_correlate_q16s_rv32im(pSrcA, srcALen, pSrcB, srcBLen, fracBits, pRes);
     } else {
         plp_correlate_q16s_xpulpv2(pSrcA, srcALen, pSrcB, srcBLen, fracBits, pRes);

@@ -80,7 +80,7 @@ void plp_cmplx_mult_real_q8(const int8_t *__restrict__ pSrcCmplx,
                             uint32_t deciPoint,
                             uint32_t numSamples) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_cmplx_mult_real_q8_rv32im(pSrcCmplx, pSrcReal, pDst, deciPoint, numSamples);
     } else {
         plp_cmplx_mult_real_q8_xpulpv2(pSrcCmplx, pSrcReal, pDst, deciPoint, numSamples);

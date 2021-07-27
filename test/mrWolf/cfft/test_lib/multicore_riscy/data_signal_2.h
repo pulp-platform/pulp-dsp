@@ -1,7 +1,7 @@
 #ifndef FFT_DATA_H
 #define FFT_DATA_H
 
-RT_L1_DATA Complex_type_f32 Input_Signal[FFT_LEN] = {
+HAL_CL_L1 Complex_type_f32 Input_Signal[FFT_LEN] = {
 {2.053767, 0.000000},
 {2.182540, 0.000000},
 {1.770722, 0.000000},

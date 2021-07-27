@@ -59,7 +59,7 @@ void plp_mult_i16(const int16_t * pSrcA,
                  int32_t * pDst,
                  uint32_t blockSize) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
       plp_mult_i16s_rv32im(pSrcA, pSrcB, pDst, blockSize);
     } else {
       plp_mult_i16s_xpulpv2(pSrcA, pSrcB, pDst, blockSize);

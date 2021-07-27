@@ -78,7 +78,7 @@ void plp_cmplx_mag_i8(const int8_t *pSrc,
                       uint32_t numSamples){
     printf("Error: plp_sqrt_q8 not implemented!\n");
     return;
-    if (rt_cluster_id() == ARCHI_FC_CID){
+    if (hal_cluster_id() == ARCHI_FC_CID){
         plp_cmplx_mag_i8s_rv32im(pSrc, pRes, numSamples);
     }
     else{

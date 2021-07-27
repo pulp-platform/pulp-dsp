@@ -82,7 +82,7 @@ void plp_cmplx_dot_prod_f32(const float32_t *__restrict__ pSrcA,
                             float32_t *__restrict__ realResult,
                             float32_t *__restrict__ imagResult) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("error: FC doesn't have FPU\n");
         return;
     } else {

@@ -1,4 +1,4 @@
-RT_L2_DATA int16_t pSrc[129] = {
+HAL_L2 int16_t pSrc[129] = {
     1434, -2345, -23394, -17960, 31594, -10280, 9354, -22791, -16343, 1060, -25846, -3011, 16955,
     -26421, 417, -2758, -23633, -1900, -18250, -18403, -13985, 18267, -12634, 16666, 4687, 24003, 6381,
     22394, -30535, -14441, -26403, -24737, -18811, -3888, -20010, -1917, 22235, 26559, 14449, 2175,
@@ -11,15 +11,15 @@ RT_L2_DATA int16_t pSrc[129] = {
     8100, -11457, 9785, 11060, 5810, -14631, -758, -11164
 };
 
-L2_DATA uint32_t blockSize = 129;
+HAL_L2 uint32_t blockSize = 129;
 
-L2_DATA uint32_t deciPoint = 7;
+HAL_L2 uint32_t deciPoint = 7;
 
-RT_L2_DATA int32_t pRes[1] = {
+HAL_L2 int32_t pRes[1] = {
     0
 };
 
-RT_L2_DATA int32_t pRes_reference[1] = {
+HAL_L2 int32_t pRes_reference[1] = {
     283295113
 };
 
@@ -37,18 +37,18 @@ RT_L2_DATA int32_t pRes_reference[1] = {
 }
 
 #define BENCH {\
-    rt_perf_t perf;\
-    rt_perf_init(&perf);\
-    int passed = do_bench(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR), 1);\
+    hal_perf_t perf;\
+    hal_perf_init(&perf);\
+    int passed = do_bench(&perf, (1<<HAL_PERF_CYCLES) | (1<<HAL_PERF_INSTR), 1);\
     printf("passed: %d\n", passed);\
-    printf("cycles: %d\n", rt_perf_read(RT_PERF_CYCLES));\
-    printf("instructions: %d\n", rt_perf_read(RT_PERF_INSTR));\
-    do_bench(&perf, 1<<RT_PERF_LD_STALL, 0);\
-    printf("load_stalls: %d\n", rt_perf_read(RT_PERF_LD_STALL));\
-    do_bench(&perf, 1<<RT_PERF_IMISS, 0);\
-    printf("icache_miss: %d\n", rt_perf_read(RT_PERF_IMISS));\
-    do_bench(&perf, 1<<RT_PERF_TCDM_CONT, 0);\
-    printf("tcdm_cont: %d\n", rt_perf_read(RT_PERF_TCDM_CONT));\
+    printf("cycles: %d\n", hal_perf_read(HAL_PERF_CYCLES));\
+    printf("instructions: %d\n", hal_perf_read(HAL_PERF_INSTR));\
+    do_bench(&perf, 1<<HAL_PERF_LD_STALL, 0);\
+    printf("load_stalls: %d\n", hal_perf_read(HAL_PERF_LD_STALL));\
+    do_bench(&perf, 1<<HAL_PERF_IMISS, 0);\
+    printf("icache_miss: %d\n", hal_perf_read(HAL_PERF_IMISS));\
+    do_bench(&perf, 1<<HAL_PERF_TCDM_CONT, 0);\
+    printf("tcdm_cont: %d\n", hal_perf_read(HAL_PERF_TCDM_CONT));\
 }\
 
 #define ABS(x) (x > 0 ? x : -x)

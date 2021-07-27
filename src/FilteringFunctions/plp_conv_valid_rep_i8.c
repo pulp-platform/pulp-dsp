@@ -72,7 +72,7 @@ void plp_conv_valid_rep_i8(const int8_t *pSrcA,
         pIn1 = pSrcB;
     }
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
 
         printf("Errorr: Not Implemented!");
 
@@ -88,8 +88,8 @@ void plp_conv_valid_rep_i8(const int8_t *pSrcA,
         uint32_t len_align = ((in1Len + 3) >> 2) << 2; // compute aligned memory size
         uint32_t mem_size = len_align << 2;            // memory size for all 4 replications
 
-        int8_t *p_1_loc = rt_alloc(RT_ALLOC_CL_DATA, sizeof(int8_t) * mem_size);
-        int8_t *p_2_loc = rt_alloc(RT_ALLOC_CL_DATA, sizeof(int8_t) * in2Len);
+        int8_t *p_1_loc = hal_cl_l1_malloc(sizeof(int8_t) * mem_size);
+        int8_t *p_2_loc = hal_cl_l1_malloc(sizeof(int8_t) * in2Len);
 
         if (p_1_loc == NULL || p_2_loc == NULL) {
             printf("Error: insufficient L1 memory!\n");
@@ -97,24 +97,24 @@ void plp_conv_valid_rep_i8(const int8_t *pSrcA,
         }
 
         // copy the data over to the L1 data, replicated 4 times
-        rt_dma_copy_t copy;
+        hal_cl_dma_cmd_t copy;
         int merge = 0;
 
         for (int i = 0; i < 4; i++) {
-            rt_dma_memcpy((unsigned int)(pIn1 + i), (unsigned int)(p_1_loc + i * len_align),
-                          sizeof(int8_t) * (in1Len - i), RT_DMA_DIR_EXT2LOC, merge, &copy);
+            hal_cl_dma_cmd((unsigned int)(pIn1 + i), (unsigned int)(p_1_loc + i * len_align),
+                          sizeof(int8_t) * (in1Len - i), HAL_CL_DMA_DIR_EXT2LOC, merge, &copy);
             merge = 1;
         }
 
-        rt_dma_memcpy((unsigned int)pIn2, (unsigned int)p_2_loc, sizeof(int8_t) * in2Len,
-                      RT_DMA_DIR_EXT2LOC, merge, &copy);
+        hal_cl_dma_cmd((unsigned int)pIn2, (unsigned int)p_2_loc, sizeof(int8_t) * in2Len,
+                      HAL_CL_DMA_DIR_EXT2LOC, merge, &copy);
 
-        rt_dma_wait(&copy);
+        hal_cl_dma_cmd_wait(&copy);
 
         plp_conv_valid_rep_i8s_xpulpv2(p_1_loc, in1Len, len_align, p_2_loc, in2Len, pRes);
 
-        rt_free(RT_ALLOC_CL_DATA, p_1_loc, sizeof(int8_t) * mem_size);
-        rt_free(RT_ALLOC_CL_DATA, p_2_loc, sizeof(int8_t) * in2Len);
+        hal_cl_l1_free(p_1_loc, sizeof(int8_t) * mem_size);
+        hal_cl_l1_free(p_2_loc, sizeof(int8_t) * in2Len);
     }
 }
 

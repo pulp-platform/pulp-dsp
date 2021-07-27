@@ -44,7 +44,7 @@
 
 float32_t plp_cos_f32(float32_t x) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         return 0.f;
     } else {
         return plp_cos_f32s_xpulpv2(x);

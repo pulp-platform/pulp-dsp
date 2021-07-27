@@ -64,7 +64,7 @@ void plp_dot_prod_q8(const int8_t *__restrict__ pSrcA,
                      uint32_t deciPoint,
                      int32_t *__restrict__ pRes) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_dot_prod_q8s_rv32im(pSrcA, pSrcB, blockSize, deciPoint, pRes);
     } else {
         plp_dot_prod_q8s_xpulpv2(pSrcA, pSrcB, blockSize, deciPoint, pRes);

@@ -48,7 +48,7 @@
 
 void plp_mat_fill_I_i32(uint32_t N, int32_t *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_mat_fill_I_i32s_rv32im(N, pDst);
     } else {
         plp_mat_fill_I_i32s_xpulpv2(N, pDst);

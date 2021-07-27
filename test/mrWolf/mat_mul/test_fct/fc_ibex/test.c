@@ -1,4 +1,4 @@
-#include "rt/rt_api.h"
+#include "rtos_hal.h"
 #include "stdio.h"
 
 // #define MUL_TEST_8
@@ -16,11 +16,11 @@
 #endif
 
 // This benchmark is a single shot so we can read the value directly out of the
-// HW counter using the function rt_perf_read
-static void do_bench_0(rt_perf_t *perf, int events)
+// HW counter using the function hal_perf_read
+static void do_bench_0(hal_perf_t *perf, int events)
 {
   
-  int32_t* result = (int32_t*) rt_alloc(RT_ALLOC_FC_DATA, sizeof(uint32_t)*M_LENGTH*O_LENGTH);
+  int32_t* result = (int32_t*) hal_fc_l1_malloc(sizeof(uint32_t)*M_LENGTH*O_LENGTH);
 
   #if defined MUL_TEST_8
     printf("running test for 8 bit\n");
@@ -31,12 +31,12 @@ static void do_bench_0(rt_perf_t *perf, int events)
   #endif
 
   // Activate specified events
-  rt_perf_conf(perf, events);
+  hal_perf_conf(perf, events);
 
   // Reset HW counters now and start and stop counters so that we benchmark
   // only around the printf
-  rt_perf_reset(perf);
-  rt_perf_start(perf);
+  hal_perf_reset(perf);
+  hal_perf_start(perf);
 
   #if defined(MUL_TEST_8)
     plp_mat_mult_i8s_rv32im(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
@@ -46,7 +46,7 @@ static void do_bench_0(rt_perf_t *perf, int events)
     plp_mat_mult_i32s_rv32im(m_a, m_b, M_LENGTH, N_LENGTH, O_LENGTH, result);
   #endif
 
-  rt_perf_stop(perf);
+  hal_perf_stop(perf);
 
   int errors = 0;
   for(int i = 0; i < M_LENGTH*O_LENGTH; i++){
@@ -69,25 +69,25 @@ int main(){
 
   // This tructure will hold the configuration and also the results in the
   // cumulative mode
-  rt_perf_t perf;
+  hal_perf_t perf;
 
   // It must be initiliazed at least once, this will set all values in the
   // structure to zero.
-  rt_perf_init(&perf);
+  hal_perf_init(&perf);
 
   // To be compatible with all platforms, we can count only 1 event at the
   // same time (the silicon as only 1 HW counter), but the total number of cyles
   // is reported by a timer, we can activate it at the same time.
   // for (int i=0; i<10; i++){
-    do_bench_0(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR) | (1<<RT_PERF_LD_STALL) | (1<<RT_PERF_TCDM_CONT));
+    do_bench_0(&perf, (1<<HAL_PERF_CYCLES) | (1<<HAL_PERF_INSTR) | (1<<HAL_PERF_LD_STALL) | (1<<HAL_PERF_TCDM_CONT));
   // }
 
   unsigned int ops = M_LENGTH*O_LENGTH*N_LENGTH*2;
-  unsigned int cycles = rt_perf_read(RT_PERF_CYCLES);
-  unsigned int instr = rt_perf_read(RT_PERF_INSTR);
-  unsigned int ld_stall = rt_perf_read(RT_PERF_LD_STALL);
-  unsigned int cont = rt_perf_read(RT_PERF_TCDM_CONT);
-  // unsigned int misc = rt_perf_read(RT_PERF_DELAY_NOP);
+  unsigned int cycles = hal_perf_read(HAL_PERF_CYCLES);
+  unsigned int instr = hal_perf_read(HAL_PERF_INSTR);
+  unsigned int ld_stall = hal_perf_read(HAL_PERF_LD_STALL);
+  unsigned int cont = hal_perf_read(HAL_PERF_TCDM_CONT);
+  // unsigned int misc = hal_perf_read(HAL_PERF_DELAY_NOP);
   printf("Total cycles: %d\n", cycles);
   printf("Instructions: %d\n", instr);
   printf("Load stalls %d\n", ld_stall);

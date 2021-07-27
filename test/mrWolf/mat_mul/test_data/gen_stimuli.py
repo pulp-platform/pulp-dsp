@@ -17,19 +17,19 @@ import random
 import numpy as np
 
 def write_header(f, name, var_type, height, width):
-    f.write('%s %s[%d];\n\n' % (var_type, name, length)) #RT_CL_DATA
+    f.write('%s %s[%d];\n\n' % (var_type, name, length)) #HAL_L1
 
 def write_header_scalar(f, name, var_type, value):
-    f.write('%s %s = %s;\n\n' % (var_type, name, value)) #RT_CL_DATA
+    f.write('%s %s = %s;\n\n' % (var_type, name, value)) #HAL_l1
 
 def write_arr(f, name, arr, var_type, length, length_VAR, L):
 
     if L == 1:
-        cache = 'RT_CL_DATA'
+        cache = 'HAL_CL_L1'
     else: 
-        cache = 'RT_L2_DATA'
+        cache = 'HAL_L2'
 
-    f.write('%s %s %s[%s] = {\n' % (cache, var_type, name,length_VAR)) # RT_L2_DATA #RT_CL_DATA
+    f.write('%s %s %s[%s] = {\n' % (cache, var_type, name,length_VAR)) # HAL_L2 # HAL_CL_L1
     for i in range(0, length):
         v = arr[i]
         f.write('%d, ' % (v))
@@ -38,7 +38,7 @@ def write_arr(f, name, arr, var_type, length, length_VAR, L):
     return
 
 def write_scalar(f, name, value, var_type):
-    f.write('%s %s = %d;\n\n' % (var_type, name, value)) # RT_L2_DATA # RT_CL_DATA
+    f.write('%s %s = %d;\n\n' % (var_type, name, value)) # HAL_L2 # HAL_CL_L1
     return
 
 ################################################################################

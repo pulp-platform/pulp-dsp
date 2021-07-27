@@ -29,7 +29,7 @@
  */
 
 #include "plp_math.h"
-#include "rt/rt_api.h"
+#include "rtos_hal.h"
 
 /**
    @ingroup BasicConvolution
@@ -48,11 +48,11 @@
 
 void plp_conv_parallel_OLA_kernel(void *task_args) {
 
-    /* printf("Hello Core %i\n", rt_core_id()); */
+    /* printf("Hello Core %i\n", hal_core_id()); */
 
     plp_conv_tree_add_instance *S = (plp_conv_tree_add_instance *)task_args;
 
-    const uint8_t coreId = rt_core_id();
+    const uint8_t coreId = hal_core_id();
 
     const uint8_t coresPerVector = S->coresPerVector;
     const uint32_t addOffset = S->addOffset;
@@ -215,7 +215,7 @@ void plp_conv_parallel_OLA_kernel(void *task_args) {
 
 #endif // if defined(PLP_MATH_LOOPUNROLL)
     }
-    rt_team_barrier();
+    hal_team_barrier();
     return;
 }
 

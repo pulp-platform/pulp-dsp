@@ -79,7 +79,7 @@ void plp_cmplx_mult_cmplx_q16(const int16_t *__restrict__ pSrcA,
                               uint32_t deciPoint,
                               uint32_t numSamples) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_cmplx_mult_cmplx_q16_rv32im(pSrcA, pSrcB, pDst, deciPoint, numSamples);
     } else {
         plp_cmplx_mult_cmplx_q16_xpulpv2(pSrcA, pSrcB, pDst, deciPoint, numSamples);

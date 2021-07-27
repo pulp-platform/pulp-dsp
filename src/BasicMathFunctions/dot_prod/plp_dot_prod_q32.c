@@ -60,7 +60,7 @@ void plp_dot_prod_q32(const int32_t *__restrict__ pSrcA,
                       uint32_t deciPoint,
                       int32_t *__restrict__ pRes) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_dot_prod_q32s_rv32im(pSrcA, pSrcB, blockSize, deciPoint, pRes);
     } else {
         plp_dot_prod_q32s_xpulpv2(pSrcA, pSrcB, blockSize, deciPoint, pRes);

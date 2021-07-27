@@ -2,7 +2,7 @@
 #ifndef __FCT_H__
 #define __FCT_H__
 
-#include "rt/rt_api.h"
+#include "rtos_hal.h"
 #include <stdint.h>
 
 void plp_mat_mult_i8s_xpulpv2(

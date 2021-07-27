@@ -73,7 +73,7 @@ void plp_cmplx_mult_real_f32(const float32_t *__restrict__ pSrcCmplx,
                              float32_t *__restrict__ pDst,
                              uint32_t numSamples) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("error: FC doesn't have FPU\n");
         return;
     } else {

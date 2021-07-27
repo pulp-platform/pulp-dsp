@@ -89,7 +89,7 @@ void plp_mat_scale_stride_i16(const int16_t *__restrict__ pSrc,
                               int32_t shift,
                               int16_t *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_mat_scale_stride_i16s_rv32im(pSrc, M, N, strideSrc, strideDst, scaleFactor, shift,
                                          pDst);
     } else {

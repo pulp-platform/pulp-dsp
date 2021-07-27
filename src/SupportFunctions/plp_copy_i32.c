@@ -82,7 +82,7 @@ void plp_copy_i32(int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32
 
     uint32_t blkCnt; /* Loop counter */
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_copy_i32s_rv32im(pSrc, pDst, blockSize);
     } else {
         plp_copy_i32s_xpulpv2(pSrc, pDst, blockSize);

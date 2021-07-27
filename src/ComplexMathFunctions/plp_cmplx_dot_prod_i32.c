@@ -82,7 +82,7 @@ void plp_cmplx_dot_prod_i32(const int32_t *__restrict__ pSrcA,
                             int32_t *__restrict__ realResult,
                             int32_t *__restrict__ imagResult) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_cmplx_dot_prod_i32_rv32im(pSrcA, pSrcB, numSamples, realResult, imagResult);
     } else {
         plp_cmplx_dot_prod_i32_xpulpv2(pSrcA, pSrcB, numSamples, realResult, imagResult);

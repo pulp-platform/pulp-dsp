@@ -49,7 +49,7 @@
 
 void plp_mat_fill_I_q32(uint32_t N, int32_t fracBits, int32_t *__restrict__ pDst) {
 
-    if (rt_cluster_id() == ARCHI_FC_CID) {
+    if (hal_cluster_id() == ARCHI_FC_CID) {
         plp_mat_fill_I_q32s_rv32im(N, fracBits, pDst);
     } else {
         plp_mat_fill_I_q32s_xpulpv2(N, fracBits, pDst);

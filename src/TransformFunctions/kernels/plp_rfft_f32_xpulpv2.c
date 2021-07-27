@@ -204,7 +204,7 @@ void plp_rfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
     Complex_type_f32 *_out_ptr;
     Complex_type_f32 *_tw_ptr;
 
-    int core_id = rt_core_id();
+    int core_id = hal_core_id();
 
     // FIRST STAGE, input is real, stage=1
     stage = 1;
@@ -223,7 +223,7 @@ void plp_rfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
 
     // STAGES 2 -> n-1
     while (dist > nPE / 2) {
-        rt_team_barrier();
+        hal_team_barrier();
         step = dist << 1;
         for (j = 0; j < butt; j++) {
             _in_ptr = (Complex_type_f32 *)&pDst[2 * core_id];
@@ -239,7 +239,7 @@ void plp_rfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
     }
 
     while (dist > 1) {
-        rt_team_barrier();
+        hal_team_barrier();
         step = dist << 1;
         for (j = 0; j < butt / nPE; j++) {
             _in_ptr = _in_ptr = (Complex_type_f32 *)pDst;
@@ -255,7 +255,7 @@ void plp_rfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
         butt = butt << 1;
     }
 
-    rt_team_barrier();
+    hal_team_barrier();
 
     // LAST STAGE
     _in_ptr = (Complex_type_f32 *)&pDst[4 * core_id];
@@ -275,7 +275,7 @@ void plp_rfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
         index += 2 * nPE;
     } // j
 
-    rt_team_barrier();
+    hal_team_barrier();
 
     // ORDER VALUES
     if (S->bitReverseFlag) {
@@ -318,7 +318,7 @@ void plp_rfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
                 _out_ptr[index4] = temp;
             }
         }
-        rt_team_barrier();
+        hal_team_barrier();
     }
 }
 

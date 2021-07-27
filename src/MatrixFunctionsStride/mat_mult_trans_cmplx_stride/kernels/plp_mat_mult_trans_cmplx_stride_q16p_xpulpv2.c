@@ -63,7 +63,7 @@
 
 void plp_mat_mult_trans_cmplx_stride_q16p_xpulpv2(void *args) {
 
-    int core_id = rt_core_id();
+    int core_id = hal_core_id();
 
     plp_mat_mult_cmplx_stride_instance_q16 *a = (plp_mat_mult_cmplx_stride_instance_q16 *)args;
 
