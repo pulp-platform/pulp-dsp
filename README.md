@@ -44,7 +44,7 @@ To compile and install the library, do
 make clean header all install
 ~~~~~
 
-To use the library add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project and don't forget to include the necessary header files, e.g., `plp_math.h`, in your codes.
+To use the library add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project and don't forget to include the necessary header files, e.g., `plp_math.h`, in your codes. Link also the math library using `-lm`.
 
 If you add or modify the source codes and want to rebuild the library without recompiling unmodified files, do 
 
