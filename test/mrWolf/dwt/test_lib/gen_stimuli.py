@@ -65,28 +65,32 @@ def compute_result(result_parameter, inputs, env, fix_point):
     wavelet = env['wavelet']
 
     if fix_point is not None:
+        src = inputs['pSrc'].value.astype(np.float32)
 
         
         if result_parameter.ctype == 'int8_t':
-            src = inputs['pSrc'].value.astype(np.float32) / 2**7
-            
-            cA, cD = pywt.dwt(src, wavelets[wavelet], modes[mode])
-            cA = to_fixed(cA, 'q8')
-            cD = to_fixed(cD, 'q8')
+            # Create 8bit quantized version of the wavelet
+            ww = make_fixed_point_wavelet(wavelets[wavelet], 'q8')
+
+            cA, cD = pywt.dwt(src, ww, modes[mode])
+            cA = right_shift(cA, 'q8')
+            cD = right_shift(cD, 'q8')
 
         elif result_parameter.ctype == 'int16_t':
-            src = inputs['pSrc'].value.astype(np.float32) / 2**15
-     
-            cA, cD = pywt.dwt(src, wavelets[wavelet], modes[mode])
-            cA = to_fixed(cA, 'q16')
-            cD = to_fixed(cD, 'q16')
+            # Create 16bit quantized version of the wavelet
+            ww = make_fixed_point_wavelet(wavelets[wavelet], 'q16')
+
+            cA, cD = pywt.dwt(src, ww, modes[mode])
+            cA = right_shift(cA, 'q16')
+            cD = right_shift(cD, 'q16')
 
         elif result_parameter.ctype == 'int32_t':
-            src = inputs['pSrc'].value.astype(np.float32) / 2**31
+            # Create 32bit quantized version of the wavelet
+            ww = make_fixed_point_wavelet(wavelets[wavelet], 'q32')
 
-            cA, cD = pywt.dwt(src, wavelets[wavelet], modes[mode])
-            cA = to_fixed(cA, 'q32')
-            cD = to_fixed(cD, 'q32')
+            cA, cD = pywt.dwt(src, ww, modes[mode])
+            cA = right_shift(cA, 'q32')
+            cD = right_shift(cD, 'q32')
 
     elif result_parameter.ctype == 'float':
         src = inputs['pSrc'].value.astype(np.float32)
@@ -107,16 +111,50 @@ def compute_result(result_parameter, inputs, env, fix_point):
 ######################
 
 
-def to_fixed(x, dtype):
-    if dtype == "q8":
-        x = np.clip(x, -1, 127/128)
-        return np.array(np.round(x * 2**7), dtype=np.int8)
+def right_shift(arr, dtype):
+    """Rightshift - needed after the fixed point multiplication"""
+    if dtype == "q32":
+        return np.right_shift(arr.astype(np.int64), 31).astype(np.int32)
     elif dtype == "q16":
-        x = np.clip(x, -1, (2**15-1)/(2**15))
-        return np.array(np.round(x * 2**15), dtype=np.int16)
+        return np.right_shift(arr.astype(np.int32), 15).astype(np.int16)
+    elif dtype == "q8":
+        return np.right_shift(arr.astype(np.int16), 7).astype(np.int8)
+
+
+def make_fixed_point_wavelet(wavelet, dtype):
+    """Make fixed point wavelet by quantizing existing wavelength coefficients"""
+    if dtype == "q32":
+        return pywt.Wavelet(filter_bank=convert_dtype(np.array(pywt.Wavelet(wavelet).filter_bank), 'q32'))
+    elif dtype == "q16":
+        return pywt.Wavelet(filter_bank=convert_dtype(np.array(pywt.Wavelet(wavelet).filter_bank), 'q16'))
+    elif dtype == "q8":
+        return pywt.Wavelet(filter_bank=convert_dtype(np.array(pywt.Wavelet(wavelet).filter_bank), 'q8'))
+
+
+def convert_dtype(arr, dtype):
+    """"""
+    arr = np.array(arr)
+    if dtype == "q32":
+        return np.array(np.round(arr*2**31), dtype=np.int32)
+    elif dtype == "q16":
+        return np.array(np.round(arr*2**15), dtype=np.int16)
+    elif dtype == "q8":
+        return  np.array(np.round(arr*2**7), dtype=np.int8)
+    else:
+        return arr
+
+
+def to_fixed(x, dtype):
+    """ Convert array into x fixed point with dtype """
+    if dtype == "q8":
+        x = np.clip(x, -(2**7), (2**7-1))
+        return np.array(np.round(x), dtype=np.int8)
+    elif dtype == "q16":
+        x = np.clip(x, -(2**15), (2**15-1))
+        return np.array(np.round(x), dtype=np.int16)
     elif dtype == "q32":
-        x = np.clip(x, -1, (2**31-1)/(2**31))
-        return np.array(np.round(x * 2**31), dtype=np.int32)
+        x = np.clip(x, -(2**31), (2**31-1))
+        return np.array(np.round(x), dtype=np.int32)
 
 
 
