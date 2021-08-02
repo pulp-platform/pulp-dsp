@@ -106,8 +106,8 @@ void plp_dwt_f32p_xpulpv2(const float32_t *__restrict__ pSrc,
 
         // Compute Filter overlapping with signal
         for(; filt_j <= offset; filt_j++){
-            sum_lo += wavelet.dec_lo[filt_j] * pSrc[offset - filt_j];
-            sum_hi += wavelet.dec_hi[filt_j] * pSrc[offset - filt_j];
+            MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
+            MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
         }
 
         // Compute Left edge extension
@@ -153,8 +153,8 @@ void plp_dwt_f32p_xpulpv2(const float32_t *__restrict__ pSrc,
         uint32_t filt_j = 0;
 
         for(; filt_j < wavelet.length; filt_j++){
-            sum_lo += wavelet.dec_lo[filt_j] * pSrc[offset - filt_j];
-            sum_hi += wavelet.dec_hi[filt_j] * pSrc[offset - filt_j];
+            MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
+            MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
         }
 
         *pCurrentA++ = sum_lo;
@@ -204,8 +204,8 @@ void plp_dwt_f32p_xpulpv2(const float32_t *__restrict__ pSrc,
 
         // Filter Center overlapp
         for(; filt_j <= offset; filt_j++){
-            sum_lo += wavelet.dec_lo[filt_j] * pSrc[offset - filt_j];
-            sum_hi += wavelet.dec_hi[filt_j] * pSrc[offset - filt_j];
+            MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
+            MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
         }   
 
         // Filter Left extension
@@ -277,8 +277,8 @@ void plp_dwt_f32p_xpulpv2(const float32_t *__restrict__ pSrc,
     
         // Filter overlapping with signal
         for(; filt_j < wavelet.length; filt_j++){
-            sum_lo += wavelet.dec_lo[filt_j] * pSrc[offset - filt_j];
-            sum_hi += wavelet.dec_hi[filt_j] * pSrc[offset - filt_j];
+            MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
+            MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
         }
 
         *pCurrentA++ = sum_lo;

@@ -36,8 +36,8 @@
 
 
 #define MAC_SHIFT 31U
-#define MAC(Acc, A, B) (Acc + (int64_t)((int64_t) A * (int64_t) B))
-#define MSU(Acc, A, B) (Acc - (int64_t)((int64_t) A * (int64_t) B))
+#define MAC(Acc, A, B) Acc += (int64_t)((int64_t) A * (int64_t) B);
+#define MSU(Acc, A, B) Acc -= (int64_t)((int64_t) A * (int64_t) B);
 
 #include "plp_dwt_signal_ext.h"
 
@@ -108,8 +108,8 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
 
         // Compute Filter overlapping with signal
         for(; filt_j <= offset; filt_j++){
-            sum_lo = MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
-            sum_hi = MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
+            MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
+            MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
         }
 
         // Compute Left edge extension
@@ -127,7 +127,7 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
                 ANTISYMMETRIC_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
                 break;
             case PLP_DWT_MODE_ANTIREFLECT:
-                ANTIREFLECT_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset, int32_t);
+                ANTIREFLECT_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset, int64_t);
                 break;
             case PLP_DWT_MODE_PERIODIC:
             case PLP_DWT_MODE_ZERO:
@@ -155,8 +155,8 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
         uint32_t filt_j = 0;
 
         for(; filt_j < wavelet.length; filt_j++){
-            sum_lo = MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
-            sum_hi = MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
+            MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
+            MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
         }
 
         *pCurrentA++ = sum_lo >> MAC_SHIFT;
@@ -195,7 +195,7 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
                 ANTISYMMETRIC_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
                 break;
             case PLP_DWT_MODE_ANTIREFLECT:
-                ANTIREFLECT_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset, int32_t);
+                ANTIREFLECT_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset, int64_t);
                 break;
             case PLP_DWT_MODE_PERIODIC:
             case PLP_DWT_MODE_ZERO:
@@ -206,8 +206,8 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
 
         // Filter Center overlapp
         for(; filt_j <= offset; filt_j++){
-            sum_lo = MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
-            sum_hi = MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
+            MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
+            MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
         }   
 
         // Filter Left extension
@@ -225,7 +225,7 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
                 ANTISYMMETRIC_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
                 break;
             case PLP_DWT_MODE_ANTIREFLECT:
-                ANTIREFLECT_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset, int32_t);
+                ANTIREFLECT_EDGE_LEFT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset, int64_t);
                 break;
             case PLP_DWT_MODE_PERIODIC:
             case PLP_DWT_MODE_ZERO:
@@ -268,7 +268,7 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
                 ANTISYMMETRIC_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset);
                 break;
             case PLP_DWT_MODE_ANTIREFLECT:
-                ANTIREFLECT_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset, int32_t);
+                ANTIREFLECT_EDGE_RIGHT(sum_lo, sum_hi, pSrc, length, wavelet, filt_j, offset, int64_t);
                 break;
             case PLP_DWT_MODE_PERIODIC:
             case PLP_DWT_MODE_ZERO:
@@ -279,8 +279,8 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
     
         // Filter overlapping with signal
         for(; filt_j < wavelet.length; filt_j++){
-            sum_lo = MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
-            sum_hi = MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
+            MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
+            MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
         }
 
         *pCurrentA++ = sum_lo >> MAC_SHIFT;
