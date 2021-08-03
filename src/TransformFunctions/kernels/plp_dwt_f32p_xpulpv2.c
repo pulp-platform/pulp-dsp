@@ -55,24 +55,21 @@
 
 /**
    @brief  Floating-point DWT on real input data for XPULPV2 extension.
-   @param[in]   pSrc     points to the input buffer (real data)
-   @param[in]   length   length of input buffer
-   @param[in]   wavelet  wavelet structure for calculating DWT
-   @param[in]   mode     boundary extension mode
-
-   @param[out]  pDstA    points to ouput buffer with Approximate coefficients
-   @param[out]  pDstD    points to ouput buffer with Detailed coefficients
+   @param[in]   args     points to the plp_dwt_instance_f32
    @return      none
 */
-void plp_dwt_f32p_xpulpv2(const float32_t *__restrict__ pSrc,
-                         uint32_t length,
-                         const plp_dwt_wavelet_f32 wavelet,
-                         plp_dwt_extension_mode mode,
-                         uint32_t nPE,
-                         float32_t *__restrict__ pDstA,
-                         float32_t *__restrict__ pDstD) {
-    float32_t *pCurrentA = pDstA;
-    float32_t *pCurrentD = pDstD;
+void plp_dwt_f32p_xpulpv2(void *args) {
+    
+    plp_dwt_instance_f32 *S = (plp_dwt_instance_f32*) args;
+    
+    const float32_t *pSrc = S->pSrc;
+    const uint32_t length = S->length;
+    const plp_dwt_wavelet_f32 wavelet = S->wavelet;
+    plp_dwt_extension_mode mode = S->mode;
+    uint32_t nPE = S->nPE;
+
+    float32_t *pCurrentA = S->pDstA;
+    float32_t *pCurrentD = S->pDstD;
 
     static uint32_t step = 2;
 
@@ -292,24 +289,20 @@ void plp_dwt_f32p_xpulpv2(const float32_t *__restrict__ pSrc,
 
 /**
    @brief  Floating-point DWT kernel optimized for Haar Wavelet on real input data for XPULPV2 extension.
-   @param[in]   pSrc     points to the input buffer (real data)
-   @param[in]   length   length of input buffer
-   @param[in]   mode     boundary extension mode
-
-   @param[out]  pDstA    points to ouput buffer with Approximate coefficients
-   @param[out]  pDstD    points to ouput buffer with Detailed coefficients
+   @param[in]   args     points to the plp_dwt_instance_f32
    @return      none
 */
-void plp_dwt_haar_f32p_xpulpv2(const float32_t *__restrict__ pSrc,
-                         uint32_t length,
-                         plp_dwt_extension_mode mode,
-                         uint32_t nPE,
-                         float32_t *__restrict__ pDstA,
-                         float32_t *__restrict__ pDstD) {
+void plp_dwt_haar_f32p_xpulpv2(void *args) {
 
+    plp_dwt_instance_f32 *S = (plp_dwt_instance_f32*) args;
+    
+    const float32_t *pSrc = S->pSrc;
+    const uint32_t length = S->length;
+    plp_dwt_extension_mode mode = S->mode;
+    uint32_t nPE = S->nPE;
 
-    float32_t *pCurrentA = pDstA;
-    float32_t *pCurrentD = pDstD;
+    float32_t *pCurrentA = S->pDstA;
+    float32_t *pCurrentD = S->pDstD;
 
     static uint32_t step = 2;
 

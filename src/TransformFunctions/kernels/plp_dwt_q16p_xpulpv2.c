@@ -65,24 +65,22 @@
 
 /**
    @brief  Q15 fixed-point DWT for XPULPV2 extension.
-   @param[in]   pSrc     points to the input buffer (q15)
-   @param[in]   length   length of input buffer
-   @param[in]   wavelet  wavelet structure for calculating DWT
-   @param[in]   mode     boundary extension mode
-
-   @param[out]  pDstA    points to ouput buffer with Approximate coefficients
-   @param[out]  pDstD    points to ouput buffer with Detailed coefficients
+   @param[in]   args     points to the plp_dwt_instance_q16
    @return      none
 */
-void plp_dwt_q16p_xpulpv2(const int16_t *__restrict__ pSrc,
-                         uint32_t length,
-                         const plp_dwt_wavelet_q16 wavelet,
-                         plp_dwt_extension_mode mode,
-                         uint32_t nPE,
-                         int16_t *__restrict__ pDstA,
-                         int16_t *__restrict__ pDstD) {
-    int16_t *pCurrentA = pDstA;
-    int16_t *pCurrentD = pDstD;
+void plp_dwt_q16p_xpulpv2(void *args) {
+
+    plp_dwt_instance_q16 *S = (plp_dwt_instance_q16*) args;
+    
+    const int16_t *pSrc = S->pSrc;
+    const uint32_t length = S->length;
+    const plp_dwt_wavelet_q16 wavelet = S->wavelet;
+    plp_dwt_extension_mode mode = S->mode;
+
+    uint32_t nPE = S->nPE;
+
+    int16_t *pCurrentA = S->pDstA;
+    int16_t *pCurrentD = S->pDstD;
 
     static uint32_t step = 2;
 
@@ -329,22 +327,21 @@ void plp_dwt_q16p_xpulpv2(const int16_t *__restrict__ pSrc,
 
 /**
    @brief q15 fixed-point DWT kernel optimized for Haar Wavelet for XPULPV2 extension.
-   @param[in]   pSrc     points to the input buffer (q15)
-   @param[in]   length   length of input buffer
-   @param[in]   mode     boundary extension mode
-
-   @param[out]  pDstA    points to ouput buffer with Approximate coefficients
-   @param[out]  pDstD    points to ouput buffer with Detailed coefficients
+   @param[in]   args     points to the plp_dwt_instance_q16
    @return      none
 */
-void plp_dwt_haar_q16p_xpulpv2(const int16_t *__restrict__ pSrc,
-                         uint32_t length,
-                         plp_dwt_extension_mode mode,
-                         uint32_t nPE,
-                         int16_t *__restrict__ pDstA,
-                         int16_t *__restrict__ pDstD) {
-    int16_t *pCurrentA = pDstA;
-    int16_t *pCurrentD = pDstD;
+void plp_dwt_haar_q16p_xpulpv2(void *args) {
+    
+    plp_dwt_instance_q16 *S = (plp_dwt_instance_q16*) args;
+    
+    const int16_t *pSrc = S->pSrc;
+    const uint32_t length = S->length;
+    plp_dwt_extension_mode mode = S->mode;
+
+    uint32_t nPE = S->nPE;
+
+    int16_t *pCurrentA = S->pDstA;
+    int16_t *pCurrentD = S->pDstD;
 
     // Vectored filter coefficients
     static v2s v_ylo = (v2s){HAAR_COEF, HAAR_COEF};

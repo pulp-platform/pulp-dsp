@@ -74,18 +74,26 @@ void plp_dwt_q32_parallel(const int32_t *__restrict__ pSrc,
       printf("parallel processing supported only for cluster side\n");
       return;
    }else {
+      plp_dwt_instance_q32 args = {
+         .pSrc = pSrc,
+         .length = length,
+         .wavelet = wavelet,
+         .mode = mode,
+         .nPE = nPE,
+         .pDstA = pDstA,
+         .pDstD = pDstD
+      };
+
       switch(wavelet.type) {
       case PLP_DWT_WAVELET_HAAR:
       case PLP_DWT_WAVELET_DB1:
-         plp_dwt_haar_q32p_xpulpv2(pSrc, length, mode, nPE, pDstA, pDstD);
+         hal_cl_team_fork(nPE, plp_dwt_haar_q32p_xpulpv2, (void *)&args);
          break;
       default:
-         plp_dwt_q32p_xpulpv2(pSrc, length, wavelet, mode, nPE, pDstA, pDstD);
+         hal_cl_team_fork(nPE, plp_dwt_q32p_xpulpv2, (void *)&args);
          break;
       }
    }
-
-
 }
 
 /**
