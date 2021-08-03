@@ -40,6 +40,9 @@
 
 #define SHUFFLEMASK (v4s) { 3, 2, 1, 0 }
 
+#define FILT_STEP 2
+
+
 
 // #define MAC(Acc, A, B) Acc = __MACS(Acc, A, B); (Slower?)
 #define MAC(Acc, A, B) Acc += ((int16_t)A * (int16_t)B);
@@ -76,15 +79,19 @@ void plp_dwt_q8p_xpulpv2(void *args) {
     const uint32_t length = S->length;
     const plp_dwt_wavelet_q8 wavelet = S->wavelet;
     plp_dwt_extension_mode mode = S->mode;
-    uint32_t nPE = S->nPE;
+    const uint32_t nPE = S->nPE;
 
-    int8_t *pCurrentA = S->pDstA;
-    int8_t *pCurrentD = S->pDstD;
+    uint32_t core_id = hal_core_id();
 
-    static uint32_t step = 2;
+    int8_t *pCurrentA = S->pDstA + core_id;
+    int8_t *pCurrentD = S->pDstD + core_id;
 
-    int32_t offset;
-        
+    int32_t offset = 1 + FILT_STEP * core_id;
+
+    uint32_t step = FILT_STEP * nPE; // We can skip the next nPE steps as they are done by other cores
+
+
+
     /***
      * The filter convolution is done in 4 steps handling cases where
      *  1. Filter is hanging over the left side of the signal
@@ -106,7 +113,7 @@ void plp_dwt_q8p_xpulpv2(void *args) {
      *          |   First compute the filter part overlapping with the signal
      *          Then extend the signal (x x) by computing the values based on the extension mode
      */
-    for(offset = step-1; offset < wavelet.length - 1 && offset < length; offset += step){
+    for(; offset < wavelet.length - 1 && offset < length; offset += step){
         int16_t sum_lo = 0;
         int16_t sum_hi = 0;
 
@@ -142,8 +149,11 @@ void plp_dwt_q8p_xpulpv2(void *args) {
         }
     
     
-        *pCurrentA++ = sum_lo >> MAC_SHIFT;
-        *pCurrentD++ = sum_hi >> MAC_SHIFT;
+        *pCurrentA = sum_lo >> MAC_SHIFT;
+        *pCurrentD = sum_hi >> MAC_SHIFT;
+
+        pCurrentA += nPE;
+        pCurrentD += nPE;
     }
 
     /*  Step 2.
@@ -213,8 +223,11 @@ void plp_dwt_q8p_xpulpv2(void *args) {
         }  
 
 
-        *pCurrentA++ = sum_lo >> MAC_SHIFT;
-        *pCurrentD++ = sum_hi >> MAC_SHIFT;
+        *pCurrentA = sum_lo >> MAC_SHIFT;
+        *pCurrentD = sum_hi >> MAC_SHIFT;
+
+        pCurrentA += nPE;
+        pCurrentD += nPE;
     }
 
     /*  Step 3.
@@ -287,8 +300,11 @@ void plp_dwt_q8p_xpulpv2(void *args) {
                 break;
         }
 
-        *pCurrentA++ = sum_lo >> MAC_SHIFT;
-        *pCurrentD++ = sum_hi >> MAC_SHIFT;
+        *pCurrentA = sum_lo >> MAC_SHIFT;
+        *pCurrentD = sum_hi >> MAC_SHIFT;
+
+        pCurrentA += nPE;
+        pCurrentD += nPE;
     }
 
 
@@ -337,8 +353,11 @@ void plp_dwt_q8p_xpulpv2(void *args) {
             MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
         }
 
-        *pCurrentA++ = sum_lo >> MAC_SHIFT;
-        *pCurrentD++ = sum_hi >> MAC_SHIFT;
+        *pCurrentA = sum_lo >> MAC_SHIFT;
+        *pCurrentD = sum_hi >> MAC_SHIFT;
+
+        pCurrentA += nPE;
+        pCurrentD += nPE;
     }
 }
 
@@ -357,10 +376,13 @@ void plp_dwt_haar_q8p_xpulpv2(void *args) {
     const int8_t *pSrc = S->pSrc;
     const uint32_t length = S->length;
     plp_dwt_extension_mode mode = S->mode;
-    uint32_t nPE = S->nPE;
+    const uint32_t nPE = S->nPE;
 
-    int8_t *pCurrentA = S->pDstA;
-    int8_t *pCurrentD = S->pDstD;
+    const uint32_t core_id = hal_core_id();
+
+    int8_t *pCurrentA = S->pDstA + 2U * core_id;
+    int8_t *pCurrentD = S->pDstD + 2U * core_id;
+
 
     // Left and Right version of Vectored filter coefficients
     static v4s v_ylo_l = (v4s){HAAR_COEF, HAAR_COEF, 0, 0};
@@ -389,8 +411,8 @@ void plp_dwt_haar_q8p_xpulpv2(void *args) {
      */ 
 
     /* We read 4 numbers at a time performing 2 convolutions (if signal is longer than or equal to 4)*/
-    uint32_t blkCnt = length >> 2U;
-    const int8_t *pS = pSrc;
+    int32_t blkCnt = (length >> 2U) - core_id;
+    const int8_t *pS = pSrc + 4U * core_id; // 
 
     while(blkCnt > 0){
         // Get next 4 numbers
@@ -401,12 +423,21 @@ void plp_dwt_haar_q8p_xpulpv2(void *args) {
         *pCurrentD++ = __DOTP4(v_x, v_yhi_l) >> MAC_SHIFT;
 
         // Perfrom dot product of right pair
-        *pCurrentA++ = __DOTP4(v_x, v_ylo_r) >> MAC_SHIFT;
-        *pCurrentD++ = __DOTP4(v_x, v_yhi_r) >> MAC_SHIFT;
-        pS   += 4;
-        blkCnt--;
+        *pCurrentA-- = __DOTP4(v_x, v_ylo_r) >> MAC_SHIFT;
+        *pCurrentD-- = __DOTP4(v_x, v_yhi_r) >> MAC_SHIFT;
+
+        pCurrentA += (2U * nPE);
+        pCurrentD += (2U * nPE);
+
+
+        pS   += 4U * nPE;
+        blkCnt -= nPE;
     }
 
+    // Let the core that is aligned to the next block deal with the rest
+    if(blkCnt != 0){
+        return;
+    }
 
     // Handle any elements left to process
     switch(length % 4U){
@@ -434,6 +465,7 @@ void plp_dwt_haar_q8p_xpulpv2(void *args) {
         break;
 
     }
+    
 
     /*  Step 2.
      *  Handle Right overhanging (only for odd signal lengths)

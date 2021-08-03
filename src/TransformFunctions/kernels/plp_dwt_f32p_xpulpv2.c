@@ -37,6 +37,9 @@
 #define MAC(Acc, A, B) Acc += (A * B);
 #define MSU(Acc, A, B) Acc -= (A * B);
 
+#define FILT_STEP 2U
+
+
 #include "plp_dwt_signal_ext.h"
 
 /**
@@ -66,14 +69,18 @@ void plp_dwt_f32p_xpulpv2(void *args) {
     const uint32_t length = S->length;
     const plp_dwt_wavelet_f32 wavelet = S->wavelet;
     plp_dwt_extension_mode mode = S->mode;
-    uint32_t nPE = S->nPE;
+    const uint32_t nPE = S->nPE;
 
-    float32_t *pCurrentA = S->pDstA;
-    float32_t *pCurrentD = S->pDstD;
+    const uint32_t core_id = hal_core_id();
 
-    static uint32_t step = 2;
+    float32_t *pCurrentA = S->pDstA + core_id;
+    float32_t *pCurrentD = S->pDstD + core_id;
+    
+    int32_t offset = 1 + FILT_STEP * core_id;
 
-    int32_t offset;
+    const uint32_t step = FILT_STEP * nPE; // We can skip the next nPE steps as they are done by other cores
+
+
         
     /***
      * The filter convolution is done in 4 steps handling cases where
@@ -96,7 +103,7 @@ void plp_dwt_f32p_xpulpv2(void *args) {
      *          |   First compute the filter part overlapping with the signal
      *          Then extend the signal (x x) by computing the values based on the extension mode
      */
-    for(offset = step-1; offset < wavelet.length - 1 && offset < length; offset += step){
+    for(; offset < wavelet.length - 1 && offset < length; offset += step){
         float32_t sum_lo = 0;
         float32_t sum_hi = 0;
 
@@ -132,8 +139,12 @@ void plp_dwt_f32p_xpulpv2(void *args) {
         }
     
     
-        *pCurrentA++ = sum_lo;
-        *pCurrentD++ = sum_hi;
+        *pCurrentA = sum_lo;
+        *pCurrentD = sum_hi;
+
+        pCurrentA += nPE;
+        pCurrentD += nPE;
+
     }
 
     /*
@@ -155,8 +166,11 @@ void plp_dwt_f32p_xpulpv2(void *args) {
             MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
         }
 
-        *pCurrentA++ = sum_lo;
-        *pCurrentD++ = sum_hi;
+        *pCurrentA = sum_lo;
+        *pCurrentD = sum_hi;
+
+        pCurrentA += nPE;
+        pCurrentD += nPE;
     }
 
      /*
@@ -229,8 +243,11 @@ void plp_dwt_f32p_xpulpv2(void *args) {
                 break;
         }
 
-        *pCurrentA++ = sum_lo;
-        *pCurrentD++ = sum_hi;
+        *pCurrentA = sum_lo;
+        *pCurrentD = sum_hi;
+    
+        pCurrentA += nPE;
+        pCurrentD += nPE;
     }
 
 
@@ -279,8 +296,11 @@ void plp_dwt_f32p_xpulpv2(void *args) {
             MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
         }
 
-        *pCurrentA++ = sum_lo;
-        *pCurrentD++ = sum_hi;
+        *pCurrentA = sum_lo;
+        *pCurrentD = sum_hi;
+
+        pCurrentA += nPE;
+        pCurrentD += nPE;
     }
 }
 
@@ -299,14 +319,20 @@ void plp_dwt_haar_f32p_xpulpv2(void *args) {
     const float32_t *pSrc = S->pSrc;
     const uint32_t length = S->length;
     plp_dwt_extension_mode mode = S->mode;
-    uint32_t nPE = S->nPE;
+    const uint32_t nPE = S->nPE;
 
-    float32_t *pCurrentA = S->pDstA;
-    float32_t *pCurrentD = S->pDstD;
+    const uint32_t core_id = hal_core_id();
 
-    static uint32_t step = 2;
+    float32_t *pCurrentA = S->pDstA + core_id;
+    float32_t *pCurrentD = S->pDstD + core_id;
 
-    int32_t offset;
+
+
+    int32_t offset = 1 + FILT_STEP * core_id;
+
+    const uint32_t step = FILT_STEP * nPE; // We can skip the next nPE steps as they are done by other cores
+
+
         
     /***
      * The filter convolution is done in 4 steps handling cases where
@@ -329,13 +355,16 @@ void plp_dwt_haar_f32p_xpulpv2(void *args) {
      *                 ^
      *                 Compute a full convolution of the filter with the signal
      */    
-    for(offset = step-1 ; offset < length; offset += step){
+    for(; offset < length; offset += step){
 
         float32_t sum_lo = HAAR_COEF * (pSrc[offset - 1] + pSrc[offset]);
         float32_t sum_hi = HAAR_COEF * (pSrc[offset - 1] - pSrc[offset]);
 
-        *pCurrentA++ = sum_lo;
-        *pCurrentD++ = sum_hi;
+        *pCurrentA = sum_lo;
+        *pCurrentD = sum_hi;
+
+        pCurrentA += nPE;
+        pCurrentD += nPE;
     }
 
    
@@ -350,7 +379,7 @@ void plp_dwt_haar_f32p_xpulpv2(void *args) {
      *                  |   First extend the signal (x x) by computing the values based on the extension mode
      *                  Then compute the filter part overlapping with the signal
      */
-    if(offset < length + 1){
+    if(offset == length){
         float32_t sum_lo = 0;
         float32_t sum_hi = 0;
 
