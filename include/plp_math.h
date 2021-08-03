@@ -1485,7 +1485,7 @@ typedef struct {
 
    float32_t *rec_lo; /* reconstruction lowpass */
    float32_t *rec_hi; /* reconstruction highpass */
-   
+
 } plp_dwt_wavelet_f32;
 
 typedef struct {
@@ -1621,6 +1621,8 @@ typedef struct {
     int8_t *pDstD;   // ouput buffer with Detailed coefficients
 } plp_dwt_instance_q8;
 
+
+#define PLP_DWT_OUTPUT_LENGTH(SIG_LEN, WAVELET) ((SIG_LEN + WAVELET.length - 1)/2)
 
 /** -------------------------------------------------------
     @brief Glue code for parallel dot product of 32-bit integer vectors.
