@@ -54,17 +54,17 @@ make header build install`
 
 ## With the pulp-sdk on the main branch
 
+You need to enable the PMSIS mode:
+
+~~~~~shell
+export PULP_RTOS=pmsis
+~~~~~
+
 To compile and install the library, do
 
 ~~~~~shell
 make build-lib
 make install-lib
-~~~~~
-
-You need to enable the PMSIS mode:
-
-~~~~~shell
-export PULP_RTOS=pmsis
 ~~~~~
 
 # Documentation
