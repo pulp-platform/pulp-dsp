@@ -108,6 +108,88 @@ void plp_dwt_f32(const float32_t *__restrict__ pSrc,
 
 }
 
+
+void plp_dwt_dec_f32(const float32_t *__restrict__ pSrc,
+                     uint32_t length,
+                     const plp_dwt_wavelet_f32 wavelet,
+                     plp_dwt_extension_mode mode,
+                     uint32_t level,
+                     float32_t *__restrict__ pTemp,
+                     float32_t *__restrict__ pDst){
+   if((mode == PLP_DWT_MODE_ANTIREFLECT || mode == PLP_DWT_MODE_REFLECT) && length <= 1){
+      printf("F Cannot run [anti]reflect mode on length 1 signal.\n");
+      return;
+   }
+
+   if (hal_cluster_id() == ARCHI_FC_CID) {
+      printf("error: FC doesn't have FPU\n");
+      return;
+   } else {
+
+
+      uint32_t dst_offset = 0;
+      uint32_t out_len = length;
+      uint32_t in_len;
+      uint32_t quotient = (out_len/(wavelet.length - 1)) >> 1;
+
+
+      float32_t *pTempBuff1 = pTemp; // For holding odd A coeffs
+      float32_t *pTempBuff2 = pTemp + PLP_DWT_DEC_TEMP_LEN(length, wavelet.length); // For holding even A coeffs
+      
+
+      const float32_t *pS = pSrc;
+      float32_t *pTempADst = pTempBuff1;
+
+      do {
+         in_len = out_len; // Get input length (previous output length)
+         out_len = PLP_DWT_OUTPUT_LENGTH(out_len, wavelet.length); // Calculate new output length 
+         
+
+         /* The signal (or previous approx. coeffs) are the input
+         * Approx. coeffs are written after the detailed coeffs
+         * Detailed coeffs are appended to end of dest buffer
+         * 
+         * Level 1: pDst = [ D1 D1 D1 D1  x  x  x  x]  ptmpADst(Buff1) = [A1 A1 A1 A1]
+         * Level 2: pDst = [ D1 D1 D1 D1 D2 D2  x  x]  ptmpADst(Buff2) = [A2 A2]
+         * Level 3: pDst = [ D1 D1 D1 D1 D2 D2 D3  x]  ptmpADst(Buff1) = [A3]
+         */
+
+         // printf("Q: %d, In_L: %d Out_l: %d dst_offset: %d\n", quotient, in_len, out_len, dst_offset);
+         switch(wavelet.type) {
+         case PLP_DWT_WAVELET_HAAR:
+         case PLP_DWT_WAVELET_DB1:
+            plp_dwt_haar_f32s_xpulpv2(pS, in_len, mode, pTempADst, pDst + dst_offset);
+            break;
+         default:
+            plp_dwt_f32s_xpulpv2(pS, in_len, wavelet, mode, pTempADst, pDst + dst_offset);
+            break;
+         }
+
+         
+         
+         pS = pTempADst; // Next input will be the current Approx coeffs
+         
+         // Choose the other buffer as the next Approx buffer
+         if(pTempADst == pTempBuff1){
+            pTempADst = pTempBuff2;
+         }else{
+            pTempADst = pTempBuff1;
+         }
+   
+
+         dst_offset += out_len;
+         // In the case that level was 0, it will underflow.
+         level--;
+         // The while loop will then run until max_level
+      } while((quotient >>= 1) && (level > 0));
+
+      // Copy the remaining Approx coeffs from the old pTempADst
+      for(int32_t i = 0; i < out_len; i++){
+         pDst[dst_offset + i] = pS[i];
+      }
+   }
+}
+
 /**
    @} end of DWT group
 */

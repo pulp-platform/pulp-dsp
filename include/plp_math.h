@@ -1622,7 +1622,13 @@ typedef struct {
 } plp_dwt_instance_q8;
 
 
-#define PLP_DWT_OUTPUT_LENGTH(SIG_LEN, WAVELET) ((SIG_LEN + WAVELET.length - 1)/2)
+#define PLP_DWT_DEC_LEN(SIG_LEN, WAVELET, LEVEL) plp_dwt_dec_len(SIG_LEN, WAVELET.length, LEVEL)
+#define PLP_DWT_DEC_TEMP_LEN(SRC_LEN, WAVELET_LEN) (((SRC_LEN+WAVELET_LEN-1)/2 + ((SRC_LEN+WAVELET_LEN-1)/2 + WAVELET_LEN-1))/2)
+#define PLP_DWT_OUTPUT_LENGTH(SIG_LEN, WAVELET_LEN) ((SIG_LEN + WAVELET_LEN - 1) >> 1)
+
+uint32_t plp_dwt_max_level(uint32_t sig_len, uint32_t wavelet_len);
+
+uint32_t plp_dwt_dec_len(uint32_t sig_len, uint32_t wavelet_len, uint32_t level);
 
 /** -------------------------------------------------------
     @brief Glue code for parallel dot product of 32-bit integer vectors.
@@ -8883,6 +8889,26 @@ void plp_dwt_q8(const int8_t *__restrict__ pSrc,
                   plp_dwt_extension_mode mode,
                   int8_t *__restrict__ pDstA,
                   int8_t *__restrict__ pDstD);
+
+
+/**
+   @brief  Floating-point n-level DWT for XPULPV2 extension.
+   @param[in]   pSrc     points to the input buffer (real data)
+   @param[in]   length   length of input buffer
+   @param[in]   wavelet  wavelet structure for calculating DWT
+   @param[in]   mode     boundary extension mode
+   @param[in]   level    Levels of Wavelet decomposition
+
+   @param[out]  pDst     points to ouput buffer with Detailed coefficients and final approximate
+   @return      none
+*/
+void plp_dwt_dec_f32(const float32_t *__restrict__ pSrc,
+                     uint32_t length,
+                     const plp_dwt_wavelet_f32 wavelet,
+                     plp_dwt_extension_mode mode,
+                     uint32_t level,
+                     float32_t *__restrict__ pTmp,
+                     float32_t *__restrict__ pDst);
 
 /**
    @brief  Floating-point DWT on real input data for XPULPV2 extension.

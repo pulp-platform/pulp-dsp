@@ -176,6 +176,7 @@ FC_SRCS = \
 	src/TransformFunctions/plp_dwt_q32_parallel.c \
 	src/TransformFunctions/plp_dwt_q16_parallel.c \
 	src/TransformFunctions/plp_dwt_q8_parallel.c \
+	src/TransformFunctions/plp_dwt_common.c \
 	src/CommonTables/plp_common_tables.c \
 	src/CommonTables/plp_const_structs.c \
 	src/CommonTables/plp_dwt_structs.c \
