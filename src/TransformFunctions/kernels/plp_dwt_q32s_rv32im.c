@@ -153,12 +153,23 @@ void plp_dwt_q32s_rv32im(const int32_t *__restrict__ pSrc,
 
         int64_t sum_lo = 0;
         int64_t sum_hi = 0;
-        uint32_t filt_j = 0;
+        
 
-        for(; filt_j < wavelet.length; filt_j++){
-            MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
-            MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
-        }
+        const int32_t *pS = pSrc + offset;
+        const int32_t *dec_lo = wavelet.dec_lo;
+        const int32_t *dec_hi = wavelet.dec_hi;
+
+        uint32_t blkCnt = wavelet.length >> 1;
+
+        do{
+            int32_t S1 = *pS--;
+            int32_t S2 = *pS--;
+            MAC(sum_lo, *dec_lo++, S1);
+            MAC(sum_hi, *dec_hi++, S1);
+            MAC(sum_lo, *dec_lo++, S2);
+            MAC(sum_hi, *dec_hi++, S2);
+        }while(--blkCnt);
+
 
         *pCurrentA++ = sum_lo >> MAC_SHIFT;
         *pCurrentD++ = sum_hi >> MAC_SHIFT;
@@ -239,7 +250,7 @@ void plp_dwt_q32s_rv32im(const int32_t *__restrict__ pSrc,
     }
 
 
-    /*  Step 4. 
+    /*  Step 4.
      *  Handle Right overhanging
      *
      * X() = [A B C D E F]x x
@@ -292,6 +303,117 @@ void plp_dwt_q32s_rv32im(const int32_t *__restrict__ pSrc,
 
 
 
+
+#define MAKE_HAAR(NAME, COEF, SHIFT)                                                                           \
+void NAME(const int32_t *__restrict__ pSrc,                                                                    \
+                         uint32_t length,                                                                      \
+                         plp_dwt_extension_mode mode,                                                          \
+                         int32_t *__restrict__ pDstA,                                                          \
+                         int32_t *__restrict__ pDstD) {                                                        \
+    int32_t *pCurrentA = pDstA;                                                                                \
+    int32_t *pCurrentD = pDstD;                                                                                \
+                                                                                                               \
+                                                                                                               \
+    /***                                                                                                       \
+     * The filter convolution is done in 2 steps handling cases where                                          \
+     *  1. Filter is same size, or totally enclosed in signal center                                           \
+     *  2. Filter hangs over the right side of the signal                                                      \
+     *                                                                                                         \
+     *  In of the cases, where signal hangs over the boundary of the signal, values are computed               \
+     *  on demand based on the edge extension mode.                                                            \
+     */                                                                                                        \
+                                                                                                               \
+                                                                                                               \
+    /*  Step 1.                                                                                                \
+     *  Compute center (length >= wavelet.length)                                                              \
+     *                                                                                                         \
+     *  X() = [A B C D E F]                                                                                    \
+     *  h() =       [b a]                                                                                      \
+     *                 ^                                                                                       \
+     *                 Compute a full convolution of the filter with the signal                                \
+     */                                                                                                        \
+    uint32_t blkCnt = length >> 2;                                                                             \
+                                                                                                               \
+    const int32_t *pS = pSrc;                                                                                  \
+    while(blkCnt--){                                                                                           \
+        int32_t s0 = *pS++;                                                                                    \
+        int32_t s1 = *pS++;                                                                                    \
+        int32_t s2 = *pS++;                                                                                    \
+        int32_t s3 = *pS++;                                                                                    \
+                                                                                                               \
+        *pCurrentA++ = (COEF * (s0 + s1)) >> SHIFT;                                                            \
+        *pCurrentD++ = (COEF * (s0 - s1)) >> SHIFT;                                                            \
+        *pCurrentA++ = (COEF * (s2 + s3)) >> SHIFT;                                                            \
+        *pCurrentD++ = (COEF * (s2 - s3)) >> SHIFT;                                                            \
+                                                                                                               \
+    }                                                                                                          \
+                                                                                                               \
+    if(length % 4 > 1){                                                                                        \
+        int32_t s0 = *pS++;                                                                                    \
+        int32_t s1 = *pS++;                                                                                    \
+                                                                                                               \
+        *pCurrentA++ = (COEF * (s0 + s1)) >> SHIFT;                                                            \
+        *pCurrentD++ = (COEF * (s0 - s1)) >> SHIFT;                                                            \
+    }                                                                                                          \
+                                                                                                               \
+                                                                                                               \
+                                                                                                               \
+                                                                                                               \
+                                                                                                               \
+    /*  Step 2.                                                                                                \
+     *  Handle Right overhanging (only for odd signal lengths)                                                 \
+     *                                                                                                         \
+     * X() = [A B C D E F]x                                                                                    \
+     * H() =           [b a]                                                                                   \
+     *                  ^ ^                                                                                    \
+     *                  | Extend the signal (x) by computing the values based on the extension mode            \
+     *                  Then compute the filter part overlapping with the signal                               \
+     */                                                                                                        \
+    if(length % 2U){                                                                                           \
+        int64_t sum_lo = 0;                                                                                    \
+        int64_t sum_hi = 0;                                                                                    \
+                                                                                                               \
+        uint32_t filt_j = 0;                                                                                   \
+                                                                                                               \
+        /* Compute Left edge extension  */                                                                     \
+        switch(mode){                                                                                          \
+            case PLP_DWT_MODE_CONSTANT:                                                                        \
+            case PLP_DWT_MODE_SYMMETRIC:                                                                       \
+                /* dec_lo[0] * src[N-1] + dec_lo[1] * src[N-1] */                                              \
+                sum_lo = 2 * COEF * pSrc[length - 1];                                                          \
+                /* dec_hi[0] * src[N-1] + dec_hi[1] * src[N-1] == -dec_hi[1] * src[N-1] + dec_hi[1] * src[N-1]*/\
+                sum_hi = 0;                                                                                    \
+                break;                                                                                         \
+            case PLP_DWT_MODE_REFLECT:                                                                         \
+                sum_lo = COEF * (pSrc[length - 1] + pSrc[length - 2]);                                         \
+                sum_hi = COEF * (pSrc[length - 1] - pSrc[length - 2]);                                         \
+                break;                                                                                         \
+            case PLP_DWT_MODE_ANTISYMMETRIC:                                                                   \
+                sum_lo = COEF * (pSrc[length - 1] - pSrc[length - 1]);                                         \
+                sum_hi = COEF * (pSrc[length - 1] + pSrc[length - 1]);                                         \
+                break;                                                                                         \
+            case PLP_DWT_MODE_ANTIREFLECT:                                                                     \
+                sum_lo = COEF * (3*pSrc[length - 1] - pSrc[length - 2]);                                       \
+                sum_hi = COEF * ( -pSrc[length - 1] + pSrc[length - 2]);                                       \
+                break;                                                                                         \
+            case PLP_DWT_MODE_PERIODIC:                                                                        \
+            case PLP_DWT_MODE_ZERO:                                                                            \
+            default:                                                                                           \
+                sum_lo = COEF * pSrc[length - 1];                                                              \
+                sum_hi = COEF * pSrc[length - 1];                                                              \
+                break;                                                                                         \
+        }                                                                                                      \
+                                                                                                               \
+        *pCurrentA = sum_lo >> SHIFT;                                                                          \
+        *pCurrentD = sum_hi >> SHIFT;                                                                          \
+    }                                                                                                          \
+}                                                                                                              \
+
+
+
+
+
+
 /**
    @brief  32bit Fixed-point DWT kernel optimized for Haar Wavelet on real input data.
    @param[in]   pSrc     points to the input buffer (real data)
@@ -302,91 +424,17 @@ void plp_dwt_q32s_rv32im(const int32_t *__restrict__ pSrc,
    @param[out]  pDstD    points to ouput buffer with Detailed coefficients
    @return      none
 */
-void plp_dwt_haar_q32s_rv32im(const int32_t *__restrict__ pSrc,
-                         uint32_t length,
-                         plp_dwt_extension_mode mode,
-                         int32_t *__restrict__ pDstA,
-                         int32_t *__restrict__ pDstD) {
-    int32_t *pCurrentA = pDstA;
-    int32_t *pCurrentD = pDstD;
-
-    static uint32_t step = 2;
-
-    int32_t offset;
-        
-    /***
-     * The filter convolution is done in 2 steps handling cases where
-     *  1. Filter is same size, or totally enclosed in signal center
-     *  2. Filter hangs over the right side of the signal
-     * 
-     *  In of the cases, where signal hangs over the boundary of the signal, values are computed 
-     *  on demand based on the edge extension mode.
-     */
-
- 
-    /*  Step 1.
-     *  Compute center (length >= wavelet.length)
-     *
-     *  X() = [A B C D E F]
-     *  h() =       [b a]
-     *                 ^
-     *                 Compute a full convolution of the filter with the signal
-     */   
-    for(offset = step-1 ; offset < length; offset += step){
-
-        int64_t sum_lo = HAAR_COEF * (pSrc[offset - 1] + pSrc[offset]);
-        int64_t sum_hi = HAAR_COEF * (pSrc[offset - 1] - pSrc[offset]);
-
-        *pCurrentA++ = sum_lo >> MAC_SHIFT;
-        *pCurrentD++ = sum_hi >> MAC_SHIFT;
-    }
-
-   
+MAKE_HAAR(plp_dwt_haar_q32s_rv32im, HAAR_COEF, MAC_SHIFT)
 
 
-    /*  Step 2.
-     *  Handle Right overhanging (only for odd signal lengths)
-     *
-     * X() = [A B C D E F]x
-     * H() =           [b a]
-     *                  ^ ^
-     *                  | Extend the signal (x) by computing the values based on the extension mode
-     *                  Then compute the filter part overlapping with the signal
-     */
-    if(length % 2U){
-        int64_t sum_lo = 0;
-        int64_t sum_hi = 0;
+// /**
+//    @brief  Q31 Fixed-point DWT kernel optimized for Un-normalized Haar Wavelet
+//    @param[in]   pSrc     points to the input buffer (q31)
+//    @param[in]   length   length of input buffer
+//    @param[in]   mode     boundary extension mode
 
-        uint32_t filt_j = 0;
-
-        // Compute Left edge extension
-        switch(mode){
-            case PLP_DWT_MODE_CONSTANT:
-            case PLP_DWT_MODE_SYMMETRIC:
-                sum_lo = 2 * HAAR_COEF * pSrc[length - 1];   // dec_lo[0] * src[N-1] + dec_lo[1] * src[N-1]
-                sum_hi = 0;                                  // dec_hi[0] * src[N-1] + dec_hi[1] * src[N-1] == -dec_hi[1] * src[N-1] + dec_hi[1] * src[N-1]
-                break;
-            case PLP_DWT_MODE_REFLECT:
-                sum_lo = HAAR_COEF * (pSrc[length - 1] + pSrc[length - 2]);
-                sum_hi = HAAR_COEF * (pSrc[length - 1] - pSrc[length - 2]);
-                break;
-            case PLP_DWT_MODE_ANTISYMMETRIC:
-                sum_lo = HAAR_COEF * (pSrc[length - 1] - pSrc[length - 1]);
-                sum_hi = HAAR_COEF * (pSrc[length - 1] + pSrc[length - 1]);
-                break;
-            case PLP_DWT_MODE_ANTIREFLECT:
-                sum_lo = HAAR_COEF * (3*pSrc[length - 1] - pSrc[length - 2]);
-                sum_hi = HAAR_COEF * ( -pSrc[length - 1] + pSrc[length - 2]);
-                break;
-            case PLP_DWT_MODE_PERIODIC:
-            case PLP_DWT_MODE_ZERO:
-            default:
-                sum_lo = HAAR_COEF * pSrc[length - 1];
-                sum_hi = HAAR_COEF * pSrc[length - 1];
-                break;
-        }
-    
-        *pCurrentA = sum_lo >> MAC_SHIFT;
-        *pCurrentD = sum_hi >> MAC_SHIFT;
-    }
-}
+//    @param[out]  pDstA    points to ouput buffer with Approximate coefficients
+//    @param[out]  pDstD    points to ouput buffer with Detailed coefficients
+//    @return      none
+// */
+// MAKE_HAAR(plp_dwt_haar_u_q32s_rv32im, 1U, 0U)
