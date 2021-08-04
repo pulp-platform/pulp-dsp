@@ -152,12 +152,23 @@ void plp_dwt_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
 
         int64_t sum_lo = 0;
         int64_t sum_hi = 0;
-        uint32_t filt_j = 0;
+        
 
-        for(; filt_j < wavelet.length; filt_j++){
-            MAC(sum_lo, wavelet.dec_lo[filt_j], pSrc[offset - filt_j]);
-            MAC(sum_hi, wavelet.dec_hi[filt_j], pSrc[offset - filt_j]);
-        }
+        const int32_t *pS = pSrc + offset;
+        const int32_t *dec_lo = wavelet.dec_lo;
+        const int32_t *dec_hi = wavelet.dec_hi;
+
+        uint32_t blkCnt = wavelet.length >> 1;
+
+        do{
+            int32_t S1 = *pS--;
+            int32_t S2 = *pS--;
+            MAC(sum_lo, *dec_lo++, S1);
+            MAC(sum_hi, *dec_hi++, S1);
+            MAC(sum_lo, *dec_lo++, S2);
+            MAC(sum_hi, *dec_hi++, S2);
+        }while(--blkCnt);
+
 
         *pCurrentA++ = sum_lo >> MAC_SHIFT;
         *pCurrentD++ = sum_hi >> MAC_SHIFT;
@@ -309,9 +320,6 @@ void plp_dwt_haar_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
     int32_t *pCurrentA = pDstA;
     int32_t *pCurrentD = pDstD;
 
-    static uint32_t step = 2;
-
-    int32_t offset;
         
     /***
      * The filter convolution is done in 2 steps handling cases where
@@ -331,14 +339,38 @@ void plp_dwt_haar_q32s_xpulpv2(const int32_t *__restrict__ pSrc,
      *                 ^
      *                 Compute a full convolution of the filter with the signal
      */ 
-    for(offset = step-1 ; offset < length; offset += step){
+    uint32_t blkCnt = length >> 2;
 
-        int64_t sum_lo = HAAR_COEF * (pSrc[offset - 1] + pSrc[offset]);
-        int64_t sum_hi = HAAR_COEF * (pSrc[offset - 1] - pSrc[offset]);
+    const int32_t *pS = pSrc;
+    while(blkCnt--){
+        int32_t s0 = *pS++;
+        int32_t s1 = *pS++;
+        int32_t s2 = *pS++;
+        int32_t s3 = *pS++;
 
-        *pCurrentA++ = sum_lo >> MAC_SHIFT;
-        *pCurrentD++ = sum_hi >> MAC_SHIFT;
+        *pCurrentA++ = (HAAR_COEF * (s0 + s1)) >> MAC_SHIFT;
+        *pCurrentD++ = (HAAR_COEF * (s0 - s1)) >> MAC_SHIFT;
+        *pCurrentA++ = (HAAR_COEF * (s2 + s3)) >> MAC_SHIFT;
+        *pCurrentD++ = (HAAR_COEF * (s2 - s3)) >> MAC_SHIFT;
+
     }
+
+    if(length % 4 > 1){
+        int32_t s0 = *pS++;
+        int32_t s1 = *pS++;
+        
+        *pCurrentA++ = (HAAR_COEF * (s0 + s1)) >> MAC_SHIFT;
+        *pCurrentD++ = (HAAR_COEF * (s0 - s1)) >> MAC_SHIFT;
+    }
+
+    // for(offset = step-1 ; offset < length; offset += step){
+
+    //     int64_t sum_lo = HAAR_COEF * (pSrc[offset - 1] + pSrc[offset]);
+    //     int64_t sum_hi = HAAR_COEF * (pSrc[offset - 1] - pSrc[offset]);
+
+    //     *pCurrentA++ = sum_lo >> MAC_SHIFT;
+    //     *pCurrentD++ = sum_hi >> MAC_SHIFT;
+    // }
 
    
 
