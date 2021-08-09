@@ -380,8 +380,8 @@ void plp_dwt_haar_q8p_xpulpv2(void *args) {
 
     const uint32_t core_id = hal_core_id();
 
-    int8_t *pCurrentA = S->pDstA + 2U * core_id;
-    int8_t *pCurrentD = S->pDstD + 2U * core_id;
+    int8_t *pCurrentA = S->pDstA + 4U * core_id;
+    int8_t *pCurrentD = S->pDstD + 4U * core_id;
 
 
     // Left and Right version of Vectored filter coefficients
@@ -389,7 +389,7 @@ void plp_dwt_haar_q8p_xpulpv2(void *args) {
     static v4s v_ylo_r = (v4s){0, 0, HAAR_COEF, HAAR_COEF};
     static v4s v_yhi_l = (v4s){HAAR_COEF, -HAAR_COEF, 0, 0};
     static v4s v_yhi_r = (v4s){0, 0, HAAR_COEF, -HAAR_COEF};
-    v4s v_x;
+    v4s v_x1, v_x2;
 
     /***
      * The filter convolution is done in 2 steps handling cases where
@@ -411,26 +411,43 @@ void plp_dwt_haar_q8p_xpulpv2(void *args) {
      */ 
 
     /* We read 4 numbers at a time performing 2 convolutions (if signal is longer than or equal to 4)*/
-    int32_t blkCnt = (length >> 2U) - core_id;
-    const int8_t *pS = pSrc + 4U * core_id; // 
+    int32_t blkCnt = (length >> 3U) - core_id;
+    const int8_t *pS = pSrc + 8U * core_id; // 
+
+    int8_t destA1, destA2, destA3, destA4, destD1, destD2, destD3, destD4;
+
 
     while(blkCnt > 0){
         // Get next 4 numbers
-        v_x   = *((v4s *)(pS));     // { x[0],  x[1],  x[2],  x[3]}
+        v_x1   = *((v4s *)(pS));     // { x[0],  x[1],  x[2],  x[3]}
+        pS += 4;
+        // Get next 4 numbers
+        v_x2   = *((v4s *)(pS));     // { x[4],  x[5],  x[6],  x[7]}
+        pS += 8U * nPE - 4U;
 
         // Perfrom dot product of left pair
-        *pCurrentA++ = __DOTP4(v_x, v_ylo_l) >> MAC_SHIFT;
-        *pCurrentD++ = __DOTP4(v_x, v_yhi_l) >> MAC_SHIFT;
+        destA1 = __DOTP4(v_x1, v_ylo_l) >> MAC_SHIFT;
+        destD1 = __DOTP4(v_x1, v_yhi_l) >> MAC_SHIFT;
 
         // Perfrom dot product of right pair
-        *pCurrentA-- = __DOTP4(v_x, v_ylo_r) >> MAC_SHIFT;
-        *pCurrentD-- = __DOTP4(v_x, v_yhi_r) >> MAC_SHIFT;
+        destA2 = __DOTP4(v_x1, v_ylo_r) >> MAC_SHIFT;
+        destD2 = __DOTP4(v_x1, v_yhi_r) >> MAC_SHIFT;
 
-        pCurrentA += (2U * nPE);
-        pCurrentD += (2U * nPE);
+        // Perfrom dot product of left pair
+        destA3 = __DOTP4(v_x2, v_ylo_l) >> MAC_SHIFT;
+        destD3 = __DOTP4(v_x2, v_yhi_l) >> MAC_SHIFT;
+
+        // Perfrom dot product of right pair
+        destA4 = __DOTP4(v_x2, v_ylo_r) >> MAC_SHIFT;
+        destD4 = __DOTP4(v_x2, v_yhi_r) >> MAC_SHIFT;
 
 
-        pS   += 4U * nPE;
+        *((v4s *)pCurrentA) = __PACK4(destA1, destA2, destA3, destA4);
+        pCurrentA += 4 * nPE;
+
+        *((v4s *)pCurrentD) = __PACK4(destD1, destD2, destD3, destD4);
+        pCurrentD += 4 * nPE;
+
         blkCnt -= nPE;
     }
 
@@ -440,19 +457,40 @@ void plp_dwt_haar_q8p_xpulpv2(void *args) {
     }
 
     // Handle any elements left to process
-    switch(length % 4U){
+    switch(length % 8U){
     case 1:
         // We have no more pairs left but there is a odd element left, so continue to Step 2.
         break;
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+        // We need to process 4
+
+        v_x1 = *((v4s *)(pS));     // { x[0],  x[1],  x[2],  x[3]}
+                                   //
+        pS += 4;
+
+        *pCurrentA++ = __DOTP4(v_x1, v_ylo_l) >> MAC_SHIFT;
+        *pCurrentD++ = __DOTP4(v_x1, v_yhi_l) >> MAC_SHIFT;
+
+        *pCurrentA++ = __DOTP4(v_x1, v_ylo_r) >> MAC_SHIFT;
+        *pCurrentD++ = __DOTP4(v_x1, v_yhi_r) >> MAC_SHIFT;
+
+        if(length % 8U < 6){
+            // If we had 6 or 7 remaining, still need 2 to process (continue to 2/3)
+            break;
+        }
+
     case 2:
         // We Still have one pair left, but after that we are done (skip Step 2.).
     case 3:
         // We compute the full overlap pair here (In case there is a trailing element left, it will be handled in Step 2.)
 
-        v_x   = *((v4s *)(pS));     // { x[0],  x[1],  x[2],  x[3]}
+        v_x1   = *((v4s *)(pS));     // { x[0],  x[1],  x[2],  x[3]}
 
-        *pCurrentA++ = __DOTP4(v_x, v_ylo_l) >> MAC_SHIFT;
-        *pCurrentD++ = __DOTP4(v_x, v_yhi_l) >> MAC_SHIFT;
+        *pCurrentA++ = __DOTP4(v_x1, v_ylo_l) >> MAC_SHIFT;
+        *pCurrentD++ = __DOTP4(v_x1, v_yhi_l) >> MAC_SHIFT;
 
         // *pCurrentA++ = __MULSN(HAAR_COEF, (pSrc[offset - 1] + pSrc[offset]), MAC_SHIFT);
         // *pCurrentD++ = __MULSN(HAAR_COEF, (pSrc[offset - 1] - pSrc[offset]), MAC_SHIFT);

@@ -359,13 +359,13 @@ void plp_dwt_haar_q16p_xpulpv2(void *args) {
     
     const uint32_t core_id = hal_core_id();
 
-    int16_t *pCurrentA = S->pDstA + core_id;
-    int16_t *pCurrentD = S->pDstD + core_id;
+    int16_t *pCurrentA = S->pDstA + 2U * core_id;
+    int16_t *pCurrentD = S->pDstD + 2U * core_id;
 
     // Vectored filter coefficients
     static v2s v_ylo = (v2s){HAAR_COEF, HAAR_COEF};
     static v2s v_yhi = (v2s){HAAR_COEF, -HAAR_COEF};
-    v2s v_x;
+    v2s v_x1, v_x2;
 
     /***
      * The filter convolution is done in 2 steps handling cases where
@@ -388,21 +388,73 @@ void plp_dwt_haar_q16p_xpulpv2(void *args) {
      */ 
 
     // We read 2 numbers at a time performing one convolution per loop
-    int32_t blkCnt = (length >> 1U) - core_id;
-    const int16_t *pS = pSrc + 2U * core_id;
+    int32_t blkCnt = (length >> 2U) - core_id;
+    const int16_t *pS = pSrc + 4U * core_id;
+
+    int16_t destA1, destA2, destD1, destD2;
 
     while(blkCnt > 0){
-        v_x   = *((v2s *)(pS));     // { x[0],  x[1]}
 
-        *pCurrentA = __DOTP2(v_x, v_ylo) >> MAC_SHIFT;
-        *pCurrentD = __DOTP2(v_x, v_yhi) >> MAC_SHIFT;
+        v_x1   = *((v2s *)(pS));     // { x[0],  x[1]}
+        pS   += 2U;
+        v_x2   = *((v2s *)(pS));     // { x[0],  x[1]}
+        pS   += 4U * nPE - 2U;
 
-        pCurrentA += nPE;
-        pCurrentD += nPE;
+        destA1 = __DOTP2(v_x1, v_ylo) >> MAC_SHIFT;
+        destD1 = __DOTP2(v_x1, v_yhi) >> MAC_SHIFT;
 
-        pS   += 2U * nPE;
+        destA2 = __DOTP2(v_x2, v_ylo) >> MAC_SHIFT;
+        destD2 = __DOTP2(v_x2, v_yhi) >> MAC_SHIFT;
+
+        *((v2s *)pCurrentA) = __PACK2(destA1, destA2);
+        *((v2s *)pCurrentD) = __PACK2(destD1, destD2);
+
+        pCurrentA += 2 * nPE;
+        pCurrentD += 2 * nPE;
         blkCnt -= nPE;
     }
+
+    if(blkCnt != 0) {
+        return;
+    }
+
+    switch(length % 4U){
+    case 1:
+        //We have one element left (odd length)
+        break;
+    case 2:
+    case 3:
+        // We have a pair left
+        v_x1   = *((v2s *)(pS));     // { x[0],  x[1]}
+        
+        *pCurrentA++ = __DOTP2(v_x1, v_ylo) >> MAC_SHIFT;
+        *pCurrentD++ = __DOTP2(v_x1, v_yhi) >> MAC_SHIFT;
+
+        break;
+
+    case 0:
+    default:
+        // We are done actually (signal divisible by 4)
+        return;
+    }
+
+
+
+    // while(blkCnt > 0){
+    //     v_x   = *((v2s *)(pS));     // { x[0],  x[1]}
+
+    //     *pCurrentA = __DOTP2(v_x, v_ylo) >> MAC_SHIFT;
+    //     *pCurrentD = __DOTP2(v_x, v_yhi) >> MAC_SHIFT;
+
+    //     pCurrentA += nPE;
+    //     pCurrentD += nPE;
+
+    //     pS   += 2U * nPE;
+    //     blkCnt -= nPE;
+    // }
+
+
+
    
 
     /*  Step 2.

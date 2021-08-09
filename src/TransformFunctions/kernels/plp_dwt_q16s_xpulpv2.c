@@ -346,7 +346,7 @@ void plp_dwt_haar_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
     // Vectored filter coefficients
     static v2s v_ylo = (v2s){HAAR_COEF, HAAR_COEF};
     static v2s v_yhi = (v2s){HAAR_COEF, -HAAR_COEF};
-    v2s v_x;
+    v2s v_x1, v_x2;
 
     /***
      * The filter convolution is done in 2 steps handling cases where
@@ -368,19 +368,51 @@ void plp_dwt_haar_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
      *                 Compute a full convolution of the filter with the signal
      */ 
 
-    // We read 2 numbers at a time performing one convolution per loop
-    uint32_t blkCnt = length >> 1U;
+    // We read 4 numbers at a time performing two convolutions per loop
+    uint32_t blkCnt = length >> 2U;
     const int16_t *pS = pSrc;
+
+    int16_t destA1, destA2, destD1, destD2;
 
     while(blkCnt > 0){
 
-        v_x   = *((v2s *)(pS));     // { x[0],  x[1]}
-
-        *pCurrentA++ = __DOTP2(v_x, v_ylo) >> MAC_SHIFT;
-        *pCurrentD++ = __DOTP2(v_x, v_yhi) >> MAC_SHIFT;
-
+        v_x1   = *((v2s *)(pS));     // { x[0],  x[1]}
         pS   += 2;
+        v_x2   = *((v2s *)(pS));     // { x[0],  x[1]}
+        pS   += 2;
+
+        destA1 = __DOTP2(v_x1, v_ylo) >> MAC_SHIFT;
+        destD1 = __DOTP2(v_x1, v_yhi) >> MAC_SHIFT;
+
+        destA2 = __DOTP2(v_x2, v_ylo) >> MAC_SHIFT;
+        destD2 = __DOTP2(v_x2, v_yhi) >> MAC_SHIFT;
+
+        *((v2s *)pCurrentA) = __PACK2(destA1, destA2);
+        *((v2s *)pCurrentD) = __PACK2(destD1, destD2);
+
+        pCurrentA += 2;
+        pCurrentD += 2;
         blkCnt--;
+    }
+
+    switch(length % 4U){
+    case 1:
+        //We have one element left (odd length)
+        break;
+    case 2:
+    case 3:
+        // We have a pair left
+        v_x1   = *((v2s *)(pS));     // { x[0],  x[1]}
+        
+        *pCurrentA++ = __DOTP2(v_x1, v_ylo) >> MAC_SHIFT;
+        *pCurrentD++ = __DOTP2(v_x1, v_yhi) >> MAC_SHIFT;
+
+        break;
+
+    case 0:
+    default:
+        // We are done actually (signal divisible by 4)
+        return;
     }
    
 
@@ -396,8 +428,6 @@ void plp_dwt_haar_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
     if(length % 2U){
         int32_t sum_lo = 0;
         int32_t sum_hi = 0;
-
-        uint32_t filt_j = 0;
 
         // Compute Left edge extension
         switch(mode){
