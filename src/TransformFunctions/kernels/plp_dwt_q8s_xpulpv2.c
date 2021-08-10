@@ -392,7 +392,7 @@ void plp_dwt_haar_q8s_xpulpv2(const int8_t *__restrict__ pSrc,
      *                 Compute a full convolution of the filter with the signal
      */ 
 
-    /* We read 4 numbers at a time performing 2 convolutions (if signal is longer than or equal to 4)*/
+    /* We read 8 numbers at a time performing 4 convolutions (if signal is longer than or equal to 8)*/
     uint32_t blkCnt = length >> 3U;
     const int8_t *pS = pSrc;
 

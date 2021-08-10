@@ -29,6 +29,7 @@
  */
 
 #include "plp_math.h"
+#include "plp_dwt_common.h"
 
 /**
   @ingroup groupTransforms
@@ -71,6 +72,10 @@ void plp_dwt_f32_parallel(const float32_t *__restrict__ pSrc,
       return;
    }
 
+   float32_t *dec_hi_l1;
+   float32_t *dec_lo_l1;
+   plp_dwt_wavelet_f32 temp_wavelet;
+
    if (hal_cluster_id() == ARCHI_FC_CID) {
       printf("parallel processing supported only for cluster side\n");
       return;
@@ -91,7 +96,23 @@ void plp_dwt_f32_parallel(const float32_t *__restrict__ pSrc,
          hal_cl_team_fork(nPE, plp_dwt_haar_f32p_xpulpv2, (void *)&args);
          break;
       default:
+
+         dec_hi_l1 = hal_cl_l1_malloc(sizeof(float32_t) * (wavelet.length));
+         dec_lo_l1 = hal_cl_l1_malloc(sizeof(float32_t) * (wavelet.length));
+
+         copy_coefs_f32(dec_hi_l1, dec_lo_l1, wavelet);
+         temp_wavelet = (plp_dwt_wavelet_f32){
+            .length = wavelet.length,
+            .type = wavelet.type,
+            .dec_hi = dec_hi_l1,
+            .dec_lo = dec_lo_l1
+         };
+
+         args.wavelet = temp_wavelet;
+
          hal_cl_team_fork(nPE, plp_dwt_f32p_xpulpv2, (void *)&args);
+         hal_cl_l1_free(dec_hi_l1, sizeof(float32_t) * (wavelet.length) );
+         hal_cl_l1_free(dec_lo_l1, sizeof(float32_t) * (wavelet.length) );
          break;
       }
    }

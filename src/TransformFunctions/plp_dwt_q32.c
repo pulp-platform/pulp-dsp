@@ -31,20 +31,8 @@
 #include "plp_math.h"
 
 
+#include "plp_dwt_common.h"
 
-void copy_coefs_q32(int32_t *dec_hi_l1, int32_t *dec_lo_l1, plp_dwt_wavelet_q32 wavelet){
-   int32_t *dec_hi_l1_temp = dec_hi_l1;
-   int32_t *dec_lo_l1_temp = dec_lo_l1;
-
-   int32_t *dec_hi_temp = wavelet.dec_hi;
-   int32_t *dec_lo_temp = wavelet.dec_lo;
-
-   // Copy wavelet coefficients into l1
-   for(int i = 0; i < wavelet.length; i++){
-      *dec_hi_l1_temp++ = *dec_hi_temp++;
-      *dec_lo_l1_temp++ = *dec_lo_temp++;
-   }
-}
 
 /**
   @ingroup groupTransforms

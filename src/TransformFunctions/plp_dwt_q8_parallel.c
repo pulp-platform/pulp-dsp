@@ -29,6 +29,7 @@
  */
 
 #include "plp_math.h"
+#include "plp_dwt_common.h"
 
 /**
   @ingroup groupTransforms
@@ -70,6 +71,10 @@ void plp_dwt_q8_parallel(const int8_t *__restrict__ pSrc,
       printf("F Cannot run [anti]reflect mode on length 1 signal.\n");
       return;
    }
+
+   int8_t *dec_hi_l1;
+   int8_t *dec_lo_l1;
+   plp_dwt_wavelet_q8 temp_wavelet;
     
    if (hal_cluster_id() == ARCHI_FC_CID) {
       printf("parallel processing supported only for cluster side\n");
@@ -91,7 +96,23 @@ void plp_dwt_q8_parallel(const int8_t *__restrict__ pSrc,
          hal_cl_team_fork(nPE, plp_dwt_haar_q8p_xpulpv2, (void *)&args);
          break;
       default:
+
+         dec_hi_l1 = hal_cl_l1_malloc(sizeof(int8_t) * (wavelet.length));
+         dec_lo_l1 = hal_cl_l1_malloc(sizeof(int8_t) * (wavelet.length));
+
+         copy_coefs_q8(dec_hi_l1, dec_lo_l1, wavelet);
+         temp_wavelet = (plp_dwt_wavelet_q8){
+            .length = wavelet.length,
+            .type = wavelet.type,
+            .dec_hi = dec_hi_l1,
+            .dec_lo = dec_lo_l1
+         };
+         args.wavelet = temp_wavelet;
+
          hal_cl_team_fork(nPE, plp_dwt_q8p_xpulpv2, (void *)&args);
+
+         hal_cl_l1_free(dec_hi_l1, sizeof(int8_t) * (wavelet.length));
+         hal_cl_l1_free(dec_lo_l1, sizeof(int8_t) * (wavelet.length));
          break;
       }
    }

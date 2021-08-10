@@ -29,6 +29,7 @@
  */
 
 #include "plp_math.h"
+#include "plp_dwt_common.h"
 
 /**
   @ingroup groupTransforms
@@ -69,6 +70,10 @@ void plp_dwt_q16(const int16_t *__restrict__ pSrc,
       return;
    }
 
+   int16_t *dec_hi_l1;
+   int16_t *dec_lo_l1;
+   plp_dwt_wavelet_q16 temp_wavelet;
+
    if (hal_cluster_id() == ARCHI_FC_CID) {
       switch(wavelet.type) {
       case PLP_DWT_WAVELET_HAAR:
@@ -86,7 +91,20 @@ void plp_dwt_q16(const int16_t *__restrict__ pSrc,
          plp_dwt_haar_q16s_xpulpv2(pSrc, length, mode, pDstA, pDstD);
          break;
       default:
-         plp_dwt_q16s_xpulpv2(pSrc, length, wavelet, mode, pDstA, pDstD);
+         dec_hi_l1 = hal_cl_l1_malloc(sizeof(int16_t) * (wavelet.length));
+         dec_lo_l1 = hal_cl_l1_malloc(sizeof(int16_t) * (wavelet.length));
+
+         copy_coefs_q16(dec_hi_l1, dec_lo_l1, wavelet);
+         temp_wavelet = (plp_dwt_wavelet_q16){
+            .length = wavelet.length,
+            .type = wavelet.type,
+            .dec_hi = dec_hi_l1,
+            .dec_lo = dec_lo_l1
+         };
+
+         plp_dwt_q16s_xpulpv2(pSrc, length, temp_wavelet, mode, pDstA, pDstD);
+         hal_cl_l1_free(dec_hi_l1, sizeof(int16_t) * (wavelet.length) );
+         hal_cl_l1_free(dec_lo_l1, sizeof(int16_t) * (wavelet.length) );
          break;
       }
    }

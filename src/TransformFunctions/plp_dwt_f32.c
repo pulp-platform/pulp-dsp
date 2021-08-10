@@ -29,6 +29,10 @@
  */
 
 #include "plp_math.h"
+#include "plp_dwt_common.h"
+
+
+
 
 /**
   @ingroup groupTransforms
@@ -69,6 +73,10 @@ void plp_dwt_f32(const float32_t *__restrict__ pSrc,
       return;
    }
 
+   float32_t *dec_hi_l1;
+   float32_t *dec_lo_l1;
+   plp_dwt_wavelet_f32 temp_wavelet;
+
    if (hal_cluster_id() == ARCHI_FC_CID) {
       printf("error: FC doesn't have FPU\n");
       return;
@@ -79,7 +87,21 @@ void plp_dwt_f32(const float32_t *__restrict__ pSrc,
          plp_dwt_haar_f32s_xpulpv2(pSrc, length, mode, pDstA, pDstD);
          break;
       default:
-         plp_dwt_f32s_xpulpv2(pSrc, length, wavelet, mode, pDstA, pDstD);
+         dec_hi_l1 = hal_cl_l1_malloc(sizeof(float32_t) * (wavelet.length));
+         dec_lo_l1 = hal_cl_l1_malloc(sizeof(float32_t) * (wavelet.length));
+
+         copy_coefs_f32(dec_hi_l1, dec_lo_l1, wavelet);
+         temp_wavelet = (plp_dwt_wavelet_f32){
+            .length = wavelet.length,
+            .type = wavelet.type,
+            .dec_hi = dec_hi_l1,
+            .dec_lo = dec_lo_l1
+         };
+
+         plp_dwt_f32s_xpulpv2(pSrc, length, temp_wavelet, mode, pDstA, pDstD);
+         
+         hal_cl_l1_free(dec_hi_l1, sizeof(float32_t) * (wavelet.length) );
+         hal_cl_l1_free(dec_lo_l1, sizeof(float32_t) * (wavelet.length) );
          break;
       }
    }
