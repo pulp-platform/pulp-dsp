@@ -30,6 +30,22 @@
 
 #include "plp_math.h"
 
+
+
+void copy_coefs_q32(int32_t *dec_hi_l1, int32_t *dec_lo_l1, plp_dwt_wavelet_q32 wavelet){
+   int32_t *dec_hi_l1_temp = dec_hi_l1;
+   int32_t *dec_lo_l1_temp = dec_lo_l1;
+
+   int32_t *dec_hi_temp = wavelet.dec_hi;
+   int32_t *dec_lo_temp = wavelet.dec_lo;
+
+   // Copy wavelet coefficients into l1
+   for(int i = 0; i < wavelet.length; i++){
+      *dec_hi_l1_temp++ = *dec_hi_temp++;
+      *dec_lo_l1_temp++ = *dec_lo_temp++;
+   }
+}
+
 /**
   @ingroup groupTransforms
  */
@@ -67,6 +83,14 @@ void plp_dwt_q32(const int32_t *__restrict__ pSrc,
       return;
    }
 
+
+   int32_t *dec_hi_l1;
+   int32_t *dec_lo_l1;
+   plp_dwt_wavelet_q32 temp_wavelet;
+
+  
+
+
    if (hal_cluster_id() == ARCHI_FC_CID) {
       switch(wavelet.type) {
       case PLP_DWT_WAVELET_HAAR:
@@ -74,7 +98,24 @@ void plp_dwt_q32(const int32_t *__restrict__ pSrc,
          plp_dwt_haar_q32s_rv32im(pSrc, length, mode, pDstA, pDstD);
          break;
       default:
+
+         // dec_hi_l1 = hal_fc_l1_malloc(sizeof(int32_t) * (wavelet.length));
+         // dec_lo_l1 = hal_fc_l1_malloc(sizeof(int32_t) * (wavelet.length));
+
+         // copy_coefs_q32(dec_hi_l1, dec_lo_l1, wavelet);
+         // temp_wavelet = (plp_dwt_wavelet_q32){
+         //    .length = wavelet.length,
+         //    .type = wavelet.type,
+         //    .dec_hi = dec_hi_l1,
+         //    .dec_lo = dec_lo_l1
+         // };
+
+
+         // copy_coefs_q32(dec_hi_l1, dec_lo_l1, wavelet);
          plp_dwt_q32s_rv32im(pSrc, length, wavelet, mode, pDstA, pDstD);
+         //plp_dwt_q32s_rv32im(pSrc, length, temp_wavelet, mode, pDstA, pDstD);
+         // hal_fc_l1_free(dec_hi_l1, sizeof(int32_t) * (wavelet.length) );
+         // hal_fc_l1_free(dec_lo_l1, sizeof(int32_t) * (wavelet.length) );
          break;
       }
    }else {
@@ -84,7 +125,23 @@ void plp_dwt_q32(const int32_t *__restrict__ pSrc,
          plp_dwt_haar_q32s_xpulpv2(pSrc, length, mode, pDstA, pDstD);
          break;
       default:
-         plp_dwt_q32s_xpulpv2(pSrc, length, wavelet, mode, pDstA, pDstD);
+
+         dec_hi_l1 = hal_cl_l1_malloc(sizeof(int32_t) * (wavelet.length));
+         dec_lo_l1 = hal_cl_l1_malloc(sizeof(int32_t) * (wavelet.length));
+
+         copy_coefs_q32(dec_hi_l1, dec_lo_l1, wavelet);
+         temp_wavelet = (plp_dwt_wavelet_q32){
+            .length = wavelet.length,
+            .type = wavelet.type,
+            .dec_hi = dec_hi_l1,
+            .dec_lo = dec_lo_l1
+         };
+
+
+         plp_dwt_q32s_xpulpv2(pSrc, length, temp_wavelet, mode, pDstA, pDstD);
+
+         hal_cl_l1_free(dec_hi_l1, sizeof(int32_t) * (wavelet.length) );
+         hal_cl_l1_free(dec_lo_l1, sizeof(int32_t) * (wavelet.length) );
          break;
       }
    }
