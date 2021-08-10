@@ -8911,6 +8911,26 @@ void plp_dwt_dec_f32(const float32_t *__restrict__ pSrc,
                      float32_t *__restrict__ pDst);
 
 /**
+   @brief  Floating-point parallel n-level DWT for XPULPV2 extension.
+   @param[in]   pSrc     points to the input buffer (real data)
+   @param[in]   length   length of input buffer
+   @param[in]   wavelet  wavelet structure for calculating DWT
+   @param[in]   mode     boundary extension mode
+   @param[in]   level    Levels of Wavelet decomposition
+
+   @param[out]  pDst     points to ouput buffer with Detailed coefficients and final approximate
+   @return      none
+*/
+void plp_dwt_dec_f32_parallel(const float32_t *__restrict__ pSrc,
+                     uint32_t length,
+                     const plp_dwt_wavelet_f32 wavelet,
+                     plp_dwt_extension_mode mode,
+                     uint32_t level,
+                     uint32_t nPE,
+                     float32_t *__restrict__ pTemp,
+                     float32_t *__restrict__ pDst);
+
+/**
    @brief  Floating-point DWT on real input data for XPULPV2 extension.
    @param[in]   pSrc     points to the input buffer (real data)
    @param[in]   length   length of input buffer

@@ -119,6 +119,135 @@ void plp_dwt_f32_parallel(const float32_t *__restrict__ pSrc,
 
 }
 
+
+
+
+void plp_dwt_dec_f32_parallel(const float32_t *__restrict__ pSrc,
+                     uint32_t length,
+                     const plp_dwt_wavelet_f32 wavelet,
+                     plp_dwt_extension_mode mode,
+                     uint32_t level,
+                     uint32_t nPE,
+                     float32_t *__restrict__ pTemp,
+                     float32_t *__restrict__ pDst){
+   if((mode == PLP_DWT_MODE_ANTIREFLECT || mode == PLP_DWT_MODE_REFLECT) && length <= 1){
+      printf("F Cannot run [anti]reflect mode on length 1 signal.\n");
+      return;
+   }
+
+   if (hal_cluster_id() == ARCHI_FC_CID) {
+      printf("error: FC doesn't have FPU\n");
+      return;
+   } else {
+
+
+      uint32_t dst_offset = 0;
+      uint32_t out_len = length;
+      uint32_t in_len;
+      uint32_t quotient = (out_len/(wavelet.length - 1)) >> 1;
+
+      float32_t *dec_hi_l1;
+      float32_t *dec_lo_l1;
+
+      plp_dwt_instance_f32 args = {
+         .mode = mode,
+         .nPE = nPE
+      };
+
+      switch(wavelet.type) {
+         case PLP_DWT_WAVELET_HAAR:
+         case PLP_DWT_WAVELET_DB1:
+            break;
+         default:
+            dec_hi_l1 = hal_cl_l1_malloc(sizeof(float32_t) * (wavelet.length));
+            dec_lo_l1 = hal_cl_l1_malloc(sizeof(float32_t) * (wavelet.length));
+            copy_coefs_f32(dec_hi_l1, dec_lo_l1, wavelet);
+
+            args.wavelet = (plp_dwt_wavelet_f32){
+                  .length = wavelet.length,
+                  .type = wavelet.type,
+                  .dec_hi = dec_hi_l1,
+                  .dec_lo = dec_lo_l1
+            };
+            break;
+      }
+
+ 
+
+      float32_t *pTempBuff1 = pTemp; // For holding odd A coeffs
+      float32_t *pTempBuff2 = pTemp + PLP_DWT_DEC_TEMP_LEN(length, wavelet.length); // For holding even A coeffs
+      
+
+      const float32_t *pS = pSrc;
+      float32_t *pTempADst = pTempBuff1;
+
+      do {
+         in_len = out_len; // Get input length (previous output length)
+         out_len = PLP_DWT_OUTPUT_LENGTH(out_len, wavelet.length); // Calculate new output length 
+         
+         args.pSrc = pS;
+         args.length = in_len;
+         args.pDstA = pTempADst;
+         args.pDstD = pDst + dst_offset;
+
+         /* The signal (or previous approx. coeffs) are the input
+         * Approx. coeffs are written after the detailed coeffs
+         * Detailed coeffs are appended to end of dest buffer
+         * 
+         * Level 1: pDst = [ D1 D1 D1 D1  x  x  x  x]  ptmpADst(Buff1) = [A1 A1 A1 A1]
+         * Level 2: pDst = [ D1 D1 D1 D1 D2 D2  x  x]  ptmpADst(Buff2) = [A2 A2]
+         * Level 3: pDst = [ D1 D1 D1 D1 D2 D2 D3  x]  ptmpADst(Buff1) = [A3]
+         */
+
+         // printf("Q: %d, In_L: %d Out_l: %d dst_offset: %d\n", quotient, in_len, out_len, dst_offset);
+         switch(wavelet.type) {
+         case PLP_DWT_WAVELET_HAAR:
+         case PLP_DWT_WAVELET_DB1:
+            hal_cl_team_fork(nPE, plp_dwt_haar_f32p_xpulpv2, (void *)&args);
+            break;
+         default:
+            hal_cl_team_fork(nPE, plp_dwt_f32p_xpulpv2, (void *)&args);
+            break;
+         }
+         
+         pS = pTempADst; // Next input will be the current Approx coeffs
+         
+         // Choose the other buffer as the next Approx buffer
+         if(pTempADst == pTempBuff1){
+            pTempADst = pTempBuff2;
+         }else{
+            pTempADst = pTempBuff1;
+         }
+   
+
+         dst_offset += out_len;
+         // In the case that level was 0, it will underflow.
+         level--;
+         // The while loop will then run until max_level
+      } while((quotient >>= 1) && (level > 0));
+
+      // Copy the remaining Approx coeffs from the old pTempADst
+      for(int32_t i = 0; i < out_len; i++){
+         pDst[dst_offset + i] = pS[i];
+      }
+
+
+      switch(wavelet.type) {
+      case PLP_DWT_WAVELET_HAAR:
+      case PLP_DWT_WAVELET_DB1:
+         break;
+      default:
+         hal_cl_l1_free(dec_hi_l1, sizeof(float32_t) * (wavelet.length) );
+         hal_cl_l1_free(dec_lo_l1, sizeof(float32_t) * (wavelet.length) );
+         break;
+      }
+   }
+}
+
+
+
+
+
 /**
    @} end of DWT group
 */

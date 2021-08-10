@@ -121,6 +121,8 @@ void plp_dwt_dec_f32(const float32_t *__restrict__ pSrc,
       return;
    }
 
+
+
    if (hal_cluster_id() == ARCHI_FC_CID) {
       printf("error: FC doesn't have FPU\n");
       return;
@@ -131,6 +133,28 @@ void plp_dwt_dec_f32(const float32_t *__restrict__ pSrc,
       uint32_t out_len = length;
       uint32_t in_len;
       uint32_t quotient = (out_len/(wavelet.length - 1)) >> 1;
+
+      float32_t *dec_hi_l1;
+      float32_t *dec_lo_l1;
+      plp_dwt_wavelet_f32 temp_wavelet;
+
+      switch(wavelet.type) {
+      case PLP_DWT_WAVELET_HAAR:
+      case PLP_DWT_WAVELET_DB1:
+         break;
+      default:
+         dec_hi_l1 = hal_cl_l1_malloc(sizeof(float32_t) * (wavelet.length));
+         dec_lo_l1 = hal_cl_l1_malloc(sizeof(float32_t) * (wavelet.length));
+         copy_coefs_f32(dec_hi_l1, dec_lo_l1, wavelet);
+
+         temp_wavelet = (plp_dwt_wavelet_f32){
+               .length = wavelet.length,
+               .type = wavelet.type,
+               .dec_hi = dec_hi_l1,
+               .dec_lo = dec_lo_l1
+         };
+         break;
+      }
 
 
       float32_t *pTempBuff1 = pTemp; // For holding odd A coeffs
@@ -161,7 +185,7 @@ void plp_dwt_dec_f32(const float32_t *__restrict__ pSrc,
             plp_dwt_haar_f32s_xpulpv2(pS, in_len, mode, pTempADst, pDst + dst_offset);
             break;
          default:
-            plp_dwt_f32s_xpulpv2(pS, in_len, wavelet, mode, pTempADst, pDst + dst_offset);
+            plp_dwt_f32s_xpulpv2(pS, in_len, temp_wavelet, mode, pTempADst, pDst + dst_offset);
             break;
          }
 
@@ -187,6 +211,23 @@ void plp_dwt_dec_f32(const float32_t *__restrict__ pSrc,
       for(int32_t i = 0; i < out_len; i++){
          pDst[dst_offset + i] = pS[i];
       }
+      
+      // hal_cl_dma_cmd_t copy;
+
+      // int32_t merge = 0;
+
+      // hal_cl_dma_cmd((uint32_t)pS, (uint32_t)(pDst + dst_offset), sizeof(flaot32_t) * out_len, HAL_CL_DMA_DIR_LOC2EXT, merge, &copy);
+
+      switch(wavelet.type) {
+      case PLP_DWT_WAVELET_HAAR:
+      case PLP_DWT_WAVELET_DB1:
+         break;
+      default:
+         hal_cl_l1_free(dec_hi_l1, sizeof(float32_t) * (wavelet.length) );
+         hal_cl_l1_free(dec_lo_l1, sizeof(float32_t) * (wavelet.length) );
+         break;
+      }
+      // hal_cl_dma_cmd_wait(&copy);
    }
 }
 
