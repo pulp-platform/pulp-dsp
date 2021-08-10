@@ -377,9 +377,9 @@ void plp_dwt_haar_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
     while(blkCnt > 0){
 
         v_x1   = *((v2s *)(pS));     // { x[0],  x[1]}
-        pS   += 2;
+        pS   += 2U;
         v_x2   = *((v2s *)(pS));     // { x[0],  x[1]}
-        pS   += 2;
+        pS   += 2U;
 
         destA1 = __DOTP2(v_x1, v_ylo) >> MAC_SHIFT;
         destD1 = __DOTP2(v_x1, v_yhi) >> MAC_SHIFT;
@@ -390,8 +390,8 @@ void plp_dwt_haar_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
         *((v2s *)pCurrentA) = __PACK2(destA1, destA2);
         *((v2s *)pCurrentD) = __PACK2(destD1, destD2);
 
-        pCurrentA += 2;
-        pCurrentD += 2;
+        pCurrentA += 2U;
+        pCurrentD += 2U;
         blkCnt--;
     }
 

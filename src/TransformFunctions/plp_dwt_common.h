@@ -27,66 +27,65 @@
  * limitations under the License.
  */
 
+#include "plp_math.h"
 
 #ifndef __PLP_DWT_COMMON_H
 #define __PLP_DWT_COMMON_H
 
 static inline void copy_coefs_q32(int32_t *dec_hi_l1, int32_t *dec_lo_l1, plp_dwt_wavelet_q32 wavelet){
-   int32_t *dec_hi_l1_temp = dec_hi_l1;
-   int32_t *dec_lo_l1_temp = dec_lo_l1;
 
-   int32_t *dec_hi_temp = wavelet.dec_hi;
-   int32_t *dec_lo_temp = wavelet.dec_lo;
+   hal_cl_dma_cmd_t copy;
 
-   // Copy wavelet coefficients into l1
-   for(uint32_t i = 0; i < wavelet.length; i++){
-      *dec_hi_l1_temp++ = *dec_hi_temp++;
-      *dec_lo_l1_temp++ = *dec_lo_temp++;
-   }
+   int32_t merge = 0;
+
+   hal_cl_dma_cmd((uint32_t)wavelet.dec_hi, (uint32_t)dec_hi_l1, sizeof(int32_t) * wavelet.length, HAL_CL_DMA_DIR_EXT2LOC, merge, &copy);
+   merge = 1;
+   hal_cl_dma_cmd((uint32_t)wavelet.dec_lo, (uint32_t)dec_lo_l1, sizeof(int32_t) * wavelet.length, HAL_CL_DMA_DIR_EXT2LOC, merge, &copy);
+
+
+   hal_cl_dma_cmd_wait(&copy);
+
 }
 
 static inline void copy_coefs_f32(float32_t *dec_hi_l1, float32_t *dec_lo_l1, plp_dwt_wavelet_f32 wavelet){
-   float32_t *dec_hi_l1_temp = dec_hi_l1;
-   float32_t *dec_lo_l1_temp = dec_lo_l1;
+    hal_cl_dma_cmd_t copy;
 
-   float32_t *dec_hi_temp = wavelet.dec_hi;
-   float32_t *dec_lo_temp = wavelet.dec_lo;
+   int32_t merge = 0;
 
-   // Copy wavelet coefficients into l1
-   for(uint32_t i = 0; i < wavelet.length; i++){
-      *dec_hi_l1_temp++ = *dec_hi_temp++;
-      *dec_lo_l1_temp++ = *dec_lo_temp++;
-   }
+   hal_cl_dma_cmd((uint32_t)wavelet.dec_hi, (uint32_t)dec_hi_l1, sizeof(float32_t) * wavelet.length, HAL_CL_DMA_DIR_EXT2LOC, merge, &copy);
+   merge = 1;
+   hal_cl_dma_cmd((uint32_t)wavelet.dec_lo, (uint32_t)dec_lo_l1, sizeof(float32_t) * wavelet.length, HAL_CL_DMA_DIR_EXT2LOC, merge, &copy);
+
+
+   hal_cl_dma_cmd_wait(&copy);
 }
 
 
 static inline void copy_coefs_q16(int16_t *dec_hi_l1, int16_t *dec_lo_l1, plp_dwt_wavelet_q16 wavelet){
-   int16_t *dec_hi_l1_temp = dec_hi_l1;
-   int16_t *dec_lo_l1_temp = dec_lo_l1;
+   hal_cl_dma_cmd_t copy;
 
-   int16_t *dec_hi_temp = wavelet.dec_hi;
-   int16_t *dec_lo_temp = wavelet.dec_lo;
+   int32_t merge = 0;
 
-   // Copy wavelet coefficients into l1
-   for(uint32_t i = 0; i < wavelet.length; i++){
-      *dec_hi_l1_temp++ = *dec_hi_temp++;
-      *dec_lo_l1_temp++ = *dec_lo_temp++;
-   }
+   hal_cl_dma_cmd((uint32_t)wavelet.dec_hi, (uint32_t)dec_hi_l1, sizeof(int16_t) * wavelet.length, HAL_CL_DMA_DIR_EXT2LOC, merge, &copy);
+   merge = 1;
+   hal_cl_dma_cmd((uint32_t)wavelet.dec_lo, (uint32_t)dec_lo_l1, sizeof(int16_t) * wavelet.length, HAL_CL_DMA_DIR_EXT2LOC, merge, &copy);
+
+
+   hal_cl_dma_cmd_wait(&copy);
 }
 
 
 static inline void copy_coefs_q8(int8_t *dec_hi_l1, int8_t *dec_lo_l1, plp_dwt_wavelet_q8 wavelet){
-   int8_t *dec_hi_l1_temp = dec_hi_l1;
-   int8_t *dec_lo_l1_temp = dec_lo_l1;
+   hal_cl_dma_cmd_t copy;
 
-   int8_t *dec_hi_temp = wavelet.dec_hi;
-   int8_t *dec_lo_temp = wavelet.dec_lo;
+   int32_t merge = 0;
 
-   // Copy wavelet coefficients into l1
-   for(uint32_t i = 0; i < wavelet.length; i++){
-      *dec_hi_l1_temp++ = *dec_hi_temp++;
-      *dec_lo_l1_temp++ = *dec_lo_temp++;
-   }
+   hal_cl_dma_cmd((uint32_t)wavelet.dec_hi, (uint32_t)dec_hi_l1, sizeof(int8_t) * wavelet.length, HAL_CL_DMA_DIR_EXT2LOC, merge, &copy);
+   merge = 1;
+   hal_cl_dma_cmd((uint32_t)wavelet.dec_lo, (uint32_t)dec_lo_l1, sizeof(int8_t) * wavelet.length, HAL_CL_DMA_DIR_EXT2LOC, merge, &copy);
+
+
+   hal_cl_dma_cmd_wait(&copy);
 }
 
 #endif
