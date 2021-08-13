@@ -79,23 +79,19 @@ void plp_mfcc_f32_parallel(const plp_fft_instance_f32 *SFFT,
                   	   const uint32_t nPE,
                   	   float32_t *__restrict__ pDst) {
 
-
 	// Step 0: Windowing. Stored in buffer space of pDst.
 	uint32_t n_fft = SFFT->FFTLength;
 	float32_t *fft_in = pDst + 2*n_fft;
 	plp_mult_f32_parallel(window, pSrc, n_fft, nPE, fft_in);
-	
 
 	// Step 1: FFT
 	plp_rfft_f32_parallel(SFFT, fft_in, nPE, pDst);
 	
-
 	// Step 2: ||.||^2 of each RFFT point / Take squared magnitude.
 	// Stores result in free buffer space of pDst, right behind
 	// the RFFT's (n_fft+2)-long output. 
 	float32_t *fft_mag = pDst + n_fft+2;
 	plp_cmplx_mag_squared_f32(pDst, fft_mag, n_fft/2 + 1);
-
 
 	// Step 3: Apply triangular filter bank.
 	// results are stored in the beginning of pDst.
@@ -104,15 +100,15 @@ void plp_mfcc_f32_parallel(const plp_fft_instance_f32 *SFFT,
 	float32_t *filter_start = (float32_t*)filterBank->V;
 	for (int i=0;i<n_mels;i++){
 		uint16_t current_length = filterBank->filterLength[i];
-		plp_dot_prod_f32_parallel(
+		plp_dot_prod_f32(
+		//plp_dot_prod_f32_parallel(
                           fft_mag+filterBank->firstValue[i], 
                           filter_start,
                           current_length, 
-			  nPE,
+			  //nPE,
                           fb_out+i);
 		filter_start += current_length;
   	}
-
 
 	// Step 4: Take the log of the computed mel scale. 
 	// the offset is copied from pytorch
