@@ -49,7 +49,7 @@ To use the library add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your projec
 If you add or modify the source codes and want to rebuild the library without recompiling unmodified files, do 
 
 ~~~~~shell
-make header build install`
+make header build install
 ~~~~~
 
 ## With the pulp-sdk on the main branch
