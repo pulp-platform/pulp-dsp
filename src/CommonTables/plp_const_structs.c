@@ -99,5 +99,21 @@ const plp_cfft_instance_q32 plp_cfft_sR_q32_len4096 = { 4096, twiddleCoef_4096_q
                                                         PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH };
 
 
+const plp_fft_instance_f32 plp_rfft_sR_f32_len32 = { 32, 0, (float32_t *)twiddleCoef_rfft_32,
+                                                        (uint16_t *)bit_rev_radix2_LUT_32 };
+
+const plp_fft_instance_f32 plp_rfft_sR_f32_len128 = { 128, 0, (float32_t *)twiddleCoef_rfft_128,
+                                                        (uint16_t *)bit_rev_radix2_LUT_128 };
+
+const plp_fft_instance_f32 plp_rfft_sR_f32_len512 = { 512, 0, (float32_t *)twiddleCoef_rfft_512,
+                                                        (uint16_t *)bit_rev_radix2_LUT_512 };
+
 const plp_fft_instance_f32 plp_rfft_sR_f32_len2048 = { 2048, 0, (float32_t *)twiddleCoef_rfft_2048,
                                                         (uint16_t *)bit_rev_radix2_LUT };
+
+const plp_triangular_filter_f32 plp_triangular_filter_f32_32 = {
+	values_fb_32,
+	startingIndices_fb_32,
+	filterLengths_fb_32,
+	32
+};

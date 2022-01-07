@@ -176,6 +176,38 @@ typedef struct {
 } plp_dot_prod_instance_f32;
 
 /** -------------------------------------------------------
+    @struct plp_mult_instance_f32
+    @brief Instance structure for float parallel multiplication.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] resBuffer  pointer to the result buffer
+*/
+typedef struct {
+    const float32_t *pSrcA; // pointer to the first vector
+    const float32_t *pSrcB; // pointer to the second vector
+    uint32_t blkSizePE;     // number of samples in each vector
+    uint32_t nPE;           // number of processing units
+    float32_t *pDst;        // pointer to result vector
+} plp_mult_instance_f32;
+
+/** -------------------------------------------------------
+    @struct plp_log_instance_f32
+    @brief Instance structure for float parallel log.
+    @param[in]  pSrc      points to the input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] pDst       pointer to the output vector
+*/
+typedef struct {
+    const float32_t *pSrc; // pointer to the vector
+    uint32_t blkSizePE;     // number of samples in each vector
+    uint32_t nPE;           // number of processing units
+    float32_t *pDst;        // pointer to result vector
+} plp_log_instance_f32;
+
+/** -------------------------------------------------------
     @brief Instance structure for basic integer convolution.
     @param[in]  pSrcA      points to the first input vector
     @param[in]  srcALen    length of the first input vector
@@ -334,6 +366,24 @@ typedef struct {
     const uint32_t nPE;
     float32_t *pDst;
 } plp_fft_instance_f32_parallel;
+
+/** -------------------------------------------------------
+    @struct plp_triangular_filter_f32
+    @brief structure containing non-zero values of triangular filterbanks
+    @param  V               pointer to an array containing all non-zero filter
+    			    coefficients of the triangular filters
+    @param  firstValue      pointer to array containing indexes of the
+    			    first non-zero coefficients of the filters
+    @param  filterLength    pointer to array containing lengths of the
+    			    non-zero region of each filter
+    @param  nFilters        total amount of triangular filters (n_mels)
+*/
+typedef struct {
+    const float32_t *V;
+    const uint16_t *firstValue;
+    const uint16_t *filterLength;
+    const uint8_t nFilters;
+} plp_triangular_filter_f32;
 
 /** -------------------------------------------------------
     @struct Complex_type_f32
@@ -2160,6 +2210,81 @@ void plp_mult_i8s_xpulpv2(const int8_t * pSrcA,
                           const int8_t * pSrcB,
                           int32_t * pDst,
                           uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Glue code for element-by-element multiplication of 32-bit float vectors.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_f32(const float32_t * pSrcA,
+                 const float32_t * pSrcB,
+                 float32_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element multiplication of 32-bit float vectors kernel for XPULPV2 extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_mult_f32s_xpulpv2(const float32_t * pSrcA,
+                          const float32_t * pSrcB,
+                          float32_t * pDst,
+                          uint32_t blockSize);
+
+/**
+  @brief Glue code for parallel dot product of 32-bit float vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  nPE        number of parallel processing units
+  @param[out] pDst       points to output vector
+  @return        none
+ */
+
+void plp_mult_f32_parallel(const float32_t *__restrict__ pSrcA,
+                               const float32_t *__restrict__ pSrcB,
+                               uint32_t blockSize,
+                               uint32_t nPE,
+                               float32_t *__restrict__ pDst);
+/**
+ *   @brief Parallel multiplication with interleaved access of 32-bit float vectors kernel for XPULPV2
+ *     extension.
+ *       @param[in]  S     points to the instance structure for float parallel multiplication
+ *         @return        none
+ *          */
+
+void plp_mult_f32p_xpulpv2(void *S);
+
+/**
+  @brief Glue code for parallel log of 32-bit float vectors.
+  @param[in]  pSrc       points to the input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  nPE        number of parallel processing units
+  @param[out] pDst       points to output vector
+  @return        none
+ */
+
+void plp_log_f32_parallel(const float32_t *__restrict__ pSrc,
+                               uint32_t blockSize,
+                               uint32_t nPE,
+                               float32_t *__restrict__ pDst);
+
+/**
+  @brief Parallel log with interleaved access of 32-bit float vectors kernel for XPULPV2
+  extension.
+  @param[in]  S     points to the instance structure for float parallel log
+  @return        none
+ */
+
+void plp_log_f32p_xpulpv2(void *S);
 
 /** -------------------------------------------------------
     @brief      Glue code of negate the elements of a vector for 32-bit integers
@@ -8308,16 +8433,6 @@ void plp_rfft_f32_xpulpv2(const plp_fft_instance_f32 *S,
 */
 void plp_rfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
 
-/** -------------------------------------------------------
-  @brief      Glue code for matrix addition of a 32-bit integer matrices.
-  @param[in]  pSrcA   Points to the first input matrix
-  @param[in]  pSrcB   Points to the second input matrix
-  @param[in]  M       Height of the matrices
-  @param[in]  N       Width of the matrices
-  @param[out] pDst    Points to the output matrix
-  @return     none
-*/
-
 /**
    @brief Floating-point FFT on complex input data.
    @param[in]   S       points to an instance of the floating-point FFT structure
@@ -8359,6 +8474,132 @@ void plp_cfft_f32_xpulpv2(const plp_fft_instance_f32 *S,
    @return      none
 */
 void plp_cfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
+
+/**
+   @brief Floating-point DCT on real input data. Implementation of
+                        John Makhoul's "A Fast Cosine Transform in One
+                        and Two Dimensions" 1980 IEEE paper.
+   @param[in]   S       points to an instance of the floating-point FFT
+                        structure with FFTLength = DCTLength
+   @param[in]   pShift  points to twiddle coefficient table of 4*FFTLength,
+                        of which only the first quarter is necessary.
+   @param[in]   pSrc    points to the input buffer (real data) of size
+                        FFTLength 
+   @param[out]  pBuf    points to buffer of size 2*FFTLength, used for 
+                        computation.
+   @param[out]  pDst    points to output buffer (real data) of size FFTLength,
+                        may be the same as pSrc.
+   @return      none
+*/
+void plp_dct2_f32(const plp_fft_instance_f32 *S,
+                  const Complex_type_f32 *pShift,
+                  const uint8_t orthoNorm,
+                  const float32_t *__restrict__ pSrc,
+                  float32_t *__restrict__ pBuf,
+                  float32_t *__restrict__ pDst);
+
+/**
+   @brief Floating-point DCT on real input data. Implementation of
+                        John Makhoul's "A Fast Cosine Transform in One
+                        and Two Dimensions" 1980 IEEE paper.
+   @param[in]   S       points to an instance of the floating-point FFT
+                        structure with FFTLength = DCTLength
+   @param[in]   pShift  points to twiddle coefficient table of 4*FFTLength,
+                        of which only the first quarter is necessary.
+   @param[in]   pSrc    points to the input buffer (real data) of size
+                        FFTLength 
+   @param[in]   nPE     number of parallel processing units
+   @param[out]  pBuf    points to buffer of size 2*FFTLength, used for 
+                        computation.
+   @param[out]  pDst    points to output buffer (real data) of size FFTLength,
+                        may be the same as pSrc.
+   @return      none
+*/
+void plp_dct2_f32_parallel(const plp_fft_instance_f32 *S,
+                  	   const Complex_type_f32 *pShift,
+                  	   const uint8_t orthoNorm,
+                  	   const float32_t *__restrict__ pSrc,
+			   const uint32_t nPE,
+                  	   float32_t *__restrict__ pBuf,
+                  	   float32_t *__restrict__ pDst);
+
+/**
+   @brief MFCC on real input data.
+   @param[in]   SFFT        points to an instance of the floating-point FFT
+                            structure for the initial FFT (with FFTLength = n_fft).
+                            bitReverseFlag should be on.
+   @param[in]   SDCT        points to an instance of the floating-point FFT
+                            structure for the DCT (with FFTLength = n_mels).
+                            bitReverseFlag should be on.
+   @param[in]   pShift      points to twiddle coefficient table with
+                            FFTLength = 4*n_mels. Only first quarter necessary.
+   @param[in]   filterBank  points to plp_triangular_filter_f32 instance with 
+                            nFilters = n_mels.
+   @param[in]   window      vector to use for windowing
+   @param[in]   orthoNorm   whether to use dct orthonormalisation or not
+   @param[in]   pSrc        points to the input buffer (real data, size n_fft)
+   @param[out]  pDst        points to the output buffer 
+                            of length at least 3*n_fft.
+                            pSrc and pDst must not overlap, the calculation can
+                            not be done in place. 
+                            MFCCs are returned in the first n_mels spots.
+   @return      none
+*/
+
+
+void plp_mfcc_f32(const plp_fft_instance_f32 *SFFT,
+                  const plp_fft_instance_f32 *SDCT,
+                  const Complex_type_f32 *pShift,
+                  const plp_triangular_filter_f32 *filterBank,
+		  const float32_t *window,
+		  const uint8_t *orthoNorm,
+                  const float32_t *__restrict__ pSrc,
+                  float32_t *__restrict__ pDst);
+
+/**
+   @brief MFCC on real input data.
+   @param[in]   SFFT        points to an instance of the floating-point FFT
+                            structure for the initial FFT (with FFTLength = n_fft).
+                            bitReverseFlag should be on.
+   @param[in]   SDCT        points to an instance of the floating-point FFT
+                            structure for the DCT (with FFTLength = n_mels).
+                            bitReverseFlag should be on.
+   @param[in]   pShift      points to twiddle coefficient table with
+                            FFTLength = 4*n_mels. Only first quarter necessary.
+   @param[in]   filterBank  points to plp_triangular_filter_f32 instance with 
+                            nFilters = n_mels.
+   @param[in]   window      vector to use for windowing
+   @param[in]   orthoNorm   whether to use dct orthonormalisation or not
+   @param[in]   pSrc        points to the input buffer (real data, size n_fft)
+   @param[in]   nPE         number of parallel processing units
+   @param[out]  pDst        points to the output buffer 
+                            of length at least 3*n_fft.
+                            pSrc and pDst must not overlap, the calculation can
+                            not be done in place. 
+                            MFCCs are returned in the first n_mels spots.
+   @return      none
+*/
+
+
+void plp_mfcc_f32_parallel(const plp_fft_instance_f32 *SFFT,
+                	   const plp_fft_instance_f32 *SDCT,
+                	   const Complex_type_f32 *pShift,
+                	   const plp_triangular_filter_f32 *filterBank,
+			   const float32_t *window,
+			   const uint8_t *orthoNorm,
+                	   const float32_t *__restrict__ pSrc,
+			   const uint32_t nPE,
+                	   float32_t *__restrict__ pDst);
+
+/** -------------------------------------------------------
+  @brief      Glue code for matrix addition of a 32-bit integer matrices.
+  @param[in]  pSrcA   Points to the first input matrix
+  @param[in]  pSrcB   Points to the second input matrix
+  @param[in]  M       Height of the matrices
+  @param[in]  N       Width of the matrices
+  @param[out] pDst    Points to the output matrix
+  @return     none
+*/
 
 void plp_mat_add_i32(const int32_t *__restrict__ pSrcA,
                      const int32_t *__restrict__ pSrcB,

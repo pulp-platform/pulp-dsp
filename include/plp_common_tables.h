@@ -71,8 +71,23 @@ extern const float32_t sinTable_f32[FAST_MATH_TABLE_SIZE + 1];
 extern const int32_t sinTable_q32[FAST_MATH_TABLE_SIZE + 1];
 extern const int16_t sinTable_q16[FAST_MATH_TABLE_SIZE + 1];
 
+extern const Complex_type_f32 twiddleCoef_rfft_32[16];
+extern const Complex_type_f32 twiddleCoef_rfft_128[64];
+extern const Complex_type_f32 twiddleCoef_rfft_512[256];
 extern const Complex_type_f32 twiddleCoef_rfft_2048[1024];
 
+extern short bit_rev_radix2_LUT_32[32];
+extern short bit_rev_radix2_LUT_128[128];
+extern short bit_rev_radix2_LUT_512[512];
 extern short bit_rev_radix2_LUT[2048];
 
+extern const float32_t melFbTable_f32_23[25];
+extern const float32_t melFbTable_f32_26[28];
+extern const float32_t melFbTable_f32_32[34];
+
+extern const uint16_t filterLengths_fb_32[32];
+extern const uint16_t startingIndices_fb_32[32];
+extern const float32_t values_fb_32[245];
+
+extern const float32_t hannWindow_f32_len512[512];
 #endif // PLP_COMMON_TABLES_H
