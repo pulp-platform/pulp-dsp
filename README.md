@@ -44,27 +44,27 @@ To compile and install the library, do
 make clean header all install
 ~~~~~
 
-To use the library add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project and don't forget to include the necessary header files, e.g., `plp_math.h`, in your codes.
+To use the library add `PULP_LDFLAGS += -lplpdsp` in the Makefile of your project and don't forget to include the necessary header files, e.g., `plp_math.h`, in your codes. Link also the math library using `-lm`.
 
 If you add or modify the source codes and want to rebuild the library without recompiling unmodified files, do 
 
 ~~~~~shell
-make header build install`
+make header build install
 ~~~~~
 
 ## With the pulp-sdk on the main branch
+
+You need to enable the PMSIS mode:
+
+~~~~~shell
+export PULP_RTOS=pmsis
+~~~~~
 
 To compile and install the library, do
 
 ~~~~~shell
 make build-lib
 make install-lib
-~~~~~
-
-You need to enable the PMSIS mode:
-
-~~~~~shell
-export PULP_RTOS=pmsis
 ~~~~~
 
 # Documentation
@@ -79,9 +79,37 @@ It creates the documentation and you can browse it by opening `html/index.html` 
 
 To add documentations use @defgroup, @ingroup, @addtogroup, etc. Please refer to plp_math.h and the source codes src/BasicMathFunctions/plp_dot_prod_i32.c and src/BasicMathFunctions/kernels/plp_dot_prod_i32s_rv32im.c as examples.
 
+# Test framework and benchmarks
+
+Under the `test` folder you can test the functions and benchmark their performance by collecting number of cycles, instructions, instructions per cycle (i/c), instruction cache misses (imiss), load stalls (ld_stall), TCDM contentions (tcdm_cont), number of operations (ops, mostly counted as multiply-and-accumulate operations), and operations per cycle (ops/c).
+
+An example on the 1D convolution function is shown below, run on gvsoc of Mr. Wolf. The device ibex means that the basic RV32IM ISA is used, while riscy means that the XPULPv2 ISA extensions are used. We can reach up to 11.739 MACs/cycle using the 8 cores of Mr. Wolf!
+
+
+| function              | device | dimension             |  cycles |    insn |   i/c | imiss | ld_stall | tcdm_cont |    ops |  ops/c |
+| --------------------- |:------:| ---------------------:| -------:| -------:| -----:| -----:| --------:| ---------:| ------:| ------:|
+| plp_conv_i32          | ibex   | len_a=512; len_b=512  | 1649017 |  868026 | 0.526 |     0 |   447594 |         0 | 523776 |  0.318 |
+| plp_conv_i32          | ibex   | len_a=512; len_b=1024 | 3176006 | 1654308 | 0.521 |     0 |   880571 |         0 | 785920 |  0.247 |
+| plp_conv_i16          | ibex   | len_a=512; len_b=512  | 1659535 |  870761 | 0.525 |     0 |   454502 |         0 | 523776 |  0.316 |
+| plp_conv_i16          | ibex   | len_a=512; len_b=1024 | 3213505 | 1669232 | 0.519 |     0 |   896778 |         0 | 785920 |  0.245 |
+| plp_conv_i8           | ibex   | len_a=512; len_b=512  | 1639099 |  850447 | 0.519 |     0 |   454457 |         0 | 523776 |  0.320 |
+| plp_conv_i8           | ibex   | len_a=512; len_b=1024 | 3174745 | 1630530 | 0.514 |     0 |   896757 |         0 | 785920 |  0.248 |
+| plp_conv_i32          | riscy  | len_a=512; len_b=512  |  567109 |  541968 | 0.956 |  1111 |       52 |         0 | 523776 |  0.924 |
+| plp_conv_i32          | riscy  | len_a=512; len_b=1024 | 1028088 |  998842 | 0.972 |  1430 |       27 |         0 | 785920 |  0.764 |
+| plp_conv_i32_parallel | riscy  | len_a=512; len_b=512  |   72510 |   68677 | 0.947 |   880 |       25 |       907 | 523776 |  7.224 |
+| plp_conv_i32_parallel | riscy  | len_a=512; len_b=1024 |  131819 |  126403 | 0.959 |   891 |       25 |      1603 | 785920 |  5.962 |
+| plp_conv_i16          | riscy  | len_a=512; len_b=512  |  489358 |  457920 | 0.936 |  1254 |       49 |         0 | 523776 |  1.070 |
+| plp_conv_i16          | riscy  | len_a=512; len_b=1024 |  892258 |  846771 | 0.949 |  1331 |       25 |         0 | 785920 |  0.881 |
+| plp_conv_i16_parallel | riscy  | len_a=512; len_b=512  |   63512 |   58444 | 0.920 |   814 |       25 |      1052 | 523776 |  8.247 |
+| plp_conv_i16_parallel | riscy  | len_a=512; len_b=1024 |  115545 |  109386 | 0.947 |   869 |       25 |      1595 | 785920 |  6.802 |
+| plp_conv_i8           | riscy  | len_a=512; len_b=512  |  336855 |  291150 | 0.864 |  1551 |       19 |         0 | 523776 |  1.555 |
+| plp_conv_i8           | riscy  | len_a=512; len_b=1024 |  575868 |  503993 | 0.875 |  1210 |       11 |         0 | 785920 |  1.365 |
+| plp_conv_i8_parallel  | riscy  | len_a=512; len_b=512  |   44618 |   37599 | 0.843 |   880 |       23 |      1211 | 523776 | 11.739 |
+| plp_conv_i8_parallel  | riscy  | len_a=512; len_b=1024 |   80015 |   68701 | 0.859 |   891 |       23 |      2304 | 785920 |  9.822 |
+
 # To contribute
 
-Contributions are very welcome and are accepted under Apache v2.0.
+The library contains many optimized functions, but there are still many of them to be optimized. Contributions are very welcome and are accepted under Apache v2.0.
 
 If you want to contribute, fork the repository and issue pull requests.
 
