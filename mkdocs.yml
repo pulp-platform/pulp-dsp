@@ -1,0 +1,10 @@
+site_name: PULP DSP
+theme:
+  name: material
+
+  icon:
+    repo: fontawesome/brands/github
+
+repo_url: https://github.com/pulp-platform/pulp-dsp
+repo_name: pulp-platform/pulp-dsp
+
