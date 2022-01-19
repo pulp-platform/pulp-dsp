@@ -12,7 +12,9 @@ test/mrWolf/bench_*.csv
 
 junit-reports
 
-doc/html/
-doc/latex/
+docs/html/
+docs/xml/
 
 *.S
+
+gmon.out

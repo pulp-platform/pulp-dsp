@@ -8,3 +8,12 @@ theme:
 repo_url: https://github.com/pulp-platform/pulp-dsp
 repo_name: pulp-platform/pulp-dsp
 
+nav:
+- Home: index.md
+- Docs:
+  - Pages: docs/Pages/index.md
+  - Files: docs/Files/index.md
+  - Classes: docs/Classes/index.md
+  - Examples: docs/Examples/index.md
+  - Modules: docs/Modules/index.md
+  - Namespaces: docs/Namespaces/index.md
