@@ -23,56 +23,59 @@
  */
 
 /**
-   \mainpage PULP DSP Software Library
-   *
-   * Introduction
-   * ------------
-   *
-   * This user manual describes the PULP DSP software library,
-   * a suite of common signal processing functions for use on PULP-based processors.
-   *
-   * The library is divided into a number of functions each covering a specific category:
-   * - Basic math functions
-   * - Fast math functions
-   * - Complex math functions
-   * - Filters
-   * - Matrix functions
-   * - Transform functions
-   * - Motor control functions
-   * - Statistical functions
-   * - Support functions
-   * - Interpolation functions
-   *
-   * The library has separate functions for operating on 8-bit integers, 16-bit integers,
-   * 32-bit integer and 32-bit floating-point values.
-   *
-   * The library is released under Apache v2.0 license.
-   *
-   */
+ *  \mainpage PULP DSP Software Library
+ * 
+ *   Introduction
+ *   ------------
+ *
+ *   This user manual describes the PULP DSP software library,
+ *   a suite of common signal processing functions for use on PULP-based processors.
+ *
+ *   The library is divided into a number of functions each covering a specific category:
+ *   - Basic math functions
+ *   - Fast math functions
+ *   - Complex math functions
+ *   - Filters
+ *   - Matrix functions
+ *   - Transform functions
+ *   - Motor control functions
+ *   - Statistical functions
+ *   - Support functions
+ *   - Interpolation functions
+ *
+ *   ..
+ *
+ *
+ *   The library has separate functions for operating on 8-bit integers, 16-bit integers,
+ *   32-bit integer and 32-bit floating-point values.
+ *
+ *   The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):
+ *
+ *   <pre>
+ *   < plp > _ < function name > _ < data type > < precision > < method > _ < isa extension >,
+ *   </pre>
+ *
+ *   with
+ *
+ *   - data type = {f, i, q} respectively for floats, integers, fixed points
+ *   - precision = {32, 16, 8} bits
+ *   - method = {s, p} respectively meaning single core or parallel multicore implementation.
+ *   - isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
+ *
+ *   ..
+ *
+ *
+ *   The library is released under Apache v2.0 license.
+ *
+ */
 
 /**
  * @defgroup groupMath Basic Math Functions
- * The naming scheme of the functions follows the following pattern (for example
- plp_dot_prod_i32s_rv32im): <pre>
- \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
-
- data type = {f, i, q} respectively for floats, integers, fixed points
-
- precision = {32, 16, 8} bits
-
- method = {s, p} respectively meaning single core or parallel multicore implementation.
-
- isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
-
- </pre>
-
 */
 
 /**
  * @defgroup groupCmplxMath Complex Math Functions
  */
-/**
-
 
 /**
  * @defgroup groupFilters Filtering Functions
@@ -80,24 +83,9 @@
 
 /**
  * @defgroup groupMatrix Matrix Functions
- * The naming scheme of the functions follows the following pattern (for example
- plp_mat_mult_i32s_rv32im): <pre>
- \<pulp\> _ \<function name\> _ \<data type\> \<precision\> \<method\> _ \<isa extension\>, with
-
- data type = {f, i, q} respectively for floats, integers, fixed points
-
- precision = {32, 16, 8} bits
-
- method = {s, p} respectively meaning single core or parallel multicore implementation.
-
- isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
-
- </pre>
-
  *
  * This set of functions provides basic matrix math operations.
  *
-
  */
 
 /**

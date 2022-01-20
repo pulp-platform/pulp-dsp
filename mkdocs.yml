@@ -11,6 +11,7 @@ repo_name: pulp-platform/pulp-dsp
 nav:
 - Home: index.md
 - Test Framework: test-framework-index.md
+- Tutorial: tutorial-index.md
 - Reference Manual:
   - Pages: refmanual/Pages/index.md
   - Files: refmanual/Files/index.md
