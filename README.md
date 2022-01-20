@@ -24,7 +24,7 @@ This repository contains:
 
 - `test` folder contains the testing setup used during the development of the library. For more details please read the README file in the folder.
 
-- `doc` folder contains the configurations for building documentation for the library.
+- `docs` folder contains the configurations for building documentation for the library.
 
 # Installation and usage
 
@@ -69,13 +69,15 @@ make install-lib
 
 # Documentation
 
-Go to the `doc` folder and do
+The documentation is built from the latest master and hosted at github pages: [https://pulp-platform.github.io/pulp-dsp](https://pulp-platform.github.io/pulp-dsp), using [MkDocs-Material](https://squidfunk.github.io/mkdocs-material/) and [Doxybook2](https://github.com/matusnovak/doxybook2).
+
+You can also generate the reference manual by yourself by going to the `docs` folder and doing
 
 ~~~~~shell
-doxygen doc_config
+doxygen Doxyfile
 ~~~~~
 
-It creates the documentation and you can browse it by opening `html/index.html` using a browser. 
+It creates the reference manual and you can browse it by opening `html/index.html` using a browser. 
 
 To add documentations use @defgroup, @ingroup, @addtogroup, etc. Please refer to plp_math.h and the source codes src/BasicMathFunctions/plp_dot_prod_i32.c and src/BasicMathFunctions/kernels/plp_dot_prod_i32s_rv32im.c as examples.
 

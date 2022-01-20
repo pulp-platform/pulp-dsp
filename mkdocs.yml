@@ -10,10 +10,11 @@ repo_name: pulp-platform/pulp-dsp
 
 nav:
 - Home: index.md
-- Docs:
-  - Pages: docs/Pages/index.md
-  - Files: docs/Files/index.md
-  - Classes: docs/Classes/index.md
-  - Examples: docs/Examples/index.md
-  - Modules: docs/Modules/index.md
-  - Namespaces: docs/Namespaces/index.md
+- Test Framework: test-framework-index.md
+- Reference Manual:
+  - Pages: refmanual/Pages/index.md
+  - Files: refmanual/Files/index.md
+  - Classes: refmanual/Classes/index.md
+  - Examples: refmanual/Examples/index.md
+  - Modules: refmanual/Modules/index.md
+  - Namespaces: refmanual/Namespaces/index.md
