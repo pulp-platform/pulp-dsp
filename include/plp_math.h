@@ -65,7 +65,11 @@
  *   ..
  *
  *
- *   The library is released under Apache v2.0 license.
+ *   If the user wants to use a parallel implementation, they can call the glue code functions with '_parallel'
+ *   in the function name.
+ *
+ *
+ *   The library is released under Apache v2.0 license. More details can be found in `LICENSE`.
  *
  */
 

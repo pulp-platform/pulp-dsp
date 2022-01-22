@@ -1,13 +1,22 @@
 #include "rtos_hal.h"
 #include "stdio.h"
 #include "plp_math.h"
+
 #include "data.h"
 
-int main(){
+void cluster_entry_i32(void* args) {
+
+  printf("Cluster entered. Compute for i32.\n\n");
 
   int32_t result=0;
 
-  printf("\nComputing dot prod of i32 numbers\n\n"); // it's better to always end with \n
+  printf("Initialize the values to 0. The vector length is %d\n", VLEN);
+  for (int i=0; i<VLEN; i++){
+    a_cl[i] = 0;
+    b_cl[i] = 0;
+  }
+
+  printf("\nCompute with single core\n\n");
 
   // We also count the number of cycles taken to compute it.
   // This tructure will hold the configuration and also the results in the
@@ -26,30 +35,30 @@ int main(){
   rt_perf_reset(&perf);
   rt_perf_start(&perf);
 
-  plp_dot_prod_i32(a, b, VLEN, &result);
+  plp_dot_prod_i32s_xpulpv2(a_cl, b_cl, VLEN, &result);
 
   rt_perf_stop(&perf);
 
-  printf("The true result is %d, the calculated result is %d.\n", res, result);
+  printf("The calculated result is %d.\n", result);
   printf("Total cycles: %d\n", rt_perf_read(RT_PERF_CYCLES));
   printf("Instructions: %d\n", rt_perf_read(RT_PERF_INSTR));
 
-  printf("\nThe glue code also took few cycles. If we call directly the kernel function to compute the dot product we have:\n");
+  printf("\nCompute with 8 parallel cores\n\n");
 
   // Reset HW counters now and start and stop counters so that we benchmark
   // only around the printf
   rt_perf_reset(&perf);
   rt_perf_start(&perf);
 
-  plp_dot_prod_i32s_rv32im(a, b, VLEN, &result);
+  plp_dot_prod_i32_parallel(a_cl, b_cl, VLEN, 8, &result);
 
   rt_perf_stop(&perf);
 
-  printf("The true result is %d, the calculated result is %d.\n", res, result);
+  printf("The calculated result is %d.\n", result);
   printf("Total cycles: %d\n", rt_perf_read(RT_PERF_CYCLES));
   printf("Instructions: %d\n", rt_perf_read(RT_PERF_INSTR));
-  printf("(The effect might be more evident with SIMD and parallel computation.)\n");
 
-  return 0;
+  return;
+
 
 }

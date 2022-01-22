@@ -1,5 +1,6 @@
 PULP_APP = dotprod
 PULP_APP_FC_SRCS = main.c
+PULP_APP_CL_SRCS = cluster.c
 
 PULP_LDFLAGS += -lplpdsp -lm
 
