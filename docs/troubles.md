@@ -3,7 +3,7 @@
 This page is a collection of possible solutions.
 
 
-# GTKWave
+## GTKWave
 
 If you are trying to generate the traces to be visualized with GTKWave on Mr. Wolf and you are getting
 
