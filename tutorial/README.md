@@ -27,7 +27,7 @@ Here we will execute the dot product between two vectors as an example.
 Everytime you open a new terminal, go to the `pulp-sdk` folder and configure the GVSoC for Mr. Wolf:
 
 ~~~~~shell
-source configs/platform-GVSoC.sh
+source configs/platform-gvsoc.sh
 source configs/wolfe.sh
 ~~~~~
 

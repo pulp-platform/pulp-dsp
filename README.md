@@ -1,6 +1,6 @@
-## PULP DSP: Digital Signal Processing on Parallel Ultra Low Power Platform
+# PULP DSP: Digital Signal Processing on Parallel Ultra Low Power Platform
 
-# Introduction
+## Introduction
 
 This repository contains DSP functions for [PULP platform](https://pulp-platform.org/).
 
@@ -12,7 +12,7 @@ Additionally, it supports the pulp-open and can be used with GWT GAP8.
 
 Some of the functions are very optimized, while others are WIP. Contributions are welcome!
 
-# Structure of the repository
+## Structure of the repository
 
 This repository contains:
 
@@ -26,7 +26,7 @@ This repository contains:
 
 - `docs` folder contains the configurations for building documentation for the library.
 
-# Installation and usage
+## Installation and usage
 
 First of all, in order to install and use the library, you have to install the pulp-sdk. You can follow the instructions [here](https://github.com/pulp-platform/pulp-sdk).
 
@@ -36,7 +36,7 @@ Configure the sdk according to the chip and the platform you want to use (for ex
 
 Once you are done with the pulp-sdk setup, you can clone this repository, enter the `pulp-dsp` folder.
 
-## With the pulp-sdk on the v1 branch
+### With the pulp-sdk on the v1 branch
 
 To compile and install the library, do
 
@@ -52,7 +52,7 @@ If you add or modify the source codes and want to rebuild the library without re
 make header build install
 ~~~~~
 
-## With the pulp-sdk on the main branch
+### With the pulp-sdk on the main branch
 
 You need to enable the PMSIS mode:
 
@@ -67,7 +67,7 @@ make build-lib
 make install-lib
 ~~~~~
 
-# Documentation
+## Documentation
 
 The documentation is built from the latest master and hosted at github pages: [https://pulp-platform.github.io/pulp-dsp](https://pulp-platform.github.io/pulp-dsp), using [MkDocs-Material](https://squidfunk.github.io/mkdocs-material/) and [Doxybook2](https://github.com/matusnovak/doxybook2).
 
@@ -81,7 +81,7 @@ It creates the reference manual and you can browse it by opening `html/index.htm
 
 To add documentations use @defgroup, @ingroup, @addtogroup, etc. Please refer to plp_math.h and the source codes src/BasicMathFunctions/plp_dot_prod_i32.c and src/BasicMathFunctions/kernels/plp_dot_prod_i32s_rv32im.c as examples.
 
-# Test framework and benchmarks
+## Test framework and benchmarks
 
 Under the `test` folder you can test the functions and benchmark their performance by collecting number of cycles, instructions, instructions per cycle (i/c), instruction cache misses (imiss), load stalls (ld_stall), TCDM contentions (tcdm_cont), number of operations (ops, mostly counted as multiply-and-accumulate operations), and operations per cycle (ops/c).
 
@@ -109,7 +109,7 @@ An example on the 1D convolution function is shown below, run on gvsoc of Mr. Wo
 | plp_conv_i8_parallel  | riscy  | len_a=512; len_b=512  |   44618 |   37599 | 0.843 |   880 |       23 |      1211 | 523776 | 11.739 |
 | plp_conv_i8_parallel  | riscy  | len_a=512; len_b=1024 |   80015 |   68701 | 0.859 |   891 |       23 |      2304 | 785920 |  9.822 |
 
-# To contribute
+## To contribute
 
 The library contains many optimized functions, but there are still many of them to be optimized. Contributions are very welcome and are accepted under Apache v2.0.
 
@@ -127,7 +127,7 @@ For each function you develop, note the following:
 
 More details can be found in `HACKATHON.md`.
 
-# License and Attribution
+## License and Attribution
 All source code is released under Apache v2.0 license unless noted otherwise, please refer to the LICENSE file for details.
 
 We are inspired by CMSIS-DSP ([CMSIS_5](https://github.com/ARM-software/CMSIS_5/tree/develop/CMSIS/DSP) licensed under Apache v2.0) and partially adapted its structure and codes.
