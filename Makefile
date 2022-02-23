@@ -165,8 +165,21 @@ FC_SRCS = \
 	src/TransformFunctions/plp_dct2_f32_parallel.c \
 	src/TransformFunctions/plp_mfcc_f32.c \
 	src/TransformFunctions/plp_mfcc_f32_parallel.c \
+	src/TransformFunctions/kernels/plp_dwt_q32s_rv32im.c \
+	src/TransformFunctions/kernels/plp_dwt_q16s_rv32im.c \
+	src/TransformFunctions/kernels/plp_dwt_q8s_rv32im.c \
+	src/TransformFunctions/plp_dwt_f32.c \
+	src/TransformFunctions/plp_dwt_q32.c \
+	src/TransformFunctions/plp_dwt_q16.c \
+	src/TransformFunctions/plp_dwt_q8.c \
+	src/TransformFunctions/plp_dwt_f32_parallel.c \
+	src/TransformFunctions/plp_dwt_q32_parallel.c \
+	src/TransformFunctions/plp_dwt_q16_parallel.c \
+	src/TransformFunctions/plp_dwt_q8_parallel.c \
+	src/TransformFunctions/plp_dwt_common.c \
 	src/CommonTables/plp_common_tables.c \
 	src/CommonTables/plp_const_structs.c \
+	src/CommonTables/plp_dwt_structs.c \
 	src/MatrixFunctions/mat_add/plp_mat_add_i32.c src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32s_rv32im.c \
 	src/MatrixFunctions/mat_add/plp_mat_add_i16.c src/MatrixFunctions/mat_add/kernels/plp_mat_add_i16s_rv32im.c \
 	src/MatrixFunctions/mat_add/plp_mat_add_i8.c src/MatrixFunctions/mat_add/kernels/plp_mat_add_i8s_rv32im.c \
@@ -561,6 +574,14 @@ CL_SRCS = \
 	src/TransformFunctions/kernels/plp_cfft_q16p_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_cfft_q32s_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_dwt_f32s_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_dwt_q32s_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_dwt_q16s_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_dwt_q8s_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_dwt_f32p_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_dwt_q32p_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_dwt_q16p_xpulpv2.c \
+	src/TransformFunctions/kernels/plp_dwt_q8p_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32s_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i32p_xpulpv2.c \
 	src/MatrixFunctions/mat_add/kernels/plp_mat_add_i16s_xpulpv2.c \
