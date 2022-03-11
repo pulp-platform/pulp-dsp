@@ -123,7 +123,9 @@ For each function you develop, note the following:
 
 - Use clang-format to format the code;
 
-- Make sure that all tests pass.
+- Make sure that all tests pass;
+
+- Maintain the compatibility for both 'old' and 'new' sdk (see `rtos_hal.h`).
 
 More details can be found in `HACKATHON.md`.
 
