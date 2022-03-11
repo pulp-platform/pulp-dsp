@@ -16,7 +16,7 @@ The kernel functions are more specific to the underlying ISA, so they can be use
 
 Follow the instructions under `Installation and usage` on the home page to install pulp-sdk and pulp-dsp.
 
-For Mr. Wolf, we will use the [v1 branch](https://github.com/pulp-platform/pulp-sdk/tree/v1) of the pulp-sdk. The 'new' sdk on the [main branch](https://github.com/pulp-platform/pulp-sdk) works similarly. For detailed documentations, please refer to the respective documentation of pulp-sdk.
+For Mr. Wolf, we will use the [v1 branch](https://github.com/pulp-platform/pulp-sdk/tree/v1) of the pulp-sdk and the `rt` functions provided with it. The 'new' sdk on the [main branch](https://github.com/pulp-platform/pulp-sdk) works similarly. Some corresponding `rt` functions can be seen in `include/rtos_hal.h`. For detailed documentations, please refer to the respective documentation of pulp-sdk.
 
 ## Configurations
 
@@ -134,6 +134,8 @@ Note that the L1 memory is limited, hence you will need to use DMA if the datasi
 3. do the computation on this first chunk;
 4. at the same time transfer a second chunk;
 5. once the second chunk is transfered, do the computation on this while transfering the next chunk.
+
+An example can be found in `cluster_double_buff`.
 
 ## Visualize traces
 

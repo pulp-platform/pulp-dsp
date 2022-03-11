@@ -12,6 +12,19 @@ The test framework is based around [plptest](https://github.com/pulp-platform/pl
 
 Before you use the test framework, make sure that the most recent version of [plptest](https://github.com/pulp-platform/plptest) is installed!
 
+If you have the [v1 branch](https://github.com/pulp-platform/pulp-sdk/tree/v1), you can go to `pulp-sdk/plptest` folder and do 
+
+~~~~~shell
+git pull
+make build
+~~~~~
+
+If you have the 'new' pulp-sdk, then clone the latest version of [plptest](https://github.com/pulp-platform/plptest) (Aug 3, 2020) and do
+
+~~~~~shell
+make build
+~~~~~
+
 ## Generating new Test Cases
 
 New tests can be generated using the test_template located at `test/mrWolf/test_template`. The following steps are required:

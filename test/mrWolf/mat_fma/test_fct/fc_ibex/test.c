@@ -77,7 +77,7 @@ static void do_bench_0(hal_perf_t *perf, int events)
 
 int main(){
 
-  // This tructure will hold the configuration and also the results in the
+  // This structure will hold the configuration and also the results in the
   // cumulative mode
   hal_perf_t perf;
 

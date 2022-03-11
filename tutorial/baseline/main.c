@@ -10,7 +10,7 @@ int main(){
   printf("\nComputing dot prod of i32 numbers\n\n"); // it's better to always end with \n
 
   // We also count the number of cycles taken to compute it.
-  // This tructure will hold the configuration and also the results in the
+  // This structure will hold the configuration and also the results in the
   // cumulative mode
   rt_perf_t perf;
 
@@ -19,7 +19,7 @@ int main(){
   rt_perf_init(&perf);
 
   // Activate specified events
-  rt_perf_conf(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR)); // Note: on gvsoc you can actiate as many counters as you want, while when you run on board, there is only one HW counter.
+  rt_perf_conf(&perf, (1<<RT_PERF_CYCLES) | (1<<RT_PERF_INSTR)); // Note: on gvsoc you can activate as many counters as you want, while when you run on board, there is only one HW counter.
 
   // Reset HW counters now and start and stop counters so that we benchmark
   // only around the printf
