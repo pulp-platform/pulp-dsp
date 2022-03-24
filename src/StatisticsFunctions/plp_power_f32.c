@@ -72,7 +72,7 @@
 void plp_power_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes) {
 
     if (hal_cluster_id() == ARCHI_FC_CID) {
-        *pRes = -1;
+        plp_power_f32s_rv32im(pSrc, blockSize, pRes);
     } else {
         plp_power_f32s_xpulpv2(pSrc, blockSize, pRes);
     }
