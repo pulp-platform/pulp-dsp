@@ -1442,6 +1442,27 @@ typedef struct {
 } plp_euclidean_distance_instance_q32;
 
 /** -------------------------------------------------------
+    @struct plp_cosine_distance_instance_f32
+    @brief Instance structure for float parallel cosine distance.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] resBuffer_A  pointer to the powerA result buffer
+    @param[out] resBuffer_B  pointer to the powerB result buffer
+    @param[out] resBuffer_dot  pointer to the dot_prod result buffer
+*/
+typedef struct {
+    const float32_t *pSrcA; // pointer to the first vector
+    const float32_t *pSrcB; // pointer to the second vector
+    uint32_t blkSizePE;     // number of samples in each vector
+    uint32_t nPE;           // number of processing units
+    float32_t *resBuffer_A;   // pointer to result vector
+    float32_t *resBuffer_B;   // pointer to result vector
+    float32_t *resBuffer_dot;   // pointer to result vector
+} plp_cosine_distance_instance_f32;
+
+/** -------------------------------------------------------
     @struct plp_power_instance_q32
     @brief Instance structure for fixed point parallel power.
     @param[in]  pSrc      points to the first input vector

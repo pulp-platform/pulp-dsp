@@ -803,6 +803,7 @@ CL_SRCS = \
 	src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q32p_xpulpv2.c \
 	src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q32s_xpulpv2.c \
 	src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q16s_xpulpv2.c \
+	src/DistanceFunctions/plp_cosine_distance/kernels/plp_cosine_distance_f32p_xpulpv2.c \
 	src/DistanceFunctions/plp_cosine_distance/kernels/plp_cosine_distance_f32s_xpulpv2.c \
 	src/DistanceFunctions/plp_cosine_distance/kernels/plp_cosine_distance_q32s_xpulpv2.c \
 	src/DistanceFunctions/plp_cosine_distance/kernels/plp_cosine_distance_q16s_xpulpv2.c \
