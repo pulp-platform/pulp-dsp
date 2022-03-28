@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_power_f32_parallel.c
- * Description:  32-bit floating-point parallel power glue code
+ * Title:        plp_power_q32_parallel.c
+ * Description:  32-bit integer parallel power glue code
  *
  * $Date:        22.03.2022
  * $Revision:    V0
@@ -68,47 +68,46 @@
 */
 
 /**
-  @brief Glue code for parallel power of 32-bit floating point vectors.
+  @brief Glue code for parallel power of 32-bit fixed-point vectors.
   @param[in]  pSrc       points to the input vector
   @param[in]  blockSize  number of samples in each vector
-  @param[in]  fracBits   number of fixed point fractional bits
+  @param[in]  deciPoint  number of fixed point fractional bits
   @param[in]  nPE        number of parallel processing units
   @param[out] pRes       output result returned here
   @return     none
  */
 
-void plp_power_f32_parallel(    const float32_t *__restrict__ pSrc,
+void plp_power_q32_parallel(    const int32_t *__restrict__ pSrc,
                                 uint32_t blockSize,
+                                uint32_t deciPoint,
                                 uint32_t nPE,
-                                float32_t *__restrict__ pRes) {
-    
+                                int32_t *__restrict__ pRes) {
+
     if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("parallel processing supported only for cluster side\n");
         return;
     } else {
 
-        uint32_t i, tmpblkSizePE = blockSize / nPE;
-        float32_t resBuffer[hal_cl_nb_pe_cores()];
+        uint32_t i;
+        int32_t resBuffer[hal_cl_nb_pe_cores()];
 
-        plp_power_instance_f32 S;
+        plp_power_instance_q32 S;
 
-        // Initialize the plp_power_instance
+        // Initialize the plp_dot_prod_instance
         S.pSrc = pSrc;
-        S.blkSizePE = tmpblkSizePE;
+        S.blkSizePE = blockSize;
+        S.deciPoint = deciPoint;
         S.nPE = nPE;
         S.resBuffer = resBuffer;
 
         // Fork the dot product to nPE cores (i.e. processing units)
-        hal_cl_team_fork(nPE, plp_power_f32p_xpulpv2, (void *)&S);
+        hal_cl_team_fork(nPE, plp_power_q32p_xpulpv2, (void *)&S);
 
-        float32_t sum = 0, tmp;
+        int sum = 0;
         for (i = 0; i < nPE; i++) { // not necessary hal_cl_nb_pe_cores()
             sum += resBuffer[i];
         }
-        for (i = (tmpblkSizePE)*nPE; i < blockSize; i++) {
-            tmp = pSrc[i];
-            sum += tmp*tmp;
-        }
+
         *pRes = sum;
     }
 
