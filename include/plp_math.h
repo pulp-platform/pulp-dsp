@@ -18323,6 +18323,15 @@ void plp_cosine_distance_f32_parallel(  const float32_t *__restrict__ pSrcA,
                                         float32_t *__restrict__ pRes);
 
 /**
+  @brief        32-bit floating-point parallel cosine distance between two vectors (computes power in parallel)
+  @param[in]    S points to the instance structure for float cosine distance
+  @return       none
+ */
+
+void plp_cosine_distance_f32p_xpulpv2(void *S);
+
+
+/**
   @brief        Glue code for cosine distance between 32-bit float vectors.
   @param[in]    pSrcA         First vector
   @param[in]    pSrcB         Second vector
