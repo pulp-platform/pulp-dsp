@@ -96,7 +96,7 @@ void plp_power_q32_parallel(    const int32_t *__restrict__ pSrc,
         // Initialize the plp_dot_prod_instance
         S.pSrc = pSrc;
         S.blkSizePE = blockSize;
-        S.deciPoint = deciPoint;
+        S.fracBits = deciPoint;
         S.nPE = nPE;
         S.resBuffer = resBuffer;
 

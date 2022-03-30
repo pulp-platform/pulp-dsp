@@ -74,7 +74,7 @@ void plp_power_q32p_xpulpv2(void* S) {
 
     int32_t *pSrc = (int32_t *)(args->pSrc);
     uint32_t blkSizePE = args->blkSizePE;
-    uint32_t deciPoint = args->deciPoint;
+    uint32_t deciPoint = args->fracBits;
     uint32_t nPE = args->nPE;
     int32_t *resBufferPE = &(args->resBuffer[core_id]);
 
