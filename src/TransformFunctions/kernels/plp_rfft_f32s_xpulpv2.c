@@ -1,6 +1,6 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_rfft_f32p_xpulpv2.c
+ * Title:        plp_rfft_f32s_xpulpv2.c
  * Description:  Floating-point FFT on real input data for XPULPV2
  *
  * $Date:        10. Aug 2020
@@ -71,20 +71,18 @@ static inline void process_butterfly_last_radix2_full(Complex_type_f32 *input,
   @{
  */
 
-
 /**
    @brief  Floating-point FFT on real input data for XPULPV2 extension.
-   @param[in]   arg      points to an instance of the floating-point FFT structure
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrc    points to the input buffer (real data)
+   @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_rfft_f32p_xpulpv2(void *arg) {
+void plp_rfft_f32s_xpulpv2(const plp_fft_instance_f32 *S,
+                          const float32_t *__restrict__ pSrc,
+                          float32_t *__restrict__ pDst) {
 
     int k, j, stage, step, d, index;
-
-    plp_fft_instance_f32 *S = ((plp_fft_instance_f32_parallel*)arg)->S;
-    const float32_t *pSrc = ((plp_fft_instance_f32_parallel*)arg)->pSrc;
-    const uint32_t nPE = ((plp_fft_instance_f32_parallel*)arg)->nPE;
-    float32_t *pDst = ((plp_fft_instance_f32_parallel*)arg)->pDst;
 
     Complex_type_f32 temp;
     int dist = S->FFTLength >> 1;
@@ -95,105 +93,62 @@ void plp_rfft_f32p_xpulpv2(void *arg) {
     Complex_type_f32 *_out_ptr;
     Complex_type_f32 *_tw_ptr;
 
-    int core_id = hal_core_id();
-
-    // FIRST STAGE, input is real, stage=1
+    // FIRST STAGE, input is real
     stage = 1;
-    _in_ptr_real = &pSrc[core_id];
-    _out_ptr = (Complex_type_f32 *)&pDst[2 * core_id];
+    _in_ptr_real = pSrc;
+    _out_ptr = (Complex_type_f32 *)pDst;
     _tw_ptr = (Complex_type_f32 *)S->pTwiddleFactors;
 
-    for (j = 0; j < (nbutterfly / nPE); j++) {
-        process_butterfly_real_radix2(_in_ptr_real, _out_ptr, j * nPE + core_id, dist, _tw_ptr);
-        _in_ptr_real += nPE;
-        _out_ptr += nPE;
+    for (j = 0; j < nbutterfly; j++) {
+        process_butterfly_real_radix2(_in_ptr_real, _out_ptr, j, dist, _tw_ptr);
+        _in_ptr_real++;
+        _out_ptr++;
     } // j
+
     stage = stage + 1;
     dist = dist >> 1;
-    hal_team_barrier();
 
     // STAGES 2 -> n-1
-    while (dist > nPE / 2) {
+    while (dist > 1) {
         step = dist << 1;
         for (j = 0; j < butt; j++) {
-            _out_ptr = (Complex_type_f32 *)&pDst[2 * core_id];
-            for (d = 0; d < dist / nPE; d++) {
-                process_butterfly_radix2(_out_ptr, (d * nPE + core_id) * butt, j * step, dist, _tw_ptr);
-                _out_ptr += nPE;
+            _out_ptr = (Complex_type_f32 *)pDst;
+            for (d = 0; d < dist; d++) {
+                process_butterfly_radix2(_out_ptr, d * butt, j * step, dist, _tw_ptr);
+                _out_ptr++;
             } // d
         } // j
         stage = stage + 1;
         dist = dist >> 1;
         butt = butt << 1;
     }
-    hal_team_barrier();
-
-    while (dist > 1) {
-        step = dist << 1;
-        if(butt<nPE) {
-            if (core_id<butt) {
-                _out_ptr = (Complex_type_f32 *)pDst;
-                for (d = 0; d < dist; d++) {
-                    process_butterfly_radix2(_out_ptr, butt * d, core_id*step, dist, _tw_ptr);
-                    _out_ptr++;
-                } // d
-            }
-        } else {
-            for (j = 0; j < butt/nPE; j++) {
-                _out_ptr = (Complex_type_f32 *)pDst;
-                for (d = 0; d < dist; d++) {
-                    process_butterfly_radix2(_out_ptr, butt * d, (j * nPE + core_id) * step, dist, _tw_ptr);
-                    _out_ptr++;
-                } // d
-            }// j
-        }
-//        for (j = 0; j <  (butt + nPE -1) / nPE; j++) {
-//        //for (j = 0; j < butt / nPE; j++) {
-//            _out_ptr = (Complex_type_f32 *)pDst;
-//            for (d = 0; d < dist; d++) {
-//                process_butterfly_radix2(_out_ptr, butt * d, (j * nPE + core_id) * step, dist, _tw_ptr);
-//                _out_ptr++;
-//            } // d
-//        }     // j
-        stage = stage + 1;
-        dist = dist >> 1;
-        butt = butt << 1;
-        hal_team_barrier();
-    }
 
     // LAST STAGE
-//    _out_ptr = (Complex_type_f32 *)&pDst[4 * core_id];
-//    index = 2 * core_id;
-//    if(core_id ==0 ) {
-//      process_butterfly_last_radix2_full(_out_ptr, (Complex_type_f32 *)pDst, index);
-//      _out_ptr += 2 * nPE;
-//      index += 2 * nPE;
-//      j = 1;
-//    }
-//    else
-//      j = 0;
-//    while (j < S->FFTLength / (2 * nPE)) {
+//    _out_ptr = (Complex_type_f32 *)pDst;
+//    index = 0;
+//    process_butterfly_last_radix2_full(_out_ptr, (Complex_type_f32 *)pDst, index);
+//    _out_ptr += 2;
+//    index   += 2;
+//    for (j = 1; j < (S->FFTLength >> 2); j++) {
 //        process_butterfly_last_radix2_partial(_out_ptr, (Complex_type_f32 *)pDst, index);
-//        _out_ptr += 2 * nPE;
-//        index += 2 * nPE;
-//        j++;
+//        _out_ptr += 2;
+//        index += 2;
 //    } // j
 
-    _out_ptr = (Complex_type_f32 *)&pDst[4 * core_id];
-    index = 2 * core_id;
-    for (j = 0; j < S->FFTLength / (2 * nPE); j++) {
+    //Computes also the simmetric half
+    _out_ptr = (Complex_type_f32 *)pDst;
+    index = 0;
+    for (j = 0; j < (S->FFTLength>>1); j++) {
         process_butterfly_last_radix2_full(_out_ptr, (Complex_type_f32 *)pDst, index);
-        _out_ptr += 2 * nPE;
-        index += 2 * nPE;
+        _out_ptr += 2;
+        index += 2;
     } // j
-    hal_team_barrier();
 
     // ORDER VALUES
     if (S->bitReverseFlag) {
-
         int index1, index2, index3, index4;
         _out_ptr = (Complex_type_f32 *)pDst;
-        for (j = 4 * core_id; j < S->FFTLength; j += nPE * 4) {
+        for (j = 0; j < S->FFTLength; j += 4) {
             if (S->pBitReverseLUT) {
                 unsigned int index12 = *((unsigned int *)(&S->pBitReverseLUT[j]));
                 unsigned int index34 = *((unsigned int *)(&S->pBitReverseLUT[j + 2]));
@@ -229,7 +184,6 @@ void plp_rfft_f32p_xpulpv2(void *arg) {
                 _out_ptr[index4] = temp;
             }
         }
-        hal_team_barrier();
     }
 }
 

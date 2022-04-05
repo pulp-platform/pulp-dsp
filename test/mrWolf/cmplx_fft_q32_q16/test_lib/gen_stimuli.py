@@ -69,18 +69,6 @@ def compute_result(result_parameter, inputs, env, fix_point):
     elif ctype == 'int8_t':
         my_type = np.int8
 
-    elif ctype == 'float':
-        my_type = np.float32
-        a = inputs['p1'].value.astype(my_type)
-        result = np.zeros(len(a), dtype=my_type)
-        complex_a = np.zeros(int(len(a)/2), dtype=np.csingle)
-        complex_result = np.zeros(len(a)>>1, dtype=np.csingle)
-        for i in range(len(a)>>1):
-            complex_a[i] = a[2*i].astype(np.csingle) + (a[2*i + 1].astype(np.csingle))*1j
-        complex_result = np.fft.fft(complex_a)
-
-
-
     else:
         raise RuntimeError("Unrecognized result type: %s" % ctype)
 
