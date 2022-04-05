@@ -47,6 +47,10 @@ extern const int32_t twiddleCoef_1024_q32[1536];
 extern const int32_t twiddleCoef_2048_q32[3072];
 extern const int32_t twiddleCoef_4096_q32[6144];
 
+extern const Complex_type_f32 twiddleCoef_cfft_512[512];
+extern const Complex_type_f32 twiddleCoef_cfft_1024[1024];
+extern const Complex_type_f32 twiddleCoef_cfft_2048[1024];
+
 #define PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH ((uint16_t)12)
 #define PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH ((uint16_t)24)
 #define PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH ((uint16_t)56)
@@ -67,6 +71,10 @@ extern const uint16_t plpBitRevIndexTable_fixed_1024[PLPBITREVINDEXTABLE_FIXED_1
 extern const uint16_t plpBitRevIndexTable_fixed_2048[PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH];
 extern const uint16_t plpBitRevIndexTable_fixed_4096[PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH];
 
+extern const uint16_t plpBitRevIndexTable_float_512[512];
+extern const uint16_t plpBitRevIndexTable_float_1024[1024];
+extern const uint16_t plpBitRevIndexTable_float_2048[2048];
+
 extern const float32_t sinTable_f32[FAST_MATH_TABLE_SIZE + 1];
 extern const int32_t sinTable_q32[FAST_MATH_TABLE_SIZE + 1];
 extern const int16_t sinTable_q16[FAST_MATH_TABLE_SIZE + 1];
@@ -79,6 +87,7 @@ extern const Complex_type_f32 twiddleCoef_rfft_2048[1024];
 extern short bit_rev_radix2_LUT_32[32];
 extern short bit_rev_radix2_LUT_128[128];
 extern short bit_rev_radix2_LUT_512[512];
+extern short bit_rev_radix2_LUT_1024[1024];
 extern short bit_rev_radix2_LUT[2048];
 
 extern const float32_t melFbTable_f32_23[25];

@@ -67,21 +67,21 @@ static inline void process_butterfly_radix8(Complex_type_f32 *input,
 
 static inline void process_butterfly_last_radix8(Complex_type_f32 *input, Complex_type_f32 *output, int outindex);
 
-static void plp_cfft_radix2_f32_xpulpv2(const plp_fft_instance_f32 *S,
+static void plp_cfft_radix2_f32_xpulpv2(const plp_cfft_instance_f32 *S,
                                         const float32_t *pSrc,
                                         float32_t *pDst);
 
-static void plp_cfft_radix4_f32_xpulpv2(const plp_fft_instance_f32 *S,
+static void plp_cfft_radix4_f32_xpulpv2(const plp_cfft_instance_f32 *S,
                                         const float32_t *pSrc,
                                         float32_t *pDst);
 
-static void plp_cfft_radix8_f32_xpulpv2(const plp_fft_instance_f32 *S,
+static void plp_cfft_radix8_f32_xpulpv2(const plp_cfft_instance_f32 *S,
                                         const float32_t *pSrc,
                                         float32_t *pDst);
 
-static void plp_cfft_radix2_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
-static void plp_cfft_radix4_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
-static void plp_cfft_radix8_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
+static void plp_cfft_radix2_f32_xpulpv2_parallel(plp_cfft_instance_f32_parallel *arg);
+static void plp_cfft_radix4_f32_xpulpv2_parallel(plp_cfft_instance_f32_parallel *arg);
+static void plp_cfft_radix8_f32_xpulpv2_parallel(plp_cfft_instance_f32_parallel *arg);
 
 /**
   @ingroup fft
@@ -110,7 +110,7 @@ static void plp_cfft_radix8_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *
    @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_cfft_f32_xpulpv2(const plp_fft_instance_f32 *S,
+void plp_cfft_f32_xpulpv2(const plp_cfft_instance_f32 *S,
                           const float32_t *pSrc,
                           float32_t *pDst) {
     switch(S->FFTLength) {
@@ -131,7 +131,7 @@ void plp_cfft_f32_xpulpv2(const plp_fft_instance_f32 *S,
     }
 }
 
-static void plp_cfft_radix2_f32_xpulpv2(const plp_fft_instance_f32 *S,
+static void plp_cfft_radix2_f32_xpulpv2(const plp_cfft_instance_f32 *S,
                           const float32_t *pSrc,
                           float32_t *pDst) {
 
@@ -228,7 +228,7 @@ static void plp_cfft_radix2_f32_xpulpv2(const plp_fft_instance_f32 *S,
     }
 }
 
-static void plp_cfft_radix4_f32_xpulpv2(const plp_fft_instance_f32 *S,
+static void plp_cfft_radix4_f32_xpulpv2(const plp_cfft_instance_f32 *S,
                                         const float32_t *pSrc,
                                         float32_t *pDst) {
 
@@ -325,7 +325,7 @@ static void plp_cfft_radix4_f32_xpulpv2(const plp_fft_instance_f32 *S,
     }
 }
 
-static void plp_cfft_radix8_f32_xpulpv2(const plp_fft_instance_f32 *S,
+static void plp_cfft_radix8_f32_xpulpv2(const plp_cfft_instance_f32 *S,
                                         const float32_t *pSrc,
                                         float32_t *pDst) {
 
@@ -428,7 +428,7 @@ static void plp_cfft_radix8_f32_xpulpv2(const plp_fft_instance_f32 *S,
    @param[in]   arg      points to an instance of the floating-point FFT structure
    @return      none
 */
-void plp_cfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
+void plp_cfft_f32_xpulpv2_parallel(plp_cfft_instance_f32_parallel *arg) {
     switch(arg->S->FFTLength) {
       case 64:
       case 512:
@@ -447,11 +447,11 @@ void plp_cfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
     }
 }
 
-void plp_cfft_radix2_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
+void plp_cfft_radix2_f32_xpulpv2_parallel(plp_cfft_instance_f32_parallel *arg) {
 
     int k, j, stage, step, d, index;
 
-    plp_fft_instance_f32 *S = arg->S;
+    plp_cfft_instance_f32 *S = arg->S;
     const float32_t *pSrc = arg->pSrc;
     const uint32_t nPE = arg->nPE;
     float32_t *pDst = arg->pDst;
@@ -574,11 +574,11 @@ void plp_cfft_radix2_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
     }
 }
 
-void plp_cfft_radix4_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
+void plp_cfft_radix4_f32_xpulpv2_parallel(plp_cfft_instance_f32_parallel *arg) {
 
     int k, j, stage, step, d, index;
 
-    plp_fft_instance_f32 *S = arg->S;
+    plp_cfft_instance_f32 *S = arg->S;
     const float32_t *pSrc = arg->pSrc;
     const uint32_t nPE = arg->nPE;
     float32_t *pDst = arg->pDst;
@@ -708,9 +708,9 @@ void plp_cfft_radix4_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
     }
 }
 
-void plp_cfft_radix8_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg) {
+void plp_cfft_radix8_f32_xpulpv2_parallel(plp_cfft_instance_f32_parallel *arg) {
   int k, j, stage, step, d, index;
-  plp_fft_instance_f32 *S = arg->S;
+  plp_cfft_instance_f32 *S = arg->S;
   const float32_t *pSrc = arg->pSrc;
   const uint32_t nPE = arg->nPE;
   float32_t *pDst = arg->pDst;
@@ -1184,7 +1184,6 @@ r0   1.0000 + 0.0000i   1.0000 + 0.0000i   1.0000 + 0.0000i   1.0000 + 0.0000i  
 r1   1.0000 + 0.0000i   0.7071 - 0.7071i   0.0000 - 1.0000i  -0.7071 - 0.7071i  -1.0000 - 0.0000i  -0.7071 + 0.7071i   0.0000 + 1.0000i   0.7071 + 0.7071i
 r2   1.0000 + 0.0000i   0.0000 - 1.0000i  -1.0000 - 0.0000i   0.0000 + 1.0000i   1.0000 + 0.0000i   0.0000 - 1.0000i   -1.0000 - 0.0000i  0.0000 + 1.0000i
 r3   1.0000 + 0.0000i  -0.7071 - 0.7071i  -0.0000 + 1.0000i   0.7071 - 0.7071i  -1.0000 - 0.0000i   0.7071 + 0.7071i   0.0000 - 1.0000i  -0.7071 + 0.7071i
-
 r4   1.0000 + 0.0000i  -1.0000 - 0.0000i   1.0000 + 0.0000i  -1.0000 - 0.0000i   1.0000 + 0.0000i  -1.0000 - 0.0000i   1.0000 + 0.0000i  -1.0000 - 0.0000i
 r5   1.0000 + 0.0000i  -0.7071 + 0.7071i   0.0000 - 1.0000i   0.7071 + 0.7071i  -1.0000 - 0.0000i   0.7071 - 0.7071i  -0.0000 + 1.0000i  -0.7071 - 0.7071i
 r6   1.0000 + 0.0000i   0.0000 + 1.0000i  -1.0000 - 0.0000i   0.0000 - 1.0000i   1.0000 + 0.0000i   0.0000 + 1.0000i  -1.0000 - 0.0000i   0.0000 - 1.0000i

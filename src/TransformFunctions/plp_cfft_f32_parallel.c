@@ -54,7 +54,7 @@
    @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_cfft_f32_parallel(const plp_fft_instance_f32 *S,
+void plp_cfft_f32_parallel(const plp_cfft_instance_f32 *S,
                            const float32_t *__restrict__ pSrc,
                            const uint32_t nPE,
                            float32_t *__restrict__ pDst) {
@@ -64,7 +64,7 @@ void plp_cfft_f32_parallel(const plp_fft_instance_f32 *S,
         return;
     }
 
-    plp_fft_instance_f32_parallel arg = (plp_fft_instance_f32_parallel){ S, pSrc, nPE, pDst };
+    plp_cfft_instance_f32_parallel arg = (plp_cfft_instance_f32_parallel){ S, pSrc, nPE, pDst };
 
     hal_cl_team_fork(nPE, plp_cfft_f32_xpulpv2_parallel, (void *)&arg);
 }
