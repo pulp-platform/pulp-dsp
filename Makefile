@@ -781,10 +781,11 @@ CL_SRCS = \
 
 IDIR=$(CURDIR)/include
 PULP_CFLAGS += -I$(IDIR) -O3 -g
+#PULP_LDFLAGS += -lplpdsp -lm
 
 ifeq ($(PULP_RTOS), pmsis)
 # PMSIS rules
-PULP_STATIC_LIB = plpdsp
+PULP_STATIC_LIB = plpdsp -lm
 PULP_CFLAGS += -DRTOS_PMSIS
 PULP_STATIC_LIB_SRCS = $(FC_SRCS) $(CL_SRCS)
 PULP_STATIC_LIB_HEADERS += $(shell find include -name *.h)
