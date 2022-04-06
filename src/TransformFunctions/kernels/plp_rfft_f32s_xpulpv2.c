@@ -90,19 +90,21 @@ void plp_rfft_f32s_xpulpv2(const plp_fft_instance_f32 *S,
     int butt = 2; // number of butterflies in the same group
 
     const float32_t *_in_ptr_real;
+    Complex_type_f32 *_in_ptr;
     Complex_type_f32 *_out_ptr;
     Complex_type_f32 *_tw_ptr;
 
     // FIRST STAGE, input is real
     stage = 1;
+
     _in_ptr_real = pSrc;
-    _out_ptr = (Complex_type_f32 *)pDst;
+    _in_ptr = (Complex_type_f32 *)pDst;
     _tw_ptr = (Complex_type_f32 *)S->pTwiddleFactors;
 
     for (j = 0; j < nbutterfly; j++) {
-        process_butterfly_real_radix2(_in_ptr_real, _out_ptr, j, dist, _tw_ptr);
+        process_butterfly_real_radix2(_in_ptr_real, _in_ptr, j, dist, _tw_ptr);
         _in_ptr_real++;
-        _out_ptr++;
+        _in_ptr++;
     } // j
 
     stage = stage + 1;
@@ -112,10 +114,10 @@ void plp_rfft_f32s_xpulpv2(const plp_fft_instance_f32 *S,
     while (dist > 1) {
         step = dist << 1;
         for (j = 0; j < butt; j++) {
-            _out_ptr = (Complex_type_f32 *)pDst;
+            _in_ptr = (Complex_type_f32 *)pDst;
             for (d = 0; d < dist; d++) {
-                process_butterfly_radix2(_out_ptr, d * butt, j * step, dist, _tw_ptr);
-                _out_ptr++;
+                process_butterfly_radix2(_in_ptr, d * butt, j * step, dist, _tw_ptr);
+                _in_ptr++;
             } // d
         } // j
         stage = stage + 1;
@@ -124,23 +126,14 @@ void plp_rfft_f32s_xpulpv2(const plp_fft_instance_f32 *S,
     }
 
     // LAST STAGE
-//    _out_ptr = (Complex_type_f32 *)pDst;
-//    index = 0;
-//    process_butterfly_last_radix2_full(_out_ptr, (Complex_type_f32 *)pDst, index);
-//    _out_ptr += 2;
-//    index   += 2;
-//    for (j = 1; j < (S->FFTLength >> 2); j++) {
-//        process_butterfly_last_radix2_partial(_out_ptr, (Complex_type_f32 *)pDst, index);
-//        _out_ptr += 2;
-//        index += 2;
-//    } // j
-
-    //Computes also the simmetric half
-    _out_ptr = (Complex_type_f32 *)pDst;
+    _in_ptr = (Complex_type_f32 *)pDst;
     index = 0;
-    for (j = 0; j < (S->FFTLength>>1); j++) {
-        process_butterfly_last_radix2_full(_out_ptr, (Complex_type_f32 *)pDst, index);
-        _out_ptr += 2;
+    process_butterfly_last_radix2_full(_in_ptr, (Complex_type_f32 *)pDst, index);
+    _in_ptr += 2;
+    index   += 2;
+    for (j = 1; j < (S->FFTLength >> 1); j++) {
+        process_butterfly_last_radix2_partial(_in_ptr, (Complex_type_f32 *)pDst, index);
+        _in_ptr += 2;
         index += 2;
     } // j
 
