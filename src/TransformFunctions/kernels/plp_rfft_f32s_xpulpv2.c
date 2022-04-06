@@ -96,7 +96,6 @@ void plp_rfft_f32s_xpulpv2(const plp_fft_instance_f32 *S,
 
     // FIRST STAGE, input is real
     stage = 1;
-
     _in_ptr_real = pSrc;
     _in_ptr = (Complex_type_f32 *)pDst;
     _tw_ptr = (Complex_type_f32 *)S->pTwiddleFactors;
@@ -125,14 +124,23 @@ void plp_rfft_f32s_xpulpv2(const plp_fft_instance_f32 *S,
         butt = butt << 1;
     }
 
-    // LAST STAGE
+//    // LAST STAGE
+//    _in_ptr = (Complex_type_f32 *)pDst;
+//    index = 0;
+//    process_butterfly_last_radix2_full(_in_ptr, (Complex_type_f32 *)pDst, index);
+//    _in_ptr += 2;
+//    index   += 2;
+//    for (j = 1; j < (S->FFTLength >> 1); j++) {
+//        process_butterfly_last_radix2_partial(_in_ptr, (Complex_type_f32 *)pDst, index);
+//        _in_ptr += 2;
+//        index += 2;
+//    } // j
+
+    //Computes also the simmetric half
     _in_ptr = (Complex_type_f32 *)pDst;
     index = 0;
-    process_butterfly_last_radix2_full(_in_ptr, (Complex_type_f32 *)pDst, index);
-    _in_ptr += 2;
-    index   += 2;
-    for (j = 1; j < (S->FFTLength >> 1); j++) {
-        process_butterfly_last_radix2_partial(_in_ptr, (Complex_type_f32 *)pDst, index);
+    for (j = 0; j < (S->FFTLength >> 1); j++) {
+        process_butterfly_last_radix2_full(_in_ptr, (Complex_type_f32 *)pDst, index);
         _in_ptr += 2;
         index += 2;
     } // j
