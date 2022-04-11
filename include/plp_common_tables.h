@@ -82,6 +82,7 @@ extern const int16_t sinTable_q16[FAST_MATH_TABLE_SIZE + 1];
 extern const Complex_type_f32 twiddleCoef_rfft_32[16];
 extern const Complex_type_f32 twiddleCoef_rfft_128[64];
 extern const Complex_type_f32 twiddleCoef_rfft_512[256];
+extern const Complex_type_f32 twiddleCoef_rfft_1024[512];
 extern const Complex_type_f32 twiddleCoef_rfft_2048[1024];
 
 extern short bit_rev_radix2_LUT_32[32];

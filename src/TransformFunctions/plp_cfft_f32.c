@@ -48,21 +48,22 @@
 
 /**
    @brief Floating-point FFT on complex input data.
-   @param[in]   S       points to an instance of the floating-point FFT structure
-   @param[in]   pSrc    points to the input buffer (complex data)
-   @param[out]  pDst    points to the output buffer (complex data)
+   @param[in]   S points to an instance of the floating-point FFT structure
+   @param[in]   pSrc points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
+   @param[in]   ifftFlag flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1)
+   @param[in]   bitReverseFlag flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output.
    @return      none
 */
-void plp_cfft_f32(const plp_cfft_instance_f32 *S,
-                  const float32_t *__restrict__ pSrc,
-                  float32_t *__restrict__ pDst) {
+void plp_cfft_f32(  const plp_cfft_instance_f32 *S,
+                    float32_t *pSrc,
+                    uint8_t ifftFlag,
+                    uint8_t bitReverseFlag) {
 
     if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("F extension is supported only for cluster side\n");
         return;
     }
-
-    plp_cfft_f32s_xpulpv2(S, pSrc, pDst);
+    plp_cfft_f32s_xpulpv2(S, pSrc, ifftFlag, bitReverseFlag);
 }
 
 /**

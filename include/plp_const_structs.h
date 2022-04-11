@@ -55,6 +55,7 @@ extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len2048;
 extern const plp_fft_instance_f32 plp_rfft_sR_f32_len32;
 extern const plp_fft_instance_f32 plp_rfft_sR_f32_len128;
 extern const plp_fft_instance_f32 plp_rfft_sR_f32_len512;
+extern const plp_fft_instance_f32 plp_rfft_sR_f32_len1024;
 extern const plp_fft_instance_f32 plp_rfft_sR_f32_len2048;
 
 extern const plp_triangular_filter_f32 plp_triangular_filter_f32_32;

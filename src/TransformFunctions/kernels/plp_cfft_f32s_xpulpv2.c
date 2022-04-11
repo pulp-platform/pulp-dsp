@@ -67,17 +67,20 @@ static inline void process_butterfly_radix8(Complex_type_f32 *input,
 
 static inline void process_butterfly_last_radix8(Complex_type_f32 *input, Complex_type_f32 *output, int outindex);
 
-static void plp_cfft_radix2_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
-                                        const float32_t *pSrc,
-                                        float32_t *pDst);
+static void plp_cfft_radix2_f32s_xpulpv2(   const plp_cfft_instance_f32 *S,
+                                            const float32_t *pSrc,
+                                            uint8_t ifftFlag,
+                                            uint8_t bitReverseFlag);
 
-static void plp_cfft_radix4_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
-                                        const float32_t *pSrc,
-                                        float32_t *pDst);
+static void plp_cfft_radix4_f32s_xpulpv2(   const plp_cfft_instance_f32 *S,
+                                            const float32_t *pSrc,
+                                            uint8_t ifftFlag,
+                                            uint8_t bitReverseFlag);
 
-static void plp_cfft_radix8_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
-                                        const float32_t *pSrc,
-                                        float32_t *pDst);
+static void plp_cfft_radix8_f32s_xpulpv2(   const plp_cfft_instance_f32 *S,
+                                            const float32_t *pSrc,
+                                            uint8_t ifftFlag,
+                                            uint8_t bitReverseFlag);
 
 /**
   @ingroup fft
@@ -102,40 +105,43 @@ static void plp_cfft_radix8_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
 /**
    @brief  Floating-point FFT on complex input data for XPULPV2 extension.
    @param[in]   S       points to an instance of the floating-point FFT structure
-   @param[in]   pSrc    points to the input buffer (complex data)
-   @param[out]  pDst    points to the output buffer (complex data)
+   @param[in]   pSrc    points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
+   @param[in]   ifftFlag flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1)
+   @param[in]   bitReverseFlag flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output.
    @return      none
 */
 void plp_cfft_f32s_xpulpv2( const plp_cfft_instance_f32 *S,
                             const float32_t *pSrc,
-                            float32_t *pDst) {
-    switch(S->FFTLength) {
+                            uint8_t ifftFlag,
+                            uint8_t bitReverseFlag) {
+    switch(S->fftLen) {
       case 64:
       case 512:
-          plp_cfft_radix8_f32s_xpulpv2(S, pSrc, pDst);
+          plp_cfft_radix8_f32s_xpulpv2(S, pSrc, ifftFlag, bitReverseFlag);
           break;
       case 16:
       case 256:
       case 1024:
-          plp_cfft_radix4_f32s_xpulpv2(S, pSrc, pDst);
+          plp_cfft_radix4_f32s_xpulpv2(S, pSrc, ifftFlag, bitReverseFlag);
           break;
       case 32:
       case 128:
       case 2048:
-          plp_cfft_radix2_f32s_xpulpv2(S, pSrc, pDst);
+          plp_cfft_radix2_f32s_xpulpv2(S, pSrc, ifftFlag, bitReverseFlag);
           break;
     }
 }
 
-static void plp_cfft_radix2_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
-                          const float32_t *pSrc,
-                          float32_t *pDst) {
+static void plp_cfft_radix2_f32s_xpulpv2(   const plp_cfft_instance_f32 *S,
+                                            const float32_t *pSrc,
+                                            uint8_t ifftFlag,
+                                            uint8_t bitReverseFlag) {
 
     int k, j, stage, step, d, index;
 
     Complex_type_f32 temp;
-    int dist = S->FFTLength >> 1;
-    int nbutterfly = S->FFTLength >> 1;
+    int dist = S->fftLen >> 1;
+    int nbutterfly = S->fftLen >> 1;
     int butt = 2; // number of butterflies in the same group
 
     Complex_type_f32 *_in_ptr;
@@ -145,8 +151,8 @@ static void plp_cfft_radix2_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
     // FIRST STAGE
     stage = 1;
     _in_ptr = (Complex_type_f32 *)pSrc;
-    _out_ptr = (Complex_type_f32 *)pDst;
-    _tw_ptr = (Complex_type_f32 *)S->pTwiddleFactors;
+    _out_ptr = (Complex_type_f32 *)pSrc;
+    _tw_ptr = (Complex_type_f32 *)S->pTwiddle;
 
     for (j = 0; j < nbutterfly; j++) {
         process_butterfly_radix2(_in_ptr, _out_ptr, j, 0, dist, _tw_ptr);
@@ -159,10 +165,11 @@ static void plp_cfft_radix2_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
 
     // STAGES 2 -> n-1
     while (dist > 1) {
-        step = dist << 1;
-        for (j = 0; j < butt; j++) {
-            _in_ptr = (Complex_type_f32 *)pDst;
-            for (d = 0; d < dist; d++) {
+
+        step = dist << 1; //identifies the starting point of the new butterfly wing
+        for (j = 0; j < butt; j++) { //this loop loops over the butterflies for layers (1,2,4,8,...)  butt doubles at each layer
+            _in_ptr = (Complex_type_f32 *)pSrc;
+            for (d = 0; d < dist; d++) { //is the index over couples for each butterfly, it can at maximum equal the distance dist between couple elements
                 process_butterfly_radix2(_in_ptr, _in_ptr, d * butt, j * step, dist, _tw_ptr);
                 _in_ptr++;
             } // d
@@ -170,36 +177,39 @@ static void plp_cfft_radix2_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
         stage = stage + 1;
         dist = dist >> 1;
         butt = butt << 1;
+
     }
 
     // LAST STAGE
-    _in_ptr = (Complex_type_f32 *)pDst;
+    _in_ptr = (Complex_type_f32 *)pSrc;
     index = 0;
-    for (j = 0; j < (S->FFTLength >> 1); j++) {
-        process_butterfly_last_radix2(_in_ptr, (Complex_type_f32 *)pDst, index);
+    for (j = 0; j < (S->fftLen >> 1); j++) {
+        process_butterfly_last_radix2(_in_ptr, (Complex_type_f32 *)pSrc, index);
         _in_ptr += 2;
         index += 2;
     } // j
 
     // ORDER VALUES
-    if (S->bitReverseFlag) {
+    if (bitReverseFlag) {
         int index1, index2, index3, index4;
-        _out_ptr = (Complex_type_f32 *)pDst;
-        for (j = 0; j < S->FFTLength; j += 4) {
-            if (S->pBitReverseLUT) {
-                unsigned int index12 = *((unsigned int *)(&S->pBitReverseLUT[j]));
-                unsigned int index34 = *((unsigned int *)(&S->pBitReverseLUT[j + 2]));
-                index1 = index12 & 0x0000FFFF;
-                index2 = index12 >> 16;
-                index3 = index34 & 0x0000FFFF;
-                index4 = index34 >> 16;
+        _out_ptr = (Complex_type_f32 *)pSrc;
+        for (j = 0; j < S->fftLen; j += 4) {
+
+            if (S->pBitRevTable) {
+                unsigned int index12 = *((unsigned int *)(&S->pBitRevTable[j]));
+                unsigned int index34 = *((unsigned int *)(&S->pBitRevTable[j + 2]));
+                index1 = index12 & 0x0000FFFF;  //Takes the 16 LSBs of the first word
+                index2 = index12 >> 16;         //Takes the 16 MSBs of the first word
+                index3 = index34 & 0x0000FFFF;  //Takes the 16 LSBs of the second word
+                index4 = index34 >> 16;         //Takes the 16 LSBs of the second word
             } else {
-                int log2FFTLen = log2(S->FFTLength);
+                int log2FFTLen = log2(S->fftLen);
                 index1 = bit_rev_radix2(j, log2FFTLen);
                 index2 = bit_rev_radix2(j + 1, log2FFTLen);
                 index3 = bit_rev_radix2(j + 2, log2FFTLen);
                 index4 = bit_rev_radix2(j + 3, log2FFTLen);
             }
+
             if (index1 > j) {
                 temp = _out_ptr[j];
                 _out_ptr[j] = _out_ptr[index1];
@@ -220,19 +230,21 @@ static void plp_cfft_radix2_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
                 _out_ptr[j + 3] = _out_ptr[index4];
                 _out_ptr[index4] = temp;
             }
+
         }
     }
 }
 
-static void plp_cfft_radix4_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
-                                        const float32_t *pSrc,
-                                        float32_t *pDst) {
+static void plp_cfft_radix4_f32s_xpulpv2(   const plp_cfft_instance_f32 *S,
+                                            const float32_t *pSrc,
+                                            uint8_t ifftFlag,
+                                            uint8_t bitReverseFlag) {
 
     int k, j, stage, step, d, index;
 
     Complex_type_f32 temp;
-    int dist = S->FFTLength >> 2;
-    int nbutterfly = S->FFTLength >> 2;
+    int dist = S->fftLen >> 2;
+    int nbutterfly = S->fftLen >> 2;
     int butt = 4; // number of butterflies in the same group
 
     Complex_type_f32 *_in_ptr;
@@ -242,8 +254,8 @@ static void plp_cfft_radix4_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
     // FIRST STAGE
     stage = 1;
     _in_ptr = (Complex_type_f32 *)pSrc;
-    _out_ptr = (Complex_type_f32 *)pDst;
-    _tw_ptr = (Complex_type_f32 *)S->pTwiddleFactors;
+    _out_ptr = (Complex_type_f32 *)pSrc;
+    _tw_ptr = (Complex_type_f32 *)S->pTwiddle;
 
     for (j = 0; j < nbutterfly; j++) {
         process_butterfly_radix4(_in_ptr, _out_ptr, j, 0, dist, _tw_ptr);
@@ -258,7 +270,7 @@ static void plp_cfft_radix4_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
     while (dist > 1) {
         step = dist << 2;
         for (j = 0; j < butt; j++) {
-            _in_ptr = (Complex_type_f32 *)pDst;
+            _in_ptr = (Complex_type_f32 *)pSrc;
             for (d = 0; d < dist; d++) {
                 process_butterfly_radix4(_in_ptr, _in_ptr, d * butt, j * step, dist, _tw_ptr);
                 _in_ptr++;
@@ -270,28 +282,28 @@ static void plp_cfft_radix4_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
     }
 
     // LAST STAGE
-    _in_ptr = (Complex_type_f32 *)pDst;
+    _in_ptr = (Complex_type_f32 *)pSrc;
     index = 0;
-    for (j = 0; j < (S->FFTLength >> 2); j++) {
-        process_butterfly_last_radix4(_in_ptr, (Complex_type_f32 *)pDst, index);
+    for (j = 0; j < (S->fftLen >> 2); j++) {
+        process_butterfly_last_radix4(_in_ptr, (Complex_type_f32 *)pSrc, index);
         _in_ptr += 4;
         index += 4;
     } // j
 
     // ORDER VALUES
-    if (S->bitReverseFlag) {
+    if (bitReverseFlag) {
           int index1, index2, index3, index4;
-        _out_ptr = (Complex_type_f32 *)pDst;
-        for (j = 0; j < S->FFTLength; j += 4) {
-            if (S->pBitReverseLUT) {
-                unsigned int index12 = *((unsigned int *)(&S->pBitReverseLUT[j]));
-                unsigned int index34 = *((unsigned int *)(&S->pBitReverseLUT[j + 2]));
+        _out_ptr = (Complex_type_f32 *)pSrc;
+        for (j = 0; j < S->fftLen; j += 4) {
+            if (S->pBitRevTable) {
+                unsigned int index12 = *((unsigned int *)(&S->pBitRevTable[j]));
+                unsigned int index34 = *((unsigned int *)(&S->pBitRevTable[j + 2]));
                 index1 = index12 & 0x0000FFFF;
                 index2 = index12 >> 16;
                 index3 = index34 & 0x0000FFFF;
                 index4 = index34 >> 16;
             } else {
-                int log2FFTLen = log2(S->FFTLength);
+                int log2FFTLen = log2(S->fftLen);
                 index1 = bit_rev_radix4(j, log2FFTLen);
                 index2 = bit_rev_radix4(j + 1, log2FFTLen);
                 index3 = bit_rev_radix4(j + 2, log2FFTLen);
@@ -321,15 +333,16 @@ static void plp_cfft_radix4_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
     }
 }
 
-static void plp_cfft_radix8_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
-                                        const float32_t *pSrc,
-                                        float32_t *pDst) {
+static void plp_cfft_radix8_f32s_xpulpv2(   const plp_cfft_instance_f32 *S,
+                                            const float32_t *pSrc,
+                                            uint8_t ifftFlag,
+                                            uint8_t bitReverseFlag) {
 
     int k, j, stage, step, d, index;
 
     Complex_type_f32 temp;
-    int dist = S->FFTLength >> 3;
-    int nbutterfly = S->FFTLength >> 3;
+    int dist = S->fftLen >> 3;
+    int nbutterfly = S->fftLen >> 3;
     int butt = 8; // number of butterflies in the same group
 
     Complex_type_f32 *_in_ptr;
@@ -339,8 +352,8 @@ static void plp_cfft_radix8_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
     // FIRST STAGE
     stage = 1;
     _in_ptr = (Complex_type_f32 *)pSrc;
-    _out_ptr = (Complex_type_f32 *)pDst;
-    _tw_ptr = (Complex_type_f32 *)S->pTwiddleFactors;
+    _out_ptr = (Complex_type_f32 *)pSrc;
+    _tw_ptr = (Complex_type_f32 *)S->pTwiddle;
 
     for (j = 0; j < nbutterfly; j++) {
         process_butterfly_radix8(_in_ptr, _out_ptr, j, 0, dist, _tw_ptr);
@@ -355,7 +368,7 @@ static void plp_cfft_radix8_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
     while (dist > 1) {
         step = dist << 3;
         for (j = 0; j < butt; j++) {
-            _in_ptr = (Complex_type_f32 *)pDst;
+            _in_ptr = (Complex_type_f32 *)pSrc;
             for (d = 0; d < dist; d++) {
                 process_butterfly_radix8(_in_ptr, _in_ptr, d * butt, j * step, dist, _tw_ptr);
                 _in_ptr++;
@@ -367,28 +380,28 @@ static void plp_cfft_radix8_f32s_xpulpv2(const plp_cfft_instance_f32 *S,
     }
 
     // LAST STAGE
-    _in_ptr = (Complex_type_f32 *)pDst;
+    _in_ptr = (Complex_type_f32 *)pSrc;
     index = 0;
-    for (j = 0; j < (S->FFTLength >> 3); j++) {
-        process_butterfly_last_radix8(_in_ptr, (Complex_type_f32 *)pDst, index);
+    for (j = 0; j < (S->fftLen >> 3); j++) {
+        process_butterfly_last_radix8(_in_ptr, (Complex_type_f32 *)pSrc, index);
         _in_ptr += 8;
         index += 8;
     } // j
 
     // ORDER VALUES
-    if (S->bitReverseFlag) {
+    if (bitReverseFlag) {
         int index1, index2, index3, index4;
-        _out_ptr = (Complex_type_f32 *)pDst;
-        for (j = 0; j < S->FFTLength; j += 4) {
-            if (S->pBitReverseLUT) {
-                unsigned int index12 = *((unsigned int *)(&S->pBitReverseLUT[j]));
-                unsigned int index34 = *((unsigned int *)(&S->pBitReverseLUT[j + 2]));
+        _out_ptr = (Complex_type_f32 *)pSrc;
+        for (j = 0; j < S->fftLen; j += 4) {
+            if (bitReverseFlag) {
+                unsigned int index12 = *((unsigned int *)(&S->pBitRevTable[j]));
+                unsigned int index34 = *((unsigned int *)(&S->pBitRevTable[j + 2]));
                 index1 = index12 & 0x0000FFFF;
                 index2 = index12 >> 16;
                 index3 = index34 & 0x0000FFFF;
                 index4 = index34 >> 16;
             } else {
-                int log2FFTLen = log2(S->FFTLength);
+                int log2FFTLen = log2(S->fftLen);
                 index1 = bit_rev_radix8(j, log2FFTLen);
                 index2 = bit_rev_radix8(j + 1, log2FFTLen);
                 index3 = bit_rev_radix8(j + 2, log2FFTLen);

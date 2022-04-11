@@ -97,7 +97,7 @@ static void plp_cfft_radix8_f32p_xpulpv2(void *arg);
    @return      none
 */
 void plp_cfft_f32p_xpulpv2(void *arg) {
-    switch( (((plp_cfft_instance_f32_parallel*)arg)->S)->FFTLength  ) {
+    switch( (((plp_cfft_instance_f32_parallel*)arg)->S)->fftLen  ) {
       case 64:
       case 512:
           plp_cfft_radix8_f32p_xpulpv2(arg);
@@ -121,12 +121,13 @@ void plp_cfft_radix2_f32p_xpulpv2(void *arg) {
 
     plp_cfft_instance_f32 *S = ((plp_cfft_instance_f32_parallel*)arg)->S;
     const float32_t *pSrc = ((plp_cfft_instance_f32_parallel*)arg)->pSrc;
+    const uint32_t ifftFlag = ((plp_cfft_instance_f32_parallel*)arg)->ifftFlag;
+    const uint32_t bitReverseFlag = ((plp_cfft_instance_f32_parallel*)arg)->bitReverseFlag;
     const uint32_t nPE = ((plp_cfft_instance_f32_parallel*)arg)->nPE;
-    float32_t *pDst = ((plp_cfft_instance_f32_parallel*)arg)->pDst;
 
     Complex_type_f32 temp;
-    int dist = S->FFTLength >> 1;
-    int nbutterfly = S->FFTLength >> 1;
+    int dist = S->fftLen >> 1;
+    int nbutterfly = S->fftLen >> 1;
     int butt = 2; // number of butterflies in the same group
 
     Complex_type_f32 *_in_ptr;
@@ -138,8 +139,8 @@ void plp_cfft_radix2_f32p_xpulpv2(void *arg) {
     // FIRST STAGE
     stage = 1;
     _in_ptr = (Complex_type_f32 *)&pSrc[2 * core_id];
-    _out_ptr = (Complex_type_f32 *)&pDst[2 * core_id];
-    _tw_ptr = (Complex_type_f32 *)S->pTwiddleFactors;
+    _out_ptr = (Complex_type_f32 *)&pSrc[2 * core_id];
+    _tw_ptr = (Complex_type_f32 *)S->pTwiddle;
 
     for (j = 0; j < nbutterfly / nPE; j++) {
         process_butterfly_radix2(_in_ptr, _out_ptr, j * nPE + core_id, 0, dist, _tw_ptr);
@@ -151,31 +152,36 @@ void plp_cfft_radix2_f32p_xpulpv2(void *arg) {
     dist = dist >> 1;
 
     // STAGES 2 -> n-1
+    // As long as the number of processing elements is larger than the distance between couples 
+    // the processing elements operate on multiple couples in parallel and are shifted across 
+    // different butterflies
     while (dist > nPE / 2) {
-        hal_team_barrier();
-        step = dist << 1;
+
+        hal_team_barrier();     // At every new stage I wait for all the cores
+        step = dist << 1;       // The distance between elements of couples is half of the step between corresponding couples in different butterflies
         for (j = 0; j < butt; j++) {
-            _in_ptr = (Complex_type_f32 *)&pDst[2 * core_id];
+
+            _in_ptr = (Complex_type_f32 *)&pSrc[2 * core_id]; //Takes a factor two because they are complex numbers
             for (d = 0; d < dist / nPE; d++) {
-                process_butterfly_radix2(_in_ptr, _in_ptr, (d * nPE + core_id) * butt, j * step, dist,
-                                         _tw_ptr);
+                process_butterfly_radix2(_in_ptr, _in_ptr, (d * nPE + core_id) * butt, j * step, dist, _tw_ptr);
                 _in_ptr += nPE;
             } // d
+
         }     // j
         stage = stage + 1;
         dist = dist >> 1;
         butt = butt << 1;
+
     }
 
+    // The butterflies are divided between the processing elements
     while (dist > 1) {
         hal_team_barrier();
         step = dist << 1;
         for (j = 0; j < butt / nPE; j++) {
-            _in_ptr = _in_ptr = (Complex_type_f32 *)pDst;
-            ;
+            _in_ptr = (Complex_type_f32 *)pSrc;
             for (d = 0; d < dist; d++) {
-                process_butterfly_radix2(_in_ptr, _in_ptr, butt * d, (j * nPE + core_id) * step, dist,
-                                         _tw_ptr);
+                process_butterfly_radix2(_in_ptr, _in_ptr, butt * d, (j * nPE + core_id) * step, dist, _tw_ptr);
                 _in_ptr++;
             } // d
         }     // j
@@ -187,10 +193,10 @@ void plp_cfft_radix2_f32p_xpulpv2(void *arg) {
     hal_team_barrier();
 
     // LAST STAGE
-    _in_ptr = (Complex_type_f32 *)&pDst[4 * core_id];
+    _in_ptr = (Complex_type_f32 *)&pSrc[4 * core_id];
     index = 2 * core_id;
-    for (j = 0; j < S->FFTLength / (2 * nPE); j++) {
-        process_butterfly_last_radix2(_in_ptr, (Complex_type_f32 *)pDst, index);
+    for (j = 0; j < S->fftLen / (2 * nPE); j++) {
+        process_butterfly_last_radix2(_in_ptr, (Complex_type_f32 *)pSrc, index);
         _in_ptr += 2 * nPE;
         index += 2 * nPE;
     } // j
@@ -198,20 +204,20 @@ void plp_cfft_radix2_f32p_xpulpv2(void *arg) {
     hal_team_barrier();
 
     // ORDER VALUES
-    if (S->bitReverseFlag) {
+    if (bitReverseFlag) {
 
         int index1, index2, index3, index4;
-        _out_ptr = (Complex_type_f32 *)pDst;
-        for (j = 4 * core_id; j < S->FFTLength; j += nPE * 4) {
-            if (S->pBitReverseLUT) {
-                unsigned int index12 = *((unsigned int *)(&S->pBitReverseLUT[j]));
-                unsigned int index34 = *((unsigned int *)(&S->pBitReverseLUT[j + 2]));
+        _out_ptr = (Complex_type_f32 *)pSrc;
+        for (j = 4 * core_id; j < S->fftLen; j += nPE * 4) {
+            if (S->pBitRevTable) {
+                unsigned int index12 = *((unsigned int *)(&S->pBitRevTable[j]));
+                unsigned int index34 = *((unsigned int *)(&S->pBitRevTable[j + 2]));
                 index1 = index12 & 0x0000FFFF;
                 index2 = index12 >> 16;
                 index3 = index34 & 0x0000FFFF;
                 index4 = index34 >> 16;
             } else {
-                int log2FFTLen = log2(S->FFTLength);
+                int log2FFTLen = log2(S->fftLen);
                 index1 = bit_rev_radix2(j, log2FFTLen);
                 index2 = bit_rev_radix2(j + 1, log2FFTLen);
                 index3 = bit_rev_radix2(j + 2, log2FFTLen);
@@ -248,12 +254,13 @@ void plp_cfft_radix4_f32p_xpulpv2(void *arg) {
 
     plp_cfft_instance_f32 *S = ((plp_cfft_instance_f32_parallel*)arg)->S;
     const float32_t *pSrc = ((plp_cfft_instance_f32_parallel*)arg)->pSrc;
+    const uint32_t ifftFlag = ((plp_cfft_instance_f32_parallel*)arg)->ifftFlag;
+    const uint32_t bitReverseFlag = ((plp_cfft_instance_f32_parallel*)arg)->bitReverseFlag;
     const uint32_t nPE = ((plp_cfft_instance_f32_parallel*)arg)->nPE;
-    float32_t *pDst = ((plp_cfft_instance_f32_parallel*)arg)->pDst;
 
     Complex_type_f32 temp;
-    int dist = S->FFTLength >> 2;
-    int nbutterfly = S->FFTLength >> 2;
+    int dist = S->fftLen >> 2;
+    int nbutterfly = S->fftLen >> 2;
     int butt = 4; // number of butterflies in the same group
 
     Complex_type_f32 *_in_ptr;
@@ -265,8 +272,8 @@ void plp_cfft_radix4_f32p_xpulpv2(void *arg) {
     // FIRST STAGE
     stage = 1;
     _in_ptr = (Complex_type_f32 *)&pSrc[2 * core_id];
-    _out_ptr = (Complex_type_f32 *)&pDst[2 * core_id];
-    _tw_ptr = (Complex_type_f32 *)S->pTwiddleFactors;
+    _out_ptr = (Complex_type_f32 *)&pSrc[2 * core_id];
+    _tw_ptr = (Complex_type_f32 *)S->pTwiddle;
 
     int first_steps = nbutterfly / nPE;
     if (first_steps == 0) {
@@ -287,7 +294,7 @@ void plp_cfft_radix4_f32p_xpulpv2(void *arg) {
         hal_team_barrier();
         step = dist << 2;
         for (j = 0; j < butt; j++) {
-            _in_ptr = (Complex_type_f32 *)&pDst[2 * core_id];
+            _in_ptr = (Complex_type_f32 *)&pSrc[2 * core_id];
             for (d = 0; d < dist / nPE; d++) {
                 process_butterfly_radix4(_in_ptr, _in_ptr, (d * nPE + core_id) * butt, j * step, dist, _tw_ptr);
                 _in_ptr += nPE;
@@ -302,7 +309,7 @@ void plp_cfft_radix4_f32p_xpulpv2(void *arg) {
         hal_team_barrier();
         step = dist << 2;
         for (j = 0; j < butt / nPE; j++) {
-            _in_ptr = (Complex_type_f32 *)pDst;
+            _in_ptr = (Complex_type_f32 *)pSrc;
             for (d = 0; d < dist; d++) {
                 process_butterfly_radix4(_in_ptr, _in_ptr, butt * d, (j * nPE + core_id) * step, dist, _tw_ptr);
                 _in_ptr++;
@@ -316,15 +323,15 @@ void plp_cfft_radix4_f32p_xpulpv2(void *arg) {
     hal_team_barrier();
 
     // LAST STAGE
-    _in_ptr = (Complex_type_f32 *)&pDst[8 * core_id];
+    _in_ptr = (Complex_type_f32 *)&pSrc[8 * core_id];
     index = 4 * core_id;
-    int last_steps = S->FFTLength / (4 * nPE);
+    int last_steps = S->fftLen / (4 * nPE);
     if (last_steps == 0) {
       // Fix for case FFTLen == 16 && nPE > 4      
       last_steps = (core_id < 4)? 1: 0;
     }
     for (j = 0; j < last_steps; j++) {
-        process_butterfly_last_radix4(_in_ptr, (Complex_type_f32 *)pDst, index);
+        process_butterfly_last_radix4(_in_ptr, (Complex_type_f32 *)pSrc, index);
         _in_ptr += 4 * nPE;
         index += 4 * nPE;
     } // j
@@ -332,20 +339,20 @@ void plp_cfft_radix4_f32p_xpulpv2(void *arg) {
     hal_team_barrier();
 
     // ORDER VALUES
-    if (S->bitReverseFlag) {
+    if (bitReverseFlag) {
 
         int index1, index2, index3, index4;
-        _out_ptr = (Complex_type_f32 *)pDst;
-        for (j = 4 * core_id; j < S->FFTLength; j += nPE * 4) {
-            if (S->pBitReverseLUT) {
-                unsigned int index12 = *((unsigned int *)(&S->pBitReverseLUT[j]));
-                unsigned int index34 = *((unsigned int *)(&S->pBitReverseLUT[j + 2]));
+        _out_ptr = (Complex_type_f32 *)pSrc;
+        for (j = 4 * core_id; j < S->fftLen; j += nPE * 4) {
+            if (bitReverseFlag) {
+                unsigned int index12 = *((unsigned int *)(&S->pBitRevTable[j]));
+                unsigned int index34 = *((unsigned int *)(&S->pBitRevTable[j + 2]));
                 index1 = index12 & 0x0000FFFF;
                 index2 = index12 >> 16;
                 index3 = index34 & 0x0000FFFF;
                 index4 = index34 >> 16;
             } else {
-                int log2FFTLen = log2(S->FFTLength);
+                int log2FFTLen = log2(S->fftLen);
                 index1 = bit_rev_radix4(j, log2FFTLen);
                 index2 = bit_rev_radix4(j + 1, log2FFTLen);
                 index3 = bit_rev_radix4(j + 2, log2FFTLen);
@@ -380,12 +387,13 @@ void plp_cfft_radix8_f32p_xpulpv2(void *arg) {
   int k, j, stage, step, d, index;
   plp_cfft_instance_f32 *S = ((plp_cfft_instance_f32_parallel*)arg)->S;
   const float32_t *pSrc = ((plp_cfft_instance_f32_parallel*)arg)->pSrc;
+  const uint32_t ifftFlag = ((plp_cfft_instance_f32_parallel*)arg)->ifftFlag;
+  const uint32_t bitReverseFlag = ((plp_cfft_instance_f32_parallel*)arg)->bitReverseFlag;
   const uint32_t nPE = ((plp_cfft_instance_f32_parallel*)arg)->nPE;
-  float32_t *pDst = ((plp_cfft_instance_f32_parallel*)arg)->pDst;
 
   Complex_type_f32 temp;
-  int dist = S->FFTLength >> 3;
-  int nbutterfly = S->FFTLength >> 3;
+  int dist = S->fftLen >> 3;
+  int nbutterfly = S->fftLen >> 3;
   int butt = 8; // number of butterflies in the same group
 
   Complex_type_f32 *_in_ptr;
@@ -397,8 +405,8 @@ void plp_cfft_radix8_f32p_xpulpv2(void *arg) {
   // FIRST STAGE
   stage = 1;
   _in_ptr = (Complex_type_f32 *)&pSrc[2 * core_id];
-  _out_ptr = (Complex_type_f32 *)&pDst[2 * core_id];
-  _tw_ptr = (Complex_type_f32 *)S->pTwiddleFactors;
+  _out_ptr = (Complex_type_f32 *)&pSrc[2 * core_id];
+  _tw_ptr = (Complex_type_f32 *)S->pTwiddle;
 
   for (j = 0; j < nbutterfly / nPE; j++) {
       process_butterfly_radix8(_in_ptr, _out_ptr, j * nPE + core_id, 0, dist, _tw_ptr);
@@ -414,7 +422,7 @@ void plp_cfft_radix8_f32p_xpulpv2(void *arg) {
       hal_team_barrier();
       step = dist << 3;
       for (j = 0; j < butt; j++) {
-          _in_ptr = (Complex_type_f32 *)&pDst[2 * core_id];
+          _in_ptr = (Complex_type_f32 *)&pSrc[2 * core_id];
           for (d = 0; d < dist / nPE; d++) {
               process_butterfly_radix8(_in_ptr, _in_ptr, (d * nPE + core_id) * butt, j * step, dist,
                                        _tw_ptr);
@@ -430,7 +438,7 @@ void plp_cfft_radix8_f32p_xpulpv2(void *arg) {
       hal_team_barrier();
       step = dist << 3;
       for (j = 0; j < butt / nPE; j++) {
-          _in_ptr = _in_ptr = (Complex_type_f32 *)pDst;
+          _in_ptr = _in_ptr = (Complex_type_f32 *)pSrc;
           ;
           for (d = 0; d < dist; d++) {
               process_butterfly_radix8(_in_ptr, _in_ptr, butt * d, (j * nPE + core_id) * step, dist,
@@ -446,10 +454,10 @@ void plp_cfft_radix8_f32p_xpulpv2(void *arg) {
   hal_team_barrier();
 
   // LAST STAGE
-  _in_ptr = (Complex_type_f32 *)&pDst[16 * core_id];
+  _in_ptr = (Complex_type_f32 *)&pSrc[16 * core_id];
   index = 8 * core_id;
-  for (j = 0; j < S->FFTLength / (8 * nPE); j++) {
-      process_butterfly_last_radix8(_in_ptr, (Complex_type_f32 *)pDst, index);
+  for (j = 0; j < S->fftLen / (8 * nPE); j++) {
+      process_butterfly_last_radix8(_in_ptr, (Complex_type_f32 *)pSrc, index);
       _in_ptr += 8 * nPE;
       index += 8 * nPE;
   } // j
@@ -457,20 +465,20 @@ void plp_cfft_radix8_f32p_xpulpv2(void *arg) {
   hal_team_barrier();
 
   // ORDER VALUES
-  if (S->bitReverseFlag) {
+  if (bitReverseFlag) {
 
       int index1, index2, index3, index4;
-      _out_ptr = (Complex_type_f32 *)pDst;
-      for (j = 4 * core_id; j < S->FFTLength; j += nPE * 4) {
-          if (S->pBitReverseLUT) {
-              unsigned int index12 = *((unsigned int *)(&S->pBitReverseLUT[j]));
-              unsigned int index34 = *((unsigned int *)(&S->pBitReverseLUT[j + 2]));
+      _out_ptr = (Complex_type_f32 *)pSrc;
+      for (j = 4 * core_id; j < S->fftLen; j += nPE * 4) {
+          if (S->pBitRevTable) {
+              unsigned int index12 = *((unsigned int *)(&S->pBitRevTable[j]));
+              unsigned int index34 = *((unsigned int *)(&S->pBitRevTable[j + 2]));
               index1 = index12 & 0x0000FFFF;
               index2 = index12 >> 16;
               index3 = index34 & 0x0000FFFF;
               index4 = index34 >> 16;
           } else {
-              int log2FFTLen = log2(S->FFTLength);
+              int log2FFTLen = log2(S->fftLen);
               index1 = bit_rev_radix8(j, log2FFTLen);
               index2 = bit_rev_radix8(j + 1, log2FFTLen);
               index3 = bit_rev_radix8(j + 2, log2FFTLen);

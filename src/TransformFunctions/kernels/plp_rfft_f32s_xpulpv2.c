@@ -145,11 +145,21 @@ void plp_rfft_f32s_xpulpv2(const plp_fft_instance_f32 *S,
         index += 2;
     } // j
 
+    /* //Computes also the simmetric half
+    _in_ptr = (Complex_type_f32 *)pDst;
+    index = 0;
+    for (j = 0; j < (S->FFTLength >> 1); j++) {
+        process_butterfly_last_radix2_full(_in_ptr, (Complex_type_f32 *)pDst, index);
+        _in_ptr += 2;
+        index += 2;
+    } // j*/
+
     // ORDER VALUES
     if (S->bitReverseFlag) {
         int index1, index2, index3, index4;
         _out_ptr = (Complex_type_f32 *)pDst;
         for (j = 0; j < S->FFTLength; j += 4) {
+
             if (S->pBitReverseLUT) {
                 unsigned int index12 = *((unsigned int *)(&S->pBitReverseLUT[j]));
                 unsigned int index34 = *((unsigned int *)(&S->pBitReverseLUT[j + 2]));
@@ -164,6 +174,7 @@ void plp_rfft_f32s_xpulpv2(const plp_fft_instance_f32 *S,
                 index3 = bit_rev_radix2(j + 2, log2FFTLen);
                 index4 = bit_rev_radix2(j + 3, log2FFTLen);
             }
+
             if (index1 > j) {
                 temp = _out_ptr[j];
                 _out_ptr[j] = _out_ptr[index1];
