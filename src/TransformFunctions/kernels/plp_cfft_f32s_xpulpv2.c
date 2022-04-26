@@ -155,9 +155,8 @@ static void plp_cfft_radix2_f32s_xpulpv2(   const plp_cfft_instance_f32 *S,
     _tw_ptr = (Complex_type_f32 *)S->pTwiddle;
 
     for (j = 0; j < nbutterfly; j++) {
-        process_butterfly_radix2(_in_ptr, _out_ptr, j, 0, dist, _tw_ptr);
+        process_butterfly_radix2(_in_ptr, _in_ptr, j, 0, dist, _tw_ptr);
         _in_ptr++;
-        _out_ptr++;
     } // j
 
     stage = stage + 1;
@@ -165,7 +164,6 @@ static void plp_cfft_radix2_f32s_xpulpv2(   const plp_cfft_instance_f32 *S,
 
     // STAGES 2 -> n-1
     while (dist > 1) {
-
         step = dist << 1; //identifies the starting point of the new butterfly wing
         for (j = 0; j < butt; j++) { //this loop loops over the butterflies for layers (1,2,4,8,...)  butt doubles at each layer
             _in_ptr = (Complex_type_f32 *)pSrc;
@@ -177,7 +175,6 @@ static void plp_cfft_radix2_f32s_xpulpv2(   const plp_cfft_instance_f32 *S,
         stage = stage + 1;
         dist = dist >> 1;
         butt = butt << 1;
-
     }
 
     // LAST STAGE

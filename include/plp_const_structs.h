@@ -28,6 +28,8 @@
 #include "plp_common_tables.h"
 #include "plp_math.h"
 
+/* Fixed-point cfft */
+
 extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len16;
 extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len32;
 extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len64;
@@ -48,18 +50,42 @@ extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len1024;
 extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len2048;
 extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len4096;
 
+/* Floating-point cfft */
+
+extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len16;
+extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len32;
+extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len64;
+extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len128;
+extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len256;
 extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len512;
 extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len1024;
 extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len2048;
 
+/* Floating-point rfft */
+
+extern const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len16;
+extern const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len64;
+extern const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len128;
+extern const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len256;
+extern const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len512;
+extern const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len1024;
+extern const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len32;
+extern const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len64;
+extern const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len128;
+extern const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len256;
+extern const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len512;
+extern const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len1024;
+extern const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len2048;
+
 extern const plp_fft_instance_f32 plp_rfft_sR_f32_len32;
+extern const plp_fft_instance_f32 plp_rfft_sR_f32_len64;
 extern const plp_fft_instance_f32 plp_rfft_sR_f32_len128;
+extern const plp_fft_instance_f32 plp_rfft_sR_f32_len256;
 extern const plp_fft_instance_f32 plp_rfft_sR_f32_len512;
 extern const plp_fft_instance_f32 plp_rfft_sR_f32_len1024;
 extern const plp_fft_instance_f32 plp_rfft_sR_f32_len2048;
 
 extern const plp_triangular_filter_f32 plp_triangular_filter_f32_32;
-
 
 extern const plp_dwt_wavelet_f32 PLP_DWT_COIF1_f32;
 extern const plp_dwt_wavelet_f32 PLP_DWT_COIF2_f32;

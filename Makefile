@@ -159,6 +159,8 @@ FC_SRCS = \
 	src/TransformFunctions/plp_cfft_q32.c src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c \
 	src/TransformFunctions/plp_rfft_f32.c \
 	src/TransformFunctions/plp_rfft_f32_parallel.c \
+	src/TransformFunctions/plp_rfftfast_f32.c \
+	src/TransformFunctions/plp_rfftfast_f32_parallel.c \
 	src/TransformFunctions/plp_cfft_f32.c \
     src/TransformFunctions/plp_cfft_f32_parallel.c \
 	src/TransformFunctions/plp_dct2_f32.c \
@@ -562,6 +564,8 @@ CL_SRCS = \
 	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_q8p_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_f32s_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_f32p_xpulpv2.c \
+		src/TransformFunctions/kernels/plp_rfftfast_f32s_xpulpv2.c \
+		src/TransformFunctions/kernels/plp_rfftfast_f32p_xpulpv2.c \
         src/TransformFunctions/kernels/plp_rfft_f32s_xpulpv2.c \
         src/TransformFunctions/kernels/plp_rfft_f32p_xpulpv2.c \
         src/TransformFunctions/kernels/plp_cfft_f32s_xpulpv2.c \

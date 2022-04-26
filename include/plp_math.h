@@ -378,6 +378,48 @@ typedef struct {
 } plp_fft_instance_f32;
 
 /** -------------------------------------------------------
+    @struct plp_fft_fast_instance_f32
+    @brief Instance structure for floating-point FFT
+    @param[in]  Internal CFFT structure
+    @param[in]  length data length of the real sequence
+    @param[in]  pTwiddleFactorsRFFT pointer to the twiddle factors.
+    These values must be computed using this formula:
+    \f$W_N^k =   e^{-j \frac{\pi}{N} k}\f$,
+    where \f$N\f$ is the data length and \f$k\f$ is the index.
+    The user must provide \f$\frac{N}{2}\f$ values (\f$k = 0 .. \frac{N}{2}-1\f$).
+    @param[in]  pBitReverseLUT  pointer to the lookup table used for the bit reversal of output.
+    This table must include \f$N\f$ elements in the range \f$0 .. N-1\f$,
+    where each location \f$k\f$ contains the value \f$bitreverse(k)\f$.
+*/
+typedef struct {
+    plp_cfft_instance_f32 *Sint;
+    uint32_t FFTLengthRFFT;
+    const float32_t *pTwiddleFactorsRFFT;
+} plp_fft_fast_instance_f32;
+
+/** -------------------------------------------------------
+    @struct plp_fft_fast_instance_f32_parallel
+    @brief Instance structure for floating-point FFT
+    @param[in]  Internal CFFT structure
+    @param[in]  length data length of the real sequence
+    @param[in]  pTwiddleFactorsRFFT pointer to the twiddle factors.
+    These values must be computed using this formula:
+    \f$W_N^k =   e^{-j \frac{\pi}{N} k}\f$,
+    where \f$N\f$ is the data length and \f$k\f$ is the index.
+    The user must provide \f$\frac{N}{2}\f$ values (\f$k = 0 .. \frac{N}{2}-1\f$).
+    @param[in]  pBitReverseLUT  pointer to the lookup table used for the bit reversal of output.
+    This table must include \f$N\f$ elements in the range \f$0 .. N-1\f$,
+    where each location \f$k\f$ contains the value \f$bitreverse(k)\f$.
+*/
+typedef struct {
+    plp_fft_fast_instance_f32* S;
+    float32_t *__restrict__ pSrc;
+    float32_t *__restrict__ pDst;
+    const uint32_t nPE;
+} plp_fft_fast_instance_f32_parallel;
+
+
+/** -------------------------------------------------------
     @struct plp_fft_instance_f32_parallel
     @brief Instance structure for floating-point FFT (parallel version)
     @param[in]  S         pointer to a plp_fft_instance_f32 data structure (FFT parameters)
@@ -8679,6 +8721,51 @@ void plp_rfft_f32s_xpulpv2(const plp_fft_instance_f32 *S,
    @return      none
 */
 void plp_rfft_f32p_xpulpv2(void *arg);
+
+
+
+
+
+/**
+   @brief Floating-point FFT on real input data.
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrc    points to the input buffer (real data)
+   @param[out]  pDst    points to the output buffer (complex data)
+   @return      none
+*/
+void plp_rfftfast_f32( const plp_fft_fast_instance_f32 *S,
+                        const float32_t *__restrict__ pSrc,
+                        float32_t *__restrict__ pDst);
+
+/**
+   @brief Floating-point parallel FFT on real input data.
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrc    points to the input buffer (real data)
+   @param[out]  pDst    points to the output buffer (complex data)
+   @return      none
+*/
+void plp_rfftfast_f32_parallel( const plp_fft_fast_instance_f32 *S,
+                                 float32_t *__restrict__ pSrc,
+                                 float32_t *__restrict__ pDst,
+                                 const uint32_t nPE);
+
+/**
+   @brief  Floating-point FFT on real input data for XPULPV2 extension.
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrcA   points to the input buffer (real data)
+   @param[out]  pDst    points to the output buffer (complex data)
+   @return      none
+*/
+void plp_rfftfast_f32s_xpulpv2( const plp_fft_fast_instance_f32 *S,
+                                 float32_t *pSrc,
+                                 float32_t *pDst);
+
+/**
+   @brief  Floating-point parallel FFT on real input data for XPULPV2 extension.
+   @param[in]   arg       points to an instance of the floating-point FFT structure
+   @return      none
+*/
+void plp_rfftfast_f32p_xpulpv2( void *arg );
 
 /**
    @brief Floating-point FFT on complex input data.

@@ -34,6 +34,9 @@ static HAL_CL_L1 float32_t ROT_CONST = 0.707106781f;
 
 /* HELPER FUNCTIONS */
 
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
+#define MIN(x, y) (((x) < (y)) ? (x) : (y))
+
 int bit_rev_radix2(int index, int log2FFTLen);
 int bit_rev_radix4(int index, int log2FFTLen);
 int bit_rev_radix8(int index, int log2FFTLen);
@@ -142,7 +145,7 @@ void plp_cfft_radix2_f32p_xpulpv2(void *arg) {
     _out_ptr = (Complex_type_f32 *)&pSrc[2 * core_id];
     _tw_ptr = (Complex_type_f32 *)S->pTwiddle;
 
-    for (j = 0; j < nbutterfly / nPE; j++) {
+    for (j = 0; j < nbutterfly/nPE; j++) {
         process_butterfly_radix2(_in_ptr, _out_ptr, j * nPE + core_id, 0, dist, _tw_ptr);
         _in_ptr += nPE;
         _out_ptr += nPE;
@@ -150,6 +153,7 @@ void plp_cfft_radix2_f32p_xpulpv2(void *arg) {
 
     stage = stage + 1;
     dist = dist >> 1;
+    hal_team_barrier();
 
     // STAGES 2 -> n-1
     // As long as the number of processing elements is larger than the distance between couples 
@@ -157,7 +161,6 @@ void plp_cfft_radix2_f32p_xpulpv2(void *arg) {
     // different butterflies
     while (dist > nPE / 2) {
 
-        hal_team_barrier();     // At every new stage I wait for all the cores
         step = dist << 1;       // The distance between elements of couples is half of the step between corresponding couples in different butterflies
         for (j = 0; j < butt; j++) {
 
@@ -173,24 +176,34 @@ void plp_cfft_radix2_f32p_xpulpv2(void *arg) {
         butt = butt << 1;
 
     }
+    hal_team_barrier();
+
 
     // The butterflies are divided between the processing elements
     while (dist > 1) {
-        hal_team_barrier();
         step = dist << 1;
-        for (j = 0; j < butt / nPE; j++) {
-            _in_ptr = (Complex_type_f32 *)pSrc;
-            for (d = 0; d < dist; d++) {
-                process_butterfly_radix2(_in_ptr, _in_ptr, butt * d, (j * nPE + core_id) * step, dist, _tw_ptr);
-                _in_ptr++;
-            } // d
-        }     // j
+        if(butt<nPE) {
+            if (core_id<butt) {
+                _in_ptr = (Complex_type_f32 *)pSrc;
+                for (d = 0; d < dist; d++) {
+                    process_butterfly_radix2(_in_ptr, _in_ptr, butt * d, core_id*step, dist, _tw_ptr);
+                    _in_ptr++;
+                } // d
+            }
+        } else {
+            for (j = 0; j < butt/nPE; j++) {
+                _in_ptr = (Complex_type_f32 *)pSrc;
+                for (d = 0; d < dist; d++) {
+                    process_butterfly_radix2(_in_ptr, _in_ptr, butt * d, (j * nPE + core_id) * step, dist, _tw_ptr);
+                    _in_ptr++;
+                } // d
+            }// j
+        }
         stage = stage + 1;
         dist = dist >> 1;
         butt = butt << 1;
+        hal_team_barrier();
     }
-
-    hal_team_barrier();
 
     // LAST STAGE
     _in_ptr = (Complex_type_f32 *)&pSrc[4 * core_id];

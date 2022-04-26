@@ -145,7 +145,7 @@ void plp_rfft_f32s_xpulpv2(const plp_fft_instance_f32 *S,
         index += 2;
     } // j
 
-    /* //Computes also the simmetric half
+    /*//Computes also the simmetric half
     _in_ptr = (Complex_type_f32 *)pDst;
     index = 0;
     for (j = 0; j < (S->FFTLength >> 1); j++) {
