@@ -322,6 +322,27 @@ typedef struct {
     uint16_t bitRevLength;       /*< bit reversal table length. */
 } plp_cfft_instance_q32;
 
+/**
+ * @brief Instance structure for the parallel CFFT Q16
+ * @param[in]       fft_struct          cfft_q16 struct
+ * @param[in/out]   p1                  points to the complex data buffer of size <code>2*fftLen</code>.
+ * Processing occurs in-place.
+ * @param[in]       ifftFlag            flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1)
+ * transform.
+ * @param[in]       bitReverseFlag      flag that enables (bitReverseFlag=1) of disables
+ * (bitReverseFlag=0) bit reversal of output.
+ * @param[in]       deciPoint           decimal point for right shift
+ * @param[in]       nPE                 number of cores to use
+ */
+typedef struct {
+    plp_cfft_instance_q32 *S;
+    int32_t *p1;
+    uint8_t ifftFlag;
+    uint8_t bitReverseFlag;
+    uint32_t fracBits;
+    uint32_t nPE;
+} plp_cfft_instance_q32_parallel;
+
 
 /**
  * @brief Instance structure for the floating-point CFFT/CIFFT function.
@@ -8604,8 +8625,7 @@ void plp_cfft_q16p_xpulpv2(void *args);
   @return     none
 */
 
-void
-plp_bitreversal_32s_rv32im(uint32_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab);
+void plp_bitreversal_32s_rv32im(uint32_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab);
 
 /**
   @brief      In-place 32 bit reversal function for XPULPV2
@@ -8615,8 +8635,18 @@ plp_bitreversal_32s_rv32im(uint32_t *pSrc, const uint16_t bitRevLen, const uint1
   @return     none
 */
 
-void
-plp_bitreversal_32s_xpulpv2(uint32_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab);
+void plp_bitreversal_32s_xpulpv2(uint32_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab);
+
+/**
+  @brief      In-place 32 bit reversal function for XPULPV2
+  @param[in,out] pSrc        points to in-place buffer of unknown 32-bit data type
+  @param[in]  bitRevLen   bit reversal table length
+  @param[in]  pBitRevTab  points to bit reversal table
+  @param[in]     nPE         number of cores
+  @return     none
+*/
+
+void plp_bitreversal_32p_xpulpv2(uint32_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab, uint32_t nPE);
 
 /**
  * @brief      Glue code for quantized 32-bit complex fast fourier transform
@@ -8645,6 +8675,24 @@ void plp_cfft_q32(const plp_cfft_instance_q32 *S,
                       uint8_t ifftFlag,
                       uint8_t bitReverseFlag,
                       uint32_t fracBits);
+
+/**
+ * @brief      Quantized 32-bit complex fast fourier transform for XPULPV2
+ *
+ * @param[in]  S               points to an instance of the 32bit quantized CFFT structure
+ * @param      p1              points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
+ * @param[in]  ifftFlag        flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1)
+ * @param[in]  bitReverseFlag  flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output.
+ * @param[in]  fracBits        decimal point for right shift (input format Q(32-fracBits).fracBits)
+ * @param[in]  nPE             Number of cores to use
+ */
+
+void plp_cfft_q32_parallel( const plp_cfft_instance_q32 *S,
+                            int32_t *p1,
+                            uint8_t ifftFlag,
+                            uint8_t bitReverseFlag,
+                            uint32_t fracBits,
+                            uint32_t nPE );
 
 /**
  * @brief      Quantized 32-bit complex fast fourier transform for RV32IM
@@ -8679,6 +8727,13 @@ void plp_cfft_q32s_xpulpv2(const plp_cfft_instance_q32 *S,
                       uint8_t ifftFlag,
                       uint8_t bitReverseFlag,
                       uint32_t fracBits);
+
+/**
+ * @brief      Parallel quantized 32 bit complex fast fourier transform for XPULPV2
+ * @param[in]   args    points to the plp_cfft_instance_q32_parallel
+ */
+
+void plp_cfft_q32p_xpulpv2(void *args);
 
 /**
    @brief Floating-point FFT on real input data.

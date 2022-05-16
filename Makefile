@@ -157,6 +157,7 @@ FC_SRCS = \
 	src/TransformFunctions/plp_cfft_q16.c src/TransformFunctions/kernels/plp_cfft_q16s_rv32im.c \
 	src/TransformFunctions/plp_cfft_q16_parallel.c \
 	src/TransformFunctions/plp_cfft_q32.c src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c \
+	src/TransformFunctions/plp_cfft_q32_parallel.c \
 	src/TransformFunctions/plp_rfft_f32.c \
 	src/TransformFunctions/plp_rfft_f32_parallel.c \
 	src/TransformFunctions/plp_rfftfast_f32.c \
@@ -573,6 +574,7 @@ CL_SRCS = \
         src/TransformFunctions/kernels/plp_bitreversal_xpulpv2.c \
         src/TransformFunctions/kernels/plp_cfft_q16s_xpulpv2.c \
         src/TransformFunctions/kernels/plp_cfft_q16p_xpulpv2.c \
+        src/TransformFunctions/kernels/plp_cfft_q32p_xpulpv2.c \
         src/TransformFunctions/kernels/plp_cfft_q32s_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_dwt_f32s_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_dwt_q32s_xpulpv2.c \
