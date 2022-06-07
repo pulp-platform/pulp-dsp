@@ -76,7 +76,7 @@
   @return     0: Success, 1: Matrix is singular
  */
 
-int plp_mat_inv_f32s_xpulpv2(float *__restrict__ pSrc, uint32_t N, float *__restrict__ pDst) {
+int plp_mat_inv_f32s_xpulpv2(float *__restrict__ pSrc, float *__restrict__ pDst, uint32_t N) {
 
     /*--------------------------------------------------------------------------------------------------------------
      * Matrix Inverse can be solved using elementary row operations.

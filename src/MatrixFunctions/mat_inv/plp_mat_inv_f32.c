@@ -74,13 +74,13 @@
   @par This function will use plp_mat_inv_i32s_xpulpv2 for its computation.
  */
 
-int plp_mat_inv_f32(float *__restrict__ pSrc, uint32_t N, float *__restrict__ pDst) {
+int plp_mat_inv_f32(float *__restrict__ pSrc, float *__restrict__ pDst, uint32_t N) {
 
     if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("Floating point is supported only for cluster side\n");
         return 2;
     } else {
-        return plp_mat_inv_f32s_xpulpv2(pSrc, N, pDst);
+        return plp_mat_inv_f32s_xpulpv2(pSrc, pDst, N);
     }
 }
 
