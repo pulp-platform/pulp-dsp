@@ -87,6 +87,7 @@ const plp_cfft_instance_q32 plp_cfft_sR_q32_len4096 = { 4096, twiddleCoef_4096_q
                                                         PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH };
 
 /* cfft f32 */
+                                                        
 const plp_cfft_instance_f32 plp_cfft_sR_f32_len16 = {  16, (float32_t *)twiddleCoef_cfft_16,
                                                         (uint16_t *)plpBitRevIndexTable_float_16, 16};                                                        
 const plp_cfft_instance_f32 plp_cfft_sR_f32_len32 = {  32, (float32_t *)twiddleCoef_cfft_32,
@@ -112,12 +113,12 @@ const plp_fft_instance_f32 plp_rfft_sR_f32_len64 = { 64, 1, (float32_t *)twiddle
                                                         (uint16_t *)bit_rev_radix2_LUT_64 };
 const plp_fft_instance_f32 plp_rfft_sR_f32_len128 = { 128, 1, (float32_t *)twiddleCoef_rfft_128,
                                                         (uint16_t *)bit_rev_radix2_LUT_128 };
-const plp_fft_instance_f32 plp_rfft_sR_f32_len256 = { 256, 1, (float32_t *)twiddleCoef_rfft_256,
-                                                        (uint16_t *)bit_rev_radix2_LUT_256 };
+const plp_fft_instance_f32 plp_rfft_sR_f32_len256 = { 256, 1, (float32_t *)twiddleCoef_cfft_256,
+                                                        (uint16_t *)plpBitRevIndexTable_float_256 };
 const plp_fft_instance_f32 plp_rfft_sR_f32_len512 = { 512, 1, (float32_t *)twiddleCoef_rfft_512,
                                                         (uint16_t *)bit_rev_radix2_LUT_512 };
-const plp_fft_instance_f32 plp_rfft_sR_f32_len1024 = { 1024, 1, (float32_t *)twiddleCoef_rfft_1024,
-                                                        (uint16_t *)bit_rev_radix2_LUT_1024 };
+const plp_fft_instance_f32 plp_rfft_sR_f32_len1024 = { 1024, 1, (float32_t *)twiddleCoef_cfft_1024,
+                                                        (uint16_t *)plpBitRevIndexTable_float_1024 };
 const plp_fft_instance_f32 plp_rfft_sR_f32_len2048 = { 2048, 1, (float32_t *)twiddleCoef_rfft_2048,
                                                         (uint16_t *)bit_rev_radix2_LUT_2048 };
                                                         
