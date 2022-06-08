@@ -37,25 +37,25 @@ def compute_result(result_parameter, inputs, env, fix_point):
 #            result[2*i+1] = (np.imag(complex_result[i]))
             
     elif result_parameter.ctype == 'float':
-#        my_type = np.float32
-#        a = inputs['pSrc'].value.astype(my_type)
-#        result = np.zeros(len(a)*2, dtype=my_type)
-#        complex_result = np.zeros(len(a), dtype=np.csingle)
-#        complex_result = np.fft.fft(a)
-#        for i in range(int(len(a))):
-#            result[2*i] = (np.real(complex_result[i]))
-#            result[2*i+1] = (np.imag(complex_result[i]))
         my_type = np.float32
         a = inputs['pSrc'].value.astype(my_type)
-        result = np.zeros(len(a), dtype=my_type)
-        complex_a = np.zeros(int(len(a)/2), dtype=np.csingle)
-        complex_result = np.zeros(len(a)>>1, dtype=np.csingle)
-        for i in range(len(a)>>1):
-            complex_a[i] = a[2*i].astype(np.csingle)
-        complex_result = np.fft.fft(complex_a)
-        for i in range(int(len(a)/2)):
+        result = np.zeros(len(a)*2, dtype=my_type)
+        complex_result = np.zeros(len(a), dtype=np.csingle)
+        complex_result = np.fft.fft(a)
+        for i in range(int(len(a))):
             result[2*i] = (np.real(complex_result[i]))
             result[2*i+1] = (np.imag(complex_result[i]))
+#        my_type = np.float32
+#        a = inputs['pSrc'].value.astype(my_type)
+#        result = np.zeros(len(a), dtype=my_type)
+#        complex_a = np.zeros(int(len(a)/2), dtype=np.csingle)
+#        complex_result = np.zeros(len(a)>>1, dtype=np.csingle)
+#        for i in range(len(a)>>1):
+#            complex_a[i] = a[2*i].astype(np.csingle)
+#        complex_result = np.fft.fft(complex_a)
+#        for i in range(int(len(a)/2)):
+#            result[2*i] = (np.real(complex_result[i]))
+#            result[2*i+1] = (np.imag(complex_result[i]))
 
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
