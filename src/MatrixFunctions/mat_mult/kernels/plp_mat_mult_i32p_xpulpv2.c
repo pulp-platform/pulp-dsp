@@ -100,11 +100,10 @@ void plp_mat_mult_i32p_xpulpv2(void *args) {
 
     int core_id = hal_core_id();
 
-    // printf("core id: %i, start: %i, end: %i\n", core_id, START, END);
+    //printf("core id: %i, start: %i, end: %i\n", core_id, START, END);
 
     for (k = core_id; k < O / 2; k += nPE) {
         for (i = 0; i < M / 2; i++) {
-
             int32_t sum00 = 0;
             int32_t sum01 = 0;
             int32_t sum10 = 0;
@@ -128,55 +127,50 @@ void plp_mat_mult_i32p_xpulpv2(void *args) {
             pDstC[(i * 2 + 1) * O + k * 2] = sum10;
             pDstC[(i * 2 + 1) * O + k * 2 + 1] = sum11;
         }
+
+        i = i*2;
+        if(i < M){
+            int32_t sum0 = 0;
+            int32_t sum1 = 0;
+            for(j = 0; j < N; j++){
+                int32_t AVal = pSrcA[i * N + (j)];
+
+                sum0 = sum0 + AVal * pSrcB[j * O + (k * 2)];
+                sum1 = sum1 + AVal * pSrcB[j * O + (k * 2 + 1)]; 
+            }
+            pDstC[i * O + k * 2] = sum0;
+            pDstC[i * O + k * 2 + 1] = sum1;
+        }
     }
 
-    // clean up code
-    i = i * 2;
-    j = j;
     k = k * 2;
-    // check if every index is nicely finished
-    if (i == M && j == N && k >= O) {
+    if(k < O){
+        for (i = 0; i < M / 2; i++) {
+            int32_t sum00 = 0;
+            int32_t sum10 = 0;
 
-    } else {
-        uint32_t iEnd = i;
-        uint32_t jEnd = j;
-        uint32_t kEnd = k >= O ? O : k;
+            for (j = 0; j < N; j++) {
+                int32_t AVal0 = pSrcA[i * 2 * N + (j)];
+                int32_t AVal1 = pSrcA[i * 2 * N + N + (j)];
 
-        // clean up for j
-        if (jEnd != N) {
-            for (i = 0; i < iEnd; i++) {
-                for (k = 0; k < kEnd; k += nPE) {
-                    int32_t sum = 0;
-                    for (j = jEnd; j < N; j++) {
-                        sum += sum + pSrcA[i * N + j] * pSrcB[j * O + k];
-                    }
-                    pDstC[i * O + k] += sum;
-                }
+                int32_t BVal0 = pSrcB[j * O + k];
+
+                sum00 = sum00 + AVal0 * BVal0;
+                sum10 = sum10 + AVal1 * BVal0;
             }
+
+            pDstC[(i * 2) * O + k] = sum00;
+            pDstC[(i * 2 + 1) * O + k] = sum10;
         }
 
-        // clean up for i
-        if (iEnd != M) {
-            for (k = core_id; k < kEnd; k += nPE) {
-                for (i = iEnd; i < M; i++) {
-                    int32_t sum = 0;
-                    for (j = 0; j < N; j++) {
-                        sum = sum + pSrcA[i * N + j] * pSrcB[j * O + k];
-                    }
-                    pDstC[i * O + k] = sum;
-                }
+        i = i*2;
+        if(i < M){
+            int32_t sum = 0;
+            for(j = 0; j < N; j++){
+                sum = sum + pSrcA[i * N + (j)]* pSrcB[j * O + k];
             }
-        }
 
-        // clean up for k
-        for (k = kEnd; k < O; k += nPE) {
-            for (i = 0; i < M; i++) {
-                int32_t sum = 0;
-                for (j = 0; j < N; j++) {
-                    sum = sum + pSrcA[i * N + j] * pSrcB[j * O + k];
-                }
-                pDstC[i * O + k] = sum;
-            }
+            pDstC[i * O + k] = sum;
         }
     }
 
