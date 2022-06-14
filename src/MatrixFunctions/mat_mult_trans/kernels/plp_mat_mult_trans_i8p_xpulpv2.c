@@ -51,6 +51,9 @@
    performed on 32 bit vectors, with 32 bit accumulator.
 */
 
+//#define BASIC_VERSION // if used don't forget to also use the undefine at end of file
+#ifdef BASIC_VERSION
+
 void plp_mat_mult_trans_i8p_xpulpv2(void *args) {
 
     uint32_t core_id = hal_core_id();
@@ -64,8 +67,7 @@ void plp_mat_mult_trans_i8p_xpulpv2(void *args) {
     uint32_t nPE = arguments->nPE;
     int32_t *__restrict__ pDstC = arguments->pDstC;
 
-#define BASIC_VERSION // if used don't forget to also use the undefine at end of file
-#ifdef BASIC_VERSION
+
 
     uint32_t m; // loop counter for M
     uint32_t n; // loop counter for N
@@ -82,14 +84,182 @@ void plp_mat_mult_trans_i8p_xpulpv2(void *args) {
     }
 
     hal_team_barrier();
+}
 
 #else
 
-    // TODO hackathon
+void plp_mat_mult_trans_i8p_xpulpv2(void *args) {
+
+    uint32_t core_id = hal_core_id();
+
+    plp_mat_mult_instance_i8 *arguments = (plp_mat_mult_instance_i8 *)args;
+    const int8_t *__restrict__ pSrcA = arguments->pSrcA;
+    const int8_t *__restrict__ pSrcB = arguments->pSrcB;
+    uint32_t M = arguments->M;
+    uint32_t N = arguments->N;
+    uint32_t O = arguments->O;
+    uint32_t nPE = arguments->nPE;
+    int32_t *__restrict__ pDstC = arguments->pDstC;
+
+    uint32_t i = 0; // loop counter for M
+    uint32_t j = 0; // loop counter for N
+    uint32_t k = 0; // loop counter for O
+
+    for(i = core_id; i < M/2; i += nPE){
+        for(k = 0; k < O/4; k++){
+            int32_t sum00 = 0;
+            int32_t sum01 = 0;
+            int32_t sum02 = 0;
+            int32_t sum03 = 0;
+            int32_t sum10 = 0;
+            int32_t sum11 = 0;
+            int32_t sum12 = 0;
+            int32_t sum13 = 0;
+
+            for(j = 0; j < N/4; j++){
+                v4s aVec0 = *((v4s *)&(pSrcA[(i * 2) * N + (j * 4)]));
+                v4s aVec1 = *((v4s *)&(pSrcA[(i * 2 + 1) * N + (j * 4)]));
+
+                v4s bVec0 = *((v4s *)&(pSrcB[(k * 4) * N + (j * 4)]));
+                v4s bVec1 = *((v4s *)&(pSrcB[(k * 4 + 1) * N + (j * 4)]));
+                v4s bVec2 = *((v4s *)&(pSrcB[(k * 4 + 2) * N + (j * 4)]));
+                v4s bVec3 = *((v4s *)&(pSrcB[(k * 4 + 3) * N + (j * 4)]));
+
+                sum00 = __SUMDOTP4(aVec0, bVec0, sum00);
+                sum01 = __SUMDOTP4(aVec0, bVec1, sum01);
+                sum02 = __SUMDOTP4(aVec0, bVec2, sum02);
+                sum03 = __SUMDOTP4(aVec0, bVec3, sum03);
+                sum10 = __SUMDOTP4(aVec1, bVec0, sum10);
+                sum11 = __SUMDOTP4(aVec1, bVec1, sum11);
+                sum12 = __SUMDOTP4(aVec1, bVec2, sum12);
+                sum13 = __SUMDOTP4(aVec1, bVec3, sum13);
+            }
+
+            for(j = j * 4; j < N; j++){
+                int32_t aVal0 = pSrcA[(i * 2) * N + j];
+                int32_t aVal1 = pSrcA[(i * 2 + 1) * N + j];
+
+                int32_t bVal0 = pSrcB[(k * 4) * N + j];
+                int32_t bVal1 = pSrcB[(k * 4 + 1) * N + j];
+                int32_t bVal2 = pSrcB[(k * 4 + 2) * N + j];
+                int32_t bVal3 = pSrcB[(k * 4 + 3) * N + j];
+
+                sum00 += aVal0 * bVal0;
+                sum01 += aVal0 * bVal1;
+                sum02 += aVal0 * bVal2;
+                sum03 += aVal0 * bVal3;
+                sum10 += aVal1 * bVal0;
+                sum11 += aVal1 * bVal1;
+                sum12 += aVal1 * bVal2;
+                sum13 += aVal1 * bVal3;
+            }
+
+            pDstC[(i * 2) * O + (k * 4)] = sum00;
+            pDstC[(i * 2) * O + (k * 4 + 1)] = sum01;
+            pDstC[(i * 2) * O + (k * 4 + 2)] = sum02;
+            pDstC[(i * 2) * O + (k * 4 + 3)] = sum03;
+            pDstC[(i * 2 + 1) * O + (k * 4)] = sum10;
+            pDstC[(i * 2 + 1) * O + (k * 4 + 1)] = sum11;
+            pDstC[(i * 2 + 1) * O + (k * 4 + 2)] = sum12;
+            pDstC[(i * 2 + 1) * O + (k * 4 + 3)] = sum13;
+        }
+
+        for(k = k * 4;k < O; k++){
+            int32_t sum00 = 0;
+            int32_t sum10 = 0;
+
+            for(j = 0; j < N/4; j++){
+                v4s aVec0 = *((v4s *)&(pSrcA[(i * 2) * N + (j * 4)]));
+                v4s aVec1 = *((v4s *)&(pSrcA[(i * 2 + 1) * N + (j * 4)]));
+
+                v4s bVec0 = *((v4s *)&(pSrcB[k * N + (j * 4)]));
+
+                sum00 = __SUMDOTP4(aVec0, bVec0, sum00);
+                sum10 = __SUMDOTP4(aVec1, bVec0, sum10);
+            }
+
+            for(j = j * 4; j < N; j++){
+                int32_t aVal0 = pSrcA[(i * 2) * N + j];
+                int32_t aVal1 = pSrcA[(i * 2 + 1) * N + j];
+
+                int32_t bVal0 = pSrcB[k * N + j];
+
+                sum00 += aVal0 * bVal0;
+                sum10 += aVal1 * bVal0;
+            }
+
+            pDstC[(i * 2) * O + k] = sum00;
+            pDstC[(i * 2 + 1) * O + k] = sum10;
+        }
+    }
+    for(i = i * 2;i < M; i++){
+        for(k = 0; k < O/4; k++){
+            int32_t sum00 = 0;
+            int32_t sum01 = 0;
+            int32_t sum02 = 0;
+            int32_t sum03 = 0;
+
+            for(j = 0; j < N/4; j++){
+                v4s aVec0 = *((v4s *)&(pSrcA[i * N + (j * 4)]));
+
+                v4s bVec0 = *((v4s *)&(pSrcB[(k * 4) * N + (j * 4)]));
+                v4s bVec1 = *((v4s *)&(pSrcB[(k * 4 + 1) * N + (j * 4)]));
+                v4s bVec2 = *((v4s *)&(pSrcB[(k * 4 + 2) * N + (j * 4)]));
+                v4s bVec3 = *((v4s *)&(pSrcB[(k * 4 + 3) * N + (j * 4)]));
+
+                sum00 = __SUMDOTP4(aVec0, bVec0, sum00);
+                sum01 = __SUMDOTP4(aVec0, bVec1, sum01);
+                sum02 = __SUMDOTP4(aVec0, bVec2, sum02);
+                sum03 = __SUMDOTP4(aVec0, bVec3, sum03);
+            }
+
+            for(j = j * 4; j < N; j++){
+                int32_t aVal0 = pSrcA[i * N + j];
+
+                int32_t bVal0 = pSrcB[(k * 4) * N + j];
+                int32_t bVal1 = pSrcB[(k * 4 + 1) * N + j];
+                int32_t bVal2 = pSrcB[(k * 4 + 2) * N + j];
+                int32_t bVal3 = pSrcB[(k * 4 + 3) * N + j];
+
+                sum00 += aVal0 * bVal0;
+                sum01 += aVal0 * bVal1;
+                sum02 += aVal0 * bVal2;
+                sum03 += aVal0 * bVal3;
+            }
+
+            pDstC[i * O + (k * 4)] = sum00;
+            pDstC[i * O + (k * 4 + 1)] = sum01;
+            pDstC[i * O + (k * 4 + 2)] = sum02;
+            pDstC[i * O + (k * 4 + 3)] = sum03;
+        }
+
+        for(k = k * 4;k < O; k++){
+            int32_t sum00 = 0;
+            int32_t sum10 = 0;
+
+            for(j = 0; j < N/4; j++){
+                v4s aVec0 = *((v4s *)&(pSrcA[i * N + (j * 4)]));
+                v4s bVec0 = *((v4s *)&(pSrcB[k * N + (j * 4)]));
+
+                sum00 = __SUMDOTP4(aVec0, bVec0, sum00);
+            }
+
+            for(j = j * 4; j < N; j++){
+                int32_t aVal0 = pSrcA[i * N + j];
+                int32_t bVal0 = pSrcB[k * N + j];
+
+                sum00 += aVal0 * bVal0;
+            }
+
+            pDstC[i * O + k] = sum00;
+        }
+    }
+}
+
 
 #endif
-#undef BASIC_VERSION
-}
+//#undef BASIC_VERSION
+
 
 /**
    @} end of MatMultTransKernels group
