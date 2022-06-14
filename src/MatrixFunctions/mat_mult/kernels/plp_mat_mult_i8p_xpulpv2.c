@@ -138,8 +138,6 @@ void plp_mat_mult_i8p_xpulpv2(void *args) {
             int32_t sum12 = 0;
             int32_t sum13 = 0;
 
-            // v2s* Bpoint = (v2s*) &(pSrcB[k]);
-
             for (j = 0; j < N / 4; j++) {
 
                 v4s aVec0 = *((v4s *)&(pSrcA[(i * 2) * N + (j * 4)]));
@@ -160,6 +158,25 @@ void plp_mat_mult_i8p_xpulpv2(void *args) {
                 sum13 = __SUMDOTP4(aVec1, bVec3, sum13);
             }
 
+            for(j = j * 4; j < N; j++){
+                int32_t aVal0 = pSrcA[(i * 2) * N + j];
+                int32_t aVal1 = pSrcA[(i * 2 + 1) * N + j];
+
+                int32_t bVal0 = pSrcB[j * O + (k * 4)];
+                int32_t bVal1 = pSrcB[j * O + (k * 4) + 1];
+                int32_t bVal2 = pSrcB[j * O + (k * 4) + 2];
+                int32_t bVal3 = pSrcB[j * O + (k * 4) + 3];
+
+                sum00 += aVal0 * bVal0;
+                sum01 += aVal0 * bVal1;
+                sum02 += aVal0 * bVal2;
+                sum03 += aVal0 * bVal3;
+                sum10 += aVal1 * bVal0;
+                sum11 += aVal1 * bVal1;
+                sum12 += aVal1 * bVal2;
+                sum13 += aVal1 * bVal3;
+            }
+
             pDstC[(i * 2) * O + (k * 4)] = sum00;
             pDstC[(i * 2) * O + (k * 4 + 1)] = sum01;
             pDstC[(i * 2) * O + (k * 4 + 2)] = sum02;
@@ -169,61 +186,144 @@ void plp_mat_mult_i8p_xpulpv2(void *args) {
             pDstC[(i * 2 + 1) * O + (k * 4 + 2)] = sum12;
             pDstC[(i * 2 + 1) * O + (k * 4 + 3)] = sum13;
         }
+
+        for(i = i * 2; i < M; i++){
+            int32_t sum00 = 0;
+            int32_t sum01 = 0;
+            int32_t sum02 = 0;
+            int32_t sum03 = 0;
+
+            for (j = 0; j < N / 4; j++) {
+
+                v4s aVec0 = *((v4s *)&(pSrcA[i * N + (j * 4)]));
+
+                v4s bVec0 = bVecs[(j * 4)];
+                v4s bVec1 = bVecs[(j * 4) + 1];
+                v4s bVec2 = bVecs[(j * 4) + 2];
+                v4s bVec3 = bVecs[(j * 4) + 3];
+
+                sum00 = __SUMDOTP4(aVec0, bVec0, sum00);
+                sum01 = __SUMDOTP4(aVec0, bVec1, sum01);
+                sum02 = __SUMDOTP4(aVec0, bVec2, sum02);
+                sum03 = __SUMDOTP4(aVec0, bVec3, sum03);
+            }
+
+            for(j = j * 4; j < N; j++){
+                int32_t aVal0 = pSrcA[i * N + j];
+
+                int32_t bVal0 = pSrcB[j * O + (k * 4)];
+                int32_t bVal1 = pSrcB[j * O + (k * 4) + 1];
+                int32_t bVal2 = pSrcB[j * O + (k * 4) + 2];
+                int32_t bVal3 = pSrcB[j * O + (k * 4) + 3];
+
+                sum00 += aVal0 * bVal0;
+                sum01 += aVal0 * bVal1;
+                sum02 += aVal0 * bVal2;
+                sum03 += aVal0 * bVal3;
+            }
+
+            pDstC[i * O + (k * 4)] = sum00;
+            pDstC[i * O + (k * 4 + 1)] = sum01;
+            pDstC[i * O + (k * 4 + 2)] = sum02;
+            pDstC[i * O + (k * 4 + 3)] = sum03;
+        }
+        
     }
 
-    // clean up code
-    i = i * 2;
-    j = j * 4;
-    k = k * 4;
-    // check if every index is nicely finished
-    if (i == M && j == N && k >= O) {
+    for(k = k * 4; k < O; k++){
+        for(i = 0; i < M/4; i++){
+            int32_t sum0 = 0;
+            int32_t sum1 = 0;
+            int32_t sum2 = 0;
+            int32_t sum3 = 0;
 
-    } else {
-        uint32_t iEnd = i;
-        uint32_t jEnd = j;
-        uint32_t kEnd = k >= O ? O : k;
+            for(j = 0; j < N; j++){
+                int32_t aVal0 = pSrcA[(i * 4) * N + j];
+                int32_t aVal1 = pSrcA[(i * 4 + 1) * N + j];
+                int32_t aVal2 = pSrcA[(i * 4 + 2) * N + j];
+                int32_t aVal3 = pSrcA[(i * 4 + 3) * N + j];
 
-        //clean up for j
-        if (jEnd != N) {
-            for (k = core_id * 4; k < kEnd; k += nPE * 4) {
-                for (int step = 0; step < 4; step++) {
-                    for (i = 0; i < iEnd; i++) {
-                        int32_t sum = 0;
-                        for (j = jEnd; j < N; j++) {
-                            sum = sum + pSrcA[i * N + j] * pSrcB[j * O + k + step];
-                        }
-                        pDstC[i * O + k + step] += sum;
-                    }
-                }
+                int32_t bVal0 = pSrcB[j * O + k];
+
+                sum0 += aVal0 * bVal0;
+                sum1 += aVal1 * bVal0;
+                sum2 += aVal2 * bVal0;
+                sum3 += aVal3 * bVal0;
             }
+
+            pDstC[(i * 4) * O + k] = sum0;
+            pDstC[(i * 4 + 1) * O + k] = sum1;
+            pDstC[(i * 4 + 2) * O + k] = sum2;
+            pDstC[(i * 4 + 3) * O + k] = sum3;
         }
 
-        // clean up for i
-        if (iEnd != M) {
-            for (k = core_id * 4; k < kEnd; k += nPE * 4) {
-                for (int step = 0; step < 4; step++) {
-                    for (i = iEnd; i < M; i++) {
-                        int32_t sum = 0;
-                        for (j = 0; j < N; j++) {
-                            sum = sum + pSrcA[i * N + j] * pSrcB[j * O + k + step];
-                        }
-                        pDstC[i * O + k + step] = sum;
-                    }
-                }
-            }
-        }
+        for(i = i*4; i < M; i++){
+            int32_t sum0 = 0;
 
-        // clean up for k
-        for (k = kEnd; k < O; k++) {
-            for (i = 0; i < M; i++) {
-                int32_t sum = 0;
-                for (j = 0; j < N; j++) {
-                    sum = sum + pSrcA[i * N + j] * pSrcB[j * O + k];
-                }
-                pDstC[i * O + k] = sum;
+            for(j = 0; j < N; j++){
+                int32_t aVal0 = pSrcA[i * N + j];
+                int32_t bVal0 = pSrcB[j * O + k];
+
+                sum0 += aVal0 * bVal0;
             }
+
+            pDstC[i * O + k] = sum0;
         }
     }
+
+    // // clean up code
+    // i = i * 2;
+    // j = j * 4;
+    // k = k * 4;
+    // // check if every index is nicely finished
+    // if (i == M && j == N && k >= O) {
+
+    // } else {
+    //     uint32_t iEnd = i;
+    //     uint32_t jEnd = j;
+    //     uint32_t kEnd = k >= O ? O : k;
+
+    //     //clean up for j
+    //     // if (jEnd != N) {
+    //     //     for (k = core_id * 4; k < kEnd; k += nPE * 4) {
+    //     //         for (int step = 0; step < 4; step++) {
+    //     //             for (i = 0; i < iEnd; i++) {
+    //     //                 int32_t sum = 0;
+    //     //                 for (j = jEnd; j < N; j++) {
+    //     //                     sum = sum + pSrcA[i * N + j] * pSrcB[j * O + k + step];
+    //     //                 }
+    //     //                 pDstC[i * O + k + step] += sum;
+    //     //             }
+    //     //         }
+    //     //     }
+    //     // }
+
+    //     //clean up for i
+    //     // if (iEnd != M) {
+    //     //     for (k = core_id * 4; k < kEnd; k += nPE * 4) {
+    //     //         for (int step = 0; step < 4; step++) {
+    //     //             for (i = iEnd; i < M; i++) {
+    //     //                 int32_t sum = 0;
+    //     //                 for (j = 0; j < N; j++) {
+    //     //                     sum = sum + pSrcA[i * N + j] * pSrcB[j * O + k + step];
+    //     //                 }
+    //     //                 pDstC[i * O + k + step] = sum;
+    //     //             }
+    //     //         }
+    //     //     }
+    //     // }
+
+    //     // clean up for k
+    //     // for (k = kEnd; k < O; k++) {
+    //     //     for (i = 0; i < M; i++) {
+    //     //         int32_t sum = 0;
+    //     //         for (j = 0; j < N; j++) {
+    //     //             sum = sum + pSrcA[i * N + j] * pSrcB[j * O + k];
+    //     //         }
+    //     //         pDstC[i * O + k] = sum;
+    //     //     }
+    //     // }
+    // }
 
     hal_team_barrier();
 }
