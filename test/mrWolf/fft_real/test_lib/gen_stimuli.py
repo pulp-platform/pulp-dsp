@@ -7,7 +7,6 @@ import numpy as np
 # compute_result #
 ##################
 
-
 def compute_result(result_parameter, inputs, env, fix_point):
     """
     Funciton to generate the expected result of the testcase.
@@ -45,6 +44,10 @@ def compute_result(result_parameter, inputs, env, fix_point):
         for i in range(int(len(a))):
             result[2*i] = (np.real(complex_result[i]))
             result[2*i+1] = (np.imag(complex_result[i]))
+#            print("{"+" {: .8f}f, ".format(result[2*i]), end='')
+#            print("{: .8f}f".format(result[2*i+1])+" },", end='')
+#            print("")
+
 #        my_type = np.float32
 #        a = inputs['pSrc'].value.astype(my_type)
 #        result = np.zeros(len(a), dtype=my_type)
