@@ -51,17 +51,18 @@
   single-core implementation!
  */
 
-int plp_mat_inv_f32_parallel(float *__restrict__ pSrc,
-                             uint32_t N,
-                             uint32_t nPE,
-                             float *__restrict__ pDst) {
+int plp_mat_inv_f32_parallel( float *__restrict__ pSrc,
+                              float *__restrict__ pDst,
+                              uint32_t N,
+                              uint32_t nPE) {
 
     if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("parallel and floating-point processing supported only for cluster side\n");
         return 2;
     } else {
-        // TODO, for now, we only call the singlecore implementation, until it is implemented
-        return plp_mat_inv_f32s_xpulpv2(pSrc, N, pDst);
+        uint32_t* __restrict__ flag = 0U;
+        plp_mat_inv_instance_f32 args = {.pSrc = pSrc, .pDst = pDst, .flag = flag, .N = N, .nPE = nPE};
+        hal_cl_team_fork(nPE, plp_mat_inv_f32p_xpulpv2, (void *)&args);
     }
 }
 

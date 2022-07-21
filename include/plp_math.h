@@ -919,6 +919,17 @@ typedef struct {
 } plp_mat_fill_I_instance_q32;
 
 /** -------------------------------------------------------
+ * @brief Instance structure for floating-point parallel matrix inversion.
+ */
+typedef struct {
+    float *__restrict__ pSrc;
+    float *__restrict__ pDst;
+    uint32_t *__restrict__ flag;
+    uint32_t N;
+    uint32_t nPE;
+} plp_mat_inv_instance_f32;
+
+/** -------------------------------------------------------
  * @brief Instance structure for strided integer parallel matrix multiplication.
  */
 typedef struct {
@@ -10832,7 +10843,7 @@ void plp_mat_trans_f32_parallel(
   @return     none
 */
 
-int plp_mat_inv_f32(float *__restrict__ pSrc, uint32_t N, float *__restrict__ pDst);
+int plp_mat_inv_f32(float *__restrict__ pSrc, float *__restrict__ pDst, uint32_t N);
 
 /** -------------------------------------------------------
   @brief      matrix inverse of a 32-bit floating-point matrices for XPULPV2 extension.
@@ -10842,21 +10853,21 @@ int plp_mat_inv_f32(float *__restrict__ pSrc, uint32_t N, float *__restrict__ pD
   @return     0: Success, 1: Matrix is singular
 */
 
-int plp_mat_inv_f32s_xpulpv2(float *__restrict__ pSrc, uint32_t N, float *__restrict__ pDst);
+int plp_mat_inv_f32s_xpulpv2(float *__restrict__ pSrc, float *__restrict__ pDst, uint32_t N);
 
 /** -------------------------------------------------------
   @brief      Glue code for parallel matrix inverse of a 32-bit floating-point matrices.
-  @param[in]  pSrc Points to the first input matrix. pSrc is modified by this funciton
+  @param[in]  pSrc Points to the input matrix. pSrc is modified by this funciton
+  @param[out] pDst Points to the output matrix
   @param[in]  N    Width and height of both matrices
   @param[in]  nPE  Number of cores to use for computation
-  @param[out] pDst Points to the output matrix
   @return     0: Success, 1: Matrix is singular, 2: operation not supported
 */
 
-int plp_mat_inv_f32_parallel(float *__restrict__ pSrc,
-                             uint32_t N,
-                             uint32_t nPE,
-                             float *__restrict__ pDst);
+int plp_mat_inv_f32_parallel( float *__restrict__ pSrc,
+                              float *__restrict__ pDst,
+                              uint32_t N,
+                              uint32_t nPE);
 
 /** -------------------------------------------------------
   @brief Parallel matrix inverse of 32-bit floating-point matrices kernel for XPULPV2 extension.
