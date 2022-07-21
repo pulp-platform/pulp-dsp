@@ -49,24 +49,25 @@
 /**
    @brief Floating-point FFT on complex input data (parallel version).
    @param[in]   S       points to an instance of the floating-point FFT structure
-   @param[in]   pSrc    points to the input buffer (complex data)
+   @param[in]   pSrc    points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
+   @param[in]   ifftFlag flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1)
+   @param[in]   bitReverseFlag flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output.
    @param[in]   nPE     number of parallel processing units
-   @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_cfft_f32_parallel(const plp_fft_instance_f32 *S,
-                           const float32_t *__restrict__ pSrc,
-                           const uint32_t nPE,
-                           float32_t *__restrict__ pDst) {
+void plp_cfft_f32_parallel( const plp_cfft_instance_f32 *S,
+                            const float32_t *pSrc,
+                            uint8_t ifftFlag,
+                            uint8_t bitReverseFlag,
+                            const uint32_t nPE) {
 
     if (hal_cluster_id() == ARCHI_FC_CID) {
         printf("Parallel processing supported only for cluster side\n");
         return;
     }
+    plp_cfft_instance_f32_parallel arg = (plp_cfft_instance_f32_parallel){ S, pSrc, ifftFlag, bitReverseFlag, nPE };
+    hal_cl_team_fork(nPE, plp_cfft_f32p_xpulpv2, (void *)&arg);
 
-    plp_fft_instance_f32_parallel arg = (plp_fft_instance_f32_parallel){ S, pSrc, nPE, pDst };
-
-    hal_cl_team_fork(nPE, plp_cfft_f32_xpulpv2_parallel, (void *)&arg);
 }
 
 /**

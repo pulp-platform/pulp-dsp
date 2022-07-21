@@ -27,6 +27,8 @@
 
 #include "plp_math.h"
 
+/* Fixed-point cfft */
+
 extern const int16_t twiddleCoef_16_q16[24];
 extern const int16_t twiddleCoef_32_q16[48];
 extern const int16_t twiddleCoef_64_q16[96];
@@ -67,19 +69,66 @@ extern const uint16_t plpBitRevIndexTable_fixed_1024[PLPBITREVINDEXTABLE_FIXED_1
 extern const uint16_t plpBitRevIndexTable_fixed_2048[PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH];
 extern const uint16_t plpBitRevIndexTable_fixed_4096[PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH];
 
+/* Floating-point cfft */
+
+extern const Complex_type_f32 twiddleCoef_cfft_16[16];
+extern const Complex_type_f32 twiddleCoef_cfft_32[32];
+extern const Complex_type_f32 twiddleCoef_cfft_64[64];
+extern const Complex_type_f32 twiddleCoef_cfft_128[128];
+extern const Complex_type_f32 twiddleCoef_cfft_256[256];
+extern const Complex_type_f32 twiddleCoef_cfft_512[512];
+extern const Complex_type_f32 twiddleCoef_cfft_1024[1024];
+extern const Complex_type_f32 twiddleCoef_cfft_2048[2048];
+
+/* Floating-point rfft */
+
+extern const uint16_t plpBitRevIndexTable_rfftfast_16[20];
+extern const uint16_t plpBitRevIndexTable_rfftfast_32[48];
+extern const uint16_t plpBitRevIndexTable_rfftfast_64[56];
+extern const uint16_t plpBitRevIndexTable_rfftfast_128[208];
+extern const uint16_t plpBitRevIndexTable_rfftfast_256[440];
+extern const uint16_t plpBitRevIndexTable_rfftfast_512[448];
+extern const uint16_t plpBitRevIndexTable_rfftfast_1024[1800];
+
+extern const Complex_type_f32 twiddleCoef_rfftfast_32[16];
+extern const Complex_type_f32 twiddleCoef_rfftfast_64[32];
+extern const Complex_type_f32 twiddleCoef_rfftfast_128[64];
+extern const Complex_type_f32 twiddleCoef_rfftfast_256[128];
+extern const Complex_type_f32 twiddleCoef_rfftfast_512[256];
+extern const Complex_type_f32 twiddleCoef_rfftfast_1024[512];
+extern const Complex_type_f32 twiddleCoef_rfftfast_2048[1024];
+
+extern const Complex_type_f32 twiddleCoef_rfft_32[16];
+extern const Complex_type_f32 twiddleCoef_rfft_64[32];
+extern const Complex_type_f32 twiddleCoef_rfft_128[64];
+extern const Complex_type_f32 twiddleCoef_rfft_256[128];
+extern const Complex_type_f32 twiddleCoef_rfft_512[256];
+extern const Complex_type_f32 twiddleCoef_rfft_1024[512];
+extern const Complex_type_f32 twiddleCoef_rfft_2048[1024];
+
+
+extern short bit_rev_radix2_LUT_32[32];
+extern short bit_rev_radix2_LUT_64[64];
+extern short bit_rev_radix2_LUT_128[128];
+extern short bit_rev_radix2_LUT_256[256];
+extern short bit_rev_radix2_LUT_512[512];
+extern short bit_rev_radix2_LUT_1024[1024];
+extern short bit_rev_radix2_LUT_2048[2048];
+
+extern short bit_rev_radix4_LUT_256[256];
+extern short bit_rev_radix4_LUT_1024[1024];
+
+extern short bit_rev_radix8_LUT_16[16];
+extern short bit_rev_radix8_LUT_64[64];
+extern short bit_rev_radix8_LUT_512[512];
+
+extern short bit_rev_radix_2by4_LUT_32[32];
+extern short bit_rev_radix_2by4_LUT_128[128];
+extern short bit_rev_radix_2by4_LUT_2048[2048];
+
 extern const float32_t sinTable_f32[FAST_MATH_TABLE_SIZE + 1];
 extern const int32_t sinTable_q32[FAST_MATH_TABLE_SIZE + 1];
 extern const int16_t sinTable_q16[FAST_MATH_TABLE_SIZE + 1];
-
-extern const Complex_type_f32 twiddleCoef_rfft_32[16];
-extern const Complex_type_f32 twiddleCoef_rfft_128[64];
-extern const Complex_type_f32 twiddleCoef_rfft_512[256];
-extern const Complex_type_f32 twiddleCoef_rfft_2048[1024];
-
-extern short bit_rev_radix2_LUT_32[32];
-extern short bit_rev_radix2_LUT_128[128];
-extern short bit_rev_radix2_LUT_512[512];
-extern short bit_rev_radix2_LUT[2048];
 
 extern const float32_t melFbTable_f32_23[25];
 extern const float32_t melFbTable_f32_26[28];

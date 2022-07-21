@@ -1,17 +1,17 @@
 /* ----------------------------------------------------------------------
  * Project:      PULP DSP Library
- * Title:        plp_cfft_f32.c
- * Description:  Floating-point FFT on complex input data
+ * Title:        plp_rfftfast_f32.c
+ * Description:  Floating-point parallel FFT on real input data
  *
- * $Date:        4. August 2020
- * $Revision:    V1
+ * $Date:        22. April 2022
+ * $Revision:    V0
  *
  * Target Processor: PULP cores with "F" support (wolfe, vega)
  * -------------------------------------------------------------------- */
 /*
- * Copyright (C) 2020 ETH Zurich and University of Bologna. All rights reserved.
+ * Copyright (C) 2022 ETH Zurich and University of Bologna. All rights reserved.
  *
- * Author: Giuseppe Tagliavini, University of Bologna
+ * Author: Marco Bertuletti, Thorir Ingolfsson ETH Zurich
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -47,23 +47,24 @@
 */
 
 /**
-   @brief Floating-point FFT on complex input data.
-   @param[in]   S points to an instance of the floating-point FFT structure
-   @param[in]   pSrc points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
-   @param[in]   ifftFlag flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1)
-   @param[in]   bitReverseFlag flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output.
+   @brief Floating-point FFT on real input data.
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrc    points to the input buffer (real data)
+   @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_cfft_f32(  const plp_cfft_instance_f32 *S,
-                    float32_t *pSrc,
-                    uint8_t ifftFlag,
-                    uint8_t bitReverseFlag) {
+void plp_rfftfast_f32_parallel( const plp_fft_fast_instance_f32 *S,
+                                 float32_t *__restrict__ pSrc,
+                                 float32_t *__restrict__ pDst,
+                                 const uint32_t nPE) {
 
     if (hal_cluster_id() == ARCHI_FC_CID) {
-        printf("F extension is supported only for cluster side\n");
+        printf("Parallel processing supported only for cluster side\n");
         return;
     }
-    plp_cfft_f32s_xpulpv2(S, pSrc, ifftFlag, bitReverseFlag);
+    plp_fft_fast_instance_f32_parallel arg = (plp_fft_fast_instance_f32_parallel){ S, pSrc, pDst, nPE };
+    //plp_thorirfft_f32p_xpulpv2((void *)&arg);
+    hal_cl_team_fork(nPE, plp_rfftfast_f32p_xpulpv2, (void *)&arg);
 }
 
 /**

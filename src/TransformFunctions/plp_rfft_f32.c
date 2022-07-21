@@ -62,7 +62,7 @@ void plp_rfft_f32(const plp_fft_instance_f32 *S,
         return;
     }
 
-    plp_rfft_f32_xpulpv2(S, pSrc, pDst);
+    plp_rfft_f32s_xpulpv2(S, pSrc, pDst);
 }
 
 /**

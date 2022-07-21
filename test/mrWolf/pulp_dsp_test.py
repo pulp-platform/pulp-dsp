@@ -1060,7 +1060,7 @@ class AggregatedTest(object):
                 """\
                 PULP_APP = test
                 PULP_APP_FC_SRCS = test.c
-                PULP_LDFLAGS += -lplpdsp
+                PULP_LDFLAGS += -lplpdsp -lm
                 PULP_CFLAGS += -I$(CONFIG_BUILD_DIR) -O3 -g
                 ifdef TFLAGS
                     PULP_CFLAGS += $(TFLAGS)
@@ -1145,7 +1145,7 @@ class AggregatedTest(object):
                     PULP_APP = test
                     PULP_APP_FC_SRCS = test.c
                     PULP_APP_CL_SRCS = cluster.c
-                    PULP_LDFLAGS += -lplpdsp
+                    PULP_LDFLAGS += -lplpdsp -lm
                     PULP_CFLAGS += -I$(CONFIG_BUILD_DIR) -O3 -g
                     ifdef TFLAGS
                         PULP_CFLAGS += $(TFLAGS)

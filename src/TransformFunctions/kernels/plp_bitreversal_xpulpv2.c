@@ -144,12 +144,54 @@ void plp_bitreversal_16p_xpulpv2(uint16_t *pSrc,
   @return     none
 */
 
-void
-plp_bitreversal_32s_xpulpv2(uint32_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab) {
+void plp_bitreversal_32s_xpulpv2(   uint32_t *pSrc, 
+                                    const uint16_t bitRevLen, 
+                                    const uint16_t *pBitRevTab) {
     uint32_t a, b, i, tmp;
 
     for (i = 0; i < bitRevLen; i += 2)
     {
+        a = pBitRevTab[i    ] >> 2;
+        b = pBitRevTab[i + 1] >> 2;
+
+        //real
+        tmp = pSrc[a];
+        pSrc[a] = pSrc[b];
+        pSrc[b] = tmp;
+
+        //complex
+        tmp = pSrc[a+1];
+        pSrc[a+1] = pSrc[b+1];
+        pSrc[b+1] = tmp;
+
+        
+    }
+}
+
+/**
+  @brief      In-place 32 bit reversal function for XPULPV2
+  @param[in,out] pSrc        points to in-place buffer of unknown 32-bit data type
+  @param[in]  bitRevLen   bit reversal table length
+  @param[in]  pBitRevTab  points to bit reversal table
+  @param[in]     nPE         number of cores
+  @return     none
+*/
+
+void plp_bitreversal_32p_xpulpv2(   uint32_t *pSrc, 
+                                    const uint16_t bitRevLen, 
+                                    const uint16_t *pBitRevTab, 
+                                    uint32_t nPE) {
+    uint32_t a, b, i, tmp;
+    int core_id = hal_core_id();
+    int step = bitRevLen/nPE;
+    if(bitRevLen % nPE != 0) {
+        step++;
+    }
+    if (step%2 != 0)
+      step++;
+
+    for (i = core_id * step; i < MIN(core_id*step+step, bitRevLen); i += 2) {
+
         a = pBitRevTab[i    ] >> 2;
         b = pBitRevTab[i + 1] >> 2;
 

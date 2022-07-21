@@ -322,6 +322,60 @@ typedef struct {
     uint16_t bitRevLength;       /*< bit reversal table length. */
 } plp_cfft_instance_q32;
 
+/**
+ * @brief Instance structure for the parallel CFFT Q16
+ * @param[in]       fft_struct          cfft_q16 struct
+ * @param[in/out]   p1                  points to the complex data buffer of size <code>2*fftLen</code>.
+ * Processing occurs in-place.
+ * @param[in]       ifftFlag            flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1)
+ * transform.
+ * @param[in]       bitReverseFlag      flag that enables (bitReverseFlag=1) of disables
+ * (bitReverseFlag=0) bit reversal of output.
+ * @param[in]       deciPoint           decimal point for right shift
+ * @param[in]       nPE                 number of cores to use
+ */
+typedef struct {
+    plp_cfft_instance_q32 *S;
+    int32_t *p1;
+    uint8_t ifftFlag;
+    uint8_t bitReverseFlag;
+    uint32_t fracBits;
+    uint32_t nPE;
+} plp_cfft_instance_q32_parallel;
+
+
+/**
+ * @brief Instance structure for the floating-point CFFT/CIFFT function.
+ * @param[in]   fftLen              length of the FFT
+ * @param[in]   pTwiddle            points to the Twiddle factor table
+ * @param[in]   pBitRevTable        points to the bit reversal table
+ * @param[in]   bitRevTableLength   bit reversal table length
+ */
+typedef struct {
+    uint32_t fftLen;
+    const float32_t *pTwiddle;
+    const uint16_t *pBitRevTable;
+    uint16_t bitRevLength;
+} plp_cfft_instance_f32;
+
+/** -------------------------------------------------------
+    @struct plp_cfft_instance_f32_parallel
+    @brief Instance structure for floating-point FFT (parallel version)
+    @param[in]  S                   pointer to a plp_cfft_instance_f32 data structure (FFT parameters)
+    @param[in]  pSrc                pointer to the input data buffer
+    @param[in]  ifftFlag            flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1)transform.
+    @param[in]  bitReverseFlag      flag that enables (bitReverseFlag=1) of disables
+    @param[in]  nPE                 number of cores
+    @param[out] pDst                pointer to the output data buffer
+*/
+typedef struct {
+    plp_cfft_instance_f32 *S;
+    const float32_t *pSrc;
+    uint8_t ifftFlag;
+    uint8_t bitReverseFlag;
+    const uint32_t nPE;
+} plp_cfft_instance_f32_parallel;
+
 /** -------------------------------------------------------
     @struct plp_fft_instance_f32
     @brief Instance structure for floating-point FFT
@@ -343,6 +397,48 @@ typedef struct {
     const float32_t *pTwiddleFactors;
     const uint16_t *pBitReverseLUT;
 } plp_fft_instance_f32;
+
+/** -------------------------------------------------------
+    @struct plp_fft_fast_instance_f32
+    @brief Instance structure for floating-point FFT
+    @param[in]  Internal CFFT structure
+    @param[in]  length data length of the real sequence
+    @param[in]  pTwiddleFactorsRFFT pointer to the twiddle factors.
+    These values must be computed using this formula:
+    \f$W_N^k =   e^{-j \frac{\pi}{N} k}\f$,
+    where \f$N\f$ is the data length and \f$k\f$ is the index.
+    The user must provide \f$\frac{N}{2}\f$ values (\f$k = 0 .. \frac{N}{2}-1\f$).
+    @param[in]  pBitReverseLUT  pointer to the lookup table used for the bit reversal of output.
+    This table must include \f$N\f$ elements in the range \f$0 .. N-1\f$,
+    where each location \f$k\f$ contains the value \f$bitreverse(k)\f$.
+*/
+typedef struct {
+    plp_cfft_instance_f32 *Sint;
+    uint32_t FFTLengthRFFT;
+    const float32_t *pTwiddleFactorsRFFT;
+} plp_fft_fast_instance_f32;
+
+/** -------------------------------------------------------
+    @struct plp_fft_fast_instance_f32_parallel
+    @brief Instance structure for floating-point FFT
+    @param[in]  Internal CFFT structure
+    @param[in]  length data length of the real sequence
+    @param[in]  pTwiddleFactorsRFFT pointer to the twiddle factors.
+    These values must be computed using this formula:
+    \f$W_N^k =   e^{-j \frac{\pi}{N} k}\f$,
+    where \f$N\f$ is the data length and \f$k\f$ is the index.
+    The user must provide \f$\frac{N}{2}\f$ values (\f$k = 0 .. \frac{N}{2}-1\f$).
+    @param[in]  pBitReverseLUT  pointer to the lookup table used for the bit reversal of output.
+    This table must include \f$N\f$ elements in the range \f$0 .. N-1\f$,
+    where each location \f$k\f$ contains the value \f$bitreverse(k)\f$.
+*/
+typedef struct {
+    plp_fft_fast_instance_f32* S;
+    float32_t *__restrict__ pSrc;
+    float32_t *__restrict__ pDst;
+    const uint32_t nPE;
+} plp_fft_fast_instance_f32_parallel;
+
 
 /** -------------------------------------------------------
     @struct plp_fft_instance_f32_parallel
@@ -8681,8 +8777,7 @@ void plp_cfft_q16p_xpulpv2(void *args);
   @return     none
 */
 
-void
-plp_bitreversal_32s_rv32im(uint32_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab);
+void plp_bitreversal_32s_rv32im(uint32_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab);
 
 /**
   @brief      In-place 32 bit reversal function for XPULPV2
@@ -8692,8 +8787,18 @@ plp_bitreversal_32s_rv32im(uint32_t *pSrc, const uint16_t bitRevLen, const uint1
   @return     none
 */
 
-void
-plp_bitreversal_32s_xpulpv2(uint32_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab);
+void plp_bitreversal_32s_xpulpv2(uint32_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab);
+
+/**
+  @brief      In-place 32 bit reversal function for XPULPV2
+  @param[in,out] pSrc        points to in-place buffer of unknown 32-bit data type
+  @param[in]  bitRevLen   bit reversal table length
+  @param[in]  pBitRevTab  points to bit reversal table
+  @param[in]     nPE         number of cores
+  @return     none
+*/
+
+void plp_bitreversal_32p_xpulpv2(uint32_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab, uint32_t nPE);
 
 /**
  * @brief      Glue code for quantized 32-bit complex fast fourier transform
@@ -8722,6 +8827,24 @@ void plp_cfft_q32(const plp_cfft_instance_q32 *S,
                       uint8_t ifftFlag,
                       uint8_t bitReverseFlag,
                       uint32_t fracBits);
+
+/**
+ * @brief      Quantized 32-bit complex fast fourier transform for XPULPV2
+ *
+ * @param[in]  S               points to an instance of the 32bit quantized CFFT structure
+ * @param      p1              points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
+ * @param[in]  ifftFlag        flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1)
+ * @param[in]  bitReverseFlag  flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output.
+ * @param[in]  fracBits        decimal point for right shift (input format Q(32-fracBits).fracBits)
+ * @param[in]  nPE             Number of cores to use
+ */
+
+void plp_cfft_q32_parallel( const plp_cfft_instance_q32 *S,
+                            int32_t *p1,
+                            uint8_t ifftFlag,
+                            uint8_t bitReverseFlag,
+                            uint32_t fracBits,
+                            uint32_t nPE );
 
 /**
  * @brief      Quantized 32-bit complex fast fourier transform for RV32IM
@@ -8758,6 +8881,13 @@ void plp_cfft_q32s_xpulpv2(const plp_cfft_instance_q32 *S,
                       uint32_t fracBits);
 
 /**
+ * @brief      Parallel quantized 32 bit complex fast fourier transform for XPULPV2
+ * @param[in]   args    points to the plp_cfft_instance_q32_parallel
+ */
+
+void plp_cfft_q32p_xpulpv2(void *args);
+
+/**
    @brief Floating-point FFT on real input data.
    @param[in]   S       points to an instance of the floating-point FFT structure
    @param[in]   pSrc    points to the input buffer (real data)
@@ -8788,7 +8918,7 @@ void plp_rfft_f32_parallel(const plp_fft_instance_f32 *S,
    @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_rfft_f32_xpulpv2(const plp_fft_instance_f32 *S,
+void plp_rfft_f32s_xpulpv2(const plp_fft_instance_f32 *S,
                           const float32_t *__restrict__ pSrc,
                           float32_t *__restrict__ pDst);
 
@@ -8797,49 +8927,100 @@ void plp_rfft_f32_xpulpv2(const plp_fft_instance_f32 *S,
    @param[in]   arg       points to an instance of the floating-point FFT structure
    @return      none
 */
-void plp_rfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
+void plp_rfft_f32p_xpulpv2(void *arg);
+
+
+
+
 
 /**
-   @brief Floating-point FFT on complex input data.
+   @brief Floating-point FFT on real input data.
    @param[in]   S       points to an instance of the floating-point FFT structure
-   @param[in]   pSrc    points to the input buffer (complex data)
+   @param[in]   pSrc    points to the input buffer (real data)
    @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_cfft_f32(const plp_fft_instance_f32 *S,
-                  const float32_t *pSrc,
-                  float32_t *pDst);
+void plp_rfftfast_f32( const plp_fft_fast_instance_f32 *S,
+                        const float32_t *__restrict__ pSrc,
+                        float32_t *__restrict__ pDst);
+
+/**
+   @brief Floating-point parallel FFT on real input data.
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrc    points to the input buffer (real data)
+   @param[out]  pDst    points to the output buffer (complex data)
+   @return      none
+*/
+void plp_rfftfast_f32_parallel( const plp_fft_fast_instance_f32 *S,
+                                 float32_t *__restrict__ pSrc,
+                                 float32_t *__restrict__ pDst,
+                                 const uint32_t nPE);
+
+/**
+   @brief  Floating-point FFT on real input data for XPULPV2 extension.
+   @param[in]   S       points to an instance of the floating-point FFT structure
+   @param[in]   pSrcA   points to the input buffer (real data)
+   @param[out]  pDst    points to the output buffer (complex data)
+   @return      none
+*/
+void plp_rfftfast_f32s_xpulpv2( const plp_fft_fast_instance_f32 *S,
+                                 float32_t *pSrc,
+                                 float32_t *pDst);
+
+/**
+   @brief  Floating-point parallel FFT on real input data for XPULPV2 extension.
+   @param[in]   arg       points to an instance of the floating-point FFT structure
+   @return      none
+*/
+void plp_rfftfast_f32p_xpulpv2( void *arg );
+
+/**
+   @brief Floating-point FFT on complex input data.
+   @param[in]   S points to an instance of the floating-point FFT structure
+   @param[in]   pSrc points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
+   @param[in]   ifftFlag flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1)
+   @param[in]   bitReverseFlag flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output.
+   @return      none
+*/
+void plp_cfft_f32(  const plp_cfft_instance_f32 *S,
+                    float32_t *pSrc,
+                    uint8_t ifftFlag,
+                    uint8_t bitReverseFlag);
 
 /**
    @brief Floating-point FFT on complex input data (parallel version).
    @param[in]   S       points to an instance of the floating-point FFT structure
-   @param[in]   pSrc    points to the input buffer (complex data)
+   @param[in]   pSrc    points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
+   @param[in]   ifftFlag flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1)
+   @param[in]   bitReverseFlag flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output.
    @param[in]   nPE     number of parallel processing units
-   @param[out]  pDst    points to the output buffer (complex data)
    @return      none
 */
-void plp_cfft_f32_parallel(const plp_fft_instance_f32 *S,
-                           const float32_t *pSrc,
-                           const uint32_t nPE,
-                           float32_t *pDst);
+void plp_cfft_f32_parallel( const plp_cfft_instance_f32 *S,
+                            const float32_t *pSrc,
+                            uint8_t ifftFlag,
+                            uint8_t bitReverseFlag,
+                            const uint32_t nPE);
 
 /**
    @brief  Floating-point FFT on complex input data for XPULPV2 extension.
    @param[in]   S       points to an instance of the floating-point FFT structure
-   @param[in]   pSrcA   points to the input buffer (complex data)
-   @param[out]  pDst    points to the output buffer (complex data)
+   @param[in]   pSrc    points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place.
+   @param[in]   ifftFlag flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1)
+   @param[in]   bitReverseFlag flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output.
    @return      none
 */
-void plp_cfft_f32_xpulpv2(const plp_fft_instance_f32 *S,
-                          const float32_t *pSrc,
-                          float32_t *pDst);
+void plp_cfft_f32s_xpulpv2( const plp_cfft_instance_f32 *S,
+                            const float32_t *pSrc,
+                            uint8_t ifftFlag,
+                            uint8_t bitReverseFlag);
 
 /**
    @brief  Floating-point FFT on complex input data for XPULPV2 extension (parallel version).
    @param[in]   arg       points to an instance of the floating-point FFT structure
    @return      none
 */
-void plp_cfft_f32_xpulpv2_parallel(plp_fft_instance_f32_parallel *arg);
+void plp_cfft_f32p_xpulpv2(void *arg);
 
 /**
    @brief Floating-point DCT on real input data. Implementation of

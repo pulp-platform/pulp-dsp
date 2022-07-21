@@ -161,10 +161,13 @@ FC_SRCS = \
 	src/TransformFunctions/plp_cfft_q16.c src/TransformFunctions/kernels/plp_cfft_q16s_rv32im.c \
 	src/TransformFunctions/plp_cfft_q16_parallel.c \
 	src/TransformFunctions/plp_cfft_q32.c src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c \
+	src/TransformFunctions/plp_cfft_q32_parallel.c \
 	src/TransformFunctions/plp_rfft_f32.c \
 	src/TransformFunctions/plp_rfft_f32_parallel.c \
+	src/TransformFunctions/plp_rfftfast_f32.c \
+	src/TransformFunctions/plp_rfftfast_f32_parallel.c \
 	src/TransformFunctions/plp_cfft_f32.c \
-        src/TransformFunctions/plp_cfft_f32_parallel.c \
+    src/TransformFunctions/plp_cfft_f32_parallel.c \
 	src/TransformFunctions/plp_dct2_f32.c \
 	src/TransformFunctions/plp_dct2_f32_parallel.c \
 	src/TransformFunctions/plp_mfcc_f32.c \
@@ -583,18 +586,17 @@ CL_SRCS = \
 	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_q8p_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_f32s_xpulpv2.c \
 	src/MatrixFunctions/mat_mult_trans_cmplx/kernels/plp_mat_mult_trans_cmplx_f32p_xpulpv2.c \
-        src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c \
-        src/TransformFunctions/kernels/plp_cfft_f32_xpulpv2.c \
+		src/TransformFunctions/kernels/plp_rfftfast_f32s_xpulpv2.c \
+		src/TransformFunctions/kernels/plp_rfftfast_f32p_xpulpv2.c \
+        src/TransformFunctions/kernels/plp_rfft_f32s_xpulpv2.c \
+        src/TransformFunctions/kernels/plp_rfft_f32p_xpulpv2.c \
+        src/TransformFunctions/kernels/plp_cfft_f32s_xpulpv2.c \
+        src/TransformFunctions/kernels/plp_cfft_f32p_xpulpv2.c \
         src/TransformFunctions/kernels/plp_bitreversal_xpulpv2.c \
         src/TransformFunctions/kernels/plp_cfft_q16s_xpulpv2.c \
         src/TransformFunctions/kernels/plp_cfft_q16p_xpulpv2.c \
+        src/TransformFunctions/kernels/plp_cfft_q32p_xpulpv2.c \
         src/TransformFunctions/kernels/plp_cfft_q32s_xpulpv2.c \
-        src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c \
-        src/TransformFunctions/kernels/plp_cfft_f32_xpulpv2.c \
-	src/TransformFunctions/kernels/plp_cfft_q16s_xpulpv2.c \
-	src/TransformFunctions/kernels/plp_cfft_q16p_xpulpv2.c \
-	src/TransformFunctions/kernels/plp_cfft_q32s_xpulpv2.c \
-	src/TransformFunctions/kernels/plp_rfft_f32_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_dwt_f32s_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_dwt_q32s_xpulpv2.c \
 	src/TransformFunctions/kernels/plp_dwt_q16s_xpulpv2.c \
@@ -811,10 +813,11 @@ CL_SRCS = \
 
 IDIR=$(CURDIR)/include
 PULP_CFLAGS += -I$(IDIR) -O3 -g
+#PULP_LDFLAGS += -lplpdsp -lm
 
 ifeq ($(PULP_RTOS), pmsis)
 # PMSIS rules
-PULP_STATIC_LIB = plpdsp
+PULP_STATIC_LIB = plpdsp -lm
 PULP_CFLAGS += -DRTOS_PMSIS
 PULP_STATIC_LIB_SRCS = $(FC_SRCS) $(CL_SRCS)
 PULP_STATIC_LIB_HEADERS += $(shell find include -name *.h)

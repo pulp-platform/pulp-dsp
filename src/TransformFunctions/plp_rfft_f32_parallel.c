@@ -66,7 +66,7 @@ void plp_rfft_f32_parallel(const plp_fft_instance_f32 *S,
 
     plp_fft_instance_f32_parallel arg = (plp_fft_instance_f32_parallel){ S, pSrc, nPE, pDst };
 
-    hal_cl_team_fork(nPE, plp_rfft_f32_xpulpv2_parallel, (void *)&arg);
+    hal_cl_team_fork(nPE, plp_rfft_f32p_xpulpv2, (void *)&arg);
 }
 
 /**
