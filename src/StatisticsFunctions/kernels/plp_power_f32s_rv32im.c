@@ -1,16 +1,16 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_power_f32.c
- * Description:  Calculates the sum of squares of an input vector
+ * Title:        plp_power_f32s_rv32im.c
+ * Description:  Calculates the sum of squares on XPULPV2 cores
  *
- * $Date:        30.06.2020
+ * $Date:        21. Mar 2022
  *
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
  * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
- * Author: Moritz Scherer, ETH Zurich
+ * Author: Marco Bertuletti, ETH Zurich
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -30,11 +30,11 @@
 #include "plp_math.h"
 
 /**
-   @ingroup groupStats
+   @ingroup groupStat
 */
 
 /**
-   @defgroup power Power
+   @defgroup powerKernels Power Kernels
    Calculates the sum of squares of the input vector.
    There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
    types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
@@ -57,27 +57,48 @@
 */
 
 /**
-   @addtogroup power
+   @addtogroup powerKernels
    @{
 */
 
 /**
-   @brief         Glue code for sum of squares of a 32-bit float vector.
+   @brief         Sum of squares of a 32-bit float vector for RV32IM.
    @param[in]     pSrc       points to the input vector
    @param[in]     blockSize  number of samples in input vector
    @param[out]    pRes    sum of squares returned here
    @return        none
- */
+*/
 
-void plp_power_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes) {
+void plp_power_f32s_rv32im(const float *__restrict__ pSrc,
+                            uint32_t blockSize,
+                            float *__restrict__ pRes) {
 
-    if (hal_cluster_id() == ARCHI_FC_CID) {
-        plp_power_f32s_rv32im(pSrc, blockSize, pRes);
-    } else {
-        plp_power_f32s_xpulpv2(pSrc, blockSize, pRes);
+    uint32_t blkCnt = 0;
+    float x1, x2;
+    float sum = 0;
+
+#if defined(PLP_MATH_LOOPUNROLL)
+
+    for (blkCnt = 0; blkCnt < (blockSize >> 1); blkCnt++) {
+        x1 = *pSrc++;
+        x2 = *pSrc++;
+        sum += x1 * x1;
+        sum += x2 * x2;
     }
-}
 
-/**
-  @} end of power group
- */
+    if (blockSize % 2 == 1) {
+        x1 = *pSrc++;
+        sum += x1 * x1;
+    }
+
+#else
+
+    for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+        x1 = *pSrc++;
+        sum += x1 * x1;
+    }
+
+#endif
+
+    *pRes = sum;
+}

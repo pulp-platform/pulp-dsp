@@ -1408,6 +1408,91 @@ typedef struct {
     float *__restrict__ pDst;
 } plp_mat_copy_stride_instance_f32;
 
+/** -------------------------------------------------------
+    @struct plp_euclidean_distance_instance_f32
+    @brief Instance structure for float parallel Euclidean distance.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+*/
+typedef struct {
+    const float32_t *pSrcA; // pointer to the first vector
+    const float32_t *pSrcB; // pointer to the second vector
+    uint32_t blkSizePE;     // number of samples in each vector
+    uint32_t nPE;           // number of processing units
+    float32_t *resBuffer;   // pointer to result vector
+} plp_euclidean_distance_instance_f32;
+
+/** -------------------------------------------------------
+    @struct plp_euclidean_distance_instance_q32
+    @brief Instance structure for float parallel Euclidean distance.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+*/
+typedef struct {
+    const int32_t *pSrcA;   // pointer to the first vector
+    const int32_t *pSrcB;   // pointer to the second vector
+    uint32_t blkSizePE;     // number of samples in each vector
+    uint32_t nPE;           // number of processing units
+    uint32_t fracBits;      // number of fixed point fractional bits
+    int32_t *resBuffer;     // pointer to result vector
+} plp_euclidean_distance_instance_q32;
+
+/** -------------------------------------------------------
+    @struct plp_cosine_distance_instance_f32
+    @brief Instance structure for float parallel cosine distance.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] resBuffer_A  pointer to the powerA result buffer
+    @param[out] resBuffer_B  pointer to the powerB result buffer
+    @param[out] resBuffer_dot  pointer to the dot_prod result buffer
+*/
+typedef struct {
+    const float32_t *pSrcA; // pointer to the first vector
+    const float32_t *pSrcB; // pointer to the second vector
+    uint32_t blkSizePE;     // number of samples in each vector
+    uint32_t nPE;           // number of processing units
+    float32_t *resBuffer_A;   // pointer to result vector
+    float32_t *resBuffer_B;   // pointer to result vector
+    float32_t *resBuffer_dot;   // pointer to result vector
+} plp_cosine_distance_instance_f32;
+
+/** -------------------------------------------------------
+    @struct plp_power_instance_q32
+    @brief Instance structure for fixed point parallel power.
+    @param[in]  pSrc      points to the first input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] resBuffer  pointer to the result buffer
+*/
+typedef struct {
+    int32_t *pSrc;     // pointer to the first vector
+    uint32_t blkSizePE; // number of samples in each vector
+    uint32_t fracBits; // fracBits for right shift
+    uint32_t nPE;       // number of processing units
+    int32_t *resBuffer; // pointer to result vector
+} plp_power_instance_q32;
+
+/** -------------------------------------------------------
+    @struct plp_power_instance_f32
+    @brief Instance structure for float parallel power.
+    @param[in]  pSrc      points to the first input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] resBuffer  pointer to the result buffer
+*/
+typedef struct {
+    const float32_t *pSrc; // pointer to the first vector
+    uint32_t blkSizePE;     // number of samples in each vector
+    uint32_t nPE;           // number of processing units
+    float32_t *resBuffer;   // pointer to result vector
+} plp_power_instance_f32;
+
 
 
 typedef enum {
@@ -3484,6 +3569,29 @@ void plp_min_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
                          uint32_t blockSize,
                          int8_t *__restrict__ pRes);
 
+/**
+  @brief Glue code for parallel power of 32-bit floating point vectors.
+  @param[in]  pSrc       points to the input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  fracBits   number of fixed point fractional bits
+  @param[in]  nPE        number of parallel processing units
+  @param[out] pRes       output result returned here
+  @return     none
+ */
+
+void plp_power_f32_parallel(const float32_t *__restrict__ pSrc,
+                            uint32_t blockSize,
+                            uint32_t nPE,
+                            float32_t *__restrict__ pRes);
+
+/**
+   @brief          Parallel sum of squares of a 32-bit float vector for XPULPV2 extension.
+   @param[in]  S   points to the instance structure for floating-point parallel power
+   @return         none
+*/
+
+void plp_power_f32p_xpulpv2(void* S);
+
 /** -------------------------------------------------------
     @brief      Glue code for Sum of squares of a 32-bit float vector.
     @param[in]  pSrc       points to the input vector
@@ -3505,6 +3613,18 @@ void plp_power_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__
 void plp_power_f32s_xpulpv2(const float *__restrict__ pSrc,
                            uint32_t blockSize,
                            float *__restrict__ pRes);
+
+/**
+   @brief         Sum of squares of a 32-bit float vector for RV32IM.
+   @param[in]     pSrc       points to the input vector
+   @param[in]     blockSize  number of samples in input vector
+   @param[out]    pRes    sum of squares returned here
+   @return        none
+*/
+
+void plp_power_f32s_rv32im(const float *__restrict__ pSrc,
+                            uint32_t blockSize,
+                            float *__restrict__ pRes);
 
 /** -------------------------------------------------------
     @brief      Glue code for Sum of squares of a 32-bit integer vector.
@@ -3611,6 +3731,30 @@ void plp_power_i8s_rv32im(const int8_t *__restrict__ pSrc,
 void plp_power_i8s_xpulpv2(const int8_t *__restrict__ pSrc,
                            uint32_t blockSize,
                            int32_t *__restrict__ pRes);
+
+/**
+  @brief Glue code for parallel power of 32-bit fixed point vectors.
+  @param[in]  pSrc       points to the input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  fracBits   number of fixed point fractional bits
+  @param[in]  nPE        number of parallel processing units
+  @param[out] pRes       output result returned here
+  @return     none
+ */
+
+void plp_power_q32_parallel(const int32_t *__restrict__ pSrc,
+                            uint32_t blockSize,
+                            uint32_t fracBits,
+                            uint32_t nPE,
+                            int32_t *__restrict__ pRes);
+
+/**
+   @brief          Parallel sum of squares of a 32-bit fixed-point vector for XPULPV2 extension.
+   @param[in]  S   points to the instance structure for fixed-point parallel power
+   @return         none
+*/
+
+void plp_power_q32p_xpulpv2(void *S);
 
 /** -------------------------------------------------------
     @brief      Glue code for Sum of squares of a 32-bit fixed point vector.
@@ -4226,6 +4370,14 @@ void plp_sqrt_q16s_xpulpv2(const int16_t *__restrict__ pSrc,
 void plp_sqrt_f32(const float *__restrict__ pSrc, 
                   float *__restrict__ pRes);
 
+/**
+   @brief         Square root of a 32-bit floating point number for RV32IM.
+   @param[in]     pSrc    points to the input vector
+   @param[out]    pRes    Square root returned here
+   @return        none
+*/
+
+void plp_sqrt_f32s_rv32im(const float *__restrict__ pSrc, float *__restrict__ pRes);
 
 /**
    @brief         Kernel for square root of a 32-bit floating point number.
@@ -17937,5 +18089,395 @@ void plp_cmplx_mult_cmplx_q8_rv32im(const int8_t *__restrict__ pSrcA,
                                     int8_t *__restrict__ pDst,
                                     uint32_t deciPoint,
                                     uint32_t numSamples);
+
+
+/**
+  @brief Glue code for parallel Euclidean distance of 32-bit fixed point vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  fracBits   number of fixed point fractional bits
+  @param[in]  nPE        number of parallel processing units
+  @param[out] pRes     output result returned here
+  @return     none
+ */
+
+void plp_euclidean_distance_q32_parallel(   const int32_t *__restrict__ pSrcA,
+                                            const int32_t *__restrict__ pSrcB,
+                                            uint32_t blockSize,
+                                            uint32_t fracBits,
+                                            uint32_t nPE,
+                                            uint32_t *__restrict__ pRes);
+
+/**
+  @brief      Glue code for parallel Euclidean distance between 32-bit float vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  nPE        number of parallel processing units
+  @param[out] pRes     output result returned here
+  @return     none
+ */
+
+void plp_euclidean_distance_f32_parallel( const float32_t *__restrict__ pSrcA,
+                                          const float32_t *__restrict__ pSrcB,
+                                          uint32_t blockSize,
+                                          uint32_t nPE,
+                                          float32_t *__restrict__ pRes);
+
+/**
+  @brief          Parallel euclidean distance with interleaved access 32-bit fixed point vectors.
+                  vectors kernel for XPULPV2 extension.
+  @param[in]  S   points to the instance structure for integer parallel dot product
+  @return         none
+ */
+
+void plp_euclidean_distance_q32p_xpulpv2(void *S);
+
+/**
+  @brief        32-bit floating-point parallel Euclidean distance between two vectors
+  @param[in]    S points to the instance structure for float euclidean distance
+  @return       none
+ */
+
+void plp_euclidean_distance_f32p_xpulpv2(void *S);
+
+/**
+  @brief Glue code for euclidean distance of 32-bit fixed point vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  fracBits   number of fixed point fractional bits
+  @param[out] pRes     output result returned here
+  @return     none
+ */
+
+void plp_euclidean_distance_q32(  const int32_t *__restrict__ pSrcA,
+                                  const int32_t *__restrict__ pSrcB,
+                                  uint32_t blockSize,
+                                  uint32_t fracBits,
+                                  int32_t *__restrict__ pRes);
+
+/**
+  @brief      Euclidean distance of 32-bit fixed point vectors kernel for XPULPV2 extension.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  fracBits   number of fixed point fractional bits
+  @param[out] pRes       output result returned here
+  @return     none
+ */
+
+void plp_euclidean_distance_q32s_xpulpv2(   const int32_t *__restrict__ pSrcA,
+                                            const int32_t *__restrict__ pSrcB,
+                                            uint32_t blockSize,
+                                            uint32_t fracBits,
+                                            int32_t *__restrict__ pRes);
+
+/**
+  @brief      Euclidean distance of 32-bit fixed point vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  fracBits   number of fixed point fractional bits
+  @param[out] pRes     output result returned here
+  @return     none
+ */
+
+void plp_euclidean_distance_q32s_rv32im(    const int32_t *__restrict__ pSrcA,
+                                            const int32_t *__restrict__ pSrcB,
+                                            uint32_t blockSize,
+                                            uint32_t fracBits,
+                                            int32_t *__restrict__ pRes);
+
+
+/**
+  @brief Glue code for euclidean distance of 16-bit fixed point vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  fracBits   number of fixed point fractional bits
+  @param[out] pRes     output result returned here
+  @return     none
+ */
+
+void plp_euclidean_distance_q16(  const int16_t *__restrict__ pSrcA,
+                                  const int16_t *__restrict__ pSrcB,
+                                  uint16_t blockSize,
+                                  uint16_t fracBits,
+                                  int32_t *__restrict__ pRes);
+
+/**
+  @brief Euclidean distance of 16-bit fixed point vectors kernel for XPULPV2.
+  @param[in]  pSrcA      points to the first input vector [16 bit]
+  @param[in]  pSrcB      points to the second input vector [16 bit]
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  fracBits  decimal point for right shift
+  @param[out] pRes     output result returned here [32 bit]
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two by two into 32 bit vectors and then the sums and prducts are
+  performed simultaneously on 32 bit vectors, with 32 bit accumulator.
+ */
+
+void plp_euclidean_distance_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
+                               const int16_t *__restrict__ pSrcB,
+                               uint32_t blockSize,
+                               uint32_t deciPoint,
+                               int32_t *__restrict__ pRes);
+
+/**
+  @brief Euclidean distance of 16-bit fixed point vectors kernel for RV32IM extension.
+  @param[in]  pSrcA      points to the first input vector [16 bit]
+  @param[in]  pSrcB      points to the second input vector [16 bit]
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  fracBits  decimal point for right shift
+  @param[out] pRes     output result returned here [32 bit]
+  @return     none
+
+  @par Exploiting SIMD instructions
+  When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the
+  two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM
+  doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
+ */
+
+void plp_euclidean_distance_q16s_rv32im(const int16_t *__restrict__ pSrcA,
+                              const int16_t *__restrict__ pSrcB,
+                              uint32_t blockSize,
+                              uint32_t fracBits,
+                              int32_t *__restrict__ pRes);
+
+/**
+  @brief        Glue code for Euclidean distance between 32-bit float vectors.
+  @param[in]    pSrcA         First vector
+  @param[in]    pSrcB         Second vector
+  @param[in]    blockSize     vector length
+  @return       none
+ */
+
+void plp_euclidean_distance_f32(  const float32_t *__restrict__ pSrcA,
+                                  const float32_t *__restrict__ pSrcB,
+                                  uint32_t blockSize,
+                                  float32_t *__restrict__ pRes);
+                                    
+/**
+  @brief        32-bit floating point Euclidean distance between two vectors
+  @param[in]    pA         First vector
+  @param[in]    pB         Second vector
+  @param[in]    blockSize  vector length
+  @param[out]   pRes       output result returned here
+  @return       none
+ */
+
+void plp_euclidean_distance_f32s_xpulpv2( const float32_t *__restrict__ pSrcA,
+                                          const float32_t *__restrict__ pSrcB,
+                                          uint32_t blockSize,
+                                          float32_t *__restrict__ pRes);
+                                              
+/**
+  @brief        32-bit floating point Euclidean distance between two vectors
+  @param[in]    pA         First vector
+  @param[in]    pB         Second vector
+  @param[in]    blockSize  vector length
+  @param[out]   pRes       output result returned here
+  @return       none
+ */
+
+void plp_euclidean_distance_f32s_rv32im(  const float32_t *__restrict__ pSrcA,
+                                          const float32_t *__restrict__ pSrcB,
+                                          uint32_t blockSize,
+                                          float32_t *__restrict__ pRes);
+
+/**
+  @brief      Glue code for parallel cosine distance between 32-bit fixed-precision vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  nPE        number of parallel processing units
+  @param[out] pRes     output result returned here
+  @return     none
+ */
+
+void plp_cosine_distance_q32_parallel(   const int32_t *__restrict__ pSrcA,
+                                         const int32_t *__restrict__ pSrcB,
+                                         uint32_t blockSize,
+                                         uint32_t fracBits,
+                                         uint32_t nPE,
+                                         int32_t *__restrict__ pRes);
+
+/**
+  @brief      Glue code for parallel cosine distance between 32-bit float vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  nPE        number of parallel processing units
+  @param[out] pRes     output result returned here
+  @return     none
+ */
+
+void plp_cosine_distance_f32_parallel(  const float32_t *__restrict__ pSrcA,
+                                        const float32_t *__restrict__ pSrcB,
+                                        uint32_t blockSize,
+                                        uint32_t nPE,
+                                        float32_t *__restrict__ pRes);
+
+/**
+  @brief        32-bit floating-point parallel cosine distance between two vectors (computes power in parallel)
+  @param[in]    S points to the instance structure for float cosine distance
+  @return       none
+ */
+
+void plp_cosine_distance_f32p_xpulpv2(void *S);
+
+
+/**
+  @brief        Glue code for cosine distance between 32-bit float vectors.
+  @param[in]    pSrcA         First vector
+  @param[in]    pSrcB         Second vector
+  @param[in]    blockSize     vector length
+  @return       none
+ */
+
+
+void plp_cosine_distance_f32(  const float32_t *__restrict__ pSrcA,
+                                  const float32_t *__restrict__ pSrcB,
+                                  uint32_t blockSize,
+                                  float32_t *__restrict__ pRes);
+
+/**
+  @brief        32-bit floating point cosine distance between two vectors
+  @param[in]    pA         First vector
+  @param[in]    pB         Second vector
+  @param[in]    blockSize  vector length
+  @param[out]   pRes       output result returned here
+  @return       none
+ */
+
+void plp_cosine_distance_f32s_rv32im(  const float32_t *__restrict__ pSrcA,
+                                          const float32_t *__restrict__ pSrcB,
+                                          uint32_t blockSize,
+                                          float32_t *__restrict__ pRes);
+
+/**
+  @brief        32-bit floating point cosine distance between two vectors
+  @param[in]    pA         First vector
+  @param[in]    pB         Second vector
+  @param[in]    blockSize  vector length
+  @param[out]   pRes       output result returned here
+  @return       none
+ */
+
+void plp_cosine_distance_f32s_xpulpv2(  const float32_t *__restrict__ pSrcA,
+                                        const float32_t *__restrict__ pSrcB,
+                                        uint32_t blockSize,
+                                        float32_t *__restrict__ pRes);
+
+/**
+  @brief Glue code for cosine distance of 32-bit fixed point vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  fracBits   number of fixed point fractional bits
+  @param[out] pRes     output result returned here
+  @return     none
+ */
+
+void plp_cosine_distance_q32(   const int32_t *__restrict__ pSrcA,
+                                const int32_t *__restrict__ pSrcB,
+                                uint32_t blockSize,
+                                uint32_t fracBits,
+                                int32_t *__restrict__ pRes);
+
+/**
+  @brief      cosine distance of 32-bit fixed point vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  fracBits   number of fixed point fractional bits
+  @param[out] pRes     output result returned here
+  @return     none
+ */
+
+void plp_cosine_distance_q32s_rv32im(   const int32_t *__restrict__ pSrcA,
+                                        const int32_t *__restrict__ pSrcB,
+                                        uint32_t blockSize,
+                                        uint32_t fracBits,
+                                        int32_t *__restrict__ pRes);
+
+/**
+  @brief      cosine distance of 32-bit fixed point vectors kernel for XPULPV2 extension.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  fracBits   number of fixed point fractional bits
+  @param[out] pRes       output result returned here
+  @return     none
+ */
+
+void plp_cosine_distance_q32s_xpulpv2(   const int32_t *__restrict__ pSrcA,
+                                            const int32_t *__restrict__ pSrcB,
+                                            uint32_t blockSize,
+                                            uint32_t fracBits,
+                                            int32_t *__restrict__ pRes);
+
+/**
+  @brief Glue code for cosine distance of 16-bit fixed point vectors.
+  @param[in]  pSrcA      points to the first input vector
+  @param[in]  pSrcB      points to the second input vector
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  fracBits   number of fixed point fractional bits
+  @param[out] pRes     output result returned here
+  @return     none
+ */
+
+void plp_cosine_distance_q16(   const int16_t *__restrict__ pSrcA,
+                                const int16_t *__restrict__ pSrcB,
+                                uint16_t blockSize,
+                                uint16_t fracBits,
+                                int32_t *__restrict__ pRes);
+
+/**
+  @brief cosine distance of 16-bit fixed point vectors kernel for RV32IM extension.
+  @param[in]  pSrcA      points to the first input vector [16 bit]
+  @param[in]  pSrcB      points to the second input vector [16 bit]
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  fracBits  decimal point for right shift
+  @param[out] pRes     output result returned here [32 bit]
+  @return     none
+
+  @par Exploiting SIMD instructions
+  When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the
+  two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM
+  doesn't support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2).
+ */
+
+void plp_cosine_distance_q16s_rv32im(const int16_t *__restrict__ pSrcA,
+                              const int16_t *__restrict__ pSrcB,
+                              uint32_t blockSize,
+                              uint32_t fracBits,
+                              int32_t *__restrict__ pRes);
+
+/**
+  @brief cosine distance of 16-bit fixed point vectors kernel for XPULPV2.
+  @param[in]  pSrcA      points to the first input vector [16 bit]
+  @param[in]  pSrcB      points to the second input vector [16 bit]
+  @param[in]  blockSize  number of samples in each vector
+  @param[in]  fracBits  decimal point for right shift
+  @param[out] pRes     output result returned here [32 bit]
+  @return     none
+
+  @par Exploiting SIMD instructions
+  The 16 bit values are packed two by two into 32 bit vectors and then the sums and prducts are
+  performed simultaneously on 32 bit vectors, with 32 bit accumulator.
+ */
+
+void plp_cosine_distance_q16s_xpulpv2(const int16_t *__restrict__ pSrcA,
+                               const int16_t *__restrict__ pSrcB,
+                               uint32_t blockSize,
+                               uint32_t fracBits,
+                               int32_t *__restrict__ pRes);
+
+
 
 #endif // __PLP_MATH_H__

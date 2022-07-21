@@ -11,7 +11,10 @@ FC_SRCS = \
 	src/StatisticsFunctions/plp_min_i32.c src/StatisticsFunctions/kernels/plp_min_i32s_rv32im.c \
 	src/StatisticsFunctions/plp_min_i16.c src/StatisticsFunctions/kernels/plp_min_i16s_rv32im.c \
 	src/StatisticsFunctions/plp_min_i8.c src/StatisticsFunctions/kernels/plp_min_i8s_rv32im.c \
+	src/StatisticsFunctions/plp_power_f32_parallel.c \
+	src/StatisticsFunctions/plp_power_q32_parallel.c \
 	src/StatisticsFunctions/plp_power_f32.c \
+	src/StatisticsFunctions/plp_power_f32.c src/StatisticsFunctions/kernels/plp_power_f32s_rv32im.c \
 	src/StatisticsFunctions/plp_power_i32.c src/StatisticsFunctions/kernels/plp_power_i32s_rv32im.c \
 	src/StatisticsFunctions/plp_power_i16.c src/StatisticsFunctions/kernels/plp_power_i16s_rv32im.c \
 	src/StatisticsFunctions/plp_power_i8.c src/StatisticsFunctions/kernels/plp_power_i8s_rv32im.c \
@@ -19,6 +22,7 @@ FC_SRCS = \
 	src/StatisticsFunctions/plp_power_q16.c src/StatisticsFunctions/kernels/plp_power_q16s_rv32im.c \
 	src/StatisticsFunctions/plp_power_q8.c src/StatisticsFunctions/kernels/plp_power_q8s_rv32im.c \
 	src/FastMathFunctions/plp_sqrt_f32.c \
+	src/FastMathFunctions/plp_sqrt_f32.c src/FastMathFunctions/kernels/plp_sqrt_f32s_rv32im.c \
 	src/FastMathFunctions/plp_sqrt_q32.c src/FastMathFunctions/kernels/plp_sqrt_q32s_rv32im.c \
 	src/FastMathFunctions/plp_sqrt_q16.c src/FastMathFunctions/kernels/plp_sqrt_q16s_rv32im.c \
 	src/FastMathFunctions/plp_sin_f32.c \
@@ -402,7 +406,22 @@ FC_SRCS = \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q16_rv32im.c \
 	src/ComplexMathFunctions/plp_cmplx_mag_squared_q8.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q8_rv32im.c \
-
+	src/DistanceFunctions/plp_euclidean_distance/plp_euclidean_distance_f32.c \
+	src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_f32s_rv32im.c \
+	src/DistanceFunctions/plp_euclidean_distance/plp_euclidean_distance_f32_parallel.c \
+	src/DistanceFunctions/plp_euclidean_distance/plp_euclidean_distance_q32.c \
+	src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q32s_rv32im.c \
+	src/DistanceFunctions/plp_euclidean_distance/plp_euclidean_distance_q32_parallel.c \
+	src/DistanceFunctions/plp_euclidean_distance/plp_euclidean_distance_q16.c \
+	src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q16s_rv32im.c \
+	src/DistanceFunctions/plp_cosine_distance/plp_cosine_distance_f32.c \
+	src/DistanceFunctions/plp_cosine_distance/kernels/plp_cosine_distance_f32s_rv32im.c \
+	src/DistanceFunctions/plp_cosine_distance/plp_cosine_distance_q32.c \
+	src/DistanceFunctions/plp_cosine_distance/kernels/plp_cosine_distance_q32s_rv32im.c \
+	src/DistanceFunctions/plp_cosine_distance/plp_cosine_distance_q16.c \
+	src/DistanceFunctions/plp_cosine_distance/kernels/plp_cosine_distance_q16s_rv32im.c \
+	src/DistanceFunctions/plp_cosine_distance/plp_cosine_distance_q32_parallel.c \
+	src/DistanceFunctions/plp_cosine_distance/plp_cosine_distance_f32_parallel.c \
 
 CL_SRCS = \
 	src/StatisticsFunctions/kernels/plp_mean_f32s_xpulpv2.c \
@@ -417,10 +436,12 @@ CL_SRCS = \
 	src/StatisticsFunctions/kernels/plp_min_i32s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_min_i16s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_min_i8s_xpulpv2.c \
+	src/StatisticsFunctions/kernels/plp_power_f32p_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_power_f32s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_power_i32s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_power_i16s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_power_i8s_xpulpv2.c \
+	src/StatisticsFunctions/kernels/plp_power_q32p_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_power_q32s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_power_q16s_xpulpv2.c \
 	src/StatisticsFunctions/kernels/plp_power_q8s_xpulpv2.c \
@@ -777,6 +798,15 @@ CL_SRCS = \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q32_xpulpv2.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q16_xpulpv2.c \
 	src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q8_xpulpv2.c \
+	src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_f32p_xpulpv2.c \
+	src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_f32s_xpulpv2.c \
+	src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q32p_xpulpv2.c \
+	src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q32s_xpulpv2.c \
+	src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q16s_xpulpv2.c \
+	src/DistanceFunctions/plp_cosine_distance/kernels/plp_cosine_distance_f32p_xpulpv2.c \
+	src/DistanceFunctions/plp_cosine_distance/kernels/plp_cosine_distance_f32s_xpulpv2.c \
+	src/DistanceFunctions/plp_cosine_distance/kernels/plp_cosine_distance_q32s_xpulpv2.c \
+	src/DistanceFunctions/plp_cosine_distance/kernels/plp_cosine_distance_q16s_xpulpv2.c \
 
 
 IDIR=$(CURDIR)/include

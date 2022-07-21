@@ -1,16 +1,16 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_power_f32.c
- * Description:  Calculates the sum of squares of an input vector
+ * Title:        plp_power_f32p_xpulpv2.c
+ * Description:  Calculates the sum of squares on XPULPV2 cores
  *
- * $Date:        30.06.2020
+ * $Date:        22.03.2022
  *
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
  * Copyright (C) 2020 ETH Zurich and University of Bologna.
  *
- * Author: Moritz Scherer, ETH Zurich
+ * Author: Marco Bertuletti, ETH Zurich
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -30,11 +30,11 @@
 #include "plp_math.h"
 
 /**
-   @ingroup groupStats
+   @ingroup groupStat
 */
 
 /**
-   @defgroup power Power
+   @defgroup powerKernels Power Kernels
    Calculates the sum of squares of the input vector.
    There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data
    types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are
@@ -57,27 +57,28 @@
 */
 
 /**
-   @addtogroup power
+   @addtogroup powerKernels
    @{
 */
 
 /**
-   @brief         Glue code for sum of squares of a 32-bit float vector.
-   @param[in]     pSrc       points to the input vector
-   @param[in]     blockSize  number of samples in input vector
-   @param[out]    pRes    sum of squares returned here
-   @return        none
- */
+   @brief          Parallel sum of squares of a 32-bit float vector for XPULPV2 extension.
+   @param[in]  S   points to the instance structure for floating-point parallel power
+   @return         none
+*/
 
-void plp_power_f32(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes) {
+void plp_power_f32p_xpulpv2(void* S) {
 
-    if (hal_cluster_id() == ARCHI_FC_CID) {
-        plp_power_f32s_rv32im(pSrc, blockSize, pRes);
-    } else {
-        plp_power_f32s_xpulpv2(pSrc, blockSize, pRes);
+    float32_t *pSrc = (float32_t *)(((plp_power_instance_f32 *)S)->pSrc) + hal_core_id();
+    uint32_t blkSizePE = ((plp_power_instance_f32 *)S)->blkSizePE;
+    uint32_t nPE = ((plp_power_instance_f32 *)S)->nPE;
+    float32_t *resBufferPE = &(((plp_power_instance_f32 *)S)->resBuffer[hal_core_id()]);
+
+    uint32_t blkCnt = 0;
+    float32_t accum = 0.0f, tmp;
+    for (blkCnt = 0; blkCnt < blkSizePE; blkCnt++) {
+        tmp = pSrc[nPE * blkCnt];
+        accum += tmp*tmp;
     }
+    *resBufferPE = accum;
 }
-
-/**
-  @} end of power group
- */
