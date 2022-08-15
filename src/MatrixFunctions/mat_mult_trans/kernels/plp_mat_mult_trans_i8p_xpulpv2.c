@@ -3,15 +3,15 @@
  * Title:        plp_mat_mult_i8p_xpulpv2.c
  * Description:  parallel 8-bit integer matrix multiplication for XPULPV2
  *
- * $Date:        22. December 2019
- * $Revision:    V0
+ * $Date:        July. 2022
+ * $Revision:    V1
  *
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
  * Copyright (C) 2019 ETH Zurich and University of Bologna.
  *
- * Author: Tom Kuchler, ETH Zurich
+ * Author: Emmet Murphy, ETH Zurich
  *
  * SPDX-License-Identifier: Apache-2.0
  *
