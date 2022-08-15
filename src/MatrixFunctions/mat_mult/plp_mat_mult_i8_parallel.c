@@ -51,7 +51,6 @@
   @return     none
  */
 
-
 void plp_mat_mult_i8_parallel(const int8_t *__restrict__ pSrcA,
                               const int8_t *__restrict__ pSrcB,
                               uint32_t M,

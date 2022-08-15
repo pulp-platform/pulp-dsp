@@ -67,8 +67,6 @@ void plp_mat_mult_trans_i8p_xpulpv2(void *args) {
     uint32_t nPE = arguments->nPE;
     int32_t *__restrict__ pDstC = arguments->pDstC;
 
-
-
     uint32_t m; // loop counter for M
     uint32_t n; // loop counter for N
     uint32_t o; // loop counter for O
@@ -105,16 +103,16 @@ void plp_mat_mult_trans_i8p_xpulpv2(void *args) {
     uint32_t j = 0; // loop counter for N
     uint32_t k = 0; // loop counter for O
 
-    for(i = core_id; i < M; i += nPE){
-        for(k = 0; k < O / 4; k++){
+    for (i = core_id; i < M; i += nPE) {
+        for (k = 0; k < O / 4; k++) {
             int32_t sum0 = 0;
             int32_t sum1 = 0;
             int32_t sum2 = 0;
             int32_t sum3 = 0;
 
-
-            for(j = 0; j < N / 4; j++){
-                v4s aVec = *(v4s*)&(pSrcA[(i+ 0) * N + (j * 4)]);;
+            for (j = 0; j < N / 4; j++) {
+                v4s aVec = *(v4s *)&(pSrcA[(i + 0) * N + (j * 4)]);
+                ;
 
                 v4s bVec0 = *((v4s *)&(pSrcB[(k * 4 + 0) * N + (j * 4)]));
                 v4s bVec1 = *((v4s *)&(pSrcB[(k * 4 + 1) * N + (j * 4)]));
@@ -127,7 +125,7 @@ void plp_mat_mult_trans_i8p_xpulpv2(void *args) {
                 sum3 = __SUMDOTP4(aVec, bVec3, sum3);
             }
 
-            for(j = j * 4; j < N; j++){
+            for (j = j * 4; j < N; j++) {
                 int32_t aVal = pSrcA[i * N + j];
 
                 int32_t bVal0 = pSrcB[(k * 4 + 0) * N + j];
@@ -135,12 +133,10 @@ void plp_mat_mult_trans_i8p_xpulpv2(void *args) {
                 int32_t bVal2 = pSrcB[(k * 4 + 2) * N + j];
                 int32_t bVal3 = pSrcB[(k * 4 + 3) * N + j];
 
-
                 sum0 += aVal * bVal0;
                 sum1 += aVal * bVal1;
                 sum2 += aVal * bVal2;
                 sum3 += aVal * bVal3;
-
             }
 
             pDstC[i * O + (k * 4 + 0)] = sum0;
@@ -149,10 +145,10 @@ void plp_mat_mult_trans_i8p_xpulpv2(void *args) {
             pDstC[i * O + (k * 4 + 3)] = sum3;
         }
 
-        for(k = k * 4;k < O; k++){
+        for (k = k * 4; k < O; k++) {
             int32_t sum = 0;
 
-            for(j = 0; j < N/4; j++){
+            for (j = 0; j < N / 4; j++) {
                 v4s aVec = *((v4s *)&(pSrcA[i * N + (j * 4)]));
 
                 v4s bVec = *((v4s *)&(pSrcB[k * N + (j * 4)]));
@@ -160,11 +156,10 @@ void plp_mat_mult_trans_i8p_xpulpv2(void *args) {
                 sum = __SUMDOTP4(aVec, bVec, sum);
             }
 
-            for(j = j * 4; j < N; j++){
+            for (j = j * 4; j < N; j++) {
                 int32_t aVal = pSrcA[i * N + j];
 
                 int32_t bVal = pSrcB[k * N + j];
-
 
                 sum += aVal * bVal;
             }
@@ -174,10 +169,8 @@ void plp_mat_mult_trans_i8p_xpulpv2(void *args) {
     }
 }
 
-
 #endif
 //#undef BASIC_VERSION
-
 
 /**
    @} end of MatMultTransKernels group

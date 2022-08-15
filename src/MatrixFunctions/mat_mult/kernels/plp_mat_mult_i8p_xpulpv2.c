@@ -107,10 +107,10 @@ void plp_mat_mult_i8p_xpulpv2(void *args) {
     uint32_t core_id = hal_core_id();
     for (k = core_id; k < O / 4; k += nPE) {
 
-        //shuffled data not dependent on i
-        //preshuffle and store
-        v4s bVecs[(N/4)*4];
-        for(j = 0; j < N / 4; j++){
+        // shuffled data not dependent on i
+        // preshuffle and store
+        v4s bVecs[(N / 4) * 4];
+        for (j = 0; j < N / 4; j++) {
             v4s temp0 = *((v4s *)&(pSrcB[(j * 4) * O + (k * 4)]));
             v4s temp1 = *((v4s *)&(pSrcB[(j * 4 + 1) * O + (k * 4)]));
             v4s temp2 = *((v4s *)&(pSrcB[(j * 4 + 2) * O + (k * 4)]));
@@ -158,7 +158,7 @@ void plp_mat_mult_i8p_xpulpv2(void *args) {
                 sum13 = __SUMDOTP4(aVec1, bVec3, sum13);
             }
 
-            for(j = j * 4; j < N; j++){
+            for (j = j * 4; j < N; j++) {
                 int32_t aVal0 = pSrcA[(i * 2) * N + j];
                 int32_t aVal1 = pSrcA[(i * 2 + 1) * N + j];
 
@@ -187,7 +187,7 @@ void plp_mat_mult_i8p_xpulpv2(void *args) {
             pDstC[(i * 2 + 1) * O + (k * 4 + 3)] = sum13;
         }
 
-        for(i = i * 2; i < M; i++){
+        for (i = i * 2; i < M; i++) {
             int32_t sum00 = 0;
             int32_t sum01 = 0;
             int32_t sum02 = 0;
@@ -208,7 +208,7 @@ void plp_mat_mult_i8p_xpulpv2(void *args) {
                 sum03 = __SUMDOTP4(aVec0, bVec3, sum03);
             }
 
-            for(j = j * 4; j < N; j++){
+            for (j = j * 4; j < N; j++) {
                 int32_t aVal0 = pSrcA[i * N + j];
 
                 int32_t bVal0 = pSrcB[j * O + (k * 4)];
@@ -227,17 +227,16 @@ void plp_mat_mult_i8p_xpulpv2(void *args) {
             pDstC[i * O + (k * 4 + 2)] = sum02;
             pDstC[i * O + (k * 4 + 3)] = sum03;
         }
-        
     }
 
-    for(k = k * 4; k < O; k++){
-        for(i = 0; i < M/4; i++){
+    for (k = k * 4; k < O; k++) {
+        for (i = 0; i < M / 4; i++) {
             int32_t sum0 = 0;
             int32_t sum1 = 0;
             int32_t sum2 = 0;
             int32_t sum3 = 0;
 
-            for(j = 0; j < N; j++){
+            for (j = 0; j < N; j++) {
                 int32_t aVal0 = pSrcA[(i * 4) * N + j];
                 int32_t aVal1 = pSrcA[(i * 4 + 1) * N + j];
                 int32_t aVal2 = pSrcA[(i * 4 + 2) * N + j];
@@ -257,10 +256,10 @@ void plp_mat_mult_i8p_xpulpv2(void *args) {
             pDstC[(i * 4 + 3) * O + k] = sum3;
         }
 
-        for(i = i*4; i < M; i++){
+        for (i = i * 4; i < M; i++) {
             int32_t sum0 = 0;
 
-            for(j = 0; j < N; j++){
+            for (j = 0; j < N; j++) {
                 int32_t aVal0 = pSrcA[i * N + j];
                 int32_t bVal0 = pSrcB[j * O + k];
 

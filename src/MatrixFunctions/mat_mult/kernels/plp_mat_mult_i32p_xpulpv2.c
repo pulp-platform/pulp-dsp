@@ -100,7 +100,7 @@ void plp_mat_mult_i32p_xpulpv2(void *args) {
 
     int core_id = hal_core_id();
 
-    //printf("core id: %i, start: %i, end: %i\n", core_id, START, END);
+    // printf("core id: %i, start: %i, end: %i\n", core_id, START, END);
 
     for (k = core_id; k < O; k += nPE) {
         for (i = 0; i < M / 4; i++) {
@@ -127,12 +127,11 @@ void plp_mat_mult_i32p_xpulpv2(void *args) {
             pDstC[(i * 4 + 1) * O + k] = sum1;
             pDstC[(i * 4 + 2) * O + k] = sum2;
             pDstC[(i * 4 + 3) * O + k] = sum3;
-
         }
 
-        for(i = i * 4; i < M; i++){
+        for (i = i * 4; i < M; i++) {
             int32_t sum0 = 0;
-            for(j = 0; j < N; j++){
+            for (j = 0; j < N; j++) {
                 int32_t AVal = pSrcA[i * N + j];
                 int32_t BVal = pSrcB[j * O + k];
 
