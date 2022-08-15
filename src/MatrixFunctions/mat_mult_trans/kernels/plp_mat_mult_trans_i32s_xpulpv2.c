@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
- * Title:        plp_mat_mult_i32s_xpulpv2.c
- * Description:  32-bit integer matrix multiplication for XPULPV2
+ * Title:        plp_mat_mult_i32p_xpulpv2.c
+ * Description:  3parallel 2-bit integer matrix multiplication for XPULPV2
  *
  * $Date:        22. December 2019
  * $Revision:    V0
@@ -40,85 +40,53 @@
  */
 
 /**
-  @brief Matrix multiplication of 32-bit integer matrices kernel for XPULPV2 extension.
-  @param[in]  pSrcA     points to the first input matrix
-  @param[in]  pSrcB     points to the second input matrix
-  @param[in]  M         height of the first input matrix
-  @param[in]  N         width of the first input matrix and hight of the second
-  @param[in]  O         width of the second input matrix
-  @param[out] pDstC     points to the output matrix
-  @return     none
- */
+   @brief      Parallel matrix transposed matrix multiplication of a 32-bit integer matrices for
+               RV32IM extension.
+   @param[in]  args  pointer to plp_mat_mult_instance_i32 struct initialized by
+                     plp_mat_mult_i32_parallel
+   @return     none
+*/
 
-// define BASIC_VERSION // if used don't forget to also use the undefine at end of file
+void plp_mat_mult_trans_i32p_xpulpv2(void *args) {
 
+    int core_id = hal_core_id();
+
+    plp_mat_mult_instance_i32 *arguments = (plp_mat_mult_instance_i32 *)args;
+    const int32_t *__restrict__ pSrcA = arguments->pSrcA;
+    const int32_t *__restrict__ pSrcB = arguments->pSrcB;
+    uint32_t M = arguments->M;
+    uint32_t N = arguments->N;
+    uint32_t O = arguments->O;
+    uint32_t nPE = arguments->nPE;
+    int32_t *__restrict__ pDstC = arguments->pDstC;
+
+#define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 #ifdef BASIC_VERSION
 
-void plp_mat_mult_trans_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
-                                     const int32_t *__restrict__ pSrcB,
-                                     uint32_t M,
-                                     uint32_t N,
-                                     uint32_t O,
-                                     int32_t *__restrict__ pDstC) {
+    uint32_t m; // loop counter for M
+    uint32_t n; // loop counter for N
+    uint32_t o; // loop counter for O
 
-    uint32_t i; // loop counter
-    uint32_t j; // loop counter
-    uint32_t k; // loop counter
-
-    for (i = 0; i < M; i++) {
-        for (k = 0; k < O; k++) {
+    for (m = core_id; m < M; m += nPE) {
+        for (o = 0; o < O; o++) {
             int32_t sum = 0;
-            for (j = 0; j < N; j++) {
-                sum = sum + pSrcA[i * N + j] * pSrcB[k * N + j];
+            for (n = 0; n < N; n++) {
+                sum = sum + pSrcA[m * N + n] * pSrcB[o * N + n];
             }
-            pDstC[i * O + k] = sum;
+            pDstC[m * O + o] = sum;
         }
     }
-}
+
+    hal_team_barrier();
 
 #else
 
-void plp_mat_mult_trans_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
-                                     const int32_t *__restrict__ pSrcB,
-                                     uint32_t M,
-                                     uint32_t N,
-                                     uint32_t O,
-                                     int32_t *__restrict__ pDstC) {
-
-    uint32_t i; // loop counter
-    uint32_t j; // loop counter
-    uint32_t k; // loop counter
-
-    if (N & 0x1) {
-        for (i = 0; i < M; i++) {
-            for (k = 0; k < O; k++) {
-                int32_t sum1 = 0;
-                int32_t sum2 = 0;
-                for (j = 0; j < N / 2; j++) {
-                    sum1 = sum1 + pSrcA[i * N + j * 2] * pSrcB[k * N + j * 2];
-                    sum2 = sum2 + pSrcA[i * N + j * 2 + 1] * pSrcB[k * N + j * 2 + 1];
-                }
-                pDstC[i * O + k] = sum1 + sum2 + pSrcA[i * N + j * 2] * pSrcB[k * N + j * 2];
-            }
-        }
-    } else {
-        for (i = 0; i < M; i++) {
-            for (k = 0; k < O; k++) {
-                int32_t sum1 = 0;
-                int32_t sum2 = 0;
-                for (j = 0; j < N / 2; j++) {
-                    sum1 = sum1 + pSrcA[i * N + j * 2] * pSrcB[k * N + j * 2];
-                    sum2 = sum2 + pSrcA[i * N + j * 2 + 1] * pSrcB[k * N + j * 2 + 1];
-                }
-                pDstC[i * O + k] = sum1 + sum2;
-            }
-        }
-    }
-}
+    // TODO hackathon
 
 #endif
+#undef BASIC_VERSION
+}
 
-// undefine BASIC_VERSION
 /**
    @} end of MatMultTransKernels group
 */
