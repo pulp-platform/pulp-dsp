@@ -105,11 +105,11 @@ void plp_mat_mult_i8p_xpulpv2(void *args) {
     uint32_t k = 0; // loop counter for O
 
     uint32_t core_id = hal_core_id();
-
     for (k = core_id; k < O / 4; k += nPE) {
 
+        //shuffled data not dependent on i
+        //preshuffle and store
         v4s bVecs[(N/4)*4];
-
         for(j = 0; j < N / 4; j++){
             v4s temp0 = *((v4s *)&(pSrcB[(j * 4) * O + (k * 4)]));
             v4s temp1 = *((v4s *)&(pSrcB[(j * 4 + 1) * O + (k * 4)]));
@@ -270,61 +270,6 @@ void plp_mat_mult_i8p_xpulpv2(void *args) {
             pDstC[i * O + k] = sum0;
         }
     }
-
-    // // clean up code
-    // i = i * 2;
-    // j = j * 4;
-    // k = k * 4;
-    // // check if every index is nicely finished
-    // if (i == M && j == N && k >= O) {
-
-    // } else {
-    //     uint32_t iEnd = i;
-    //     uint32_t jEnd = j;
-    //     uint32_t kEnd = k >= O ? O : k;
-
-    //     //clean up for j
-    //     // if (jEnd != N) {
-    //     //     for (k = core_id * 4; k < kEnd; k += nPE * 4) {
-    //     //         for (int step = 0; step < 4; step++) {
-    //     //             for (i = 0; i < iEnd; i++) {
-    //     //                 int32_t sum = 0;
-    //     //                 for (j = jEnd; j < N; j++) {
-    //     //                     sum = sum + pSrcA[i * N + j] * pSrcB[j * O + k + step];
-    //     //                 }
-    //     //                 pDstC[i * O + k + step] += sum;
-    //     //             }
-    //     //         }
-    //     //     }
-    //     // }
-
-    //     //clean up for i
-    //     // if (iEnd != M) {
-    //     //     for (k = core_id * 4; k < kEnd; k += nPE * 4) {
-    //     //         for (int step = 0; step < 4; step++) {
-    //     //             for (i = iEnd; i < M; i++) {
-    //     //                 int32_t sum = 0;
-    //     //                 for (j = 0; j < N; j++) {
-    //     //                     sum = sum + pSrcA[i * N + j] * pSrcB[j * O + k + step];
-    //     //                 }
-    //     //                 pDstC[i * O + k + step] = sum;
-    //     //             }
-    //     //         }
-    //     //     }
-    //     // }
-
-    //     // clean up for k
-    //     // for (k = kEnd; k < O; k++) {
-    //     //     for (i = 0; i < M; i++) {
-    //     //         int32_t sum = 0;
-    //     //         for (j = 0; j < N; j++) {
-    //     //             sum = sum + pSrcA[i * N + j] * pSrcB[j * O + k];
-    //     //         }
-    //     //         pDstC[i * O + k] = sum;
-    //     //     }
-    //     // }
-    // }
-
     hal_team_barrier();
 }
 

@@ -51,6 +51,11 @@
   @return     none
  */
 
+HAL_CL_L1 static v4s mask0 = { 0, 1, 4, 5 };
+HAL_CL_L1 static v4s mask1 = { 2, 3, 6, 7 };
+HAL_CL_L1 static v4s mask2 = { 0, 2, 4, 6 };
+HAL_CL_L1 static v4s mask3 = { 1, 3, 5, 7 };
+
 void plp_mat_mult_i8_parallel(const int8_t *__restrict__ pSrcA,
                               const int8_t *__restrict__ pSrcB,
                               uint32_t M,
@@ -63,6 +68,7 @@ void plp_mat_mult_i8_parallel(const int8_t *__restrict__ pSrcA,
         printf("parallel processing supported only for cluster side\n");
         return;
     } else {
+
         plp_mat_mult_instance_i8 args = {
             .pSrcA = pSrcA, .pSrcB = pSrcB, .M = M, .N = N, .O = O, .nPE = nPE, .pDstC = pDstC
         };
