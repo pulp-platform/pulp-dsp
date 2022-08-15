@@ -47,6 +47,10 @@
    @return     none
 */
 
+//#define BASIC_VERSION // if used don't forget to also use the undefine at end of file
+#ifdef BASIC_VERSION
+
+
 void plp_mat_mult_trans_i32p_xpulpv2(void *args) {
 
     int core_id = hal_core_id();
@@ -60,8 +64,6 @@ void plp_mat_mult_trans_i32p_xpulpv2(void *args) {
     uint32_t nPE = arguments->nPE;
     int32_t *__restrict__ pDstC = arguments->pDstC;
 
-#define BASIC_VERSION // if used don't forget to also use the undefine at end of file
-#ifdef BASIC_VERSION
 
     uint32_t m; // loop counter for M
     uint32_t n; // loop counter for N
@@ -79,13 +81,14 @@ void plp_mat_mult_trans_i32p_xpulpv2(void *args) {
 
     hal_team_barrier();
 
+}
+
 #else
 
-    // TODO hackathon
 
 #endif
-#undef BASIC_VERSION
-}
+//#undef BASIC_VERSION
+
 
 /**
    @} end of MatMultTransKernels group
