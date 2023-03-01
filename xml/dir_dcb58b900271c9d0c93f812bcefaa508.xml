@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_dcb58b900271c9d0c93f812bcefaa508" kind="dir">
+    <compoundname>/github/workspace/src/BasicMathFunctions/offset</compoundname>
+    <innerdir refid="dir_8d6e128fc136f22ed2e9842083384676">/github/workspace/src/BasicMathFunctions/offset/kernels</innerdir>
+    <innerfile refid="plp__offset__f32_8c">plp_offset_f32.c</innerfile>
+    <innerfile refid="plp__offset__i16_8c">plp_offset_i16.c</innerfile>
+    <innerfile refid="plp__offset__i32_8c">plp_offset_i32.c</innerfile>
+    <innerfile refid="plp__offset__i8_8c">plp_offset_i8.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/BasicMathFunctions/offset/"/>
+  </compounddef>
+</doxygen>

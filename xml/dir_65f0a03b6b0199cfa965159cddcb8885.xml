@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_65f0a03b6b0199cfa965159cddcb8885" kind="dir">
+    <compoundname>/github/workspace/src/MatrixFunctionsStride/mat_fill_stride</compoundname>
+    <innerdir refid="dir_4ff10f0c468e6c9cf695e058e55ef477">/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/kernels</innerdir>
+    <innerfile refid="plp__mat__fill__stride__f32_8c">plp_mat_fill_stride_f32.c</innerfile>
+    <innerfile refid="plp__mat__fill__stride__f32__parallel_8c">plp_mat_fill_stride_f32_parallel.c</innerfile>
+    <innerfile refid="plp__mat__fill__stride__i16_8c">plp_mat_fill_stride_i16.c</innerfile>
+    <innerfile refid="plp__mat__fill__stride__i16__parallel_8c">plp_mat_fill_stride_i16_parallel.c</innerfile>
+    <innerfile refid="plp__mat__fill__stride__i32_8c">plp_mat_fill_stride_i32.c</innerfile>
+    <innerfile refid="plp__mat__fill__stride__i32__parallel_8c">plp_mat_fill_stride_i32_parallel.c</innerfile>
+    <innerfile refid="plp__mat__fill__stride__i8_8c">plp_mat_fill_stride_i8.c</innerfile>
+    <innerfile refid="plp__mat__fill__stride__i8__parallel_8c">plp_mat_fill_stride_i8_parallel.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/"/>
+  </compounddef>
+</doxygen>

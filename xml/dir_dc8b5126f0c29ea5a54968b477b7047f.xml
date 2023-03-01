@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_dc8b5126f0c29ea5a54968b477b7047f" kind="dir">
+    <compoundname>/github/workspace/src/BasicMathFunctions/log/kernels</compoundname>
+    <innerfile refid="plp__log__f32p__xpulpv2_8c">plp_log_f32p_xpulpv2.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/BasicMathFunctions/log/kernels/"/>
+  </compounddef>
+</doxygen>

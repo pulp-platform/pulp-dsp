@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_6109bdce413620c94cf38989d62b837a" kind="dir">
+    <compoundname>/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels</compoundname>
+    <innerfile refid="plp__euclidean__distance__f32p__xpulpv2_8c">plp_euclidean_distance_f32p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__euclidean__distance__f32s__rv32im_8c">plp_euclidean_distance_f32s_rv32im.c</innerfile>
+    <innerfile refid="plp__euclidean__distance__f32s__xpulpv2_8c">plp_euclidean_distance_f32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__euclidean__distance__q16s__rv32im_8c">plp_euclidean_distance_q16s_rv32im.c</innerfile>
+    <innerfile refid="plp__euclidean__distance__q16s__xpulpv2_8c">plp_euclidean_distance_q16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__euclidean__distance__q32p__xpulpv2_8c">plp_euclidean_distance_q32p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__euclidean__distance__q32s__rv32im_8c">plp_euclidean_distance_q32s_rv32im.c</innerfile>
+    <innerfile refid="plp__euclidean__distance__q32s__xpulpv2_8c">plp_euclidean_distance_q32s_xpulpv2.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/"/>
+  </compounddef>
+</doxygen>

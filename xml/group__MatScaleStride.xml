@@ -1,0 +1,981 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__MatScaleStride" kind="group">
+    <compoundname>MatScaleStride</compoundname>
+    <title>Strided Matrix Scale</title>
+    <innergroup refid="group__MatScaleStrideKernels">Strided Matrix Scale Kernels</innergroup>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__MatScaleStride_1ga5d17cc24935d44213a064515b8700b17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_stride_f32</definition>
+        <argsstring>(const float *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t strideSrc, uint32_t strideDst, float scaleFactor, float *__restrict__ pDst)</argsstring>
+        <name>plp_mat_scale_stride_f32</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideDst</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for strided matrix scale of 32-bit floating-point matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for strided matrix scale of a 32-bit floating-point matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of input matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to mulitply all elements </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_f32.c" line="54" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_f32.c" bodystart="54" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleStride_1ga7d9ff9af145bf889ec8d573468b3cfde" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_stride_f32_parallel</definition>
+        <argsstring>(const float *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t strideSrc, uint32_t strideDst, float scaleFactor, uint32_t nPE, float *__restrict__ pDst)</argsstring>
+        <name>plp_mat_scale_stride_f32_parallel</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideDst</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel strided matrix scale of 32-bit floating-point matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel strided matrix scale of a 32-bit floating-point matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of input matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to mulitply all elements </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use for computation </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_f32_parallel.c" line="55" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_f32_parallel.c" bodystart="55" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleStride_1ga909ea9373ae6d8ee963ea67e8456c472" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_stride_i16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t strideSrc, uint32_t strideDst, int16_t scaleFactor, int32_t shift, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_scale_stride_i16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideDst</declname>
+        </param>
+        <param>
+          <type>int16_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for strided matrix scale of 16-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for strided matrix scale of a 16-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of input matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to mulitply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift each element </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i16.c" line="83" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i16.c" bodystart="83" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleStride_1ga7f87f65631821fe13e8aebe05a35df6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_stride_i16_parallel</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t strideSrc, uint32_t strideDst, int16_t scaleFactor, int32_t shift, uint32_t nPE, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_scale_stride_i16_parallel</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideDst</declname>
+        </param>
+        <param>
+          <type>int16_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel strided matrix scale of 16-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel strided matrix scale of a 16-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of input matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to mulitply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift each element </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use for computation </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i16_parallel.c" line="56" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i16_parallel.c" bodystart="56" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleStride_1ga59dbbec297c16dceb249d2b7e5eeaf6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_stride_i32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t strideSrc, uint32_t strideDst, int32_t scaleFactor, int32_t shift, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_scale_stride_i32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideDst</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for strided matrix scale of 16-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for strided matrix scale of a 32-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of input matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to mulitply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift each element </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i32.c" line="55" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i32.c" bodystart="55" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleStride_1ga2544307dc2837450f663ab4faf954ef0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_stride_i32_parallel</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t strideSrc, uint32_t strideDst, int32_t scaleFactor, int32_t shift, uint32_t nPE, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_scale_stride_i32_parallel</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideDst</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel strided matrix scale of 16-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel strided matrix scale of a 32-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of input matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to mulitply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use for computation </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift each element </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i32_parallel.c" line="56" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i32_parallel.c" bodystart="56" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleStride_1gae99be6b489ca9a44e958c3469f4c93fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_stride_i8</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t strideSrc, uint32_t strideDst, int8_t scaleFactor, int32_t shift, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_scale_stride_i8</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideDst</declname>
+        </param>
+        <param>
+          <type>int8_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for strided matrix scale of 16-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for strided matrix scale of a 8-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of input matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to mulitply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift each element </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i8.c" line="55" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i8.c" bodystart="55" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleStride_1ga612569dda401f17a0c9bba96836e717d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_stride_i8_parallel</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t strideSrc, uint32_t strideDst, int8_t scaleFactor, int32_t shift, uint32_t nPE, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_scale_stride_i8_parallel</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideDst</declname>
+        </param>
+        <param>
+          <type>int8_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel strided matrix scale of 16-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel strided matrix scale of a 8-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of input matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to mulitply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift each element </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use for computation </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i8_parallel.c" line="56" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_scale_stride/plp_mat_scale_stride_i8_parallel.c" bodystart="56" bodyend="82"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the glue code for strided matrix scale. The kernel codes (kernels) are in the Module strided matrix scale Kernels.</para>
+<para>The Matrix Scale applies a scalar multiplication, followed by a bitshift operation to every element in the matrix. For floating-point implementations, the bitshift operation is not applied. <verbatim>`pDst[m,n] = (pSrc[m,n] * scale) &gt;&gt; shift`
+</verbatim> There are functions for integer 32- 16- and 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.</para>
+<para>The naming scheme of the functions follows the following pattern (for example <computeroutput>plp_mat_scale_stride_i32</computeroutput>): <verbatim>`plp_&lt;function name&gt;_&lt;data type&gt;&lt;precision&gt;[_parallel]`
+</verbatim> <table rows="4" cols="2"><row>
+<entry thead="yes"><para>name   </para>
+</entry><entry thead="yes"><para>description    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>function_name   </para>
+</entry><entry thead="no"><para><computeroutput>mat_scale_stride</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>data type   </para>
+</entry><entry thead="no"><para>{f, i, q} respectively for floats, integers, fixed points    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>precision   </para>
+</entry><entry thead="no"><para>{32, 16, 8} bits   </para>
+</entry></row>
+</table>
+</para>
+<para>The <computeroutput>strideX</computeroutput> argument tells how many elements are in between the start of each row of the matrix. In other words, it is the width of the original matrix. <ref refid="group__groupMatrixStride" kindref="compound">Strided Matrix operations</ref> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

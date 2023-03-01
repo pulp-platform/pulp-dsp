@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_116a3fa5b6891027e83bc1a5d7e3f914" kind="dir">
+    <compoundname>/github/workspace/src/ComplexMathFunctions/kernels</compoundname>
+    <innerfile refid="plp__cmplx__conj__f32__xpulpv2_8c">plp_cmplx_conj_f32_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__conj__i16__rv32im_8c">plp_cmplx_conj_i16_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__conj__i16__xpulpv2_8c">plp_cmplx_conj_i16_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__conj__i32__rv32im_8c">plp_cmplx_conj_i32_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__conj__i32__xpulpv2_8c">plp_cmplx_conj_i32_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__conj__i8__rv32im_8c">plp_cmplx_conj_i8_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__conj__i8__xpulpv2_8c">plp_cmplx_conj_i8_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__dot__prod__f32__xpulpv2_8c">plp_cmplx_dot_prod_f32_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__dot__prod__i16__rv32im_8c">plp_cmplx_dot_prod_i16_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__dot__prod__i16__xpulpv2_8c">plp_cmplx_dot_prod_i16_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__dot__prod__i32__rv32im_8c">plp_cmplx_dot_prod_i32_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__dot__prod__i32__xpulpv2_8c">plp_cmplx_dot_prod_i32_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__dot__prod__i8__rv32im_8c">plp_cmplx_dot_prod_i8_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__dot__prod__i8__xpulpv2_8c">plp_cmplx_dot_prod_i8_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__dot__prod__q16__rv32im_8c">plp_cmplx_dot_prod_q16_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__dot__prod__q16__xpulpv2_8c">plp_cmplx_dot_prod_q16_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__dot__prod__q32__rv32im_8c">plp_cmplx_dot_prod_q32_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__dot__prod__q32__xpulpv2_8c">plp_cmplx_dot_prod_q32_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__f32s__xpulpv2_8c">plp_cmplx_mag_f32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__i16s__rv32im_8c">plp_cmplx_mag_i16s_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__i16s__xpulpv2_8c">plp_cmplx_mag_i16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__i32s__rv32im_8c">plp_cmplx_mag_i32s_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__i32s__xpulpv2_8c">plp_cmplx_mag_i32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__i8s__rv32im_8c">plp_cmplx_mag_i8s_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__i8s__xpulpv2_8c">plp_cmplx_mag_i8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__q16s__rv32im_8c">plp_cmplx_mag_q16s_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__q16s__xpulpv2_8c">plp_cmplx_mag_q16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__q32s__rv32im_8c">plp_cmplx_mag_q32s_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__q32s__xpulpv2_8c">plp_cmplx_mag_q32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__q8s__rv32im_8c">plp_cmplx_mag_q8s_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__q8s__xpulpv2_8c">plp_cmplx_mag_q8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__squared__f32__xpulpv2_8c">plp_cmplx_mag_squared_f32_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__squared__i16__rv32im_8c">plp_cmplx_mag_squared_i16_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__squared__i16__xpulpv2_8c">plp_cmplx_mag_squared_i16_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__squared__i32__rv32im_8c">plp_cmplx_mag_squared_i32_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__squared__i32__xpulpv2_8c">plp_cmplx_mag_squared_i32_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__squared__i8__rv32im_8c">plp_cmplx_mag_squared_i8_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__squared__i8__xpulpv2_8c">plp_cmplx_mag_squared_i8_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__squared__q16__rv32im_8c">plp_cmplx_mag_squared_q16_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__squared__q16__xpulpv2_8c">plp_cmplx_mag_squared_q16_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__squared__q32__rv32im_8c">plp_cmplx_mag_squared_q32_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__squared__q32__xpulpv2_8c">plp_cmplx_mag_squared_q32_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__squared__q8__rv32im_8c">plp_cmplx_mag_squared_q8_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mag__squared__q8__xpulpv2_8c">plp_cmplx_mag_squared_q8_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__cmplx__f32__xpulpv2_8c">plp_cmplx_mult_cmplx_f32_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__cmplx__i16__rv32im_8c">plp_cmplx_mult_cmplx_i16_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__cmplx__i16__xpulpv2_8c">plp_cmplx_mult_cmplx_i16_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__cmplx__i32__rv32im_8c">plp_cmplx_mult_cmplx_i32_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__cmplx__i32__xpulpv2_8c">plp_cmplx_mult_cmplx_i32_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__cmplx__i8__rv32im_8c">plp_cmplx_mult_cmplx_i8_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__cmplx__i8__xpulpv2_8c">plp_cmplx_mult_cmplx_i8_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__cmplx__q16__rv32im_8c">plp_cmplx_mult_cmplx_q16_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__cmplx__q16__xpulpv2_8c">plp_cmplx_mult_cmplx_q16_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__cmplx__q32__rv32im_8c">plp_cmplx_mult_cmplx_q32_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__cmplx__q32__xpulpv2_8c">plp_cmplx_mult_cmplx_q32_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__cmplx__q8__rv32im_8c">plp_cmplx_mult_cmplx_q8_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__cmplx__q8__xpulpv2_8c">plp_cmplx_mult_cmplx_q8_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__real__f32__xpulpv2_8c">plp_cmplx_mult_real_f32_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__real__i16__rv32im_8c">plp_cmplx_mult_real_i16_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__real__i16__xpulpv2_8c">plp_cmplx_mult_real_i16_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__real__i32__rv32im_8c">plp_cmplx_mult_real_i32_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__real__i32__xpulpv2_8c">plp_cmplx_mult_real_i32_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__real__i8__rv32im_8c">plp_cmplx_mult_real_i8_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__real__i8__xpulpv2_8c">plp_cmplx_mult_real_i8_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__real__q16__rv32im_8c">plp_cmplx_mult_real_q16_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__real__q16__xpulpv2_8c">plp_cmplx_mult_real_q16_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__real__q32__rv32im_8c">plp_cmplx_mult_real_q32_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__real__q32__xpulpv2_8c">plp_cmplx_mult_real_q32_xpulpv2.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__real__q8__rv32im_8c">plp_cmplx_mult_real_q8_rv32im.c</innerfile>
+    <innerfile refid="plp__cmplx__mult__real__q8__xpulpv2_8c">plp_cmplx_mult_real_q8_xpulpv2.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/ComplexMathFunctions/kernels/"/>
+  </compounddef>
+</doxygen>

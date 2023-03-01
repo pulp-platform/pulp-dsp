@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_ce685a79dbf07864cbc6f5f774242679" kind="dir">
+    <compoundname>/github/workspace/src/MatrixFunctions/mat_mult</compoundname>
+    <innerdir refid="dir_03b6dc69c12d14aeeb82a49284b2ff5c">/github/workspace/src/MatrixFunctions/mat_mult/kernels</innerdir>
+    <innerfile refid="plp__mat__mult__f32_8c">plp_mat_mult_f32.c</innerfile>
+    <innerfile refid="plp__mat__mult__f32__parallel_8c">plp_mat_mult_f32_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__i16_8c">plp_mat_mult_i16.c</innerfile>
+    <innerfile refid="plp__mat__mult__i16__parallel_8c">plp_mat_mult_i16_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__i32_8c">plp_mat_mult_i32.c</innerfile>
+    <innerfile refid="plp__mat__mult__i32__parallel_8c">plp_mat_mult_i32_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__i8_8c">plp_mat_mult_i8.c</innerfile>
+    <innerfile refid="plp__mat__mult__i8__parallel_8c">plp_mat_mult_i8_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__q16_8c">plp_mat_mult_q16.c</innerfile>
+    <innerfile refid="plp__mat__mult__q16__parallel_8c">plp_mat_mult_q16_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__q32_8c">plp_mat_mult_q32.c</innerfile>
+    <innerfile refid="plp__mat__mult__q32__parallel_8c">plp_mat_mult_q32_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__q8_8c">plp_mat_mult_q8.c</innerfile>
+    <innerfile refid="plp__mat__mult__q8__parallel_8c">plp_mat_mult_q8_parallel.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/MatrixFunctions/mat_mult/"/>
+  </compounddef>
+</doxygen>

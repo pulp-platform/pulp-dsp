@@ -1,0 +1,284 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__sqrtKernels" kind="group">
+    <compoundname>sqrtKernels</compoundname>
+    <title>Sqrt Kernels</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__sqrtKernels_1gae7c737b7ee35477dffa3d334e73724d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_sqrt_f32s_rv32im</definition>
+        <argsstring>(const float *__restrict__ pSrc, float *__restrict__ pRes)</argsstring>
+        <name>plp_sqrt_f32s_rv32im</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Square root of a 32-bit floating point number for RV32IM. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Square root returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FastMathFunctions/kernels/plp_sqrt_f32s_rv32im.c" line="57" column="6" bodyfile="/github/workspace/src/FastMathFunctions/kernels/plp_sqrt_f32s_rv32im.c" bodystart="57" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="group__sqrtKernels_1ga678f41ff9b40fabe9aee3fa1f4a8df6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_sqrt_f32s_xpulpv2</definition>
+        <argsstring>(const float *__restrict__ pSrc, float *__restrict__ pRes)</argsstring>
+        <name>plp_sqrt_f32s_xpulpv2</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Square root of a 32-bit floating point number for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Kernel for square root of a 32-bit floating point number.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Square root returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FastMathFunctions/kernels/plp_sqrt_f32s_xpulpv2.c" line="57" column="6" bodyfile="/github/workspace/src/FastMathFunctions/kernels/plp_sqrt_f32s_xpulpv2.c" bodystart="57" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="group__sqrtKernels_1ga4bba0abdb43801ea0d5e1981c4001654" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_sqrt_q16s_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, const uint32_t fracBits, int16_t *__restrict__ pRes)</argsstring>
+        <name>plp_sqrt_q16s_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Square root of a 16-bit fixed point number for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Square root of a 16-bit fixed point number for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Square root returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FastMathFunctions/kernels/plp_sqrt_q16s_rv32im.c" line="59" column="6" bodyfile="/github/workspace/src/FastMathFunctions/kernels/plp_sqrt_q16s_rv32im.c" bodystart="59" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="group__sqrtKernels_1ga4dfd45d0c2afc849858fb2f4a9349932" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_sqrt_q16s_xpulpv2</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, const uint32_t fracBits, int16_t *__restrict__ pRes)</argsstring>
+        <name>plp_sqrt_q16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Square root of a 16-bit fixed point number for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Square root returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FastMathFunctions/kernels/plp_sqrt_q16s_xpulpv2.c" line="60" column="6" bodyfile="/github/workspace/src/FastMathFunctions/kernels/plp_sqrt_q16s_xpulpv2.c" bodystart="60" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="group__sqrtKernels_1ga1c10fefcc7a0220a175b602af4e09543" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_sqrt_q32s_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, const uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_sqrt_q32s_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Square root of a 32-bit fixed point number for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Square root of a 32-bit fixed point number for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Square root returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FastMathFunctions/kernels/plp_sqrt_q32s_rv32im.c" line="54" column="6" bodyfile="/github/workspace/src/FastMathFunctions/kernels/plp_sqrt_q32s_rv32im.c" bodystart="54" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="group__sqrtKernels_1ga4d0a1caf4746bc75d091603b21f8c784" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_sqrt_q32s_xpulpv2</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, const uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_sqrt_q32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Square root of a 32-bit fixed point number for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Square root returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FastMathFunctions/kernels/plp_sqrt_q32s_xpulpv2.c" line="54" column="6" bodyfile="/github/workspace/src/FastMathFunctions/kernels/plp_sqrt_q32s_xpulpv2.c" bodystart="54" bodyend="87"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

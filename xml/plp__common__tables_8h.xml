@@ -1,0 +1,1452 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="plp__common__tables_8h" kind="file" language="C++">
+    <compoundname>plp_common_tables.h</compoundname>
+    <includes refid="plp__math_8h" local="yes">plp_math.h</includes>
+    <includedby refid="plp__const__structs_8h" local="yes">/github/workspace/include/plp_const_structs.h</includedby>
+    <includedby refid="plp__common__tables_8c" local="yes">/github/workspace/src/CommonTables/plp_common_tables.c</includedby>
+    <includedby refid="plp__const__structs_8c" local="yes">/github/workspace/src/CommonTables/plp_const_structs.c</includedby>
+    <includedby refid="plp__cos__f32s__xpulpv2_8c" local="yes">/github/workspace/src/FastMathFunctions/kernels/plp_cos_f32s_xpulpv2.c</includedby>
+    <includedby refid="plp__cos__q16s__rv32im_8c" local="yes">/github/workspace/src/FastMathFunctions/kernels/plp_cos_q16s_rv32im.c</includedby>
+    <includedby refid="plp__cos__q16s__xpulpv2_8c" local="yes">/github/workspace/src/FastMathFunctions/kernels/plp_cos_q16s_xpulpv2.c</includedby>
+    <includedby refid="plp__cos__q32s__rv32im_8c" local="yes">/github/workspace/src/FastMathFunctions/kernels/plp_cos_q32s_rv32im.c</includedby>
+    <includedby refid="plp__cos__q32s__xpulpv2_8c" local="yes">/github/workspace/src/FastMathFunctions/kernels/plp_cos_q32s_xpulpv2.c</includedby>
+    <includedby refid="plp__sin__f32s__xpulpv2_8c" local="yes">/github/workspace/src/FastMathFunctions/kernels/plp_sin_f32s_xpulpv2.c</includedby>
+    <includedby refid="plp__sin__q16s__rv32im_8c" local="yes">/github/workspace/src/FastMathFunctions/kernels/plp_sin_q16s_rv32im.c</includedby>
+    <includedby refid="plp__sin__q16s__xpulpv2_8c" local="yes">/github/workspace/src/FastMathFunctions/kernels/plp_sin_q16s_xpulpv2.c</includedby>
+    <includedby refid="plp__sin__q32s__rv32im_8c" local="yes">/github/workspace/src/FastMathFunctions/kernels/plp_sin_q32s_rv32im.c</includedby>
+    <includedby refid="plp__sin__q32s__xpulpv2_8c" local="yes">/github/workspace/src/FastMathFunctions/kernels/plp_sin_q32s_xpulpv2.c</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>/github/workspace/include/plp_common_tables.h</label>
+        <link refid="plp__common__tables_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>plp_math.h</label>
+        <link refid="plp__math_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rtos_hal.h</label>
+        <link refid="rtos__hal_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>math.h</label>
+      </node>
+      <node id="5">
+        <label>rt/rt_api.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/github/workspace/include/plp_common_tables.h</label>
+        <link refid="plp__common__tables_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/github/workspace/include/plp_const_structs.h</label>
+        <link refid="plp__const__structs_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/github/workspace/src/CommonTables/plp_common_tables.c</label>
+        <link refid="plp__common__tables_8c"/>
+      </node>
+      <node id="3">
+        <label>/github/workspace/src/CommonTables/plp_const_structs.c</label>
+        <link refid="plp__const__structs_8c"/>
+      </node>
+      <node id="4">
+        <label>/github/workspace/src/CommonTables/plp_dwt_structs.c</label>
+        <link refid="plp__dwt__structs_8c"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="plp__common__tables_8h_1a3d6c26bd1360ecc99c3e89f92622e0bb" prot="public" static="no">
+        <name>PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH</name>
+        <initializer>((uint16_t)12)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="52" column="9" bodyfile="/github/workspace/include/plp_common_tables.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="plp__common__tables_8h_1a082674558b0d1f9eb60616377023dbfa" prot="public" static="no">
+        <name>PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH</name>
+        <initializer>((uint16_t)24)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="53" column="9" bodyfile="/github/workspace/include/plp_common_tables.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="plp__common__tables_8h_1ac459b1e4d3e717cdae290503e7b491c6" prot="public" static="no">
+        <name>PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH</name>
+        <initializer>((uint16_t)56)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="54" column="9" bodyfile="/github/workspace/include/plp_common_tables.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="plp__common__tables_8h_1a978a5a427dc86a71c31a4e5dde1a9c63" prot="public" static="no">
+        <name>PLPBITREVINDEXTABLE_FIXED_128_TABLE_LENGTH</name>
+        <initializer>((uint16_t)112)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="55" column="9" bodyfile="/github/workspace/include/plp_common_tables.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="plp__common__tables_8h_1a904b686a0cf2c2ac0494853b52581b1b" prot="public" static="no">
+        <name>PLPBITREVINDEXTABLE_FIXED_256_TABLE_LENGTH</name>
+        <initializer>((uint16_t)240)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="56" column="9" bodyfile="/github/workspace/include/plp_common_tables.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="plp__common__tables_8h_1a5cb0640ca1a9787d48b2aea4547e0712" prot="public" static="no">
+        <name>PLPBITREVINDEXTABLE_FIXED_512_TABLE_LENGTH</name>
+        <initializer>((uint16_t)480)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="57" column="9" bodyfile="/github/workspace/include/plp_common_tables.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="plp__common__tables_8h_1a2409861c9fe09d5b2452e7fe6b4a6130" prot="public" static="no">
+        <name>PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH</name>
+        <initializer>((uint16_t)992)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="58" column="9" bodyfile="/github/workspace/include/plp_common_tables.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="plp__common__tables_8h_1a97b05818459ab31121d5c8bc104ec05e" prot="public" static="no">
+        <name>PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH</name>
+        <initializer>((uint16_t)1984)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="59" column="9" bodyfile="/github/workspace/include/plp_common_tables.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="plp__common__tables_8h_1ab8991ad15b84864b8cf18601d5212723" prot="public" static="no">
+        <name>PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH</name>
+        <initializer>((uint16_t)4032)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="60" column="9" bodyfile="/github/workspace/include/plp_common_tables.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="plp__common__tables_8h_1a103b1a04c61ca126cc7cbe6e5f8a2f22" prot="public" static="no" mutable="no">
+        <type>const int16_t</type>
+        <definition>const int16_t twiddleCoef_16_q16[24]</definition>
+        <argsstring>[24]</argsstring>
+        <name>twiddleCoef_16_q16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="par"><title></title><para>Example code for q15 Twiddle factors Generation:: </para>
+</simplesect>
+<simplesect kind="par"><title></title><para><preformatted>fori = 0; i&lt; 3N/4; i++)
+{
+   twiddleCoefq15[2*i]   = cos(i * 2*PI/(float)N);
+   twiddleCoefq15[2*i+1] = sin(i * 2*PI/(float)N);
+} </preformatted> </para>
+</simplesect>
+<simplesect kind="par"><title></title><para>where N = 16, PI = 3.14159265358979 </para>
+</simplesect>
+<simplesect kind="par"><title></title><para>Cos and Sin values are interleaved fashion </para>
+</simplesect>
+<simplesect kind="par"><title></title><para>Convert Floating point to q15(Fixed point 1.15): round(twiddleCoefq15(i) * pow(2, 15)) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="32" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="45" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="32" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1ae10424796d47eb561ad8b7fe70b11b30" prot="public" static="no" mutable="no">
+        <type>const int16_t</type>
+        <definition>const int16_t twiddleCoef_32_q16[48]</definition>
+        <argsstring>[48]</argsstring>
+        <name>twiddleCoef_32_q16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="33" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="53" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="33" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a3093e5fb23bc52199291f8f61f2b7d55" prot="public" static="no" mutable="no">
+        <type>const int16_t</type>
+        <definition>const int16_t twiddleCoef_64_q16[96]</definition>
+        <argsstring>[96]</argsstring>
+        <name>twiddleCoef_64_q16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="34" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="66" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="34" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1af496623089a25c34e65875536dbddd29" prot="public" static="no" mutable="no">
+        <type>const int16_t</type>
+        <definition>const int16_t twiddleCoef_128_q16[192]</definition>
+        <argsstring>[192]</argsstring>
+        <name>twiddleCoef_128_q16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="35" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="89" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="35" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1ac50c0fe7f91c7c80e79b0c3c915de6dd" prot="public" static="no" mutable="no">
+        <type>const int16_t</type>
+        <definition>const int16_t twiddleCoef_256_q16[384]</definition>
+        <argsstring>[384]</argsstring>
+        <name>twiddleCoef_256_q16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="36" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="131" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="36" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a6afe78bc7e5d5ba624717ccd871aa653" prot="public" static="no" mutable="no">
+        <type>const int16_t</type>
+        <definition>const int16_t twiddleCoef_512_q16[768]</definition>
+        <argsstring>[768]</argsstring>
+        <name>twiddleCoef_512_q16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="37" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="211" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="37" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a3fb595dfaf46a9335c2400f284c5240d" prot="public" static="no" mutable="no">
+        <type>const int16_t</type>
+        <definition>const int16_t twiddleCoef_1024_q16[1536]</definition>
+        <argsstring>[1536]</argsstring>
+        <name>twiddleCoef_1024_q16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="38" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="368" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="38" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a1f6bc26f493eb05700f23abcaffdd2d8" prot="public" static="no" mutable="no">
+        <type>const int16_t</type>
+        <definition>const int16_t twiddleCoef_2048_q16[3072]</definition>
+        <argsstring>[3072]</argsstring>
+        <name>twiddleCoef_2048_q16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="39" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="679" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="39" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a9a13ce0eb82b89248a747e7706d51c33" prot="public" static="no" mutable="no">
+        <type>const int16_t</type>
+        <definition>const int16_t twiddleCoef_4096_q16[6144]</definition>
+        <argsstring>[6144]</argsstring>
+        <name>twiddleCoef_4096_q16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="40" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="1297" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="40" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a4113e0b8a8bc5955dd34838db52b2190" prot="public" static="no" mutable="no">
+        <type>const int32_t</type>
+        <definition>const int32_t twiddleCoef_16_q32[24]</definition>
+        <argsstring>[24]</argsstring>
+        <name>twiddleCoef_16_q32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="par"><title></title><para>Example code for q32 Twiddle factors Generation:: </para>
+</simplesect>
+<simplesect kind="par"><title></title><para><preformatted> for(i = 0; i&lt; 3N/4; i++)
+{
+   twiddleCoefq32[2*i]   = cos(i * 2*PI/(float)N);
+   twiddleCoefq32[2*i+1] = sin(i * 2*PI/(float)N);
+} </preformatted> </para>
+</simplesect>
+<simplesect kind="par"><title></title><para>where N = 16, PI = 3.14159265358979 </para>
+</simplesect>
+<simplesect kind="par"><title></title><para>Cos and Sin values are interleaved fashion </para>
+</simplesect>
+<simplesect kind="par"><title></title><para>Convert Floating point to q32(Fixed point 1.31): round(twiddleCoefq32(i) * pow(2, 31)) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="42" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="2546" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="42" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a665abf4bb8ceb55949468519a1083666" prot="public" static="no" mutable="no">
+        <type>const int32_t</type>
+        <definition>const int32_t twiddleCoef_32_q32[48]</definition>
+        <argsstring>[48]</argsstring>
+        <name>twiddleCoef_32_q32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="43" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="2555" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="43" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a5f8cdbddaf21748e0fef0ad9f913541b" prot="public" static="no" mutable="no">
+        <type>const int32_t</type>
+        <definition>const int32_t twiddleCoef_64_q32[96]</definition>
+        <argsstring>[96]</argsstring>
+        <name>twiddleCoef_64_q32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="44" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="2570" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="44" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a0bef8a4252c9312b50229807a6c0193d" prot="public" static="no" mutable="no">
+        <type>const int32_t</type>
+        <definition>const int32_t twiddleCoef_128_q32[192]</definition>
+        <argsstring>[192]</argsstring>
+        <name>twiddleCoef_128_q32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="45" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="2597" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="45" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a9ba81e3b662c435082903b39a8454c17" prot="public" static="no" mutable="no">
+        <type>const int32_t</type>
+        <definition>const int32_t twiddleCoef_256_q32[384]</definition>
+        <argsstring>[384]</argsstring>
+        <name>twiddleCoef_256_q32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="46" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="2648" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="46" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1ac842d09283321652cc7a0068fce7763d" prot="public" static="no" mutable="no">
+        <type>const int32_t</type>
+        <definition>const int32_t twiddleCoef_512_q32[768]</definition>
+        <argsstring>[768]</argsstring>
+        <name>twiddleCoef_512_q32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="47" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="2747" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="47" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a6b65dc6bf02e1fd580c8809458c50b1c" prot="public" static="no" mutable="no">
+        <type>const int32_t</type>
+        <definition>const int32_t twiddleCoef_1024_q32[1536]</definition>
+        <argsstring>[1536]</argsstring>
+        <name>twiddleCoef_1024_q32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="48" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="3006" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="48" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1aa36a74b5ee4f72e7b47500b1993a22b1" prot="public" static="no" mutable="no">
+        <type>const int32_t</type>
+        <definition>const int32_t twiddleCoef_2048_q32[3072]</definition>
+        <argsstring>[3072]</argsstring>
+        <name>twiddleCoef_2048_q32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="49" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="3521" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="49" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a45cdedd8db0cac23698e30cf36bacb30" prot="public" static="no" mutable="no">
+        <type>const int32_t</type>
+        <definition>const int32_t twiddleCoef_4096_q32[6144]</definition>
+        <argsstring>[6144]</argsstring>
+        <name>twiddleCoef_4096_q32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="50" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="4548" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="50" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a7fee9a47425f922fcd74e41df0217dee" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t plpBitRevIndexTable_fixed_16[PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH]</definition>
+        <argsstring>[PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH]</argsstring>
+        <name>plpBitRevIndexTable_fixed_16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="62" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="6600" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="62" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a2b269baef4c13e3d71698774b6ad907f" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t plpBitRevIndexTable_fixed_32[PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH]</definition>
+        <argsstring>[PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH]</argsstring>
+        <name>plpBitRevIndexTable_fixed_32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="63" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="6605" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="63" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a3e8c24235f50ede02a73ca7989833a20" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t plpBitRevIndexTable_fixed_64[PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH]</definition>
+        <argsstring>[PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH]</argsstring>
+        <name>plpBitRevIndexTable_fixed_64</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="64" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="6611" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="64" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a9903b61f9c85ee3a21b798711b072ee1" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t plpBitRevIndexTable_fixed_128[PLPBITREVINDEXTABLE_FIXED_128_TABLE_LENGTH]</definition>
+        <argsstring>[PLPBITREVINDEXTABLE_FIXED_128_TABLE_LENGTH]</argsstring>
+        <name>plpBitRevIndexTable_fixed_128</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="65" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="6618" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="65" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a25b19797872ad48220909db0992fe5d5" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t plpBitRevIndexTable_fixed_256[PLPBITREVINDEXTABLE_FIXED_256_TABLE_LENGTH]</definition>
+        <argsstring>[PLPBITREVINDEXTABLE_FIXED_256_TABLE_LENGTH]</argsstring>
+        <name>plpBitRevIndexTable_fixed_256</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="66" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="6628" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="66" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1ac0df472d76dd6f3efb52f44c58b0c13b" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t plpBitRevIndexTable_fixed_512[PLPBITREVINDEXTABLE_FIXED_512_TABLE_LENGTH]</definition>
+        <argsstring>[PLPBITREVINDEXTABLE_FIXED_512_TABLE_LENGTH]</argsstring>
+        <name>plpBitRevIndexTable_fixed_512</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="67" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="6647" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="67" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a6bf9d496ae84fea38e47b271a92f84e0" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t plpBitRevIndexTable_fixed_1024[PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH]</definition>
+        <argsstring>[PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH]</argsstring>
+        <name>plpBitRevIndexTable_fixed_1024</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="68" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="6681" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="68" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1aaa67694d35a0a5eb9be05dd7be5dcb11" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t plpBitRevIndexTable_fixed_2048[PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH]</definition>
+        <argsstring>[PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH]</argsstring>
+        <name>plpBitRevIndexTable_fixed_2048</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="69" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="6747" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="69" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a8c3d7c578b50357000a25d71cfb94e97" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t plpBitRevIndexTable_fixed_4096[PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH]</definition>
+        <argsstring>[PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH]</argsstring>
+        <name>plpBitRevIndexTable_fixed_4096</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="70" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="6904" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="70" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1ae8b91082211ddd8a43d2602d6fb6092c" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_cfft_16[16]</definition>
+        <argsstring>[16]</argsstring>
+        <name>twiddleCoef_cfft_16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="74" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="7234" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="74" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a98b14a4106ed8d3d85f46f36ec75de49" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_cfft_32[32]</definition>
+        <argsstring>[32]</argsstring>
+        <name>twiddleCoef_cfft_32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="75" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="7243" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="75" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a0dec31a25ba1d9222eb962bc91207b2f" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_cfft_64[64]</definition>
+        <argsstring>[64]</argsstring>
+        <name>twiddleCoef_cfft_64</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="76" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="7257" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="76" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a2f9b51e49646e2462a265aabe5de7fe7" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_cfft_128[128]</definition>
+        <argsstring>[128]</argsstring>
+        <name>twiddleCoef_cfft_128</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="77" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="7282" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="77" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a92594c1c3ed8b1ef496afcba196755df" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_cfft_256[256]</definition>
+        <argsstring>[256]</argsstring>
+        <name>twiddleCoef_cfft_256</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="78" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="7328" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="78" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a847b7ec63c6172e2df00d49a35954135" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_cfft_512[512]</definition>
+        <argsstring>[512]</argsstring>
+        <name>twiddleCoef_cfft_512</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="79" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="7417" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="79" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a6b48510c0528c07f0ba1ac1eb659e7e6" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_cfft_1024[1024]</definition>
+        <argsstring>[1024]</argsstring>
+        <name>twiddleCoef_cfft_1024</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="80" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="7591" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="80" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1ab90715b8dbf01a5479dd86985d2677ce" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_cfft_2048[2048]</definition>
+        <argsstring>[2048]</argsstring>
+        <name>twiddleCoef_cfft_2048</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="81" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="7936" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="81" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a6eae63bc4dd14cfa774184d046164f87" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t plpBitRevIndexTable_rfftfast_16[20]</definition>
+        <argsstring>[20]</argsstring>
+        <name>plpBitRevIndexTable_rfftfast_16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="85" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="10696" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="85" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a93f9a9ed5b29252c67b275ead18cf3a5" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t plpBitRevIndexTable_rfftfast_32[48]</definition>
+        <argsstring>[48]</argsstring>
+        <name>plpBitRevIndexTable_rfftfast_32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="86" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="10688" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="86" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a7bd7a4f6c49e56e21a62a58c2d88a2c8" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t plpBitRevIndexTable_rfftfast_64[56]</definition>
+        <argsstring>[56]</argsstring>
+        <name>plpBitRevIndexTable_rfftfast_64</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="87" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="10679" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="87" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a5d5416aab316c3ab50d8c2c27937b139" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t plpBitRevIndexTable_rfftfast_128[208]</definition>
+        <argsstring>[208]</argsstring>
+        <name>plpBitRevIndexTable_rfftfast_128</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="88" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="10661" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="88" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a5ec92c3bea3065562e555c439503817e" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t plpBitRevIndexTable_rfftfast_256[440]</definition>
+        <argsstring>[440]</argsstring>
+        <name>plpBitRevIndexTable_rfftfast_256</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="89" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="10624" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="89" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1ae570d7b6343701a11b19031ee067e19b" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t plpBitRevIndexTable_rfftfast_512[448]</definition>
+        <argsstring>[448]</argsstring>
+        <name>plpBitRevIndexTable_rfftfast_512</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="90" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="10584" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="90" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a497197f6111681f630aead3a926db647" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t plpBitRevIndexTable_rfftfast_1024[1800]</definition>
+        <argsstring>[1800]</argsstring>
+        <name>plpBitRevIndexTable_rfftfast_1024</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="91" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="10432" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="91" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a4c47facd17fac97834dd1fd00f7bd334" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_rfftfast_32[16]</definition>
+        <argsstring>[16]</argsstring>
+        <name>twiddleCoef_rfftfast_32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="93" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="10425" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="93" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a7f96a2696d5c7106d67d24c4177283f3" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_rfftfast_64[32]</definition>
+        <argsstring>[32]</argsstring>
+        <name>twiddleCoef_rfftfast_64</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="94" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="10411" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="94" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a5a409345514b214ee173bea6f5d20451" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_rfftfast_128[64]</definition>
+        <argsstring>[64]</argsstring>
+        <name>twiddleCoef_rfftfast_128</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="95" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="10392" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="95" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a4ea2f619303587ed5be55b95cca767d2" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_rfftfast_256[128]</definition>
+        <argsstring>[128]</argsstring>
+        <name>twiddleCoef_rfftfast_256</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="96" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="10357" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="96" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a78f6a7fdca434f4df779472262a90b31" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_rfftfast_512[256]</definition>
+        <argsstring>[256]</argsstring>
+        <name>twiddleCoef_rfftfast_512</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="97" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="10290" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="97" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a1ce7ecd79b651fc76f5aaa0dcdddf08f" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_rfftfast_1024[512]</definition>
+        <argsstring>[512]</argsstring>
+        <name>twiddleCoef_rfftfast_1024</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="98" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="10159" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="98" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1ab49434f6bfd4541fc5d148f7fa45c041" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_rfftfast_2048[1024]</definition>
+        <argsstring>[1024]</argsstring>
+        <name>twiddleCoef_rfftfast_2048</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="99" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="9900" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="99" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a1fabc21a3e5efa15297501956b65603d" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_rfft_32[16]</definition>
+        <argsstring>[16]</argsstring>
+        <name>twiddleCoef_rfft_32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="101" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="8638" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="101" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1ab61860c67c3d6335a4866936369c1c8f" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_rfft_64[32]</definition>
+        <argsstring>[32]</argsstring>
+        <name>twiddleCoef_rfft_64</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="102" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="8646" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="102" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1aeda07cf5d12873335db195a4e7ec0b67" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_rfft_128[64]</definition>
+        <argsstring>[64]</argsstring>
+        <name>twiddleCoef_rfft_128</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="103" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="8659" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="103" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a55c8441635d230bee50973605c1f739c" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_rfft_256[128]</definition>
+        <argsstring>[128]</argsstring>
+        <name>twiddleCoef_rfft_256</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="104" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="8683" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="104" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a42dc1073ff204358b9f10adc1d9eddfb" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_rfft_512[256]</definition>
+        <argsstring>[256]</argsstring>
+        <name>twiddleCoef_rfft_512</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="105" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="8728" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="105" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a66002a767d1a40b0cd534056f070f671" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_rfft_1024[512]</definition>
+        <argsstring>[512]</argsstring>
+        <name>twiddleCoef_rfft_1024</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="106" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="8816" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="106" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1abe549aacc6638db9833f36f099ba4aa7" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref></type>
+        <definition>const Complex_type_f32 twiddleCoef_rfft_2048[1024]</definition>
+        <argsstring>[1024]</argsstring>
+        <name>twiddleCoef_rfft_2048</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="107" column="31" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="8989" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="107" declcolumn="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a0c385921b3f4c88c97937069c0f05e7b" prot="public" static="no" mutable="no">
+        <type>short</type>
+        <definition>short bit_rev_radix2_LUT_32[32]</definition>
+        <argsstring>[32]</argsstring>
+        <name>bit_rev_radix2_LUT_32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="110" column="14" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="9346" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="110" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1ae107c4a0109b9edfa44f6c3d3220f735" prot="public" static="no" mutable="no">
+        <type>short</type>
+        <definition>short bit_rev_radix2_LUT_64[64]</definition>
+        <argsstring>[64]</argsstring>
+        <name>bit_rev_radix2_LUT_64</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="111" column="14" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="9356" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="111" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1ae17121d1f3034f6c047655426975af9f" prot="public" static="no" mutable="no">
+        <type>short</type>
+        <definition>short bit_rev_radix2_LUT_128[128]</definition>
+        <argsstring>[128]</argsstring>
+        <name>bit_rev_radix2_LUT_128</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="112" column="14" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="9370" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="112" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1aec1e13cf8e3c88d173e033d2d8b17f00" prot="public" static="no" mutable="no">
+        <type>short</type>
+        <definition>short bit_rev_radix2_LUT_256[256]</definition>
+        <argsstring>[256]</argsstring>
+        <name>bit_rev_radix2_LUT_256</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="113" column="14" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="9392" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="113" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1abd6d30335472bc14db4a5a7b267a9255" prot="public" static="no" mutable="no">
+        <type>short</type>
+        <definition>short bit_rev_radix2_LUT_512[512]</definition>
+        <argsstring>[512]</argsstring>
+        <name>bit_rev_radix2_LUT_512</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="114" column="14" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="9430" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="114" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a84eeac230706d071486d6800c338586e" prot="public" static="no" mutable="no">
+        <type>short</type>
+        <definition>short bit_rev_radix2_LUT_1024[1024]</definition>
+        <argsstring>[1024]</argsstring>
+        <name>bit_rev_radix2_LUT_1024</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="115" column="14" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="9500" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="115" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a2f1291989fa78bfe791324917811b2cc" prot="public" static="no" mutable="no">
+        <type>short</type>
+        <definition>short bit_rev_radix2_LUT_2048[2048]</definition>
+        <argsstring>[2048]</argsstring>
+        <name>bit_rev_radix2_LUT_2048</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="116" column="14" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="9765" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="116" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1af402d91aa8243865b53fccb14085bff7" prot="public" static="no" mutable="no">
+        <type>short</type>
+        <definition>short bit_rev_radix4_LUT_256[256]</definition>
+        <argsstring>[256]</argsstring>
+        <name>bit_rev_radix4_LUT_256</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="118" column="14" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="9411" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="118" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1ab30cfad1fefabc63455e44db023aa13c" prot="public" static="no" mutable="no">
+        <type>short</type>
+        <definition>short bit_rev_radix4_LUT_1024[1024]</definition>
+        <argsstring>[1024]</argsstring>
+        <name>bit_rev_radix4_LUT_1024</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="119" column="14" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="9567" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="119" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a49e245cc37e23087034d3623f3b60355" prot="public" static="no" mutable="no">
+        <type>short</type>
+        <definition>short bit_rev_radix8_LUT_16[16]</definition>
+        <argsstring>[16]</argsstring>
+        <name>bit_rev_radix8_LUT_16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="121" column="14" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="9342" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="121" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a56e2af5b03a86742d4c97c22335211e2" prot="public" static="no" mutable="no">
+        <type>short</type>
+        <definition>short bit_rev_radix8_LUT_64[64]</definition>
+        <argsstring>[64]</argsstring>
+        <name>bit_rev_radix8_LUT_64</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="122" column="14" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="9363" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="122" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a03cb4b229ebfdac68b0ebc019a96409f" prot="public" static="no" mutable="no">
+        <type>short</type>
+        <definition>short bit_rev_radix8_LUT_512[512]</definition>
+        <argsstring>[512]</argsstring>
+        <name>bit_rev_radix8_LUT_512</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="123" column="14" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="9465" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="123" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a1e8cb6b6fec76ce1ebb3c435217bea13" prot="public" static="no" mutable="no">
+        <type>short</type>
+        <definition>short bit_rev_radix_2by4_LUT_32[32]</definition>
+        <argsstring>[32]</argsstring>
+        <name>bit_rev_radix_2by4_LUT_32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="125" column="14" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="9351" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="125" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a25fdb5ab6722d2574fa375e6dda1e13c" prot="public" static="no" mutable="no">
+        <type>short</type>
+        <definition>short bit_rev_radix_2by4_LUT_128[128]</definition>
+        <argsstring>[128]</argsstring>
+        <name>bit_rev_radix_2by4_LUT_128</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="126" column="14" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="9380" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="126" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1ab399108f7a1d360979cbdae0f6539dd4" prot="public" static="no" mutable="no">
+        <type>short</type>
+        <definition>short bit_rev_radix_2by4_LUT_2048[2048]</definition>
+        <argsstring>[2048]</argsstring>
+        <name>bit_rev_radix_2by4_LUT_2048</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="127" column="14" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="9634" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="127" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a1dec82d596780f1a66ef4f76f137c1d9" prot="public" static="no" mutable="no">
+        <type>const float32_t</type>
+        <definition>const float32_t sinTable_f32[FAST_MATH_TABLE_SIZE+1]</definition>
+        <argsstring>[FAST_MATH_TABLE_SIZE+1]</argsstring>
+        <name>sinTable_f32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="par"><title></title><para>Example code for the generation of the floating-point sine table: <preformatted>
+ tableSize = 512;
+ for (n = 0; n &lt; (tableSize + 1); n++)
+ {
+ sinTable[n] = sin(2*PI*n/tableSize);
+ }</preformatted> </para>
+</simplesect>
+<simplesect kind="par"><title></title><para>where PI value is 3.14159265358979 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="129" column="24" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="10714" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="129" declcolumn="24"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a5ece6080827e733dad2c145448184341" prot="public" static="no" mutable="no">
+        <type>const int32_t</type>
+        <definition>const int32_t sinTable_q32[FAST_MATH_TABLE_SIZE+1]</definition>
+        <argsstring>[FAST_MATH_TABLE_SIZE+1]</argsstring>
+        <name>sinTable_q32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="par"><title></title><para>Table values are in q32 (1.31 fixed-point format) and generation is done in three steps. First, generate sin values in floating point: <preformatted>
+ tableSize = 512;
+ for (n = 0; n &lt; (tableSize + 1); n++)
+ {
+ sinTable[n] = sin(2*PI*n/tableSize);
+ } </preformatted> where PI value is 3.14159265358979 </para>
+</simplesect>
+<simplesect kind="par"><title></title><para>Second, convert floating-point to q32 (Fixed point): (sinTable[i] * pow(2, 31)) </para>
+</simplesect>
+<simplesect kind="par"><title></title><para>Finally, round to the nearest integer value: sinTable[i] += (sinTable[i] &gt; 0 ? 0.5 : -0.5); </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="130" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="10821" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="130" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1aad2cb9ef02a0a7654351b2d3fe243401" prot="public" static="no" mutable="no">
+        <type>const int16_t</type>
+        <definition>const int16_t sinTable_q16[FAST_MATH_TABLE_SIZE+1]</definition>
+        <argsstring>[FAST_MATH_TABLE_SIZE+1]</argsstring>
+        <name>sinTable_q16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="par"><title></title><para>Table values are in Q15 (1.15 fixed-point format) and generation is done in three steps. First, generate sin values in floating point: <preformatted>
+ tableSize = 512;
+ for (n = 0; n &lt; (tableSize + 1); n++)
+ {
+ sinTable[n] = sin(2*PI*n/tableSize);
+ } </preformatted> where PI value is 3.14159265358979 </para>
+</simplesect>
+<simplesect kind="par"><title></title><para>Second, convert floating-point to Q15 (Fixed point): (sinTable[i] * pow(2, 15)) </para>
+</simplesect>
+<simplesect kind="par"><title></title><para>Finally, round to the nearest integer value: sinTable[i] += (sinTable[i] &gt; 0 ? 0.5 :-0.5); </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="131" column="22" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="11353" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="131" declcolumn="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1ac8fec4ff22a12159e14b64d6fdbe8067" prot="public" static="no" mutable="no">
+        <type>const float32_t</type>
+        <definition>const float32_t melFbTable_f32_23[25]</definition>
+        <argsstring>[25]</argsstring>
+        <name>melFbTable_f32_23</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="133" column="24" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="11414" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="133" declcolumn="24"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a2cf0d9dabf2c273fd4b6738610e4bf8f" prot="public" static="no" mutable="no">
+        <type>const float32_t</type>
+        <definition>const float32_t melFbTable_f32_26[28]</definition>
+        <argsstring>[28]</argsstring>
+        <name>melFbTable_f32_26</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="134" column="24" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="11424" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="134" declcolumn="24"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a69b01bc995bd95d28be098e898f9be5c" prot="public" static="no" mutable="no">
+        <type>const float32_t</type>
+        <definition>const float32_t melFbTable_f32_32[34]</definition>
+        <argsstring>[34]</argsstring>
+        <name>melFbTable_f32_32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="135" column="24" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="11434" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="135" declcolumn="24"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a2b880ae8aed4b039ab7591d037c4b334" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t filterLengths_fb_32[32]</definition>
+        <argsstring>[32]</argsstring>
+        <name>filterLengths_fb_32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="137" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="11446" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="137" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a0ba2bbbe19fd43908b9f4b6774eccbba" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t startingIndices_fb_32[32]</definition>
+        <argsstring>[32]</argsstring>
+        <name>startingIndices_fb_32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="138" column="23" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="11451" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="138" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a3ba556c7cd6c498319fd3566f59f3dc7" prot="public" static="no" mutable="no">
+        <type>const float32_t</type>
+        <definition>const float32_t values_fb_32[245]</definition>
+        <argsstring>[245]</argsstring>
+        <name>values_fb_32</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="139" column="24" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="11456" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="139" declcolumn="24"/>
+      </memberdef>
+      <memberdef kind="variable" id="plp__common__tables_8h_1a5bf100f02396455700e732882cf742ad" prot="public" static="no" mutable="no">
+        <type>const float32_t</type>
+        <definition>const float32_t hannWindow_f32_len512[512]</definition>
+        <argsstring>[512]</argsstring>
+        <name>hannWindow_f32_len512</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_common_tables.h" line="141" column="24" bodyfile="/github/workspace/src/CommonTables/plp_common_tables.c" bodystart="11509" bodyend="-1" declfile="/github/workspace/include/plp_common_tables.h" declline="141" declcolumn="24"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>File containing extern declarations for common tables. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>==========================================================================</para>
+<para><simplesect kind="version"><para>V0 </para>
+</simplesect>
+</para>
+<sect1 id="plp__common__tables_8h_1autotoc_md0">
+<title>@date     28. June 2020</title>
+</sect1>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(C)<sp/>2020<sp/>ETH<sp/>Zurich<sp/>and<sp/>University<sp/>of<sp/>Bologna.<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>Licensed<sp/>under<sp/>the<sp/>Apache<sp/>License,<sp/>Version<sp/>2.0<sp/>(the<sp/>License);<sp/>you<sp/>may</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>not<sp/>use<sp/>this<sp/>file<sp/>except<sp/>in<sp/>compliance<sp/>with<sp/>the<sp/>License.</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/>You<sp/>may<sp/>obtain<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>License<sp/>at</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>www.apache.org/licenses/LICENSE-2.0</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>Unless<sp/>required<sp/>by<sp/>applicable<sp/>law<sp/>or<sp/>agreed<sp/>to<sp/>in<sp/>writing,<sp/>software</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>distributed<sp/>under<sp/>the<sp/>License<sp/>is<sp/>distributed<sp/>on<sp/>an<sp/>AS<sp/>IS<sp/>BASIS,<sp/>WITHOUT</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>WARRANTIES<sp/>OR<sp/>CONDITIONS<sp/>OF<sp/>ANY<sp/>KIND,<sp/>either<sp/>express<sp/>or<sp/>implied.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>See<sp/>the<sp/>License<sp/>for<sp/>the<sp/>specific<sp/>language<sp/>governing<sp/>permissions<sp/>and</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>limitations<sp/>under<sp/>the<sp/>License.</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>__PLP_COMMON_TABLES_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__PLP_COMMON_TABLES_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="plp__math_8h" kindref="compound">plp_math.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Fixed-point<sp/>cfft<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int16_t<sp/><ref refid="plp__common__tables_8h_1a103b1a04c61ca126cc7cbe6e5f8a2f22" kindref="member">twiddleCoef_16_q16</ref>[24];</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int16_t<sp/>twiddleCoef_32_q16[48];</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int16_t<sp/>twiddleCoef_64_q16[96];</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int16_t<sp/>twiddleCoef_128_q16[192];</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int16_t<sp/>twiddleCoef_256_q16[384];</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int16_t<sp/>twiddleCoef_512_q16[768];</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int16_t<sp/>twiddleCoef_1024_q16[1536];</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int16_t<sp/>twiddleCoef_2048_q16[3072];</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int16_t<sp/>twiddleCoef_4096_q16[6144];</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int32_t<sp/><ref refid="plp__common__tables_8h_1a4113e0b8a8bc5955dd34838db52b2190" kindref="member">twiddleCoef_16_q32</ref>[24];</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int32_t<sp/>twiddleCoef_32_q32[48];</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int32_t<sp/>twiddleCoef_64_q32[96];</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int32_t<sp/>twiddleCoef_128_q32[192];</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int32_t<sp/>twiddleCoef_256_q32[384];</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int32_t<sp/>twiddleCoef_512_q32[768];</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int32_t<sp/>twiddleCoef_1024_q32[1536];</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int32_t<sp/>twiddleCoef_2048_q32[3072];</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int32_t<sp/>twiddleCoef_4096_q32[6144];</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH<sp/>((uint16_t)12)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH<sp/>((uint16_t)24)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH<sp/>((uint16_t)56)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PLPBITREVINDEXTABLE_FIXED_128_TABLE_LENGTH<sp/>((uint16_t)112)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PLPBITREVINDEXTABLE_FIXED_256_TABLE_LENGTH<sp/>((uint16_t)240)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PLPBITREVINDEXTABLE_FIXED_512_TABLE_LENGTH<sp/>((uint16_t)480)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH<sp/>((uint16_t)992)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH<sp/>((uint16_t)1984)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH<sp/>((uint16_t)4032)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>plpBitRevIndexTable_fixed_16[PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH];</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>plpBitRevIndexTable_fixed_32[PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH];</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>plpBitRevIndexTable_fixed_64[PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH];</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>plpBitRevIndexTable_fixed_128[PLPBITREVINDEXTABLE_FIXED_128_TABLE_LENGTH];</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>plpBitRevIndexTable_fixed_256[PLPBITREVINDEXTABLE_FIXED_256_TABLE_LENGTH];</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>plpBitRevIndexTable_fixed_512[PLPBITREVINDEXTABLE_FIXED_512_TABLE_LENGTH];</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>plpBitRevIndexTable_fixed_1024[PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH];</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>plpBitRevIndexTable_fixed_2048[PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH];</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>plpBitRevIndexTable_fixed_4096[PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH];</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Floating-point<sp/>cfft<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_cfft_16[16];</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_cfft_32[32];</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_cfft_64[64];</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_cfft_128[128];</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_cfft_256[256];</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_cfft_512[512];</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_cfft_1024[1024];</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_cfft_2048[2048];</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Floating-point<sp/>rfft<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>plpBitRevIndexTable_rfftfast_16[20];</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>plpBitRevIndexTable_rfftfast_32[48];</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>plpBitRevIndexTable_rfftfast_64[56];</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>plpBitRevIndexTable_rfftfast_128[208];</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>plpBitRevIndexTable_rfftfast_256[440];</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>plpBitRevIndexTable_rfftfast_512[448];</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>plpBitRevIndexTable_rfftfast_1024[1800];</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_rfftfast_32[16];</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_rfftfast_64[32];</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_rfftfast_128[64];</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_rfftfast_256[128];</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_rfftfast_512[256];</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_rfftfast_1024[512];</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_rfftfast_2048[1024];</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_rfft_32[16];</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_rfft_64[32];</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_rfft_128[64];</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_rfft_256[128];</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_rfft_512[256];</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_rfft_1024[512];</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref><sp/>twiddleCoef_rfft_2048[1024];</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>bit_rev_radix2_LUT_32[32];</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>bit_rev_radix2_LUT_64[64];</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>bit_rev_radix2_LUT_128[128];</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>bit_rev_radix2_LUT_256[256];</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>bit_rev_radix2_LUT_512[512];</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>bit_rev_radix2_LUT_1024[1024];</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>bit_rev_radix2_LUT_2048[2048];</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>bit_rev_radix4_LUT_256[256];</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>bit_rev_radix4_LUT_1024[1024];</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>bit_rev_radix8_LUT_16[16];</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>bit_rev_radix8_LUT_64[64];</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>bit_rev_radix8_LUT_512[512];</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>bit_rev_radix_2by4_LUT_32[32];</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>bit_rev_radix_2by4_LUT_128[128];</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>bit_rev_radix_2by4_LUT_2048[2048];</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>float32_t<sp/><ref refid="plp__common__tables_8h_1a1dec82d596780f1a66ef4f76f137c1d9" kindref="member">sinTable_f32</ref>[<ref refid="plp__math_8h_1afcb9147c96853bea484cfc2dde07463d" kindref="member">FAST_MATH_TABLE_SIZE</ref><sp/>+<sp/>1];</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int32_t<sp/><ref refid="plp__common__tables_8h_1a5ece6080827e733dad2c145448184341" kindref="member">sinTable_q32</ref>[<ref refid="plp__math_8h_1afcb9147c96853bea484cfc2dde07463d" kindref="member">FAST_MATH_TABLE_SIZE</ref><sp/>+<sp/>1];</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int16_t<sp/><ref refid="plp__common__tables_8h_1aad2cb9ef02a0a7654351b2d3fe243401" kindref="member">sinTable_q16</ref>[<ref refid="plp__math_8h_1afcb9147c96853bea484cfc2dde07463d" kindref="member">FAST_MATH_TABLE_SIZE</ref><sp/>+<sp/>1];</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>float32_t<sp/>melFbTable_f32_23[25];</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>float32_t<sp/>melFbTable_f32_26[28];</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>float32_t<sp/>melFbTable_f32_32[34];</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>filterLengths_fb_32[32];</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>startingIndices_fb_32[32];</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>float32_t<sp/>values_fb_32[245];</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>float32_t<sp/>hannWindow_f32_len512[512];</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>PLP_COMMON_TABLES_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/github/workspace/include/plp_common_tables.h"/>
+  </compounddef>
+</doxygen>

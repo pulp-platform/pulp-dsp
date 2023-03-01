@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="plp__cmplx__mag__i32_8c" kind="file" language="C++">
+    <compoundname>plp_cmplx_mag_i32.c</compoundname>
+    <includes refid="plp__math_8h" local="yes">plp_math.h</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>plp_math.h</label>
+        <link refid="plp__math_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rtos_hal.h</label>
+        <link refid="rtos__hal_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_i32.c</label>
+        <link refid="plp__cmplx__mag__i32_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>math.h</label>
+      </node>
+      <node id="5">
+        <label>rt/rt_api.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__cmplx__mag_1ga19a5d86e750d7ac7239615a283697bc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_i32</definition>
+        <argsstring>(const int32_t *pSrc, int32_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_i32</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for complex magnitude calculation in 32-bit integer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_i32.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_i32.c" bodystart="79" bodyend="88"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>=====================================================================</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Project:<sp/><sp/><sp/><sp/><sp/><sp/>PULP<sp/>DSP<sp/>Library</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>Title:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>plp_cmplx_mag_i32.c</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>Description:<sp/><sp/>i32<sp/>complex<sp/>magnitude</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>$Date:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>31.<sp/>July<sp/>2020</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>$Revision:<sp/><sp/><sp/><sp/>V0</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>Target<sp/>Processor:<sp/>PULP<sp/>cores</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>=====================================================================<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(C)<sp/>2019<sp/>ETH<sp/>Zurich<sp/>and<sp/>University<sp/>of<sp/>Bologna.<sp/></highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/>Author:<sp/>Michael<sp/>Rogenmoser,<sp/>ETH<sp/>Zurich</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>Licensed<sp/>under<sp/>the<sp/>Apache<sp/>License,<sp/>Version<sp/>2.0<sp/>(the<sp/>License);<sp/>you<sp/>may</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>not<sp/>use<sp/>this<sp/>file<sp/>except<sp/>in<sp/>compliance<sp/>with<sp/>the<sp/>License.</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>You<sp/>may<sp/>obtain<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>License<sp/>at</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>www.apache.org/licenses/LICENSE-2.0</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>Unless<sp/>required<sp/>by<sp/>applicable<sp/>law<sp/>or<sp/>agreed<sp/>to<sp/>in<sp/>writing,<sp/>software</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>distributed<sp/>under<sp/>the<sp/>License<sp/>is<sp/>distributed<sp/>on<sp/>an<sp/>AS<sp/>IS<sp/>BASIS,<sp/>WITHOUT</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>WARRANTIES<sp/>OR<sp/>CONDITIONS<sp/>OF<sp/>ANY<sp/>KIND,<sp/>either<sp/>express<sp/>or<sp/>implied.</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>See<sp/>the<sp/>License<sp/>for<sp/>the<sp/>specific<sp/>language<sp/>governing<sp/>permissions<sp/>and</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>limitations<sp/>under<sp/>the<sp/>License.</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>Notice:<sp/>project<sp/>inspired<sp/>by<sp/>ARM<sp/>CMSIS<sp/>DSP<sp/>and<sp/>parts<sp/>of<sp/>source<sp/>code</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/>ported<sp/>and<sp/>adopted<sp/>for<sp/>RISC-V<sp/>PULP<sp/>platform<sp/>from<sp/>ARM<sp/>CMSIS<sp/>DSP</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>released<sp/>under<sp/>Copyright<sp/>(C)<sp/>2010-2019<sp/>ARM<sp/>Limited<sp/>or<sp/>its<sp/>affiliates</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/>with<sp/>Apache-2.0.</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="plp__math_8h" kindref="compound">plp_math.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__cmplx__mag_1ga19a5d86e750d7ac7239615a283697bc0" kindref="member">plp_cmplx_mag_i32</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int32_t<sp/>*pSrc,</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32_t<sp/>*pRes,</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>numSamples){</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(hal_cluster_id()<sp/>==<sp/>ARCHI_FC_CID){</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__cmplx__mag_1ga1267a3c91cd352de31012516d2dab166" kindref="member">plp_cmplx_mag_i32s_rv32im</ref>(pSrc,<sp/>pRes,<sp/>numSamples);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__cmplx__mag_1gae5f2f85152beedab2ad3e86120ba3784" kindref="member">plp_cmplx_mag_i32s_xpulpv2</ref>(pSrc,<sp/>pRes,<sp/>numSamples);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="88"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_i32.c"/>
+  </compounddef>
+</doxygen>

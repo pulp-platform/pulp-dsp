@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__BasicAdd" kind="group">
+    <compoundname>BasicAdd</compoundname>
+    <title>Vector Addition</title>
+    <innergroup refid="group__BasicAddKernels">Vector Addition Kernels</innergroup>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__BasicAdd_1ga27badc72541baf0d9ad99739bc67f974" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_add_i16</definition>
+        <argsstring>(const int16_t *pSrcA, const int16_t *pSrcB, int32_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_add_i16</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for element-by-element addition of 16-bit integer vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/add/plp_add_i16.c" line="57" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/add/plp_add_i16.c" bodystart="57" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicAdd_1ga5b4ea48fb175c09c9bce00f2d959c928" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_add_i32</definition>
+        <argsstring>(const int32_t *pSrcA, const int32_t *pSrcB, int32_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_add_i32</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for element-by-element addition of 32-bit integer vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/add/plp_add_i32.c" line="89" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/add/plp_add_i32.c" bodystart="89" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicAdd_1gabcf1aea563ec82ab2d04ad51f762c6e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_add_i8</definition>
+        <argsstring>(const int8_t *pSrcA, const int8_t *pSrcB, int32_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_add_i8</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for element-by-element addition of 8-bit integer vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/add/plp_add_i8.c" line="57" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/add/plp_add_i8.c" bodystart="57" bodyend="67"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the glue code for Vector Addition. The kernel codes (kernels) are in the Moducle Vector Addition Kernels.</para>
+<para>The Vector Addition computes element-by-element addition of two vectors.</para>
+<para><preformatted>
+pDst[n] = pSrcA[n] + pSrcB[n],   0 &lt;= n &lt; blockSize.
+</preformatted></para>
+<para>There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.</para>
+<para>The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s): <preformatted>
+&lt;pulp&gt; _ &lt;function name&gt; _ &lt;data type&gt; &lt;precision&gt; &lt;method&gt; _ &lt;isa extension&gt;, with
+
+data type = {f, i, q} respectively for floats, integers, fixed points
+
+precision = {32, 16, 8} bits
+
+method = {s, p} respectively meaning single core or parallel multicore implementation.
+
+isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
+
+</preformatted> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

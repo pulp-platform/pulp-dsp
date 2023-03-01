@@ -1,0 +1,1089 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__BasicConvolutionKernels" kind="group">
+    <compoundname>BasicConvolutionKernels</compoundname>
+    <title>Basic Convolution Kernels</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__BasicConvolutionKernels_1gadb38259b7afb09d1dff5b7edbe672561" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_i16p_xpulpv2</definition>
+        <argsstring>(void *task_args)</argsstring>
+        <name>plp_conv_i16p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>task_args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel convolution of 16-bit integer vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Setup code for parallel convolution of 16-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">task_args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__conv__instance__i16" kindref="compound">plp_conv_instance_i16</ref> struct initialized by plp_conv_i16_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i16p_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i16p_xpulpv2.c" bodystart="53" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolutionKernels_1gab3352eebb04c9aa3e134349a8d80efd1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_i16s_rv32im</definition>
+        <argsstring>(const int16_t *pSrcA, const uint32_t srcALen, const int16_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_i16s_rv32im</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Convolution of 16-bit integer vectors kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i16s_rv32im.c" line="55" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i16s_rv32im.c" bodystart="55" bodyend="511"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolutionKernels_1gac0a50f3f99ca76b42b5d1ef1228f61e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_i16s_xpulpv2</definition>
+        <argsstring>(const int16_t *pSrcA, const uint32_t srcALen, const int16_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_i16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Convolution of 16-bit integer vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i16s_xpulpv2.c" line="60" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i16s_xpulpv2.c" bodystart="60" bodyend="490"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolutionKernels_1ga6ddc7a9e2a7ec4109cdf5f57d788ea53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_i32p_xpulpv2</definition>
+        <argsstring>(void *task_args)</argsstring>
+        <name>plp_conv_i32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>task_args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel convolution of 32-bit integer vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Setup code for parallel convolution of 32-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">task_args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__conv__instance__i32" kindref="compound">plp_conv_instance_i32</ref> struct initialized by plp_conv_i32_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i32p_xpulpv2.c" line="52" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i32p_xpulpv2.c" bodystart="52" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolutionKernels_1gaf32c50ec9e70ef8b167cb44aa77b7793" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_i32s_rv32im</definition>
+        <argsstring>(const int32_t *pSrcA, const uint32_t srcALen, const int32_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_i32s_rv32im</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Convolution of 32-bit integer vectors kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i32s_rv32im.c" line="62" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i32s_rv32im.c" bodystart="62" bodyend="518"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolutionKernels_1ga5c60fa452802770ea4450b2c2dd1cd46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_i32s_xpulpv2</definition>
+        <argsstring>(const int32_t *pSrcA, const uint32_t srcALen, const int32_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_i32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Convolution of 32-bit integer vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i32s_xpulpv2.c" line="55" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i32s_xpulpv2.c" bodystart="55" bodyend="518"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolutionKernels_1ga319a2a710df4df1007a477a18365f716" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_i8p_xpulpv2</definition>
+        <argsstring>(void *task_args)</argsstring>
+        <name>plp_conv_i8p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>task_args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel convolution of 8-bit integer vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Setup code for parallel convolution of 8-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">task_args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__conv__instance__i8" kindref="compound">plp_conv_instance_i8</ref> struct initialized by plp_conv_i8_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i8p_xpulpv2.c" line="52" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i8p_xpulpv2.c" bodystart="52" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolutionKernels_1ga8e8eedfffdd7d46e8be3708327537733" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_i8s_rv32im</definition>
+        <argsstring>(const int8_t *pSrcA, const uint32_t srcALen, const int8_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_i8s_rv32im</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Convolution of 8-bit integer vectors kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i8s_rv32im.c" line="55" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i8s_rv32im.c" bodystart="55" bodyend="511"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolutionKernels_1gae65c0880bcacb4a7f63272eca43f697d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_i8s_xpulpv2</definition>
+        <argsstring>(const int8_t *pSrcA, const uint32_t srcALen, const int8_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_i8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Convolution of 8-bit integer vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i8s_xpulpv2.c" line="62" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_conv_i8s_xpulpv2.c" bodystart="62" bodyend="471"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolutionKernels_1gad545ebfe4edc2fa47d854b0e0d504b10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_parallel_OLA</definition>
+        <argsstring>(uint32_t nPE, uint32_t srcALen, uint32_t srcBLen, int32_t *resultsBuffer)</argsstring>
+        <name>plp_conv_parallel_OLA</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>resultsBuffer</declname>
+        </param>
+        <briefdescription>
+<para>Helper function for parallelized overlap-adding of partial convolution results. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of processing cores </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first original input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second original input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">resultsBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>resultsBuffer array from plp_conv_i[XX]_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_conv_parallel_OLA.c" line="52" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_conv_parallel_OLA.c" bodystart="52" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolutionKernels_1gaa508390d33d0562d90225ceb2aae4e8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_parallel_OLA_kernel</definition>
+        <argsstring>(void *task_args)</argsstring>
+        <name>plp_conv_parallel_OLA_kernel</name>
+        <param>
+          <type>void *</type>
+          <declname>task_args</declname>
+        </param>
+        <briefdescription>
+<para>Helper function for parallelized overlap-adding of partial convolution results. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">task_args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Holds the <ref refid="structplp__conv__tree__add__instance" kindref="compound">plp_conv_tree_add_instance</ref> that describes the vector parameters </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_conv_parallel_OLA_kernel.c" line="49" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_conv_parallel_OLA_kernel.c" bodystart="49" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolutionKernels_1ga3aea6809ccfec8fdf9f2b0615e379854" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_valid_i16s_xpulpv2</definition>
+        <argsstring>(const int16_t *pSrcA, const uint32_t srcALen, const int16_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_valid_i16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Convolution of 16-bit integer vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Convolution (valid) of 16-bit integer vectors kernel for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_conv_valid_i16s_xpulpv2.c" line="61" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_conv_valid_i16s_xpulpv2.c" bodystart="61" bodyend="331"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolutionKernels_1gae899e35051d2d4c97c558006ac9299d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_valid_i32s_xpulpv2</definition>
+        <argsstring>(const int32_t *pSrcA, const uint32_t srcALen, const int32_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_valid_i32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Convolution (valid) of 32-bit integer vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_conv_valid_i32s_xpulpv2.c" line="56" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_conv_valid_i32s_xpulpv2.c" bodystart="56" bodyend="345"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolutionKernels_1ga5efb25ab63bd8702436823b0e2c0e757" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_valid_i8s_xpulpv2</definition>
+        <argsstring>(const int8_t *pSrcA, const uint32_t srcALen, const int8_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_valid_i8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Convolution of 8-bit integer vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Convolution (valid) of 8-bit integer vectors kernel for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_conv_valid_i8s_xpulpv2.c" line="65" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_conv_valid_i8s_xpulpv2.c" bodystart="65" bodyend="302"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolutionKernels_1gae400183e8fa07a412e26650ae3e890e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_valid_rep_i16s_xpulpv2</definition>
+        <argsstring>(const int16_t *pSrcA, const uint32_t srcALen, const uint32_t srcAMem, const int16_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_valid_rep_i16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcAMem</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Convolution of 16-bit integer vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Convolution (valid with data replication) of 16-bit integer vectors kernel for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector of the replicated data </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of elements in (unreplicated) vector a </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcAMem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of elements between each replication </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_conv_valid_rep_i16s_xpulpv2.c" line="64" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_conv_valid_rep_i16s_xpulpv2.c" bodystart="64" bodyend="544"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolutionKernels_1gaa1d7ed01e6fbdc555eff19ca72f00c28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_valid_rep_i8s_xpulpv2</definition>
+        <argsstring>(const int8_t *pSrcA, const uint32_t srcALen, const uint32_t srcAMem, const int8_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_valid_rep_i8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcAMem</declname>
+        </param>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Convolution of 8-bit integer vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Convolution (valid with data replication) of 8-bit integer vectors kernel for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector of the replicated data </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of elements in (unreplicated) vector a </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcAMem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of elements between each replication </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_conv_valid_rep_i8s_xpulpv2.c" line="62" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_conv_valid_rep_i8s_xpulpv2.c" bodystart="62" bodyend="439"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Computes 1D convolution of two vectors. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structComplex__type__f32" kind="struct" language="C++" prot="public">
+    <compoundname>Complex_type_f32</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structComplex__type__f32_1a3632a84b163de983b74503f51edfb4fa" prot="public" static="no" mutable="no">
+        <type>float32_t</type>
+        <definition>float32_t Complex_type_f32::re</definition>
+        <argsstring></argsstring>
+        <name>re</name>
+        <qualifiedname>Complex_type_f32::re</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="483" column="15" bodyfile="/github/workspace/include/plp_math.h" bodystart="483" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structComplex__type__f32_1a8bae88508ff7c6a7e2485d731ab458d5" prot="public" static="no" mutable="no">
+        <type>float32_t</type>
+        <definition>float32_t Complex_type_f32::im</definition>
+        <argsstring></argsstring>
+        <name>im</name>
+        <qualifiedname>Complex_type_f32::im</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="484" column="15" bodyfile="/github/workspace/include/plp_math.h" bodystart="484" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Helper type to represent complex values with float32 components. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>re</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Real part </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>im</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Imaginary part </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="482" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="482" bodyend="485"/>
+    <listofallmembers>
+      <member refid="structComplex__type__f32_1a8bae88508ff7c6a7e2485d731ab458d5" prot="public" virt="non-virtual"><scope>Complex_type_f32</scope><name>im</name></member>
+      <member refid="structComplex__type__f32_1a3632a84b163de983b74503f51edfb4fa" prot="public" virt="non-virtual"><scope>Complex_type_f32</scope><name>re</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

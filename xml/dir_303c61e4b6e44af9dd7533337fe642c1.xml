@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_303c61e4b6e44af9dd7533337fe642c1" kind="dir">
+    <compoundname>/github/workspace/src/MatrixFunctions/mat_inv</compoundname>
+    <innerdir refid="dir_f1525a2a779619638a4450468d5ed586">/github/workspace/src/MatrixFunctions/mat_inv/kernels</innerdir>
+    <innerfile refid="plp__mat__inv__f32_8c">plp_mat_inv_f32.c</innerfile>
+    <innerfile refid="plp__mat__inv__f32__parallel_8c">plp_mat_inv_f32_parallel.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/MatrixFunctions/mat_inv/"/>
+  </compounddef>
+</doxygen>

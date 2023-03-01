@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_3a243b6a7ee236a5b428df016f9a8037" kind="dir">
+    <compoundname>/github/workspace/src/MatrixFunctionsStride</compoundname>
+    <innerdir refid="dir_6d312efb59f359639601f96e06a42147">/github/workspace/src/MatrixFunctionsStride/mat_add_stride</innerdir>
+    <innerdir refid="dir_c2adfcbad334ed229477dea717e25026">/github/workspace/src/MatrixFunctionsStride/mat_copy_stride</innerdir>
+    <innerdir refid="dir_33aabb3dc275b779349b43aa3527a317">/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride</innerdir>
+    <innerdir refid="dir_65f0a03b6b0199cfa965159cddcb8885">/github/workspace/src/MatrixFunctionsStride/mat_fill_stride</innerdir>
+    <innerdir refid="dir_8c50d1cddbcb76e3a442339af7bae577">/github/workspace/src/MatrixFunctionsStride/mat_mult_cmplx_stride</innerdir>
+    <innerdir refid="dir_c2e09de5fc40d1df28fb456947545464">/github/workspace/src/MatrixFunctionsStride/mat_mult_stride</innerdir>
+    <innerdir refid="dir_cbf774664296a350c2213ce5b8f1a486">/github/workspace/src/MatrixFunctionsStride/mat_mult_trans_cmplx_stride</innerdir>
+    <innerdir refid="dir_3f2ebc6f6651f0327374568b9298c31f">/github/workspace/src/MatrixFunctionsStride/mat_mult_trans_stride</innerdir>
+    <innerdir refid="dir_9ba68ed91783c5958dfa680fbfbcbeca">/github/workspace/src/MatrixFunctionsStride/mat_scale_stride</innerdir>
+    <innerdir refid="dir_7e07050f789e36bcd9db92d2776adf74">/github/workspace/src/MatrixFunctionsStride/mat_sub_stride</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/MatrixFunctionsStride/"/>
+  </compounddef>
+</doxygen>

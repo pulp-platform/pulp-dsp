@@ -1,0 +1,1035 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>/github/workspace/src/FilteringFunctions/kernels/plp_conv_i32s_rv32im.c - PULP DSP</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#githubworkspacesrcfilteringfunctionskernelsplp_conv_i32s_rv32imc" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="PULP DSP" class="md-header__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PULP DSP
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              /github/workspace/src/FilteringFunctions/kernels/plp_conv_i32s_rv32im.c
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="PULP DSP" class="md-nav__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    PULP DSP
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../test-framework-index/" class="md-nav__link">
+        Test Framework
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorial-index/" class="md-nav__link">
+        Tutorial
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../troubles/" class="md-nav__link">
+        Troubles Shooting
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Reference Manual
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Reference Manual
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pages/" class="md-nav__link">
+        Pages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Classes/" class="md-nav__link">
+        Classes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/" class="md-nav__link">
+        Modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Namespaces/" class="md-nav__link">
+        Namespaces
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-documentation" class="md-nav__link">
+    Functions Documentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function-plp_conv_i32s_rv32im" class="md-nav__link">
+    function plp_conv_i32s_rv32im
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="githubworkspacesrcfilteringfunctionskernelsplp_conv_i32s_rv32imc">/github/workspace/src/FilteringFunctions/kernels/plp_conv_i32s_rv32im.c</h1>
+<h2 id="functions">Functions</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void</td>
+<td><strong><a href="/pulp-dsp/refmanual/Modules/group__BasicConvolutionKernels/#function-plp-conv-i32s-rv32im">plp_conv_i32s_rv32im</a></strong>(const int32_t * pSrcA, const uint32_t srcALen, const int32_t * pSrcB, const uint32_t srcBLen, int32_t * pRes)<br>Convolution of 32-bit integer vectors kernel for RV32IM extension.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="functions-documentation">Functions Documentation</h2>
+<h3 id="function-plp_conv_i32s_rv32im">function plp_conv_i32s_rv32im</h3>
+<pre><code class="language-cpp">void plp_conv_i32s_rv32im(
+    const int32_t * pSrcA,
+    const uint32_t srcALen,
+    const int32_t * pSrcB,
+    const uint32_t srcBLen,
+    int32_t * pRes
+)
+</code></pre>
+<p>Convolution of 32-bit integer vectors kernel for RV32IM extension. </p>
+<p><strong>Parameters</strong>: </p>
+<ul>
+<li><strong>pSrcA</strong> points to the first input vector </li>
+<li><strong>srcALen</strong> Length of the first input vector </li>
+<li><strong>pSrcB</strong> points to the second input vector </li>
+<li><strong>srcBLen</strong> Length of the second input vector </li>
+<li><strong>pRes</strong> output result returned here </li>
+</ul>
+<p><strong>Return</strong>: none </p>
+<h2 id="source-code">Source code</h2>
+<pre><code class="language-cpp">/* =====================================================================
+ * Project:      PULP DSP Library
+ * Title:        plp_conv_i32_rv32im.c
+ * Description:  32-bit integer singlecore convolution for RV32IM
+ *
+ * $Date:        01. July 2019
+ * $Revision:    V0
+ *
+ * Target Processor: PULP cores
+ * ===================================================================== */
+/*
+ * Copyright (C) 2019 ETH Zurich and University of Bologna.
+ *
+ * Author: Moritz Scherer, ETH Zurich
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the License); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#include &quot;plp_math.h&quot;
+
+// Pre-condition: psrcALen &gt;= psrcBLen, established by calling function plp_conv_i32
+// Pre-condition: pRes has enough allocated memory, i.e. srcALen + srcBLen-1u
+// Pre-condition: srcALen &gt;= 2 and srcBLen &gt;= 2, otherwise use vector dot product
+
+void plp_conv_i32s_rv32im(const int32_t *pSrcA,
+                          const uint32_t srcALen,
+                          const int32_t *pSrcB,
+                          const uint32_t srcBLen,
+                          int32_t *pRes) {
+
+    const int32_t *pIn1 = pSrcA;                 /* InputA pointer */
+    const int32_t *pIn2 = pSrcB;                 /* InputB pointer */
+    int32_t *pOut = pRes;                        /* Output pointer */
+    const int32_t *px;                           /* Intermediate inputA pointer */
+    const int32_t *py;                           /* Intermediate inputB pointer */
+    const int32_t *pSrc1, *pSrc2;                /* Intermediate pointers */
+    int32_t sum;                                 /* Accumulators */
+    uint32_t blockSize1, blockSize2, blockSize3; /* Loop counters */
+    uint32_t j, k, count, blkCnt;                /* Loop counters */
+
+#if defined(PLP_MATH_LOOPUNROLL)
+    int32_t acc0, acc1, acc2, acc3; /* Accumulators */
+    int32_t x0, x1, x2, x3, c0;     /* Temporary variables to hold state and coefficient values */
+#endif
+
+    int32_t temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8;
+
+    blockSize1 = srcBLen - 1U;
+    blockSize2 = srcALen - (srcBLen - 1U);
+    blockSize3 = blockSize1;
+
+    /* --------------------------
+     * Initializations of stage1
+     * -------------------------*/
+
+    /* sum = x[0] * y[0]
+     * sum = x[0] * y[1] + x[1] * y[0]
+     * ....
+     * sum = x[0] * y[srcBlen - 1] + x[1] * y[srcBlen - 2] +...+ x[srcBLen - 1] * y[0]
+     */
+
+    /* In this stage the MAC operations are increased by 1 for every iteration.
+       The count variable holds the number of MAC operations performed */
+    count = 1U;
+
+    /* Working pointer of inputA */
+    px = pIn1;
+
+    /* Working pointer of inputB */
+    py = pIn2;
+
+    /* ------------------------
+     * Stage1 process
+     * ----------------------*/
+
+    /* The first stage starts here */
+    while (blockSize1 &gt; 0U) {
+        /* Accumulator is made zero for every iteration */
+        sum = 0;
+
+#if defined(PLP_MATH_LOOPUNROLL)
+        /* Loop unrolling: Compute 4 outputs at a time */
+        k = count &gt;&gt; 2U;
+        while (k &gt; 0U) {
+
+            temp1 = *px++;
+            temp2 = *py--;
+            temp3 = *px++;
+            temp4 = *py--;
+
+            /* x[0] * y[srcBLen - 1] */
+            // sum = __MAC(sum, *px++, *py--);
+            sum += temp1 * temp2;
+
+            temp1 = *px++;
+            temp2 = *py--;
+
+            /* x[1] * y[srcBLen - 2] */
+            // sum = __MAC(sum, *px++, *py--);
+            sum += temp3 * temp4;
+
+            temp3 = *px++;
+            temp4 = *py--;
+
+            /* x[2] * y[srcBLen - 3] */
+            // sum = __MAC(sum, *px++, *py--);
+            sum += temp1 * temp2;
+
+            /* x[3] * y[srcBLen - 4] */
+            // sum = __MAC(sum, *px++, *py--);
+            sum += temp3 * temp4;
+
+            /* Decrement loop counter */
+            k--;
+        }
+
+        /* Loop unrolling: Compute remaining outputs */
+        k = count % 0x4U;
+#else
+        /* Initialize k with number of samples */
+        k = count;
+
+#endif /* #if defined (PLP_MATH_LOOPUNROLL) */
+
+        while (k &gt; 0U) {
+            /* Perform the multiply-accumulate */
+            sum += *px++ * *py--;
+
+            /* Decrement loop counter */
+            k--;
+        }
+
+        /* Store the result in the accumulator in the destination buffer. */
+        *pOut++ = sum;
+
+        /* Update the inputA and inputB pointers for next MAC calculation */
+        py = pIn2 + count;
+        px = pIn1;
+
+        /* Increment MAC count */
+        count++;
+
+        /* Decrement loop counter */
+        blockSize1--;
+    }
+
+    /* --------------------------
+     * Initializations of stage2
+     * ------------------------*/
+
+    /* sum = x[0] * y[srcBLen-1] + x[1] * y[srcBLen-2] +...+ x[srcBLen-1] * y[0]
+     * sum = x[1] * y[srcBLen-1] + x[2] * y[srcBLen-2] +...+ x[srcBLen]   * y[0]
+     * ....
+     * sum = x[srcALen-srcBLen-2] * y[srcBLen-1] + x[srcALen] * y[srcBLen-2] +...+ x[srcALen-1] *
+     * y[0]
+     */
+
+    /* Working pointer of inputA */
+    px = pIn1;
+
+    /* Working pointer of inputB */
+    pSrc2 = pIn2 + (srcBLen - 1U);
+    py = pSrc2;
+
+    /* count is index by which the pointer pIn1 to be incremented */
+    count = 0U;
+
+    /* -------------------
+     * Stage2 process
+     * ------------------*/
+
+    /* Stage2 depends on srcBLen as in this stage srcBLen number of MACS are performed.
+     * So, to loop unroll over blockSize2,
+     * srcBLen should be greater than or equal to 4 */
+    if (srcBLen &gt;= 4U) {
+
+#if defined(PLP_MATH_LOOPUNROLL)
+
+        /* Loop unrolling: Compute 4 outputs at a time */
+        blkCnt = blockSize2 &gt;&gt; 2U;
+
+        while (blkCnt &gt; 0U) {
+            /* Set all accumulators to zero */
+            acc0 = 0;
+            acc1 = 0;
+            acc2 = 0;
+            acc3 = 0;
+
+            /* Apply loop unrolling and compute 4 MACs simultaneously. */
+            k = srcBLen &gt;&gt; 2U;
+            /* read x[0], x[1], x[2] samples */
+            x0 = *px++;
+            x1 = *px++;
+            x2 = *px++;
+
+            /* First part of the processing with loop unrolling.  Compute 4 MACs at a time.
+            ** a second loop below computes MACs for the remaining 1 to 3 samples. */
+            do {
+                /* Read y[srcBLen - 1] sample */
+                c0 = *py--;
+                /* Read x[3] sample */
+                x3 = *(px);
+
+                /* Perform the multiply-accumulate */
+                /* acc0 +=  x[0] * y[srcBLen - 1] */
+                acc0 += x0 * c0;
+                /* acc1 +=  x[1] * y[srcBLen - 1] */
+                acc1 += x1 * c0;
+                /* acc2 +=  x[2] * y[srcBLen - 1] */
+                acc2 += x2 * c0;
+                /* acc3 +=  x[3] * y[srcBLen - 1] */
+                acc3 += x3 * c0;
+
+                /* Read y[srcBLen - 2] sample */
+                c0 = *py--;
+                /* Read x[4] sample */
+                x0 = *(px + 1U);
+
+                /* Perform the multiply-accumulate */
+                /* acc0 +=  x[1] * y[srcBLen - 2] */
+                acc0 += x1 * c0;
+                /* acc1 +=  x[2] * y[srcBLen - 2] */
+                acc1 += x2 * c0;
+                /* acc2 +=  x[3] * y[srcBLen - 2] */
+                acc2 += x3 * c0;
+                /* acc3 +=  x[4] * y[srcBLen - 2] */
+                acc3 += x0 * c0;
+
+                /* Read y[srcBLen - 3] sample */
+                c0 = *py--;
+                /* Read x[5] sample */
+                x1 = *(px + 2U);
+
+                /* Perform the multiply-accumulate */
+                /* acc0 +=  x[2] * y[srcBLen - 3] */
+                acc0 += x2 * c0;
+                /* acc1 +=  x[3] * y[srcBLen - 2] */
+                acc1 += x3 * c0;
+                /* acc2 +=  x[4] * y[srcBLen - 2] */
+                acc2 += x0 * c0;
+                /* acc3 +=  x[5] * y[srcBLen - 2] */
+                acc3 += x1 * c0;
+
+                /* Read y[srcBLen - 4] sample */
+                c0 = *py--;
+                /* Read x[6] sample */
+                x2 = *(px + 3U);
+                px += 4U;
+
+                /* Perform the multiply-accumulate */
+                /* acc0 +=  x[3] * y[srcBLen - 4] */
+                acc0 += x3 * c0;
+                /* acc1 +=  x[4] * y[srcBLen - 4] */
+                acc1 += x0 * c0;
+                /* acc2 +=  x[5] * y[srcBLen - 4] */
+                acc2 += x1 * c0;
+                /* acc3 +=  x[6] * y[srcBLen - 4] */
+                acc3 += x2 * c0;
+
+            } while (--k);
+
+            /* If the srcBLen is not a multiple of 4, compute any remaining MACs here.
+            ** No loop unrolling is used. */
+            k = srcBLen % 0x4U;
+
+            while (k &gt; 0U) {
+                /* Read y[srcBLen - 5] sample */
+                c0 = *py--;
+                /* Read x[7] sample */
+                x3 = *px++;
+
+                /* Perform the multiply-accumulate */
+                /* acc0 +=  x[4] * y[srcBLen - 5] */
+                acc0 += x0 * c0;
+                /* acc1 +=  x[5] * y[srcBLen - 5] */
+                acc1 += x1 * c0;
+                /* acc2 +=  x[6] * y[srcBLen - 5] */
+                acc2 += x2 * c0;
+                /* acc3 +=  x[7] * y[srcBLen - 5] */
+                acc3 += x3 * c0;
+
+                /* Reuse the present samples for the next MAC */
+                x0 = x1;
+                x1 = x2;
+                x2 = x3;
+
+                /* Decrement the loop counter */
+                k--;
+            }
+
+            /* Store the result in the accumulator in the destination buffer. */
+            *pOut++ = acc0;
+            *pOut++ = acc1;
+            *pOut++ = acc2;
+            *pOut++ = acc3;
+
+            /* Increment the pointer pIn1 index, count by 4 */
+            count += 4U;
+
+            /* Update the inputA and inputB pointers for next MAC calculation */
+            px = pIn1 + count;
+            py = pSrc2;
+
+            /* Decrement the loop counter */
+            blkCnt--;
+        }
+
+        /* If the blockSize2 is not a multiple of 4, compute any remaining output samples here.
+        ** No loop unrolling is used. */
+        blkCnt = blockSize2 % 0x4U;
+
+#else
+
+        /* Initialize blkCnt with number of samples */
+        blkCnt = blockSize2;
+
+#endif /* #if defined (PLP_MATH_LOOPUNROLL)*/
+
+        while (blkCnt &gt; 0U) {
+            /* Accumulator is made zero for every iteration */
+            sum = 0.0f;
+
+#if defined(PLP_MATH_LOOPUNROLL)
+            /* Loop unrolling: Compute 4 outputs at a time */
+            k = srcBLen &gt;&gt; 2U;
+            while (k &gt; 0U) {
+                /* Perform the multiply-accumulate */
+                sum += *px++ * *py--;
+                sum += *px++ * *py--;
+                sum += *px++ * *py--;
+                sum += *px++ * *py--;
+
+                /* Decrement loop counter */
+                k--;
+            }
+
+            /* Loop unrolling: Compute remaining outputs */
+            k = srcBLen % 0x4U;
+
+#else
+            /* Initialize blkCnt with number of samples */
+            k = srcBLen;
+
+#endif /* #if defined (PLP_MATH_LOOPUNROLL) */
+
+            while (k &gt; 0U) {
+                /* Perform the multiply-accumulate */
+                sum += *px++ * *py--;
+
+                /* Decrement the loop counter */
+                k--;
+            }
+
+            /* Store the result in the accumulator in the destination buffer. */
+            *pOut++ = sum;
+
+            /* Increment the MAC count */
+            count++;
+
+            /* Update the inputA and inputB pointers for next MAC calculation */
+            px = pIn1 + count;
+            py = pSrc2;
+
+            /* Decrement the loop counter */
+            blkCnt--;
+        }
+    } else {
+        /* If the srcBLen is not a multiple of 4,
+         * the blockSize2 loop cannot be unrolled by 4 */
+        blkCnt = blockSize2;
+
+        while (blkCnt &gt; 0U) {
+            /* Accumulator is made zero for every iteration */
+            sum = 0.0f;
+
+            /* srcBLen number of MACS should be performed */
+            k = srcBLen;
+
+            while (k &gt; 0U) {
+                /* Perform the multiply-accumulate */
+                sum += *px++ * *py--;
+
+                /* Decrement the loop counter */
+                k--;
+            }
+
+            /* Store the result in the accumulator in the destination buffer. */
+            *pOut++ = sum;
+
+            /* Increment the MAC count */
+            count++;
+
+            /* Update the inputA and inputB pointers for next MAC calculation */
+            px = pIn1 + count;
+            py = pSrc2;
+
+            /* Decrement the loop counter */
+            blkCnt--;
+        }
+    }
+
+    /* --------------------------
+     * Initializations of stage3
+     * -------------------------*/
+
+    /* sum += x[srcALen-srcBLen+1] * y[srcBLen-1] + x[srcALen-srcBLen+2] * y[srcBLen-2] +...+
+     * x[srcALen-1] * y[1] sum += x[srcALen-srcBLen+2] * y[srcBLen-1] + x[srcALen-srcBLen+3] *
+     * y[srcBLen-2] +...+ x[srcALen-1] * y[2]
+     * ....
+     * sum +=  x[srcALen-2] * y[srcBLen-1] + x[srcALen-1] * y[srcBLen-2]
+     * sum +=  x[srcALen-1] * y[srcBLen-1]
+     */
+
+    /* In this stage the MAC operations are decreased by 1 for every iteration.
+       The blockSize3 variable holds the number of MAC operations performed */
+
+    /* Working pointer of inputA */
+    pSrc1 = pIn1 + (srcALen - (srcBLen - 1U));
+    px = pSrc1;
+
+    /* Working pointer of inputB */
+    pSrc2 = pIn2 + (srcBLen - 1U);
+    py = pSrc2;
+
+    /* -------------------
+     * Stage3 process
+     * ------------------*/
+    while (blockSize3 &gt; 0U) {
+        /* Accumulator is made zero for every iteration */
+        sum = 0.0f;
+
+#if defined(PLP_MATH_LOOPUNROLL)
+        /* Loop unrolling: Compute 4 outputs at a time */
+        k = blockSize3 &gt;&gt; 2U;
+        while (k &gt; 0U) {
+            /* Perform the multiply-accumulate */
+            /* sum += x[srcALen - srcBLen + 1] * y[srcBLen - 1] */
+            sum += *px++ * *py--;
+
+            /* sum += x[srcALen - srcBLen + 2] * y[srcBLen - 2] */
+            sum += *px++ * *py--;
+
+            /* sum += x[srcALen - srcBLen + 3] * y[srcBLen - 3] */
+            sum += *px++ * *py--;
+
+            /* sum += x[srcALen - srcBLen + 4] * y[srcBLen - 4] */
+            sum += *px++ * *py--;
+
+            /* Decrement loop counter */
+            k--;
+        }
+
+        /* Loop unrolling: Compute remaining outputs */
+        k = blockSize3 % 0x4U;
+#else
+
+        /* Initialize blkCnt with number of samples */
+        k = blockSize3;
+
+#endif /* defined (PLP_MATH_LOOPUNROLL)*/
+
+        while (k &gt; 0U) {
+            /* Perform the multiply-accumulate */
+            /* sum +=  x[srcALen-1] * y[srcBLen-1] */
+            sum += *px++ * *py--;
+
+            /* Decrement loop counter */
+            k--;
+        }
+
+        /* Store the result in the accumulator in the destination buffer. */
+        *pOut++ = sum;
+
+        /* Update the inputA and inputB pointers for next MAC calculation */
+        px = ++pSrc1;
+        py = pSrc2;
+
+        /* Decrement the loop counter */
+        blockSize3--;
+    }
+}
+</code></pre>
+<hr />
+<p>Updated on 2023-03-01 at 16:16:32 +0000</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+    
+  </body>
+</html>

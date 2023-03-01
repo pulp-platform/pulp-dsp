@@ -1,0 +1,688 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__realDWTKernels" kind="group">
+    <compoundname>realDWTKernels</compoundname>
+    <title>DWT kernels on real input values</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__realDWTKernels_1ga7bbaf1244633932ab0c4bbd5e52fcf11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_dwt_f32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_dwt_f32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point DWT on real input data for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the <ref refid="structplp__dwt__instance__f32" kindref="compound">plp_dwt_instance_f32</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_dwt_f32p_xpulpv2.c" line="64" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_dwt_f32p_xpulpv2.c" bodystart="64" bodyend="305"/>
+      </memberdef>
+      <memberdef kind="function" id="group__realDWTKernels_1gae774a34c83e953198e8648c583eeea4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_dwt_haar_f32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_dwt_haar_f32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point DWT kernel optimized for Haar Wavelet on real input data for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the <ref refid="structplp__dwt__instance__f32" kindref="compound">plp_dwt_instance_f32</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_dwt_f32p_xpulpv2.c" line="315" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_dwt_f32p_xpulpv2.c" bodystart="315" bodyend="418"/>
+      </memberdef>
+      <memberdef kind="function" id="group__realDWTKernels_1ga363becb5e6109ef5db13eb88f132ccf0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_dwt_f32s_xpulpv2</definition>
+        <argsstring>(const float32_t *__restrict__ pSrc, uint32_t length, const plp_dwt_wavelet_f32 wavelet, plp_dwt_extension_mode mode, float32_t *__restrict__ pDstA, float32_t *__restrict__ pDstD)</argsstring>
+        <name>plp_dwt_f32s_xpulpv2</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structplp__dwt__wavelet__f32" kindref="compound">plp_dwt_wavelet_f32</ref></type>
+          <declname>wavelet</declname>
+        </param>
+        <param>
+          <type>plp_dwt_extension_mode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDstA</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDstD</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point DWT on real input data for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (real data) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of input buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wavelet</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>wavelet structure for calculating DWT </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>boundary extension mode</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Approximate coefficients </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Detailed coefficients </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_dwt_f32s_xpulpv2.c" line="69" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_dwt_f32s_xpulpv2.c" bodystart="69" bodyend="290"/>
+      </memberdef>
+      <memberdef kind="function" id="group__realDWTKernels_1ga5a6b33b43e240cbfe1cf0ccec19cdf5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_dwt_haar_f32s_xpulpv2</definition>
+        <argsstring>(const float32_t *__restrict__ pSrc, uint32_t length, plp_dwt_extension_mode mode, float32_t *__restrict__ pDstA, float32_t *__restrict__ pDstD)</argsstring>
+        <name>plp_dwt_haar_f32s_xpulpv2</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>plp_dwt_extension_mode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDstA</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDstD</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point DWT kernel optimized for Haar Wavelet on real input data for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (real data) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of input buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>boundary extension mode</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Approximate coefficients </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Detailed coefficients </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_dwt_f32s_xpulpv2.c" line="305" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_dwt_f32s_xpulpv2.c" bodystart="305" bodyend="393"/>
+      </memberdef>
+      <memberdef kind="function" id="group__realDWTKernels_1gaf073964224e1835cb57c9d98ee06363d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_dwt_q16s_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t length, const plp_dwt_wavelet_q16 wavelet, plp_dwt_extension_mode mode, int16_t *__restrict__ pDstA, int16_t *__restrict__ pDstD)</argsstring>
+        <name>plp_dwt_q16s_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structplp__dwt__wavelet__q16" kindref="compound">plp_dwt_wavelet_q16</ref></type>
+          <declname>wavelet</declname>
+        </param>
+        <param>
+          <type>plp_dwt_extension_mode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDstA</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDstD</declname>
+        </param>
+        <briefdescription>
+<para>16bit fixed-point DWT on real input data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>16bit Fixed-point DWT.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (real data) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of input buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wavelet</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>wavelet structure for calculating DWT </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>boundary extension mode</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Approximate coefficients </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Detailed coefficients </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q16s_rv32im.c" line="73" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q16s_rv32im.c" bodystart="73" bodyend="294"/>
+      </memberdef>
+      <memberdef kind="function" id="group__realDWTKernels_1gab4a6fc86ef5b12aad11f21af9d40105d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_dwt_haar_q16s_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t length, plp_dwt_extension_mode mode, int16_t *__restrict__ pDstA, int16_t *__restrict__ pDstD)</argsstring>
+        <name>plp_dwt_haar_q16s_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>plp_dwt_extension_mode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDstA</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDstD</declname>
+        </param>
+        <briefdescription>
+<para>16bit fixed-point DWT kernel optimized for Haar Wavelet on real input data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>16bit Fixed-point DWT kernel optimized for Haar Wavelet on real input data.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (real data) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of input buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>boundary extension mode</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Approximate coefficients </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Detailed coefficients </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q16s_rv32im.c" line="309" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q16s_rv32im.c" bodystart="309" bodyend="394"/>
+      </memberdef>
+      <memberdef kind="function" id="group__realDWTKernels_1gaf434a48ca966b32eb38a3406812c9d83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_dwt_q32s_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t length, const plp_dwt_wavelet_q32 wavelet, plp_dwt_extension_mode mode, int32_t *__restrict__ pDstA, int32_t *__restrict__ pDstD)</argsstring>
+        <name>plp_dwt_q32s_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structplp__dwt__wavelet__q32" kindref="compound">plp_dwt_wavelet_q32</ref></type>
+          <declname>wavelet</declname>
+        </param>
+        <param>
+          <type>plp_dwt_extension_mode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstA</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstD</declname>
+        </param>
+        <briefdescription>
+<para>Q32 Fixed-point DWT on real input data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>32bit Fixed-point DWT.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (real data) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of input buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wavelet</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>wavelet structure for calculating DWT </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>boundary extension mode</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Approximate coefficients </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Detailed coefficients </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q32s_rv32im.c" line="70" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q32s_rv32im.c" bodystart="70" bodyend="301"/>
+      </memberdef>
+      <memberdef kind="function" id="group__realDWTKernels_1ga0e5db0b8deccf398c6ec3825ab1966ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_dwt_q8s_rv32im</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t length, const plp_dwt_wavelet_q8 wavelet, plp_dwt_extension_mode mode, int8_t *__restrict__ pDstA, int8_t *__restrict__ pDstD)</argsstring>
+        <name>plp_dwt_q8s_rv32im</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structplp__dwt__wavelet__q8" kindref="compound">plp_dwt_wavelet_q8</ref></type>
+          <declname>wavelet</declname>
+        </param>
+        <param>
+          <type>plp_dwt_extension_mode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDstA</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDstD</declname>
+        </param>
+        <briefdescription>
+<para>8bit fixed-point DWT on real input data </para>
+        </briefdescription>
+        <detaileddescription>
+<para>8bit Fixed-point DWT.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (real data) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of input buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wavelet</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>wavelet structure for calculating DWT </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>boundary extension mode</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Approximate coefficients </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Detailed coefficients </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q8s_rv32im.c" line="73" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q8s_rv32im.c" bodystart="73" bodyend="294"/>
+      </memberdef>
+      <memberdef kind="function" id="group__realDWTKernels_1ga51f28713d3571f72713c729e5a102858" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_dwt_haar_q8s_rv32im</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t length, plp_dwt_extension_mode mode, int8_t *__restrict__ pDstA, int8_t *__restrict__ pDstD)</argsstring>
+        <name>plp_dwt_haar_q8s_rv32im</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>plp_dwt_extension_mode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDstA</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDstD</declname>
+        </param>
+        <briefdescription>
+<para>8bit fixed-point DWT kernel optimized for Haar Wavelet on real input data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>8bit Fixed-point DWT kernel optimized for Haar Wavelet on real input data.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (real data) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of input buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>boundary extension mode</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Approximate coefficients </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Detailed coefficients </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q8s_rv32im.c" line="309" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q8s_rv32im.c" bodystart="309" bodyend="394"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__realDWTKernels_1gadb6bb4d74f3e32556e7d87269bcca1bf" prot="public" static="no">
+        <name>MAKE_HAAR</name>
+        <param><defname>NAME</defname></param>
+        <param><defname>COEF</defname></param>
+        <param><defname>SHIFT</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q32s_rv32im.c" line="307" column="9" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q32s_rv32im.c" bodystart="307" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>These kernels calculate the DWT transform on real input data. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

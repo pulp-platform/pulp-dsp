@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__mat__fill__I__instance__q8" kind="struct" language="C++" prot="public">
+    <compoundname>plp_mat_fill_I_instance_q8</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__mat__fill__I__instance__q8_1a9a596b696505ae43fb507f407663ac99" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_fill_I_instance_q8::N</definition>
+        <argsstring></argsstring>
+        <name>N</name>
+        <qualifiedname>plp_mat_fill_I_instance_q8::N</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="895" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="895" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__fill__I__instance__q8_1abc77522d8d34ce0a5ac84634e83b7384" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t plp_mat_fill_I_instance_q8::fracBits</definition>
+        <argsstring></argsstring>
+        <name>fracBits</name>
+        <qualifiedname>plp_mat_fill_I_instance_q8::fracBits</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="896" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="896" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__fill__I__instance__q8_1ae7584ceb6fa47d158ad67a1249845e0e" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_fill_I_instance_q8::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_mat_fill_I_instance_q8::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="897" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="897" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__fill__I__instance__q8_1a2c7a7a5cfb947708211a9df9dd11da8c" prot="public" static="no" mutable="no">
+        <type>int8_t *__restrict__</type>
+        <definition>int8_t* __restrict__ plp_mat_fill_I_instance_q8::pDst</definition>
+        <argsstring></argsstring>
+        <name>pDst</name>
+        <qualifiedname>plp_mat_fill_I_instance_q8::pDst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="898" column="25" bodyfile="/github/workspace/include/plp_math.h" bodystart="898" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for fix-point parallel identity matrix creation. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="894" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="894" bodyend="899"/>
+    <listofallmembers>
+      <member refid="structplp__mat__fill__I__instance__q8_1abc77522d8d34ce0a5ac84634e83b7384" prot="public" virt="non-virtual"><scope>plp_mat_fill_I_instance_q8</scope><name>fracBits</name></member>
+      <member refid="structplp__mat__fill__I__instance__q8_1a9a596b696505ae43fb507f407663ac99" prot="public" virt="non-virtual"><scope>plp_mat_fill_I_instance_q8</scope><name>N</name></member>
+      <member refid="structplp__mat__fill__I__instance__q8_1ae7584ceb6fa47d158ad67a1249845e0e" prot="public" virt="non-virtual"><scope>plp_mat_fill_I_instance_q8</scope><name>nPE</name></member>
+      <member refid="structplp__mat__fill__I__instance__q8_1a2c7a7a5cfb947708211a9df9dd11da8c" prot="public" virt="non-virtual"><scope>plp_mat_fill_I_instance_q8</scope><name>pDst</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

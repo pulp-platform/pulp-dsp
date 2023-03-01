@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__sqrt" kind="group">
+    <compoundname>sqrt</compoundname>
+    <title>Sqrt</title>
+    <innergroup refid="group__sqrtKernels">Sqrt Kernels</innergroup>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__sqrt_1ga3454e44bc884f77b35ef1b8c4e1462be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_sqrt_f32</definition>
+        <argsstring>(const float *__restrict__ pSrc, float *__restrict__ pRes)</argsstring>
+        <name>plp_sqrt_f32</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for square root of a 32-bit floating point number. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vectoro </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Square root returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FastMathFunctions/plp_sqrt_f32.c" line="58" column="6" bodyfile="/github/workspace/src/FastMathFunctions/plp_sqrt_f32.c" bodystart="58" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="group__sqrt_1gaba100064c0ce9ce74408a11df0818aad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_sqrt_q16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, const uint32_t fracBits, int16_t *__restrict__ pRes)</argsstring>
+        <name>plp_sqrt_q16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for square root of a 16-bit fixed point number. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Square root returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FastMathFunctions/plp_sqrt_q16.c" line="58" column="6" bodyfile="/github/workspace/src/FastMathFunctions/plp_sqrt_q16.c" bodystart="58" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="group__sqrt_1ga75cdb966be9de70bf1cd979da8607a3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_sqrt_q32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, const uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_sqrt_q32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for square root of a 32-bit fixed point number. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Square root returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FastMathFunctions/plp_sqrt_q32.c" line="54" column="6" bodyfile="/github/workspace/src/FastMathFunctions/plp_sqrt_q32.c" bodystart="54" bodyend="63"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

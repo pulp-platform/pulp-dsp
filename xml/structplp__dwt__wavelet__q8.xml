@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__dwt__wavelet__q8" kind="struct" language="C++" prot="public">
+    <compoundname>plp_dwt_wavelet_q8</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__dwt__wavelet__q8_1ae63d01dd153bf09be0daea188d7f25c1" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_dwt_wavelet_q8::length</definition>
+        <argsstring></argsstring>
+        <name>length</name>
+        <qualifiedname>plp_dwt_wavelet_q8::length</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1703" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="1703" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__dwt__wavelet__q8_1a1c45dafcb462a0167aea57761b957241" prot="public" static="no" mutable="no">
+        <type>plp_dwt_wavelet_type</type>
+        <definition>plp_dwt_wavelet_type plp_dwt_wavelet_q8::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>plp_dwt_wavelet_q8::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1704" column="25" bodyfile="/github/workspace/include/plp_math.h" bodystart="1704" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__dwt__wavelet__q8_1afc6de46ca90e9387d505f5eefda2fc66" prot="public" static="no" mutable="no">
+        <type>int8_t *</type>
+        <definition>int8_t* plp_dwt_wavelet_q8::dec_lo</definition>
+        <argsstring></argsstring>
+        <name>dec_lo</name>
+        <qualifiedname>plp_dwt_wavelet_q8::dec_lo</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1706" column="11" bodyfile="/github/workspace/include/plp_math.h" bodystart="1706" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__dwt__wavelet__q8_1ae4574015733d4a36d57698f124dd0354" prot="public" static="no" mutable="no">
+        <type>int8_t *</type>
+        <definition>int8_t* plp_dwt_wavelet_q8::dec_hi</definition>
+        <argsstring></argsstring>
+        <name>dec_hi</name>
+        <qualifiedname>plp_dwt_wavelet_q8::dec_hi</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1707" column="11" bodyfile="/github/workspace/include/plp_math.h" bodystart="1707" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="1701" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="1701" bodyend="1708"/>
+    <listofallmembers>
+      <member refid="structplp__dwt__wavelet__q8_1ae4574015733d4a36d57698f124dd0354" prot="public" virt="non-virtual"><scope>plp_dwt_wavelet_q8</scope><name>dec_hi</name></member>
+      <member refid="structplp__dwt__wavelet__q8_1afc6de46ca90e9387d505f5eefda2fc66" prot="public" virt="non-virtual"><scope>plp_dwt_wavelet_q8</scope><name>dec_lo</name></member>
+      <member refid="structplp__dwt__wavelet__q8_1ae63d01dd153bf09be0daea188d7f25c1" prot="public" virt="non-virtual"><scope>plp_dwt_wavelet_q8</scope><name>length</name></member>
+      <member refid="structplp__dwt__wavelet__q8_1a1c45dafcb462a0167aea57761b957241" prot="public" virt="non-virtual"><scope>plp_dwt_wavelet_q8</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

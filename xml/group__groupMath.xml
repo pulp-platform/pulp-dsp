@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__groupMath" kind="group">
+    <compoundname>groupMath</compoundname>
+    <title>Basic Math Functions</title>
+    <innergroup refid="group__BasicAbs">Vector Absolute Value</innergroup>
+    <innergroup refid="group__BasicAdd">Vector Addition</innergroup>
+    <innergroup refid="group__BasicDotProd">Vector Dot Product</innergroup>
+    <innergroup refid="group__BasicMult">Vector Multiplication</innergroup>
+    <innergroup refid="group__BasicNegate">Vector Negate</innergroup>
+    <innergroup refid="group__BasicOffset">vector offset</innergroup>
+    <innergroup refid="group__BasicScale">vector scale</innergroup>
+    <innergroup refid="group__BasicSub">vector subtraction</innergroup>
+    <innergroup refid="group__BasicLog">BasicLog</innergroup>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

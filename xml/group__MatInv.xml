@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__MatInv" kind="group">
+    <compoundname>MatInv</compoundname>
+    <title>matrix inversion</title>
+    <innergroup refid="group__MatInvKernels">matrix inversion kernels</innergroup>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__MatInv_1gaa17fc23236a7c33e5a705de09c07c39d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int plp_mat_inv_f32</definition>
+        <argsstring>(float *__restrict__ pSrc, float *__restrict__ pDst, uint32_t N)</argsstring>
+        <name>plp_mat_inv_f32</name>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for matrix inversion of 32-bit floating-point matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for matrix inverse of a 32-bit floating-point matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix. pSrc is modified by this function </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0: Success, 1: Matrix is singular, 2: operation not supported</para>
+</simplesect>
+<simplesect kind="par"><title>This function will use plp_mat_inv_i32s_xpulpv2 for its computation.</title><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_inv/plp_mat_inv_f32.c" line="77" column="5" bodyfile="/github/workspace/src/MatrixFunctions/mat_inv/plp_mat_inv_f32.c" bodystart="77" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatInv_1ga06fc9862844a25e37e3389a7c31cafb0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int plp_mat_inv_f32_parallel</definition>
+        <argsstring>(float *__restrict__ pSrc, float *__restrict__ pDst, uint32_t N, uint32_t nPE)</argsstring>
+        <name>plp_mat_inv_f32_parallel</name>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel matrix inversion of 32-bit floating-point matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel matrix inverse of a 32-bit floating-point matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix, pSrc is modified by this function </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use for computation </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0: Success, 1: Matrix is singular, 2: operation not supported</para>
+</simplesect>
+@warn This function is not yet implemented in parallel, and it will call the single-core implementation! </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_inv/plp_mat_inv_f32_parallel.c" line="54" column="5" bodyfile="/github/workspace/src/MatrixFunctions/mat_inv/plp_mat_inv_f32_parallel.c" bodystart="54" bodyend="67"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the glue code for matrix inversion. The kernel codes (kernels) are in the Module matrix inversion Kernels.</para>
+<para>The inverse of a matrix of shape MxN is another matrix of shape NxN, such that</para>
+<para><formula id="7">\[
+  I = A \cdot A^{-1}
+\]</formula></para>
+<para>The inverse is defined only if the input matrix is square and non-singular (the determinant is non-zero). The function checks that the input and output matrices are square and of the same size. Matrix inversion is numerically sensitive and the PULP DSP library only supports matrix inversion of floating-point matrices.</para>
+<para><simplesect kind="par"><title>Algorithm</title><para>The Gauss-Jordan method is used to find the inverse. The algorithm performs a sequence of elementary row-operations until it reduces the input matrix to an identity matrix. Applying the same sequence of elementary row-operations to an identity matrix yields the inverse matrix. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

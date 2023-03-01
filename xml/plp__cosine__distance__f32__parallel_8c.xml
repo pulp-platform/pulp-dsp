@@ -1,0 +1,272 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="plp__cosine__distance__f32__parallel_8c" kind="file" language="C++">
+    <compoundname>plp_cosine_distance_f32_parallel.c</compoundname>
+    <includes refid="plp__math_8h" local="yes">plp_math.h</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>plp_math.h</label>
+        <link refid="plp__math_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rtos_hal.h</label>
+        <link refid="rtos__hal_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/github/workspace/src/DistanceFunctions/plp_cosine_distance/plp_cosine_distance_f32_parallel.c</label>
+        <link refid="plp__cosine__distance__f32__parallel_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>math.h</label>
+      </node>
+      <node id="5">
+        <label>rt/rt_api.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__cosine_1ga6aa0d6b99fc8a6f7d21a501434fe19a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cosine_distance_f32_parallel</definition>
+        <argsstring>(const float32_t *__restrict__ pSrcA, const float32_t *__restrict__ pSrcB, uint32_t blockSize, uint32_t nPE, float32_t *__restrict__ pRes)</argsstring>
+        <name>plp_cosine_distance_f32_parallel</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel cosine distance between 32-bit float vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of parallel processing units </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/DistanceFunctions/plp_cosine_distance/plp_cosine_distance_f32_parallel.c" line="57" column="6" bodyfile="/github/workspace/src/DistanceFunctions/plp_cosine_distance/plp_cosine_distance_f32_parallel.c" bodystart="57" bodyend="173"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>=====================================================================</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Project:<sp/><sp/><sp/><sp/><sp/><sp/>PULP<sp/>DSP<sp/>Library</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>Title:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>plp_cosine_distance_f32_parallel.c</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>Description:<sp/><sp/>32-bit<sp/>floating<sp/>point<sp/>cosine<sp/>distance<sp/>kernel<sp/>for<sp/>RV32IM</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>$Date:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>21.<sp/>March<sp/>2022</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>$Revision:<sp/><sp/><sp/><sp/>V0</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>Target<sp/>Processor:<sp/>PULP<sp/>cores</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>=====================================================================<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(C)<sp/>2022<sp/>ETH<sp/>Zurich<sp/>and<sp/>University<sp/>of<sp/>Bologna.</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/>Author:<sp/>Marco<sp/>Bertuletti<sp/>ETH<sp/>Zurich</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>Licensed<sp/>under<sp/>the<sp/>Apache<sp/>License,<sp/>Version<sp/>2.0<sp/>(the<sp/>License);<sp/>you<sp/>may</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>not<sp/>use<sp/>this<sp/>file<sp/>except<sp/>in<sp/>compliance<sp/>with<sp/>the<sp/>License.</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>You<sp/>may<sp/>obtain<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>License<sp/>at</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>www.apache.org/licenses/LICENSE-2.0</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>Unless<sp/>required<sp/>by<sp/>applicable<sp/>law<sp/>or<sp/>agreed<sp/>to<sp/>in<sp/>writing,<sp/>software</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>distributed<sp/>under<sp/>the<sp/>License<sp/>is<sp/>distributed<sp/>on<sp/>an<sp/>AS<sp/>IS<sp/>BASIS,<sp/>WITHOUT</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>WARRANTIES<sp/>OR<sp/>CONDITIONS<sp/>OF<sp/>ANY<sp/>KIND,<sp/>either<sp/>express<sp/>or<sp/>implied.</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>See<sp/>the<sp/>License<sp/>for<sp/>the<sp/>specific<sp/>language<sp/>governing<sp/>permissions<sp/>and</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>limitations<sp/>under<sp/>the<sp/>License.</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="plp__math_8h" kindref="compound">plp_math.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__cosine_1ga6aa0d6b99fc8a6f7d21a501434fe19a4" kindref="member">plp_cosine_distance_f32_parallel</ref>(<sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>float32_t<sp/>*__restrict__<sp/>pSrcA,</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>float32_t<sp/>*__restrict__<sp/>pSrcB,</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>blockSize,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>nPE,</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float32_t<sp/>*__restrict__<sp/>pRes)<sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*float32_t<sp/>pwrA,<sp/>pwrB;</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/><sp/>float32_t<sp/>dot,<sp/>tmp;</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/><sp/>plp_power_f32_parallel(pSrcA,<sp/>blockSize,<sp/>nPE,<sp/>&amp;pwrA);</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/><sp/>plp_power_f32_parallel(pSrcB,<sp/>blockSize,<sp/>nPE,<sp/>&amp;pwrB);</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/><sp/>tmp<sp/>=<sp/>pwrA*pwrB;</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"></highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/><sp/>plp_dot_prod_f32_parallel(pSrcA,<sp/>pSrcB,<sp/>blockSize,<sp/>nPE,<sp/>&amp;dot);</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/>plp_sqrt_f32(&amp;tmp,<sp/>&amp;tmp);</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/>*pRes<sp/>=<sp/>1.0f<sp/>-<sp/>dot/tmp;*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(hal_cluster_id()<sp/>==<sp/>ARCHI_FC_CID)<sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;parallel<sp/>processing<sp/>supported<sp/>only<sp/>for<sp/>cluster<sp/>side\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>i;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>tmpblkSizePE<sp/>=<sp/>blockSize<sp/>/<sp/>2;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float32_t<sp/>resBuffer_A[2];</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float32_t<sp/>resBuffer_B[2];</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float32_t<sp/>resBuffer_dot[2];</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structplp__cosine__distance__instance__f32" kindref="compound">plp_cosine_distance_instance_f32</ref><sp/>S;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Initialize<sp/>the<sp/>plp_cosine_distance_instance</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S.pSrcA<sp/>=<sp/>pSrcA;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S.pSrcB<sp/>=<sp/>pSrcB;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S.blkSizePE<sp/>=<sp/>tmpblkSizePE;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S.nPE<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S.resBuffer_A<sp/>=<sp/>resBuffer_A;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S.resBuffer_B<sp/>=<sp/>resBuffer_B;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S.resBuffer_dot<sp/>=<sp/>resBuffer_dot;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hal_cl_team_fork(2,<sp/><ref refid="group__cosine_1ga102a1bab98a78f00fe263588ee271f7a" kindref="member">plp_cosine_distance_f32p_xpulpv2</ref>,<sp/>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*)&amp;S);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float32_t<sp/>pwrA<sp/>=<sp/>0,<sp/>pwrB=0;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float32_t<sp/>dot<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>2;<sp/>i++)<sp/>{<sp/></highlight><highlight class="comment">//<sp/>not<sp/>necessary<sp/>hal_cl_nb_pe_cores()</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pwrA<sp/>+=<sp/>resBuffer_A[i];</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pwrB<sp/>+=<sp/>resBuffer_B[i];</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dot<sp/>+=<sp/>resBuffer_dot[i];</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*uint32_t<sp/>nPEdot<sp/>=<sp/>nPE;</highlight></codeline>
+<codeline lineno="106"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>nPEpwr<sp/>=<sp/>nPE;</highlight></codeline>
+<codeline lineno="107"><highlight class="comment"></highlight></codeline>
+<codeline lineno="108"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>i;</highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>tmpblkSizePE_pwr<sp/>=<sp/>blockSize<sp/>/<sp/>nPEpwr;</highlight></codeline>
+<codeline lineno="110"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float32_t<sp/>resBuffer_pwr[nPEpwr];</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>plp_power_instance_f32<sp/>S_pwr;</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Initialize<sp/>the<sp/>plp_power_instance</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S_pwr.blkSizePE<sp/>=<sp/>tmpblkSizePE_pwr;</highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S_pwr.nPE<sp/>=<sp/>nPE;</highlight></codeline>
+<codeline lineno="115"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S_pwr.resBuffer<sp/>=<sp/>resBuffer_pwr;</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"></highlight></codeline>
+<codeline lineno="117"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>POWER<sp/>OF<sp/>THE<sp/>FIRST<sp/>VECTOR</highlight></codeline>
+<codeline lineno="118"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S_pwr.pSrc<sp/>=<sp/>pSrcA;</highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Fork<sp/>the<sp/>dot<sp/>product<sp/>to<sp/>nPE<sp/>cores<sp/>(i.e.<sp/>processing<sp/>units)</highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hal_cl_team_fork(nPEpwr,<sp/>plp_power_f32p_xpulpv2,<sp/>(void<sp/>*)&amp;S_pwr);</highlight></codeline>
+<codeline lineno="121"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float32_t<sp/>pwrA<sp/>=<sp/>0,<sp/>tmpA;</highlight></codeline>
+<codeline lineno="122"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>for<sp/>(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>nPE;<sp/>i++)<sp/>{<sp/>//<sp/>not<sp/>necessary<sp/>hal_cl_nb_pe_cores()</highlight></codeline>
+<codeline lineno="123"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pwrA<sp/>+=<sp/>resBuffer_pwr[i];</highlight></codeline>
+<codeline lineno="124"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="125"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>for<sp/>(i<sp/>=<sp/>(tmpblkSizePE_pwr)*nPEpwr;<sp/>i<sp/>&lt;<sp/>blockSize;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="126"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tmpA<sp/>=<sp/>pSrcA[i];</highlight></codeline>
+<codeline lineno="127"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pwrA<sp/>+=<sp/>tmpA*tmpA;</highlight></codeline>
+<codeline lineno="128"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="129"><highlight class="comment"></highlight></codeline>
+<codeline lineno="130"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>POWER<sp/>OF<sp/>THE<sp/>SECOND<sp/>VECTOR</highlight></codeline>
+<codeline lineno="131"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S_pwr.pSrc<sp/>=<sp/>pSrcB;</highlight></codeline>
+<codeline lineno="132"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Fork<sp/>the<sp/>dot<sp/>product<sp/>to<sp/>nPE<sp/>cores<sp/>(i.e.<sp/>processing<sp/>units)</highlight></codeline>
+<codeline lineno="133"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hal_cl_team_fork(nPE,<sp/>plp_power_f32p_xpulpv2,<sp/>(void<sp/>*)&amp;S_pwr);</highlight></codeline>
+<codeline lineno="134"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float32_t<sp/>pwrB<sp/>=<sp/>0,<sp/>tmpB;</highlight></codeline>
+<codeline lineno="135"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>for<sp/>(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>nPE;<sp/>i++)<sp/>{<sp/>//<sp/>not<sp/>necessary<sp/>hal_cl_nb_pe_cores()</highlight></codeline>
+<codeline lineno="136"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pwrB<sp/>+=<sp/>resBuffer_pwr[i];</highlight></codeline>
+<codeline lineno="137"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="138"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>for<sp/>(i<sp/>=<sp/>(tmpblkSizePE_pwr)*nPEpwr;<sp/>i<sp/>&lt;<sp/>blockSize;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="139"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tmpB<sp/>=<sp/>pSrcB[i];</highlight></codeline>
+<codeline lineno="140"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pwrB<sp/>+=<sp/>tmpB*tmpB;</highlight></codeline>
+<codeline lineno="141"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="142"><highlight class="comment"></highlight></codeline>
+<codeline lineno="143"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>DOT<sp/>PRODUCT</highlight></codeline>
+<codeline lineno="144"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float32_t<sp/>dot<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="145"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>plp_dot_prod_f32s_xpulpv2(pSrcA,<sp/>pSrcB,<sp/>blockSize,<sp/>&amp;dot);</highlight></codeline>
+<codeline lineno="146"><highlight class="comment"></highlight></codeline>
+<codeline lineno="147"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>DOT<sp/>PRODUCT</highlight></codeline>
+<codeline lineno="148"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>tmpblkSizePE_dot<sp/>=<sp/>blockSize<sp/>/<sp/>nPEdot;</highlight></codeline>
+<codeline lineno="149"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float32_t<sp/>resBuffer_dot[nPEdot];</highlight></codeline>
+<codeline lineno="150"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>plp_dot_prod_instance_f32<sp/>S_dot;</highlight></codeline>
+<codeline lineno="151"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Initialize<sp/>the<sp/>plp_dot_prod_instance</highlight></codeline>
+<codeline lineno="152"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S_dot.pSrcA<sp/>=<sp/>pSrcA;</highlight></codeline>
+<codeline lineno="153"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S_dot.pSrcB<sp/>=<sp/>pSrcB;</highlight></codeline>
+<codeline lineno="154"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S_dot.blkSizePE<sp/>=<sp/>tmpblkSizePE_dot;</highlight></codeline>
+<codeline lineno="155"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S_dot.nPE<sp/>=<sp/>nPEdot;</highlight></codeline>
+<codeline lineno="156"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>S_dot.resBuffer<sp/>=<sp/>resBuffer_dot;</highlight></codeline>
+<codeline lineno="157"><highlight class="comment"></highlight></codeline>
+<codeline lineno="158"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Fork<sp/>the<sp/>dot<sp/>product<sp/>to<sp/>nPE<sp/>cores<sp/>(i.e.<sp/>processing<sp/>units)</highlight></codeline>
+<codeline lineno="159"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hal_cl_team_fork(nPEdot,<sp/>plp_dot_prod_f32p_xpulpv2,<sp/>(void<sp/>*)&amp;S_dot);</highlight></codeline>
+<codeline lineno="160"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float32_t<sp/>dot<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="161"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>for<sp/>(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>nPEdot;<sp/>i++)<sp/>{<sp/>//<sp/>not<sp/>necessary<sp/>hal_cl_nb_pe_cores()</highlight></codeline>
+<codeline lineno="162"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dot<sp/>+=<sp/>resBuffer_dot[i];</highlight></codeline>
+<codeline lineno="163"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="164"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>for<sp/>(i<sp/>=<sp/>(tmpblkSizePE_dot)*nPEdot;<sp/>i<sp/>&lt;<sp/>blockSize;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="165"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dot<sp/>+=<sp/>pSrcA[i]<sp/>*<sp/>pSrcB[i];</highlight></codeline>
+<codeline lineno="166"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float32_t<sp/>tmp<sp/>=<sp/>pwrA*pwrB;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__sqrt_1ga3454e44bc884f77b35ef1b8c4e1462be" kindref="member">plp_sqrt_f32</ref>(&amp;tmp,<sp/>&amp;tmp);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*pRes<sp/>=<sp/>1.0f<sp/>-<sp/>dot/tmp;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/github/workspace/src/DistanceFunctions/plp_cosine_distance/plp_cosine_distance_f32_parallel.c"/>
+  </compounddef>
+</doxygen>

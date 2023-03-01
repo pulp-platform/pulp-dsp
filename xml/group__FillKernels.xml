@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__FillKernels" kind="group">
+    <compoundname>FillKernels</compoundname>
+    <title>Vector Fill Kernels</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__FillKernels_1ga5cdd4fe36fb7685fefc296d29dadbf95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_fill_i32s_rv32im</definition>
+        <argsstring>(int32_t value, int32_t *__restrict__ pDst, uint32_t blockSize)</argsstring>
+        <name>plp_fill_i32s_rv32im</name>
+        <param>
+          <type>int32_t</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Fills a constant value into a 32-bit integer vector for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>input value to be filled </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/SupportFunctions/kernels/plp_fill_i32s_rv32im.c" line="81" column="6" bodyfile="/github/workspace/src/SupportFunctions/kernels/plp_fill_i32s_rv32im.c" bodystart="81" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="group__FillKernels_1gade3e792d09cda275a4268d8aa793b713" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_fill_i32s_xpulpv2</definition>
+        <argsstring>(int32_t value, int32_t *__restrict__ pDst, uint32_t blockSize)</argsstring>
+        <name>plp_fill_i32s_xpulpv2</name>
+        <param>
+          <type>int32_t</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Fills a constant value into a 32-bit integer vector for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>input value to be filled </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/SupportFunctions/kernels/plp_fill_i32s_xpulpv2.c" line="55" column="6" bodyfile="/github/workspace/src/SupportFunctions/kernels/plp_fill_i32s_xpulpv2.c" bodystart="55" bodyend="82"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Fills the destination vector with a constant value. <preformatted>
+    pDst[n] = value;   0 &lt;= n &lt; blockSize.
+</preformatted> There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.</para>
+<para>The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s): <preformatted>
+&lt;pulp&gt; _ &lt;function name&gt; _ &lt;data type&gt; &lt;precision&gt; &lt;method&gt; _ &lt;isa extension&gt;, with
+
+data type = {f, i, q} respectively for floats, integers, fixed points
+
+precision = {32, 16, 8} bits
+
+method = {s, p} respectively meaning single core or parallel multicore implementation.
+
+isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
+
+</preformatted> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

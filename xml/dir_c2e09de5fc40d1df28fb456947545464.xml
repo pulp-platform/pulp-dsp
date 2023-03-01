@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_c2e09de5fc40d1df28fb456947545464" kind="dir">
+    <compoundname>/github/workspace/src/MatrixFunctionsStride/mat_mult_stride</compoundname>
+    <innerdir refid="dir_e37087e2a39b6c48cbff37df10234f76">/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/kernels</innerdir>
+    <innerfile refid="plp__mat__mult__stride__f32_8c">plp_mat_mult_stride_f32.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__f32__parallel_8c">plp_mat_mult_stride_f32_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__i16_8c">plp_mat_mult_stride_i16.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__i16__parallel_8c">plp_mat_mult_stride_i16_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__i32_8c">plp_mat_mult_stride_i32.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__i32__parallel_8c">plp_mat_mult_stride_i32_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__i8_8c">plp_mat_mult_stride_i8.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__i8__parallel_8c">plp_mat_mult_stride_i8_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__q16_8c">plp_mat_mult_stride_q16.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__q16__parallel_8c">plp_mat_mult_stride_q16_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__q32_8c">plp_mat_mult_stride_q32.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__q32__parallel_8c">plp_mat_mult_stride_q32_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__q8_8c">plp_mat_mult_stride_q8.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__q8__parallel_8c">plp_mat_mult_stride_q8_parallel.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/"/>
+  </compounddef>
+</doxygen>

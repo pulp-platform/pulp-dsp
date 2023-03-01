@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__mat__mult__cmplx__instance__i8" kind="struct" language="C++" prot="public">
+    <compoundname>plp_mat_mult_cmplx_instance_i8</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__mat__mult__cmplx__instance__i8_1aa15921c7d47b0de0da6b264c5b3c1171" prot="public" static="no" mutable="no">
+        <type>const int8_t *__restrict__</type>
+        <definition>const int8_t* __restrict__ plp_mat_mult_cmplx_instance_i8::pSrcA</definition>
+        <argsstring></argsstring>
+        <name>pSrcA</name>
+        <qualifiedname>plp_mat_mult_cmplx_instance_i8::pSrcA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="585" column="31" bodyfile="/github/workspace/include/plp_math.h" bodystart="585" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__cmplx__instance__i8_1a0d92bc81123f5400ff372296b72ff76c" prot="public" static="no" mutable="no">
+        <type>const int8_t *__restrict__</type>
+        <definition>const int8_t* __restrict__ plp_mat_mult_cmplx_instance_i8::pSrcB</definition>
+        <argsstring></argsstring>
+        <name>pSrcB</name>
+        <qualifiedname>plp_mat_mult_cmplx_instance_i8::pSrcB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="586" column="31" bodyfile="/github/workspace/include/plp_math.h" bodystart="586" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__cmplx__instance__i8_1a4edef10e315d3e18f3038d998534f86e" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_mult_cmplx_instance_i8::M</definition>
+        <argsstring></argsstring>
+        <name>M</name>
+        <qualifiedname>plp_mat_mult_cmplx_instance_i8::M</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="587" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="587" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__cmplx__instance__i8_1a847ccd26dc52a3a566f948d59fe1dfde" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_mult_cmplx_instance_i8::N</definition>
+        <argsstring></argsstring>
+        <name>N</name>
+        <qualifiedname>plp_mat_mult_cmplx_instance_i8::N</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="588" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="588" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__cmplx__instance__i8_1a9fd6e6ee1326a3a1a078abc94133e544" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_mult_cmplx_instance_i8::O</definition>
+        <argsstring></argsstring>
+        <name>O</name>
+        <qualifiedname>plp_mat_mult_cmplx_instance_i8::O</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="589" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="589" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__cmplx__instance__i8_1a4ccef31aec53f04b74965ae7d123e237" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_mult_cmplx_instance_i8::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_mat_mult_cmplx_instance_i8::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="590" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="590" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__cmplx__instance__i8_1a04ea5ed43bc296329bc51f7204fbb1a0" prot="public" static="no" mutable="no">
+        <type>int32_t *__restrict__</type>
+        <definition>int32_t* __restrict__ plp_mat_mult_cmplx_instance_i8::pDstC</definition>
+        <argsstring></argsstring>
+        <name>pDstC</name>
+        <qualifiedname>plp_mat_mult_cmplx_instance_i8::pDstC</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="591" column="26" bodyfile="/github/workspace/include/plp_math.h" bodystart="591" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for integer parallel complex matrix matrix multiplication. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="584" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="584" bodyend="592"/>
+    <listofallmembers>
+      <member refid="structplp__mat__mult__cmplx__instance__i8_1a4edef10e315d3e18f3038d998534f86e" prot="public" virt="non-virtual"><scope>plp_mat_mult_cmplx_instance_i8</scope><name>M</name></member>
+      <member refid="structplp__mat__mult__cmplx__instance__i8_1a847ccd26dc52a3a566f948d59fe1dfde" prot="public" virt="non-virtual"><scope>plp_mat_mult_cmplx_instance_i8</scope><name>N</name></member>
+      <member refid="structplp__mat__mult__cmplx__instance__i8_1a4ccef31aec53f04b74965ae7d123e237" prot="public" virt="non-virtual"><scope>plp_mat_mult_cmplx_instance_i8</scope><name>nPE</name></member>
+      <member refid="structplp__mat__mult__cmplx__instance__i8_1a9fd6e6ee1326a3a1a078abc94133e544" prot="public" virt="non-virtual"><scope>plp_mat_mult_cmplx_instance_i8</scope><name>O</name></member>
+      <member refid="structplp__mat__mult__cmplx__instance__i8_1a04ea5ed43bc296329bc51f7204fbb1a0" prot="public" virt="non-virtual"><scope>plp_mat_mult_cmplx_instance_i8</scope><name>pDstC</name></member>
+      <member refid="structplp__mat__mult__cmplx__instance__i8_1aa15921c7d47b0de0da6b264c5b3c1171" prot="public" virt="non-virtual"><scope>plp_mat_mult_cmplx_instance_i8</scope><name>pSrcA</name></member>
+      <member refid="structplp__mat__mult__cmplx__instance__i8_1a0d92bc81123f5400ff372296b72ff76c" prot="public" virt="non-virtual"><scope>plp_mat_mult_cmplx_instance_i8</scope><name>pSrcB</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

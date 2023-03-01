@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_17ea6c6435f1a46024e73b1c65617575" kind="dir">
+    <compoundname>/github/workspace/src/BasicMathFunctions</compoundname>
+    <innerdir refid="dir_4ec0f5aee4239b5b8fc70da47a05498b">/github/workspace/src/BasicMathFunctions/abs</innerdir>
+    <innerdir refid="dir_dcecf22f28a8a5d8ab94cfdd8c99dad1">/github/workspace/src/BasicMathFunctions/add</innerdir>
+    <innerdir refid="dir_93858385031cf1864c86f88cd0e55567">/github/workspace/src/BasicMathFunctions/dot_prod</innerdir>
+    <innerdir refid="dir_81f9fd92b1fb0f53d21838837ab5641a">/github/workspace/src/BasicMathFunctions/log</innerdir>
+    <innerdir refid="dir_9c523f70ee2e1bd186b85f5ef41797d6">/github/workspace/src/BasicMathFunctions/mult</innerdir>
+    <innerdir refid="dir_274d6f438776e755d807ad2f57d213d6">/github/workspace/src/BasicMathFunctions/negate</innerdir>
+    <innerdir refid="dir_dcb58b900271c9d0c93f812bcefaa508">/github/workspace/src/BasicMathFunctions/offset</innerdir>
+    <innerdir refid="dir_68b133510a4b320f57168d8ad1597481">/github/workspace/src/BasicMathFunctions/scale</innerdir>
+    <innerdir refid="dir_51e6cb4983f1b341101117f6869b44ca">/github/workspace/src/BasicMathFunctions/sub</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/BasicMathFunctions/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1120 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c - PULP DSP</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#githubworkspacesrctransformfunctionskernelsplp_cfft_q32s_rv32imc" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="PULP DSP" class="md-header__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PULP DSP
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              /github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="PULP DSP" class="md-nav__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    PULP DSP
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../test-framework-index/" class="md-nav__link">
+        Test Framework
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorial-index/" class="md-nav__link">
+        Tutorial
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../troubles/" class="md-nav__link">
+        Troubles Shooting
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Reference Manual
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Reference Manual
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pages/" class="md-nav__link">
+        Pages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Classes/" class="md-nav__link">
+        Classes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/" class="md-nav__link">
+        Modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Namespaces/" class="md-nav__link">
+        Namespaces
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defines" class="md-nav__link">
+    Defines
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-documentation" class="md-nav__link">
+    Functions Documentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function-plp_cfft_radix4by2_q32" class="md-nav__link">
+    function plp_cfft_radix4by2_q32
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-plp_radix4_butterfly_q32" class="md-nav__link">
+    function plp_radix4_butterfly_q32
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-plp_cfft_q32s_rv32im" class="md-nav__link">
+    function plp_cfft_q32s_rv32im
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#macros-documentation" class="md-nav__link">
+    Macros Documentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Macros Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#define-multacc_32x32_keep32_r" class="md-nav__link">
+    define multAcc_32x32_keep32_R
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-multsub_32x32_keep32_r" class="md-nav__link">
+    define multSub_32x32_keep32_R
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-mult_32x32_keep32_r" class="md-nav__link">
+    define mult_32x32_keep32_R
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="githubworkspacesrctransformfunctionskernelsplp_cfft_q32s_rv32imc">/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c</h1>
+<h2 id="functions">Functions</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void</td>
+<td><strong><a href="/pulp-dsp/refmanual/Modules/group__fft/#function-plp-cfft-radix4by2-q32">plp_cfft_radix4by2_q32</a></strong>(int32_t * pSrc, uint32_t fftLen, const int32_t * pCoef)</td>
+</tr>
+<tr>
+<td>void</td>
+<td><strong><a href="/pulp-dsp/refmanual/Modules/group__fft/#function-plp-radix4-butterfly-q32">plp_radix4_butterfly_q32</a></strong>(int32_t * pSrc, uint32_t fftLen, int32_t * pCoef, uint32_t twidCoefModifier)</td>
+</tr>
+<tr>
+<td>void</td>
+<td><strong><a href="/pulp-dsp/refmanual/Modules/group__fft/#function-plp-cfft-q32s-rv32im">plp_cfft_q32s_rv32im</a></strong>(const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q32/">plp_cfft_instance_q32</a> * S, int32_t * p1, uint8_t ifftFlag, uint8_t bitReverseFlag, uint32_t fracBits)<br>Quantized 32-bit complex fast fourier transform for RV32IM.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="defines">Defines</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Modules/group__fft/#define-multacc-32x32-keep32-r">multAcc_32x32_keep32_R</a></strong>(a, x, y)</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Modules/group__fft/#define-multsub-32x32-keep32-r">multSub_32x32_keep32_R</a></strong>(a, x, y)</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Modules/group__fft/#define-mult-32x32-keep32-r">mult_32x32_keep32_R</a></strong>(a, x, y)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="functions-documentation">Functions Documentation</h2>
+<h3 id="function-plp_cfft_radix4by2_q32">function plp_cfft_radix4by2_q32</h3>
+<pre><code class="language-cpp">static void plp_cfft_radix4by2_q32(
+    int32_t * pSrc,
+    uint32_t fftLen,
+    const int32_t * pCoef
+)
+</code></pre>
+<h3 id="function-plp_radix4_butterfly_q32">function plp_radix4_butterfly_q32</h3>
+<pre><code class="language-cpp">static void plp_radix4_butterfly_q32(
+    int32_t * pSrc,
+    uint32_t fftLen,
+    int32_t * pCoef,
+    uint32_t twidCoefModifier
+)
+</code></pre>
+<h3 id="function-plp_cfft_q32s_rv32im">function plp_cfft_q32s_rv32im</h3>
+<pre><code class="language-cpp">void plp_cfft_q32s_rv32im(
+    const plp_cfft_instance_q32 * S,
+    int32_t * p1,
+    uint8_t ifftFlag,
+    uint8_t bitReverseFlag,
+    uint32_t fracBits
+)
+</code></pre>
+<p>Quantized 32-bit complex fast fourier transform for RV32IM. </p>
+<p><strong>Parameters</strong>: </p>
+<ul>
+<li><strong>S</strong> points to an instance of the 32bit quantized CFFT structure </li>
+<li><strong>p1</strong> points to the complex data buffer of size <code>2*fftLen</code>. Processing occurs in-place. </li>
+<li><strong>ifftFlag</strong> flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1) </li>
+<li><strong>bitReverseFlag</strong> flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. </li>
+<li><strong>fracBits</strong> decimal point for right shift (input format Q(32-fracBits).fracBits) </li>
+</ul>
+<h2 id="macros-documentation">Macros Documentation</h2>
+<h3 id="define-multacc_32x32_keep32_r">define multAcc_32x32_keep32_R</h3>
+<pre><code class="language-cpp">#define multAcc_32x32_keep32_R(
+    a,
+    x,
+    y
+)
+    a = (int32_t) (((((int64_t) a) &lt;&lt; 32) + ((int64_t) x * y) + 0x80000000LL ) &gt;&gt; 32)
+</code></pre>
+<h3 id="define-multsub_32x32_keep32_r">define multSub_32x32_keep32_R</h3>
+<pre><code class="language-cpp">#define multSub_32x32_keep32_R(
+    a,
+    x,
+    y
+)
+    a = (int32_t) (((((int64_t) a) &lt;&lt; 32) - ((int64_t) x * y) + 0x80000000LL ) &gt;&gt; 32)
+</code></pre>
+<h3 id="define-mult_32x32_keep32_r">define mult_32x32_keep32_R</h3>
+<pre><code class="language-cpp">#define mult_32x32_keep32_R(
+    a,
+    x,
+    y
+)
+    a = (int32_t) (((int64_t) x * y + 0x80000000LL ) &gt;&gt; 32)
+</code></pre>
+<h2 id="source-code">Source code</h2>
+<pre><code class="language-cpp">/* =====================================================================
+ * Project:      PULP DSP Library
+ * Title:        plp_cfft_q32s_rv32im.c
+ * Description:  32-bit fixed point Fast Fourier Transform on Compled Input Data
+ *
+ * $Date:        30. July 2020
+ * $Revision:    V0
+ *
+ * Target Processor: PULP cores
+ * ===================================================================== */
+/*
+ * Copyright (C) 2020 ETH Zurich and University of Bologna. All rights reserved.
+ *
+ * Author: Michael Rogenmoser, ETH Zurich
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the License); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#include &quot;plp_math.h&quot;
+
+#define multAcc_32x32_keep32_R(a, x, y) \
+    a = (int32_t) (((((int64_t) a) &lt;&lt; 32) + ((int64_t) x * y) + 0x80000000LL ) &gt;&gt; 32)
+
+#define multSub_32x32_keep32_R(a, x, y) \
+    a = (int32_t) (((((int64_t) a) &lt;&lt; 32) - ((int64_t) x * y) + 0x80000000LL ) &gt;&gt; 32)
+
+#define mult_32x32_keep32_R(a, x, y) \
+    a = (int32_t) (((int64_t) x * y + 0x80000000LL ) &gt;&gt; 32)
+
+
+static void plp_cfft_radix4by2_q32(int32_t *pSrc, uint32_t fftLen, const int32_t *pCoef);
+
+static void plp_radix4_butterfly_q32(int32_t *pSrc,
+    uint32_t fftLen,
+    int32_t *pCoef,
+    uint32_t twidCoefModifier);
+
+void plp_cfft_q32s_rv32im(const plp_cfft_instance_q32 *S,
+    int32_t *p1,
+    uint8_t ifftFlag,
+    uint8_t bitReverseFlag,
+    uint32_t fracBits){
+    uint32_t L = S-&gt;fftLen;
+
+    if (ifftFlag == 0) {
+        switch (L) {
+            case 16:
+            case 64:
+            case 256:
+            case 1024:
+            case 4096:
+            plp_radix4_butterfly_q32(p1, L, (int32_t *)S-&gt;pTwiddle, 1);
+            break;
+            case 32:
+            case 128:
+            case 512:
+            case 2048:
+            plp_cfft_radix4by2_q32(p1, L, (int32_t *)S-&gt;pTwiddle);
+            break;
+        }
+    }
+
+    if (bitReverseFlag)
+        plp_bitreversal_32s_rv32im((uint32_t *)p1, S-&gt;bitRevLength, S-&gt;pBitRevTable);
+}
+
+void plp_cfft_radix4by2_q32(int32_t *pSrc, uint32_t fftLen, const int32_t *pCoef){
+    uint32_t i, l;
+    uint32_t n2;
+    int32_t xt, yt, cosVal, sinVal;
+    int32_t p0, p1;
+
+    n2 = fftLen &gt;&gt; 1U;
+    for (i = 0; i &lt; n2; i++)
+    {
+        cosVal = pCoef[2 * i];
+        sinVal = pCoef[2 * i + 1];
+
+        l = i + n2;
+
+        xt =          (pSrc[2 * i] &gt;&gt; 2U) - (pSrc[2 * l] &gt;&gt; 2U);
+        pSrc[2 * i] = (pSrc[2 * i] &gt;&gt; 2U) + (pSrc[2 * l] &gt;&gt; 2U);
+
+        yt =              (pSrc[2 * i + 1] &gt;&gt; 2U) - (pSrc[2 * l + 1] &gt;&gt; 2U);
+        pSrc[2 * i + 1] = (pSrc[2 * l + 1] &gt;&gt; 2U) + (pSrc[2 * i + 1] &gt;&gt; 2U);
+
+        mult_32x32_keep32_R(p0, xt, cosVal);
+        mult_32x32_keep32_R(p1, yt, cosVal);
+        multAcc_32x32_keep32_R(p0, yt, sinVal);
+        multSub_32x32_keep32_R(p1, xt, sinVal);
+
+        pSrc[2 * l]     = p0 &lt;&lt; 1;
+        pSrc[2 * l + 1] = p1 &lt;&lt; 1;
+    }
+
+
+    /* first col */
+    plp_radix4_butterfly_q32 (pSrc,          n2, (int32_t*)pCoef, 2U);
+
+    /* second col */
+    plp_radix4_butterfly_q32 (pSrc + fftLen, n2, (int32_t*)pCoef, 2U);
+
+    n2 = fftLen &gt;&gt; 1U;
+    for (i = 0; i &lt; n2; i++)
+    {
+        p0 = pSrc[4 * i + 0];
+        p1 = pSrc[4 * i + 1];
+        xt = pSrc[4 * i + 2];
+        yt = pSrc[4 * i + 3];
+
+        p0 &lt;&lt;= 1U;
+        p1 &lt;&lt;= 1U;
+        xt &lt;&lt;= 1U;
+        yt &lt;&lt;= 1U;
+
+        pSrc[4 * i + 0] = p0;
+        pSrc[4 * i + 1] = p1;
+        pSrc[4 * i + 2] = xt;
+        pSrc[4 * i + 3] = yt;
+    }
+}
+
+void plp_radix4_butterfly_q32(int32_t *pSrc,
+    uint32_t fftLen,
+    int32_t *pCoef,
+    uint32_t twidCoefModifier){
+    uint32_t n1, n2, ia1, ia2, ia3, i0, i1, i2, i3, j, k;
+    int32_t t1, t2, r1, r2, s1, s2, co1, co2, co3, si1, si2, si3;
+
+    int32_t xa, xb, xc, xd;
+    int32_t ya, yb, yc, yd;
+    int32_t xa_out, xb_out, xc_out, xd_out;
+    int32_t ya_out, yb_out, yc_out, yd_out;
+
+    int32_t *ptr1;
+
+  /* Total process is divided into three stages */
+
+  /* process first stage, middle stages, &amp; last stage */
+
+
+  /* start of first stage process */
+
+  /*  Initializations for the first stage */
+    n2 = fftLen;
+    n1 = n2;
+  /* n2 = fftLen/4 */
+    n2 &gt;&gt;= 2U;
+    i0 = 0U;
+    ia1 = 0U;
+
+    j = n2;
+
+  /*  Calculation of first stage */
+    do
+    {
+    /*  index calculation for the input as, */
+    /*  pSrc[i0 + 0], pSrc[i0 + fftLen/4], pSrc[i0 + fftLen/2U], pSrc[i0 + 3fftLen/4] */
+        i1 = i0 + n2;
+        i2 = i1 + n2;
+        i3 = i2 + n2;
+
+    /* input is in 1.31(q31) format and provide 4 guard bits for the input */
+
+    /*  Butterfly implementation */
+    /* xa + xc */
+        r1 = (pSrc[(2U * i0)] &gt;&gt; 4U) + (pSrc[(2U * i2)] &gt;&gt; 4U);
+    /* xa - xc */
+        r2 = (pSrc[(2U * i0)] &gt;&gt; 4U) - (pSrc[(2U * i2)] &gt;&gt; 4U);
+
+    /* xb + xd */
+        t1 = (pSrc[(2U * i1)] &gt;&gt; 4U) + (pSrc[(2U * i3)] &gt;&gt; 4U);
+
+    /* ya + yc */
+        s1 = (pSrc[(2U * i0) + 1U] &gt;&gt; 4U) + (pSrc[(2U * i2) + 1U] &gt;&gt; 4U);
+    /* ya - yc */
+        s2 = (pSrc[(2U * i0) + 1U] &gt;&gt; 4U) - (pSrc[(2U * i2) + 1U] &gt;&gt; 4U);
+
+    /* xa' = xa + xb + xc + xd */
+        pSrc[2U * i0] = (r1 + t1);
+    /* (xa + xc) - (xb + xd) */
+        r1 = r1 - t1;
+    /* yb + yd */
+        t2 = (pSrc[(2U * i1) + 1U] &gt;&gt; 4U) + (pSrc[(2U * i3) + 1U] &gt;&gt; 4U);
+
+    /* ya' = ya + yb + yc + yd */
+        pSrc[(2U * i0) + 1U] = (s1 + t2);
+
+    /* (ya + yc) - (yb + yd) */
+        s1 = s1 - t2;
+
+    /* yb - yd */
+        t1 = (pSrc[(2U * i1) + 1U] &gt;&gt; 4U) - (pSrc[(2U * i3) + 1U] &gt;&gt; 4U);
+    /* xb - xd */
+        t2 = (pSrc[(2U * i1)] &gt;&gt; 4U) - (pSrc[(2U * i3)] &gt;&gt; 4U);
+
+    /*  index calculation for the coefficients */
+        ia2 = 2U * ia1;
+        co2 = pCoef[(ia2 * 2U)];
+        si2 = pCoef[(ia2 * 2U) + 1U];
+
+    /* xc' = (xa-xb+xc-xd)co2 + (ya-yb+yc-yd)(si2) */
+        pSrc[2U * i1] = (((int32_t) (((int64_t) r1 * co2) &gt;&gt; 32)) +
+            ((int32_t) (((int64_t) s1 * si2) &gt;&gt; 32))) &lt;&lt; 1U;
+
+    /* yc' = (ya-yb+yc-yd)co2 - (xa-xb+xc-xd)(si2) */
+        pSrc[(2U * i1) + 1U] = (((int32_t) (((int64_t) s1 * co2) &gt;&gt; 32)) -
+            ((int32_t) (((int64_t) r1 * si2) &gt;&gt; 32))) &lt;&lt; 1U;
+
+    /* (xa - xc) + (yb - yd) */
+        r1 = r2 + t1;
+    /* (xa - xc) - (yb - yd) */
+        r2 = r2 - t1;
+
+    /* (ya - yc) - (xb - xd) */
+        s1 = s2 - t2;
+    /* (ya - yc) + (xb - xd) */
+        s2 = s2 + t2;
+
+        co1 = pCoef[(ia1 * 2U)];
+        si1 = pCoef[(ia1 * 2U) + 1U];
+
+    /* xb' = (xa+yb-xc-yd)co1 + (ya-xb-yc+xd)(si1) */
+        pSrc[2U * i2] = (((int32_t) (((int64_t) r1 * co1) &gt;&gt; 32)) +
+            ((int32_t) (((int64_t) s1 * si1) &gt;&gt; 32))) &lt;&lt; 1U;
+
+    /* yb' = (ya-xb-yc+xd)co1 - (xa+yb-xc-yd)(si1) */
+        pSrc[(2U * i2) + 1U] = (((int32_t) (((int64_t) s1 * co1) &gt;&gt; 32)) -
+            ((int32_t) (((int64_t) r1 * si1) &gt;&gt; 32))) &lt;&lt; 1U;
+
+    /*  index calculation for the coefficients */
+        ia3 = 3U * ia1;
+        co3 = pCoef[(ia3 * 2U)];
+        si3 = pCoef[(ia3 * 2U) + 1U];
+
+    /* xd' = (xa-yb-xc+yd)co3 + (ya+xb-yc-xd)(si3) */
+        pSrc[2U * i3] = (((int32_t) (((int64_t) r2 * co3) &gt;&gt; 32)) +
+            ((int32_t) (((int64_t) s2 * si3) &gt;&gt; 32))) &lt;&lt; 1U;
+
+    /* yd' = (ya+xb-yc-xd)co3 - (xa-yb-xc+yd)(si3) */
+        pSrc[(2U * i3) + 1U] = (((int32_t) (((int64_t) s2 * co3) &gt;&gt; 32)) -
+            ((int32_t) (((int64_t) r2 * si3) &gt;&gt; 32))) &lt;&lt; 1U;
+
+    /*  Twiddle coefficients index modifier */
+        ia1 = ia1 + twidCoefModifier;
+
+    /*  Updating input index */
+        i0 = i0 + 1U;
+
+    } while (--j);
+
+  /* end of first stage process */
+
+  /* data is in 5.27(q27) format */
+
+
+  /* start of Middle stages process */
+
+
+  /* each stage in middle stages provides two down scaling of the input */
+
+    twidCoefModifier &lt;&lt;= 2U;
+
+
+    for (k = fftLen / 4U; k &gt; 4U; k &gt;&gt;= 2U)
+    {
+    /*  Initializations for the first stage */
+        n1 = n2;
+        n2 &gt;&gt;= 2U;
+        ia1 = 0U;
+
+    /*  Calculation of first stage */
+        for (j = 0U; j &lt;= (n2 - 1U); j++)
+        {
+      /*  index calculation for the coefficients */
+            ia2 = ia1 + ia1;
+            ia3 = ia2 + ia1;
+            co1 = pCoef[(ia1 * 2U)];
+            si1 = pCoef[(ia1 * 2U) + 1U];
+            co2 = pCoef[(ia2 * 2U)];
+            si2 = pCoef[(ia2 * 2U) + 1U];
+            co3 = pCoef[(ia3 * 2U)];
+            si3 = pCoef[(ia3 * 2U) + 1U];
+      /*  Twiddle coefficients index modifier */
+            ia1 = ia1 + twidCoefModifier;
+
+            for (i0 = j; i0 &lt; fftLen; i0 += n1)
+            {
+        /*  index calculation for the input as, */
+        /*  pSrc[i0 + 0], pSrc[i0 + fftLen/4], pSrc[i0 + fftLen/2U], pSrc[i0 + 3fftLen/4] */
+                i1 = i0 + n2;
+                i2 = i1 + n2;
+                i3 = i2 + n2;
+
+        /*  Butterfly implementation */
+        /* xa + xc */
+                r1 = pSrc[2U * i0] + pSrc[2U * i2];
+        /* xa - xc */
+                r2 = pSrc[2U * i0] - pSrc[2U * i2];
+
+        /* ya + yc */
+                s1 = pSrc[(2U * i0) + 1U] + pSrc[(2U * i2) + 1U];
+        /* ya - yc */
+                s2 = pSrc[(2U * i0) + 1U] - pSrc[(2U * i2) + 1U];
+
+        /* xb + xd */
+                t1 = pSrc[2U * i1] + pSrc[2U * i3];
+
+        /* xa' = xa + xb + xc + xd */
+                pSrc[2U * i0] = (r1 + t1) &gt;&gt; 2U;
+        /* xa + xc -(xb + xd) */
+                r1 = r1 - t1;
+
+        /* yb + yd */
+                t2 = pSrc[(2U * i1) + 1U] + pSrc[(2U * i3) + 1U];
+        /* ya' = ya + yb + yc + yd */
+                pSrc[(2U * i0) + 1U] = (s1 + t2) &gt;&gt; 2U;
+
+        /* (ya + yc) - (yb + yd) */
+                s1 = s1 - t2;
+
+        /* (yb - yd) */
+                t1 = pSrc[(2U * i1) + 1U] - pSrc[(2U * i3) + 1U];
+        /* (xb - xd) */
+                t2 = pSrc[2U * i1] - pSrc[2U * i3];
+
+        /* xc' = (xa-xb+xc-xd)co2 + (ya-yb+yc-yd)(si2) */
+                pSrc[2U * i1] = (((int32_t) (((int64_t) r1 * co2) &gt;&gt; 32)) +
+                    ((int32_t) (((int64_t) s1 * si2) &gt;&gt; 32))) &gt;&gt; 1U;
+
+        /* yc' = (ya-yb+yc-yd)co2 - (xa-xb+xc-xd)(si2) */
+                pSrc[(2U * i1) + 1U] = (((int32_t) (((int64_t) s1 * co2) &gt;&gt; 32)) -
+                    ((int32_t) (((int64_t) r1 * si2) &gt;&gt; 32))) &gt;&gt; 1U;
+
+        /* (xa - xc) + (yb - yd) */
+                r1 = r2 + t1;
+        /* (xa - xc) - (yb - yd) */
+                r2 = r2 - t1;
+
+        /* (ya - yc) -  (xb - xd) */
+                s1 = s2 - t2;
+        /* (ya - yc) +  (xb - xd) */
+                s2 = s2 + t2;
+
+        /* xb' = (xa+yb-xc-yd)co1 + (ya-xb-yc+xd)(si1) */
+                pSrc[2U * i2] = (((int32_t) (((int64_t) r1 * co1) &gt;&gt; 32)) +
+                    ((int32_t) (((int64_t) s1 * si1) &gt;&gt; 32))) &gt;&gt; 1U;
+
+        /* yb' = (ya-xb-yc+xd)co1 - (xa+yb-xc-yd)(si1) */
+                pSrc[(2U * i2) + 1U] = (((int32_t) (((int64_t) s1 * co1) &gt;&gt; 32)) -
+                    ((int32_t) (((int64_t) r1 * si1) &gt;&gt; 32))) &gt;&gt; 1U;
+
+        /* xd' = (xa-yb-xc+yd)co3 + (ya+xb-yc-xd)(si3) */
+                pSrc[2U * i3] = (((int32_t) (((int64_t) r2 * co3) &gt;&gt; 32)) +
+                    ((int32_t) (((int64_t) s2 * si3) &gt;&gt; 32))) &gt;&gt; 1U;
+
+        /* yd' = (ya+xb-yc-xd)co3 - (xa-yb-xc+yd)(si3) */
+                pSrc[(2U * i3) + 1U] = (((int32_t) (((int64_t) s2 * co3) &gt;&gt; 32)) -
+                    ((int32_t) (((int64_t) r2 * si3) &gt;&gt; 32))) &gt;&gt; 1U;
+            }
+        }
+        twidCoefModifier &lt;&lt;= 2U;
+    }
+
+  /* End of Middle stages process */
+
+  /* data is in 11.21(q21) format for the 1024 point as there are 3 middle stages */
+  /* data is in 9.23(q23) format for the 256 point as there are 2 middle stages */
+  /* data is in 7.25(q25) format for the 64 point as there are 1 middle stage */
+  /* data is in 5.27(q27) format for the 16 point as there are no middle stages */
+
+
+  /* start of Last stage process */
+  /*  Initializations for the last stage */
+    j = fftLen &gt;&gt; 2;
+    ptr1 = &amp;pSrc[0];
+
+  /*  Calculations of last stage */
+    do
+    {
+    /* Read xa (real), ya(imag) input */
+        xa = *ptr1++;
+        ya = *ptr1++;
+
+    /* Read xb (real), yb(imag) input */
+        xb = *ptr1++;
+        yb = *ptr1++;
+
+    /* Read xc (real), yc(imag) input */
+        xc = *ptr1++;
+        yc = *ptr1++;
+
+    /* Read xc (real), yc(imag) input */
+        xd = *ptr1++;
+        yd = *ptr1++;
+
+    /* xa' = xa + xb + xc + xd */
+        xa_out = xa + xb + xc + xd;
+
+    /* ya' = ya + yb + yc + yd */
+        ya_out = ya + yb + yc + yd;
+
+    /* pointer updation for writing */
+        ptr1 = ptr1 - 8U;
+
+    /* writing xa' and ya' */
+        *ptr1++ = xa_out;
+        *ptr1++ = ya_out;
+
+        xc_out = (xa - xb + xc - xd);
+        yc_out = (ya - yb + yc - yd);
+
+    /* writing xc' and yc' */
+        *ptr1++ = xc_out;
+        *ptr1++ = yc_out;
+
+        xb_out = (xa + yb - xc - yd);
+        yb_out = (ya - xb - yc + xd);
+
+    /* writing xb' and yb' */
+        *ptr1++ = xb_out;
+        *ptr1++ = yb_out;
+
+        xd_out = (xa - yb - xc + yd);
+        yd_out = (ya + xb - yc - xd);
+
+    /* writing xd' and yd' */
+        *ptr1++ = xd_out;
+        *ptr1++ = yd_out;
+
+
+    } while (--j);
+
+  /* output is in 11.21(q21) format for the 1024 point */
+  /* output is in 9.23(q23) format for the 256 point */
+  /* output is in 7.25(q25) format for the 64 point */
+  /* output is in 5.27(q27) format for the 16 point */
+
+  /* End of last stage process */
+
+}
+</code></pre>
+<hr />
+<p>Updated on 2023-03-01 at 16:16:33 +0000</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+    
+  </body>
+</html>

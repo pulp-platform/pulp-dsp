@@ -1,0 +1,1129 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>/github/workspace/src/FilteringFunctions/kernels/plp_conv_valid_rep_i16s_xpulpv2.c - PULP DSP</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#githubworkspacesrcfilteringfunctionskernelsplp_conv_valid_rep_i16s_xpulpv2c" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="PULP DSP" class="md-header__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PULP DSP
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              /github/workspace/src/FilteringFunctions/kernels/plp_conv_valid_rep_i16s_xpulpv2.c
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="PULP DSP" class="md-nav__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    PULP DSP
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../test-framework-index/" class="md-nav__link">
+        Test Framework
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorial-index/" class="md-nav__link">
+        Tutorial
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../troubles/" class="md-nav__link">
+        Troubles Shooting
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Reference Manual
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Reference Manual
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pages/" class="md-nav__link">
+        Pages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Classes/" class="md-nav__link">
+        Classes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/" class="md-nav__link">
+        Modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Namespaces/" class="md-nav__link">
+        Namespaces
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defines" class="md-nav__link">
+    Defines
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-documentation" class="md-nav__link">
+    Functions Documentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function-plp_conv_valid_rep_i16s_xpulpv2" class="md-nav__link">
+    function plp_conv_valid_rep_i16s_xpulpv2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#macros-documentation" class="md-nav__link">
+    Macros Documentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Macros Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#define-shufflemask1" class="md-nav__link">
+    define shufflemask1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-ymask" class="md-nav__link">
+    define ymask
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="githubworkspacesrcfilteringfunctionskernelsplp_conv_valid_rep_i16s_xpulpv2c">/github/workspace/src/FilteringFunctions/kernels/plp_conv_valid_rep_i16s_xpulpv2.c</h1>
+<h2 id="functions">Functions</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void</td>
+<td><strong><a href="/pulp-dsp/refmanual/Modules/group__BasicConvolutionKernels/#function-plp-conv-valid-rep-i16s-xpulpv2">plp_conv_valid_rep_i16s_xpulpv2</a></strong>(const int16_t * pSrcA, const uint32_t srcALen, const uint32_t srcAMem, const int16_t * pSrcB, const uint32_t srcBLen, int32_t * pRes)<br>Convolution of 16-bit integer vectors kernel for XPULPV2 extension.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="defines">Defines</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__conv__valid__rep__i16s__xpulpv2_8c/#define-shufflemask1">shufflemask1</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__conv__valid__rep__i16s__xpulpv2_8c/#define-ymask">ymask</a></strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="functions-documentation">Functions Documentation</h2>
+<h3 id="function-plp_conv_valid_rep_i16s_xpulpv2">function plp_conv_valid_rep_i16s_xpulpv2</h3>
+<pre><code class="language-cpp">void plp_conv_valid_rep_i16s_xpulpv2(
+    const int16_t * pSrcA,
+    const uint32_t srcALen,
+    const uint32_t srcAMem,
+    const int16_t * pSrcB,
+    const uint32_t srcBLen,
+    int32_t * pRes
+)
+</code></pre>
+<p>Convolution of 16-bit integer vectors kernel for XPULPV2 extension. </p>
+<p><strong>Parameters</strong>: </p>
+<ul>
+<li><strong>pSrcA</strong> points to the first input vector of the replicated data </li>
+<li><strong>srcALen</strong> Number of elements in (unreplicated) vector a </li>
+<li><strong>srcAMem</strong> Number of elements between each replication </li>
+<li><strong>pSrcB</strong> points to the second input vector </li>
+<li><strong>srcBLen</strong> Length of the second input vector </li>
+<li><strong>pRes</strong> output result returned here </li>
+</ul>
+<p><strong>Return</strong>: none </p>
+<p>Convolution (valid with data replication) of 16-bit integer vectors kernel for XPULPV2 extension.</p>
+<h2 id="macros-documentation">Macros Documentation</h2>
+<h3 id="define-shufflemask1">define shufflemask1</h3>
+<pre><code class="language-cpp">#define shufflemask1     (v2s) { 1, 0 }
+</code></pre>
+<h3 id="define-ymask">define ymask</h3>
+<pre><code class="language-cpp">#define ymask     (v2s) { 0xFFFF, 0x0000 }
+</code></pre>
+<h2 id="source-code">Source code</h2>
+<pre><code class="language-cpp">/* =====================================================================
+ * Project:      PULP DSP Library
+ * Title:        plp_conv_valid_rep_i16s_xpulpv2.c
+ * Description:  16-bit integer singlecore convolution (valid with data
+ *               replication) for XPULPV2
+ *
+ * $Date:        3. May 2020
+ * $Revision:    V0
+ *
+ * Target Processor: PULP cores
+ * ===================================================================== */
+/*
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
+ *
+ * Author: Moritz Scherer, Tibor Schneider, ETH Zurich
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the License); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#include &quot;plp_math.h&quot;
+
+#define shufflemask1                                                                               \
+    (v2s) { 1, 0 }
+#define ymask                                                                                      \
+    (v2s) { 0xFFFF, 0x0000 }
+
+// Pre-condition: pSrcA with data replicated 4 times, shifted by 1 element.
+// Pre-condition: srcALen &gt;= srcBLen, established by calling function plp_conv_i32
+// Pre-condition: pRes has enough allocated memory, i.e. srcALen + srcBLen-1u
+// Pre-condition: srcALen &gt;= 2 and srcBLen &gt;= 2, otherwise use vector dot product
+
+void plp_conv_valid_rep_i16s_xpulpv2(const int16_t *pSrcA,
+                                     const uint32_t srcALen,
+                                     const uint32_t srcAMem,
+                                     const int16_t *pSrcB,
+                                     const uint32_t srcBLen,
+                                     int32_t *pRes) {
+
+    const int16_t *pSrcA_iter_0; // intermediate input a pointer (replication 0)
+    const int16_t *pSrcA_iter_1; // intermediate input a pointer (replication 1)
+    const int16_t *pSrcB_iter;   // intermediate input b pointer
+
+    int res_len = srcALen - srcBLen + 1; // length of output vector
+
+#ifdef PLP_MATH_LOOPUNROLL
+
+    const int16_t *pSrcB_end;      // Intermediate pointers
+    int32_t sum;                   // Accumulators
+    uint32_t j, k, count, blk_cnt; // Loop counters
+
+    // for loop unroll
+    int32_t acc0, acc1, acc2, acc3; // Accumulators
+
+    v2s _x0, _x1, _x2, _x3, _x4, _x5; // local registers
+    v2s _y1, _y2;                     // local registers
+
+    int16_t _a0, _a1, _a2, _b0; // local registers for non-simd computation
+
+    // Working pointer of inputA
+    pSrcA_iter_0 = pSrcA + 0 * srcAMem;
+    pSrcA_iter_1 = pSrcA + 1 * srcAMem;
+
+    // Working pointer of inputB
+    pSrcB_end = pSrcB + (srcBLen - 1U);
+    pSrcB_iter = pSrcB_end;
+
+    // count is index by which the pointer pSrcA to be incremented
+    count = 0U;
+
+    if (srcBLen &gt;= 4U) {
+
+        // compute 4 outputs at the same time
+        blk_cnt = res_len &gt;&gt; 2U;
+        while (blk_cnt &gt; 0U) {
+
+            // Set all accumulators to zero
+            acc0 = 0;
+            acc1 = 0;
+            acc2 = 0;
+            acc3 = 0;
+
+            // Apply loop unrolling and compute 4 MACs simultaneously.
+            k = srcBLen &gt;&gt; 2U;
+
+            /* First part of the processing with loop unrolling. Compute 4 MACs at a
+             * a second loop below computes MACs for the remaining 1 to 3 samples.
+             */
+
+            do {
+                // load the data
+                _y1 = *((v2s *)(pSrcB_iter - 1)); // { y[srcBLen - 2] , y[srcBLen - 1] }
+                _y2 = *((v2s *)(pSrcB_iter - 3)); // { y[srcBLen - 4] , y[srcBLen - 3] }
+
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+                _x4 = *((v2s *)(pSrcA_iter_0 + 4)); // {x[4],x[5]}
+                _x5 = *((v2s *)(pSrcA_iter_1 + 4)); // {x[5],x[6]}
+
+                _y1 = __builtin_shuffle(_y1, _y1,
+                                        shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
+                _y2 = __builtin_shuffle(_y2, _y2,
+                                        shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
+
+                // update pointers
+                pSrcB_iter -= 4;
+                pSrcA_iter_0 += 4;
+                pSrcA_iter_1 += 4;
+
+                // Perform the multiply-accumulate
+                acc0 = __SUMDOTP2(_x0, _y1, acc0);
+                acc1 = __SUMDOTP2(_x1, _y1, acc1);
+                acc2 = __SUMDOTP2(_x2, _y1, acc2);
+                acc3 = __SUMDOTP2(_x3, _y1, acc3);
+
+                acc0 = __SUMDOTP2(_x2, _y2, acc0);
+                acc1 = __SUMDOTP2(_x3, _y2, acc1);
+                acc2 = __SUMDOTP2(_x4, _y2, acc2);
+                acc3 = __SUMDOTP2(_x5, _y2, acc3);
+
+            } while (--k);
+
+            /* If the srcBLen is not a multiple of 4, compute any remaining MACs here.
+             * No loop unrolling is used.
+             */
+
+            k = srcBLen % 0x4U;
+
+            if (k == 1) {
+
+                // load the data
+                _y1 = *((v2s *)(pSrcB_iter - 1));   // {y[srcBLen - 2],y[srcBLen - 1]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+
+                _y1 = __builtin_shuffle(_y1, _y1,
+                                        shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
+                _y1 = __AND2(_y1, ymask);
+
+                // Perform the multiply-accumulate
+                acc0 = __SUMDOTP2(_x0, _y1, acc0);
+                acc1 = __SUMDOTP2(_x1, _y1, acc1);
+                acc2 = __SUMDOTP2(_x2, _y1, acc2);
+                acc3 = __SUMDOTP2(_x3, _y1, acc3);
+
+            } else if (k == 2) {
+
+                // load the data
+                _y1 = *((v2s *)(pSrcB_iter - 1));   // {y[srcBLen - 2],y[srcBLen - 1]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+
+                _y1 = __builtin_shuffle(_y1, _y1,
+                                        shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
+
+                // Perform the multiply-accumulate
+                acc0 = __SUMDOTP2(_x0, _y1, acc0);
+                acc1 = __SUMDOTP2(_x1, _y1, acc1);
+                acc2 = __SUMDOTP2(_x2, _y1, acc2);
+                acc3 = __SUMDOTP2(_x3, _y1, acc3);
+
+            } else if (k == 3) {
+
+                // load the data
+                _y1 = *((v2s *)(pSrcB_iter - 1));   // {y[srcBLen - 2],y[srcBLen - 1]}
+                _y2 = *((v2s *)(pSrcB_iter - 3));   // {y[srcBLen - 4],y[srcBLen - 3]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+                _x4 = *((v2s *)(pSrcA_iter_0 + 4)); // {x[4],x[5]}
+                _x5 = *((v2s *)(pSrcA_iter_1 + 4)); // {x[5],x[6]}
+
+                _y1 = __builtin_shuffle(_y1, _y1,
+                                        shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
+                _y2 = __builtin_shuffle(_y2, _y2,
+                                        shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
+                _y2 = __AND2(_y2, ymask);
+
+                // Perform the multiply-accumulate
+                acc0 = __SUMDOTP2(_x0, _y1, acc0);
+                acc1 = __SUMDOTP2(_x1, _y1, acc1);
+                acc2 = __SUMDOTP2(_x2, _y1, acc2);
+                acc3 = __SUMDOTP2(_x3, _y1, acc3);
+
+                acc0 = __SUMDOTP2(_x2, _y2, acc0);
+                acc1 = __SUMDOTP2(_x3, _y2, acc1);
+                acc2 = __SUMDOTP2(_x4, _y2, acc2);
+                acc3 = __SUMDOTP2(_x5, _y2, acc3);
+            }
+
+            /* Store the result in the accumulator in the destination buffer. */
+            *pRes++ = acc0;
+            *pRes++ = acc1;
+            *pRes++ = acc2;
+            *pRes++ = acc3;
+
+            /* Increment the pointer pSrcA index, count by 4 */
+            count += 4U;
+
+            /* Update the inputA and inputB pointers for next MAC calculation */
+            pSrcA_iter_0 = pSrcA + count + 0 * srcAMem;
+            pSrcA_iter_1 = pSrcA + count + 1 * srcAMem;
+            pSrcB_iter = pSrcB_end;
+
+            /* Decrement the loop counter */
+            blk_cnt--;
+        }
+
+        /* If the res_len is not a multiple of 4, compute any remaining output samples here.
+         * No loop unrolling is used.
+         */
+        blk_cnt = res_len % 0x4U;
+
+        // only one element required, only use pSrcA_iter_0
+        if (blk_cnt == 1) {
+
+            // Set all accumulators to zero
+            acc0 = 0;
+
+            // setup the iterator
+            k = srcBLen &gt;&gt; 2U;
+
+            do {
+                // Read y[srcBLen - 1] sample
+                _y1 = *((v2s *)(pSrcB_iter - 1));   // {y[srcBLen - 2],y[srcBLen - 1]}
+                _y2 = *((v2s *)(pSrcB_iter - 3));   // {y[srcBLen - 4],y[srcBLen - 3]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+
+                _y1 = __builtin_shuffle(_y1, _y1,
+                                        shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
+                _y2 = __builtin_shuffle(_y2, _y2,
+                                        shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
+
+                acc0 = __SUMDOTP2(_x0, _y1, acc0);
+                acc0 = __SUMDOTP2(_x2, _y2, acc0);
+
+                pSrcB_iter -= 4;
+                pSrcA_iter_0 += 4;
+
+            } while (--k);
+
+            /* If the srcBLen is not a multiple of 4, compute any remaining MACs here.
+             * No loop unrolling is used.
+             */
+
+            k = srcBLen % 0x4U;
+
+            while (k &gt; 0) {
+                _b0 = *pSrcB_iter--;
+                _a0 = *pSrcA_iter_0++;
+                acc0 = __MAC(acc0, _a0, _b0);
+                k--;
+            }
+
+            /* Store the result in the accumulator in the destination buffer. */
+            *pRes++ = acc0;
+
+        }
+
+        // only two element required, only use pSrcA_iter_0 and pSrcA_iter_1
+        else if (blk_cnt == 2) {
+
+            // Set all accumulators to zero
+            acc0 = 0;
+            acc1 = 0;
+
+            // setup the iterator
+            k = srcBLen &gt;&gt; 2U;
+
+            do {
+                // Read y[srcBLen - 1] sample
+                _y1 = *((v2s *)(pSrcB_iter - 1));   // {y[srcBLen - 2],y[srcBLen - 1]}
+                _y2 = *((v2s *)(pSrcB_iter - 3));   // {y[srcBLen - 4],y[srcBLen - 3]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+
+                _y1 = __builtin_shuffle(_y1, _y1,
+                                        shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
+                _y2 = __builtin_shuffle(_y2, _y2,
+                                        shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
+
+                acc0 = __SUMDOTP2(_x0, _y1, acc0);
+                acc1 = __SUMDOTP2(_x1, _y1, acc1);
+                acc0 = __SUMDOTP2(_x2, _y2, acc0);
+                acc1 = __SUMDOTP2(_x3, _y2, acc1);
+
+                pSrcB_iter -= 4;
+                pSrcA_iter_0 += 4;
+                pSrcA_iter_1 += 4;
+            } while (--k);
+
+            /* If the srcBLen is not a multiple of 4, compute any remaining MACs here.
+             * No loop unrolling is used.
+             */
+
+            k = srcBLen % 0x4U;
+
+            while (k &gt; 0) {
+                _b0 = *pSrcB_iter--;
+                _a0 = *pSrcA_iter_0++;
+                _a1 = *pSrcA_iter_1++;
+                acc0 = __MAC(acc0, _a0, _b0);
+                acc1 = __MAC(acc1, _a1, _b0);
+                k--;
+            }
+
+            /* Store the result in the accumulator in the destination buffer. */
+            *pRes++ = acc0;
+            *pRes++ = acc1;
+
+        }
+
+        // only three element required, only use pSrcA_iter_0, pSrcA_iter_1 and pSrcA_iter_2
+        else if (blk_cnt == 3) {
+
+            // Set all accumulators to zero
+            acc0 = 0;
+            acc1 = 0;
+            acc2 = 0;
+
+            // setup the iterator
+            k = srcBLen &gt;&gt; 2U;
+
+            do {
+                // Read y[srcBLen - 1] sample
+                _y1 = *((v2s *)(pSrcB_iter - 1));   // {y[srcBLen - 2],y[srcBLen - 1]}
+                _y2 = *((v2s *)(pSrcB_iter - 3));   // {y[srcBLen - 4],y[srcBLen - 3]}
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+                _x4 = *((v2s *)(pSrcA_iter_0 + 4)); // {x[4],x[5]}
+                _x5 = *((v2s *)(pSrcA_iter_1 + 4)); // {x[5],x[6]}
+
+                _y1 = __builtin_shuffle(_y1, _y1,
+                                        shufflemask1); // { y[srcBLen - 1] , y[srcBLen - 2] }
+                _y2 = __builtin_shuffle(_y2, _y2,
+                                        shufflemask1); // { y[srcBLen - 3] , y[srcBLen - 4] }
+
+                acc0 = __SUMDOTP2(_x0, _y1, acc0);
+                acc1 = __SUMDOTP2(_x1, _y1, acc1);
+                acc2 = __SUMDOTP2(_x2, _y1, acc2);
+                acc0 = __SUMDOTP2(_x2, _y2, acc0);
+                acc1 = __SUMDOTP2(_x3, _y2, acc1);
+                acc2 = __SUMDOTP2(_x4, _y2, acc2);
+
+                pSrcB_iter -= 4;
+                pSrcA_iter_0 += 4;
+                pSrcA_iter_1 += 4;
+            } while (--k);
+
+            /* If the srcBLen is not a multiple of 4, compute any remaining MACs here.
+             * No loop unrolling is used.
+             */
+
+            k = srcBLen % 0x4U;
+
+            while (k &gt; 0) {
+                _b0 = *pSrcB_iter--;
+                _a0 = *pSrcA_iter_0;
+                _a1 = *pSrcA_iter_1++;
+                _a2 = *((pSrcA_iter_0++) + 2);
+                acc0 = __MAC(acc0, _a0, _b0);
+                acc1 = __MAC(acc1, _a1, _b0);
+                acc2 = __MAC(acc2, _a2, _b0);
+                k--;
+            }
+
+            /* Store the result in the accumulator in the destination buffer. */
+            *pRes++ = acc0;
+            *pRes++ = acc1;
+            *pRes++ = acc2;
+        }
+
+    } else { // case: srcBLen &lt; 4
+
+        blk_cnt = res_len &gt;&gt; 2;
+
+        if (srcBLen == 1) {
+            printf(&quot;Error: use dot product instead of convolution!\n&quot;);
+        } else if (srcBLen == 2) {
+
+            _y1 = *((v2s *)pSrcB);
+            _y1 = __builtin_shuffle(_y1, _y1, shufflemask1);
+
+            while (blk_cnt &gt; 0) {
+
+                // load data
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+
+                // store dot product
+                *pRes++ = __DOTP2(_x0, _y1);
+                *pRes++ = __DOTP2(_x1, _y1);
+                *pRes++ = __DOTP2(_x2, _y1);
+                *pRes++ = __DOTP2(_x3, _y1);
+
+                // update pointers
+                pSrcA_iter_0 += 4;
+                pSrcA_iter_1 += 4;
+
+                // decrement iteration counter
+                blk_cnt--;
+            }
+
+            // do the remaining elements without loop unrolling
+            blk_cnt = res_len % 4;
+
+            if (blk_cnt == 1) {
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                *pRes++ = __DOTP2(_x0, _y1);
+            } else if (blk_cnt == 2) {
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                *pRes++ = __DOTP2(_x0, _y1);
+                *pRes++ = __DOTP2(_x1, _y1);
+            } else if (blk_cnt == 3) {
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                *pRes++ = __DOTP2(_x0, _y1);
+                *pRes++ = __DOTP2(_x1, _y1);
+                *pRes++ = __DOTP2(_x2, _y1);
+            }
+
+        } else if (srcBLen == 3) {
+
+            _y1 = *((v2s *)(pSrcB + 1));
+            _y2 = *((v2s *)(pSrcB + 0));
+            _y1 = __builtin_shuffle(_y1, _y1, shufflemask1);
+            _y2 = __AND2(_y2, ymask);
+
+            while (blk_cnt &gt; 0) {
+
+                // load data
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+                _x4 = *((v2s *)(pSrcA_iter_0 + 4)); // {x[4],x[5]}
+                _x5 = *((v2s *)(pSrcA_iter_1 + 4)); // {x[5],x[6]}
+
+                // compute dot product
+                acc0 = __DOTP2(_x0, _y1);
+                acc1 = __DOTP2(_x1, _y1);
+                acc2 = __DOTP2(_x2, _y1);
+                acc3 = __DOTP2(_x3, _y1);
+
+                *pRes++ = __SUMDOTP2(_x2, _y2, acc0);
+                *pRes++ = __SUMDOTP2(_x3, _y2, acc1);
+                *pRes++ = __SUMDOTP2(_x4, _y2, acc2);
+                *pRes++ = __SUMDOTP2(_x5, _y2, acc3);
+
+                // update pointers
+                pSrcA_iter_0 += 4;
+                pSrcA_iter_1 += 4;
+
+                // decrement iteration counter
+                blk_cnt--;
+            }
+
+            // do the remaining elements without loop unrolling
+            blk_cnt = res_len % 4;
+
+            if (blk_cnt == 1) {
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                acc0 = __DOTP2(_x0, _y1);
+                *pRes++ = __SUMDOTP2(_x2, _y2, acc0);
+            } else if (blk_cnt == 2) {
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+                acc0 = __DOTP2(_x0, _y1);
+                acc1 = __DOTP2(_x1, _y1);
+                *pRes++ = __SUMDOTP2(_x2, _y2, acc0);
+                *pRes++ = __SUMDOTP2(_x3, _y2, acc1);
+            } else if (blk_cnt == 3) {
+                _x0 = *((v2s *)(pSrcA_iter_0 + 0)); // {x[0],x[1]}
+                _x1 = *((v2s *)(pSrcA_iter_1 + 0)); // {x[1],x[2]}
+                _x2 = *((v2s *)(pSrcA_iter_0 + 2)); // {x[2],x[3]}
+                _x3 = *((v2s *)(pSrcA_iter_1 + 2)); // {x[3],x[4]}
+                _x4 = *((v2s *)(pSrcA_iter_0 + 4)); // {x[4],x[5]}
+                acc0 = __DOTP2(_x0, _y1);
+                acc1 = __DOTP2(_x1, _y1);
+                acc2 = __DOTP2(_x2, _y1);
+                *pRes++ = __SUMDOTP2(_x2, _y2, acc0);
+                *pRes++ = __SUMDOTP2(_x3, _y2, acc1);
+                *pRes++ = __SUMDOTP2(_x4, _y2, acc2);
+            }
+        }
+    }
+
+#else // PLP_MATH_LOOPUNROLL
+
+    // this makes no sense...
+    printf(&quot;Error: not implemented!&quot;);
+
+#endif // PLP_MATH_LOOPUNROLL
+}
+</code></pre>
+<hr />
+<p>Updated on 2023-03-01 at 16:16:32 +0000</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+    
+  </body>
+</html>

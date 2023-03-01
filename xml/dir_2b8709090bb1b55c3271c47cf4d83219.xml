@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_2b8709090bb1b55c3271c47cf4d83219" kind="dir">
+    <compoundname>/github/workspace/src/StatisticsFunctions/kernels</compoundname>
+    <innerfile refid="plp__max__f32s__xpulpv2_8c">plp_max_f32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__max__i16s__rv32im_8c">plp_max_i16s_rv32im.c</innerfile>
+    <innerfile refid="plp__max__i16s__xpulpv2_8c">plp_max_i16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__max__i32s__rv32im_8c">plp_max_i32s_rv32im.c</innerfile>
+    <innerfile refid="plp__max__i32s__xpulpv2_8c">plp_max_i32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__max__i8s__rv32im_8c">plp_max_i8s_rv32im.c</innerfile>
+    <innerfile refid="plp__max__i8s__xpulpv2_8c">plp_max_i8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mean__f32s__xpulpv2_8c">plp_mean_f32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mean__i16s__rv32im_8c">plp_mean_i16s_rv32im.c</innerfile>
+    <innerfile refid="plp__mean__i16s__xpulpv2_8c">plp_mean_i16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mean__i32s__rv32im_8c">plp_mean_i32s_rv32im.c</innerfile>
+    <innerfile refid="plp__mean__i32s__xpulpv2_8c">plp_mean_i32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mean__i8s__rv32im_8c">plp_mean_i8s_rv32im.c</innerfile>
+    <innerfile refid="plp__mean__i8s__xpulpv2_8c">plp_mean_i8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__min__f32s__xpulpv2_8c">plp_min_f32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__min__i16s__rv32im_8c">plp_min_i16s_rv32im.c</innerfile>
+    <innerfile refid="plp__min__i16s__xpulpv2_8c">plp_min_i16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__min__i32s__rv32im_8c">plp_min_i32s_rv32im.c</innerfile>
+    <innerfile refid="plp__min__i32s__xpulpv2_8c">plp_min_i32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__min__i8s__rv32im_8c">plp_min_i8s_rv32im.c</innerfile>
+    <innerfile refid="plp__min__i8s__xpulpv2_8c">plp_min_i8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__power__f32p__xpulpv2_8c">plp_power_f32p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__power__f32s__rv32im_8c">plp_power_f32s_rv32im.c</innerfile>
+    <innerfile refid="plp__power__f32s__xpulpv2_8c">plp_power_f32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__power__i16s__rv32im_8c">plp_power_i16s_rv32im.c</innerfile>
+    <innerfile refid="plp__power__i16s__xpulpv2_8c">plp_power_i16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__power__i32s__rv32im_8c">plp_power_i32s_rv32im.c</innerfile>
+    <innerfile refid="plp__power__i32s__xpulpv2_8c">plp_power_i32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__power__i8s__rv32im_8c">plp_power_i8s_rv32im.c</innerfile>
+    <innerfile refid="plp__power__i8s__xpulpv2_8c">plp_power_i8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__power__q16s__rv32im_8c">plp_power_q16s_rv32im.c</innerfile>
+    <innerfile refid="plp__power__q16s__xpulpv2_8c">plp_power_q16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__power__q32p__xpulpv2_8c">plp_power_q32p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__power__q32s__rv32im_8c">plp_power_q32s_rv32im.c</innerfile>
+    <innerfile refid="plp__power__q32s__xpulpv2_8c">plp_power_q32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__power__q8s__rv32im_8c">plp_power_q8s_rv32im.c</innerfile>
+    <innerfile refid="plp__power__q8s__xpulpv2_8c">plp_power_q8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__rms__f32s__xpulpv2_8c">plp_rms_f32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__rms__i16s__rv32im_8c">plp_rms_i16s_rv32im.c</innerfile>
+    <innerfile refid="plp__rms__i16s__xpulpv2_8c">plp_rms_i16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__rms__i32s__rv32im_8c">plp_rms_i32s_rv32im.c</innerfile>
+    <innerfile refid="plp__rms__i32s__xpulpv2_8c">plp_rms_i32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__rms__i8s__rv32im_8c">plp_rms_i8s_rv32im.c</innerfile>
+    <innerfile refid="plp__rms__i8s__xpulpv2_8c">plp_rms_i8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__rms__q16s__rv32im_8c">plp_rms_q16s_rv32im.c</innerfile>
+    <innerfile refid="plp__rms__q16s__xpulpv2_8c">plp_rms_q16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__rms__q32s__rv32im_8c">plp_rms_q32s_rv32im.c</innerfile>
+    <innerfile refid="plp__rms__q32s__xpulpv2_8c">plp_rms_q32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__rms__q8s__rv32im_8c">plp_rms_q8s_rv32im.c</innerfile>
+    <innerfile refid="plp__rms__q8s__xpulpv2_8c">plp_rms_q8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__std__f32s__xpulpv2_8c">plp_std_f32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__std__q16s__rv32im_8c">plp_std_q16s_rv32im.c</innerfile>
+    <innerfile refid="plp__std__q16s__xpulpv2_8c">plp_std_q16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__std__q32s__rv32im_8c">plp_std_q32s_rv32im.c</innerfile>
+    <innerfile refid="plp__std__q32s__xpulpv2_8c">plp_std_q32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__std__q8s__rv32im_8c">plp_std_q8s_rv32im.c</innerfile>
+    <innerfile refid="plp__std__q8s__xpulpv2_8c">plp_std_q8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__var__f32s__xpulpv2_8c">plp_var_f32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__var__q16s__rv32im_8c">plp_var_q16s_rv32im.c</innerfile>
+    <innerfile refid="plp__var__q16s__xpulpv2_8c">plp_var_q16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__var__q32s__rv32im_8c">plp_var_q32s_rv32im.c</innerfile>
+    <innerfile refid="plp__var__q32s__xpulpv2_8c">plp_var_q32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__var__q8s__rv32im_8c">plp_var_q8s_rv32im.c</innerfile>
+    <innerfile refid="plp__var__q8s__xpulpv2_8c">plp_var_q8s_xpulpv2.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/StatisticsFunctions/kernels/"/>
+  </compounddef>
+</doxygen>

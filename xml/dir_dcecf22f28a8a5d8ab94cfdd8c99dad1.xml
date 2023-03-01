@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_dcecf22f28a8a5d8ab94cfdd8c99dad1" kind="dir">
+    <compoundname>/github/workspace/src/BasicMathFunctions/add</compoundname>
+    <innerdir refid="dir_6382ec370daeb721a3be0ef206a65ae1">/github/workspace/src/BasicMathFunctions/add/kernels</innerdir>
+    <innerfile refid="plp__add__i16_8c">plp_add_i16.c</innerfile>
+    <innerfile refid="plp__add__i32_8c">plp_add_i32.c</innerfile>
+    <innerfile refid="plp__add__i8_8c">plp_add_i8.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/BasicMathFunctions/add/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,422 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__stdKernels" kind="group">
+    <compoundname>stdKernels</compoundname>
+    <title>Std Kernels</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__stdKernels_1ga8cfbf58e8532c07392fb4d7f310bf2ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_std_f32s_xpulpv2</definition>
+        <argsstring>(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes)</argsstring>
+        <name>plp_std_f32s_xpulpv2</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Standard deviation of a 32-bit fixed point vector for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Kernel for Statisical standard deviation of a 32-bit float vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>standard deviation returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_std_f32s_xpulpv2.c" line="54" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_std_f32s_xpulpv2.c" bodystart="54" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="group__stdKernels_1ga19e998a68f5730b4e0107d225c6e7fcb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_std_q16s_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int16_t *__restrict__ pRes)</argsstring>
+        <name>plp_std_q16s_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Standard deviation of a 16-bit fixed point vector for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Statisical standard deviation of a 16-bit fixed point vector for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>standard deviation returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_std_q16s_rv32im.c" line="54" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_std_q16s_rv32im.c" bodystart="54" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="group__stdKernels_1gadea1569dae230b0a97f3640f0c2b7455" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_std_q16s_xpulpv2</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int16_t *__restrict__ pRes)</argsstring>
+        <name>plp_std_q16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Standard deviation of a 16-bit fixed point vector for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Statisical standard deviation of a 16-bit fixed point vector for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>standard deviation returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_std_q16s_xpulpv2.c" line="54" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_std_q16s_xpulpv2.c" bodystart="54" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="group__stdKernels_1gaa1679d5efd3116cef3f2841635fef4c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_std_q32s_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_std_q32s_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Standard deviation of a 32-bit fixed point vector for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Statisical standard deviation of a 32-bit fixed point vector for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>standard deviation returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_std_q32s_rv32im.c" line="54" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_std_q32s_rv32im.c" bodystart="54" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="group__stdKernels_1ga13901d77c2cb973cc2d9addfad22cac1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_std_q32s_xpulpv2</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_std_q32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Standard deviation of a 32-bit fixed point vector for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Statisical standard deviation of a 32-bit fixed point vector for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>standard deviation returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_std_q32s_xpulpv2.c" line="54" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_std_q32s_xpulpv2.c" bodystart="54" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="group__stdKernels_1gaf4267adcd18519ae9ca4565ac8eb7581" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_std_q8s_rv32im</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int8_t *__restrict__ pRes)</argsstring>
+        <name>plp_std_q8s_rv32im</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Standard deviation of a 8-bit fixed point vector for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Statisical standard deviation of a 8-bit fixed point vector for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>standard deviation returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_std_q8s_rv32im.c" line="55" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_std_q8s_rv32im.c" bodystart="55" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="group__stdKernels_1ga4f6b5412af4c8748974e2871bd0ef703" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_std_q8s_xpulpv2</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int8_t *__restrict__ pRes)</argsstring>
+        <name>plp_std_q8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Standard deviation of a 8-bit fixed point vector for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Statisical standard deviation of a 8-bit fixed point vector for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>standard deviation returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_std_q8s_xpulpv2.c" line="54" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_std_q8s_xpulpv2.c" bodystart="54" bodyend="70"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

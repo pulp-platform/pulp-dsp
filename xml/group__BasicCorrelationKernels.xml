@@ -1,0 +1,978 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__BasicCorrelationKernels" kind="group">
+    <compoundname>BasicCorrelationKernels</compoundname>
+    <title>BasicCorrelationKernels</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__BasicCorrelationKernels_1ga0083499e1324e25e3cb9740b1ce78de5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_correlate_i16s_rv32im</definition>
+        <argsstring>(const int16_t *pSrcA, const uint32_t srcALen, const int16_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_correlate_i16s_rv32im</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Correlation of 16-bit integer vectors kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_i16s_rv32im.c" line="50" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_i16s_rv32im.c" bodystart="50" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicCorrelationKernels_1ga3a6e842b0c71101fcb6c8832952b0d89" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_correlate_i16s_xpulpv2</definition>
+        <argsstring>(const int16_t *pSrcA, const uint32_t srcALen, const int16_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_correlate_i16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Correlation of 16-bit integer vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_i16s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_i16s_xpulpv2.c" bodystart="50" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicCorrelationKernels_1ga847eebff198890c9115fc603c111d322" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_correlate_i32s_rv32im</definition>
+        <argsstring>(const int32_t *pSrcA, const uint32_t srcALen, const int32_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_correlate_i32s_rv32im</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Correlation of 32-bit integer vectors kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_i32s_rv32im.c" line="50" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_i32s_rv32im.c" bodystart="50" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicCorrelationKernels_1ga1110992112718471f688866ac97751d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_correlate_i32s_xpulpv2</definition>
+        <argsstring>(const int32_t *pSrcA, const uint32_t srcALen, const int32_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_correlate_i32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Correlation of 32-bit integer vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_i32s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_i32s_xpulpv2.c" bodystart="50" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicCorrelationKernels_1gae554a1606c4f96d91c0ebccb41c9c077" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_correlate_i8s_rv32im</definition>
+        <argsstring>(const int8_t *pSrcA, const uint32_t srcALen, const int8_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_correlate_i8s_rv32im</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Correlation of 8-bit integer vectors kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_i8s_rv32im.c" line="50" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_i8s_rv32im.c" bodystart="50" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicCorrelationKernels_1ga456c707a1cdc8ca95841ad7cff0d99ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_correlate_i8s_xpulpv2</definition>
+        <argsstring>(const int8_t *pSrcA, const uint32_t srcALen, const int8_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_correlate_i8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Correlation of 8-bit integer vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_i8s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_i8s_xpulpv2.c" bodystart="50" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicCorrelationKernels_1ga7c6bc8179e1289f4df1c84b664e05e48" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_correlate_q16s_rv32im</definition>
+        <argsstring>(const int16_t *pSrcA, const uint32_t srcALen, const int16_t *pSrcB, const uint32_t srcBLen, uint32_t fracBits, int32_t *pRes)</argsstring>
+        <name>plp_correlate_q16s_rv32im</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Correlation of 16-bit fixed point vectors kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Correlation of 16-bit integer vectors kernel for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_q16s_rv32im.c" line="50" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_q16s_rv32im.c" bodystart="50" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicCorrelationKernels_1gaebadb75ff4041d4cee9821dc551ed464" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_correlate_q16s_xpulpv2</definition>
+        <argsstring>(const int16_t *pSrcA, const uint32_t srcALen, const int16_t *pSrcB, const uint32_t srcBLen, uint32_t fracBits, int32_t *pRes)</argsstring>
+        <name>plp_correlate_q16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Correlation of 16-bit fixed point vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Correlation of 16-bit integer vectors kernel for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_q16s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_q16s_xpulpv2.c" bodystart="50" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicCorrelationKernels_1gad3ceb4b371c75ddfbe33e61b65903ff8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_correlate_q32s_rv32im</definition>
+        <argsstring>(const int32_t *pSrcA, const uint32_t srcALen, const int32_t *pSrcB, const uint32_t srcBLen, uint32_t fracBits, int32_t *pRes)</argsstring>
+        <name>plp_correlate_q32s_rv32im</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Correlation of 32-bit fixed point vectors kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Correlation of 32-bit integer vectors kernel for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_q32s_rv32im.c" line="50" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_q32s_rv32im.c" bodystart="50" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicCorrelationKernels_1gaef0670550e7440f5186316016eb79e64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_correlate_q32s_xpulpv2</definition>
+        <argsstring>(const int32_t *pSrcA, const uint32_t srcALen, const int32_t *pSrcB, const uint32_t srcBLen, uint32_t fracBits, int32_t *pRes)</argsstring>
+        <name>plp_correlate_q32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Correlation of 32-bit fixed point vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_q32s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_q32s_xpulpv2.c" bodystart="50" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicCorrelationKernels_1gaffd496ce54274ff248aab28a35fea38a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_correlate_q8s_rv32im</definition>
+        <argsstring>(const int8_t *pSrcA, const uint32_t srcALen, const int8_t *pSrcB, const uint32_t srcBLen, uint32_t fracBits, int32_t *pRes)</argsstring>
+        <name>plp_correlate_q8s_rv32im</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Correlation of 8-bit fixed point vectors kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Correlation of 8-bit integer vectors kernel for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ocdutput result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_q8s_rv32im.c" line="50" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_q8s_rv32im.c" bodystart="50" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicCorrelationKernels_1ga3381fa4c67e839cb2ee4cdefd9d00aee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_correlate_q8s_xpulpv2</definition>
+        <argsstring>(const int8_t *pSrcA, const uint32_t srcALen, const int8_t *pSrcB, const uint32_t srcBLen, uint32_t fracBits, int32_t *pRes)</argsstring>
+        <name>plp_correlate_q8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Correlation of 8-bit fixed point vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Correlation of 8-bit integer vectors kernel for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_q8s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/FilteringFunctions/kernels/plp_correlate_q8s_xpulpv2.c" bodystart="50" bodyend="139"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

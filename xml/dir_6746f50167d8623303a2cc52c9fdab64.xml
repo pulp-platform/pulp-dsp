@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_6746f50167d8623303a2cc52c9fdab64" kind="dir">
+    <compoundname>/github/workspace/src/StatisticsFunctions</compoundname>
+    <innerdir refid="dir_2b8709090bb1b55c3271c47cf4d83219">/github/workspace/src/StatisticsFunctions/kernels</innerdir>
+    <innerfile refid="plp__max__f32_8c">plp_max_f32.c</innerfile>
+    <innerfile refid="plp__max__i16_8c">plp_max_i16.c</innerfile>
+    <innerfile refid="plp__max__i32_8c">plp_max_i32.c</innerfile>
+    <innerfile refid="plp__max__i8_8c">plp_max_i8.c</innerfile>
+    <innerfile refid="plp__mean__f32_8c">plp_mean_f32.c</innerfile>
+    <innerfile refid="plp__mean__i16_8c">plp_mean_i16.c</innerfile>
+    <innerfile refid="plp__mean__i32_8c">plp_mean_i32.c</innerfile>
+    <innerfile refid="plp__mean__i8_8c">plp_mean_i8.c</innerfile>
+    <innerfile refid="plp__min__f32_8c">plp_min_f32.c</innerfile>
+    <innerfile refid="plp__min__i16_8c">plp_min_i16.c</innerfile>
+    <innerfile refid="plp__min__i32_8c">plp_min_i32.c</innerfile>
+    <innerfile refid="plp__min__i8_8c">plp_min_i8.c</innerfile>
+    <innerfile refid="plp__power__f32_8c">plp_power_f32.c</innerfile>
+    <innerfile refid="plp__power__f32__parallel_8c">plp_power_f32_parallel.c</innerfile>
+    <innerfile refid="plp__power__i16_8c">plp_power_i16.c</innerfile>
+    <innerfile refid="plp__power__i32_8c">plp_power_i32.c</innerfile>
+    <innerfile refid="plp__power__i8_8c">plp_power_i8.c</innerfile>
+    <innerfile refid="plp__power__q16_8c">plp_power_q16.c</innerfile>
+    <innerfile refid="plp__power__q32_8c">plp_power_q32.c</innerfile>
+    <innerfile refid="plp__power__q32__parallel_8c">plp_power_q32_parallel.c</innerfile>
+    <innerfile refid="plp__power__q8_8c">plp_power_q8.c</innerfile>
+    <innerfile refid="plp__rms__f32_8c">plp_rms_f32.c</innerfile>
+    <innerfile refid="plp__rms__q16_8c">plp_rms_q16.c</innerfile>
+    <innerfile refid="plp__rms__q32_8c">plp_rms_q32.c</innerfile>
+    <innerfile refid="plp__rms__q8_8c">plp_rms_q8.c</innerfile>
+    <innerfile refid="plp__std__f32_8c">plp_std_f32.c</innerfile>
+    <innerfile refid="plp__std__q16_8c">plp_std_q16.c</innerfile>
+    <innerfile refid="plp__std__q32_8c">plp_std_q32.c</innerfile>
+    <innerfile refid="plp__std__q8_8c">plp_std_q8.c</innerfile>
+    <innerfile refid="plp__var__f32_8c">plp_var_f32.c</innerfile>
+    <innerfile refid="plp__var__q16_8c">plp_var_q16.c</innerfile>
+    <innerfile refid="plp__var__q32_8c">plp_var_q32.c</innerfile>
+    <innerfile refid="plp__var__q8_8c">plp_var_q8.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/StatisticsFunctions/"/>
+  </compounddef>
+</doxygen>

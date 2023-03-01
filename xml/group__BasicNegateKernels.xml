@@ -1,0 +1,394 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__BasicNegateKernels" kind="group">
+    <compoundname>BasicNegateKernels</compoundname>
+    <title>Vector Negate Kernels</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__BasicNegateKernels_1gadc10f7a57f088bb31dd8ace2a6249c09" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_negate_f32s_xpulpv2</definition>
+        <argsstring>(const float32_t *pSrc, float32_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_negate_f32s_xpulpv2</name>
+        <param>
+          <type>const float32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float32_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>negate the elements of a vector for 32-bit floats on XpulpV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/negate/kernels/plp_negate_f32s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/negate/kernels/plp_negate_f32s_xpulpv2.c" bodystart="50" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicNegateKernels_1ga11c70b48942ef16c1bd3007aff20adf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_negate_i16s_rv32im</definition>
+        <argsstring>(const int16_t *pSrc, int16_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_negate_i16s_rv32im</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>negate the elements of a vector for 16-bit integers on RV32IM </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/negate/kernels/plp_negate_i16s_rv32im.c" line="58" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/negate/kernels/plp_negate_i16s_rv32im.c" bodystart="58" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicNegateKernels_1ga91623dbf425eef9108c6c37085f42dbe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_negate_i16s_xpulpv2</definition>
+        <argsstring>(const int16_t *pSrc, int16_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_negate_i16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>negate the elements of a vector for 16-bit integers on XpulpV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/negate/kernels/plp_negate_i16s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/negate/kernels/plp_negate_i16s_xpulpv2.c" bodystart="50" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicNegateKernels_1gaabed927f1ccb7bcfd02658a29418b691" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_negate_i32s_rv32im</definition>
+        <argsstring>(const int32_t *pSrc, int32_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_negate_i32s_rv32im</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>negate the elements of a vector for 32-bit integers on RV32IM </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/negate/kernels/plp_negate_i32s_rv32im.c" line="50" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/negate/kernels/plp_negate_i32s_rv32im.c" bodystart="50" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicNegateKernels_1gaa5c55049d9140d6ac636649bfc92e34f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_negate_i32s_xpulpv2</definition>
+        <argsstring>(const int32_t *pSrc, int32_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_negate_i32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>negate the elements of a vector for 32-bit integers on XpulpV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/negate/kernels/plp_negate_i32s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/negate/kernels/plp_negate_i32s_xpulpv2.c" bodystart="50" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicNegateKernels_1ga2bdf53a4d9ab5bc09c8326ae3c93cf39" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_negate_i8s_rv32im</definition>
+        <argsstring>(const int8_t *pSrc, int8_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_negate_i8s_rv32im</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>negate the elements of a vector for 8-bit integers on RV32IM </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/negate/kernels/plp_negate_i8s_rv32im.c" line="50" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/negate/kernels/plp_negate_i8s_rv32im.c" bodystart="50" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicNegateKernels_1gae292bd1123190ecbd0307047cefbb34d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_negate_i8s_xpulpv2</definition>
+        <argsstring>(const int8_t *pSrc, int8_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_negate_i8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>negate the elements of a vector for 8-bit integers on XpulpV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/negate/kernels/plp_negate_i8s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/negate/kernels/plp_negate_i8s_xpulpv2.c" bodystart="50" bodyend="74"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Negates the elements of a vector. <preformatted>
+    pDst[n] = -pSrc[n],   0 &lt;= n &lt; blockSize.
+</preformatted> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__fft__fast__instance__f32__parallel" kind="struct" language="C++" prot="public">
+    <compoundname>plp_fft_fast_instance_f32_parallel</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__fft__fast__instance__f32__parallel_1a7e81962680f23a8e63f07fff632c4091" prot="public" static="no" mutable="no">
+        <type><ref refid="structplp__fft__fast__instance__f32" kindref="compound">plp_fft_fast_instance_f32</ref> *</type>
+        <definition>plp_fft_fast_instance_f32* plp_fft_fast_instance_f32_parallel::S</definition>
+        <argsstring></argsstring>
+        <name>S</name>
+        <qualifiedname>plp_fft_fast_instance_f32_parallel::S</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="436" column="31" bodyfile="/github/workspace/include/plp_math.h" bodystart="436" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__fft__fast__instance__f32__parallel_1a8ad47d6ff4047ca3e194645d7c196093" prot="public" static="no" mutable="no">
+        <type>float32_t *__restrict__</type>
+        <definition>float32_t* __restrict__ plp_fft_fast_instance_f32_parallel::pSrc</definition>
+        <argsstring></argsstring>
+        <name>pSrc</name>
+        <qualifiedname>plp_fft_fast_instance_f32_parallel::pSrc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="437" column="28" bodyfile="/github/workspace/include/plp_math.h" bodystart="437" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__fft__fast__instance__f32__parallel_1a98f4ed27149d795116666bc67b47d00b" prot="public" static="no" mutable="no">
+        <type>float32_t *__restrict__</type>
+        <definition>float32_t* __restrict__ plp_fft_fast_instance_f32_parallel::pDst</definition>
+        <argsstring></argsstring>
+        <name>pDst</name>
+        <qualifiedname>plp_fft_fast_instance_f32_parallel::pDst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="438" column="28" bodyfile="/github/workspace/include/plp_math.h" bodystart="438" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__fft__fast__instance__f32__parallel_1af1a04b9e9ae057ea355253c26d347f2b" prot="public" static="no" mutable="no">
+        <type>const uint32_t</type>
+        <definition>const uint32_t plp_fft_fast_instance_f32_parallel::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_fft_fast_instance_f32_parallel::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="439" column="20" bodyfile="/github/workspace/include/plp_math.h" bodystart="439" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for floating-point FFT. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">Internal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CFFT structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>data length of the real sequence </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pTwiddleFactorsRFFT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to the twiddle factors. These values must be computed using this formula: <formula id="0">$W_N^k =   e^{-j \frac{\pi}{N} k}$</formula>, where <formula id="1">$N$</formula> is the data length and <formula id="2">$k$</formula> is the index. The user must provide <formula id="3">$\frac{N}{2}$</formula> values ( <formula id="4">$k = 0 .. \frac{N}{2}-1$</formula>). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pBitReverseLUT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to the lookup table used for the bit reversal of output. This table must include <formula id="1">$N$</formula> elements in the range <formula id="5">$0 .. N-1$</formula>, where each location <formula id="2">$k$</formula> contains the value <formula id="6">$bitreverse(k)$</formula>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>plp_cfft_instance_f32</label>
+        <link refid="structplp__cfft__instance__f32"/>
+      </node>
+      <node id="2">
+        <label>plp_fft_fast_instance_f32</label>
+        <link refid="structplp__fft__fast__instance__f32"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>Sint</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>plp_fft_fast_instance_f32_parallel</label>
+        <link refid="structplp__fft__fast__instance__f32__parallel"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>S</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/github/workspace/include/plp_math.h" line="435" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="435" bodyend="440"/>
+    <listofallmembers>
+      <member refid="structplp__fft__fast__instance__f32__parallel_1af1a04b9e9ae057ea355253c26d347f2b" prot="public" virt="non-virtual"><scope>plp_fft_fast_instance_f32_parallel</scope><name>nPE</name></member>
+      <member refid="structplp__fft__fast__instance__f32__parallel_1a98f4ed27149d795116666bc67b47d00b" prot="public" virt="non-virtual"><scope>plp_fft_fast_instance_f32_parallel</scope><name>pDst</name></member>
+      <member refid="structplp__fft__fast__instance__f32__parallel_1a8ad47d6ff4047ca3e194645d7c196093" prot="public" virt="non-virtual"><scope>plp_fft_fast_instance_f32_parallel</scope><name>pSrc</name></member>
+      <member refid="structplp__fft__fast__instance__f32__parallel_1a7e81962680f23a8e63f07fff632c4091" prot="public" virt="non-virtual"><scope>plp_fft_fast_instance_f32_parallel</scope><name>S</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

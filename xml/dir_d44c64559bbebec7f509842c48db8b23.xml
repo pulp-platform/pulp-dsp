@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_d44c64559bbebec7f509842c48db8b23" kind="dir">
+    <compoundname>/github/workspace/include</compoundname>
+    <innerfile refid="plp__common__tables_8h">plp_common_tables.h</innerfile>
+    <innerfile refid="plp__const__structs_8h">plp_const_structs.h</innerfile>
+    <innerfile refid="plp__math_8h">plp_math.h</innerfile>
+    <innerfile refid="rtos__hal_8h">rtos_hal.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/include/"/>
+  </compounddef>
+</doxygen>

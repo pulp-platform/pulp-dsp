@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_8f0c3609e087f7301b9c942467c4604f" kind="dir">
+    <compoundname>/github/workspace/src/MatrixFunctions</compoundname>
+    <innerdir refid="dir_e1d82d7870701c21eeda1ee4705f28ba">/github/workspace/src/MatrixFunctions/mat_add</innerdir>
+    <innerdir refid="dir_54efffabbef3159b8300adce12b64a21">/github/workspace/src/MatrixFunctions/mat_fill_I</innerdir>
+    <innerdir refid="dir_303c61e4b6e44af9dd7533337fe642c1">/github/workspace/src/MatrixFunctions/mat_inv</innerdir>
+    <innerdir refid="dir_ce685a79dbf07864cbc6f5f774242679">/github/workspace/src/MatrixFunctions/mat_mult</innerdir>
+    <innerdir refid="dir_148005d04fe4fec3a4d0176d833dba8d">/github/workspace/src/MatrixFunctions/mat_mult_cmplx</innerdir>
+    <innerdir refid="dir_361c5ff40a028274bbc0ecc1db163a94">/github/workspace/src/MatrixFunctions/mat_mult_trans</innerdir>
+    <innerdir refid="dir_ae59a420a7ce1ca72aedf4167e6e5834">/github/workspace/src/MatrixFunctions/mat_mult_trans_cmplx</innerdir>
+    <innerdir refid="dir_f217f927fd83240b10ce33fb0131bc99">/github/workspace/src/MatrixFunctions/mat_scale</innerdir>
+    <innerdir refid="dir_939e68965fea1e4e1e1eee2a77a0676d">/github/workspace/src/MatrixFunctions/mat_sub</innerdir>
+    <innerdir refid="dir_1214ad627b6edf0ca06a4820d4e4e442">/github/workspace/src/MatrixFunctions/mat_trans</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/MatrixFunctions/"/>
+  </compounddef>
+</doxygen>

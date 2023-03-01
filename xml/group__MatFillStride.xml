@@ -1,0 +1,643 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__MatFillStride" kind="group">
+    <compoundname>MatFillStride</compoundname>
+    <title>strided matrix fill</title>
+    <innergroup refid="group__MatFillStrideKernels">Strided Matrix Fill Kernels</innergroup>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__MatFillStride_1ga7e01d99ef4649fef25a30b1c55bc7e4e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_stride_f32</definition>
+        <argsstring>(uint32_t M, uint32_t N, uint32_t stride, float value, float *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_stride_f32</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for filling an MxN strided 32-bit floats matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_f32.c" line="51" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_f32.c" bodystart="51" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillStride_1gac500897f0fdb5805e53a648377215761" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_stride_f32_parallel</definition>
+        <argsstring>(uint32_t M, uint32_t N, uint32_t stride, float value, uint32_t nPE, float *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_stride_f32_parallel</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for filling an MxN strided 32-bit floats matrix in parallel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use for processing </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_f32_parallel.c" line="52" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_f32_parallel.c" bodystart="52" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillStride_1gab4b69b2f1d117b9c49383a78727a795c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_stride_i16</definition>
+        <argsstring>(uint32_t M, uint32_t N, uint32_t stride, int16_t value, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_stride_i16</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int16_t</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for filling an MxN strided 16-bit integers matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i16.c" line="72" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i16.c" bodystart="72" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillStride_1ga4ab23fb636996b9b734b4118d5d864eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_stride_i16_parallel</definition>
+        <argsstring>(uint32_t M, uint32_t N, uint32_t stride, int16_t value, uint32_t nPE, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_stride_i16_parallel</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int16_t</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for filling an MxN strided 16-bit integers matrix in parallel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use for processing </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i16_parallel.c" line="52" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i16_parallel.c" bodystart="52" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillStride_1gaa8a7645452e10bf94fd80f6941c07325" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_stride_i32</definition>
+        <argsstring>(uint32_t M, uint32_t N, uint32_t stride, int32_t value, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_stride_i32</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for filling an MxN strided 32-bit integers matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i32.c" line="51" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i32.c" bodystart="51" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillStride_1ga4c34defd977bb4299f196842fabb2dc8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_stride_i32_parallel</definition>
+        <argsstring>(uint32_t M, uint32_t N, uint32_t stride, int32_t value, uint32_t nPE, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_stride_i32_parallel</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for filling an MxN strided 32-bit integers matrix in parallel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use for processing </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i32_parallel.c" line="52" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i32_parallel.c" bodystart="52" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillStride_1ga4e0b1a3c09477dfc19cd6969ad796e88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_stride_i8</definition>
+        <argsstring>(uint32_t M, uint32_t N, uint32_t stride, int8_t value, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_stride_i8</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int8_t</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for filling an MxN strided 8-bit integers matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i8.c" line="51" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i8.c" bodystart="51" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillStride_1ga54c4dcac4295b78409c175cd33b8d4fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_stride_i8_parallel</definition>
+        <argsstring>(uint32_t M, uint32_t N, uint32_t stride, int8_t value, uint32_t nPE, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_stride_i8_parallel</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int8_t</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for filling an MxN strided 8-bit integers matrix in parallel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use for processing </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i8_parallel.c" line="52" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_stride/plp_mat_fill_stride_i8_parallel.c" bodystart="52" bodyend="69"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the glue code for filling strided matrices. The kernel codes (kernels) are located in the module <ref refid="group__MatFillStrideKernels" kindref="compound">Strided Matrix Fill Kernels</ref>.</para>
+<para>There are functions for integer 32- 16- and 8-bit data types, as well as for floating-point. The naming scheme of the functions follows the following pattern (for example <computeroutput>plp_mat_fill_stride_i32</computeroutput>): <verbatim>`plp_&lt;function name&gt;_&lt;data type&gt;&lt;precision&gt;[_parallel]`
+</verbatim> <table rows="4" cols="2"><row>
+<entry thead="yes"><para>name   </para>
+</entry><entry thead="yes"><para>description    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>function_name   </para>
+</entry><entry thead="no"><para><computeroutput>mat_fill_stride</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>data type   </para>
+</entry><entry thead="no"><para>{f, i, q} respectively for floats, integers, fixed points    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>precision   </para>
+</entry><entry thead="no"><para>{32, 16, 8} bits   </para>
+</entry></row>
+</table>
+</para>
+<para>The <computeroutput>stride</computeroutput> argument tells how many elements are in between the start of each row of the matrix. In other words, it is the width of the original matrix. <ref refid="group__groupMatrixStride" kindref="compound">Strided Matrix operations</ref> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

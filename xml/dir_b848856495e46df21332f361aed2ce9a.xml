@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_b848856495e46df21332f361aed2ce9a" kind="dir">
+    <compoundname>/github/workspace/src/TransformFunctions</compoundname>
+    <innerdir refid="dir_efbe982c9fdfb85a5dbb323dc476b504">/github/workspace/src/TransformFunctions/kernels</innerdir>
+    <innerfile refid="plp__cfft__f32_8c">plp_cfft_f32.c</innerfile>
+    <innerfile refid="plp__cfft__f32__parallel_8c">plp_cfft_f32_parallel.c</innerfile>
+    <innerfile refid="plp__cfft__q16_8c">plp_cfft_q16.c</innerfile>
+    <innerfile refid="plp__cfft__q16__parallel_8c">plp_cfft_q16_parallel.c</innerfile>
+    <innerfile refid="plp__cfft__q32_8c">plp_cfft_q32.c</innerfile>
+    <innerfile refid="plp__cfft__q32__parallel_8c">plp_cfft_q32_parallel.c</innerfile>
+    <innerfile refid="plp__dct2__f32_8c">plp_dct2_f32.c</innerfile>
+    <innerfile refid="plp__dct2__f32__parallel_8c">plp_dct2_f32_parallel.c</innerfile>
+    <innerfile refid="plp__dwt__common_8c">plp_dwt_common.c</innerfile>
+    <innerfile refid="plp__dwt__common_8h">plp_dwt_common.h</innerfile>
+    <innerfile refid="plp__dwt__f32_8c">plp_dwt_f32.c</innerfile>
+    <innerfile refid="plp__dwt__f32__parallel_8c">plp_dwt_f32_parallel.c</innerfile>
+    <innerfile refid="plp__dwt__q16_8c">plp_dwt_q16.c</innerfile>
+    <innerfile refid="plp__dwt__q16__parallel_8c">plp_dwt_q16_parallel.c</innerfile>
+    <innerfile refid="plp__dwt__q32_8c">plp_dwt_q32.c</innerfile>
+    <innerfile refid="plp__dwt__q32__parallel_8c">plp_dwt_q32_parallel.c</innerfile>
+    <innerfile refid="plp__dwt__q8_8c">plp_dwt_q8.c</innerfile>
+    <innerfile refid="plp__dwt__q8__parallel_8c">plp_dwt_q8_parallel.c</innerfile>
+    <innerfile refid="plp__mfcc__f32_8c">plp_mfcc_f32.c</innerfile>
+    <innerfile refid="plp__mfcc__f32__parallel_8c">plp_mfcc_f32_parallel.c</innerfile>
+    <innerfile refid="plp__rfft__f32_8c">plp_rfft_f32.c</innerfile>
+    <innerfile refid="plp__rfft__f32__parallel_8c">plp_rfft_f32_parallel.c</innerfile>
+    <innerfile refid="plp__rfftfast__f32_8c">plp_rfftfast_f32.c</innerfile>
+    <innerfile refid="plp__rfftfast__f32__parallel_8c">plp_rfftfast_f32_parallel.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/TransformFunctions/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__mat__add__stride__instance__f32" kind="struct" language="C++" prot="public">
+    <compoundname>plp_mat_add_stride_instance_f32</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__mat__add__stride__instance__f32_1a0270176621c958aae47133017daacd1a" prot="public" static="no" mutable="no">
+        <type>const float *__restrict__</type>
+        <definition>const float* __restrict__ plp_mat_add_stride_instance_f32::pSrcA</definition>
+        <argsstring></argsstring>
+        <name>pSrcA</name>
+        <qualifiedname>plp_mat_add_stride_instance_f32::pSrcA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1215" column="30" bodyfile="/github/workspace/include/plp_math.h" bodystart="1215" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__add__stride__instance__f32_1accec620a4a9711e54a8142e59ffb0ed0" prot="public" static="no" mutable="no">
+        <type>const float *__restrict__</type>
+        <definition>const float* __restrict__ plp_mat_add_stride_instance_f32::pSrcB</definition>
+        <argsstring></argsstring>
+        <name>pSrcB</name>
+        <qualifiedname>plp_mat_add_stride_instance_f32::pSrcB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1216" column="30" bodyfile="/github/workspace/include/plp_math.h" bodystart="1216" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__add__stride__instance__f32_1ab7a52ce99a1559feb2088e531d8508bd" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_add_stride_instance_f32::M</definition>
+        <argsstring></argsstring>
+        <name>M</name>
+        <qualifiedname>plp_mat_add_stride_instance_f32::M</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1217" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1217" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__add__stride__instance__f32_1a684ec1c0b8738c8441e592cd27c3ebe4" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_add_stride_instance_f32::N</definition>
+        <argsstring></argsstring>
+        <name>N</name>
+        <qualifiedname>plp_mat_add_stride_instance_f32::N</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1218" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1218" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__add__stride__instance__f32_1ae77349502e0bfc382d341e469874cba1" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_add_stride_instance_f32::strideA</definition>
+        <argsstring></argsstring>
+        <name>strideA</name>
+        <qualifiedname>plp_mat_add_stride_instance_f32::strideA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1219" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1219" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__add__stride__instance__f32_1a002ea241793b2af635a71e0f7c67b0a8" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_add_stride_instance_f32::strideB</definition>
+        <argsstring></argsstring>
+        <name>strideB</name>
+        <qualifiedname>plp_mat_add_stride_instance_f32::strideB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1220" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1220" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__add__stride__instance__f32_1a6409042d191b50430f3aaca0b1504472" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_add_stride_instance_f32::strideY</definition>
+        <argsstring></argsstring>
+        <name>strideY</name>
+        <qualifiedname>plp_mat_add_stride_instance_f32::strideY</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1221" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1221" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__add__stride__instance__f32_1a9229a29ff412ad1eb0e2f298396e7da6" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_add_stride_instance_f32::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_mat_add_stride_instance_f32::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1222" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1222" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__add__stride__instance__f32_1afcd3b5ce53fb3b309d08ad1d73ee1de8" prot="public" static="no" mutable="no">
+        <type>float *__restrict__</type>
+        <definition>float* __restrict__ plp_mat_add_stride_instance_f32::pDst</definition>
+        <argsstring></argsstring>
+        <name>pDst</name>
+        <qualifiedname>plp_mat_add_stride_instance_f32::pDst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1223" column="24" bodyfile="/github/workspace/include/plp_math.h" bodystart="1223" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for strided floating-point parallel matrix addition. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="1214" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="1214" bodyend="1224"/>
+    <listofallmembers>
+      <member refid="structplp__mat__add__stride__instance__f32_1ab7a52ce99a1559feb2088e531d8508bd" prot="public" virt="non-virtual"><scope>plp_mat_add_stride_instance_f32</scope><name>M</name></member>
+      <member refid="structplp__mat__add__stride__instance__f32_1a684ec1c0b8738c8441e592cd27c3ebe4" prot="public" virt="non-virtual"><scope>plp_mat_add_stride_instance_f32</scope><name>N</name></member>
+      <member refid="structplp__mat__add__stride__instance__f32_1a9229a29ff412ad1eb0e2f298396e7da6" prot="public" virt="non-virtual"><scope>plp_mat_add_stride_instance_f32</scope><name>nPE</name></member>
+      <member refid="structplp__mat__add__stride__instance__f32_1afcd3b5ce53fb3b309d08ad1d73ee1de8" prot="public" virt="non-virtual"><scope>plp_mat_add_stride_instance_f32</scope><name>pDst</name></member>
+      <member refid="structplp__mat__add__stride__instance__f32_1a0270176621c958aae47133017daacd1a" prot="public" virt="non-virtual"><scope>plp_mat_add_stride_instance_f32</scope><name>pSrcA</name></member>
+      <member refid="structplp__mat__add__stride__instance__f32_1accec620a4a9711e54a8142e59ffb0ed0" prot="public" virt="non-virtual"><scope>plp_mat_add_stride_instance_f32</scope><name>pSrcB</name></member>
+      <member refid="structplp__mat__add__stride__instance__f32_1ae77349502e0bfc382d341e469874cba1" prot="public" virt="non-virtual"><scope>plp_mat_add_stride_instance_f32</scope><name>strideA</name></member>
+      <member refid="structplp__mat__add__stride__instance__f32_1a002ea241793b2af635a71e0f7c67b0a8" prot="public" virt="non-virtual"><scope>plp_mat_add_stride_instance_f32</scope><name>strideB</name></member>
+      <member refid="structplp__mat__add__stride__instance__f32_1a6409042d191b50430f3aaca0b1504472" prot="public" virt="non-virtual"><scope>plp_mat_add_stride_instance_f32</scope><name>strideY</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

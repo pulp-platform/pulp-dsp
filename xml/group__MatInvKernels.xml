@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__MatInvKernels" kind="group">
+    <compoundname>MatInvKernels</compoundname>
+    <title>matrix inversion kernels</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__MatInvKernels_1ga20ee10de32d09bf19730990261bf7c65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int plp_mat_inv_f32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_inv_f32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel matrix inversion of 32-bit floating-point matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Parallel matrix inverse of 32-bit floating-point matrices kernel for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__inv__instance__f32" kindref="compound">plp_mat_inv_instance_f32</ref> struct initialized by plp_mat_inv_f32_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0: Success, 1: Matrix is singular</para>
+</simplesect>
+@warn Not yet implemented </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_inv/kernels/plp_mat_inv_f32p_xpulpv2.c" line="51" column="5" bodyfile="/github/workspace/src/MatrixFunctions/mat_inv/kernels/plp_mat_inv_f32p_xpulpv2.c" bodystart="51" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatInvKernels_1ga0a2c772d3d20254d8bd654c051cfd7ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int plp_mat_inv_f32s_xpulpv2</definition>
+        <argsstring>(float *__restrict__ pSrc, float *__restrict__ pDst, uint32_t N)</argsstring>
+        <name>plp_mat_inv_f32s_xpulpv2</name>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <briefdescription>
+<para>matrix inversion of 32-bit floating-point matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>matrix inverse of a 32-bit floating-point matrices for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the first input matrix. pSrc is modified by this funciton </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0: Success, 1: Matrix is singular </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_inv/kernels/plp_mat_inv_f32s_xpulpv2.c" line="79" column="5" bodyfile="/github/workspace/src/MatrixFunctions/mat_inv/kernels/plp_mat_inv_f32s_xpulpv2.c" bodystart="79" bodyend="368"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the kernel functions for matrix inversion.</para>
+<para>The inverse of a matrix of shape MxN is another matrix of shape NxN, such that</para>
+<para><formula id="7">\[
+  I = A \cdot A^{-1}
+\]</formula></para>
+<para>The inverse is defined only if the input matrix is square and non-singular (the determinant is non-zero). The function checks that the input and output matrices are square and of the same size. Matrix inversion is numerically sensitive and the PULP DSP library only supports matrix inversion of floating-point matrices.</para>
+<para><simplesect kind="par"><title>Algorithm</title><para>The Gauss-Jordan method is used to find the inverse. The algorithm performs a sequence of elementary row-operations until it reduces the input matrix to an identity matrix. Applying the same sequence of elementary row-operations to an identity matrix yields the inverse matrix. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

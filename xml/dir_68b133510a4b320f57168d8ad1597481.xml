@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_68b133510a4b320f57168d8ad1597481" kind="dir">
+    <compoundname>/github/workspace/src/BasicMathFunctions/scale</compoundname>
+    <innerdir refid="dir_5f8c69d84d28235f22a514e5eae5d89a">/github/workspace/src/BasicMathFunctions/scale/kernels</innerdir>
+    <innerfile refid="plp__scale__f32_8c">plp_scale_f32.c</innerfile>
+    <innerfile refid="plp__scale__i16_8c">plp_scale_i16.c</innerfile>
+    <innerfile refid="plp__scale__i32_8c">plp_scale_i32.c</innerfile>
+    <innerfile refid="plp__scale__i8_8c">plp_scale_i8.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/BasicMathFunctions/scale/"/>
+  </compounddef>
+</doxygen>

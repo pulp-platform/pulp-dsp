@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__conv__instance__i32" kind="struct" language="C++" prot="public">
+    <compoundname>plp_conv_instance_i32</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__conv__instance__i32_1af70ae84031e4c466b2fb281b5bf6975b" prot="public" static="no" mutable="no">
+        <type>const int32_t *</type>
+        <definition>const int32_t* plp_conv_instance_i32::pSrcA</definition>
+        <argsstring></argsstring>
+        <name>pSrcA</name>
+        <qualifiedname>plp_conv_instance_i32::pSrcA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="212" column="19" bodyfile="/github/workspace/include/plp_math.h" bodystart="212" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__conv__instance__i32_1af442e92e8055038d2db077f5c6e68ce6" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_conv_instance_i32::srcALen</definition>
+        <argsstring></argsstring>
+        <name>srcALen</name>
+        <qualifiedname>plp_conv_instance_i32::srcALen</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="213" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="213" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__conv__instance__i32_1ac4b53b884323857adc101c5c828f4369" prot="public" static="no" mutable="no">
+        <type>const int32_t *</type>
+        <definition>const int32_t* plp_conv_instance_i32::pSrcB</definition>
+        <argsstring></argsstring>
+        <name>pSrcB</name>
+        <qualifiedname>plp_conv_instance_i32::pSrcB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="214" column="19" bodyfile="/github/workspace/include/plp_math.h" bodystart="214" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__conv__instance__i32_1a4eff9204c3092a8a452973b435166771" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_conv_instance_i32::srcBLen</definition>
+        <argsstring></argsstring>
+        <name>srcBLen</name>
+        <qualifiedname>plp_conv_instance_i32::srcBLen</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="215" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="215" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__conv__instance__i32_1a0440413eedd43e7daa0c26ded7a0bf82" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t plp_conv_instance_i32::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_conv_instance_i32::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="216" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="216" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__conv__instance__i32_1aaeeae4f038f6c5d8ad3e336aac76dbc4" prot="public" static="no" mutable="no">
+        <type>int32_t *</type>
+        <definition>int32_t* plp_conv_instance_i32::pRes</definition>
+        <argsstring></argsstring>
+        <name>pRes</name>
+        <qualifiedname>plp_conv_instance_i32::pRes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="217" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="217" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for basic integer convolution. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of parallel processing units </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="211" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="211" bodyend="218"/>
+    <listofallmembers>
+      <member refid="structplp__conv__instance__i32_1a0440413eedd43e7daa0c26ded7a0bf82" prot="public" virt="non-virtual"><scope>plp_conv_instance_i32</scope><name>nPE</name></member>
+      <member refid="structplp__conv__instance__i32_1aaeeae4f038f6c5d8ad3e336aac76dbc4" prot="public" virt="non-virtual"><scope>plp_conv_instance_i32</scope><name>pRes</name></member>
+      <member refid="structplp__conv__instance__i32_1af70ae84031e4c466b2fb281b5bf6975b" prot="public" virt="non-virtual"><scope>plp_conv_instance_i32</scope><name>pSrcA</name></member>
+      <member refid="structplp__conv__instance__i32_1ac4b53b884323857adc101c5c828f4369" prot="public" virt="non-virtual"><scope>plp_conv_instance_i32</scope><name>pSrcB</name></member>
+      <member refid="structplp__conv__instance__i32_1af442e92e8055038d2db077f5c6e68ce6" prot="public" virt="non-virtual"><scope>plp_conv_instance_i32</scope><name>srcALen</name></member>
+      <member refid="structplp__conv__instance__i32_1a4eff9204c3092a8a452973b435166771" prot="public" virt="non-virtual"><scope>plp_conv_instance_i32</scope><name>srcBLen</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

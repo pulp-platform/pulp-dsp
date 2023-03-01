@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__cosine__distance__instance__f32" kind="struct" language="C++" prot="public">
+    <compoundname>plp_cosine_distance_instance_f32</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__cosine__distance__instance__f32_1acc88ee83561f4903aaff385a7ddb2243" prot="public" static="no" mutable="no">
+        <type>const float32_t *</type>
+        <definition>const float32_t* plp_cosine_distance_instance_f32::pSrcA</definition>
+        <argsstring></argsstring>
+        <name>pSrcA</name>
+        <qualifiedname>plp_cosine_distance_instance_f32::pSrcA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1563" column="21" bodyfile="/github/workspace/include/plp_math.h" bodystart="1563" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__cosine__distance__instance__f32_1afcda26e245ec42154562bb6060e196b5" prot="public" static="no" mutable="no">
+        <type>const float32_t *</type>
+        <definition>const float32_t* plp_cosine_distance_instance_f32::pSrcB</definition>
+        <argsstring></argsstring>
+        <name>pSrcB</name>
+        <qualifiedname>plp_cosine_distance_instance_f32::pSrcB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1564" column="21" bodyfile="/github/workspace/include/plp_math.h" bodystart="1564" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__cosine__distance__instance__f32_1aa9cccf512561a5f4606c92b733085ac2" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_cosine_distance_instance_f32::blkSizePE</definition>
+        <argsstring></argsstring>
+        <name>blkSizePE</name>
+        <qualifiedname>plp_cosine_distance_instance_f32::blkSizePE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1565" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1565" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__cosine__distance__instance__f32_1afcf11abf963d7ec24fa39a32346a74df" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_cosine_distance_instance_f32::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_cosine_distance_instance_f32::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1566" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1566" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__cosine__distance__instance__f32_1aad58e41c2d8d1a24152c0631461fc4e7" prot="public" static="no" mutable="no">
+        <type>float32_t *</type>
+        <definition>float32_t* plp_cosine_distance_instance_f32::resBuffer_A</definition>
+        <argsstring></argsstring>
+        <name>resBuffer_A</name>
+        <qualifiedname>plp_cosine_distance_instance_f32::resBuffer_A</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1567" column="15" bodyfile="/github/workspace/include/plp_math.h" bodystart="1567" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__cosine__distance__instance__f32_1afe85c0e75c7eafdc812aa3b88defdb4e" prot="public" static="no" mutable="no">
+        <type>float32_t *</type>
+        <definition>float32_t* plp_cosine_distance_instance_f32::resBuffer_B</definition>
+        <argsstring></argsstring>
+        <name>resBuffer_B</name>
+        <qualifiedname>plp_cosine_distance_instance_f32::resBuffer_B</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1568" column="15" bodyfile="/github/workspace/include/plp_math.h" bodystart="1568" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__cosine__distance__instance__f32_1ac1d7de86ba254830e887aa4cf159b122" prot="public" static="no" mutable="no">
+        <type>float32_t *</type>
+        <definition>float32_t* plp_cosine_distance_instance_f32::resBuffer_dot</definition>
+        <argsstring></argsstring>
+        <name>resBuffer_dot</name>
+        <qualifiedname>plp_cosine_distance_instance_f32::resBuffer_dot</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1569" column="15" bodyfile="/github/workspace/include/plp_math.h" bodystart="1569" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for float parallel cosine distance. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blkSizePE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of parallel processing units </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">resBuffer_A</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to the powerA result buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">resBuffer_B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to the powerB result buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">resBuffer_dot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to the dot_prod result buffer </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="1562" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="1562" bodyend="1570"/>
+    <listofallmembers>
+      <member refid="structplp__cosine__distance__instance__f32_1aa9cccf512561a5f4606c92b733085ac2" prot="public" virt="non-virtual"><scope>plp_cosine_distance_instance_f32</scope><name>blkSizePE</name></member>
+      <member refid="structplp__cosine__distance__instance__f32_1afcf11abf963d7ec24fa39a32346a74df" prot="public" virt="non-virtual"><scope>plp_cosine_distance_instance_f32</scope><name>nPE</name></member>
+      <member refid="structplp__cosine__distance__instance__f32_1acc88ee83561f4903aaff385a7ddb2243" prot="public" virt="non-virtual"><scope>plp_cosine_distance_instance_f32</scope><name>pSrcA</name></member>
+      <member refid="structplp__cosine__distance__instance__f32_1afcda26e245ec42154562bb6060e196b5" prot="public" virt="non-virtual"><scope>plp_cosine_distance_instance_f32</scope><name>pSrcB</name></member>
+      <member refid="structplp__cosine__distance__instance__f32_1aad58e41c2d8d1a24152c0631461fc4e7" prot="public" virt="non-virtual"><scope>plp_cosine_distance_instance_f32</scope><name>resBuffer_A</name></member>
+      <member refid="structplp__cosine__distance__instance__f32_1afe85c0e75c7eafdc812aa3b88defdb4e" prot="public" virt="non-virtual"><scope>plp_cosine_distance_instance_f32</scope><name>resBuffer_B</name></member>
+      <member refid="structplp__cosine__distance__instance__f32_1ac1d7de86ba254830e887aa4cf159b122" prot="public" virt="non-virtual"><scope>plp_cosine_distance_instance_f32</scope><name>resBuffer_dot</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

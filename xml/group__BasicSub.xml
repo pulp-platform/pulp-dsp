@@ -1,0 +1,281 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__BasicSub" kind="group">
+    <compoundname>BasicSub</compoundname>
+    <title>vector subtraction</title>
+    <innergroup refid="group__BasicSubKernels">vector subtraction Kernels</innergroup>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__BasicSub_1gae401b2705a4aad47563c1d35dbd99863" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_sub_f32</definition>
+        <argsstring>(const float32_t *pSrcA, const float32_t *pSrcB, float32_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_sub_f32</name>
+        <param>
+          <type>const float32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const float32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>float32_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code of vector substraction for 32-bit floats. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/sub/plp_sub_f32.c" line="51" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/sub/plp_sub_f32.c" bodystart="51" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicSub_1ga0c037d5c3e8d721b6d16088bcdfe6cc3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_sub_i16</definition>
+        <argsstring>(const int16_t *pSrcA, const int16_t *pSrcB, int32_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_sub_i16</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code of vector substraction for 16-bit integers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/sub/plp_sub_i16.c" line="61" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/sub/plp_sub_i16.c" bodystart="61" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicSub_1ga4a22b83e727cebf6c732b1ff34dca026" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_sub_i32</definition>
+        <argsstring>(const int32_t *pSrcA, const int32_t *pSrcB, int32_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_sub_i32</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code of vector substraction for 32-bit integers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/sub/plp_sub_i32.c" line="51" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/sub/plp_sub_i32.c" bodystart="51" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicSub_1ga1cf2586c65068ad16b2591f10b45220b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_sub_i8</definition>
+        <argsstring>(const int8_t *pSrcA, const int8_t *pSrcB, int32_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_sub_i8</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code of vector substraction for 8-bit integers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/sub/plp_sub_i8.c" line="51" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/sub/plp_sub_i8.c" bodystart="51" bodyend="58"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the glue code for vector subtraction. The kernel codes (kernels) are in the Module vector subtraction Kernels. Element-by-element subtraction of two vectors. <preformatted>
+    pDst[n] = pSrcA[n] - pSrcB[n],   0 &lt;= n &lt; blockSize.
+</preformatted> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

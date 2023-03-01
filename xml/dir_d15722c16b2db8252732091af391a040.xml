@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_d15722c16b2db8252732091af391a040" kind="dir">
+    <compoundname>/github/workspace/src/MatrixFunctions/mat_sub/kernels</compoundname>
+    <innerfile refid="plp__mat__sub__f32p__xpulpv2_8c">plp_mat_sub_f32p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__sub__f32s__xpulpv2_8c">plp_mat_sub_f32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__sub__i16p__xpulpv2_8c">plp_mat_sub_i16p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__sub__i16s__rv32im_8c">plp_mat_sub_i16s_rv32im.c</innerfile>
+    <innerfile refid="plp__mat__sub__i16s__xpulpv2_8c">plp_mat_sub_i16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__sub__i32p__xpulpv2_8c">plp_mat_sub_i32p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__sub__i32s__rv32im_8c">plp_mat_sub_i32s_rv32im.c</innerfile>
+    <innerfile refid="plp__mat__sub__i32s__xpulpv2_8c">plp_mat_sub_i32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__sub__i8p__xpulpv2_8c">plp_mat_sub_i8p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__sub__i8s__rv32im_8c">plp_mat_sub_i8s_rv32im.c</innerfile>
+    <innerfile refid="plp__mat__sub__i8s__xpulpv2_8c">plp_mat_sub_i8s_xpulpv2.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/MatrixFunctions/mat_sub/kernels/"/>
+  </compounddef>
+</doxygen>

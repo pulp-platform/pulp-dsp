@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_93858385031cf1864c86f88cd0e55567" kind="dir">
+    <compoundname>/github/workspace/src/BasicMathFunctions/dot_prod</compoundname>
+    <innerdir refid="dir_62520efc8a0cf555937cdc0d8b33e320">/github/workspace/src/BasicMathFunctions/dot_prod/kernels</innerdir>
+    <innerfile refid="plp__dot__prod__f32_8c">plp_dot_prod_f32.c</innerfile>
+    <innerfile refid="plp__dot__prod__f32__parallel_8c">plp_dot_prod_f32_parallel.c</innerfile>
+    <innerfile refid="plp__dot__prod__i16_8c">plp_dot_prod_i16.c</innerfile>
+    <innerfile refid="plp__dot__prod__i32_8c">plp_dot_prod_i32.c</innerfile>
+    <innerfile refid="plp__dot__prod__i32__parallel_8c">plp_dot_prod_i32_parallel.c</innerfile>
+    <innerfile refid="plp__dot__prod__i8_8c">plp_dot_prod_i8.c</innerfile>
+    <innerfile refid="plp__dot__prod__q16_8c">plp_dot_prod_q16.c</innerfile>
+    <innerfile refid="plp__dot__prod__q32_8c">plp_dot_prod_q32.c</innerfile>
+    <innerfile refid="plp__dot__prod__q32__parallel_8c">plp_dot_prod_q32_parallel.c</innerfile>
+    <innerfile refid="plp__dot__prod__q8_8c">plp_dot_prod_q8.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/BasicMathFunctions/dot_prod/"/>
+  </compounddef>
+</doxygen>

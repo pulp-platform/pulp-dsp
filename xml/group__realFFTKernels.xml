@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__realFFTKernels" kind="group">
+    <compoundname>realFFTKernels</compoundname>
+    <title>FFT kernels on real input values</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__realFFTKernels_1ga6f852cad3f83b9552717a2471b6c2bc3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rfft_f32p_xpulpv2</definition>
+        <argsstring>(void *arg)</argsstring>
+        <name>plp_rfft_f32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>arg</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point FFT on real input data for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Floating-point FFT on real input data for XPULPV2 extension (parallel version).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">arg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the floating-point FFT structure </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_rfft_f32p_xpulpv2.c" line="107" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_rfft_f32p_xpulpv2.c" bodystart="107" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="group__realFFTKernels_1ga720337ee62441de294471216104f2ab4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rfft_f32s_xpulpv2</definition>
+        <argsstring>(const plp_fft_instance_f32 *S, const float32_t *__restrict__ pSrc, float32_t *__restrict__ pDst)</argsstring>
+        <name>plp_rfft_f32s_xpulpv2</name>
+        <param>
+          <type>const <ref refid="structplp__fft__instance__f32" kindref="compound">plp_fft_instance_f32</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point FFT on real input data for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the floating-point FFT structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (real data) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output buffer (complex data) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_rfft_f32s_xpulpv2.c" line="106" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_rfft_f32s_xpulpv2.c" bodystart="106" bodyend="128" declfile="/github/workspace/src/TransformFunctions/kernels/plp_rfft_f32s_xpulpv2.c" declline="53" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>These kernels calculate the FFT transform on real input data. If the dimension of input is FFTLen float32 numbers, the output buffer must contain at least (2*FFTLen) float32 values (used for intermediate computations). Due to the symmetry of real FFT only the first (FFTLen + 2) values of the result are computed in the last stage, corresponding to (FFTLen / 2 + 1) complex values. Supported algorithms: radix-2</para>
+<para>These kernels calculate the FFT transform on real input data. If the dimension of input is FFTLen float32 numbers, the output buffer must contain at least (2*FFTLen) float32 values (used for intermediate computations). Due to the symmetry of real FFT only the first (FFTLen + 2) values of the result are computed in the last stage, corresponding to (FFTLen / 2 + 1) complex values. Supported algorithms: radix-2 radix-4 radix-8 </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

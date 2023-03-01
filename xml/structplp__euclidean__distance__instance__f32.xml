@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__euclidean__distance__instance__f32" kind="struct" language="C++" prot="public">
+    <compoundname>plp_euclidean_distance_instance_f32</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__euclidean__distance__instance__f32_1aca288a04222a904af02a8672cc063984" prot="public" static="no" mutable="no">
+        <type>const float32_t *</type>
+        <definition>const float32_t* plp_euclidean_distance_instance_f32::pSrcA</definition>
+        <argsstring></argsstring>
+        <name>pSrcA</name>
+        <qualifiedname>plp_euclidean_distance_instance_f32::pSrcA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1527" column="21" bodyfile="/github/workspace/include/plp_math.h" bodystart="1527" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__euclidean__distance__instance__f32_1a94c3666af694c6107d70120d401cf803" prot="public" static="no" mutable="no">
+        <type>const float32_t *</type>
+        <definition>const float32_t* plp_euclidean_distance_instance_f32::pSrcB</definition>
+        <argsstring></argsstring>
+        <name>pSrcB</name>
+        <qualifiedname>plp_euclidean_distance_instance_f32::pSrcB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1528" column="21" bodyfile="/github/workspace/include/plp_math.h" bodystart="1528" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__euclidean__distance__instance__f32_1a8708ea01b2516b3d088784062011e901" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_euclidean_distance_instance_f32::blkSizePE</definition>
+        <argsstring></argsstring>
+        <name>blkSizePE</name>
+        <qualifiedname>plp_euclidean_distance_instance_f32::blkSizePE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1529" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1529" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__euclidean__distance__instance__f32_1a437b0603f38939cef904ca3080fcff12" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_euclidean_distance_instance_f32::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_euclidean_distance_instance_f32::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1530" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1530" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__euclidean__distance__instance__f32_1a56199569e6fa02d9ecd1a70f3721ff66" prot="public" static="no" mutable="no">
+        <type>float32_t *</type>
+        <definition>float32_t* plp_euclidean_distance_instance_f32::resBuffer</definition>
+        <argsstring></argsstring>
+        <name>resBuffer</name>
+        <qualifiedname>plp_euclidean_distance_instance_f32::resBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1531" column="15" bodyfile="/github/workspace/include/plp_math.h" bodystart="1531" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for float parallel Euclidean distance. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blkSizePE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of parallel processing units </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="1526" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="1526" bodyend="1532"/>
+    <listofallmembers>
+      <member refid="structplp__euclidean__distance__instance__f32_1a8708ea01b2516b3d088784062011e901" prot="public" virt="non-virtual"><scope>plp_euclidean_distance_instance_f32</scope><name>blkSizePE</name></member>
+      <member refid="structplp__euclidean__distance__instance__f32_1a437b0603f38939cef904ca3080fcff12" prot="public" virt="non-virtual"><scope>plp_euclidean_distance_instance_f32</scope><name>nPE</name></member>
+      <member refid="structplp__euclidean__distance__instance__f32_1aca288a04222a904af02a8672cc063984" prot="public" virt="non-virtual"><scope>plp_euclidean_distance_instance_f32</scope><name>pSrcA</name></member>
+      <member refid="structplp__euclidean__distance__instance__f32_1a94c3666af694c6107d70120d401cf803" prot="public" virt="non-virtual"><scope>plp_euclidean_distance_instance_f32</scope><name>pSrcB</name></member>
+      <member refid="structplp__euclidean__distance__instance__f32_1a56199569e6fa02d9ecd1a70f3721ff66" prot="public" virt="non-virtual"><scope>plp_euclidean_distance_instance_f32</scope><name>resBuffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

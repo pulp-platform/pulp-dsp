@@ -1,0 +1,1166 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__cmplx__mag" kind="group">
+    <compoundname>cmplx_mag</compoundname>
+    <title>Complex Magnitude</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__cmplx__mag_1gaa666dac6ec0ea11c27eb36aa478f7af6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_f32s_xpulpv2</definition>
+        <argsstring>(const float32_t *pSrc, float32_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_f32s_xpulpv2</name>
+        <param>
+          <type>const float32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>complex magnitude for float32 on XPULPV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_f32s_xpulpv2.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_f32s_xpulpv2.c" bodystart="79" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1ga87e868f76f763d4fabf40499d33865b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_i16s_rv32im</definition>
+        <argsstring>(const int16_t *pSrc, int16_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_i16s_rv32im</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>complex magnitude for i16 on RV32IM </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_i16s_rv32im.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_i16s_rv32im.c" bodystart="79" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1ga90d171753a2c6c070a983653a27736f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_i16s_xpulpv2</definition>
+        <argsstring>(const int16_t *pSrc, int16_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_i16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>complex magnitude for i16 on XPULPV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_i16s_xpulpv2.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_i16s_xpulpv2.c" bodystart="79" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1ga1267a3c91cd352de31012516d2dab166" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_i32s_rv32im</definition>
+        <argsstring>(const int32_t *pSrc, int32_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_i32s_rv32im</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>complex magnitude for i32 on RV32IM </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_i32s_rv32im.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_i32s_rv32im.c" bodystart="79" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1gae5f2f85152beedab2ad3e86120ba3784" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_i32s_xpulpv2</definition>
+        <argsstring>(const int32_t *pSrc, int32_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_i32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>complex magnitude for i32 on XPULPV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_i32s_xpulpv2.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_i32s_xpulpv2.c" bodystart="79" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1gac2cff4df24005757516159cb798b3f83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_i8s_rv32im</definition>
+        <argsstring>(const int8_t *pSrc, int8_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_i8s_rv32im</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>complex magnitude for i8 on RV32IM </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_i8s_rv32im.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_i8s_rv32im.c" bodystart="79" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1ga1b576d1478d110b2cd133f9d8bbb0684" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_i8s_xpulpv2</definition>
+        <argsstring>(const int8_t *pSrc, int8_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_i8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>complex magnitude for i8 on XPULPV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_i8s_xpulpv2.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_i8s_xpulpv2.c" bodystart="79" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1ga8df8843f7cab60bba3c17134aa373cd1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_q16s_rv32im</definition>
+        <argsstring>(const int16_t *pSrc, const uint32_t fracBits, int16_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_q16s_rv32im</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>complex magnitude for q16 on RV32IM </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>fractional bits -&gt; Q(32-fracBits).fracBits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_q16s_rv32im.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_q16s_rv32im.c" bodystart="79" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1gaf3caa58ee0ec0c63693ee44d6d9ac004" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_q16s_xpulpv2</definition>
+        <argsstring>(const int16_t *pSrc, const uint32_t fracBits, int16_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_q16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>complex magnitude for q16 on XPULPV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>fractional bits -&gt; Q(32-fracBits).fracBits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_q16s_xpulpv2.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_q16s_xpulpv2.c" bodystart="79" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1gadff8d55d498c24f32049140a86159e92" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_q32s_rv32im</definition>
+        <argsstring>(const int32_t *pSrc, const uint32_t fracBits, int32_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_q32s_rv32im</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>complex magnitude for q32 on RV32IM </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>fractional bits -&gt; Q(32-fracBits).fracBits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_q32s_rv32im.c" line="80" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_q32s_rv32im.c" bodystart="80" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1ga2dadee5771a2d0d1cdda850e6d25ec9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_q32s_xpulpv2</definition>
+        <argsstring>(const int32_t *pSrc, const uint32_t fracBits, int32_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_q32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>complex magnitude for q32 on XPULPV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>fractional bits -&gt; Q(32-fracBits).fracBits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_q32s_xpulpv2.c" line="80" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_q32s_xpulpv2.c" bodystart="80" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1ga57885e2d645e18c4dbf404f09840744c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_q8s_rv32im</definition>
+        <argsstring>(const int8_t *pSrc, const uint32_t fracBits, int8_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_q8s_rv32im</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>complex magnitude for q8 on RV32IM </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>fractional bits -&gt; Q(8-fracBits).fracBits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_q8s_rv32im.c" line="80" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_q8s_rv32im.c" bodystart="80" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1gabc5acb73b39a034b9b4f9ffd87fd4f44" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_q8s_xpulpv2</definition>
+        <argsstring>(const int8_t *pSrc, const uint32_t fracBits, int8_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_q8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>complex magnitude for q8 on XPULPV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>fractional bits -&gt; Q(8-fracBits).fracBits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_q8s_xpulpv2.c" line="80" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_q8s_xpulpv2.c" bodystart="80" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1ga5a966b323ab40bfc1cf422ef4a60ec0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_f32</definition>
+        <argsstring>(const float32_t *pSrc, float32_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_f32</name>
+        <param>
+          <type>const float32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for complex magnitude calculation in float32. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_f32.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_f32.c" bodystart="79" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1gabffb8ae50a1fa704a159e97b47ce7d02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_i16</definition>
+        <argsstring>(const int16_t *pSrc, int16_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_i16</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for complex magnitude calculation in 16-bit integer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_i16.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_i16.c" bodystart="79" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1ga19a5d86e750d7ac7239615a283697bc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_i32</definition>
+        <argsstring>(const int32_t *pSrc, int32_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_i32</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for complex magnitude calculation in 32-bit integer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_i32.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_i32.c" bodystart="79" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1gab20722674e22cb372b23312d91306df2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_i8</definition>
+        <argsstring>(const int8_t *pSrc, int8_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_i8</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for complex magnitude calculation in 8-bit integer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_i8.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_i8.c" bodystart="79" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1ga8995812a07265a85aae318c21c524d83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_q16</definition>
+        <argsstring>(const int16_t *pSrc, const uint32_t fracBits, int16_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_q16</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for complex magnitude calculation in 16-bit quantized integer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>fractional bits -&gt; Q(32-fracBits).fracBits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_q16.c" line="72" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_q16.c" bodystart="72" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1ga2ba09fe7dd10d48ea0cba1e97045d2bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_q32</definition>
+        <argsstring>(const int32_t *pSrc, const uint32_t fracBits, int32_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_q32</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for complex magnitude calculation for 32 bit fixpoint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>fractional bits -&gt; Q(32-fracBits).fracBits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_q32.c" line="80" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_q32.c" bodystart="80" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag_1gae1d7b457bd1602a40544e5025abdac52" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_q8</definition>
+        <argsstring>(const int8_t *pSrc, const uint32_t fracBits, int8_t *pRes, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_q8</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for complex magnitude calculation for 8 bit fixpoint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to source </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>fractional bits -&gt; Q(8-fracBits).fracBits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to result </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number samples </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_q8.c" line="80" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_q8.c" bodystart="80" bodyend="90"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Computes the magnitude of the elements of a complex data vector. The <computeroutput>pSrc</computeroutput> points to the source data and <computeroutput>pDst</computeroutput> points to the where the result should be written. <computeroutput>numSamples</computeroutput> specifies the number of complex samples in the input array and the data is stored in an interleaved fashion (real, imag, real, imag, ...). The input array has a total of <computeroutput>2*numSamples</computeroutput> values; the output array has a total of <computeroutput>numSamples</computeroutput> values. The underlying algorithm is used: <preformatted>
+for (n = 0; n &lt; numSamples; n++) {
+    pDst[n] = sqrt(pSrc[(2*n)+0]^2 + pSrc[(2*n)+1]^2);
+}
+</preformatted> There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. Please ensure the appropriate range is used for integers and fixed point data types, as these are at risk for overflow if using too large numbers. Larger than normal errors are possible when using fixed point numbers and very small values. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

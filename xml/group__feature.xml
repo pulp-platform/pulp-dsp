@@ -1,0 +1,254 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__feature" kind="group">
+    <compoundname>feature</compoundname>
+    <title>feature transforms</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__feature_1ga90f37d209b5512a958d2b695be291bb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mfcc_f32</definition>
+        <argsstring>(const plp_fft_instance_f32 *SFFT, const plp_fft_instance_f32 *SDCT, const Complex_type_f32 *pShift, const plp_triangular_filter_f32 *filterBank, const float32_t *window, const uint8_t *orthoNorm, const float32_t *__restrict__ pSrc, float32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mfcc_f32</name>
+        <param>
+          <type>const <ref refid="structplp__fft__instance__f32" kindref="compound">plp_fft_instance_f32</ref> *</type>
+          <declname>SFFT</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structplp__fft__instance__f32" kindref="compound">plp_fft_instance_f32</ref> *</type>
+          <declname>SDCT</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref> *</type>
+          <declname>pShift</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structplp__triangular__filter__f32" kindref="compound">plp_triangular_filter_f32</ref> *</type>
+          <declname>filterBank</declname>
+        </param>
+        <param>
+          <type>const float32_t *</type>
+          <declname>window</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>orthoNorm</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>MFCC on real input data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">SFFT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the floating-point FFT structure for the initial FFT (with FFTLength = n_fft). bitReverseFlag should be on. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">SDCT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the floating-point FFT structure for the DCT (with FFTLength = n_mels). bitReverseFlag should be on. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pShift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to twiddle coefficient table with FFTLength = 4*n_mels. Only first quarter necessary. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filterBank</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to <ref refid="structplp__triangular__filter__f32" kindref="compound">plp_triangular_filter_f32</ref> instance with nFilters = n_mels. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">window</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector to use for windowing </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">orthoNorm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>whether to use dct orthonormalisation or not </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (real data, size n_fft) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output buffer of length at least 3*n_fft. pSrc and pDst must not overlap, the calculation can not be done in place. MFCCs are returned in the first n_mels spots. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_mfcc_f32.c" line="71" column="6" bodyfile="/github/workspace/src/TransformFunctions/plp_mfcc_f32.c" bodystart="71" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="group__feature_1gabe9fd69e5e9d1bd9413f51a848b3d309" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mfcc_f32_parallel</definition>
+        <argsstring>(const plp_fft_instance_f32 *SFFT, const plp_fft_instance_f32 *SDCT, const Complex_type_f32 *pShift, const plp_triangular_filter_f32 *filterBank, const float32_t *window, const uint8_t *orthoNorm, const float32_t *__restrict__ pSrc, const uint32_t nPE, float32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mfcc_f32_parallel</name>
+        <param>
+          <type>const <ref refid="structplp__fft__instance__f32" kindref="compound">plp_fft_instance_f32</ref> *</type>
+          <declname>SFFT</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structplp__fft__instance__f32" kindref="compound">plp_fft_instance_f32</ref> *</type>
+          <declname>SDCT</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref> *</type>
+          <declname>pShift</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structplp__triangular__filter__f32" kindref="compound">plp_triangular_filter_f32</ref> *</type>
+          <declname>filterBank</declname>
+        </param>
+        <param>
+          <type>const float32_t *</type>
+          <declname>window</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>orthoNorm</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>MFCC on real input data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">SFFT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the floating-point FFT structure for the initial FFT (with FFTLength = n_fft). bitReverseFlag should be on. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">SDCT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the floating-point FFT structure for the DCT (with FFTLength = n_mels). bitReverseFlag should be on. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pShift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to twiddle coefficient table with FFTLength = 4*n_mels. Only first quarter necessary. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filterBank</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to <ref refid="structplp__triangular__filter__f32" kindref="compound">plp_triangular_filter_f32</ref> instance with nFilters = n_mels. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">window</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector to use for windowing </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">orthoNorm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>whether to use dct orthonormalisation or not </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (real data, size n_fft) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of parallel processing units </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output buffer of length at least 3*n_fft. pSrc and pDst must not overlap, the calculation can not be done in place. MFCCs are returned in the first n_mels spots. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_mfcc_f32_parallel.c" line="72" column="6" bodyfile="/github/workspace/src/TransformFunctions/plp_mfcc_f32_parallel.c" bodystart="72" bodyend="124"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the code to perform feature transforms. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

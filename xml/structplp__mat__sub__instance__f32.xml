@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__mat__sub__instance__f32" kind="struct" language="C++" prot="public">
+    <compoundname>plp_mat_sub_instance_f32</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__mat__sub__instance__f32_1acafde1ea1d1e9911c869173c928deca0" prot="public" static="no" mutable="no">
+        <type>const float *__restrict__</type>
+        <definition>const float* __restrict__ plp_mat_sub_instance_f32::pSrcA</definition>
+        <argsstring></argsstring>
+        <name>pSrcA</name>
+        <qualifiedname>plp_mat_sub_instance_f32::pSrcA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="763" column="30" bodyfile="/github/workspace/include/plp_math.h" bodystart="763" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__sub__instance__f32_1ac236281901c8e57588e4f3fb2664de23" prot="public" static="no" mutable="no">
+        <type>const float *__restrict__</type>
+        <definition>const float* __restrict__ plp_mat_sub_instance_f32::pSrcB</definition>
+        <argsstring></argsstring>
+        <name>pSrcB</name>
+        <qualifiedname>plp_mat_sub_instance_f32::pSrcB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="764" column="30" bodyfile="/github/workspace/include/plp_math.h" bodystart="764" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__sub__instance__f32_1a441041233afe82e742dfe05ac8f2935d" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_sub_instance_f32::M</definition>
+        <argsstring></argsstring>
+        <name>M</name>
+        <qualifiedname>plp_mat_sub_instance_f32::M</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="765" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="765" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__sub__instance__f32_1abc58b4a02b94b9f36eff9f1eefc57384" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_sub_instance_f32::N</definition>
+        <argsstring></argsstring>
+        <name>N</name>
+        <qualifiedname>plp_mat_sub_instance_f32::N</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="766" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="766" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__sub__instance__f32_1a5f5e6dc1d3a7a88f833a40ff1f3c7136" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_sub_instance_f32::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_mat_sub_instance_f32::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="767" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="767" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__sub__instance__f32_1ada7c665542732cecfe863c39e1336b59" prot="public" static="no" mutable="no">
+        <type>float *__restrict__</type>
+        <definition>float* __restrict__ plp_mat_sub_instance_f32::pDst</definition>
+        <argsstring></argsstring>
+        <name>pDst</name>
+        <qualifiedname>plp_mat_sub_instance_f32::pDst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="768" column="24" bodyfile="/github/workspace/include/plp_math.h" bodystart="768" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for floating-point parallel matrix subtraction. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="762" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="762" bodyend="769"/>
+    <listofallmembers>
+      <member refid="structplp__mat__sub__instance__f32_1a441041233afe82e742dfe05ac8f2935d" prot="public" virt="non-virtual"><scope>plp_mat_sub_instance_f32</scope><name>M</name></member>
+      <member refid="structplp__mat__sub__instance__f32_1abc58b4a02b94b9f36eff9f1eefc57384" prot="public" virt="non-virtual"><scope>plp_mat_sub_instance_f32</scope><name>N</name></member>
+      <member refid="structplp__mat__sub__instance__f32_1a5f5e6dc1d3a7a88f833a40ff1f3c7136" prot="public" virt="non-virtual"><scope>plp_mat_sub_instance_f32</scope><name>nPE</name></member>
+      <member refid="structplp__mat__sub__instance__f32_1ada7c665542732cecfe863c39e1336b59" prot="public" virt="non-virtual"><scope>plp_mat_sub_instance_f32</scope><name>pDst</name></member>
+      <member refid="structplp__mat__sub__instance__f32_1acafde1ea1d1e9911c869173c928deca0" prot="public" virt="non-virtual"><scope>plp_mat_sub_instance_f32</scope><name>pSrcA</name></member>
+      <member refid="structplp__mat__sub__instance__f32_1ac236281901c8e57588e4f3fb2664de23" prot="public" virt="non-virtual"><scope>plp_mat_sub_instance_f32</scope><name>pSrcB</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

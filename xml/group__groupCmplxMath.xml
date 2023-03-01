@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__groupCmplxMath" kind="group">
+    <compoundname>groupCmplxMath</compoundname>
+    <title>Complex Math Functions</title>
+    <innergroup refid="group__cmplx__conj">Complex Conjugate</innergroup>
+    <innergroup refid="group__cmplx__dot__prod">Complex Dot Product</innergroup>
+    <innergroup refid="group__cmplx__mag">Complex Magnitude</innergroup>
+    <innergroup refid="group__cmplx__mag__squared">Complex Magnitude Squared</innergroup>
+    <innergroup refid="group__CmplxByRealMult">Complex-by-Real Multiplication</innergroup>
+    <innergroup refid="group__CmplxByCmplxMult">Complex-by-Complex Multiplication</innergroup>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

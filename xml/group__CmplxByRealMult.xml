@@ -1,0 +1,1808 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__CmplxByRealMult" kind="group">
+    <compoundname>CmplxByRealMult</compoundname>
+    <title>Complex-by-Real Multiplication</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__CmplxByRealMult_1ga767cb508653c2cd082ed177bd4e6650a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_i32_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, int32_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_i32_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point complex-by-complex multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>32-bit integer complex multiplied by complex.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i32_rv32im.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i32_rv32im.c" bodystart="75" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1ga347a481a3eee175c4880ac95af8f5936" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_i32_xpulpv2</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, int32_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_i32_xpulpv2</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point complex-by-complex multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>32-bit integer complex multiplied by complex.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i32_xpulpv2.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i32_xpulpv2.c" bodystart="75" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1gabcdec6e8d0f4e83e6df0ba27df926b88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_i8_rv32im</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcA, const int8_t *__restrict__ pSrcB, int8_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_i8_rv32im</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>8-bit integer complex-by-complex multiplication </para>
+        </briefdescription>
+        <detaileddescription>
+<para>8-bit integer complex multiplied by complex.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i8_rv32im.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i8_rv32im.c" bodystart="75" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1ga91e0e8c95bc46100812c5f97ef0cacd8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_i8_xpulpv2</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcA, const int8_t *__restrict__ pSrcB, int8_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_i8_xpulpv2</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>8-bit integer complex-by-complex multiplication </para>
+        </briefdescription>
+        <detaileddescription>
+<para>8-bit integer complex multiplied by complex.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i8_xpulpv2.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i8_xpulpv2.c" bodystart="75" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1gaa84ccb90b5598fba4fecdf91efd4a88f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_f32_xpulpv2</definition>
+        <argsstring>(const float32_t *__restrict__ pSrcCmplx, const float32_t *__restrict__ pSrcReal, float32_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_f32_xpulpv2</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point complex-by-real multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Floating-point complex multiplied with real.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_f32_xpulpv2.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_f32_xpulpv2.c" bodystart="75" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1ga5112f8ff7f554efc6731458f2918dd16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_i16_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcCmplx, const int16_t *__restrict__ pSrcReal, int16_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_i16_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex-by-real multiplication </para>
+        </briefdescription>
+        <detaileddescription>
+<para>16-bit integer complex multiplied with real.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i16_rv32im.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i16_rv32im.c" bodystart="75" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1gaf92c9af7054bf62418623f776589bed2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_i16_xpulpv2</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcCmplx, const int16_t *__restrict__ pSrcReal, int16_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_i16_xpulpv2</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex-by-real multiplication </para>
+        </briefdescription>
+        <detaileddescription>
+<para>16-bit integer complex multiplied with real.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i16_xpulpv2.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i16_xpulpv2.c" bodystart="75" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1gaf32f92a4245d4ddb1cb1c0c45be3e122" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_i32_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcCmplx, const int32_t *__restrict__ pSrcReal, int32_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_i32_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point complex-by-real multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>32-bit integer complex multiplied with real.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i32_rv32im.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i32_rv32im.c" bodystart="75" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1ga9a70e0e7dbe8bbbe46380d795c683a20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_i32_xpulpv2</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcCmplx, const int32_t *__restrict__ pSrcReal, int32_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_i32_xpulpv2</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point complex-by-real multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>32-bit integer complex multiplied with real.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i32_xpulpv2.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i32_xpulpv2.c" bodystart="75" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1gacab46743fbdef1c47f228647fb156bf8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_i8_rv32im</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcCmplx, const int8_t *__restrict__ pSrcReal, int8_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_i8_rv32im</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>8-bit integer complex-by-real multiplication </para>
+        </briefdescription>
+        <detaileddescription>
+<para>8-bit integer complex multiplied with real.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i8_rv32im.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i8_rv32im.c" bodystart="75" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1gad755663f43f64f20af6ef299a8c0e6e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_i8_xpulpv2</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcCmplx, const int8_t *__restrict__ pSrcReal, int8_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_i8_xpulpv2</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>8-bit integer complex-by-real multiplication </para>
+        </briefdescription>
+        <detaileddescription>
+<para>8-bit integer complex multiplied with real.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i8_xpulpv2.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_i8_xpulpv2.c" bodystart="75" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1ga1674b73d192d476b1edd080b6ae1ce26" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_q16_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcCmplx, const int16_t *__restrict__ pSrcReal, int16_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_q16_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex-by-real multiplication </para>
+        </briefdescription>
+        <detaileddescription>
+<para>16-bit fixed-point complex multiplied with real.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q16_rv32im.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q16_rv32im.c" bodystart="76" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1gad58170cbb46e81c6f67115c06c0bbb2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_q16_xpulpv2</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcCmplx, const int16_t *__restrict__ pSrcReal, int16_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_q16_xpulpv2</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex-by-real multiplication </para>
+        </briefdescription>
+        <detaileddescription>
+<para>16-bit fixed-point complex multiplied with real.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q16_xpulpv2.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q16_xpulpv2.c" bodystart="76" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1gaaa8b6fa0bb99cc4fbf26cf2d691950f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_q32_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcCmplx, const int32_t *__restrict__ pSrcReal, int32_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_q32_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point complex-by-real multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>32-bit fixed-point complex multiplied with real.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q32_rv32im.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q32_rv32im.c" bodystart="76" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1ga1ab7ba984df57ceb267f4d7562924ce8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_q32_xpulpv2</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcCmplx, const int32_t *__restrict__ pSrcReal, int32_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_q32_xpulpv2</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point complex-by-real multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>32-bit fixed-point complex multiplied with real.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q32_xpulpv2.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q32_xpulpv2.c" bodystart="76" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1ga0e77c6791886eafc5a55165f1f80e91b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_q8_rv32im</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcCmplx, const int8_t *__restrict__ pSrcReal, int8_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_q8_rv32im</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex-by-real multiplication </para>
+        </briefdescription>
+        <detaileddescription>
+<para>8-bit fixed-point complex multiplied with real.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q8_rv32im.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q8_rv32im.c" bodystart="76" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1ga01270e1f9d68ebc8ee344234bbc9c71c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_q8_xpulpv2</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcCmplx, const int8_t *__restrict__ pSrcReal, int8_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_q8_xpulpv2</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex-by-real multiplication </para>
+        </briefdescription>
+        <detaileddescription>
+<para>8-bit fixed-point complex multiplied with real.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q8_xpulpv2.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_real_q8_xpulpv2.c" bodystart="76" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1ga30f93033ae3c458c91bc2bfdb3c52d1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_i32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, int32_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_i32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>32-bit integer complex-by-complex multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex multiplied by complex of 32-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_cmplx_i32.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_cmplx_i32.c" bodystart="76" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1gadd6b6960b72af8e2fd8776c43f3a0064" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_f32</definition>
+        <argsstring>(const float32_t *__restrict__ pSrcCmplx, const float32_t *__restrict__ pSrcReal, float32_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_f32</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point complex-by-real multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex multiplied with real of 32-bit float vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_real_f32.c" line="71" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_real_f32.c" bodystart="71" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1gaabbc5ec46c24a660a8be7fe6e56b592a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_i16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcCmplx, const int16_t *__restrict__ pSrcReal, int16_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_i16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex-by-real multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex multiplied with real of 16-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_real_i16.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_real_i16.c" bodystart="76" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1ga66568cb6ffa9d7e8bd99251a8728308b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_i32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcCmplx, const int32_t *__restrict__ pSrcReal, int32_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_i32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>32-bit integer complex-by-real multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex multiplied with real of 32-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_real_i32.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_real_i32.c" bodystart="76" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1gad905acdf65a09f21155d78f59aefbf93" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_i8</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcCmplx, const int8_t *__restrict__ pSrcReal, int8_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_i8</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>8-bit integer complex-by-real multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex multiplied with real of 8-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_real_i8.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_real_i8.c" bodystart="76" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1gaded3d6c552bdbdab785650738001a182" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_q16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcCmplx, const int16_t *__restrict__ pSrcReal, int16_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_q16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit fixed-point complex-by-real multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex multiplied with real of 16-bit fixed-point vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_real_q16.c" line="77" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_real_q16.c" bodystart="77" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1ga14e4aedbb3ff12b01c779d4fcadc3b5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_q32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcCmplx, const int32_t *__restrict__ pSrcReal, int32_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_q32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>32-bit fixed-point complex-by-real multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex multiplied with real of 32-bit fixed-point vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_real_q32.c" line="77" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_real_q32.c" bodystart="77" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByRealMult_1ga8bd3b445a8ae5c1c2c728f44242f1d24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_real_q8</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcCmplx, const int8_t *__restrict__ pSrcReal, int8_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_real_q8</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcCmplx</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcReal</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>8-bit fixed-point complex-by-real multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex multiplied with real of 8-bit fixed-point vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcCmplx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcReal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pCmplxDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_real_q8.c" line="77" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_real_q8.c" bodystart="77" bodyend="88"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Multiplies a complex vector by a real vector and generates a complex result. The data in the complex arrays is stored in an interleaved fashion (real, imag, real, imag, ...). The parameter <computeroutput>numSamples</computeroutput> represents the number of complex samples processed. The complex arrays have a total of <computeroutput>2*numSamples</computeroutput> real values while the real array has a total of <computeroutput>numSamples</computeroutput> real values. The underlying algorithm is used: <preformatted>
+for (n = 0; n &lt; numSamples; n++) {
+    pCmplxDst[(2*n)+0] = pSrcA[(2*n)+0] * pSrcB[n];
+    pCmplxDst[(2*n)+1] = pSrcA[(2*n)+1] * pSrcB[n];
+}
+</preformatted> There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types.</para>
+<para>Multiplies a complex vector by a real vector and generates a complex result. The data in the complex arrays is stored in an interleaved fashion (real, imag, real, imag, ...). The parameter <computeroutput>numSamples</computeroutput> represents the number of complex samples processed. The complex arrays have a total of <computeroutput>2*numSamples</computeroutput> real values while the real array has a total of <computeroutput>numSamples</computeroutput> real values. The underlying algorithm is used: <preformatted>
+for (n = 0; n &lt; numSamples; n++) {
+    pCmplxDst[(2*n)+0] = pSrcCmplx[(2*n)+0] * pSrcReal[n];
+    pCmplxDst[(2*n)+1] = pSrcCmplx[(2*n)+1] * pSrcReal[n];
+}
+</preformatted> There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

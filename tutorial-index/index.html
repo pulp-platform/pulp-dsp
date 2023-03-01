@@ -1,0 +1,811 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../test-framework-index/">
+      
+      
+        <link rel="next" href="../troubles/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>Tutorial - PULP DSP</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pulp-tutorial" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="PULP DSP" class="md-header__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PULP DSP
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Tutorial
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="PULP DSP" class="md-nav__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    PULP DSP
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../test-framework-index/" class="md-nav__link">
+        Test Framework
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Tutorial
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Tutorial
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurations" class="md-nav__link">
+    Configurations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#baseline" class="md-nav__link">
+    Baseline
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-cluster-core" class="md-nav__link">
+    Single cluster core
+  </a>
+  
+    <nav class="md-nav" aria-label="Single cluster core">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-version" class="md-nav__link">
+    Basic version
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic version">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate-assembly-code" class="md-nav__link">
+    Generate assembly code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipc-and-macscycle" class="md-nav__link">
+    IPC and MACs/cycle
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer-the-data-with-dma" class="md-nav__link">
+    Transfer the data with DMA
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simd-instructions" class="md-nav__link">
+    SIMD instructions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parallel-computation-using-multiple-cluster-cores" class="md-nav__link">
+    Parallel computation using multiple cluster cores
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualize-traces" class="md-nav__link">
+    Visualize traces
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimizations" class="md-nav__link">
+    Optimizations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributions" class="md-nav__link">
+    Contributions
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubles/" class="md-nav__link">
+        Troubles Shooting
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Reference Manual
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Reference Manual
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../refmanual/Pages/" class="md-nav__link">
+        Pages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../refmanual/Files/" class="md-nav__link">
+        Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../refmanual/Classes/" class="md-nav__link">
+        Classes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../refmanual/Examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../refmanual/Modules/" class="md-nav__link">
+        Modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../refmanual/Namespaces/" class="md-nav__link">
+        Namespaces
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurations" class="md-nav__link">
+    Configurations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#baseline" class="md-nav__link">
+    Baseline
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-cluster-core" class="md-nav__link">
+    Single cluster core
+  </a>
+  
+    <nav class="md-nav" aria-label="Single cluster core">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-version" class="md-nav__link">
+    Basic version
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic version">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate-assembly-code" class="md-nav__link">
+    Generate assembly code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipc-and-macscycle" class="md-nav__link">
+    IPC and MACs/cycle
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer-the-data-with-dma" class="md-nav__link">
+    Transfer the data with DMA
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simd-instructions" class="md-nav__link">
+    SIMD instructions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parallel-computation-using-multiple-cluster-cores" class="md-nav__link">
+    Parallel computation using multiple cluster cores
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualize-traces" class="md-nav__link">
+    Visualize traces
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimizations" class="md-nav__link">
+    Optimizations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributions" class="md-nav__link">
+    Contributions
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="pulp-tutorial">PULP Tutorial</h1>
+<p>In this tutorial you will learn how to use the pulp-dsp library and how to improve and write optimized code for PULP platforms.</p>
+<p>We will use the GVSoC virtual platform and Mr. Wolf processor as an example. The methods are analogous for other PULP platforms.</p>
+<p>Mr. Wolf has two processing domains: SoC with a Fabric Controller (FC) and Cluster which is activated for compute-intensive tasks. The FC contains an Ibex core with basic RV32IMC ISA, while the Cluster contains 8 CV32E40P (formerly called RI5CY) cores with RV32IMCXPulpV2 extensions.</p>
+<p>The library contains glue codes where it is checked in which domain the function is called. If it's in FC, then the rv32im kernel function is called, otherwise the xpulpv2 kernel function is called.</p>
+<p>If the user wants to use a parallel implementation, they can call the glue code functions with '_parallel' in the function name.</p>
+<p>The kernel functions are more specific to the underlying ISA, so they can be used for other processors (other than Mr. Wolf) that contain cores with the specific ISA.</p>
+<h2 id="requirements">Requirements</h2>
+<p>Follow the instructions under <code>Installation and usage</code> on the home page to install pulp-sdk and pulp-dsp.</p>
+<p>For Mr. Wolf, we will use the <a href="https://github.com/pulp-platform/pulp-sdk/tree/v1">v1 branch</a> of the pulp-sdk and the <code>rt</code> functions provided with it. The 'new' sdk on the <a href="https://github.com/pulp-platform/pulp-sdk">main branch</a> works similarly. Some corresponding <code>rt</code> functions can be seen in <code>include/rtos_hal.h</code>. For detailed documentations, please refer to the respective documentation of pulp-sdk.</p>
+<h2 id="configurations">Configurations</h2>
+<p>After you installed the pulp-sdk and the pulp-dsp in the sdk, you can start developing your DSP application. </p>
+<p>Here we will execute the dot product between two vectors as an example.</p>
+<p>Everytime you open a new terminal, go to the <code>pulp-sdk</code> folder and configure the GVSoC for Mr. Wolf:</p>
+<pre><code class="language-shell">source configs/platform-gvsoc.sh
+source configs/wolfe.sh
+</code></pre>
+<p>and activate the configurations:</p>
+<pre><code class="language-shell">source sourceme.sh
+</code></pre>
+<h2 id="baseline">Baseline</h2>
+<p>Go to the <code>baseline</code> folder. It contains the codes for computing the dot product on FC of Mr. Wolf, which has an Ibex core featuring the basic RV32IMC ISA.</p>
+<p>Run the command</p>
+<pre><code class="language-shell">make clean all run
+</code></pre>
+<p>The vectors length is 80. The values are 32-bit integers. It takes around 806 cycles and 431 instructions. Refer to the <code>main.c</code> to learn how to use the performance counter. Note that on GVSoC you can use as many counters as you want, while on the board only one HW counter exists.</p>
+<h2 id="single-cluster-core">Single cluster core</h2>
+<h3 id="basic-version">Basic version</h3>
+<p>Go to the folder <code>cluster_single_basic</code>, compile and run the code as before.</p>
+<p>If you access the data from the cluster to the L2 memory in the SoC, the number of cycles is very high (2165 cycles, 277 instructions), because the data access to L2 requires many cycles.</p>
+<p>You have to store the data in L1 to exploit the fast TCDM memory with single-cycle access and sigle-cycle latency which is hidden by the loop unrolling. Uncomment <code>#define L2DATA</code> in <code>defines.h</code> and run again. You will see that the number of cycles is significantly reduced (394 cycles, 277 instructions).</p>
+<h4 id="generate-assembly-code">Generate assembly code</h4>
+<p>Compared to the execution on Ibex, the number of cycles is halved, thanks to the hardware loop (<code>lp.setup</code>) and the post-incremental load and store (marked by <code>!</code>). You can visualize these instructions by generating the assembly code:</p>
+<pre><code class="language-shell">make dis
+</code></pre>
+<p>You can dump it in a text file:</p>
+<pre><code class="language-shell">make dis &gt; dis.S
+</code></pre>
+<p>and visualize the file using a text editor. If you search for <code>plp_dot_prod_</code> you find the dot product function and the most inner loop where the dot product is computed:</p>
+<pre><code>1c008662:   00c7c0fb            lp.setup    x1,a5,1c00867a &lt;plp_dot_prod_i32s_xpulpv2+0x34&gt;
+1c008666:   0088a38b            p.lw    t2,8(a7!)
+1c00866a:   0083228b            p.lw    t0,8(t1!)
+1c00866e:   008eaf8b            p.lw    t6,8(t4!)
+1c008672:   008e2f0b            p.lw    t5,8(t3!)
+1c008676:   42538733            p.mac   a4,t2,t0
+1c00867a:   43ef8833            p.mac   a6,t6,t5
+</code></pre>
+<p>You can refer to the manuals of the ISA extensions for details about the instructions.</p>
+<h4 id="ipc-and-macscycle">IPC and MACs/cycle</h4>
+<p>Ideally the instructions per cycle would be 1 and the asymptotical MACs/cycle is 2/6=0.33. (MACs = multiply-and-accumulate operations)</p>
+<p>Our execution has IPC=277/394=0.7 and 80/394=0.20 MACs/cycle. We computed the dot product of 80 elements. With more elements, the IPC and the MACs/cycle will increase and approach the ideal case. You can try to calculate the dot product of 800 elements. The IPC will be around 0.95 and the MACs/cycle around 0.31.</p>
+<h3 id="transfer-the-data-with-dma">Transfer the data with DMA</h3>
+<p>The L1 memory is much smaller (64kB on Mr. Wolf) than the L2 (512kB). This means that you will need to transfer some data back and forth during the computation when your datasize is too big.</p>
+<p>You can use the DMA to transfer the data between L1 and L2.</p>
+<p>Go to <code>cluster_single_dma</code> folder and check how this is done.</p>
+<h3 id="simd-instructions">SIMD instructions</h3>
+<p>The CV32E40P core with RV32IMCXPulpV2 extensions provides Single Instructions Multiple Data (SIMD) instructions. If you have 8-bit integer numbers, you can do the dot product of 4 values in a single cycyle with a single instruction.</p>
+<p>Go to <code>cluster_single_simd</code> folder and run the code. You will see around 221 cycles and 93 instructions for computing the dot product of the same amount of elements. Both cycles and instructions are reduced. You can see in the assembly code that the <code>pv.sdotsp.b</code> instruction is used.</p>
+<pre><code>1c00865c:   00c340fb            lp.setup    x1,t1,1c008674 &lt;plp_dot_prod_i8s_xpulpv2+0x3a&gt;
+1c008660:   008fa88b            p.lw    a7,8(t6!)
+1c008664:   008f280b            p.lw    a6,8(t5!)
+1c008668:   0083a70b            p.lw    a4,8(t2!)
+1c00866c:   0082a78b            p.lw    a5,8(t0!)
+1c008670:   b9089ed7            pv.sdotsp.b t4,a7,a6
+1c008674:   b8f71e57            pv.sdotsp.b t3,a4,a5
+</code></pre>
+<h2 id="parallel-computation-using-multiple-cluster-cores">Parallel computation using multiple cluster cores</h2>
+<p>You can compute the dot product using all the cores in the cluster. The library provides also functions to do parallel computations.</p>
+<p>Go to <code>cluster_parallel</code> and run the code.</p>
+<p>When using single cluster core, it takes 21022 cycles to compute the dot product of two vectors of length 6960 in 32 bits. When using 8 cores it takes 3046 cycles. The parallel speedup is around 6.9. With increasing vectors' length, it asymptotically approaches to 8, which is the ideal speedup with eight parallel cores.</p>
+<p>Note that the L1 memory is limited, hence you will need to use DMA if the datasize exceeds the memory availability. You can then use a technique called double buffering: </p>
+<ol>
+<li>you divide your huge datasize into chunks;</li>
+<li>transfer a first chunk;</li>
+<li>do the computation on this first chunk;</li>
+<li>at the same time transfer a second chunk;</li>
+<li>once the second chunk is transfered, do the computation on this while transfering the next chunk.</li>
+</ol>
+<p>An example can be found in <code>cluster_double_buff</code>.</p>
+<h2 id="visualize-traces">Visualize traces</h2>
+<p>The GVSoC virtual platform allows dumping architecture events to help developers debugging their applications by better showing what is happening in the system. For example, it can show instructions being executed, DMA transfers, events generated, memory accesses and so on. The generated traces can be visualized using GTKWave. You can install it from their official website.</p>
+<p>After compiling your code, do</p>
+<pre><code class="language-shell">make run runner_args=&quot;--vcd --event=.*&quot;
+</code></pre>
+<p>The traces have been generated. You can visualize them using gtkwave:</p>
+<pre><code class="language-shell">gtkwave build/wolfe/view.gtkw
+</code></pre>
+<p>You can visualize the status of each core, how long each of them spend doing what. An example can be found <code>gtkwave_screenshot.png</code>.</p>
+<p><img alt="gtkwave example" src="/tutorial/gtkwave_screenshot.png" /></p>
+<h2 id="optimizations">Optimizations</h2>
+<p>Under <code>Signals</code> window, select <code>chip/fc/func</code>. In <code>Wave</code> window, zoom in and out, find <code>__rt_init_cluster_data</code> at the level of <code>func</code>, put the cursor on it, click. You will see a vertical red line popping up. You can now go with left and right arrow on your keyboard, the cursor will jump to the beginning or end of the function, respectively. Now under <code>overview/soc</code> you see the cycles number. </p>
+<p>With <code>VLEN</code> = 6960 we have 563472-205509 = 357963 cycles. Change <code>VLEN</code> in <code>data.h</code> to lower, e.g., 696, do the same (compile, run, generate traces, and visualize with GTKWave), you will see the initialization of the cluster data taking 184503-102156 = 82347, instead. </p>
+<p>When you declare the vectors with <code>RT_CL_DATA</code> (the same as <code>RT_L1_DATA</code>), the vectors are by default initialized during the cluster activation. For variables that are used as buffers, this is not necessary. You can use <code>RT_L1_BSS</code> to shorten the cluster initialization.</p>
+<p>Change <code>RT_CL_DATA</code> to <code>RT_L1_BSS</code>, compile, run, generate traces, and visualize again. You can see that the cluster initialization is significantly shortened.</p>
+<p>Another part which takes long cycles can be seen under <code>chip/cluster/pe_0</code> with <code>func=memset</code>. This is the part of code in <code>cluster.c</code> where the values are initialized to 0. This only serves for this example code. </p>
+<p>In real applications, the optimization methods will vary case by case. For example, you might acquire data from some sensors and the data are first stored in L2 memory. Then you need the cluster to do some compute-intensive tasks on these data, you can declare buffer variables using <code>RT_L1_BSS</code>, then using DMA (maybe also applying the double buffering technique), you transfer the data from L2 to L1 and do the computations with the cluster cores in parallel.</p>
+<h2 id="contributions">Contributions</h2>
+<p>This library provides many optimized functions. However, there are still many to be optimized. You are very welcome to contribute. You can use the techniques learned in this tutorial and apply them. Find more details on how to contribute on the home page <code>README.md</code>. Have fun!</p>
+<p><sub>Author: Xiaying Wang. Last updated on Jan 22, 2022.</sub></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+    
+  </body>
+</html>

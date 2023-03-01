@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_62520efc8a0cf555937cdc0d8b33e320" kind="dir">
+    <compoundname>/github/workspace/src/BasicMathFunctions/dot_prod/kernels</compoundname>
+    <innerfile refid="plp__dot__prod__f32p__xpulpv2_8c">plp_dot_prod_f32p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__dot__prod__f32s__rv32im_8c">plp_dot_prod_f32s_rv32im.c</innerfile>
+    <innerfile refid="plp__dot__prod__f32s__xpulpv2_8c">plp_dot_prod_f32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__dot__prod__i16s__rv32im_8c">plp_dot_prod_i16s_rv32im.c</innerfile>
+    <innerfile refid="plp__dot__prod__i16s__xpulpv2_8c">plp_dot_prod_i16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__dot__prod__i32p__xpulpv2_8c">plp_dot_prod_i32p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__dot__prod__i32s__rv32im_8c">plp_dot_prod_i32s_rv32im.c</innerfile>
+    <innerfile refid="plp__dot__prod__i32s__xpulpv2_8c">plp_dot_prod_i32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__dot__prod__i8s__rv32im_8c">plp_dot_prod_i8s_rv32im.c</innerfile>
+    <innerfile refid="plp__dot__prod__i8s__xpulpv2_8c">plp_dot_prod_i8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__dot__prod__q16s__rv32im_8c">plp_dot_prod_q16s_rv32im.c</innerfile>
+    <innerfile refid="plp__dot__prod__q16s__xpulpv2_8c">plp_dot_prod_q16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__dot__prod__q32p__xpulpv2_8c">plp_dot_prod_q32p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__dot__prod__q32s__rv32im_8c">plp_dot_prod_q32s_rv32im.c</innerfile>
+    <innerfile refid="plp__dot__prod__q32s__xpulpv2_8c">plp_dot_prod_q32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__dot__prod__q8s__rv32im_8c">plp_dot_prod_q8s_rv32im.c</innerfile>
+    <innerfile refid="plp__dot__prod__q8s__xpulpv2_8c">plp_dot_prod_q8s_xpulpv2.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/BasicMathFunctions/dot_prod/kernels/"/>
+  </compounddef>
+</doxygen>

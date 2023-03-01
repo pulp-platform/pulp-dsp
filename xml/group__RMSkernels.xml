@@ -1,0 +1,759 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__RMSkernels" kind="group">
+    <compoundname>RMSkernels</compoundname>
+    <title>RMS Kernels</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__RMSkernels_1gac85fbfa29c252fa4cc672ea21b1b4025" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_f32s_xpulpv2</definition>
+        <argsstring>(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes)</argsstring>
+        <name>plp_rms_f32s_xpulpv2</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>RMS value of a 32-bit float vector for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Kernel for Statisical standard deviation of a 32-bit float vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_f32s_xpulpv2.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_f32s_xpulpv2.c" bodystart="72" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="group__RMSkernels_1ga820405100aad2e26fc963050f2655a48" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_i16s_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_rms_i16s_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>RMS value of a 16-bit integer vector for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_i16s_rv32im.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_i16s_rv32im.c" bodystart="72" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="group__RMSkernels_1gadfdc9cbdd8a71381ed38da307aa54102" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_i16s_xpulpv2</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_rms_i16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>RMS value of a 16-bit integer vector for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_i16s_xpulpv2.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_i16s_xpulpv2.c" bodystart="72" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="group__RMSkernels_1ga1b4acc32b4ddcf8b79706b8842e5e26e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_i32s_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_rms_i32s_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>RMS value of a 32-bit integer vector for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_i32s_rv32im.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_i32s_rv32im.c" bodystart="72" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="group__RMSkernels_1gacfca78993ba60eab5475e0f9a34a4e3a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_i32s_xpulpv2</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_rms_i32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>RMS value of a 32-bit integer vector for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_i32s_xpulpv2.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_i32s_xpulpv2.c" bodystart="72" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="group__RMSkernels_1gadc8a858ceae87aa28d2b193087ea7569" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_i8s_rv32im</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_rms_i8s_rv32im</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>RMS value of a 8-bit integer vector for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_i8s_rv32im.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_i8s_rv32im.c" bodystart="72" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="group__RMSkernels_1ga4e69dcc259af87653b7dd9deae0e85b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_i8s_xpulpv2</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_rms_i8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>RMS value of a 8-bit integer vector for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_i8s_xpulpv2.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_i8s_xpulpv2.c" bodystart="72" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="group__RMSkernels_1ga80868dc79c722648b01477b4a06d11e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_q16s_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int16_t *__restrict__ pRes)</argsstring>
+        <name>plp_rms_q16s_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>RMS value of a 16-bit fixed point vector for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Statisical standard deviation of a 16-bit fixed point vector for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_q16s_rv32im.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_q16s_rv32im.c" bodystart="72" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="group__RMSkernels_1gaab9d60c814763313c89a31d2acf21c3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_q16s_xpulpv2</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int16_t *__restrict__ pRes)</argsstring>
+        <name>plp_rms_q16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>RMS value of a 16-bit fixed point vector for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Statisical standard deviation of a 16-bit fixed point vector for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_q16s_xpulpv2.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_q16s_xpulpv2.c" bodystart="72" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="group__RMSkernels_1ga400d65a603fd2c6175c9c4683abbb838" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_q32s_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_rms_q32s_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>RMS value of a 32-bit fixed point vector for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Statisical standard deviation of a 32-bit fixed point vector for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_q32s_rv32im.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_q32s_rv32im.c" bodystart="72" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="group__RMSkernels_1ga2f2d70acb6d5a714facc0c6ec9f62235" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_q32s_xpulpv2</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_rms_q32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>RMS value of a 32-bit fixed point vector for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Statisical standard deviation of a 32-bit fixed point vector for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_q32s_xpulpv2.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_q32s_xpulpv2.c" bodystart="72" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="group__RMSkernels_1gaaa4d6dd4db32954d26531a74ac8f1d84" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_q8s_rv32im</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int8_t *__restrict__ pRes)</argsstring>
+        <name>plp_rms_q8s_rv32im</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>RMS value of a 8-bit fixed point vector for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Statisical standard deviation of a 8-bit fixed point vector for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_q8s_rv32im.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_q8s_rv32im.c" bodystart="72" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="group__RMSkernels_1gad8c987a557b8c13e582d6a4bf6166859" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_q8s_xpulpv2</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int8_t *__restrict__ pRes)</argsstring>
+        <name>plp_rms_q8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>RMS value of a 8-bit fixed point vector for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Statisical standard deviation of a 8-bit fixed point vector for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_q8s_xpulpv2.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/kernels/plp_rms_q8s_xpulpv2.c" bodystart="72" bodyend="85"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Calculates the RMS value of the input vector. There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.</para>
+<para>The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s): <preformatted>
+&lt;pulp&gt; _ &lt;function name&gt; _ &lt;data type&gt; &lt;precision&gt; &lt;method&gt; _ &lt;isa extension&gt;, with
+
+data type = {f, i, q} respectively for floats, integers, fixed points
+
+precision = {32, 16, 8} bits
+
+method = {s, p} respectively meaning single core or parallel multicore implementation.
+
+isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
+
+</preformatted> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

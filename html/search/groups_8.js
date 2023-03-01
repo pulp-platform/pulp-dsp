@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['sqrt_0',['Sqrt',['../group__sqrt.html',1,'']]],
+  ['sqrt_20kernels_1',['Sqrt Kernels',['../group__sqrtKernels.html',1,'']]],
+  ['statistics_20functions_2',['Statistics Functions',['../group__groupStats.html',1,'']]],
+  ['std_3',['Std',['../group__std.html',1,'']]],
+  ['std_20kernels_4',['Std Kernels',['../group__stdKernels.html',1,'']]],
+  ['strided_20identity_20matrix_20creation_5',['strided identity matrix creation',['../group__MatFillIStride.html',1,'']]],
+  ['strided_20identity_20matrix_20creation_20kernels_6',['Strided Identity Matrix Creation Kernels',['../group__MatFillIStrideKernels.html',1,'']]],
+  ['strided_20matrix_20addition_7',['Strided Matrix Addition',['../group__MatAddStride.html',1,'']]],
+  ['strided_20matrix_20addition_20kernels_8',['Strided Matrix Addition Kernels',['../group__MatAddStrideKernels.html',1,'']]],
+  ['strided_20matrix_20copy_9',['Strided Matrix Copy',['../group__MatCopyStride.html',1,'']]],
+  ['strided_20matrix_20copy_20kernels_10',['Strided Matrix Copy Kernels',['../group__MatCopyStrideKernels.html',1,'']]],
+  ['strided_20matrix_20fill_11',['strided matrix fill',['../group__MatFillStride.html',1,'']]],
+  ['strided_20matrix_20fill_20kernels_12',['Strided Matrix Fill Kernels',['../group__MatFillStrideKernels.html',1,'']]],
+  ['strided_20matrix_20matrix_20multiplication_13',['Strided Matrix Matrix Multiplication',['../group__BasicMatMultStride.html',1,'']]],
+  ['strided_20matrix_20multiplication_20kernels_14',['Strided Matrix Multiplication Kernels',['../group__BasicMatMultStrideKernels.html',1,'']]],
+  ['strided_20matrix_20operations_15',['Strided Matrix operations',['../group__groupMatrixStride.html',1,'']]],
+  ['strided_20matrix_20scale_16',['Strided Matrix Scale',['../group__MatScaleStride.html',1,'']]],
+  ['strided_20matrix_20scale_20kernels_17',['Strided Matrix Scale Kernels',['../group__MatScaleStrideKernels.html',1,'']]],
+  ['strided_20matrix_20subtraction_18',['Strided Matrix Subtraction',['../group__MatSubStride.html',1,'']]],
+  ['strided_20matrix_20subtraction_20kernels_19',['Strided Matrix Subtraction Kernels',['../group__MatSubStrideKernels.html',1,'']]],
+  ['strided_20matrix_20transpose_20matrix_20multiplication_20kernels_20',['Strided Matrix Transpose Matrix Multiplication Kernels',['../group__MatMultTransStrideKernels.html',1,'']]],
+  ['strided_20matrix_20transposed_20matrix_20multiplication_21',['Strided Matrix Transposed Matrix Multiplication',['../group__MatMultTransStride.html',1,'']]],
+  ['support_20functions_22',['Support Functions',['../group__groupSupport.html',1,'']]]
+];

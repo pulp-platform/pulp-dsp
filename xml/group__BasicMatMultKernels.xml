@@ -1,0 +1,1719 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__BasicMatMultKernels" kind="group">
+    <compoundname>BasicMatMultKernels</compoundname>
+    <title>Matrix Multiplication Kernels</title>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="group__BasicMatMultKernels_1ga0f22c312b4dc30f9c7485df5a4c77683" prot="public" static="yes" mutable="no">
+        <type>HAL_CL_L1 v4s</type>
+        <definition>HAL_CL_L1 v4s mask0</definition>
+        <argsstring></argsstring>
+        <name>mask0</name>
+        <initializer>= { 0, 1, 4, 5 }</initializer>
+        <briefdescription>
+<para>Parallel matrix multiplication of 8-bit integer matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__mult__instance__i8" kindref="compound">plp_mat_mult_instance_i8</ref> struct initialized by plp_mat_mult_i8_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8p_xpulpv2.c" line="87" column="22" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8p_xpulpv2.c" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group__BasicMatMultKernels_1ga90fefa27ef98c4e99f89aabe9297444d" prot="public" static="yes" mutable="no">
+        <type>HAL_CL_L1 v4s</type>
+        <definition>HAL_CL_L1 v4s mask1</definition>
+        <argsstring></argsstring>
+        <name>mask1</name>
+        <initializer>= { 2, 3, 6, 7 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8p_xpulpv2.c" line="88" column="22" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8p_xpulpv2.c" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group__BasicMatMultKernels_1ga7671a23616e09bbe33c47eb5aa6439a5" prot="public" static="yes" mutable="no">
+        <type>HAL_CL_L1 v4s</type>
+        <definition>HAL_CL_L1 v4s mask2</definition>
+        <argsstring></argsstring>
+        <name>mask2</name>
+        <initializer>= { 0, 2, 4, 6 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8p_xpulpv2.c" line="89" column="22" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8p_xpulpv2.c" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group__BasicMatMultKernels_1ga26e9d78b65554e9ce700a1c8194a3b85" prot="public" static="yes" mutable="no">
+        <type>HAL_CL_L1 v4s</type>
+        <definition>HAL_CL_L1 v4s mask3</definition>
+        <argsstring></argsstring>
+        <name>mask3</name>
+        <initializer>= { 1, 3, 5, 7 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8p_xpulpv2.c" line="90" column="22" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8p_xpulpv2.c" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group__BasicMatMultKernels_1ga0f22c312b4dc30f9c7485df5a4c77683" prot="public" static="yes" mutable="no">
+        <type>HAL_CL_L1 v4s</type>
+        <definition>HAL_CL_L1 v4s mask0</definition>
+        <argsstring></argsstring>
+        <name>mask0</name>
+        <initializer>= { 0, 1, 4, 5 }</initializer>
+        <briefdescription>
+<para>Matrix multiplication of 8-bit integer matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8s_xpulpv2.c" line="81" column="22" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8s_xpulpv2.c" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group__BasicMatMultKernels_1ga90fefa27ef98c4e99f89aabe9297444d" prot="public" static="yes" mutable="no">
+        <type>HAL_CL_L1 v4s</type>
+        <definition>HAL_CL_L1 v4s mask1</definition>
+        <argsstring></argsstring>
+        <name>mask1</name>
+        <initializer>= { 2, 3, 6, 7 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8s_xpulpv2.c" line="82" column="22" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8s_xpulpv2.c" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group__BasicMatMultKernels_1ga7671a23616e09bbe33c47eb5aa6439a5" prot="public" static="yes" mutable="no">
+        <type>HAL_CL_L1 v4s</type>
+        <definition>HAL_CL_L1 v4s mask2</definition>
+        <argsstring></argsstring>
+        <name>mask2</name>
+        <initializer>= { 0, 2, 4, 6 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8s_xpulpv2.c" line="83" column="22" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8s_xpulpv2.c" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group__BasicMatMultKernels_1ga26e9d78b65554e9ce700a1c8194a3b85" prot="public" static="yes" mutable="no">
+        <type>HAL_CL_L1 v4s</type>
+        <definition>HAL_CL_L1 v4s mask3</definition>
+        <argsstring></argsstring>
+        <name>mask3</name>
+        <initializer>= { 1, 3, 5, 7 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8s_xpulpv2.c" line="84" column="22" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8s_xpulpv2.c" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga56c2e0a4ea5aecbda019e314fc186b48" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_f32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_mult_f32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel matrix multiplication of 32-bit floating-point matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__mult__instance__f32" kindref="compound">plp_mat_mult_instance_f32</ref> struct initialized by plp_mat_mult_f32_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_f32p_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_f32p_xpulpv2.c" bodystart="50" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1gafa8242614a0331a63c9002a2cccecf1d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_f32s_xpulpv2</definition>
+        <argsstring>(const float *__restrict__ pSrcA, const float *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, float *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_f32s_xpulpv2</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Matrix multiplication of 32-bit floating-point matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Matrix matrix multiplication of a 32-bit floating-point matrices for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_f32s_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_f32s_xpulpv2.c" bodystart="53" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga40488e14eca6d8f1e412f18b9b2c7322" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_i16p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_mult_i16p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel matrix multiplication of 16-bit integer matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__mult__instance__i16" kindref="compound">plp_mat_mult_instance_i16</ref> struct initialized by plp_mat_mult_i16_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i16p_xpulpv2.c" line="88" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i16p_xpulpv2.c" bodystart="88" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga52924a14dae42e38f48f86acdda19f09" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_i16s_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, int32_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_i16s_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Matrix multiplication of 16-bit integer matrices kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Matrix matrix multiplication of a 16-bit integer matrices for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i16s_rv32im.c" line="81" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i16s_rv32im.c" bodystart="81" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga2a8d43f37269f136d9718f1ce5524666" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_i16s_xpulpv2</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, int32_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_i16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Matrix multiplication of 16-bit integer matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Matrix matrix multiplication of a 16-bit integer matrices for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i16s_xpulpv2.c" line="81" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i16s_xpulpv2.c" bodystart="81" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga0a863a4277cd8292c19bd24681920010" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_i32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_mult_i32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel matrix multiplication of 32-bit integer matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Parallel matrix matrix multiplication of a 32-bit integer matrices for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__mult__instance__i32" kindref="compound">plp_mat_mult_instance_i32</ref> struct initialized by plp_mat_mult_i32_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i32p_xpulpv2.c" line="87" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i32p_xpulpv2.c" bodystart="87" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga166315047e586fbb475860f426dcad62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_i32s_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, int32_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_i32s_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Matrix multiplication of 32-bit integer matrices kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Matrix matrix multiplication of a 32-bit integer matrices for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i32s_rv32im.c" line="109" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i32s_rv32im.c" bodystart="109" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga141b55a3cf372118554980dccd80d808" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_i32s_xpulpv2</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, int32_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_i32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Matrix multiplication of 32-bit integer matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Matrix matrix multiplication of a 32-bit integer matrices for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i32s_xpulpv2.c" line="81" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i32s_xpulpv2.c" bodystart="81" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga57527e6100a4c564580cb363a5b868b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_i8p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_mult_i8p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel matrix multiplication of 8-bit integer matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><hruler/>
+ <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__mult__instance__i8" kindref="compound">plp_mat_mult_instance_i8</ref> struct initialized by plp_mat_mult_i8_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8p_xpulpv2.c" line="92" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8p_xpulpv2.c" bodystart="92" bodyend="273"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga06596e3c2edc097c4b59d3e0cb5f0780" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_i8s_rv32im</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcA, const int8_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, int32_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_i8s_rv32im</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Matrix multiplication of 8-bit integer matrices kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Matrix matrix multiplication of a 8-bit integer matrices for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8s_rv32im.c" line="81" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8s_rv32im.c" bodystart="81" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga8ed7ecd1d62c7760a3f4591fba932f8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_i8s_xpulpv2</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcA, const int8_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, int32_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_i8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Matrix matrix multiplication of a 8-bit integer matrices for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><hruler/>
+ <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of first matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of first and heigt of second matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of second matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output is written here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8s_xpulpv2.c" line="86" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_i8s_xpulpv2.c" bodystart="86" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga8c16c083550b6d0b465ed57da0726352" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_q16p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_mult_q16p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel Matrix multiplication of 16-bit fix-point matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Parallel matrix multiplication of 16-bit fix-point matrices kernel for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__mult__instance__q16" kindref="compound">plp_mat_mult_instance_q16</ref> struct initialized by plp_mat_mult_q16_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point and Shifting</title><para>The result will be shifted by the parameter <computeroutput>shift</computeroutput> to the right (multiplied by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix B as pSrcB * 2^-y (in other words, A has it&apos;s x last digits after the binary point). Then, the output is represented as pDstC * 2^-(x + y - shift).</para>
+</simplesect>
+The output of the matrix multiplication will also be stored as an 16-bit array. Set the <computeroutput>shift</computeroutput> parameter such that no overflow ocurrs. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q16p_xpulpv2.c" line="58" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q16p_xpulpv2.c" bodystart="58" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga199c80681974d3c5c0a6a7f7c8c8b0e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_q16s_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t shift, int16_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_q16s_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Matrix multiplication of 16-bit integer matrices kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Matrix matrix multiplication of a 16-bit fix-point matrices for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift the result of each multiplication. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point and Shifting</title><para>The result will be shifted by the parameter <computeroutput>shift</computeroutput> to the right (multiplied by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix B as pSrcB * 2^-y (in other words, A has it&apos;s x last digits after the binary point). Then, the output is represented as pDstC * 2^-(x + y - shift).</para>
+</simplesect>
+The output of the matrix multiplication will also be stored as an 16-bit array. Set the <computeroutput>shift</computeroutput> parameter such that no overflow ocurrs. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q16s_rv32im.c" line="63" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q16s_rv32im.c" bodystart="63" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga24b1854a23b765910c88195dd6282580" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_q16s_xpulpv2</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t shift, int16_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_q16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Matrix multiplication of 16-bit integer matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Matrix matrix multiplication of a 16-bit fix-point matrices for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift the result of each multiplication. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point and Shifting</title><para>The result will be shifted by the parameter <computeroutput>shift</computeroutput> to the right (multiplied by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix B as pSrcB * 2^-y (in other words, A has it&apos;s x last digits after the binary point). Then, the output is represented as pDstC * 2^-(x + y - shift).</para>
+</simplesect>
+The output of the matrix multiplication will also be stored as an 16-bit array. Set the <computeroutput>shift</computeroutput> parameter such that no overflow ocurrs. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q16s_xpulpv2.c" line="63" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q16s_xpulpv2.c" bodystart="63" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1gac827cc75b993b0ea7398dfabf8272a09" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_q32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_mult_q32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel Matrix multiplication of 32-bit fix-point matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Parallel matrix multiplication of 32-bit fix-point matrices kernel for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__mult__instance__q32" kindref="compound">plp_mat_mult_instance_q32</ref> struct initialized by plp_mat_mult_q32_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point and Shifting</title><para>The result will be shifted by the parameter <computeroutput>shift</computeroutput> to the right (multiplied by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix B as pSrcB * 2^-y (in other words, A has it&apos;s x last digits after the binary point). Then, the output is represented as pDstC * 2^-(x + y - shift). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q32p_xpulpv2.c" line="55" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q32p_xpulpv2.c" bodystart="55" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga37dfa2895329ef668161a67a5158c3e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_q32s_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t shift, int32_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_q32s_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Matrix multiplication of 32-bit integer matrices kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Matrix matrix multiplication of a 32-bit fix-point matrices for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift the result of each multiplication. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point and Shifting</title><para>The result will be shifted by the parameter <computeroutput>shift</computeroutput> to the right (multiplied by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix B as pSrcB * 2^-y (in other words, A has it&apos;s x last digits after the binary point). Then, the output is represented as pDstC * 2^-(x + y - shift). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q32s_rv32im.c" line="60" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q32s_rv32im.c" bodystart="60" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga2d4fe49fff6c95b0619b634fc6d34599" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_q32s_xpulpv2</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t shift, int32_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_q32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Matrix multiplication of 32-bit integer matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Matrix matrix multiplication of a 32-bit fix-point matrices for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift the result of each multiplication. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point and Shifting</title><para>The result will be shifted by the parameter <computeroutput>shift</computeroutput> to the right (multiplied by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix B as pSrcB * 2^-y (in other words, A has it&apos;s x last digits after the binary point). Then, the output is represented as pDstC * 2^-(x + y - shift). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q32s_xpulpv2.c" line="60" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q32s_xpulpv2.c" bodystart="60" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga96b0d92e93807397ac7fecc41878507d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_q8p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_mult_q8p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel Matrix multiplication of 8-bit fix-point matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Parallel matrix multiplication of 8-bit fix-point matrices kernel for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__mult__instance__q8" kindref="compound">plp_mat_mult_instance_q8</ref> struct initialized by plp_mat_mult_q8_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point and Shifting</title><para>The result will be shifted by the parameter <computeroutput>shift</computeroutput> to the right (multiplied by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix B as pSrcB * 2^-y (in other words, A has it&apos;s x last digits after the binary point). Then, the output is represented as pDstC * 2^-(x + y - shift).</para>
+</simplesect>
+The output of the matrix multiplication will also be stored as an 8-bit array. Set the <computeroutput>shift</computeroutput> parameter such that no overflow ocurrs. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q8p_xpulpv2.c" line="58" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q8p_xpulpv2.c" bodystart="58" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1ga2de3671328ad595ce6d320f5d492e05b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_q8s_rv32im</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcA, const int8_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t shift, int8_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_q8s_rv32im</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Matrix multiplication of 8-bit integer matrices kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Matrix matrix multiplication of a 8-bit fix-point matrices for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift the result of each multiplication. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point and Shifting</title><para>The result will be shifted by the parameter <computeroutput>shift</computeroutput> to the right (multiplied by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix B as pSrcB * 2^-y (in other words, A has it&apos;s x last digits after the binary point). Then, the output is represented as pDstC * 2^-(x + y - shift).</para>
+</simplesect>
+The output of the matrix multiplication will also be stored as an 8-bit array. Set the <computeroutput>shift</computeroutput> parameter such that no overflow ocurrs. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q8s_rv32im.c" line="63" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q8s_rv32im.c" bodystart="63" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultKernels_1gac9c18a7287dfacc6b9b8a711783518d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_q8s_xpulpv2</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcA, const int8_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t shift, int8_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_q8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Matrix multiplication of 8-bit integer matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Matrix matrix multiplication of a 8-bit fix-point matrices for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift the result of each multiplication. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point and Shifting</title><para>The result will be shifted by the parameter <computeroutput>shift</computeroutput> to the right (multiplied by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix B as pSrcB * 2^-y (in other words, A has it&apos;s x last digits after the binary point). Then, the output is represented as pDstC * 2^-(x + y - shift).</para>
+</simplesect>
+The output of the matrix multiplication will also be stored as an 8-bit array. Set the <computeroutput>shift</computeroutput> parameter such that no overflow ocurrs. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q8s_xpulpv2.c" line="63" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_mult/kernels/plp_mat_mult_q8s_xpulpv2.c" bodystart="63" bodyend="96"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the kernels for matrix matrix multiplication.</para>
+<para>The Matrix Matrix Multiplication computes the product of two matrices with dimensions MxN and NxO. The first matrix is accessed row wise, the second column wise, all values form the first are multiplied with the values of the second and then sum of the result gives the value for the result matrix. <verbatim>&apos;pDst[m,o] = pSrcA[m,0]*pSrcB[0,o] + pSrcA[m,1]*pSrcB[1,o] + ... + pSrcA[m,N-1]*pSrcB[N-1,o]`
+</verbatim> There are functions for integer 32- 16- and 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.</para>
+<para>The naming scheme of the functions follows the following pattern (for example <computeroutput>plp_mat_mult_i32s_xpulpv2</computeroutput>): <verbatim>`plp_&lt;function name&gt;_&lt;data type&gt;&lt;precision&gt;&lt;method&gt;_&lt;isa_extension&gt;`
+</verbatim> <table rows="6" cols="2"><row>
+<entry thead="yes"><para>name   </para>
+</entry><entry thead="yes"><para>description    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>function_name   </para>
+</entry><entry thead="no"><para><computeroutput>mat_mult</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>data type   </para>
+</entry><entry thead="no"><para>{<computeroutput>f</computeroutput>, <computeroutput>i</computeroutput>, <computeroutput>q</computeroutput>} respectively for floats, integers, fixed points    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>precision   </para>
+</entry><entry thead="no"><para>{<computeroutput>32</computeroutput>, <computeroutput>16</computeroutput>, <computeroutput>8</computeroutput>} bits    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>method   </para>
+</entry><entry thead="no"><para>{<computeroutput>s</computeroutput>, <computeroutput>v</computeroutput>, <computeroutput>p</computeroutput>} meaning scalar, vectorized (i.e. SIMD) and parallel, respectively    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>isa_extension   </para>
+</entry><entry thead="no"><para>{<computeroutput>rv32im</computeroutput>, <computeroutput>xpulpv2</computeroutput>} respectively for ibex and riscy   </para>
+</entry></row>
+</table>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_5d1fd2a111ae743ba9613d902c688a31" kind="dir">
+    <compoundname>/github/workspace/src/DistanceFunctions/plp_cosine_distance</compoundname>
+    <innerdir refid="dir_23ca659546a35da67a1b41b9c8bb7eba">/github/workspace/src/DistanceFunctions/plp_cosine_distance/kernels</innerdir>
+    <innerfile refid="plp__cosine__distance__f32_8c">plp_cosine_distance_f32.c</innerfile>
+    <innerfile refid="plp__cosine__distance__f32__parallel_8c">plp_cosine_distance_f32_parallel.c</innerfile>
+    <innerfile refid="plp__cosine__distance__q16_8c">plp_cosine_distance_q16.c</innerfile>
+    <innerfile refid="plp__cosine__distance__q32_8c">plp_cosine_distance_q32.c</innerfile>
+    <innerfile refid="plp__cosine__distance__q32__parallel_8c">plp_cosine_distance_q32_parallel.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/DistanceFunctions/plp_cosine_distance/"/>
+  </compounddef>
+</doxygen>

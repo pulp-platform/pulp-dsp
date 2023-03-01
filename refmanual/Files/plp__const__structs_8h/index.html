@@ -1,0 +1,2749 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>/github/workspace/include/plp_const_structs.h - PULP DSP</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#githubworkspaceincludeplp_const_structsh" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="PULP DSP" class="md-header__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PULP DSP
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              /github/workspace/include/plp_const_structs.h
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="PULP DSP" class="md-nav__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    PULP DSP
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../test-framework-index/" class="md-nav__link">
+        Test Framework
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorial-index/" class="md-nav__link">
+        Tutorial
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../troubles/" class="md-nav__link">
+        Troubles Shooting
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Reference Manual
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Reference Manual
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pages/" class="md-nav__link">
+        Pages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Classes/" class="md-nav__link">
+        Classes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/" class="md-nav__link">
+        Modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Namespaces/" class="md-nav__link">
+        Namespaces
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-description" class="md-nav__link">
+    Detailed Description
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="githubworkspaceincludeplp_const_structsh">/github/workspace/include/plp_const_structs.h</h1>
+<p>File containing constant structs, initialized for user convenience.  <a href="#detailed-description">More...</a></p>
+<h2 id="attributes">Attributes</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q16/">plp_cfft_instance_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q16-len16">plp_cfft_sR_q16_len16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q16/">plp_cfft_instance_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q16-len32">plp_cfft_sR_q16_len32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q16/">plp_cfft_instance_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q16-len64">plp_cfft_sR_q16_len64</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q16/">plp_cfft_instance_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q16-len128">plp_cfft_sR_q16_len128</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q16/">plp_cfft_instance_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q16-len256">plp_cfft_sR_q16_len256</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q16/">plp_cfft_instance_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q16-len512">plp_cfft_sR_q16_len512</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q16/">plp_cfft_instance_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q16-len1024">plp_cfft_sR_q16_len1024</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q16/">plp_cfft_instance_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q16-len2048">plp_cfft_sR_q16_len2048</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q16/">plp_cfft_instance_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q16-len4096">plp_cfft_sR_q16_len4096</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q32/">plp_cfft_instance_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q32-len16">plp_cfft_sR_q32_len16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q32/">plp_cfft_instance_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q32-len32">plp_cfft_sR_q32_len32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q32/">plp_cfft_instance_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q32-len64">plp_cfft_sR_q32_len64</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q32/">plp_cfft_instance_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q32-len128">plp_cfft_sR_q32_len128</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q32/">plp_cfft_instance_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q32-len256">plp_cfft_sR_q32_len256</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q32/">plp_cfft_instance_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q32-len512">plp_cfft_sR_q32_len512</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q32/">plp_cfft_instance_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q32-len1024">plp_cfft_sR_q32_len1024</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q32/">plp_cfft_instance_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q32-len2048">plp_cfft_sR_q32_len2048</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__q32/">plp_cfft_instance_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-q32-len4096">plp_cfft_sR_q32_len4096</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__f32/">plp_cfft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-f32-len16">plp_cfft_sR_f32_len16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__f32/">plp_cfft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-f32-len32">plp_cfft_sR_f32_len32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__f32/">plp_cfft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-f32-len64">plp_cfft_sR_f32_len64</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__f32/">plp_cfft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-f32-len128">plp_cfft_sR_f32_len128</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__f32/">plp_cfft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-f32-len256">plp_cfft_sR_f32_len256</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__f32/">plp_cfft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-f32-len512">plp_cfft_sR_f32_len512</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__f32/">plp_cfft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-f32-len1024">plp_cfft_sR_f32_len1024</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__f32/">plp_cfft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-sr-f32-len2048">plp_cfft_sR_f32_len2048</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__f32/">plp_cfft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-fast-sr-f32-len16">plp_cfft_fast_sR_f32_len16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__f32/">plp_cfft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-fast-sr-f32-len64">plp_cfft_fast_sR_f32_len64</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__f32/">plp_cfft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-fast-sr-f32-len128">plp_cfft_fast_sR_f32_len128</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__f32/">plp_cfft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-fast-sr-f32-len256">plp_cfft_fast_sR_f32_len256</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__f32/">plp_cfft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-fast-sr-f32-len512">plp_cfft_fast_sR_f32_len512</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__cfft__instance__f32/">plp_cfft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-cfft-fast-sr-f32-len1024">plp_cfft_fast_sR_f32_len1024</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__fft__fast__instance__f32/">plp_fft_fast_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-rfft-fast-sr-f32-len32">plp_rfft_fast_sR_f32_len32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__fft__fast__instance__f32/">plp_fft_fast_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-rfft-fast-sr-f32-len64">plp_rfft_fast_sR_f32_len64</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__fft__fast__instance__f32/">plp_fft_fast_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-rfft-fast-sr-f32-len128">plp_rfft_fast_sR_f32_len128</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__fft__fast__instance__f32/">plp_fft_fast_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-rfft-fast-sr-f32-len256">plp_rfft_fast_sR_f32_len256</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__fft__fast__instance__f32/">plp_fft_fast_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-rfft-fast-sr-f32-len512">plp_rfft_fast_sR_f32_len512</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__fft__fast__instance__f32/">plp_fft_fast_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-rfft-fast-sr-f32-len1024">plp_rfft_fast_sR_f32_len1024</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__fft__fast__instance__f32/">plp_fft_fast_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-rfft-fast-sr-f32-len2048">plp_rfft_fast_sR_f32_len2048</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__fft__instance__f32/">plp_fft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-rfft-sr-f32-len32">plp_rfft_sR_f32_len32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__fft__instance__f32/">plp_fft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-rfft-sr-f32-len64">plp_rfft_sR_f32_len64</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__fft__instance__f32/">plp_fft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-rfft-sr-f32-len128">plp_rfft_sR_f32_len128</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__fft__instance__f32/">plp_fft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-rfft-sr-f32-len256">plp_rfft_sR_f32_len256</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__fft__instance__f32/">plp_fft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-rfft-sr-f32-len512">plp_rfft_sR_f32_len512</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__fft__instance__f32/">plp_fft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-rfft-sr-f32-len1024">plp_rfft_sR_f32_len1024</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__fft__instance__f32/">plp_fft_instance_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-rfft-sr-f32-len2048">plp_rfft_sR_f32_len2048</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__triangular__filter__f32/">plp_triangular_filter_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-triangular-filter-f32-32">plp_triangular_filter_f32_32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif1-f32">PLP_DWT_COIF1_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif2-f32">PLP_DWT_COIF2_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif3-f32">PLP_DWT_COIF3_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif4-f32">PLP_DWT_COIF4_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif5-f32">PLP_DWT_COIF5_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif6-f32">PLP_DWT_COIF6_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif7-f32">PLP_DWT_COIF7_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif8-f32">PLP_DWT_COIF8_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif9-f32">PLP_DWT_COIF9_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif10-f32">PLP_DWT_COIF10_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif11-f32">PLP_DWT_COIF11_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif12-f32">PLP_DWT_COIF12_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif13-f32">PLP_DWT_COIF13_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif14-f32">PLP_DWT_COIF14_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif15-f32">PLP_DWT_COIF15_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif16-f32">PLP_DWT_COIF16_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif17-f32">PLP_DWT_COIF17_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db1-f32">PLP_DWT_DB1_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db2-f32">PLP_DWT_DB2_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db3-f32">PLP_DWT_DB3_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db4-f32">PLP_DWT_DB4_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db5-f32">PLP_DWT_DB5_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db6-f32">PLP_DWT_DB6_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db7-f32">PLP_DWT_DB7_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db8-f32">PLP_DWT_DB8_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db9-f32">PLP_DWT_DB9_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db10-f32">PLP_DWT_DB10_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db11-f32">PLP_DWT_DB11_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db12-f32">PLP_DWT_DB12_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db13-f32">PLP_DWT_DB13_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db14-f32">PLP_DWT_DB14_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db15-f32">PLP_DWT_DB15_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db16-f32">PLP_DWT_DB16_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db17-f32">PLP_DWT_DB17_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db18-f32">PLP_DWT_DB18_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db19-f32">PLP_DWT_DB19_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db20-f32">PLP_DWT_DB20_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-haar-f32">PLP_DWT_HAAR_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym2-f32">PLP_DWT_SYM2_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym3-f32">PLP_DWT_SYM3_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym4-f32">PLP_DWT_SYM4_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym5-f32">PLP_DWT_SYM5_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym6-f32">PLP_DWT_SYM6_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym7-f32">PLP_DWT_SYM7_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym8-f32">PLP_DWT_SYM8_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym9-f32">PLP_DWT_SYM9_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym10-f32">PLP_DWT_SYM10_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym11-f32">PLP_DWT_SYM11_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym12-f32">PLP_DWT_SYM12_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym13-f32">PLP_DWT_SYM13_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym14-f32">PLP_DWT_SYM14_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym15-f32">PLP_DWT_SYM15_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym16-f32">PLP_DWT_SYM16_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym17-f32">PLP_DWT_SYM17_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym18-f32">PLP_DWT_SYM18_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym19-f32">PLP_DWT_SYM19_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__f32/">plp_dwt_wavelet_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym20-f32">PLP_DWT_SYM20_f32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif1-q32">PLP_DWT_COIF1_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif2-q32">PLP_DWT_COIF2_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif3-q32">PLP_DWT_COIF3_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif4-q32">PLP_DWT_COIF4_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif5-q32">PLP_DWT_COIF5_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif6-q32">PLP_DWT_COIF6_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif7-q32">PLP_DWT_COIF7_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif8-q32">PLP_DWT_COIF8_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif9-q32">PLP_DWT_COIF9_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif10-q32">PLP_DWT_COIF10_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif11-q32">PLP_DWT_COIF11_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif12-q32">PLP_DWT_COIF12_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif13-q32">PLP_DWT_COIF13_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif14-q32">PLP_DWT_COIF14_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif15-q32">PLP_DWT_COIF15_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif16-q32">PLP_DWT_COIF16_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif17-q32">PLP_DWT_COIF17_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db1-q32">PLP_DWT_DB1_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db2-q32">PLP_DWT_DB2_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db3-q32">PLP_DWT_DB3_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db4-q32">PLP_DWT_DB4_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db5-q32">PLP_DWT_DB5_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db6-q32">PLP_DWT_DB6_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db7-q32">PLP_DWT_DB7_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db8-q32">PLP_DWT_DB8_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db9-q32">PLP_DWT_DB9_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db10-q32">PLP_DWT_DB10_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db11-q32">PLP_DWT_DB11_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db12-q32">PLP_DWT_DB12_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db13-q32">PLP_DWT_DB13_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db14-q32">PLP_DWT_DB14_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db15-q32">PLP_DWT_DB15_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db16-q32">PLP_DWT_DB16_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db17-q32">PLP_DWT_DB17_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db18-q32">PLP_DWT_DB18_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db19-q32">PLP_DWT_DB19_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db20-q32">PLP_DWT_DB20_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-haar-q32">PLP_DWT_HAAR_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym2-q32">PLP_DWT_SYM2_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym3-q32">PLP_DWT_SYM3_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym4-q32">PLP_DWT_SYM4_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym5-q32">PLP_DWT_SYM5_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym6-q32">PLP_DWT_SYM6_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym7-q32">PLP_DWT_SYM7_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym8-q32">PLP_DWT_SYM8_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym9-q32">PLP_DWT_SYM9_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym10-q32">PLP_DWT_SYM10_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym11-q32">PLP_DWT_SYM11_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym12-q32">PLP_DWT_SYM12_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym13-q32">PLP_DWT_SYM13_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym14-q32">PLP_DWT_SYM14_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym15-q32">PLP_DWT_SYM15_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym16-q32">PLP_DWT_SYM16_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym17-q32">PLP_DWT_SYM17_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym18-q32">PLP_DWT_SYM18_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym19-q32">PLP_DWT_SYM19_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q32/">plp_dwt_wavelet_q32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym20-q32">PLP_DWT_SYM20_q32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif1-q16">PLP_DWT_COIF1_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif2-q16">PLP_DWT_COIF2_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif3-q16">PLP_DWT_COIF3_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif4-q16">PLP_DWT_COIF4_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif5-q16">PLP_DWT_COIF5_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif6-q16">PLP_DWT_COIF6_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif7-q16">PLP_DWT_COIF7_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif8-q16">PLP_DWT_COIF8_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif9-q16">PLP_DWT_COIF9_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif10-q16">PLP_DWT_COIF10_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif11-q16">PLP_DWT_COIF11_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif12-q16">PLP_DWT_COIF12_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif13-q16">PLP_DWT_COIF13_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif14-q16">PLP_DWT_COIF14_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif15-q16">PLP_DWT_COIF15_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif16-q16">PLP_DWT_COIF16_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif17-q16">PLP_DWT_COIF17_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db1-q16">PLP_DWT_DB1_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db2-q16">PLP_DWT_DB2_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db3-q16">PLP_DWT_DB3_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db4-q16">PLP_DWT_DB4_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db5-q16">PLP_DWT_DB5_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db6-q16">PLP_DWT_DB6_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db7-q16">PLP_DWT_DB7_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db8-q16">PLP_DWT_DB8_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db9-q16">PLP_DWT_DB9_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db10-q16">PLP_DWT_DB10_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db11-q16">PLP_DWT_DB11_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db12-q16">PLP_DWT_DB12_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db13-q16">PLP_DWT_DB13_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db14-q16">PLP_DWT_DB14_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db15-q16">PLP_DWT_DB15_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db16-q16">PLP_DWT_DB16_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db17-q16">PLP_DWT_DB17_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db18-q16">PLP_DWT_DB18_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db19-q16">PLP_DWT_DB19_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db20-q16">PLP_DWT_DB20_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-haar-q16">PLP_DWT_HAAR_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym2-q16">PLP_DWT_SYM2_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym3-q16">PLP_DWT_SYM3_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym4-q16">PLP_DWT_SYM4_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym5-q16">PLP_DWT_SYM5_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym6-q16">PLP_DWT_SYM6_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym7-q16">PLP_DWT_SYM7_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym8-q16">PLP_DWT_SYM8_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym9-q16">PLP_DWT_SYM9_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym10-q16">PLP_DWT_SYM10_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym11-q16">PLP_DWT_SYM11_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym12-q16">PLP_DWT_SYM12_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym13-q16">PLP_DWT_SYM13_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym14-q16">PLP_DWT_SYM14_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym15-q16">PLP_DWT_SYM15_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym16-q16">PLP_DWT_SYM16_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym17-q16">PLP_DWT_SYM17_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym18-q16">PLP_DWT_SYM18_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym19-q16">PLP_DWT_SYM19_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q16/">plp_dwt_wavelet_q16</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym20-q16">PLP_DWT_SYM20_q16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif1-q8">PLP_DWT_COIF1_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif2-q8">PLP_DWT_COIF2_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif3-q8">PLP_DWT_COIF3_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif4-q8">PLP_DWT_COIF4_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif5-q8">PLP_DWT_COIF5_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif6-q8">PLP_DWT_COIF6_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif7-q8">PLP_DWT_COIF7_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif8-q8">PLP_DWT_COIF8_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif9-q8">PLP_DWT_COIF9_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif10-q8">PLP_DWT_COIF10_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif11-q8">PLP_DWT_COIF11_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif12-q8">PLP_DWT_COIF12_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif13-q8">PLP_DWT_COIF13_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif14-q8">PLP_DWT_COIF14_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif15-q8">PLP_DWT_COIF15_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif16-q8">PLP_DWT_COIF16_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-coif17-q8">PLP_DWT_COIF17_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db1-q8">PLP_DWT_DB1_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db2-q8">PLP_DWT_DB2_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db3-q8">PLP_DWT_DB3_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db4-q8">PLP_DWT_DB4_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db5-q8">PLP_DWT_DB5_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db6-q8">PLP_DWT_DB6_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db7-q8">PLP_DWT_DB7_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db8-q8">PLP_DWT_DB8_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db9-q8">PLP_DWT_DB9_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db10-q8">PLP_DWT_DB10_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db11-q8">PLP_DWT_DB11_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db12-q8">PLP_DWT_DB12_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db13-q8">PLP_DWT_DB13_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db14-q8">PLP_DWT_DB14_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db15-q8">PLP_DWT_DB15_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db16-q8">PLP_DWT_DB16_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db17-q8">PLP_DWT_DB17_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db18-q8">PLP_DWT_DB18_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db19-q8">PLP_DWT_DB19_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-db20-q8">PLP_DWT_DB20_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-haar-q8">PLP_DWT_HAAR_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym2-q8">PLP_DWT_SYM2_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym3-q8">PLP_DWT_SYM3_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym4-q8">PLP_DWT_SYM4_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym5-q8">PLP_DWT_SYM5_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym6-q8">PLP_DWT_SYM6_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym7-q8">PLP_DWT_SYM7_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym8-q8">PLP_DWT_SYM8_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym9-q8">PLP_DWT_SYM9_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym10-q8">PLP_DWT_SYM10_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym11-q8">PLP_DWT_SYM11_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym12-q8">PLP_DWT_SYM12_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym13-q8">PLP_DWT_SYM13_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym14-q8">PLP_DWT_SYM14_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym15-q8">PLP_DWT_SYM15_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym16-q8">PLP_DWT_SYM16_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym17-q8">PLP_DWT_SYM17_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym18-q8">PLP_DWT_SYM18_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym19-q8">PLP_DWT_SYM19_q8</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structplp__dwt__wavelet__q8/">plp_dwt_wavelet_q8</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__const__structs_8h/#variable-plp-dwt-sym20-q8">PLP_DWT_SYM20_q8</a></strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description</h2>
+<p>File containing constant structs, initialized for user convenience. </p>
+<p><strong>Version</strong>: V0 </p>
+<p>==========================================================================</p>
+<h1 id="date-28-june-2020">@date     28. June 2020</h1>
+<h2 id="attributes-documentation">Attributes Documentation</h2>
+<h3 id="variable-plp_cfft_sr_q16_len16">variable plp_cfft_sR_q16_len16</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q16 plp_cfft_sR_q16_len16;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q16_len32">variable plp_cfft_sR_q16_len32</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q16 plp_cfft_sR_q16_len32;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q16_len64">variable plp_cfft_sR_q16_len64</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q16 plp_cfft_sR_q16_len64;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q16_len128">variable plp_cfft_sR_q16_len128</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q16 plp_cfft_sR_q16_len128;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q16_len256">variable plp_cfft_sR_q16_len256</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q16 plp_cfft_sR_q16_len256;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q16_len512">variable plp_cfft_sR_q16_len512</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q16 plp_cfft_sR_q16_len512;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q16_len1024">variable plp_cfft_sR_q16_len1024</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q16 plp_cfft_sR_q16_len1024;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q16_len2048">variable plp_cfft_sR_q16_len2048</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q16 plp_cfft_sR_q16_len2048;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q16_len4096">variable plp_cfft_sR_q16_len4096</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q16 plp_cfft_sR_q16_len4096;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q32_len16">variable plp_cfft_sR_q32_len16</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q32 plp_cfft_sR_q32_len16;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q32_len32">variable plp_cfft_sR_q32_len32</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q32 plp_cfft_sR_q32_len32;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q32_len64">variable plp_cfft_sR_q32_len64</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q32 plp_cfft_sR_q32_len64;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q32_len128">variable plp_cfft_sR_q32_len128</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q32 plp_cfft_sR_q32_len128;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q32_len256">variable plp_cfft_sR_q32_len256</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q32 plp_cfft_sR_q32_len256;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q32_len512">variable plp_cfft_sR_q32_len512</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q32 plp_cfft_sR_q32_len512;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q32_len1024">variable plp_cfft_sR_q32_len1024</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q32 plp_cfft_sR_q32_len1024;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q32_len2048">variable plp_cfft_sR_q32_len2048</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q32 plp_cfft_sR_q32_len2048;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_q32_len4096">variable plp_cfft_sR_q32_len4096</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_q32 plp_cfft_sR_q32_len4096;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_f32_len16">variable plp_cfft_sR_f32_len16</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_f32 plp_cfft_sR_f32_len16;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_f32_len32">variable plp_cfft_sR_f32_len32</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_f32 plp_cfft_sR_f32_len32;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_f32_len64">variable plp_cfft_sR_f32_len64</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_f32 plp_cfft_sR_f32_len64;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_f32_len128">variable plp_cfft_sR_f32_len128</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_f32 plp_cfft_sR_f32_len128;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_f32_len256">variable plp_cfft_sR_f32_len256</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_f32 plp_cfft_sR_f32_len256;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_f32_len512">variable plp_cfft_sR_f32_len512</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_f32 plp_cfft_sR_f32_len512;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_f32_len1024">variable plp_cfft_sR_f32_len1024</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_f32 plp_cfft_sR_f32_len1024;
+</code></pre>
+<h3 id="variable-plp_cfft_sr_f32_len2048">variable plp_cfft_sR_f32_len2048</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_f32 plp_cfft_sR_f32_len2048;
+</code></pre>
+<h3 id="variable-plp_cfft_fast_sr_f32_len16">variable plp_cfft_fast_sR_f32_len16</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len16;
+</code></pre>
+<h3 id="variable-plp_cfft_fast_sr_f32_len64">variable plp_cfft_fast_sR_f32_len64</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len64;
+</code></pre>
+<h3 id="variable-plp_cfft_fast_sr_f32_len128">variable plp_cfft_fast_sR_f32_len128</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len128;
+</code></pre>
+<h3 id="variable-plp_cfft_fast_sr_f32_len256">variable plp_cfft_fast_sR_f32_len256</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len256;
+</code></pre>
+<h3 id="variable-plp_cfft_fast_sr_f32_len512">variable plp_cfft_fast_sR_f32_len512</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len512;
+</code></pre>
+<h3 id="variable-plp_cfft_fast_sr_f32_len1024">variable plp_cfft_fast_sR_f32_len1024</h3>
+<pre><code class="language-cpp">const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len1024;
+</code></pre>
+<h3 id="variable-plp_rfft_fast_sr_f32_len32">variable plp_rfft_fast_sR_f32_len32</h3>
+<pre><code class="language-cpp">const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len32;
+</code></pre>
+<h3 id="variable-plp_rfft_fast_sr_f32_len64">variable plp_rfft_fast_sR_f32_len64</h3>
+<pre><code class="language-cpp">const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len64;
+</code></pre>
+<h3 id="variable-plp_rfft_fast_sr_f32_len128">variable plp_rfft_fast_sR_f32_len128</h3>
+<pre><code class="language-cpp">const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len128;
+</code></pre>
+<h3 id="variable-plp_rfft_fast_sr_f32_len256">variable plp_rfft_fast_sR_f32_len256</h3>
+<pre><code class="language-cpp">const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len256;
+</code></pre>
+<h3 id="variable-plp_rfft_fast_sr_f32_len512">variable plp_rfft_fast_sR_f32_len512</h3>
+<pre><code class="language-cpp">const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len512;
+</code></pre>
+<h3 id="variable-plp_rfft_fast_sr_f32_len1024">variable plp_rfft_fast_sR_f32_len1024</h3>
+<pre><code class="language-cpp">const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len1024;
+</code></pre>
+<h3 id="variable-plp_rfft_fast_sr_f32_len2048">variable plp_rfft_fast_sR_f32_len2048</h3>
+<pre><code class="language-cpp">const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len2048;
+</code></pre>
+<h3 id="variable-plp_rfft_sr_f32_len32">variable plp_rfft_sR_f32_len32</h3>
+<pre><code class="language-cpp">const plp_fft_instance_f32 plp_rfft_sR_f32_len32;
+</code></pre>
+<h3 id="variable-plp_rfft_sr_f32_len64">variable plp_rfft_sR_f32_len64</h3>
+<pre><code class="language-cpp">const plp_fft_instance_f32 plp_rfft_sR_f32_len64;
+</code></pre>
+<h3 id="variable-plp_rfft_sr_f32_len128">variable plp_rfft_sR_f32_len128</h3>
+<pre><code class="language-cpp">const plp_fft_instance_f32 plp_rfft_sR_f32_len128;
+</code></pre>
+<h3 id="variable-plp_rfft_sr_f32_len256">variable plp_rfft_sR_f32_len256</h3>
+<pre><code class="language-cpp">const plp_fft_instance_f32 plp_rfft_sR_f32_len256;
+</code></pre>
+<h3 id="variable-plp_rfft_sr_f32_len512">variable plp_rfft_sR_f32_len512</h3>
+<pre><code class="language-cpp">const plp_fft_instance_f32 plp_rfft_sR_f32_len512;
+</code></pre>
+<h3 id="variable-plp_rfft_sr_f32_len1024">variable plp_rfft_sR_f32_len1024</h3>
+<pre><code class="language-cpp">const plp_fft_instance_f32 plp_rfft_sR_f32_len1024;
+</code></pre>
+<h3 id="variable-plp_rfft_sr_f32_len2048">variable plp_rfft_sR_f32_len2048</h3>
+<pre><code class="language-cpp">const plp_fft_instance_f32 plp_rfft_sR_f32_len2048;
+</code></pre>
+<h3 id="variable-plp_triangular_filter_f32_32">variable plp_triangular_filter_f32_32</h3>
+<pre><code class="language-cpp">const plp_triangular_filter_f32 plp_triangular_filter_f32_32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif1_f32">variable PLP_DWT_COIF1_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF1_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif2_f32">variable PLP_DWT_COIF2_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF2_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif3_f32">variable PLP_DWT_COIF3_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF3_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif4_f32">variable PLP_DWT_COIF4_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF4_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif5_f32">variable PLP_DWT_COIF5_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF5_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif6_f32">variable PLP_DWT_COIF6_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF6_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif7_f32">variable PLP_DWT_COIF7_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF7_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif8_f32">variable PLP_DWT_COIF8_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF8_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif9_f32">variable PLP_DWT_COIF9_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF9_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif10_f32">variable PLP_DWT_COIF10_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF10_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif11_f32">variable PLP_DWT_COIF11_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF11_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif12_f32">variable PLP_DWT_COIF12_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF12_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif13_f32">variable PLP_DWT_COIF13_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF13_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif14_f32">variable PLP_DWT_COIF14_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF14_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif15_f32">variable PLP_DWT_COIF15_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF15_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif16_f32">variable PLP_DWT_COIF16_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF16_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif17_f32">variable PLP_DWT_COIF17_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_COIF17_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db1_f32">variable PLP_DWT_DB1_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB1_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db2_f32">variable PLP_DWT_DB2_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB2_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db3_f32">variable PLP_DWT_DB3_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB3_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db4_f32">variable PLP_DWT_DB4_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB4_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db5_f32">variable PLP_DWT_DB5_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB5_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db6_f32">variable PLP_DWT_DB6_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB6_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db7_f32">variable PLP_DWT_DB7_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB7_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db8_f32">variable PLP_DWT_DB8_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB8_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db9_f32">variable PLP_DWT_DB9_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB9_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db10_f32">variable PLP_DWT_DB10_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB10_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db11_f32">variable PLP_DWT_DB11_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB11_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db12_f32">variable PLP_DWT_DB12_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB12_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db13_f32">variable PLP_DWT_DB13_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB13_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db14_f32">variable PLP_DWT_DB14_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB14_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db15_f32">variable PLP_DWT_DB15_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB15_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db16_f32">variable PLP_DWT_DB16_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB16_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db17_f32">variable PLP_DWT_DB17_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB17_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db18_f32">variable PLP_DWT_DB18_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB18_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db19_f32">variable PLP_DWT_DB19_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB19_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_db20_f32">variable PLP_DWT_DB20_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_DB20_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_haar_f32">variable PLP_DWT_HAAR_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_HAAR_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym2_f32">variable PLP_DWT_SYM2_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM2_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym3_f32">variable PLP_DWT_SYM3_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM3_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym4_f32">variable PLP_DWT_SYM4_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM4_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym5_f32">variable PLP_DWT_SYM5_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM5_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym6_f32">variable PLP_DWT_SYM6_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM6_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym7_f32">variable PLP_DWT_SYM7_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM7_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym8_f32">variable PLP_DWT_SYM8_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM8_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym9_f32">variable PLP_DWT_SYM9_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM9_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym10_f32">variable PLP_DWT_SYM10_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM10_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym11_f32">variable PLP_DWT_SYM11_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM11_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym12_f32">variable PLP_DWT_SYM12_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM12_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym13_f32">variable PLP_DWT_SYM13_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM13_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym14_f32">variable PLP_DWT_SYM14_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM14_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym15_f32">variable PLP_DWT_SYM15_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM15_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym16_f32">variable PLP_DWT_SYM16_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM16_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym17_f32">variable PLP_DWT_SYM17_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM17_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym18_f32">variable PLP_DWT_SYM18_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM18_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym19_f32">variable PLP_DWT_SYM19_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM19_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym20_f32">variable PLP_DWT_SYM20_f32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_f32 PLP_DWT_SYM20_f32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif1_q32">variable PLP_DWT_COIF1_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF1_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif2_q32">variable PLP_DWT_COIF2_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF2_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif3_q32">variable PLP_DWT_COIF3_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF3_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif4_q32">variable PLP_DWT_COIF4_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF4_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif5_q32">variable PLP_DWT_COIF5_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF5_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif6_q32">variable PLP_DWT_COIF6_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF6_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif7_q32">variable PLP_DWT_COIF7_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF7_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif8_q32">variable PLP_DWT_COIF8_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF8_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif9_q32">variable PLP_DWT_COIF9_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF9_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif10_q32">variable PLP_DWT_COIF10_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF10_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif11_q32">variable PLP_DWT_COIF11_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF11_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif12_q32">variable PLP_DWT_COIF12_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF12_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif13_q32">variable PLP_DWT_COIF13_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF13_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif14_q32">variable PLP_DWT_COIF14_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF14_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif15_q32">variable PLP_DWT_COIF15_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF15_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif16_q32">variable PLP_DWT_COIF16_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF16_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif17_q32">variable PLP_DWT_COIF17_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_COIF17_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db1_q32">variable PLP_DWT_DB1_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB1_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db2_q32">variable PLP_DWT_DB2_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB2_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db3_q32">variable PLP_DWT_DB3_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB3_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db4_q32">variable PLP_DWT_DB4_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB4_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db5_q32">variable PLP_DWT_DB5_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB5_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db6_q32">variable PLP_DWT_DB6_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB6_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db7_q32">variable PLP_DWT_DB7_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB7_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db8_q32">variable PLP_DWT_DB8_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB8_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db9_q32">variable PLP_DWT_DB9_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB9_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db10_q32">variable PLP_DWT_DB10_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB10_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db11_q32">variable PLP_DWT_DB11_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB11_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db12_q32">variable PLP_DWT_DB12_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB12_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db13_q32">variable PLP_DWT_DB13_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB13_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db14_q32">variable PLP_DWT_DB14_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB14_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db15_q32">variable PLP_DWT_DB15_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB15_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db16_q32">variable PLP_DWT_DB16_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB16_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db17_q32">variable PLP_DWT_DB17_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB17_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db18_q32">variable PLP_DWT_DB18_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB18_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db19_q32">variable PLP_DWT_DB19_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB19_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_db20_q32">variable PLP_DWT_DB20_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_DB20_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_haar_q32">variable PLP_DWT_HAAR_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_HAAR_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym2_q32">variable PLP_DWT_SYM2_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM2_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym3_q32">variable PLP_DWT_SYM3_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM3_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym4_q32">variable PLP_DWT_SYM4_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM4_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym5_q32">variable PLP_DWT_SYM5_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM5_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym6_q32">variable PLP_DWT_SYM6_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM6_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym7_q32">variable PLP_DWT_SYM7_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM7_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym8_q32">variable PLP_DWT_SYM8_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM8_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym9_q32">variable PLP_DWT_SYM9_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM9_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym10_q32">variable PLP_DWT_SYM10_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM10_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym11_q32">variable PLP_DWT_SYM11_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM11_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym12_q32">variable PLP_DWT_SYM12_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM12_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym13_q32">variable PLP_DWT_SYM13_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM13_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym14_q32">variable PLP_DWT_SYM14_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM14_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym15_q32">variable PLP_DWT_SYM15_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM15_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym16_q32">variable PLP_DWT_SYM16_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM16_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym17_q32">variable PLP_DWT_SYM17_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM17_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym18_q32">variable PLP_DWT_SYM18_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM18_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym19_q32">variable PLP_DWT_SYM19_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM19_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_sym20_q32">variable PLP_DWT_SYM20_q32</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q32 PLP_DWT_SYM20_q32;
+</code></pre>
+<h3 id="variable-plp_dwt_coif1_q16">variable PLP_DWT_COIF1_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF1_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif2_q16">variable PLP_DWT_COIF2_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF2_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif3_q16">variable PLP_DWT_COIF3_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF3_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif4_q16">variable PLP_DWT_COIF4_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF4_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif5_q16">variable PLP_DWT_COIF5_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF5_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif6_q16">variable PLP_DWT_COIF6_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF6_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif7_q16">variable PLP_DWT_COIF7_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF7_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif8_q16">variable PLP_DWT_COIF8_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF8_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif9_q16">variable PLP_DWT_COIF9_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF9_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif10_q16">variable PLP_DWT_COIF10_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF10_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif11_q16">variable PLP_DWT_COIF11_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF11_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif12_q16">variable PLP_DWT_COIF12_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF12_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif13_q16">variable PLP_DWT_COIF13_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF13_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif14_q16">variable PLP_DWT_COIF14_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF14_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif15_q16">variable PLP_DWT_COIF15_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF15_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif16_q16">variable PLP_DWT_COIF16_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF16_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif17_q16">variable PLP_DWT_COIF17_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_COIF17_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db1_q16">variable PLP_DWT_DB1_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB1_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db2_q16">variable PLP_DWT_DB2_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB2_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db3_q16">variable PLP_DWT_DB3_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB3_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db4_q16">variable PLP_DWT_DB4_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB4_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db5_q16">variable PLP_DWT_DB5_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB5_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db6_q16">variable PLP_DWT_DB6_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB6_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db7_q16">variable PLP_DWT_DB7_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB7_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db8_q16">variable PLP_DWT_DB8_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB8_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db9_q16">variable PLP_DWT_DB9_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB9_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db10_q16">variable PLP_DWT_DB10_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB10_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db11_q16">variable PLP_DWT_DB11_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB11_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db12_q16">variable PLP_DWT_DB12_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB12_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db13_q16">variable PLP_DWT_DB13_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB13_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db14_q16">variable PLP_DWT_DB14_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB14_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db15_q16">variable PLP_DWT_DB15_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB15_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db16_q16">variable PLP_DWT_DB16_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB16_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db17_q16">variable PLP_DWT_DB17_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB17_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db18_q16">variable PLP_DWT_DB18_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB18_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db19_q16">variable PLP_DWT_DB19_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB19_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_db20_q16">variable PLP_DWT_DB20_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_DB20_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_haar_q16">variable PLP_DWT_HAAR_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_HAAR_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym2_q16">variable PLP_DWT_SYM2_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM2_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym3_q16">variable PLP_DWT_SYM3_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM3_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym4_q16">variable PLP_DWT_SYM4_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM4_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym5_q16">variable PLP_DWT_SYM5_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM5_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym6_q16">variable PLP_DWT_SYM6_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM6_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym7_q16">variable PLP_DWT_SYM7_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM7_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym8_q16">variable PLP_DWT_SYM8_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM8_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym9_q16">variable PLP_DWT_SYM9_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM9_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym10_q16">variable PLP_DWT_SYM10_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM10_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym11_q16">variable PLP_DWT_SYM11_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM11_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym12_q16">variable PLP_DWT_SYM12_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM12_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym13_q16">variable PLP_DWT_SYM13_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM13_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym14_q16">variable PLP_DWT_SYM14_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM14_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym15_q16">variable PLP_DWT_SYM15_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM15_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym16_q16">variable PLP_DWT_SYM16_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM16_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym17_q16">variable PLP_DWT_SYM17_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM17_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym18_q16">variable PLP_DWT_SYM18_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM18_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym19_q16">variable PLP_DWT_SYM19_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM19_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_sym20_q16">variable PLP_DWT_SYM20_q16</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q16 PLP_DWT_SYM20_q16;
+</code></pre>
+<h3 id="variable-plp_dwt_coif1_q8">variable PLP_DWT_COIF1_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF1_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_coif2_q8">variable PLP_DWT_COIF2_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF2_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_coif3_q8">variable PLP_DWT_COIF3_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF3_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_coif4_q8">variable PLP_DWT_COIF4_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF4_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_coif5_q8">variable PLP_DWT_COIF5_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF5_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_coif6_q8">variable PLP_DWT_COIF6_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF6_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_coif7_q8">variable PLP_DWT_COIF7_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF7_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_coif8_q8">variable PLP_DWT_COIF8_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF8_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_coif9_q8">variable PLP_DWT_COIF9_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF9_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_coif10_q8">variable PLP_DWT_COIF10_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF10_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_coif11_q8">variable PLP_DWT_COIF11_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF11_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_coif12_q8">variable PLP_DWT_COIF12_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF12_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_coif13_q8">variable PLP_DWT_COIF13_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF13_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_coif14_q8">variable PLP_DWT_COIF14_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF14_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_coif15_q8">variable PLP_DWT_COIF15_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF15_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_coif16_q8">variable PLP_DWT_COIF16_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF16_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_coif17_q8">variable PLP_DWT_COIF17_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_COIF17_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db1_q8">variable PLP_DWT_DB1_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB1_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db2_q8">variable PLP_DWT_DB2_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB2_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db3_q8">variable PLP_DWT_DB3_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB3_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db4_q8">variable PLP_DWT_DB4_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB4_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db5_q8">variable PLP_DWT_DB5_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB5_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db6_q8">variable PLP_DWT_DB6_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB6_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db7_q8">variable PLP_DWT_DB7_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB7_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db8_q8">variable PLP_DWT_DB8_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB8_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db9_q8">variable PLP_DWT_DB9_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB9_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db10_q8">variable PLP_DWT_DB10_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB10_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db11_q8">variable PLP_DWT_DB11_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB11_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db12_q8">variable PLP_DWT_DB12_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB12_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db13_q8">variable PLP_DWT_DB13_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB13_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db14_q8">variable PLP_DWT_DB14_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB14_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db15_q8">variable PLP_DWT_DB15_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB15_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db16_q8">variable PLP_DWT_DB16_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB16_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db17_q8">variable PLP_DWT_DB17_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB17_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db18_q8">variable PLP_DWT_DB18_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB18_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db19_q8">variable PLP_DWT_DB19_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB19_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_db20_q8">variable PLP_DWT_DB20_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_DB20_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_haar_q8">variable PLP_DWT_HAAR_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_HAAR_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym2_q8">variable PLP_DWT_SYM2_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM2_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym3_q8">variable PLP_DWT_SYM3_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM3_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym4_q8">variable PLP_DWT_SYM4_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM4_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym5_q8">variable PLP_DWT_SYM5_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM5_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym6_q8">variable PLP_DWT_SYM6_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM6_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym7_q8">variable PLP_DWT_SYM7_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM7_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym8_q8">variable PLP_DWT_SYM8_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM8_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym9_q8">variable PLP_DWT_SYM9_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM9_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym10_q8">variable PLP_DWT_SYM10_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM10_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym11_q8">variable PLP_DWT_SYM11_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM11_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym12_q8">variable PLP_DWT_SYM12_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM12_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym13_q8">variable PLP_DWT_SYM13_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM13_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym14_q8">variable PLP_DWT_SYM14_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM14_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym15_q8">variable PLP_DWT_SYM15_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM15_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym16_q8">variable PLP_DWT_SYM16_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM16_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym17_q8">variable PLP_DWT_SYM17_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM17_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym18_q8">variable PLP_DWT_SYM18_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM18_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym19_q8">variable PLP_DWT_SYM19_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM19_q8;
+</code></pre>
+<h3 id="variable-plp_dwt_sym20_q8">variable PLP_DWT_SYM20_q8</h3>
+<pre><code class="language-cpp">const plp_dwt_wavelet_q8 PLP_DWT_SYM20_q8;
+</code></pre>
+<h2 id="source-code">Source code</h2>
+<pre><code class="language-cpp">
+/*
+ * Copyright (C) 2020 ETH Zurich and University of Bologna. All rights reserved.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the License); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#ifndef __PLP_CONST_STRUCTS_H__
+#define __PLP_CONST_STRUCTS_H__
+
+#include &quot;plp_common_tables.h&quot;
+#include &quot;plp_math.h&quot;
+
+/* Fixed-point cfft */
+
+extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len16;
+extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len32;
+extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len64;
+extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len128;
+extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len256;
+extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len512;
+extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len1024;
+extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len2048;
+extern const plp_cfft_instance_q16 plp_cfft_sR_q16_len4096;
+
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len16;
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len32;
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len64;
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len128;
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len256;
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len512;
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len1024;
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len2048;
+extern const plp_cfft_instance_q32 plp_cfft_sR_q32_len4096;
+
+/* Floating-point cfft */
+
+extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len16;
+extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len32;
+extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len64;
+extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len128;
+extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len256;
+extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len512;
+extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len1024;
+extern const plp_cfft_instance_f32 plp_cfft_sR_f32_len2048;
+
+/* Floating-point rfft */
+
+extern const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len16;
+extern const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len64;
+extern const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len128;
+extern const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len256;
+extern const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len512;
+extern const plp_cfft_instance_f32 plp_cfft_fast_sR_f32_len1024;
+extern const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len32;
+extern const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len64;
+extern const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len128;
+extern const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len256;
+extern const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len512;
+extern const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len1024;
+extern const plp_fft_fast_instance_f32 plp_rfft_fast_sR_f32_len2048;
+
+extern const plp_fft_instance_f32 plp_rfft_sR_f32_len32;
+extern const plp_fft_instance_f32 plp_rfft_sR_f32_len64;
+extern const plp_fft_instance_f32 plp_rfft_sR_f32_len128;
+extern const plp_fft_instance_f32 plp_rfft_sR_f32_len256;
+extern const plp_fft_instance_f32 plp_rfft_sR_f32_len512;
+extern const plp_fft_instance_f32 plp_rfft_sR_f32_len1024;
+extern const plp_fft_instance_f32 plp_rfft_sR_f32_len2048;
+
+extern const plp_triangular_filter_f32 plp_triangular_filter_f32_32;
+
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF1_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF2_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF3_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF4_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF5_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF6_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF7_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF8_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF9_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF10_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF11_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF12_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF13_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF14_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF15_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF16_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_COIF17_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB1_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB2_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB3_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB4_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB5_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB6_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB7_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB8_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB9_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB10_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB11_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB12_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB13_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB14_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB15_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB16_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB17_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB18_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB19_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_DB20_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_HAAR_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM2_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM3_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM4_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM5_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM6_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM7_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM8_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM9_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM10_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM11_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM12_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM13_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM14_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM15_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM16_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM17_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM18_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM19_f32;
+extern const plp_dwt_wavelet_f32 PLP_DWT_SYM20_f32;
+
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF1_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF2_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF3_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF4_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF5_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF6_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF7_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF8_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF9_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF10_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF11_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF12_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF13_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF14_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF15_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF16_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_COIF17_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB1_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB2_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB3_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB4_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB5_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB6_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB7_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB8_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB9_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB10_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB11_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB12_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB13_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB14_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB15_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB16_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB17_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB18_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB19_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_DB20_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_HAAR_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM2_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM3_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM4_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM5_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM6_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM7_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM8_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM9_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM10_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM11_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM12_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM13_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM14_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM15_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM16_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM17_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM18_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM19_q32;
+extern const plp_dwt_wavelet_q32 PLP_DWT_SYM20_q32;
+
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF1_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF2_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF3_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF4_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF5_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF6_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF7_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF8_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF9_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF10_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF11_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF12_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF13_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF14_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF15_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF16_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_COIF17_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB1_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB2_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB3_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB4_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB5_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB6_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB7_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB8_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB9_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB10_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB11_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB12_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB13_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB14_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB15_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB16_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB17_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB18_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB19_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_DB20_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_HAAR_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM2_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM3_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM4_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM5_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM6_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM7_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM8_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM9_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM10_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM11_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM12_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM13_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM14_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM15_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM16_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM17_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM18_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM19_q16;
+extern const plp_dwt_wavelet_q16 PLP_DWT_SYM20_q16;
+
+
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF1_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF2_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF3_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF4_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF5_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF6_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF7_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF8_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF9_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF10_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF11_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF12_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF13_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF14_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF15_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF16_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_COIF17_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB1_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB2_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB3_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB4_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB5_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB6_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB7_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB8_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB9_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB10_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB11_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB12_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB13_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB14_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB15_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB16_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB17_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB18_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB19_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_DB20_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_HAAR_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM2_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM3_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM4_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM5_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM6_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM7_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM8_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM9_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM10_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM11_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM12_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM13_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM14_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM15_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM16_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM17_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM18_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM19_q8;
+extern const plp_dwt_wavelet_q8 PLP_DWT_SYM20_q8;
+
+
+#endif // PLP_CONST_STRUCTS_H
+</code></pre>
+<hr />
+<p>Updated on 2023-03-01 at 16:16:33 +0000</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+    
+  </body>
+</html>

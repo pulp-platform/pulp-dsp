@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_ae59a420a7ce1ca72aedf4167e6e5834" kind="dir">
+    <compoundname>/github/workspace/src/MatrixFunctions/mat_mult_trans_cmplx</compoundname>
+    <innerdir refid="dir_e85663a3980e78b902223f6aec9bd8c5">/github/workspace/src/MatrixFunctions/mat_mult_trans_cmplx/kernels</innerdir>
+    <innerfile refid="plp__mat__mult__trans__cmplx__f32_8c">plp_mat_mult_trans_cmplx_f32.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__f32__parallel_8c">plp_mat_mult_trans_cmplx_f32_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__i16_8c">plp_mat_mult_trans_cmplx_i16.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__i16__parallel_8c">plp_mat_mult_trans_cmplx_i16_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__i32_8c">plp_mat_mult_trans_cmplx_i32.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__i32__parallel_8c">plp_mat_mult_trans_cmplx_i32_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__i8_8c">plp_mat_mult_trans_cmplx_i8.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__i8__parallel_8c">plp_mat_mult_trans_cmplx_i8_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__q16_8c">plp_mat_mult_trans_cmplx_q16.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__q16__parallel_8c">plp_mat_mult_trans_cmplx_q16_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__q32_8c">plp_mat_mult_trans_cmplx_q32.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__q32__parallel_8c">plp_mat_mult_trans_cmplx_q32_parallel.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__q8_8c">plp_mat_mult_trans_cmplx_q8.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__q8__parallel_8c">plp_mat_mult_trans_cmplx_q8_parallel.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/MatrixFunctions/mat_mult_trans_cmplx/"/>
+  </compounddef>
+</doxygen>

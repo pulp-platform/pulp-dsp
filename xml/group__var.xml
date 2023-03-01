@@ -1,0 +1,246 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__var" kind="group">
+    <compoundname>var</compoundname>
+    <title>Var</title>
+    <innergroup refid="group__varKernels">Var Kernels</innergroup>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__var_1gab0d0bbe174ee00d0698b0481be034c7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_var_f32</definition>
+        <argsstring>(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes)</argsstring>
+        <name>plp_var_f32</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for var value of a 32-bit float vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for Statisical variance of a 32-bit float vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>variance value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_var_f32.c" line="53" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_var_f32.c" bodystart="53" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="group__var_1gabba7c884b0005dd7c729480edf96600f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_var_q16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int16_t *__restrict__ pRes)</argsstring>
+        <name>plp_var_q16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for var value of a 16-bit integer vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for Statisical variance of a 16-bit fixed point vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>variance value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_var_q16.c" line="53" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_var_q16.c" bodystart="53" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="group__var_1ga151bd2576333f0730c1a32c029a25704" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_var_q32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_var_q32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for var value of a 32-bit integer vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for Statisical variance of a 32-bit fixed point vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>variance value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_var_q32.c" line="53" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_var_q32.c" bodystart="53" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="group__var_1ga38324d87b2b220a25ebaf9738f72cbeb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_var_q8</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int8_t *__restrict__ pRes)</argsstring>
+        <name>plp_var_q8</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for var value of a 8-bit integer vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for Statisical variance of a 8-bit fixed point vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>variance value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_var_q8.c" line="53" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_var_q8.c" bodystart="53" bodyend="63"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

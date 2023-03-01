@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="plp__dwt__common_8h" kind="file" language="C++">
+    <compoundname>plp_dwt_common.h</compoundname>
+    <includes refid="plp__math_8h" local="yes">plp_math.h</includes>
+    <includedby refid="plp__dwt__f32_8c" local="yes">/github/workspace/src/TransformFunctions/plp_dwt_f32.c</includedby>
+    <includedby refid="plp__dwt__f32__parallel_8c" local="yes">/github/workspace/src/TransformFunctions/plp_dwt_f32_parallel.c</includedby>
+    <includedby refid="plp__dwt__q16_8c" local="yes">/github/workspace/src/TransformFunctions/plp_dwt_q16.c</includedby>
+    <includedby refid="plp__dwt__q16__parallel_8c" local="yes">/github/workspace/src/TransformFunctions/plp_dwt_q16_parallel.c</includedby>
+    <includedby refid="plp__dwt__q32_8c" local="yes">/github/workspace/src/TransformFunctions/plp_dwt_q32.c</includedby>
+    <includedby refid="plp__dwt__q32__parallel_8c" local="yes">/github/workspace/src/TransformFunctions/plp_dwt_q32_parallel.c</includedby>
+    <includedby refid="plp__dwt__q8_8c" local="yes">/github/workspace/src/TransformFunctions/plp_dwt_q8.c</includedby>
+    <includedby refid="plp__dwt__q8__parallel_8c" local="yes">/github/workspace/src/TransformFunctions/plp_dwt_q8_parallel.c</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>plp_math.h</label>
+        <link refid="plp__math_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>rtos_hal.h</label>
+        <link refid="rtos__hal_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/github/workspace/src/TransformFunctions/plp_dwt_common.h</label>
+        <link refid="plp__dwt__common_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>math.h</label>
+      </node>
+      <node id="5">
+        <label>rt/rt_api.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="plp__dwt__common_8h_1a03861ad3146d7a5b46ee87c6b73d2054" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void copy_coefs_q32</definition>
+        <argsstring>(int32_t *dec_hi_l1, int32_t *dec_lo_l1, plp_dwt_wavelet_q32 wavelet)</argsstring>
+        <name>copy_coefs_q32</name>
+        <param>
+          <type>int32_t *</type>
+          <declname>dec_hi_l1</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>dec_lo_l1</declname>
+        </param>
+        <param>
+          <type><ref refid="structplp__dwt__wavelet__q32" kindref="compound">plp_dwt_wavelet_q32</ref></type>
+          <declname>wavelet</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_dwt_common.h" line="35" column="20" bodyfile="/github/workspace/src/TransformFunctions/plp_dwt_common.h" bodystart="35" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="plp__dwt__common_8h_1ae13c2ed07018eafc9a4e6d4716cbcf32" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void copy_coefs_f32</definition>
+        <argsstring>(float32_t *dec_hi_l1, float32_t *dec_lo_l1, plp_dwt_wavelet_f32 wavelet)</argsstring>
+        <name>copy_coefs_f32</name>
+        <param>
+          <type>float32_t *</type>
+          <declname>dec_hi_l1</declname>
+        </param>
+        <param>
+          <type>float32_t *</type>
+          <declname>dec_lo_l1</declname>
+        </param>
+        <param>
+          <type><ref refid="structplp__dwt__wavelet__f32" kindref="compound">plp_dwt_wavelet_f32</ref></type>
+          <declname>wavelet</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_dwt_common.h" line="50" column="20" bodyfile="/github/workspace/src/TransformFunctions/plp_dwt_common.h" bodystart="50" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="plp__dwt__common_8h_1a8495302ea118c3a9412cfa6c0a0c5dff" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void copy_coefs_q16</definition>
+        <argsstring>(int16_t *dec_hi_l1, int16_t *dec_lo_l1, plp_dwt_wavelet_q16 wavelet)</argsstring>
+        <name>copy_coefs_q16</name>
+        <param>
+          <type>int16_t *</type>
+          <declname>dec_hi_l1</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>dec_lo_l1</declname>
+        </param>
+        <param>
+          <type><ref refid="structplp__dwt__wavelet__q16" kindref="compound">plp_dwt_wavelet_q16</ref></type>
+          <declname>wavelet</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_dwt_common.h" line="64" column="20" bodyfile="/github/workspace/src/TransformFunctions/plp_dwt_common.h" bodystart="64" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="plp__dwt__common_8h_1a67b3263fe9f9ba81dc4666234f828a7c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void copy_coefs_q8</definition>
+        <argsstring>(int8_t *dec_hi_l1, int8_t *dec_lo_l1, plp_dwt_wavelet_q8 wavelet)</argsstring>
+        <name>copy_coefs_q8</name>
+        <param>
+          <type>int8_t *</type>
+          <declname>dec_hi_l1</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>dec_lo_l1</declname>
+        </param>
+        <param>
+          <type><ref refid="structplp__dwt__wavelet__q8" kindref="compound">plp_dwt_wavelet_q8</ref></type>
+          <declname>wavelet</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_dwt_common.h" line="78" column="20" bodyfile="/github/workspace/src/TransformFunctions/plp_dwt_common.h" bodystart="78" bodyend="89"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>----------------------------------------------------------------------</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Project:<sp/><sp/><sp/><sp/><sp/><sp/>PULP<sp/>DSP<sp/>Library</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>Title:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>plp_dwt_common.h</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>Description:<sp/><sp/>Signal<sp/>Edge<sp/>extension<sp/>algorithms</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>$Date:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>10.<sp/>Juli<sp/>2021</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>$Revision:<sp/><sp/><sp/><sp/>V1</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>--------------------------------------------------------------------<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(C)<sp/>2021<sp/>ETH<sp/>Zurich<sp/>and<sp/>University<sp/>of<sp/>Bologna.<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>Author:<sp/>Jakub<sp/>Mandula,<sp/>ETH<sp/>Zurich</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/>SPDX-License-Identifier:<sp/>Apache-2.0</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/>Licensed<sp/>under<sp/>the<sp/>Apache<sp/>License,<sp/>Version<sp/>2.0<sp/>(the<sp/>License);<sp/>you<sp/>may</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>not<sp/>use<sp/>this<sp/>file<sp/>except<sp/>in<sp/>compliance<sp/>with<sp/>the<sp/>License.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>You<sp/>may<sp/>obtain<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>License<sp/>at</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>www.apache.org/licenses/LICENSE-2.0</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>Unless<sp/>required<sp/>by<sp/>applicable<sp/>law<sp/>or<sp/>agreed<sp/>to<sp/>in<sp/>writing,<sp/>software</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>distributed<sp/>under<sp/>the<sp/>License<sp/>is<sp/>distributed<sp/>on<sp/>an<sp/>AS<sp/>IS<sp/>BASIS,<sp/>WITHOUT</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>WARRANTIES<sp/>OR<sp/>CONDITIONS<sp/>OF<sp/>ANY<sp/>KIND,<sp/>either<sp/>express<sp/>or<sp/>implied.</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>See<sp/>the<sp/>License<sp/>for<sp/>the<sp/>specific<sp/>language<sp/>governing<sp/>permissions<sp/>and</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>limitations<sp/>under<sp/>the<sp/>License.</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="plp__math_8h" kindref="compound">plp_math.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>__PLP_DWT_COMMON_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__PLP_DWT_COMMON_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>copy_coefs_q32(int32_t<sp/>*dec_hi_l1,<sp/>int32_t<sp/>*dec_lo_l1,<sp/><ref refid="structplp__dwt__wavelet__q32" kindref="compound">plp_dwt_wavelet_q32</ref><sp/>wavelet){</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/>hal_cl_dma_cmd_t<sp/>copy;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/>int32_t<sp/>merge<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/>hal_cl_dma_cmd((uint32_t)wavelet.dec_hi,<sp/>(uint32_t)dec_hi_l1,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(int32_t)<sp/>*<sp/>wavelet.length,<sp/>HAL_CL_DMA_DIR_EXT2LOC,<sp/>merge,<sp/>&amp;copy);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/>merge<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/>hal_cl_dma_cmd((uint32_t)wavelet.dec_lo,<sp/>(uint32_t)dec_lo_l1,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(int32_t)<sp/>*<sp/>wavelet.length,<sp/>HAL_CL_DMA_DIR_EXT2LOC,<sp/>merge,<sp/>&amp;copy);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/>hal_cl_dma_cmd_wait(&amp;copy);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>copy_coefs_f32(float32_t<sp/>*dec_hi_l1,<sp/>float32_t<sp/>*dec_lo_l1,<sp/><ref refid="structplp__dwt__wavelet__f32" kindref="compound">plp_dwt_wavelet_f32</ref><sp/>wavelet){</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>hal_cl_dma_cmd_t<sp/>copy;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/>int32_t<sp/>merge<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/>hal_cl_dma_cmd((uint32_t)wavelet.dec_hi,<sp/>(uint32_t)dec_hi_l1,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(float32_t)<sp/>*<sp/>wavelet.length,<sp/>HAL_CL_DMA_DIR_EXT2LOC,<sp/>merge,<sp/>&amp;copy);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/>merge<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/>hal_cl_dma_cmd((uint32_t)wavelet.dec_lo,<sp/>(uint32_t)dec_lo_l1,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(float32_t)<sp/>*<sp/>wavelet.length,<sp/>HAL_CL_DMA_DIR_EXT2LOC,<sp/>merge,<sp/>&amp;copy);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/>hal_cl_dma_cmd_wait(&amp;copy);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>copy_coefs_q16(int16_t<sp/>*dec_hi_l1,<sp/>int16_t<sp/>*dec_lo_l1,<sp/><ref refid="structplp__dwt__wavelet__q16" kindref="compound">plp_dwt_wavelet_q16</ref><sp/>wavelet){</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/>hal_cl_dma_cmd_t<sp/>copy;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/>int32_t<sp/>merge<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/>hal_cl_dma_cmd((uint32_t)wavelet.dec_hi,<sp/>(uint32_t)dec_hi_l1,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(int16_t)<sp/>*<sp/>wavelet.length,<sp/>HAL_CL_DMA_DIR_EXT2LOC,<sp/>merge,<sp/>&amp;copy);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/>merge<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/>hal_cl_dma_cmd((uint32_t)wavelet.dec_lo,<sp/>(uint32_t)dec_lo_l1,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(int16_t)<sp/>*<sp/>wavelet.length,<sp/>HAL_CL_DMA_DIR_EXT2LOC,<sp/>merge,<sp/>&amp;copy);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/>hal_cl_dma_cmd_wait(&amp;copy);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>copy_coefs_q8(int8_t<sp/>*dec_hi_l1,<sp/>int8_t<sp/>*dec_lo_l1,<sp/><ref refid="structplp__dwt__wavelet__q8" kindref="compound">plp_dwt_wavelet_q8</ref><sp/>wavelet){</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/>hal_cl_dma_cmd_t<sp/>copy;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/>int32_t<sp/>merge<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/>hal_cl_dma_cmd((uint32_t)wavelet.dec_hi,<sp/>(uint32_t)dec_hi_l1,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(int8_t)<sp/>*<sp/>wavelet.length,<sp/>HAL_CL_DMA_DIR_EXT2LOC,<sp/>merge,<sp/>&amp;copy);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/>merge<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/>hal_cl_dma_cmd((uint32_t)wavelet.dec_lo,<sp/>(uint32_t)dec_lo_l1,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(int8_t)<sp/>*<sp/>wavelet.length,<sp/>HAL_CL_DMA_DIR_EXT2LOC,<sp/>merge,<sp/>&amp;copy);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/>hal_cl_dma_cmd_wait(&amp;copy);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/github/workspace/src/TransformFunctions/plp_dwt_common.h"/>
+  </compounddef>
+</doxygen>

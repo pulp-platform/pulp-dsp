@@ -1,0 +1,281 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__BasicOffset" kind="group">
+    <compoundname>BasicOffset</compoundname>
+    <title>vector offset</title>
+    <innergroup refid="group__BasicOffsetKernels">vector offset Kernels</innergroup>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__BasicOffset_1ga9cb85cdec9fa236bab023c2dd9cad798" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_offset_f32</definition>
+        <argsstring>(const float32_t *pSrc, float32_t offset, float32_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_offset_f32</name>
+        <param>
+          <type>const float32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float32_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>float32_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code of add a constant offset to a vector for 32-bit floats. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the offset to be added </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/offset/plp_offset_f32.c" line="51" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/offset/plp_offset_f32.c" bodystart="51" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicOffset_1ga1a01ce8e3544544fc4304b9b36b327d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_offset_i16</definition>
+        <argsstring>(const int16_t *pSrc, int16_t offset, int16_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_offset_i16</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code of add a constant offset to a vector for 16-bit integers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the offset to be added </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/offset/plp_offset_i16.c" line="61" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/offset/plp_offset_i16.c" bodystart="61" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicOffset_1ga6c251f31e8edd35bfe22b63b769b6941" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_offset_i32</definition>
+        <argsstring>(const int32_t *pSrc, int32_t offset, int32_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_offset_i32</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code of add a constant offset to a vector for 32-bit integers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the offset to be added </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/offset/plp_offset_i32.c" line="51" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/offset/plp_offset_i32.c" bodystart="51" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicOffset_1gaf3b89563baa6f05068cd19c2790f96f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_offset_i8</definition>
+        <argsstring>(const int8_t *pSrc, int8_t offset, int8_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_offset_i8</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code of add a constant offset to a vector for 8-bit integers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the offset to be added </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/offset/plp_offset_i8.c" line="51" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/offset/plp_offset_i8.c" bodystart="51" bodyend="58"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the glue code for vector offset. The kernel codes (kernels) are in the Module vector offset Kernels. Adds a constant offset to each element of a vector. <preformatted>
+    pDst[n] = pSrc[n] + offset,   0 &lt;= n &lt; blockSize.
+</preformatted> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

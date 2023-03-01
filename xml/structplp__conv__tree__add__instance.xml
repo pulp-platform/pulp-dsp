@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__conv__tree__add__instance" kind="struct" language="C++" prot="public">
+    <compoundname>plp_conv_tree_add_instance</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__conv__tree__add__instance_1a4af85ef8dd75dcb10148ebeff3a4dacc" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_conv_tree_add_instance::addOffset</definition>
+        <argsstring></argsstring>
+        <name>addOffset</name>
+        <qualifiedname>plp_conv_tree_add_instance::addOffset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="267" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="267" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__conv__tree__add__instance_1a9d5ef83b84851c3be74e4d9fd46336d1" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_conv_tree_add_instance::addLengthfirst</definition>
+        <argsstring></argsstring>
+        <name>addLengthfirst</name>
+        <qualifiedname>plp_conv_tree_add_instance::addLengthfirst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="268" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="268" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__conv__tree__add__instance_1ad217fce6a7fe3241daf01e89a3b4b625" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_conv_tree_add_instance::addLengthsecond</definition>
+        <argsstring></argsstring>
+        <name>addLengthsecond</name>
+        <qualifiedname>plp_conv_tree_add_instance::addLengthsecond</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="269" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="269" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__conv__tree__add__instance_1a7b8e5818cbfeb201522159c14a5286ae" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_conv_tree_add_instance::numVectors</definition>
+        <argsstring></argsstring>
+        <name>numVectors</name>
+        <qualifiedname>plp_conv_tree_add_instance::numVectors</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="270" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="270" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__conv__tree__add__instance_1a101b3afe1b59c2819dd0b13988ad10dc" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_conv_tree_add_instance::blockOffset</definition>
+        <argsstring></argsstring>
+        <name>blockOffset</name>
+        <qualifiedname>plp_conv_tree_add_instance::blockOffset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="271" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="271" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__conv__tree__add__instance_1a449f2bbfb7cdb9e44d22a966ed1a870c" prot="public" static="no" mutable="no">
+        <type>int32_t *</type>
+        <definition>int32_t* plp_conv_tree_add_instance::pRes</definition>
+        <argsstring></argsstring>
+        <name>pRes</name>
+        <qualifiedname>plp_conv_tree_add_instance::pRes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="272" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="272" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__conv__tree__add__instance_1a894a81a2d80f32ba8dd299ac22f1f3f2" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t plp_conv_tree_add_instance::coresPerVector</definition>
+        <argsstring></argsstring>
+        <name>coresPerVector</name>
+        <qualifiedname>plp_conv_tree_add_instance::coresPerVector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="273" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="273" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for basic integer convolution. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">addOffset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">addLengthfirst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">addLengthsecond</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numVectors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockOffset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coresPerVector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="266" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="266" bodyend="274"/>
+    <listofallmembers>
+      <member refid="structplp__conv__tree__add__instance_1a9d5ef83b84851c3be74e4d9fd46336d1" prot="public" virt="non-virtual"><scope>plp_conv_tree_add_instance</scope><name>addLengthfirst</name></member>
+      <member refid="structplp__conv__tree__add__instance_1ad217fce6a7fe3241daf01e89a3b4b625" prot="public" virt="non-virtual"><scope>plp_conv_tree_add_instance</scope><name>addLengthsecond</name></member>
+      <member refid="structplp__conv__tree__add__instance_1a4af85ef8dd75dcb10148ebeff3a4dacc" prot="public" virt="non-virtual"><scope>plp_conv_tree_add_instance</scope><name>addOffset</name></member>
+      <member refid="structplp__conv__tree__add__instance_1a101b3afe1b59c2819dd0b13988ad10dc" prot="public" virt="non-virtual"><scope>plp_conv_tree_add_instance</scope><name>blockOffset</name></member>
+      <member refid="structplp__conv__tree__add__instance_1a894a81a2d80f32ba8dd299ac22f1f3f2" prot="public" virt="non-virtual"><scope>plp_conv_tree_add_instance</scope><name>coresPerVector</name></member>
+      <member refid="structplp__conv__tree__add__instance_1a7b8e5818cbfeb201522159c14a5286ae" prot="public" virt="non-virtual"><scope>plp_conv_tree_add_instance</scope><name>numVectors</name></member>
+      <member refid="structplp__conv__tree__add__instance_1a449f2bbfb7cdb9e44d22a966ed1a870c" prot="public" virt="non-virtual"><scope>plp_conv_tree_add_instance</scope><name>pRes</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

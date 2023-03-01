@@ -1,0 +1,317 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__BasicScale" kind="group">
+    <compoundname>BasicScale</compoundname>
+    <title>vector scale</title>
+    <innergroup refid="group__BasicScaleKernels">vector scale Kernels</innergroup>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__BasicScale_1gae47793391432d2990a5be0aea376c86a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_scale_f32</definition>
+        <argsstring>(const float32_t *__restrict__ pSrc, float32_t scaleFactor, float32_t *__restrict__ pDst, uint32_t blockSize)</argsstring>
+        <name>plp_scale_f32</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float32_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code of multiply a vector by a scalar for 32-bit floats. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to multiply all elements </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/scale/plp_scale_f32.c" line="51" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/scale/plp_scale_f32.c" bodystart="51" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicScale_1ga8c4b053ac0aeb251bd3e1cf875accbe5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_scale_i16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, int16_t scaleFactor, int32_t shift, int16_t *__restrict__ pDst, uint32_t blockSize)</argsstring>
+        <name>plp_scale_i16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code of multiply a vector by a scalar for 16-bit integers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to multiply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of bits to shift the result by </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/scale/plp_scale_i16.c" line="62" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/scale/plp_scale_i16.c" bodystart="62" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicScale_1ga0a156c860ea6d7450b9497abd6bd6b74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_scale_i32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, int32_t scaleFactor, int32_t shift, int32_t *__restrict__ pDst, uint32_t blockSize)</argsstring>
+        <name>plp_scale_i32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code of multiply a vector by a scalar for 32-bit integers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to multiply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of bits to shift the result by </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/scale/plp_scale_i32.c" line="52" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/scale/plp_scale_i32.c" bodystart="52" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicScale_1ga60aa814e581799a4388d6bc23638888a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_scale_i8</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, int8_t scaleFactor, int32_t shift, int8_t *__restrict__ pDst, uint32_t blockSize)</argsstring>
+        <name>plp_scale_i8</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code of multiply a vector by a scalar for 8-bit integers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to multiply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of bits to shift the result by </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/scale/plp_scale_i8.c" line="52" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/scale/plp_scale_i8.c" bodystart="52" bodyend="59"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the glue code for vector scale. The kernel codes (kernels) are in the Module vector scale Kernels. Multiply a vector by a scalar value. For floating-point data, the algorithm used is: <preformatted>
+    pDst[n] = pSrc[n] * scale,   0 &lt;= n &lt; blockSize.
+</preformatted> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

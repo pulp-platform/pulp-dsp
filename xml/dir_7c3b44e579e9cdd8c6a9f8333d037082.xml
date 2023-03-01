@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_7c3b44e579e9cdd8c6a9f8333d037082" kind="dir">
+    <compoundname>/github/workspace/src/FilteringFunctions/kernels</compoundname>
+    <innerfile refid="plp__conv__i16p__xpulpv2_8c">plp_conv_i16p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__conv__i16s__rv32im_8c">plp_conv_i16s_rv32im.c</innerfile>
+    <innerfile refid="plp__conv__i16s__xpulpv2_8c">plp_conv_i16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__conv__i32p__xpulpv2_8c">plp_conv_i32p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__conv__i32s__rv32im_8c">plp_conv_i32s_rv32im.c</innerfile>
+    <innerfile refid="plp__conv__i32s__rv32im__2_8c">plp_conv_i32s_rv32im_2.c</innerfile>
+    <innerfile refid="plp__conv__i32s__xpulpv2_8c">plp_conv_i32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__conv__i8p__xpulpv2_8c">plp_conv_i8p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__conv__i8s__rv32im_8c">plp_conv_i8s_rv32im.c</innerfile>
+    <innerfile refid="plp__conv__i8s__xpulpv2_8c">plp_conv_i8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__conv__parallel__OLA_8c">plp_conv_parallel_OLA.c</innerfile>
+    <innerfile refid="plp__conv__parallel__OLA__kernel_8c">plp_conv_parallel_OLA_kernel.c</innerfile>
+    <innerfile refid="plp__conv__valid__i16s__xpulpv2_8c">plp_conv_valid_i16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__conv__valid__i32s__xpulpv2_8c">plp_conv_valid_i32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__conv__valid__i8s__xpulpv2_8c">plp_conv_valid_i8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__conv__valid__rep__i16s__xpulpv2_8c">plp_conv_valid_rep_i16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__conv__valid__rep__i8s__xpulpv2_8c">plp_conv_valid_rep_i8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__correlate__i16s__rv32im_8c">plp_correlate_i16s_rv32im.c</innerfile>
+    <innerfile refid="plp__correlate__i16s__xpulpv2_8c">plp_correlate_i16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__correlate__i32s__rv32im_8c">plp_correlate_i32s_rv32im.c</innerfile>
+    <innerfile refid="plp__correlate__i32s__xpulpv2_8c">plp_correlate_i32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__correlate__i8s__rv32im_8c">plp_correlate_i8s_rv32im.c</innerfile>
+    <innerfile refid="plp__correlate__i8s__xpulpv2_8c">plp_correlate_i8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__correlate__q16s__rv32im_8c">plp_correlate_q16s_rv32im.c</innerfile>
+    <innerfile refid="plp__correlate__q16s__xpulpv2_8c">plp_correlate_q16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__correlate__q32s__rv32im_8c">plp_correlate_q32s_rv32im.c</innerfile>
+    <innerfile refid="plp__correlate__q32s__xpulpv2_8c">plp_correlate_q32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__correlate__q8s__rv32im_8c">plp_correlate_q8s_rv32im.c</innerfile>
+    <innerfile refid="plp__correlate__q8s__xpulpv2_8c">plp_correlate_q8s_xpulpv2.c</innerfile>
+    <innerfile refid="pre_8c">pre.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/FilteringFunctions/kernels/"/>
+  </compounddef>
+</doxygen>

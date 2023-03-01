@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__mat__fill__I__instance__f32" kind="struct" language="C++" prot="public">
+    <compoundname>plp_mat_fill_I_instance_f32</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__mat__fill__I__instance__f32_1ae949a7f05c86cdec8d253f05f5770e22" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_fill_I_instance_f32::N</definition>
+        <argsstring></argsstring>
+        <name>N</name>
+        <qualifiedname>plp_mat_fill_I_instance_f32::N</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="886" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="886" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__fill__I__instance__f32_1a4a34ff8d277571dac556b776d93640df" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_fill_I_instance_f32::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_mat_fill_I_instance_f32::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="887" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="887" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__fill__I__instance__f32_1aeeb1bf6f876e775455e56c58162ed0d8" prot="public" static="no" mutable="no">
+        <type>float *__restrict__</type>
+        <definition>float* __restrict__ plp_mat_fill_I_instance_f32::pDst</definition>
+        <argsstring></argsstring>
+        <name>pDst</name>
+        <qualifiedname>plp_mat_fill_I_instance_f32::pDst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="888" column="24" bodyfile="/github/workspace/include/plp_math.h" bodystart="888" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for floating-point parallel identity matrix creation. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="885" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="885" bodyend="889"/>
+    <listofallmembers>
+      <member refid="structplp__mat__fill__I__instance__f32_1ae949a7f05c86cdec8d253f05f5770e22" prot="public" virt="non-virtual"><scope>plp_mat_fill_I_instance_f32</scope><name>N</name></member>
+      <member refid="structplp__mat__fill__I__instance__f32_1a4a34ff8d277571dac556b776d93640df" prot="public" virt="non-virtual"><scope>plp_mat_fill_I_instance_f32</scope><name>nPE</name></member>
+      <member refid="structplp__mat__fill__I__instance__f32_1aeeb1bf6f876e775455e56c58162ed0d8" prot="public" virt="non-virtual"><scope>plp_mat_fill_I_instance_f32</scope><name>pDst</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

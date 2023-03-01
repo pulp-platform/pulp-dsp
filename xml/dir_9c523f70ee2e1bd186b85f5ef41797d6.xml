@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_9c523f70ee2e1bd186b85f5ef41797d6" kind="dir">
+    <compoundname>/github/workspace/src/BasicMathFunctions/mult</compoundname>
+    <innerdir refid="dir_5360689dd6fd9f277e170d17d22a4aeb">/github/workspace/src/BasicMathFunctions/mult/kernels</innerdir>
+    <innerfile refid="plp__mult__f32_8c">plp_mult_f32.c</innerfile>
+    <innerfile refid="plp__mult__f32__parallel_8c">plp_mult_f32_parallel.c</innerfile>
+    <innerfile refid="plp__mult__i16_8c">plp_mult_i16.c</innerfile>
+    <innerfile refid="plp__mult__i32_8c">plp_mult_i32.c</innerfile>
+    <innerfile refid="plp__mult__i8_8c">plp_mult_i8.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/BasicMathFunctions/mult/"/>
+  </compounddef>
+</doxygen>

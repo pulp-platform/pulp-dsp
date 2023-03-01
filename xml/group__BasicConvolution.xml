@@ -1,0 +1,914 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__BasicConvolution" kind="group">
+    <compoundname>BasicConvolution</compoundname>
+    <title>Basic Convolution</title>
+    <innergroup refid="group__BasicConvolutionKernels">Basic Convolution Kernels</innergroup>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__BasicConvolution_1gaa2808b8819a2740941de7733786f232c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_i16</definition>
+        <argsstring>(const int16_t *pSrcA, const uint32_t srcALen, const int16_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_i16</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for convolution of 16-bit integer vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/plp_conv_i16.c" line="54" column="6" bodyfile="/github/workspace/src/FilteringFunctions/plp_conv_i16.c" bodystart="54" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolution_1ga688897799ae02179efeb34f42841eb63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_i16_parallel</definition>
+        <argsstring>(const int16_t *pSrcA, const uint32_t srcALen, const int16_t *pSrcB, const uint32_t srcBLen, const uint8_t nPE, int32_t *pRes)</argsstring>
+        <name>plp_conv_i16_parallel</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel convolution of 16-bit integer vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to compute on </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/plp_conv_i16_parallel.c" line="56" column="6" bodyfile="/github/workspace/src/FilteringFunctions/plp_conv_i16_parallel.c" bodystart="56" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolution_1gad3449f33f3bd82c06ad074818179f61b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_i32</definition>
+        <argsstring>(const int32_t *pSrcA, const uint32_t srcALen, const int32_t *pSrcB, const uint32_t srcBLen, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_conv_i32</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for convolution of 32-bit integer vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/plp_conv_i32.c" line="62" column="6" bodyfile="/github/workspace/src/FilteringFunctions/plp_conv_i32.c" bodystart="62" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolution_1ga711d0067f1bbc2b3ae6d47c13c21bcdb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_i32_parallel</definition>
+        <argsstring>(const int32_t *pSrcA, const uint32_t srcALen, const int32_t *pSrcB, const uint32_t srcBLen, const uint8_t nPE, int32_t *pRes)</argsstring>
+        <name>plp_conv_i32_parallel</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel convolution of 32-bit integer vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to compute on </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/plp_conv_i32_parallel.c" line="58" column="6" bodyfile="/github/workspace/src/FilteringFunctions/plp_conv_i32_parallel.c" bodystart="58" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolution_1gac0b212295bc976acd1d8768862532af9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_i8</definition>
+        <argsstring>(const int8_t *pSrcA, const uint32_t srcALen, const int8_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_i8</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for convolution of 8-bit integer vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/plp_conv_i8.c" line="54" column="6" bodyfile="/github/workspace/src/FilteringFunctions/plp_conv_i8.c" bodystart="54" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolution_1ga268ae60a1f5c516e48ecf594e212f15b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_i8_parallel</definition>
+        <argsstring>(const int8_t *pSrcA, const uint32_t srcALen, const int8_t *pSrcB, const uint32_t srcBLen, const uint8_t nPE, int32_t *pRes)</argsstring>
+        <name>plp_conv_i8_parallel</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel convolution of 8-bit integer vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to compute on </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/plp_conv_i8_parallel.c" line="56" column="6" bodyfile="/github/workspace/src/FilteringFunctions/plp_conv_i8_parallel.c" bodystart="56" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolution_1gab49e29998df3fdcb54e5f4ef238f3ae3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_valid_i16</definition>
+        <argsstring>(const int16_t *pSrcA, const uint32_t srcALen, const int16_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_valid_i16</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for convolution of 16-bit integer vectors in valid range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for convolution (valid) of 16-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ength of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here, of size |srcALen - srcBLen| + 1 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/plp_conv_valid_i16.c" line="52" column="6" bodyfile="/github/workspace/src/FilteringFunctions/plp_conv_valid_i16.c" bodystart="52" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolution_1gaac40c9a172490f7eba34fbe685c3f15e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_valid_i32</definition>
+        <argsstring>(const int32_t *pSrcA, const uint32_t srcALen, const int32_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_valid_i32</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for convolution of 32-bit integer vectors in valid range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for convolution (valid) of 32-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ength of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here, of size |srcALen - srcBLen| + 1 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/plp_conv_valid_i32.c" line="51" column="6" bodyfile="/github/workspace/src/FilteringFunctions/plp_conv_valid_i32.c" bodystart="51" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolution_1ga8ce38448c2d59944773c22ab33c9ffd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_valid_i8</definition>
+        <argsstring>(const int8_t *pSrcA, const uint32_t srcALen, const int8_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_valid_i8</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for convolution of 8-bit integer vectors in valid range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for convolution (valid) of 8-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ength of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here, of size |srcALen - srcBLen| + 1 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/plp_conv_valid_i8.c" line="51" column="6" bodyfile="/github/workspace/src/FilteringFunctions/plp_conv_valid_i8.c" bodystart="51" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolution_1ga016bacb3289184d193e95123dbdc593e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_valid_rep_i16</definition>
+        <argsstring>(const int16_t *pSrcA, const uint32_t srcALen, const int16_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_valid_rep_i16</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for convolution of 16-bit integer vectors in valid range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for convolution (valid with replication) of 16-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector, must be on L2 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ength of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector, must be on L2 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here, of size |srcALen - srcBLen| + 1, preferably in L1 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/plp_conv_valid_rep_i16.c" line="53" column="6" bodyfile="/github/workspace/src/FilteringFunctions/plp_conv_valid_rep_i16.c" bodystart="53" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicConvolution_1gab74d15f9f97a32daf5beae0b9b15b3b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_conv_valid_rep_i8</definition>
+        <argsstring>(const int8_t *pSrcA, const uint32_t srcALen, const int8_t *pSrcB, const uint32_t srcBLen, int32_t *pRes)</argsstring>
+        <name>plp_conv_valid_rep_i8</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcALen</declname>
+        </param>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>srcBLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for convolution of 8-bit integer vectors in valid range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for convolution (valid with data replication) of 8-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector, must be on L2 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcALen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ength of the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector, must be on L2 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">srcBLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here, of size |srcALen - srcBLen| + 1, preferably in L1 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/FilteringFunctions/plp_conv_valid_rep_i8.c" line="53" column="6" bodyfile="/github/workspace/src/FilteringFunctions/plp_conv_valid_rep_i8.c" bodystart="53" bodyend="119"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the glue code for Basic Convolution. The kernel codes (kernels) are in the Moducle Basic Convolution Kernels. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

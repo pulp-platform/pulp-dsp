@@ -1,0 +1,1983 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__BasicMatMultStride" kind="group">
+    <compoundname>BasicMatMultStride</compoundname>
+    <title>Strided Matrix Matrix Multiplication</title>
+    <innergroup refid="group__BasicMatMultStrideKernels">Strided Matrix Multiplication Kernels</innergroup>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__BasicMatMultStride_1ga1db499fbf306d0e21e83ea19dae760b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_stride_f32</definition>
+        <argsstring>(const float *__restrict__ pSrcA, const float *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t strideA, uint32_t strideB, uint32_t strideC, float *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_stride_f32</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideA</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideC</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for strided matrix multiplication of 32-bit floating-point matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for strided matrix matrix multiplication of a 32-bit floating-point matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix A (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix B (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_f32.c" line="56" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_f32.c" bodystart="56" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultStride_1ga50da3711d41b92595838bfedd3875f62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_stride_f32_parallel</definition>
+        <argsstring>(const float *__restrict__ pSrcA, const float *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t strideA, uint32_t strideB, uint32_t strideC, uint32_t nPE, float *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_stride_f32_parallel</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideA</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideC</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel strided matrix multiplication of 32-bit floating-point matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel strided matrix matrix multiplication of a 32-bit floating-point matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix A (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix B (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_f32_parallel.c" line="57" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_f32_parallel.c" bodystart="57" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultStride_1ga0bfae7400f9e48d6e89f6d0145868729" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_stride_i16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t strideA, uint32_t strideB, uint32_t strideC, int32_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_stride_i16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideA</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideC</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for strided matrix multiplication of 16-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for strided matrix matrix multiplication of a 16-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix A (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix B (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i16.c" line="56" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i16.c" bodystart="56" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultStride_1ga2ef4c0c14117c360d31b84eb5fc7eaf1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_stride_i16_parallel</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t strideA, uint32_t strideB, uint32_t strideC, uint32_t nPE, int32_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_stride_i16_parallel</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideA</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideC</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel strided matrix multiplication of 16-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel strided matrix matrix multiplication of a 16-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix A (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix B (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i16_parallel.c" line="57" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i16_parallel.c" bodystart="57" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultStride_1ga9706aa9b1abb909f028690fbfe430529" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_stride_i32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t strideA, uint32_t strideB, uint32_t strideC, int32_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_stride_i32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideA</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideC</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for strided matrix multiplication of 32-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for strided matrix matrix multiplication of a 32-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix A (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix B (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i32.c" line="116" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i32.c" bodystart="116" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultStride_1ga03b07beaf7f2d3c48759b9b6ca08c4ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_stride_i32_parallel</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t strideA, uint32_t strideB, uint32_t strideC, uint32_t nPE, int32_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_stride_i32_parallel</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideA</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideC</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel strided matrix multiplication of 32-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel strided matrix matrix multiplication of a 32-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix A (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix B (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i32_parallel.c" line="57" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i32_parallel.c" bodystart="57" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultStride_1gaaf61f6f539c375f6f0a28b2621a19d04" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_stride_i8</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcA, const int8_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t strideA, uint32_t strideB, uint32_t strideC, int32_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_stride_i8</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideA</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideC</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for strided matrix multiplication of 8-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for strided matrix matrix multiplication of a 8-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix A (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix B (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i8.c" line="56" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i8.c" bodystart="56" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultStride_1ga379e3932e26fc5d23d2d442cf5e30604" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_stride_i8_parallel</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcA, const int8_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t strideA, uint32_t strideB, uint32_t strideC, uint32_t nPE, int32_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_stride_i8_parallel</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideA</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideC</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel strided matrix multiplication of 8-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel strided matrix matrix multiplication of a 8-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix A (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix B (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i8_parallel.c" line="57" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_i8_parallel.c" bodystart="57" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultStride_1gad87722afdf1e7505d8d5fcfd03e64921" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_stride_q16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t strideA, uint32_t strideB, uint32_t strideC, uint32_t shift, int16_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_stride_q16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideA</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideC</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for strided matrix multiplication of 16-bit fix-point matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for strided matrix matrix multiplication of a 16-bit fix-point matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix A (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix B (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift the result of each multiplication. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point and Shifting</title><para>The result will be shifted by the parameter <computeroutput>shift</computeroutput> to the right (multiplied by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix B as pSrcB * 2^-y (in other words, A has it&apos;s x last digits after the binary point). Then, the output is represented as pDstC * 2^-(x + y - shift).</para>
+</simplesect>
+The output of the strided matrix multiplication will also be stored as an 16-bit array. Set the <computeroutput>shift</computeroutput> parameter such that no overflow ocurrs. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q16.c" line="66" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q16.c" bodystart="66" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultStride_1ga284d4a7deaef5b3071e2865ef6a66f73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_stride_q16_parallel</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t strideA, uint32_t strideB, uint32_t strideC, uint32_t shift, uint32_t nPE, int16_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_stride_q16_parallel</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideA</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideC</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel strided matrix multiplication of 16-bit fix-point matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel strided matrix matrix multiplication of a 16-bit fix-point matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix A (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix B (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift the result of each multiplication. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point and Shifting</title><para>The result will be shifted by the parameter <computeroutput>shift</computeroutput> to the right (multiplied by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix B as pSrcB * 2^-y (in other words, A has it&apos;s x last digits after the binary point). Then, the output is represented as pDstC * 2^-(x + y - shift).</para>
+</simplesect>
+The output of the strided matrix multiplication will also be stored as an 16-bit array. Set the <computeroutput>shift</computeroutput> parameter such that no overflow ocurrs. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q16_parallel.c" line="67" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q16_parallel.c" bodystart="67" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultStride_1gaa55d8748f5a75320263bfc72baaf37ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_stride_q32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t strideA, uint32_t strideB, uint32_t strideC, uint32_t shift, int32_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_stride_q32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideA</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideC</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for strided matrix multiplication of 32-bit fix-point matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for strided matrix matrix multiplication of a 32-bit fix-point matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix A (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix B (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift the result of each multiplication. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point and Shifting</title><para>The result will be shifted by the parameter <computeroutput>shift</computeroutput> to the right (multiplied by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix B as pSrcB * 2^-y (in other words, A has it&apos;s x last digits after the binary point). Then, the output is represented as pDstC * 2^-(x + y - shift). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q32.c" line="63" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q32.c" bodystart="63" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultStride_1ga06c7d725b350c66c190d6e9b70877f0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_stride_q32_parallel</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t strideA, uint32_t strideB, uint32_t strideC, uint32_t shift, uint32_t nPE, int32_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_stride_q32_parallel</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideA</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideC</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel strided matrix multiplication of 32-bit fix-point matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel strided matrix matrix multiplication of a 32-bit fix-point matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix A (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix B (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift the result of each multiplication. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point and Shifting</title><para>The result will be shifted by the parameter <computeroutput>shift</computeroutput> to the right (multiplied by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix B as pSrcB * 2^-y (in other words, A has it&apos;s x last digits after the binary point). Then, the output is represented as pDstC * 2^-(x + y - shift). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q32_parallel.c" line="64" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q32_parallel.c" bodystart="64" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultStride_1ga7765f1ec7e13a93becbfb34846aa7ae0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_stride_q8</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcA, const int8_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t strideA, uint32_t strideB, uint32_t strideC, uint32_t shift, int8_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_stride_q8</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideA</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideC</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for strided matrix multiplication of 8-bit fix-point matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for strided matrix matrix multiplication of a 8-bit fix-point matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix A (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix B (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift the result of each multiplication. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point and Shifting</title><para>The result will be shifted by the parameter <computeroutput>shift</computeroutput> to the right (multiplied by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix B as pSrcB * 2^-y (in other words, A has it&apos;s x last digits after the binary point). Then, the output is represented as pDstC * 2^-(x + y - shift).</para>
+</simplesect>
+The output of the strided matrix multiplication will also be stored as an 8-bit array. Set the <computeroutput>shift</computeroutput> parameter such that no overflow ocurrs. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q8.c" line="66" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q8.c" bodystart="66" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicMatMultStride_1gac4b5dc4c7bdec7e7094f5871e8f7092d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_mult_stride_q8_parallel</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcA, const int8_t *__restrict__ pSrcB, uint32_t M, uint32_t N, uint32_t O, uint32_t strideA, uint32_t strideB, uint32_t strideC, uint32_t shift, uint32_t nPE, int8_t *__restrict__ pDstC)</argsstring>
+        <name>plp_mat_mult_stride_q8_parallel</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>O</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideA</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideC</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDstC</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel strided matrix multiplication of 8-bit fix-point matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel strided matrix matrix multiplication of a 8-bit fix-point matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the first input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the first input matrix and hight of the second </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">O</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the second input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix A (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of matrix B (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift the result of each multiplication. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point and Shifting</title><para>The result will be shifted by the parameter <computeroutput>shift</computeroutput> to the right (multiplied by 2^-shift). Assume that matrix A is represented as pSrcA * 2^-x, and matrix B as pSrcB * 2^-y (in other words, A has it&apos;s x last digits after the binary point). Then, the output is represented as pDstC * 2^-(x + y - shift).</para>
+</simplesect>
+The output of the strided matrix multiplication will also be stored as an 8-bit array. Set the <computeroutput>shift</computeroutput> parameter such that no overflow ocurrs. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q8_parallel.c" line="67" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/plp_mat_mult_stride_q8_parallel.c" bodystart="67" bodyend="96"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the glue code for Matrix Matrix Multiplication. The kernel codes (kernels) are in the Moducle Matrix Matrix Multiplication Kernels.</para>
+<para>The Matrix Matrix Multiplication computes the product of two matrices with dimensions MxN and NxO. The first matrix is accessed row wise, the second column wise, all values form the first are multiplied with the values of the second and then sum of the result gives the value for the result matrix. <verbatim>&apos;pDst[m,o] = pSrcA[m,0]*pSrcB[0,o] + pSrcA[m,1]*pSrcB[1,o] + ... + pSrcA[m,N-1]*pSrcB[N-1,o]`
+</verbatim> There are functions for integer 32- 16- and 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.</para>
+<para>The naming scheme of the functions follows the following pattern (for example <computeroutput>plp_mat_mult_stride_i32</computeroutput>): <verbatim>`plp_&lt;function name&gt;_&lt;data type&gt;&lt;precision&gt;[_parallel]`
+</verbatim> <table rows="4" cols="2"><row>
+<entry thead="yes"><para>name   </para>
+</entry><entry thead="yes"><para>description    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>function_name   </para>
+</entry><entry thead="no"><para><computeroutput>mat_mult_stride</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>data type   </para>
+</entry><entry thead="no"><para>{f, i, q} respectively for floats, integers, fixed points    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>precision   </para>
+</entry><entry thead="no"><para>{32, 16, 8} bits   </para>
+</entry></row>
+</table>
+</para>
+<para>The <computeroutput>strideX</computeroutput> argument tells how many elements are in between the start of each row of the matrix. In other words, it is the width of the original matrix. <ref refid="group__groupMatrixStride" kindref="compound">Strided Matrix operations</ref> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

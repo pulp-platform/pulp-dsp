@@ -1,0 +1,904 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__Euclidean" kind="group">
+    <compoundname>Euclidean</compoundname>
+    <title>distance</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__Euclidean_1ga463e4594232ccb5dd3169bd4929bdc29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_euclidean_distance_f32p_xpulpv2</definition>
+        <argsstring>(void *S)</argsstring>
+        <name>plp_euclidean_distance_f32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>S</declname>
+        </param>
+        <briefdescription>
+<para>32-bit floating-point parallel Euclidean distance between two vectors </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the instance structure for float euclidean distance </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_f32p_xpulpv2.c" line="58" column="6" bodyfile="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_f32p_xpulpv2.c" bodystart="58" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="group__Euclidean_1ga6b6c27d1fff29e2700217ab8647860e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_euclidean_distance_f32s_rv32im</definition>
+        <argsstring>(const float32_t *__restrict__ pSrcA, const float32_t *__restrict__ pSrcB, uint32_t blockSize, float32_t *__restrict__ pRes)</argsstring>
+        <name>plp_euclidean_distance_f32s_rv32im</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>32-bit floating point Euclidean distance between two vectors </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector length </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_f32s_rv32im.c" line="56" column="6" bodyfile="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_f32s_rv32im.c" bodystart="56" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="group__Euclidean_1ga3c1bfe17ff952f64239d2ada2bde48ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_euclidean_distance_f32s_xpulpv2</definition>
+        <argsstring>(const float32_t *__restrict__ pSrcA, const float32_t *__restrict__ pSrcB, uint32_t blockSize, float32_t *__restrict__ pRes)</argsstring>
+        <name>plp_euclidean_distance_f32s_xpulpv2</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>32-bit floating point Euclidean distance between two vectors </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector length </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_f32s_xpulpv2.c" line="56" column="6" bodyfile="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_f32s_xpulpv2.c" bodystart="56" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="group__Euclidean_1ga192d43fe0589dba94aa2e94995588896" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_euclidean_distance_q16s_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, uint32_t blockSize, uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_euclidean_distance_q16s_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Euclidean distance of 16-bit fixed point vectors kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector [16 bit] </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector [16 bit] </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here [32 bit] </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>When the ISA supports, the 16 bit values are packed two by two into 32 bit vectors and then the two dot products are performed simultaneously on 32 bit vectors, with 32 bit accumulator. RV32IM doesn&apos;t support SIMD. For SIMD, check out other ISA extensions (e.g. XPULPV2). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q16s_rv32im.c" line="67" column="6" bodyfile="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q16s_rv32im.c" bodystart="67" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="group__Euclidean_1ga7d5c304753af1476976bec38ea78cea3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_euclidean_distance_q16s_xpulpv2</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, uint32_t blockSize, uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_euclidean_distance_q16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Euclidean distance of 16-bit fixed point vectors kernel for XPULPV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector [16 bit] </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector [16 bit] </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here [32 bit] </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 16 bit values are packed two by two into 32 bit vectors and then the sums and prducts are performed simultaneously on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q16s_xpulpv2.c" line="66" column="6" bodyfile="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q16s_xpulpv2.c" bodystart="66" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="group__Euclidean_1ga1ac1493b476fbc4f24c29c262e8e18cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_euclidean_distance_q32p_xpulpv2</definition>
+        <argsstring>(void *S)</argsstring>
+        <name>plp_euclidean_distance_q32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>S</declname>
+        </param>
+        <briefdescription>
+<para>Parallel euclidean distance with interleaved access 32-bit fixed point vectors. vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the instance structure for integer parallel Euclidean distance </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q32p_xpulpv2.c" line="59" column="6" bodyfile="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q32p_xpulpv2.c" bodystart="59" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="group__Euclidean_1ga4963e47d54d8385b5bd91d17786ecd2c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_euclidean_distance_q32s_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, uint32_t blockSize, uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_euclidean_distance_q32s_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Euclidean distance of 32-bit fixed point vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of fixed point fractional bits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q32s_rv32im.c" line="62" column="6" bodyfile="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q32s_rv32im.c" bodystart="62" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="group__Euclidean_1ga16154c5dfb731f8bdd637906a880a872" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_euclidean_distance_q32s_xpulpv2</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, uint32_t blockSize, uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_euclidean_distance_q32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Euclidean distance of 32-bit fixed point vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of fixed point fractional bits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q32s_xpulpv2.c" line="62" column="6" bodyfile="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/kernels/plp_euclidean_distance_q32s_xpulpv2.c" bodystart="62" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="group__Euclidean_1ga345ba37e8a8782de190627ae7770948a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_euclidean_distance_f32</definition>
+        <argsstring>(const float32_t *__restrict__ pSrcA, const float32_t *__restrict__ pSrcB, uint32_t blockSize, float32_t *__restrict__ pRes)</argsstring>
+        <name>plp_euclidean_distance_f32</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for Euclidean distance between 32-bit float vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector length </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/plp_euclidean_distance_f32.c" line="61" column="6" bodyfile="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/plp_euclidean_distance_f32.c" bodystart="61" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="group__Euclidean_1ga77d21fca558c577b6f7f5005fede0afa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_euclidean_distance_f32_parallel</definition>
+        <argsstring>(const float32_t *__restrict__ pSrcA, const float32_t *__restrict__ pSrcB, uint32_t blockSize, uint32_t nPE, float32_t *__restrict__ pRes)</argsstring>
+        <name>plp_euclidean_distance_f32_parallel</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel Euclidean distance between 32-bit float vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of parallel processing units </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/plp_euclidean_distance_f32_parallel.c" line="62" column="6" bodyfile="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/plp_euclidean_distance_f32_parallel.c" bodystart="62" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="group__Euclidean_1gae659a07c8d168d417b2be7a90e4ce2cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_euclidean_distance_q16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, uint16_t blockSize, uint16_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_euclidean_distance_q16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for euclidean distance of 16-bit fixed point vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of fixed point fractional bits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/plp_euclidean_distance_q16.c" line="62" column="6" bodyfile="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/plp_euclidean_distance_q16.c" bodystart="62" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="group__Euclidean_1ga2a926d0b0e9aa4a63064b2f718fa587d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_euclidean_distance_q32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, uint32_t blockSize, uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_euclidean_distance_q32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for euclidean distance of 32-bit fixed point vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of fixed point fractional bits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/plp_euclidean_distance_q32.c" line="62" column="6" bodyfile="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/plp_euclidean_distance_q32.c" bodystart="62" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="group__Euclidean_1ga75421b0267032ccf5996d78c2b433583" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_euclidean_distance_q32_parallel</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, uint32_t blockSize, uint32_t fracBits, uint32_t nPE, uint32_t *__restrict__ pRes)</argsstring>
+        <name>plp_euclidean_distance_q32_parallel</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>uint32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel Euclidean distance of 32-bit fixed point vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of fixed point fractional bits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of parallel processing units </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/plp_euclidean_distance_q32_parallel.c" line="63" column="6" bodyfile="/github/workspace/src/DistanceFunctions/plp_euclidean_distance/plp_euclidean_distance_q32_parallel.c" bodystart="63" bodyend="97"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Euclidean distance </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

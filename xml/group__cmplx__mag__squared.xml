@@ -1,0 +1,1226 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__cmplx__mag__squared" kind="group">
+    <compoundname>cmplx_mag_squared</compoundname>
+    <title>Complex Magnitude Squared</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__cmplx__mag__squared_1gae7f85898b30305b41f5509186ce79f9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_f32_xpulpv2</definition>
+        <argsstring>(const float32_t *__restrict__ pSrc, float32_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_f32_xpulpv2</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Floating-point complex squared magnitude.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_f32_xpulpv2.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_f32_xpulpv2.c" bodystart="75" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1gaf8b59d1e02fcbb919d9ec652c3947f7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_i16_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, int16_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_i16_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit Integer complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>16-bit integer complex squared magnitude.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i16_rv32im.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i16_rv32im.c" bodystart="75" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1ga0b9a77fd5382ceb64a37b87f8155c6be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_i16_xpulpv2</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, int16_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_i16_xpulpv2</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit Integer complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>16 bit Integer complex squared magnitude.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i16_xpulpv2.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i16_xpulpv2.c" bodystart="75" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1ga33c05dc42dba375dee3c5dccc398c05a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_i32_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_i32_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Integer complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>32-bit integer complex squared magnitude.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i32_rv32im.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i32_rv32im.c" bodystart="75" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1gab91d4f757a1a8439f2366e75b8191791" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_i32_xpulpv2</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_i32_xpulpv2</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Integer complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>32-bit integer complex squared magnitude.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i32_xpulpv2.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i32_xpulpv2.c" bodystart="75" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1ga041449343a9d447178cbe0041daba24f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_i8_rv32im</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, int8_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_i8_rv32im</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>8-bit Integer complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>8-bit integer complex squared magnitude.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i8_rv32im.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i8_rv32im.c" bodystart="75" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1ga3b464846fc0edb85383d3e9dd90bfee6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_i8_xpulpv2</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, int8_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_i8_xpulpv2</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>8-bit Integer complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>8 bit Integer complex squared magnitude.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i8_xpulpv2.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_i8_xpulpv2.c" bodystart="75" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1gacc4e94a0b35022f6c8641f552f184599" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_q16_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, int16_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_q16_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit fixed-point complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>16-bit fixed-point complex squared magnitude.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q16_rv32im.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q16_rv32im.c" bodystart="76" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1ga1615315d1336e42fc4f4f1748058f13f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_q16_xpulpv2</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, int16_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_q16_xpulpv2</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit fixed-point complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>16 bit fixed-point complex squared magnitude.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q16_xpulpv2.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q16_xpulpv2.c" bodystart="76" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1ga96ab42e35f2d15a1e2e0f6a6f2eef24e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_q32_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_q32_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>32-bit fixed-point complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>32-bit fixed-point complex squared magnitude.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q32_rv32im.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q32_rv32im.c" bodystart="76" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1gac13ef06b0114f3b326b021b4964f31d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_q32_xpulpv2</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_q32_xpulpv2</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>32-bit fixed-point complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>32 bit fixed-point complex squared magnitude.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q32_xpulpv2.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q32_xpulpv2.c" bodystart="76" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1gadc66dcf20a36ac85d1360dc3e83e5388" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_q8_rv32im</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, int8_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_q8_rv32im</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>8-bit fixed-point complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>8-bit fixed-point complex squared magnitude.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q8_rv32im.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q8_rv32im.c" bodystart="76" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1ga9e623c990cb40dbca092df393520faed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_q8_xpulpv2</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, int8_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_q8_xpulpv2</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>8-bit fixed-point complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>8 bit fixed-point complex squared magnitude.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q8_xpulpv2.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mag_squared_q8_xpulpv2.c" bodystart="76" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1ga9b78c649c914b80e911fb8432bcb48b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_f32</definition>
+        <argsstring>(const float32_t *__restrict__ pSrc, float32_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_f32</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex squared magnitude of 32-bit float vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_squared_f32.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_squared_f32.c" bodystart="75" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1ga0401c76623d82283dfa1aa951ab672a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_i16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, int16_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_i16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Integer complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex squared magnitude of 16-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_squared_i16.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_squared_i16.c" bodystart="75" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1ga3ae1ac0f8114cc2f8766639f2a91cef3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_i32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_i32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Integer complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex squared magnitude of 32-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_squared_i32.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_squared_i32.c" bodystart="75" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1ga81cf2f1084107f0a89ccbbbd1826ca75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_i8</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, int8_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_i8</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Integer complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex squared magnitude of 32-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_squared_i8.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_squared_i8.c" bodystart="75" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1ga6b08b5fc12681bcf2e15cdc4b29f6101" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_q16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, int16_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_q16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit fixed-point complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex squared magnitude of 16-bit fixed-point vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_squared_q16.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_squared_q16.c" bodystart="76" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1ga6d489ba3f4e6114d8e545ce35d60b87e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_q32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, int32_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_q32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>32-bit fixed-point complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex squared magnitude of 32-bit fixed-point vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_squared_q32.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_squared_q32.c" bodystart="76" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__mag__squared_1ga518bcf7ff8c5888020e2a8708b130649" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mag_squared_q8</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, int8_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mag_squared_q8</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>8-bit fixed-point complex magnitude squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex squared magnitude of 8-bit fixed-point vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_squared_q8.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mag_squared_q8.c" bodystart="76" bodyend="86"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Computes the magnitude squared of the elements of a complex data vector. The <computeroutput>pSrc</computeroutput> points to the source data and <computeroutput>pDst</computeroutput> points to the where the result should be written. <computeroutput>numSamples</computeroutput> specifies the number of complex samples in the input array and the data is stored in an interleaved fashion (real, imag, real, imag, ...). The input array has a total of <computeroutput>2*numSamples</computeroutput> values; the output array has a total of <computeroutput>numSamples</computeroutput> values. The underlying algorithm is used: <preformatted>
+for (n = 0; n &lt; numSamples; n++) {
+    pDst[n] = pSrc[(2*n)+0]^2 + pSrc[(2*n)+1]^2;
+}
+</preformatted> There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

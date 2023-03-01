@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_cac54e9f0d0be73c79b7d218acb23090" kind="dir">
+    <compoundname>/github/workspace/src/DistanceFunctions</compoundname>
+    <innerdir refid="dir_5d1fd2a111ae743ba9613d902c688a31">/github/workspace/src/DistanceFunctions/plp_cosine_distance</innerdir>
+    <innerdir refid="dir_3ae623a08d2e7ca35bfd118aa9ec8e22">/github/workspace/src/DistanceFunctions/plp_euclidean_distance</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/DistanceFunctions/"/>
+  </compounddef>
+</doxygen>

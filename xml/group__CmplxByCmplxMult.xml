@@ -1,0 +1,1138 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__CmplxByCmplxMult" kind="group">
+    <compoundname>CmplxByCmplxMult</compoundname>
+    <title>Complex-by-Complex Multiplication</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__CmplxByCmplxMult_1ga86a99f551a25b7fc3436dc773b30e55b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_f32_xpulpv2</definition>
+        <argsstring>(const float32_t *__restrict__ pSrcA, const float32_t *__restrict__ pSrcB, float32_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_f32_xpulpv2</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point complex-by-complex multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Floating-point complex multiplied by complex.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to real input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to complex output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_f32_xpulpv2.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_f32_xpulpv2.c" bodystart="75" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByCmplxMult_1ga3f4db23d6c26abddf45d93a298373ff7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_i16_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, int16_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_i16_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex-by-complex multiplication </para>
+        </briefdescription>
+        <detaileddescription>
+<para>16-bit integer complex multiplied by complex.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i16_rv32im.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i16_rv32im.c" bodystart="75" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByCmplxMult_1ga5ee4c1b3e61640f0bdbfbaa27ccd3436" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_i16_xpulpv2</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, int16_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_i16_xpulpv2</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex-by-complex multiplication </para>
+        </briefdescription>
+        <detaileddescription>
+<para>16-bit integer complex multiplied by complex.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i16_xpulpv2.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_i16_xpulpv2.c" bodystart="75" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByCmplxMult_1ga0f8e23b09885c655229edc9746206747" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_q16_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, int16_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_q16_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex-by-complex multiplication </para>
+        </briefdescription>
+        <detaileddescription>
+<para>16-bit fixed-point complex multiplied by complex.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q16_rv32im.c" line="68" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q16_rv32im.c" bodystart="68" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByCmplxMult_1ga8a7a4716e0fa5d347b682893a8cfc518" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_q16_xpulpv2</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, int16_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_q16_xpulpv2</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex-by-complex multiplication </para>
+        </briefdescription>
+        <detaileddescription>
+<para>16-bit fixed-point complex multiplied by complex.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q16_xpulpv2.c" line="69" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q16_xpulpv2.c" bodystart="69" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByCmplxMult_1ga80435e7c8ec7f07986f24f47adeb3311" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_q32_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, int32_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_q32_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point complex-by-complex multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>32-bit fixed-point complex multiplied by complex.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q32_rv32im.c" line="69" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q32_rv32im.c" bodystart="69" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByCmplxMult_1ga786b0c51e18ecb6c02d827df3f75103d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_q32_xpulpv2</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, int32_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_q32_xpulpv2</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point complex-by-complex multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>32-bit fixed-point complex multiplied by complex.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q32_xpulpv2.c" line="69" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q32_xpulpv2.c" bodystart="69" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByCmplxMult_1ga4e44818251453132030e034feecd1976" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_q8_rv32im</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcA, const int8_t *__restrict__ pSrcB, int8_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_q8_rv32im</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex-by-complex multiplication </para>
+        </briefdescription>
+        <detaileddescription>
+<para>8-bit fixed-point complex multiplied by complex.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q8_rv32im.c" line="69" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q8_rv32im.c" bodystart="69" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByCmplxMult_1gaf880ebe4d893196421b2a9ce86f8da90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_q8_xpulpv2</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcA, const int8_t *__restrict__ pSrcB, int8_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_q8_xpulpv2</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex-by-complex multiplication </para>
+        </briefdescription>
+        <detaileddescription>
+<para>8-bit fixed-point complex multiplied by complex.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q8_xpulpv2.c" line="69" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_mult_cmplx_q8_xpulpv2.c" bodystart="69" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByCmplxMult_1ga0ee688336bb3e1f19b1c87a48c3d97ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_f32</definition>
+        <argsstring>(const float32_t *__restrict__ pSrcA, const float32_t *__restrict__ pSrcB, float32_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_f32</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point complex-by-complex multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex multiplied by complex of 32-bit float vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_cmplx_f32.c" line="70" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_cmplx_f32.c" bodystart="70" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByCmplxMult_1ga80bf5989f4e027524efaae208080997e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_i16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, int16_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_i16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex-by-complex multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex multiplied by complex of 16-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_cmplx_i16.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_cmplx_i16.c" bodystart="75" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByCmplxMult_1gaf3cc46e8384e6356a6967559d1204ae5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_i8</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcA, const int8_t *__restrict__ pSrcB, int8_t *__restrict__ pDst, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_i8</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>8-bit integer complex-by-complex multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex multiplied by complex of 8-bit integer vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_cmplx_i8.c" line="75" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_cmplx_i8.c" bodystart="75" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByCmplxMult_1ga2e2b7642164a8189ddabb44e74fe89e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_q16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, int16_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_q16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>16-bit fixed-point complex-by-complex multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex multiplied by complex of 16-bit fixed-point vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_cmplx_q16.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_cmplx_q16.c" bodystart="76" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByCmplxMult_1ga02838287dffc32159a5e8a7508200263" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_q32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, int32_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_q32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>32-bit fixed-point complex-by-complex multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex multiplied by complex of 32-bit fixed-point vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_cmplx_q32.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_cmplx_q32.c" bodystart="76" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="group__CmplxByCmplxMult_1ga732b2a9983ba0ff350176b8a393747ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_mult_cmplx_q8</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcA, const int8_t *__restrict__ pSrcB, int8_t *__restrict__ pDst, uint32_t deciPoint, uint32_t numSamples)</argsstring>
+        <name>plp_cmplx_mult_cmplx_q8</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <briefdescription>
+<para>8-bit fixed-point complex-by-complex multiplication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for complex multiplied by complex of 8-bit fixed-point vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_cmplx_q8.c" line="76" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_mult_cmplx_q8.c" bodystart="76" bodyend="87"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Multiplies a complex vector by another complex vector and generates a complex result. The data in the complex arrays is stored in an interleaved fashion (real, imag, real, imag, ...). The parameter <computeroutput>numSamples</computeroutput> represents the number of complex samples processed. The complex arrays have a total of <computeroutput>2*numSamples</computeroutput> real values. The underlying algorithm is used: <preformatted>
+for (n = 0; n &lt; numSamples; n++) {
+    pDst[(2*n)+0] = pSrcA[(2*n)+0] * pSrcB[(2*n)+0] - pSrcA[(2*n)+1] * pSrcB[(2*n)+1];
+    pDst[(2*n)+1] = pSrcA[(2*n)+0] * pSrcB[(2*n)+1] + pSrcA[(2*n)+1] * pSrcB[(2*n)+0];
+}
+</preformatted> There are separate functions for floating-point, Q15, and Q31 data types.</para>
+<para>Multiplies a complex vector by another complex vector and generates a complex result. The data in the complex arrays is stored in an interleaved fashion (real, imag, real, imag, ...). The parameter <computeroutput>numSamples</computeroutput> represents the number of complex samples processed. The complex arrays have a total of <computeroutput>2*numSamples</computeroutput> real values. The underlying algorithm is used: <preformatted>
+for (n = 0; n &lt; numSamples; n++) {
+    pDst[(2*n)+0] = pSrcA[(2*n)+0] * pSrcB[(2*n)+0] - pSrcA[(2*n)+1] * pSrcB[(2*n)+1];
+    pDst[(2*n)+1] = pSrcA[(2*n)+0] * pSrcB[(2*n)+1] + pSrcA[(2*n)+1] * pSrcB[(2*n)+0];
+}
+</preformatted> There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

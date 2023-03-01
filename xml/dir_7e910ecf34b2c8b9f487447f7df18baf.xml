@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_7e910ecf34b2c8b9f487447f7df18baf" kind="dir">
+    <compoundname>/github/workspace/src/FastMathFunctions</compoundname>
+    <innerdir refid="dir_e8ea030dfbebd7db8e727585dc1a4d0a">/github/workspace/src/FastMathFunctions/kernels</innerdir>
+    <innerfile refid="plp__cos__f32_8c">plp_cos_f32.c</innerfile>
+    <innerfile refid="plp__cos__q16_8c">plp_cos_q16.c</innerfile>
+    <innerfile refid="plp__cos__q32_8c">plp_cos_q32.c</innerfile>
+    <innerfile refid="plp__sin__f32_8c">plp_sin_f32.c</innerfile>
+    <innerfile refid="plp__sin__q16_8c">plp_sin_q16.c</innerfile>
+    <innerfile refid="plp__sin__q32_8c">plp_sin_q32.c</innerfile>
+    <innerfile refid="plp__sqrt__f32_8c">plp_sqrt_f32.c</innerfile>
+    <innerfile refid="plp__sqrt__q16_8c">plp_sqrt_q16.c</innerfile>
+    <innerfile refid="plp__sqrt__q32_8c">plp_sqrt_q32.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/FastMathFunctions/"/>
+  </compounddef>
+</doxygen>

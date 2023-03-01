@@ -1,0 +1,793 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__MatScaleKernels" kind="group">
+    <compoundname>MatScaleKernels</compoundname>
+    <title>matrix scale Kernels</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__MatScaleKernels_1gab536f17a5ed07c5e95dcf214c7c60552" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_f32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_scale_f32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel matrix scale of 32-bit floating-point matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__scale__instance__f32" kindref="compound">plp_mat_scale_instance_f32</ref> struct initialized by plp_mat_scale_f32_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_f32p_xpulpv2.c" line="49" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_f32p_xpulpv2.c" bodystart="49" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleKernels_1ga8565696eb4aa275a3bc61b496b664798" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_f32s_xpulpv2</definition>
+        <argsstring>(const float *__restrict__ pSrc, uint32_t M, uint32_t N, float scaleFactor, float *__restrict__ pDst)</argsstring>
+        <name>plp_mat_scale_f32s_xpulpv2</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>matrix scale of 32-bit floating-point matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>matrix scale of a 32-bit floating-point matrices for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to mulitply all elements </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_f32s_xpulpv2.c" line="52" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_f32s_xpulpv2.c" bodystart="52" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleKernels_1ga2e388867d01b6eaec9ed70f1992a2ecd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_i16p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_scale_i16p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel matrix scale of 16-bit integer matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__scale__instance__i16" kindref="compound">plp_mat_scale_instance_i16</ref> struct initialized by plp_mat_scale_i16_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i16p_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i16p_xpulpv2.c" bodystart="53" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleKernels_1ga584dc81218e920fb1c03ecc13fb8b50d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_i16s_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t M, uint32_t N, int16_t scaleFactor, int32_t shift, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_scale_i16s_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int16_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>matrix scale of 16-bit integer matrices kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>matrix scale of a 16-bit integer matrices for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to mulitply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift each element </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i16s_rv32im.c" line="79" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i16s_rv32im.c" bodystart="79" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleKernels_1gaec1f0e145ad122e5cceea97db0b70b68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_i16s_xpulpv2</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t M, uint32_t N, int16_t scaleFactor, int32_t shift, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_scale_i16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int16_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>matrix scale of 16-bit integer matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>matrix scale of a 16-bit integer matrices for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to mulitply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift each element </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i16s_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i16s_xpulpv2.c" bodystart="53" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleKernels_1ga397f40d8594b9e883f74539c13212b76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_i32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_scale_i32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel matrix scale of 32-bit integer matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Parallel matrix scale of a 32-bit integer matrices for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__scale__instance__i32" kindref="compound">plp_mat_scale_instance_i32</ref> struct initialized by plp_mat_scale_i32_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i32p_xpulpv2.c" line="49" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i32p_xpulpv2.c" bodystart="49" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleKernels_1gab3178e14c761bfd9fc9d7f14b8405060" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_i32s_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t M, uint32_t N, int32_t scaleFactor, int32_t shift, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_scale_i32s_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>matrix scale of 32-bit integer matrices kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>matrix scale of a 32-bit integer matrices for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to mulitply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift each element </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i32s_rv32im.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i32s_rv32im.c" bodystart="53" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleKernels_1gaac33628b419add3bebee76344787c8c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_i32s_xpulpv2</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t M, uint32_t N, int32_t scaleFactor, int32_t shift, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_scale_i32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>matrix scale of 32-bit integer matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>matrix scale of a 32-bit integer matrices for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to mulitply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift each element </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i32s_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i32s_xpulpv2.c" bodystart="53" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleKernels_1ga0df3475515536e0133736b53cfb47675" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_i8p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_scale_i8p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel matrix scale of 8-bit integer matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__scale__instance__i8" kindref="compound">plp_mat_scale_instance_i8</ref> struct initialized by plp_mat_scale_i8_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i8p_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i8p_xpulpv2.c" bodystart="53" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleKernels_1gab07e6f294558ae88ccee47d0daefc152" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_i8s_rv32im</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t M, uint32_t N, int8_t scaleFactor, int32_t shift, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_scale_i8s_rv32im</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int8_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>matrix scale of 8-bit integer matrices kernel for RV32IM extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>matrix scale of a 8-bit integer matrices for RV32IM extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to mulitply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift each element </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i8s_rv32im.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i8s_rv32im.c" bodystart="53" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatScaleKernels_1gaceda460ca47c80d5136811ccc0b87f2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_scale_i8s_xpulpv2</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t M, uint32_t N, int8_t scaleFactor, int32_t shift, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_scale_i8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int8_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>matrix scale of 8-bit integer matrices kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>matrix scale of a 8-bit integer matrices for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to mulitply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount to shift each element </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i8s_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_scale/kernels/plp_mat_scale_i8s_xpulpv2.c" bodystart="53" bodyend="76"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the kernel functions for matrix scale.</para>
+<para>The Matrix Scale applies a scalar multiplication, followed by a bitshift operation to every element in the matrix. For floating-point implementations, the bitshift operation is not applied. <verbatim>`pDst[m,n] = (pSrc[m,n] * scale) &gt;&gt; shift`
+</verbatim> There are functions for integer 32- 16- and 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.</para>
+<para>The naming scheme of the functions follows the following pattern (for example <computeroutput>plp_mat_scale_i32s_xpulpv2</computeroutput>): <verbatim>`plp_&lt;function name&gt;_&lt;data type&gt;&lt;precision&gt;&lt;method&gt;_&lt;isa_extension&gt;`
+</verbatim> <table rows="6" cols="2"><row>
+<entry thead="yes"><para>name   </para>
+</entry><entry thead="yes"><para>description    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>function_name   </para>
+</entry><entry thead="no"><para><computeroutput>mat_scale</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>data type   </para>
+</entry><entry thead="no"><para>{f, i, q} respectively for floats, integers, fixed points    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>precision   </para>
+</entry><entry thead="no"><para>{32, 16, 8} bits    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>method   </para>
+</entry><entry thead="no"><para>{<computeroutput>s</computeroutput>, <computeroutput>v</computeroutput>, <computeroutput>p</computeroutput>} meaning scalar, vectorized (i.e. SIMD) and parallel, respectively    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>isa_extension   </para>
+</entry><entry thead="no"><para>{<computeroutput>rv32im</computeroutput>, <computeroutput>xpulpv2</computeroutput>} respectively for ibex and riscy   </para>
+</entry></row>
+</table>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

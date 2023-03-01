@@ -1,0 +1,1406 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>/github/workspace/include/rtos_hal.h - PULP DSP</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#githubworkspaceincludertos_halh" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="PULP DSP" class="md-header__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PULP DSP
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              /github/workspace/include/rtos_hal.h
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="PULP DSP" class="md-nav__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    PULP DSP
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../test-framework-index/" class="md-nav__link">
+        Test Framework
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorial-index/" class="md-nav__link">
+        Tutorial
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../troubles/" class="md-nav__link">
+        Troubles Shooting
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Reference Manual
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Reference Manual
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pages/" class="md-nav__link">
+        Pages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Classes/" class="md-nav__link">
+        Classes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/" class="md-nav__link">
+        Modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Namespaces/" class="md-nav__link">
+        Namespaces
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#types" class="md-nav__link">
+    Types
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defines" class="md-nav__link">
+    Defines
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types-documentation" class="md-nav__link">
+    Types Documentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Types Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#typedef-hal_cl_dma_cmd_t" class="md-nav__link">
+    typedef hal_cl_dma_cmd_t
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typedef-hal_cl_dma_dir_e" class="md-nav__link">
+    typedef hal_cl_dma_dir_e
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typedef-hal_perf_t" class="md-nav__link">
+    typedef hal_perf_t
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-documentation" class="md-nav__link">
+    Functions Documentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function-hal_cl_nb_pe_cores" class="md-nav__link">
+    function hal_cl_nb_pe_cores
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hal_team_barrier" class="md-nav__link">
+    function hal_team_barrier
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hal_cl_team_fork" class="md-nav__link">
+    function hal_cl_team_fork
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hal_fc_l1_malloc" class="md-nav__link">
+    function hal_fc_l1_malloc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hal_fc_l1_free" class="md-nav__link">
+    function hal_fc_l1_free
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hal_cl_l1_malloc" class="md-nav__link">
+    function hal_cl_l1_malloc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hal_cl_l1_free" class="md-nav__link">
+    function hal_cl_l1_free
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hal_cl_dma_cmd" class="md-nav__link">
+    function hal_cl_dma_cmd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hal_cl_dma_cmd_wait" class="md-nav__link">
+    function hal_cl_dma_cmd_wait
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hal_perf_init" class="md-nav__link">
+    function hal_perf_init
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hal_perf_conf" class="md-nav__link">
+    function hal_perf_conf
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hal_perf_reset" class="md-nav__link">
+    function hal_perf_reset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hal_perf_start" class="md-nav__link">
+    function hal_perf_start
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hal_perf_stop" class="md-nav__link">
+    function hal_perf_stop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function-hal_perf_read" class="md-nav__link">
+    function hal_perf_read
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#macros-documentation" class="md-nav__link">
+    Macros Documentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Macros Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_l1" class="md-nav__link">
+    define HAL_L1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_cl_l1" class="md-nav__link">
+    define HAL_CL_L1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_l2" class="md-nav__link">
+    define HAL_L2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_cl_dma_dir_ext2loc" class="md-nav__link">
+    define HAL_CL_DMA_DIR_EXT2LOC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_cl_dma_dir_loc2ext" class="md-nav__link">
+    define HAL_CL_DMA_DIR_LOC2EXT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_perf_cycles" class="md-nav__link">
+    define HAL_PERF_CYCLES
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_perf_active_cycles" class="md-nav__link">
+    define HAL_PERF_ACTIVE_CYCLES
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_perf_instr" class="md-nav__link">
+    define HAL_PERF_INSTR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_perf_ld_stall" class="md-nav__link">
+    define HAL_PERF_LD_STALL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_perf_jr_stall" class="md-nav__link">
+    define HAL_PERF_JR_STALL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_perf_imiss" class="md-nav__link">
+    define HAL_PERF_IMISS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_perf_wbranch" class="md-nav__link">
+    define HAL_PERF_WBRANCH
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_perf_wbranch_cyc" class="md-nav__link">
+    define HAL_PERF_WBRANCH_CYC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_perf_ld" class="md-nav__link">
+    define HAL_PERF_LD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_perf_st" class="md-nav__link">
+    define HAL_PERF_ST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_perf_jump" class="md-nav__link">
+    define HAL_PERF_JUMP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_perf_branch" class="md-nav__link">
+    define HAL_PERF_BRANCH
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_perf_delay_nop" class="md-nav__link">
+    define HAL_PERF_DELAY_NOP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_perf_ld_ext_cyc" class="md-nav__link">
+    define HAL_PERF_LD_EXT_CYC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_perf_st_ext_cyc" class="md-nav__link">
+    define HAL_PERF_ST_EXT_CYC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-hal_perf_tcdm_cont" class="md-nav__link">
+    define HAL_PERF_TCDM_CONT
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="githubworkspaceincludertos_halh">/github/workspace/include/rtos_hal.h</h1>
+<h2 id="types">Types</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>typedef rt_dma_copy_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#typedef-hal-cl-dma-cmd-t">hal_cl_dma_cmd_t</a></strong></td>
+</tr>
+<tr>
+<td>typedef rt_dma_dir_e</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#typedef-hal-cl-dma-dir-e">hal_cl_dma_dir_e</a></strong></td>
+</tr>
+<tr>
+<td>typedef rt_perf_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#typedef-hal-perf-t">hal_perf_t</a></strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="functions">Functions</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#function-hal-cl-nb-pe-cores">hal_cl_nb_pe_cores</a></strong>()</td>
+</tr>
+<tr>
+<td>void</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#function-hal-team-barrier">hal_team_barrier</a></strong>()</td>
+</tr>
+<tr>
+<td>void</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#function-hal-cl-team-fork">hal_cl_team_fork</a></strong>(int nb_cores, void(<em>)(void </em>) entry, void * arg)</td>
+</tr>
+<tr>
+<td>void *</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#function-hal-fc-l1-malloc">hal_fc_l1_malloc</a></strong>(int size)</td>
+</tr>
+<tr>
+<td>void</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#function-hal-fc-l1-free">hal_fc_l1_free</a></strong>(void * chunk, int size)</td>
+</tr>
+<tr>
+<td>void *</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#function-hal-cl-l1-malloc">hal_cl_l1_malloc</a></strong>(int size)</td>
+</tr>
+<tr>
+<td>void</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#function-hal-cl-l1-free">hal_cl_l1_free</a></strong>(void * chunk, int size)</td>
+</tr>
+<tr>
+<td>void</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#function-hal-cl-dma-cmd">hal_cl_dma_cmd</a></strong>(uint32_t ext, uint32_t loc, uint32_t size, hal_cl_dma_dir_e dir, int merge, hal_cl_dma_cmd_t * cmd)</td>
+</tr>
+<tr>
+<td>void</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#function-hal-cl-dma-cmd-wait">hal_cl_dma_cmd_wait</a></strong>(hal_cl_dma_cmd_t * cmd)</td>
+</tr>
+<tr>
+<td>void</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#function-hal-perf-init">hal_perf_init</a></strong>(hal_perf_t * perf)</td>
+</tr>
+<tr>
+<td>void</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#function-hal-perf-conf">hal_perf_conf</a></strong>(hal_perf_t * perf, unsigned events)</td>
+</tr>
+<tr>
+<td>void</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#function-hal-perf-reset">hal_perf_reset</a></strong>(hal_perf_t * perf)</td>
+</tr>
+<tr>
+<td>void</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#function-hal-perf-start">hal_perf_start</a></strong>(hal_perf_t * perf)</td>
+</tr>
+<tr>
+<td>void</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#function-hal-perf-stop">hal_perf_stop</a></strong>(hal_perf_t * perf)</td>
+</tr>
+<tr>
+<td>unsigned int</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#function-hal-perf-read">hal_perf_read</a></strong>(int id)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="defines">Defines</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-l1">HAL_L1</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-cl-l1">HAL_CL_L1</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-l2">HAL_L2</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-cl-dma-dir-ext2loc">HAL_CL_DMA_DIR_EXT2LOC</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-cl-dma-dir-loc2ext">HAL_CL_DMA_DIR_LOC2EXT</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-perf-cycles">HAL_PERF_CYCLES</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-perf-active-cycles">HAL_PERF_ACTIVE_CYCLES</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-perf-instr">HAL_PERF_INSTR</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-perf-ld-stall">HAL_PERF_LD_STALL</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-perf-jr-stall">HAL_PERF_JR_STALL</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-perf-imiss">HAL_PERF_IMISS</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-perf-wbranch">HAL_PERF_WBRANCH</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-perf-wbranch-cyc">HAL_PERF_WBRANCH_CYC</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-perf-ld">HAL_PERF_LD</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-perf-st">HAL_PERF_ST</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-perf-jump">HAL_PERF_JUMP</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-perf-branch">HAL_PERF_BRANCH</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-perf-delay-nop">HAL_PERF_DELAY_NOP</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-perf-ld-ext-cyc">HAL_PERF_LD_EXT_CYC</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-perf-st-ext-cyc">HAL_PERF_ST_EXT_CYC</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/rtos__hal_8h/#define-hal-perf-tcdm-cont">HAL_PERF_TCDM_CONT</a></strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="types-documentation">Types Documentation</h2>
+<h3 id="typedef-hal_cl_dma_cmd_t">typedef hal_cl_dma_cmd_t</h3>
+<pre><code class="language-cpp">typedef rt_dma_copy_t hal_cl_dma_cmd_t;
+</code></pre>
+<h3 id="typedef-hal_cl_dma_dir_e">typedef hal_cl_dma_dir_e</h3>
+<pre><code class="language-cpp">typedef rt_dma_dir_e hal_cl_dma_dir_e;
+</code></pre>
+<h3 id="typedef-hal_perf_t">typedef hal_perf_t</h3>
+<pre><code class="language-cpp">typedef rt_perf_t hal_perf_t;
+</code></pre>
+<h2 id="functions-documentation">Functions Documentation</h2>
+<h3 id="function-hal_cl_nb_pe_cores">function hal_cl_nb_pe_cores</h3>
+<pre><code class="language-cpp">static inline uint32_t hal_cl_nb_pe_cores()
+</code></pre>
+<h3 id="function-hal_team_barrier">function hal_team_barrier</h3>
+<pre><code class="language-cpp">static inline void hal_team_barrier()
+</code></pre>
+<h3 id="function-hal_cl_team_fork">function hal_cl_team_fork</h3>
+<pre><code class="language-cpp">static inline void hal_cl_team_fork(
+    int nb_cores,
+    void(*)(void *) entry,
+    void * arg
+)
+</code></pre>
+<h3 id="function-hal_fc_l1_malloc">function hal_fc_l1_malloc</h3>
+<pre><code class="language-cpp">static inline void * hal_fc_l1_malloc(
+    int size
+)
+</code></pre>
+<h3 id="function-hal_fc_l1_free">function hal_fc_l1_free</h3>
+<pre><code class="language-cpp">static inline void hal_fc_l1_free(
+    void * chunk,
+    int size
+)
+</code></pre>
+<h3 id="function-hal_cl_l1_malloc">function hal_cl_l1_malloc</h3>
+<pre><code class="language-cpp">static inline void * hal_cl_l1_malloc(
+    int size
+)
+</code></pre>
+<h3 id="function-hal_cl_l1_free">function hal_cl_l1_free</h3>
+<pre><code class="language-cpp">static inline void hal_cl_l1_free(
+    void * chunk,
+    int size
+)
+</code></pre>
+<h3 id="function-hal_cl_dma_cmd">function hal_cl_dma_cmd</h3>
+<pre><code class="language-cpp">static inline void hal_cl_dma_cmd(
+    uint32_t ext,
+    uint32_t loc,
+    uint32_t size,
+    hal_cl_dma_dir_e dir,
+    int merge,
+    hal_cl_dma_cmd_t * cmd
+)
+</code></pre>
+<h3 id="function-hal_cl_dma_cmd_wait">function hal_cl_dma_cmd_wait</h3>
+<pre><code class="language-cpp">static inline void hal_cl_dma_cmd_wait(
+    hal_cl_dma_cmd_t * cmd
+)
+</code></pre>
+<h3 id="function-hal_perf_init">function hal_perf_init</h3>
+<pre><code class="language-cpp">static inline void hal_perf_init(
+    hal_perf_t * perf
+)
+</code></pre>
+<h3 id="function-hal_perf_conf">function hal_perf_conf</h3>
+<pre><code class="language-cpp">static inline void hal_perf_conf(
+    hal_perf_t * perf,
+    unsigned events
+)
+</code></pre>
+<h3 id="function-hal_perf_reset">function hal_perf_reset</h3>
+<pre><code class="language-cpp">static inline void hal_perf_reset(
+    hal_perf_t * perf
+)
+</code></pre>
+<h3 id="function-hal_perf_start">function hal_perf_start</h3>
+<pre><code class="language-cpp">static inline void hal_perf_start(
+    hal_perf_t * perf
+)
+</code></pre>
+<h3 id="function-hal_perf_stop">function hal_perf_stop</h3>
+<pre><code class="language-cpp">static inline void hal_perf_stop(
+    hal_perf_t * perf
+)
+</code></pre>
+<h3 id="function-hal_perf_read">function hal_perf_read</h3>
+<pre><code class="language-cpp">static inline unsigned int hal_perf_read(
+    int id
+)
+</code></pre>
+<h2 id="macros-documentation">Macros Documentation</h2>
+<h3 id="define-hal_l1">define HAL_L1</h3>
+<pre><code class="language-cpp">#define HAL_L1 RT_CL_DATA
+</code></pre>
+<h3 id="define-hal_cl_l1">define HAL_CL_L1</h3>
+<pre><code class="language-cpp">#define HAL_CL_L1 RT_CL_DATA
+</code></pre>
+<h3 id="define-hal_l2">define HAL_L2</h3>
+<pre><code class="language-cpp">#define HAL_L2 RT_L2_DATA
+</code></pre>
+<h3 id="define-hal_cl_dma_dir_ext2loc">define HAL_CL_DMA_DIR_EXT2LOC</h3>
+<pre><code class="language-cpp">#define HAL_CL_DMA_DIR_EXT2LOC RT_DMA_DIR_EXT2LOC
+</code></pre>
+<h3 id="define-hal_cl_dma_dir_loc2ext">define HAL_CL_DMA_DIR_LOC2EXT</h3>
+<pre><code class="language-cpp">#define HAL_CL_DMA_DIR_LOC2EXT RT_DMA_DIR_LOC2EXT
+</code></pre>
+<h3 id="define-hal_perf_cycles">define HAL_PERF_CYCLES</h3>
+<pre><code class="language-cpp">#define HAL_PERF_CYCLES RT_PERF_CYCLES
+</code></pre>
+<h3 id="define-hal_perf_active_cycles">define HAL_PERF_ACTIVE_CYCLES</h3>
+<pre><code class="language-cpp">#define HAL_PERF_ACTIVE_CYCLES RT_PERF_ACTIVE_CYCLES
+</code></pre>
+<h3 id="define-hal_perf_instr">define HAL_PERF_INSTR</h3>
+<pre><code class="language-cpp">#define HAL_PERF_INSTR RT_PERF_INSTR
+</code></pre>
+<h3 id="define-hal_perf_ld_stall">define HAL_PERF_LD_STALL</h3>
+<pre><code class="language-cpp">#define HAL_PERF_LD_STALL RT_PERF_LD_STALL
+</code></pre>
+<h3 id="define-hal_perf_jr_stall">define HAL_PERF_JR_STALL</h3>
+<pre><code class="language-cpp">#define HAL_PERF_JR_STALL RT_PERF_JR_STALL
+</code></pre>
+<h3 id="define-hal_perf_imiss">define HAL_PERF_IMISS</h3>
+<pre><code class="language-cpp">#define HAL_PERF_IMISS RT_PERF_IMISS
+</code></pre>
+<h3 id="define-hal_perf_wbranch">define HAL_PERF_WBRANCH</h3>
+<pre><code class="language-cpp">#define HAL_PERF_WBRANCH RT_PERF_WBRANCH
+</code></pre>
+<h3 id="define-hal_perf_wbranch_cyc">define HAL_PERF_WBRANCH_CYC</h3>
+<pre><code class="language-cpp">#define HAL_PERF_WBRANCH_CYC RT_PERF_WBRANCH_CYC
+</code></pre>
+<h3 id="define-hal_perf_ld">define HAL_PERF_LD</h3>
+<pre><code class="language-cpp">#define HAL_PERF_LD RT_PERF_LD
+</code></pre>
+<h3 id="define-hal_perf_st">define HAL_PERF_ST</h3>
+<pre><code class="language-cpp">#define HAL_PERF_ST RT_PERF_ST
+</code></pre>
+<h3 id="define-hal_perf_jump">define HAL_PERF_JUMP</h3>
+<pre><code class="language-cpp">#define HAL_PERF_JUMP RT_PERF_JUMP
+</code></pre>
+<h3 id="define-hal_perf_branch">define HAL_PERF_BRANCH</h3>
+<pre><code class="language-cpp">#define HAL_PERF_BRANCH RT_PERF_BRANCH
+</code></pre>
+<h3 id="define-hal_perf_delay_nop">define HAL_PERF_DELAY_NOP</h3>
+<pre><code class="language-cpp">#define HAL_PERF_DELAY_NOP RT_PERF_DELAY_NOP
+</code></pre>
+<h3 id="define-hal_perf_ld_ext_cyc">define HAL_PERF_LD_EXT_CYC</h3>
+<pre><code class="language-cpp">#define HAL_PERF_LD_EXT_CYC RT_PERF_LD_EXT_CYC
+</code></pre>
+<h3 id="define-hal_perf_st_ext_cyc">define HAL_PERF_ST_EXT_CYC</h3>
+<pre><code class="language-cpp">#define HAL_PERF_ST_EXT_CYC RT_PERF_ST_EXT_CYC
+</code></pre>
+<h3 id="define-hal_perf_tcdm_cont">define HAL_PERF_TCDM_CONT</h3>
+<pre><code class="language-cpp">#define HAL_PERF_TCDM_CONT RT_PERF_TCDM_CONT
+</code></pre>
+<h2 id="source-code">Source code</h2>
+<pre><code class="language-cpp">#ifndef _RTOS_HAL_H
+#define _RTOS_HAL_H
+
+#ifdef RTOS_PMSIS
+
+#include &quot;pmsis.h&quot;
+
+#define HAL_L1 PI_CL_L1 
+#define HAL_CL_L1 PI_CL_L1 
+#define HAL_L2 PI_L2
+
+static inline uint32_t hal_cl_nb_pe_cores(){
+  return pi_cl_cluster_nb_pe_cores();
+}
+
+static inline void hal_team_barrier()
+{
+  pi_cl_team_barrier(0); 
+}
+
+static inline void hal_cl_team_fork(int nb_cores, void (*entry)(void *), void *arg)
+{
+  pi_cl_team_fork(nb_cores, entry, arg);
+}
+
+
+/* MEMORY ALLOCATION */
+
+static inline void * hal_fc_l1_malloc(int size)
+{
+  return pi_fc_l1_malloc(size);
+}
+
+static inline void hal_fc_l1_free(void *chunk, int size)
+{
+  pi_fc_l1_free(chunk, size);
+}
+
+static inline void * hal_cl_l1_malloc(int size)
+{
+  return pi_cl_l1_malloc(0, size);
+}
+
+static inline void hal_cl_l1_free(void *chunk, int size)
+{
+  pi_cl_l1_free(0, chunk, size);
+}
+
+
+/* DMA */
+
+#define HAL_CL_DMA_DIR_EXT2LOC PI_CL_DMA_DIR_EXT2LOC
+#define HAL_CL_DMA_DIR_LOC2EXT PI_CL_DMA_DIR_LOC2EXT
+
+typedef pi_cl_dma_cmd_t hal_cl_dma_cmd_t;
+
+typedef pi_cl_dma_dir_e hal_cl_dma_dir_e;
+
+static inline void hal_cl_dma_cmd(uint32_t ext, uint32_t loc, uint32_t size, hal_cl_dma_dir_e dir, int merge __attribute__((unused)), hal_cl_dma_cmd_t * cmd)
+{
+  pi_cl_dma_cmd(ext, loc, size, dir, cmd);
+}
+
+static inline void hal_cl_dma_cmd_wait(hal_cl_dma_cmd_t * cmd)
+{
+  pi_cl_dma_cmd_wait(cmd);
+}
+
+
+/* PERFORMANCE COUNTERS */
+
+#define HAL_PERF_CYCLES PI_PERF_CYCLES
+#define HAL_PERF_ACTIVE_CYCLES PI_PERF_ACTIVE_CYCLES
+#define HAL_PERF_INSTR PI_PERF_INSTR
+#define HAL_PERF_LD_STALL PI_PERF_LD_STALL
+#define HAL_PERF_JR_STALL PI_PERF_JR_STALL
+#define HAL_PERF_IMISS PI_PERF_IMISS
+#define HAL_PERF_WBRANCH PI_PERF_WBRANCH
+#define HAL_PERF_WBRANCH_CYC PI_PERF_WBRANCH_CYC
+#define HAL_PERF_LD PI_PERF_LD
+#define HAL_PERF_ST PI_PERF_ST
+#define HAL_PERF_JUMP PI_PERF_JUMP
+#define HAL_PERF_BRANCH PI_PERF_BRANCH
+#define HAL_PERF_DELAY_NOP PI_PERF_DELAY_NOP
+#define HAL_PERF_LD_EXT_CYC PI_PERF_LD_EXT_CYC
+#define HAL_PERF_ST_EXT_CYC PI_PERF_ST_EXT_CYC
+#define HAL_PERF_TCDM_CONT PI_PERF_TCDM_CONT
+
+typedef int hal_perf_t;
+
+
+static inline void hal_perf_init(hal_perf_t * perf __attribute__((unused)))
+{
+}
+
+static inline void hal_perf_conf(hal_perf_t * perf __attribute__((unused)), unsigned events)
+{
+  pi_perf_conf(events);
+}
+
+static inline void hal_perf_reset(hal_perf_t * perf __attribute__((unused)))
+{
+  pi_perf_reset();
+}
+
+static inline void hal_perf_start(hal_perf_t * perf __attribute__((unused)))
+{
+  pi_perf_start();
+}
+
+
+static inline void hal_perf_stop(hal_perf_t * perf __attribute__((unused)))
+{
+  pi_perf_stop();
+}
+
+static inline unsigned int hal_perf_read(int id)
+{
+  return pi_perf_read(id);
+}
+
+
+
+
+
+#else /* PULP-RT */
+
+#include &quot;rt/rt_api.h&quot;
+
+#define HAL_L1 RT_CL_DATA
+#define HAL_CL_L1 RT_CL_DATA
+#define HAL_L2 RT_L2_DATA
+
+static inline uint32_t hal_cl_nb_pe_cores(){
+  return rt_nb_pe();
+}
+
+static inline void hal_team_barrier()
+{
+  rt_team_barrier();
+}
+
+
+static inline void hal_cl_team_fork(int nb_cores, void (*entry)(void *), void *arg)
+{
+  rt_team_fork(nb_cores, entry, arg);
+}
+
+
+/* MEMORY ALLOCATION */
+
+static inline void * hal_fc_l1_malloc(int size)
+{
+  return rt_alloc(RT_ALLOC_FC_DATA, size);
+}   
+
+static inline void hal_fc_l1_free(void *chunk, int size)
+{
+  rt_free(RT_ALLOC_FC_DATA, chunk, size);
+}
+
+static inline void * hal_cl_l1_malloc(int size)
+{
+  return rt_alloc(RT_ALLOC_CL_DATA, size);
+}
+
+static inline void hal_cl_l1_free(void *chunk, int size)
+{
+  rt_free(RT_ALLOC_CL_DATA, chunk, size);
+}
+
+
+/* DMA */
+
+#define HAL_CL_DMA_DIR_EXT2LOC RT_DMA_DIR_EXT2LOC 
+#define HAL_CL_DMA_DIR_LOC2EXT RT_DMA_DIR_LOC2EXT
+
+typedef rt_dma_copy_t hal_cl_dma_cmd_t;
+
+typedef rt_dma_dir_e hal_cl_dma_dir_e;
+
+static inline void hal_cl_dma_cmd(uint32_t ext, uint32_t loc, uint32_t size, hal_cl_dma_dir_e dir, int merge, hal_cl_dma_cmd_t * cmd)
+{
+  rt_dma_memcpy(ext, loc, size, dir, merge, cmd);
+}
+
+static inline void hal_cl_dma_cmd_wait(hal_cl_dma_cmd_t * cmd)
+{
+  rt_dma_wait(cmd);
+}
+
+
+/* PERFORMANCE COUNTERS */
+
+#define HAL_PERF_CYCLES RT_PERF_CYCLES
+#define HAL_PERF_ACTIVE_CYCLES RT_PERF_ACTIVE_CYCLES
+#define HAL_PERF_INSTR RT_PERF_INSTR
+#define HAL_PERF_LD_STALL RT_PERF_LD_STALL
+#define HAL_PERF_JR_STALL RT_PERF_JR_STALL
+#define HAL_PERF_IMISS RT_PERF_IMISS
+#define HAL_PERF_WBRANCH RT_PERF_WBRANCH
+#define HAL_PERF_WBRANCH_CYC RT_PERF_WBRANCH_CYC
+#define HAL_PERF_LD RT_PERF_LD
+#define HAL_PERF_ST RT_PERF_ST
+#define HAL_PERF_JUMP RT_PERF_JUMP
+#define HAL_PERF_BRANCH RT_PERF_BRANCH
+#define HAL_PERF_DELAY_NOP RT_PERF_DELAY_NOP
+#define HAL_PERF_LD_EXT_CYC RT_PERF_LD_EXT_CYC
+#define HAL_PERF_ST_EXT_CYC RT_PERF_ST_EXT_CYC
+#define HAL_PERF_TCDM_CONT RT_PERF_TCDM_CONT
+
+typedef rt_perf_t hal_perf_t;
+
+static inline void hal_perf_init(hal_perf_t * perf)
+{
+  rt_perf_init(perf);
+}
+
+static inline void hal_perf_conf(hal_perf_t * perf, unsigned events)
+{
+  rt_perf_conf(perf, events);
+}
+
+static inline void hal_perf_reset(hal_perf_t * perf)
+{
+  rt_perf_reset(perf);
+}
+
+static inline void hal_perf_start(hal_perf_t * perf)
+{
+  rt_perf_start(perf);
+}
+
+
+static inline void hal_perf_stop(hal_perf_t * perf)
+{
+  rt_perf_stop(perf);
+}
+
+static inline unsigned int hal_perf_read(int id)
+{
+  return rt_perf_read(id);
+}
+
+
+#endif /* PULP-RT */
+
+#endif
+</code></pre>
+<hr />
+<p>Updated on 2023-03-01 at 16:16:34 +0000</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+    
+  </body>
+</html>

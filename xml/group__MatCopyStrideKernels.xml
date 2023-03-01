@@ -1,0 +1,796 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__MatCopyStrideKernels" kind="group">
+    <compoundname>MatCopyStrideKernels</compoundname>
+    <title>Strided Matrix Copy Kernels</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__MatCopyStrideKernels_1gad20bd74b888dae96a31727906a6ad3bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_copy_stride_f32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_copy_stride_f32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Copy an MxN strided 32-bit floats matrix on XpulpV2 in parallel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to plp_mat_mat_copy_stride_instance_f32 struct initialized by plp_mat_copy_stride_f32_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_f32p_xpulpv2.c" line="49" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_f32p_xpulpv2.c" bodystart="49" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatCopyStrideKernels_1ga851caba5ba07d2fffa5b6cdfcfc8392d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_copy_stride_f32s_xpulpv2</definition>
+        <argsstring>(const float *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t strideSrc, uint32_t strideDst, float *__restrict__ pDst)</argsstring>
+        <name>plp_mat_copy_stride_f32s_xpulpv2</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideDst</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Copy an MxN strided 32-bit floats matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the input matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_f32s_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_f32s_xpulpv2.c" bodystart="53" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatCopyStrideKernels_1ga9111a312e8326d85cf5443756789a6bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_copy_stride_i16p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_copy_stride_i16p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Copy an MxN strided 16-bit integers matrix on XpulpV2 in parallel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to plp_mat_mat_copy_stride_instance_i16 struct initialized by plp_mat_copy_stride_i16_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i16p_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i16p_xpulpv2.c" bodystart="53" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatCopyStrideKernels_1gad90cdd42a214292a6b91d34948b12738" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_copy_stride_i16s_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t strideSrc, uint32_t strideDst, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_copy_stride_i16s_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideDst</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Copy an MxN strided 16-bit integers matrix on RV32IM. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the input matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i16s_rv32im.c" line="76" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i16s_rv32im.c" bodystart="76" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatCopyStrideKernels_1gaf75fa2bfce9505b11ba901f3e7bb3737" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_copy_stride_i16s_xpulpv2</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t strideSrc, uint32_t strideDst, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_copy_stride_i16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideDst</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Copy an MxN strided 16-bit integers matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the input matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i16s_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i16s_xpulpv2.c" bodystart="53" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatCopyStrideKernels_1ga06683103020ab8af6affeaa0bbf00475" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_copy_stride_i32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_copy_stride_i32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Copy an MxN strided 32-bit integers matrix on XpulpV2 in parallel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to plp_mat_mat_copy_stride_instance_i32 struct initialized by plp_mat_copy_stride_i32_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i32p_xpulpv2.c" line="49" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i32p_xpulpv2.c" bodystart="49" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatCopyStrideKernels_1ga0320c98035e8c2e750fe8ae6045a8e0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_copy_stride_i32s_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t strideSrc, uint32_t strideDst, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_copy_stride_i32s_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideDst</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Copy an MxN strided 32-bit integers matrix on RV32IM. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the input matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i32s_rv32im.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i32s_rv32im.c" bodystart="53" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatCopyStrideKernels_1ga829ebd1dab23d215b6efe1402a434ab4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_copy_stride_i32s_xpulpv2</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t strideSrc, uint32_t strideDst, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_copy_stride_i32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideDst</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Copy an MxN strided 32-bit integers matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the input matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i32s_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i32s_xpulpv2.c" bodystart="53" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatCopyStrideKernels_1ga3b5ea8153cc962cf022751c5c8e75cb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_copy_stride_i8p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_copy_stride_i8p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Copy an MxN strided 8-bit integers matrix on XpulpV2 in parallel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to plp_mat_mat_copy_stride_instance_i8 struct initialized by plp_mat_copy_stride_i8_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i8p_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i8p_xpulpv2.c" bodystart="53" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatCopyStrideKernels_1gafb9c3877300601ea9f078fac54ff7af8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_copy_stride_i8s_rv32im</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t strideSrc, uint32_t strideDst, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_copy_stride_i8s_rv32im</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideDst</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Copy an MxN strided 8-bit integers matrix on RV32IM. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the input matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i8s_rv32im.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i8s_rv32im.c" bodystart="53" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatCopyStrideKernels_1gaf4c051fb833cacbaa58a72d2d0137bee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_copy_stride_i8s_xpulpv2</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t strideSrc, uint32_t strideDst, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_copy_stride_i8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>strideDst</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Copy an MxN strided 8-bit integers matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of both matrices </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the input matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">strideDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the output matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i8s_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_copy_stride/kernels/plp_mat_copy_stride_i8s_xpulpv2.c" bodystart="53" bodyend="92"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>The source and destination matrix can have different strides.</para>
+<para>There are functions for integer 32- 16- and 8-bit data types, as well as for floating-point. The naming scheme of the functions follows the following pattern (for example <computeroutput>plp_mat_copy_stride_i32s_xpulpv2</computeroutput>): <verbatim>`plp_&lt;function name&gt;_&lt;data type&gt;&lt;precision&gt;&lt;method&gt;_&lt;isa_extension&gt;`
+</verbatim> <table rows="6" cols="2"><row>
+<entry thead="yes"><para>name   </para>
+</entry><entry thead="yes"><para>description    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>function_name   </para>
+</entry><entry thead="no"><para><computeroutput>mat_copy_stride</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>data type   </para>
+</entry><entry thead="no"><para>{f, i, q} respectively for floats, integers, fixed points    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>precision   </para>
+</entry><entry thead="no"><para>{32, 16, 8} bits    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>method   </para>
+</entry><entry thead="no"><para>{<computeroutput>s</computeroutput>, <computeroutput>v</computeroutput>, <computeroutput>p</computeroutput>} meaning scalar, vectorized (i.e. SIMD) and parallel, respectively    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>isa_extension   </para>
+</entry><entry thead="no"><para>{<computeroutput>rv32im</computeroutput>, <computeroutput>xpulpv2</computeroutput>} respectively for ibex and riscy   </para>
+</entry></row>
+</table>
+</para>
+<para>The <computeroutput>strideSrc</computeroutput> and <computeroutput>strideDst</computeroutput> argument tells how many elements are in between the start of each row of the matrix. In other words, it is the width of the original matrix. <ref refid="group__groupMatrixStride" kindref="compound">Strided Matrix operations</ref> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__log__instance__f32" kind="struct" language="C++" prot="public">
+    <compoundname>plp_log_instance_f32</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__log__instance__f32_1ac111ecb5573245059cc4a5bef4306cef" prot="public" static="no" mutable="no">
+        <type>const float32_t *</type>
+        <definition>const float32_t* plp_log_instance_f32::pSrc</definition>
+        <argsstring></argsstring>
+        <name>pSrc</name>
+        <qualifiedname>plp_log_instance_f32::pSrc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="196" column="21" bodyfile="/github/workspace/include/plp_math.h" bodystart="196" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__log__instance__f32_1a3c3431f9b31a23e321e3ce9bf97ba39e" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_log_instance_f32::blkSizePE</definition>
+        <argsstring></argsstring>
+        <name>blkSizePE</name>
+        <qualifiedname>plp_log_instance_f32::blkSizePE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="197" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__log__instance__f32_1ae8794a783e8a937ee7e56560511fc7ca" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_log_instance_f32::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_log_instance_f32::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="198" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="198" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__log__instance__f32_1aa480aec7b86aeaca28fef07be5a18795" prot="public" static="no" mutable="no">
+        <type>float32_t *</type>
+        <definition>float32_t* plp_log_instance_f32::pDst</definition>
+        <argsstring></argsstring>
+        <name>pDst</name>
+        <qualifiedname>plp_log_instance_f32::pDst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="199" column="15" bodyfile="/github/workspace/include/plp_math.h" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for float parallel log. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blkSizePE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of parallel processing units </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to the output vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="195" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="195" bodyend="200"/>
+    <listofallmembers>
+      <member refid="structplp__log__instance__f32_1a3c3431f9b31a23e321e3ce9bf97ba39e" prot="public" virt="non-virtual"><scope>plp_log_instance_f32</scope><name>blkSizePE</name></member>
+      <member refid="structplp__log__instance__f32_1ae8794a783e8a937ee7e56560511fc7ca" prot="public" virt="non-virtual"><scope>plp_log_instance_f32</scope><name>nPE</name></member>
+      <member refid="structplp__log__instance__f32_1aa480aec7b86aeaca28fef07be5a18795" prot="public" virt="non-virtual"><scope>plp_log_instance_f32</scope><name>pDst</name></member>
+      <member refid="structplp__log__instance__f32_1ac111ecb5573245059cc4a5bef4306cef" prot="public" virt="non-virtual"><scope>plp_log_instance_f32</scope><name>pSrc</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

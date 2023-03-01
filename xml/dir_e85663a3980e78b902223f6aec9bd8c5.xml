@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_e85663a3980e78b902223f6aec9bd8c5" kind="dir">
+    <compoundname>/github/workspace/src/MatrixFunctions/mat_mult_trans_cmplx/kernels</compoundname>
+    <innerfile refid="plp__mat__mult__trans__cmplx__f32p__xpulpv2_8c">plp_mat_mult_trans_cmplx_f32p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__f32s__xpulpv2_8c">plp_mat_mult_trans_cmplx_f32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__i16p__xpulpv2_8c">plp_mat_mult_trans_cmplx_i16p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__i16s__rv32im_8c">plp_mat_mult_trans_cmplx_i16s_rv32im.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__i16s__xpulpv2_8c">plp_mat_mult_trans_cmplx_i16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__i32p__xpulpv2_8c">plp_mat_mult_trans_cmplx_i32p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__i32s__rv32im_8c">plp_mat_mult_trans_cmplx_i32s_rv32im.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__i32s__xpulpv2_8c">plp_mat_mult_trans_cmplx_i32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__i8p__xpulpv2_8c">plp_mat_mult_trans_cmplx_i8p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__i8s__rv32im_8c">plp_mat_mult_trans_cmplx_i8s_rv32im.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__i8s__xpulpv2_8c">plp_mat_mult_trans_cmplx_i8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__q16p__xpulpv2_8c">plp_mat_mult_trans_cmplx_q16p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__q16s__rv32im_8c">plp_mat_mult_trans_cmplx_q16s_rv32im.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__q16s__xpulpv2_8c">plp_mat_mult_trans_cmplx_q16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__q32p__xpulpv2_8c">plp_mat_mult_trans_cmplx_q32p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__q32s__rv32im_8c">plp_mat_mult_trans_cmplx_q32s_rv32im.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__q32s__xpulpv2_8c">plp_mat_mult_trans_cmplx_q32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__q8p__xpulpv2_8c">plp_mat_mult_trans_cmplx_q8p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__q8s__rv32im_8c">plp_mat_mult_trans_cmplx_q8s_rv32im.c</innerfile>
+    <innerfile refid="plp__mat__mult__trans__cmplx__q8s__xpulpv2_8c">plp_mat_mult_trans_cmplx_q8s_xpulpv2.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/MatrixFunctions/mat_mult_trans_cmplx/kernels/"/>
+  </compounddef>
+</doxygen>

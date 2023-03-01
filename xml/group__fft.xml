@@ -1,0 +1,2039 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__fft" kind="group">
+    <compoundname>fft</compoundname>
+    <title>FFT transforms</title>
+    <innergroup refid="group__complexFFTKernels">FFT kernels on complex input values</innergroup>
+    <innergroup refid="group__realFFTKernels">FFT kernels on real input values</innergroup>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__fft_1gaa78927838ca3aab8e4b4c54dd586f173" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_bitreversal_16s_rv32im</definition>
+        <argsstring>(uint16_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab)</argsstring>
+        <name>plp_bitreversal_16s_rv32im</name>
+        <param>
+          <type>uint16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>bitRevLen</declname>
+        </param>
+        <param>
+          <type>const uint16_t *</type>
+          <declname>pBitRevTab</declname>
+        </param>
+        <briefdescription>
+<para>In-place 16 bit reversal function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In-place 16 bit reversal function for RV32IM.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to in-place buffer of unknown 16-bit data type </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitRevLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>bit reversal table length </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pBitRevTab</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to bit reversal table </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_bitreversal_rv32im.c" line="50" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_bitreversal_rv32im.c" bodystart="50" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga3e0ca3f3b85fbc902db056ac058e8a01" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_bitreversal_32s_rv32im</definition>
+        <argsstring>(uint32_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab)</argsstring>
+        <name>plp_bitreversal_32s_rv32im</name>
+        <param>
+          <type>uint32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>bitRevLen</declname>
+        </param>
+        <param>
+          <type>const uint16_t *</type>
+          <declname>pBitRevTab</declname>
+        </param>
+        <briefdescription>
+<para>In-place 32 bit reversal function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In-place 32 bit reversal function for RV32IM.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to in-place buffer of unknown 32-bit data type </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitRevLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>bit reversal table length </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pBitRevTab</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to bit reversal table </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_bitreversal_rv32im.c" line="81" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_bitreversal_rv32im.c" bodystart="81" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga7aa2094e692d48bae33406a4f23dccf8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_bitreversal_16s_xpulpv2</definition>
+        <argsstring>(uint16_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab)</argsstring>
+        <name>plp_bitreversal_16s_xpulpv2</name>
+        <param>
+          <type>uint16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>bitRevLen</declname>
+        </param>
+        <param>
+          <type>const uint16_t *</type>
+          <declname>pBitRevTab</declname>
+        </param>
+        <briefdescription>
+<para>In-place 16 bit reversal function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In-place 16 bit reversal function for XPULPV2.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to in-place buffer of unknown 16-bit data type </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitRevLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>bit reversal table length </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pBitRevTab</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to bit reversal table </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_bitreversal_xpulpv2.c" line="52" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_bitreversal_xpulpv2.c" bodystart="52" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gaec1d1602a003a1cbe46b588b699f1b66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_bitreversal_16p_xpulpv2</definition>
+        <argsstring>(uint16_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab, uint32_t nPE)</argsstring>
+        <name>plp_bitreversal_16p_xpulpv2</name>
+        <param>
+          <type>uint16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>bitRevLen</declname>
+        </param>
+        <param>
+          <type>const uint16_t *</type>
+          <declname>pBitRevTab</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <briefdescription>
+<para>In-place 16 bit reversal function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to in-place buffer of unknown 16-bit data type </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitRevLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>bit reversal table length </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pBitRevTab</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to bit reversal table </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of cores </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_bitreversal_xpulpv2.c" line="96" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_bitreversal_xpulpv2.c" bodystart="96" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gad890fbbc11c24ba7d1d1e8c2390c37b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_bitreversal_32s_xpulpv2</definition>
+        <argsstring>(uint32_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab)</argsstring>
+        <name>plp_bitreversal_32s_xpulpv2</name>
+        <param>
+          <type>uint32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>bitRevLen</declname>
+        </param>
+        <param>
+          <type>const uint16_t *</type>
+          <declname>pBitRevTab</declname>
+        </param>
+        <briefdescription>
+<para>In-place 32 bit reversal function for XPULPV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to in-place buffer of unknown 32-bit data type </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitRevLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>bit reversal table length </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pBitRevTab</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to bit reversal table </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_bitreversal_xpulpv2.c" line="147" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_bitreversal_xpulpv2.c" bodystart="147" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga4e76736fdf0b7209f9e0774cd28a9994" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_bitreversal_32p_xpulpv2</definition>
+        <argsstring>(uint32_t *pSrc, const uint16_t bitRevLen, const uint16_t *pBitRevTab, uint32_t nPE)</argsstring>
+        <name>plp_bitreversal_32p_xpulpv2</name>
+        <param>
+          <type>uint32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>bitRevLen</declname>
+        </param>
+        <param>
+          <type>const uint16_t *</type>
+          <declname>pBitRevTab</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <briefdescription>
+<para>In-place 32 bit reversal function for XPULPV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to in-place buffer of unknown 32-bit data type </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitRevLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>bit reversal table length </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pBitRevTab</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to bit reversal table </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of cores </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_bitreversal_xpulpv2.c" line="180" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_bitreversal_xpulpv2.c" bodystart="180" bodyend="210"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga1bb49777a5da9cdce48cb97b21cd3fee" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cfft_radix4by2_q16</definition>
+        <argsstring>(int16_t *pSrc, uint32_t fftLen, const int16_t *pCoef, uint32_t nPE)</argsstring>
+        <name>plp_cfft_radix4by2_q16</name>
+        <param>
+          <type>int16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fftLen</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pCoef</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16p_xpulpv2.c" line="89" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16p_xpulpv2.c" bodystart="89" bodyend="168" declfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16p_xpulpv2.c" declline="45" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gab1619fe263e8393cb18c0aa6c5ca5c7b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_radix4_butterfly_q16</definition>
+        <argsstring>(int16_t *pSrc16, uint32_t fftLen, int16_t *pCoef16, uint32_t twidCoefModifier, uint32_t nPE)</argsstring>
+        <name>plp_radix4_butterfly_q16</name>
+        <param>
+          <type>int16_t *</type>
+          <declname>pSrc16</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fftLen</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>pCoef16</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>twidCoefModifier</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <briefdescription>
+<para>Core function for the Q15 CFFT butterfly process. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">*pSrc16</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the in-place buffer of Q15 data type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fftLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of the FFT. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">*pCoef16</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to twiddle coefficient buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">twidCoefModifier</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>twiddle coefficient modifier that supports different size FFTs with the same twiddle factor table. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16p_xpulpv2.c" line="214" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16p_xpulpv2.c" bodystart="214" bodyend="583" declfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16p_xpulpv2.c" declline="47" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga005d4589a06ea25a779b4ccd23938f59" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cfft_q16p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_cfft_q16p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel quantized 16 bit complex fast fourier transform for XPULPV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the <ref refid="structplp__cfft__instance__q16__parallel" kindref="compound">plp_cfft_instance_q16_parallel</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16p_xpulpv2.c" line="58" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16p_xpulpv2.c" bodystart="58" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gad91b74fef41b636e24ad3afcf96f71b9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cfft_radix4by2_q16</definition>
+        <argsstring>(int16_t *pSrc, uint32_t fftLen, const int16_t *pCoef)</argsstring>
+        <name>plp_cfft_radix4by2_q16</name>
+        <param>
+          <type>int16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fftLen</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pCoef</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16s_rv32im.c" line="79" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16s_rv32im.c" bodystart="79" bodyend="130" declfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16s_rv32im.c" declline="42" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga8e1709ace8acae5460faeeb1e366f31a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_radix4_butterfly_q16</definition>
+        <argsstring>(int16_t *pSrc16, uint32_t fftLen, int16_t *pCoef16, uint32_t twidCoefModifier)</argsstring>
+        <name>plp_radix4_butterfly_q16</name>
+        <param>
+          <type>int16_t *</type>
+          <declname>pSrc16</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fftLen</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>pCoef16</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>twidCoefModifier</declname>
+        </param>
+        <briefdescription>
+<para>Core function for the Q15 CFFT butterfly process. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">*pSrc16</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the in-place buffer of Q15 data type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fftLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of the FFT. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">*pCoef16</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to twiddle coefficient buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">twidCoefModifier</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>twiddle coefficient modifier that supports different size FFTs with the same twiddle factor table. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16s_rv32im.c" line="176" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16s_rv32im.c" bodystart="176" bodyend="567" declfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16s_rv32im.c" declline="44" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gab2b16ac88f643850ac3304bffd752c4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cfft_q16s_rv32im</definition>
+        <argsstring>(const plp_cfft_instance_q16 *S, int16_t *p1, uint8_t ifftFlag, uint8_t bitReverseFlag, uint32_t deciPoint)</argsstring>
+        <name>plp_cfft_q16s_rv32im</name>
+        <param>
+          <type>const <ref refid="structplp__cfft__instance__q16" kindref="compound">plp_cfft_instance_q16</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>p1</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>ifftFlag</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>bitReverseFlag</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <briefdescription>
+<para>Quantized 16 bit complex fast fourier transform for RV32IM. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the 16bit quantized CFFT structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">p1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the complex data buffer of size <computeroutput>2*fftLen</computeroutput>. Processing occurs in-place. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ifftFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1) transform. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitReverseFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16s_rv32im.c" line="49" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16s_rv32im.c" bodystart="49" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gad5dff75d146ac82538f412bf2e3d7f66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cfft_q16s_xpulpv2</definition>
+        <argsstring>(const plp_cfft_instance_q16 *S, int16_t *p1, uint8_t ifftFlag, uint8_t bitReverseFlag, uint32_t deciPoint)</argsstring>
+        <name>plp_cfft_q16s_xpulpv2</name>
+        <param>
+          <type>const <ref refid="structplp__cfft__instance__q16" kindref="compound">plp_cfft_instance_q16</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>p1</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>ifftFlag</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>bitReverseFlag</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <briefdescription>
+<para>Quantized 16 bit complex fast fourier transform for XPULPV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the 16bit quantized CFFT structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">p1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the complex data buffer of size <computeroutput>2*fftLen</computeroutput>. Processing occurs in-place. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ifftFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1) transform. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitReverseFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16s_xpulpv2.c" line="49" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q16s_xpulpv2.c" bodystart="49" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga92cd7480e834988561406793f342fbae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cfft_radix4by2_q32</definition>
+        <argsstring>(int32_t *pSrc, uint32_t fftLen, const int32_t *pCoef, uint32_t nPE)</argsstring>
+        <name>plp_cfft_radix4by2_q32</name>
+        <param>
+          <type>int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fftLen</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pCoef</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32p_xpulpv2.c" line="100" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32p_xpulpv2.c" bodystart="100" bodyend="177" declfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32p_xpulpv2.c" declline="54" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gad111706ab4205fa49cd30b8d168a5f8e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_radix4_butterfly_q32</definition>
+        <argsstring>(int32_t *pSrc, uint32_t fftLen, int32_t *pCoef, uint32_t twidCoefModifier, uint32_t nPE)</argsstring>
+        <name>plp_radix4_butterfly_q32</name>
+        <param>
+          <type>int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fftLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pCoef</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>twidCoefModifier</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32p_xpulpv2.c" line="179" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32p_xpulpv2.c" bodystart="179" bodyend="516" declfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32p_xpulpv2.c" declline="59" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gaba0d6fc77469d8b3f4f19f9e25dbd8c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cfft_q32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_cfft_q32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Parallel quantized 32 bit complex fast fourier transform for XPULPV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the <ref refid="structplp__cfft__instance__q32__parallel" kindref="compound">plp_cfft_instance_q32_parallel</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32p_xpulpv2.c" line="70" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32p_xpulpv2.c" bodystart="70" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga5559175c84c4a6cf24350ea0580cee9a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cfft_radix4by2_q32</definition>
+        <argsstring>(int32_t *pSrc, uint32_t fftLen, const int32_t *pCoef)</argsstring>
+        <name>plp_cfft_radix4by2_q32</name>
+        <param>
+          <type>int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fftLen</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pCoef</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c" line="99" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c" bodystart="99" bodyend="153" declfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c" declline="52" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gac2ee5bd7072404ef36f81cba2b04fba5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_radix4_butterfly_q32</definition>
+        <argsstring>(int32_t *pSrc, uint32_t fftLen, int32_t *pCoef, uint32_t twidCoefModifier)</argsstring>
+        <name>plp_radix4_butterfly_q32</name>
+        <param>
+          <type>int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fftLen</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pCoef</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>twidCoefModifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c" line="155" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c" bodystart="155" bodyend="473" declfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c" declline="54" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga93880a65bbd4bab3bb9eff5d57dab5a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cfft_q32s_rv32im</definition>
+        <argsstring>(const plp_cfft_instance_q32 *S, int32_t *p1, uint8_t ifftFlag, uint8_t bitReverseFlag, uint32_t fracBits)</argsstring>
+        <name>plp_cfft_q32s_rv32im</name>
+        <param>
+          <type>const <ref refid="structplp__cfft__instance__q32" kindref="compound">plp_cfft_instance_q32</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>p1</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>ifftFlag</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>bitReverseFlag</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <briefdescription>
+<para>Quantized 32-bit complex fast fourier transform for RV32IM. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the 32bit quantized CFFT structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>p1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the complex data buffer of size <computeroutput>2*fftLen</computeroutput>. Processing occurs in-place. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ifftFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitReverseFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift (input format Q(32-fracBits).fracBits) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c" line="70" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c" bodystart="70" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga4507899adff450b780692b20de28f60a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cfft_q32s_xpulpv2</definition>
+        <argsstring>(const plp_cfft_instance_q32 *S, int32_t *p1, uint8_t ifftFlag, uint8_t bitReverseFlag, uint32_t fracBits)</argsstring>
+        <name>plp_cfft_q32s_xpulpv2</name>
+        <param>
+          <type>const <ref refid="structplp__cfft__instance__q32" kindref="compound">plp_cfft_instance_q32</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>p1</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>ifftFlag</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>bitReverseFlag</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <briefdescription>
+<para>Quantized 32-bit complex fast fourier transform for XPULPV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the 32bit quantized CFFT structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>p1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the complex data buffer of size <computeroutput>2*fftLen</computeroutput>. Processing occurs in-place. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ifftFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitReverseFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift (input format Q(32-fracBits).fracBits) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_xpulpv2.c" line="70" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_xpulpv2.c" bodystart="70" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga3fd605bd18e2dc0a2fa8251babb68bba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cfft_f32</definition>
+        <argsstring>(const plp_cfft_instance_f32 *S, float32_t *pSrc, uint8_t ifftFlag, uint8_t bitReverseFlag)</argsstring>
+        <name>plp_cfft_f32</name>
+        <param>
+          <type>const <ref refid="structplp__cfft__instance__f32" kindref="compound">plp_cfft_instance_f32</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>float32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>ifftFlag</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>bitReverseFlag</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point FFT on complex input data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the floating-point FFT structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the complex data buffer of size <computeroutput>2*fftLen</computeroutput>. Processing occurs in-place. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ifftFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitReverseFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_cfft_f32.c" line="57" column="6" bodyfile="/github/workspace/src/TransformFunctions/plp_cfft_f32.c" bodystart="57" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gab33d0d5150f2fd862e2fa87c9bdb78b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cfft_f32_parallel</definition>
+        <argsstring>(const plp_cfft_instance_f32 *S, const float32_t *pSrc, uint8_t ifftFlag, uint8_t bitReverseFlag, const uint32_t nPE)</argsstring>
+        <name>plp_cfft_f32_parallel</name>
+        <param>
+          <type>const <ref refid="structplp__cfft__instance__f32" kindref="compound">plp_cfft_instance_f32</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>const float32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>ifftFlag</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>bitReverseFlag</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point FFT on complex input data (parallel version). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the floating-point FFT structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the complex data buffer of size <computeroutput>2*fftLen</computeroutput>. Processing occurs in-place. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ifftFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitReverseFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of parallel processing units </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_cfft_f32_parallel.c" line="58" column="6" bodyfile="/github/workspace/src/TransformFunctions/plp_cfft_f32_parallel.c" bodystart="58" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gad15e7319f7be165ea4adc0360fa1966a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cfft_q16</definition>
+        <argsstring>(const plp_cfft_instance_q16 *S, int16_t *p1, uint8_t ifftFlag, uint8_t bitReverseFlag, uint32_t deciPoint)</argsstring>
+        <name>plp_cfft_q16</name>
+        <param>
+          <type>const <ref refid="structplp__cfft__instance__q16" kindref="compound">plp_cfft_instance_q16</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>p1</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>ifftFlag</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>bitReverseFlag</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for quantized 16 bit complex fast fourier transform. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the 16bit quantized CFFT structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">p1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the complex data buffer of size <computeroutput>2*fftLen</computeroutput>. Processing occurs in-place. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ifftFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1) transform. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitReverseFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_cfft_q16.c" line="54" column="6" bodyfile="/github/workspace/src/TransformFunctions/plp_cfft_q16.c" bodystart="54" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gac6e2fbfd94adc1e023dd3c3285cdcad7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cfft_q16_parallel</definition>
+        <argsstring>(const plp_cfft_instance_q16 *S, int16_t *p1, uint8_t ifftFlag, uint8_t bitReverseFlag, uint32_t deciPoint, uint32_t nPE)</argsstring>
+        <name>plp_cfft_q16_parallel</name>
+        <param>
+          <type>const <ref refid="structplp__cfft__instance__q16" kindref="compound">plp_cfft_instance_q16</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>p1</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>ifftFlag</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>bitReverseFlag</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for quantized 16 bit complex fast fourier transform. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Fixed point units input -&gt; output dependent on length: len=16: Q1.15 -&gt; Q5.11 len=32: Q1.15 -&gt; Q6.10 len=64: Q1.15 -&gt; Q7.9 len=128: Q1.15 -&gt; Q8.8 len=256: Q1.15 -&gt; Q9.7 len=512: Q1.15 -&gt; Q10.6 len=1024: Q1.15 -&gt; Q11.5 len=2048: Q1.15 -&gt; Q12.4 len=4096: Q1.15 -&gt; Q13.3</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the 16bit quantized CFFT structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">p1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the complex data buffer of size <computeroutput>2*fftLen</computeroutput>. Processing occurs in-place. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ifftFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1) transform. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitReverseFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_cfft_q16_parallel.c" line="68" column="6" bodyfile="/github/workspace/src/TransformFunctions/plp_cfft_q16_parallel.c" bodystart="68" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga3bc7a7c1665361124c5d0c0e017b88f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cfft_q32</definition>
+        <argsstring>(const plp_cfft_instance_q32 *S, int32_t *p1, uint8_t ifftFlag, uint8_t bitReverseFlag, uint32_t fracBits)</argsstring>
+        <name>plp_cfft_q32</name>
+        <param>
+          <type>const <ref refid="structplp__cfft__instance__q32" kindref="compound">plp_cfft_instance_q32</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>p1</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>ifftFlag</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>bitReverseFlag</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for quantized 32-bit complex fast fourier transform. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the 32bit quantized CFFT structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>p1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the complex data buffer of size <computeroutput>2*fftLen</computeroutput>. Processing occurs in-place. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ifftFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitReverseFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift (input format Q(32-fracBits).fracBits) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_cfft_q32.c" line="53" column="6" bodyfile="/github/workspace/src/TransformFunctions/plp_cfft_q32.c" bodystart="53" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga3b4aeb89d035a843797659c31851d4d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cfft_q32_parallel</definition>
+        <argsstring>(const plp_cfft_instance_q32 *S, int32_t *p1, uint8_t ifftFlag, uint8_t bitReverseFlag, uint32_t fracBits, uint32_t nPE)</argsstring>
+        <name>plp_cfft_q32_parallel</name>
+        <param>
+          <type>const <ref refid="structplp__cfft__instance__q32" kindref="compound">plp_cfft_instance_q32</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>p1</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>ifftFlag</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>bitReverseFlag</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <briefdescription>
+<para>Quantized 32-bit complex fast fourier transform for XPULPV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the 32bit quantized CFFT structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>p1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the complex data buffer of size <computeroutput>2*fftLen</computeroutput>. Processing occurs in-place. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ifftFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that selects forwart (ifftFlag=0) or inverse (ifftFlag=1) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitReverseFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift (input format Q(32-fracBits).fracBits) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_cfft_q32_parallel.c" line="53" column="6" bodyfile="/github/workspace/src/TransformFunctions/plp_cfft_q32_parallel.c" bodystart="53" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga2b50fdc01054ed42c762ccd21f479eb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_dct2_f32</definition>
+        <argsstring>(const plp_fft_instance_f32 *S, const Complex_type_f32 *pShift, const uint8_t orthoNorm, const float32_t *__restrict__ pSrc, float32_t *__restrict__ pBuf, float32_t *__restrict__ pDst)</argsstring>
+        <name>plp_dct2_f32</name>
+        <param>
+          <type>const <ref refid="structplp__fft__instance__f32" kindref="compound">plp_fft_instance_f32</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref> *</type>
+          <declname>pShift</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>orthoNorm</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pBuf</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point DCT on real input data. Implementation of John Makhoul&apos;s &quot;A Fast Cosine Transform in One
+        and Two Dimensions&quot; 1980 IEEE paper. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the floating-point FFT structure with FFTLength = DCTLength </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pShift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to twiddle coefficient table of 4*FFTLength, of which only the first quadrant of the complex unit circle is used. For example, if S contains twiddleCoef_rfft_32, pShift can be set to twiddleCoef_rfft_128. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (real data) of size FFTLength. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pBuf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to buffer of size 2*FFTLength, used for computation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output buffer (real data) of size FFTLength, may be the same as pSrc. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_dct2_f32.c" line="69" column="6" bodyfile="/github/workspace/src/TransformFunctions/plp_dct2_f32.c" bodystart="69" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gaa984c76763dc0c63ec92a63b2a819858" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_dct2_f32_parallel</definition>
+        <argsstring>(const plp_fft_instance_f32 *S, const Complex_type_f32 *pShift, const uint8_t orthoNorm, const float32_t *__restrict__ pSrc, const uint32_t nPE, float32_t *__restrict__ pBuf, float32_t *__restrict__ pDst)</argsstring>
+        <name>plp_dct2_f32_parallel</name>
+        <param>
+          <type>const <ref refid="structplp__fft__instance__f32" kindref="compound">plp_fft_instance_f32</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structComplex__type__f32" kindref="compound">Complex_type_f32</ref> *</type>
+          <declname>pShift</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>orthoNorm</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pBuf</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point DCT on real input data. Parallelised implementation of John Makhoul&apos;s &quot;A Fast Cosine Transform in One
+        and Two Dimensions&quot; 1980 IEEE paper. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Floating-point DCT on real input data. Implementation of John Makhoul&apos;s &quot;A Fast Cosine Transform in One
+                     and Two Dimensions&quot; 1980 IEEE paper.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the floating-point FFT structure with FFTLength = DCTLength </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pShift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to twiddle coefficient table of 4*FFTLength, of which only the first quadrant of the complex unit circle is used. For example, if S contains twiddleCoef_rfft_32, pShift can be set to twiddleCoef_rfft_128. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (real data) of size FFTLength. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pBuf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to buffer of size 2*FFTLength, used for computation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output buffer (real data) of size FFTLength, may be the same as pSrc. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_dct2_f32_parallel.c" line="69" column="6" bodyfile="/github/workspace/src/TransformFunctions/plp_dct2_f32_parallel.c" bodystart="69" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gafcd6967c8db703758121024598696cf9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rfft_f32</definition>
+        <argsstring>(const plp_fft_instance_f32 *S, const float32_t *__restrict__ pSrc, float32_t *__restrict__ pDst)</argsstring>
+        <name>plp_rfft_f32</name>
+        <param>
+          <type>const <ref refid="structplp__fft__instance__f32" kindref="compound">plp_fft_instance_f32</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point FFT on real input data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the floating-point FFT structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (real data) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output buffer (complex data) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_rfft_f32.c" line="56" column="6" bodyfile="/github/workspace/src/TransformFunctions/plp_rfft_f32.c" bodystart="56" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga0624079923e4d72cd33fb885e9c4920e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rfft_f32_parallel</definition>
+        <argsstring>(const plp_fft_instance_f32 *S, const float32_t *__restrict__ pSrc, const uint32_t nPE, float32_t *__restrict__ pDst)</argsstring>
+        <name>plp_rfft_f32_parallel</name>
+        <param>
+          <type>const <ref refid="structplp__fft__instance__f32" kindref="compound">plp_fft_instance_f32</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point FFT on real input data (parallel version). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the floating-point FFT structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (real data) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of parallel processing units </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output buffer (complex data) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_rfft_f32_parallel.c" line="57" column="6" bodyfile="/github/workspace/src/TransformFunctions/plp_rfft_f32_parallel.c" bodystart="57" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gac4ae3e9625ccb243ec0b264fc7cc5396" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rfftfast_f32</definition>
+        <argsstring>(const plp_fft_fast_instance_f32 *S, const float32_t *__restrict__ pSrc, float32_t *__restrict__ pDst)</argsstring>
+        <name>plp_rfftfast_f32</name>
+        <param>
+          <type>const <ref refid="structplp__fft__fast__instance__f32" kindref="compound">plp_fft_fast_instance_f32</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point FFT on real input data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the floating-point FFT structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (real data) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output buffer (complex data) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_rfftfast_f32.c" line="56" column="6" bodyfile="/github/workspace/src/TransformFunctions/plp_rfftfast_f32.c" bodystart="56" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gae7850718182a6c557aa02f4d3c6063b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rfftfast_f32_parallel</definition>
+        <argsstring>(const plp_fft_fast_instance_f32 *S, float32_t *__restrict__ pSrc, float32_t *__restrict__ pDst, const uint32_t nPE)</argsstring>
+        <name>plp_rfftfast_f32_parallel</name>
+        <param>
+          <type>const <ref refid="structplp__fft__fast__instance__f32" kindref="compound">plp_fft_fast_instance_f32</ref> *</type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point FFT on real input data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Floating-point parallel FFT on real input data.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to an instance of the floating-point FFT structure </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (real data) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output buffer (complex data) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_rfftfast_f32_parallel.c" line="56" column="6" bodyfile="/github/workspace/src/TransformFunctions/plp_rfftfast_f32_parallel.c" bodystart="56" bodyend="68"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__fft_1gaba3e538352fc7f9d6d15f9a18d469399" prot="public" static="no">
+        <name>multAcc_32x32_keep32_R</name>
+        <param><defname>a</defname></param>
+        <param><defname>x</defname></param>
+        <param><defname>y</defname></param>
+        <initializer>	a = (int32_t) (((((int64_t) a) &lt;&lt; 32) + ((int64_t) x * y) + 0x80000000LL ) &gt;&gt; 32)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32p_xpulpv2.c" line="44" column="9" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32p_xpulpv2.c" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__fft_1ga668fbf1cd1c3bc8faf1b1c83964ade23" prot="public" static="no">
+        <name>multSub_32x32_keep32_R</name>
+        <param><defname>a</defname></param>
+        <param><defname>x</defname></param>
+        <param><defname>y</defname></param>
+        <initializer>	a = (int32_t) (((((int64_t) a) &lt;&lt; 32) - ((int64_t) x * y) + 0x80000000LL ) &gt;&gt; 32)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32p_xpulpv2.c" line="47" column="9" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32p_xpulpv2.c" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__fft_1ga960f210642058d2b3d5368729a6e8375" prot="public" static="no">
+        <name>mult_32x32_keep32_R</name>
+        <param><defname>a</defname></param>
+        <param><defname>x</defname></param>
+        <param><defname>y</defname></param>
+        <initializer>	a = (int32_t) (((int64_t) x * y + 0x80000000LL ) &gt;&gt; 32)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32p_xpulpv2.c" line="50" column="9" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32p_xpulpv2.c" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__fft_1gaba3e538352fc7f9d6d15f9a18d469399" prot="public" static="no">
+        <name>multAcc_32x32_keep32_R</name>
+        <param><defname>a</defname></param>
+        <param><defname>x</defname></param>
+        <param><defname>y</defname></param>
+        <initializer>	a = (int32_t) (((((int64_t) a) &lt;&lt; 32) + ((int64_t) x * y) + 0x80000000LL ) &gt;&gt; 32)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c" line="42" column="9" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__fft_1ga668fbf1cd1c3bc8faf1b1c83964ade23" prot="public" static="no">
+        <name>multSub_32x32_keep32_R</name>
+        <param><defname>a</defname></param>
+        <param><defname>x</defname></param>
+        <param><defname>y</defname></param>
+        <initializer>	a = (int32_t) (((((int64_t) a) &lt;&lt; 32) - ((int64_t) x * y) + 0x80000000LL ) &gt;&gt; 32)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c" line="45" column="9" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__fft_1ga960f210642058d2b3d5368729a6e8375" prot="public" static="no">
+        <name>mult_32x32_keep32_R</name>
+        <param><defname>a</defname></param>
+        <param><defname>x</defname></param>
+        <param><defname>y</defname></param>
+        <initializer>	a = (int32_t) (((int64_t) x * y + 0x80000000LL ) &gt;&gt; 32)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c" line="48" column="9" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_rv32im.c" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__fft_1gaba3e538352fc7f9d6d15f9a18d469399" prot="public" static="no">
+        <name>multAcc_32x32_keep32_R</name>
+        <param><defname>a</defname></param>
+        <param><defname>x</defname></param>
+        <param><defname>y</defname></param>
+        <initializer>	a = (int32_t) (((((int64_t) a) &lt;&lt; 32) + ((int64_t) x * y) + 0x80000000LL ) &gt;&gt; 32)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_xpulpv2.c" line="42" column="9" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_xpulpv2.c" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__fft_1ga668fbf1cd1c3bc8faf1b1c83964ade23" prot="public" static="no">
+        <name>multSub_32x32_keep32_R</name>
+        <param><defname>a</defname></param>
+        <param><defname>x</defname></param>
+        <param><defname>y</defname></param>
+        <initializer>	a = (int32_t) (((((int64_t) a) &lt;&lt; 32) - ((int64_t) x * y) + 0x80000000LL ) &gt;&gt; 32)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_xpulpv2.c" line="45" column="9" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_xpulpv2.c" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__fft_1ga960f210642058d2b3d5368729a6e8375" prot="public" static="no">
+        <name>mult_32x32_keep32_R</name>
+        <param><defname>a</defname></param>
+        <param><defname>x</defname></param>
+        <param><defname>y</defname></param>
+        <initializer>	a = (int32_t) (((int64_t) x * y + 0x80000000LL ) &gt;&gt; 32)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_xpulpv2.c" line="48" column="9" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_cfft_q32s_xpulpv2.c" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the code to perform FFT transforms. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_f217f927fd83240b10ce33fb0131bc99" kind="dir">
+    <compoundname>/github/workspace/src/MatrixFunctions/mat_scale</compoundname>
+    <innerdir refid="dir_c37427bec292ca262ee16cb61e331260">/github/workspace/src/MatrixFunctions/mat_scale/kernels</innerdir>
+    <innerfile refid="plp__mat__scale__f32_8c">plp_mat_scale_f32.c</innerfile>
+    <innerfile refid="plp__mat__scale__f32__parallel_8c">plp_mat_scale_f32_parallel.c</innerfile>
+    <innerfile refid="plp__mat__scale__i16_8c">plp_mat_scale_i16.c</innerfile>
+    <innerfile refid="plp__mat__scale__i16__parallel_8c">plp_mat_scale_i16_parallel.c</innerfile>
+    <innerfile refid="plp__mat__scale__i32_8c">plp_mat_scale_i32.c</innerfile>
+    <innerfile refid="plp__mat__scale__i32__parallel_8c">plp_mat_scale_i32_parallel.c</innerfile>
+    <innerfile refid="plp__mat__scale__i8_8c">plp_mat_scale_i8.c</innerfile>
+    <innerfile refid="plp__mat__scale__i8__parallel_8c">plp_mat_scale_i8_parallel.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/MatrixFunctions/mat_scale/"/>
+  </compounddef>
+</doxygen>

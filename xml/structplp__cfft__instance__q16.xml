@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__cfft__instance__q16" kind="struct" language="C++" prot="public">
+    <compoundname>plp_cfft_instance_q16</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__cfft__instance__q16_1a30b2b84418aeaae20e007c7afbd42546" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t plp_cfft_instance_q16::fftLen</definition>
+        <argsstring></argsstring>
+        <name>fftLen</name>
+        <qualifiedname>plp_cfft_instance_q16::fftLen</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="284" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="284" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__cfft__instance__q16_1a0efae920a602cf9c6234c679004e1979" prot="public" static="no" mutable="no">
+        <type>const int16_t *</type>
+        <definition>const int16_t* plp_cfft_instance_q16::pTwiddle</definition>
+        <argsstring></argsstring>
+        <name>pTwiddle</name>
+        <qualifiedname>plp_cfft_instance_q16::pTwiddle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="285" column="19" bodyfile="/github/workspace/include/plp_math.h" bodystart="285" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__cfft__instance__q16_1afc7d03eff0f8a7801a3d47be548b4acb" prot="public" static="no" mutable="no">
+        <type>const int16_t *</type>
+        <definition>const int16_t* plp_cfft_instance_q16::pBitRevTable</definition>
+        <argsstring></argsstring>
+        <name>pBitRevTable</name>
+        <qualifiedname>plp_cfft_instance_q16::pBitRevTable</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="286" column="19" bodyfile="/github/workspace/include/plp_math.h" bodystart="286" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__cfft__instance__q16_1a310c1a70b2c944671c4b0247dbd153f0" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t plp_cfft_instance_q16::bitRevLength</definition>
+        <argsstring></argsstring>
+        <name>bitRevLength</name>
+        <qualifiedname>plp_cfft_instance_q16::bitRevLength</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="287" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="287" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for the fixed-point CFFT/CIFFT function. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">fftLen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of the FFT </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pTwiddle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the Twiddle factor table </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pBitRevTable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the bit reversal table </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitRevTableLength</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>bit reversal table length </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="283" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="283" bodyend="288"/>
+    <listofallmembers>
+      <member refid="structplp__cfft__instance__q16_1a310c1a70b2c944671c4b0247dbd153f0" prot="public" virt="non-virtual"><scope>plp_cfft_instance_q16</scope><name>bitRevLength</name></member>
+      <member refid="structplp__cfft__instance__q16_1a30b2b84418aeaae20e007c7afbd42546" prot="public" virt="non-virtual"><scope>plp_cfft_instance_q16</scope><name>fftLen</name></member>
+      <member refid="structplp__cfft__instance__q16_1afc7d03eff0f8a7801a3d47be548b4acb" prot="public" virt="non-virtual"><scope>plp_cfft_instance_q16</scope><name>pBitRevTable</name></member>
+      <member refid="structplp__cfft__instance__q16_1a0efae920a602cf9c6234c679004e1979" prot="public" virt="non-virtual"><scope>plp_cfft_instance_q16</scope><name>pTwiddle</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

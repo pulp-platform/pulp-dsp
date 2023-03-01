@@ -1,0 +1,550 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__BasicScaleKernels" kind="group">
+    <compoundname>BasicScaleKernels</compoundname>
+    <title>vector scale Kernels</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__BasicScaleKernels_1gac1e3881eaecb8a5a99b31c818908519b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_scale_f32s_xpulpv2</definition>
+        <argsstring>(const float32_t *__restrict__ pSrc, float32_t scaleFactor, float32_t *__restrict__ pDst, uint32_t blockSize)</argsstring>
+        <name>plp_scale_f32s_xpulpv2</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float32_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>multiply a vector by a scalar for 32-bit floats on XpulpV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to multiply all elements </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/scale/kernels/plp_scale_f32s_xpulpv2.c" line="51" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/scale/kernels/plp_scale_f32s_xpulpv2.c" bodystart="51" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicScaleKernels_1ga62c04567e5974c99ce5c347254016061" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_scale_i16s_rv32im</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, int16_t scaleFactor, int32_t shift, int16_t *__restrict__ pDst, uint32_t blockSize)</argsstring>
+        <name>plp_scale_i16s_rv32im</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>multiply a vector by a scalar for 16-bit integers on RV32IM </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to multiply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of bits to shift the result by </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/scale/kernels/plp_scale_i16s_rv32im.c" line="60" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/scale/kernels/plp_scale_i16s_rv32im.c" bodystart="60" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicScaleKernels_1ga6727298e86f1e2a669da13b24d1bf053" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_scale_i16s_xpulpv2</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, int16_t scaleFactor, int32_t shift, int16_t *__restrict__ pDst, uint32_t blockSize)</argsstring>
+        <name>plp_scale_i16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>multiply a vector by a scalar for 16-bit integers on XpulpV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to multiply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of bits to shift the result by </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/scale/kernels/plp_scale_i16s_xpulpv2.c" line="52" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/scale/kernels/plp_scale_i16s_xpulpv2.c" bodystart="52" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicScaleKernels_1gaa08a4bd41e6d4f091940b22b24373d84" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_scale_i32s_rv32im</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, int32_t scaleFactor, int32_t shift, int32_t *__restrict__ pDst, uint32_t blockSize)</argsstring>
+        <name>plp_scale_i32s_rv32im</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>multiply a vector by a scalar for 32-bit integers on RV32IM </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to multiply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of bits to shift the result by </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/scale/kernels/plp_scale_i32s_rv32im.c" line="52" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/scale/kernels/plp_scale_i32s_rv32im.c" bodystart="52" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicScaleKernels_1ga066ad809e6fc1c258209e39521aca570" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_scale_i32s_xpulpv2</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, int32_t scaleFactor, int32_t shift, int32_t *__restrict__ pDst, uint32_t blockSize)</argsstring>
+        <name>plp_scale_i32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>multiply a vector by a scalar for 32-bit integers on XpulpV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to multiply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of bits to shift the result by </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/scale/kernels/plp_scale_i32s_xpulpv2.c" line="52" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/scale/kernels/plp_scale_i32s_xpulpv2.c" bodystart="52" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicScaleKernels_1gaf75431d29f4e789de668c55cb97ed974" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_scale_i8s_rv32im</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, int8_t scaleFactor, int32_t shift, int8_t *__restrict__ pDst, uint32_t blockSize)</argsstring>
+        <name>plp_scale_i8s_rv32im</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>multiply a vector by a scalar for 8-bit integers on RV32IM </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to multiply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of bits to shift the result by </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/scale/kernels/plp_scale_i8s_rv32im.c" line="52" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/scale/kernels/plp_scale_i8s_rv32im.c" bodystart="52" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicScaleKernels_1ga52e6a2e05f67b6f03b01ce0eada74bc1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_scale_i8s_xpulpv2</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, int8_t scaleFactor, int32_t shift, int8_t *__restrict__ pDst, uint32_t blockSize)</argsstring>
+        <name>plp_scale_i8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t</type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>multiply a vector by a scalar for 8-bit integers on XpulpV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scaleFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factor to multiply all elements before shifting </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of bits to shift the result by </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/scale/kernels/plp_scale_i8s_xpulpv2.c" line="52" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/scale/kernels/plp_scale_i8s_xpulpv2.c" bodystart="52" bodyend="69"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Multiply a vector by a scalar value. For floating-point data, the algorithm used is: <preformatted>
+    pDst[n] = pSrc[n] * scale,   0 &lt;= n &lt; blockSize.
+</preformatted> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

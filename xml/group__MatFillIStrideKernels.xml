@@ -1,0 +1,1058 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__MatFillIStrideKernels" kind="group">
+    <compoundname>MatFillIStrideKernels</compoundname>
+    <title>Strided Identity Matrix Creation Kernels</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1ga3b1e790efe6fafc7448631ec2acb422b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_f32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_fill_I_stride_f32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 32-bit floats identity matrix on XpulpV2 in parallel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to plp_mat_mat_fill_I_stride_instance_f32 struct initialized by plp_mat_fill_I_stride_f32_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_f32p_xpulpv2.c" line="49" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_f32p_xpulpv2.c" bodystart="49" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1gaa5a69036da24dd9c89dcfb5cd2286bdd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_f32s_xpulpv2</definition>
+        <argsstring>(uint32_t N, uint32_t stride, float *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_stride_f32s_xpulpv2</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 32-bit floats identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_f32s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_f32s_xpulpv2.c" bodystart="50" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1ga3dcd52b810d49ae835f3d4a39f88deea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_i16p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_fill_I_stride_i16p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 16-bit integers identity matrix on XpulpV2 in parallel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to plp_mat_mat_fill_I_stride_instance_i16 struct initialized by plp_mat_fill_I_stride_i16_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i16p_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i16p_xpulpv2.c" bodystart="53" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1ga2b827f85f20c36150d9137bada35a23a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_i16s_rv32im</definition>
+        <argsstring>(uint32_t N, uint32_t stride, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_stride_i16s_rv32im</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 16-bit integers identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Create a strided 16-bit integers identity matrix on RV32IM.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i16s_rv32im.c" line="74" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i16s_rv32im.c" bodystart="74" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1ga53aeff4e859b087683834bff3eb5f881" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_i16s_xpulpv2</definition>
+        <argsstring>(uint32_t N, uint32_t stride, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_stride_i16s_xpulpv2</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 16-bit integers identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i16s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i16s_xpulpv2.c" bodystart="50" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1ga5bf986a97214538f03ae1bddda452a6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_i32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_fill_I_stride_i32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 32-bit integers identity matrix on XpulpV2 in parallel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to plp_mat_mat_fill_I_stride_instance_i32 struct initialized by plp_mat_fill_I_stride_i32_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i32p_xpulpv2.c" line="49" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i32p_xpulpv2.c" bodystart="49" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1ga2141f48480375a8af885c03fdab6f56b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_i32s_rv32im</definition>
+        <argsstring>(uint32_t N, uint32_t stride, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_stride_i32s_rv32im</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 32-bit integers identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Create a strided 32-bit integers identity matrix on RV32IM.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i32s_rv32im.c" line="50" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i32s_rv32im.c" bodystart="50" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1gafe304a46be3ab14437a1bb1537c87439" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_i32s_xpulpv2</definition>
+        <argsstring>(uint32_t N, uint32_t stride, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_stride_i32s_xpulpv2</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 32-bit integers identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i32s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i32s_xpulpv2.c" bodystart="50" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1ga4f6eeabec4379fba7d622b27f3e73ca8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_i8p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_fill_I_stride_i8p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 8-bit integers identity matrix on XpulpV2 in parallel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to plp_mat_mat_fill_I_stride_instance_i8 struct initialized by plp_mat_fill_I_stride_i8_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i8p_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i8p_xpulpv2.c" bodystart="53" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1ga22e3c0189f3f587bafc321d228ee992f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_i8s_rv32im</definition>
+        <argsstring>(uint32_t N, uint32_t stride, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_stride_i8s_rv32im</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 8-bit integers identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Create a strided 8-bit integers identity matrix on RV32IM.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i8s_rv32im.c" line="50" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i8s_rv32im.c" bodystart="50" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1ga3c57820392e696691040dfc41d66778c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_i8s_xpulpv2</definition>
+        <argsstring>(uint32_t N, uint32_t stride, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_stride_i8s_xpulpv2</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 8-bit integers identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i8s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_i8s_xpulpv2.c" bodystart="50" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1gad437bb20bad2b8dba231ee58f56f1336" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_q16p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_fill_I_stride_q16p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 16-bit fix-point identity matrix on XpulpV2 in parallel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to plp_mat_mat_fill_I_stride_instance_q16 struct initialized by plp_mat_fill_I_stride_q16_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point</title><para>The diagonal elements will be filled with the value: <computeroutput>1 &lt;&lt; fracBits</computeroutput>.</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q16p_xpulpv2.c" line="56" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q16p_xpulpv2.c" bodystart="56" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1ga0a9c51f748701e91015cad738298f290" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_q16s_rv32im</definition>
+        <argsstring>(uint32_t N, uint32_t stride, int32_t fracBits, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_stride_q16s_rv32im</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 16-bit fix-point identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Create a strided 16-bit fix-point identity matrix on RV32IM.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Decimal point for the appropriate scale </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point</title><para>The diagonal elements will be filled with the value: <computeroutput>1 &lt;&lt; fracBits</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q16s_rv32im.c" line="54" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q16s_rv32im.c" bodystart="54" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1ga0d9d7ada8f0b2705f57836eafb11e51c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_q16s_xpulpv2</definition>
+        <argsstring>(uint32_t N, uint32_t stride, int32_t fracBits, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_stride_q16s_xpulpv2</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 16-bit fix-point identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Decimal point for the appropriate scale </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point</title><para>The diagonal elements will be filled with the value: <computeroutput>1 &lt;&lt; fracBits</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q16s_xpulpv2.c" line="54" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q16s_xpulpv2.c" bodystart="54" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1ga4e62101ce51bd88df204b7acce5323c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_q32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_fill_I_stride_q32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 32-bit fix-point identity matrix on XpulpV2 in parallel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to plp_mat_mat_fill_I_stride_instance_q32 struct initialized by plp_mat_fill_I_stride_q32_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point</title><para>The diagonal elements will be filled with the value: <computeroutput>1 &lt;&lt; fracBits</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q32p_xpulpv2.c" line="52" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q32p_xpulpv2.c" bodystart="52" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1ga5bbf751f9018598c2f83b6b1bed73c23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_q32s_rv32im</definition>
+        <argsstring>(uint32_t N, uint32_t stride, int32_t fracBits, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_stride_q32s_rv32im</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 32-bit fix-point identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Create a strided 32-bit fix-point identity matrix on RV32IM.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Decimal point for the appropriate scale </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point</title><para>The diagonal elements will be filled with the value: <computeroutput>1 &lt;&lt; fracBits</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q32s_rv32im.c" line="54" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q32s_rv32im.c" bodystart="54" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1ga09e5585c090152a7f5145890cfe519a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_q32s_xpulpv2</definition>
+        <argsstring>(uint32_t N, uint32_t stride, int32_t fracBits, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_stride_q32s_xpulpv2</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 32-bit fix-point identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Decimal point for the appropriate scale </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point</title><para>The diagonal elements will be filled with the value: <computeroutput>1 &lt;&lt; fracBits</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q32s_xpulpv2.c" line="54" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q32s_xpulpv2.c" bodystart="54" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1gaeee5d12e6fae6170c8aef2f23ec967aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_q8p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_fill_I_stride_q8p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 8-bit fix-point identity matrix on XpulpV2 in parallel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to plp_mat_mat_fill_I_stride_instance_q8 struct initialized by plp_mat_fill_I_stride_q8_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point</title><para>The diagonal elements will be filled with the value: <computeroutput>1 &lt;&lt; fracBits</computeroutput>.</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q8p_xpulpv2.c" line="56" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q8p_xpulpv2.c" bodystart="56" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1ga28529255de716d5f24333bff993264c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_q8s_rv32im</definition>
+        <argsstring>(uint32_t N, uint32_t stride, int32_t fracBits, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_stride_q8s_rv32im</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 8-bit fix-point identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Create a strided 8-bit fix-point identity matrix on RV32IM.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Decimal point for the appropriate scale </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point</title><para>The diagonal elements will be filled with the value: <computeroutput>1 &lt;&lt; fracBits</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q8s_rv32im.c" line="54" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q8s_rv32im.c" bodystart="54" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIStrideKernels_1gad9160ae3bb10c778b7f0ae9aaf9abe94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_stride_q8s_xpulpv2</definition>
+        <argsstring>(uint32_t N, uint32_t stride, int32_t fracBits, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_stride_q8s_xpulpv2</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a strided 8-bit fix-point identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stride of the matrix (elements between each row) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Decimal point for the appropriate scale </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Fix-Point</title><para>The diagonal elements will be filled with the value: <computeroutput>1 &lt;&lt; fracBits</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q8s_xpulpv2.c" line="54" column="6" bodyfile="/github/workspace/src/MatrixFunctionsStride/mat_fill_I_stride/kernels/plp_mat_fill_I_stride_q8s_xpulpv2.c" bodystart="54" bodyend="74"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>The identity matrix is a square matrix, with the value <computeroutput>1</computeroutput> on it&apos;s main diagonal, and all other values <computeroutput>0</computeroutput>.</para>
+<para>There are functions for integer 32- 16- and 8-bit data types, as well as for floating-point. The naming scheme of the functions follows the following pattern (for example <computeroutput>plp_mat_fill_I_stride_i32s_xpulpv2</computeroutput>): <verbatim>`plp_&lt;function name&gt;_&lt;data type&gt;&lt;precision&gt;&lt;method&gt;_&lt;isa_extension&gt;`
+</verbatim> <table rows="6" cols="2"><row>
+<entry thead="yes"><para>name   </para>
+</entry><entry thead="yes"><para>description    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>function_name   </para>
+</entry><entry thead="no"><para><computeroutput>mat_fill_stride_I</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>data type   </para>
+</entry><entry thead="no"><para>{f, i, q} respectively for floats, integers, fixed points    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>precision   </para>
+</entry><entry thead="no"><para>{32, 16, 8} bits    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>method   </para>
+</entry><entry thead="no"><para>{<computeroutput>s</computeroutput>, <computeroutput>v</computeroutput>, <computeroutput>p</computeroutput>} meaning scalar, vectorized (i.e. SIMD) and parallel, respectively    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>isa_extension   </para>
+</entry><entry thead="no"><para>{<computeroutput>rv32im</computeroutput>, <computeroutput>xpulpv2</computeroutput>} respectively for ibex and riscy   </para>
+</entry></row>
+</table>
+</para>
+<para>The <computeroutput>stride</computeroutput> argument tells how many elements are in between the start of each row of the matrix. In other words, it is the width of the original matrix. <ref refid="group__groupMatrixStride" kindref="compound">Strided Matrix operations</ref> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

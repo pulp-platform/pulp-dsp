@@ -1,0 +1,866 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>/github/workspace/src/MatrixFunctions/mat_inv/kernels/plp_mat_inv_f32s_xpulpv2.c - PULP DSP</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#githubworkspacesrcmatrixfunctionsmat_invkernelsplp_mat_inv_f32s_xpulpv2c" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="PULP DSP" class="md-header__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PULP DSP
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              /github/workspace/src/MatrixFunctions/mat_inv/kernels/plp_mat_inv_f32s_xpulpv2.c
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="PULP DSP" class="md-nav__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    PULP DSP
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../test-framework-index/" class="md-nav__link">
+        Test Framework
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorial-index/" class="md-nav__link">
+        Tutorial
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../troubles/" class="md-nav__link">
+        Troubles Shooting
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Reference Manual
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Reference Manual
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pages/" class="md-nav__link">
+        Pages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Classes/" class="md-nav__link">
+        Classes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/" class="md-nav__link">
+        Modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Namespaces/" class="md-nav__link">
+        Namespaces
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-documentation" class="md-nav__link">
+    Functions Documentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function-plp_mat_inv_f32s_xpulpv2" class="md-nav__link">
+    function plp_mat_inv_f32s_xpulpv2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="githubworkspacesrcmatrixfunctionsmat_invkernelsplp_mat_inv_f32s_xpulpv2c">/github/workspace/src/MatrixFunctions/mat_inv/kernels/plp_mat_inv_f32s_xpulpv2.c</h1>
+<h2 id="functions">Functions</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td><strong><a href="/pulp-dsp/refmanual/Modules/group__MatInvKernels/#function-plp-mat-inv-f32s-xpulpv2">plp_mat_inv_f32s_xpulpv2</a></strong>(float <em><strong>restrict</strong> pSrc, float </em><strong>restrict</strong> pDst, uint32_t N)<br>matrix inversion of 32-bit floating-point matrices kernel for XPULPV2 extension.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="functions-documentation">Functions Documentation</h2>
+<h3 id="function-plp_mat_inv_f32s_xpulpv2">function plp_mat_inv_f32s_xpulpv2</h3>
+<pre><code class="language-cpp">int plp_mat_inv_f32s_xpulpv2(
+    float *__restrict__ pSrc,
+    float *__restrict__ pDst,
+    uint32_t N
+)
+</code></pre>
+<p>matrix inversion of 32-bit floating-point matrices kernel for XPULPV2 extension. </p>
+<p><strong>Parameters</strong>: </p>
+<ul>
+<li><strong>pSrc</strong> Points to the first input matrix. pSrc is modified by this funciton </li>
+<li><strong>N</strong> Width and height of both matrices </li>
+<li><strong>pDst</strong> Points to the output matrix </li>
+</ul>
+<p><strong>Return</strong>: 0: Success, 1: Matrix is singular </p>
+<p>matrix inverse of a 32-bit floating-point matrices for XPULPV2 extension.</p>
+<h2 id="source-code">Source code</h2>
+<pre><code class="language-cpp">/* =====================================================================
+ * Project:      PULP DSP Library
+ * Title:        plp_mat_inv_f32s_xpulpv2.c
+ * Description:  32-bit floating-point matrix inversion for XPULPV2
+ *
+ * $Date:        14. July 2020
+ * $Revision:    V0
+ *
+ * Target Processor: PULP cores
+ * ===================================================================== */
+/*
+ * Copyright (C) 2020 ETH Zurich and University of Bologna.
+ *
+ * Author: Tibor Schneider, ETH Zurich
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the License); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Notice: project inspired by ARM CMSIS DSP and parts of source codes
+ * ported and adopted for RISC-V PULP platform from ARM CMSIS DSP
+ * released under Copyright (C) 2010-2019 ARM Limited or its affiliates
+ * Apache-2.0.
+ */
+
+#include &quot;plp_math.h&quot;
+
+int plp_mat_inv_f32s_xpulpv2(float *__restrict__ pSrc, float *__restrict__ pDst, uint32_t N) {
+
+    /*--------------------------------------------------------------------------------------------------------------
+     * Matrix Inverse can be solved using elementary row operations.
+     *
+     *  Gauss-Jordan Method:
+     *
+     *      1. First combine the identity matrix and the input matrix separated by a bar to form an
+     *        augmented matrix as follows:
+     *                      _                  _         _         _
+     *                     |  a11  a12 | 1   0  |       |  X11 X12  |
+     *                     |           |        |   =   |           |
+     *                     |_ a21  a22 | 0   1 _|       |_ X21 X21 _|
+     *
+     *      2. In our implementation, pDst Matrix is used as identity matrix.
+     *
+     *      3. Begin with the first row. Let i = 1.
+     *
+     *      4. Check to see if the pivot for row i is zero.
+     *         The pivot is the element of the main diagonal that is on the current row.
+     *         For instance, if working with row i, then the pivot element is aii.
+     *         If the pivot is zero, exchange that row with a row below it that does not
+     *         contain a zero in column i. If this is not possible, then an inverse
+     *         to that matrix does not exist.
+     *
+     *      5. Divide every element of row i by the pivot.
+     *
+     *      6. For every row below and  row i, replace that row with the sum of that row and
+     *         a multiple of row i so that each new element in column i below row i is zero.
+     *
+     *      7. Move to the next row and column and repeat steps 2 through 5 until you have zeros
+     *         for every element below and above the main diagonal.
+     *
+     *      8. Now an identical matrix is formed to the left of the bar(input matrix, pSrc).
+     *         Therefore, the matrix to the right of the bar is our solution(pDst matrix, pDst).
+     *----------------------------------------------------------------------------------------------------------------*/
+
+    float *pSrcT1, *pSrcT2;                    /* Temporary input data matrix pointer */
+    float *pDstT1, *pDstT2;                    /* Temporary output data matrix pointer */
+    float *pPivotRowIn;                        /* Temporary input and output data matrix pointer */
+    float *pPRT_in, *pPivotRowDst, *pPRT_pDst; /* Temporary input and output data matrix pointer */
+
+    float Xchg, in = 0.0f, in1;                      /* Temporary input values  */
+    uint32_t i, rowCnt, flag = 0U, j, loopCnt, k, l; /* loop counters */
+
+    uint32_t M = N; /* M is the number of rows. However, the matirces must be square. */
+
+    /* Working pointer for destination matrix */
+    pDstT1 = pDst;
+
+    /* Loop over the number of rows */
+    rowCnt = M;
+
+    /* Making the destination matrix as identity matrix */
+    while (rowCnt &gt; 0U) {
+        /* Writing all zeroes in lower triangle of the destination matrix */
+        j = M - rowCnt;
+        while (j &gt; 0U) {
+            *pDstT1++ = 0.0f;
+            j--;
+        }
+
+        /* Writing all ones in the diagonal of the destination matrix */
+        *pDstT1++ = 1.0f;
+
+        /* Writing all zeroes in upper triangle of the destination matrix */
+        j = rowCnt - 1U;
+        while (j &gt; 0U) {
+            *pDstT1++ = 0.0f;
+            j--;
+        }
+
+        /* Decrement loop counter */
+        rowCnt--;
+    }
+
+    /* Loop over the number of columns of the input matrix.
+       All the elements in each column are processed by the row operations */
+    loopCnt = N;
+
+    /* Index modifier to navigate through the columns */
+    l = 0U;
+
+    while (loopCnt &gt; 0U) {
+        /* Check if the pivot element is zero..
+         * If it is zero then interchange the row with non zero row below.
+         * If there is no non zero element to replace in the rows below,
+         * then the matrix is Singular. */
+
+        /* Working pointer for the input matrix that points
+         * to the pivot element of the particular row  */
+        pSrcT1 = pSrc + (l * N);
+
+        /* Working pointer for the destination matrix that points
+         * to the pivot element of the particular row  */
+        pDstT1 = pDst + (l * N);
+
+        /* Temporary variable to hold the pivot value */
+        in = *pSrcT1;
+
+        /* Destination pointer modifier */
+        k = 1U;
+
+        /* Check if the pivot element is zero */
+        if (*pSrcT1 == 0.0f) {
+            /* Loop over the number rows present below */
+
+            for (i = (l + 1U); i &lt; M; i++) {
+                /* Update the input and destination pointers */
+                pSrcT2 = pSrcT1 + (N * i);
+                pDstT2 = pDstT1 + (N * k);
+
+                /* Check if there is a non zero pivot element to
+                 * replace in the rows below */
+                if (*pSrcT2 != 0.0f) {
+                    /* Loop over number of columns
+                     * to the right of the pilot element */
+                    j = N - l;
+
+                    while (j &gt; 0U) {
+                        /* Exchange the row elements of the input matrix */
+                        Xchg = *pSrcT2;
+                        *pSrcT2++ = *pSrcT1;
+                        *pSrcT1++ = Xchg;
+
+                        /* Decrement the loop counter */
+                        j--;
+                    }
+
+                    /* Loop over number of columns of the destination matrix */
+                    j = N;
+
+                    while (j &gt; 0U) {
+                        /* Exchange the row elements of the destination matrix */
+                        Xchg = *pDstT2;
+                        *pDstT2++ = *pDstT1;
+                        *pDstT1++ = Xchg;
+
+                        /* Decrement loop counter */
+                        j--;
+                    }
+
+                    /* Flag to indicate whether exchange is done or not */
+                    flag = 1U;
+
+                    /* Break after exchange is done */
+                    break;
+                }
+
+                /* Update the destination pointer modifier */
+                k++;
+
+                /* Decrement loop counter */
+            }
+        }
+
+        /* Update the status if the matrix is singular */
+        if ((flag != 1U) &amp;&amp; (in == 0.0f)) {
+            return 1;
+        }
+
+        /* Points to the pivot row of input and destination matrices */
+        pPivotRowIn = pSrc + (l * N);
+        pPivotRowDst = pDst + (l * N);
+
+        /* Temporary pointers to the pivot row pointers */
+        pSrcT1 = pPivotRowIn;
+        pSrcT2 = pPivotRowDst;
+
+        /* Pivot element of the row */
+        in = *pPivotRowIn;
+
+        /* Loop over number of columns
+         * to the right of the pilot element */
+        j = (N - l);
+
+        while (j &gt; 0U) {
+            /* Divide each element of the row of the input matrix
+             * by the pivot element */
+            in1 = *pSrcT1;
+            *pSrcT1++ = in1 / in;
+
+            /* Decrement the loop counter */
+            j--;
+        }
+
+        /* Loop over number of columns of the destination matrix */
+        j = N;
+
+        while (j &gt; 0U) {
+            /* Divide each element of the row of the destination matrix
+             * by the pivot element */
+            in1 = *pSrcT2;
+            *pSrcT2++ = in1 / in;
+
+            /* Decrement the loop counter */
+            j--;
+        }
+
+        /* Replace the rows with the sum of that row and a multiple of row i
+         * so that each new element in column i above row i is zero.*/
+
+        /* Temporary pointers for input and destination matrices */
+        pSrcT1 = pSrc;
+        pSrcT2 = pDst;
+
+        /* index used to check for pivot element */
+        i = 0U;
+
+        /* Loop over number of rows */
+        /*  to be replaced by the sum of that row and a multiple of row i */
+        k = M;
+
+        while (k &gt; 0U) {
+            /* Check for the pivot element */
+            if (i == l) {
+                /* If the processing element is the pivot element,
+                   only the columns to the right are to be processed */
+                pSrcT1 += N - l;
+
+                pSrcT2 += N;
+            } else {
+                /* Element of the reference row */
+                in = *pSrcT1;
+
+                /* Working pointers for input and destination pivot rows */
+                pPRT_in = pPivotRowIn;
+                pPRT_pDst = pPivotRowDst;
+
+                /* Loop over the number of columns to the right of the pivot element,
+                   to replace the elements in the input matrix */
+                j = (N - l);
+
+                while (j &gt; 0U) {
+                    /* Replace the element by the sum of that row
+                       and a multiple of the reference row  */
+                    in1 = *pSrcT1;
+                    *pSrcT1++ = in1 - (in * *pPRT_in++);
+
+                    /* Decrement the loop counter */
+                    j--;
+                }
+
+                /* Loop over the number of columns to
+                   replace the elements in the destination matrix */
+                j = N;
+
+                while (j &gt; 0U) {
+                    /* Replace the element by the sum of that row
+                       and a multiple of the reference row  */
+                    in1 = *pSrcT2;
+                    *pSrcT2++ = in1 - (in * *pPRT_pDst++);
+
+                    /* Decrement loop counter */
+                    j--;
+                }
+            }
+
+            /* Increment temporary input pointer */
+            pSrcT1 = pSrcT1 + l;
+
+            /* Decrement loop counter */
+            k--;
+
+            /* Increment pivot index */
+            i++;
+        }
+
+        /* Increment the input pointer */
+        pSrc++;
+
+        /* Decrement the loop counter */
+        loopCnt--;
+
+        /* Increment the index modifier */
+        l++;
+    }
+
+    if ((flag != 1U) &amp;&amp; (in == 0.0f)) {
+        for (i = 0; i &lt; M * N; i++) {
+            if (pSrc[i] != 0.0f)
+                break;
+        }
+
+        if (i == M * N)
+            return 1;
+    }
+
+    return 0;
+}
+</code></pre>
+<hr />
+<p>Updated on 2023-03-01 at 16:16:33 +0000</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+    
+  </body>
+</html>

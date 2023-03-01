@@ -1,0 +1,564 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__MatTrans" kind="group">
+    <compoundname>MatTrans</compoundname>
+    <title>matrix transpose</title>
+    <innergroup refid="group__MatTransKernels">matrix transpose Kernels</innergroup>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__MatTrans_1ga31d0c89ce4802494ed6099abe9f740cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_trans_f32</definition>
+        <argsstring>(const float *__restrict__ pSrc, uint32_t M, uint32_t N, float *__restrict__ pDst)</argsstring>
+        <name>plp_mat_trans_f32</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for matrix transpose of 32-bit floating-point matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for matrix transpose of a 32-bit float*ing-point matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the input matrix and width of the output matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of the input matrix and height of the output matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxM </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>This function will use plp_mat_trans_i32s_xpulpv2 for its computation.</title><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_trans/plp_mat_trans_f32.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_trans/plp_mat_trans_f32.c" bodystart="53" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatTrans_1gae445dc55d75dc137cbd01555b751b4c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_trans_f32_parallel</definition>
+        <argsstring>(const float *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t nPE, float *__restrict__ pDst)</argsstring>
+        <name>plp_mat_trans_f32_parallel</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel matrix transpose of 32-bit floating-point matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel matrix transpose of a 32-bit float*ing-point matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the input matrix and width of the output matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of the input matrix and height of the output matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use for computation </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxM </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>This function will use plp_mat_trans_i32p_xpulpv2 for its computation.</title><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_trans/plp_mat_trans_f32_parallel.c" line="54" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_trans/plp_mat_trans_f32_parallel.c" bodystart="54" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatTrans_1ga64ff197ce28e7535458bb274bdbfd6e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_trans_i16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t M, uint32_t N, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_trans_i16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for matrix transpose of 16-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for matrix transpose of a 16-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the input matrix and width of the output matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of the input matrix and height of the output matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxM </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_trans/plp_mat_trans_i16.c" line="67" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_trans/plp_mat_trans_i16.c" bodystart="67" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatTrans_1ga28399d02c5db697d1d80b9654c397538" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_trans_i16_parallel</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t nPE, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_trans_i16_parallel</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel matrix transpose of 16-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel matrix transpose of a 16-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the input matrix and width of the output matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of the input matrix and height of the output matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use for computation </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxM </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_trans/plp_mat_trans_i16_parallel.c" line="52" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_trans/plp_mat_trans_i16_parallel.c" bodystart="52" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatTrans_1ga7a80cd72899559c64d4b9aca06f5cd1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_trans_i32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t M, uint32_t N, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_trans_i32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for matrix transpose of 16-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for matrix transpose of a 32-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the input matrix and width of the output matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of the input matrix and height of the output matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxM </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_trans/plp_mat_trans_i32.c" line="51" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_trans/plp_mat_trans_i32.c" bodystart="51" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatTrans_1ga47396077ff8ccb41c6a89629befb6360" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_trans_i32_parallel</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t nPE, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_trans_i32_parallel</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel matrix transpose of 16-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel matrix transpose of a 32-bit integer matrices. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_trans/plp_mat_trans_i32_parallel.c" line="48" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_trans/plp_mat_trans_i32_parallel.c" bodystart="48" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatTrans_1ga959647ea37ffac7f7d023d253ce9242f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_trans_i8</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t M, uint32_t N, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_trans_i8</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for matrix transpose of 16-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for matrix transpose of a 8-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the input matrix and width of the output matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of the input matrix and height of the output matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxM </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_trans/plp_mat_trans_i8.c" line="51" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_trans/plp_mat_trans_i8.c" bodystart="51" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatTrans_1ga890351b09256842f65920ae9ef56c027" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_trans_i8_parallel</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t M, uint32_t N, uint32_t nPE, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_trans_i8_parallel</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel matrix transpose of 16-bit integer matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel matrix transpose of a 8-bit integer matrices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the input matrix of shape MxN </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">M</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the input matrix and width of the output matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width of the input matrix and height of the output matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use for computation </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxM </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_trans/plp_mat_trans_i8_parallel.c" line="52" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_trans/plp_mat_trans_i8_parallel.c" bodystart="52" bodyend="66"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the glue code for matrix transpose. The kernel codes (kernels) are in the Module matrix transpose Kernels.</para>
+<para>The transpose of a matrix of shape MxN is another matrix of shape NxM, where the the matrix is flipped:</para>
+<para><preformatted>
+  pDst[n, m] = pSrc[m, n]
+</preformatted></para>
+<para>There are functions for integer 32- 16- and 8-bit data types, as well as for floating-point. These functions can also be used for fix-point matrices. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

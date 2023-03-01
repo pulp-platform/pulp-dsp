@@ -1,0 +1,823 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__power" kind="group">
+    <compoundname>power</compoundname>
+    <title>Power</title>
+    <innergroup refid="group__powerKernels">Power Kernels</innergroup>
+    <innergroup refid="group__RMSkernels">RMS Kernels</innergroup>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__power_1ga67989bd6cc54b75c8aca3a24055631cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_power_f32</definition>
+        <argsstring>(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes)</argsstring>
+        <name>plp_power_f32</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for sum of squares of a 32-bit float vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for Sum of squares of a 32-bit float vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>sum of squares returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_power_f32.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_power_f32.c" bodystart="72" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="group__power_1ga42fcf65d49f6308dd795d224af92ae71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_power_f32_parallel</definition>
+        <argsstring>(const float32_t *__restrict__ pSrc, uint32_t blockSize, uint32_t nPE, float32_t *__restrict__ pRes)</argsstring>
+        <name>plp_power_f32_parallel</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel power of 32-bit floating point vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of fixed point fractional bits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of parallel processing units </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_power_f32_parallel.c" line="80" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_power_f32_parallel.c" bodystart="80" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="group__power_1ga4484e3e4a58959717dee505c280ab654" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_power_i16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_power_i16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for sum of squares of a 16-bit integer vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for Sum of squares of a 16-bit integer vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>sum of squares returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_power_i16.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_power_i16.c" bodystart="72" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="group__power_1ga208e6720abbc6df3ece7422c86a4aee5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_power_i32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_power_i32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for sum of squares of a 32-bit integer vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for Sum of squares of a 32-bit integer vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>sum of squares returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_power_i32.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_power_i32.c" bodystart="72" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="group__power_1ga02c33912fd94fd3a6e2794540955c91b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_power_i8</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t blockSize, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_power_i8</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for sum of squares of a 8-bit integer vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for Sum of squares of a 8-bit integer vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>sum of squares returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_power_i8.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_power_i8.c" bodystart="72" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="group__power_1gad58cd9bf26a058be753487f0b2dfcdad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_power_q16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_power_q16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for sum of squares of a 8-bit fixed point vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for Sum of squares of a 16-bit fixed point vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>sum of squares returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_power_q16.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_power_q16.c" bodystart="72" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="group__power_1ga98d3d5cd0896bdc5071ca08ae12c9975" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_power_q32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_power_q32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for sum of squares of a 8-bit fixed point vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for Sum of squares of a 32-bit fixed point vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>sum of squares returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_power_q32.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_power_q32.c" bodystart="72" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="group__power_1ga930c12316586d2b7f631286b230576be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_power_q32_parallel</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t blockSize, uint32_t deciPoint, uint32_t nPE, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_power_q32_parallel</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nPE</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for parallel power of 32-bit fixed-point vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for parallel power of 32-bit fixed point vectors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of fixed point fractional bits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of parallel processing units </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_power_q32_parallel.c" line="80" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_power_q32_parallel.c" bodystart="80" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="group__power_1ga43cd63f72d140fb533cc2c8980ac3d1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_power_q8</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_power_q8</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for sum of squares of a 8-bit fixed point vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for Sum of squares of a 8-bit fixed point vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>sum of squares returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_power_q8.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_power_q8.c" bodystart="72" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="group__power_1gaee92e8c8d7183988d670d54571cc93f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_f32</definition>
+        <argsstring>(const float *__restrict__ pSrc, uint32_t blockSize, float *__restrict__ pRes)</argsstring>
+        <name>plp_rms_f32</name>
+        <param>
+          <type>const float *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for RMS value of a 32-bit float vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for Statisical standard deviation of a 32-bit floating point vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_rms_f32.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_rms_f32.c" bodystart="72" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="group__power_1ga51e131ed067d687d946b8ca5d46e36c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_q16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int16_t *__restrict__ pRes)</argsstring>
+        <name>plp_rms_q16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for RMS value of a 8-bit fixed point vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for Statisical standard deviation of a 16-bit fixed point vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_rms_q16.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_rms_q16.c" bodystart="72" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="group__power_1ga7dd0af7e25e046c8ba423ca5d901d134" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_q32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int32_t *__restrict__ pRes)</argsstring>
+        <name>plp_rms_q32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for RMS value of a 8-bit fixed point vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for Statisical standard deviation of a 32-bit fixed point vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_rms_q32.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_rms_q32.c" bodystart="72" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="group__power_1ga9afbaa433129d7c0de1f17f3d3580406" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_rms_q8</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t blockSize, uint32_t fracBits, int8_t *__restrict__ pRes)</argsstring>
+        <name>plp_rms_q8</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pRes</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for RMS value of a 8-bit fixed point vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Glue code for Statisical standard deviation of a 8-bit fixed point vector.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pRes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RMS value returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/StatisticsFunctions/plp_rms_q8.c" line="72" column="6" bodyfile="/github/workspace/src/StatisticsFunctions/plp_rms_q8.c" bodystart="72" bodyend="82"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Calculates the sum of squares of the input vector. There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.</para>
+<para>The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s): <preformatted>
+&lt;pulp&gt; _ &lt;function name&gt; _ &lt;data type&gt; &lt;precision&gt; &lt;method&gt; _ &lt;isa extension&gt;, with
+
+data type = {f, i, q} respectively for floats, integers, fixed points
+
+precision = {32, 16, 8} bits
+
+method = {s, p} respectively meaning single core or parallel multicore implementation.
+
+isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
+
+</preformatted></para>
+<para>Calculates the RMS value of the input vector. There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.</para>
+<para>The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s): <preformatted>
+&lt;pulp&gt; _ &lt;function name&gt; _ &lt;data type&gt; &lt;precision&gt; &lt;method&gt; _ &lt;isa extension&gt;, with
+
+data type = {f, i, q} respectively for floats, integers, fixed points
+
+precision = {32, 16, 8} bits
+
+method = {s, p} respectively meaning single core or parallel multicore implementation.
+
+isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
+
+</preformatted> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

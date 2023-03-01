@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__mat__mult__cmplx__instance__q8" kind="struct" language="C++" prot="public">
+    <compoundname>plp_mat_mult_cmplx_instance_q8</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__mat__mult__cmplx__instance__q8_1a2ddc258ba9275c762659a040d287529f" prot="public" static="no" mutable="no">
+        <type>const int8_t *__restrict__</type>
+        <definition>const int8_t* __restrict__ plp_mat_mult_cmplx_instance_q8::pSrcA</definition>
+        <argsstring></argsstring>
+        <name>pSrcA</name>
+        <qualifiedname>plp_mat_mult_cmplx_instance_q8::pSrcA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="637" column="31" bodyfile="/github/workspace/include/plp_math.h" bodystart="637" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__cmplx__instance__q8_1a10a3a5441797c2541c568f7152ec9b4d" prot="public" static="no" mutable="no">
+        <type>const int8_t *__restrict__</type>
+        <definition>const int8_t* __restrict__ plp_mat_mult_cmplx_instance_q8::pSrcB</definition>
+        <argsstring></argsstring>
+        <name>pSrcB</name>
+        <qualifiedname>plp_mat_mult_cmplx_instance_q8::pSrcB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="638" column="31" bodyfile="/github/workspace/include/plp_math.h" bodystart="638" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__cmplx__instance__q8_1a0e672f7414360fd1199cac8cd6468c47" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_mult_cmplx_instance_q8::M</definition>
+        <argsstring></argsstring>
+        <name>M</name>
+        <qualifiedname>plp_mat_mult_cmplx_instance_q8::M</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="639" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="639" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__cmplx__instance__q8_1a3023e7ba2dc2dac354ee03679bdceacc" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_mult_cmplx_instance_q8::N</definition>
+        <argsstring></argsstring>
+        <name>N</name>
+        <qualifiedname>plp_mat_mult_cmplx_instance_q8::N</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="640" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="640" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__cmplx__instance__q8_1af22bc49379f8e8008d263b6edf84488f" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_mult_cmplx_instance_q8::O</definition>
+        <argsstring></argsstring>
+        <name>O</name>
+        <qualifiedname>plp_mat_mult_cmplx_instance_q8::O</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="641" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="641" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__cmplx__instance__q8_1a1aec2d2a006da47c6593ebf40a3b1510" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_mult_cmplx_instance_q8::shift</definition>
+        <argsstring></argsstring>
+        <name>shift</name>
+        <qualifiedname>plp_mat_mult_cmplx_instance_q8::shift</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="642" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="642" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__cmplx__instance__q8_1a34f1a4666c14066b9177cd7581483589" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_mult_cmplx_instance_q8::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_mat_mult_cmplx_instance_q8::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="643" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="643" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__cmplx__instance__q8_1a04434f45c948c7efb6cb35891e6a8c96" prot="public" static="no" mutable="no">
+        <type>int8_t *__restrict__</type>
+        <definition>int8_t* __restrict__ plp_mat_mult_cmplx_instance_q8::pDstC</definition>
+        <argsstring></argsstring>
+        <name>pDstC</name>
+        <qualifiedname>plp_mat_mult_cmplx_instance_q8::pDstC</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="644" column="25" bodyfile="/github/workspace/include/plp_math.h" bodystart="644" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for 8-bit fix-point parallel complex matrix matrix multiplication. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="636" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="636" bodyend="645"/>
+    <listofallmembers>
+      <member refid="structplp__mat__mult__cmplx__instance__q8_1a0e672f7414360fd1199cac8cd6468c47" prot="public" virt="non-virtual"><scope>plp_mat_mult_cmplx_instance_q8</scope><name>M</name></member>
+      <member refid="structplp__mat__mult__cmplx__instance__q8_1a3023e7ba2dc2dac354ee03679bdceacc" prot="public" virt="non-virtual"><scope>plp_mat_mult_cmplx_instance_q8</scope><name>N</name></member>
+      <member refid="structplp__mat__mult__cmplx__instance__q8_1a34f1a4666c14066b9177cd7581483589" prot="public" virt="non-virtual"><scope>plp_mat_mult_cmplx_instance_q8</scope><name>nPE</name></member>
+      <member refid="structplp__mat__mult__cmplx__instance__q8_1af22bc49379f8e8008d263b6edf84488f" prot="public" virt="non-virtual"><scope>plp_mat_mult_cmplx_instance_q8</scope><name>O</name></member>
+      <member refid="structplp__mat__mult__cmplx__instance__q8_1a04434f45c948c7efb6cb35891e6a8c96" prot="public" virt="non-virtual"><scope>plp_mat_mult_cmplx_instance_q8</scope><name>pDstC</name></member>
+      <member refid="structplp__mat__mult__cmplx__instance__q8_1a2ddc258ba9275c762659a040d287529f" prot="public" virt="non-virtual"><scope>plp_mat_mult_cmplx_instance_q8</scope><name>pSrcA</name></member>
+      <member refid="structplp__mat__mult__cmplx__instance__q8_1a10a3a5441797c2541c568f7152ec9b4d" prot="public" virt="non-virtual"><scope>plp_mat_mult_cmplx_instance_q8</scope><name>pSrcB</name></member>
+      <member refid="structplp__mat__mult__cmplx__instance__q8_1a1aec2d2a006da47c6593ebf40a3b1510" prot="public" virt="non-virtual"><scope>plp_mat_mult_cmplx_instance_q8</scope><name>shift</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

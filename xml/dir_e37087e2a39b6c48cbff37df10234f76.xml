@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_e37087e2a39b6c48cbff37df10234f76" kind="dir">
+    <compoundname>/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/kernels</compoundname>
+    <innerfile refid="plp__mat__mult__stride__f32p__xpulpv2_8c">plp_mat_mult_stride_f32p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__f32s__xpulpv2_8c">plp_mat_mult_stride_f32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__i16p__xpulpv2_8c">plp_mat_mult_stride_i16p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__i16s__rv32im_8c">plp_mat_mult_stride_i16s_rv32im.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__i16s__xpulpv2_8c">plp_mat_mult_stride_i16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__i32p__xpulpv2_8c">plp_mat_mult_stride_i32p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__i32s__rv32im_8c">plp_mat_mult_stride_i32s_rv32im.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__i32s__xpulpv2_8c">plp_mat_mult_stride_i32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__i8p__xpulpv2_8c">plp_mat_mult_stride_i8p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__i8s__rv32im_8c">plp_mat_mult_stride_i8s_rv32im.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__i8s__xpulpv2_8c">plp_mat_mult_stride_i8s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__q16p__xpulpv2_8c">plp_mat_mult_stride_q16p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__q16s__rv32im_8c">plp_mat_mult_stride_q16s_rv32im.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__q16s__xpulpv2_8c">plp_mat_mult_stride_q16s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__q32p__xpulpv2_8c">plp_mat_mult_stride_q32p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__q32s__rv32im_8c">plp_mat_mult_stride_q32s_rv32im.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__q32s__xpulpv2_8c">plp_mat_mult_stride_q32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__q8p__xpulpv2_8c">plp_mat_mult_stride_q8p_xpulpv2.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__q8s__rv32im_8c">plp_mat_mult_stride_q8s_rv32im.c</innerfile>
+    <innerfile refid="plp__mat__mult__stride__q8s__xpulpv2_8c">plp_mat_mult_stride_q8s_xpulpv2.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/MatrixFunctionsStride/mat_mult_stride/kernels/"/>
+  </compounddef>
+</doxygen>

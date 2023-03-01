@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__BasicLogKernels" kind="group">
+    <compoundname>BasicLogKernels</compoundname>
+    <title>BasicLogKernels</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__BasicLogKernels_1gadbc6bd500342733eb6ca7e4a27cf0b57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_log_f32p_xpulpv2</definition>
+        <argsstring>(void *S)</argsstring>
+        <name>plp_log_f32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>S</declname>
+        </param>
+        <briefdescription>
+<para>Parallel log with interleaved access of 32-bit float vectors kernel for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the instance structure for float parallel log </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/log/kernels/plp_log_f32p_xpulpv2.c" line="54" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/log/kernels/plp_log_f32p_xpulpv2.c" bodystart="54" bodyend="92"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

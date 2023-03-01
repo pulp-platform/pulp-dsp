@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir">
+    <compoundname>/github/workspace/src</compoundname>
+    <innerdir refid="dir_17ea6c6435f1a46024e73b1c65617575">/github/workspace/src/BasicMathFunctions</innerdir>
+    <innerdir refid="dir_a8779fb57e1844dcf5c7f56bb6ed478b">/github/workspace/src/CommonTables</innerdir>
+    <innerdir refid="dir_3c5be9a5c53ab781feb1386cf077b6c5">/github/workspace/src/ComplexMathFunctions</innerdir>
+    <innerdir refid="dir_cac54e9f0d0be73c79b7d218acb23090">/github/workspace/src/DistanceFunctions</innerdir>
+    <innerdir refid="dir_7e910ecf34b2c8b9f487447f7df18baf">/github/workspace/src/FastMathFunctions</innerdir>
+    <innerdir refid="dir_f6a10e8165fd6f074aecf51d69aef8a4">/github/workspace/src/FilteringFunctions</innerdir>
+    <innerdir refid="dir_8f0c3609e087f7301b9c942467c4604f">/github/workspace/src/MatrixFunctions</innerdir>
+    <innerdir refid="dir_3a243b6a7ee236a5b428df016f9a8037">/github/workspace/src/MatrixFunctionsStride</innerdir>
+    <innerdir refid="dir_6746f50167d8623303a2cc52c9fdab64">/github/workspace/src/StatisticsFunctions</innerdir>
+    <innerdir refid="dir_32ff5a1c57603faa7b19df2524be450b">/github/workspace/src/SupportFunctions</innerdir>
+    <innerdir refid="dir_b848856495e46df21332f361aed2ce9a">/github/workspace/src/TransformFunctions</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/"/>
+  </compounddef>
+</doxygen>

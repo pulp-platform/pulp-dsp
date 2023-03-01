@@ -1,0 +1,244 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__q8DWTKernels" kind="group">
+    <compoundname>q8DWTKernels</compoundname>
+    <title>DWT kernels on Q7 input values</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__q8DWTKernels_1ga82f9c2452f759ef7f8493acdf072cc55" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_dwt_q8p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_dwt_q8p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Q7 fixed-point DWT for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the <ref refid="structplp__dwt__instance__q8" kindref="compound">plp_dwt_instance_q8</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q8p_xpulpv2.c" line="74" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q8p_xpulpv2.c" bodystart="74" bodyend="362"/>
+      </memberdef>
+      <memberdef kind="function" id="group__q8DWTKernels_1ga2628226c80759a667cf75e532061912c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_dwt_haar_q8p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_dwt_haar_q8p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>q7 fixed-point DWT kernel optimized for Haar Wavelet for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the <ref refid="structplp__dwt__instance__q8" kindref="compound">plp_dwt_instance_q8</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q8p_xpulpv2.c" line="372" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q8p_xpulpv2.c" bodystart="372" bodyend="553"/>
+      </memberdef>
+      <memberdef kind="function" id="group__q8DWTKernels_1ga132feccf970f7444299a64f1b6897de1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_dwt_q8s_xpulpv2</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t length, const plp_dwt_wavelet_q8 wavelet, plp_dwt_extension_mode mode, int8_t *__restrict__ pDstA, int8_t *__restrict__ pDstD)</argsstring>
+        <name>plp_dwt_q8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structplp__dwt__wavelet__q8" kindref="compound">plp_dwt_wavelet_q8</ref></type>
+          <declname>wavelet</declname>
+        </param>
+        <param>
+          <type>plp_dwt_extension_mode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDstA</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDstD</declname>
+        </param>
+        <briefdescription>
+<para>Q7 fixed-point DWT for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>8bit Fixed-point DWT for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (q7) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of input buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wavelet</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>wavelet structure for calculating DWT </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>boundary extension mode</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Approximate coefficients </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Detailed coefficients </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q8s_xpulpv2.c" line="77" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q8s_xpulpv2.c" bodystart="77" bodyend="346"/>
+      </memberdef>
+      <memberdef kind="function" id="group__q8DWTKernels_1ga76131b27de6f2d01b1125461c742466f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_dwt_haar_q8s_xpulpv2</definition>
+        <argsstring>(const int8_t *__restrict__ pSrc, uint32_t length, plp_dwt_extension_mode mode, int8_t *__restrict__ pDstA, int8_t *__restrict__ pDstD)</argsstring>
+        <name>plp_dwt_haar_q8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>plp_dwt_extension_mode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDstA</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDstD</declname>
+        </param>
+        <briefdescription>
+<para>q7 fixed-point DWT kernel optimized for Haar Wavelet for XPULPV2 extension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>8bit Fixed-point DWT kernel optimized for Haar Wavelet on real input data for XPULPV2 extension.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer (q7) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of input buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>boundary extension mode</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Approximate coefficients </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Detailed coefficients </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q8s_xpulpv2.c" line="361" column="6" bodyfile="/github/workspace/src/TransformFunctions/kernels/plp_dwt_q8s_xpulpv2.c" bodystart="361" bodyend="526"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>These kernels calculate the DWT transform on Q7 fixed point data. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

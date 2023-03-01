@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__groupMatrix" kind="group">
+    <compoundname>groupMatrix</compoundname>
+    <title>Matrix Functions</title>
+    <innergroup refid="group__MatAdd">matrix addition</innergroup>
+    <innergroup refid="group__MatFillI">Identity Matrix Creation</innergroup>
+    <innergroup refid="group__MatInv">matrix inversion</innergroup>
+    <innergroup refid="group__BasicMatMult">Matrix Matrix Multiplication</innergroup>
+    <innergroup refid="group__MatMultCmplx">Complex Matrix Matrix Multiplication</innergroup>
+    <innergroup refid="group__MatMultTrans">Matrix Transposed Matrix Multiplication</innergroup>
+    <innergroup refid="group__MatMultTransCmplx">Complex Matrix Transpose Matrix Multiplication</innergroup>
+    <innergroup refid="group__MatScale">matrix scale</innergroup>
+    <innergroup refid="group__MatSub">matrix subtraction</innergroup>
+    <innergroup refid="group__MatTrans">matrix transpose</innergroup>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This set of functions provides basic matrix math operations. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

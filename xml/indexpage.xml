@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="indexpage" kind="page">
+    <compoundname>index</compoundname>
+    <title>PULP DSP Software Library</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect2 id="index_1autotoc_md3">
+<title>Introduction</title>
+<para>This user manual describes the PULP DSP software library, a suite of common signal processing functions for use on PULP-based processors.</para>
+<para>The library is divided into a number of functions each covering a specific category:<itemizedlist>
+<listitem><para>Basic math functions</para>
+</listitem><listitem><para>Fast math functions</para>
+</listitem><listitem><para>Complex math functions</para>
+</listitem><listitem><para>Filters</para>
+</listitem><listitem><para>Matrix functions</para>
+</listitem><listitem><para>Transform functions</para>
+</listitem><listitem><para>Motor control functions</para>
+</listitem><listitem><para>Statistical functions</para>
+</listitem><listitem><para>Support functions</para>
+</listitem><listitem><para>Interpolation functions</para>
+</listitem></itemizedlist>
+</para>
+<para>..</para>
+<para>The library has separate functions for operating on 8-bit integers, 16-bit integers, 32-bit integer and 32-bit floating-point values.</para>
+<para>The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s):</para>
+<para><preformatted>
+ &lt; plp &gt; _ &lt; function name &gt; _ &lt; data type &gt; &lt; precision &gt; &lt; method &gt; _ &lt; isa extension &gt;,
+ </preformatted></para>
+<para>with</para>
+<para><itemizedlist>
+<listitem><para>data type = {f, i, q} respectively for floats, integers, fixed points</para>
+</listitem><listitem><para>precision = {32, 16, 8} bits</para>
+</listitem><listitem><para>method = {s, p} respectively meaning single core or parallel multicore implementation.</para>
+</listitem><listitem><para>isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.</para>
+</listitem></itemizedlist>
+</para>
+<para>..</para>
+<para>If the user wants to use a parallel implementation, they can call the glue code functions with &apos;_parallel&apos; in the function name.</para>
+<para>The library is released under Apache v2.0 license. More details can be found in <computeroutput>LICENSE</computeroutput>. </para>
+</sect2>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h"/>
+  </compounddef>
+</doxygen>

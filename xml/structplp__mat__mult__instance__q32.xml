@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__mat__mult__instance__q32" kind="struct" language="C++" prot="public">
+    <compoundname>plp_mat_mult_instance_q32</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__mat__mult__instance__q32_1a6906fb58f4e258fbaa6b48b4b0eec8c9" prot="public" static="no" mutable="no">
+        <type>const int32_t *__restrict__</type>
+        <definition>const int32_t* __restrict__ plp_mat_mult_instance_q32::pSrcA</definition>
+        <argsstring></argsstring>
+        <name>pSrcA</name>
+        <qualifiedname>plp_mat_mult_instance_q32::pSrcA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="571" column="32" bodyfile="/github/workspace/include/plp_math.h" bodystart="571" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__instance__q32_1a7290831ef24ca166c0e129ff3529093f" prot="public" static="no" mutable="no">
+        <type>const int32_t *__restrict__</type>
+        <definition>const int32_t* __restrict__ plp_mat_mult_instance_q32::pSrcB</definition>
+        <argsstring></argsstring>
+        <name>pSrcB</name>
+        <qualifiedname>plp_mat_mult_instance_q32::pSrcB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="572" column="32" bodyfile="/github/workspace/include/plp_math.h" bodystart="572" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__instance__q32_1a7a77b2f751c94f08d51f5245275795bc" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_mult_instance_q32::M</definition>
+        <argsstring></argsstring>
+        <name>M</name>
+        <qualifiedname>plp_mat_mult_instance_q32::M</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="573" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="573" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__instance__q32_1a57af2bcc6b1c80ce7da6bd8b6d0168af" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_mult_instance_q32::N</definition>
+        <argsstring></argsstring>
+        <name>N</name>
+        <qualifiedname>plp_mat_mult_instance_q32::N</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="574" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="574" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__instance__q32_1a711578db19223a8a67809046ab153272" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_mult_instance_q32::O</definition>
+        <argsstring></argsstring>
+        <name>O</name>
+        <qualifiedname>plp_mat_mult_instance_q32::O</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="575" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="575" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__instance__q32_1a9e321d0b2648edb4e16b84efd45cae34" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_mult_instance_q32::shift</definition>
+        <argsstring></argsstring>
+        <name>shift</name>
+        <qualifiedname>plp_mat_mult_instance_q32::shift</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="576" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="576" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__instance__q32_1a59c060b93871c21405ffe2852704765b" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_mult_instance_q32::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_mat_mult_instance_q32::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="577" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="577" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__mult__instance__q32_1af82d39d6534cca7c053c4cacf4654a11" prot="public" static="no" mutable="no">
+        <type>int32_t *__restrict__</type>
+        <definition>int32_t* __restrict__ plp_mat_mult_instance_q32::pDstC</definition>
+        <argsstring></argsstring>
+        <name>pDstC</name>
+        <qualifiedname>plp_mat_mult_instance_q32::pDstC</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="578" column="26" bodyfile="/github/workspace/include/plp_math.h" bodystart="578" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for 32-bit fix-point parallel matrix multiplication. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="570" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="570" bodyend="579"/>
+    <listofallmembers>
+      <member refid="structplp__mat__mult__instance__q32_1a7a77b2f751c94f08d51f5245275795bc" prot="public" virt="non-virtual"><scope>plp_mat_mult_instance_q32</scope><name>M</name></member>
+      <member refid="structplp__mat__mult__instance__q32_1a57af2bcc6b1c80ce7da6bd8b6d0168af" prot="public" virt="non-virtual"><scope>plp_mat_mult_instance_q32</scope><name>N</name></member>
+      <member refid="structplp__mat__mult__instance__q32_1a59c060b93871c21405ffe2852704765b" prot="public" virt="non-virtual"><scope>plp_mat_mult_instance_q32</scope><name>nPE</name></member>
+      <member refid="structplp__mat__mult__instance__q32_1a711578db19223a8a67809046ab153272" prot="public" virt="non-virtual"><scope>plp_mat_mult_instance_q32</scope><name>O</name></member>
+      <member refid="structplp__mat__mult__instance__q32_1af82d39d6534cca7c053c4cacf4654a11" prot="public" virt="non-virtual"><scope>plp_mat_mult_instance_q32</scope><name>pDstC</name></member>
+      <member refid="structplp__mat__mult__instance__q32_1a6906fb58f4e258fbaa6b48b4b0eec8c9" prot="public" virt="non-virtual"><scope>plp_mat_mult_instance_q32</scope><name>pSrcA</name></member>
+      <member refid="structplp__mat__mult__instance__q32_1a7290831ef24ca166c0e129ff3529093f" prot="public" virt="non-virtual"><scope>plp_mat_mult_instance_q32</scope><name>pSrcB</name></member>
+      <member refid="structplp__mat__mult__instance__q32_1a9e321d0b2648edb4e16b84efd45cae34" prot="public" virt="non-virtual"><scope>plp_mat_mult_instance_q32</scope><name>shift</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

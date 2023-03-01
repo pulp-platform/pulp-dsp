@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__mat__add__instance__i8" kind="struct" language="C++" prot="public">
+    <compoundname>plp_mat_add_instance_i8</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__mat__add__instance__i8_1a0e3a9c853f4d2d4376abb0f13c52a241" prot="public" static="no" mutable="no">
+        <type>const int8_t *__restrict__</type>
+        <definition>const int8_t* __restrict__ plp_mat_add_instance_i8::pSrcA</definition>
+        <argsstring></argsstring>
+        <name>pSrcA</name>
+        <qualifiedname>plp_mat_add_instance_i8::pSrcA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="679" column="31" bodyfile="/github/workspace/include/plp_math.h" bodystart="679" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__add__instance__i8_1af106a25000da7c56d7e4ab04d61b96a6" prot="public" static="no" mutable="no">
+        <type>const int8_t *__restrict__</type>
+        <definition>const int8_t* __restrict__ plp_mat_add_instance_i8::pSrcB</definition>
+        <argsstring></argsstring>
+        <name>pSrcB</name>
+        <qualifiedname>plp_mat_add_instance_i8::pSrcB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="680" column="31" bodyfile="/github/workspace/include/plp_math.h" bodystart="680" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__add__instance__i8_1aca24bbf4d51835d07e10208ebd5c3755" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_add_instance_i8::M</definition>
+        <argsstring></argsstring>
+        <name>M</name>
+        <qualifiedname>plp_mat_add_instance_i8::M</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="681" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="681" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__add__instance__i8_1aab6ef1bad3b191d8e925eda3003d8eb1" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_add_instance_i8::N</definition>
+        <argsstring></argsstring>
+        <name>N</name>
+        <qualifiedname>plp_mat_add_instance_i8::N</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="682" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="682" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__add__instance__i8_1a724ac05048a78fe73a338f1ecaa264e1" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_add_instance_i8::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_mat_add_instance_i8::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="683" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="683" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__add__instance__i8_1a4eb71e29e90dea0ca980cf0a4fb726f5" prot="public" static="no" mutable="no">
+        <type>int8_t *__restrict__</type>
+        <definition>int8_t* __restrict__ plp_mat_add_instance_i8::pDst</definition>
+        <argsstring></argsstring>
+        <name>pDst</name>
+        <qualifiedname>plp_mat_add_instance_i8::pDst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="684" column="25" bodyfile="/github/workspace/include/plp_math.h" bodystart="684" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for integer parallel matrix addition. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="678" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="678" bodyend="685"/>
+    <listofallmembers>
+      <member refid="structplp__mat__add__instance__i8_1aca24bbf4d51835d07e10208ebd5c3755" prot="public" virt="non-virtual"><scope>plp_mat_add_instance_i8</scope><name>M</name></member>
+      <member refid="structplp__mat__add__instance__i8_1aab6ef1bad3b191d8e925eda3003d8eb1" prot="public" virt="non-virtual"><scope>plp_mat_add_instance_i8</scope><name>N</name></member>
+      <member refid="structplp__mat__add__instance__i8_1a724ac05048a78fe73a338f1ecaa264e1" prot="public" virt="non-virtual"><scope>plp_mat_add_instance_i8</scope><name>nPE</name></member>
+      <member refid="structplp__mat__add__instance__i8_1a4eb71e29e90dea0ca980cf0a4fb726f5" prot="public" virt="non-virtual"><scope>plp_mat_add_instance_i8</scope><name>pDst</name></member>
+      <member refid="structplp__mat__add__instance__i8_1a0e3a9c853f4d2d4376abb0f13c52a241" prot="public" virt="non-virtual"><scope>plp_mat_add_instance_i8</scope><name>pSrcA</name></member>
+      <member refid="structplp__mat__add__instance__i8_1af106a25000da7c56d7e4ab04d61b96a6" prot="public" virt="non-virtual"><scope>plp_mat_add_instance_i8</scope><name>pSrcB</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

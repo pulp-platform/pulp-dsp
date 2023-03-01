@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__mat__fill__stride__instance__i32" kind="struct" language="C++" prot="public">
+    <compoundname>plp_mat_fill_stride_instance_i32</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__mat__fill__stride__instance__i32_1ad2241cee46bf4e57af91a45b51c95003" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_fill_stride_instance_i32::M</definition>
+        <argsstring></argsstring>
+        <name>M</name>
+        <qualifiedname>plp_mat_fill_stride_instance_i32::M</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1446" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1446" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__fill__stride__instance__i32_1aa96233278bcbde70ea284c7384a0e600" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_fill_stride_instance_i32::N</definition>
+        <argsstring></argsstring>
+        <name>N</name>
+        <qualifiedname>plp_mat_fill_stride_instance_i32::N</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1447" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1447" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__fill__stride__instance__i32_1a00497a7738a545b4faca5f7dca3ee30f" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_fill_stride_instance_i32::stride</definition>
+        <argsstring></argsstring>
+        <name>stride</name>
+        <qualifiedname>plp_mat_fill_stride_instance_i32::stride</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1448" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1448" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__fill__stride__instance__i32_1a48b848dd086f43110422178367e77d42" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t plp_mat_fill_stride_instance_i32::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>plp_mat_fill_stride_instance_i32::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1449" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="1449" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__fill__stride__instance__i32_1a4f82102608ae6dcedafef74a73cd5f26" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_fill_stride_instance_i32::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_mat_fill_stride_instance_i32::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1450" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1450" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__fill__stride__instance__i32_1a6a170e5b0f901b558a138b64d02ae630" prot="public" static="no" mutable="no">
+        <type>int32_t *__restrict__</type>
+        <definition>int32_t* __restrict__ plp_mat_fill_stride_instance_i32::pDst</definition>
+        <argsstring></argsstring>
+        <name>pDst</name>
+        <qualifiedname>plp_mat_fill_stride_instance_i32::pDst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1451" column="26" bodyfile="/github/workspace/include/plp_math.h" bodystart="1451" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for filling an integer matrix in parallel. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="1445" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="1445" bodyend="1452"/>
+    <listofallmembers>
+      <member refid="structplp__mat__fill__stride__instance__i32_1ad2241cee46bf4e57af91a45b51c95003" prot="public" virt="non-virtual"><scope>plp_mat_fill_stride_instance_i32</scope><name>M</name></member>
+      <member refid="structplp__mat__fill__stride__instance__i32_1aa96233278bcbde70ea284c7384a0e600" prot="public" virt="non-virtual"><scope>plp_mat_fill_stride_instance_i32</scope><name>N</name></member>
+      <member refid="structplp__mat__fill__stride__instance__i32_1a4f82102608ae6dcedafef74a73cd5f26" prot="public" virt="non-virtual"><scope>plp_mat_fill_stride_instance_i32</scope><name>nPE</name></member>
+      <member refid="structplp__mat__fill__stride__instance__i32_1a6a170e5b0f901b558a138b64d02ae630" prot="public" virt="non-virtual"><scope>plp_mat_fill_stride_instance_i32</scope><name>pDst</name></member>
+      <member refid="structplp__mat__fill__stride__instance__i32_1a00497a7738a545b4faca5f7dca3ee30f" prot="public" virt="non-virtual"><scope>plp_mat_fill_stride_instance_i32</scope><name>stride</name></member>
+      <member refid="structplp__mat__fill__stride__instance__i32_1a48b848dd086f43110422178367e77d42" prot="public" virt="non-virtual"><scope>plp_mat_fill_stride_instance_i32</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__power__instance__q32" kind="struct" language="C++" prot="public">
+    <compoundname>plp_power_instance_q32</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__power__instance__q32_1a64a7df291a7a40943cce1d979c70e91e" prot="public" static="no" mutable="no">
+        <type>int32_t *</type>
+        <definition>int32_t* plp_power_instance_q32::pSrc</definition>
+        <argsstring></argsstring>
+        <name>pSrc</name>
+        <qualifiedname>plp_power_instance_q32::pSrc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1581" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="1581" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__power__instance__q32_1a0cd2afc58e3caf24f04e5426f20fa3fa" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_power_instance_q32::blkSizePE</definition>
+        <argsstring></argsstring>
+        <name>blkSizePE</name>
+        <qualifiedname>plp_power_instance_q32::blkSizePE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1582" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1582" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__power__instance__q32_1af97968596c2aad4ccf598b316dc0578f" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_power_instance_q32::fracBits</definition>
+        <argsstring></argsstring>
+        <name>fracBits</name>
+        <qualifiedname>plp_power_instance_q32::fracBits</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1583" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1583" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__power__instance__q32_1a21377b603e897738edfe54a868c34c7d" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_power_instance_q32::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_power_instance_q32::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1584" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1584" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__power__instance__q32_1a8a21df64450faa16cce69499e40b2269" prot="public" static="no" mutable="no">
+        <type>int32_t *</type>
+        <definition>int32_t* plp_power_instance_q32::resBuffer</definition>
+        <argsstring></argsstring>
+        <name>resBuffer</name>
+        <qualifiedname>plp_power_instance_q32::resBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1585" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="1585" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for fixed point parallel power. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blkSizePE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of parallel processing units </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">resBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to the result buffer </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="1580" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="1580" bodyend="1586"/>
+    <listofallmembers>
+      <member refid="structplp__power__instance__q32_1a0cd2afc58e3caf24f04e5426f20fa3fa" prot="public" virt="non-virtual"><scope>plp_power_instance_q32</scope><name>blkSizePE</name></member>
+      <member refid="structplp__power__instance__q32_1af97968596c2aad4ccf598b316dc0578f" prot="public" virt="non-virtual"><scope>plp_power_instance_q32</scope><name>fracBits</name></member>
+      <member refid="structplp__power__instance__q32_1a21377b603e897738edfe54a868c34c7d" prot="public" virt="non-virtual"><scope>plp_power_instance_q32</scope><name>nPE</name></member>
+      <member refid="structplp__power__instance__q32_1a64a7df291a7a40943cce1d979c70e91e" prot="public" virt="non-virtual"><scope>plp_power_instance_q32</scope><name>pSrc</name></member>
+      <member refid="structplp__power__instance__q32_1a8a21df64450faa16cce69499e40b2269" prot="public" virt="non-virtual"><scope>plp_power_instance_q32</scope><name>resBuffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_e44bb82c57fbab980703d77e61854c03" kind="dir">
+    <compoundname>/github/workspace/src/SupportFunctions/kernels</compoundname>
+    <innerfile refid="plp__copy__f32s__rv32im_8c">plp_copy_f32s_rv32im.c</innerfile>
+    <innerfile refid="plp__copy__f32s__xpulpv2_8c">plp_copy_f32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__copy__i32s__rv32im_8c">plp_copy_i32s_rv32im.c</innerfile>
+    <innerfile refid="plp__copy__i32s__xpulpv2_8c">plp_copy_i32s_xpulpv2.c</innerfile>
+    <innerfile refid="plp__fill__i32s__rv32im_8c">plp_fill_i32s_rv32im.c</innerfile>
+    <innerfile refid="plp__fill__i32s__xpulpv2_8c">plp_fill_i32s_xpulpv2.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/SupportFunctions/kernels/"/>
+  </compounddef>
+</doxygen>

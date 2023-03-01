@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__cfft__instance__q16__parallel" kind="struct" language="C++" prot="public">
+    <compoundname>plp_cfft_instance_q16_parallel</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__cfft__instance__q16__parallel_1a0a931d8809e89209f954a294c27348c3" prot="public" static="no" mutable="no">
+        <type><ref refid="structplp__cfft__instance__q16" kindref="compound">plp_cfft_instance_q16</ref> *</type>
+        <definition>plp_cfft_instance_q16* plp_cfft_instance_q16_parallel::S</definition>
+        <argsstring></argsstring>
+        <name>S</name>
+        <qualifiedname>plp_cfft_instance_q16_parallel::S</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="303" column="27" bodyfile="/github/workspace/include/plp_math.h" bodystart="303" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__cfft__instance__q16__parallel_1aa7fd126ebce32c6b171f070c5b38123e" prot="public" static="no" mutable="no">
+        <type>int16_t *</type>
+        <definition>int16_t* plp_cfft_instance_q16_parallel::p1</definition>
+        <argsstring></argsstring>
+        <name>p1</name>
+        <qualifiedname>plp_cfft_instance_q16_parallel::p1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="304" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="304" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__cfft__instance__q16__parallel_1a6c6cd14bf713c1012f8502564a5508ad" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t plp_cfft_instance_q16_parallel::ifftFlag</definition>
+        <argsstring></argsstring>
+        <name>ifftFlag</name>
+        <qualifiedname>plp_cfft_instance_q16_parallel::ifftFlag</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="305" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="305" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__cfft__instance__q16__parallel_1a2741af1f5c47440c88f9bb1b93ac0471" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t plp_cfft_instance_q16_parallel::bitReverseFlag</definition>
+        <argsstring></argsstring>
+        <name>bitReverseFlag</name>
+        <qualifiedname>plp_cfft_instance_q16_parallel::bitReverseFlag</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="306" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="306" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__cfft__instance__q16__parallel_1a360cf4cc106973f2e318b3c69b0620b8" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_cfft_instance_q16_parallel::deciPoint</definition>
+        <argsstring></argsstring>
+        <name>deciPoint</name>
+        <qualifiedname>plp_cfft_instance_q16_parallel::deciPoint</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="307" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="307" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__cfft__instance__q16__parallel_1ae057e131efc6577e272add349c18f1b7" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_cfft_instance_q16_parallel::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_cfft_instance_q16_parallel::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="308" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="308" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for the parallel CFFT Q16. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">fft_struct</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>cfft_q16 struct </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>[in/out]</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>p1 points to the complex data buffer of size <computeroutput>2*fftLen</computeroutput>. Processing occurs in-place. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ifftFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that selects forward (ifftFlag=0) or inverse (ifftFlag=1) transform. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bitReverseFlag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>flag that enables (bitReverseFlag=1) of disables (bitReverseFlag=0) bit reversal of output. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of cores to use </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>plp_cfft_instance_q16</label>
+        <link refid="structplp__cfft__instance__q16"/>
+      </node>
+      <node id="1">
+        <label>plp_cfft_instance_q16_parallel</label>
+        <link refid="structplp__cfft__instance__q16__parallel"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>S</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/github/workspace/include/plp_math.h" line="302" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="302" bodyend="309"/>
+    <listofallmembers>
+      <member refid="structplp__cfft__instance__q16__parallel_1a2741af1f5c47440c88f9bb1b93ac0471" prot="public" virt="non-virtual"><scope>plp_cfft_instance_q16_parallel</scope><name>bitReverseFlag</name></member>
+      <member refid="structplp__cfft__instance__q16__parallel_1a360cf4cc106973f2e318b3c69b0620b8" prot="public" virt="non-virtual"><scope>plp_cfft_instance_q16_parallel</scope><name>deciPoint</name></member>
+      <member refid="structplp__cfft__instance__q16__parallel_1a6c6cd14bf713c1012f8502564a5508ad" prot="public" virt="non-virtual"><scope>plp_cfft_instance_q16_parallel</scope><name>ifftFlag</name></member>
+      <member refid="structplp__cfft__instance__q16__parallel_1ae057e131efc6577e272add349c18f1b7" prot="public" virt="non-virtual"><scope>plp_cfft_instance_q16_parallel</scope><name>nPE</name></member>
+      <member refid="structplp__cfft__instance__q16__parallel_1aa7fd126ebce32c6b171f070c5b38123e" prot="public" virt="non-virtual"><scope>plp_cfft_instance_q16_parallel</scope><name>p1</name></member>
+      <member refid="structplp__cfft__instance__q16__parallel_1a0a931d8809e89209f954a294c27348c3" prot="public" virt="non-virtual"><scope>plp_cfft_instance_q16_parallel</scope><name>S</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

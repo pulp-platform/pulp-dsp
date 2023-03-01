@@ -1,0 +1,1365 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>/github/workspace/include/plp_common_tables.h - PULP DSP</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#githubworkspaceincludeplp_common_tablesh" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="PULP DSP" class="md-header__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PULP DSP
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              /github/workspace/include/plp_common_tables.h
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="PULP DSP" class="md-nav__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    PULP DSP
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../test-framework-index/" class="md-nav__link">
+        Test Framework
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorial-index/" class="md-nav__link">
+        Tutorial
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../troubles/" class="md-nav__link">
+        Troubles Shooting
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Reference Manual
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Reference Manual
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pages/" class="md-nav__link">
+        Pages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Classes/" class="md-nav__link">
+        Classes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/" class="md-nav__link">
+        Modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Namespaces/" class="md-nav__link">
+        Namespaces
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defines" class="md-nav__link">
+    Defines
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-description" class="md-nav__link">
+    Detailed Description
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="githubworkspaceincludeplp_common_tablesh">/github/workspace/include/plp_common_tables.h</h1>
+<p>File containing extern declarations for common tables.  <a href="#detailed-description">More...</a></p>
+<h2 id="attributes">Attributes</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>const int16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-16-q16">twiddleCoef_16_q16</a></strong></td>
+</tr>
+<tr>
+<td>const int16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-32-q16">twiddleCoef_32_q16</a></strong></td>
+</tr>
+<tr>
+<td>const int16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-64-q16">twiddleCoef_64_q16</a></strong></td>
+</tr>
+<tr>
+<td>const int16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-128-q16">twiddleCoef_128_q16</a></strong></td>
+</tr>
+<tr>
+<td>const int16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-256-q16">twiddleCoef_256_q16</a></strong></td>
+</tr>
+<tr>
+<td>const int16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-512-q16">twiddleCoef_512_q16</a></strong></td>
+</tr>
+<tr>
+<td>const int16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-1024-q16">twiddleCoef_1024_q16</a></strong></td>
+</tr>
+<tr>
+<td>const int16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-2048-q16">twiddleCoef_2048_q16</a></strong></td>
+</tr>
+<tr>
+<td>const int16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-4096-q16">twiddleCoef_4096_q16</a></strong></td>
+</tr>
+<tr>
+<td>const int32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-16-q32">twiddleCoef_16_q32</a></strong></td>
+</tr>
+<tr>
+<td>const int32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-32-q32">twiddleCoef_32_q32</a></strong></td>
+</tr>
+<tr>
+<td>const int32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-64-q32">twiddleCoef_64_q32</a></strong></td>
+</tr>
+<tr>
+<td>const int32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-128-q32">twiddleCoef_128_q32</a></strong></td>
+</tr>
+<tr>
+<td>const int32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-256-q32">twiddleCoef_256_q32</a></strong></td>
+</tr>
+<tr>
+<td>const int32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-512-q32">twiddleCoef_512_q32</a></strong></td>
+</tr>
+<tr>
+<td>const int32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-1024-q32">twiddleCoef_1024_q32</a></strong></td>
+</tr>
+<tr>
+<td>const int32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-2048-q32">twiddleCoef_2048_q32</a></strong></td>
+</tr>
+<tr>
+<td>const int32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-4096-q32">twiddleCoef_4096_q32</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-plpbitrevindextable-fixed-16">plpBitRevIndexTable_fixed_16</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-plpbitrevindextable-fixed-32">plpBitRevIndexTable_fixed_32</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-plpbitrevindextable-fixed-64">plpBitRevIndexTable_fixed_64</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-plpbitrevindextable-fixed-128">plpBitRevIndexTable_fixed_128</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-plpbitrevindextable-fixed-256">plpBitRevIndexTable_fixed_256</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-plpbitrevindextable-fixed-512">plpBitRevIndexTable_fixed_512</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-plpbitrevindextable-fixed-1024">plpBitRevIndexTable_fixed_1024</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-plpbitrevindextable-fixed-2048">plpBitRevIndexTable_fixed_2048</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-plpbitrevindextable-fixed-4096">plpBitRevIndexTable_fixed_4096</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-cfft-16">twiddleCoef_cfft_16</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-cfft-32">twiddleCoef_cfft_32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-cfft-64">twiddleCoef_cfft_64</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-cfft-128">twiddleCoef_cfft_128</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-cfft-256">twiddleCoef_cfft_256</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-cfft-512">twiddleCoef_cfft_512</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-cfft-1024">twiddleCoef_cfft_1024</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-cfft-2048">twiddleCoef_cfft_2048</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-plpbitrevindextable-rfftfast-16">plpBitRevIndexTable_rfftfast_16</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-plpbitrevindextable-rfftfast-32">plpBitRevIndexTable_rfftfast_32</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-plpbitrevindextable-rfftfast-64">plpBitRevIndexTable_rfftfast_64</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-plpbitrevindextable-rfftfast-128">plpBitRevIndexTable_rfftfast_128</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-plpbitrevindextable-rfftfast-256">plpBitRevIndexTable_rfftfast_256</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-plpbitrevindextable-rfftfast-512">plpBitRevIndexTable_rfftfast_512</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-plpbitrevindextable-rfftfast-1024">plpBitRevIndexTable_rfftfast_1024</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-rfftfast-32">twiddleCoef_rfftfast_32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-rfftfast-64">twiddleCoef_rfftfast_64</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-rfftfast-128">twiddleCoef_rfftfast_128</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-rfftfast-256">twiddleCoef_rfftfast_256</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-rfftfast-512">twiddleCoef_rfftfast_512</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-rfftfast-1024">twiddleCoef_rfftfast_1024</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-rfftfast-2048">twiddleCoef_rfftfast_2048</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-rfft-32">twiddleCoef_rfft_32</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-rfft-64">twiddleCoef_rfft_64</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-rfft-128">twiddleCoef_rfft_128</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-rfft-256">twiddleCoef_rfft_256</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-rfft-512">twiddleCoef_rfft_512</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-rfft-1024">twiddleCoef_rfft_1024</a></strong></td>
+</tr>
+<tr>
+<td>const <a href="/pulp-dsp/refmanual/Classes/structComplex__type__f32/">Complex_type_f32</a></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-twiddlecoef-rfft-2048">twiddleCoef_rfft_2048</a></strong></td>
+</tr>
+<tr>
+<td>short</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-bit-rev-radix2-lut-32">bit_rev_radix2_LUT_32</a></strong></td>
+</tr>
+<tr>
+<td>short</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-bit-rev-radix2-lut-64">bit_rev_radix2_LUT_64</a></strong></td>
+</tr>
+<tr>
+<td>short</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-bit-rev-radix2-lut-128">bit_rev_radix2_LUT_128</a></strong></td>
+</tr>
+<tr>
+<td>short</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-bit-rev-radix2-lut-256">bit_rev_radix2_LUT_256</a></strong></td>
+</tr>
+<tr>
+<td>short</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-bit-rev-radix2-lut-512">bit_rev_radix2_LUT_512</a></strong></td>
+</tr>
+<tr>
+<td>short</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-bit-rev-radix2-lut-1024">bit_rev_radix2_LUT_1024</a></strong></td>
+</tr>
+<tr>
+<td>short</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-bit-rev-radix2-lut-2048">bit_rev_radix2_LUT_2048</a></strong></td>
+</tr>
+<tr>
+<td>short</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-bit-rev-radix4-lut-256">bit_rev_radix4_LUT_256</a></strong></td>
+</tr>
+<tr>
+<td>short</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-bit-rev-radix4-lut-1024">bit_rev_radix4_LUT_1024</a></strong></td>
+</tr>
+<tr>
+<td>short</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-bit-rev-radix8-lut-16">bit_rev_radix8_LUT_16</a></strong></td>
+</tr>
+<tr>
+<td>short</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-bit-rev-radix8-lut-64">bit_rev_radix8_LUT_64</a></strong></td>
+</tr>
+<tr>
+<td>short</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-bit-rev-radix8-lut-512">bit_rev_radix8_LUT_512</a></strong></td>
+</tr>
+<tr>
+<td>short</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-bit-rev-radix-2by4-lut-32">bit_rev_radix_2by4_LUT_32</a></strong></td>
+</tr>
+<tr>
+<td>short</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-bit-rev-radix-2by4-lut-128">bit_rev_radix_2by4_LUT_128</a></strong></td>
+</tr>
+<tr>
+<td>short</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-bit-rev-radix-2by4-lut-2048">bit_rev_radix_2by4_LUT_2048</a></strong></td>
+</tr>
+<tr>
+<td>const float32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-sintable-f32">sinTable_f32</a></strong></td>
+</tr>
+<tr>
+<td>const int32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-sintable-q32">sinTable_q32</a></strong></td>
+</tr>
+<tr>
+<td>const int16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-sintable-q16">sinTable_q16</a></strong></td>
+</tr>
+<tr>
+<td>const float32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-melfbtable-f32-23">melFbTable_f32_23</a></strong></td>
+</tr>
+<tr>
+<td>const float32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-melfbtable-f32-26">melFbTable_f32_26</a></strong></td>
+</tr>
+<tr>
+<td>const float32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-melfbtable-f32-32">melFbTable_f32_32</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-filterlengths-fb-32">filterLengths_fb_32</a></strong></td>
+</tr>
+<tr>
+<td>const uint16_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-startingindices-fb-32">startingIndices_fb_32</a></strong></td>
+</tr>
+<tr>
+<td>const float32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-values-fb-32">values_fb_32</a></strong></td>
+</tr>
+<tr>
+<td>const float32_t</td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#variable-hannwindow-f32-len512">hannWindow_f32_len512</a></strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="defines">Defines</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#define-plpbitrevindextable-fixed-16-table-length">PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#define-plpbitrevindextable-fixed-32-table-length">PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#define-plpbitrevindextable-fixed-64-table-length">PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#define-plpbitrevindextable-fixed-128-table-length">PLPBITREVINDEXTABLE_FIXED_128_TABLE_LENGTH</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#define-plpbitrevindextable-fixed-256-table-length">PLPBITREVINDEXTABLE_FIXED_256_TABLE_LENGTH</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#define-plpbitrevindextable-fixed-512-table-length">PLPBITREVINDEXTABLE_FIXED_512_TABLE_LENGTH</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#define-plpbitrevindextable-fixed-1024-table-length">PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#define-plpbitrevindextable-fixed-2048-table-length">PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH</a></strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/pulp-dsp/refmanual/Files/plp__common__tables_8h/#define-plpbitrevindextable-fixed-4096-table-length">PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH</a></strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description</h2>
+<p>File containing extern declarations for common tables. </p>
+<p><strong>Version</strong>: V0 </p>
+<p>==========================================================================</p>
+<h1 id="date-28-june-2020">@date     28. June 2020</h1>
+<h2 id="attributes-documentation">Attributes Documentation</h2>
+<h3 id="variable-twiddlecoef_16_q16">variable twiddleCoef_16_q16</h3>
+<pre><code class="language-cpp">const int16_t twiddleCoef_16_q16;
+</code></pre>
+<p><strong>Par</strong>: </p>
+<ul>
+<li></li>
+</ul>
+<p>Example code for q15 Twiddle factors Generation:: 
+  * </p>
+<p>fori = 0; i&lt; 3N/4; i++)
+{
+   twiddleCoefq15[2<em>i]   = cos(i * 2</em>PI/(float)N);
+   twiddleCoefq15[2<em>i+1] = sin(i * 2</em>PI/(float)N);
+} 
+  * </p>
+<p>where N = 16, PI = 3.14159265358979 
+  * </p>
+<p>Cos and Sin values are interleaved fashion 
+  * </p>
+<p>Convert Floating point to q15(Fixed point 1.15): round(twiddleCoefq15(i) * pow(2, 15)) </p>
+<h3 id="variable-twiddlecoef_32_q16">variable twiddleCoef_32_q16</h3>
+<pre><code class="language-cpp">const int16_t twiddleCoef_32_q16;
+</code></pre>
+<h3 id="variable-twiddlecoef_64_q16">variable twiddleCoef_64_q16</h3>
+<pre><code class="language-cpp">const int16_t twiddleCoef_64_q16;
+</code></pre>
+<h3 id="variable-twiddlecoef_128_q16">variable twiddleCoef_128_q16</h3>
+<pre><code class="language-cpp">const int16_t twiddleCoef_128_q16;
+</code></pre>
+<h3 id="variable-twiddlecoef_256_q16">variable twiddleCoef_256_q16</h3>
+<pre><code class="language-cpp">const int16_t twiddleCoef_256_q16;
+</code></pre>
+<h3 id="variable-twiddlecoef_512_q16">variable twiddleCoef_512_q16</h3>
+<pre><code class="language-cpp">const int16_t twiddleCoef_512_q16;
+</code></pre>
+<h3 id="variable-twiddlecoef_1024_q16">variable twiddleCoef_1024_q16</h3>
+<pre><code class="language-cpp">const int16_t twiddleCoef_1024_q16;
+</code></pre>
+<h3 id="variable-twiddlecoef_2048_q16">variable twiddleCoef_2048_q16</h3>
+<pre><code class="language-cpp">const int16_t twiddleCoef_2048_q16;
+</code></pre>
+<h3 id="variable-twiddlecoef_4096_q16">variable twiddleCoef_4096_q16</h3>
+<pre><code class="language-cpp">const int16_t twiddleCoef_4096_q16;
+</code></pre>
+<h3 id="variable-twiddlecoef_16_q32">variable twiddleCoef_16_q32</h3>
+<pre><code class="language-cpp">const int32_t twiddleCoef_16_q32;
+</code></pre>
+<p><strong>Par</strong>: </p>
+<ul>
+<li></li>
+</ul>
+<p>Example code for q32 Twiddle factors Generation:: 
+  * </p>
+<p>for(i = 0; i&lt; 3N/4; i++)
+{
+   twiddleCoefq32[2<em>i]   = cos(i * 2</em>PI/(float)N);
+   twiddleCoefq32[2<em>i+1] = sin(i * 2</em>PI/(float)N);
+} 
+  * </p>
+<p>where N = 16, PI = 3.14159265358979 
+  * </p>
+<p>Cos and Sin values are interleaved fashion 
+  * </p>
+<p>Convert Floating point to q32(Fixed point 1.31): round(twiddleCoefq32(i) * pow(2, 31)) </p>
+<h3 id="variable-twiddlecoef_32_q32">variable twiddleCoef_32_q32</h3>
+<pre><code class="language-cpp">const int32_t twiddleCoef_32_q32;
+</code></pre>
+<h3 id="variable-twiddlecoef_64_q32">variable twiddleCoef_64_q32</h3>
+<pre><code class="language-cpp">const int32_t twiddleCoef_64_q32;
+</code></pre>
+<h3 id="variable-twiddlecoef_128_q32">variable twiddleCoef_128_q32</h3>
+<pre><code class="language-cpp">const int32_t twiddleCoef_128_q32;
+</code></pre>
+<h3 id="variable-twiddlecoef_256_q32">variable twiddleCoef_256_q32</h3>
+<pre><code class="language-cpp">const int32_t twiddleCoef_256_q32;
+</code></pre>
+<h3 id="variable-twiddlecoef_512_q32">variable twiddleCoef_512_q32</h3>
+<pre><code class="language-cpp">const int32_t twiddleCoef_512_q32;
+</code></pre>
+<h3 id="variable-twiddlecoef_1024_q32">variable twiddleCoef_1024_q32</h3>
+<pre><code class="language-cpp">const int32_t twiddleCoef_1024_q32;
+</code></pre>
+<h3 id="variable-twiddlecoef_2048_q32">variable twiddleCoef_2048_q32</h3>
+<pre><code class="language-cpp">const int32_t twiddleCoef_2048_q32;
+</code></pre>
+<h3 id="variable-twiddlecoef_4096_q32">variable twiddleCoef_4096_q32</h3>
+<pre><code class="language-cpp">const int32_t twiddleCoef_4096_q32;
+</code></pre>
+<h3 id="variable-plpbitrevindextable_fixed_16">variable plpBitRevIndexTable_fixed_16</h3>
+<pre><code class="language-cpp">const uint16_t plpBitRevIndexTable_fixed_16;
+</code></pre>
+<h3 id="variable-plpbitrevindextable_fixed_32">variable plpBitRevIndexTable_fixed_32</h3>
+<pre><code class="language-cpp">const uint16_t plpBitRevIndexTable_fixed_32;
+</code></pre>
+<h3 id="variable-plpbitrevindextable_fixed_64">variable plpBitRevIndexTable_fixed_64</h3>
+<pre><code class="language-cpp">const uint16_t plpBitRevIndexTable_fixed_64;
+</code></pre>
+<h3 id="variable-plpbitrevindextable_fixed_128">variable plpBitRevIndexTable_fixed_128</h3>
+<pre><code class="language-cpp">const uint16_t plpBitRevIndexTable_fixed_128;
+</code></pre>
+<h3 id="variable-plpbitrevindextable_fixed_256">variable plpBitRevIndexTable_fixed_256</h3>
+<pre><code class="language-cpp">const uint16_t plpBitRevIndexTable_fixed_256;
+</code></pre>
+<h3 id="variable-plpbitrevindextable_fixed_512">variable plpBitRevIndexTable_fixed_512</h3>
+<pre><code class="language-cpp">const uint16_t plpBitRevIndexTable_fixed_512;
+</code></pre>
+<h3 id="variable-plpbitrevindextable_fixed_1024">variable plpBitRevIndexTable_fixed_1024</h3>
+<pre><code class="language-cpp">const uint16_t plpBitRevIndexTable_fixed_1024;
+</code></pre>
+<h3 id="variable-plpbitrevindextable_fixed_2048">variable plpBitRevIndexTable_fixed_2048</h3>
+<pre><code class="language-cpp">const uint16_t plpBitRevIndexTable_fixed_2048;
+</code></pre>
+<h3 id="variable-plpbitrevindextable_fixed_4096">variable plpBitRevIndexTable_fixed_4096</h3>
+<pre><code class="language-cpp">const uint16_t plpBitRevIndexTable_fixed_4096;
+</code></pre>
+<h3 id="variable-twiddlecoef_cfft_16">variable twiddleCoef_cfft_16</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_cfft_16;
+</code></pre>
+<h3 id="variable-twiddlecoef_cfft_32">variable twiddleCoef_cfft_32</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_cfft_32;
+</code></pre>
+<h3 id="variable-twiddlecoef_cfft_64">variable twiddleCoef_cfft_64</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_cfft_64;
+</code></pre>
+<h3 id="variable-twiddlecoef_cfft_128">variable twiddleCoef_cfft_128</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_cfft_128;
+</code></pre>
+<h3 id="variable-twiddlecoef_cfft_256">variable twiddleCoef_cfft_256</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_cfft_256;
+</code></pre>
+<h3 id="variable-twiddlecoef_cfft_512">variable twiddleCoef_cfft_512</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_cfft_512;
+</code></pre>
+<h3 id="variable-twiddlecoef_cfft_1024">variable twiddleCoef_cfft_1024</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_cfft_1024;
+</code></pre>
+<h3 id="variable-twiddlecoef_cfft_2048">variable twiddleCoef_cfft_2048</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_cfft_2048;
+</code></pre>
+<h3 id="variable-plpbitrevindextable_rfftfast_16">variable plpBitRevIndexTable_rfftfast_16</h3>
+<pre><code class="language-cpp">const uint16_t plpBitRevIndexTable_rfftfast_16;
+</code></pre>
+<h3 id="variable-plpbitrevindextable_rfftfast_32">variable plpBitRevIndexTable_rfftfast_32</h3>
+<pre><code class="language-cpp">const uint16_t plpBitRevIndexTable_rfftfast_32;
+</code></pre>
+<h3 id="variable-plpbitrevindextable_rfftfast_64">variable plpBitRevIndexTable_rfftfast_64</h3>
+<pre><code class="language-cpp">const uint16_t plpBitRevIndexTable_rfftfast_64;
+</code></pre>
+<h3 id="variable-plpbitrevindextable_rfftfast_128">variable plpBitRevIndexTable_rfftfast_128</h3>
+<pre><code class="language-cpp">const uint16_t plpBitRevIndexTable_rfftfast_128;
+</code></pre>
+<h3 id="variable-plpbitrevindextable_rfftfast_256">variable plpBitRevIndexTable_rfftfast_256</h3>
+<pre><code class="language-cpp">const uint16_t plpBitRevIndexTable_rfftfast_256;
+</code></pre>
+<h3 id="variable-plpbitrevindextable_rfftfast_512">variable plpBitRevIndexTable_rfftfast_512</h3>
+<pre><code class="language-cpp">const uint16_t plpBitRevIndexTable_rfftfast_512;
+</code></pre>
+<h3 id="variable-plpbitrevindextable_rfftfast_1024">variable plpBitRevIndexTable_rfftfast_1024</h3>
+<pre><code class="language-cpp">const uint16_t plpBitRevIndexTable_rfftfast_1024;
+</code></pre>
+<h3 id="variable-twiddlecoef_rfftfast_32">variable twiddleCoef_rfftfast_32</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_rfftfast_32;
+</code></pre>
+<h3 id="variable-twiddlecoef_rfftfast_64">variable twiddleCoef_rfftfast_64</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_rfftfast_64;
+</code></pre>
+<h3 id="variable-twiddlecoef_rfftfast_128">variable twiddleCoef_rfftfast_128</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_rfftfast_128;
+</code></pre>
+<h3 id="variable-twiddlecoef_rfftfast_256">variable twiddleCoef_rfftfast_256</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_rfftfast_256;
+</code></pre>
+<h3 id="variable-twiddlecoef_rfftfast_512">variable twiddleCoef_rfftfast_512</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_rfftfast_512;
+</code></pre>
+<h3 id="variable-twiddlecoef_rfftfast_1024">variable twiddleCoef_rfftfast_1024</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_rfftfast_1024;
+</code></pre>
+<h3 id="variable-twiddlecoef_rfftfast_2048">variable twiddleCoef_rfftfast_2048</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_rfftfast_2048;
+</code></pre>
+<h3 id="variable-twiddlecoef_rfft_32">variable twiddleCoef_rfft_32</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_rfft_32;
+</code></pre>
+<h3 id="variable-twiddlecoef_rfft_64">variable twiddleCoef_rfft_64</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_rfft_64;
+</code></pre>
+<h3 id="variable-twiddlecoef_rfft_128">variable twiddleCoef_rfft_128</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_rfft_128;
+</code></pre>
+<h3 id="variable-twiddlecoef_rfft_256">variable twiddleCoef_rfft_256</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_rfft_256;
+</code></pre>
+<h3 id="variable-twiddlecoef_rfft_512">variable twiddleCoef_rfft_512</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_rfft_512;
+</code></pre>
+<h3 id="variable-twiddlecoef_rfft_1024">variable twiddleCoef_rfft_1024</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_rfft_1024;
+</code></pre>
+<h3 id="variable-twiddlecoef_rfft_2048">variable twiddleCoef_rfft_2048</h3>
+<pre><code class="language-cpp">const Complex_type_f32 twiddleCoef_rfft_2048;
+</code></pre>
+<h3 id="variable-bit_rev_radix2_lut_32">variable bit_rev_radix2_LUT_32</h3>
+<pre><code class="language-cpp">short bit_rev_radix2_LUT_32;
+</code></pre>
+<h3 id="variable-bit_rev_radix2_lut_64">variable bit_rev_radix2_LUT_64</h3>
+<pre><code class="language-cpp">short bit_rev_radix2_LUT_64;
+</code></pre>
+<h3 id="variable-bit_rev_radix2_lut_128">variable bit_rev_radix2_LUT_128</h3>
+<pre><code class="language-cpp">short bit_rev_radix2_LUT_128;
+</code></pre>
+<h3 id="variable-bit_rev_radix2_lut_256">variable bit_rev_radix2_LUT_256</h3>
+<pre><code class="language-cpp">short bit_rev_radix2_LUT_256;
+</code></pre>
+<h3 id="variable-bit_rev_radix2_lut_512">variable bit_rev_radix2_LUT_512</h3>
+<pre><code class="language-cpp">short bit_rev_radix2_LUT_512;
+</code></pre>
+<h3 id="variable-bit_rev_radix2_lut_1024">variable bit_rev_radix2_LUT_1024</h3>
+<pre><code class="language-cpp">short bit_rev_radix2_LUT_1024;
+</code></pre>
+<h3 id="variable-bit_rev_radix2_lut_2048">variable bit_rev_radix2_LUT_2048</h3>
+<pre><code class="language-cpp">short bit_rev_radix2_LUT_2048;
+</code></pre>
+<h3 id="variable-bit_rev_radix4_lut_256">variable bit_rev_radix4_LUT_256</h3>
+<pre><code class="language-cpp">short bit_rev_radix4_LUT_256;
+</code></pre>
+<h3 id="variable-bit_rev_radix4_lut_1024">variable bit_rev_radix4_LUT_1024</h3>
+<pre><code class="language-cpp">short bit_rev_radix4_LUT_1024;
+</code></pre>
+<h3 id="variable-bit_rev_radix8_lut_16">variable bit_rev_radix8_LUT_16</h3>
+<pre><code class="language-cpp">short bit_rev_radix8_LUT_16;
+</code></pre>
+<h3 id="variable-bit_rev_radix8_lut_64">variable bit_rev_radix8_LUT_64</h3>
+<pre><code class="language-cpp">short bit_rev_radix8_LUT_64;
+</code></pre>
+<h3 id="variable-bit_rev_radix8_lut_512">variable bit_rev_radix8_LUT_512</h3>
+<pre><code class="language-cpp">short bit_rev_radix8_LUT_512;
+</code></pre>
+<h3 id="variable-bit_rev_radix_2by4_lut_32">variable bit_rev_radix_2by4_LUT_32</h3>
+<pre><code class="language-cpp">short bit_rev_radix_2by4_LUT_32;
+</code></pre>
+<h3 id="variable-bit_rev_radix_2by4_lut_128">variable bit_rev_radix_2by4_LUT_128</h3>
+<pre><code class="language-cpp">short bit_rev_radix_2by4_LUT_128;
+</code></pre>
+<h3 id="variable-bit_rev_radix_2by4_lut_2048">variable bit_rev_radix_2by4_LUT_2048</h3>
+<pre><code class="language-cpp">short bit_rev_radix_2by4_LUT_2048;
+</code></pre>
+<h3 id="variable-sintable_f32">variable sinTable_f32</h3>
+<pre><code class="language-cpp">const float32_t sinTable_f32;
+</code></pre>
+<p><strong>Par</strong>: </p>
+<ul>
+<li></li>
+</ul>
+<p>Example code for the generation of the floating-point sine table: 
+ tableSize = 512;
+ for (n = 0; n &lt; (tableSize + 1); n++)
+ {
+ sinTable[n] = sin(2<em>PI</em>n/tableSize);
+ }
+  * </p>
+<p>where PI value is 3.14159265358979 </p>
+<h3 id="variable-sintable_q32">variable sinTable_q32</h3>
+<pre><code class="language-cpp">const int32_t sinTable_q32;
+</code></pre>
+<p><strong>Par</strong>: </p>
+<ul>
+<li></li>
+</ul>
+<p>Table values are in q32 (1.31 fixed-point format) and generation is done in three steps. First, generate sin values in floating point: 
+ tableSize = 512;
+ for (n = 0; n &lt; (tableSize + 1); n++)
+ {
+ sinTable[n] = sin(2<em>PI</em>n/tableSize);
+ }  where PI value is 3.14159265358979 
+  * </p>
+<p>Second, convert floating-point to q32 (Fixed point): (sinTable[i] * pow(2, 31)) 
+  * </p>
+<p>Finally, round to the nearest integer value: sinTable[i] += (sinTable[i] &gt; 0 ? 0.5 : -0.5); </p>
+<h3 id="variable-sintable_q16">variable sinTable_q16</h3>
+<pre><code class="language-cpp">const int16_t sinTable_q16;
+</code></pre>
+<p><strong>Par</strong>: </p>
+<ul>
+<li></li>
+</ul>
+<p>Table values are in Q15 (1.15 fixed-point format) and generation is done in three steps. First, generate sin values in floating point: 
+ tableSize = 512;
+ for (n = 0; n &lt; (tableSize + 1); n++)
+ {
+ sinTable[n] = sin(2<em>PI</em>n/tableSize);
+ }  where PI value is 3.14159265358979 
+  * </p>
+<p>Second, convert floating-point to Q15 (Fixed point): (sinTable[i] * pow(2, 15)) 
+  * </p>
+<p>Finally, round to the nearest integer value: sinTable[i] += (sinTable[i] &gt; 0 ? 0.5 :-0.5); </p>
+<h3 id="variable-melfbtable_f32_23">variable melFbTable_f32_23</h3>
+<pre><code class="language-cpp">const float32_t melFbTable_f32_23;
+</code></pre>
+<h3 id="variable-melfbtable_f32_26">variable melFbTable_f32_26</h3>
+<pre><code class="language-cpp">const float32_t melFbTable_f32_26;
+</code></pre>
+<h3 id="variable-melfbtable_f32_32">variable melFbTable_f32_32</h3>
+<pre><code class="language-cpp">const float32_t melFbTable_f32_32;
+</code></pre>
+<h3 id="variable-filterlengths_fb_32">variable filterLengths_fb_32</h3>
+<pre><code class="language-cpp">const uint16_t filterLengths_fb_32;
+</code></pre>
+<h3 id="variable-startingindices_fb_32">variable startingIndices_fb_32</h3>
+<pre><code class="language-cpp">const uint16_t startingIndices_fb_32;
+</code></pre>
+<h3 id="variable-values_fb_32">variable values_fb_32</h3>
+<pre><code class="language-cpp">const float32_t values_fb_32;
+</code></pre>
+<h3 id="variable-hannwindow_f32_len512">variable hannWindow_f32_len512</h3>
+<pre><code class="language-cpp">const float32_t hannWindow_f32_len512;
+</code></pre>
+<h2 id="macros-documentation">Macros Documentation</h2>
+<h3 id="define-plpbitrevindextable_fixed_16_table_length">define PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH</h3>
+<pre><code class="language-cpp">#define PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH ((uint16_t)12)
+</code></pre>
+<h3 id="define-plpbitrevindextable_fixed_32_table_length">define PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH</h3>
+<pre><code class="language-cpp">#define PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH ((uint16_t)24)
+</code></pre>
+<h3 id="define-plpbitrevindextable_fixed_64_table_length">define PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH</h3>
+<pre><code class="language-cpp">#define PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH ((uint16_t)56)
+</code></pre>
+<h3 id="define-plpbitrevindextable_fixed_128_table_length">define PLPBITREVINDEXTABLE_FIXED_128_TABLE_LENGTH</h3>
+<pre><code class="language-cpp">#define PLPBITREVINDEXTABLE_FIXED_128_TABLE_LENGTH ((uint16_t)112)
+</code></pre>
+<h3 id="define-plpbitrevindextable_fixed_256_table_length">define PLPBITREVINDEXTABLE_FIXED_256_TABLE_LENGTH</h3>
+<pre><code class="language-cpp">#define PLPBITREVINDEXTABLE_FIXED_256_TABLE_LENGTH ((uint16_t)240)
+</code></pre>
+<h3 id="define-plpbitrevindextable_fixed_512_table_length">define PLPBITREVINDEXTABLE_FIXED_512_TABLE_LENGTH</h3>
+<pre><code class="language-cpp">#define PLPBITREVINDEXTABLE_FIXED_512_TABLE_LENGTH ((uint16_t)480)
+</code></pre>
+<h3 id="define-plpbitrevindextable_fixed_1024_table_length">define PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH</h3>
+<pre><code class="language-cpp">#define PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH ((uint16_t)992)
+</code></pre>
+<h3 id="define-plpbitrevindextable_fixed_2048_table_length">define PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH</h3>
+<pre><code class="language-cpp">#define PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH ((uint16_t)1984)
+</code></pre>
+<h3 id="define-plpbitrevindextable_fixed_4096_table_length">define PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH</h3>
+<pre><code class="language-cpp">#define PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH ((uint16_t)4032)
+</code></pre>
+<h2 id="source-code">Source code</h2>
+<pre><code class="language-cpp">
+/*
+ * Copyright (C) 2020 ETH Zurich and University of Bologna. All rights reserved.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the License); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#ifndef __PLP_COMMON_TABLES_H__
+#define __PLP_COMMON_TABLES_H__
+
+#include &quot;plp_math.h&quot;
+
+/* Fixed-point cfft */
+
+extern const int16_t twiddleCoef_16_q16[24];
+extern const int16_t twiddleCoef_32_q16[48];
+extern const int16_t twiddleCoef_64_q16[96];
+extern const int16_t twiddleCoef_128_q16[192];
+extern const int16_t twiddleCoef_256_q16[384];
+extern const int16_t twiddleCoef_512_q16[768];
+extern const int16_t twiddleCoef_1024_q16[1536];
+extern const int16_t twiddleCoef_2048_q16[3072];
+extern const int16_t twiddleCoef_4096_q16[6144];
+
+extern const int32_t twiddleCoef_16_q32[24];
+extern const int32_t twiddleCoef_32_q32[48];
+extern const int32_t twiddleCoef_64_q32[96];
+extern const int32_t twiddleCoef_128_q32[192];
+extern const int32_t twiddleCoef_256_q32[384];
+extern const int32_t twiddleCoef_512_q32[768];
+extern const int32_t twiddleCoef_1024_q32[1536];
+extern const int32_t twiddleCoef_2048_q32[3072];
+extern const int32_t twiddleCoef_4096_q32[6144];
+
+#define PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH ((uint16_t)12)
+#define PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH ((uint16_t)24)
+#define PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH ((uint16_t)56)
+#define PLPBITREVINDEXTABLE_FIXED_128_TABLE_LENGTH ((uint16_t)112)
+#define PLPBITREVINDEXTABLE_FIXED_256_TABLE_LENGTH ((uint16_t)240)
+#define PLPBITREVINDEXTABLE_FIXED_512_TABLE_LENGTH ((uint16_t)480)
+#define PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH ((uint16_t)992)
+#define PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH ((uint16_t)1984)
+#define PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH ((uint16_t)4032)
+
+extern const uint16_t plpBitRevIndexTable_fixed_16[PLPBITREVINDEXTABLE_FIXED_16_TABLE_LENGTH];
+extern const uint16_t plpBitRevIndexTable_fixed_32[PLPBITREVINDEXTABLE_FIXED_32_TABLE_LENGTH];
+extern const uint16_t plpBitRevIndexTable_fixed_64[PLPBITREVINDEXTABLE_FIXED_64_TABLE_LENGTH];
+extern const uint16_t plpBitRevIndexTable_fixed_128[PLPBITREVINDEXTABLE_FIXED_128_TABLE_LENGTH];
+extern const uint16_t plpBitRevIndexTable_fixed_256[PLPBITREVINDEXTABLE_FIXED_256_TABLE_LENGTH];
+extern const uint16_t plpBitRevIndexTable_fixed_512[PLPBITREVINDEXTABLE_FIXED_512_TABLE_LENGTH];
+extern const uint16_t plpBitRevIndexTable_fixed_1024[PLPBITREVINDEXTABLE_FIXED_1024_TABLE_LENGTH];
+extern const uint16_t plpBitRevIndexTable_fixed_2048[PLPBITREVINDEXTABLE_FIXED_2048_TABLE_LENGTH];
+extern const uint16_t plpBitRevIndexTable_fixed_4096[PLPBITREVINDEXTABLE_FIXED_4096_TABLE_LENGTH];
+
+/* Floating-point cfft */
+
+extern const Complex_type_f32 twiddleCoef_cfft_16[16];
+extern const Complex_type_f32 twiddleCoef_cfft_32[32];
+extern const Complex_type_f32 twiddleCoef_cfft_64[64];
+extern const Complex_type_f32 twiddleCoef_cfft_128[128];
+extern const Complex_type_f32 twiddleCoef_cfft_256[256];
+extern const Complex_type_f32 twiddleCoef_cfft_512[512];
+extern const Complex_type_f32 twiddleCoef_cfft_1024[1024];
+extern const Complex_type_f32 twiddleCoef_cfft_2048[2048];
+
+/* Floating-point rfft */
+
+extern const uint16_t plpBitRevIndexTable_rfftfast_16[20];
+extern const uint16_t plpBitRevIndexTable_rfftfast_32[48];
+extern const uint16_t plpBitRevIndexTable_rfftfast_64[56];
+extern const uint16_t plpBitRevIndexTable_rfftfast_128[208];
+extern const uint16_t plpBitRevIndexTable_rfftfast_256[440];
+extern const uint16_t plpBitRevIndexTable_rfftfast_512[448];
+extern const uint16_t plpBitRevIndexTable_rfftfast_1024[1800];
+
+extern const Complex_type_f32 twiddleCoef_rfftfast_32[16];
+extern const Complex_type_f32 twiddleCoef_rfftfast_64[32];
+extern const Complex_type_f32 twiddleCoef_rfftfast_128[64];
+extern const Complex_type_f32 twiddleCoef_rfftfast_256[128];
+extern const Complex_type_f32 twiddleCoef_rfftfast_512[256];
+extern const Complex_type_f32 twiddleCoef_rfftfast_1024[512];
+extern const Complex_type_f32 twiddleCoef_rfftfast_2048[1024];
+
+extern const Complex_type_f32 twiddleCoef_rfft_32[16];
+extern const Complex_type_f32 twiddleCoef_rfft_64[32];
+extern const Complex_type_f32 twiddleCoef_rfft_128[64];
+extern const Complex_type_f32 twiddleCoef_rfft_256[128];
+extern const Complex_type_f32 twiddleCoef_rfft_512[256];
+extern const Complex_type_f32 twiddleCoef_rfft_1024[512];
+extern const Complex_type_f32 twiddleCoef_rfft_2048[1024];
+
+
+extern short bit_rev_radix2_LUT_32[32];
+extern short bit_rev_radix2_LUT_64[64];
+extern short bit_rev_radix2_LUT_128[128];
+extern short bit_rev_radix2_LUT_256[256];
+extern short bit_rev_radix2_LUT_512[512];
+extern short bit_rev_radix2_LUT_1024[1024];
+extern short bit_rev_radix2_LUT_2048[2048];
+
+extern short bit_rev_radix4_LUT_256[256];
+extern short bit_rev_radix4_LUT_1024[1024];
+
+extern short bit_rev_radix8_LUT_16[16];
+extern short bit_rev_radix8_LUT_64[64];
+extern short bit_rev_radix8_LUT_512[512];
+
+extern short bit_rev_radix_2by4_LUT_32[32];
+extern short bit_rev_radix_2by4_LUT_128[128];
+extern short bit_rev_radix_2by4_LUT_2048[2048];
+
+extern const float32_t sinTable_f32[FAST_MATH_TABLE_SIZE + 1];
+extern const int32_t sinTable_q32[FAST_MATH_TABLE_SIZE + 1];
+extern const int16_t sinTable_q16[FAST_MATH_TABLE_SIZE + 1];
+
+extern const float32_t melFbTable_f32_23[25];
+extern const float32_t melFbTable_f32_26[28];
+extern const float32_t melFbTable_f32_32[34];
+
+extern const uint16_t filterLengths_fb_32[32];
+extern const uint16_t startingIndices_fb_32[32];
+extern const float32_t values_fb_32[245];
+
+extern const float32_t hannWindow_f32_len512[512];
+#endif // PLP_COMMON_TABLES_H
+</code></pre>
+<hr />
+<p>Updated on 2023-03-01 at 16:16:33 +0000</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+    
+  </body>
+</html>

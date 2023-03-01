@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_f6a10e8165fd6f074aecf51d69aef8a4" kind="dir">
+    <compoundname>/github/workspace/src/FilteringFunctions</compoundname>
+    <innerdir refid="dir_7c3b44e579e9cdd8c6a9f8333d037082">/github/workspace/src/FilteringFunctions/kernels</innerdir>
+    <innerfile refid="plp__conv__i16_8c">plp_conv_i16.c</innerfile>
+    <innerfile refid="plp__conv__i16__parallel_8c">plp_conv_i16_parallel.c</innerfile>
+    <innerfile refid="plp__conv__i32_8c">plp_conv_i32.c</innerfile>
+    <innerfile refid="plp__conv__i32__parallel_8c">plp_conv_i32_parallel.c</innerfile>
+    <innerfile refid="plp__conv__i8_8c">plp_conv_i8.c</innerfile>
+    <innerfile refid="plp__conv__i8__parallel_8c">plp_conv_i8_parallel.c</innerfile>
+    <innerfile refid="plp__conv__valid__i16_8c">plp_conv_valid_i16.c</innerfile>
+    <innerfile refid="plp__conv__valid__i32_8c">plp_conv_valid_i32.c</innerfile>
+    <innerfile refid="plp__conv__valid__i8_8c">plp_conv_valid_i8.c</innerfile>
+    <innerfile refid="plp__conv__valid__rep__i16_8c">plp_conv_valid_rep_i16.c</innerfile>
+    <innerfile refid="plp__conv__valid__rep__i8_8c">plp_conv_valid_rep_i8.c</innerfile>
+    <innerfile refid="plp__correlate__i16_8c">plp_correlate_i16.c</innerfile>
+    <innerfile refid="plp__correlate__i32_8c">plp_correlate_i32.c</innerfile>
+    <innerfile refid="plp__correlate__i8_8c">plp_correlate_i8.c</innerfile>
+    <innerfile refid="plp__correlate__q16_8c">plp_correlate_q16.c</innerfile>
+    <innerfile refid="plp__correlate__q32_8c">plp_correlate_q32.c</innerfile>
+    <innerfile refid="plp__correlate__q8_8c">plp_correlate_q8.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/FilteringFunctions/"/>
+  </compounddef>
+</doxygen>

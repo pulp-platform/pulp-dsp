@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_81f9fd92b1fb0f53d21838837ab5641a" kind="dir">
+    <compoundname>/github/workspace/src/BasicMathFunctions/log</compoundname>
+    <innerdir refid="dir_dc8b5126f0c29ea5a54968b477b7047f">/github/workspace/src/BasicMathFunctions/log/kernels</innerdir>
+    <innerfile refid="plp__log__f32__parallel_8c">plp_log_f32_parallel.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/BasicMathFunctions/log/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__dwt__common" kind="group">
+    <compoundname>dwt_common</compoundname>
+    <title>DWT Common Utility functions</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__dwt__common_1gad2dfdf6394a43c49b35b494e5e3e049d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_dwt_max_level</definition>
+        <argsstring>(uint32_t sig_len, uint32_t wavelet_len)</argsstring>
+        <name>plp_dwt_max_level</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>sig_len</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>wavelet_len</declname>
+        </param>
+        <briefdescription>
+<para>Computes maximum available decomposition level for a signal length and wavelet length. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">sig_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of input signal </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wavelet_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>wavelet length </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Maximal decomposition level </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_dwt_common.c" line="57" column="10" bodyfile="/github/workspace/src/TransformFunctions/plp_dwt_common.c" bodystart="57" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="group__dwt__common_1gafd8a5d12fcae25c1d662ef3480a9a2b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_dwt_dec_len</definition>
+        <argsstring>(uint32_t sig_len, uint32_t wavelet_len, uint32_t level)</argsstring>
+        <name>plp_dwt_dec_len</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>sig_len</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>wavelet_len</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+<para>Calculates decomposition output length given a level. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">sig_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of input signal </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wavelet_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>wavelet length </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decomposition level (0 for maximal decomposition) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Length of decomposition output buffer <linebreak/>
+ </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/TransformFunctions/plp_dwt_common.c" line="74" column="10" bodyfile="/github/workspace/src/TransformFunctions/plp_dwt_common.c" bodystart="74" bodyend="88"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the helper code for the DWT transforms. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1422 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__cmplx__dot__prod" kind="group">
+    <compoundname>cmplx_dot_prod</compoundname>
+    <title>Complex Dot Product</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__cmplx__dot__prod_1ga70497fd14b3438eb61ae95cdffa13952" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_f32_xpulpv2</definition>
+        <argsstring>(const float32_t *pSrcA, const float32_t *pSrcB, uint32_t numSamples, float32_t *realResult, float32_t *imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_f32_xpulpv2</name>
+        <param>
+          <type>const float32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const float32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>float32_t *</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>float32_t *</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>Floating-point complex dot product. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_f32_xpulpv2.c" line="80" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_f32_xpulpv2.c" bodystart="80" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__dot__prod_1ga85002d5ec3a99f17585ae836915bdbc2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_i16_rv32im</definition>
+        <argsstring>(const int16_t *pSrcA, const int16_t *pSrcB, uint32_t numSamples, int16_t *realResult, int16_t *imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_i16_rv32im</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex dot product. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i16_rv32im.c" line="80" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i16_rv32im.c" bodystart="80" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__dot__prod_1ga46cff98d5e88594dd31a244ce7581f7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_i16_xpulpv2</definition>
+        <argsstring>(const int16_t *pSrcA, const int16_t *pSrcB, uint32_t numSamples, int16_t *realResult, int16_t *imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_i16_xpulpv2</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex dot product. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i16_xpulpv2.c" line="80" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i16_xpulpv2.c" bodystart="80" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__dot__prod_1ga9a3c7030e83556edafa7ea2c4fdfa044" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_i32_rv32im</definition>
+        <argsstring>(const int32_t *pSrcA, const int32_t *pSrcB, uint32_t numSamples, int32_t *realResult, int32_t *imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_i32_rv32im</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>32-bit integer complex dot product. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i32_rv32im.c" line="80" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i32_rv32im.c" bodystart="80" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__dot__prod_1ga6b5daf098298dc1759ac4e5f3859f238" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_i32_xpulpv2</definition>
+        <argsstring>(const int32_t *pSrcA, const int32_t *pSrcB, uint32_t numSamples, int32_t *realResult, int32_t *imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_i32_xpulpv2</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>32-bit integer complex dot product. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i32_xpulpv2.c" line="80" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i32_xpulpv2.c" bodystart="80" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__dot__prod_1ga6b684e78775c8103bafaa1182921b589" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_i8_rv32im</definition>
+        <argsstring>(const int8_t *pSrcA, const int8_t *pSrcB, uint32_t numSamples, int8_t *realResult, int8_t *imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_i8_rv32im</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>8-bit integer complex dot product. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i8_rv32im.c" line="80" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i8_rv32im.c" bodystart="80" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__dot__prod_1ga0ee59f291aea3a5c164ed600d6d0a66d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_i8_xpulpv2</definition>
+        <argsstring>(const int8_t *pSrcA, const int8_t *pSrcB, uint32_t numSamples, int8_t *realResult, int8_t *imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_i8_xpulpv2</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>8-bit integer complex dot product. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i8_xpulpv2.c" line="80" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_i8_xpulpv2.c" bodystart="80" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__dot__prod_1ga32870fb5e12bb1ac1913e6aea1f35c32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_q16_rv32im</definition>
+        <argsstring>(const int16_t *pSrcA, const int16_t *pSrcB, uint32_t numSamples, uint32_t deciPoint, int16_t *realResult, int16_t *imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_q16_rv32im</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex dot product. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>16-bit fixed-point complex dot product.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_q16_rv32im.c" line="81" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_q16_rv32im.c" bodystart="81" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__dot__prod_1ga494a87390821475ec34c0286c05ec47c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_q16_xpulpv2</definition>
+        <argsstring>(const int16_t *pSrcA, const int16_t *pSrcB, uint32_t numSamples, uint32_t deciPoint, int16_t *realResult, int16_t *imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_q16_xpulpv2</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>16-bit integer complex dot product. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>16-bit fixed-point complex dot product.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_q16_xpulpv2.c" line="81" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_q16_xpulpv2.c" bodystart="81" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__dot__prod_1ga22e33f737990accd83ab2ed3321372f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_q32_rv32im</definition>
+        <argsstring>(const int32_t *pSrcA, const int32_t *pSrcB, uint32_t numSamples, uint32_t deciPoint, int32_t *realResult, int32_t *imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_q32_rv32im</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>32-bit integer complex dot product. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_q32_rv32im.c" line="81" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_q32_rv32im.c" bodystart="81" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__dot__prod_1ga5f8090255e612bb47fc0f73f269d28db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_q32_xpulpv2</definition>
+        <argsstring>(const int32_t *pSrcA, const int32_t *pSrcB, uint32_t numSamples, uint32_t deciPoint, int32_t *realResult, int32_t *imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_q32_xpulpv2</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>32-bit integer complex dot product. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>32-bit fixed-point complex dot product.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_q32_xpulpv2.c" line="81" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/kernels/plp_cmplx_dot_prod_q32_xpulpv2.c" bodystart="81" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__dot__prod_1gae592c84fad4ea120d014719156088b08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_f32</definition>
+        <argsstring>(const float32_t *__restrict__ pSrcA, const float32_t *__restrict__ pSrcB, uint32_t numSamples, float32_t *__restrict__ realResult, float32_t *__restrict__ imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_f32</name>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const float32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>float32_t *__restrict__</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for complex dot product of 32-bit float vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_dot_prod_f32.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_dot_prod_f32.c" bodystart="79" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__dot__prod_1gac00fefa1555623715a59d0cb209eea86" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_i16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, uint32_t numSamples, int16_t *__restrict__ realResult, int16_t *__restrict__ imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_i16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for complex dot product of 32-bit float vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_dot_prod_i16.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_dot_prod_i16.c" bodystart="79" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__dot__prod_1ga1dd3195265d0e262b1011dbdf4c605f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_i32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, uint32_t numSamples, int32_t *__restrict__ realResult, int32_t *__restrict__ imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_i32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for complex dot product of 32-bit float vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_dot_prod_i32.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_dot_prod_i32.c" bodystart="79" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__dot__prod_1ga9793aed243ccede84d35cec585699de9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_i8</definition>
+        <argsstring>(const int8_t *__restrict__ pSrcA, const int8_t *__restrict__ pSrcB, uint32_t numSamples, int8_t *__restrict__ realResult, int8_t *__restrict__ imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_i8</name>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int8_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for complex dot product of 32-bit float vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_dot_prod_i8.c" line="79" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_dot_prod_i8.c" bodystart="79" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__dot__prod_1ga54e614da80aa96931b58de06fd7ab6de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_q16</definition>
+        <argsstring>(const int16_t *__restrict__ pSrcA, const int16_t *__restrict__ pSrcB, uint32_t numSamples, uint32_t deciPoint, int16_t *__restrict__ realResult, int16_t *__restrict__ imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_q16</name>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int16_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for complex dot product of 32-bit float vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_dot_prod_q16.c" line="80" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_dot_prod_q16.c" bodystart="80" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="group__cmplx__dot__prod_1gaaae67d09de99553d3658e95fddb514b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_cmplx_dot_prod_q32</definition>
+        <argsstring>(const int32_t *__restrict__ pSrcA, const int32_t *__restrict__ pSrcB, uint32_t numSamples, uint32_t deciPoint, int32_t *__restrict__ realResult, int32_t *__restrict__ imagResult)</argsstring>
+        <name>plp_cmplx_dot_prod_q32</name>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcA</declname>
+        </param>
+        <param>
+          <type>const int32_t *__restrict__</type>
+          <declname>pSrcB</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>numSamples</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>deciPoint</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>realResult</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>imagResult</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for complex dot product of 32-bit float vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSamples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deciPoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>decimal point for right shift </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">realResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">imagResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the result returned here </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/ComplexMathFunctions/plp_cmplx_dot_prod_q32.c" line="80" column="6" bodyfile="/github/workspace/src/ComplexMathFunctions/plp_cmplx_dot_prod_q32.c" bodystart="80" bodyend="92"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Computes the dot product of two complex vectors. The vectors are multiplied element-by-element and then summed. The <computeroutput>pSrcA</computeroutput> points to the first complex input vector and <computeroutput>pSrcB</computeroutput> points to the second complex input vector. <computeroutput>numSamples</computeroutput> specifies the number of complex samples and the data in each array is stored in an interleaved fashion (real, imag, real, imag, ...). Each array has a total of <computeroutput>2*numSamples</computeroutput> values. The underlying algorithm is used: <preformatted>
+realResult = 0;
+imagResult = 0;
+for (n = 0; n &lt; numSamples; n++) {
+    realResult += pSrcA[(2*n)+0] * pSrcB[(2*n)+0] - pSrcA[(2*n)+1] * pSrcB[(2*n)+1];
+    imagResult += pSrcA[(2*n)+0] * pSrcB[(2*n)+1] + pSrcA[(2*n)+1] * pSrcB[(2*n)+0];
+}
+</preformatted> There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

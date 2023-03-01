@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__dwt__instance__q8" kind="struct" language="C++" prot="public">
+    <compoundname>plp_dwt_instance_q8</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__dwt__instance__q8_1a894b77be6a18efb7539f8e452877711d" prot="public" static="no" mutable="no">
+        <type>const int8_t *</type>
+        <definition>const int8_t* plp_dwt_instance_q8::pSrc</definition>
+        <argsstring></argsstring>
+        <name>pSrc</name>
+        <qualifiedname>plp_dwt_instance_q8::pSrc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1806" column="18" bodyfile="/github/workspace/include/plp_math.h" bodystart="1806" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__dwt__instance__q8_1ae7a7ace2e4196b4f62cc1eb1e84cce57" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_dwt_instance_q8::length</definition>
+        <argsstring></argsstring>
+        <name>length</name>
+        <qualifiedname>plp_dwt_instance_q8::length</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1807" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1807" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__dwt__instance__q8_1a5548ff5a9e7557cddfce7d6e422c248a" prot="public" static="no" mutable="no">
+        <type><ref refid="structplp__dwt__wavelet__q8" kindref="compound">plp_dwt_wavelet_q8</ref></type>
+        <definition>plp_dwt_wavelet_q8 plp_dwt_instance_q8::wavelet</definition>
+        <argsstring></argsstring>
+        <name>wavelet</name>
+        <qualifiedname>plp_dwt_instance_q8::wavelet</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1808" column="24" bodyfile="/github/workspace/include/plp_math.h" bodystart="1808" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__dwt__instance__q8_1ae3af96991a4653f7baafe6a566f4e277" prot="public" static="no" mutable="no">
+        <type>plp_dwt_extension_mode</type>
+        <definition>plp_dwt_extension_mode plp_dwt_instance_q8::mode</definition>
+        <argsstring></argsstring>
+        <name>mode</name>
+        <qualifiedname>plp_dwt_instance_q8::mode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1809" column="28" bodyfile="/github/workspace/include/plp_math.h" bodystart="1809" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__dwt__instance__q8_1a621eacfa344b0b3cddf1559350581e57" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_dwt_instance_q8::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_dwt_instance_q8::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1810" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1810" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__dwt__instance__q8_1a3146cb92e5f84c36beb20618195d8dd9" prot="public" static="no" mutable="no">
+        <type>int8_t *</type>
+        <definition>int8_t* plp_dwt_instance_q8::pDstA</definition>
+        <argsstring></argsstring>
+        <name>pDstA</name>
+        <qualifiedname>plp_dwt_instance_q8::pDstA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1812" column="12" bodyfile="/github/workspace/include/plp_math.h" bodystart="1812" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__dwt__instance__q8_1a3a77a51eace3e3c9b52c5ac7bec60070" prot="public" static="no" mutable="no">
+        <type>int8_t *</type>
+        <definition>int8_t* plp_dwt_instance_q8::pDstD</definition>
+        <argsstring></argsstring>
+        <name>pDstD</name>
+        <qualifiedname>plp_dwt_instance_q8::pDstD</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1813" column="12" bodyfile="/github/workspace/include/plp_math.h" bodystart="1813" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for Q8 parallel dwt. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of input buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wavelet</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>wavelet structure for calculating DWT </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>boundary extension mode </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of parallel processing units</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to output buffer with Approximate coefficients </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDstD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to ouput buffer with Detailed coefficients </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>plp_dwt_instance_q8</label>
+        <link refid="structplp__dwt__instance__q8"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>wavelet</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>plp_dwt_wavelet_q8</label>
+        <link refid="structplp__dwt__wavelet__q8"/>
+      </node>
+    </collaborationgraph>
+    <location file="/github/workspace/include/plp_math.h" line="1805" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="1805" bodyend="1814"/>
+    <listofallmembers>
+      <member refid="structplp__dwt__instance__q8_1ae7a7ace2e4196b4f62cc1eb1e84cce57" prot="public" virt="non-virtual"><scope>plp_dwt_instance_q8</scope><name>length</name></member>
+      <member refid="structplp__dwt__instance__q8_1ae3af96991a4653f7baafe6a566f4e277" prot="public" virt="non-virtual"><scope>plp_dwt_instance_q8</scope><name>mode</name></member>
+      <member refid="structplp__dwt__instance__q8_1a621eacfa344b0b3cddf1559350581e57" prot="public" virt="non-virtual"><scope>plp_dwt_instance_q8</scope><name>nPE</name></member>
+      <member refid="structplp__dwt__instance__q8_1a3146cb92e5f84c36beb20618195d8dd9" prot="public" virt="non-virtual"><scope>plp_dwt_instance_q8</scope><name>pDstA</name></member>
+      <member refid="structplp__dwt__instance__q8_1a3a77a51eace3e3c9b52c5ac7bec60070" prot="public" virt="non-virtual"><scope>plp_dwt_instance_q8</scope><name>pDstD</name></member>
+      <member refid="structplp__dwt__instance__q8_1a894b77be6a18efb7539f8e452877711d" prot="public" virt="non-virtual"><scope>plp_dwt_instance_q8</scope><name>pSrc</name></member>
+      <member refid="structplp__dwt__instance__q8_1a5548ff5a9e7557cddfce7d6e422c248a" prot="public" virt="non-virtual"><scope>plp_dwt_instance_q8</scope><name>wavelet</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

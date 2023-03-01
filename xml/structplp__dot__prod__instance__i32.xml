@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__dot__prod__instance__i32" kind="struct" language="C++" prot="public">
+    <compoundname>plp_dot_prod_instance_i32</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__dot__prod__instance__i32_1a3b5087c78613d31329b414fa0bb9f5b4" prot="public" static="no" mutable="no">
+        <type>int32_t *</type>
+        <definition>int32_t* plp_dot_prod_instance_i32::pSrcA</definition>
+        <argsstring></argsstring>
+        <name>pSrcA</name>
+        <qualifiedname>plp_dot_prod_instance_i32::pSrcA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="129" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__dot__prod__instance__i32_1aa974dfc679742611fdc70c1391a429e4" prot="public" static="no" mutable="no">
+        <type>int32_t *</type>
+        <definition>int32_t* plp_dot_prod_instance_i32::pSrcB</definition>
+        <argsstring></argsstring>
+        <name>pSrcB</name>
+        <qualifiedname>plp_dot_prod_instance_i32::pSrcB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="130" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__dot__prod__instance__i32_1a8c22a3436164b3dedfb76d04e67247c5" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_dot_prod_instance_i32::blkSizePE</definition>
+        <argsstring></argsstring>
+        <name>blkSizePE</name>
+        <qualifiedname>plp_dot_prod_instance_i32::blkSizePE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="131" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__dot__prod__instance__i32_1adfde9626fc3f76f68efb371bbb5b82b2" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_dot_prod_instance_i32::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_dot_prod_instance_i32::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="132" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__dot__prod__instance__i32_1abcb58d0644e8896265a333026d34c980" prot="public" static="no" mutable="no">
+        <type>int32_t *</type>
+        <definition>int32_t* plp_dot_prod_instance_i32::resBuffer</definition>
+        <argsstring></argsstring>
+        <name>resBuffer</name>
+        <qualifiedname>plp_dot_prod_instance_i32::resBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="133" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for integer parallel dot product. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blkSizePE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of parallel processing units </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">resBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to the result buffer </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="128" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="128" bodyend="134"/>
+    <listofallmembers>
+      <member refid="structplp__dot__prod__instance__i32_1a8c22a3436164b3dedfb76d04e67247c5" prot="public" virt="non-virtual"><scope>plp_dot_prod_instance_i32</scope><name>blkSizePE</name></member>
+      <member refid="structplp__dot__prod__instance__i32_1adfde9626fc3f76f68efb371bbb5b82b2" prot="public" virt="non-virtual"><scope>plp_dot_prod_instance_i32</scope><name>nPE</name></member>
+      <member refid="structplp__dot__prod__instance__i32_1a3b5087c78613d31329b414fa0bb9f5b4" prot="public" virt="non-virtual"><scope>plp_dot_prod_instance_i32</scope><name>pSrcA</name></member>
+      <member refid="structplp__dot__prod__instance__i32_1aa974dfc679742611fdc70c1391a429e4" prot="public" virt="non-virtual"><scope>plp_dot_prod_instance_i32</scope><name>pSrcB</name></member>
+      <member refid="structplp__dot__prod__instance__i32_1abcb58d0644e8896265a333026d34c980" prot="public" virt="non-virtual"><scope>plp_dot_prod_instance_i32</scope><name>resBuffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

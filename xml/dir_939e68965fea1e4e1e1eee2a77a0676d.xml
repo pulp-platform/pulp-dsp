@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_939e68965fea1e4e1e1eee2a77a0676d" kind="dir">
+    <compoundname>/github/workspace/src/MatrixFunctions/mat_sub</compoundname>
+    <innerdir refid="dir_d15722c16b2db8252732091af391a040">/github/workspace/src/MatrixFunctions/mat_sub/kernels</innerdir>
+    <innerfile refid="plp__mat__sub__f32_8c">plp_mat_sub_f32.c</innerfile>
+    <innerfile refid="plp__mat__sub__f32__parallel_8c">plp_mat_sub_f32_parallel.c</innerfile>
+    <innerfile refid="plp__mat__sub__i16_8c">plp_mat_sub_i16.c</innerfile>
+    <innerfile refid="plp__mat__sub__i16__parallel_8c">plp_mat_sub_i16_parallel.c</innerfile>
+    <innerfile refid="plp__mat__sub__i32_8c">plp_mat_sub_i32.c</innerfile>
+    <innerfile refid="plp__mat__sub__i32__parallel_8c">plp_mat_sub_i32_parallel.c</innerfile>
+    <innerfile refid="plp__mat__sub__i8_8c">plp_mat_sub_i8.c</innerfile>
+    <innerfile refid="plp__mat__sub__i8__parallel_8c">plp_mat_sub_i8_parallel.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/MatrixFunctions/mat_sub/"/>
+  </compounddef>
+</doxygen>

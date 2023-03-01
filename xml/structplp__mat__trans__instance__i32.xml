@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__mat__trans__instance__i32" kind="struct" language="C++" prot="public">
+    <compoundname>plp_mat_trans_instance_i32</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__mat__trans__instance__i32_1a5bcad716f0d090fee66be02c7c111cfd" prot="public" static="no" mutable="no">
+        <type>const int32_t *__restrict__</type>
+        <definition>const int32_t* __restrict__ plp_mat_trans_instance_i32::pSrc</definition>
+        <argsstring></argsstring>
+        <name>pSrc</name>
+        <qualifiedname>plp_mat_trans_instance_i32::pSrc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="848" column="32" bodyfile="/github/workspace/include/plp_math.h" bodystart="848" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__trans__instance__i32_1a8481db264d1d5c666b1662d091c82b73" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_trans_instance_i32::M</definition>
+        <argsstring></argsstring>
+        <name>M</name>
+        <qualifiedname>plp_mat_trans_instance_i32::M</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="849" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="849" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__trans__instance__i32_1a7e5cfe78e1ac3891469b3c90f234c695" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_trans_instance_i32::N</definition>
+        <argsstring></argsstring>
+        <name>N</name>
+        <qualifiedname>plp_mat_trans_instance_i32::N</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="850" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="850" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__trans__instance__i32_1a0e20da1ea39d8f5b1e6174c747f96ac4" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_trans_instance_i32::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_mat_trans_instance_i32::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="851" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="851" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__trans__instance__i32_1a55144b1f00023f8e7fb86b61d0708547" prot="public" static="no" mutable="no">
+        <type>int32_t *__restrict__</type>
+        <definition>int32_t* __restrict__ plp_mat_trans_instance_i32::pDst</definition>
+        <argsstring></argsstring>
+        <name>pDst</name>
+        <qualifiedname>plp_mat_trans_instance_i32::pDst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="852" column="26" bodyfile="/github/workspace/include/plp_math.h" bodystart="852" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for integer parallel matrix transpose. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="847" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="847" bodyend="853"/>
+    <listofallmembers>
+      <member refid="structplp__mat__trans__instance__i32_1a8481db264d1d5c666b1662d091c82b73" prot="public" virt="non-virtual"><scope>plp_mat_trans_instance_i32</scope><name>M</name></member>
+      <member refid="structplp__mat__trans__instance__i32_1a7e5cfe78e1ac3891469b3c90f234c695" prot="public" virt="non-virtual"><scope>plp_mat_trans_instance_i32</scope><name>N</name></member>
+      <member refid="structplp__mat__trans__instance__i32_1a0e20da1ea39d8f5b1e6174c747f96ac4" prot="public" virt="non-virtual"><scope>plp_mat_trans_instance_i32</scope><name>nPE</name></member>
+      <member refid="structplp__mat__trans__instance__i32_1a55144b1f00023f8e7fb86b61d0708547" prot="public" virt="non-virtual"><scope>plp_mat_trans_instance_i32</scope><name>pDst</name></member>
+      <member refid="structplp__mat__trans__instance__i32_1a5bcad716f0d090fee66be02c7c111cfd" prot="public" virt="non-virtual"><scope>plp_mat_trans_instance_i32</scope><name>pSrc</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

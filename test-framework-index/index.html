@@ -1,0 +1,1579 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../tutorial-index/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>Test Framework - PULP DSP</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#test-framework" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="PULP DSP" class="md-header__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PULP DSP
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Test Framework
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="PULP DSP" class="md-nav__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    PULP DSP
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Test Framework
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Test Framework
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    How it works
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    Setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generating-new-test-cases" class="md-nav__link">
+    Generating new Test Cases
+  </a>
+  
+    <nav class="md-nav" aria-label="Generating new Test Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testsetcfg" class="md-nav__link">
+    testset.cfg
+  </a>
+  
+    <nav class="md-nav" aria-label="testset.cfg">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate_test" class="md-nav__link">
+    generate_test
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+    <nav class="md-nav" aria-label="Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sweepvariable" class="md-nav__link">
+    SweepVariable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamicvariable" class="md-nav__link">
+    DynamicVariable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+    <nav class="md-nav" aria-label="Arguments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-argument" class="md-nav__link">
+    Default Argument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arrayargument" class="md-nav__link">
+    ArrayArgument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputargument" class="md-nav__link">
+    OutputArgument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inplaceargument" class="md-nav__link">
+    InplaceArgument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returnvalue" class="md-nav__link">
+    ReturnValue
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixpointargument" class="md-nav__link">
+    FixPointArgument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parallelargument" class="md-nav__link">
+    ParallelArgument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customargument" class="md-nav__link">
+    CustomArgument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-functions" class="md-nav__link">
+    Dynamic Functions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-structs" class="md-nav__link">
+    Generating Structs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#link-to-static-structs" class="md-nav__link">
+    Link to Static Structs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gen_stimulipy" class="md-nav__link">
+    gen_stimuli.py
+  </a>
+  
+    <nav class="md-nav" aria-label="gen_stimuli.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compute_result" class="md-nav__link">
+    compute_result
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate_stimuli" class="md-nav__link">
+    generate_stimuli
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testing-pulp-dsp" class="md-nav__link">
+    Testing Pulp-DSP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#target-platform-pulp-sdk-compatibility" class="md-nav__link">
+    Target platform &amp; Pulp-SDK Compatibility
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benchmarking" class="md-nav__link">
+    Benchmarking
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging" class="md-nav__link">
+    Debugging
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explenation-of-the-internals" class="md-nav__link">
+    Explenation of the internals
+  </a>
+  
+    <nav class="md-nav" aria-label="Explenation of the internals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#two-phases" class="md-nav__link">
+    Two phases
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#naming-convention" class="md-nav__link">
+    Naming Convention
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#large-test-programs" class="md-nav__link">
+    Large test programs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handling-floating-point-arguments" class="md-nav__link">
+    Handling floating-point arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling-and-parsing" class="md-nav__link">
+    Error Handling and Parsing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benchmarking_1" class="md-nav__link">
+    Benchmarking
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations-speed-and-future-work" class="md-nav__link">
+    Limitations, Speed and Future Work
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial-index/" class="md-nav__link">
+        Tutorial
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubles/" class="md-nav__link">
+        Troubles Shooting
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Reference Manual
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Reference Manual
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../refmanual/Pages/" class="md-nav__link">
+        Pages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../refmanual/Files/" class="md-nav__link">
+        Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../refmanual/Classes/" class="md-nav__link">
+        Classes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../refmanual/Examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../refmanual/Modules/" class="md-nav__link">
+        Modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../refmanual/Namespaces/" class="md-nav__link">
+        Namespaces
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    How it works
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    Setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generating-new-test-cases" class="md-nav__link">
+    Generating new Test Cases
+  </a>
+  
+    <nav class="md-nav" aria-label="Generating new Test Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testsetcfg" class="md-nav__link">
+    testset.cfg
+  </a>
+  
+    <nav class="md-nav" aria-label="testset.cfg">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate_test" class="md-nav__link">
+    generate_test
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+    <nav class="md-nav" aria-label="Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sweepvariable" class="md-nav__link">
+    SweepVariable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamicvariable" class="md-nav__link">
+    DynamicVariable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+    <nav class="md-nav" aria-label="Arguments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-argument" class="md-nav__link">
+    Default Argument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arrayargument" class="md-nav__link">
+    ArrayArgument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputargument" class="md-nav__link">
+    OutputArgument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inplaceargument" class="md-nav__link">
+    InplaceArgument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returnvalue" class="md-nav__link">
+    ReturnValue
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixpointargument" class="md-nav__link">
+    FixPointArgument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parallelargument" class="md-nav__link">
+    ParallelArgument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customargument" class="md-nav__link">
+    CustomArgument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-functions" class="md-nav__link">
+    Dynamic Functions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-structs" class="md-nav__link">
+    Generating Structs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#link-to-static-structs" class="md-nav__link">
+    Link to Static Structs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gen_stimulipy" class="md-nav__link">
+    gen_stimuli.py
+  </a>
+  
+    <nav class="md-nav" aria-label="gen_stimuli.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compute_result" class="md-nav__link">
+    compute_result
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate_stimuli" class="md-nav__link">
+    generate_stimuli
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testing-pulp-dsp" class="md-nav__link">
+    Testing Pulp-DSP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#target-platform-pulp-sdk-compatibility" class="md-nav__link">
+    Target platform &amp; Pulp-SDK Compatibility
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benchmarking" class="md-nav__link">
+    Benchmarking
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging" class="md-nav__link">
+    Debugging
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explenation-of-the-internals" class="md-nav__link">
+    Explenation of the internals
+  </a>
+  
+    <nav class="md-nav" aria-label="Explenation of the internals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#two-phases" class="md-nav__link">
+    Two phases
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#naming-convention" class="md-nav__link">
+    Naming Convention
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#large-test-programs" class="md-nav__link">
+    Large test programs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handling-floating-point-arguments" class="md-nav__link">
+    Handling floating-point arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling-and-parsing" class="md-nav__link">
+    Error Handling and Parsing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benchmarking_1" class="md-nav__link">
+    Benchmarking
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations-speed-and-future-work" class="md-nav__link">
+    Limitations, Speed and Future Work
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="test-framework">Test Framework</h1>
+<p>This folder contains the necessary codes for testing the functions during the development of the library.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>The test framework is based around <a href="https://github.com/pulp-platform/plptest">plptest</a>. Additionally, the file <code>test/mrWolf/pulp_dsp_test.py</code> provides with several functions and classes making the generation of new tests for Pulp-DSP easy and quick.</p>
+<p><code>pulp_dsp_test.py</code> expects a description of the function, including all parameters. To test different dimensions, the framework allows you to define several <code>SweepVariable</code> (and <code>DynamicVariable</code> which are derived from the former). Then, a <code>Test</code> is generated for each combination of the <code>SweepVariables</code>. This <code>Test</code> class is json-serializable, such that it can be passed to <code>gen_stimuli.py</code>. All <code>gen_stimuli.py</code> also use <code>plp_dsp_test</code>, to deserialize the arguments to the <code>Test</code> class, allowing seamless integration between <code>testset.cfg</code> and <code>gen_stimuli.py</code>. The <code>gen_stimuli.py</code> generates a file <code>data.h</code> with random stimuli vectors and the check function.</p>
+<h2 id="setup">Setup</h2>
+<p>Before you use the test framework, make sure that the most recent version of <a href="https://github.com/pulp-platform/plptest">plptest</a> is installed!</p>
+<p>If you have the <a href="https://github.com/pulp-platform/pulp-sdk/tree/v1">v1 branch</a>, you can go to <code>pulp-sdk/plptest</code> folder and do </p>
+<pre><code class="language-shell">git pull
+make build
+</code></pre>
+<p>If you have the 'new' pulp-sdk, then clone the latest version of <a href="https://github.com/pulp-platform/plptest">plptest</a> (Aug 3, 2020) and do</p>
+<pre><code class="language-shell">make build
+</code></pre>
+<h2 id="generating-new-test-cases">Generating new Test Cases</h2>
+<p>New tests can be generated using the test_template located at <code>test/mrWolf/test_template</code>. The following steps are required:</p>
+<ol>
+<li>Copy and rename the folder <code>test/mrWolf/test_template</code> to <code>test/mrWolf/[NAME]</code>. The two necessary files in this folder are: <code>testset.cfg</code> and <code>gen_stimuli.py</code>.</li>
+<li>Edit <code>test/mrWolf/testset.cfg</code> and add the new test using <code>add_test_folder</code>.</li>
+<li>Edit the <code>testset.cfg</code> configuration file (which is treated as a regular python sctipt):</li>
+<li>Create the <a href="#variables"><code>variables</code></a> list.</li>
+<li>Create the <a href="#arguments"><code>arguments</code></a> list. The following arguments are possible<ul>
+<li><a href="#default-argument"><code>Argument</code></a></li>
+<li><a href="#arrayargument"><code>ArrayArgument</code></a></li>
+<li><a href="#fixpointargument"><code>FixPointArgument</code></a></li>
+<li><a href="#parallelargument"><code>ParallelArgument</code></a></li>
+<li><a href="#outputargument"><code>OutputArgument</code></a></li>
+<li><a href="#returnvalue"><code>ReturnValue</code></a></li>
+<li><a href="#inplaceargument"><code>InplaceArgument</code></a></li>
+<li><a href="#customargument"><code>CustomArgument</code></a></li>
+</ul>
+</li>
+<li>Edit the <a href="#generate_test"><code>implemented</code> dictionary</a>.</li>
+<li>Create the function <a href="#generate_test"><code>n_ops</code></a>.</li>
+<li>(Optional) Create a dictionary <a href="#generate_test"><code>arg_ret_type</code></a>.</li>
+<li>Call <a href="#generate_test"><code>generate_test</code></a> and store the returned struct as <code>TestConfig</code></li>
+<li>Edit the <code>gen_stimuli.py</code> script, and write the function <a href="#compute_result"><code>compute_result</code></a> (and optionally <a href="#generate_stimuli"><code>generate_stimuli</code></a>)</li>
+</ol>
+<h3 id="testsetcfg">testset.cfg</h3>
+<p>This file calls the test framework with the correct configuration. It is interpreted as a regular python script. The last line calls <code>generate_test</code>:</p>
+<h4 id="generate_test">generate_test</h4>
+<p>This is the main funciton which generates the setset (required for <a href="https://github.com/pulp-platform/plptest">plptest</a>). It returns a testset structure, which <em>must</em> be assigned to a variable called <code>TestConfig</code>. This function has the following arguments:</p>
+<ul>
+<li><code>function_name</code>: Name of the function to be tested, without the version suffix (like <code>_q16</code>).</li>
+<li><code>arguments</code>: List of <a href="#arguments"><code>Argument</code>s</a></li>
+<li><code>variables</code>: List of <a href="#variables"><code>Variable</code>s</a></li>
+<li><code>implemented</code>: Dictionary, which has the following structure (the first dictionary must always contain the keys <code>'riscy'</code> and <code>'ibex'</code>!):
+  <code>{
+    'riscy': {
+      'i8': True,
+      'i16': True,
+      #...
+      'i8_parallel': False,
+      #...
+    },
+    'ibex' :{
+      #...
+    }
+  }</code></li>
+<li>(optional) <code>use_l1</code>: Boolean, default value for using L1 scratchpad memory for the arrays or not. For IBEX test cases, L2 is always used. This value can be overwritten for every <code>Argument</code> individually.</li>
+<li>(optional) <code>extended_output</code>: Boolean. If <code>True</code>, the test will print out all mistakes (their position, the expected value and the acquired result). This should be disabled when running on a board!</li>
+<li>(optional) <code>n_ops</code>: Funciton, which maps the current <code>version</code> (from <code>implemented</code>) to a number of ops. This is used for bechmarking.</li>
+<li>(optional) <code>arg_ret_type</code>: Dictionary, which maps the <code>version</code> to the ctype, which is used for <code>arg_type</code> and <code>ret_type</code> in the <code>Variable</code>s. It has the following form:
+  <code>{
+    'i32':   ('int32_t', 'int32_t'),
+    'i16':   ('int16_t', 'int16_t'),
+    #...
+  }</code>
+  If a version is not present in this dictionary, the following default values are used:
+  | version | <code>var_type</code> | <code>ret_type</code> |
+  | ------- | ---------- | ---------- |
+  | <code>i8</code>    | <code>int8_t</code>   | <code>int32_t</code>  |
+  | <code>i16</code>   | <code>int16_t</code>  | <code>int32_t</code>  |
+  | <code>i32</code>   | <code>int32_t</code>  | <code>int32_t</code>  |
+  | <code>q8</code>    | <code>int8_t</code>   | <code>int32_t</code>  |
+  | <code>q16</code>   | <code>int16_t</code>  | <code>int32_t</code>  |
+  | <code>q32</code>   | <code>int32_t</code>  | <code>int32_t</code>  |
+  | <code>f32</code>   | <code>float</code>    | <code>float</code>    |</li>
+</ul>
+<h4 id="variables">Variables</h4>
+<p>Variables are used to sweep over multiple different test instances (e.g. dimensions). There are two different variable types:</p>
+<h5 id="sweepvariable">SweepVariable</h5>
+<p>These variables are used to define the sweeps. It's constructor has the following arguments:</p>
+<ul>
+<li><code>name</code>: Name for the variable, which can be used later for <a href="#arguments"><code>Argument</code>s</a></li>
+<li><code>values</code>: List (or other iterable) over all values to be swept.</li>
+<li>(optional) <code>visible</code>: Boolean. If <code>True</code>, this variable will appear in the test name. If <code>False</code>, the variable is hidden.</li>
+<li>(optional) <code>active</code>: Function: <code>F: version: str -&gt; bool</code> which tells the test framework to use the sweep variable based on the current version.</li>
+</ul>
+<h5 id="dynamicvariable">DynamicVariable</h5>
+<p>If there are other parameters, which depend on <code>SweepVariable</code>s, but are different, then you can use <code>DynamicVariable</code>. You can specify a function based in previously defined <code>Variable</code>s (in the <code>variables</code> list).</p>
+<ul>
+<li><code>name</code>: Name for the variable, which can be used later for <a href="#arguments"><code>Argument</code>s</a></li>
+<li><code>fun</code>: function: <code>F: dict(str, number) -&gt; number</code>, which maps the environment (previous <code>Arguments</code>) to a value.</li>
+<li>(optional) <code>visible</code>: Boolean. If <code>True</code>, this variable will appear in the test name. If <code>False</code>, the variable is hidden.</li>
+</ul>
+<h4 id="arguments">Arguments</h4>
+<p>With arguments, you describe how the function, which is tested, looks like. There are several different argument types.</p>
+<h5 id="default-argument">Default Argument</h5>
+<p>This argument represents a single scalar argument for the function. It's constructor has the following parameters:</p>
+<ul>
+<li><code>name</code>: Name of the argument. This is only used internally, and does not need to match the one from the function declaration.</li>
+<li><code>ctype</code>: This represents the type in <code>C</code> (like <code>int16_t</code>). It can be one of the following:</li>
+<li>String, representing the type. If the type is dependent on the <code>version</code>, you can use either the string <code>var_type</code> or <code>ret_type</code> (see <a href="#generate_test"><code>generate_test</code></a>).</li>
+<li><a href="#dynamic-functions">Function</a>, which returns the type as a string.</li>
+<li><code>value</code>: This is the value which should be used: It can be one of the following:</li>
+<li>Number for constant initialization</li>
+<li>The name of a <code>SweepVariable</code> or <code>DynamicVariable</code>, to take their value for the current iteration.</li>
+<li><code>None</code> for a random value</li>
+<li>Tuple <code>(min, max)</code> for a random value in the given range</li>
+<li><a href="#dynamic-functions">Function</a>, which returns the value as a number. This function can also return a type described above (like <code>None</code>, a <code>tuple</code> or a name of a <code>Variable</code>), which will lead to the behavior described above.</li>
+<li>The string <code>"gen_stimuli"</code> (or the constant <code>pulp_dsp_test.GENERATE_STIMULI</code>). In this case, the values can be computed in the <a href="#generate_stimuli"><code>generate_stimuli</code> function</a> (The <a href="#dynamic-functions">Function</a> should return the resulting value)</li>
+<li>(optional) <code>use_l1</code>: Boolean to tell if L1 storage should be used. This overwrites the argument in <a href="#generate_test"><code>generate_test</code></a>.</li>
+<li>(optional) <code>in_function</code>: Boolean if <code>True</code> (default), this argument will appear in the function arguments. If <code>False</code> it is only initialized.</li>
+</ul>
+<h5 id="arrayargument">ArrayArgument</h5>
+<p>This argument represents an array argument for the function, which is passed via a pointer. It's constructor has the following parameters:</p>
+<ul>
+<li><code>name</code>: Name of the argument. This is only used internally, and does not need to match the one from the function declaration.</li>
+<li><code>ctype</code>: This represents the type in <code>C</code> (like <code>int16_t</code>). It can be one of the following:</li>
+<li>String, representing the type. If the type is dependent on the <code>version</code>, you can use either the string <code>var_type</code> or <code>ret_type</code> (see <a href="#generate_test"><code>generate_test</code></a>).</li>
+<li><a href="#dynamic-functions">Function</a>, which returns the type as a string.</li>
+<li><code>length</code>: This represents the length of the array. It can be one of the following:</li>
+<li>Number for a constant-sized array</li>
+<li>The name of a <code>SweepVariable</code> or <code>DynamicVariable</code> to set the length to the value of this variable at the current iteration.</li>
+<li>Tuple <code>(min, max)</code> for a random length.</li>
+<li><a href="#dynamic-functions">Function</a>, which returns the the length as a number.</li>
+<li><code>value</code>: This is the value which should be used: It can be one of the following:</li>
+<li>Number for constant initialization, where all elements of the array will have this value,</li>
+<li><code>np.ndarray</code> to set the array to this constant value (the length must match!)</li>
+<li><code>None</code> for a random value</li>
+<li>Tuple <code>(min, max)</code> for a random value in the given range</li>
+<li><a href="#dynamic-functions">Function</a>, which returns the value as a <code>np.ndarray</code>. This function can also return a type described above (like <code>None</code>, a <code>tuple</code> or a name of a <code>Variable</code>), which will lead to the behavior described above.</li>
+<li>The string <code>"gen_stimuli"</code> (or the constant <code>pulp_dsp_test.GENERATE_STIMULI</code>). In this case, the values can be computed in the <a href="#generate_stimuli"><code>generate_stimuli</code> function</a>. (The <a href="#dynamic-functions">Function</a> should return the resulting array)</li>
+<li>(optional) <code>use_l1</code>: Boolean to tell if L1 storage should be used. This overwrites the argument in <a href="#generate_test"><code>generate_test</code></a>.</li>
+<li>(optional) <code>in_function</code>: Boolean if <code>True</code> (default), this argument will appear in the function arguments. If <code>False</code> it is only initialized.</li>
+</ul>
+<h5 id="outputargument">OutputArgument</h5>
+<p>This argument represents an array, to which the function writes the result. A funciton declaration can have multiple <code>OutputArgument</code>. This argument is passed to the function as a pointer. The constructor has the following parameters:</p>
+<ul>
+<li><code>name</code>: Name of the argument. This is only used internally, and does not need to match the one from the function declaration.</li>
+<li><code>ctype</code>: This represents the type in <code>C</code> (like <code>int16_t</code>). It can be one of the following:</li>
+<li>String, representing the type. If the type is dependent on the <code>version</code>, you can use either the string <code>var_type</code> or <code>ret_type</code> (see <a href="#generate_test"><code>generate_test</code></a>).</li>
+<li><a href="#dynamic-functions">Function</a>, which returns the type as a string.</li>
+<li><code>length</code>: This represents the length of the array. It can be one of the following:</li>
+<li>Number for a constant-sized array</li>
+<li>The name of a <code>SweepVariable</code> or <code>DynamicVariable</code> to set the length to the value of this variable at the current iteration.</li>
+<li>Tuple <code>(min, max)</code> for a random length.</li>
+<li><a href="#dynamic-functions">Function</a>, which returns the the length as a number.</li>
+<li>(optional) <code>use_l1</code>: Boolean to tell if L1 storage should be used. This overwrites the argument in <a href="#generate_test"><code>generate_test</code></a>.</li>
+<li>(optional) <code>tolerance</code>: This is the tolerance for comparing the acquired to the expected value. If the number is greater or equal to 1, it will be interpreted as a absolute tolerance. If it is smaller than 1, it will be interpreted as relative tolerance. This can be one of:</li>
+<li><code>float</code>, for a constant number,</li>
+<li><a href="#dynamic-functions">Function</a>, which returns the the tolerance as a number.</li>
+<li>(optional) <code>in_function</code>: Boolean if <code>True</code> (default), this argument will appear in the function arguments. If <code>False</code> it is only initialized and checked.</li>
+<li>(optional) <code>skip_check</code>: Boolean, if <code>True</code>, the check is skipped, and the expected result is not generated. If <code>False</code> (default), then this argument is checked during the test.</li>
+</ul>
+<p>The expected output must be computed in the <a href="#compute_result"><code>compute_result</code> function</a>. The test framework will automatically generate a test to check that every element matches the expected result.</p>
+<h5 id="inplaceargument">InplaceArgument</h5>
+<p>This argument represents an array, which is used as both input and output (if the operation is done inplace). As for <code>OutputArgument</code>, there can be mulitple <code>InplaceArgument</code>s (and <code>OutputArgument</code>s). This argument is passed to the function as a pointer. The constructor has the following parameters:</p>
+<ul>
+<li><code>name</code>: Name of the argument. This is only used internally, and does not need to match the one from the function declaration.</li>
+<li><code>ctype</code>: This represents the type in <code>C</code> (like <code>int16_t</code>). It can be one of the following:</li>
+<li>String, representing the type. If the type is dependent on the <code>version</code>, you can use either the string <code>var_type</code> or <code>ret_type</code> (see <a href="#generate_test"><code>generate_test</code></a>).</li>
+<li><a href="#dynamic-functions">Function</a>, which returns the type as a string.</li>
+<li><code>length</code>: This represents the length of the array. It can be one of the following:</li>
+<li>Number for a constant-sized array</li>
+<li>The name of a <code>SweepVariable</code> or <code>DynamicVariable</code> to set the length to the value of this variable at the current iteration.</li>
+<li>Tuple <code>(min, max)</code> for a random length.</li>
+<li><a href="#dynamic-functions">Function</a>, which returns the the length as a number.</li>
+<li><code>value</code>: This is the value which should be used: It can be one of the following:</li>
+<li>Number for constant initialization, where all elements of the array will have this value,</li>
+<li><code>np.ndarray</code> to set the array to this constant value (the length must match!)</li>
+<li><code>None</code> for a random value</li>
+<li>Tuple <code>(min, max)</code> for a random value in the given range</li>
+<li><a href="#dynamic-functions">Function</a>, which returns the value as a <code>np.ndarray</code>. This function can also return a type described above (like <code>None</code>, a <code>tuple</code> or a name of a <code>Variable</code>), which will lead to the behavior described above.</li>
+<li>The string <code>"gen_stimuli"</code> (or the constant <code>pulp_dsp_test.GENERATE_STIMULI</code>). In this case, the values can be computed in the <a href="#generate_stimuli"><code>generate_stimuli</code> function</a>. (The <a href="#dynamic-functions">Function</a> should return the resulting array)</li>
+<li>(optional) <code>use_l1</code>: Boolean to tell if L1 storage should be used. This overwrites the argument in <a href="#generate_test"><code>generate_test</code></a>.</li>
+<li>(optional) <code>tolerance</code>: This is the tolerance for comparing the acquired to the expected value. If the number is greater or equal to 1, it will be interpreted as a absolute tolerance. If it is smaller than 1, it will be interpreted as relative tolerance. This can be one of:</li>
+<li><code>float</code>, for a constant number,</li>
+<li><a href="#dynamic-functions">Function</a>, which returns the the tolerance as a number.</li>
+<li>(optional) <code>in_function</code>: Boolean if <code>True</code> (default), this argument will appear in the function arguments. If <code>False</code> it is only initialized and checked.</li>
+<li>(optional) <code>skip_check</code>: Boolean, if <code>True</code>, the check is skipped, and the expected result is not generated. If <code>False</code> (default), then this argument is checked during the test.</li>
+</ul>
+<p>The expected output must be computed in the <a href="#compute_result"><code>compute_result</code> function</a>. The test framework will automatically generate a test to check that every element matches the expected result. The test framework will also automatically generate setup procedure to reset the array every time the function is called. This way, we make sure that the benchmark always runs on the same data (in case the runtime of the funciton is dependent on the data).</p>
+<p>For Functions, where the input arguments are changed during the funciton call, but are not used as an output, use an <code>InplaceArgument</code>, with the option <code>skip_check=True</code>.</p>
+<h5 id="returnvalue">ReturnValue</h5>
+<p>This represents the value, which is returned by the function. If nothing is returned by the function, then this argument cannot be used!. The constructor has the following parameters:</p>
+<ul>
+<li><code>name</code>: Name of the argument. This is only used internally, and does not need to match the one from the function declaration.</li>
+<li><code>ctype</code>: This represents the type in <code>C</code> (like <code>int16_t</code>). It can be one of the following:</li>
+<li>String, representing the type. If the type is dependent on the <code>version</code>, you can use either the string <code>var_type</code> or <code>ret_type</code> (see <a href="#generate_test"><code>generate_test</code></a>).</li>
+<li><a href="#dynamic-functions">Function</a>, which returns the type as a string.</li>
+<li>(optional) <code>use_l1</code>: Boolean to tell if L1 storage should be used. This overwrites the argument in <a href="#generate_test"><code>generate_test</code></a>.</li>
+<li>(optional) <code>tolerance</code>: This is the tolerance for comparing the acquired to the expected value. If the number is greater or equal to 1, it will be interpreted as a absolute tolerance. If it is smaller than 1, it will be interpreted as relative tolerance. This can be one of:</li>
+<li><code>float</code>, for a constant number,</li>
+<li><a href="#dynamic-functions">Function</a>, which returns the the tolerance as a number.</li>
+<li>(optional) <code>in_function</code>: Boolean if <code>True</code> (default), this argument will appear in the function arguments. If <code>False</code> it is only initialized and checked.</li>
+</ul>
+<p>The expected output must be computed in the <a href="#compute_result"><code>compute_result</code> function</a>. The test framework will automatically generate a test to check that every element matches the expected result.</p>
+<h5 id="fixpointargument">FixPointArgument</h5>
+<p>This is very similar to the <a href="#default-argument">default <code>Argument</code></a>, but it represents the fix-point position used in the computation. This argument is only added to the test for fix-point versions. And if fix-point versions are used, exactly one <code>FixPointArgument</code> is required. The <code>ctype</code> is always assumed to be <code>uint32_t</code>. It has the following arguments:</p>
+<ul>
+<li><code>name</code>: Name of the argument. This is only used internally, and does not need to match the one from the function declaration.</li>
+<li><code>value</code>: This is the value which should be used: It can be one of the following:</li>
+<li>Number for constant initialization</li>
+<li>The name of a <code>SweepVariable</code> or <code>DynamicVariable</code>, to take their value for the current iteration.</li>
+<li><code>None</code> for a random value</li>
+<li>Tuple <code>(min, max)</code> for a random value in the given range</li>
+<li><a href="#dynamic-functions">Function</a>, which returns the value as a number. This function can also return a type described above (like <code>None</code>, a <code>tuple</code> or a name of a <code>Variable</code>), which will lead to the behavior described above.</li>
+<li>The string <code>"gen_stimuli"</code> (or the constant <code>pulp_dsp_test.GENERATE_STIMULI</code>). in this case, the values can be computed in the <a href="#generate_stimuli"><code>generate_stimuli</code> function</a></li>
+<li>(optional) <code>use_l1</code>: Boolean to tell if L1 storage should be used. This overwrites the argument in <a href="#generate_test"><code>generate_test</code></a>.</li>
+<li>(optional) <code>in_function</code>: Boolean if <code>True</code> (default), this argument will appear in the function arguments. If <code>False</code> it is only initialized</li>
+</ul>
+<h5 id="parallelargument">ParallelArgument</h5>
+<p>This is very similar to the <a href="#default-argument">default <code>Argument</code></a>, but it represents the number of processor cores used in the parallel version. This argument is only added to the test for parallel versions. And if parallel versions are used, exactly one <code>ParallelArgument</code> is required. The <code>ctype</code> is always assumed to be <code>uint32_t</code>. It has the following arguments:</p>
+<ul>
+<li><code>name</code>: Name of the argument. This is only used internally, and does not need to match the one from the function declaration.</li>
+<li><code>value</code>: This is the value which should be used: It can be one of the following:</li>
+<li>Number for constant initialization</li>
+<li>The name of a <code>SweepVariable</code> or <code>DynamicVariable</code>, to take their value for the current iteration.</li>
+<li><code>None</code> for a random value</li>
+<li>Tuple <code>(min, max)</code> for a random value in the given range</li>
+<li><a href="#dynamic-functions">Function</a>, which returns the value as a number. This function can also return a type described above (like <code>None</code>, a <code>tuple</code> or a name of a <code>Variable</code>), which will lead to the behavior described above.</li>
+<li>The string <code>"gen_stimuli"</code> (or the constant <code>pulp_dsp_test.GENERATE_STIMULI</code>). in this case, the values can be computed in the <a href="#generate_stimuli"><code>generate_stimuli</code> function</a></li>
+<li>(optional) <code>use_l1</code>: Boolean to tell if L1 storage should be used. This overwrites the argument in <a href="#generate_test"><code>generate_test</code></a>.</li>
+<li>(optional) <code>in_function</code>: Boolean if <code>True</code> (default), this argument will appear in the function arguments. If <code>False</code> it is only initialized</li>
+</ul>
+<h5 id="customargument">CustomArgument</h5>
+<p>Custom arguments allow tests to be very flexible. They can either be used to <a href="#link-to-static-struct">link</a> to a static variable / array / struct, or they can be used to <a href="#generating-structs">generate a struct</a>. It has the following arguments:</p>
+<ul>
+<li><code>name</code>: Name of the argument, which is only used internally, and does not need to match the one from the function declaration.</li>
+<li><code>value</code>: <a href="#dynamic-functions">Function</a>, which should return a string for initializing the <code>CustomVariable</code>. By using other arguments (for which you have set <code>in_function=False</code>), you can craft structs. This function can produce a multi-line initialization string. The function <em>must</em> return the entire string for initialization, including the type and the name of the variable. Note, that every reference to another argument <strong>must</strong> be transformed using the function <code>arg_name</code> (passed as argument).</li>
+<li>(optional) <code>as_ptr</code>: Boolean to tell the framework how to pass the variable to the function. Default is <code>False</code>.</li>
+<li>(optional) <code>deref</code>: Boolean to tell the framework to dereference the variable before passing it to the function. Default is <code>False</code>.</li>
+<li>(optional) <code>in_function</code>: Boolean if <code>True</code> (default), this argument will appear in the function arguments. If <code>False</code> it is only initialized</li>
+</ul>
+<p>The string, which is returned by the <code>value</code> function, will be inserted into the <code>data.h</code> file. Thus, you can even define types, structs, and do fancy things with <code>CustomArgument</code>s.</p>
+<h5 id="dynamic-functions">Dynamic Functions</h5>
+<p>Several Arguments can be setup with functions, which give you fine-grained control over how the test should be built. The arguments for these functions can be chosen dynamically, and the framework will automatically choose the correct parameters to pass in. For this to work, the arguments must have a specific name. The following list shows the possible arguments, their types and the names which you need to choose:</p>
+<table>
+<thead>
+<tr>
+<th>description</th>
+<th>type</th>
+<th>possible names</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>environment, containing the different <a href="#variables">variables</a></td>
+<td><code>dict(str -&gt; number)</code></td>
+<td><code>e</code>, <code>env</code>, <code>environ</code>, <code>environment</code></td>
+</tr>
+<tr>
+<td>version name (like <code>q8</code> or <code>i32_parallel</code>)</td>
+<td><code>str</code></td>
+<td><code>v</code>, <code>ver</code>, <code>version</code></td>
+</tr>
+<tr>
+<td>target device name (<code>riscy</code> or <code>ibex</code>)</td>
+<td><code>str</code></td>
+<td><code>d</code>, <code>dev</code>, <code>device</code>, <code>t</code>, <code>tar</code>, <code>target</code></td>
+</tr>
+<tr>
+<td>variable type (tuple: <code>(var_type, ret_type</code>)</td>
+<td><code>tuple(str, str)</code></td>
+<td><code>var</code>, <code>vars</code>, <code>var_type</code>, <code>var_types</code></td>
+</tr>
+</tbody>
+</table>
+<p>For the <code>value</code> function in <code>CustomArgument</code>s, there are the following additional arguments:</p>
+<table>
+<thead>
+<tr>
+<th>description</th>
+<th>type</th>
+<th>possible names</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>if L1 is enabled or disabled</td>
+<td><code>bool</code></td>
+<td><code>l1</code>, <code>use_l1</code></td>
+</tr>
+<tr>
+<td>Function to transform an argument name</td>
+<td><code>f: str -&gt; str</code></td>
+<td><code>a</code>, <code>arg</code>, <code>name</code>, <code>arg_name</code></td>
+</tr>
+</tbody>
+</table>
+<p>For the <code>generate_stimuli</code> funciton in <code>gen_stimuli.py</code>, there is an additional argument:</p>
+<table>
+<thead>
+<tr>
+<th>description</th>
+<th>type</th>
+<th>possible names</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Argument for which to generate the stimuli</td>
+<td><code>Argument</code></td>
+<td><code>a</code>, <code>arg</code>, <code>argument</code></td>
+</tr>
+</tbody>
+</table>
+<p>To write such a funciton, you don't need to add all arguments, but just the ones you need. However, the name of the arguments need to match one of the possible names, listed above. The order of the arguments does not matter. As an example, if you write a function and need the environment and the version, then you can use:</p>
+<pre><code>lambda e, v: do_some_work(e, v)
+</code></pre>
+<h4 id="generating-structs">Generating Structs</h4>
+<p>The test framework allows you to generate structs, but it needs a bit more work. Assume, that you wish to create a struct, which contains several values, and some pointers to arrays. Also, assume that the struct type was already defined in the Pulp-DSP  library.</p>
+<p>First, we create all attributes as <a href="#arguments"><code>Argument</code>s</a>, but we set <code>in_function=False</code>. This case, they are treated as regular arguments, are initialized regularly (and are checked if they are <code>OutputArguments</code>), but will not appear in the funciton call. Additionally, for <a href="#compute_result"><code>compute_result</code></a>, the arguments will appear normally, so you can use it to compute the result. Note, that this needs to be done in the list before we create the <a href="#customargument"><code>CustomArgument</code></a>.</p>
+<p>Then, we can create the <a href="#customargument"><code>CustomArgument</code></a>. For <code>value</code>, we write a funciton, which will initialize the struct of the required type normally. As attributes, we can use the names from the previously defined arguments. We can use the arguments (as described <a href="#customargument">here</a>) to generate the required type for the struct, and for all the attributes.</p>
+<p>In the following example, we will call the function <code>void plp_mat_mult_i8vp_xpulpv2(void* args)</code>, and pass in the argument <code>plp_mat_mult_instance_i8</code>, which is defined as follows:</p>
+<pre><code>// in plp_math.h
+typedef struct
+{
+    const int8_t * __restrict__ pSrcA;
+    const int8_t * __restrict__ pSrcB;
+    uint32_t M;
+    uint32_t N;
+    uint32_t O;
+    uint32_t nPE;
+    int32_t * __restrict__ pDstC;
+} plp_mat_mult_instance_i8;
+</code></pre>
+<p>To use this struct and pass it to the function under test, we first write a python function for the <code>CustomArgument</code>, which returns a string to initialize the struct. For this, we can add constants (like <code>.nPE = 8</code>), refer to arguments in the <code>arguments</code> list (with their name), we can access a <code>SweepVariable</code> or <code>DynamicVariable</code> in the <code>env</code> dictionary, or use the <code>version</code>, <code>var_type</code> or the <code>use_l1</code> flag. This is a normal python function, so you can build whatever you like here. Since the function <code>plp_mat_mult_i8vp_xpulpv2</code> takes a <code>void*</code> pointer as an input argument, we create a <code>void*</code> pointer <code>pArgs</code> to pass to the function. This will make sure that there will be no compiler warnings or errors.</p>
+<pre><code>from textwrap import dedent
+def mat_mult_instance(env, version, var_type, use_l1, arg_name):
+    version_prefix = version.split(&quot;_&quot;)[0] # remove the _parallel from the version
+    return dedent(
+        &quot;&quot;&quot;\
+        plp_mat_mult_instance_{ver} {args} = {
+            .pSrcA = {pSrcA},
+            .pSrcB = {pSrcB},
+            .M = {m},
+            .N = {n},
+            .O = {o},
+            .nPE = 8,
+            .pDstC = {pDst}
+        };
+        void* pArgs = (void*)&amp;args;
+        &quot;&quot;&quot;.format(ver=version_prefix, m=env['len_m'], n=env['len_n'], o=env['len_o'],
+                   args=arg_name(&quot;args&quot;), pSrcA=arg_name(&quot;pSrcA&quot;), pSrcB=arg_name(&quot;pSrcB&quot;),
+                   pDst=arg_name(&quot;pDst&quot;))
+    )
+</code></pre>
+<p>Then, we generate generate the arguments list by adding all arrays, but setting <code>in_function=False</code>. In the end, we create the <code>CustomArgument</code>.</p>
+<pre><code>arguments = [
+    ArrayArgument('pSrcA', 'var_type', 'len_srcA', in_function=False),
+    ArrayArgument('pSrcB', 'var_type', 'len_srcB', in_function=False),
+    OutputArgument('pDst', 'ret_type', 'len_res', in_function=False),
+    CustomArgument('pArgs', mat_mult_instance, as_ptr=False)
+]
+</code></pre>
+<p>Note, that the name of the <code>CustomArgument</code>, <code>pArgs</code>, is also used to initialize the struct. In the <code>gen_stimuli.py</code> file, the function <code>compute_result</code> is still called for <code>pDst</code>, and the argument <code>inputs</code> will contain <code>pSrcA</code> and <code>pSrcB</code>. But those arguments will not be written to the arguments list. We set <code>as_ptr=False</code>, because we already pass a pointer to <code>void</code> into the function.</p>
+<p><em>Important</em>: If you wish to use a scalar argument (e.g. <code>Argument</code>) in the struct, which is a <code>float</code>, then you need to append <code>.f</code> to the name of the argument when creating the struct in the <code>value</code>-function of the <code>CustomArgument</code>. (If the type is version specific, then you need to append the <code>.f</code> only for the float version, and no suffix for the integer or fix-point version.)</p>
+<h4 id="link-to-static-structs">Link to Static Structs</h4>
+<p>To link to a static struct, which is defined somewhere in the pulp dsp library. This can be done by using a <a href="#customargument"><code>CustomArgument</code></a>. Write the <code>value</code> function, such that:
+1. the respective header file from pulp-dsp is included, (if necessary),
+2. the variable is declared and defined, by giving it the requred type, and setting it to the required value (probably the address of the target struct).
+Then, set <code>as_ptr</code> respectively.</p>
+<p>Alternatively, you can also define the struct type right before defining the variable.</p>
+<h3 id="gen_stimulipy">gen_stimuli.py</h3>
+<p>This file contains the functions for generating the stimuli and the expected result.</p>
+<h4 id="compute_result">compute_result</h4>
+<p>This function (with the exact name <code>compute_result</code>) computes the result of one output (either <a href="#outputargument"><code>OutputArgument</code></a> or <a href="#returnvalue"><code>ReturnValue</code></a>). If there are multiple such arguments defined in <a href="#testset.cfg"><code>testset.cfg</code></a>, then this function is called multiple times, with different parameters. The function must take the following arguments:</p>
+<ul>
+<li><code>result_parameter</code>: Either <a href="#outputargument"><code>OutputArgument</code></a> or <a href="#returnvalue"><code>ReturnValue</code></a>, the one for which the result must be computed. You can use <code>result_parameter.name</code>, <code>result_parameter.ctype</code> or <code>result_parameter.length</code> to write the function.</li>
+<li><code>inputs</code>: A list of <a href="#arguments"><code>Argument</code>s</a>. Use <code>inputs[i].value</code> to get the stimuli for the function.</li>
+<li><code>env</code>: A dictionary, which maps the <a href="#variables"><code>Variable</code></a> name to a value.</li>
+<li><code>fix_point</code>: Either <code>None</code> if fix_point is not used, or the specific positoin of the fix-point for this iteration.</li>
+</ul>
+<p>This function <em>must</em> return the <code>np.ndarray</code> with the expected result.</p>
+<h4 id="generate_stimuli">generate_stimuli</h4>
+<p>This optional function (with the exact name <code>generate_stimuli</code>) will generate the stimuli vector (or scalar) for <a href="#default-argument"><code>Argument</code>s</a> or <a href="#arrayargument"><code>ArrayArgument</code>s</a>, for which the <code>value</code> is set to <code>'gen_stimuli'</code>. This function can be called multiple times, for each of these arguments once. It takes in the following arguments:</p>
+<ul>
+<li><code>argument</code>: Either <a href="#default-argument"><code>Argument</code>s</a> or <a href="#arrayargument"><code>ArrayArgument</code>s</a> for which the stimuli need to be generated. Use <code>argument.name</code>, <code>argument.ctype</code> and <code>argument.length</code> to write this function.</li>
+<li><code>env</code>: A dictionary, which maps the <a href="#variables"><code>Variable</code></a> name to a value.</li>
+</ul>
+<p>This function <em>must</em> return the <code>np.ndarray</code> with the expected result.</p>
+<h2 id="usage">Usage</h2>
+<h3 id="testing-pulp-dsp">Testing Pulp-DSP</h3>
+<p>To execute the tests, you need to change directory into either <code>test/mrWolf</code>, or any of it's subdirectories. Then, start plptest with:</p>
+<pre><code>plptest
+</code></pre>
+<p>Running all tests will take a while. As soon as all tests are finished, plptest will show you a summary of all executed tests and if they passed or failed.</p>
+<h3 id="target-platform-pulp-sdk-compatibility">Target platform &amp; Pulp-SDK Compatibility</h3>
+<p>In recent versions of Pulp-SDK, the platform configuration changed. In earlier versions, the platform could be chosen by sourcing <code>pulp-sdk/configs/platform-&lt;PLATFORM&gt;.sh</code>. However, this was removed in recent versions, and replaced by adding the <code>platform=&lt;PLATFORM&gt;</code> flag to <code>make run</code> (this flag is already available in earlier versions). In order to guarantee compatibility with different Pulp-SDK versions, the test framework chooses the platform in the following way:</p>
+<ul>
+<li>If the environment variable <code>TEST_PLATFORM</code> is set, then the tests are run with <code>make run platform=$TEST_PLATFORM</code>. Simply run <code>TEST_PLATFORM=board plptest</code> to execute the tests on an actual board.</li>
+<li>The old platform configuration script <code>pulp-sdk/configs/platform-&lt;PLATFORM&gt;.sh</code> sets the environment variable <code>PULP_CURRENT_CONFIG_ARGS=platform=&lt;PLATFORM&gt;</code>. If this variable is set (and <code>TEST_PLATFORM</code> is not), then the tests are executed with <code>make run $PULP_CURRENT_CONFIG_ARGS</code>. This will ensure that the configuration is applied.</li>
+<li>If neither of the two environment variables <code>TEST_PLATFORM</code> or <code>PULP_CURRENT_CONFIG_ARGS</code> are set, then the tests are run with <code>make run platform=gvsoc</code>.</li>
+</ul>
+<h3 id="benchmarking">Benchmarking</h3>
+<p>Every test will measure it's cycles and instructions. After every test is complete (and passed), all measurements will be written to the csv file: <code>test/mrWolf/bench_YYYY-MM-DD_hh:mm:ss.csv</code>. The time is is set to be when the test is started. After the test is complete, you can use <code>test/mrWolf/bench.py</code> to print out the results in a human-readable format. This script has two modes of operation:</p>
+<ul>
+<li><code>view</code>: view a benchmark file. </li>
+<li><code>-b BENCH_FILE</code> or <code>--bench-file BENCH_FILE</code>: the benchmark file to show. If not set, take the most recent one.</li>
+<li><code>-f FUNCITON</code> or <code>--funciton FUNCTION</code>: regex string, only results with a function name that matches the regex will be shown</li>
+<li><code>-d DEVICE</code> or <code>--device DEVICE</code>: regex string, only results with a device that matches the regex will be shown</li>
+<li><code>compare</code>: compare two benchmarks, an old with the new, and shows the difference. It only shows test found in both the old and the new benchmark file.</li>
+<li><code>-n NEW_BENCH_FILE</code> or <code>--new-bench-file NEW_BENCH_FILE</code>: the benchmark file to show. If not set, take the most recent one.</li>
+<li><code>-o OLD_BENCH_FILE</code> or <code>--old-bench-file OLD_BENCH_FILE</code>: the benchmark file to compare to.</li>
+<li><code>-f FUNCITON</code> or <code>--funciton FUNCTION</code>: regex string, only results with a function name that matches the regex will be shown</li>
+<li><code>-d DEVICE</code> or <code>--device DEVICE</code>: regex string, only results with a device that matches the regex will be shown</li>
+</ul>
+<h2 id="debugging">Debugging</h2>
+<p>Sometimes, it is nice to see what went wrong, when writing the tests. When the tests don't compile, the result will also be <code>KO</code> (just like if there was a mismatch). However, if there was a mismatch, it will be printed to <code>stdout</code> (except the flag <code>extended_output=False</code> is overwritten). To see what went wrong, start the tests as follows:</p>
+<pre><code>plptest --threads 1 --stdout
+</code></pre>
+<p>The test will generate all necessary source files automatically. But, they are removed after the test passed or failed. You can still view the generated files by canceling the test during compilation (by pressing <code>Ctrl-C</code>). This should be done about 2 seconds after the test has started (when gcc is executed). Then, you can inspect the files. You can make changes on the fly, and check if it works by manually running <code>make clean all run</code>.</p>
+<h2 id="explenation-of-the-internals">Explenation of the internals</h2>
+<p>This test framework is based around <code>plptest</code>. In <code>plptest</code>, every test is configured in the class <code>plptest.Test</code> (renamed to <code>PulpTest</code> in <code>pulp_dsp_test.py</code>). Such a test can have a name, and commands to execute. </p>
+<ol>
+<li>Generate (written as <code>plptest.Check</code>): Calls <code>generate_test_program</code>, which generate all stimuli, compute the expected results, and generate the entire test program with all necessary files. We use <code>plptest.Check</code> because this allows us to pass the test object without serializing and deserializing.</li>
+<li><code>bash TEST_FOLDER/run.sh platform=PLATFORM</code>: build the project and run it on gvsoc</li>
+<li>Check (written as <code>plptest.Check</code>): Calls <code>check_output</code> in <code>pulp_dsp_test.py</code>. Here, we can reuse the test object by using the parameter <code>test_obj</code>. It also clears all program files of the test.</li>
+</ol>
+<p>Each test program will check multiple different cases. All iterations of <code>SweepVariable</code>s and <code>DynamicVariable</code>s will be grouped to getter for all functions and versions. This way, we reduce the total amount of work required by approximately factor 8. Also, the programmer does not need to think about the test time before adding more test cases and iterations of <code>SweepVariable</code>s. </p>
+<p>All data for the tests need to fit in L2 memory. This can be a limitation if the user creates large arrays, or uses many iterations. To mitigate this problem, the test framework approximates the memory requirement for each test case and aggregates cases, such that L2 memory is not exceeded. The variable <code>TEST_MEM_SIZE_KB=256</code> configures the total amount of memory allowed in the a single test program. The memory is approximated using the funciton <code>estimate_memory</code> (in <code>Variable</code> and all sub-classes, and in <code>AggregateTestCase</code>). Then, the steps 1 and 2 are repeated, with each iteration generating as many cases as fit into <code>TEST_MEM_SIZE_KB</code>, until all iterations are tested.</p>
+<p>The generated test program will have the following files, in a sub folder, which allows parallel execution:</p>
+<ul>
+<li><code>run.sh</code>: Executes <code>make clean all run</code>, and writes to stdout if something fails. This script always exists with status <code>0</code>. See <a href="error-handling-and-parsing">Error Handling and Parsing</a>.</li>
+<li><code>common.h</code>: Common declarations (like the union <code>__u2f</code> and the macro <code>ABS</code>)</li>
+<li><code>data_tXX.h</code>: The stimuli and the expected result, stored for each test case separately.</li>
+<li><code>test.c</code> (<code>cluster.c</code> for <code>riscy</code> tests): Contains the function <code>test_entry</code>, which calls all test cases. Each test case is represented as a function, called <code>tXX__run_test</code>. Each of these functions does the following:</li>
+<li>Setup the test (e.g. copy all necessary data from L2 to L1)</li>
+<li>Execute <code>tXX__do_bench</code> multiple times. Each time, the performance counters (hardware counters) count different metrics:<ol>
+<li>Count the number of cycles and instructions. The first iteration also checks every element of every <code>OutputArgument</code>, <code>ReturnValue</code> and <code>InplaceArgument</code>. </li>
+<li>Count the number of load stalls</li>
+<li>Count all instruction cache misses</li>
+<li>Count all TCDM contentions</li>
+</ol>
+</li>
+</ul>
+<p>All results of all test cases will be written to <code>stdout</code>. The function <code>check_output</code> then parses the output, to assign those performance numbers to the correct test case. Afterwards, the benchmark file will be written.</p>
+<h3 id="two-phases">Two phases</h3>
+<p>The tests (assigning concrete values to the name, length, type and value of <code>Argument</code>s) are generated in two different phases.</p>
+<ol>
+<li>In the first phase, we instantiate all names, types and sizes of all arguments. This is done when creating the <code>AggregateTestCases</code> in <code>AggregatedTest.__init__</code> in the <code>apply</code> function of every <code>Argument</code>. </li>
+<li>In the second phase, the stimuli and the expected result is created. This is done when the data is written to the file. This way, we never store the data in the class, but drop it after the test is written. This reduces the total memory usage.</li>
+</ol>
+<h3 id="naming-convention">Naming Convention</h3>
+<ul>
+<li>All variables, arguments and functions of a specific test case are suffixed with <code>tXX__</code>.</li>
+<li>The function <code>tXX__run_test()</code> sets up some arguments (e.g. copy data from L2 to L1), and calls <code>tXX__do_bench</code> multiple times to measure several performance numbers</li>
+<li>The function <code>tXX__do_bench()</code> sets up some arguments (e.g. reset the values of an <code>InplaceArgument</code>), configures the hardware counter, calls the function-under-test and checks the result (but only on the first iteration).</li>
+<li>For some arguments, multiple variables are generated:</li>
+<li><code>tXX__NAME</code>: This is the variable which is (usually) passed to the function-under-test.</li>
+<li><code>tXX__NAME__reference</code>: This is the variable containing the expected result.</li>
+<li><code>tXX__NAME__original</code>: This is the array containing the original data, used only for <code>InplaceArgument</code>.</li>
+<li><code>tXX__NAME__l2</code>: The l2 data for all arrays, for which <code>use_l1</code> is set to true. This way, we can copy the data from <code>tXX__NAME__l2</code> to <code>tXX__NAME</code> at the start of <code>tXX__run_test()</code>.</li>
+</ul>
+<h3 id="large-test-programs">Large test programs</h3>
+<p>We now group multiple test cases to a single test program. Therefore, one test program may contain 20+ test cases, which all need their own data. Thus, it is not possible to store everything directly to L1. Instead, the test framework stores all data into <code>RT_L2_DATA</code> as the variable <code>tXX__NAME__l2</code>. In addition, for all arrays with <code>use_l1=True</code>, we generate an additional pointer (<code>tXX__NAME</code>), which is not yet initialized. At the start of <code>tXX__run_test()</code>, we allocate the required memory in L1, and store the pointer in <code>tXX__NAME</code>. Then, we perform a <code>memcpy</code> to copy the data from <code>tXX__NAME__l2</code> to <code>tXX__NAME</code>. This way, we can generate as many data as fits into <code>RT_L2_DATA</code> (which is 448 kB).</p>
+<h3 id="handling-floating-point-arguments">Handling floating-point arguments</h3>
+<p>It is important that the floating point values are passe to the function-under-test exactly like the expected output was computed. This is not possible, when using the decimal "string" representation of a float (normal way in which float constants are written in C). The test framework overcomes this limitation by expressing a floating point value in the hexadecimal representation using the python module <code>struct</code>:</p>
+<pre><code>import struct
+struct.pack(&quot;!f&quot;, float_val)
+</code></pre>
+<p>This is done in the function <code>fmt_float</code>. The <code>data.h</code> file is created in the following way:</p>
+<ul>
+<li><em>Arrays</em>: Arrays are stored as <code>uint32_t[]</code> arrays in memory (with the name <code>&lt;NAME&gt;__int</code>). Then, we typecast the array to a <code>float*</code> using (see <code>HeaderWriter.write_array</code>):
+  <code>RT_L1_DATA uint32_t &lt;NAME&gt;__int[&lt;LEN&gt;] = [ /*...*/ ];
+  RT_L1_DATA float * &lt;NAME&gt; = (float*)((void*)&lt;NAME&gt;__int);</code>
+  Then, in the function, the array is passed normally.</li>
+<li><em>Scalars</em>: Unfortunately, we cannot use the same approach as before to reinterpret the unsigned int as a float. The reason is that you are not allowed to dereference a pointer in a header file. We overcome this problem by defining a union:
+  <code>typedef union {
+      uint32_t u;
+      float f;
+  } __u2f;</code>
+  Unions are ideal for this kind of usecase. Now, we declare the scalar as:
+  <code>RT_L1_DATA __u2f &lt;NAME&gt; = {.u = 0xbf12d71dU};</code>
+  Finally, every time we use the variable (when passing it to the function, when writing to the return value and when checking the return value), we use <code>&lt;NAME&gt;.f</code> to interpret the data ase a floating-point number</li>
+</ul>
+<h3 id="error-handling-and-parsing">Error Handling and Parsing</h3>
+<p>For the user, it is convenient when the reason for failure is printed to stdout, without the need of using the <code>--stdout</code> flag. To print reasonable results, the generated <code>run.sh</code> script is written such that it always returns with status <code>0</code>. This way, <code>plptest</code> will not automatically assume the test failed, but will call the check function anyway. In <code>check_output</code>, the output of all test cases is parsed. It checks for errors, which are printed by <code>run.sh</code>. It also gets that gvsoc errors (e.g. invalid access) and prints those to stdout. The parser also accepts non-complete results, parses the ones that were successful and skips the check for all who came after the error.</p>
+<h3 id="benchmarking_1">Benchmarking</h3>
+<p>We cannot know the order in which <code>plptest</code> executes the tests. Therefore, we also cannot know if this is the first or the last test to be executed. Therefore, we store every result of the test as a single line, every time a test is complete. The <code>.csv</code> file is created with the header row if it does not yet exist. The bechmark name is generated and stored as a static variable, once the <code>pulp_dsp_test.py</code> file is imported for the first time (any subsequent imports will not overwrite this variable!). Since the check function is passed as a regular python function, and not a shell program, <code>pulp_dsp_test.py</code> (and thus the function <code>check_output</code>) remains loaded, and the static variable containing the benchmark file will not be changed.</p>
+<h3 id="limitations-speed-and-future-work">Limitations, Speed and Future Work</h3>
+<p>The main limitation of the current framework is the speed. As of the time of writing this part of the documentation, there already exists more than 1200 individual test cases. Every test takes around 3.5 seconds, which makes the total execution time around 80 minutes. By grouping all iterations of a single function and version into one single executable, the testing time could be reduced from 80 minutes down to 9 minutes (speedup of approx. <strong>9x</strong>). This performance can be increased even more by combining all versions of the same target device together. However, one must make sure that the L1 memory (448kB) is not exceeded.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+    
+  </body>
+</html>

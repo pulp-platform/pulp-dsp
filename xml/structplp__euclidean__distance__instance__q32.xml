@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__euclidean__distance__instance__q32" kind="struct" language="C++" prot="public">
+    <compoundname>plp_euclidean_distance_instance_q32</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__euclidean__distance__instance__q32_1a892118a9c94a6aed9b64451a4999c248" prot="public" static="no" mutable="no">
+        <type>const int32_t *</type>
+        <definition>const int32_t* plp_euclidean_distance_instance_q32::pSrcA</definition>
+        <argsstring></argsstring>
+        <name>pSrcA</name>
+        <qualifiedname>plp_euclidean_distance_instance_q32::pSrcA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1543" column="19" bodyfile="/github/workspace/include/plp_math.h" bodystart="1543" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__euclidean__distance__instance__q32_1a5048e76e25874c97c046931a59a9914e" prot="public" static="no" mutable="no">
+        <type>const int32_t *</type>
+        <definition>const int32_t* plp_euclidean_distance_instance_q32::pSrcB</definition>
+        <argsstring></argsstring>
+        <name>pSrcB</name>
+        <qualifiedname>plp_euclidean_distance_instance_q32::pSrcB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1544" column="19" bodyfile="/github/workspace/include/plp_math.h" bodystart="1544" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__euclidean__distance__instance__q32_1a252801093cea187a2fce266af33ba85b" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_euclidean_distance_instance_q32::blkSizePE</definition>
+        <argsstring></argsstring>
+        <name>blkSizePE</name>
+        <qualifiedname>plp_euclidean_distance_instance_q32::blkSizePE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1545" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1545" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__euclidean__distance__instance__q32_1a21ec5b86d7e3a274640c4807824f3f10" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_euclidean_distance_instance_q32::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_euclidean_distance_instance_q32::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1546" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1546" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__euclidean__distance__instance__q32_1a87603fb58fe941f1a40b00adec2aa256" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_euclidean_distance_instance_q32::fracBits</definition>
+        <argsstring></argsstring>
+        <name>fracBits</name>
+        <qualifiedname>plp_euclidean_distance_instance_q32::fracBits</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1547" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1547" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__euclidean__distance__instance__q32_1a6813bd81952223b94c30d81fe26653fc" prot="public" static="no" mutable="no">
+        <type>int32_t *</type>
+        <definition>int32_t* plp_euclidean_distance_instance_q32::resBuffer</definition>
+        <argsstring></argsstring>
+        <name>resBuffer</name>
+        <qualifiedname>plp_euclidean_distance_instance_q32::resBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1548" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="1548" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for float parallel Euclidean distance. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the first input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrcB</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the second input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blkSizePE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of parallel processing units </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="1542" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="1542" bodyend="1549"/>
+    <listofallmembers>
+      <member refid="structplp__euclidean__distance__instance__q32_1a252801093cea187a2fce266af33ba85b" prot="public" virt="non-virtual"><scope>plp_euclidean_distance_instance_q32</scope><name>blkSizePE</name></member>
+      <member refid="structplp__euclidean__distance__instance__q32_1a87603fb58fe941f1a40b00adec2aa256" prot="public" virt="non-virtual"><scope>plp_euclidean_distance_instance_q32</scope><name>fracBits</name></member>
+      <member refid="structplp__euclidean__distance__instance__q32_1a21ec5b86d7e3a274640c4807824f3f10" prot="public" virt="non-virtual"><scope>plp_euclidean_distance_instance_q32</scope><name>nPE</name></member>
+      <member refid="structplp__euclidean__distance__instance__q32_1a892118a9c94a6aed9b64451a4999c248" prot="public" virt="non-virtual"><scope>plp_euclidean_distance_instance_q32</scope><name>pSrcA</name></member>
+      <member refid="structplp__euclidean__distance__instance__q32_1a5048e76e25874c97c046931a59a9914e" prot="public" virt="non-virtual"><scope>plp_euclidean_distance_instance_q32</scope><name>pSrcB</name></member>
+      <member refid="structplp__euclidean__distance__instance__q32_1a6813bd81952223b94c30d81fe26653fc" prot="public" virt="non-virtual"><scope>plp_euclidean_distance_instance_q32</scope><name>resBuffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,877 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__MatFillIKernels" kind="group">
+    <compoundname>MatFillIKernels</compoundname>
+    <title>Identity Matrix Creation Kernels</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__MatFillIKernels_1ga1f67f491aeb46f1e67d6352e42b62e3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_f32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_fill_I_f32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Create a 32-bit float identity matrix in parallel on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__fill__I__instance__f32" kindref="compound">plp_mat_fill_I_instance_f32</ref> struct initialized by plp_mat_fill_I_f32_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_f32p_xpulpv2.c" line="49" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_f32p_xpulpv2.c" bodystart="49" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1ga31e697eaf11f374771686fff73aaaa96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_f32s_xpulpv2</definition>
+        <argsstring>(uint32_t N, float *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_f32s_xpulpv2</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>float *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a 32-bit float identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_f32s_xpulpv2.c" line="49" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_f32s_xpulpv2.c" bodystart="49" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1ga564c496301b5ecbde9df23ad6f6a7194" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_i16p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_fill_I_i16p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Create a 16-bit integer identity matrix in parallel on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__fill__I__instance__i16" kindref="compound">plp_mat_fill_I_instance_i16</ref> struct initialized by plp_mat_fill_I_i16_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i16p_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i16p_xpulpv2.c" bodystart="53" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1ga6eff856a6da8c7bbed7a998b5a8ddfdd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_i16s_rv32im</definition>
+        <argsstring>(uint32_t N, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_i16s_rv32im</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a 16-bit integer identity matrix on RV32IM. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i16s_rv32im.c" line="70" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i16s_rv32im.c" bodystart="70" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1ga745fda3c6fbb116ab1d033c06045a836" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_i16s_xpulpv2</definition>
+        <argsstring>(uint32_t N, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_i16s_xpulpv2</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a 16-bit integer identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i16s_xpulpv2.c" line="49" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i16s_xpulpv2.c" bodystart="49" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1gadf40bfe34edfb3a9c43de9bc90afeee2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_i32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_fill_I_i32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Create a 32-bit integer identity matrix in parallel on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__fill__I__instance__i32" kindref="compound">plp_mat_fill_I_instance_i32</ref> struct initialized by plp_mat_fill_I_i32_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i32p_xpulpv2.c" line="49" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i32p_xpulpv2.c" bodystart="49" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1ga1040b99acb186db1c2e9daa6bd91a668" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_i32s_rv32im</definition>
+        <argsstring>(uint32_t N, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_i32s_rv32im</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a 32-bit integer identity matrix on RV32IM. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i32s_rv32im.c" line="49" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i32s_rv32im.c" bodystart="49" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1gaebf0684ac56d6c745efe1df74623adc8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_i32s_xpulpv2</definition>
+        <argsstring>(uint32_t N, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_i32s_xpulpv2</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a 32-bit integer identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i32s_xpulpv2.c" line="49" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i32s_xpulpv2.c" bodystart="49" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1ga35a11afa8fef61232439934d75dd9feb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_i8p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_fill_I_i8p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Create a 8-bit integer identity matrix in parallel on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__fill__I__instance__i8" kindref="compound">plp_mat_fill_I_instance_i8</ref> struct initialized by plp_mat_fill_I_i8_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i8p_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i8p_xpulpv2.c" bodystart="53" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1ga00ceee2639f960b454ebf4bde88c7bc8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_i8s_rv32im</definition>
+        <argsstring>(uint32_t N, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_i8s_rv32im</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a 8-bit integer identity matrix on RV32IM. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i8s_rv32im.c" line="49" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i8s_rv32im.c" bodystart="49" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1gad448800d838b7bf113fbdf7633e45942" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_i8s_xpulpv2</definition>
+        <argsstring>(uint32_t N, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_i8s_xpulpv2</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a 8-bit integer identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i8s_xpulpv2.c" line="49" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_i8s_xpulpv2.c" bodystart="49" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1ga7a4d6cf6099438799896f8dd09ad4fb2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_q16p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_fill_I_q16p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Create a 16-bit fix-point identity matrix in parallel on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__fill__I__instance__q16" kindref="compound">plp_mat_fill_I_instance_q16</ref> struct initialized by plp_mat_fill_I_q16_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 16 bit values are packed two each into 32 bit vectors and then the two dot products are performed on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q16p_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q16p_xpulpv2.c" bodystart="53" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1ga6acbc33e047de5500c10e049412583fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_q16s_rv32im</definition>
+        <argsstring>(uint32_t N, int32_t fracBits, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_q16s_rv32im</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a 16-bit fix-point identity matrix on RV32IM. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Decimal point for the appropriate scale </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q16s_rv32im.c" line="50" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q16s_rv32im.c" bodystart="50" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1ga1567193918140268c7e7f43d6d5153ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_q16s_xpulpv2</definition>
+        <argsstring>(uint32_t N, int32_t fracBits, int16_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_q16s_xpulpv2</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int16_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a 16-bit fix-point identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Decimal point for the appropriate scale </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q16s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q16s_xpulpv2.c" bodystart="50" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1ga5eaf87bab145e85c020665026d292408" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_q32p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_fill_I_q32p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Create a 32-bit fix-point identity matrix in parallel on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__fill__I__instance__q32" kindref="compound">plp_mat_fill_I_instance_q32</ref> struct initialized by plp_mat_fill_I_q32_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q32p_xpulpv2.c" line="49" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q32p_xpulpv2.c" bodystart="49" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1gaa5e3fb12d65ad4630e5740cddf181769" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_q32s_rv32im</definition>
+        <argsstring>(uint32_t N, int32_t fracBits, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_q32s_rv32im</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a 32-bit fix-point identity matrix on RV32IM. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Decimal point for the appropriate scale </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q32s_rv32im.c" line="50" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q32s_rv32im.c" bodystart="50" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1ga70fef524a5b43883e2912e75cc030cf7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_q32s_xpulpv2</definition>
+        <argsstring>(uint32_t N, int32_t fracBits, int32_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_q32s_xpulpv2</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int32_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a 32-bit fix-point identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Decimal point for the appropriate scale </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q32s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q32s_xpulpv2.c" bodystart="50" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1gac5855fce3ec7dbd33d9f12441e8c1c3f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_q8p_xpulpv2</definition>
+        <argsstring>(void *args)</argsstring>
+        <name>plp_mat_fill_I_q8p_xpulpv2</name>
+        <param>
+          <type>void *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Create a 8-bit fix-point identity matrix in parallel on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to <ref refid="structplp__mat__fill__I__instance__q8" kindref="compound">plp_mat_fill_I_instance_q8</ref> struct initialized by plp_mat_fill_I_q8_parallel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none</para>
+</simplesect>
+<simplesect kind="par"><title>Exploiting SIMD instructions</title><para>The 8 bit values are packed four each into 32 bit vectors and then the four dot products are performed on 32 bit vectors, with 32 bit accumulator. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q8p_xpulpv2.c" line="53" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q8p_xpulpv2.c" bodystart="53" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1ga7a4a88a5d8f049e5ba3922b80776c534" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_q8s_rv32im</definition>
+        <argsstring>(uint32_t N, int32_t fracBits, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_q8s_rv32im</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a 8-bit fix-point identity matrix on RV32IM. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Decimal point for the appropriate scale </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q8s_rv32im.c" line="50" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q8s_rv32im.c" bodystart="50" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="group__MatFillIKernels_1gaca04c85560bf831d868bd7ab5da8db51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_mat_fill_I_q8s_xpulpv2</definition>
+        <argsstring>(uint32_t N, int32_t fracBits, int8_t *__restrict__ pDst)</argsstring>
+        <name>plp_mat_fill_I_q8s_xpulpv2</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>N</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>fracBits</declname>
+        </param>
+        <param>
+          <type>int8_t *__restrict__</type>
+          <declname>pDst</declname>
+        </param>
+        <briefdescription>
+<para>Create a 8-bit fix-point identity matrix on XpulpV2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Width and height of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fracBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Decimal point for the appropriate scale </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points to the output matrix of shape NxN </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q8s_xpulpv2.c" line="50" column="6" bodyfile="/github/workspace/src/MatrixFunctions/mat_fill_I/kernels/plp_mat_fill_I_q8s_xpulpv2.c" bodystart="50" bodyend="67"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>The identity matrix is a square matrix, with the value <computeroutput>1</computeroutput> on it&apos;s main diagonal, and all other values <computeroutput>0</computeroutput>.</para>
+<para>There are functions for integer 32- 16- and 8-bit data types, as well as for floating-point. The naming scheme of the functions follows the following pattern (for example <computeroutput>plp_mat_fill_I_i32s_xpulpv2</computeroutput>): <verbatim>`plp_&lt;function name&gt;_&lt;data type&gt;&lt;precision&gt;&lt;method&gt;_&lt;isa_extension&gt;`
+</verbatim> <table rows="6" cols="2"><row>
+<entry thead="yes"><para>name   </para>
+</entry><entry thead="yes"><para>description    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>function_name   </para>
+</entry><entry thead="no"><para><computeroutput>mat_fill_I</computeroutput>    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>data type   </para>
+</entry><entry thead="no"><para>{f, i, q} respectively for floats, integers, fixed points    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>precision   </para>
+</entry><entry thead="no"><para>{32, 16, 8} bits    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>method   </para>
+</entry><entry thead="no"><para>{<computeroutput>s</computeroutput>, <computeroutput>v</computeroutput>, <computeroutput>p</computeroutput>} meaning scalar, vectorized (i.e. SIMD) and parallel, respectively    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>isa_extension   </para>
+</entry><entry thead="no"><para>{<computeroutput>rv32im</computeroutput>, <computeroutput>xpulpv2</computeroutput>} respectively for ibex and riscy   </para>
+</entry></row>
+</table>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

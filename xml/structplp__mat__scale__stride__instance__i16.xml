@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__mat__scale__stride__instance__i16" kind="struct" language="C++" prot="public">
+    <compoundname>plp_mat_scale_stride_instance_i16</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__i16_1a58926c7621ad369daa87d4fc09e43fbd" prot="public" static="no" mutable="no">
+        <type>const int16_t *__restrict__</type>
+        <definition>const int16_t* __restrict__ plp_mat_scale_stride_instance_i16::pSrc</definition>
+        <argsstring></argsstring>
+        <name>pSrc</name>
+        <qualifiedname>plp_mat_scale_stride_instance_i16::pSrc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1305" column="32" bodyfile="/github/workspace/include/plp_math.h" bodystart="1305" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__i16_1abcc1a303dda4c4d64e10e58302000849" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_scale_stride_instance_i16::M</definition>
+        <argsstring></argsstring>
+        <name>M</name>
+        <qualifiedname>plp_mat_scale_stride_instance_i16::M</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1306" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1306" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__i16_1a333feb94f803843562a3157f1bc3a346" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_scale_stride_instance_i16::N</definition>
+        <argsstring></argsstring>
+        <name>N</name>
+        <qualifiedname>plp_mat_scale_stride_instance_i16::N</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1307" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1307" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__i16_1a54cb1614fe8d2671ec39e2dbe7d9be53" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_scale_stride_instance_i16::strideSrc</definition>
+        <argsstring></argsstring>
+        <name>strideSrc</name>
+        <qualifiedname>plp_mat_scale_stride_instance_i16::strideSrc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1308" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1308" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__i16_1a5ea561610a4af20943074986d0ed7365" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_scale_stride_instance_i16::strideDst</definition>
+        <argsstring></argsstring>
+        <name>strideDst</name>
+        <qualifiedname>plp_mat_scale_stride_instance_i16::strideDst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1309" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1309" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__i16_1a696b2fd3121523007430f71121abc4e4" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t plp_mat_scale_stride_instance_i16::scaleFactor</definition>
+        <argsstring></argsstring>
+        <name>scaleFactor</name>
+        <qualifiedname>plp_mat_scale_stride_instance_i16::scaleFactor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1310" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="1310" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__i16_1acc31365c62d620e228a13548255918d4" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t plp_mat_scale_stride_instance_i16::shift</definition>
+        <argsstring></argsstring>
+        <name>shift</name>
+        <qualifiedname>plp_mat_scale_stride_instance_i16::shift</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1311" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="1311" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__i16_1a423213f84e957962e8c219699b77185e" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_scale_stride_instance_i16::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_mat_scale_stride_instance_i16::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1312" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1312" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__i16_1a2fe62345a5a31deb7fbe22e20c45b0c6" prot="public" static="no" mutable="no">
+        <type>int16_t *__restrict__</type>
+        <definition>int16_t* __restrict__ plp_mat_scale_stride_instance_i16::pDst</definition>
+        <argsstring></argsstring>
+        <name>pDst</name>
+        <qualifiedname>plp_mat_scale_stride_instance_i16::pDst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1313" column="26" bodyfile="/github/workspace/include/plp_math.h" bodystart="1313" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for strided integer parallel matrix scale. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="1304" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="1304" bodyend="1314"/>
+    <listofallmembers>
+      <member refid="structplp__mat__scale__stride__instance__i16_1abcc1a303dda4c4d64e10e58302000849" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_i16</scope><name>M</name></member>
+      <member refid="structplp__mat__scale__stride__instance__i16_1a333feb94f803843562a3157f1bc3a346" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_i16</scope><name>N</name></member>
+      <member refid="structplp__mat__scale__stride__instance__i16_1a423213f84e957962e8c219699b77185e" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_i16</scope><name>nPE</name></member>
+      <member refid="structplp__mat__scale__stride__instance__i16_1a2fe62345a5a31deb7fbe22e20c45b0c6" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_i16</scope><name>pDst</name></member>
+      <member refid="structplp__mat__scale__stride__instance__i16_1a58926c7621ad369daa87d4fc09e43fbd" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_i16</scope><name>pSrc</name></member>
+      <member refid="structplp__mat__scale__stride__instance__i16_1a696b2fd3121523007430f71121abc4e4" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_i16</scope><name>scaleFactor</name></member>
+      <member refid="structplp__mat__scale__stride__instance__i16_1acc31365c62d620e228a13548255918d4" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_i16</scope><name>shift</name></member>
+      <member refid="structplp__mat__scale__stride__instance__i16_1a5ea561610a4af20943074986d0ed7365" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_i16</scope><name>strideDst</name></member>
+      <member refid="structplp__mat__scale__stride__instance__i16_1a54cb1614fe8d2671ec39e2dbe7d9be53" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_i16</scope><name>strideSrc</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

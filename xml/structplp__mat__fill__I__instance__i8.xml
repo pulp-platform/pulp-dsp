@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__mat__fill__I__instance__i8" kind="struct" language="C++" prot="public">
+    <compoundname>plp_mat_fill_I_instance_i8</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__mat__fill__I__instance__i8_1a8f9e0765a3ad6b2942b937a83c20e696" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_fill_I_instance_i8::N</definition>
+        <argsstring></argsstring>
+        <name>N</name>
+        <qualifiedname>plp_mat_fill_I_instance_i8::N</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="859" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="859" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__fill__I__instance__i8_1ae1c31ed9be0f7f897dfaf0c44df57446" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_fill_I_instance_i8::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_mat_fill_I_instance_i8::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="860" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="860" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__fill__I__instance__i8_1a336b4bd47c1a37f1c80b843a7725b3b1" prot="public" static="no" mutable="no">
+        <type>int8_t *__restrict__</type>
+        <definition>int8_t* __restrict__ plp_mat_fill_I_instance_i8::pDst</definition>
+        <argsstring></argsstring>
+        <name>pDst</name>
+        <qualifiedname>plp_mat_fill_I_instance_i8::pDst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="861" column="25" bodyfile="/github/workspace/include/plp_math.h" bodystart="861" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for integer parallel identity matrix creation. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="858" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="858" bodyend="862"/>
+    <listofallmembers>
+      <member refid="structplp__mat__fill__I__instance__i8_1a8f9e0765a3ad6b2942b937a83c20e696" prot="public" virt="non-virtual"><scope>plp_mat_fill_I_instance_i8</scope><name>N</name></member>
+      <member refid="structplp__mat__fill__I__instance__i8_1ae1c31ed9be0f7f897dfaf0c44df57446" prot="public" virt="non-virtual"><scope>plp_mat_fill_I_instance_i8</scope><name>nPE</name></member>
+      <member refid="structplp__mat__fill__I__instance__i8_1a336b4bd47c1a37f1c80b843a7725b3b1" prot="public" virt="non-virtual"><scope>plp_mat_fill_I_instance_i8</scope><name>pDst</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

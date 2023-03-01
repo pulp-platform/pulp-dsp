@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__mat__scale__instance__i16" kind="struct" language="C++" prot="public">
+    <compoundname>plp_mat_scale_instance_i16</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__mat__scale__instance__i16_1a43bf8bcfb8457220fd7b0639f89aa6d5" prot="public" static="no" mutable="no">
+        <type>const int16_t *__restrict__</type>
+        <definition>const int16_t* __restrict__ plp_mat_scale_instance_i16::pSrc</definition>
+        <argsstring></argsstring>
+        <name>pSrc</name>
+        <qualifiedname>plp_mat_scale_instance_i16::pSrc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="788" column="32" bodyfile="/github/workspace/include/plp_math.h" bodystart="788" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__instance__i16_1acbfc64c8bca6ad115a4882dcdf35a80c" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_scale_instance_i16::M</definition>
+        <argsstring></argsstring>
+        <name>M</name>
+        <qualifiedname>plp_mat_scale_instance_i16::M</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="789" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="789" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__instance__i16_1aa71d7f8ba1e06c363a3bda22569f05bf" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_scale_instance_i16::N</definition>
+        <argsstring></argsstring>
+        <name>N</name>
+        <qualifiedname>plp_mat_scale_instance_i16::N</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="790" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="790" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__instance__i16_1ab77bd78be8dcd2bc263fc21d4f541a52" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t plp_mat_scale_instance_i16::scaleFactor</definition>
+        <argsstring></argsstring>
+        <name>scaleFactor</name>
+        <qualifiedname>plp_mat_scale_instance_i16::scaleFactor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="791" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="791" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__instance__i16_1a197fe51c3f4dd69e019d3808dc4ea58f" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t plp_mat_scale_instance_i16::shift</definition>
+        <argsstring></argsstring>
+        <name>shift</name>
+        <qualifiedname>plp_mat_scale_instance_i16::shift</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="792" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="792" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__instance__i16_1a5503be23843c84d7ea6b16c3c14bb9c3" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_scale_instance_i16::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_mat_scale_instance_i16::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="793" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="793" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__instance__i16_1a0fcc45d7794bcf075048defc7003e57f" prot="public" static="no" mutable="no">
+        <type>int16_t *__restrict__</type>
+        <definition>int16_t* __restrict__ plp_mat_scale_instance_i16::pDst</definition>
+        <argsstring></argsstring>
+        <name>pDst</name>
+        <qualifiedname>plp_mat_scale_instance_i16::pDst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="794" column="26" bodyfile="/github/workspace/include/plp_math.h" bodystart="794" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for integer parallel matrix scale. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="787" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="787" bodyend="795"/>
+    <listofallmembers>
+      <member refid="structplp__mat__scale__instance__i16_1acbfc64c8bca6ad115a4882dcdf35a80c" prot="public" virt="non-virtual"><scope>plp_mat_scale_instance_i16</scope><name>M</name></member>
+      <member refid="structplp__mat__scale__instance__i16_1aa71d7f8ba1e06c363a3bda22569f05bf" prot="public" virt="non-virtual"><scope>plp_mat_scale_instance_i16</scope><name>N</name></member>
+      <member refid="structplp__mat__scale__instance__i16_1a5503be23843c84d7ea6b16c3c14bb9c3" prot="public" virt="non-virtual"><scope>plp_mat_scale_instance_i16</scope><name>nPE</name></member>
+      <member refid="structplp__mat__scale__instance__i16_1a0fcc45d7794bcf075048defc7003e57f" prot="public" virt="non-virtual"><scope>plp_mat_scale_instance_i16</scope><name>pDst</name></member>
+      <member refid="structplp__mat__scale__instance__i16_1a43bf8bcfb8457220fd7b0639f89aa6d5" prot="public" virt="non-virtual"><scope>plp_mat_scale_instance_i16</scope><name>pSrc</name></member>
+      <member refid="structplp__mat__scale__instance__i16_1ab77bd78be8dcd2bc263fc21d4f541a52" prot="public" virt="non-virtual"><scope>plp_mat_scale_instance_i16</scope><name>scaleFactor</name></member>
+      <member refid="structplp__mat__scale__instance__i16_1a197fe51c3f4dd69e019d3808dc4ea58f" prot="public" virt="non-virtual"><scope>plp_mat_scale_instance_i16</scope><name>shift</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_4ec0f5aee4239b5b8fc70da47a05498b" kind="dir">
+    <compoundname>/github/workspace/src/BasicMathFunctions/abs</compoundname>
+    <innerdir refid="dir_8b59a11742e8a648f595e7a73aebf410">/github/workspace/src/BasicMathFunctions/abs/kernels</innerdir>
+    <innerfile refid="plp__abs__i16_8c">plp_abs_i16.c</innerfile>
+    <innerfile refid="plp__abs__i32_8c">plp_abs_i32.c</innerfile>
+    <innerfile refid="plp__abs__i8_8c">plp_abs_i8.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/BasicMathFunctions/abs/"/>
+  </compounddef>
+</doxygen>

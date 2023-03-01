@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__mat__fill__I__stride__instance__q16" kind="struct" language="C++" prot="public">
+    <compoundname>plp_mat_fill_I_stride_instance_q16</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__mat__fill__I__stride__instance__q16_1af1106d353aeb9b57c2a970d3067daf61" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_fill_I_stride_instance_q16::N</definition>
+        <argsstring></argsstring>
+        <name>N</name>
+        <qualifiedname>plp_mat_fill_I_stride_instance_q16::N</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1400" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1400" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__fill__I__stride__instance__q16_1ad5d90a8b60c4c21f6c98147ff753389b" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_fill_I_stride_instance_q16::stride</definition>
+        <argsstring></argsstring>
+        <name>stride</name>
+        <qualifiedname>plp_mat_fill_I_stride_instance_q16::stride</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1401" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1401" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__fill__I__stride__instance__q16_1a367b7ae2da303995f9585ef59f4a7fe6" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_fill_I_stride_instance_q16::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_mat_fill_I_stride_instance_q16::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1402" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1402" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__fill__I__stride__instance__q16_1ab76460051f60b3456d49b9183a3ee8fe" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t plp_mat_fill_I_stride_instance_q16::fracBits</definition>
+        <argsstring></argsstring>
+        <name>fracBits</name>
+        <qualifiedname>plp_mat_fill_I_stride_instance_q16::fracBits</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1403" column="13" bodyfile="/github/workspace/include/plp_math.h" bodystart="1403" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__fill__I__stride__instance__q16_1af352574570016905ec4e62e74edfb7ce" prot="public" static="no" mutable="no">
+        <type>int16_t *__restrict__</type>
+        <definition>int16_t* __restrict__ plp_mat_fill_I_stride_instance_q16::pDst</definition>
+        <argsstring></argsstring>
+        <name>pDst</name>
+        <qualifiedname>plp_mat_fill_I_stride_instance_q16::pDst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1404" column="26" bodyfile="/github/workspace/include/plp_math.h" bodystart="1404" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for 16-bit fix-point parallel strided identity matrix creation. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="1399" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="1399" bodyend="1405"/>
+    <listofallmembers>
+      <member refid="structplp__mat__fill__I__stride__instance__q16_1ab76460051f60b3456d49b9183a3ee8fe" prot="public" virt="non-virtual"><scope>plp_mat_fill_I_stride_instance_q16</scope><name>fracBits</name></member>
+      <member refid="structplp__mat__fill__I__stride__instance__q16_1af1106d353aeb9b57c2a970d3067daf61" prot="public" virt="non-virtual"><scope>plp_mat_fill_I_stride_instance_q16</scope><name>N</name></member>
+      <member refid="structplp__mat__fill__I__stride__instance__q16_1a367b7ae2da303995f9585ef59f4a7fe6" prot="public" virt="non-virtual"><scope>plp_mat_fill_I_stride_instance_q16</scope><name>nPE</name></member>
+      <member refid="structplp__mat__fill__I__stride__instance__q16_1af352574570016905ec4e62e74edfb7ce" prot="public" virt="non-virtual"><scope>plp_mat_fill_I_stride_instance_q16</scope><name>pDst</name></member>
+      <member refid="structplp__mat__fill__I__stride__instance__q16_1ad5d90a8b60c4c21f6c98147ff753389b" prot="public" virt="non-virtual"><scope>plp_mat_fill_I_stride_instance_q16</scope><name>stride</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

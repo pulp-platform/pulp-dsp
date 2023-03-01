@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__BasicAbs" kind="group">
+    <compoundname>BasicAbs</compoundname>
+    <title>Vector Absolute Value</title>
+    <innergroup refid="group__BasicAbsKernels">Vector Dot Product Kernels</innergroup>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__BasicAbs_1ga9757ac725d229157655c1abeb0ce421e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_abs_i16</definition>
+        <argsstring>(const int16_t *pSrc, int16_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_abs_i16</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for absolute value of 16-bit integer vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/abs/plp_abs_i16.c" line="56" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/abs/plp_abs_i16.c" bodystart="56" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicAbs_1ga42ed78138f79ce5d477b7d9df8a457f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_abs_i32</definition>
+        <argsstring>(const int32_t *pSrc, int32_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_abs_i32</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for absolute value of 32-bit integer vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/abs/plp_abs_i32.c" line="87" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/abs/plp_abs_i32.c" bodystart="87" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicAbs_1ga1152e077c72074d138b680d8f4a1d4a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_abs_i8</definition>
+        <argsstring>(const int8_t *pSrc, int8_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_abs_i8</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>Glue code for absolute value of 8-bit integer vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/abs/plp_abs_i8.c" line="56" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/abs/plp_abs_i8.c" bodystart="56" bodyend="65"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This module contains the glue code for Vector Absolute Value. The kernel codes (kernels) are in the Moducle Vector Absolute Value Kernels.</para>
+<para>The Vector Absolute Value computes the absolute value of a vector on an element-by-element basis. The vectors are multiplied element-by-element and then summed. <preformatted>
+pDst[n] = abs(pSrc[n]),   0 &lt;= n &lt; blockSize.
+</preformatted> There are separate functions for floating point, integer, and fixed point 32- 16- 8-bit data types. For lower precision integers (16- and 8-bit), functions exploiting SIMD instructions are provided.</para>
+<para>The naming scheme of the functions follows the following pattern (for example plp_dot_prod_i32s): <preformatted>
+&lt;pulp&gt; _ &lt;function name&gt; _ &lt;data type&gt; &lt;precision&gt; &lt;method&gt; _ &lt;isa extension&gt;, with
+
+data type = {f, i, q} respectively for floats, integers, fixed points
+
+precision = {32, 16, 8} bits
+
+method = {s, p} respectively meaning single core or parallel multicore implementation.
+
+isa extension = rv32im, xpulpv2, etc. of which rv32im is the most general one.
+
+</preformatted> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="structplp__mat__scale__stride__instance__f32" kind="struct" language="C++" prot="public">
+    <compoundname>plp_mat_scale_stride_instance_f32</compoundname>
+    <includes refid="plp__math_8h" local="no">plp_math.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__f32_1a41575e3b7daaaa3efd2b376ae4e519cb" prot="public" static="no" mutable="no">
+        <type>const float *__restrict__</type>
+        <definition>const float* __restrict__ plp_mat_scale_stride_instance_f32::pSrc</definition>
+        <argsstring></argsstring>
+        <name>pSrc</name>
+        <qualifiedname>plp_mat_scale_stride_instance_f32::pSrc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1335" column="30" bodyfile="/github/workspace/include/plp_math.h" bodystart="1335" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__f32_1ab84021e10fb195593fb8e891d417992d" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_scale_stride_instance_f32::M</definition>
+        <argsstring></argsstring>
+        <name>M</name>
+        <qualifiedname>plp_mat_scale_stride_instance_f32::M</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1336" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1336" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__f32_1abc2563a1d16323accf4a673a13090f11" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_scale_stride_instance_f32::N</definition>
+        <argsstring></argsstring>
+        <name>N</name>
+        <qualifiedname>plp_mat_scale_stride_instance_f32::N</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1337" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1337" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__f32_1aba1885810b5aad7d2195e881edf951b1" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_scale_stride_instance_f32::strideSrc</definition>
+        <argsstring></argsstring>
+        <name>strideSrc</name>
+        <qualifiedname>plp_mat_scale_stride_instance_f32::strideSrc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1338" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1338" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__f32_1a09d1f4cfe307a23602811a7e119eb9a6" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_scale_stride_instance_f32::strideDst</definition>
+        <argsstring></argsstring>
+        <name>strideDst</name>
+        <qualifiedname>plp_mat_scale_stride_instance_f32::strideDst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1339" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1339" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__f32_1a4fb84a8f27a34f57b523240ecb17f107" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float plp_mat_scale_stride_instance_f32::scaleFactor</definition>
+        <argsstring></argsstring>
+        <name>scaleFactor</name>
+        <qualifiedname>plp_mat_scale_stride_instance_f32::scaleFactor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1340" column="11" bodyfile="/github/workspace/include/plp_math.h" bodystart="1340" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__f32_1a5d9cc2907b8c25503a62f815c7b9f683" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t plp_mat_scale_stride_instance_f32::nPE</definition>
+        <argsstring></argsstring>
+        <name>nPE</name>
+        <qualifiedname>plp_mat_scale_stride_instance_f32::nPE</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1341" column="14" bodyfile="/github/workspace/include/plp_math.h" bodystart="1341" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplp__mat__scale__stride__instance__f32_1a627701538bfa785eaf2d39c1e770990d" prot="public" static="no" mutable="no">
+        <type>float *__restrict__</type>
+        <definition>float* __restrict__ plp_mat_scale_stride_instance_f32::pDst</definition>
+        <argsstring></argsstring>
+        <name>pDst</name>
+        <qualifiedname>plp_mat_scale_stride_instance_f32::pDst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/include/plp_math.h" line="1342" column="24" bodyfile="/github/workspace/include/plp_math.h" bodystart="1342" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Instance structure for strided floating-point parallel matrix scale. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="/github/workspace/include/plp_math.h" line="1334" column="1" bodyfile="/github/workspace/include/plp_math.h" bodystart="1334" bodyend="1343"/>
+    <listofallmembers>
+      <member refid="structplp__mat__scale__stride__instance__f32_1ab84021e10fb195593fb8e891d417992d" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_f32</scope><name>M</name></member>
+      <member refid="structplp__mat__scale__stride__instance__f32_1abc2563a1d16323accf4a673a13090f11" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_f32</scope><name>N</name></member>
+      <member refid="structplp__mat__scale__stride__instance__f32_1a5d9cc2907b8c25503a62f815c7b9f683" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_f32</scope><name>nPE</name></member>
+      <member refid="structplp__mat__scale__stride__instance__f32_1a627701538bfa785eaf2d39c1e770990d" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_f32</scope><name>pDst</name></member>
+      <member refid="structplp__mat__scale__stride__instance__f32_1a41575e3b7daaaa3efd2b376ae4e519cb" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_f32</scope><name>pSrc</name></member>
+      <member refid="structplp__mat__scale__stride__instance__f32_1a4fb84a8f27a34f57b523240ecb17f107" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_f32</scope><name>scaleFactor</name></member>
+      <member refid="structplp__mat__scale__stride__instance__f32_1a09d1f4cfe307a23602811a7e119eb9a6" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_f32</scope><name>strideDst</name></member>
+      <member refid="structplp__mat__scale__stride__instance__f32_1aba1885810b5aad7d2195e881edf951b1" prot="public" virt="non-virtual"><scope>plp_mat_scale_stride_instance_f32</scope><name>strideSrc</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

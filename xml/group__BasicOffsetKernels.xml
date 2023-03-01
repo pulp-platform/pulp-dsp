@@ -1,0 +1,478 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="group__BasicOffsetKernels" kind="group">
+    <compoundname>BasicOffsetKernels</compoundname>
+    <title>vector offset Kernels</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__BasicOffsetKernels_1ga666c85518336c3bfcc1905e9409ef279" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_offset_f32s_xpulpv2</definition>
+        <argsstring>(const float32_t *pSrc, float32_t offset, float32_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_offset_f32s_xpulpv2</name>
+        <param>
+          <type>const float32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>float32_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>float32_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>add a constant offset to a vector for 32-bit floats on XpulpV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the offset to be added </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/offset/kernels/plp_offset_f32s_xpulpv2.c" line="51" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/offset/kernels/plp_offset_f32s_xpulpv2.c" bodystart="51" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicOffsetKernels_1gaeca53964013ea480fffe4db7786fd274" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_offset_i16s_rv32im</definition>
+        <argsstring>(const int16_t *pSrc, int16_t offset, int16_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_offset_i16s_rv32im</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>add a constant offset to a vector for 16-bit integers on RV32IM </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the offset to be added </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/offset/kernels/plp_offset_i16s_rv32im.c" line="59" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/offset/kernels/plp_offset_i16s_rv32im.c" bodystart="59" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicOffsetKernels_1ga5a826725d306313dc9edc208b35fcf14" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_offset_i16s_xpulpv2</definition>
+        <argsstring>(const int16_t *pSrc, int16_t offset, int16_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_offset_i16s_xpulpv2</name>
+        <param>
+          <type>const int16_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int16_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>int16_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>add a constant offset to a vector for 16-bit integers on XpulpV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the offset to be added </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/offset/kernels/plp_offset_i16s_xpulpv2.c" line="51" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/offset/kernels/plp_offset_i16s_xpulpv2.c" bodystart="51" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicOffsetKernels_1ga2398fbcd440fc47d56cbab5dbcdf0af6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_offset_i32s_rv32im</definition>
+        <argsstring>(const int32_t *pSrc, int32_t offset, int32_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_offset_i32s_rv32im</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>add a constant offset to a vector for 32-bit integers on RV32IM </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the offset to be added </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/offset/kernels/plp_offset_i32s_rv32im.c" line="51" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/offset/kernels/plp_offset_i32s_rv32im.c" bodystart="51" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicOffsetKernels_1gabed56c3006bb4beded7be15466ddb08d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_offset_i32s_xpulpv2</definition>
+        <argsstring>(const int32_t *pSrc, int32_t offset, int32_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_offset_i32s_xpulpv2</name>
+        <param>
+          <type>const int32_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>int32_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>add a constant offset to a vector for 32-bit integers on XpulpV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the offset to be added </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/offset/kernels/plp_offset_i32s_xpulpv2.c" line="51" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/offset/kernels/plp_offset_i32s_xpulpv2.c" bodystart="51" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicOffsetKernels_1ga93f922de11b619a87e2fdc1da5fe0ab0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_offset_i8s_rv32im</definition>
+        <argsstring>(const int8_t *pSrc, int8_t offset, int8_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_offset_i8s_rv32im</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>add a constant offset to a vector for 8-bit integers on RV32IM </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the offset to be added </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/offset/kernels/plp_offset_i8s_rv32im.c" line="51" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/offset/kernels/plp_offset_i8s_rv32im.c" bodystart="51" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="group__BasicOffsetKernels_1ga553fd271d989af84f2ee5b5e50d787e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plp_offset_i8s_xpulpv2</definition>
+        <argsstring>(const int8_t *pSrc, int8_t offset, int8_t *pDst, uint32_t blockSize)</argsstring>
+        <name>plp_offset_i8s_xpulpv2</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>pSrc</declname>
+        </param>
+        <param>
+          <type>int8_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>pDst</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blockSize</declname>
+        </param>
+        <briefdescription>
+<para>add a constant offset to a vector for 8-bit integers on XpulpV2 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pSrc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the input vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the offset to be added </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">pDst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>points to the output vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blockSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of samples in each vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/github/workspace/src/BasicMathFunctions/offset/kernels/plp_offset_i8s_xpulpv2.c" line="51" column="6" bodyfile="/github/workspace/src/BasicMathFunctions/offset/kernels/plp_offset_i8s_xpulpv2.c" bodystart="51" bodyend="75"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Adds a constant offset to each element of a vector. <preformatted>
+    pDst[n] = pSrc[n] + offset,   0 &lt;= n &lt; blockSize.
+</preformatted> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

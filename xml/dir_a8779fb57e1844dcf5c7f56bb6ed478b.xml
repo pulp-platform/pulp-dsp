@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.5" xml:lang="en-US">
+  <compounddef id="dir_a8779fb57e1844dcf5c7f56bb6ed478b" kind="dir">
+    <compoundname>/github/workspace/src/CommonTables</compoundname>
+    <innerfile refid="plp__common__tables_8c">plp_common_tables.c</innerfile>
+    <innerfile refid="plp__const__structs_8c">plp_const_structs.c</innerfile>
+    <innerfile refid="plp__dwt__structs_8c">plp_dwt_structs.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/github/workspace/src/CommonTables/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,977 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+        <link rel="next" href="test-framework-index/">
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
+    
+    
+      
+        <title>PULP DSP</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.113286f1.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pulp-dsp-digital-signal-processing-on-parallel-ultra-low-power-platform" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="PULP DSP" class="md-header__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PULP DSP
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="PULP DSP" class="md-nav__button md-logo" aria-label="PULP DSP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    PULP DSP
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pulp-platform/pulp-dsp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pulp-platform/pulp-dsp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        Home
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structure-of-the-repository" class="md-nav__link">
+    Structure of the repository
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-and-usage" class="md-nav__link">
+    Installation and usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation and usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#with-the-pulp-sdk-on-the-v1-branch" class="md-nav__link">
+    With the pulp-sdk on the v1 branch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-the-pulp-sdk-on-the-main-branch" class="md-nav__link">
+    With the pulp-sdk on the main branch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    Documentation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-framework-and-benchmarks" class="md-nav__link">
+    Test framework and benchmarks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to-contribute" class="md-nav__link">
+    To contribute
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license-and-attribution" class="md-nav__link">
+    License and Attribution
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="test-framework-index/" class="md-nav__link">
+        Test Framework
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorial-index/" class="md-nav__link">
+        Tutorial
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="troubles/" class="md-nav__link">
+        Troubles Shooting
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Reference Manual
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Reference Manual
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="refmanual/Pages/" class="md-nav__link">
+        Pages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="refmanual/Files/" class="md-nav__link">
+        Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="refmanual/Classes/" class="md-nav__link">
+        Classes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="refmanual/Examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="refmanual/Modules/" class="md-nav__link">
+        Modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="refmanual/Namespaces/" class="md-nav__link">
+        Namespaces
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structure-of-the-repository" class="md-nav__link">
+    Structure of the repository
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-and-usage" class="md-nav__link">
+    Installation and usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation and usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#with-the-pulp-sdk-on-the-v1-branch" class="md-nav__link">
+    With the pulp-sdk on the v1 branch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-the-pulp-sdk-on-the-main-branch" class="md-nav__link">
+    With the pulp-sdk on the main branch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    Documentation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-framework-and-benchmarks" class="md-nav__link">
+    Test framework and benchmarks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to-contribute" class="md-nav__link">
+    To contribute
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license-and-attribution" class="md-nav__link">
+    License and Attribution
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="pulp-dsp-digital-signal-processing-on-parallel-ultra-low-power-platform">PULP DSP: Digital Signal Processing on Parallel Ultra Low Power Platform</h1>
+<h2 id="introduction">Introduction</h2>
+<p>This repository contains DSP functions for <a href="https://pulp-platform.org/">PULP platform</a>.</p>
+<p>It contains the kernel functions for different ISA extensions of RISC-V being developed for PULP platforms (RV32IM, XPULPV2, etc.).</p>
+<p>Currently it's being developed and tested on Mr.Wolf (fabric controller (FC) with IBEX (previous zero-riscy), i.e. RV32IM, and cluster with 8 RISCY cores, i.e. RV32IM with XPULPV2 extentions.).</p>
+<p>Additionally, it supports the pulp-open and can be used with GWT GAP8.</p>
+<p>Some of the functions are very optimized, while others are WIP. Contributions are welcome!</p>
+<h2 id="structure-of-the-repository">Structure of the repository</h2>
+<p>This repository contains:</p>
+<ul>
+<li>
+<p><code>src</code> folder contains the source codes. In the folder you can find subfolders with different kinds of functions (e.g. BasicMathFunctions, StatisticsFunctions, etc.). In each subfolder you find the glue codes and a folder called <code>kernel</code> which contains the kernels for different ISA extensions. The glue codes are used for namely "gluing" the kernels, for example for checking the ISA extension of the calling platform (in the case of Mr. Wolf, it checks if it's FC or CLUSTER calling the function, in case of FC the kernel function for RV32IM is called, otherwise the kernel function for XPULPV2 extension is called. The glue code can be changed and adapted to the specific chip.</p>
+</li>
+<li>
+<p><code>include</code> folder with necessary header files. Especially the main header file <code>plp_math.h</code> has to be included in the codes which want to use this library. Moreover, the <code>rtos_hal.h</code> provides an hardware abstraction layer (HAL) for interfacing both the 'old' pulp-sdk (<a href="https://github.com/pulp-platform/pulp-sdk/tree/v1">v1 branch</a>, which supports Mr. Wolf and older chips) and the 'new' pulp-sdk (<a href="https://github.com/pulp-platform/pulp-sdk">main branch</a>, which supports newer chips and GAP8). Note: in the same header file it's possible to define macros (e.g. LOOPUNROLL if you want to take into consideration the option of unrolling or not unrolling the loops).</p>
+</li>
+<li>
+<p><code>Makefile</code> for compiling the library. Add your glue codes and kernel functions to be compiled.</p>
+</li>
+<li>
+<p><code>test</code> folder contains the testing setup used during the development of the library. For more details please read the README file in the folder.</p>
+</li>
+<li>
+<p><code>docs</code> folder contains the configurations for building documentation for the library.</p>
+</li>
+</ul>
+<h2 id="installation-and-usage">Installation and usage</h2>
+<p>First of all, in order to install and use the library, you have to install the pulp-sdk. You can follow the instructions <a href="https://github.com/pulp-platform/pulp-sdk">here</a>.</p>
+<p>Note that for Mr. Wolf and older chips you need to use the 'old' sdk on the <a href="https://github.com/pulp-platform/pulp-sdk/tree/v1">v1 branch</a>. While for newer chips and GAP8 use the 'new' sdk on the <a href="https://github.com/pulp-platform/pulp-sdk">main branch</a>.</p>
+<p>Configure the sdk according to the chip and the platform you want to use (for example with the 'old' sdk <code>source configs/wolfe.sh</code> and <code>source configs/platform-board.sh</code>). Do not forget to source the <code>sourceme.sh</code> everytime you open a new terminal to set up the environmental variables (e.g. PULP_SDK_HOME) needed to run pulp projects. For more updated instructions, please refer to the pulp-sdk page.</p>
+<p>Once you are done with the pulp-sdk setup, you can clone this repository, enter the <code>pulp-dsp</code> folder.</p>
+<h3 id="with-the-pulp-sdk-on-the-v1-branch">With the pulp-sdk on the v1 branch</h3>
+<p>To compile and install the library, do</p>
+<pre><code class="language-shell">make clean header all install
+</code></pre>
+<p>To use the library add <code>PULP_LDFLAGS += -lplpdsp</code> in the Makefile of your project and don't forget to include the necessary header files, e.g., <code>plp_math.h</code>, in your codes. Link also the math library using <code>-lm</code>.</p>
+<p>If you add or modify the source codes and want to rebuild the library without recompiling unmodified files, do </p>
+<pre><code class="language-shell">make header build install
+</code></pre>
+<h3 id="with-the-pulp-sdk-on-the-main-branch">With the pulp-sdk on the main branch</h3>
+<p>You need to enable the PMSIS mode:</p>
+<pre><code class="language-shell">export PULP_RTOS=pmsis
+</code></pre>
+<p>To compile and install the library, do</p>
+<pre><code class="language-shell">make build-lib
+make install-lib
+</code></pre>
+<h2 id="documentation">Documentation</h2>
+<p>The documentation is built from the latest master and hosted at github pages: <a href="https://pulp-platform.github.io/pulp-dsp">https://pulp-platform.github.io/pulp-dsp</a>, using <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs-Material</a> and <a href="https://github.com/matusnovak/doxybook2">Doxybook2</a>.</p>
+<p>You can also generate the reference manual by yourself by going to the <code>docs</code> folder and doing</p>
+<pre><code class="language-shell">doxygen Doxyfile
+</code></pre>
+<p>It creates the reference manual and you can browse it by opening <code>html/index.html</code> using a browser. </p>
+<p>To add documentations use @defgroup, @ingroup, @addtogroup, etc. Please refer to plp_math.h and the source codes src/BasicMathFunctions/plp_dot_prod_i32.c and src/BasicMathFunctions/kernels/plp_dot_prod_i32s_rv32im.c as examples.</p>
+<h2 id="test-framework-and-benchmarks">Test framework and benchmarks</h2>
+<p>Under the <code>test</code> folder you can test the functions and benchmark their performance by collecting number of cycles, instructions, instructions per cycle (i/c), instruction cache misses (imiss), load stalls (ld_stall), TCDM contentions (tcdm_cont), number of operations (ops, mostly counted as multiply-and-accumulate operations), and operations per cycle (ops/c).</p>
+<p>An example on the 1D convolution function is shown below, run on gvsoc of Mr. Wolf. The device ibex means that the basic RV32IM ISA is used, while riscy means that the XPULPv2 ISA extensions are used. We can reach up to 11.739 MACs/cycle using the 8 cores of Mr. Wolf!</p>
+<table>
+<thead>
+<tr>
+<th>function</th>
+<th align="center">device</th>
+<th align="right">dimension</th>
+<th align="right">cycles</th>
+<th align="right">insn</th>
+<th align="right">i/c</th>
+<th align="right">imiss</th>
+<th align="right">ld_stall</th>
+<th align="right">tcdm_cont</th>
+<th align="right">ops</th>
+<th align="right">ops/c</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>plp_conv_i32</td>
+<td align="center">ibex</td>
+<td align="right">len_a=512; len_b=512</td>
+<td align="right">1649017</td>
+<td align="right">868026</td>
+<td align="right">0.526</td>
+<td align="right">0</td>
+<td align="right">447594</td>
+<td align="right">0</td>
+<td align="right">523776</td>
+<td align="right">0.318</td>
+</tr>
+<tr>
+<td>plp_conv_i32</td>
+<td align="center">ibex</td>
+<td align="right">len_a=512; len_b=1024</td>
+<td align="right">3176006</td>
+<td align="right">1654308</td>
+<td align="right">0.521</td>
+<td align="right">0</td>
+<td align="right">880571</td>
+<td align="right">0</td>
+<td align="right">785920</td>
+<td align="right">0.247</td>
+</tr>
+<tr>
+<td>plp_conv_i16</td>
+<td align="center">ibex</td>
+<td align="right">len_a=512; len_b=512</td>
+<td align="right">1659535</td>
+<td align="right">870761</td>
+<td align="right">0.525</td>
+<td align="right">0</td>
+<td align="right">454502</td>
+<td align="right">0</td>
+<td align="right">523776</td>
+<td align="right">0.316</td>
+</tr>
+<tr>
+<td>plp_conv_i16</td>
+<td align="center">ibex</td>
+<td align="right">len_a=512; len_b=1024</td>
+<td align="right">3213505</td>
+<td align="right">1669232</td>
+<td align="right">0.519</td>
+<td align="right">0</td>
+<td align="right">896778</td>
+<td align="right">0</td>
+<td align="right">785920</td>
+<td align="right">0.245</td>
+</tr>
+<tr>
+<td>plp_conv_i8</td>
+<td align="center">ibex</td>
+<td align="right">len_a=512; len_b=512</td>
+<td align="right">1639099</td>
+<td align="right">850447</td>
+<td align="right">0.519</td>
+<td align="right">0</td>
+<td align="right">454457</td>
+<td align="right">0</td>
+<td align="right">523776</td>
+<td align="right">0.320</td>
+</tr>
+<tr>
+<td>plp_conv_i8</td>
+<td align="center">ibex</td>
+<td align="right">len_a=512; len_b=1024</td>
+<td align="right">3174745</td>
+<td align="right">1630530</td>
+<td align="right">0.514</td>
+<td align="right">0</td>
+<td align="right">896757</td>
+<td align="right">0</td>
+<td align="right">785920</td>
+<td align="right">0.248</td>
+</tr>
+<tr>
+<td>plp_conv_i32</td>
+<td align="center">riscy</td>
+<td align="right">len_a=512; len_b=512</td>
+<td align="right">567109</td>
+<td align="right">541968</td>
+<td align="right">0.956</td>
+<td align="right">1111</td>
+<td align="right">52</td>
+<td align="right">0</td>
+<td align="right">523776</td>
+<td align="right">0.924</td>
+</tr>
+<tr>
+<td>plp_conv_i32</td>
+<td align="center">riscy</td>
+<td align="right">len_a=512; len_b=1024</td>
+<td align="right">1028088</td>
+<td align="right">998842</td>
+<td align="right">0.972</td>
+<td align="right">1430</td>
+<td align="right">27</td>
+<td align="right">0</td>
+<td align="right">785920</td>
+<td align="right">0.764</td>
+</tr>
+<tr>
+<td>plp_conv_i32_parallel</td>
+<td align="center">riscy</td>
+<td align="right">len_a=512; len_b=512</td>
+<td align="right">72510</td>
+<td align="right">68677</td>
+<td align="right">0.947</td>
+<td align="right">880</td>
+<td align="right">25</td>
+<td align="right">907</td>
+<td align="right">523776</td>
+<td align="right">7.224</td>
+</tr>
+<tr>
+<td>plp_conv_i32_parallel</td>
+<td align="center">riscy</td>
+<td align="right">len_a=512; len_b=1024</td>
+<td align="right">131819</td>
+<td align="right">126403</td>
+<td align="right">0.959</td>
+<td align="right">891</td>
+<td align="right">25</td>
+<td align="right">1603</td>
+<td align="right">785920</td>
+<td align="right">5.962</td>
+</tr>
+<tr>
+<td>plp_conv_i16</td>
+<td align="center">riscy</td>
+<td align="right">len_a=512; len_b=512</td>
+<td align="right">489358</td>
+<td align="right">457920</td>
+<td align="right">0.936</td>
+<td align="right">1254</td>
+<td align="right">49</td>
+<td align="right">0</td>
+<td align="right">523776</td>
+<td align="right">1.070</td>
+</tr>
+<tr>
+<td>plp_conv_i16</td>
+<td align="center">riscy</td>
+<td align="right">len_a=512; len_b=1024</td>
+<td align="right">892258</td>
+<td align="right">846771</td>
+<td align="right">0.949</td>
+<td align="right">1331</td>
+<td align="right">25</td>
+<td align="right">0</td>
+<td align="right">785920</td>
+<td align="right">0.881</td>
+</tr>
+<tr>
+<td>plp_conv_i16_parallel</td>
+<td align="center">riscy</td>
+<td align="right">len_a=512; len_b=512</td>
+<td align="right">63512</td>
+<td align="right">58444</td>
+<td align="right">0.920</td>
+<td align="right">814</td>
+<td align="right">25</td>
+<td align="right">1052</td>
+<td align="right">523776</td>
+<td align="right">8.247</td>
+</tr>
+<tr>
+<td>plp_conv_i16_parallel</td>
+<td align="center">riscy</td>
+<td align="right">len_a=512; len_b=1024</td>
+<td align="right">115545</td>
+<td align="right">109386</td>
+<td align="right">0.947</td>
+<td align="right">869</td>
+<td align="right">25</td>
+<td align="right">1595</td>
+<td align="right">785920</td>
+<td align="right">6.802</td>
+</tr>
+<tr>
+<td>plp_conv_i8</td>
+<td align="center">riscy</td>
+<td align="right">len_a=512; len_b=512</td>
+<td align="right">336855</td>
+<td align="right">291150</td>
+<td align="right">0.864</td>
+<td align="right">1551</td>
+<td align="right">19</td>
+<td align="right">0</td>
+<td align="right">523776</td>
+<td align="right">1.555</td>
+</tr>
+<tr>
+<td>plp_conv_i8</td>
+<td align="center">riscy</td>
+<td align="right">len_a=512; len_b=1024</td>
+<td align="right">575868</td>
+<td align="right">503993</td>
+<td align="right">0.875</td>
+<td align="right">1210</td>
+<td align="right">11</td>
+<td align="right">0</td>
+<td align="right">785920</td>
+<td align="right">1.365</td>
+</tr>
+<tr>
+<td>plp_conv_i8_parallel</td>
+<td align="center">riscy</td>
+<td align="right">len_a=512; len_b=512</td>
+<td align="right">44618</td>
+<td align="right">37599</td>
+<td align="right">0.843</td>
+<td align="right">880</td>
+<td align="right">23</td>
+<td align="right">1211</td>
+<td align="right">523776</td>
+<td align="right">11.739</td>
+</tr>
+<tr>
+<td>plp_conv_i8_parallel</td>
+<td align="center">riscy</td>
+<td align="right">len_a=512; len_b=1024</td>
+<td align="right">80015</td>
+<td align="right">68701</td>
+<td align="right">0.859</td>
+<td align="right">891</td>
+<td align="right">23</td>
+<td align="right">2304</td>
+<td align="right">785920</td>
+<td align="right">9.822</td>
+</tr>
+</tbody>
+</table>
+<h2 id="to-contribute">To contribute</h2>
+<p>The library contains many optimized functions, but there are still many of them to be optimized. Contributions are very welcome and are accepted under Apache v2.0.</p>
+<p>If you want to contribute, fork the repository and issue pull requests.</p>
+<p>For each function you develop, note the following:</p>
+<ul>
+<li>
+<p>Include its corresponding test framework under the <code>test</code> folder or adapt it if it already exists;</p>
+</li>
+<li>
+<p>Update the documentation;</p>
+</li>
+<li>
+<p>Use clang-format to format the code;</p>
+</li>
+<li>
+<p>Make sure that all tests pass;</p>
+</li>
+<li>
+<p>Maintain the compatibility for both 'old' and 'new' sdk (see <code>rtos_hal.h</code>).</p>
+</li>
+</ul>
+<p>More details can be found in <code>HACKATHON.md</code>.</p>
+<h2 id="license-and-attribution">License and Attribution</h2>
+<p>All source code is released under Apache v2.0 license unless noted otherwise, please refer to the LICENSE file for details.</p>
+<p>We are inspired by CMSIS-DSP (<a href="https://github.com/ARM-software/CMSIS_5/tree/develop/CMSIS/DSP">CMSIS_5</a> licensed under Apache v2.0) and partially adapted its structure and codes.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+    
+  </body>
+</html>
