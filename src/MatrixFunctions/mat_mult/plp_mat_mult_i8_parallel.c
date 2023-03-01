@@ -63,6 +63,7 @@ void plp_mat_mult_i8_parallel(const int8_t *__restrict__ pSrcA,
         printf("parallel processing supported only for cluster side\n");
         return;
     } else {
+
         plp_mat_mult_instance_i8 args = {
             .pSrcA = pSrcA, .pSrcB = pSrcB, .M = M, .N = N, .O = O, .nPE = nPE, .pDstC = pDstC
         };

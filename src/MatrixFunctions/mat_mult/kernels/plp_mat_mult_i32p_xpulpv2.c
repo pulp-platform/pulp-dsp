@@ -3,15 +3,15 @@
  * Title:        plp_mat_mult_i32p_xpulpv2.c
  * Description:  3parallel 2-bit integer matrix multiplication for XPULPV2
  *
- * $Date:        18. July 2019
- * $Revision:    V0
+ * $Date:        July 2022
+ * $Revision:    V1
  *
  * Target Processor: PULP cores
  * ===================================================================== */
 /*
  * Copyright (C) 2019 ETH Zurich and University of Bologna.
  *
- * Author: Tom Kuchler, ETH Zurich
+ * Author: Emmet Murphy, ETH Zurich
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -102,81 +102,42 @@ void plp_mat_mult_i32p_xpulpv2(void *args) {
 
     // printf("core id: %i, start: %i, end: %i\n", core_id, START, END);
 
-    for (k = core_id; k < O / 2; k += nPE) {
-        for (i = 0; i < M / 2; i++) {
-
-            int32_t sum00 = 0;
-            int32_t sum01 = 0;
-            int32_t sum10 = 0;
-            int32_t sum11 = 0;
+    for (k = core_id; k < O; k += nPE) {
+        for (i = 0; i < M / 4; i++) {
+            int32_t sum0 = 0;
+            int32_t sum1 = 0;
+            int32_t sum2 = 0;
+            int32_t sum3 = 0;
 
             for (j = 0; j < N; j++) {
-                int32_t AVal0 = pSrcA[i * 2 * N + (j)];
-                int32_t AVal1 = pSrcA[i * 2 * N + N + (j)];
+                int32_t AVal0 = pSrcA[(i * 4 + 0) * N + j];
+                int32_t AVal1 = pSrcA[(i * 4 + 1) * N + j];
+                int32_t AVal2 = pSrcA[(i * 4 + 2) * N + j];
+                int32_t AVal3 = pSrcA[(i * 4 + 3) * N + j];
 
-                int32_t BVal0 = pSrcB[j * O + (k * 2)];
-                int32_t BVal1 = pSrcB[j * O + (k * 2 + 1)];
+                int32_t BVal = pSrcB[j * O + k];
 
-                sum00 = sum00 + AVal0 * BVal0;
-                sum01 = sum01 + AVal0 * BVal1;
-                sum10 = sum10 + AVal1 * BVal0;
-                sum11 = sum11 + AVal1 * BVal1;
+                sum0 = sum0 + AVal0 * BVal;
+                sum1 = sum1 + AVal1 * BVal;
+                sum2 = sum2 + AVal2 * BVal;
+                sum3 = sum3 + AVal3 * BVal;
             }
 
-            pDstC[(i * 2) * O + k * 2] = sum00;
-            pDstC[(i * 2) * O + k * 2 + 1] = sum01;
-            pDstC[(i * 2 + 1) * O + k * 2] = sum10;
-            pDstC[(i * 2 + 1) * O + k * 2 + 1] = sum11;
-        }
-    }
-
-    // clean up code
-    i = i * 2;
-    j = j;
-    k = k * 2;
-    // check if every index is nicely finished
-    if (i == M && j == N && k >= O) {
-
-    } else {
-        uint32_t iEnd = i;
-        uint32_t jEnd = j;
-        uint32_t kEnd = k >= O ? O : k;
-
-        // clean up for j
-        if (jEnd != N) {
-            for (i = 0; i < iEnd; i++) {
-                for (k = 0; k < kEnd; k += nPE) {
-                    int32_t sum = 0;
-                    for (j = jEnd; j < N; j++) {
-                        sum += sum + pSrcA[i * N + j] * pSrcB[j * O + k];
-                    }
-                    pDstC[i * O + k] += sum;
-                }
-            }
+            pDstC[(i * 4 + 0) * O + k] = sum0;
+            pDstC[(i * 4 + 1) * O + k] = sum1;
+            pDstC[(i * 4 + 2) * O + k] = sum2;
+            pDstC[(i * 4 + 3) * O + k] = sum3;
         }
 
-        // clean up for i
-        if (iEnd != M) {
-            for (k = core_id; k < kEnd; k += nPE) {
-                for (i = iEnd; i < M; i++) {
-                    int32_t sum = 0;
-                    for (j = 0; j < N; j++) {
-                        sum = sum + pSrcA[i * N + j] * pSrcB[j * O + k];
-                    }
-                    pDstC[i * O + k] = sum;
-                }
-            }
-        }
+        for (i = i * 4; i < M; i++) {
+            int32_t sum0 = 0;
+            for (j = 0; j < N; j++) {
+                int32_t AVal = pSrcA[i * N + j];
+                int32_t BVal = pSrcB[j * O + k];
 
-        // clean up for k
-        for (k = kEnd; k < O; k += nPE) {
-            for (i = 0; i < M; i++) {
-                int32_t sum = 0;
-                for (j = 0; j < N; j++) {
-                    sum = sum + pSrcA[i * N + j] * pSrcB[j * O + k];
-                }
-                pDstC[i * O + k] = sum;
+                sum0 = sum0 + AVal * BVal;
             }
+            pDstC[i * O + k] = sum0;
         }
     }
 
