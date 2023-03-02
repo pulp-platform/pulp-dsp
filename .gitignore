@@ -1,6 +1,8 @@
 *~
 __pycache__
+.vscode/
 build/
+BUILD/
 *.sw[p,o]
 cscope.*
 *.o
@@ -9,6 +11,7 @@ test_data
 !test_data/gen_stimuli.py
 
 test/mrWolf/bench_*.csv
+test/mrWolf/*/test_lib/*
 
 junit-reports
 
