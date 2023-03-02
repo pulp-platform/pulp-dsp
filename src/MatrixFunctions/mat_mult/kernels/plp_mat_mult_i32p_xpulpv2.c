@@ -46,11 +46,12 @@
   @return     none
  */
 
-// define BASIC_VERSION // if used don't forget to also use the undefine at end of file
+// #define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 
 #ifdef BASIC_VERSION
 
 void plp_mat_mult_i32p_xpulpv2(void *args) {
+    printf("Basic version of plp_mat_mult_i32p_xpulpv2\n");
     plp_mat_mult_instance_i32 *arguments = (plp_mat_mult_instance_i32 *)args;
     const int32_t *__restrict__ pSrcA = arguments->pSrcA;
     const int32_t *__restrict__ pSrcB = arguments->pSrcB;
@@ -85,6 +86,7 @@ void plp_mat_mult_i32p_xpulpv2(void *args) {
 #else
 
 void plp_mat_mult_i32p_xpulpv2(void *args) {
+    // printf("Optimized version of plp_mat_mult_i32p_xpulpv2\n");
     plp_mat_mult_instance_i32 *arguments = (plp_mat_mult_instance_i32 *)args;
     const int32_t *__restrict__ pSrcA = arguments->pSrcA;
     const int32_t *__restrict__ pSrcB = arguments->pSrcB;
@@ -116,7 +118,7 @@ void plp_mat_mult_i32p_xpulpv2(void *args) {
 
                 int32_t BVal0 = pSrcB[j * O + (k * 2)];
                 int32_t BVal1 = pSrcB[j * O + (k * 2 + 1)];
-
+                
                 sum00 = sum00 + AVal0 * BVal0;
                 sum01 = sum01 + AVal0 * BVal1;
                 sum10 = sum10 + AVal1 * BVal0;
@@ -186,6 +188,7 @@ void plp_mat_mult_i32p_xpulpv2(void *args) {
 #endif
 
 // undefine BASIC_VERSION
+// #undef BASIC_VERSION
 /**
    @} end of BasicMatMultKernels group
 */

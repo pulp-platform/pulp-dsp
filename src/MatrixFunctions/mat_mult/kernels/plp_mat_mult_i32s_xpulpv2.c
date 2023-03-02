@@ -50,7 +50,7 @@
   @return     none
  */
 
-// define BASIC_VERSION // if used don't forget to also use the undefine at end of file
+// #define BASIC_VERSION // if used don't forget to also use the undefine at end of file
 
 #ifdef BASIC_VERSION
 
@@ -155,7 +155,7 @@ void plp_mat_mult_i32s_xpulpv2(const int32_t *__restrict__ pSrcA,
 
 #endif
 
-// undefine BASIC_VERSION
+// #undef BASIC_VERSION
 /**
    @} end of BasicMatMultKernels group
 */
