@@ -254,6 +254,24 @@ typedef struct {
 } plp_conv_instance_i8;
 
 /** -------------------------------------------------------
+    @brief Instance structure for basic floating-point convolution.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  srcALen    length of the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  srcBLen    length of the second input vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] pRes       output result returned here
+*/
+typedef struct {
+    const float32_t *pSrcA; // pointer to the first vector
+    uint32_t srcALen;
+    const float32_t *pSrcB; // pointer to the second vector
+    uint32_t srcBLen;     // number of samples in each vector
+    uint8_t nPE;          // number of processing units
+    float32_t *pRes;        // pointer to result vector
+} plp_conv_instance_f32;
+
+/** -------------------------------------------------------
     @brief Instance structure for basic integer convolution.
     @param[in]  addOffset
     @param[in]  addLengthfirst
@@ -2490,6 +2508,81 @@ void plp_add_i8s_xpulpv2(const int8_t * pSrcA,
                           const int8_t * pSrcB,
                           int32_t * pDst,
                           uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Glue code for element-by-element addition of 8-bit integer vectors.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i4(const int32_t * pSrcA,
+                 const int32_t * pSrcB,
+                 int32_t * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element addition of 4-bit integer vectors kernel for RV32IM extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i4s_rv32im(const int32_t * pSrcA,
+                         const int32_t * pSrcB,
+                         int32_t * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+    @brief Element-by-element addition of 8-bit integer vectors kernel for XPULPV2 extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_i4s_xpulpv2(const int32_t * pSrcA,
+                          const int32_t * pSrcB,
+                          int32_t * pDst,
+                          uint32_t blockSize);
+/** -------------------------------------------------------
+    @brief Glue code for element-by-element addition of 8-bit integer vectors.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_f32(volatile float * pSrcA,
+                 volatile float * pSrcB,
+                 volatile float * pDst,
+                 uint32_t blockSize);
+
+void plp_add_f32_test(volatile float * pSrcA,
+                 volatile float * pSrcB,
+                 volatile float * pDst,
+                 uint32_t blockSize);
+                 
+/** -------------------------------------------------------
+    @brief Element-by-element addition of 32-bit floating point vectors kernel for RV32IM extension.
+    @param[in]     pSrcA      points to first input vector
+    @param[in]     pSrcB      points to second input vector
+    @param[out]    pDst       points to output vector
+    @param[in]     blockSize  number of samples in each vector
+    @return        none
+*/
+
+void plp_add_f32_rv32im(volatile float * pSrcA,
+                        volatile float * pSrcB,
+                        volatile float * pDst,
+                        uint32_t blockSize);
+
 
 /** -------------------------------------------------------
     @brief Glue code for element-by-element multiplication of 32-bit integer vectors.
@@ -5436,6 +5529,39 @@ void plp_conv_parallel_OLA_kernel(void *task_args);
    @param[out] pDstC Output is written here
    @return     none
 */
+
+/** -------------------------------------------------------
+  @brief Glue code for convolution of 32-bit floating-point vectors.
+  @param[in]  pSrcA    points to the first input vector
+  @param[in]  srcALen  Length of the first input vector
+  @param[in]  pSrcB    points to the second input vector
+  @param[in]  srcBLen  Length of the second input vector
+  @param[out] pRes     result returned here
+  @return     none
+ */
+
+void plp_conv_f32(const float32_t *pSrcA,
+                  const uint32_t srcALen,
+                  const float32_t *pSrcB,
+                  const uint32_t srcBLen,
+                  float32_t *pRes);
+
+/** -------------------------------------------------------
+   @brief Convolution of 32-bit floating-point vectors kernel for RV32IM extension.
+   @param[in]  pSrcA   points to the first input vector
+   @param[in]  srcALen Length of the first input vector
+   @param[in]  pSrcB   points to the second input vector
+   @param[in]  srcBLen Length of the second input vector
+   @param[out] pRes    output result returned here
+   @return     none
+*/
+
+void plp_conv_f32s_rv32im(const float32_t *pSrcA,
+                          const uint32_t srcALen,
+                          const float32_t *pSrcB,
+                          const uint32_t srcBLen,
+                          float32_t *pRes);
+
 
 void plp_mat_mult_i32(const int32_t *__restrict__ pSrcA,
                       const int32_t *__restrict__ pSrcB,
