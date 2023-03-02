@@ -59,7 +59,7 @@ static float32_t *_pRes1_32;
    @param[out] pRes     output result returned here
    @return        none
 */
-void plp_conv_i32(const float32_t *pSrcA,
+void plp_conv_f32(const float32_t *pSrcA,
                   const uint32_t srcALen,
                   const float32_t *pSrcB,
                   const uint32_t srcBLen,
@@ -96,6 +96,65 @@ void plp_conv_i32(const float32_t *pSrcA,
 
     if (hal_cluster_id() == ARCHI_FC_CID) {
 
+        printf("FC does not have an FPU!\n");
+
+        // _pRes1_32 = hal_fc_l1_malloc(sizeof(float32_t) * (resultsoffset));
+
+        // float32_t *pOut = pRes;
+        // float32_t *_pRes = _pRes1_32;
+
+        // for (uint32_t i = 0; i < nPE - 1; i++) {
+        //     plp_conv_f32s_rv32im(pIn1, in1Len, pIn2 + i * src2Offset, src2Offset, _pRes1_32);
+
+        //     pOut = pRes + i * src2Offset;
+        //     _pRes = _pRes1_32;
+
+        //     k = resultsoffset >> 1;
+        //     while (k) {
+
+        //         temp1 = *_pRes++;
+        //         temp2 = *_pRes++;
+
+        //         *pOut++ += temp1;
+        //         *pOut++ += temp2;
+
+        //         k--;
+        //     }
+
+        //     k = resultsoffset % 2U;
+
+        //     if (k) {
+        //         *pOut++ += *_pRes++;
+        //     }
+        // }
+
+        // plp_conv_f32s_rv32im(pIn1, in1Len, pIn2 + (nPE - 1) * src2Offset,
+        //                      in2Len - (src2Offset * (nPE - 1)), _pRes1_32);
+
+        // pOut = pRes + (nPE - 1) * src2Offset;
+        // _pRes = _pRes1_32;
+
+        // k = lastresultLen >> 1;
+
+        // while (k) {
+
+        //     temp1 = *_pRes++;
+        //     temp2 = *_pRes++;
+
+        //     *pOut++ += temp1;
+        //     *pOut++ += temp2;
+
+        //     k--;
+        // }
+
+        // k = lastresultLen % 2U;
+
+        // if (k) {
+        //     *pOut++ += *_pRes++;
+        // }
+
+    } else {
+
         _pRes1_32 = hal_fc_l1_malloc(sizeof(float32_t) * (resultsoffset));
 
         float32_t *pOut = pRes;
@@ -128,63 +187,6 @@ void plp_conv_i32(const float32_t *pSrcA,
 
         plp_conv_f32s_rv32im(pIn1, in1Len, pIn2 + (nPE - 1) * src2Offset,
                              in2Len - (src2Offset * (nPE - 1)), _pRes1_32);
-
-        pOut = pRes + (nPE - 1) * src2Offset;
-        _pRes = _pRes1_32;
-
-        k = lastresultLen >> 1;
-
-        while (k) {
-
-            temp1 = *_pRes++;
-            temp2 = *_pRes++;
-
-            *pOut++ += temp1;
-            *pOut++ += temp2;
-
-            k--;
-        }
-
-        k = lastresultLen % 2U;
-
-        if (k) {
-            *pOut++ += *_pRes++;
-        }
-
-    } else {
-
-        _pRes1_32 = hal_cl_l1_malloc(sizeof(float32_t) * (resultsoffset));
-
-        float32_t *pOut = pRes;
-        float32_t *_pRes = _pRes1_32;
-
-        for (uint32_t i = 0; i < nPE - 1; i++) {
-            plp_conv_f32s_xpulpv2(pIn1, in1Len, pIn2 + i * src2Offset, src2Offset, _pRes1_32);
-
-            pOut = pRes + i * src2Offset;
-            _pRes = _pRes1_32;
-
-            k = resultsoffset >> 1;
-            while (k) {
-
-                temp1 = *_pRes++;
-                temp2 = *_pRes++;
-
-                *pOut++ += temp1;
-                *pOut++ += temp2;
-
-                k--;
-            }
-
-            k = resultsoffset % 2U;
-
-            if (k) {
-                *pOut++ += *_pRes++;
-            }
-        }
-
-        plp_conv_f32s_xpulpv2(pIn1, in1Len, pIn2 + (nPE - 1) * src2Offset,
-                              in2Len - (src2Offset * (nPE - 1)), _pRes1_32);
 
         pOut = pRes + (nPE - 1) * src2Offset;
         _pRes = _pRes1_32;
