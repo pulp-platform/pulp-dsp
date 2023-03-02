@@ -59,6 +59,8 @@ void plp_add_i8(const int8_t * pSrcA,
                  int32_t * pDst,
                  uint32_t blockSize) {
 
+    printf("hello world\n");
+
     if (hal_cluster_id() == ARCHI_FC_CID) {
       plp_add_i8s_rv32im(pSrcA, pSrcB, pDst, blockSize);
     } else {
