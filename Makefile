@@ -62,6 +62,8 @@ FC_SRCS = \
 	src/BasicMathFunctions/add/plp_add_i32.c src/BasicMathFunctions/add/kernels/plp_add_i32s_rv32im.c \
 	src/BasicMathFunctions/add/plp_add_i16.c src/BasicMathFunctions/add/kernels/plp_add_i16s_rv32im.c \
 	src/BasicMathFunctions/add/plp_add_i8.c src/BasicMathFunctions/add/kernels/plp_add_i8s_rv32im.c \
+	src/BasicMathFunctions/add/plp_add_i4.c src/BasicMathFunctions/add/kernels/plp_add_i4s_rv32im.c \
+	src/BasicMathFunctions/add/plp_add_f32.c src/BasicMathFunctions/add/kernels/plp_add_f32_rv32im.c \
 	src/BasicMathFunctions/mult/plp_mult_i32.c src/BasicMathFunctions/mult/kernels/plp_mult_i32s_rv32im.c \
 	src/BasicMathFunctions/mult/plp_mult_i16.c src/BasicMathFunctions/mult/kernels/plp_mult_i16s_rv32im.c \
 	src/BasicMathFunctions/mult/plp_mult_i8.c src/BasicMathFunctions/mult/kernels/plp_mult_i8s_rv32im.c \
@@ -93,6 +95,7 @@ FC_SRCS = \
 	src/FilteringFunctions/plp_conv_i32.c src/FilteringFunctions/kernels/plp_conv_i32s_rv32im.c \
 	src/FilteringFunctions/plp_conv_i16.c src/FilteringFunctions/kernels/plp_conv_i16s_rv32im.c \
 	src/FilteringFunctions/plp_conv_i8.c src/FilteringFunctions/kernels/plp_conv_i8s_rv32im.c \
+	src/FilteringFunctions/plp_conv_f32.c src/FilteringFunctions/kernels/plp_conv_f32s_rv32im.c \
 	src/FilteringFunctions/plp_conv_valid_i32.c \
 	src/FilteringFunctions/plp_conv_valid_i16.c \
 	src/FilteringFunctions/plp_conv_valid_i8.c \
@@ -479,6 +482,7 @@ CL_SRCS = \
 	src/BasicMathFunctions/add/kernels/plp_add_i32s_xpulpv2.c \
 	src/BasicMathFunctions/add/kernels/plp_add_i16s_xpulpv2.c \
 	src/BasicMathFunctions/add/kernels/plp_add_i8s_xpulpv2.c \
+	src/BasicMathFunctions/add/kernels/plp_add_i4s_xpulpv2.c \
 	src/BasicMathFunctions/mult/kernels/plp_mult_i32s_xpulpv2.c \
 	src/BasicMathFunctions/mult/kernels/plp_mult_i16s_xpulpv2.c \
 	src/BasicMathFunctions/mult/kernels/plp_mult_i8s_xpulpv2.c \
