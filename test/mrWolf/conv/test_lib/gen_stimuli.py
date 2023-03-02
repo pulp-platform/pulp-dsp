@@ -27,7 +27,10 @@ def compute_result(result_parameter, inputs, env, fix_point):
         else:
             raise RuntimeError("Fixpoint not implemented")
     elif result_parameter.ctype == 'float':
-        raise RuntimeError("Float not implemented")
+        a = inputs['srcA'].value.astype(np.float32)
+        b = inputs['srcB'].value.astype(np.float32)
+        return np.convolve(a, b, mode='full')
+        # raise RuntimeError("Float not implemented")
     else:
         raise RuntimeError("Unrecognized result type: %s" % result_parameter.ctype)
 
