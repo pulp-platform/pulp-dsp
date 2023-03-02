@@ -107,6 +107,7 @@ class Argument(object):
             self.ctype = var_type[1]
         # change the name
         self.name = "t{}__{}".format(idx, self.name)
+        self.version = version
         return self
 
     def general_name(self):
@@ -162,6 +163,7 @@ class Argument(object):
         return None
 
     def generate_value(self, env, version, device, gen_stimuli):
+        # print("generate_value", self.name, self.value)
         """ Interpret the type of self.value and generate the stimuli """
         if callable(self.value):
             self.value = call_dynamic_function(self.value, env, version, device)
@@ -182,7 +184,7 @@ class Argument(object):
         assert isinstance(self.value, (int, np.int8, np.int16, np.int32, float, np.float32))
 
     def header_str(self):
-        """ return the string for delclaring and initializing the data """
+        """ return the string for declaring and initializing the data """
         assert isinstance(self.value, (float, int))
         return declare_scalar(self.name, self.ctype, self.value)
 
@@ -252,6 +254,7 @@ class ArrayArgument(Argument):
             self.length = self.length
         assert isinstance(self.length, int)
         # do the same thing as a regular Argument
+        self.version = version
         return super(ArrayArgument, self).apply(env, var_type, version, use_l1, idx, device)
 
     def l2_data_name(self):
@@ -316,7 +319,7 @@ class ArrayArgument(Argument):
         assert isinstance(self.value, (list, np.ndarray))
 
     def header_str(self):
-        """ return the string for delclaring and initializing the data """
+        """ return the string for declaring and initializing the data """
         assert isinstance(self.value, np.ndarray)
         if self.use_l1:
             return dedent(
@@ -381,6 +384,7 @@ class OutputArgument(ArrayArgument):
         - Apply the tolerance
         - Alter the name to contain the test id
         """
+        self.version = version
         if callable(self.tolerance):
             self.tolerance = call_dynamic_function(self.tolerance, env, version, device)
         return super(OutputArgument, self).apply(env, var_type, version, use_l1, idx, device)
@@ -479,7 +483,7 @@ class InplaceArgument(OutputArgument):
         ).format(len=self.length, data=self.name, original=self.original_name())
 
     def header_str(self):
-        """ return the string for delclaring and initializing the data """
+        """ return the string for declaring and initializing the data """
         assert isinstance(self.value, np.ndarray)
         return dedent(
             """\
@@ -524,6 +528,7 @@ class ReturnValue(Argument):
         - Apply the tolerance
         - Alter the name to contain the test id
         """
+        self.version = version
         if callable(self.tolerance):
             self.tolerance = call_dynamic_function(self.tolerance, env, version, device)
         return super(ReturnValue, self).apply(env, var_type, version, use_l1, idx, device)
@@ -626,6 +631,7 @@ class CustomArgument(Argument):
         Prepares the value (initialization string) of the custom argument, and the name to include
         the test id
         """
+        self.version = version
         def arg_name(name):
             return "t{}__{}".format(idx, name)
         self.name = arg_name(self.name)
@@ -650,7 +656,7 @@ class CustomArgument(Argument):
         pass
 
     def header_str(self):
-        """ return the string for delclaring and initializing the data """
+        """ return the string for declaring and initializing the data """
         # here, we just need to return self.value, since this is the initialization string.
         return self.value
 
@@ -855,6 +861,7 @@ class AggregatedTest(object):
         else:
             raise RuntimeError("Unknown type for n_ops: {}".format(type(n_ops)))
 
+        # print("arg_ret_type: \n", arg_ret_type)
         # prepare var_type
         version_type = version.split('_')[0]
         if arg_ret_type is not None and version_type in arg_ret_type:
@@ -868,6 +875,7 @@ class AggregatedTest(object):
         else:
             var_type = ['float', 'float']
 
+        # print("version type: ", version)
         # arguments based on if fix-point and parallel is used
         if not version.startswith('q') and not version.endswith('parallel'):
             arguments = [arg for arg in arguments
@@ -991,7 +999,7 @@ class AggregatedTest(object):
                     make clean
                     make all
                     if [ $? -eq 0 ]; then
-                        timeout -k 1 5 make run $@
+                        timeout -k 1 50 make run $@
                         if [ $? -eq 0 ]; then
                             echo "#@# success"
                         else
@@ -1060,7 +1068,9 @@ class AggregatedTest(object):
                 """\
                 PULP_APP = test
                 PULP_APP_FC_SRCS = test.c
-                PULP_LDFLAGS += -lplpdsp -lm
+                # PULP_LDFLAGS += -lplpdsp -lm
+                PULP_LIB_LD_PATH = $(PULP_SDK_HOME)/ext_libs
+                PULP_CFLAGS += -I$(PULP_EXT_LIBS)/include/
                 PULP_CFLAGS += -I$(CONFIG_BUILD_DIR) -O3 -g
                 ifdef TFLAGS
                     PULP_CFLAGS += $(TFLAGS)
@@ -1145,7 +1155,9 @@ class AggregatedTest(object):
                     PULP_APP = test
                     PULP_APP_FC_SRCS = test.c
                     PULP_APP_CL_SRCS = cluster.c
-                    PULP_LDFLAGS += -lplpdsp -lm
+                    PULP_LIB_LD_PATH = $(PULP_SDK_HOME)/ext_libs
+                    PULP_LDFLAGS += -L$(PULP_LIB_LD_PATH) -lplpdsp -lm
+                    PULP_CFLAGS += -I$(PULP_EXT_LIBS)/include/
                     PULP_CFLAGS += -I$(CONFIG_BUILD_DIR) -O3 -g
                     ifdef TFLAGS
                         PULP_CFLAGS += $(TFLAGS)
