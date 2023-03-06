@@ -168,6 +168,23 @@ typedef struct {
 } plp_dot_prod_instance_f32;
 
 /** -------------------------------------------------------
+    @struct plp_dot_prod_instance_i16
+    @brief Instance structure for short integer parallel dot product.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] resBuffer  pointer to the result buffer
+*/
+typedef struct {
+    int16_t *pSrcA;     // pointer to the first vector
+    int16_t *pSrcB;     // pointer to the second vector
+    uint32_t blkSizePE; // number of samples in each vector
+    uint32_t nPE;       // number of processing units
+    int32_t *resBuffer; // pointer to result vector
+} plp_dot_prod_instance_i16;
+
+/** -------------------------------------------------------
     @struct plp_mult_instance_f32
     @brief Instance structure for float parallel multiplication.
     @param[in]  pSrcA      points to the first input vector
@@ -1891,6 +1908,22 @@ void plp_dot_prod_f32_parallel(const float32_t *__restrict__ pSrcA,
                                float32_t *__restrict__ pRes);
 
 /** -------------------------------------------------------
+    @brief Glue code for parallel dot product of 16-bit integer vectors.
+    @param[in]  pSrcA      points to the first input vector
+    @param[in]  pSrcB      points to the second input vector
+    @param[in]  blockSize  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] pRes     output result returned here
+    @return     none
+*/
+
+void plp_dot_prod_i16_parallel(const int16_t *__restrict__ pSrcA,
+                               const int16_t *__restrict__ pSrcB,
+                               uint32_t blockSize,
+                               uint32_t nPE,
+                               int32_t *__restrict__ pRes);
+
+/** -------------------------------------------------------
     @brief Parallel dot product with interleaved access of 32-bit integer vectors kernel for XPULPV2
     extension.
     @param[in]  S     points to the instance structure for integer parallel dot product
@@ -2096,6 +2129,16 @@ void plp_dot_prod_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
                                const int16_t *__restrict__ pSrcB,
                                uint32_t blockSize,
                                int32_t *__restrict__ pRes);
+
+
+/** -------------------------------------------------------
+    @brief Parallel dot product with interleaved access of 16-bit integer vectors kernel for XPULPV2
+    extension.
+    @param[in]  S     points to the instance structure for short integer parallel dot product
+    @return     none
+*/
+
+void plp_dot_prod_i16p_xpulpv2(void *S);
 
 /** -------------------------------------------------------
     @brief Glue code for dot product of 16-bit fixed point vectors.

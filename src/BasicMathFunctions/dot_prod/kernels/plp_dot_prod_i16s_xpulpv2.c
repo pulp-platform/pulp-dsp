@@ -71,18 +71,24 @@ void plp_dot_prod_i16s_xpulpv2(const int16_t *__restrict__ pSrcA,
     for (blkCnt = 0; blkCnt < tmpBS; blkCnt++) {
 
         v2s a0 = *((v2s *)((void *)(pSrcA + 4 * blkCnt)));
+        int16_t a0_0 = a0[0];
+        int16_t a0_1 = a0[1];
         v2s b0 = *((v2s *)((void *)(pSrcB + 4 * blkCnt)));
+        int16_t b0_0 = b0[0];
+        int16_t b0_1 = b0[1];
         v2s a1 = *((v2s *)((void *)(pSrcA + 4 * blkCnt + 2)));
+        int16_t a1_0 = a1[0];
+        int16_t a1_1 = a1[1];
         v2s b1 = *((v2s *)((void *)(pSrcB + 4 * blkCnt + 2)));
+        int16_t b1_0 = b1[0];
+        int16_t b1_1 = b1[1];
         sum1 = __SUMDOTP2(a0, b0, sum1);
         sum2 = __SUMDOTP2(a1, b1, sum2);
-
-        // sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
-        // sum = __MAC(sum, (*pSrcA++), (*pSrcB++));
     }
 
     tmpBS = (blockSize % 4U);
 
+    // Code below is for non-4 multiple of blockSize
     for (blkCnt = 0; blkCnt < tmpBS; blkCnt++) {
         int16_t a = *((int16_t *)(pSrcA + 4 * (blockSize / 4) + blkCnt));
         int16_t b = *((int16_t *)(pSrcB + 4 * (blockSize / 4) + blkCnt));
