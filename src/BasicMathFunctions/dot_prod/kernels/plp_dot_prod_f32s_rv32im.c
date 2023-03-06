@@ -52,10 +52,39 @@ void plp_dot_prod_f32s_rv32im(const float32_t *__restrict__ pSrcA,
                                const float32_t *__restrict__ pSrcB,
                                uint32_t blockSize,
                                float32_t *__restrict__ pRes) {
+  
+  uint32_t blkCnt, tmpBS;     /* Loop counter, temporal BlockSize */
+  float sum1 = 0, sum2 = 0; /* Temporary return variable */
   *pRes = 0.0f;
-  for (int i = 0; i < blockSize; i++) {
-    *pRes += *(pSrcA++) * (*(pSrcB++));
-  }
+
+  #if defined(PLP_MATH_LOOPUNROLL)
+    
+    tmpBS = (blockSize >> 1);
+
+    for (blkCnt = 0; blkCnt < tmpBS; blkCnt++) {
+      sum1 += *(pSrcA++) * (*(pSrcB++));
+      sum2 += *(pSrcA++) * (*(pSrcB++));
+    }
+
+    tmpBS = (blockSize % 2U);
+
+    for (blkCnt = 0; blkCnt < tmpBS; blkCnt++) {
+      sum1 += *(pSrcA++) * (*(pSrcB++));
+    }
+
+  #else 
+  
+      for (blkCnt = 0; blkCnt < blockSize; blkCnt++) {
+        sum1 += *(pSrcA++) * (*(pSrcB++));
+      }
+
+  #endif
+
+  *pRes = sum1 + sum2;
+
+  // for (int i = 0; i < blockSize; i++) {
+  //   *pRes += *(pSrcA++) * (*(pSrcB++));
+  // }
 }
 
 /**

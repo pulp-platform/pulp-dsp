@@ -98,20 +98,10 @@ void plp_mat_mult_f32s_xpulpv2(const float *__restrict__ pSrcA,
                 float BVal0 = pSrcB[j * O + (k * 2)];
                 float BVal1 = pSrcB[j * O + (k * 2 + 1)];
 
-                // sum00 = sum00 + AVal0 * BVal0;
-                // sum01 = sum01 + AVal0 * BVal1;
-                // sum10 = sum10 + AVal1 * BVal0;
-                // sum11 = sum11 + AVal1 * BVal1;
-                asm(
-                    "fmadd.s  %[sum00], %[AVal0], %[BVal0], %[sum00]\n"
-                    "fmadd.s  %[sum01], %[AVal0], %[BVal1], %[sum01]\n"
-                    "fmadd.s  %[sum10], %[AVal1], %[BVal0], %[sum10]\n"
-                    "fmadd.s  %[sum11], %[AVal1], %[BVal1], %[sum11]\n"
-                    : [sum00] "+f"(sum00), [sum01] "+f"(sum01), 
-                      [sum10] "+f"(sum10), [sum11] "+f"(sum11)
-                    : [AVal0] "f"(AVal0), [AVal1] "f"(AVal1),
-                      [BVal0] "f"(BVal0), [BVal1] "f"(BVal1)
-                );
+                sum00 = sum00 + AVal0 * BVal0;
+                sum01 = sum01 + AVal0 * BVal1;
+                sum10 = sum10 + AVal1 * BVal0;
+                sum11 = sum11 + AVal1 * BVal1;
             }
 
             pDstC[(i * 2) * O + k * 2] = sum00;

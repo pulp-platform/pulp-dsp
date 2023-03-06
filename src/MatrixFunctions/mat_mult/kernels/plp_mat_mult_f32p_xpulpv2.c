@@ -96,10 +96,7 @@ void plp_mat_mult_f32p_xpulpv2(void *args) {
 
                 float BVal0 = pSrcB[j * O + (k * 2)];
                 float BVal1 = pSrcB[j * O + (k * 2 + 1)];
-
-                /* Code below will be emulated as integer operation
-                *  instead of utilizing the dedicated FPU
-                */
+                
                 sum00 = sum00 + AVal0 * BVal0;
                 sum01 = sum01 + AVal0 * BVal1;
                 sum10 = sum10 + AVal1 * BVal0;
