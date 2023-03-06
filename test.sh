@@ -22,6 +22,10 @@ len_n=$(grep "len_n=" $file | sed -e 's/.*len_n=//g' | sed -e 's/,.*//g')
 
 len_o=$(grep "len_o=" $file | sed -e 's/.*len_o=//g' | sed -e 's/,.*//g')
 
+len_a=$(grep "len_a=" $file | sed -e 's/.*len_a=//g' | sed -e 's/,.*//g')
+
+len_b=$(grep "len_b=" $file | sed -e 's/.*len_b=//g' | sed -e 's/,.*//g')
+
 # if len_m not empty, compute len_mnok
 if [ -n "$len_m" ]; then
   len_mnok=""
@@ -60,6 +64,43 @@ if [ -n "$len_m" ]; then
   done
 fi
 
+# if len_a not empty, compute len_ab
+if [ -n "$len_a" ]; then
+  len_ab=""
+  # get first value of len_a
+  for i in $len_a; do
+    len_ab=$i
+    break
+  done
+
+  # echo "len_ab: $len_ab"
+
+  for j in $len_b; do
+    # multiply first value of len_a with first value of len_b
+    len_ab=$(($len_ab*$j))
+    break
+  done
+
+  # echo "len_ab: $len_ab"
+
+  len_ab_tmp=$len_ab
+  len_ab+=$'\n'
+  # print length of len_a array
+  len_a_len=$(echo $len_a | wc -w)
+  # append the same value to len_ab for the number of entries in len_a
+  for ((i=1; i<$len_a_len; i++)); do
+    new_element=$len_ab_tmp
+    len_ab+="$new_element"
+    # add new line to len_ab except for the last entry
+    if [ $i -ne $(($len_a_len-1)) ]; then
+      len_ab+=$'\n'
+    fi
+    # len_ab+=$'\n'
+    new_element=""
+  done
+  # echo "len_ab: $len_ab"
+fi
+
 cycles=$(grep "cycles:" $file | sed -e 's/.*cycles://g' | sed -e 's/ //g')
 instructions=$(grep "instructions:" $file | sed -e 's/.*instructions://g' | sed -e 's/ //g')
 icache_miss=$(grep "icache_miss:" $file | sed -e 's/.*icache_miss://g' | sed -e 's/ //g')
@@ -68,8 +109,23 @@ tcdm_cont=$(grep "tcdm_cont:" $file | sed -e 's/.*tcdm_cont://g' | sed -e 's/ //
 
 # if len is empty, len = len_mnok, else len = len 
 if [ -z "$len" ]; then
-  len=$len_mnok
+  # check if len_m is not empty
+  if [ -n "$len_m" ]; then
+    # echo "len_m is not empty"
+    len=$len_mnok
+  fi
+  # check if len_a is not empty
+  if [ -n "$len_a" ]; then
+    # echo "len_a is not empty"
+    len=$len_ab
+  fi
 fi
+
+# replace comma with new line
+len=$(echo $len | tr ',' '\n')
+# replace space with new line
+len=$(echo $len | tr ' ' '\n')
+
 echo "function,len"
 paste -d, <(echo "$functions") <(echo "$len")
 echo ""
@@ -88,7 +144,9 @@ echo ""
 echo "function,tcdm_cont"
 paste -d, <(echo "$functions") <(echo "$tcdm_cont")
 echo ""
-
+echo "function, relative_stalls"
+paste -d, <(echo "$functions") <(echo "$load_stalls") <(echo "$tcdm_cont") <(echo "$cycles") | awk -F',' '{print $1", "(($2+$3)/$4)}'
+echo ""
 # divide instructions by cycles
 echo "function,instructions/cycles"
 paste -d, <(echo "$functions") <(echo "$instructions") <(echo "$cycles") | awk -F, '{print $1","$2/$3}'
@@ -96,8 +154,8 @@ paste -d, <(echo "$functions") <(echo "$instructions") <(echo "$cycles") | awk -
 # write functions, cycles, instructions, icache_miss, load_stalls, tcdm_cont, instructions/cycles to csv file
 # remove .txt from file name
 file=${file%.txt}
-echo "function,dimension,cycles,instructions,icache_miss,load_stalls,tcdm_cont,instructions/cycles" > result.tmp
-paste -d, <(echo "$functions") <(echo "$len") <(echo "$cycles") <(echo "$instructions") <(echo "$icache_miss") <(echo "$load_stalls") <(echo "$tcdm_cont") <(echo "$instructions") <(echo "$cycles") | awk -F, '{print $1","$2","$3","$4","$5","$6","$7","$8/$9}' >> result.tmp
+echo "function,dimension,cycles,instructions,icache_miss,load_stalls,tcdm_cont,instructions/cycles,relative_stalls" > result.tmp
+paste -d, <(echo "$functions") <(echo "$len") <(echo "$cycles") <(echo "$instructions") <(echo "$icache_miss") <(echo "$load_stalls") <(echo "$tcdm_cont") <(echo "$instructions") <(echo "$cycles") | awk -F, '{print $1","$2","$3","$4","$5","$6","$7","$8/$9","($6+$7)/$3}' >> result.tmp
 # replace ^M with newline
 tr -d '\r' < result.tmp > result.csv
 # replace double commas with single comma
