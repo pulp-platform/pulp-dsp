@@ -117,6 +117,36 @@ typedef float float32_t;
 #define PLP_MATH_LOOPUNROLL
 
 /** -------------------------------------------------------
+    @struct plp_abs_instance_f32
+    @brief Instance structure for float parallel absolute value.
+    @param[in]  pSrcA      points to the  input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] resBuffer  pointer to the result buffer
+*/
+typedef struct {
+    const float32_t *pSrcA; // pointer to the input vector
+    uint32_t blkSizePE;     // number of samples in each vector
+    uint32_t nPE;           // number of processing units
+    float32_t *pDst;        // pointer to result vector
+} plp_abs_instance_f32;
+
+/** -------------------------------------------------------
+    @struct plp_abs_instance_fi8
+    @brief Instance structure for float parallel absolute value.
+    @param[in]  pSrcA      points to the  input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] resBuffer  pointer to the result buffer
+*/
+typedef struct {
+    const int8_t *pSrcA; // pointer to the input vector
+    uint32_t blkSizePE;     // number of samples in each vector
+    uint32_t nPE;           // number of processing units
+    int8_t *pDst;        // pointer to result vector
+} plp_abs_instance_i8;
+
+/** -------------------------------------------------------
     @struct plp_dot_prod_instance_i32
     @brief Instance structure for integer parallel dot product.
     @param[in]  pSrcA      points to the first input vector
@@ -2488,6 +2518,65 @@ void plp_abs_i32s_xpulpv2(const int32_t * pSrc,
                           uint32_t blockSize);
 
 /** -------------------------------------------------------
+   @brief Glue code for absolute value of 32-bit float vectors.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_f32(const float * pSrc,
+                 float * pDst,
+                 uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Glue code for parallel executed absolute value of 32-bit float vectors.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_f32_parallel(const float *__restrict__ pSrc,
+                 float *__restrict__ pDst,
+                 uint32_t blockSize,
+                 uint32_t nPE);
+
+/** -------------------------------------------------------
+   @brief Element-by-element absolute value of 32-bit integer vectors kernel for RV32IM extension.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+/**
+ *   @brief Parallel multiplication with interleaved access of 32-bit float vectors kernel for XPULPV2
+ *     extension.
+ *   @param[in]  S     points to the instance structure for float parallel multiplication
+ *   @return        none
+ *          
+ */
+
+void plp_abs_f32p_xpulpv2(void *S);
+
+void plp_abs_f32s_rv32im(const float * pSrc,
+                         float * pDst,
+                         uint32_t blockSize);
+
+/** -------------------------------------------------------
+   @brief Element-by-element absolute value of 32-bit float vectors kernel for XPULPV2 extension.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_f32s_xpulpv2(const float * pSrc,
+                          float * pDst,
+                          uint32_t blockSize);
+
+/** -------------------------------------------------------
    @brief Glue code for absolute value of 16-bit integer vectors.
    @param[in]     pSrc       points to the input vector
    @param[out]    pDst       points to the output vector
@@ -2536,6 +2625,19 @@ void plp_abs_i8(const int8_t * pSrc,
                  uint32_t blockSize);
 
 /** -------------------------------------------------------
+   @brief Glue code for parallel executed absolute value of 32-bit float vectors.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i8_parallel(const int8_t *__restrict__ pSrc,
+                 int8_t *__restrict__ pDst,
+                 uint32_t blockSize,
+                 uint32_t nPE);
+
+/** -------------------------------------------------------
    @brief Element-by-element absolute value of 8-bit integer vectors kernel for RV32IM extension.
    @param[in]     pSrc       points to the input vector
    @param[out]    pDst       points to the output vector
@@ -2558,6 +2660,16 @@ void plp_abs_i8s_rv32im(const int8_t * pSrc,
 void plp_abs_i8s_xpulpv2(const int8_t * pSrc,
                           int8_t * pDst,
                           uint32_t blockSize);
+
+/**
+ *   @brief Parallel multiplication with interleaved access of 32-bit float vectors kernel for XPULPV2
+ *     extension.
+ *   @param[in]  S     points to the instance structure for float parallel multiplication
+ *   @return        none
+ *          
+ */
+
+void plp_abs_i8p_xpulpv2(void *S);
 
 /** -------------------------------------------------------
     @brief Glue code for element-by-element addition of 32-bit integer vectors.
