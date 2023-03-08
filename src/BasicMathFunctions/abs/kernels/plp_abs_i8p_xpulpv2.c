@@ -1,7 +1,7 @@
 /* =====================================================================
  * Project:      PULP DSP Library
  * Title:        plp_mult_i8p_xpulpv2.c
- * Description:  8-bit floating-point multiplication for XPULPV2 with interleaved access
+ * Description:  8-bit integer multiplication for XPULPV2 with interleaved access
  *
  * $Date:        06. Mar 2023
  * $Revision:    V0
@@ -45,9 +45,9 @@
  */
 
 /**
-  @brief Parallel multiplication with interleaved access of 32-bit float vectors kernel for XPULPV2
+  @brief Parallel multiplication with interleaved access of 8-bit integer vectors kernel for XPULPV2
   extension.
-  @param[in]  S     points to the instance structure for float parallel multiplication
+  @param[in]  S     points to the instance structure for integer parallel multiplication
   @return        none
  */
 

@@ -45,7 +45,7 @@
  */
 
 /**
-  @brief Glue code for parallel dot product of 32-bit float vectors.
+  @brief Glue code for parallel dot product of 8-bit integer vectors.
   @param[in]  pSrcA      points to the first input vector
   @param[in]  pSrcB      points to the second input vector
   @param[in]  blockSize  number of samples in each vector
