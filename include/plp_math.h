@@ -132,8 +132,23 @@ typedef struct {
 } plp_abs_instance_f32;
 
 /** -------------------------------------------------------
-    @struct plp_abs_instance_fi8
-    @brief Instance structure for float parallel absolute value.
+    @struct plp_abs_instance_i16
+    @brief Instance structure for integer parallel absolute value.
+    @param[in]  pSrcA      points to the  input vector
+    @param[in]  blkSizePE  number of samples in each vector
+    @param[in]  nPE        number of parallel processing units
+    @param[out] resBuffer  pointer to the result buffer
+*/
+typedef struct {
+    const int16_t *pSrcA; // pointer to the input vector
+    uint32_t blkSizePE;     // number of samples in each vector
+    uint32_t nPE;           // number of processing units
+    int16_t *pDst;        // pointer to result vector
+} plp_abs_instance_i16;
+
+/** -------------------------------------------------------
+    @struct plp_abs_instance_i8
+    @brief Instance structure for integer parallel absolute value.
     @param[in]  pSrcA      points to the  input vector
     @param[in]  blkSizePE  number of samples in each vector
     @param[in]  nPE        number of parallel processing units
@@ -2589,6 +2604,19 @@ void plp_abs_i16(const int16_t * pSrc,
                  uint32_t blockSize);
 
 /** -------------------------------------------------------
+   @brief Glue code for parallel executed absolute value of 16-bit integer vectors.
+   @param[in]     pSrc       points to the input vector
+   @param[out]    pDst       points to the output vector
+   @param[in]     blockSize  number of samples in each vector
+   @return        none
+*/
+
+void plp_abs_i16_parallel(const int16_t *__restrict__ pSrc,
+                 int16_t *__restrict__ pDst,
+                 uint32_t blockSize,
+                 uint32_t nPE);
+
+/** -------------------------------------------------------
    @brief Element-by-element absolute value of 16-bit integer vectors kernel for RV32IM extension.
    @param[in]     pSrc       points to the input vector
    @param[out]    pDst       points to the output vector
@@ -2620,12 +2648,22 @@ void plp_abs_i16s_xpulpv2(const int16_t * pSrc,
    @return        none
 */
 
+/**
+ *   @brief Parallel multiplication with interleaved access of 16-bit integer vectors kernel for XPULPV2
+ *     extension.
+ *   @param[in]  S     points to the instance structure for integer parallel multiplication
+ *   @return        none
+ *          
+ */
+
+void plp_abs_i16p_xpulpv2(void *S);
+
 void plp_abs_i8(const int8_t * pSrc,
                  int8_t * pDst,
                  uint32_t blockSize);
 
 /** -------------------------------------------------------
-   @brief Glue code for parallel executed absolute value of 32-bit float vectors.
+   @brief Glue code for parallel executed absolute value of 8-bit integer vectors.
    @param[in]     pSrc       points to the input vector
    @param[out]    pDst       points to the output vector
    @param[in]     blockSize  number of samples in each vector
@@ -2662,9 +2700,9 @@ void plp_abs_i8s_xpulpv2(const int8_t * pSrc,
                           uint32_t blockSize);
 
 /**
- *   @brief Parallel multiplication with interleaved access of 32-bit float vectors kernel for XPULPV2
+ *   @brief Parallel multiplication with interleaved access of 8-bit integer vectors kernel for XPULPV2
  *     extension.
- *   @param[in]  S     points to the instance structure for float parallel multiplication
+ *   @param[in]  S     points to the instance structure for integer parallel multiplication
  *   @return        none
  *          
  */

@@ -64,6 +64,7 @@ FC_SRCS = \
 	src/BasicMathFunctions/abs/plp_abs_f32.c src/BasicMathFunctions/abs/kernels/plp_abs_f32s_rv32im.c \
 	src/BasicMathFunctions/abs/plp_abs_f32_parallel.c \
 	src/BasicMathFunctions/abs/plp_abs_i16.c src/BasicMathFunctions/abs/kernels/plp_abs_i16s_rv32im.c \
+	src/BasicMathFunctions/abs/plp_abs_i16_parallel.c \
 	src/BasicMathFunctions/abs/plp_abs_i8.c src/BasicMathFunctions/abs/kernels/plp_abs_i8s_rv32im.c \
 	src/BasicMathFunctions/abs/plp_abs_i8_parallel.c \
 	src/BasicMathFunctions/add/plp_add_i32.c src/BasicMathFunctions/add/kernels/plp_add_i32s_rv32im.c \
@@ -489,13 +490,14 @@ CL_SRCS = \
 	src/BasicMathFunctions/dot_prod/kernels/plp_dot_prod_q8p_xpulpv2.c \
 	src/BasicMathFunctions/abs/kernels/plp_abs_i32s_xpulpv2.c \
 	src/BasicMathFunctions/abs/kernels/plp_abs_i16s_xpulpv2.c \
+	src/BasicMathFunctions/abs/kernels/plp_abs_i16p_xpulpv2.c \
 	src/BasicMathFunctions/abs/kernels/plp_abs_i8s_xpulpv2.c \
+	src/BasicMathFunctions/abs/kernels/plp_abs_i8p_xpulpv2.c \
 	src/BasicMathFunctions/abs/kernels/plp_abs_f32s_xpulpv2.c \
 	src/BasicMathFunctions/abs/kernels/plp_abs_f32p_xpulpv2.c \
 	src/BasicMathFunctions/add/kernels/plp_add_i32s_xpulpv2.c \
 	src/BasicMathFunctions/add/kernels/plp_add_i16s_xpulpv2.c \
 	src/BasicMathFunctions/add/kernels/plp_add_i8s_xpulpv2.c \
-	src/BasicMathFunctions/abs/kernels/plp_abs_i8p_xpulpv2.c \
 	src/BasicMathFunctions/add/kernels/plp_add_i4s_xpulpv2.c \
 	src/BasicMathFunctions/mult/kernels/plp_mult_i32s_xpulpv2.c \
 	src/BasicMathFunctions/mult/kernels/plp_mult_i16s_xpulpv2.c \
